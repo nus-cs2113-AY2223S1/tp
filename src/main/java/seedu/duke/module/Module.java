@@ -18,7 +18,7 @@ public class Module {
     private String moduleName;
     private String moduleCode;
     private List<Lesson> lessonList;
-    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap;
+    private final LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap;
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> attendingMap;
     private List<Lesson> attendingList;
     private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
@@ -64,24 +64,24 @@ public class Module {
     }
 
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
-        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> temp
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> entry
                 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
         for (String lessonType : lessonMap.keySet()) { //initialises the types of lessons
-            if (!temp.containsKey(lessonType)) {
-                temp.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+            if (!entry.containsKey(lessonType)) {
+                entry.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
             }
             if (lessonMap.get(lessonType).size() == 1) {
-                temp.replace(lessonType, lessonMap.get(lessonType));
+                entry.replace(lessonType, new LinkedHashMap<>(lessonMap.get(lessonType)));
             } else {
                 int numOfClasses = 0;
-                for (ArrayList<Lesson> numberedClass : lessonMap.get(lessonType).values()) {
+                for (ArrayList<Lesson> numberedClass : new ArrayList<>(lessonMap.get(lessonType).values())) {
                     numOfClasses = numberedClass.size();
                     break;
                 }
-                addUnknownToAttendingList(temp.get(lessonType), lessonType, numOfClasses);
+                addUnknownToAttendingList(entry.get(lessonType), lessonType, numOfClasses);
             }
         }
-        return temp;
+        return entry;
     }
 
     private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> temp, String lessonType, int size) {
@@ -285,8 +285,8 @@ public class Module {
 
 
         String newClassNum = newLesson.getClassNumber();
-        ArrayList<Lesson> newLessonGroup = new ArrayList<Lesson>();
-        newLessonGroup = lessonMap.get(newLessonType).get(newClassNum); //finds the lessons associated with newLesson
+        //makes a copy of the new lesson group
+        ArrayList<Lesson> newLessonGroup = new ArrayList<Lesson>(lessonMap.get(newLessonType).get(newClassNum));
         attendingMap.get(newLessonType).put(newClassNum, newLessonGroup); //puts the new lesson into attendingMap
         attendingList = getAttendingInListForm(); //updates the attendingList based on the new attendingMap
 
