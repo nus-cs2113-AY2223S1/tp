@@ -10,6 +10,8 @@ import seedu.exception.ParkingException;
  */
 public class Ui {
     private static final String SEPARATOR_STRING = "===========================================";
+    private static final String RED = "\u001b[31m";
+    private static final String CLEAR = "\u001b[0m";
     private Scanner in;
     public Ui() {
         this.in = new Scanner(System.in);
@@ -93,7 +95,9 @@ public class Ui {
      * @param e {@link ParkingException} exception
      */
     public static void printError(ParkingException e) {
+        print("\u001b[31m");
         println(e.getMessage());
+        print("\u001b[0m");
     }
 
     /**

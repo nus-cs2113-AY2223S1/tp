@@ -120,7 +120,6 @@ public class Api {
             try {
                 result = asyncGetResponse(index).trim();
             } catch (ServerNotReadyApiException | UnknownResponseApiException e) {
-                e.setTryNumber(fetchTries);
                 Ui.printError(e);
             } finally {
                 fetchTries--;
