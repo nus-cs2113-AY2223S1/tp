@@ -32,7 +32,8 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 
 ## 1. Introduction
 
-...To be updated
+The goal of Upcycle to to create a perfect desktop app dedicated to managing rental businesses. The target auidence are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
+The aim of this guide is to help readers understand how the different components of Upcycle is implemented and integrated to create an functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
 
 ## 2. Setup the environment
 
@@ -56,10 +57,10 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
 ### 3.1. Duke
+Duke is the main class where Upcycle will run. Upon running it, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
+Afterwards, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke and sent to the CommandParser class to be parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the data is stored in Storage. If not, an appropriate error is displayed instead.
 
 ![DukeSequence](images/DukeSequence.png)
-
-... To be updated
 
 ### 3.2. Command component
 
@@ -92,7 +93,13 @@ All user-related commands operate mainly on a list of users (userList:UserList).
 
 ### 3.4. Item component
 
-...To be updated
+The Class diagram below show how Item-related classes interact with each other. `Item` object contains `itemId`, `itemName`, `ownerId`, `pricePerDay` and `category` 
+attributes. Among those, `itemId` is created by `IdGenerator`'s static method to create a unique id for each item (To allow for duplicate items), and `category` is created by `Category`'s method to map the item to its specific category.
+Items are stored in `itemList`, which will be loaded and written on the file by `itemStorage` (inherits from `Item`) whenever Upcycle runs or exits. All item-related 
+commands operate mainly on a list of items (itemList:ItemList).
+Both `item` and `itemList` classes have methods that depend on TransactionList as well for cross-checking of information between the classes.
+
+![ItemClassDiagram](images/ItemClassDiagram.png)
 
 ### 3.5. Transaction component
 
@@ -453,7 +460,7 @@ Step 4: After finding the transaction, a message will be displayed to the user v
 The following sequence diagram shows how the view transaction operation works:
 ![viewTransactionSequence](images/ViewTransactionSequence.png)
 
-#### 4.3.5. View Transactions By Status
+#### 4.3.5. Find Transactions By Status
 
 > The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add a command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 
@@ -500,7 +507,11 @@ The following sequence diagram models the operation:
 
 ### 4.4. Help Command
 
-**...To be updated**
+>This feature allow users to see all the commands and command format required by Upcycle
+
+Usage is very simple, and is prompted when the user first opens the Upcycle application.
+
+Step 1: Type ```help``` in the command line. A list of all relevant commands are displayed for the user's reference.
 
 ### 4.5. Exit Command
 
@@ -544,16 +555,20 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v1.0    | manager  | delete a user               | remove the user if he violates community guidelines           |
 | v1.0    | manager  | add an item                 | make the item available for loan                              |
 | v1.0    | manager  | delete an item              | remove the item when a user decides not to loan it            |
+| v1.0    | manager  | view a specific item        | know what the details of the item like itemID and price       |
+| v1.0    | manager  | view all items              | see what items are available/unavailable for loan             |
 | v1.0    | manager  | create a transaction        | keep a record of that transaction                             |
-| v1.0    | manager  | view a transaction          | keep track of the status of the transaction                   |
+| v1.0    | manager  | view a specific transaction | keep track of the status of the transaction                   |
 | v1.0    | manager  | delete a transaction        | remove transaction when users change their mind               |
 | v2.0    | manager  | find a item by keyword      | locate an item without going through the list                 |
 | v2.0    | manager  | find a user by keyword      | locate a user without going through the list                  |
 | v2.0    | manager  | view transactions by status | view the transactions that are finished or not finished       |
-| v2.0    | manager  | sort items                  | view items based on its price                                 |
+| v2.0    | manager  | sort items                  | view items based on its price and categories                  |
 | v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
 | v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
 | v2.0    | manager  | store my database           | maintain the database without losing my data                  |
+| v2.0    | manager  | view a user's items         | view the items that belong to a specific user                 |
+
 
 Feature: Find Item/ User by keyword.
 
@@ -589,7 +604,14 @@ The user enters the following command: “find-item /k Book”. In this case, th
 
 ## 8. Glossary
 
-|||
+|     Term     |           Definition           |
+|--------------|--------------------------------|
+|      tx      |           Transaction          |
+|      /c      |         Contact Number         |
+
+...TO BE UPDATED
+
+
 
 ## 9. Instructions for manual testing
 

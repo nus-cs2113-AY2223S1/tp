@@ -3,7 +3,6 @@ package seedu.duke.transaction;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,7 +74,7 @@ public class TransactionList {
             Transaction tx = this.transactionList.get(i);
             if (tx.getTxId().equals(transactionId)) {
                 Transaction updatedTx = tx.update(duration, moneyTransacted);
-                checkIfListHasTransactionOfThisItemThatOverlapWithUpdatedTransaction(updatedTx);
+                checkOldTransactionsOverlapWithUpdated(updatedTx);
                 this.transactionList.set(i, updatedTx);
                 return updatedTx;
             }
@@ -152,11 +151,11 @@ public class TransactionList {
      * @param transactionToCheck The new transaction to check
      * @throws InvalidTransactionException If overlap
      */
-    public void checkIfListHasTransactionOfThisItemThatOverlapWithNewTransaction(Transaction transactionToCheck)
+    public void checkOldTransactionsOverlapWithNew(Transaction transactionToCheck)
             throws InvalidTransactionException {
         List<Transaction> transactions = transactionList.stream()
                 .filter(t -> t.getItemId().equals(transactionToCheck.getItemId()))
-                .filter(t -> t.isOverlapWithTransactionWithEquality(transactionToCheck))
+                .filter(t -> t.checkOverlapToAddTx(transactionToCheck))
                 .collect(Collectors.toList());
         int count = transactions.size();
         if (count > 0) {
@@ -171,11 +170,11 @@ public class TransactionList {
      * @param transactionToCheck The update transaction to check
      * @throws InvalidTransactionException If overlap
      */
-    public void checkIfListHasTransactionOfThisItemThatOverlapWithUpdatedTransaction(Transaction transactionToCheck)
+    public void checkOldTransactionsOverlapWithUpdated(Transaction transactionToCheck)
             throws InvalidTransactionException {
         List<Transaction> transactions = transactionList.stream()
                 .filter(t -> t.getItemId().equals(transactionToCheck.getItemId()))
-                .filter(t -> t.isOverlapWithTransactionWithoutEquality(transactionToCheck))
+                .filter(t -> t.checkOverlapToUpdateTx(transactionToCheck))
                 .collect(Collectors.toList());
         int count = transactions.size();
         if (count > 0) {

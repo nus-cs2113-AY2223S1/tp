@@ -14,12 +14,24 @@ import seedu.duke.user.UserList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
+/**
+ * A representation of a command to view a user's items.
+ */
 public class ViewUserItemsCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final TransactionList transactionList;
     private final UserList userList;
 
+    /**
+     * Constructor for ViewUserItemsCommand.
+     *
+     * @param parts           The parts from user input
+     * @param userList        The list of users to work with
+     * @param itemList        The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException if arguments is insufficient
+     */
     public ViewUserItemsCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -31,6 +43,12 @@ public class ViewUserItemsCommand extends Command {
         }
     }
 
+    /**
+     * Get arg values from the respective parts.
+     *
+     * @return A string of arg value
+     * @throws InvalidArgumentException if the part does not fit the command
+     */
     private String getArgViewUserItemsCmd() throws InvalidArgumentException {
         String args;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
@@ -42,6 +60,13 @@ public class ViewUserItemsCommand extends Command {
         return args;
     }
 
+    /**
+     * Checks if user is valid.
+     *
+     * @param userName name of user
+     * @return true if is valid
+     * @throws UserNotFoundException if user is not found in the list of users
+     */
     private boolean isValidUser(String userName) throws UserNotFoundException {
         try {
             userList.getUserById(userName);
@@ -51,6 +76,13 @@ public class ViewUserItemsCommand extends Command {
         }
     }
 
+    /**
+     * Get the list of items that belongs to the user.
+     *
+     * @return list of items that belong to the user
+     * @throws UserNotFoundException    if user is not found in list of users
+     * @throws InvalidArgumentException if arg is invalid
+     */
     protected ItemList getUserItems() throws UserNotFoundException, InvalidArgumentException {
         String args = getArgViewUserItemsCmd();
         ItemList userItems = new ItemList();
@@ -64,6 +96,13 @@ public class ViewUserItemsCommand extends Command {
         return userItems;
     }
 
+    /**
+     * Executes ViewUserItemsCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException if the argument is invalid
+     * @throws UserNotFoundException    if the user is not found in list of users
+     */
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException {
         ItemList userItems = getUserItems();
         Ui.printResponse(userItems.toString(transactionList));
