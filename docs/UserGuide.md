@@ -183,7 +183,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.4. ```view-user``` - View a user
->View the details of a user in the list including the user's items and debt
+>View the details of a user in the list including the user's items and his/her gain and loss
 
 Format: ```view-user /u [USERNAME]```
 
