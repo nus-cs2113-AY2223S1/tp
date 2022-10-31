@@ -1,11 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.commands.CommandPrintTimetable;
-import seedu.duke.commands.CommandSetLesson;
-import seedu.duke.commands.CommandAddModule;
+import seedu.duke.commands.CommandPrintTimetableVertical;
 import seedu.duke.commands.CommandDeleteModule;
 import seedu.duke.commands.CommandInfoModule;
-
+import seedu.duke.commands.CommandAddModule;
+import seedu.duke.commands.CommandSetLesson;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -17,6 +17,7 @@ public class Parser {
     private static final String COMMAND_PRINT = "print";
     //For now
     private static final String COMMAND_ALLOCATE = "allocate";
+    private static final String COMMAND_PRINT_VERT = "view";
 
 
     public static String parseCommand(String command, String currentSemester) {
@@ -35,6 +36,8 @@ public class Parser {
             return CommandSetLesson.setLesson();
         case COMMAND_PRINT:
             return CommandPrintTimetable.printTimetable();
+        case COMMAND_PRINT_VERT:
+            return CommandPrintTimetableVertical.viewTimetable();
         case COMMAND_ALLOCATE:
             return Timetable.allocateModules();
         default:
