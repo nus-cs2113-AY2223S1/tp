@@ -491,5 +491,5 @@ A list of all valid commands.
 * Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
 * Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 * Help: `help`
-* Exit: `exit`
+* Exit: `bye`
 
