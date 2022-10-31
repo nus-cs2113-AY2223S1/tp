@@ -58,6 +58,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 //@@author xzynos
@@ -175,7 +176,7 @@ public class ConsoleParser {
             BigDecimal amount = new BigDecimal(amountStr);
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddExpenseInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
@@ -236,7 +237,7 @@ public class ConsoleParser {
 
             LocalDateTime dateTime;
             if (dateTimeStr == null) {
-                dateTime = LocalDateTime.now();
+                dateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
             } else {
                 dateTime = LocalDateTime.parse(
                         dateTimeStr,
@@ -593,7 +594,7 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditExpenseInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
@@ -1099,12 +1100,12 @@ public class ConsoleParser {
             BigDecimal amount = new BigDecimal(amountStr);
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
 
@@ -1122,12 +1123,12 @@ public class ConsoleParser {
             BigDecimal currentAmount = new BigDecimal(currentAmountStr);
             if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
     }
@@ -1453,12 +1454,12 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditTargetInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -1472,12 +1473,12 @@ public class ConsoleParser {
                 BigDecimal currentAmount = new BigDecimal(currentAmountStr);
                 if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditTargetInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -1670,12 +1671,12 @@ public class ConsoleParser {
             BigDecimal amount = new BigDecimal(amountStr);
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddIncomeInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddIncomeInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
     }
@@ -2008,12 +2009,12 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditIncomeInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -2177,7 +2178,7 @@ public class ConsoleParser {
 
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
@@ -2534,12 +2535,12 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -2762,7 +2763,7 @@ public class ConsoleParser {
     ) {
         LocalDateTime dateTime = consoleCommandPayRecurringPayment.getDateTime();
         if (dateTime == null) {
-            LocalDateTime dateTimeNow = LocalDateTime.now();
+            LocalDateTime dateTimeNow = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
             consoleCommandPayRecurringPayment.setDateTime(dateTimeNow);
         }
 

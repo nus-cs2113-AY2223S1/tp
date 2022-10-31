@@ -26,8 +26,6 @@ public class Messages {
     //region Defines messages for ExpenseManager
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
-    public static final String EXPENSE_MANAGER_ERROR_DUPLICATE_EXPENSE = ""
-            + "There is already a similar expense";
 
     //endregion
 
@@ -126,8 +124,8 @@ public class Messages {
     //endregion
 
     //@@author jeyvia
-    //region Defines messages for InvalidAmountException
-    public static final String CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION = ""
+    //region Defines shared messages for console commands
+    public static final String CONSOLE_ERROR_COMMAND_INVALID_AMOUNT = ""
             + "Amount entered is invalid. Please enter an amount greater than 0.";
 
     //endregion
@@ -201,6 +199,8 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_DUPLICATE_EXPENSE = ""
+            + "The expense already exists.";
 
     //endregion
 
@@ -300,6 +300,8 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_DUPLICATE_EXPENSE = ""
+            + "The expense already exists.";
 
     //endregion
 
@@ -623,6 +625,8 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT = ""
+            + "The recurring payment already exists.";
 
     //endregion
 
@@ -708,6 +712,8 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT = ""
+            + "The recurring payment already exists.";
 
     //endregion
 
@@ -729,6 +735,11 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE = ""
+            + "The expense already exists. Please provide a different date using the "
+            + "-"
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+            + " flag.";
 
     //endregion
 

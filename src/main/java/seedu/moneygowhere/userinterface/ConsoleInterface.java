@@ -417,6 +417,13 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getRemarks(),
                 consoleCommandAddExpense.getCurrency(),
                 consoleCommandAddExpense.getModeOfPayment());
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
         expenseManager.addExpense(expense, localStorage);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
@@ -582,6 +589,7 @@ public class ConsoleInterface {
         if (consoleCommandEditExpense.isModeOfPaymentSet()) {
             expense.setModeOfPayment(consoleCommandEditExpense.getModeOfPayment());
         }
+
 
         try {
             expenseManager.editExpense(expenseIndex, expense, localStorage);
@@ -882,6 +890,12 @@ public class ConsoleInterface {
                 consoleCommandAddRecurringPayment.getModeOfPayment()
         );
 
+        if (recurringPaymentManager.hasRecurringPayment(recurringPayment)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT);
+
+            return;
+        }
+
         recurringPaymentManager.addRecurringPayment(recurringPayment, localStorage);
 
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
@@ -1030,6 +1044,13 @@ public class ConsoleInterface {
                 recurringPayment.getCurrency(),
                 recurringPayment.getModeOfPayment()
         );
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
         expenseManager.addExpense(expense, localStorage);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
