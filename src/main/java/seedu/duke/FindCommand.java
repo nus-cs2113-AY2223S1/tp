@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 public class FindCommand extends Commands {
     private final String outputString = "---Here are the reviews that match the keyword---\n";
     private final String movieString = "\nMovies:\n";
@@ -38,4 +40,21 @@ public class FindCommand extends Commands {
         output = output.strip();
         return output;
     }
+
+    //@@author indraneelrp
+    public ArrayList<Media> getMatching() {
+        ArrayList<Media> found = new ArrayList<>();
+
+        for (int i = 0; i < reviewList.inputs.size(); i++) {
+            Media media = reviewList.inputs.get(i);
+            if (media instanceof Movie && media.getTitle().contains(searchTerm)) {
+                found.add(reviewList.inputs.get(i));
+            } else if (media instanceof TvShow && media.getTitle().contains(searchTerm)) {
+                found.add(reviewList.inputs.get(i));
+            }
+        }
+
+        return found;
+    }
+
 }
