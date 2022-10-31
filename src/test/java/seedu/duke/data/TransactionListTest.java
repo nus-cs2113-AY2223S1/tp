@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class TransactionListTest {
     //@@author wcwy
@@ -183,20 +185,22 @@ public class TransactionListTest {
     }
 
     @Test
-    public void isTransactionInstance_validTransactionInstanceAsExpense_expectTrue() {
+    public void isTransactionInstance_validTransactionInstanceAsExpense_expectTrue() throws
+            ClassNotFoundException {
         TransactionList transactions = new TransactionList();
         Transaction transaction = new Expense("buy_a_bear", 80, "toys",
                 LocalDate.of(2022, 10, 30));
 
-        assertEquals(transaction, "seedu.duke.data.transaction.Expense");
+        assertTrue(transactions.isTransactionInstance(transaction, "seedu.duke.data.transaction.Expense"));
     }
 
     @Test
-    public void isTransactionInstance_invalidTransactionInstanceAsExpense_expectFalse() {
+    public void isTransactionInstance_invalidTransactionInstanceAsExpense_expectFalse() throws
+            ClassNotFoundException {
         TransactionList transactions = new TransactionList();
         Transaction transaction = new Income("buy_a_bear", 80, "toys",
                 LocalDate.of(2022, 10, 30));
 
-        assertEquals(transaction, "seedu.duke.data.transaction.Expense");
+        assertFalse(transactions.isTransactionInstance(transaction, "seedu.duke.data.transaction.Expense"));
     }
 }
