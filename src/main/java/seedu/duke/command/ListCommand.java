@@ -121,7 +121,7 @@ public class ListCommand extends ListAndStatsCommand {
 
         // Checks if there are any error in the tag combinations related to DateIntervals
         parseDateIntervalsTags();
-        listTransactions(transactions);
+        listTransactions(transactions, ui);
     }
 
     /**

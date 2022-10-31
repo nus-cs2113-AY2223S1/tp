@@ -50,12 +50,13 @@ public class StatsCommandTest {
     public void listStatsByStatsType_useInvalidStatsType_exceptionThrown() {
         StatsCommand statsCommand = new StatsCommand();
         TransactionList transactions = new TransactionList();
+        Ui ui = new Ui();
 
         statsCommand.setStatsType("moolah");
 
         assertThrows(
             StatsInvalidTypeException.class,
-            () -> statsCommand.listStatsByStatsType(transactions)
+            () -> statsCommand.listStatsByStatsType(transactions, ui)
         );
     }
 
@@ -63,11 +64,12 @@ public class StatsCommandTest {
     public void listStatsByStatsType_useCategoricalSavingsStatsType_noError() {
         StatsCommand statsCommand = new StatsCommand();
         TransactionList transactions = new TransactionList();
+        Ui ui = new Ui();
 
         statsCommand.setStatsType("categorical_savings");
 
         assertDoesNotThrow(
-            () -> statsCommand.listStatsByStatsType(transactions)
+            () -> statsCommand.listStatsByStatsType(transactions, ui)
         );
     }
 }
