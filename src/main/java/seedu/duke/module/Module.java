@@ -301,7 +301,7 @@ public class Module {
             timetableDict.deleteLesson(lesson);
         }
         for (Lesson lesson : newLessons) {
-            timetableDict.addLesson(lesson, moduleCode);
+            timetableDict.addLesson(lesson);
         }
     }
 
@@ -309,14 +309,21 @@ public class Module {
         Lesson oldLesson = attending.get(indexForLesson);
         Timetable.timetableDict.deleteLesson(oldLesson);
         attending.set(indexForLesson, newLesson);
-        Timetable.timetableDict.addLesson(newLesson, moduleCode);
+        Timetable.timetableDict.addLesson(newLesson);
     }
 
 
     public void replaceAttending(Lesson newLesson) {
         int indexToSet = 0;
+        List<String> newLessonInfo = newLesson.getInfo(); 
+        String newLessonType = newLesson.getLessonType();
+        if (attending.contains(newLesson)) { 
+            return;
+        }
         for (Lesson lesson : attending) {
-            if (lesson.getLessonType().equals(newLesson.getLessonType())) {
+            List<String> lessonInfo = lesson.getInfo();
+            String lessonType = lesson.getLessonType();
+            if (lessonType.equals(newLessonType) && !lessonInfo.equals(newLessonInfo)) {
                 break;
             }
             indexToSet += 1;
@@ -325,7 +332,7 @@ public class Module {
             return;
         }
 
-        //delete old lesson from timetableDict
+        //delete old lesson from timetableDicts
         Lesson oldLesson = attending.get(indexToSet);
         Timetable.timetableDict.deleteLesson(oldLesson);
 
@@ -333,7 +340,7 @@ public class Module {
         attending.set(indexToSet, newLesson);
 
         //Adding to timetableDict
-        Timetable.timetableDict.addLesson(newLesson, moduleCode);
+        Timetable.timetableDict.addLesson(newLesson);
     }
 
     private ArrayList<Lesson> getOldLessons(String moduleCode) {
@@ -383,5 +390,30 @@ public class Module {
 
     public LinkedHashMap<String, ArrayList<Lesson>> getClassifiedLessons() {
         return classifiedLessons;
+    }
+
+    public boolean checkLessonTypeAttended(String lessonType) {
+        boolean isLessonTypeAttended = false;
+        for (Lesson attendingLesson : attending) {
+            String lessonDay = attendingLesson.getDay();
+            String attendingLessonType = attendingLesson.getLessonType();
+            if (attendingLessonType.equals(lessonType)) {
+                if (!lessonDay.equals("Undetermined Day")) {
+                    isLessonTypeAttended = true;
+                } else {
+                    isLessonTypeAttended = false;
+                }
+            }
+        }
+        return isLessonTypeAttended;
+    }
+
+    public List<String> getAttendingLessonTypes() {
+        List<String> attendingLessonTypes = new ArrayList<String>();
+        for (Lesson lesson : attending) {
+            attendingLessonTypes.add(lesson.getLessonType());
+            // System.out.println(lesson.getLessonType());
+        }
+        return attendingLessonTypes;
     }
 }
