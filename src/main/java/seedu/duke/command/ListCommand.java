@@ -108,7 +108,9 @@ public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "List" command. Ensure that there are no errors in the tag combinations related
+     * to DateIntervals before proceeding to list transactions with/without filters for each transaction
+     * object.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -130,19 +132,26 @@ public class ListCommand extends ListAndStatsCommand {
      * @param transactions An instance of the TransactionList class.
      * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private void listTransactions(TransactionList transactions) throws MoolahException {
+    private void listTransactions(TransactionList transactions, Ui ui) throws MoolahException {
+        // Gets array list of transactions based on time filters, if any, i.e. year, month, period
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
+
+        /*
+            Gets the list of transactions from the time-filtered array list based on whether each transaction
+            matches the type, category or date (if any) filter(s) that have been given
+         */
         String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
 
+        // Prints the list if available, else print no matching transactions
         if (transactionsList.isEmpty()) {
-            listLogger.log(Level.INFO, "Transactions list is empty as there are no transactions available.");
-            Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
+            listLogger.log(Level.INFO, "Transactions list is empty as there are no matching transactions.");
+            ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
         }
 
         assert !transactionsList.isEmpty();
-        listLogger.log(Level.INFO, "Transactions list is found to contain transaction records.");
-        Ui.showList(transactionsList, INFO_LIST.toString());
+        listLogger.log(Level.INFO, "There are matching transactions for the Transactions list.");
+        ui.showList(transactionsList, INFO_LIST.toString());
     }
 
     //@@author paullowse
