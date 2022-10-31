@@ -257,7 +257,7 @@ public class ConsoleParser {
 
         if (isNameArgumentInvalid(name)) {
             throw new ConsoleParserCommandAddExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_NAME_INVALID
             );
         }
 
@@ -267,7 +267,7 @@ public class ConsoleParser {
 
         if (isAmountArgumentInvalid(amountStr)) {
             throw new ConsoleParserCommandAddExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_AMOUNT_INVALID
             );
         }
 
@@ -277,7 +277,7 @@ public class ConsoleParser {
 
         if (dateTimeStr != null && isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandAddExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_DATE_TIME_INVALID
             );
         }
     }
@@ -438,7 +438,7 @@ public class ConsoleParser {
 
         if (expenseIndexStr != null && isExpenseIndexArgumentInvalid(expenseIndexStr)) {
             throw new ConsoleParserCommandViewExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_INVALID
             );
         }
     }
@@ -547,7 +547,7 @@ public class ConsoleParser {
 
         if (isExpenseIndexArgumentInvalid(expenseIndexStr)) {
             throw new ConsoleParserCommandDeleteExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_INVALID
             );
         }
     }
@@ -657,7 +657,7 @@ public class ConsoleParser {
 
         if (isExpenseIndexArgumentInvalid(expenseIndexStr)) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_INVALID
             );
         }
 
@@ -667,7 +667,7 @@ public class ConsoleParser {
 
         if (name != null && isNameArgumentInvalid(name)) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_NAME_INVALID
             );
         }
 
@@ -677,7 +677,7 @@ public class ConsoleParser {
 
         if (dateTimeStr != null && isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_INVALID
             );
         }
 
@@ -687,7 +687,7 @@ public class ConsoleParser {
 
         if (amountStr != null && isAmountArgumentInvalid(amountStr)) {
             throw new ConsoleParserCommandEditExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_AMOUNT_INVALID
             );
         }
     }
@@ -2221,7 +2221,7 @@ public class ConsoleParser {
 
         if (isNameArgumentInvalid(name)) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_INVALID
             );
         }
 
@@ -2231,7 +2231,7 @@ public class ConsoleParser {
 
         if (isIntervalArgumentInvalid(intervalStr)) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_INVALID
             );
         }
 
@@ -2241,7 +2241,7 @@ public class ConsoleParser {
 
         if (isAmountArgumentInvalid(amountStr)) {
             throw new ConsoleParserCommandAddRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_INVALID
             );
         }
     }
@@ -2379,7 +2379,7 @@ public class ConsoleParser {
 
         if (recurringPaymentIndexStr != null && isRecurringPaymentIndexArgumentInvalid(recurringPaymentIndexStr)) {
             throw new ConsoleParserCommandViewRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID
             );
         }
     }
@@ -2479,7 +2479,7 @@ public class ConsoleParser {
 
         if (isRecurringPaymentIndexArgumentInvalid(recurringPaymentIndexStr)) {
             throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID
             );
         }
     }
@@ -2588,7 +2588,7 @@ public class ConsoleParser {
 
         if (isRecurringPaymentIndexArgumentInvalid(recurringPaymentIndex)) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID
             );
         }
 
@@ -2598,7 +2598,7 @@ public class ConsoleParser {
 
         if (name != null && isNameArgumentInvalid(name)) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_INVALID
             );
         }
 
@@ -2608,7 +2608,7 @@ public class ConsoleParser {
 
         if (intervalStr != null && isIntervalArgumentInvalid(intervalStr)) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_INVALID
             );
         }
 
@@ -2618,7 +2618,7 @@ public class ConsoleParser {
 
         if (amountStr != null && isAmountArgumentInvalid(amountStr)) {
             throw new ConsoleParserCommandEditRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_INVALID
             );
         }
     }
@@ -2796,7 +2796,7 @@ public class ConsoleParser {
 
         if (isRecurringPaymentIndexArgumentInvalid(recurringPaymentIndexStr)) {
             throw new ConsoleParserCommandPayRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID
             );
         }
 
@@ -2806,7 +2806,7 @@ public class ConsoleParser {
 
         if (isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandPayRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID
+                    Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_INVALID
             );
         }
     }
