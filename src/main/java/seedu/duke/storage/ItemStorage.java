@@ -99,18 +99,26 @@ public class ItemStorage extends Storage {
      */
     public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException, StoreFailureException {
         assert splitItemLine.length == 6 : "Invalid Transaction Line";
-        Item item = getItemFromItemLine(splitItemLine);
-        checkCheckSumLine(item, Integer.parseInt(splitItemLine[5]));
-        return item;
+        try {
+            Item item = getItemFromItemLine(splitItemLine);
+            checkCheckSumLine(item, Integer.parseInt(splitItemLine[5].trim()));
+            return item;
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
-    private static Item getItemFromItemLine(String[] splitItemLine) throws InvalidCategoryException {
-        String itemId = splitItemLine[0];
-        String itemName = splitItemLine[1];
-        double price = Double.parseDouble(splitItemLine[2]);
-        String ownerId = splitItemLine[3];
-        int categoryNumber = Integer.parseInt(splitItemLine[4]);
-        return new Item(itemId, itemName, categoryNumber, price, ownerId);
+    private static Item getItemFromItemLine(String[] splitItemLine) throws StoreFailureException {
+        try {
+            String itemId = splitItemLine[0].trim();
+            String itemName = splitItemLine[1].trim();
+            double price = Double.parseDouble(splitItemLine[2].trim());
+            String ownerId = splitItemLine[3].trim();
+            int categoryNumber = Integer.parseInt(splitItemLine[4].trim());
+            return new Item(itemId, itemName, categoryNumber, price, ownerId);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
     private static void checkCheckSumLine(Item item, int checkSum) throws StoreFailureException {

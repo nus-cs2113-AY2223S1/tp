@@ -51,7 +51,7 @@ public class Duke {
             initializeTransactionList();
             initializeItemList();
         } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
+            exitDukeDueToDataCorruption(e.getMessage());
         }
     }
 
@@ -82,10 +82,7 @@ public class Duke {
         }
     }
 
-    private void resetAllListsDueToDataCorruption(String errorMessage) {
-        this.userList = new UserList();
-        this.itemList = new ItemList();
-        this.transactionList = new TransactionList();
+    private void exitDukeDueToDataCorruption(String errorMessage) {
         Ui.printErrorMessage(errorMessage);
         isLastCommand = true;
     }
@@ -102,9 +99,9 @@ public class Duke {
     }
 
     private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExit = (userStorage.hasUserFile() == itemStorage.hasItemFile())
+        boolean areSimultaneouslyExistOrNotExist = (userStorage.hasUserFile() == itemStorage.hasItemFile())
                 && (transactionStorage.hasTransactionFile() == itemStorage.hasItemFile());
-        if (!areSimultaneouslyExistOrNotExit) {
+        if (!areSimultaneouslyExistOrNotExist) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }
     }

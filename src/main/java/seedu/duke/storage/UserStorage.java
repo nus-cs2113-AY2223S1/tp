@@ -96,17 +96,26 @@ public class UserStorage extends Storage {
      * @return A User with full information.
      */
     public static User handleUserLine(String[] splitUserLine) throws StoreFailureException {
-        User user = getUserFromUserLine(splitUserLine);
-        checkCheckSumLine(user, Integer.parseInt(splitUserLine[3]));
-        return user;
+        try {
+            User user = getUserFromUserLine(splitUserLine);
+            checkCheckSumLine(user, Integer.parseInt(splitUserLine[3].trim()));
+            return user;
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
-    private static User getUserFromUserLine(String[] splitUserLine) {
-        assert splitUserLine.length == 4 : "Invalid User Line";
-        String username = splitUserLine[0];
-        int age = Integer.parseInt(splitUserLine[1]);
-        String contactNumber = splitUserLine[2];
-        return new User(username, age, contactNumber);
+    private static User getUserFromUserLine(String[] splitUserLine) throws StoreFailureException {
+        try {
+            assert splitUserLine.length == 4 : "Invalid User Line";
+            String username = splitUserLine[0].trim();
+            int age = Integer.parseInt(splitUserLine[1].trim());
+            Integer.parseInt(splitUserLine[2].trim());
+            String contactNumber = splitUserLine[2].trim();
+            return new User(username, age, contactNumber);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
     private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {
