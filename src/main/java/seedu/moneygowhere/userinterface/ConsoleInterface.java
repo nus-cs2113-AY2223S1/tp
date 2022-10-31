@@ -1,6 +1,6 @@
 package seedu.moneygowhere.userinterface;
 
-import seedu.moneygowhere.apis.CurrencyApi;
+import seedu.moneygowhere.apis.CurrencyApiManager;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
@@ -16,6 +16,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
+import seedu.moneygowhere.commands.ConsoleCommandHelp;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
@@ -88,6 +89,7 @@ public class ConsoleInterface {
     private CurrencyManager currencyManager;
 
     private LocalStorage localStorage;
+    private CurrencyApiManager currencyApiManager;
 
     //@@author xzynos
 
@@ -114,6 +116,7 @@ public class ConsoleInterface {
         currencyManager = new CurrencyManager();
 
         localStorage = new LocalStorage();
+        currencyApiManager = new CurrencyApiManager();
     }
 
 
@@ -324,6 +327,76 @@ public class ConsoleInterface {
         }
     }
 
+    private void runCommandHelp(ConsoleCommandHelp consoleCommandHelp) {
+        String helpStr = "";
+        helpStr += "EXPENSE-RELATED-COMMANDS:" + "\n";
+        helpStr += "___________________________________________" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_EXPENSE
+                + Messages.CONSOLE_COMMAND_ADD_EXPENSE_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_VIEW_EXPENSE
+                + Messages.CONSOLE_COMMAND_VIEW_EXPENSE_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_DELETE_EXPENSE
+                + Messages.CONSOLE_COMMAND_DELETE_EXPENSE_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_EXPENSE
+                + Messages.CONSOLE_COMMAND_EDIT_EXPENSE_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_SORT_EXPENSE
+                + Messages.CONSOLE_COMMAND_SORT_EXPENSE_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_CONVERT_CURRENCIES
+                + Messages.CONSOLE_COMMAND_CONVERT_CURRENCY_FORMAT
+                + "\n";
+        helpStr += "\n" + "RECURRING-PAYMENT-RELATED-COMMANDS:" + "\n";
+        helpStr += "___________________________________________" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_RECURRING_PAYMENT
+                + Messages.CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_VIEW_RECURRING_PAYMENT
+                + Messages.CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_DELETE_RECURRING_PAYMENT
+                + Messages.CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_RECURRING_PAYMENT
+                + Messages.CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_PAY_RECURRING_PAYMENT
+                + Messages.CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_FORMAT
+                + "\n";
+        helpStr += "\n" + "INCOME-RELATED-COMMANDS:" + "\n";
+        helpStr += "___________________________________________" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_INCOME
+                + Messages.CONSOLE_COMMAND_ADD_INCOME_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_VIEW_INCOME
+                + Messages.CONSOLE_COMMAND_VIEW_INCOME_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_DELETE_INCOME
+                + Messages.CONSOLE_COMMAND_DELETE_INCOME_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_INCOME
+                + Messages.CONSOLE_COMMAND_EDIT_INCOME_FORMAT
+                + "\n";
+        helpStr += "\n" + "TARGET-RELATED-COMMANDS:" + "\n";
+        helpStr += "___________________________________________" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_TARGET
+                + Messages.CONSOLE_COMMAND_ADD_TARGET_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_VIEW_TARGET
+                + Messages.CONSOLE_COMMAND_VIEW_TARGET_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_DELETE_TARGET
+                + Messages.CONSOLE_COMMAND_DELETE_TARGET_FORMAT
+                + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_TARGET
+                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT
+                + "\n";
+        printInformationalMessage(helpStr);
+    }
+
     //@@author xzynos
     private void runCommandAddExpense(ConsoleCommandAddExpense consoleCommandAddExpense) {
         try {
@@ -518,7 +591,12 @@ public class ConsoleInterface {
 
     //@@author xzynos
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
+        ArrayList<Expense> expenses = expenseManager.getExpenses();
         expenseManager.updateSortExpenses(commandSortExpense, localStorage);
+        if (expenses.isEmpty()) {
+            printInformationalMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
+            return;
+        }
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
     }
 
@@ -1002,7 +1080,7 @@ public class ConsoleInterface {
         recurringPaymentManager.setRecurringPayments(localStorage.getSavedRecurringPayments());
         targetManager.setTargets(localStorage.getSavedTargets());
         incomeManager.setIncomes(localStorage.getSavedIncomes());
-        CurrencyApi.getCurrencyApi(currencyManager);
+        currencyApiManager.getCurrencyApi(currencyManager);
 
         printBlankLine();
 
@@ -1013,6 +1091,8 @@ public class ConsoleInterface {
                 runCommandBye((ConsoleCommandBye) consoleCommand);
 
                 return;
+            } else if (consoleCommand instanceof ConsoleCommandHelp) {
+                runCommandHelp((ConsoleCommandHelp) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandAddExpense) {
                 runCommandAddExpense((ConsoleCommandAddExpense) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandViewExpense) {

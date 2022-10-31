@@ -63,6 +63,10 @@ public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {
         return modeOfPayment;
     }
 
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     public void setModeOfPayment(String modeOfPayment) {
         this.modeOfPayment = modeOfPayment;
     }
