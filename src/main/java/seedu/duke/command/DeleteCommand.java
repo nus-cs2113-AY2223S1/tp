@@ -8,6 +8,7 @@ public class DeleteCommand extends Command {
     boolean hasDeleteComment;
 
     String checker;
+    
     public DeleteCommand(String[] parameters, CommandType commandType, boolean isDeleteModule, Lesson lesson) {
         super(parameters, commandType);
         this.lesson = lesson;
