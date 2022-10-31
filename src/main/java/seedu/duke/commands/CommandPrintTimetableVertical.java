@@ -63,7 +63,7 @@ public class CommandPrintTimetableVertical {
         initializeRawTimeTable();
 
         for (Module module : listOfModules) {
-            List<Lesson> lessons = module.getAttending();
+            List<Lesson> lessons = module.getAttendingList();
             try {
                 String code = module.getModuleCode();
                 writeRawTimetable(lessons, code);
