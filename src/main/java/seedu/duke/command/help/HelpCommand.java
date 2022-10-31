@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
     private static final String VIEW_COMMAND_HEADER = "VIEW-RELATED-COMMANDS";
     private static final String UPDATE_COMMAND_HEADER = "UPDATE-RELATED-COMMANDS";
     private static final String FIND_COMMAND_HEADER = "FIND-RELATED-COMMANDS";
-    private static final String ADDITONAL_DETAILS_HEADER = "ADDITIONAL-DETAILS";
+    private static final String ADDITIONAL_DETAILS_HEADER = "ADDITIONAL-DETAILS";
 
     // Command constants
     private static final String COMMAND_ADD_USER =
@@ -141,7 +141,7 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put(COMMAND_FIND_USER_DESCRIPTION, COMMAND_FIND_USER);
         this.commandToDetailMap.put(COMMAND_FIND_ITEM_DESCRIPTION, COMMAND_FIND_ITEM);
         this.commandToDetailMap.put(COMMAND_SORT_ITEM_DESCRIPTION, COMMAND_SORT_ITEM);
-        this.commandToDetailMap.put(System.lineSeparator() + ADDITONAL_DETAILS_HEADER, UNDERLINE);
+        this.commandToDetailMap.put(System.lineSeparator() + ADDITIONAL_DETAILS_HEADER, UNDERLINE);
         assert this.commandToDetailMap.size() == NUMBER_OF_COMMANDS
                 + NUMBER_OF_HEADERS : "Missing command";
     }
@@ -152,20 +152,18 @@ public class HelpCommand extends Command {
      * @return false
      */
     public boolean executeCommand() {
-        Ui.showLine();
         Ui.printResponse(this.toString());
-        System.out.println(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
-        Ui.showLine();
         return false;
     }
 
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Map.Entry<String, String> entry : commandToDetailMap.entrySet()) {
-            output += entry.getKey() + COMMAND_TO_DETAIL_SEPARATOR_TOKEN + entry.getValue()
-                    + System.lineSeparator();
+            output.append(entry.getKey()).append(COMMAND_TO_DETAIL_SEPARATOR_TOKEN)
+                    .append(entry.getValue()).append(System.lineSeparator());
         }
-        return output;
+        output.append(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
+        return output.toString();
     }
 }

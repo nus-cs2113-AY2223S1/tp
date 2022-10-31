@@ -2,7 +2,7 @@
 hide footbox
 
 Actor Transaction
-"Transaction" -> ":Duke": "view-transaction..."
+"Transaction" -> ":Duke": "view-tx..."
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"

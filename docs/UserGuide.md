@@ -113,7 +113,7 @@ Sort all items in a range: sort-items /mode <mode: hl or lh> /min <min> /max <ma
 
 ADDITIONAL-DETAILS: 
 --------------------
-Please take note to add a space after delimiters!
+Please take note to add a space before and after delimiters! e.g ' /c '
 Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!
 Refrain from using '|' and '/' as arguments!
 ____________________________________________________________
