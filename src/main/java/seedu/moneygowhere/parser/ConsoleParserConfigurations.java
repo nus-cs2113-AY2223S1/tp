@@ -1018,6 +1018,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_DESC
         );
+        optionCurrentAmount.setRequired(COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionTargetIndex);
@@ -1162,6 +1163,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_DESC
         );
+        optionAmount.setRequired(COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionIncomeIndex);
