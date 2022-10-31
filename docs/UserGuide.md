@@ -78,7 +78,7 @@ Example of usage:
 Sample Output:
 
 ```
-help
+Sem [1] >> help
 --------------------------------------------------------------------------------
 Processing "help" ...
 
@@ -134,7 +134,7 @@ Example of usage:
 Sample Output:
 
 ```
-bye
+Sem [1] >> bye
 --------------------------------------------------------------------------------
 Shutting down......
 --------------------------------------------------------------------------------
@@ -170,7 +170,7 @@ Example of usage:
 Sample Output:
 
 ```
-add CS2040
+Sem [1] >> add CS2040
 --------------------------------------------------------------------------------
 Processing "add cs2040" ...
 
@@ -183,25 +183,25 @@ Possible Error:
 1. Wrong module format:
     - The module code must be an exact match (CS2030 instead of cs203) else nothing will be added.
    ```
-   add cs203
-   --------------------------------------
+   Sem [1] >> add cs203
+   --------------------------------------------------------------------------------
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Module is invalid! Please enter a valid module code.
    Each module of study has a unique module code consisting of a two-
    or three-letter prefix that generally denotes the discipline,
    and four digits, the first of which indicates the level of the module
    (e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).
-   --------------------------------------
+   --------------------------------------------------------------------------------
    ```
 
 2. More than one module:
     - Currently, YAMOM only support adding one module at a time.
    ```
-   add CS1231 CS2101
-   --------------------------------------
+   Sem [1] >> add CS1231 CS2101
+   --------------------------------------------------------------------------------
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Unknown command, try again.
-   --------------------------------------
+   --------------------------------------------------------------------------------
    ```
 
 ### Remove a module: `remove`
@@ -221,7 +221,7 @@ Example of usage:
 Sample Output:
 
 ```
-remove cs2040
+Sem [1] >> remove cs2040
 --------------------------------------------------------------------------------
 Processing "remove cs2040" ...
 
@@ -257,7 +257,7 @@ Example of usage:
 Sample Output:
 
 ```
-search /code CG /level 2
+Sem [1] >> search /code CG /level 2
 --------------------------------------------------------------------------------
 Processing "search /code CG /level 2" ...
 
@@ -281,8 +281,9 @@ Possible Error:
 
 1. Module code does not have a match:
     * YAMOM will return an empty list of modules
+   
    ```
-    search /code XX
+    Sem [1] >> search /code XX
     --------------------------------------------------------------------------------
     Processing "search /code XX" ...
     
@@ -294,7 +295,7 @@ Possible Error:
     * YAMOM will prompt for the right search format
 
     ```   
-    search ABC
+    Sem [1] >> search ABC
     --------------------------------------------------------------------------------
     Processing "search ABC" ...
 
@@ -327,12 +328,13 @@ Example of usage:
 Sample Output:
 
 ```
-semester 3
+Sem [1] >> semester 3
 --------------------------------------------------------------------------------
 Processing "semester 3" ...
 
 You are now planning for special term I
 --------------------------------------------------------------------------------
+Sem [ST1] >> 
 ```
 
 Possible Error:
@@ -340,7 +342,7 @@ Possible Error:
 1. User did not input a valid semester:
 
     ```
-    semester 0
+    Sem [1] >> semester 0
     --------------------------------------------------------------------------------
     Processing "semester 0" ...
     
@@ -365,9 +367,10 @@ Sample Output:
 
 Assuming user has CS2040C in their timetable:
 ```
-timetable
---------------------------------------
-Processing "timetable" ...
+Sem [1] >> timetable /simple
+--------------------------------------------------------------------------------
+Processing "timetable /simple" ...
+
                                                                     
           : Mon      : Tues     : Wed      : Thur     : Fri         
 ====================================================================
@@ -382,13 +385,61 @@ Processing "timetable" ...
    1200   :          :          +----------+          :             
    1230   :          :          :          :          :             
    1300   :          :          :          :          :             
+   1330   :          :          :          :          :             
+   1400   :          :          :          :          :             
+   1430   :          :          :          :          :             
+   1500   :          :          :          :          :             
+   1530   :          :          :          :          :             
+   1600   :          :          :          :          :             
+   1630   :          :          :          :          :             
+   1700   :          :          :          +----------+             
+   1730   :          :          :          |CS2040    |             
+   1800   :          :          :          +-LEC[1]---+             
+   1830   :          :          :          :          :             
+   1900   :          :          :          :          :             
                                                                     
 
---------------------------------------
+--------------------------------------------------------------------------------
+```
+
+```
+Sem [1] >> timetable /fancy
+--------------------------------------------------------------------------------
+Processing "timetable /fancy" ...
+
+                                                                    
+          : Mon      : Tues     : Wed      : Thur     : Fri         
+====================================================================
+   0800   :          :          :          ┌──────────┬──────────┐  
+   0830   :          :          :          │CS2040    │CS2040    │  
+   0900   :          :          :          └─TUT[01]──┤ LAB[1C]  │  
+   0930   :          :          :          :          │          │  
+   1000   :          :          ┌──────────┐          └──────────┘  
+   1030   :          :          │CS2040    │          :             
+   1100   :          :          │ LEC[1]   │          :             
+   1130   :          :          │          │          :             
+   1200   :          :          └──────────┘          :             
+   1230   :          :          :          :          :             
+   1300   :          :          :          :          :             
+   1330   :          :          :          :          :             
+   1400   :          :          :          :          :             
+   1430   :          :          :          :          :             
+   1500   :          :          :          :          :             
+   1530   :          :          :          :          :             
+   1600   :          :          :          :          :             
+   1630   :          :          :          :          :             
+   1700   :          :          :          ┌──────────┐             
+   1730   :          :          :          │CS2040    │             
+   1800   :          :          :          └─LEC[1]───┘             
+   1830   :          :          :          :          :             
+   1900   :          :          :          :          :             
+                                                                    
+
+--------------------------------------------------------------------------------
 ```
 Assuming user has no modules in their timetable:
 ```
-timetable
+Sem [1] >> timetable
 --------------------------------------------------------------------------------
 Processing "timetable" ...
 
@@ -402,7 +453,7 @@ Possible Error:
 1. Random parameters:
 
     ```
-    timetable show
+    Sem [1] >> timetable show
     --------------------------------------------------------------------------------
     Processing "timetable show" ...
     
@@ -413,7 +464,7 @@ Possible Error:
 2. Forgot backslash `/`:
 
     ```
-    timetable fancy
+    Sem [1] >> timetable fancy
     --------------------------------------------------------------------------------
     Processing "timetable fancy" ...
     
@@ -424,7 +475,7 @@ Possible Error:
 3. Contains both `/fancy` and `/simple`:
 
     ```
-    timetable /simple /fancy
+    Sem [1] >> timetable /simple /fancy
     --------------------------------------------------------------------------------
     Processing "timetable /simple /fancy" ...
     
@@ -446,7 +497,7 @@ Sample Output:
 
 Assuming the user has selected the CS1010 and CS2040C:
 ```
-list
+Sem [1] >> list
 --------------------------------------------------------------------------------
 Processing "list" ...
 
@@ -465,7 +516,7 @@ Here's a list of your current selected module(s)!
 ```
 Assuming empty list of modules:
 ```
-list
+Sem [1] >> list
 --------------------------------------------------------------------------------
 You currently have no selected module(s)!
 --------------------------------------------------------------------------------
@@ -476,7 +527,7 @@ Possible Error:
 1. Additional parameters:
 
     ```
-    list modules
+    Sem [1] >> list modules
     --------------------------------------------------------------------------------
     Processing "list modules" ...
     
@@ -514,7 +565,7 @@ Example of usage:
 Sample Output:
 
 ```
-select /module CS2040 /type lecture /code 1
+Sem [1] >> select /module CS2040 /type lecture /code 1
 --------------------------------------------------------------------------------
 Processing "select /module CS2040 /type lecture /code 1" ...
 
@@ -527,36 +578,36 @@ Possible Error:
 1. The module code is not in the list of selected modules (assuming that cs2040 is not in the list of selected modules):
 
     ```
-    select /module CS2040 /type lecture /code 2
+    Sem [1] >> select /module CS2040 /type lecture /code 2
     --------------------------------------------------------------------------------
     Processing "select /module CS2040 /type lecture /code 2" ...
-    
-    Slot selection unsuccessful!
-    You might have entered the wrong Module, Lesson Type or Class No.
+
+    Error!  You need to add the module to your timetable first. Use the add command.
+        e.g. add CS2040
     --------------------------------------------------------------------------------
     ```
 
 2. The module code is in the list of selected modules, but the lesson type and class no is not valid:
 
     ```
-    select /module CS2113 /type rec /code 2
+    Sem [1] >> select /module CS2040 /type lecture /code 2
     --------------------------------------------------------------------------------
-    Processing "select /module CS2113 /type rec /code 2" ...
+    Processing "select /module CS2040 /type lecture /code 2" ...
     
-    Slot selection unsuccessful!
-    You might have entered the wrong Module, Lesson Type or Class No.
+    Error!  Class code 2 does not exist for LECTURE for CS2040 in semester 1
     --------------------------------------------------------------------------------
     ```
 
 3. The search is not in the expected format:
 
     ```
-    select /mod CS2040 /type lecture /number 2 
+    Sem [1] >> select /mod CS2040 /type lecture /number 2 
     --------------------------------------------------------------------------------
     Processing "select /mod CS2040 /type lecture /number 2" ...
     
     Error! 	Wrong format given, should be 
         select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
+        Missing parameter /module
     --------------------------------------------------------------------------------
     ```
 
@@ -573,7 +624,7 @@ Example of usage:
 Sample Output:
 
 ```
-export
+Sem [1] >> export
 --------------------------------------------------------------------------------
 Processing "export" ...
 
@@ -622,10 +673,20 @@ Example of usage:
 Sample Output:
 
 ```
-import https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
+Sem [1] >> import https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
 --------------------------------------------------------------------------------
 Processing "import https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01" ...
 
+Semester 1 timetable imported.
+CS1010 added.
+The following lessons were added:
+LABORATORY:B03
+SECTIONAL_TEACHING:1
+TUTORIAL:01
+
+Please check that the format of the link provided is correct if there are missing modules or lessons.
+Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-timetable-import
+for more information.
 Timetable imported to YAMOM!
 --------------------------------------------------------------------------------
 ```
@@ -635,7 +696,7 @@ Possible error:
 1. No link given:
 
     ```
-    import 
+    Sem [1] >> import 
     --------------------------------------------------------------------------------
     Processing "import" ...
     
@@ -646,7 +707,7 @@ Possible error:
 2. Wrong link format:
 
     ```
-    import www.google.com
+    Sem [1] >> import www.google.com
     --------------------------------------------------------------------------------
     Processing "import www.google.com" ...
     
