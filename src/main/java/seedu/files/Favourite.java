@@ -55,6 +55,10 @@ public class Favourite {
         fileStorage.writeDataToFile(content.toString());
     }
 
+    public void replaceFavouriteList(ArrayList<String> content) {
+        favouriteList = content;
+    }
+
     public static ArrayList<String> getFavouriteList() {
         return favouriteList;
     }
