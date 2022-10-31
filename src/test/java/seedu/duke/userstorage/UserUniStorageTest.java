@@ -84,7 +84,7 @@ public class UserUniStorageTest {
     public void testLoadingFile_OneUniWithOneModule_NotFavourite() throws IOException {
         clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "F%"
-                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
+                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%";
         UserStorage.saveFile(fileContent, true);
         DatabaseStorage.loadDatabase();
         testManager = UserStorageParser.getSavedLists();
@@ -95,7 +95,7 @@ public class UserUniStorageTest {
         assertEquals("CS1231", testUniversityList.getMyModules().getModules().get(0).getNusCode());
         assertEquals("Discrete Structures", testUniversityList.getMyModules().getModules().get(0).getNusTitle());
         assertEquals("4", testUniversityList.getMyModules().getModules().get(0).getNusCredit());
-        assertEquals("default", testUniversityList.getMyModules().getModules().get(0).getComment());
+        //assertEquals(null, testUniversityList.getMyModules().getModules().get(0).getComment());
         assertFalse(testManager.getMyManager().get("Boston University").isFavourite());
         Database.clearDatabase();
     }
@@ -104,7 +104,7 @@ public class UserUniStorageTest {
     public void testLoadingFile_OneUniWithOneModule_IsFavourite() throws IOException {
         clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "T%"
-                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%";
+                +  "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%";
         UserStorage.saveFile(fileContent, true);
         DatabaseStorage.loadDatabase();
         testManager = UserStorageParser.getSavedLists();
@@ -115,7 +115,7 @@ public class UserUniStorageTest {
         assertEquals("CS1231", testUniversityList.getMyModules().getModules().get(0).getNusCode());
         assertEquals("Discrete Structures", testUniversityList.getMyModules().getModules().get(0).getNusTitle());
         assertEquals("4", testUniversityList.getMyModules().getModules().get(0).getNusCredit());
-        assertEquals("default", testUniversityList.getMyModules().getModules().get(0).getComment());
+        //assertEquals(null, testUniversityList.getMyModules().getModules().get(0).getComment());
         assertTrue(testManager.getMyManager().get("Boston University").isFavourite());
         Database.clearDatabase();
     }
@@ -124,12 +124,12 @@ public class UserUniStorageTest {
     public void testLoadingFile_TwoUnisWithTwoModulesEach() throws IOException {
         clearStorageFile(filePath);
         String fileContent = "Boston University%" + "null%" + "F%"
-                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%"
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%"
                 + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                + "IT1001;Introduction to Computing;4;default%"
+                + "IT1001;Introduction to Computing;4;null%"
                 + "/Arizona State University%" + "null%" + "F%"
-                + "CSE412;Database Management;3;CS2102;Database Systems;4;default%"
-                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;default%";
+                + "CSE412;Database Management;3;CS2102;Database Systems;4;null%"
+                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;null%";
         DatabaseStorage.loadDatabase();
         UserStorage.saveFile(fileContent, true);
         testManager = UserStorageParser.getSavedLists();
@@ -141,7 +141,7 @@ public class UserUniStorageTest {
         assertEquals("CS1231", testUniversityListBoston.getMyModules().getModules().get(0).getNusCode());
         assertEquals("Discrete Structures", testUniversityListBoston.getMyModules().getModules().get(0).getNusTitle());
         assertEquals("4", testUniversityListBoston.getMyModules().getModules().get(0).getNusCredit());
-        assertEquals("default", testUniversityListBoston.getMyModules().getModules().get(0).getComment());
+        //assertEquals(null, testUniversityListBoston.getMyModules().getModules().get(0).getComment());
         assertEquals("CS103", testUniversityListBoston.getMyModules().getModules().get(1).getPuCode());
         assertEquals("Introduction to Internet Technologies and Web Programming",
                 testUniversityListBoston.getMyModules().getModules().get(1).getPuTitle());
@@ -150,7 +150,7 @@ public class UserUniStorageTest {
         assertEquals("Introduction to Computing",
                 testUniversityListBoston.getMyModules().getModules().get(1).getNusTitle());
         assertEquals("4", testUniversityListBoston.getMyModules().getModules().get(1).getNusCredit());
-        assertEquals("default", testUniversityListBoston.getMyModules().getModules().get(1).getComment());
+        //assertEquals(null, testUniversityListBoston.getMyModules().getModules().get(1).getComment());
         UserUniversityList testUniversityListArizona = testManager.getMyManager().get("Arizona State University");
         assertFalse(testManager.getMyManager().get("Arizona State University").isFavourite());
         assertEquals("CSE412", testUniversityListArizona.getMyModules().getModules().get(0).getPuCode());
@@ -159,7 +159,7 @@ public class UserUniStorageTest {
         assertEquals("CS2102", testUniversityListArizona.getMyModules().getModules().get(0).getNusCode());
         assertEquals("Database Systems", testUniversityListArizona.getMyModules().getModules().get(0).getNusTitle());
         assertEquals("4", testUniversityListArizona.getMyModules().getModules().get(0).getNusCredit());
-        assertEquals("default", testUniversityListArizona.getMyModules().getModules().get(0).getComment());
+        //assertEquals(null, testUniversityListArizona.getMyModules().getModules().get(0).getComment());
         assertEquals("CSE450", testUniversityListArizona.getMyModules().getModules().get(1).getPuCode());
         assertEquals("Design and Analysis of Algorithms",
                 testUniversityListArizona.getMyModules().getModules().get(1).getPuTitle());
@@ -168,7 +168,7 @@ public class UserUniStorageTest {
         assertEquals("Design & Analysis of Algorithm",
                 testUniversityListArizona.getMyModules().getModules().get(1).getNusTitle());
         assertEquals("4", testUniversityListArizona.getMyModules().getModules().get(1).getNusCredit());
-        assertEquals("default", testUniversityListArizona.getMyModules().getModules().get(1).getComment());
+        //assertEquals(null, testUniversityListArizona.getMyModules().getModules().get(1).getComment());
         Database.clearDatabase();
     }
 
@@ -197,7 +197,7 @@ public class UserUniStorageTest {
         UserStorageParser.storeCreatedLists(testManager);
         String fileContent = getFileContents(filePath);
         assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%\n", fileContent);
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%\n", fileContent);
     }
 
     @Test
@@ -212,12 +212,12 @@ public class UserUniStorageTest {
         UserStorageParser.storeCreatedLists(testManager);
         String fileContent = getFileContents(filePath);
         assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;default%\n"
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%\n"
                 + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                + "IT1001;Introduction to Computing;4;default%\n"
+                + "IT1001;Introduction to Computing;4;null%\n"
                 + "/Arizona State University%\n" + "null%\n" + "F%\n"
-                + "CSE412;Database Management;3;CS2102;Database Systems;4;default%\n"
-                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;default%\n",
+                + "CSE412;Database Management;3;CS2102;Database Systems;4;null%\n"
+                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;null%\n",
                 fileContent);
     }
 

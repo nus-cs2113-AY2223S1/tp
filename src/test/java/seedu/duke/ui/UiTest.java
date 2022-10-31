@@ -142,7 +142,7 @@ public class UiTest {
                 + "Success! You updated:\n" + "NUS: " + "CS3243" + " "
                 + "Introduction to Artificial Intelligence" + " | Partner University: " + "test " + "CPSC123" + " "
                 + "Intro to AI" + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
-                + "With the following comment: " + dummy.getComment() + "\n"
+                + "Note: " + dummy.getComment() + "\n"
                 + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModuleUpdatedAcknowledgement(dummy));
 
