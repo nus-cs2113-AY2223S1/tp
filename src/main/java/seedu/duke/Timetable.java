@@ -10,10 +10,6 @@ public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
     public static TimetableDict timetableDict = new TimetableDict();
 
-    public static void initTimetableDict() {
-        timetableDict.init();
-    }
-
     public static String allocateModules() {
         return timetableDict.allocateModules();
     }
