@@ -50,7 +50,7 @@ public class Parser {
         case "find":
             return new FindCommand(arguments);
         case "help":
-            return new HelpCommand();
+            return new HelpCommand(arguments);
         default:
             return new InvalidCommand();
         }

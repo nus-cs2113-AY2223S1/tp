@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
@@ -10,12 +11,17 @@ import seedu.duke.storage.Storage;
 public class HelpCommand extends Command {
 
     private Ui ui;
+    private final String arguments;
 
-    public HelpCommand() {
+    public HelpCommand(String arguments) {
+        this.arguments = arguments;
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IllegalValueException {
+        if (arguments.length() > 0) {
+            throw new IllegalValueException("Invalid help command");
+        }
         ui.output("Help will always be given at Hogwarts to those who ask for it\n"
                 + "Available commands:\n"
                 + "help - to display the help message\n"
