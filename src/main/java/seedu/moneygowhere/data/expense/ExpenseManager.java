@@ -67,7 +67,8 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getCategory().equals(categoryName)) {
+                String category = expense.getCategory();
+                if (category != null && category.equalsIgnoreCase(categoryName)) {
                     expensesByCategory.add(expense);
                 }
             }
@@ -84,7 +85,7 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getName().equals(expenseName)) {
+                if (expense.getName().equalsIgnoreCase(expenseName)) {
                     expensesByName.add(expense);
                 }
             }
