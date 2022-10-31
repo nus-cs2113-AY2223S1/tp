@@ -70,17 +70,31 @@ public class FavouriteCommand extends Command {
                 if (!isValid) {
                     favourite.replaceFavouriteList(validCarparkIDs);
                     favourite.writeFavouriteList();
-                    ui.print("Some values were invalid. These were skipped.\n");
+                    ui.print("Some values were invalid. Invalid values were skipped.\n");
                 }
                 if (isEmpty) {
                     return new CommandResult("There is no favourites in the list!");
                 }
                 return new CommandResult(content.toString().trim());
             } else {
-                Carpark result = carparkList.findCarpark(argument);
-                setFavourite(result.getCarparkId());
-                result.setFavourite(true);
-                return new CommandResult("Added Carpark " + argument + " to favourites!");
+                StringBuilder content = new StringBuilder();
+                String[] words = argument.trim().split("\\s+");
+                boolean isValid = true;
+                for (String word : words) {
+                    if (carparkList.isCarparkValid(word)) {
+                        Carpark result = carparkList.findCarpark(word);
+                        String carparkId = result.getCarparkId();
+                        setFavourite(carparkId);
+                        content.append(carparkId).append(" ");
+                        result.setFavourite(true);
+                    } else {
+                        isValid = false;
+                    }
+                }
+                if (!isValid) {
+                    ui.print("Some values were invalid. Invalid values were skipped.\n");
+                }
+                return new CommandResult("Added Carpark " + content + "to favourites!");
             }
         } catch (NoCarparkFoundException noCarparkFoundException) {
             return new CommandResult(noCarparkFoundException.getMessage());
