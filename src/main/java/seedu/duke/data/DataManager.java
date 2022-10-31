@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import seedu.duke.Exceptions;
+import seedu.duke.Timetable;
+import seedu.duke.module.Module;
 
 public class DataManager {
     protected static String currSemester;
@@ -45,12 +47,20 @@ public class DataManager {
     public static void loadTimetableFromDataFile() throws Exceptions.FileLoadException, FileNotFoundException {
         ModuleManager.loadModules();
         AttendingManager.loadAttendingIntoDataList();
-        AttendingManager.loadAttendingIntoTimetable();
+        AttendingManager.loadNewAttendingOnStartUp();
     }
 
     public static void makeSave() {
         ModuleManager.saveModules();
         AttendingManager.saveAttendingIntoDataList();
         AttendingManager.saveAttendingData();
+    }
+
+    public static void resetDataFiles() {
+        ModuleManager.deleteDataFile(dataDirectoryPath);
+        AttendingManager.deleteDataFile(dataDirectoryPath);
+        File dataDir = new File(dataDirectoryPath);
+        Timetable.clearData();
+        dataDir.delete();
     }
 }

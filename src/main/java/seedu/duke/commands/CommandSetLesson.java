@@ -5,6 +5,7 @@ import seedu.duke.Timetable;
 import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 public class CommandSetLesson {
@@ -29,8 +30,9 @@ public class CommandSetLesson {
 
     private static String runSetProcedure(int indexForModule) {
 
+        //gets
         String indexForLesson = UI.getLessonIndexFromUser(Timetable.getLessonTypes(indexForModule));
-        int lessonTypeListLength = Timetable.getLessonTypeLength(indexForModule);
+        int lessonTypeListLength = Timetable.getLessonTypeLength(indexForModule); //no of types for this mod
 
         if (isInvalidInput(indexForLesson, lessonTypeListLength)) {
             return "Invalid Lesson Index!";
@@ -44,9 +46,9 @@ public class CommandSetLesson {
                 Integer.parseInt(indexForLesson) - 1);
 
         try {
-            Lesson newLesson = getPreferredLesson(indexForModule,
+            ArrayList<Lesson> newLessons = getPreferredLesson(indexForModule,
                     Integer.parseInt(indexForLesson) - 1, targetLessonType);
-            replaceAttendingLesson(newLesson, indexForModule, Integer.parseInt(indexForLesson) - 1);
+            replaceAttendingLesson(newLessons, indexForModule, targetLessonType);
         } catch (Exceptions.InvalidTimeslotException e) {
             return "Invalid Timeslot Index!";
         }
@@ -54,11 +56,11 @@ public class CommandSetLesson {
         return "Successfully set your lesson!";
     }
 
-    private static void replaceAttendingLesson(Lesson newLesson, int indexForModule, Integer indexForLesson) {
-        Timetable.replaceLesson(newLesson, indexForModule, indexForLesson);
+    private static void replaceAttendingLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
+        Timetable.replaceLesson(newLessons, indexForModule, moduleType);
     }
 
-    private static Lesson getPreferredLesson(int indexForModule, int i, String targetLessonType)
+    private static ArrayList<Lesson> getPreferredLesson(int indexForModule, int i, String targetLessonType)
             throws Exceptions.InvalidTimeslotException {
 
         int numberOfReplacements = Timetable.getNumberOfPossibleReplacements(indexForModule, targetLessonType);
