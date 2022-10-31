@@ -8,6 +8,9 @@ public class UI {
 
     public static final String DOTTED_CHAR = ":";
     public static final String HORIZONTAL_BORDER = "─";
+    public static final String TABLE_HEADER = "=";
+
+    public static final String CLASH_CHAR = "X";
 
 
     public static void printResponse(String response) {
