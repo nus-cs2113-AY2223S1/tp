@@ -626,6 +626,7 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | update price                      | change the price a user decides to loan his item for          |
 | v2.0    | manager  | update transaction                | change the number of days a user decides to loan his item for |
 | v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
+| v2.0    | manager  | view a user's items               | view the items that belong to a user                          |
 | v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
 | v2.1    | manager  | view a user's lend transactions   | view the transactions in which a user is a lender             |
 | v2.1    | manager  | view a user's loss                | see how much a user has to pay for the items he has borrowed  |
