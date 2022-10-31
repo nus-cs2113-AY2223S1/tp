@@ -8,6 +8,8 @@ import seedu.commands.AuthCommand;
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
 import seedu.commands.FavouriteCommand;
+import seedu.commands.FilterAddressCommand;
+import seedu.commands.FilterCarparkIdCommand;
 import seedu.commands.FilterCommand;
 import seedu.commands.FindCommand;
 import seedu.commands.HelpCommand;
@@ -17,8 +19,10 @@ import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
 import seedu.common.CommonData;
 import seedu.data.CarparkList;
+import seedu.exception.DashedArgumentsNotInFrontException;
 import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
+import seedu.parser.search.Arguments;
 import seedu.parser.search.Sentence;
 
 /**
@@ -29,6 +33,8 @@ public class Parser {
     private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
     private static final String INVALID_NUMBER_OF_ARGS_HEADER = "This command only takes exactly %s argument(s). Valid "
         + "command(s): \n";
+    private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)"
+        + ".\n";
 
     private CarparkList carparkList;
     private Api api;
@@ -51,9 +57,15 @@ public class Parser {
             return new InvalidCommand("Invalid Command");
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments").trim();
-
+        final String commandWord = matcher.group("commandWord").trim();
+        final Arguments argsList;
+        final String arguments;
+        try {
+            argsList = new Arguments(matcher.group("arguments").trim());
+            arguments = argsList.getArguments().toString();
+        } catch (DashedArgumentsNotInFrontException e) {
+            return new InvalidCommand(e.getMessage());
+        }
 
         if (commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD)
                 || commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD_SHORT)) {
@@ -90,12 +102,36 @@ public class Parser {
             return prepareList(arguments);
         } else if (commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD)
                 || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT)) {
+            String dashedCommand;
+            Sentence actualArgument = argsList.getArguments();
+            if (argsList.getDashedArgsCount() == 1) {
+                dashedCommand = argsList.getDashedArgs().get(0);
+                if (dashedCommand.equalsIgnoreCase("i")) {
+                    if (actualArgument.getWordCount() == 0) {
+                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    }
+                    return prepareFilterCarparkId(actualArgument);
+                } else if (dashedCommand.equalsIgnoreCase("a")) {
+                    if (actualArgument.getWordCount() == 0) {
+                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    }
+                    return prepareFilterAddress(actualArgument);
+                }
+            } else if (argsList.getDashedArgsCount() > 1) {
+                return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
+                    + CommonData.FILTER_FORMAT);
+            } else {
+                if (actualArgument.getWordCount() == 0) {
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                }
+                return prepareFilterAddress(actualArgument);
+            }
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
             return prepareFilter(arguments);
-        } else if (commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD_SHORT)) {
+        } else if (commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD.trim())
+                || commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD_SHORT.trim())) {
             return prepareUpdate(arguments);
         } else if (commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD)
                 || commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD_SHORT)) {
@@ -189,15 +225,29 @@ public class Parser {
         }
     }
 
+    private Command prepareFilter(String arguments) {
+        Sentence searchQuery = new Sentence(arguments);
+        return new FilterCommand(carparkList, searchQuery);
+    }
+
     /**
      * To prepare the arguments to be taken in for Search Command.
      *
      * @param arguments arguments given by the user after the command word
      * @return command to be carried out
      */
-    private Command prepareFilter(String arguments) {
-        Sentence searchQuery = new Sentence(arguments);
-        return new FilterCommand(carparkList, searchQuery);
+    private Command prepareFilterAddress(Sentence searchQuery) {
+        return new FilterAddressCommand(carparkList, searchQuery);
+    }
+
+    /**
+     * To prepare the arguments to be taken in for Search Command.
+     *
+     * @param arguments arguments given by the user after the command word
+     * @return command to be carried out
+     */
+    private Command prepareFilterCarparkId(Sentence searchQuery) {
+        return new FilterCarparkIdCommand(carparkList, searchQuery);
     }
 
     /**

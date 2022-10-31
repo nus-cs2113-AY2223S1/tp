@@ -2,6 +2,8 @@ package seedu.data;
 
 import java.util.List;
 
+import seedu.commands.FilterAddressCommand;
+
 /**
  * A subset of {@link CarparkList} that contains items that were filtered or searched for.
  */
@@ -17,7 +19,7 @@ public class CarparkFilteredList extends CarparkList {
     }
 
     /**
-     * Gets a formatted string for use with the {@link seedu.commands.FilterCommand Filter} command.
+     * Gets a formatted string for use with the {@link FilterAddressCommand Filter} command.
      *
      * @return Formatted string.
      */
@@ -28,5 +30,4 @@ public class CarparkFilteredList extends CarparkList {
         }
         return bufferString.toString().trim();
     }
-
 }
