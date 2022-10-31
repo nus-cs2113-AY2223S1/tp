@@ -1125,12 +1125,12 @@ public class ConsoleParser {
             BigDecimal amount = new BigDecimal(amountStr);
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
 
@@ -1148,12 +1148,12 @@ public class ConsoleParser {
             BigDecimal currentAmount = new BigDecimal(currentAmountStr);
             if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddTargetInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
     }
@@ -1488,12 +1488,12 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditTargetInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -1507,12 +1507,12 @@ public class ConsoleParser {
                 BigDecimal currentAmount = new BigDecimal(currentAmountStr);
                 if (currentAmount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditTargetInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }
@@ -1708,12 +1708,12 @@ public class ConsoleParser {
             BigDecimal amount = new BigDecimal(amountStr);
             if (amount.compareTo(BigDecimal.ZERO) != 1) {
                 throw new ConsoleParserCommandAddIncomeInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         } catch (NumberFormatException exception) {
             throw new ConsoleParserCommandAddIncomeInvalidException(
-                    Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                    Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
             );
         }
     }
@@ -2055,12 +2055,12 @@ public class ConsoleParser {
                 BigDecimal amount = new BigDecimal(amountStr);
                 if (amount.compareTo(BigDecimal.ZERO) != 1) {
                     throw new ConsoleParserCommandEditIncomeInvalidException(
-                            Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                            Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                     );
                 }
             } catch (NumberFormatException exception) {
                 throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION
+                        Messages.CONSOLE_ERROR_COMMAND_INVALID_AMOUNT
                 );
             }
         }

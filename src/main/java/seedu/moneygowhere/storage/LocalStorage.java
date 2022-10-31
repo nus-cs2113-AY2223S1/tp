@@ -9,13 +9,9 @@ import org.xml.sax.SAXException;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.data.expense.Expense;
-import seedu.moneygowhere.data.expense.ExpenseManager;
 import seedu.moneygowhere.data.income.Income;
-import seedu.moneygowhere.data.income.IncomeManager;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
-import seedu.moneygowhere.data.recurringpayments.RecurringPaymentManager;
 import seedu.moneygowhere.data.target.Target;
-import seedu.moneygowhere.data.target.TargetManager;
 import seedu.moneygowhere.exceptions.storage.LocalStorageLoadDataException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
@@ -115,9 +111,8 @@ public class LocalStorage {
 
     /**
      * Reads saved data and configurations from a load file in a fixed directory, parse it and convert them into objects
-     * and add them to the arraylist that stores the corresponding objects.
-     * Sort the current arraylist afterwards based on saved configuration.
-     *
+     * and add them to the arraylist that stores the corresponding objects. Sort the current arraylist afterwards based
+     * on saved configuration.
      */
     public void loadFromFile() {
         Expense loadExpense;
@@ -482,7 +477,6 @@ public class LocalStorage {
 
     /**
      * Parse current expenses and configurations for sorting expenses and saves it to a xml file in storage.
-     *
      */
     public void saveToFile() {
         try {
