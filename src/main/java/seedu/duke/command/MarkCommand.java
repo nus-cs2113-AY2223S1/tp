@@ -71,6 +71,7 @@ public class MarkCommand extends Command {
                         "calories:" + exercise.getCaloriesBurnt());
             } catch (NumberFormatException e) {
                 LOGGER.log(Level.WARNING, "Error converting string to double", e);
+                throw new IllegalValueException("time and met must be decimal");
             }
             break;
         case "undone":
