@@ -567,6 +567,14 @@ This is how the command works:
 
 7. The display shows the successful purging via `ui.showInfoMessage()` and writes it to file by `storage.writeToFile()`.
 
+The sequence diagram below shows the interactions of a successful execution of the `DeleteCommand`.
+
+<p align="center">
+    <img src="images/PurgeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.7: Sequence Diagram for Purge Command</i>
+</p>
+
 _Written by: Brian Wong Yun Long_
 
 ### Storage Operations
