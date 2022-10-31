@@ -53,23 +53,23 @@ class ParserTest {
         assertEquals(expected, outContent.toString());
     }
 
-//    @Test
-//    void executeFindTestNegative() {
-//        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-//        System.setOut(new PrintStream(outContent));
-//
-//        String[] findArray = new String[]{"find","in2"};
-//        ps.executeFind(findArray);
-//
-//        StringWriter expectedStringWriter = new StringWriter();
-//        PrintWriter printWriter = new PrintWriter(expectedStringWriter);
-//
-//        printWriter.println("---Here are the reviews that match the keyword---\n");
-//        printWriter.println("Movies:");
-//        printWriter.println("\nTV Shows:");
-//        printWriter.close();
-//
-//        String expected = expectedStringWriter.toString();
-//        assertEquals(expected, outContent.toString());
-//    }
+    // @Test
+    // void executeFindTestNegative() {
+    //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    //     System.setOut(new PrintStream(outContent));
+
+    //     String[] findArray = new String[]{"find","in2"};
+    //     ps.executeFind(findArray);
+
+    //     StringWriter expectedStringWriter = new StringWriter();
+    //     PrintWriter printWriter = new PrintWriter(expectedStringWriter);
+
+    //     printWriter.println("---Here are the reviews that match the keyword---\n");
+    //     printWriter.println("Movies:");
+    //     printWriter.println("\nTV Shows:");
+    //     printWriter.close();
+
+    //     String expected = expectedStringWriter.toString();
+    //     assertEquals(expected, outContent.toString());
+    // }
 }
