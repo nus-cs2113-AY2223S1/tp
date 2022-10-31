@@ -70,8 +70,7 @@ public class Parking {
     private void loadFavourite(CarparkList carparkList) {
         try {
             favourite.updateFavouriteList(carparkList);
-        } catch (IOException e) {
-            ui.showUpdateFavouriteError();
+            favourite.writeFavouriteList();
         } catch (ParkingException e) {
             Ui.printError(e);
         }

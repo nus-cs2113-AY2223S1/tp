@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateKeyException;
@@ -39,16 +40,15 @@ public class Favourite {
     /**
      * Reads in data from favourite.txt file and saves it to this object.
      *
-     * @throws IOException If unable to read from file.
      * @throws NoFileFoundException If no file found.
      */
     public void updateFavouriteList(CarparkList carparkList)
-        throws IOException, NoFileFoundException, FileWriteException, InvalidFormatException {
+        throws NoFileFoundException, FileWriteException, InvalidFormatException {
         String content = FileReader.readStringFromTxt(file, directory, true);
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<>();
         Collections.addAll(tempArray, lines);
-        tempArray = new ArrayList<>(new HashSet<>(tempArray));
+        tempArray = new ArrayList<>(new LinkedHashSet<>(tempArray));
         boolean isValid = ensureValidity(carparkList, tempArray);
         if (!isValid) {
             writeFavouriteList();
