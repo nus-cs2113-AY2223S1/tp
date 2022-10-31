@@ -21,6 +21,16 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TRANSACTION
 //@@author bdthanh
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
+    private static final int TX_ID_INDEX = 0;
+    private static final int ITEM_NAME_INDEX = 1;
+    private static final int ITEM_ID_INDEX = 2;
+    private static final int LENDER_INDEX = 3;
+    private static final int BORROWER_INDEX = 4;
+    private static final int DURATION_INDEX = 5;
+    private static final int DATE_INDEX = 6;
+    private static final int MONEY_INDEX = 7;
+    private static final int CHECKSUM_INDEX = 8;
+
     private final String transactionFilePath;
 
     /**
@@ -98,22 +108,31 @@ public class TransactionStorage extends Storage {
      */
     public static Transaction handleTransactionLine(String[] splitTransactionLine) throws StoreFailureException {
         assert splitTransactionLine.length == 9 : "Invalid Transaction Line";
-        Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
-        checkCheckSumLine(transaction, Integer.parseInt(splitTransactionLine[8]));
-        return transaction;
+        try {
+            Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
+            checkCheckSumLine(transaction, Integer.parseInt(splitTransactionLine[CHECKSUM_INDEX].trim()));
+            return transaction;
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
-    private static Transaction getTransactionFromTransactionLine(String[] splitTransactionLine) {
-        String transactionId = splitTransactionLine[0];
-        String itemName = splitTransactionLine[1];
-        String itemId = splitTransactionLine[2];
-        String lenderId = splitTransactionLine[3];
-        String borrowerId = splitTransactionLine[4];
-        int duration = Integer.parseInt(splitTransactionLine[5]);
-        LocalDate createdAt = LocalDate.parse(splitTransactionLine[6]);
-        double moneyTransacted = Double.parseDouble(splitTransactionLine[7]);
-        return new Transaction(transactionId, itemName, itemId, borrowerId,
-                lenderId, duration, createdAt, moneyTransacted);
+    private static Transaction getTransactionFromTransactionLine(String[] splitTransactionLine)
+            throws StoreFailureException {
+        try {
+            String transactionId = splitTransactionLine[TX_ID_INDEX].trim();
+            String itemName = splitTransactionLine[ITEM_NAME_INDEX].trim();
+            String itemId = splitTransactionLine[ITEM_ID_INDEX].trim();
+            String lenderId = splitTransactionLine[LENDER_INDEX].trim();
+            String borrowerId = splitTransactionLine[BORROWER_INDEX].trim();
+            int duration = Integer.parseInt(splitTransactionLine[DURATION_INDEX].trim());
+            LocalDate createdAt = LocalDate.parse(splitTransactionLine[DATE_INDEX].trim());
+            double moneyTransacted = Double.parseDouble(splitTransactionLine[MONEY_INDEX].trim());
+            return new Transaction(transactionId, itemName, itemId, borrowerId,
+                    lenderId, duration, createdAt, moneyTransacted);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
     private static void checkCheckSumLine(Transaction transaction, int checkSum) throws StoreFailureException {

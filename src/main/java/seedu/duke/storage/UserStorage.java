@@ -20,6 +20,10 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAG
 //@@author bdthanh
 public class UserStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
+    private static final int USERNAME_INDEX = 0;
+    private static final int AGE_INDEX = 1;
+    private static final int CONTACT_INDEX = 2;
+    private static final int CHECKSUM_INDEX = 3;
     private final String userFilePath;
 
     /**
@@ -96,17 +100,26 @@ public class UserStorage extends Storage {
      * @return A User with full information.
      */
     public static User handleUserLine(String[] splitUserLine) throws StoreFailureException {
-        User user = getUserFromUserLine(splitUserLine);
-        checkCheckSumLine(user, Integer.parseInt(splitUserLine[3]));
-        return user;
+        try {
+            User user = getUserFromUserLine(splitUserLine);
+            checkCheckSumLine(user, Integer.parseInt(splitUserLine[CHECKSUM_INDEX].trim()));
+            return user;
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
-    private static User getUserFromUserLine(String[] splitUserLine) {
-        assert splitUserLine.length == 4 : "Invalid User Line";
-        String username = splitUserLine[0];
-        int age = Integer.parseInt(splitUserLine[1]);
-        String contactNumber = splitUserLine[2];
-        return new User(username, age, contactNumber);
+    private static User getUserFromUserLine(String[] splitUserLine) throws StoreFailureException {
+        try {
+            assert splitUserLine.length == 4 : "Invalid User Line";
+            String username = splitUserLine[USERNAME_INDEX].trim();
+            int age = Integer.parseInt(splitUserLine[AGE_INDEX].trim());
+            Integer.parseInt(splitUserLine[CONTACT_INDEX].trim());
+            String contactNumber = splitUserLine[CONTACT_INDEX].trim();
+            return new User(username, age, contactNumber);
+        } catch (Exception e) {
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+        }
     }
 
     private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {

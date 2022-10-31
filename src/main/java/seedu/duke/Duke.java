@@ -5,6 +5,7 @@ import seedu.duke.exception.StoreFailureException;
 import seedu.duke.exception.TransactionFileNotFoundException;
 import seedu.duke.exception.UserFileNotFoundException;
 import seedu.duke.item.ItemList;
+import seedu.duke.logger.DukeLogger;
 import seedu.duke.storage.ItemStorage;
 import seedu.duke.storage.TransactionStorage;
 import seedu.duke.storage.UserStorage;
@@ -16,6 +17,9 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILES_ILLEGALLY_DELETED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
+import static seedu.duke.logger.LoggerMessages.LOG_EXECUTE_SUCCESSFULLY;
+import static seedu.duke.logger.LoggerMessages.LOG_EXIT_DUKE;
+import static seedu.duke.logger.LoggerMessages.LOG_RUN_DUKE;
 import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
@@ -32,6 +36,7 @@ public class Duke {
     private final TransactionStorage transactionStorage;
     private final ItemStorage itemStorage;
     private final UserStorage userStorage;
+    private final DukeLogger dukeLogger;
     private boolean isLastCommand = false;
 
     /**
@@ -42,6 +47,7 @@ public class Duke {
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
+        dukeLogger = new DukeLogger();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
@@ -51,7 +57,7 @@ public class Duke {
             initializeTransactionList();
             initializeItemList();
         } catch (StoreFailureException e) {
-            resetAllListsDueToDataCorruption(e.getMessage());
+            exitDukeDueToDataCorruption(e.getMessage());
         }
     }
 
@@ -82,10 +88,7 @@ public class Duke {
         }
     }
 
-    private void resetAllListsDueToDataCorruption(String errorMessage) {
-        this.userList = new UserList();
-        this.itemList = new ItemList();
-        this.transactionList = new TransactionList();
+    private void exitDukeDueToDataCorruption(String errorMessage) {
         Ui.printErrorMessage(errorMessage);
         isLastCommand = true;
     }
@@ -102,9 +105,9 @@ public class Duke {
     }
 
     private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExit = (userStorage.hasUserFile() == itemStorage.hasItemFile())
+        boolean areSimultaneouslyExistOrNotExist = (userStorage.hasUserFile() == itemStorage.hasItemFile())
                 && (transactionStorage.hasTransactionFile() == itemStorage.hasItemFile());
-        if (!areSimultaneouslyExistOrNotExit) {
+        if (!areSimultaneouslyExistOrNotExist) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }
     }
@@ -115,6 +118,7 @@ public class Duke {
     public void run() {
         if (!isLastCommand) {
             Ui.printGreeting();
+            dukeLogger.info(LOG_RUN_DUKE);
         }
         while (!isLastCommand) {
             try {
@@ -123,10 +127,13 @@ public class Duke {
                         CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
                 writeDataToFile();
+                dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY);
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
+                dukeLogger.warning(e.getMessage());
             }
         }
+        dukeLogger.info(LOG_EXIT_DUKE);
     }
 
     /**
