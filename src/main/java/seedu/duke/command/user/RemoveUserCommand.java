@@ -12,7 +12,7 @@ import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROWING;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
@@ -47,7 +47,7 @@ public class RemoveUserCommand extends Command {
         this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != NUMBER_OF_ARGS) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

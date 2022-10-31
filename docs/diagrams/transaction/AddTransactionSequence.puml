@@ -17,7 +17,7 @@ activate ":AddTransactionCommand"
 ":AddTransactionCommand" -> ":AddTransactionCommand": getArgsAddTxCmd()
 activate ":AddTransactionCommand"
 return args
-alt args is valid
+opt args are valid
     ":AddTransactionCommand" -> ":Transaction"**: new Transaction()
     activate ":Transaction"
     ":Transaction" --> ":AddTransactionCommand"
@@ -29,20 +29,9 @@ alt args is valid
     deactivate ":TransactionList"
     deactivate "<<class>>\nUi"
     deactivate ":Transaction"
-else args is invalid
-    ":AddTransactionCommand" -> ":DukeException"** : new
-    destroy ":AddTransactionCommand"
-    activate ":DukeException"
-    ":DukeException" --> ":Duke"
-    deactivate ":DukeException"
-    ":Duke" -> "<<class>>\nUi" : print error
-    activate "<<class>>\nUi"
-    "<<class>>\nUi" -> ":DukeException": getMessage()
-    activate ":DukeException"
-    return
-    destroy ":DukeException"
-    "<<class>>\nUi" --> ":Duke"
-    deactivate "<<class>>\nUi"
+":AddTransactionCommand" --> ":Duke"
+destroy ":AddTransactionCommand"
 end
+
 
 @enduml

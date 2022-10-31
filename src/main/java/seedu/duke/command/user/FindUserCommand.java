@@ -8,7 +8,7 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author jorellesee
@@ -21,7 +21,7 @@ public class FindUserCommand extends Command {
         this.parts = parts;
         this.userList = userList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

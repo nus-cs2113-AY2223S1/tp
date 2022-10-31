@@ -19,7 +19,7 @@ activate ":RemoveTransactionCommand"
 return args
     ":RemoveTransactionCommand" -> ":TransactionList": getTransactionById()
     activate ":TransactionList"
-alt transaction is valid
+opt transaction is valid
     ":TransactionList" --> ":RemoveTransactionCommand"
     deactivate ":TransactionList"
     ":RemoveTransactionCommand" -> ":TransactionList": deleteTransaction()
@@ -30,21 +30,8 @@ alt transaction is valid
     return
     deactivate "<<class>>\nUi"
     deactivate ":TransactionList"
-else transaction is invalid
-    ":RemoveTransactionCommand" -> ":DukeException"** : new
-    destroy ":RemoveTransactionCommand"
-    activate ":DukeException"
-    ":DukeException" --> ":Duke"
-    deactivate ":DukeException"
-    ":Duke" -> "<<class>>\nUi" : print error
-    activate "<<class>>\nUi"
-    "<<class>>\nUi" -> ":DukeException": getMessage()
-    activate ":DukeException"
-    return
-    destroy ":DukeException"
-    "<<class>>\nUi" --> ":Duke"
-    deactivate "<<class>>\nUi"
+":RemoveTransactionCommand" --> ":Duke"
+destroy ":RemoveTransactionCommand"
 end
-deactivate ":RemoveTransactionCommand"
 
 @enduml

@@ -19,7 +19,7 @@ activate ":RemoveUserCommand"
 return args
     ":RemoveUserCommand" -> ":UserList": getUserById()
     activate ":UserList"
-alt user is valid
+opt user is valid
     ":UserList" --> ":RemoveUserCommand":
     deactivate ":UserList"
 
@@ -34,21 +34,8 @@ alt user is valid
     return
     deactivate "<<class>>\nUi"
     deactivate ":UserList"
-else user is invalid
-    ":RemoveUserCommand" -> ":DukeException"** : new
+    ":RemoveUserCommand" --> ":Duke"
     destroy ":RemoveUserCommand"
-    activate ":DukeException"
-    ":DukeException" --> ":Duke"
-     deactivate ":DukeException"
-     ":Duke" -> "<<class>>\nUi" : print error
-     activate "<<class>>\nUi"
-     "<<class>>\nUi" -> ":DukeException": getMessage()
-     activate ":DukeException"
-     return
-     destroy ":DukeException"
-     "<<class>>\nUi" --> ":Duke"
-     deactivate "<<class>>\nUi"
 end
-deactivate ":RemoveUserCommand"
 
 @enduml

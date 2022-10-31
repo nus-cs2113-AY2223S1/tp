@@ -11,23 +11,23 @@ import seedu.duke.user.UserList;
 import seedu.duke.transaction.TransactionList;
 
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 // @@author jorellesee
-public class ViewUserDebtCommand extends Command {
+public class ViewUserLossCommand extends Command {
     private final String[] parts;
     private final UserList userList;
     private final TransactionList transactionList;
 
 
-    public ViewUserDebtCommand(String[] parts, UserList userList, TransactionList transactionList)
+    public ViewUserLossCommand(String[] parts, UserList userList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

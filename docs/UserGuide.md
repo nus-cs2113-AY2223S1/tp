@@ -97,6 +97,10 @@ View a user: view-user /u <userName>
 View a user's items: view-user-items /u <userName>
 View a item: view-item /i <itemId>
 View a transaction: view-tx /t <transactionId>
+View list of user's borrow transaction: view-borrow-tx-by-user /u <userName>
+View list of user's lend transaction: view-lend-tx-by-user /u <userName>
+View the amount of money loss of a user: view-user-loss /u <userName>
+View the amount of money gain of a user: view-user-gain /u <userName>
 
 UPDATE-RELATED-COMMANDS: 
 --------------------
@@ -113,7 +117,7 @@ Sort all items in a range: sort-items /mode <mode: hl or lh> /min <min> /max <ma
 
 ADDITIONAL-DETAILS: 
 --------------------
-Please take note to add a space after delimiters!
+Please take note to add a space before and after delimiters! e.g ' /c '
 Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!
 Refrain from using '|' and '/' as arguments!
 ____________________________________________________________
@@ -179,7 +183,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.4. ```view-user``` - View a user
->View the details of a user in the list including the user's items and debt
+>View the details of a user in the list including the user's items and his/her gain and loss
 
 Format: ```view-user /u [USERNAME]```
 
@@ -193,7 +197,8 @@ Expected outcome:
 ____________________________________________________________
 Here is the user you have requested to view: 
 Username: bui Age: 20 Contact: 12345678 
-The user's debt is $0.0
+The user's loss is $0.0
+The user's gain is $0.0
 Here are 2 item(s) in your list:
 1. [Available] ItemId: 69b69ff2
    Item name: charger
@@ -221,7 +226,7 @@ Example of usage: `view-user-items /u bui`
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 2 item(s) in your list:
+Here are 2 item(s) in the list:
 1. [Available] ItemId: 69b69ff2
    Item name: charger
    Category: ELECTRICAL_APPLIANCES
@@ -253,6 +258,8 @@ Here are 2 user(s) in your list:
 2. Username: yixiang Age: 21 Contact: 69324729 
 ____________________________________________________________
 ```
+
+**...To be updated(View-user-loss, view-user-gain)**
 
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
@@ -314,7 +321,7 @@ Example of usage: ```list-items```
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 1 item(s) in your list:
+Here are 1 item(s) in the list:
 1. Status: [On loan] ItemId: ea608c61 
    Item: toy 
    Category: SPORTS_EQUIPMENT 
@@ -442,7 +449,7 @@ Example of usage: ```find-item /k book```
 Expected outcome: 
 ```
 ____________________________________________________________
-Here are 3 item(s) in your list:
+Here are 3 item(s) in the list:
 1. Status: [Available] ItemId: 18c90077 
    Item: book 
    Category: SPORTS_EQUIPMENT 
@@ -483,7 +490,8 @@ Expected outcome:
 ____________________________________________________________
 OK! I will add the following transaction:
 [Finished] TxID: 7ddc865f 
-   ItemName: speaker ItemID: 3ff10798 
+   ItemName: speaker ItemID: 3ff10798
+   Lender: thanh 
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
@@ -508,6 +516,7 @@ ____________________________________________________________
 OK! I will remove the following item:
 [Finished] TxID: 7ddc865f 
    ItemName: speaker ItemID: 3ff10798 
+   Lender: thanh 
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
@@ -526,15 +535,17 @@ Example of usage: ```list-tx```
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 2 transaction(s) in your list:
+Here are 2 transaction(s) you want to view:
 1. [Unfinished] TxID: 55e36921 
    ItemName: scale ItemID: f15dff20 
+   Lender: thanh 
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
    MoneyTransacted: $5.0 
 2. [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
@@ -558,6 +569,7 @@ ____________________________________________________________
 Here is the transaction you requested to view: 
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
@@ -577,13 +589,15 @@ Expected outcome:
 ____________________________________________________________
 Here are the uncompleted transactions: 
 [Unfinished] TxID: 55e36921 
-   ItemName: scale ItemID: f15dff20 
+   ItemName: scale ItemID: f15dff20
+   Lender: thanh  
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
    MoneyTransacted: $5.0 
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
@@ -608,12 +622,14 @@ ____________________________________________________________
 Done! Here is the updated transaction:
 [Unfinished] TxID: 55e36921 
    ItemName: scale ItemID: f15dff20 
+   Lender: thanh 
    Borrower: jorelle 
    Duration: 10 
    ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
    MoneyTransacted: $10.0 
 ____________________________________________________________
 ```
+**...To be updated(View-borrow-tx, view-lend-tx)**
 
 ### 3.5. Exit Program
 

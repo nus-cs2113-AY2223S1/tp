@@ -11,10 +11,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import java.math.BigDecimal;
-
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
@@ -40,7 +38,7 @@ public class UpdateTransactionCommand extends Command {
         this.parts = parts;
         this.transactionList = transactionList;
         if (parts.length != 2) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 

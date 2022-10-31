@@ -123,8 +123,18 @@ public class TransactionList {
         return returnList;
     }
 
+    public TransactionList getLendTransactionsByUser(String userName) {
+        TransactionList returnList = new TransactionList();
+        for (Transaction transaction : this.transactionList) {
+            if (transaction.getLender().equals(userName)) {
+                returnList.addTransaction(transaction);
+            }
+        }
+        return returnList;
+    }
+
     public double getTotalMoneyTransacted() {
-        int totalProfit = 0;
+        double totalProfit = 0;
         for (Transaction transaction : transactionList) {
             totalProfit += transaction.getMoneyTransacted();
         }
@@ -219,10 +229,10 @@ public class TransactionList {
     public String toString() {
         StringBuilder listString = new StringBuilder();
         if (transactionList.size() == 0) {
-            listString.append("There is no transaction in your list right now");
+            listString.append("Your requested transaction list is empty");
         } else {
             listString.append("Here are ").append(transactionList.size())
-                    .append(" transaction(s) in your list:");
+                    .append(" transaction(s) you want to view:");
         }
         int index = 1;
         for (Transaction transaction : transactionList) {

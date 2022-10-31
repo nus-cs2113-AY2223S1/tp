@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -98,9 +97,9 @@ public class TransactionStorage extends Storage {
      * @return A Transaction with full information.
      */
     public static Transaction handleTransactionLine(String[] splitTransactionLine) throws StoreFailureException {
-        assert splitTransactionLine.length == 8 : "Invalid Transaction Line";
+        assert splitTransactionLine.length == 9 : "Invalid Transaction Line";
         Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
-        checkCheckSumLine(transaction, Integer.parseInt(splitTransactionLine[7]));
+        checkCheckSumLine(transaction, Integer.parseInt(splitTransactionLine[8]));
         return transaction;
     }
 
@@ -108,11 +107,13 @@ public class TransactionStorage extends Storage {
         String transactionId = splitTransactionLine[0];
         String itemName = splitTransactionLine[1];
         String itemId = splitTransactionLine[2];
-        String borrowerId = splitTransactionLine[3];
-        int duration = Integer.parseInt(splitTransactionLine[4]);
-        LocalDate createdAt = LocalDate.parse(splitTransactionLine[5]);
-        double moneyTransacted = Double.parseDouble(splitTransactionLine[6]);
-        return new Transaction(transactionId, itemName, itemId, borrowerId, duration, createdAt, moneyTransacted);
+        String lenderId = splitTransactionLine[3];
+        String borrowerId = splitTransactionLine[4];
+        int duration = Integer.parseInt(splitTransactionLine[5]);
+        LocalDate createdAt = LocalDate.parse(splitTransactionLine[6]);
+        double moneyTransacted = Double.parseDouble(splitTransactionLine[7]);
+        return new Transaction(transactionId, itemName, itemId, borrowerId,
+                lenderId, duration, createdAt, moneyTransacted);
     }
 
     private static void checkCheckSumLine(Transaction transaction, int checkSum) throws StoreFailureException {

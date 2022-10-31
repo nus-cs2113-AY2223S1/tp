@@ -23,7 +23,7 @@ import seedu.duke.user.UserList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CREATED_DATE_RANGE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DATE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
@@ -64,7 +64,7 @@ public class AddTransactionCommand extends Command {
         this.itemList = itemList;
         this.userList = userList;
         if (parts.length != NUMBER_OF_ARGS) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -206,9 +206,10 @@ public class AddTransactionCommand extends Command {
         String itemId = args[0];
         String itemName = itemList.getItemById(args[ITEM_ID_INDEX]).getName();
         String borrowId = args[BORROWER_INDEX];
+        String lenderId = itemList.getItemById(itemId).getOwnerId();
         int duration = Integer.parseInt(args[DURATION_INDEX]);
         LocalDate createdAt = LocalDate.parse(args[CREATED_DATE_INDEX]);
         double moneyTransacted = itemList.getItemById(args[ITEM_ID_INDEX]).getPricePerDay() * (double) duration;
-        return new Transaction(itemName, itemId, borrowId, duration, createdAt, moneyTransacted);
+        return new Transaction(itemName, itemId, borrowId, lenderId, duration, createdAt, moneyTransacted);
     }
 }

@@ -1,38 +1,37 @@
 package seedu.duke.command.user;
 
 import seedu.duke.command.Command;
-import seedu.duke.item.ItemList;
-import seedu.duke.transaction.TransactionList;
-import seedu.duke.ui.Ui;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
+import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.parser.CommandParser;
-import seedu.duke.user.User;
+import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
+import seedu.duke.transaction.TransactionList;
+
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-// @@author jingwei55
-public class ViewUserCommand extends Command {
+// @@author jorellesee
+public class ViewUserGainCommand extends Command {
     private final String[] parts;
     private final UserList userList;
     private final TransactionList transactionList;
-    private final ItemList itemList;
 
-    public ViewUserCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
+
+    public ViewUserGainCommand(String[] parts, UserList userList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
-        this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
             throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
-    private String getArgsViewUserCmd() throws InvalidArgumentException {
+    private String getArgsViewUserProfitCmd() throws InvalidArgumentException {
         String arg;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
         if (delimiter.equals("u")) {
@@ -53,14 +52,11 @@ public class ViewUserCommand extends Command {
     }
 
     public boolean executeCommand()
-            throws UserNotFoundException, InvalidArgumentException, InsufficientArgumentsException {
-        String userName = getArgsViewUserCmd();
+            throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
+        String userName = getArgsViewUserProfitCmd();
         if (isValidUser(userName)) {
-            User user = this.userList.getUserById(userName);
-            ItemList userItems = new ViewUserItemsCommand(parts, userList, itemList, transactionList).getUserItems();
-            double totalLoss = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            double totalGain = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.viewUserMessage(user, userItems, transactionList, totalLoss, totalGain);
+            double totalProfit = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
+            Ui.printResponse("The profit of " + userName + " is: $" + totalProfit);
         }
         return false;
     }
