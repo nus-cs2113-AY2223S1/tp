@@ -24,36 +24,36 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.CommandStructure.UNIT_TYPE_ONE;
-import static seedu.duke.CommandStructure.UNIT_TYPE_TWO;
-import static seedu.duke.CommandStructure.UNIT_TYPE_THREE;
-import static seedu.duke.CommandStructure.UNIT_TYPE_FOUR;
-import static seedu.duke.CommandStructure.UNIT_TYPE_FIVE;
-import static seedu.duke.CommandStructure.UNIT_TYPE_SIX;
-import static seedu.duke.CommandStructure.UNIT_TYPE_SEVEN;
-import static seedu.duke.CommandStructure.UNIT_TYPE_EIGHT;
-import static seedu.duke.CommandStructure.UNIT_TYPE_NINE;
-import static seedu.duke.CommandStructure.UNIT_TYPE_TEN;
-import static seedu.duke.CommandStructure.UNIT_TYPE_ELEVEN;
-import static seedu.duke.CommandStructure.UNIT_TYPE_TWELVE;
-import static seedu.duke.CommandStructure.UNIT_TYPE_THIRTEEN;
-import static seedu.duke.CommandStructure.UNIT_TYPE_FOURTEEN;
-import static seedu.duke.CommandStructure.UNIT_TYPE_FIFTEEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ONE;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWO;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THREE;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOUR;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIVE;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SIX;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SEVEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_EIGHT;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_NINE;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_ELEVEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TWELVE;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_THIRTEEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FOURTEEN;
-import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_FIFTEEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_2ROOM_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_3ROOM_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_4ROOM_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_5ROOM_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_3GEN;
+import static seedu.duke.CommandStructure.UNIT_TYPE_EXECUTIVE_FLAT_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_DBSS_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_MAISONETTE_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_JUMBO_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_HDB_TERRENCE_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_CONDO_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_PENTHOUSE_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_LANDED_TERRENCE_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_SEMI_DETEACHED_SHORT;
+import static seedu.duke.CommandStructure.UNIT_TYPE_BUNGALOW_SHORT;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_2ROOM;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_3ROOM;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_4ROOM;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_5ROOM;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_3GEN;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_EXECUTIVE_FLAT;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_DBSS;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_MAISONETTE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_JUMBO;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_TERRENCE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_CONDO;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_HDB_PENTHOUSE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_LANDED_TERRENCE;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SEMI_DETACHED;
+import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_BUNGALOW;
 
 import static seedu.duke.Messages.INVALID_CLIENT_FORMATTING;
 import static seedu.duke.Messages.INVALID_CLIENT_ENTRIES;
@@ -61,6 +61,9 @@ import static seedu.duke.Messages.INVALID_PROPERTY_ENTRIES;
 import static seedu.duke.Messages.INVALID_PROPERTY_FORMATTING;
 import static seedu.duke.Messages.INVALID_PAIRING_FORMATTING;
 
+import static seedu.duke.Messages.MESSAGE_NO_CLIENT_FILE;
+import static seedu.duke.Messages.MESSAGE_NO_PROPERTY_FILE;
+import static seedu.duke.Messages.MESSAGE_NO_PAIRING_FILE;
 
 public class Storage {
     private static final String DIRECTORY = "./data/";
@@ -126,21 +129,21 @@ public class Storage {
         this.pairingList = pairingList;
 
         // Loading all the actual and unit type label
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_ONE, UNIT_TYPE_ONE);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TWO, UNIT_TYPE_TWO);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_THREE, UNIT_TYPE_THREE);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FOUR, UNIT_TYPE_FOUR);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FIVE, UNIT_TYPE_FIVE);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_SIX, UNIT_TYPE_SIX);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_SEVEN, UNIT_TYPE_SEVEN);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_EIGHT, UNIT_TYPE_EIGHT);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_NINE, UNIT_TYPE_NINE);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TEN, UNIT_TYPE_TEN);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_ELEVEN, UNIT_TYPE_ELEVEN);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TWELVE, UNIT_TYPE_TWELVE);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_THIRTEEN, UNIT_TYPE_THIRTEEN);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FOURTEEN, UNIT_TYPE_FOURTEEN);
-        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_FIFTEEN, UNIT_TYPE_FIFTEEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_2ROOM, UNIT_TYPE_2ROOM_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_3ROOM, UNIT_TYPE_3ROOM_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_4ROOM, UNIT_TYPE_4ROOM_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_5ROOM, UNIT_TYPE_5ROOM_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_3GEN, UNIT_TYPE_3GEN);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_EXECUTIVE_FLAT, UNIT_TYPE_EXECUTIVE_FLAT_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_DBSS, UNIT_TYPE_DBSS_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_MAISONETTE, UNIT_TYPE_MAISONETTE_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_JUMBO, UNIT_TYPE_JUMBO_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_TERRENCE, UNIT_TYPE_HDB_TERRENCE_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_CONDO, UNIT_TYPE_CONDO_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_HDB_PENTHOUSE, UNIT_TYPE_PENTHOUSE_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_LANDED_TERRENCE, UNIT_TYPE_LANDED_TERRENCE_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_SEMI_DETACHED, UNIT_TYPE_SEMI_DETEACHED_SHORT);
+        unitTypeHashMap.put(ACTUAL_UNIT_TYPE_BUNGALOW, UNIT_TYPE_BUNGALOW_SHORT);
 
         boolean hasDirectory = checkDirectory();
         boolean hasPropertyFile = checkPropertyFile();
@@ -173,7 +176,6 @@ public class Storage {
     public void makeDirectory() {
         File dir = new File(DIRECTORY);
 
-        // Creates a directory
         dir.mkdir();
     }
 
@@ -229,7 +231,7 @@ public class Storage {
 
         if (hasClientFile) {
             File clientFile = new File(CLIENT_PATH);
-            assert clientFile.exists() : "Client text file does not exist";
+            assert clientFile.exists() : MESSAGE_NO_CLIENT_FILE;
             try {
                 loadClient(clientFile);
             } catch (FileNotFoundException e) {
@@ -239,7 +241,7 @@ public class Storage {
 
         if (hasPropertyFile) {
             File propertyFile = new File(PROPERTY_PATH);
-            assert propertyFile.exists() : "Property text file does not exist";
+            assert propertyFile.exists() : MESSAGE_NO_PROPERTY_FILE;
             try {
                 loadProperty(propertyFile);
             } catch (FileNotFoundException e) {
@@ -249,7 +251,7 @@ public class Storage {
 
         if (hasPairingFile) {
             File pairingFile = new File(PAIR_PATH);
-            assert pairingFile.exists() : "Pairing text file does not exist";
+            assert pairingFile.exists() : MESSAGE_NO_PAIRING_FILE;
             try {
                 loadPair(pairingFile);
             } catch (FileNotFoundException e) {
@@ -313,7 +315,7 @@ public class Storage {
                 String description = LANDLORD_NAME_FLAG + landlordName + PROPERTY_ADDRESS_FLAG + address
                         + PROPERTY_RENTAL_FLAG + price + PROPERTY_TYPE_FLAG + unitTypeLabel;
 
-                addPropertyEntries(description, landlordName, address, price, unitTypeLabel);
+                addPropertyEntries(description, landlordName, address, price, unitTypeString);
 
             } else {
                 skipPropertyEntries();
@@ -426,20 +428,17 @@ public class Storage {
             FileWriter clientFile = new FileWriter(CLIENT_PATH);
             ArrayList<Client> clientLists = clientList.getClientList();
 
-            // clientText will initially be empty and will be appended in subsequent iterations of the client list.
             String clientText = EMPTY_STRING;
-            for (int i = 0; i < clientLists.size(); i += 1) {
-                // Concatenate the string variables into clientText
-                String budgetPrice = clientLists.get(i).getClientBudgetPerMonth();
-                String name = clientLists.get(i).getClientName();
-                String contact = clientLists.get(i).getClientContactNumber();
-                String email = clientLists.get(i).getClientEmail();
+            for (Client client : clientLists) {
+                String budgetPrice = client.getClientBudgetPerMonth();
+                String name = client.getClientName();
+                String contact = client.getClientContactNumber();
+                String email = client.getClientEmail();
                 String finalText = name + SEPARATOR + contact + SEPARATOR + email + SEPARATOR
                         + budgetPrice + System.lineSeparator();
                 clientText = clientText.concat(finalText);
             }
 
-            // Write the client list into a file.
             clientFile.write(clientText);
             clientFile.close();
             LOGGER.log(Level.INFO, LOG_CLIENT_UPDATE_LABEL);
@@ -459,14 +458,15 @@ public class Storage {
             ArrayList<Property> propertyLists = propertyList.getPropertyList();
             String propertyText = EMPTY_STRING;
 
-            for (int i = 0; i < propertyLists.size(); i += 1) {
-                String landlordName = propertyLists.get(i).getLandlordName();
-                String propertyAddress = propertyLists.get(i).getPropertyAddress();
-                String rentingPrice = propertyLists.get(i).getRentingPrice();
-                String unitTypeString = propertyLists.get(i).getUnitType();
+            for (Property property : propertyLists) {
+                String landlordName = property.getLandlordName();
+                String propertyAddress = property.getPropertyAddress();
+                String rentingPrice = property.getRentingPrice();
+                String unitTypeActual = property.getUnitType();
+
 
                 String finalText = landlordName + SEPARATOR + propertyAddress + SEPARATOR
-                        + rentingPrice + SEPARATOR + unitTypeString + System.lineSeparator();
+                        + rentingPrice + SEPARATOR + unitTypeActual + System.lineSeparator();
 
                 propertyText = propertyText.concat(finalText);
             }
@@ -523,6 +523,10 @@ public class Storage {
                 boolean hasCorrectPropertyLength = clientParameters.length == 4;
                 boolean hasCorrectFormat = hasCorrectClientLength && hasCorrectPropertyLength;
 
+
+                String propertyUnitTypeLabel = unitTypeHashMap.get(propertyParameters[PROPERTY_TYPE_INDEX]);
+
+                // Replace the format for unit type in property
                 checkPairingFormat(hasCorrectFormat, clientParameters, propertyParameters);
 
             } else {
