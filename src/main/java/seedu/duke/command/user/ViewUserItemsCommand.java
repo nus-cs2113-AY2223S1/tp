@@ -23,6 +23,8 @@ public class ViewUserItemsCommand extends Command {
     private final TransactionList transactionList;
     private final UserList userList;
 
+    private static final String USER_ID_DELIM = "u";
+
     /**
      * Constructor for ViewUserItemsCommand.
      *
@@ -52,7 +54,7 @@ public class ViewUserItemsCommand extends Command {
     private String getArgViewUserItemsCmd() throws InvalidArgumentException {
         String args;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("u")) {
+        if (delimiter.equals(USER_ID_DELIM)) {
             args = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
