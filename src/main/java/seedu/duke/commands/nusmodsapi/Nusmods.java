@@ -147,8 +147,9 @@ public class Nusmods {
             String endTime = lessonNode.get("endTime").asText();
             String lessonType = removeQuotes(lessonNode.get("lessonType").toString());
             String classNumber = lessonNode.get("classNo").toString();
+            String weeks = "Weeks: " + removeQuotes(lessonNode.get("weeks").toString());
 
-            lessons.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
+            lessons.add(new Lesson(day, startTime, endTime, lessonType, classNumber, weeks, moduleCode));
             arrayIndex += 1;
         }
         lgr.fine("lessons are added, returning list of lesson data");

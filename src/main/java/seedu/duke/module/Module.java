@@ -90,8 +90,9 @@ public class Module {
         String startTime = "Undetermined";
         String endTime = "Undetermined";
         String classNumber = "NA";
+        String weeks = "Weeks: NA";
         for (int i = 0; i < size; i++) {
-            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, moduleCode));
+            classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, weeks, moduleCode));
         }
         temp.put(classNumber, classes);
     }
@@ -106,7 +107,7 @@ public class Module {
             details.append("     [").append(lesson.getLessonType()).append(counter).append("] ")
                     .append(lesson.getDay()).append("   ")
                     .append(convertTime(lesson.getStartTime())).append(" - ")
-                    .append(convertTime(lesson.getEndTime())).append("\n");
+                    .append(convertTime(lesson.getEndTime())).append("   ").append(lesson.getWeeks()).append("\n");
         }
         return details.toString();
     }
@@ -209,7 +210,7 @@ public class Module {
             for (Lesson lesson : oneClass) {
                 details.append(lesson.getDay()).append("   ")
                         .append(convertTime(lesson.getStartTime())).append(" - ")
-                        .append(convertTime(lesson.getEndTime())).append("\n");
+                        .append(convertTime(lesson.getEndTime())).append("   ").append(lesson.getWeeks()).append("\n");
             }
             index++;
         }
