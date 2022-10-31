@@ -68,10 +68,8 @@ class ParserTest {
         StringWriter expectedStringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(expectedStringWriter);
 
-        printWriter.println("---Here are the reviews that match the keyword---");
-        printWriter.println("");
-        printWriter.println("Movies:");
-        printWriter.println("");
+        printWriter.println("---Here are the reviews that match the keyword---" + System.getProperty("line.separator"));
+        printWriter.println("Movies:" + System.getProperty("line.separator"));
         printWriter.println("TV Shows:");
         printWriter.close();
 
