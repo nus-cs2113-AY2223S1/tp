@@ -331,8 +331,7 @@ public class ConsoleInterface {
 
     private void runCommandHelp(ConsoleCommandHelp consoleCommandHelp) {
         String helpStr = "";
-        helpStr += "EXPENSE-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+        helpStr += "---- EXPENSE-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_EXPENSE
                 + Messages.CONSOLE_COMMAND_ADD_EXPENSE_FORMAT
                 + "\n";
@@ -351,8 +350,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_CONVERT_CURRENCIES
                 + Messages.CONSOLE_COMMAND_CONVERT_CURRENCY_FORMAT
                 + "\n";
-        helpStr += "\n" + "RECURRING-PAYMENT-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- RECURRING-PAYMENT-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_FORMAT
                 + "\n";
@@ -368,8 +369,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_PAY_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_FORMAT
                 + "\n";
-        helpStr += "\n" + "INCOME-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- INCOME-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_INCOME
                 + Messages.CONSOLE_COMMAND_ADD_INCOME_FORMAT
                 + "\n";
@@ -382,8 +385,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_INCOME
                 + Messages.CONSOLE_COMMAND_EDIT_INCOME_FORMAT
                 + "\n";
-        helpStr += "\n" + "TARGET-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- TARGET-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_TARGET
                 + Messages.CONSOLE_COMMAND_ADD_TARGET_FORMAT
                 + "\n";
