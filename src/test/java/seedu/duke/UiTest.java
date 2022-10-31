@@ -10,13 +10,13 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 class UiTest {
-    Ui ui = new Ui();
+    final Ui ui = new Ui();
     final String expectedGreeting =  "Welcome to your Movie Reviews bot,\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
     final String expectedPrint = "hello\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
     final String expectedExitGreeting = "\n---------------\nSee you again!\n"
-            .replaceAll("\\n", System.getProperty("line.separator"));
+            .replace("\\n", System.getProperty("line.separator"));
     final String userInput = "test";
 
     @Test
