@@ -12,7 +12,10 @@ public class RemoveCommand extends Commands {
     }
 
     //@@author matthewphua
-
+    /**
+     * Removes the media of the specified type and index within reviews.
+     * @return Confirmation of the removal.
+     */
     @Override
     public String execute() {
         int current = 0;

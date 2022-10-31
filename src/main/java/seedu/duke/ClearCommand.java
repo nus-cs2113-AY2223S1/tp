@@ -7,6 +7,11 @@ public class ClearCommand extends Commands {
         super(reviews);
     }
 
+    //@author matthewphua
+    /**
+     * Clears all reviews in review list.
+     * @return Confirmation of clearance.
+     */
     @Override
     public String execute() {
         reviewList.inputs.clear();

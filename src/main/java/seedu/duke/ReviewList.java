@@ -13,14 +13,26 @@ public class ReviewList {
         this.inputs = inputs;
     }
 
+    /**
+     * Adds inputted media into reviews.
+     * @param media Object to be added.
+     */
     public void add(Media media) {
         this.inputs.add(media);
     }
 
+    /**
+     * Removes the review from the specified index.
+     * @param index index to remove review in list.
+     */
     public void remove(int index) {
         this.inputs.remove(index);
     }
 
+    /**
+     * Formats a list output of all reviews.
+     * @return Outputted string.
+     */
     @Override
     public String toString() {
         String output = "";
