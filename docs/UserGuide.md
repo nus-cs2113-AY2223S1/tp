@@ -4,6 +4,7 @@
 ## Contents
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
+* [Understanding the Command Syntax](#understanding-the-command-syntax)
 * [Features](#features)
    * [Managing Your Expenses](#managing-your-expenses)
    * [Managing Your Recurring Payments](#managing-your-recurring-payments)
@@ -11,7 +12,7 @@
    * [Managing Your Targets](#managing-your-targets)
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
-   * [Exiting the application: `exit`](#exiting-the-application-exit)
+   * [Exiting the application: `bye`](#exiting-the-application-bye)
 * [Sample Outputs](#sample-outputs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -20,13 +21,20 @@
 
 MoneyGoWhere is a financial planner to help you manage your finances.
 
-## Understanding the command syntax
+## Quick Start
 
-Capitalised words represents the values included in the respective commands. 
+1. Ensure that ```Java 11``` is installed on your system.
+    1. Execute the command ```java --version``` in your terminal window.
+    2. Verify that the version of Java installed is ```Java 11```.
+2. Ensure that you have write permissions for the directory in which you are executing the program.
 
-Arguments given without brackets are **mandatory** arguments. 
+## Understanding the Command Syntax
 
-Arguments given with brackets are **optional** arguments.
+* Arguments given without square brackets denote **mandatory** arguments.
+* Arguments given with square brackets denote **optional** arguments.
+* Argument values with spaces should be enclosed with double quotes.
+* Argument values with a double quote can be escaped by prepending an additional double quote.
+* Argument values cannot start with a hyphen.
 
 ### Example: `Add-Expense`
 
@@ -40,13 +48,6 @@ Examples of invalid command syntax:
 * `Add-Expense -n Subscription`
 * `Add-Expense -a 13.37`
 
-## Quick Start
-
-1. Ensure that ```Java 11``` is installed on your system.
-    1. Execute the command ```java --version``` in your terminal window.
-    2. Verify that the version of Java installed is ```Java 11```.
-2. Ensure that you have write permissions for the directory in which you are executing the program.
-
 ## Features
 
 ### Listing all available commands: `help`
@@ -59,32 +60,28 @@ Example of usage:
 
 Expected output: 
 ```
-EXPENSE-RELATED-COMMANDS:
-___________________________________________
-Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+---- EXPENSE-RELATED-COMMANDS ----
+Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
 View your expenses: View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]
 Delete an expense: Delete-Expense -e EXPENSE-INDEX
-Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
 Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending
 Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
 
-RECURRING-PAYMENT-RELATED-COMMANDS:
-___________________________________________
+---- RECURRING-PAYMENT-RELATED-COMMANDS ----
 Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
 Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
 Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
 
-INCOME-RELATED-COMMANDS:
-___________________________________________
+---- INCOME-RELATED-COMMANDS ----
 Add an income: Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
 View your incomes: View-Income [-e INCOME-INDEX]
 Delete an income: Delete-Income -e INCOME-INDEX
 Edit an income: Edit-Income -e INCOME-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT]
 
-TARGET-RELATED-COMMANDS:
-___________________________________________
+---- TARGET-RELATED-COMMANDS ----
 Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
 View your targets: View-Target [-e TARGET-INDEX]
 Delete a target: Delete-Target -e TARGET-INDEX
@@ -98,16 +95,15 @@ Adds a new expense to the list of expenses.
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 
 Examples of usage: 
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 * `Add-Expense -n Subscription -a 13.37`
-* `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
 <hr>
 
@@ -117,7 +113,7 @@ Displays past expenses you have added.
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 Example of usage:
@@ -132,7 +128,7 @@ Deletes an expense from the list of expenses.
 Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 
 Example of usage:
 * `Delete-Expense -e 1`
@@ -145,10 +141,10 @@ Edits an existing expense in the list of expenses.
 Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
@@ -185,7 +181,7 @@ Converts the currency of an expense from the list of expenses.
 Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
@@ -201,7 +197,7 @@ Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c
 > ⚠️️️️ Syntax Notes
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `MODE_OF_PAYMENT` is a text string.
 
 Example of usage:
@@ -246,7 +242,7 @@ Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL
 > * `RECURRING_PAYMENT_INDEX` is an integer value.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 
 Example of usage:
 * `Edit-RecurringPayment -r 1 -a 20.00`
@@ -274,7 +270,7 @@ Syntax: `Add-Income -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
 
 > ⚠️️️️ Syntax Notes
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 
@@ -320,7 +316,7 @@ Syntax: `Edit-Income -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t D
 > ⚠️️️️ Syntax Notes
 > * `INCOME_NUMBER` is an integer value.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-> * `AMOUNT` is a decimal value.
+> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
@@ -337,7 +333,7 @@ Syntax: `Add-Target -n NAME -a AMOUNT -c CURRENT_AMOUNT [-d DATE_TIME] [-t DESCR
 
 > ⚠️️️️ Syntax Notes
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
-> * `AMOUNT` and `CURRENT_AMOUNT` are decimal value.
+> * `AMOUNT` and `CURRENT_AMOUNT` are decimal value. The values should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 
@@ -383,7 +379,7 @@ Syntax: `Edit-Target -e TARGET_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] 
 > ⚠️️️️ Syntax Notes
 > * `TARGET_NUMBER` is an integer value.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-> * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value.
+> * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value. The values should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 Example of usage:
@@ -396,7 +392,7 @@ Example of usage:
 ### Merging a data file: `Merge-File`
 Merges save file from an external source given path to the save file (.xml)
 
-Syntax: `Merge-File [-p PATH_STRING]`
+Syntax: `Merge-File -p PATH_STRING`
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
@@ -462,9 +458,9 @@ The recurring payment was added as an expense successfully.
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: There will be a 'Memory' folder created in the same directory as your .jar file. 
-To transfer your data, simply copy the whole folder over to the same directory as the .jar 
-file in your other devices. Data will be saved automatically.
+**A**:
+As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
+You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
 
 ## Command Summary
 
@@ -491,5 +487,5 @@ A list of all valid commands.
 * Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
 * Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 * Help: `help`
-* Exit: `exit`
+* Exit: `bye`
 

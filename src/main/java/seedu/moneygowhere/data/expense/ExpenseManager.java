@@ -43,6 +43,11 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
+    public boolean hasExpense(Expense expense) {
+        return expenses.contains(expense);
+    }
+
+    //@@author xzynos
     public Expense getExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
         try {
             return expenses.get(expenseIndex);
@@ -58,7 +63,7 @@ public class ExpenseManager {
 
     //@@author LokQiJun
     public void setExpenses(ArrayList<Expense> savedExpenses) {
-        this.expenses = new ArrayList<Expense>(savedExpenses);
+        this.expenses = new ArrayList<>(savedExpenses);
     }
 
     //@@author yuu-chennn
@@ -67,7 +72,8 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getCategory().equals(categoryName)) {
+                String category = expense.getCategory();
+                if (category != null && category.equalsIgnoreCase(categoryName)) {
                     expensesByCategory.add(expense);
                 }
             }
@@ -84,7 +90,7 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getName().equals(expenseName)) {
+                if (expense.getName().equalsIgnoreCase(expenseName)) {
                     expensesByName.add(expense);
                 }
             }

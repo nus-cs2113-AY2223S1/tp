@@ -14,6 +14,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_BYE = "bye";
     //endregion
 
+    //@@author jevyia
     //region Defines parameters for console command help
     public static final String COMMAND_HELP = "help";
     //endregion
@@ -59,13 +60,9 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "Mode of Payment";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
     //endregion
@@ -150,13 +147,9 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "Mode of Payment";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
     //endregion
@@ -1017,6 +1010,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_DESC
         );
+        optionCurrentAmount.setRequired(COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionTargetIndex);
@@ -1161,6 +1155,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_DESC
         );
+        optionAmount.setRequired(COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionIncomeIndex);

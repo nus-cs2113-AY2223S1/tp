@@ -1,6 +1,5 @@
 package seedu.moneygowhere.userinterface;
 
-import seedu.moneygowhere.apis.CurrencyApi;
 import seedu.moneygowhere.apis.CurrencyApiManager;
 import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
@@ -65,10 +64,8 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPay
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
-import java.io.Console;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -239,8 +236,9 @@ public class ConsoleInterface {
         if (expense.getRemarks() != null) {
             expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
         }
-        expenseStr += "Currency        : " + expense.getCurrency() + "\n";
+        expenseStr += "Currency        : " + expense.getCurrency();
         if (expense.getModeOfPayment() != null) {
+            expenseStr += "\n";
             expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
         }
 
@@ -315,8 +313,9 @@ public class ConsoleInterface {
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
-        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency() + "\n";
+        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
         if (recurringPayment.getModeOfPayment() != null) {
+            recurringPaymentStr += "\n";
             recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
         }
 
@@ -332,8 +331,7 @@ public class ConsoleInterface {
 
     private void runCommandHelp(ConsoleCommandHelp consoleCommandHelp) {
         String helpStr = "";
-        helpStr += "EXPENSE-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+        helpStr += "---- EXPENSE-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_EXPENSE
                 + Messages.CONSOLE_COMMAND_ADD_EXPENSE_FORMAT
                 + "\n";
@@ -352,8 +350,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_CONVERT_CURRENCIES
                 + Messages.CONSOLE_COMMAND_CONVERT_CURRENCY_FORMAT
                 + "\n";
-        helpStr += "\n" + "RECURRING-PAYMENT-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- RECURRING-PAYMENT-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_FORMAT
                 + "\n";
@@ -369,8 +369,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_PAY_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_FORMAT
                 + "\n";
-        helpStr += "\n" + "INCOME-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- INCOME-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_INCOME
                 + Messages.CONSOLE_COMMAND_ADD_INCOME_FORMAT
                 + "\n";
@@ -383,8 +385,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_INCOME
                 + Messages.CONSOLE_COMMAND_EDIT_INCOME_FORMAT
                 + "\n";
-        helpStr += "\n" + "TARGET-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- TARGET-RELATED-COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_TARGET
                 + Messages.CONSOLE_COMMAND_ADD_TARGET_FORMAT
                 + "\n";
@@ -395,8 +399,8 @@ public class ConsoleInterface {
                 + Messages.CONSOLE_COMMAND_DELETE_TARGET_FORMAT
                 + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_TARGET
-                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT
-                + "\n";
+                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT;
+
         printInformationalMessage(helpStr);
     }
 
@@ -420,6 +424,13 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getRemarks(),
                 consoleCommandAddExpense.getCurrency(),
                 consoleCommandAddExpense.getModeOfPayment());
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
         expenseManager.addExpense(expense, localStorage);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
@@ -454,6 +465,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -474,6 +489,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -487,7 +506,7 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
         if (expenses.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_EMPTY_LIST);
         }
 
         for (int index = 0; index < expenses.size(); index++) {
@@ -577,6 +596,7 @@ public class ConsoleInterface {
         if (consoleCommandEditExpense.isModeOfPaymentSet()) {
             expense.setModeOfPayment(consoleCommandEditExpense.getModeOfPayment());
         }
+
 
         try {
             expenseManager.editExpense(expenseIndex, expense, localStorage);
@@ -670,7 +690,7 @@ public class ConsoleInterface {
         ArrayList<Target> targets = targetManager.getTargets();
 
         if (targets.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
         }
 
         for (int index = 0; index < targets.size(); index++) {
@@ -787,7 +807,7 @@ public class ConsoleInterface {
         ArrayList<Income> incomes = incomeManager.getIncomes();
 
         if (incomes.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
         }
 
         for (int index = 0; index < incomes.size(); index++) {
@@ -878,6 +898,12 @@ public class ConsoleInterface {
                 consoleCommandAddRecurringPayment.getModeOfPayment()
         );
 
+        if (recurringPaymentManager.hasRecurringPayment(recurringPayment)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT);
+
+            return;
+        }
+
         recurringPaymentManager.addRecurringPayment(recurringPayment, localStorage);
 
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
@@ -888,6 +914,10 @@ public class ConsoleInterface {
     //@@author xzynos
     private void viewRecurringPayment() {
         ArrayList<RecurringPayment> recurringPayments = recurringPaymentManager.getRecurringPayments();
+
+        if (recurringPayments.isEmpty()) {
+            printErrorMessage(Messages.COMMAND_VIEW_RECURRING_PAYMENT_EMPTY_LIST);
+        }
 
         for (int index = 0; index < recurringPayments.size(); index++) {
             RecurringPayment recurringPayment = recurringPayments.get(index);
@@ -1022,6 +1052,13 @@ public class ConsoleInterface {
                 recurringPayment.getCurrency(),
                 recurringPayment.getModeOfPayment()
         );
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
         expenseManager.addExpense(expense, localStorage);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
