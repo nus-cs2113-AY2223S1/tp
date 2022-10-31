@@ -207,13 +207,14 @@ public class Parser {
         Sentence actualArgument = argsList.getArguments();
         if (argsList.getDashedArgsCount() == 1) {
             dashedCommand = argsList.getDashedArgs().get(0);
-            if (dashedCommand.equalsIgnoreCase("i")) {
+            if (dashedCommand.equalsIgnoreCase("id")) {
                 if (actualArgument.getWordCount() == 0) {
                     return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                 }
                 return prepareFilterCarparkId(actualArgument);
             }
-            if (dashedCommand.equalsIgnoreCase("a")) {
+            if (dashedCommand.equalsIgnoreCase("add")
+                    || dashedCommand.equalsIgnoreCase("address")) {
                 if (actualArgument.getWordCount() == 0) {
                     return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                 }
