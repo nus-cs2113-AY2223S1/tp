@@ -2,12 +2,13 @@
 
 ## Introduction
 
-Timetabler is an app that allows NUS students taking official NUS modules to view their classes and plan their timetable efficiently in AY22/23.
+Timetabler is a **desktop app** that allows **NUS students** taking official NUS modules to **view their classes** and **plan their timetable efficiently** in AY22/23. The desktop app is optimmized for use via a Command Line Interface (CLI).
+
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `tp` from [here](http://link.to/duke).
+1. Ensure that you have Java `11` or above installed.
+2. Down the latest version of `tp` from [here](https://github.com/AY2223S1-CS2113-T17-3/tp/releases/).
 3. Copy the jar file into an empty folder.
 4. Open a command window or terminal for mac in that folder.
 5. Run the command `java -jar tp.jar` in the same folder.
