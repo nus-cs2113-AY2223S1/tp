@@ -1,6 +1,15 @@
 # User Guide
 
-## Table of Contents
+## Contents
+
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+  - [Disclaimer](#disclaimer-regarding-use-of-api-key-for-the-purposes-of-nus-cs2113)
+- [Features](#features)
+  - [Authenticate User Api](#authenticate-user-api)
+  - [Authenticate Default Api](#authenticate-default)
+  - [Authentication Status](#authentication-status)
+  - [Find number of Lots ]
 
 
 ## Introduction
@@ -23,7 +32,7 @@ lot when you arrive at your destination. We got you and your loved ones parked!
 4. Use the command `java -jar parKING.jar` to start the program!
 5. Note that the programme will automatically create a directory called `Resources` to store local data files.
 
-## Disclaimer regarding use of API key for the purposes of NUS CS2113
+### Disclaimer regarding use of API key for the purposes of NUS CS2113
 We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
 NUS CS2113, we have provided a default api key for testing purposes. **This default api key will be removed at the end of
 module in Q4 2022**.
@@ -33,20 +42,20 @@ module in Q4 2022**.
 > Notes about the command format:
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 
-| Command                  | Description                                                                                |
-|--------------------------|--------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                            |
-| `auth default`           | [Authenticate API using default key](#authenticate-default)                                |
-| `auth status`            | [Authentication status](#authentication-status)                                            |
-| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
-| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                      | 
-| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
-| `update`                 | [Update data from API](#update-data-from-api)                                              |
-| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
-| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
-| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                  |
-| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |   
-| `exit`                   | [Exiting the program](#exiting-the-program)                                                |
+| Command                  | Description                                                                                     |
+|--------------------------|-------------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                                 |
+| `auth default`           | [Authenticate API using default key](#authenticate-default)                                     |
+| `auth status`            | [Authentication status](#authentication-status)                                                 |
+| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)               | 
+| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                           | 
+| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)               |
+| `update`                 | [Update data from API](#update-data-from-api)                                                   |
+| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                           |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                       |
+| `favourite list`         | [List lot availability of favourite carparks](#list-lot-availability-of-all-favourite-carparks) |
+| `help`                   | [Lists all possible commands](#viewing-help)                                                    |   
+| `exit`                   | [Exiting the program](#exiting-the-program)                                                     |
 
 ### Authenticate user API
 
@@ -125,7 +134,7 @@ You have authenticated your API key successfully. API key stored in the local fi
 You have not authenticated your personal API key. Currently you have access to the API but you are using our default key!
 ```
 
-### Find number of lots available by carpark ID
+### Find number of lots by carpark ID
 
 **Returns the number of lots available in the carpark that the user has chosen to find.**
 > Format: `find CARPARK_ID`
@@ -190,7 +199,7 @@ CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
     304 available lots total
 ```
 
-### Get a list of available carparks on the app
+### Get a list of carparks on the app
 
 **Returns a list of the available carparks from the JSON file.**
 > Format: `list`
@@ -382,19 +391,18 @@ when you restart the program.
 
 ## Command Summary
 
-| Command                  | Description                                                                                |
-|--------------------------|--------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                            |
-| `auth default`           | [Authenticate API using default key](#authenticate-default)                                |
-| `auth status`            | [Authentication status](#authentication-status)                                            |
-| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id)| 
-| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                      | 
-| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |
-| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app)|
-| `update`                 | [Update data from API](#update-data-from-api)                                              |
-| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
-| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
-| `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                  |
-| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |   
-| `exit`                   | [Exiting the program](#exiting-the-program)                                                |
+| Command                  | Description                                                                                     |
+|--------------------------|-------------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                                 |
+| `auth default`           | [Authenticate API using default key](#authenticate-default)                                     |
+| `auth status`            | [Authentication status](#authentication-status)                                                 |
+| `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)               | 
+| `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                           | 
+| `list`                   | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)               |
+| `update`                 | [Update data from API](#update-data-from-api)                                                   |
+| `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                           |
+| `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                       |
+| `favourite list`         | [List lot availability of favourite carparks](#list-lot-availability-of-all-favourite-carparks) |
+| `help`                   | [Lists all possible commands](#viewing-help)                                                    |   
+| `exit`                   | [Exiting the program](#exiting-the-program)                                                     |
 
