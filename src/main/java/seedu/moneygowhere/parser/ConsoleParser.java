@@ -66,6 +66,7 @@ import java.util.List;
 /**
  * Provide functions to parse inputs read from standard input.
  */
+@SuppressWarnings("ReplaceNullCheck")
 public class ConsoleParser {
     //@@author xzynos
 
@@ -346,6 +347,16 @@ public class ConsoleParser {
         BigDecimal amountNormalized = amount.stripTrailingZeros();
 
         consoleCommandAddExpense.setAmount(amountNormalized);
+
+        LocalDateTime dateTime = consoleCommandAddExpense.getDateTime();
+        LocalDateTime dateTimeNormalized;
+        if (dateTime == null) {
+            dateTimeNormalized = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        } else {
+            dateTimeNormalized = dateTime;
+        }
+
+        consoleCommandAddExpense.setDateTime(dateTimeNormalized);
 
         String currency = consoleCommandAddExpense.getCurrency();
         String currencyNormalized;
@@ -2836,10 +2847,14 @@ public class ConsoleParser {
             ConsoleCommandPayRecurringPayment consoleCommandPayRecurringPayment
     ) {
         LocalDateTime dateTime = consoleCommandPayRecurringPayment.getDateTime();
+        LocalDateTime dateTimeNormalized;
         if (dateTime == null) {
-            LocalDateTime dateTimeNow = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
-            consoleCommandPayRecurringPayment.setDateTime(dateTimeNow);
+            dateTimeNormalized = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+        } else {
+            dateTimeNormalized = dateTime;
         }
+
+        consoleCommandPayRecurringPayment.setDateTime(dateTimeNormalized);
 
         return consoleCommandPayRecurringPayment;
     }
