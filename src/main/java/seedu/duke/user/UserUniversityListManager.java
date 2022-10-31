@@ -167,6 +167,9 @@ public class UserUniversityListManager {
      * Method then prints all the modules user has saved for that particular university
      */
     public void displayAll() {
+        if (myManager.isEmpty()) {
+            System.out.println("You do not have any university lists at the moment!");
+        }
         for (Map.Entry<String, UserUniversityList> set : myManager.entrySet()) {
             String universityName = set.getKey();
             UserUniversityList universityList = set.getValue();
