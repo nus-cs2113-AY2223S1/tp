@@ -294,7 +294,7 @@ public class TimetableDict {
 
         //Prints what has not been allocated
         for (Module module : listOfModules) {
-            for (Lesson attendingLesson : module.getAttending()) {
+            for (Lesson attendingLesson : module.getAttendingList()) {
                 if (attendingLesson.getDay().equals("Undetermined Day")) {
                     unallocated++;
                     resultString += attendingLesson.getModuleCode() + " (" + attendingLesson.getLessonType() + ")\n";

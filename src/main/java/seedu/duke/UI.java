@@ -68,6 +68,22 @@ public class UI {
                 + "                                           |___/                 ");
     }
 
+
+    /**
+     * Formats the list of lesson types that the user
+     * can choose after they have selected a module to set.
+     *
+     * @param index The associated number tagged to each lesson type.
+     * @param lessonType The type of lesson
+     * @param userView The object that stores what the user will eventually see.
+     */
+    public static void displayLessonTypeToSet(int index, String lessonType, StringBuilder userView) {
+        userView.append(index)
+                .append(". ")
+                .append(lessonType)
+                .append("\n");
+    }
+
     public static String getDataProtocolResponse() {
         String response = "2";
         System.out.println("Oops! Something went wrong. Either a file is corrupted or you are not connected "
