@@ -43,7 +43,7 @@ abstract class "{abstract}\nStorage" {
 }
 
 UserStorage .> UserList : > loads and writes
-UserList *--> "0..*" User: UserList
+UserList *--> "*" User: UserList
 "{abstract}\nStorage" <|-- UserStorage
 
 @enduml
