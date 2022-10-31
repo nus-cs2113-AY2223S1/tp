@@ -80,7 +80,7 @@ public class AttendingManager {
     public static void saveAttendingIntoDataList() {
         attendingDataList.clear();
         for (Module module : Timetable.listOfModules) {
-            for (Lesson lesson : module.getAllAvailableLessons()) {
+            for (Lesson lesson : module.getAttendingInListForm()) {
                 addAttending(lesson, module.getModuleCode());
             }
         }
@@ -123,7 +123,7 @@ public class AttendingManager {
             String classNumber = currLine[5];
 
             Module currModule = moduleList.get(currModuleIndex);
-            while (currModule.getLessons().size() == 0) {
+            while (currModule.getLessonList().size() == 0) {
                 assert currModuleIndex != moduleList.size() : "Theres no module with that index";
                 currModuleIndex++;
                 currModule = moduleList.get(currModuleIndex);
@@ -133,7 +133,7 @@ public class AttendingManager {
                 addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
                         lessonType, classNumber, moduleCode));
             } else {
-                currModule.replaceNewAttending(newLessons); //update the attending for the current module
+                currModule.replaceAllAttending(newLessons); //update the attending for the current module
                 newLessons = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>(); //clear the data
                 addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
                         lessonType, classNumber, moduleCode));
@@ -141,48 +141,9 @@ public class AttendingManager {
             }
         }
         Module currModule = moduleList.get(currModuleIndex);
-        currModule.replaceNewAttending(newLessons);
+        currModule.replaceAllAttending(newLessons);
     }
 
-    /*
-     * Loads attendingLessons from attendingDataList into Modules in Timetable
-     */
-    public static void loadAttendingIntoTimetable() {
-
-        List<Module> moduleList = Timetable.getListOfModules();
-
-        String[] currLine;
-
-        Module currModule;
-        String moduleCode;
-        int moduleIndex = 0;
-        int attendingIndex = 0;
-
-        for (int index = 0; index < attendingDataList.size(); index++) {
-            currLine = attendingDataList.get(index).split("\\|");
-
-            currModule = moduleList.get(moduleIndex);
-            moduleCode = currModule.getModuleCode();
-
-            String lessonType = currLine[1];
-            String lessonDay = currLine[2];
-            String lessonStart = currLine[3];
-            String lessonEnd = currLine[4];
-            String classNumber = currLine[5];
-
-            if (!currLine[0].equals(moduleCode)) {
-                moduleIndex++;
-                attendingIndex = 0;
-                if (moduleIndex >= moduleList.size()) {
-                    break;
-                }
-                currModule = moduleList.get(moduleIndex);
-            }
-            Lesson newLesson = new Lesson(lessonDay, lessonStart, lessonEnd, lessonType, classNumber, moduleCode);
-            currModule.replaceAttending(newLesson, attendingIndex);
-            attendingIndex++;
-        }
-    }
 
     /*
      * Loads attendingLessons from attendingDataFile into attendingDataList

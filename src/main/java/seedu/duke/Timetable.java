@@ -87,7 +87,7 @@ public class Timetable {
      * @return Number of lessons types with adjustable lessons
      */
     public static int getLessonTypeLength(int index) {
-        return listOfModules.get(index).getLessonTypeLength();
+        return listOfModules.get(index).getNumLessonTypes();
     }
 
     public static String getLessonTypes(int index) {

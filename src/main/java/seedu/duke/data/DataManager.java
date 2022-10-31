@@ -45,7 +45,6 @@ public class DataManager {
     public static void loadTimetableFromDataFile() throws Exceptions.FileLoadException, FileNotFoundException {
         ModuleManager.loadModules();
         AttendingManager.loadAttendingIntoDataList();
-        //AttendingManager.loadAttendingIntoTimetable();
         AttendingManager.loadNewAttendingOnStartUp();
     }
 

@@ -26,6 +26,7 @@ public class Nusmods {
     private final int moduleCode = 0;
     private final int moduleName = 1;
     private final int moduleDescription = 2;
+    private final String jsonFileType = ".json";
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private String setUri(String moduleCode) {
@@ -42,7 +43,7 @@ public class Nusmods {
             }
         }
         assert mod != null : "URI creation failed, module code is invalid!";
-        return baseUri + mod + ".json";
+        return baseUri + mod + jsonFileType;
     }
 
     private HttpResponse<String> getResponse(String moduleCode) throws IOException, InterruptedException {
