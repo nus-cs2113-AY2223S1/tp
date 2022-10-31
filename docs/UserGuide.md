@@ -99,7 +99,7 @@ Adds a new expense to the list of expenses.
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -117,7 +117,7 @@ Displays past expenses you have added.
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 Example of usage:
@@ -132,7 +132,7 @@ Deletes an expense from the list of expenses.
 Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 
 Example of usage:
 * `Delete-Expense -e 1`
@@ -145,7 +145,7 @@ Edits an existing expense in the list of expenses.
 Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
@@ -185,7 +185,7 @@ Converts the currency of an expense from the list of expenses.
 Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
@@ -462,9 +462,9 @@ The recurring payment was added as an expense successfully.
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: There will be a 'Memory' folder created in the same directory as your .jar file. 
-To transfer your data, simply copy the whole folder over to the same directory as the .jar 
-file in your other devices. Data will be saved automatically.
+**A**:
+As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
+You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
 
 ## Command Summary
 
@@ -491,5 +491,5 @@ A list of all valid commands.
 * Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
 * Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
 * Help: `help`
-* Exit: `exit`
+* Exit: `bye`
 
