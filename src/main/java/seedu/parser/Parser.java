@@ -7,8 +7,10 @@ import seedu.api.Api;
 import seedu.commands.*;
 import seedu.common.CommonData;
 import seedu.data.CarparkList;
+import seedu.exception.DashedExceptionNotInFrontException;
 import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
+import seedu.parser.search.Arguments;
 import seedu.parser.search.Sentence;
 
 /**
@@ -19,6 +21,8 @@ public class Parser {
     private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
     private static final String INVALID_NUMBER_OF_ARGS_HEADER = "This command only takes exactly %s argument(s). Valid "
         + "command(s): \n";
+    private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)"
+        + ".\n";
 
     private CarparkList carparkList;
     private Api api;
@@ -42,8 +46,14 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord").trim();
-        final String arguments = matcher.group("arguments").trim();
-
+        final Arguments argsList;
+        final String arguments;
+        try {
+            argsList = new Arguments(matcher.group("arguments").trim());
+            arguments = argsList.getArguments().toString();
+        } catch (DashedExceptionNotInFrontException e) {
+            return new InvalidCommand(e.getMessage());
+        }
 
         if (commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD)
                 || commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD_SHORT)) {
@@ -80,23 +90,29 @@ public class Parser {
             return prepareList(arguments);
         } else if (commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD)
                 || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT)) {
-            if (arguments.contains("-")) {
-                String args = arguments.split("-", 0)[1];
-                String[] actualArgs = args.split(" ", 0);
-                String dashedCommand = actualArgs[0];
-                String actualArgument = actualArgs[1];
-                if (dashedCommand.equalsIgnoreCase("id")) {
-                    if (actualArgument.isEmpty()) {
+            String dashedCommand;
+            Sentence actualArgument = argsList.getArguments();
+            if (argsList.getDashedArgsCount() == 1) {
+                dashedCommand = argsList.getDashedArgs().get(0);
+                if (dashedCommand.equalsIgnoreCase("i")) {
+                    if (actualArgument.getWordCount() == 0) {
                         return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                     }
                     return prepareFilterCarparkId(actualArgument);
-                } else if (dashedCommand.equalsIgnoreCase("add")
-                        || dashedCommand.equalsIgnoreCase("address")) {
-                    if (actualArgument.isEmpty()) {
+                } else if (dashedCommand.equalsIgnoreCase("a")) {
+                    if (actualArgument.getWordCount() == 0) {
                         return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                     }
                     return prepareFilterAddress(actualArgument);
                 }
+            } else if (argsList.getDashedArgsCount() > 1) {
+                return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
+                    + CommonData.FILTER_FORMAT);
+            } else {
+                if (actualArgument.getWordCount() == 0) {
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                }
+                return prepareFilterAddress(actualArgument);
             }
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
@@ -208,8 +224,7 @@ public class Parser {
      * @param arguments arguments given by the user after the command word
      * @return command to be carried out
      */
-    private Command prepareFilterAddress(String arguments) {
-        Sentence searchQuery = new Sentence(arguments);
+    private Command prepareFilterAddress(Sentence searchQuery) {
         return new FilterAddressCommand(carparkList, searchQuery);
     }
 
@@ -219,8 +234,7 @@ public class Parser {
      * @param arguments arguments given by the user after the command word
      * @return command to be carried out
      */
-    private Command prepareFilterCarparkId(String arguments) {
-        Sentence searchQuery = new Sentence(arguments);
+    private Command prepareFilterCarparkId(Sentence searchQuery) {
         return new FilterCarparkIdCommand(carparkList, searchQuery);
     }
 
