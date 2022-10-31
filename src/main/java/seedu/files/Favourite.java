@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
+import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
@@ -15,7 +16,7 @@ import seedu.ui.Ui;
  * Represents the 'favourite' class.
  */
 public class Favourite {
-    private static ArrayList<String> favouriteList;
+    private static ArrayList<String> favouriteList = new ArrayList<>();
     private final FileStorage fileStorage;
     private final String directory;
     private final String file;
@@ -38,17 +39,25 @@ public class Favourite {
      * @throws NoFileFoundException If no file found.
      */
     public void updateFavouriteList(CarparkList carparkList)
-            throws NoFileFoundException, FileWriteException, InvalidFormatException {
-        String content = FileReader.readStringFromTxt(file, directory, true);
+            throws NoFileFoundException, FileWriteException {
+        String content = FileReader.readStringFromTxt(file, directory, true).trim();
+        if (content.isEmpty()) {
+            return;
+        }
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<>();
         Collections.addAll(tempArray, lines);
         tempArray = new ArrayList<>(new LinkedHashSet<>(tempArray));
         boolean isValid = ensureValidity(carparkList, tempArray);
+
+        // Don't throw exception and interrupt the flow in the method that calls this one - file should be
+        // good to go after writing.
         if (!isValid) {
             writeFavouriteList();
-            throw new InvalidFormatException("There was an issue loading some favourites in your favourites.txt file.\n"
-                    + "The problematic items have been skipped and removed from the list.");
+            InvalidFormatException e = new InvalidFormatException("NOTE: There was an issue loading some favourites "
+                + "in your " + CommonFiles.FAVOURITE_FILE + " file.\n      The problematic items have been skipped "
+                + "and removed from the list.");
+            Ui.printError(e);
         }
     }
 
