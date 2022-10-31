@@ -361,12 +361,11 @@ Here are the categorical savings and expenditure summary for
 The past 3 weeks: 
 
 -----Categorical Savings-----
-[transport] $-10000
 
 -----Expenditure Summary-----
 Income: $0
-Expense: $10000
-Savings: $-10000
+Expense: $0
+Savings: $0
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
