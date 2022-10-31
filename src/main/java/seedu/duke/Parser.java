@@ -17,6 +17,7 @@ import seedu.duke.exception.InvalidDateException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +67,7 @@ public class Parser {
 
     public static String[] getArgumentList(String arguments) {
         assert (arguments != null);
-        String[] argumentList = arguments.split("\\s*/\\s*");
+        String[] argumentList = arguments.toLowerCase().split("\\s*/\\s*");
         return argumentList;
     }
 
