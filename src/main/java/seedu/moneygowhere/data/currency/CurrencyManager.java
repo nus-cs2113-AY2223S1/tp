@@ -58,7 +58,7 @@ public class CurrencyManager {
         ));
     }
 
-    public BigDecimal exchangeCurrency(Expense expense, String currency) {
+    public BigDecimal exchangeCurrency(Expense expense, String currency, BigDecimal rate) {
         String oldCurrency = expense.getCurrency();
         BigDecimal amount = expense.getAmount();
         BigDecimal amountInSgd;
@@ -70,26 +70,20 @@ public class CurrencyManager {
         if (currency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
             return amountInSgd;
         }
-        BigDecimal rate = getRate(currency);
-        BigDecimal amountInNewCurrency = amount.multiply(rate);
-        return amountInNewCurrency;
-    }
-
-    public BigDecimal exchangeCurrencyWithRate(Expense expense, String currency, BigDecimal rate) {
-        BigDecimal amount = expense.getAmount();
-        BigDecimal amountInNewCurrency = amount.multiply(rate);
-        exchangeRates.put(currency, rate);
-        expense.setRate(rate);
+        BigDecimal amountInNewCurrency;
+        if (rate == null) {
+            BigDecimal newRate = getRate(currency);
+            amountInNewCurrency = amount.multiply(newRate);
+        } else {
+            amountInNewCurrency = amount.multiply(rate);
+            exchangeRates.put(currency, rate);
+            expense.setRate(rate);
+        }
         return amountInNewCurrency;
     }
 
     public void changeCurrency(Expense expense, String currency, BigDecimal rate) {
-        BigDecimal newAmount;
-        if (rate == null) {
-            newAmount = exchangeCurrency(expense, currency);
-        } else {
-            newAmount = exchangeCurrencyWithRate(expense, currency, rate);
-        }
+        BigDecimal newAmount = exchangeCurrency(expense, currency, rate);
         BigDecimal newAmountRounded = newAmount.setScale(
                 Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
                 RoundingMode.HALF_UP

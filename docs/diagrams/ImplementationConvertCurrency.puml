@@ -30,19 +30,11 @@ opt consoleCommand instanceof ConsoleCommandConvertCurrency
     consoleInterface -[USER_INTERFACE_COLOR_1]> currencyManager : changeCurrency(expense:Expense, currency:String, rate:BigDecimal)
     activate currencyManager DATA_COLOR_1
 
-    alt rate == null
-        currencyManager -[DATA_COLOR_1]> currencyManager : \lexchangeCurrency(\n\texpense:Expense,  \n\tcurrency:String\n)
-        activate currencyManager DATA_COLOR_1
+    currencyManager -[DATA_COLOR_1]> currencyManager : \lexchangeCurrency(\n\texpense:Expense, \n\tcurrency:String, \n\trate:BigDecimal\n)
+    activate currencyManager DATA_COLOR_1
 
-        currencyManager -[DATA_COLOR_1]> currencyManager : newAmount:BigDecimal
-        deactivate currencyManager
-    else rate != null
-        currencyManager -[DATA_COLOR_1]> currencyManager : \lexchangeCurrencyWithRate(\n\texpense:Expense, \n\tcurrency:String, \n\trate:BigDecimal\n)
-        activate currencyManager DATA_COLOR_1
-
-        currencyManager -[DATA_COLOR_1]> currencyManager : newAmount:BigDecimal
-        deactivate currencyManager
-    end alt
+    currencyManager -[DATA_COLOR_1]> currencyManager : newAmount:BigDecimal
+    deactivate currencyManager
 
     currencyManager --[DATA_COLOR_1]> consoleInterface
     deactivate currencyManager
