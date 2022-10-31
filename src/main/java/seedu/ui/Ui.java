@@ -11,6 +11,7 @@ import seedu.exception.ParkingException;
 public class Ui {
     private static final String SEPARATOR_STRING = "===========================================";
     private static final String RED = "\u001b[31m";
+    private static final String GREEN = "\u001b[32m";
     private static final String CLEAR = "\u001b[0m";
     private Scanner in;
     public Ui() {
@@ -33,6 +34,59 @@ public class Ui {
      */
     public static void print(String line) {
         System.out.print(line);
+    }
+
+    /**
+     * Print string in GREEN colour.
+     *
+     * @param line String to print
+     * @param isNewLine if true, print newline.
+     */
+    public static void printGreen(String line, boolean isNewLine) {
+        if (isSupportAnsi()) {
+            print(GREEN);
+        }
+        if (isNewLine) {
+            println(line);
+        } else {
+            print(line);
+        }
+        if (isSupportAnsi()) {
+            print(CLEAR);
+        }
+    }
+
+    /**
+     * Print string in RED colour.
+     *
+     * @param line String to print
+     * @param isNewLine if true, print newline.
+     */
+    public static void printRed(String line, boolean isNewLine) {
+        if (isSupportAnsi()) {
+            print(RED);
+        }
+        if (isNewLine) {
+            println(line);
+        } else {
+            print(line);
+        }
+        if (isSupportAnsi()) {
+            print(CLEAR);
+        }
+    }
+
+    /**
+     * Checks whether the system support ANSI encoding.
+     *
+     * @return true if it supports ANSI.
+     */
+    public static boolean isSupportAnsi() {
+        String systemOS = System.getProperty("os.name").toLowerCase();
+        if (systemOS.contains("mac")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -95,44 +149,42 @@ public class Ui {
      * @param e {@link ParkingException} exception
      */
     public static void printError(ParkingException e) {
-        print("\u001b[31m");
-        println(e.getMessage());
-        print("\u001b[0m");
+        printRed(e.getMessage(), true);
     }
 
     /**
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        println("Something went wrong when fetching data, trying again...");
+        printRed("Something went wrong when fetching data, trying again...", true);
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        println("Fetch Timeout, trying again...");
+        printRed("Fetch Timeout, trying again...", true);
     }
 
     /**
      * Show error message when saving data to file.
      */
     public void showSaveError() {
-        println("Something went wrong when saving data.");
+        printRed("Something went wrong when saving data.", true);
     }
 
     /**
      * Show error message when creating file is unsuccessful.
      */
     public void showCreateFileError() {
-        println("Something wrong happened in file creation.");
+        printRed("Something wrong happened in file creation.", true);
     }
 
     /**
      * Show error message when invalid command is entered.
      */
     public void showInvalidCommandError() {
-        println("Invalid command. Try again.");
+        printRed("Invalid command. Try again.", true);
     }
 
     /**
