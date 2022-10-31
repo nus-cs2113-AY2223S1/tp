@@ -103,6 +103,7 @@ public class ViewUserItemsCommand extends Command {
      * @throws InvalidArgumentException if the argument is invalid
      * @throws UserNotFoundException    if the user is not found in list of users
      */
+    @Override
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException {
         ItemList userItems = getUserItems();
         Ui.printResponse(userItems.toString(transactionList));
