@@ -12,6 +12,7 @@ import seedu.duke.command.CommandAddProperty;
 import seedu.duke.exception.DuplicatePropertyException;
 import seedu.duke.exception.EmptyAddPropertyDetailException;
 import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
+import seedu.duke.exception.AddressFormatUnitTypeMismatchException;
 import seedu.duke.exception.InvalidPriceFormatException;
 import seedu.duke.exception.InvalidSingaporeAddressException;
 import seedu.duke.exception.InvalidUnitTypeLabelException;
@@ -106,7 +107,11 @@ public class ParseAddProperty extends ParseAdd {
 
     private static HashMap<String, String> UNIT_TYPE_HASHMAP;
 
-
+    private static final String HASH_SYMBOL = "#";
+    private static final String LANDED_PROPERTY_TAG = "LP";
+    public static final String HDB_TAG = "HDB";
+    public static final String CONDOMINIUM = "Condominium";
+    public static final String PENTHOUSE = "Penthouse";
 
     public ParseAddProperty(String addCommandDescription, PropertyList propertyList) {
         this.commandDescription = addCommandDescription;
@@ -193,20 +198,20 @@ public class ParseAddProperty extends ParseAdd {
         return extractedPropertyDetails;
     }
 
-
     public void validatePropertyDetails(ArrayList<String> propertyDetails) throws EmptyAddPropertyDetailException,
             InvalidSingaporeAddressException, InvalidPriceFormatException, InvalidUnitTypeLabelException,
-            DuplicatePropertyException {
+            AddressFormatUnitTypeMismatchException, DuplicatePropertyException {
         // Checks for Missing Landlord Name, Property Address, Renting Price (SGD/month) and Unit-Type.
         for (String propertyDetail : propertyDetails) {
             checkForEmptyAddPropertyDetails(propertyDetail);
         }
 
-        // Checks Format for Address (Singapore) and Renting Price.
         checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
         checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
         propertyDetails.set(PROPERTY_UNIT_TYPE_INDEX,
                 checkForValidUnitType(propertyDetails.get(PROPERTY_UNIT_TYPE_INDEX)));
+        checkForValidAddressFormatUnitTypeMatching(propertyDetails.get(PROPERTY_ADDRESS_INDEX),
+                propertyDetails.get(PROPERTY_UNIT_TYPE_INDEX));
 
         // Duplicate Property refers to properties with the same address.
         checkForDuplicateProperty(propertyList, propertyDetails.get(PROPERTY_ADDRESS_INDEX));
@@ -262,6 +267,40 @@ public class ParseAddProperty extends ParseAdd {
         boolean isDuplicateAddress = checkForDuplicateAddress(propertyList, propertyAddress);
         if (isDuplicateAddress) {
             throw new DuplicatePropertyException();
+        }
+    }
+
+    private void checkForValidAddressFormatUnitTypeMatching(String address, String unitType) throws
+            AddressFormatUnitTypeMismatchException {
+        boolean isHdbTerrace = unitType.equals(ACTUAL_UNIT_TYPE_TERRENCE);
+        // HDB Terrace Houses may or may not have unit level.
+        if (isHdbTerrace) {
+            return;
+        }
+
+        boolean hasUnitLevel = address.contains(HASH_SYMBOL);
+        // Landed Properties do not have unit level, hence address does not contain '#' symbol
+        if (!hasUnitLevel) {
+            checkForLandedProperty(unitType);
+        } else {
+            checkForNonLandedProperty(unitType);
+        }
+    }
+
+    private void checkForLandedProperty(String unitType) throws AddressFormatUnitTypeMismatchException {
+        boolean hasLandedPropertyTag = unitType.contains(LANDED_PROPERTY_TAG);
+        if (!hasLandedPropertyTag) {
+            throw new AddressFormatUnitTypeMismatchException();
+        }
+    }
+
+    private void checkForNonLandedProperty(String unitType) throws AddressFormatUnitTypeMismatchException {
+        boolean hasHdbTag = unitType.contains(HDB_TAG);
+        boolean isCondominium = unitType.contains(CONDOMINIUM);
+        boolean isPenthouse = unitType.contains(PENTHOUSE);
+        boolean isNonLandedProperty = hasHdbTag || isCondominium || isPenthouse;
+        if (!isNonLandedProperty) {
+            throw new AddressFormatUnitTypeMismatchException();
         }
     }
 
