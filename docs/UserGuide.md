@@ -2,28 +2,33 @@
 
 ## Introduction
 
-parKING is a desktop app that helps drivers choose the best place to park via a Command Line Interface (CLI).
-parKING allows users to search, save and look at carpark availability information at a glance,
-while interfacing with LTA's real-time API that updates every minute. Whenever you launch parKING, it automatically 
-updates it for you.You can use parKING to plan trips in advance or simply check lot availability before you leave the house.
+parKING is a desktop app that helps drivers choose the best place to park via the Command Line Interface (CLI).
+parKING allows users to search, save and look at car park availability information at a glance, while interfacing with 
+LTA's real-time API. Whenever you launch parKING, it automatically get the latest car park availability and updates the
+local data immediately. The best part about parKING is that it can be used offline (based on the data you have saved the 
+last time you are connected to the internet).
 
-
+With parKING, you can plan your parking destination in advance or simply check lot availability before you leave. We 
+strive to become your driving companion, keeping you at ease while ensuring that your vehicle will always get a parking 
+lot when you arrive at your destination. We got you and your loved ones parked!
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of parKING from [here](https://github.com/AY2223S1-CS2113-T17-4/tp/releases/download/v2.0/parKING.jar).
-3. Use the command `java -jar parKING.jar` to start the program!
+3. For continued usage of the application, do sign up for your personal API key through [LTA](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html).
+4. Use the command `java -jar parKING.jar` to start the program!
+5. Note that the programme will automatically create a directory called `Resources` to store local data files.
 
 ## Disclaimer regarding use of API key for the purposes of NUS CS2113
 We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
-NUS CS2113, we have provided a default api key for testing purposes.
+NUS CS2113, we have provided a default api key for testing purposes. **This default api key will be removed at the end of
+module in Q4 2022**.
 
 ## Features
 
 > Notes about the command format:
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
->  - Items in square bracket are optional.
 
 | Command                  | Description                                                                                |
 |--------------------------|--------------------------------------------------------------------------------------------| 
@@ -32,12 +37,12 @@ NUS CS2113, we have provided a default api key for testing purposes.
 | `auth status`            | [Authentication status](#authentication-status)                                            |
 | `find CARPARK_ID`        | [Find number of lots available by carpark ID](#find-number-of-lots-available-by-carpark-id) | 
 | `filter QUERY`           | [Filter carparks based on address](#filter-carparks-based-on-address)                      | 
-| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |   
 | `list`                   | [Get a list of available carparks on the app](#get-a-list-of-available-carparks-on-the-app) |
 | `update`                 | [Update data from API](#update-data-from-api)                                              |
 | `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
 | `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
 | `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                  |
+| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |   
 | `exit`                   | [Exiting the program](#exiting-the-program)                                                |
 
 ### Authenticate user API
@@ -180,37 +185,6 @@ CarparkID C6 at BLK 3`2`8-334 `CLEMENTI` `AVE` `2`
     226 available lots total
 CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
     304 available lots total
-```
-
-### Viewing Help
-
-**Returns a list of all the available command of the program.**
-> Format : `help`
-
-- This function will return a list of all the available commands to use and a description of their purpose.
-
-Example of usage:
-
-**Input:**
-
-`help`
-
-**Output**
-```
-Here are the list of available commands to use! 
-Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
-`help` 	: To display all possible commands.
-`exit` 	: To quit parKING.
-`list` 	: List the carparks and its details.
-`auth API_KEY` 	: to authenticate your personal API key.
-`auth default` 	: to authenticate using the default key provided by parKING.
-`auth status` 	: to get the authentication status.
-`update` 	: To fetch the latest data from LTA.
-`filter KEYWORD` 	: Find carpark based on its address.
-`find CARPARK_ID` 	: Display information about the queried carpark.
-`favourite CARPARK_ID` 	: favourite carpark by its ID
-`favourite list` 	: to get the list of favourited carparks.
-`unfavourite CARPARK_ID` 	: unfavourite carpark by its ID.
 ```
 
 ### Get a list of available carparks on the app
@@ -356,6 +330,37 @@ CarparkID J8 at BLK 232/240 JURONG EAST ST 21: 318 lots available
 ===========================================
 ```
 
+### Viewing Help
+
+**Returns a list of all the available command of the program.**
+> Format : `help`
+
+- This function will return a list of all the available commands to use and a description of their purpose.
+
+Example of usage:
+
+**Input:**
+
+`help`
+
+**Output**
+```
+Here are the list of available commands to use! 
+Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
+`help` 	: To display all possible commands.
+`exit` 	: To quit parKING.
+`list` 	: List the carparks and its details.
+`auth API_KEY` 	: to authenticate your personal API key.
+`auth default` 	: to authenticate using the default key provided by parKING.
+`auth status` 	: to get the authentication status.
+`update` 	: To fetch the latest data from LTA.
+`filter KEYWORD` 	: Find carpark based on its address.
+`find CARPARK_ID` 	: Display information about the queried carpark.
+`favourite CARPARK_ID` 	: favourite carpark by its ID
+`favourite list` 	: to get the list of favourited carparks.
+`unfavourite CARPARK_ID` 	: unfavourite carpark by its ID.
+```
+
 ### Exiting the program
 
 **Terminates the program.**
@@ -373,6 +378,7 @@ carpark data, you can do so as long as the format is maintained. These changes w
 when you restart the program.
 
 ## Command Summary
+
 | Command                  | Description                                                                                |
 |--------------------------|--------------------------------------------------------------------------------------------| 
 | `auth API_KEY`           | [Authenticate API using user's API key](#authenticate-user-api)                            |
@@ -386,5 +392,6 @@ when you restart the program.
 | `favourite CARPARK_ID`   | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
 | `unfavourite CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
 | `favourite list`         | [List all IDs of favourite carparks](#list-all-ids-of-favourite-carparks)                  |
+| `help`                   | [Lists all the features and their input formats](#viewing-help)                            |   
 | `exit`                   | [Exiting the program](#exiting-the-program)                                                |
 
