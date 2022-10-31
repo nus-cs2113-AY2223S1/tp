@@ -250,7 +250,7 @@ public class TimetableDict {
 
         //Quick fix
         for (Module module : listOfModules) {
-            for (Lesson attendingLesson : module.getAttending()) {
+            for (Lesson attendingLesson : module.getAttendingList()) {
                 if (attendingLesson.getDay().equals("Undetermined Day")) {
                     unallocated++;
                     resultString += attendingLesson.getModuleCode() + " (" + attendingLesson.getLessonType() + ")\n";
@@ -291,7 +291,7 @@ public class TimetableDict {
         for (String lessonType : classifiedLessons.keySet()) {
             //check if a lesson has already been set for that lesson type
             boolean isAlreadyAttending = false;
-            for (Lesson lesson : module.getAttending()) {
+            for (Lesson lesson : module.getAttendingList()) {
                 if (lesson.getLessonType().equals(lessonType) && !lesson.getDay().equals("Undetermined Day")) {
                     isAlreadyAttending = true;
                     break;
@@ -319,7 +319,7 @@ public class TimetableDict {
             int lessonIndex = 0;
             if (numOfLessons == 1 && currLessonTypeLessons.size() != 1) { //already set
                 Lesson tempLesson;
-                for (Lesson attendingLesson : module.getAttending()) {
+                for (Lesson attendingLesson : module.getAttendingList()) {
                     if (attendingLesson.getLessonType().equals(currLessonType)) {
                         tempLesson = attendingLesson;
                         for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
