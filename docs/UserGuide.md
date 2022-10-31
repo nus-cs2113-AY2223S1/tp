@@ -377,20 +377,19 @@ Example of usage:
 
 **Output**
 ```
-Here are the list of available commands to use! 
-Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
-`help` 	: To display all possible commands.
-`exit` 	: To quit parKING.
-`list` 	: List the carparks and its details.
-`auth API_KEY` 	: to authenticate your personal API key.
-`auth default` 	: to authenticate using the default key provided by parKING.
-`auth status` 	: to get the authentication status.
-`update` 	: To fetch the latest data from LTA.
-`filter KEYWORD` 	: Find carpark based on its address.
-`find CARPARK_ID` 	: Display information about the queried carpark.
-`favourite CARPARK_ID` 	: favourite carpark by its ID
-`favourite list` 	: to get the list of favourited carparks.
-`unfavourite CARPARK_ID` 	: unfavourite carpark by its ID.
+Here are the list of available commands to use! Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
+`help` or `h` 	: To display all possible commands.
+`exit` or `e` 	: To quit parKING.
+`list` or `l` 	: List the carparks and its details.
+`auth API_KEY` or `a API_KEY` 	: to authenticate your personal API key.
+`auth default` or `a default` 	: to authenticate using the default key provided by parKING.
+`auth status` or `a status` 	: to get the authentication status.
+`update` or `u` 	: To fetch the latest data from LTA.
+`filter KEYWORD` or `fil KEYWORD` 	: Find carpark based on its address.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the queried carpark.
+`favourite list` or `fav list` 	: to get the list of favourited carparks.
+`favourite CARPARK_ID` or `fav CARPARK_ID` 	: favourite carpark by its ID.
+`unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: unfavourite carpark by its ID.
 ```
 
 ### Exiting the program
