@@ -136,12 +136,15 @@ public class Ui {
      * @param incomeMessage  A string containing the formatted income amount.
      * @param expenseMessage A string containing the formatted expense amount.
      * @param savingsMessage A string containing the formatted savings amount.
+     * @param spendingHabitComment   A string containing the formatted spending habit comment.
      * @param budgetMessage  A string containing the formatted budget amount.
      * @param budgetAdvice   A string containing the formatted budget advice.
      */
     public static void showTimeInsightsList(String list, String message, String incomeMessage,
-            String expenseMessage, String savingsMessage, String budgetMessage, String budgetAdvice) {
-        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage, budgetMessage, budgetAdvice);
+            String expenseMessage, String savingsMessage, String budgetMessage, String spendingHabitComment,
+                                            String budgetAdvice) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage, budgetMessage,
+                spendingHabitComment, budgetAdvice);
     }
 
     //@@author chydarren

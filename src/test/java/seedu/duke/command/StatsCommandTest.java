@@ -5,7 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.GlobalMissingTagException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.GlobalUnsupportedTagCombinationException;
 import seedu.duke.exception.StatsInvalidTypeException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -26,7 +26,7 @@ public class StatsCommandTest {
         Storage storage = new Storage();
 
         assertThrows(
-            GlobalUnsupportedTagException.class,
+            GlobalUnsupportedTagCombinationException.class,
             () -> statsCommand.execute(transactions, ui, storage)
         );
     }
@@ -50,12 +50,13 @@ public class StatsCommandTest {
     public void listStatsByStatsType_useInvalidStatsType_exceptionThrown() {
         StatsCommand statsCommand = new StatsCommand();
         TransactionList transactions = new TransactionList();
+        Ui ui = new Ui();
 
         statsCommand.setStatsType("moolah");
 
         assertThrows(
             StatsInvalidTypeException.class,
-            () -> statsCommand.listStatsByStatsType(transactions)
+            () -> statsCommand.listStatsByStatsType(transactions, ui)
         );
     }
 
@@ -63,11 +64,12 @@ public class StatsCommandTest {
     public void listStatsByStatsType_useCategoricalSavingsStatsType_noError() {
         StatsCommand statsCommand = new StatsCommand();
         TransactionList transactions = new TransactionList();
+        Ui ui = new Ui();
 
         statsCommand.setStatsType("categorical_savings");
 
         assertDoesNotThrow(
-            () -> statsCommand.listStatsByStatsType(transactions)
+            () -> statsCommand.listStatsByStatsType(transactions, ui)
         );
     }
 }
