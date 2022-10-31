@@ -1,11 +1,8 @@
 package seedu.commands;
 
-import java.io.IOException;
-
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
-import seedu.exception.DuplicateKeyException;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;

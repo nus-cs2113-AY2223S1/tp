@@ -1,15 +1,10 @@
 package seedu.files;
 
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 import seedu.data.CarparkList;
-import seedu.exception.DuplicateKeyException;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
@@ -43,7 +38,7 @@ public class Favourite {
      * @throws NoFileFoundException If no file found.
      */
     public void updateFavouriteList(CarparkList carparkList)
-        throws NoFileFoundException, FileWriteException, InvalidFormatException {
+            throws NoFileFoundException, FileWriteException, InvalidFormatException {
         String content = FileReader.readStringFromTxt(file, directory, true);
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<>();

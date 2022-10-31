@@ -1,17 +1,15 @@
 package seedu.exception;
 
-import seedu.common.CommonFiles;
-
 /**
  * Exception for when no carpark is found.
  */
-public class DuplicateKeyException extends ParkingException {
+public class DuplicateCarparkIdException extends ParkingException {
     private final String filePath;
 
     /**
      * Constructor for the exception.
      */
-    public DuplicateKeyException(String filePath) {
+    public DuplicateCarparkIdException(String filePath) {
         super();
         this.filePath = filePath;
     }

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import seedu.common.CommonFiles;
-import seedu.exception.DuplicateKeyException;
+import seedu.exception.DuplicateCarparkIdException;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
@@ -55,7 +55,7 @@ public class CarparkList {
      * save expressed in a string.
      * @param saveStringFull A string that is a save of the entire List of {@link Carpark} objects.
      */
-    public CarparkList(String saveStringFull) throws InvalidFormatException, DuplicateKeyException {
+    public CarparkList(String saveStringFull) throws InvalidFormatException, DuplicateCarparkIdException {
         carparks = new ArrayList<>();
         HashSet<String> carparkIds = new HashSet<>();
         String filePath = Paths.get(CommonFiles.CARPARK_LIST_DIRECTORY, CommonFiles.CARPARK_LIST_FILE).toString();
@@ -69,14 +69,14 @@ public class CarparkList {
                     Carpark carpark = Carpark.parseCarpark(saveString);
                     String carparkId = carpark.getCarparkId().trim().toLowerCase();
                     if (carparkIds.contains(carparkId)) {
-                        throw new DuplicateKeyException(filePath);
+                        throw new DuplicateCarparkIdException(filePath);
                     } else {
                         carparkIds.add(carparkId);
                     }
                     carparks.add(carpark);
                 }
-            } catch (DuplicateKeyException duplicateKeyException) {
-                throw new DuplicateKeyException(filePath);
+            } catch (DuplicateCarparkIdException duplicateCarparkIdException) {
+                throw new DuplicateCarparkIdException(filePath);
             } catch (Exception e) {
                 throw new InvalidFormatException("Save string format invalid. Loading from backup and restoring "
                     + "files...");

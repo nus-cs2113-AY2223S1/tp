@@ -8,8 +8,6 @@ import static seedu.common.CommonFiles.FAVOURITE_DIRECTORY;
 import static seedu.common.CommonFiles.FAVOURITE_FILE;
 import static seedu.common.CommonFiles.LTA_JSON_FILE;
 
-import java.io.IOException;
-
 import seedu.api.Api;
 import seedu.commands.Command;
 import seedu.commands.CommandResult;

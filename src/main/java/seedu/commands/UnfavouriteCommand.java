@@ -1,6 +1,5 @@
 package seedu.commands;
 
-import java.io.IOException;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
