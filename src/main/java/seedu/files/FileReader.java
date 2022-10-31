@@ -44,7 +44,7 @@ public class FileReader {
             }
             return carparks;
         } catch (IOException e) {
-            System.out.println("No file was found, or invalid format at " + filepath + ". Trying the backup:");
+            Ui.println("No file was found, or invalid format at " + filepath + ". Trying the backup:");
             try {
                 List<Carpark> carparks = getCarparks(filepathBackup);
                 System.out.println("Backup load successful!");
@@ -54,7 +54,7 @@ public class FileReader {
                 }
                 return carparks;
             } catch (IOException backupException) {
-                System.out.println("Both the main and backup file failed to load. Loading from internal backup: ");
+                Ui.println("Both the main and backup file failed to load. Loading from internal backup: ");
                 FileStorage.ensureBackup();
                 try {
                     return getCarparks(filepathBackup);
@@ -84,7 +84,9 @@ public class FileReader {
      * @param directoryPath Directory path.
      * @param createDirectory if true and file does not exist, it will create.
      * @return Data string in file.
-     * @throws IOException if file not found.
+     *
+     * @throws NoFileFoundException When a file could not be found.
+     * @throws FileWriteException When there's an issue with writing to the file.
      */
     public static String readStringFromTxt(String filePath, String directoryPath, boolean createDirectory)
             throws NoFileFoundException, FileWriteException {
