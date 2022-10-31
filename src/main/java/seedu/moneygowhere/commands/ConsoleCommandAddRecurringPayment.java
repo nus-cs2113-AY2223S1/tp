@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 /**
  * Stores the command Add-RecurringPayment and its arguments.
  */
-@SuppressWarnings("FieldMayBeFinal")
+@SuppressWarnings({"FieldMayBeFinal", "unused"})
 public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {
     private String name;
     private int interval;
@@ -39,32 +39,52 @@ public class ConsoleCommandAddRecurringPayment extends ConsoleCommand {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getInterval() {
         return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     public String getCategory() {
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getCurrency() {
         return currency;
     }
 
-    public String getModeOfPayment() {
-        return modeOfPayment;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public String getModeOfPayment() {
+        return modeOfPayment;
     }
 
     public void setModeOfPayment(String modeOfPayment) {
