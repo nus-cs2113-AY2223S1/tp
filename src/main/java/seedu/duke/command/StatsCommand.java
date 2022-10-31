@@ -34,6 +34,7 @@ import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_SAVINGS;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET;
+import static seedu.duke.common.InfoMessages.INFO_SPENDING_HABIT;
 import static seedu.duke.common.InfoMessages.INFO_STATS_CATEGORY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_STATS_EXPENDITURE_HEADER;
@@ -200,32 +201,39 @@ public class StatsCommand extends ListAndStatsCommand {
      * Produces info strings, list of categories and summary statistics.
      *
      * @param transactions An instance of the TransactionList class.
+     * @param ui           An instance of the Ui class.
      */
-    public void statsTypeTimeInsights(TransactionList transactions) {
+    public void statsTypeTimeInsights(TransactionList transactions, Ui ui) {
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
         String timeInsightsList = transactions.listTimeStats(timeTransactions, year, month, period, number);
 
         if (timeInsightsList.isEmpty()) {
             statsLogger.log(Level.INFO, "Time insights list is empty as there are no transactions available.");
-            Ui.showInfoMessage(INFO_STATS_EMPTY.toString());
+            ui.showInfoMessage(INFO_STATS_EMPTY.toString());
             return;
         }
 
         // summary values
-        ArrayList<String> amounts;
-        amounts = transactions.processTimeSummaryStats(timeTransactions);
+        ArrayList<String> timeInsightsValues;
+        timeInsightsValues = transactions.processTimeSummaryStats(timeTransactions);
 
         String incomeMessage = INFO_STATS_EXPENDITURE_HEADER + LINE_SEPARATOR.toString()
-                + String.format("%s%s%s", INFO_INCOME, COLON_SPACE, DOLLAR_SIGN) + amounts.get(0);
-        String expensesMessage = String.format("%s%s%s", INFO_EXPENSE, COLON_SPACE, DOLLAR_SIGN) + amounts.get(1);
-        String savingsMessage = String.format("%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN) + amounts.get(2);
+                + String.format("%s%s%s", INFO_INCOME, COLON_SPACE, DOLLAR_SIGN) + timeInsightsValues.get(0);
+        String expensesMessage = String.format("%s%s%s", INFO_EXPENSE, COLON_SPACE, DOLLAR_SIGN)
+                + timeInsightsValues.get(1);
+        String savingsMessage = String.format("%s%s%s", INFO_SAVINGS, COLON_SPACE, DOLLAR_SIGN)
+                + timeInsightsValues.get(2);
+        String habitMessage = String.format("%s%s%s", INFO_SPENDING_HABIT, COLON_SPACE, timeInsightsValues.get(3));
 
-        printTimeInsightsStatistics(timeInsightsList, amounts, incomeMessage, expensesMessage, savingsMessage);
+        printTimeInsightsStatistics(timeInsightsList, timeInsightsValues, incomeMessage, expensesMessage,
+                savingsMessage, habitMessage);
 
         assert !timeInsightsList.isEmpty();
         statsLogger.log(Level.INFO, "Time insights list has info available for the specified time period.");
 
     }
+
+    //@@author wcwy
 
     /**
      * Prints the statistics for time insights based on the parameters chosen.
@@ -237,19 +245,19 @@ public class StatsCommand extends ListAndStatsCommand {
      * @param savingsMessage   A string containing the formatted savings.
      */
     private static void printTimeInsightsStatistics(String timeInsightsList, ArrayList<String> amounts,
-            String incomeMessage, String expensesMessage, String savingsMessage) {
+            String incomeMessage, String expensesMessage, String savingsMessage, String spendingHabitComment) {
 
         if (containMonthYear() == CONTAIN_BOTH) {
-            // Information on budget is only displayed when displaying a specific month's time insights
+            // Information on spending habit and budget displayed only when displaying a specific month's time insights
             String budgetMessage = String.format("%s%s%s", INFO_BUDGET, COLON_SPACE, DOLLAR_SIGN) + Budget.getBudget();
 
             long budgetLeft = Budget.calculateBudgetLeft(Long.parseLong(amounts.get(1)));
             String budgetAdvice = Budget.generateBudgetAdvice(budgetLeft, Budget.hasExceededBudget(budgetLeft));
 
             Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage,
-                    expensesMessage, savingsMessage, budgetMessage, budgetAdvice);
+                    expensesMessage, savingsMessage, budgetMessage, spendingHabitComment, budgetAdvice);
+        //@@author paullowse
         } else {
-            //@@author paullowse
             Ui.showTimeInsightsList(timeInsightsList, INFO_STATS_TIME_INSIGHTS.toString(), incomeMessage,
                     expensesMessage, savingsMessage);
         }

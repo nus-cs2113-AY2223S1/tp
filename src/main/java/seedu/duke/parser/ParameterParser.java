@@ -14,7 +14,7 @@ import seedu.duke.exception.GlobalInvalidMonthException;
 import seedu.duke.exception.GlobalInvalidPeriodException;
 import seedu.duke.exception.GlobalInvalidYearException;
 import seedu.duke.exception.GlobalMissingTagException;
-import seedu.duke.exception.GlobalNonNumericIndexException;
+import seedu.duke.exception.GlobalIndexNotNumericException;
 import seedu.duke.exception.GlobalNumberNotNumericException;
 import seedu.duke.exception.GlobalUnsupportedTagException;
 import seedu.duke.exception.HelpUnknownOptionException;
@@ -84,6 +84,7 @@ public class ParameterParser {
     private static final String CATEGORICAL_SAVINGS = "categorical_savings";
     private static final String MONTHLY_EXPENDITURE = "monthly_expenditure";
     private static final String TIME_INSIGHTS = "time_insights";
+    private static final String DAYS = "days";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
 
@@ -484,14 +485,14 @@ public class ParameterParser {
         int index;
         //@@chinhan99
         if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
-            throw new GlobalNonNumericIndexException();
+            throw new GlobalIndexNotNumericException();
         } else if (startsWithMinusSign(parameter)) { // Checks if parameter is negative value
             if (parameter.length() == MIN_PARAMETER_LENGTH) { //Means parameter == "-"
-                throw new GlobalNonNumericIndexException();
+                throw new GlobalIndexNotNumericException();
             }
             throw new GlobalInvalidIndexException();
         } else if (containSymbol(parameter)) { // Checks if contains any other symbols
-            throw new GlobalNonNumericIndexException();
+            throw new GlobalIndexNotNumericException();
         }
         //@@author brian-vb
         try {
@@ -634,6 +635,8 @@ public class ParameterParser {
     public static String parsePeriodTag(String parameter) throws GlobalInvalidPeriodException {
         String period;
         switch (parameter) {
+        case DAYS:
+            return DAYS;
         case WEEKS:
             return WEEKS;
         case MONTHS:
