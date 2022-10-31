@@ -60,21 +60,21 @@ public class UnfavouriteCommand extends Command {
                 }
             }
             if (!hasMatch) {
-                Ui.print("Some carparks not found in favourite list! Skipping...\n");
+                Ui.printRed("Some carparks not found in favourite list! Skipping...\n", true);
             }
             if (!isValid) {
-                Ui.print("Some values were invalid. Invalid values were skipped.\n");
+                Ui.printRed("Some values were invalid. Invalid values were skipped.\n", true);
             }
             setUnfavourite(validIDs);
             if (!validIDs.isEmpty()) {
-                return new CommandResult("Removed Carpark " + content + "from favourites!");
+                return new CommandResult("Removed Carpark " + content + "from favourites!", CommandStatus.SUCCESS);
             } else {
-                return new CommandResult("Nothing to remove from favourites!");
+                return new CommandResult("Nothing to remove from favourites!", CommandStatus.FAIL);
             }
         } catch (FileWriteException e) {
-            return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         } catch (NoCarparkFoundException e) {
-            return new CommandResult("Carpark not found in favourite list!");
+            return new CommandResult("Carpark not found in favourite list!", CommandStatus.FAIL);
         }
     }
 

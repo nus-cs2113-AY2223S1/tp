@@ -49,9 +49,9 @@ public class FavouriteCommand extends Command {
                 favourite.writeFavouriteList();
                 String content = favourite.getFavouriteListString(carparkList);
                 if (content.isEmpty()) {
-                    return new CommandResult("There are no favourites in the list!");
+                    return new CommandResult("There are no favourites in the list!", CommandStatus.FAIL);
                 }
-                return new CommandResult(content.trim());
+                return new CommandResult(content.trim(), CommandStatus.MESSAGE);
             } else {
                 StringBuilder content = new StringBuilder();
                 ArrayList<String> validIDs = new ArrayList<>();
@@ -86,15 +86,16 @@ public class FavouriteCommand extends Command {
                     Ui.printError(e);
                 }
                 if (!validIDs.isEmpty()) {
-                    return new CommandResult("Added Carpark " + content + "to favourites!");
+                    return new CommandResult("Added Carpark " + content + "to favourites!",
+                            CommandStatus.SUCCESS);
                 } else {
-                    return new CommandResult("Nothing to add to favourites!");
+                    return new CommandResult("Nothing to add to favourites!", CommandStatus.FAIL);
                 }
             }
         } catch (NoCarparkFoundException | NoFileFoundException e) {
-            return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         } catch (FileWriteException fileWriteException) {
-            return new CommandResult("Error in setting " + argument + " as favourite.");
+            return new CommandResult("Error in setting " + argument + " as favourite.", CommandStatus.FAIL);
         }
     }
 

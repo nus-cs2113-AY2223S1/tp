@@ -37,10 +37,10 @@ public class FilterCarparkIdCommand extends Command {
                 throw new NoCarparkFoundException();
             }
             carparkList.resetBoldForAllCarparks();
-            return new CommandResult(result);
+            return new CommandResult(result, CommandStatus.MESSAGE);
         } catch (NoCarparkFoundException e) {
             carparkList.resetBoldForAllCarparks();
-            return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         }
     }
 }

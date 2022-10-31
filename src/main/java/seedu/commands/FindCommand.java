@@ -29,7 +29,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute() throws NoCarparkFoundException {
         final Carpark result = findThisCarpark(carparkID);
-        return new CommandResult(result.getDetailViewString());
+        return new CommandResult(result.getDetailViewString(), CommandStatus.MESSAGE);
     }
 
     /**

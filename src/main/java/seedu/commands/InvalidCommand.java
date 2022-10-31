@@ -13,6 +13,6 @@ public class InvalidCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(showToUser);
+        return new CommandResult(showToUser, CommandStatus.FAIL);
     }
 }

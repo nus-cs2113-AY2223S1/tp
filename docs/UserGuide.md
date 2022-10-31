@@ -160,6 +160,7 @@ You have not authenticated your personal API key. Currently you have access to t
 - Using data from the API, after the user has inputted the ID of a certain carpark,
   the function will return detailed information regarding the aforementioned carpark (this includes the number 
   of available carparks of different types).
+- Note that it will also show empty car park lots.
 - The command can only take a complete carpark ID. If the user inputs a non-existing carpark ID or inputs the wrong format,
   the program will prompt the user to re-enter the correct and existing carpark ID.
 - `find` is case-insensitive and will find the correct carpark code even if lowercase is used.
@@ -195,6 +196,7 @@ Number of available lots (total): 132
 - Multiple words can be input to narrow the filtered results further. Given the previous example, `clementi ave` will
   also give the above carpark as one of its results.
 - Only a summarised list of carparks with minimal information will be shown.
+- Note that it will also show empty car park lots.
 - For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
   example, `clem` will also match the above carpark.
 - In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched.

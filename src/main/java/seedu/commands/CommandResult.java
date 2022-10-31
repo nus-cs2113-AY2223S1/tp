@@ -11,15 +11,31 @@ public class CommandResult {
      * The message to be shown to the user.
      */
     public final String showToUser;
-
-    public CommandResult(String showToUser) {
-        this.showToUser = showToUser;
-    }
-
-    public CommandResult(CarparkList showToUser) {
+    public final CommandStatus status;
+    /**
+     * Result object to be run by the Ui class.
+     *
+     * @param showToUser the CarparkList class object to output.
+     * @param status the status of the output.
+     */
+    public CommandResult(CarparkList showToUser, CommandStatus status) {
         this.showToUser = showToUser.toString();
+        this.status = status;
     }
 
+    /**
+     * Result object to be run by the Ui class.
+     *
+     * @param showToUser the string to output.
+     * @param status the status of the output.
+     */
+    public CommandResult(String showToUser, CommandStatus status) {
+        this.showToUser = showToUser;
+        this.status = status;
+    }
 
+    public final CommandStatus getStatus() {
+        return status;
+    }
 }
 

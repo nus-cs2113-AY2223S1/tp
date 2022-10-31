@@ -24,7 +24,6 @@ public class UnknownResponseApiException extends ApiServerResponseErrorException
     @Override
     public String getMessage() {
         return "Response Code: " + responseCode
-            + "\nIf the problem persists please contact the developer. Trying "
-            + super.getTryNumber() + " more time...";
+            + "\nIf the problem persists please contact the developer. Trying again...";
     }
 }

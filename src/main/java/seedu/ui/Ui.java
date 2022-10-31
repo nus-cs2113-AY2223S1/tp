@@ -10,6 +10,9 @@ import seedu.exception.ParkingException;
  */
 public class Ui {
     private static final String SEPARATOR_STRING = "===========================================";
+    private static final String RED = "\u001b[31m";
+    private static final String GREEN = "\u001b[32m";
+    private static final String CLEAR = "\u001b[0m";
     private Scanner in;
     public Ui() {
         this.in = new Scanner(System.in);
@@ -31,6 +34,59 @@ public class Ui {
      */
     public static void print(String line) {
         System.out.print(line);
+    }
+
+    /**
+     * Print string in GREEN colour.
+     *
+     * @param line String to print
+     * @param isNewLine if true, print newline.
+     */
+    public static void printGreen(String line, boolean isNewLine) {
+        if (isSupportAnsi()) {
+            print(GREEN);
+        }
+        if (isNewLine) {
+            println(line);
+        } else {
+            print(line);
+        }
+        if (isSupportAnsi()) {
+            print(CLEAR);
+        }
+    }
+
+    /**
+     * Print string in RED colour.
+     *
+     * @param line String to print
+     * @param isNewLine if true, print newline.
+     */
+    public static void printRed(String line, boolean isNewLine) {
+        if (isSupportAnsi()) {
+            print(RED);
+        }
+        if (isNewLine) {
+            println(line);
+        } else {
+            print(line);
+        }
+        if (isSupportAnsi()) {
+            print(CLEAR);
+        }
+    }
+
+    /**
+     * Checks whether the system support ANSI encoding.
+     *
+     * @return true if it supports ANSI.
+     */
+    public static boolean isSupportAnsi() {
+        String systemOS = System.getProperty("os.name").toLowerCase();
+        if (systemOS.contains("mac")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -84,7 +140,17 @@ public class Ui {
      * @param result Command result
      */
     public void printResult(CommandResult result) {
-        println(result.showToUser);
+        switch (result.getStatus()) {
+        case FAIL:
+            printRed(result.showToUser, true);
+            break;
+        case SUCCESS:
+            printGreen(result.showToUser, true);
+            break;
+        default:
+            println(result.showToUser);
+            break;
+        }
     }
 
     /**
@@ -93,42 +159,28 @@ public class Ui {
      * @param e {@link ParkingException} exception
      */
     public static void printError(ParkingException e) {
-        println(e.getMessage());
+        printRed(e.getMessage(), true);
     }
 
     /**
      * Show error message when fetching data is unsuccessful.
      */
     public void showFetchError() {
-        println("Something went wrong when fetching data, trying again...");
+        printRed("Something went wrong when fetching data, trying again...", true);
     }
 
     /**
      * Show error message when fetching data took too long.
      */
     public void showFetchTimeout() {
-        println("Fetch Timeout, trying again...");
-    }
-
-    /**
-     * Show error message when saving data to file.
-     */
-    public void showSaveError() {
-        println("Something went wrong when saving data.");
+        printRed("Fetch Timeout, trying again...", true);
     }
 
     /**
      * Show error message when creating file is unsuccessful.
      */
     public void showCreateFileError() {
-        println("Something wrong happened in file creation.");
-    }
-
-    /**
-     * Show error message when invalid command is entered.
-     */
-    public void showInvalidCommandError() {
-        println("Invalid command. Try again.");
+        printRed("Something wrong happened in file creation.", true);
     }
 
     /**
@@ -149,37 +201,7 @@ public class Ui {
      * Show message when data is successfully loaded.
      */
     public void showLoadingDataSuccess() {
-        println("Load data sequence successful!");
-    }
-
-    /**
-     * Show message when data is successfully updated
-     */
-    public void showUpdateDataSuccess() {
-        println("Updated data successfully!");
-    }
-
-    public void showUpdateError() {
-        println("Unable to update data!");
-    }
-    public void showApiKeySaved() {
-        println("API key saved successfully and the latest data has been downloaded.");
-    }
-
-    public void showAuthError() {
-        println("Unable to authenticate API Key!");
-    }
-
-    public void showFavouriteAddSuccess(String carparkId) {
-        println(String.format("Added Carpark %s to favourites!", carparkId));
-    }
-
-    public void showUnfavouriteSuccess(String carparkId) {
-        println(String.format("Removed Carpark %s from favourites!", carparkId));
-    }
-
-    public void showUpdateFavouriteError() {
-        println("Could not update favourite list.");
+        printGreen("Load data sequence successful!", true);
     }
 
     /**
