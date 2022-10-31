@@ -3,13 +3,14 @@ package seedu.duke.command;
 //@@author chydarren
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.GlobalMissingPeriodNumberTagException;
+import seedu.duke.exception.GlobalUnsupportedTagCombinationException;
 import seedu.duke.exception.GlobalMissingYearTagException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.GlobalMissingPeriodNumberTagException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public abstract class ListAndStatsCommand extends Command {
     public static final int CONTAIN_EITHER = 2;
     public static final int CONTAIN_EITHER_INVALID = 3;
     private static final int FALSE = 0;
+    private static final String DAYS = "days";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
     private static Logger listStatsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
@@ -105,18 +107,18 @@ public abstract class ListAndStatsCommand extends Command {
      */
     public static void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
-            // Throws an unsupported tag exception if tags are not supposed to be used together
-            listStatsLogger.log(Level.WARNING, "Exception occurred as an invalid combination "
+            // Throws an unsupported tag combination exception if tags are not supposed to be used together
+            listStatsLogger.log(Level.WARNING, "Exception thrown as an invalid combination "
                     + "of tags has been given.");
-            throw new GlobalUnsupportedTagException();
+            throw new GlobalUnsupportedTagCombinationException();
         } else if (containMonthYear() == CONTAIN_EITHER_INVALID) {
             // Throws a missing tag exception if number and period was not given together
-            listStatsLogger.log(Level.WARNING, "Exception occurred as a month was given without "
+            listStatsLogger.log(Level.WARNING, "Exception thrown as a month was given without "
                     + "a year.");
             throw new GlobalMissingYearTagException();
         } else if (containPeriodNumber() == CONTAIN_EITHER) {
             // Throws a missing tag exception if number and period was not given together
-            listStatsLogger.log(Level.WARNING, "Exception occurred as number and period needs "
+            listStatsLogger.log(Level.WARNING, "Exception thrown as number and period needs "
                     + "to be given together.");
             throw new GlobalMissingPeriodNumberTagException();
         }
@@ -141,8 +143,12 @@ public abstract class ListAndStatsCommand extends Command {
             timeTransactions = transactions.getTransactionsByMonthRange(LocalDate.now(), number);
         } else if (containPeriodNumber() == CONTAIN_BOTH && period == WEEKS) {
             timeTransactions = transactions.getTransactionsByWeekRange(LocalDate.now(), number);
+        } else if (containPeriodNumber() == CONTAIN_BOTH && period == DAYS) {
+            timeTransactions = transactions.getTransactionsByDayRange(LocalDate.now(), number);
         }
 
+        // Sorts time-filtered transactions array list based on ascending order of date
+        Collections.sort(timeTransactions);
         return timeTransactions;
     }
 }

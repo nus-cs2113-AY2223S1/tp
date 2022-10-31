@@ -16,7 +16,6 @@ public class Constants {
     public static final int MAXIMUM_STATS_NUMBER = 100;
     public static final int MINIMUM_STATS_NUMBER = 1;
 
-
     //@@author wcwy
 
     /*
@@ -27,6 +26,11 @@ public class Constants {
 
     // One million transactions is the capacity allowed
     public static int MAX_TRANSACTIONS_COUNT = 1000000;
+
+    //@@author chydarren
+
+    // An amount that has no value in it
+    public static int NO_AMOUNT_VALUE = 0;
 
     //@@author chinhan99
 

@@ -12,7 +12,7 @@ public class Duke {
     private Ui ui;
 
     //@@author chinhan99
-    public Duke() { // TODO: Add a file path when implementing storage feature
+    public Duke() {
         ui = new Ui();
         storage = new Storage();
 
@@ -42,6 +42,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run(); // TODO: Add a file path when implementing storage feature
+        new Duke().run();
     }
 }

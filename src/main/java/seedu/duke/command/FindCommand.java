@@ -7,13 +7,15 @@ import seedu.duke.data.TransactionList;
 import seedu.duke.exception.FindTransactionMissingKeywordsException;
 import seedu.duke.exception.MoolahException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_KEYWORDS;
 import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_FIND;
 import static seedu.duke.common.HelpMessages.COMMAND_USAGE_FIND;
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED;
-import static seedu.duke.common.InfoMessages.INFO_LIST_UNFILTERED;
+import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED_EMPTY;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
-
 
 /**
  * Represents a find command object that will execute the operations for Find command.
@@ -33,7 +35,8 @@ public class FindCommand extends Command {
             + LINE_SEPARATOR;
 
     //@@author chydarren
-    protected String keywords;
+    private static Logger findLogger = Logger.getLogger(FindCommand.class.getName());
+    private String keywords;
 
     /**
      * Initialises the variables of the FindCommand class.
@@ -52,6 +55,7 @@ public class FindCommand extends Command {
      */
     public static void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
         if (keywords.isBlank()) {
+            findLogger.log(Level.WARNING, "Exception thrown as there are no keywords found.");
             throw new FindTransactionMissingKeywordsException();
         }
     }
@@ -66,17 +70,37 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+        findLogger.setLevel(Level.SEVERE);
+        findLogger.log(Level.INFO, "Entering execution of the Find command.");
+
         // Checks the format of find to ensure that it contains keywords used in the search expression
         checkFindFormat(keywords);
         assert !keywords.isBlank();
 
+        findTransactions(transactions, ui, keywords);
+    }
+
+    /**
+     * Finds a specific or multiple transactions based on any keywords that have been specified.
+     *
+     * @param transactions An instance of the TransactionList class.
+     * @param ui           An instance of the Ui class.
+     * @param keywords     A string containing the keywords used in the search expression.
+     */
+    public void findTransactions(TransactionList transactions, Ui ui, String keywords) {
+        // Gets the list of transactions where their description match the searching keywords
         String transactionsList = transactions.findTransactions(keywords);
+
+        // Prints the list if available, else print no matching transactions
         if (transactionsList.isEmpty()) {
-            ui.showInfoMessage(INFO_LIST_UNFILTERED.toString());
+            findLogger.log(Level.INFO, "Transactions list is empty as there are no matching "
+                    + "transactions.");
+            ui.showInfoMessage(INFO_LIST_FILTERED_EMPTY.toString());
             return;
         }
 
         assert !transactionsList.isEmpty();
+        findLogger.log(Level.INFO, "There are matching transactions for the Transactions list.");
         ui.showList(transactionsList, INFO_LIST_FILTERED.toString());
     }
 

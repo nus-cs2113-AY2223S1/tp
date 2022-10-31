@@ -12,6 +12,8 @@ public enum ErrorMessages {
     ERROR_GLOBAL_MISSING_TAG_PERIODNUMBER("Period and number tags must be provided together, "
             + "please enter <help> for the command guide."),
     ERROR_GLOBAL_UNSUPPORTED_TAG("Not supported tag(s) detected, please enter <help> for the command guide."),
+    ERROR_GLOBAL_UNSUPPORTED_TAG_COMBINATION("These tag(s) and/or parameter(s) are incorrectly used, please enter "
+            + "<help> for the command guide."),
     ERROR_GLOBAL_EMPTY_PARAMETER("Parameter behind tag(s) is found to be empty, "
             + "please enter <help> for the command guide."),
     ERROR_GLOBAL_INVALID_INDEX("Invalid index, please enter <help> for the command guide."),

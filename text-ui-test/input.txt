@@ -46,12 +46,23 @@ list c/food d/30092022
 list c/food d/13092022
 list t/income d/
 list t/income d/30092022
+list t/expense c/food d/13092022
+stats s/categorical_savings y/2022
+stats s/categorical_savings m/10
+stats s/categorical_savings y/2022 m/10
+stats s/categorical_savings p/weeks
+stats s/categorical_savings n/5
+stats s/categorical_savings p/days n/4
 stats s/categorical_savings
+stats s/monthly_expenditure p/months n/5
+stats s/monthly_expenditure y/2021 m/4
 stats s/monthly_expenditure
 stats s/time_insights y/2022
 stats s/time_insights y/2022 m/10
+stats s/time_insights p/days
 stats s/time_insights m/10
 stats s/time_insights p/weeks n/3
+stats s/time_insights p/days n/5
 stats s/time_insights p/months n/4
 stats s/time_insights p/mont n/4
 stats s/time_insights n/4

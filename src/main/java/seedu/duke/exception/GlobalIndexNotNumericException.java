@@ -4,7 +4,7 @@ package seedu.duke.exception;
 
 import seedu.duke.common.ErrorMessages;
 
-public class GlobalNonNumericIndexException extends MoolahException {
+public class GlobalIndexNotNumericException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
