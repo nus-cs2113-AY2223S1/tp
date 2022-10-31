@@ -111,9 +111,9 @@ public class ItemList {
     public String toString(TransactionList transactionList) {
         StringBuilder listString = new StringBuilder();
         if (itemList.size() == 0) {
-            listString.append("There is no item in your list right now");
+            listString.append("There is no item in the list right now");
         } else {
-            listString.append("Here are ").append(itemList.size()).append(" item(s) in your list:");
+            listString.append("Here are ").append(itemList.size()).append(" item(s) in the list:");
         }
         int index = 1;
         for (Item item : itemList) {

@@ -58,7 +58,7 @@ public class ExceptionMessages {
             "The date format is incorrect(YYYY-MM-DD)";
     public static final String MESSAGE_CREATED_DATE_RANGE_INVALID =
             "The created date must be between today and 2016-01-01";
-    public static final String MESSAGE_INSUFFICIENT_ARGUMENTS =
+    public static final String MESSAGE_INVALID_NUMBER_OF_ARGS =
             "The number of arguments for this command is incorrect";
     public static final String MESSAGE_COMMAND_UNRECOGNIZABLE =
             "This command is unrecognizable!!!\n" + "Please use the 'help' command to check";

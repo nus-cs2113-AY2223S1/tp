@@ -95,6 +95,7 @@ public class Transaction {
     public String getBorrower() {
         return borrower;
     }
+
     public String getLender() {
         return lender;
     }
@@ -143,7 +144,7 @@ public class Transaction {
     public String convertTransactionToFileFormat() {
         String separator = " | ";
         int checkSum = toString().length();
-        return transactionId + separator + itemName + separator + itemId + separator + borrower
+        return transactionId + separator + itemName + separator + itemId + separator + lender + separator + borrower
                 + separator + duration + separator + createdAt + separator + moneyTransacted + separator + checkSum;
     }
 
@@ -156,7 +157,7 @@ public class Transaction {
      * @return The updated transaction
      */
     public Transaction update(int newDuration, double newMoneyTransacted) {
-        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower,
+        return new Transaction(this.transactionId, this.itemName, this.itemId, this.borrower, this.lender,
                 newDuration, this.createdAt, newMoneyTransacted);
     }
 
@@ -203,16 +204,16 @@ public class Transaction {
         String lenderId = "   Lender: " + this.lender + "\n";
         String duration = "   Duration: " + this.duration + "\n";
         BigDecimal money = new BigDecimal(this.moneyTransacted);
-        String moneyTransactedString = "   Money_Transacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
+        String moneyTransactedString = "   MoneyTransacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
-                    + " day(s) left)\n";
+                    + " day(s) left)";
             String returnDate = "   ReturnDate: " + DateParser.formatDateToString(returnedAt) + remainDays + "\n";
-            return transactionIcon + transactionId + itemName + itemId + borrowerId + lenderId
+            return transactionIcon + transactionId + itemName + itemId + lenderId + borrowerId
                     + duration + returnDate + moneyTransactedString;
         }
         String returnedDate = "   ReturnedDate: " + DateParser.formatDateToString(returnedAt) + "\n";
-        return transactionIcon + transactionId + itemName + itemId + borrowerId + lenderId
+        return transactionIcon + transactionId + itemName + itemId + lenderId + borrowerId
                 + duration + returnedDate + moneyTransactedString;
     }
 }

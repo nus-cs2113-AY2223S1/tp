@@ -11,27 +11,27 @@ import seedu.duke.user.UserList;
 import seedu.duke.transaction.TransactionList;
 
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 // @@author jorellesee
-public class ViewUserProfitCommand extends Command {
+public class ViewUserLossCommand extends Command {
     private final String[] parts;
     private final UserList userList;
     private final TransactionList transactionList;
 
 
-    public ViewUserProfitCommand(String[] parts, UserList userList, TransactionList transactionList)
+    public ViewUserLossCommand(String[] parts, UserList userList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
-    private String getArgsViewUserProfitCmd() throws InvalidArgumentException {
+    private String getArgsViewUserDebtCmd() throws InvalidArgumentException {
         String arg;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
         if (delimiter.equals("u")) {
@@ -53,10 +53,10 @@ public class ViewUserProfitCommand extends Command {
 
     public boolean executeCommand()
             throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
-        String userName = getArgsViewUserProfitCmd();
+        String userName = getArgsViewUserDebtCmd();
         if (isValidUser(userName)) {
-            double totalProfit = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.printResponse("The profit of " + userName + " is: $" + totalProfit);
+            double totalDebt = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
+            Ui.printResponse("The debt of " + userName + " is: $" + totalDebt);
         }
         return false;
     }

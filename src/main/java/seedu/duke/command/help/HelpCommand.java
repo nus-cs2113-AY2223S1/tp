@@ -12,7 +12,7 @@ import java.util.Map;
  * A representation of a command to print all commands.
  */
 public class HelpCommand extends Command {
-    private static final int NUMBER_OF_COMMANDS = 22;
+    private static final int NUMBER_OF_COMMANDS = 26;
     private static final int NUMBER_OF_HEADERS = 7;
     private static final String COMMAND_TO_DETAIL_SEPARATOR_TOKEN = ": ";
 
@@ -71,6 +71,18 @@ public class HelpCommand extends Command {
 
     private static final String COMMAND_VIEW_ITEM = "view-item /i <itemId>";
     private static final String COMMAND_VIEW_ITEM_DESCRIPTION = "View a item";
+
+    private static final String COMMAND_VIEW_USER_LOSS = "view-user-loss /u <userName>";
+    private static final String COMMAND_VIEW_USER_LOSS_DESCRIPTION = "View the amount of money loss of a user";
+
+    private static final String COMMAND_VIEW_USER_GAIN = "view-user-gain /u <userName>";
+    private static final String COMMAND_VIEW_USER_GAIN_DESCRIPTION = "View the amount of money gain of a user";
+
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER = "view-borrow-tx-by-user /u <userName>";
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION = "View list of user's borrow transaction";
+
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER = "view-lend-tx-by-user /u <userName>";
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION = "View list of user's lend transaction";
 
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_VIEW_TX_DESCRIPTION = "View a transaction";
@@ -131,6 +143,10 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put(COMMAND_VIEW_USER_ITEMS_DESCRIPTION, COMMAND_VIEW_USER_ITEMS);
         this.commandToDetailMap.put(COMMAND_VIEW_ITEM_DESCRIPTION, COMMAND_VIEW_ITEM);
         this.commandToDetailMap.put(COMMAND_VIEW_TX_DESCRIPTION, COMMAND_VIEW_TX);
+        this.commandToDetailMap.put(COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_BORROW_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_LEND_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_USER_LOSS_DESCRIPTION, COMMAND_VIEW_USER_LOSS);
+        this.commandToDetailMap.put(COMMAND_VIEW_USER_GAIN_DESCRIPTION, COMMAND_VIEW_USER_GAIN);
         this.commandToDetailMap.put(System.lineSeparator() + UPDATE_COMMAND_HEADER, UNDERLINE);
         this.commandToDetailMap.put(COMMAND_UPDATE_ITEM_DESCRIPTION, COMMAND_UPDATE_ITEM);
         this.commandToDetailMap.put(COMMAND_UPDATE_TX_DESCRIPTION, COMMAND_UPDATE_TX);

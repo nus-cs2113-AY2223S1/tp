@@ -32,8 +32,8 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 
 ## 1. Introduction
 
-The goal of Upcycle to to create a perfect desktop app dedicated to managing rental businesses. The target auidence are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
-The aim of this guide is to help readers understand how the different components of Upcycle is implemented and integrated to create an functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
+The goal of Upcycle to create a perfect desktop app dedicated to managing rental businesses. The target audience are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
+The aim of this guide is to help readers understand how the different components of Upcycle is implemented and integrated to create a functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
 
 ## 2. Setup the environment
 
@@ -625,8 +625,8 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
 | v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
 | v2.1    | manager  | view a user's lend transactions   | view the transactions in which a user is a lender             |
-| v2.1    | manager  | view a user's debt                | see how much a user has to pay for the items he has borrowed  |
-| v2.1    | manager  | view a user's profit              | see how much a user has earned for items he has lent          |
+| v2.1    | manager  | view a user's loss                | see how much a user has to pay for the items he has borrowed  |
+| v2.1    | manager  | view a user's gain                | see how much a user has earned for items he has lent          |
 
 
 ## 7. Non-Functional Requirements

@@ -10,7 +10,7 @@ import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author jorellesee
@@ -26,7 +26,7 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
         this.transactionList = transactionList;
         this.userList = userList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -57,7 +57,7 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
-            Ui.printResponse("Listed below are the transactions in which " + arg + "is the borrower.");
+            //Ui.printResponse("Listed below are the transactions in which " + arg + "is the borrower.");
             Ui.printResponse(returnList.toString());
         }
         return false;

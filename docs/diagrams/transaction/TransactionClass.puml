@@ -9,6 +9,7 @@ class Transaction {
     - transactionId: String
     - itemName: String
     - itemId: String
+    - lender: String
     - borrower: String
     - duration: Integer
     - createdAt: LocalDate

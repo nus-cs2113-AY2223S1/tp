@@ -11,7 +11,7 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 // @@author jingwei55
@@ -28,7 +28,7 @@ public class ViewUserCommand extends Command {
         this.itemList = itemList;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -58,8 +58,9 @@ public class ViewUserCommand extends Command {
         if (isValidUser(userName)) {
             User user = this.userList.getUserById(userName);
             ItemList userItems = new ViewUserItemsCommand(parts, userList, itemList, transactionList).getUserItems();
-            double totalDebt = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.viewUserMessage(user, userItems, transactionList, totalDebt);
+            double totalLoss = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
+            double totalGain = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
+            Ui.viewUserMessage(user, userItems, transactionList, totalLoss, totalGain);
         }
         return false;
     }
