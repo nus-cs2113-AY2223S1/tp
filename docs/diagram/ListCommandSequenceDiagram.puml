@@ -1,4 +1,6 @@
 @startuml
+skinparam monochrome true
+skinparam shadowing false
 'https://plantuml.com/sequence-diagram
 hide footbox
 
@@ -9,26 +11,24 @@ Participant "command:ListCommand" as ListCommand
 Participant "transactions:TransactionList" as Transactions
 Participant "ui:Ui" as Ui
 
+
 -> Duke
 activate Duke
 
 Duke -> CommandParser:parse("list c/transport")
 activate CommandParser
 
-CommandParser -> CommandParser:splitInput("list c/transport")
-activate CommandParser
-return inputTokens: String[]
 
 CommandParser -> CommandParser:getCommand()
 activate CommandParser
 
 
-CommandParser -> ParameterParser:parse(parametersInput: String)
+CommandParser -> ParameterParser:parse(input: String)
 activate ParameterParser
 
-ParameterParser ->ParameterParser:setParameter(tag: String)
+ParameterParser ->ParameterParser:setParameter()
 activate ParameterParser
-return setCommand(command: Command)
+return setCommand()
 return command
 
 create ListCommand
@@ -49,10 +49,32 @@ activate ListCommand
 ListCommand -> ListCommand:listTransactions()
 activate ListCommand
 
-ListCommand -> Transactions:getTransactions()
-activate Transactions
+alt containMonthYear() == CONTAIN_BOTH
+    ListCommand -> Transactions:getTransactionsByMonth()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if containMonthYear() == CONTAIN_EITHER
+    ListCommand -> Transactions:getTransactionsByYear()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == MONTHS
+    ListCommand -> Transactions:getTransactionsByMonthRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == WEEKS
+    ListCommand -> Transactions:getTransactionsByWeekRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == DAYS
+    ListCommand -> Transactions:getTransactionsByDayRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+end
 
+ListCommand -> Transactions:listTransactions()
+activate Transactions
 return transactionsList: String
+
 
 alt transactionsList is empty
     ListCommand -> Ui:showInfoMessage(message: String)

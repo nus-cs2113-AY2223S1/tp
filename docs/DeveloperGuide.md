@@ -402,8 +402,10 @@ In a command like `list c/transport`
    is called
 3. Various checks are done through functions within `parameter.parse()`
 4. The list command is undergoing execution in `command.execute()` which will call `listTransactions()` in ListCommand
-5. Next, `getCommand()` is called to obtain a String of transactionList.
-6. `ui.showTransactionsList()` is then executed since parameters are present, causing the matching transactions to be displayed.
+5. Depending on the various tags that could be used in list Command, the List Class will call the relevant 
+`getTransaction` function to obtain an ArrayList of time Transactions.
+6. Next, `getCommand()` is called to obtain a String of transactionList from the ArrayList.
+7. `ui.showTransactionsList()` is then executed since parameters are present, causing the matching transactions to be displayed.
 
 
 
