@@ -282,7 +282,7 @@ Possible Error:
 1. Module code does not have a match:
     * YAMOM will return an empty list of modules
    
-   ```
+    ```
     Sem [1] >> search /code XX
     --------------------------------------------------------------------------------
     Processing "search /code XX" ...
@@ -290,7 +290,7 @@ Possible Error:
     Search Result:
     No module found
     --------------------------------------------------------------------------------
-   ```
+    ```
 2. The search is not in the expected format:
     * YAMOM will prompt for the right search format
 
@@ -299,10 +299,10 @@ Possible Error:
     --------------------------------------------------------------------------------
     Processing "search ABC" ...
 
-    Error! 	Wrong format given, should be
-    search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
-   * the search term can either be module code or a keyword in module title.
-   * MODULE_LEVEL and SEMESTER should be a single digit number.
+    Error!  Wrong format given, should be 
+            search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
+                 * the search term can either be module code or a keyword in module title.
+                 * MODULE_LEVEL and SEMESTER should be a single digit number.
     --------------------------------------------------------------------------------
     ```
 
