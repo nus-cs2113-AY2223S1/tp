@@ -43,6 +43,8 @@
         - [Why it is implemented this way](#3472-why-it-is-implemented-this-way)
         - [Alternatives considered](#3473-alternatives-considered)
       - [3.4.8 TimetableCommand](#348-timetablecommand)
+        - [How the feature is implemented](#3481-how-the-feature-is-implemented)
+        - [Why it is implemented this way](#3482-why-it-is-implemented-this-way)
       - [3.4.9 ByeCommand](#349-byecommand)
       - [3.4.10 ListCommand](#3410-listcommand)
       - [3.4.11 ExportCommand](#3411-exportcommand)
@@ -216,10 +218,14 @@ Finally, it will also lead to tight coupling and decreased cohesion.
 ![Command Abstract Class](images/commandClass.png)
 
 The <code>Command</code> component can:
-- execute based on the command type.
+- execute based on the command type.  
+
+The individual `Command` classes contains `public static final String` that specifies the keyword, usage and description of that command.
+They may also consist of various possible error messages related to that command.
 
 Below is a table of command subclasses and their respective command type. The different command types extends from the
-Command class and are all in the command package.
+Command class and are all in the command package. You may click the specific command under **Command Subclass** to view 
+more information about that command.
 
 | Command Word | Command Subclass                                      | Intended Outcome                                                   |
 |--------------|-------------------------------------------------------|--------------------------------------------------------------------|
@@ -370,9 +376,19 @@ not know the exact module code, which is not very user-friendly and takes up a l
 details for 1 module.
 
 #### 3.4.8 TimetableCommand
+![TimetableCommand](images/TimetableCommandClass.png)
 
 The <code>TimetableCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
 selected modules.
+
+##### 3.4.8.1 How the feature is implemented
+The `execute` method will create a `List<Pair<Module,RawLesson>>` from the selected modules of the current semester and uses
+the [Timetable](#322-timetable) class to display to the user the timetable of the currently selected semester.
+`/show fancy` is to show the timetable with color while `/show simple` shows without color.
+
+##### 3.4.8.2 Why it is implemented this way
+To make use of the existing [Timetable](#322-timetable) class that has a nice format. This prevents the need 
+to create duplicate code to fulfil similar needs as the timetable is needed by other components.
 
 #### 3.4.9 ByeCommand
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.

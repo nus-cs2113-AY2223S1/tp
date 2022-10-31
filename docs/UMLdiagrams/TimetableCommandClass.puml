@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class TimetableCommand {
+    <u>+ COMMAND_WORD: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>- ERROR_MESSAGE_EMPTY_TIMETABLE: String
+    - showFancy: boolean
+    - showSimple: boolean
+
+    - addToLessonsList(State, List<Pair<Module, RawLesson>>, SelectedModule, Map<LessonType, String>): void
+    - addValidLesson(List<Pair<Module, RawLesson, Module, List<RawLesson>): void
+}
+@enduml
