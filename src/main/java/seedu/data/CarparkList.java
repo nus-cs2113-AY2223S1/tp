@@ -33,6 +33,7 @@ public class CarparkList {
     public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException, FileWriteException {
         carparks = FileReader.loadLtaJson(filepath, filepathBackup);
         combineByLotType();
+        sortCarparksById();
     }
 
     /**
@@ -43,6 +44,7 @@ public class CarparkList {
      */
     CarparkList(List<Carpark> carparks) {
         this.carparks = carparks;
+        sortCarparksById();
     }
 
     /**
@@ -61,17 +63,16 @@ public class CarparkList {
                     carparks.add(Carpark.parseCarpark(saveString));
                 }
             } catch (Exception e) {
-                throw new InvalidFormatException("Save string format invalid. Loading from backup: ");
+                throw new InvalidFormatException("Save string format invalid. Loading from backup and restoring "
+                    + "files...");
             }
         }
         combineByLotType();
+        sortCarparksById();
     }
 
-    /**
-     * Constructor for the {@link CarparkList} class. Initialises an empty CarparkList object.
-     */
-    public CarparkList() {
-        carparks = new ArrayList<>();
+    private void sortCarparksById() {
+        carparks.sort(Carpark::compareTo);
     }
 
     /**
@@ -110,13 +111,32 @@ public class CarparkList {
 
     /**
      * Filter {@link CarparkList#carparks} with a {@link Sentence} object, where
+     * any word must be present as a substring in the carpark object's carparkId field.
+     *
+     * @param searchQuery {@link Sentence} object to use as a search.
+     * @return Filtered {@link CarparkList} object.
+     */
+    public CarparkFilteredList filterByCarparkId(Sentence searchQuery) {
+        HashSet<Carpark> carparkListBuffer = new HashSet<>();
+        for (Word word : searchQuery.getWords()) {
+            for (Carpark carpark : carparks) {
+                if (carpark.getCarparkId().toLowerCase().contains(word.getText().toLowerCase())) {
+                    carparkListBuffer.add(carpark);
+                }
+            }
+        }
+        return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
+    }
+
+    /**
+     * Filter {@link CarparkList#carparks} with a {@link Sentence} object, where
      * every word in the query must be present or a prefixing substring of a word
      * in the {@link Carpark} object's development string.
      *
      * @param searchQuery {@link Sentence} object to use as a search.
      * @return Filtered {@link CarparkList} object.
      */
-    public CarparkFilteredList filterByAllStrings(Sentence searchQuery) {
+    public CarparkFilteredList filterByAddress(Sentence searchQuery) {
         HashSet<Carpark> carparkListBuffer = new HashSet<>(carparks);
         for (Word word : searchQuery.getWords()) {
             carparkListBuffer = filterBySubstring(carparkListBuffer, word.toString());
@@ -188,22 +208,16 @@ public class CarparkList {
         for (Carpark carpark : carparkListNew.getCarparks()) {
             try {
                 Carpark carparkToBeUpdated = findCarpark(carpark.getCarparkId());
+                if (!carpark.getAllAvailableLots().equals(carparkToBeUpdated.getAllAvailableLots())) {
+                    carparkToBeUpdated.updateTime();
+                }
                 carparkToBeUpdated.setAllAvailableLots(carpark.getAllAvailableLots());
-                carparkToBeUpdated.updateTime();
             } catch (NoCarparkFoundException e) {
                 carpark.updateTime();
                 carparks.add(carpark);
             }
         }
         combineByLotType();
-    }
-
-    private boolean carparkExists(Carpark carpark) {
-        try {
-            findCarpark(carpark.getCarparkId());
-            return true;
-        } catch (NoCarparkFoundException e) {
-            return false;
-        }
+        sortCarparksById();
     }
 }

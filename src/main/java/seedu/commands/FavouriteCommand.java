@@ -1,12 +1,12 @@
 package seedu.commands;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
 import seedu.exception.FileWriteException;
+import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.Favourite;
@@ -46,36 +46,13 @@ public class FavouriteCommand extends Command {
     public CommandResult execute() {
         try {
             if (argument.equalsIgnoreCase("list")) {
-                favourite.updateFavouriteList();
-                StringBuilder content = new StringBuilder();
-                ArrayList<String> validCarparkIDs = new ArrayList<>();
-                boolean isEmpty = true;
-                boolean isValid = true;
-                for (String id : Favourite.getFavouriteList()) {
-                    if (id.isEmpty()) {
-                        continue;
-                    } else if (carparkList.isCarparkValid(id)) {
-                        validCarparkIDs.add(id);
-                        if (isEmpty) {
-                            isEmpty = false;
-                        } else {
-                            content.append("\n" + SEPARATOR_STRING + "\n");
-                        }
-                        assert carparkList.findCarpark(id) != null : "Could not find carpark!";
-                        content.append(carparkList.findCarpark(id).toString());
-                    } else {
-                        isValid = false;
-                    }
+                favourite.updateFavouriteList(carparkList);
+                favourite.writeFavouriteList();
+                String content = favourite.getFavouriteListString(carparkList);
+                if (content.isEmpty()) {
+                    return new CommandResult("There are no favourites in the list!");
                 }
-                if (!isValid) {
-                    favourite.replaceFavouriteList(validCarparkIDs);
-                    favourite.writeFavouriteList();
-                    ui.print("Some values were invalid. Invalid values were skipped.\n");
-                }
-                if (isEmpty) {
-                    return new CommandResult("There is no favourites in the list!");
-                }
-                return new CommandResult(content.toString().trim());
+                return new CommandResult(content.trim());
             } else {
                 StringBuilder content = new StringBuilder();
                 String[] words = argument.trim().split("\\s+");
@@ -96,16 +73,11 @@ public class FavouriteCommand extends Command {
                 }
                 return new CommandResult("Added Carpark " + content + "to favourites!");
             }
-        } catch (NoCarparkFoundException noCarparkFoundException) {
-            return new CommandResult(noCarparkFoundException.getMessage());
-        } catch (DuplicateCarparkException duplicateCarparkException) {
-            return new CommandResult(duplicateCarparkException.getMessage());
+        } catch (NoCarparkFoundException | IOException | DuplicateCarparkException | NoFileFoundException
+                 | InvalidFormatException e) {
+            return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");
-        } catch (IOException ioException) {
-            return new CommandResult(ioException.getMessage());
-        } catch (NoFileFoundException noFileFoundException) {
-            return new CommandResult(noFileFoundException.getMessage());
         }
     }
 
