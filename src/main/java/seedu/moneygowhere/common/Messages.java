@@ -733,6 +733,11 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE = ""
+            + "The expense already exists. Please provide a different date using the "
+            + "-"
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+            + " flag.";
 
     //endregion
 
