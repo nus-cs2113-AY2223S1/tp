@@ -25,6 +25,10 @@ public class UserUniversityList {
         isFavourite = favourite;
     }
 
+    public void updateComment(String moduleCode, String comment) {
+        myModules.updateComment(moduleCode, comment);
+    }
+
     public UserUniversityList(String universityName) {
         this.universityName = universityName;
         this.myModules = new UserModuleMappingList();

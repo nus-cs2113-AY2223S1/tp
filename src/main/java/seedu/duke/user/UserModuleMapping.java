@@ -29,8 +29,8 @@ public class UserModuleMapping {
         } catch (InvalidUniversityException | InvalidModuleException e) {
             Ui.printExceptionMessage(e);
         }
-        this.comment = "default";
     }
+
 
     public String getNusCode() {
         return nusModule.getCode();

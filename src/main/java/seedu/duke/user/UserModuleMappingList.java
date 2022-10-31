@@ -41,6 +41,26 @@ public class UserModuleMappingList {
         return isFound;
     }
 
+    public void updateComment(String moduleCode, String comment) {
+        boolean isFound = false;
+        UserModuleMapping mod = null;
+        for (UserModuleMapping module : modules) {
+            if (module.getPuCode().equals(moduleCode)) {
+                isFound = true;
+                module.setComment(comment);
+                mod = module;
+                //success
+            }
+        }
+        if(!isFound) {
+            System.out.println("Error no such modules to update");
+            System.out.println("Please add module to list before adding a note");
+        } else {
+            System.out.println("Module updated successfully\n");
+            Ui.printModuleUpdatedAcknowledgement(mod);
+        }
+    }
+
     public void addModule(UserModuleMapping input) {
         if (findModuleByCode(input)) {
             System.out.println("Error module already added");
