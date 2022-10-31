@@ -67,41 +67,45 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
 
-        if (commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(AuthCommand.COMMAND_WORD_SHORT)) {
+        switch (commandWord) {
+        case AuthCommand.COMMAND_WORD:
+        case AuthCommand.COMMAND_WORD_SHORT:
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
-            } else if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
+            }
+            if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
                         AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareAuth(arguments);
-        } else if (commandWord.equalsIgnoreCase(ExitCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(ExitCommand.COMMAND_WORD_SHORT)) {
+        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD_SHORT:
             return prepareExit(arguments);
-        } else if (commandWord.equalsIgnoreCase(FavouriteCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FavouriteCommand.COMMAND_WORD_SHORT)) {
+        case FavouriteCommand.COMMAND_WORD:
+        case FavouriteCommand.COMMAND_WORD_SHORT:
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
-            } else if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
+            }
+            if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
                         FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
             return prepareFavourite(arguments);
-        } else if (commandWord.equalsIgnoreCase(FindCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FindCommand.COMMAND_WORD_SHORT)) {
+        case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD_SHORT:
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
-            } else if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
+            }
+            if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
                         FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
             }
             return prepareFind(arguments);
-        } else if (commandWord.equalsIgnoreCase(ListCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(ListCommand.COMMAND_WORD_SHORT)) {
+        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD_SHORT:
             return prepareList(arguments);
-        } else if (commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(FilterCommand.COMMAND_WORD_SHORT)) {
+        case FilterCommand.COMMAND_WORD:
+        case FilterCommand.COMMAND_WORD_SHORT:
             String dashedCommand;
             Sentence actualArgument = argsList.getArguments();
             if (argsList.getDashedArgsCount() == 1) {
@@ -111,7 +115,8 @@ public class Parser {
                         return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                     }
                     return prepareFilterCarparkId(actualArgument);
-                } else if (dashedCommand.equalsIgnoreCase("a")) {
+                }
+                if (dashedCommand.equalsIgnoreCase("a")) {
                     if (actualArgument.getWordCount() == 0) {
                         return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
                     }
@@ -119,7 +124,7 @@ public class Parser {
                 }
             } else if (argsList.getDashedArgsCount() > 1) {
                 return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
-                    + CommonData.FILTER_FORMAT);
+                        + CommonData.FILTER_FORMAT);
             } else {
                 if (actualArgument.getWordCount() == 0) {
                     return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
@@ -130,20 +135,20 @@ public class Parser {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
             }
             return prepareFilter(arguments);
-        } else if (commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD.trim())
-                || commandWord.equalsIgnoreCase(UpdateCommand.COMMAND_WORD_SHORT.trim())) {
+        case UpdateCommand.COMMAND_WORD:
+        case UpdateCommand.COMMAND_WORD_SHORT:
             return prepareUpdate(arguments);
-        } else if (commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(UnfavouriteCommand.COMMAND_WORD_SHORT)) {
+        case UnfavouriteCommand.COMMAND_WORD:
+        case UnfavouriteCommand.COMMAND_WORD_SHORT:
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
             }
             return prepareUnfavourite(arguments);
-        } else if (commandWord.equalsIgnoreCase(HelpCommand.COMMAND_WORD)
-                || commandWord.equalsIgnoreCase(HelpCommand.COMMAND_WORD_SHORT)) {
+        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD_SHORT:
             return prepareHelp(arguments);
-        } else {
-            return new InvalidCommand("Invalid Command.");
+        default:
+            return new InvalidCommand("Invalid Command. Please try again.");
         }
     }
 
