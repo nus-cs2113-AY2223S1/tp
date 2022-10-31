@@ -415,11 +415,6 @@ public class TransactionList {
 
         String categoricalList = listCategoricalSavings(timeTransactions);
         timeInsightsList += categoricalList;
-        // Formats every entry in the hashmap into a time insights list
-        //for (Transaction entry : timeTransactions) {
-        //    timeInsightsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getCategory(),
-        //            POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getAmount(), LINE_SEPARATOR);
-        //}
 
         return timeInsightsList;
     }
