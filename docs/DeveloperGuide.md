@@ -562,7 +562,7 @@ The following sequence diagram models the operation:
 
 ### 4.4. Help Command
 
->This feature allow users to see all the commands and command format required by Upcycle
+>This feature allows users to see all the commands and command format required by Upcycle
 
 Usage is very simple, and is prompted when the user first opens the Upcycle application.
 
@@ -601,30 +601,31 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 
 ## 6. User Stories
 
-| Version | As a ... | I want to ...               | So that I can ...                                             |
-|---------|----------|-----------------------------|---------------------------------------------------------------|
-| v1.0    | new user | see usage instructions      | refer to them when I forget how to use the application        |
-| v1.0    | manager  | add a user                  | he/she may borrow and loan items                              |
-| v1.0    | manager  | view a specific user        | know what items he/she is borrowing and loaning               |
-| v1.0    | manager  | view all users              | see who are available for loaning and borrowing               |
-| v1.0    | manager  | delete a user               | remove the user if he violates community guidelines           |
-| v1.0    | manager  | add an item                 | make the item available for loan                              |
-| v1.0    | manager  | delete an item              | remove the item when a user decides not to loan it            |
-| v1.0    | manager  | view a specific item        | know what the details of the item like itemID and price       |
-| v1.0    | manager  | view all items              | see what items are available/unavailable for loan             |
-| v1.0    | manager  | create a transaction        | keep a record of that transaction                             |
-| v1.0    | manager  | view a specific transaction | keep track of the status of the transaction                   |
-| v1.0    | manager  | delete a transaction        | remove transaction when users change their mind               |
-| v2.0    | manager  | find a item by keyword      | locate an item without going through the list                 |
-| v2.0    | manager  | find a user by keyword      | locate a user without going through the list                  |
-| v2.0    | manager  | view transactions by status | view the transactions that are finished or not finished       |
-| v2.0    | manager  | sort items                  | view items based on its price and categories                  |
-| v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
-| v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
-| v2.0    | manager  | store my database           | maintain the database without losing my data                  |
-| v2.1    | manager  | view a user's transactions  | view the transactions in which a user is a borrower           |
-| v2.1    | manager  | view a user's debt          | see how much a user has to pay for the items he has borrowed  |
-| v2.1    | manager  | view a user's profit        | see how much a user has earned for items he has lent          |
+| Version | As a ... | I want to ...                     | So that I can ...                                             |
+|---------|----------|-----------------------------------|---------------------------------------------------------------|
+| v1.0    | new user | see usage instructions            | refer to them when I forget how to use the application        |
+| v1.0    | manager  | add a user                        | he/she may borrow and loan items                              |
+| v1.0    | manager  | view a specific user              | know what items he/she is borrowing and loaning               |
+| v1.0    | manager  | view all users                    | see who are available for loaning and borrowing               |
+| v1.0    | manager  | delete a user                     | remove the user if he violates community guidelines           |
+| v1.0    | manager  | add an item                       | make the item available for loan                              |
+| v1.0    | manager  | delete an item                    | remove the item when a user decides not to loan it            |
+| v1.0    | manager  | view a specific item              | know what the details of the item like itemID and price       |
+| v1.0    | manager  | view all items                    | see what items are available/unavailable for loan             |
+| v1.0    | manager  | create a transaction              | keep a record of that transaction                             |
+| v1.0    | manager  | view a specific transaction       | keep track of the status of the transaction                   |
+| v1.0    | manager  | delete a transaction              | remove transaction when users change their mind               |
+| v2.0    | manager  | find a item by keyword            | locate an item without going through the list                 |
+| v2.0    | manager  | find a user by keyword            | locate a user without going through the list                  |
+| v2.0    | manager  | view transactions by status       | view the transactions that are finished or not finished       |
+| v2.0    | manager  | sort items                        | view items based on its price and categories                  |
+| v2.0    | manager  | update price                      | change the price a user decides to loan his item for          |
+| v2.0    | manager  | update transaction                | change the number of days a user decides to loan his item for |
+| v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
+| v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
+| v2.1    | manager  | view a user's lend transactions   | view the transactions in which a user is a lender             |
+| v2.1    | manager  | view a user's debt                | see how much a user has to pay for the items he has borrowed  |
+| v2.1    | manager  | view a user's profit              | see how much a user has earned for items he has lent          |
 
 
 ## 7. Non-Functional Requirements
