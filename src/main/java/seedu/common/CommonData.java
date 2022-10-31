@@ -25,7 +25,7 @@ public class CommonData {
     public static final String AUTH_FORMAT = "`auth API_KEY` \t: to authenticate your personal API key."
             + "\n`auth default` \t: to authenticate using the default key provided by parKING."
             + "\n`auth status` \t: to get the authentication status.";
-    public static final String FAVOURITE_FORMAT = "`favourite CARPARK_ID` \t: favourite carpark by its ID"
+    public static final String FAVOURITE_FORMAT = " `favourite CARPARK_ID` \t: favourite carpark by its ID"
             + "\n`favourite list` \t: to get the list of favourited carparks.";
     public static final String UNFAVOURITE_FORMAT = "`unfavourite CARPARK_ID` \t: unfavourite carpark by its ID.";
     public static final String FIND_FORMAT = "`find CARPARK_ID` \t: Display information about the queried carpark.";
