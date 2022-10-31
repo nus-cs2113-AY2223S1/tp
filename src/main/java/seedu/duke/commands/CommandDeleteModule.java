@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.Timetable;
 import seedu.duke.UI;
+import seedu.duke.timetable.Timetable;
 
 import java.util.logging.Logger;
 

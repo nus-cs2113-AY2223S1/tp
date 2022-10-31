@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.timetable;
 
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.module.Module;

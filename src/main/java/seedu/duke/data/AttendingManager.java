@@ -9,9 +9,9 @@ import java.io.FileReader;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.timetable.Timetable;
 
 public class AttendingManager {
     public static ArrayList<String> attendingDataList = new ArrayList<>();

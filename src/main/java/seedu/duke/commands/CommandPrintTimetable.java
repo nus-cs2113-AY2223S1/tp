@@ -1,8 +1,8 @@
 package seedu.duke.commands;
 
-import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.timetable.Timetable;
 import seedu.duke.UI;
 
 import java.util.ArrayList;

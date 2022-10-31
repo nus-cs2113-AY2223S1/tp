@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.timetable;
 
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
@@ -23,7 +23,6 @@ public class Timetable {
         Module newModule = new Module(code, name, lessons);
         listOfModules.add(newModule);
     }
-
 
     public static List<Module> getListOfModules() {
         return listOfModules;
