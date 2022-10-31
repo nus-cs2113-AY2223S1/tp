@@ -24,6 +24,7 @@ public abstract class ListAndStatsCommand extends Command {
     public static final int CONTAIN_EITHER = 2;
     public static final int CONTAIN_EITHER_INVALID = 3;
     private static final int FALSE = 0;
+    private static final String DAYS = "days";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
     private static Logger listStatsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
@@ -142,8 +143,12 @@ public abstract class ListAndStatsCommand extends Command {
             timeTransactions = transactions.getTransactionsByMonthRange(LocalDate.now(), number);
         } else if (containPeriodNumber() == CONTAIN_BOTH && period == WEEKS) {
             timeTransactions = transactions.getTransactionsByWeekRange(LocalDate.now(), number);
+        } else if (containPeriodNumber() == CONTAIN_BOTH && period == DAYS) {
+            timeTransactions = transactions.getTransactionsByDayRange(LocalDate.now(), number);
         }
 
+        // Sorts time-filtered transactions array list based on ascending order of date
+        Collections.sort(timeTransactions);
         return timeTransactions;
     }
 }
