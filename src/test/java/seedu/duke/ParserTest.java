@@ -37,13 +37,12 @@ class ParserTest {
         ArrayList<Media> expected = new ArrayList<>();
         ArrayList<Media> results = new ArrayList<>();
 
-        Movie foundMovie= new Movie("inception2", 10, "thriller", "10-01-2020");
+        Movie foundMovie = new Movie("inception2", 10, "thriller", "10-01-2020");
         expected.add(foundMovie);
         results = ps.executeFind(findArray);
 
         for (int i = 0; i < results.size(); i++) {
             assertEquals(expected.get(i).toString(), results.get(i).toString());
         }
-        
     }
 }
