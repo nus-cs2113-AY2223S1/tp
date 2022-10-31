@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ModuleManager {
-    static ArrayList<String> modules = new ArrayList<>();
     static String dataDirectoryPath;
     static String currSemester;
 
@@ -41,7 +40,7 @@ public class ModuleManager {
             myWriter.write(data.toString());
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("Sorry, failed to save to ModuleData.txt");
+            System.out.println("Sorry, ave to ModuleData.txt");
         }
     }
 
@@ -66,5 +65,10 @@ public class ModuleManager {
         default:
             break;
         }
+    }
+
+    public static void deleteDataFile(String dataDirectoryPath) {
+        File data = new File(dataDirectoryPath + " \"/ModuleData.txt\"");
+        data.delete();
     }
 }

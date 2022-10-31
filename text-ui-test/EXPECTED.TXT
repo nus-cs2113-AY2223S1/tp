@@ -26,11 +26,11 @@ Which is your preferred timeslot? Enter corresponding valid index
 1:
 Friday   11:00 - 12:00
 2:
-Wednesday   13:00 - 14:00
-3:
-Thursday   17:00 - 18:00
-4:
 Wednesday   12:00 - 13:00
+3:
+Wednesday   13:00 - 14:00
+4:
+Thursday   17:00 - 18:00
 5:
 Thursday   17:00 - 18:00
 

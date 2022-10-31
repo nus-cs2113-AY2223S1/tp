@@ -114,7 +114,7 @@ input: `1`
 Successfully set your lesson!
 ```
 ---
-### Deleting a module: `add`
+### Deleting a module: `delete`
 Command used to initiate the process of deleting a new module.
 
 * You will be prompted to choose the module to delete after this command.
