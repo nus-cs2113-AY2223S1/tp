@@ -43,10 +43,10 @@ class ParserTest {
         StringWriter expectedStringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(expectedStringWriter);
 
-        printWriter.println("---Here are the reviews that match the keyword---\n");
-        printWriter.println("Movies:");
+        printWriter.println("---Here are the reviews that match the keyword---");
+        printWriter.println(System.getProperty("line.separator") + "Movies:");
         printWriter.println("1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020");
-        printWriter.println("\nTV Shows:");
+        printWriter.println(System.getProperty("line.separator") + "TV Shows:");
         printWriter.close();
 
         String expected = expectedStringWriter.toString();
@@ -55,9 +55,13 @@ class ParserTest {
 
     // @Test
     // void executeFindTestNegative() {
+    //     addTestMovie();
+        
+    //     // sets outContent to capture any would-be console output
+    //     // Only AFTER test Movie has been added to test list.
     //     ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     //     System.setOut(new PrintStream(outContent));
-
+        
     //     String[] findArray = new String[]{"find","in2"};
     //     ps.executeFind(findArray);
 
