@@ -10,7 +10,7 @@ public class AddCommand extends Commands {
         this.media = media;
     }
 
-    //@@author matthewphua
+    //@author matthewphua
     /**
      * Adds the media parameter to review list.
      * @return Confirmation String.
