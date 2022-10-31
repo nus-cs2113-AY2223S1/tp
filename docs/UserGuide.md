@@ -26,7 +26,7 @@ towards their fitness journeys.
     - Marking exercise as done or undone: `mark`
     - Viewing BMI: `view BMI`
     - Viewing maintenance calories: `view maintenance`
-    - Viewing daily calorie consumption, burn and net intake: `view calories`  
+    - Viewing daily calorie consumption, burn and net intake: `view calories`
 - FAQ
 - Command summary
 
@@ -76,7 +76,7 @@ Format: `add food /{description} /{calories} /{date}`
 * description needs to be a string
 * calories should be positive integer inputs in the units of kcal
 * date is an optional parameter. If user does not input a specific date,
-the program will automatically fill it with today's date
+  the program will automatically fill it with today's date
 
 Example of usage:
 
@@ -96,6 +96,7 @@ Recorded on: 25-10-2022
  This food is added to the food list successfully
 -------------------------------------------------------------------------------
 ```
+
 Adding with date:
 
 `add food /noodles /300 /24-10-2022`
@@ -167,10 +168,9 @@ Recorded on: 24-10-2022
 
 ```
 
-
 ### Find Food Consumptions Based On Description: `find food`
-Find specific food records from user's food consumption over time using keyword in TracknFit
 
+Find specific food records from user's food consumption over time using keyword in TracknFit
 
 Format: `find food /{description}`
 
@@ -193,6 +193,7 @@ Index | Description  | Calories | Date       |
 ```
 
 ### Find Food Consumptions Based On Date: `find date_f`
+
 Find specific food records from user's food consumption over time using keyword in TracknFit
 
 Format: `find date_f /{date}`
@@ -203,6 +204,7 @@ Example of usage:
 Expected outcome:
 All relevant records from the history would be printed out for the user to see how much of a specific food they
 have been consuming.
+
 ```
 -------------------------------------------------------------------------------
 
@@ -223,6 +225,7 @@ Index | Description                                         | Calories | Date   
 ```
 
 ### Viewing All Daily Records: `view all`
+
 View user's daily records over time in TracknFit
 
 Format: `view all`
@@ -232,6 +235,7 @@ Example of usage:
 
 Expected outcome:
 All daily historical records of the user are displayed.
+
 ```
 -------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------
@@ -328,9 +332,6 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-
-
-
 ### Adding cardio exercise: `add cardio`
 
 Add cardio exercise into the exercise list
@@ -403,7 +404,6 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-
 ### Viewing exercise: `view exercise`
 
 View all exercises in the exercise list
@@ -442,17 +442,17 @@ Format:
 2. `mark undone /{index}`
 
 - index must be within the limit of the list displayed.
-- time can be a double, must be positive and smaller than 1440 mins
-- Metabolic equivalent (met) a double, must be positive and smaller than 50.
+- time can be a double with 1 d.p, must be positive and smaller than 1440 mins
+- Metabolic equivalent (met) a double with 1 d.p, must be positive and smaller than 50.
 - met can be used to measure the intensity of the activity and is used to calculate calories burnt for the exercise. Use
   the reference below as a guide to estimate the intensity of the exercise.
     - e.g.
         - Walking: 3.0
-        - Light calisthenics (e.g. push ups, jumping jacks): 4
+        - Light calisthenics (e.g. push ups, jumping jacks): 4.0
         - WeightLifting: 6.0
         - circuit training: 8.0
         - Running(7min/km): 8.0
-        - Running(5min/km): 12
+        - Running(5min/km): 12.0
 
 Example of usage: `mark undone /1`
 
@@ -490,7 +490,6 @@ Expected outcome: bmi of user will be displayed
 Your current BMI is : 25.2
 You are currently in the overweight range
 ```
-
 
 ### View Maintenance Calories : `view Maintenance`
 
@@ -535,7 +534,8 @@ Format: `find calories /date`
 
 Example of usage: `find calories /30-11-2022`
 
-Expected outcome:  The total calorie consumption/burn and net surplus/deficit of the user on that date will be displayed.
+Expected outcome:  The total calorie consumption/burn and net surplus/deficit of the user on that date will be
+displayed.
 
 ```
 --------------------------------------------------------------------------------

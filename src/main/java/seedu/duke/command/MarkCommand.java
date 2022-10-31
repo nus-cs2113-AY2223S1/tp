@@ -15,6 +15,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MarkCommand extends Command {
+    public static final int MAXIMUM_TIME = 1440;
+    public static final int ZERO = 0;
+    public static final String INVALID_TIME_MESSAGE = "Invalid value for time";
+    public static final String INVALID_MET_MESSAGE = "Invalid met value";
+    public static final int MAXIMUM_MET = 50;
     private Ui ui;
     private Biometrics biometrics;
     private ExerciseList exerciseList;
@@ -95,19 +100,32 @@ public class MarkCommand extends Command {
     }
 
     private static double getMetabolicEquivalentWithValidation(String[] argumentList) throws IllegalValueException {
+        validateDecimalPlace(argumentList[3]);
         double metabolicEquivalent = Double.parseDouble(argumentList[3]);
-        if (metabolicEquivalent <= 0 || metabolicEquivalent > 50) {
-            throw new IllegalValueException("Invalid met value");
-        }
+        validateDouble(metabolicEquivalent, MAXIMUM_MET, ZERO, INVALID_MET_MESSAGE);
         return metabolicEquivalent;
     }
 
-    private static double getTimeWithValidation(String[] argumentList) throws IllegalValueException {
-        double time = Double.parseDouble(argumentList[2]);
-        if (time <= 0 || time > 1440) {
-            throw new IllegalValueException("Invalid value for time");
+
+    private static void validateDecimalPlace(String doubleString) throws IllegalValueException {
+        String[] doubleArray = doubleString.split("\\.");
+        if (doubleArray.length == 2 && doubleArray[1].length() > 1) {
+            throw new IllegalValueException("Double must be 1 decimal place");
         }
+    }
+
+    private static double getTimeWithValidation(String[] argumentList) throws IllegalValueException {
+        validateDecimalPlace(argumentList[2]);
+        double time = Double.parseDouble(argumentList[2]);
+        validateDouble(time, MAXIMUM_TIME, ZERO, INVALID_TIME_MESSAGE);
         return time;
+    }
+
+    private static void validateDouble(double value, int maximumAcceptableValue, int maximumRejectedValue,
+                                       String rejectMessage) throws IllegalValueException {
+        if (value <= maximumRejectedValue || value > maximumAcceptableValue) {
+            throw new IllegalValueException(rejectMessage);
+        }
     }
 
     @Override
