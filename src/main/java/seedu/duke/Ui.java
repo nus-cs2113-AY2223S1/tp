@@ -297,14 +297,14 @@ public class Ui {
     //@@author ngdeqi
     public void showCheckProperty(Property property, ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY);
-        showToUser(SPACE + property.toString() + System.lineSeparator());
+        showToUser(property.toString() + System.lineSeparator());
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
         int count = 0;
         for (Client tenant : tenants) {
             String tenantInfo = tenant.toString();
             showToUser(String.format(CHECK_PROPERTY_FORMAT, ++count, tenantInfo));
         }
-        showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
+        showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count + System.lineSeparator());
     }
     //@@author
 
