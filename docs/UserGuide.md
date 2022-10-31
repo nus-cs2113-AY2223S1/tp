@@ -451,14 +451,13 @@ list
 Processing "list" ...
 
 CS1010   Programming Methodology
-         LAB[B03]  COM1-B108, weeks: 3 - 13
-         SEC[1]    I3-AUD, weeks: 1 - 13
-         TUT[01]   COM1-0201, weeks: 3 - 13
+         LAB[B03]  Thur 1000-1200, COM1-B108, weeks: 3 - 13
+         SEC[1]    Mon 1200-1400, I3-AUD, weeks: 1 - 13
+         TUT[01]   Wed 0800-0900, COM1-0201, weeks: 3 - 13
 
-CS2040C  Data Structures and Algorithms
-         LAB[02]   COM1-0120, weeks: 3 - 13
-         LEC[1]    LT15, weeks: 1 - 13
-                   E-Learn_C, weeks: 1 - 13
+CS2113   Software Engineering & Object-Oriented Programming
+         LEC[1]    Fri 1600-1800, LT19, weeks: 1 - 13
+         TUT[4]    Fri 1100-1200, COM1-0210, weeks: 3 - 13
 
 
 Here's a list of your current selected module(s)!
@@ -493,18 +492,18 @@ Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
 
 * The `CLASS_NO` will be a number.
 * The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
-  *  TUTORIAL                   e.g. *tut, Tutorial*
-  *  TUTORIAL_TYPE_2            e.g. *tut2, Tutorial2*
+  *  TUTORIAL                   e.g. *tut, tutorial*
+  *  TUTORIAL_TYPE_2            e.g. *tut2, tutorial2*
   *  LECTURE                    e.g. *lecture, lec*
   *  RECITATION                 e.g. *rec, recitation*
-  *  DESIGN_LECTURE             e.g. *des, dlec*
-  *  PACKAGED_LECTURE           e.g. *pac, plec*
+  *  DESIGN_LECTURE             e.g. *dlec, design_lecture*
+  *  PACKAGED_LECTURE           e.g. *plec, packaged_lecture*
   *  PACKAGED_TUTORIAL          e.g. *ptut, packaged_tutorial*
-  *  SECTIONAL_TEACHING         e.g. *sec, Sectional*
-  *  WORKSHOP                   e.g. *workshop, work*
+  *  SECTIONAL_TEACHING         e.g. *sec, sectional*
+  *  WORKSHOP                   e.g. *workshop, wksh*
   *  LABORATORY                 e.g. *lab, laboratory*
-  *  MINI_PROJECT               e.g. *mini, minproj, mini_project*
-  *  SEMINAR_STYLE_MODULE_CLASS e.g. *sem, seminar_style_module*
+  *  MINI_PROJECT               e.g. *proj, mini_project*
+  *  SEMINAR_STYLE_MODULE_CLASS e.g. *sem, seminar, seminar_style_module*
 * The `LESSON_TYPE` need not be an exact match or case-sensitive.
 * The `MODULE_CODE` need to be an exact match.
 

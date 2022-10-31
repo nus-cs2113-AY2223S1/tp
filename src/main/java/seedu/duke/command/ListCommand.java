@@ -56,7 +56,8 @@ public class ListCommand extends Command {
                 DETAILS_INDENT - HEADING_LENGTH);
         return classNoString + module.getSemesterData(semester).getLessonsByTypeAndNo(type, classNo)
                 .stream()
-                .map(r -> r.venue + ", weeks: " + formatWeeks(r.weeks))
+                .map(r -> Timetable.dayToShortString(r.day) + " " + r.startTime + "-" + r.endTime + ", "
+                    + r.venue + ", weeks: " + formatWeeks(r.weeks))
                 .collect(Collectors.joining("\n" + StringUtils.repeat(" ", DETAILS_INDENT)));
     }
 

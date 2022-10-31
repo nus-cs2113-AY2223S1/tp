@@ -1,5 +1,10 @@
 package seedu.duke.utils;
 
+/**
+ * Color utilities - Outputting the ANSI color codes will change the color of text in the terminal.
+ * Resetting to the original color can be done by outputting the ANSI_RESET code.
+ * Reference: https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+ */
 public class Color {
     public static final String NOTHING = "";
     public static final String ANSI_RESET = "\u001B[0m";
@@ -11,5 +16,4 @@ public class Color {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    public static final String BACKGROUND_BLACK = "\u001b[40m";
 }
