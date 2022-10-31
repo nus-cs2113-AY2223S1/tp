@@ -144,7 +144,7 @@ public class CarparkList {
         return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
     }
 
-    private HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
+    public HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
         HashSet<Carpark> bufferList = new HashSet<>();
         for (Carpark carpark : carparkList) {
             for (Word word : carpark.getDevelopmentSentence().getWords()) {
@@ -156,6 +156,22 @@ public class CarparkList {
             }
         }
         return bufferList;
+    }
+
+    /**
+     * Filter {@link CarparkList#carparks} with a {@link Sentence} object, where
+     * every word in the query must be present or a prefixing substring of a word
+     * in the {@link Carpark} object's development string.
+     *
+     * @param searchQuery {@link Sentence} object to use as a search.
+     * @return Filtered {@link CarparkList} object.
+     */
+    public CarparkFilteredList filterByAllStrings(Sentence searchQuery) {
+        HashSet<Carpark> carparkListBuffer = new HashSet<>(carparks);
+        for (Word word : searchQuery.getWords()) {
+            carparkListBuffer = filterBySubstring(carparkListBuffer, word.toString());
+        }
+        return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
     }
 
     /**
