@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
@@ -47,8 +48,9 @@ public class Favourite {
         boolean isValid = ensureValidity(carparkList, tempArray);
         if (!isValid) {
             writeFavouriteList();
-            throw new InvalidFormatException("There was an issue loading some favourites in your favourites.txt file.\n"
-                    + "The problematic items have been skipped and removed from the list.");
+            throw new InvalidFormatException("There was an issue loading some favourites in your "
+                + CommonFiles.FAVOURITE_FILE + " file.\nThe problematic items have been skipped "
+                + "and removed from the list.");
         }
     }
 
