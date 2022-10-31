@@ -35,6 +35,7 @@ public class CommandPrintTimetableVertical {
     private static ArrayList<Integer[]>[] emptySlotList = new ArrayList[DAY_PER_WEEK];
     // array of 5 arraylist of integer pairs
 
+
     public static String viewTimetable() {
         populateRawTimetable(Timetable.getListOfModules());
         setTable();
@@ -44,12 +45,16 @@ public class CommandPrintTimetableVertical {
 
         return printTimetable(timeTable);
     }
+
+
     private static void initializeRawTimeTable() {
         for (int i = 0; i < DAY_PER_WEEK; i++) {
             rawTimetable.add(new ArrayList<>());
             emptySlotList[i] = new ArrayList<Integer[]>();
         }
     }
+
+
     private static void populateRawTimetable(List<Module> listOfModules) {
         rawTimetable = new ArrayList<>(DAY_PER_WEEK);
         emptySlotList = new ArrayList[DAY_PER_WEEK];
@@ -69,10 +74,12 @@ public class CommandPrintTimetableVertical {
         }
     }
 
+
     private static void populateDailyRawTimetable(String code, Lesson les, int[] info) {
         Object[] rawLesson = new Object[4];
         rawLesson[0] = info[1]; // starting slot
-        rawLesson[1] = info[2] + END_SLOT_DIFFERENCE; // ending slot, difference between api data and data here
+        rawLesson[1] = info[2] + END_SLOT_DIFFERENCE; 
+        // api data and timetable data here has a difference in lesson ending time
         rawLesson[2] = code; // lesson code
         String type = les.getLessonType();
         rawLesson[3] = type; // lesson type
@@ -101,16 +108,24 @@ public class CommandPrintTimetableVertical {
         return info;
     }
 
+
     private static int parseTimeToIndex(String time) {
         String newTime = time.replaceFirst("^0+(?!$)", "");
         return (Integer.parseInt(newTime) - 770) / 50;
     }
 
+
     private static boolean isInvalidTimings(String startTime, String endTime) {
-        return (Objects.equals(startTime, "Undetermined") || Objects.equals(endTime, "Undetermined")
-                || Integer.parseInt(startTime) > 2000 || Integer.parseInt(startTime) < 800
-                || Integer.parseInt(endTime) > 2000 || Integer.parseInt(endTime) < 800);
+        boolean isValidStart = Objects.equals(startTime, "Undetermined");
+        boolean isValidEnd = Objects.equals(endTime, "Undetermined");
+        boolean isInRangeStartUpper = Integer.parseInt(startTime) > 2000;
+        boolean isInRangeStartLower = Integer.parseInt(startTime) < 800;
+        boolean isInRangeEndUpper = Integer.parseInt(endTime) > 2000;
+        boolean isInRangeEndLower = Integer.parseInt(endTime) < 800;
+        return (isValidStart || isValidEnd || isInRangeStartLower || isInRangeStartUpper
+                || isInRangeEndLower || isInRangeEndUpper);
     }
+
 
     private static int determineDay(String day) {
         switch (day) {
@@ -138,6 +153,7 @@ public class CommandPrintTimetableVertical {
         });
     }
 
+
     private static void sortRawTimetable(Integer day) {
         Collections.sort(emptySlotList[day],new Comparator<Integer[]>() {
             public int compare(Integer[] i1,Integer[] i2) {
@@ -146,9 +162,11 @@ public class CommandPrintTimetableVertical {
         });
     }
 
+
     private static void setTable() {
         timeTable = new String[TIMETABLE_HEIGHT][TIMETABLE_WIDTH];
     }
+
 
     private static void initializeTable() {
         for (int i = 0; i < TIMETABLE_HEIGHT; i++) {
@@ -181,6 +199,7 @@ public class CommandPrintTimetableVertical {
         }
     }
 
+
     private static void write(String text, int row, int column) {
         timeTable[row][column] = "" + text.charAt(0);
         for (int i = 1; i < text.length(); i++) {
@@ -188,11 +207,13 @@ public class CommandPrintTimetableVertical {
         }
     }
 
+
     private static String indexToTime(int index) {
         boolean isHalf = index % 2 == 0; // even index in timetable is half hours
         int hours = (index - ROW_DIFFERENCE) / 2 + FIRST_HOUR; 
         return String.format("%02d", hours) + (isHalf ? "30" : "00");
     }
+
 
     private static int getDayColumnIndex(int day) { // day 0 is Monday
         int columnIndex = 0;
@@ -202,6 +223,7 @@ public class CommandPrintTimetableVertical {
 
         return columnIndex + TIMETABLE_TIME_WIDTH; 
     }
+
 
     private static void writeTable() {
         for (int i = 0; i < rawTimetable.size(); i++) {
@@ -215,6 +237,7 @@ public class CommandPrintTimetableVertical {
         }
 
     }
+
 
     private static void createTimetableString(int day, ArrayList<Object[]> dayIterator) {
         for (int j = 0; j < dayIterator.size(); j++) {
@@ -249,6 +272,7 @@ public class CommandPrintTimetableVertical {
         }
     }
 
+
     private static void writeTopBoarder(int startSlot, StringBuilder upBoarder, Integer columnIndex) {
         Integer rowIndex = startSlot + ROW_DIFFERENCE;
         String stringToCheck = timeTable[rowIndex][columnIndex + 1];
@@ -257,6 +281,7 @@ public class CommandPrintTimetableVertical {
             write(upBoarder.toString(), startSlot + 3, columnIndex);
         }
     }
+
 
     private static void buildLowBoarder(int startSlot, int endSlot, String modType, StringBuilder lowBoarder) {
         if (endSlot - startSlot < 3) {
@@ -268,6 +293,7 @@ public class CommandPrintTimetableVertical {
         }
     }
 
+
     private static void buildNarrowLowBoarder(String currentModType, StringBuilder lowerBoarder) {
         lowerBoarder.append(UI.HORIZONTAL_BORDER);
         String lessonType = currentModType.substring(0,3).toUpperCase();
@@ -276,6 +302,7 @@ public class CommandPrintTimetableVertical {
         String stringToWrite = UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1 - currentLength);
         lowerBoarder.append(stringToWrite);
     }
+
 
     private static void initializeClashSlotList(int day) {
         boolean dailyClashFlag = checkDailySlotClash(day);
@@ -323,6 +350,7 @@ public class CommandPrintTimetableVertical {
 
     }
 
+
     private static ArrayList<Integer[]> getDailyClashSlot(Integer day) {
         if (emptySlotList.length > 0) {
             sortDailySlots(day, emptySlotList);
@@ -349,6 +377,7 @@ public class CommandPrintTimetableVertical {
 
     }
 
+
     private static void sortSlotList(Integer day, Stack<Integer[]> stack) {
         for (int i = 1; i < emptySlotList[day].size(); i++) {
             Integer[] top = stack.peek();
@@ -363,6 +392,7 @@ public class CommandPrintTimetableVertical {
             }
         }
     }
+
 
     private static boolean checkSlotWritten(Integer row, Integer column, String string) {
         return timeTable[row][column].equals(string);
