@@ -23,9 +23,9 @@ Which lesson type do you want to set? Enter corresponding valid index
 1. Tutorial     2. Lecture     
 Which is your preferred timeslot? Enter corresponding valid index
 1. [Tutorial] Friday   11:00 - 12:00
-2. [Tutorial] Wednesday   12:00 - 13:00
-3. [Tutorial] Wednesday   13:00 - 14:00
-4. [Tutorial] Thursday   17:00 - 18:00
+2. [Tutorial] Thursday   17:00 - 18:00
+3. [Tutorial] Wednesday   12:00 - 13:00
+4. [Tutorial] Wednesday   13:00 - 14:00
 5. [Tutorial] Thursday   17:00 - 18:00
 
 Invalid Timeslot Index!
