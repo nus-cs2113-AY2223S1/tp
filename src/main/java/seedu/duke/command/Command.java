@@ -48,14 +48,20 @@ public abstract class Command extends Parser {
     public void checkFlightDetailSync(OperationList flights,
                                       OperationList passengers,
                                       String lineInput) throws SkyControlException, SyncException {
-        try {
-            getPassengerDetail(lineInput);
-            passengers.checkPassengerFlightSync(flights, passengerDetail);
-        } catch (SkyControlException e) {
-            throw new SkyControlException(ui.getBlankOpsError());
-        } catch (SyncException e) {
-            throw new SyncException(ui.getFlightNumberSyncError());
-        }
+        getPassengerDetail(lineInput);
+        passengers.checkPassengerFlightSync(flights, passengerDetail);
+    }
+
+    public String getPassengerDepartureTime(OperationList flights, String lineInput) throws SkyControlException {
+        getPassengerDetail(lineInput);
+        String departureTime = OperationList.getPassengerDepartureTime(flights, passengerDetail);
+        return departureTime;
+    }
+
+    public String getPassengerGateNumber(OperationList flights, String lineInput) throws SkyControlException {
+        getPassengerDetail(lineInput);
+        String gateNumber = OperationList.getPassengerGateNumber(flights, passengerDetail);
+        return gateNumber;
     }
 
     public abstract void execute(OperationList operations, String lineInput) throws SkyControlException;

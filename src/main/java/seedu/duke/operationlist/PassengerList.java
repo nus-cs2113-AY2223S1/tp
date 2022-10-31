@@ -20,6 +20,7 @@ public class PassengerList extends OperationList {
     protected static final String BOARDING_GROUP_DELIMITER = " bg/";
     protected static final String SEAT_NUMBER_DELIMITER = " sn/";
     protected static final String BOARDING_TIME_DELIMITER = " bt/";
+    protected static final String FORWARD_SLASH = "/";
     protected static final String EMPTY_STRING = "";
     public static final int NO_PASSENGER = 0;
     protected static final int NAME_LENGTH_LIMIT = 24;
@@ -36,15 +37,11 @@ public class PassengerList extends OperationList {
     protected static boolean isNamePresent = false;
     protected static boolean isFlightNumberPresent = false;
     protected static boolean isSeatNumberPresent = false;
-    protected static boolean isDepartureTimePresent = false;
     protected static boolean isValidPassenger = false;
     protected static boolean isDeleteSuccess = false;
     protected static boolean isExceedNameLength = false;
     protected static boolean isWrongNameFormat = false;
-    protected static boolean isWrongDepartureFormat = false;
-    protected static boolean isWrongFlightNumFormat = false;
     protected static boolean isWrongBoardingTimeFormat = false;
-    protected static boolean isWrongGateNumberFormat = false;
     protected static boolean isWrongBoardingGroupFormat = false;
     protected static boolean isWrongSeatNumberFormat = false;
     protected String name;
@@ -93,30 +90,17 @@ public class PassengerList extends OperationList {
     //@@author ivanthengwr
     private void checkPassengerDetails() throws SkyControlException {
         if (isExceedNameLength) {
-            resetCheckFormat();
             throw new SkyControlException(ui.getExceedNameLengthError(name));
         } else if (isWrongNameFormat) {
-            resetCheckFormat();
             throw new SkyControlException(ui.getNameError());
-        } else if (isWrongDepartureFormat) {
-            resetCheckFormat();
-            throw new SkyControlException(ui.getDepartureTimeError());
-        } else if (isWrongFlightNumFormat) {
-            resetCheckFormat();
-            throw new SkyControlException(ui.getFlightNumberError());
         } else if (isWrongBoardingTimeFormat) {
-            resetCheckFormat();
             throw new SkyControlException(ui.getBoardingTimeError());
-        } else if (isWrongGateNumberFormat) {
-            resetCheckFormat();
-            throw new SkyControlException(ui.getGateNumberError());
         } else if (isWrongBoardingGroupFormat) {
-            resetCheckFormat();
             throw new SkyControlException(ui.getBoardingGroupError());
         } else if (isWrongSeatNumberFormat) {
-            resetCheckFormat();
             throw new SkyControlException(ui.getSeatNumberError());
         }
+        resetCheckFormat();
     }
 
     //@@author shengiv
@@ -204,8 +188,7 @@ public class PassengerList extends OperationList {
         isNamePresent = passengers.get(index).getName().equals(name);
         isFlightNumberPresent = passengers.get(index).getFlightNumber().equals(flightNumber);
         isSeatNumberPresent = passengers.get(index).getSeatNumber().equals(seatNumber);
-        isDepartureTimePresent = passengers.get(index).getDepartureTime().equals(departureTime);
-        isValidPassenger = isNamePresent && isFlightNumberPresent && isSeatNumberPresent && isDepartureTimePresent;
+        isValidPassenger = isNamePresent && isFlightNumberPresent && isSeatNumberPresent;
     }
 
     public void getNumberOfPassengers() {
@@ -215,12 +198,12 @@ public class PassengerList extends OperationList {
     public void getPassengerDetails(String passengerDetail) throws SkyControlException {
         getPassengerName(passengerDetail);
         getDepartureDate();
-        getDepartureTime(passengerDetail);
         getFlightNumber(passengerDetail);
-        getGateNumber(passengerDetail);
         getBoardingGroup(passengerDetail);
         getSeatNumber(passengerDetail);
         getBoardingTime(passengerDetail);
+        getDepartureTime(passengerDetail);
+        getGateNumber(passengerDetail);
     }
 
     private void iteratePassengerDetail(int index) {
@@ -240,7 +223,7 @@ public class PassengerList extends OperationList {
     private void getPassengerName(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             name = getSubstringBetweenDelimiters(passengerDetail,
-                    NAME_DELIMITER, DEPARTURE_TIME_DELIMITER);
+                    NAME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
         } else if (isDelete) {
             name = getSubstringBetweenDelimiters(passengerDetail,
                     NAME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
@@ -252,40 +235,45 @@ public class PassengerList extends OperationList {
     }
 
     private void getDepartureTime(String passengerDetail) throws SkyControlException {
-        if (isAdd) {
-            departureTime = getSubstringBetweenDelimiters(passengerDetail,
-                    DEPARTURE_TIME_DELIMITER, FLIGHT_NUMBER_DELIMITER);
-        } else if (isDelete) {
-            startIndex = passengerDetail.indexOf(DEPARTURE_TIME_DELIMITER)
-                    + DEPARTURE_TIME_DELIMITER.length();
-            assert startIndex >= 0;
-            departureTime = passengerDetail.substring(startIndex);
-            departureTime = departureTime.toUpperCase();
-        }
+        departureTime = getSubstringBetweenDelimiters(passengerDetail,
+                DEPARTURE_TIME_DELIMITER, GATE_NUMBER_DELIMITER);
+
     }
 
     static void getFlightNumber(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
-                    FLIGHT_NUMBER_DELIMITER, GATE_NUMBER_DELIMITER);
+                    FLIGHT_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
         } else if (isDelete) {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                     FLIGHT_NUMBER_DELIMITER, SEAT_NUMBER_DELIMITER);
         }
     }
 
-    static String getFlightNumberForSync(String passengerDetail) {
-        try {
-            getFlightNumber(passengerDetail);
-        } catch (SkyControlException e) {
-            ui.showError(e.getMessage());
+    static String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
+        flightNumber = getSubstringBetweenDelimiters(passengerDetail,
+                FLIGHT_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
+        if (!isValidFlightNumber(flightNumber)) {
+            if (flightNumber.contains(FORWARD_SLASH)) {
+                throw new SkyControlException(ui.getErrorMessage());
+            } else {
+                throw new SkyControlException(ui.getFlightNumberError());
+            }
         }
         return flightNumber;
     }
 
     private void getGateNumber(String passengerDetail) throws SkyControlException {
-        gateNumber = getSubstringBetweenDelimiters(passengerDetail,
-                GATE_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
+        int indexOfGateNumber = passengerDetail.indexOf(GATE_NUMBER_DELIMITER);
+        int indexOfDepartureTime = passengerDetail.indexOf(DEPARTURE_TIME_DELIMITER);
+        if (indexOfGateNumber < 0 || indexOfGateNumber < indexOfDepartureTime) {
+            throw new SkyControlException(ui.getErrorMessage());
+        }
+        startIndex = indexOfGateNumber + GATE_NUMBER_DELIMITER.length();
+        gateNumber = passengerDetail.substring(startIndex).toUpperCase();
+        if (gateNumber.equals(EMPTY_STRING)) {
+            throw new SkyControlException(ui.getMissingDetailsError());
+        }
     }
 
     private void getBoardingGroup(String passengerDetail) throws SkyControlException {
@@ -304,29 +292,30 @@ public class PassengerList extends OperationList {
             seatNumber = getSubstringBetweenDelimiters(passengerDetail,
                     SEAT_NUMBER_DELIMITER, BOARDING_TIME_DELIMITER);
         } else if (isDelete) {
-            seatNumber = getSubstringBetweenDelimiters(passengerDetail,
-                    SEAT_NUMBER_DELIMITER, DEPARTURE_TIME_DELIMITER);
+            int indexOfSeatNumber = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER);
+            int indexOfFlightNumber = passengerDetail.indexOf(FLIGHT_NUMBER_DELIMITER);
+            int startIndex = indexOfSeatNumber + SEAT_NUMBER_DELIMITER.length();
+            if (indexOfSeatNumber < 0 || indexOfSeatNumber < indexOfFlightNumber) {
+                throw new SkyControlException(ui.getErrorMessage());
+            }
+            seatNumber = passengerDetail.substring(startIndex).toUpperCase();
+            if (seatNumber.equals(EMPTY_STRING)) {
+                throw new SkyControlException(ui.getMissingDetailsError());
+            }
         }
     }
 
     private void getBoardingTime(String passengerDetail) throws SkyControlException {
-        int indexOfBoardingTime = passengerDetail.indexOf(BOARDING_TIME_DELIMITER);
-        int indexOfSeatNumber = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER);
-        if (indexOfBoardingTime < 0 || indexOfBoardingTime < indexOfSeatNumber) {
-            throw new SkyControlException(ui.getErrorMessage());
-        }
-        startIndex = indexOfBoardingTime + BOARDING_TIME_DELIMITER.length();
-        boardingTime = passengerDetail.substring(startIndex).toUpperCase();
-        if (boardingTime.equals(EMPTY_STRING)) {
-            throw new SkyControlException(ui.getMissingDetailsError());
-        }
+        boardingTime = getSubstringBetweenDelimiters(passengerDetail,
+                BOARDING_TIME_DELIMITER, DEPARTURE_TIME_DELIMITER);
     }
 
     private static String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
             throws SkyControlException {
-        int startIndex = inputString.indexOf(startDelimiter) + startDelimiter.length();
+        int indexOfStartDelimiter = inputString.indexOf(startDelimiter);
+        int startIndex = indexOfStartDelimiter + startDelimiter.length();
         int endIndex = inputString.lastIndexOf(endDelimiter);
-        if (endIndex <= startIndex || endIndex < 0 || startIndex < 0) {
+        if (endIndex < startIndex || endIndex < 0 || indexOfStartDelimiter < 0) {
             throw new SkyControlException(ui.getErrorMessage());
         }
         String outputString = inputString.substring(startIndex, endIndex).trim();
@@ -340,10 +329,7 @@ public class PassengerList extends OperationList {
     private void validateDetailFormat() {
         isExceedNameLength = name.length() > NAME_LENGTH_LIMIT;
         isWrongNameFormat = !name.matches(REGEX_LETTER);
-        isWrongDepartureFormat = isValidTime(departureTime);
-        isWrongFlightNumFormat = isValidFlightNumber(flightNumber);
         isWrongBoardingTimeFormat = isValidTime(boardingTime);
-        isWrongGateNumberFormat = isValidGateNumber(gateNumber);
         isWrongBoardingGroupFormat = isValidBoardingGroup();
         isWrongSeatNumberFormat = isValidSeatNumber();
     }
@@ -373,17 +359,6 @@ public class PassengerList extends OperationList {
         }
     }
 
-    private boolean isValidGateNumber(String gateNumber) {
-        boolean isNotValidLength = gateNumber.length() > MAX_GN_LENGTH
-                || gateNumber.length() < MIN_GN_LENGTH;
-        boolean isNotValidNumber = !gateNumber.matches(REGEX_NUMBER);
-        if (isNotValidLength) {
-            return true;
-        } else {
-            return isNotValidNumber;
-        }
-    }
-
     private boolean isValidTime(String time) {
         Pattern p = Pattern.compile(REGEX_TIME);
         Matcher m = p.matcher(time);
@@ -391,27 +366,27 @@ public class PassengerList extends OperationList {
         return isNotValidTime;
     }
 
-    private boolean isValidFlightNumber(String flightNumber) {
+    private static boolean isValidFlightNumber(String flightNumber) {
         int lenOfFlightNum = flightNumber.length();
         if (lenOfFlightNum < FN_MIN_LENGTH) {
-            return isWrongFlightNumFormat = true;
+            return false;
         } else if (isValidFlightNumberTag(flightNumber)) {
             int numOfDigits = checkNumOfDigits();
             if (isValidFLightNum(numOfDigits)) {
-                return isWrongFlightNumFormat;
+                return true;
             }
         }
-        return isWrongFlightNumFormat;
+        return false;
     }
 
     private boolean isPassengerDuplicate() {
         boolean isPassengerDuplicate;
         isPassengerDuplicate = isFlightNumberPresent
-                && isSeatNumberPresent && isDepartureTimePresent;
+                && isSeatNumberPresent;
         return isPassengerDuplicate;
     }
 
-    private int checkNumOfDigits() {
+    private static int checkNumOfDigits() {
         int numOfDigits = 0;
         for (int i = 0; i < flightNumber.length(); i++) {
             if (Character.isDigit(flightNumber.charAt(i))) {
@@ -421,14 +396,14 @@ public class PassengerList extends OperationList {
         return numOfDigits;
     }
 
-    private boolean isValidFlightNumberTag(String flightNumber) {
+    private static boolean isValidFlightNumberTag(String flightNumber) {
         boolean isValidFlightNumberTag;
         isValidFlightNumberTag = Character.isLetter(flightNumber.charAt(FIRST_INDEX))
                 && Character.isLetter(flightNumber.charAt(SECOND_INDEX));
         return isValidFlightNumberTag;
     }
 
-    private boolean isValidFLightNum(int numOfDigits) {
+    private static boolean isValidFLightNum(int numOfDigits) {
         boolean isValidFlightNumber;
         isValidFlightNumber = numOfDigits >= MIN_FN_LENGTH
                 && numOfDigits <= MAX_FN_LENGTH;
@@ -438,10 +413,7 @@ public class PassengerList extends OperationList {
     private void resetCheckFormat() {
         isExceedNameLength = false;
         isWrongNameFormat = false;
-        isWrongDepartureFormat = false;
-        isWrongFlightNumFormat = false;
         isWrongBoardingTimeFormat = false;
-        isWrongGateNumberFormat = false;
         isWrongBoardingGroupFormat = false;
         isWrongSeatNumberFormat = false;
     }
@@ -449,6 +421,5 @@ public class PassengerList extends OperationList {
     private void resetCheckDuplicate() {
         isFlightNumberPresent = false;
         isSeatNumberPresent = false;
-        isDepartureTimePresent = false;
     }
 }

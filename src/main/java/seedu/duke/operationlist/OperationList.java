@@ -28,15 +28,37 @@ public abstract class OperationList extends Parser {
     }
 
     public void checkPassengerFlightSync(OperationList flights,
-                                         String passengerDetail) throws SyncException {
-        try {
-            ArrayList<FlightInfo> flightsThatExist;
-            flightsThatExist = flights.getFlights();
-            getFlightSyncDetails(passengerDetail, flightsThatExist);
-            executeCheck(flightsThatExist);
-        } catch (SyncException e) {
-            throw new SyncException(ui.getFlightNumberSyncError());
+                                         String passengerDetail) throws SkyControlException, SyncException {
+        ArrayList<FlightInfo> flightsThatExist;
+        flightsThatExist = flights.getFlights();
+        getFlightSyncDetails(passengerDetail, flightsThatExist);
+        executeCheck(flightsThatExist);
+    }
+
+    public static String getPassengerDepartureTime(OperationList flights,
+                                                   String passengerDetail) throws SkyControlException {
+        String departureTime = null;
+        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
+        ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
+        for (FlightInfo flight : flightsInFlightList) {
+            if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
+                departureTime = flight.getDepartureTime();
+            }
         }
+        return departureTime;
+    }
+
+    public static String getPassengerGateNumber(OperationList flights,
+                                                String passengerDetail) throws SkyControlException {
+        String gateNumber = null;
+        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
+        ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
+        for (FlightInfo flight : flightsInFlightList) {
+            if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
+                gateNumber = flight.getGateNum();
+            }
+        }
+        return gateNumber;
     }
 
     private void executeCheck(ArrayList<FlightInfo> flightsThatExist) throws SyncException {
@@ -57,7 +79,7 @@ public abstract class OperationList extends Parser {
     }
 
     private void getFlightSyncDetails(String passengerDetail,
-                                      ArrayList<FlightInfo> flightsThatExist) {
+                                      ArrayList<FlightInfo> flightsThatExist) throws SkyControlException {
         flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
         isEmptyFlightList = flightsThatExist.size() == EMPTY_FLIGHT_LIST;
 
