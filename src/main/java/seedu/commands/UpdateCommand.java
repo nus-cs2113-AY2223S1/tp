@@ -47,6 +47,6 @@ public class UpdateCommand extends Command {
     @Override
     public CommandResult execute() {
         String message = updateCarparkList(api, carparkList);
-        return new CommandResult(message);
+        return new CommandResult(message, CommandStatus.SUCCESS);
     }
 }

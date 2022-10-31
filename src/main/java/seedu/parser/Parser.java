@@ -143,7 +143,7 @@ public class Parser {
                 || commandWord.equalsIgnoreCase(HelpCommand.COMMAND_WORD_SHORT)) {
             return prepareHelp(arguments);
         } else {
-            return new InvalidCommand("Invalid Command. ");
+            return new InvalidCommand("Invalid Command.");
         }
     }
 

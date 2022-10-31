@@ -11,6 +11,7 @@ import static seedu.common.CommonFiles.LTA_JSON_FILE;
 import seedu.api.Api;
 import seedu.commands.Command;
 import seedu.commands.CommandResult;
+import seedu.commands.CommandStatus;
 import seedu.commands.ExitCommand;
 import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
@@ -81,7 +82,7 @@ public class Parking {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.syncFetchData();
-            Ui.println("Fetching data from API successful!");
+            Ui.printGreen("Fetching data from API successful!", true);
         } catch (ParkingException e) {
             Ui.println(e.getMessage());
         }
@@ -133,10 +134,9 @@ public class Parking {
      */
     private CommandResult executeCommand(Command command) {
         try {
-            CommandResult result = command.execute();
-            return result;
+            return command.execute();
         } catch (FileWriteException | NoCarparkFoundException e) {
-            return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         } catch (InvalidCommandException e) {
             throw new RuntimeException(e);
         }

@@ -47,21 +47,22 @@ public class FavouriteCommand extends Command {
                 favourite.writeFavouriteList();
                 String content = favourite.getFavouriteListString(carparkList);
                 if (content.isEmpty()) {
-                    return new CommandResult("There are no favourites in the list!");
+                    return new CommandResult("There are no favourites in the list!", CommandStatus.FAIL);
                 }
-                return new CommandResult(content.trim());
+                return new CommandResult(content.trim(), CommandStatus.MESSAGE);
             } else {
                 favourite.updateFavouriteList(carparkList);
                 favourite.writeFavouriteList();
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
                 result.setFavourite(true);
-                return new CommandResult("Added Carpark " + argument + " to favourites!");
+                return new CommandResult("Added Carpark " + argument + " to favourites!",
+                        CommandStatus.SUCCESS);
             }
         } catch (NoCarparkFoundException | DuplicateCarparkException | NoFileFoundException e) {
-            return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         } catch (FileWriteException fileWriteException) {
-            return new CommandResult("Error in setting " + argument + " as favourite.");
+            return new CommandResult("Error in setting " + argument + " as favourite.", CommandStatus.FAIL);
         }
     }
 

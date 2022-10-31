@@ -32,6 +32,6 @@ public class HelpCommand extends Command {
         message += FAVOURITE_FORMAT + "\n";
         message += UNFAVOURITE_FORMAT;
 
-        return new CommandResult(message);
+        return new CommandResult(message, CommandStatus.MESSAGE);
     }
 }

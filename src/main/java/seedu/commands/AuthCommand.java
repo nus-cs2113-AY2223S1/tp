@@ -43,19 +43,20 @@ public class AuthCommand extends Command {
         try {
             if (apiKey.equals("status")) {
                 String message = api.getApiAuthStatus();
-                return new CommandResult(message);
+                return new CommandResult(message, CommandStatus.MESSAGE);
             } else if (apiKey.equals("default")) {
                 api.loadDefaultApiKey();
                 String message = fetchApiData();
-                return new CommandResult("Authenticated successfully using default API Key." + message);
+                return new CommandResult("Authenticated successfully using default API Key." + message,
+                        CommandStatus.SUCCESS);
             } else if (api.isApiValid(apiKey)) {
                 saveApiKey(apiKey);
                 String message = fetchApiData();
-                return new CommandResult("Authenticated successfully." + message);
+                return new CommandResult("Authenticated successfully." + message, CommandStatus.SUCCESS);
             }
-            return new CommandResult("Authentication failed.");
+            return new CommandResult("Authentication failed.", CommandStatus.FAIL);
         } catch (FileWriteException | UnauthorisedAccessApiException e) {
-            return new CommandResult("Authentication failed. " + e.getMessage());
+            return new CommandResult("Authentication failed. " + e.getMessage(), CommandStatus.FAIL);
         }
     }
 

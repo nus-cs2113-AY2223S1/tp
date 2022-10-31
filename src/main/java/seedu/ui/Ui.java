@@ -140,7 +140,17 @@ public class Ui {
      * @param result Command result
      */
     public void printResult(CommandResult result) {
-        println(result.showToUser);
+        switch (result.getStatus()) {
+        case FAIL:
+            printRed(result.showToUser, true);
+            break;
+        case SUCCESS:
+            printGreen(result.showToUser, true);
+            break;
+        default:
+            println(result.showToUser);
+            break;
+        }
     }
 
     /**
@@ -167,24 +177,10 @@ public class Ui {
     }
 
     /**
-     * Show error message when saving data to file.
-     */
-    public void showSaveError() {
-        printRed("Something went wrong when saving data.", true);
-    }
-
-    /**
      * Show error message when creating file is unsuccessful.
      */
     public void showCreateFileError() {
         printRed("Something wrong happened in file creation.", true);
-    }
-
-    /**
-     * Show error message when invalid command is entered.
-     */
-    public void showInvalidCommandError() {
-        printRed("Invalid command. Try again.", true);
     }
 
     /**
@@ -205,37 +201,7 @@ public class Ui {
      * Show message when data is successfully loaded.
      */
     public void showLoadingDataSuccess() {
-        println("Load data sequence successful!");
-    }
-
-    /**
-     * Show message when data is successfully updated
-     */
-    public void showUpdateDataSuccess() {
-        println("Updated data successfully!");
-    }
-
-    public void showUpdateError() {
-        println("Unable to update data!");
-    }
-    public void showApiKeySaved() {
-        println("API key saved successfully and the latest data has been downloaded.");
-    }
-
-    public void showAuthError() {
-        println("Unable to authenticate API Key!");
-    }
-
-    public void showFavouriteAddSuccess(String carparkId) {
-        println(String.format("Added Carpark %s to favourites!", carparkId));
-    }
-
-    public void showUnfavouriteSuccess(String carparkId) {
-        println(String.format("Removed Carpark %s from favourites!", carparkId));
-    }
-
-    public void showUpdateFavouriteError() {
-        println("Could not update favourite list.");
+        printGreen("Load data sequence successful!", true);
     }
 
     /**
