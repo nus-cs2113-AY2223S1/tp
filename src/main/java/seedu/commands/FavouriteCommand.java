@@ -59,8 +59,7 @@ public class FavouriteCommand extends Command {
                 result.setFavourite(true);
                 return new CommandResult("Added Carpark " + argument + " to favourites!");
             }
-        } catch (NoCarparkFoundException | DuplicateCarparkException | NoFileFoundException
-                 | InvalidFormatException e) {
+        } catch (NoCarparkFoundException | DuplicateCarparkException | NoFileFoundException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");

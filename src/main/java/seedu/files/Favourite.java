@@ -39,18 +39,22 @@ public class Favourite {
      * @throws NoFileFoundException If no file found.
      */
     public void updateFavouriteList(CarparkList carparkList)
-            throws NoFileFoundException, FileWriteException, InvalidFormatException {
+            throws NoFileFoundException, FileWriteException {
         String content = FileReader.readStringFromTxt(file, directory, true);
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<>();
         Collections.addAll(tempArray, lines);
         tempArray = new ArrayList<>(new LinkedHashSet<>(tempArray));
         boolean isValid = ensureValidity(carparkList, tempArray);
+
+        // Don't throw exception and interrupt the flow in the method that calls this one - file should be
+        // good to go after writing.
         if (!isValid) {
             writeFavouriteList();
-            throw new InvalidFormatException("There was an issue loading some favourites in your "
-                + CommonFiles.FAVOURITE_FILE + " file.\nThe problematic items have been skipped "
+            InvalidFormatException e = new InvalidFormatException("NOTE: There was an issue loading some favourites "
+                + "in your " + CommonFiles.FAVOURITE_FILE + " file.\n      The problematic items have been skipped "
                 + "and removed from the list.");
+            Ui.printError(e);
         }
     }
 
