@@ -55,10 +55,6 @@ class ParserTest {
 
     @Test
     void executeFindTestNegative() {
-        addTestMovie();
-        
-        // sets outContent to capture any would-be console output
-        // Only AFTER test Movie has been added to test list.
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         
@@ -68,9 +64,9 @@ class ParserTest {
         StringWriter expectedStringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(expectedStringWriter);
 
-        printWriter.println("---Here are the reviews that match the keyword---" + System.getProperty("line.separator"));
-        printWriter.println("Movies:" + System.getProperty("line.separator"));
-        printWriter.println("TV Shows:");
+        printWriter.println("---Here are the reviews that match the keyword---\n");
+        printWriter.println("Movies:");
+        printWriter.println("\nTV Shows:");
         printWriter.close();
 
         String expected = expectedStringWriter.toString();
