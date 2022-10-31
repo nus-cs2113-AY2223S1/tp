@@ -77,8 +77,6 @@ public class UnfavouriteCommand extends Command {
             return new CommandResult(e.getMessage());
         } catch (NoCarparkFoundException e) {
             return new CommandResult("Carpark not found in favourite list!");
-        } catch (FileWriteException e) {
-            return new CommandResult("Error removing " + argument + " as favourite.");
         }
     }
 
