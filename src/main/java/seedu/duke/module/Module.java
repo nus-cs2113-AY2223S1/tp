@@ -292,7 +292,7 @@ public class Module {
 
         //Adding to timetableDict
         for (Lesson lesson : newLessonGroup) {
-            Timetable.timetableDict.addLesson(lesson, moduleCode);
+            Timetable.timetableDict.addLesson(lesson);
         }
     }
 
@@ -352,7 +352,7 @@ public class Module {
 
     public boolean checkLessonTypeAttended(String lessonType) {
         boolean isLessonTypeAttended = false;
-        for (Lesson attendingLesson : attending) {
+        for (Lesson attendingLesson : attendingList) {
             String lessonDay = attendingLesson.getDay();
             String attendingLessonType = attendingLesson.getLessonType();
             if (attendingLessonType.equals(lessonType)) {
@@ -368,7 +368,7 @@ public class Module {
 
     public List<String> getAttendingLessonTypes() {
         List<String> attendingLessonTypes = new ArrayList<String>();
-        for (Lesson lesson : attending) {
+        for (Lesson lesson : attendingList) {
             attendingLessonTypes.add(lesson.getLessonType());
         }
         return attendingLessonTypes;

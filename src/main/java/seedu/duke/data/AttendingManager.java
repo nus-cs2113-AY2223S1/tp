@@ -13,21 +13,6 @@ import seedu.duke.Timetable;
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
 
-/*
- * ### Public Functions: ###
- * initAttendingDataFile()
- * addAttending(Lesson lesson, String moduleCode)
- * deleteAttending(Module module)
- * setAttending(Lesson lessonToSet, String moduleCode)
- * attendingExists(Lesson lesson, String moduleCode)
- * loadAttendingIntoTimetable()
- * loadAttendingIntoDataList()
- * 
- * ### Helper (private) Functions: ###
- * rewriteAttendingData()
- * removeModuleFromDataList(Module module)
- */
-
 public class AttendingManager {
     public static ArrayList<String> attendingDataList = new ArrayList<>();
     static String currentSemester;
@@ -77,6 +62,9 @@ public class AttendingManager {
         attendingDataList.add(line);
     }
 
+    /*
+     * 
+     */
     public static void saveAttendingIntoDataList() {
         attendingDataList.clear();
         for (Module module : Timetable.listOfModules) {

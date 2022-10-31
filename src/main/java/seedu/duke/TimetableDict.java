@@ -19,7 +19,7 @@ public class TimetableDict {
     public TimetableDict(List<Module> attendingModules) {
         init();
         for (Module module : attendingModules) {
-            List<Lesson> attendingLessons = module.getAttending();
+            List<Lesson> attendingLessons = module.getAttendingList();
             for (Lesson lesson : attendingLessons) {
                 addLesson(lesson);
             }
@@ -336,7 +336,7 @@ public class TimetableDict {
 
             //if lessonType is already attended
             if (module.checkLessonTypeAttended(currLessonType)) { 
-                for (Lesson attendingLesson : module.getAttending()) {
+                for (Lesson attendingLesson : module.getAttendingList()) {
                     lesson = attendingLesson;
                     if (attendingLesson.getLessonType().equals(currLessonType)) {
                         //if got 2 of the same kind of lesson, skips to the one which hasnt been set
