@@ -20,7 +20,7 @@ public class Ui {
      *
      * @param line String to print.
      */
-    public void println(String line) {
+    public static void println(String line) {
         System.out.println(line);
     }
 
@@ -29,7 +29,7 @@ public class Ui {
      *
      * @param line String to print.
      */
-    public void print(String line) {
+    public static void print(String line) {
         System.out.print(line);
     }
 
@@ -92,7 +92,7 @@ public class Ui {
      *
      * @param e {@link ParkingException} exception
      */
-    public void printError(ParkingException e) {
+    public static void printError(ParkingException e) {
         println(e.getMessage());
     }
 

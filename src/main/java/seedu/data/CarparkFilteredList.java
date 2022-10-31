@@ -17,7 +17,7 @@ public class CarparkFilteredList extends CarparkList {
     }
 
     /**
-     * Gets a formatted string for use with the {@link seedu.commands.Search Search} command.
+     * Gets a formatted string for use with the {@link seedu.commands.FilterCommand Filter} command.
      *
      * @return Formatted string.
      */

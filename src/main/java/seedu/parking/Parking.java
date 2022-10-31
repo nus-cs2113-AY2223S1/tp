@@ -19,7 +19,6 @@ import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
-import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.files.Favourite;
 import seedu.files.FileReader;
@@ -48,9 +47,9 @@ public class Parking {
      */
     public void run() {
         start();
-        loadFavourite();
         loadApi();
         loadJson();
+        loadFavourite(carparkList);
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -68,13 +67,13 @@ public class Parking {
     /**
      * Loads the data from favouriteList.txt into program.
      */
-    private void loadFavourite() {
+    private void loadFavourite(CarparkList carparkList) {
         try {
-            favourite.updateFavouriteList();
+            favourite.updateFavouriteList(carparkList);
         } catch (IOException e) {
             ui.showUpdateFavouriteError();
-        } catch (NoFileFoundException | FileWriteException e) {
-            ui.printError(e);
+        } catch (ParkingException e) {
+            Ui.printError(e);
         }
     }
 
@@ -85,9 +84,9 @@ public class Parking {
         try {
             api.loadApiKey(API_KEY_FILE, API_JSON_DIRECTORY, true);
             api.syncFetchData();
-            ui.println("Fetching data from API successful!");
+            Ui.println("Fetching data from API successful!");
         } catch (ParkingException e) {
-            ui.println(e.getMessage());
+            Ui.println(e.getMessage());
         }
     }
 
@@ -103,7 +102,7 @@ public class Parking {
             FileStorage.saveCarparkList(carparkList);
             ui.showLoadingDataSuccess();
         } catch (ParkingException e) {
-            ui.printError(e);
+            Ui.printError(e);
         }
     }
 
