@@ -16,7 +16,7 @@ import seedu.ui.Ui;
  * Represents the 'favourite' class.
  */
 public class Favourite {
-    private static ArrayList<String> favouriteList;
+    private static ArrayList<String> favouriteList = new ArrayList<>();
     private final FileStorage fileStorage;
     private final String directory;
     private final String file;
@@ -40,7 +40,10 @@ public class Favourite {
      */
     public void updateFavouriteList(CarparkList carparkList)
             throws NoFileFoundException, FileWriteException {
-        String content = FileReader.readStringFromTxt(file, directory, true);
+        String content = FileReader.readStringFromTxt(file, directory, true).trim();
+        if (content.isEmpty()) {
+            return;
+        }
         String[] lines = content.split("\\R");
         ArrayList<String> tempArray = new ArrayList<>();
         Collections.addAll(tempArray, lines);
