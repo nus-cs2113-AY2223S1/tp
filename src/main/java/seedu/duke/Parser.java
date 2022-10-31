@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -109,16 +110,23 @@ public class Parser {
     /**
      * Executes the find action by creating a find object.
      */
-    public void executeFind(String[] words) {
+    public ArrayList<Media> executeFind(String[] words) {
+        ArrayList<Media> found = new ArrayList<>();
         try {
             String keyWord = words[1];
+            //@@author indraneelrp
+            FindCommand executor;
             executor = new FindCommand(mediaList, keyWord);
+            found = executor.getMatching();
+            
+            //@@author matthewphua
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
         } catch (Exception e) {
             Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
         }
+        return found;
     }
 
     //@@author naz019
