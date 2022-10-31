@@ -16,6 +16,6 @@ public class ServerNotReadyApiException extends ApiServerResponseErrorException 
     @Override
     public String getMessage() {
         return "The server is currently unavailable: 503 Service Unavailable"
-                + "Trying " + super.getTryNumber() + " more time...";
+                + "Trying " + super.getTryNumber() + " more times...";
     }
 }

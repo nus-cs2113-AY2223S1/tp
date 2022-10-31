@@ -3,7 +3,9 @@ package seedu.commands;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
+import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoFileFoundException;
 import seedu.files.Favourite;
 
 
@@ -36,14 +38,18 @@ public class UnfavouriteCommand extends Command {
      */
     public CommandResult execute() {
         try {
+            favourite.updateFavouriteList(carparkList);
+            favourite.writeFavouriteList();
             Carpark result = carparkList.findCarpark(argument);
             setUnfavourite(result.getCarparkId());
             result.setFavourite(false);
             return new CommandResult("Removed Carpark " + argument + " from favourites!");
-        } catch (FileWriteException e) {
+        } catch (NoFileFoundException | InvalidFormatException e) {
             return new CommandResult(e.getMessage());
         } catch (NoCarparkFoundException e) {
             return new CommandResult("Carpark not found in favourite list!");
+        } catch (FileWriteException e) {
+            return new CommandResult("Error removing " + argument + " as favourite.");
         }
     }
 

@@ -18,6 +18,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 resources/api/ltaResponse.json
 resources/api/secret.txt
 secret.txt
-favourite/favourite.txt
+resources/favourite/favourite.txt
 resources/carparkList.txt
 resources/favourite/favourite.txt

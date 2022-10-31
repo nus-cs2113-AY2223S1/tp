@@ -1,7 +1,5 @@
 package seedu.commands;
 
-import java.io.IOException;
-
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
@@ -54,12 +52,14 @@ public class FavouriteCommand extends Command {
                 }
                 return new CommandResult(content.trim());
             } else {
+                favourite.updateFavouriteList(carparkList);
+                favourite.writeFavouriteList();
                 Carpark result = carparkList.findCarpark(argument);
                 setFavourite(result.getCarparkId());
                 result.setFavourite(true);
                 return new CommandResult("Added Carpark " + argument + " to favourites!");
             }
-        } catch (NoCarparkFoundException | IOException | DuplicateCarparkException | NoFileFoundException
+        } catch (NoCarparkFoundException | DuplicateCarparkException | NoFileFoundException
                  | InvalidFormatException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
