@@ -2,6 +2,8 @@ package seedu.moneygowhere;
 
 import seedu.moneygowhere.userinterface.ConsoleInterface;
 
+//@@author xzynos
+
 /**
  * Entrypoint of the MoneyGoWhere application.
  */
