@@ -22,6 +22,12 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILE
 //@@author bdthanh
 public class ItemStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
+    private static final int ITEM_ID_INDEX = 0;
+    private static final int ITEM_NAME_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+    private static final int OWNER_INDEX = 3;
+    private static final int CATEGORY_INDEX = 4;
+    private static final int CHECKSUM_INDEX = 5;
     private final String itemFilePath;
 
     /**
@@ -101,7 +107,7 @@ public class ItemStorage extends Storage {
         assert splitItemLine.length == 6 : "Invalid Transaction Line";
         try {
             Item item = getItemFromItemLine(splitItemLine);
-            checkCheckSumLine(item, Integer.parseInt(splitItemLine[5].trim()));
+            checkCheckSumLine(item, Integer.parseInt(splitItemLine[CHECKSUM_INDEX].trim()));
             return item;
         } catch (Exception e) {
             throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
@@ -110,11 +116,11 @@ public class ItemStorage extends Storage {
 
     private static Item getItemFromItemLine(String[] splitItemLine) throws StoreFailureException {
         try {
-            String itemId = splitItemLine[0].trim();
-            String itemName = splitItemLine[1].trim();
-            double price = Double.parseDouble(splitItemLine[2].trim());
-            String ownerId = splitItemLine[3].trim();
-            int categoryNumber = Integer.parseInt(splitItemLine[4].trim());
+            String itemId = splitItemLine[ITEM_ID_INDEX].trim();
+            String itemName = splitItemLine[ITEM_NAME_INDEX].trim();
+            double price = Double.parseDouble(splitItemLine[PRICE_INDEX].trim());
+            String ownerId = splitItemLine[OWNER_INDEX].trim();
+            int categoryNumber = Integer.parseInt(splitItemLine[CATEGORY_INDEX].trim());
             return new Item(itemId, itemName, categoryNumber, price, ownerId);
         } catch (Exception e) {
             throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
