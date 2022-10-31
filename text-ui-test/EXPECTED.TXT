@@ -596,11 +596,13 @@ The recurring payment was deleted successfully.
 The recurring payment was deleted successfully.
 
 
+ERROR: Your list of recurring payments is empty.
 
 
 ERROR: The recurring payment is not found.
 
 
+ERROR: Your list of recurring payments is empty.
 
 
 ERROR: The command entered is invalid.
