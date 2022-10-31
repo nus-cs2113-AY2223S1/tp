@@ -47,7 +47,8 @@ public class UserUniversityListManager {
         }
     }
 
-    public void updateComment(String universityName, String moduleCode, String comment) throws InvalidUserCommandException {
+    public void updateComment(String universityName, String moduleCode, String comment)
+            throws InvalidUserCommandException {
         if (!containsKey(universityName)) {
             System.out.println("Error: No list containing such university");
             System.out.println("Please create university and add relevant module before adding a comment");

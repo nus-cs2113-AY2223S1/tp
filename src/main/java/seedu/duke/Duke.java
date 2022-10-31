@@ -215,10 +215,10 @@ public class Duke {
     }
 
     /**
-     * Processes the update comment function
+     * Processes the update comment function.
      * @param userUniversityListManager User university lists' manager
      * @param addCommand The add command to be executed
-     * @throws InvalidUserCommandException
+     * @throws InvalidUserCommandException if user provides invalid university name
      */
     private static void addComment(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
             throws InvalidUserCommandException {

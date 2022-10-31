@@ -52,7 +52,7 @@ public class UserModuleMappingList {
                 //success
             }
         }
-        if(!isFound) {
+        if (!isFound) {
             System.out.println("Error no such modules to update");
             System.out.println("Please add module to list before adding a note");
         } else {
