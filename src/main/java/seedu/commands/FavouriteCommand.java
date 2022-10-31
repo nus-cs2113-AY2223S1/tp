@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
-import seedu.exception.EmptyFavouriteFileException;
 import seedu.exception.FileWriteException;
-import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.Favourite;
@@ -93,8 +91,7 @@ public class FavouriteCommand extends Command {
                     return new CommandResult("Nothing to add to favourites!");
                 }
             }
-        } catch (NoCarparkFoundException | NoFileFoundException | InvalidFormatException
-                 | EmptyFavouriteFileException e) {
+        } catch (NoCarparkFoundException | NoFileFoundException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");
