@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.category;
 
 import java.util.ArrayList;
 
+//@@author yuu-chennn
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class CategoryManager {
     private ArrayList<Category> categories;
@@ -16,7 +17,7 @@ public class CategoryManager {
     }
 
     public boolean hasCategory(String categoryName) {
-        for (Category category: categories) {
+        for (Category category : categories) {
             if (category.categoryName.equals(categoryName)) {
                 return true;
             }

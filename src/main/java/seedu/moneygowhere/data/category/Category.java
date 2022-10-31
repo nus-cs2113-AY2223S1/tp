@@ -1,5 +1,7 @@
 package seedu.moneygowhere.data.category;
 
+//@@author yuu-chennn
+
 /**
  * Stores data associated with a category.
  */

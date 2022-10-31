@@ -1,7 +1,9 @@
 package seedu.moneygowhere.commands;
 
+//@@author xzynos
+
 /**
- * Stores the bye command and its arguments.
+ * Stores the command Bye and its arguments.
  */
 public class ConsoleCommandBye extends ConsoleCommand {
 }
