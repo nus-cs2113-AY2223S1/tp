@@ -4,8 +4,8 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "currencyManager:CurrencyManager" as currencyManager DATA_COLOR_1
 Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "currencyManager:CurrencyManager" as currencyManager DATA_COLOR_1
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 
