@@ -451,6 +451,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -471,6 +475,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -484,7 +492,7 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
         if (expenses.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
         }
 
         for (int index = 0; index < expenses.size(); index++) {
@@ -594,7 +602,7 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
         expenseManager.updateSortExpenses(commandSortExpense, localStorage);
         if (expenses.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
             return;
         }
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
@@ -666,7 +674,7 @@ public class ConsoleInterface {
         ArrayList<Target> targets = targetManager.getTargets();
 
         if (targets.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
         }
 
         for (int index = 0; index < targets.size(); index++) {
@@ -783,7 +791,7 @@ public class ConsoleInterface {
         ArrayList<Income> incomes = incomeManager.getIncomes();
 
         if (incomes.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
         }
 
         for (int index = 0; index < incomes.size(); index++) {
@@ -884,6 +892,10 @@ public class ConsoleInterface {
     //@@author xzynos
     private void viewRecurringPayment() {
         ArrayList<RecurringPayment> recurringPayments = recurringPaymentManager.getRecurringPayments();
+
+        if (recurringPayments.isEmpty()) {
+            printErrorMessage(Messages.COMMAND_VIEW_RECURRING_PAYMENT_EMPTY_LIST);
+        }
 
         for (int index = 0; index < recurringPayments.size(); index++) {
             RecurringPayment recurringPayment = recurringPayments.get(index);
