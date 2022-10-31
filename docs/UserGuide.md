@@ -99,7 +99,7 @@ Adds a new expense to the list of expenses.
 Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -117,7 +117,7 @@ Displays past expenses you have added.
 Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 Example of usage:
@@ -132,7 +132,7 @@ Deletes an expense from the list of expenses.
 Syntax: `Delete-Expense -e EXPENSE_NUMBER`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 
 Example of usage:
 * `Delete-Expense -e 1`
@@ -145,7 +145,7 @@ Edits an existing expense in the list of expenses.
 Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
@@ -185,7 +185,7 @@ Converts the currency of an expense from the list of expenses.
 Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 
 > ⚠️️️️ Syntax Notes
-> * `EXPENSE_NUMBER` is an integer value.
+> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
