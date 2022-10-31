@@ -184,7 +184,7 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 The Api component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
 
-![Component-Api](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp//docs/diagrams/ComponentApi.puml)
+![Component-Api](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ComponentApi.puml)
 
 The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the Api and transfer that data into a hashmap of exchange rates.
 
