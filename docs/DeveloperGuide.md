@@ -216,7 +216,10 @@ Step 2: The ViewUserCommand command checks if the delimiters ('u') is present in
 
 Step 3: If all arguments are valid, then it finds the user in the userList by his/her name, which is unique:
 
-`userList.getUserById(userName);`
+`userList.getUserById(userName);`.
+
+It will also find the items belonging to the user (`ViewUserItemsCommand.getUserItems`)
+and the user's debt (`transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted()`)
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
 
@@ -235,7 +238,7 @@ Step 2: The ViewUserItemsCommand checks if the delimiters ('u') are present in t
 
 Step 3: If argument is valid, then `getUserItems()` will return a list of items whose owner's id equals to the argument.
 
-Step 4: The list of items wil then be displayed to the user via `Ui.printResponse()`.
+Step 4: The list of items will then be displayed to the user via `Ui.printResponse()`.
 
 The following sequence diagram shows how the view-user-items operation works:
 ![viewUserItemsSequence](images/ViewUserItemsSequence.png)
