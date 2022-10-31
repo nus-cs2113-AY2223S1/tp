@@ -58,8 +58,11 @@ public class CommandFindProperty extends Command {
         String unitType = currentProperty.getUnitType().toLowerCase();
         String lowerCaseQueryText = queryText.toLowerCase();
 
-        return landlordName.contains(lowerCaseQueryText) | propertyAddress.contains(lowerCaseQueryText)
-                | propertyRentalPrice.contains(lowerCaseQueryText) | unitType.contains(lowerCaseQueryText);
+
+        boolean hasQueryTextInProperty = landlordName.contains(lowerCaseQueryText)
+                || propertyAddress.contains(lowerCaseQueryText) || propertyRentalPrice.contains(lowerCaseQueryText)
+                || unitType.contains(lowerCaseQueryText);
+        return hasQueryTextInProperty;
 
     }
 }
