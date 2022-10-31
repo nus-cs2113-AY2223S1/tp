@@ -4,6 +4,7 @@
 ## Contents
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
+* [Understanding the Command Syntax](#understanding-the-command-syntax)
 * [Features](#features)
    * [Managing Your Expenses](#managing-your-expenses)
    * [Managing Your Recurring Payments](#managing-your-recurring-payments)
@@ -11,7 +12,7 @@
    * [Managing Your Targets](#managing-your-targets)
    * [Handling Your Data](#handling-your-data)
    * [Listing all available commands: `help`](#listing-all-available-commands-help)
-   * [Exiting the application: `exit`](#exiting-the-application-exit)
+   * [Exiting the application: `exit`](#exiting-the-application-bye)
 * [Sample Outputs](#sample-outputs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -20,13 +21,19 @@
 
 MoneyGoWhere is a financial planner to help you manage your finances.
 
-## Understanding the command syntax
+## Quick Start
 
-Capitalised words represents the values included in the respective commands. 
+1. Ensure that ```Java 11``` is installed on your system.
+    1. Execute the command ```java --version``` in your terminal window.
+    2. Verify that the version of Java installed is ```Java 11```.
+2. Ensure that you have write permissions for the directory in which you are executing the program.
 
-Arguments given without brackets are **mandatory** arguments. 
+## Understanding the Command Syntax
 
-Arguments given with brackets are **optional** arguments.
+* Arguments given without square brackets denote **mandatory** arguments.
+* Arguments given with square brackets denote **optional** arguments.
+* Argument values with spaces should be enclosed with double quotes.
+* Argument values with a double quote can be escaped by prepending an additional double quote.
 
 ### Example: `Add-Expense`
 
@@ -39,13 +46,6 @@ Examples of valid command syntax:
 Examples of invalid command syntax:
 * `Add-Expense -n Subscription`
 * `Add-Expense -a 13.37`
-
-## Quick Start
-
-1. Ensure that ```Java 11``` is installed on your system.
-    1. Execute the command ```java --version``` in your terminal window.
-    2. Verify that the version of Java installed is ```Java 11```.
-2. Ensure that you have write permissions for the directory in which you are executing the program.
 
 ## Features
 
