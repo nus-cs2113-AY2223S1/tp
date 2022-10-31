@@ -70,79 +70,27 @@ public class Parser {
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
         case AuthCommand.COMMAND_WORD_SHORT:
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
-            }
-            if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
-                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                        AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
-            }
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD_SHORT:
             return prepareExit(arguments);
         case FavouriteCommand.COMMAND_WORD:
         case FavouriteCommand.COMMAND_WORD_SHORT:
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
-            }
-            if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
-                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                        FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
-            }
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
         case FindCommand.COMMAND_WORD_SHORT:
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
-            }
-            if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
-                return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                        FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
-            }
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD_SHORT:
             return prepareList(arguments);
         case FilterCommand.COMMAND_WORD:
         case FilterCommand.COMMAND_WORD_SHORT:
-            String dashedCommand;
-            Sentence actualArgument = argsList.getArguments();
-            if (argsList.getDashedArgsCount() == 1) {
-                dashedCommand = argsList.getDashedArgs().get(0);
-                if (dashedCommand.equalsIgnoreCase("i")) {
-                    if (actualArgument.getWordCount() == 0) {
-                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-                    }
-                    return prepareFilterCarparkId(actualArgument);
-                }
-                if (dashedCommand.equalsIgnoreCase("a")) {
-                    if (actualArgument.getWordCount() == 0) {
-                        return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-                    }
-                    return prepareFilterAddress(actualArgument);
-                }
-            } else if (argsList.getDashedArgsCount() > 1) {
-                return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
-                        + CommonData.FILTER_FORMAT);
-            } else {
-                if (actualArgument.getWordCount() == 0) {
-                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-                }
-                return prepareFilterAddress(actualArgument);
-            }
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-            }
-            return prepareFilter(arguments);
+            return prepareFilter(argsList, arguments);
         case UpdateCommand.COMMAND_WORD:
         case UpdateCommand.COMMAND_WORD_SHORT:
             return prepareUpdate(arguments);
         case UnfavouriteCommand.COMMAND_WORD:
         case UnfavouriteCommand.COMMAND_WORD_SHORT:
-            if (arguments.isEmpty()) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
-            }
             return prepareUnfavourite(arguments);
         case HelpCommand.COMMAND_WORD:
         case HelpCommand.COMMAND_WORD_SHORT:
@@ -176,6 +124,13 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareAuth(String arguments) {
+        if (arguments.isEmpty()) {
+            return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.AUTH_FORMAT);
+        }
+        if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
+            return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+        }
         final String apiKey = arguments.trim();
         return new AuthCommand(api, apiKey);
     }
@@ -187,6 +142,13 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareFavourite(String arguments) {
+        if (arguments.isEmpty()) {
+            return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
+        }
+        if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
+            return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+        }
         final String carparkID = arguments.trim();
         return new FavouriteCommand(carparkID, favourite, carparkList);
     }
@@ -198,6 +160,9 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareUnfavourite(String arguments) {
+        if (arguments.isEmpty()) {
+            return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.UNFAVOURITE_FORMAT);
+        }
         final String carparkID = arguments.trim();
         return new UnfavouriteCommand(carparkID, favourite, carparkList);
     }
@@ -209,6 +174,13 @@ public class Parser {
      * @return command to be carried out
      */
     private Command prepareFind(String arguments) {
+        if (arguments.isEmpty()) {
+            return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FIND_FORMAT);
+        }
+        if (numberOfArguments(arguments) != FindCommand.NUMBER_OF_ARGUMENTS) {
+            return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
+                    FindCommand.NUMBER_OF_ARGUMENTS) + CommonData.FIND_FORMAT);
+        }
         final String carparkID = arguments.trim();
         return new FindCommand(carparkID, carparkList);
     }
@@ -230,7 +202,35 @@ public class Parser {
         }
     }
 
-    private Command prepareFilter(String arguments) {
+    private Command prepareFilter(Arguments argsList, String arguments) {
+        String dashedCommand;
+        Sentence actualArgument = argsList.getArguments();
+        if (argsList.getDashedArgsCount() == 1) {
+            dashedCommand = argsList.getDashedArgs().get(0);
+            if (dashedCommand.equalsIgnoreCase("i")) {
+                if (actualArgument.getWordCount() == 0) {
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                }
+                return prepareFilterCarparkId(actualArgument);
+            }
+            if (dashedCommand.equalsIgnoreCase("a")) {
+                if (actualArgument.getWordCount() == 0) {
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                }
+                return prepareFilterAddress(actualArgument);
+            }
+        } else if (argsList.getDashedArgsCount() > 1) {
+            return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
+                    + CommonData.FILTER_FORMAT);
+        } else {
+            if (actualArgument.getWordCount() == 0) {
+                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+            }
+            return prepareFilterAddress(actualArgument);
+        }
+        if (arguments.isEmpty()) {
+            return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+        }
         Sentence searchQuery = new Sentence(arguments);
         return new FilterCommand(carparkList, searchQuery);
     }
