@@ -2,6 +2,7 @@
 
 ## Contents
 
+- [Contents](#contents)
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
   - [Disclaimer](#disclaimer-regarding-use-of-api-key-for-the-purposes-of-nus-cs2113)
@@ -33,6 +34,11 @@ With parKING, you can plan your parking destination in advance or simply check l
 strive to become your driving companion, keeping you at ease while ensuring that your vehicle will always get a parking 
 lot when you arrive at your destination. We got you and your loved ones parked!
 
+### Disclaimer regarding use of API key for the purposes of NUS CS2113
+We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
+NUS CS2113, we have provided a default api key for testing purposes. **This default api key will be removed at the end of
+module in Q4 2022**.
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -40,11 +46,14 @@ lot when you arrive at your destination. We got you and your loved ones parked!
 3. [__Recommended__] For continued usage of the application, do sign up for your personal API key through [LTA](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html).
 4. Use the command `java -jar parKING.jar` to start the program!
 5. Note that the programme will automatically create a directory called `Resources` to store local data files.
-
-### Disclaimer regarding use of API key for the purposes of NUS CS2113
-We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
-NUS CS2113, we have provided a default api key for testing purposes. **This default api key will be removed at the end of
-module in Q4 2022**.
+6. Here are some simple commands to get you started. 
+   1. To authenticate using your personal api key, use the command [`auth API_KEY`](#authenticate-user-api).
+   2. To get a detailed information on a carpark using its ID, use the command [`find CARPARK_ID`](#find-number-of-lots-by-carpark-id).
+   3. To get the list of carpark by address keyword, use the command [`filter QUERY`](#filter-carparks-based-on-address).
+   4. Use [`favourite CARPARK_ID`](#favourite-carparks-by-carpark-id)/[`unfavourite CARPARK_ID`](#unfavourite-carparks-by-carpark-id)
+   to add / remove certain carparks into your favourite list.
+      
+Read in more detail at the [Features Section](#features) section below.
 
 ## Features
 
