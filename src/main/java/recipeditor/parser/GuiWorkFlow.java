@@ -26,7 +26,7 @@ public class GuiWorkFlow {
                 try {
                     String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
                     recipe = new TextFileParser().parseTextToRecipe(content);
-                    if(RecipeList.containsRecipe(recipe)){
+                    if (RecipeList.containsRecipe(recipe)) {
                         throw new DuplicateRecipeTitleException(DuplicateRecipeTitleException.DUPLICATE_IN_MODEL);
                     }
                     validity = true;

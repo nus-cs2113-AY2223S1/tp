@@ -21,10 +21,10 @@ public class Storage {
 
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
-    private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
-    private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
     public static final String ALL_RECIPES_FILE_PATH = "./RecipeData/AllRecipes.txt";
+    private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
+    private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
     private static final String TEMPLATE_FILE = "# TITLE \n"
             + "Example Title \n\n"
             + "# DESCRIPTION\n"
@@ -93,7 +93,7 @@ public class Storage {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
             RecipeList.recipeTitles.addAll(Arrays.asList(recipeTitles));
-//TODO: Check duplicate?
+            //TODO: Check duplicate?
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
@@ -107,7 +107,7 @@ public class Storage {
                 logger.log(Level.INFO, recipeTitle);
                 String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
                 String content = Storage.loadFileContent(recipeFilePath);
-                Recipe addedRecipe  = new TextFileParser().parseTextToRecipe(content);
+                Recipe addedRecipe = new TextFileParser().parseTextToRecipe(content);
                 RecipeList.addRecipe(addedRecipe);
                 logger.log(Level.INFO, recipeTitle + " is added to recipeList");
             }

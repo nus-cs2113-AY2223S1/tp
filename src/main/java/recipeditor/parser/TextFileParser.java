@@ -12,8 +12,8 @@ public class TextFileParser {
 
     private static final Logger logger = Logger.getLogger(TextFileParser.class.getName());
 
-    private static final String UNIMPORTANT_TEXT = "There are unimportant text that cannot be parsed. Please follow " +
-            "the Template" ;
+    private static final String UNIMPORTANT_TEXT = "There are unimportant text that cannot be parsed. Please follow "
+            + "the Template";
     private static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
     private static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
             + "(except whitespace)";
@@ -35,8 +35,8 @@ public class TextFileParser {
     private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
             + "from 1";
     private static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
-    private static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in " +
-            "content";
+    private static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in "
+            + "content";
     private static final String EMPTY = "There is an empty field. The recipe is not valid";
     private static final String HASHTAG = "Don't use # in the content if it is not a heading";
 
@@ -116,7 +116,7 @@ public class TextFileParser {
     private LineType checkLineType(String line, int[] stageCounter) throws ParseFileException {
         String trimmedLine = line.trim();
         if (trimmedLine.contains("#")) {
-            String[] parsedWords= trimmedLine.replace("#"," ").trim().split(" ");
+            String[] parsedWords = trimmedLine.replace("#"," ").trim().split(" ");
             switch (parsedWords[0].toLowerCase()) {
             case "title":
                 incrementStageCounterAt(stageCounter, 0);

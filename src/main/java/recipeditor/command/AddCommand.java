@@ -6,8 +6,8 @@ import recipeditor.storage.Storage;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
-    private Recipe addedRecipe;
-    private boolean isValid;
+    private final Recipe addedRecipe;
+    private final boolean isValid;
 
     public AddCommand(boolean isValid, Recipe addedRecipe) {
         this.isValid = isValid;
@@ -20,8 +20,7 @@ public class AddCommand extends Command {
             RecipeList.recipeTitles.add(addedRecipe.getTitle());
             Storage.appendRecipeToAllRecipeFile(addedRecipe);
             String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + addedRecipe.getTitle();
-            Storage.saveRecipe(addedRecipe,"",recipeFileSourcePath);
-//            Storage.saveRecipeFile(Storage.TEMPORARY_FILE_PATH, recipeFileSourcePath);
+            Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
             assert addedRecipe != null;
             return new CommandResult(addedRecipe.getTitle() + " added to the recipe.");
         } else {
