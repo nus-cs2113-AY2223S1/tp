@@ -365,7 +365,7 @@ Example of usage:
 
 Sample Output:
 
-Assuming user has CS2040C in their timetable:
+Assuming user has CS2040 in their timetable:
 ```
 Sem [1] >> timetable /simple
 --------------------------------------------------------------------------------
@@ -495,7 +495,7 @@ Example of usage:
 
 Sample Output:
 
-Assuming the user has selected the CS1010 and CS2040C:
+Assuming the user has selected the CS1010 and CS2113:
 ```
 Sem [1] >> list
 --------------------------------------------------------------------------------
