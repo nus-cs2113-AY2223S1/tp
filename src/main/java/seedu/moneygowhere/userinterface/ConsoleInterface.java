@@ -236,8 +236,9 @@ public class ConsoleInterface {
         if (expense.getRemarks() != null) {
             expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
         }
-        expenseStr += "Currency        : " + expense.getCurrency() + "\n";
+        expenseStr += "Currency        : " + expense.getCurrency();
         if (expense.getModeOfPayment() != null) {
+            expenseStr += "\n";
             expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
         }
 
@@ -312,8 +313,9 @@ public class ConsoleInterface {
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
-        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency() + "\n";
+        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
         if (recurringPayment.getModeOfPayment() != null) {
+            recurringPaymentStr += "\n";
             recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
         }
 
@@ -392,8 +394,8 @@ public class ConsoleInterface {
                 + Messages.CONSOLE_COMMAND_DELETE_TARGET_FORMAT
                 + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_TARGET
-                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT
-                + "\n";
+                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT;
+
         printInformationalMessage(helpStr);
     }
 
