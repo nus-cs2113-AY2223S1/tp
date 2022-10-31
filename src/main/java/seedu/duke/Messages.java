@@ -43,10 +43,10 @@ public class Messages {
 
     public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE = "OOPS!!! Please specify sub-command type.\n"
             + "For client: <command> -client\n"
-            + "For property: <command> -property";
+            + "For property: <command> -property\n";
 
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter index(es) that appears within the "
-            + "property list or client list";
+            + "property list or client list\n";
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index\n";
 
@@ -202,9 +202,7 @@ public class Messages {
             + "following format:\n"
             + "  check -property ip/INDEX\n"
             + "Example:\n"
-            + "  check -property ip/5";
-
-    public static final String MESSAGE_TRY_AGAIN = "Please try again.";
+            + "  check -property ip/5\n";
 
 
     /* List related Error Messages */
