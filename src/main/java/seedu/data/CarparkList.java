@@ -89,6 +89,16 @@ public class CarparkList {
         }
     }
 
+    /**
+     * Checks if carpark ID exists in carpark list.
+     *
+     * @param searchString Carpark ID to search for.
+     * @return Returns true if carpark ID exists, false otherwise.
+     */
+    public boolean isCarparkValid(String searchString) {
+        return carparkHashMap.get(searchString.toLowerCase()) != null;
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
