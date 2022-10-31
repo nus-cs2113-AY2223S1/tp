@@ -147,7 +147,7 @@ public class ParseAddClient extends ParseAdd {
         checkForEmptyAddClientDetails(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         checkForEmptyAddClientDetails(clientDetails.get(CLIENT_BUDGET_INDEX));
 
-        // Checks for Contact Number, Email and Budget Format
+        // Checks for Contact Number, Email (if any) and Budget Format
         checkForValidSingaporeContactNumber(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         boolean hasEmail = !clientDetails.get(CLIENT_EMAIL_INDEX).isEmpty();
         if (hasEmail) {
