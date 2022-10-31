@@ -124,7 +124,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFind command executed");
         } catch (Exception e) {
-            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("Incomplete or wrongly formatted command, try again.");
         }
         return found;
     }
@@ -137,7 +137,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tSort command executed");
         } catch (Exception e) {
-            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("Incomplete or wrongly formatted command, try again.");
         }
     }
 
@@ -148,7 +148,7 @@ public class Parser {
             Ui.print(output);
             logger.log(Level.INFO, "\n\tFavourites command executed");
         } catch (Exception e) {
-            Ui.print("\nIncomplete or wrongly formatted command, try again.\n");
+            Ui.print("Incomplete or wrongly formatted command, try again.");
         }
     }
 
@@ -278,9 +278,9 @@ public class Parser {
                 Ui.print(output);
                 logger.log(Level.INFO, "\n\tDelete command executed");
             }
-        } catch (DukeException e) {
+        } catch (DukeException | NumberFormatException e) {
             logger.log(Level.WARNING, "\n\tDelete command failed");
-            Ui.print("\n" + e.getMessage());
+            Ui.print("Incomplete or wrongly formatted command, try again.");
         }
 
     }

@@ -13,13 +13,17 @@ public class RemoveCommand extends Commands {
 
     //@@author matthewphua
     /**
-     * Removes the media of the specified type and index within reviews.
+     * Removes the media of the specified type and index (between 1 and # of reviews) within reviews.
      * @return Confirmation of the removal.
      */
     @Override
     public String execute() {
         int current = 0;
         Media deleteMedia;
+        //if index is > than reviews size or <= 0, then index is guaranteed to not be valid regardless of media type
+        if (index <= 0 || index > reviewList.inputs.size()) {
+            return cannotFind;
+        }
         for (int i = 0; i < reviewList.inputs.size(); i++) {
             Media currMedia = reviewList.inputs.get(i);
             if (currMedia.getClass().equals(type)) {
