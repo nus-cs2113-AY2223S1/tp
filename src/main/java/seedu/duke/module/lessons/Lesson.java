@@ -10,6 +10,7 @@ public class Lesson {
     private String lessonType;
     private String classNumber;
     private String moduleCode;
+    private String weeks;
 
     public String getDay() {
         return day;
@@ -35,6 +36,10 @@ public class Lesson {
         return moduleCode;
     }
 
+    public String getWeeks() {
+        return weeks;
+    }
+
     public List<String> getInfo() {
         List<String> info = new ArrayList<String>();
         info.add(day);
@@ -46,12 +51,13 @@ public class Lesson {
     }
 
     public Lesson(String day, String startTime, String endTime, String lessonType,
-                 String classNumber, String moduleCode) {
+                 String classNumber, String weeks, String moduleCode) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
         this.lessonType = lessonType;
         this.classNumber = classNumber;
+        this.weeks = weeks;
         this.moduleCode = moduleCode;
     }
 }

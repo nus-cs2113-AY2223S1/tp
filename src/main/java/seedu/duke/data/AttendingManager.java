@@ -58,7 +58,7 @@ public class AttendingManager {
     private static void addAttending(Lesson lesson, String moduleCode) {
         String line = moduleCode + "|" + lesson.getLessonType() + "|" + lesson.getDay()
                 + "|" + lesson.getStartTime() + "|" + lesson.getEndTime()
-                + "|" + lesson.getClassNumber() + "\n";
+                + "|" + lesson.getClassNumber() + "|" + lesson.getWeeks() + "\n";
         attendingDataList.add(line);
     }
 
@@ -109,6 +109,7 @@ public class AttendingManager {
             String lessonStart = currLine[3];
             String lessonEnd = currLine[4];
             String classNumber = currLine[5];
+            String weeks = currLine[6];
 
             Module currModule = moduleList.get(currModuleIndex);
             while (currModule.getLessonList().size() == 0) {
@@ -119,12 +120,12 @@ public class AttendingManager {
             String currModuleCode = moduleList.get(currModuleIndex).getModuleCode();
             if (currModuleCode.equals(currLine[0])) { //if the current module is the same as the one in the list
                 addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
-                        lessonType, classNumber, moduleCode));
+                        lessonType, classNumber, weeks, moduleCode));
             } else {
                 currModule.replaceAllAttending(newLessons); //update the attending for the current module
-                newLessons = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>(); //clear the data
+                newLessons = new LinkedHashMap<>(); //clear the data
                 addLessonsIntoMap(newLessons, new Lesson(lessonDay, lessonStart, lessonEnd,
-                        lessonType, classNumber, moduleCode));
+                        lessonType, classNumber, weeks, moduleCode));
                 currModuleIndex++;
             }
         }
