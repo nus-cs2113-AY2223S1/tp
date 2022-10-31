@@ -1,20 +1,11 @@
 package seedu.commands;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.io.IOException;
 import java.util.ArrayList;
 
-=======
->>>>>>> f90f5d0f94baacd91926860d58c2772963bdb339
-=======
-import java.io.IOException;
-import java.util.ArrayList;
-
->>>>>>> 20924978feb1c3625e3bfedc5e2a6bd4dceddff8
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.DuplicateCarparkException;
+import seedu.exception.EmptyFavouriteFileException;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
@@ -102,7 +93,8 @@ public class FavouriteCommand extends Command {
                     return new CommandResult("Nothing to add to favourites!");
                 }
             }
-        } catch (NoCarparkFoundException | NoFileFoundException | InvalidFormatException | IOException e) {
+        } catch (NoCarparkFoundException | NoFileFoundException | InvalidFormatException
+                 | EmptyFavouriteFileException e) {
             return new CommandResult(e.getMessage());
         } catch (FileWriteException fileWriteException) {
             return new CommandResult("Error in setting " + argument + " as favourite.");
