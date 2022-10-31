@@ -5,7 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.GlobalMissingTagException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.GlobalUnsupportedTagCombinationException;
 import seedu.duke.exception.StatsInvalidTypeException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -26,7 +26,7 @@ public class StatsCommandTest {
         Storage storage = new Storage();
 
         assertThrows(
-            GlobalUnsupportedTagException.class,
+            GlobalUnsupportedTagCombinationException.class,
             () -> statsCommand.execute(transactions, ui, storage)
         );
     }
