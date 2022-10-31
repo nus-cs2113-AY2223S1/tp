@@ -176,4 +176,9 @@ public class AttendingManager {
             System.out.println("Sorry, failed to load attendingLessons from AttendingData.txt");
         }
     }
+
+    public static void deleteDataFile(String dataDirectoryPath) {
+        File data = new File(dataDirectoryPath + " \"/ModuleData.txt\"");
+        data.delete();
+    }
 }

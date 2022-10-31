@@ -68,6 +68,7 @@ public class UI {
                 + "                                           |___/                 ");
     }
 
+
     /**
      * Formats the list of lesson types that the user
      * can choose after they have selected a module to set.
@@ -83,4 +84,15 @@ public class UI {
                 .append("\n");
     }
 
+    public static String getDataProtocolResponse() {
+        String response = "2";
+        System.out.println("Oops! Something went wrong. Either a file is corrupted or you are not connected "
+                + "to the internet.\n" + "Enter 0 if you are sure you have internet connection - files will be "
+                + "deleted and recreated before continuing.\n" + "Enter 1 if you have no internet connection - "
+                + "program will quit without losing data.\n");
+        while (!response.equals("0") && !response.equals("1")) {
+            response = sc.nextLine();
+        }
+        return response;
+    }
 }

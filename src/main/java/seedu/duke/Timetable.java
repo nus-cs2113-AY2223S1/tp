@@ -124,4 +124,8 @@ public class Timetable {
 
         listOfModules.get(indexForModule).replaceAttending(timetableDict, newLessons, moduleType);
     }
+
+    public static void clearData() {
+        listOfModules.clear();
+    }
 }
