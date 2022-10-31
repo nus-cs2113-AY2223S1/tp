@@ -14,13 +14,13 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIEN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author jorellesee
-public class ViewTransactionsByUserCommand extends Command {
+public class ViewLendTransactionsByUserCommand extends Command {
 
     private final String[] parts;
     private final TransactionList transactionList;
     private final UserList userList;
 
-    public ViewTransactionsByUserCommand(String[] parts, TransactionList transactionList, UserList userList)
+    public ViewLendTransactionsByUserCommand(String[] parts, TransactionList transactionList, UserList userList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
@@ -57,8 +57,10 @@ public class ViewTransactionsByUserCommand extends Command {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
+            Ui.printResponse("Listed below are the transactions in which " + arg + "is the lender.");
             Ui.printResponse(returnList.toString());
         }
         return false;
     }
 }
+
