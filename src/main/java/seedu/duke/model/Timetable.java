@@ -192,6 +192,12 @@ public class Timetable {
             int dayIndex = days.indexOf(lesson.getRight().day);
             int startRow = timeToIndex(lesson.getRight().startTime);
             int indent = lessonStack.get(dayIndex).get(startRow).size();
+            for (int j = 0; j < lessonStack.get(dayIndex).get(startRow).size(); j++) {
+                if (lessonStack.get(dayIndex).get(startRow).get(j) == null) {
+                    indent = j;
+                    break;
+                }
+            }
             indents.add(indent);
             for (int j = startRow; j < timeToIndex(lesson.getRight().endTime); j++) {
                 while (lessonStack.get(dayIndex).get(j).size() < indent) {
