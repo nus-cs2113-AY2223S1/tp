@@ -31,6 +31,7 @@ public class Favourite {
         this.fileStorage = new FileStorage(directory, file);
         this.directory = directory;
         this.file = file;
+        favouriteList = new ArrayList<>();
     }
 
     /**
@@ -38,8 +39,7 @@ public class Favourite {
      *
      * @throws NoFileFoundException If no file found.
      */
-    public void updateFavouriteList(CarparkList carparkList)
-            throws NoFileFoundException, FileWriteException {
+    public void updateFavouriteList(CarparkList carparkList) throws NoFileFoundException, FileWriteException {
         String content = FileReader.readStringFromTxt(file, directory, true).trim();
         if (content.isEmpty()) {
             return;
@@ -94,8 +94,8 @@ public class Favourite {
      */
     public void writeFavouriteList() throws FileWriteException {
         StringBuilder content = new StringBuilder();
-        for (String id : favouriteList) {
-            content.append(id).append("\n");
+        for (int i = 0; i < favouriteList.size(); i++) {
+            content.append(favouriteList.get(i)).append("\n");
         }
         fileStorage.writeDataToFile(content.toString());
     }

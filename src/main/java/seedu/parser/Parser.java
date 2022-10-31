@@ -83,7 +83,7 @@ public class Parser {
                 || commandWord.equalsIgnoreCase(FavouriteCommand.COMMAND_WORD_SHORT)) {
             if (arguments.isEmpty()) {
                 return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FAVOURITE_FORMAT);
-            } else if (numberOfArguments(arguments) != FavouriteCommand.NUMBER_OF_ARGUMENTS) {
+            } else if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
                 return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
                         FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
             }
