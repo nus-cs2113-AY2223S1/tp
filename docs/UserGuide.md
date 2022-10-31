@@ -99,14 +99,13 @@ Thank you, come again! :)
 passenger already exists in the flight list and the seat number is not already occupied by another
 passenger in the passenger list.
 
-**Format**: `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER
-bg/BOARDING_GROUP sn/SEAT_NUMBER bt/BOARDING_TIME`
+**Format**: `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER bt/BOARDING_TIME`
 
 Example:
 
 **Input**
 
-`passenger add n/Ivan Theng dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100`
+`passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`
 
 **Output**
 
@@ -124,13 +123,13 @@ delete the detail of a single passenger. It is used to remove a passenger from t
 
 **Function**: Deletes a passenger from the current passenger list.
 
-**Usage**: `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER dt/DEPARTURE_TIME`
+**Usage**: `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`
 
 Example:
 
 **Input**
 
-`passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145`
+`passenger delete n/Ivan Theng fn/sq832 sn/17d`
 
 **Output**
 
@@ -351,16 +350,16 @@ _If flight details logbook is empty_.
 
 ## Command Summary
 
-| Command                | Format                                                                                                                                  | Example                                                                  |
-|:-----------------------|:----------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------|
-| `passenger add`        | `passenger add n/PASSENGER_NAME dt/DEPARTURE_TIME fn/FLIGHT_NUMBER gn/GATE_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `    | `passenger add n/Ivan Theng dt/2145 fn/sq832 gn/05 bg/01 sn/17d bt/2100` |
-| `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR`                               | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03`     |
-| `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER dt/DEPARTURE_TIME`                                                   | `passenger delete n/Ivan Theng fn/sq832 sn/17d dt/2145`                  |
-| `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                                                        | `flight delete ke632`                                                    |
-| `passenger list`       | `passenger list`                                                                                                                        | `passenger list`                                                         |
-| `flight list`          | `flight list`                                                                                                                           | `flight list`                                                            |
-| `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                                                             | `modify SQ832 fn/SQ654`                                                  |
-| `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                                               | `modify SQ654 gn/08`                                                     |
+| Command                | Format                                                                                                    | Example                                                              |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
+| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `       | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`           |
+| `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
+| `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
+| `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
+| `passenger list`       | `passenger list`                                                                                          | `passenger list`                                                     |
+| `flight list`          | `flight list`                                                                                             | `flight list`                                                        |
+| `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                               | `modify SQ832 fn/SQ654`                                              |
+| `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                 | `modify SQ654 gn/08`                                                 |
 
 ---
 
