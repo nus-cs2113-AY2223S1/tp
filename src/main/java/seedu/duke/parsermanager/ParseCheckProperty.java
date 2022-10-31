@@ -24,10 +24,10 @@ public class ParseCheckProperty extends Parser {
     @Override
     public Command parseCommand() throws ParseCheckException {
 
-        ArrayList<String> checkDetailsString = processCommandDetails(commandDescription);
-        ArrayList<Integer> checkDetailsInt = convertCheckCommandDetailsToInteger(checkDetailsString);
+        ArrayList<String> stringCheckDetails = processCommandDetails(commandDescription);
+        ArrayList<Integer> integerCheckDetails = convertCheckCommandDetailsToInteger(stringCheckDetails);
 
-        return new CommandCheckProperty(checkDetailsInt);
+        return new CommandCheckProperty(integerCheckDetails);
     }
 
 
@@ -48,7 +48,7 @@ public class ParseCheckProperty extends Parser {
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
+        return (flagIndexPosition != FLAG_ABSENT_RETURN_VALUE);
     }
 
     private ArrayList<Integer> convertCheckCommandDetailsToInteger(ArrayList<String> checkDetailsString)

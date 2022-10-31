@@ -42,7 +42,10 @@ public class Ui {
     private static final String PROPERTY_RENTAL_LABEL = "Property Rental Price: ";
     private static final String PROPERTY_UNIT_TYPE_LABEL = "Unit Type: ";
 
+    private static final String CHECK_PROPERTY_FORMAT = "  %d. %s";
+
     private static final String SPACE = "\t";
+    private static final String AND = " and ";
 
     //@@author wilsonngja
     private static boolean isInputEmpty(String rawInput) {
@@ -135,16 +138,17 @@ public class Ui {
 
 
     /* Pair/Unpair-Command-related showMessage methods. */
-
+    //@@author ngdeqi
     public void showPairedConfirmationMessage(Client client, Property property) {
         showToUser(MESSAGE_PAIRED);
-        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+        showToUser(SPACE + client.getClientName() + AND + property.getPropertyAddress());
     }
 
     public void showUnpairedConfirmationMessage(Client client, Property property) {
         showToUser(MESSAGE_UNPAIRED);
-        showToUser("  " + client.getClientName() + " and " + property.getPropertyAddress());
+        showToUser(SPACE + client.getClientName() + AND + property.getPropertyAddress());
     }
+    //@@author
 
 
     /* Check-Command-related showMessage methods. */
@@ -290,19 +294,23 @@ public class Ui {
         showToUser(MESSAGE_CHECK_CLIENT_NO_PAIR);
     }
 
+    //@@author ngdeqi
     public void showCheckProperty(Property property, ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY);
-        showToUser("  " + property.toString() + "\n");
+        showToUser(SPACE + property.toString() + System.lineSeparator());
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);
         int count = 0;
         for (Client tenant : tenants) {
             String tenantInfo = tenant.toString();
-            showToUser(String.format("  %d. %s", ++count, tenantInfo));
+            showToUser(String.format(CHECK_PROPERTY_FORMAT, ++count, tenantInfo));
         }
         showToUser(MESSAGE_NUMBER_OF_LIST_RESULTS + count);
     }
+    //@@author
 
+    //@@author ngdeqi
     public void showExceptionMessage(DukeException e) {
         showToUser(e.toString());
     }
+    //@@author
 }

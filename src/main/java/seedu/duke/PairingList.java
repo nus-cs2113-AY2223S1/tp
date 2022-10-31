@@ -17,16 +17,35 @@ public class PairingList {
     private static final String LOG_DELETE_PAIR = "The following pairing(s) has been deleted from PairingList: ";
     private static final String LOG_PAIRS_WITH = "Pairs with ";
 
+    public static final String ASSERTION_ADD_PAIRING_CLIENT_ALREADY_PAIRED =
+            "Add Pairing: client already paired with property. Pairing addition unsuccessful.\n";
+
+    private static final String ASSERTION_DELETE_PAIRING_UNSUCCESSFUL =
+            "Delete Pairing: pairing deletion unsuccessful.\n";
+    private static final String ASSERTION_DELETE_PAIRING_CLIENT_NOT_PAIRED = "Delete Pairing: client is not paired. "
+            + "Pairing does not exist. Pairing deletion unsuccessful.\n";
+    private static final String ASSERTION_DELETE_PAIRING_PROPERTY_NOT_PAIRED = "Delete Pairing: property is not paired."
+            + "Pairing deletion unsuccessful.";
+    private static final String ASSERTION_CLIENT_IS_NOT_PAIRED = "isAlreadyPaired() : Client is not paired.";
+
+
     //@@author wilsonngja
     private final HashMap<Client, Property> clientPropertyPairs = new HashMap<>();
     //@@author
-    private static final Logger LOGGER = Logger.getLogger("PairingList");
+    private static final Logger LOGGER = Logger.getLogger(PairingList.class.getName());
 
     /**
      * Constructs the PairingList object.
      */
     public PairingList() {
+        loggerInit();
+    }
 
+    /**
+     * Initialises the logger. Level set to Level.SEVERE to prevent terminal from getting flooded by logs.
+     */
+    public void loggerInit() {
+        LOGGER.setLevel(Level.SEVERE);
     }
 
     /**
@@ -37,8 +56,8 @@ public class PairingList {
      * @param property Property being rented.
      */
     public void addPairing(Client client, Property property) {
-        assert !clientPropertyPairs.containsKey(client) : "Add Pairing: client already paired with property."
-                + " Pairing addition unsuccessful.";
+        assert !clientPropertyPairs.containsKey(client) : ASSERTION_ADD_PAIRING_CLIENT_ALREADY_PAIRED;
+
         clientPropertyPairs.put(client, property);
         LOGGER.log(Level.INFO, LOG_ADD_PAIR + System.lineSeparator()
                 + client.toString() + System.lineSeparator() + property.toString());
@@ -52,11 +71,10 @@ public class PairingList {
      * @param property Property that is no longer being rented.
      */
     public void deletePairing(Client client, Property property) {
-        assert clientPropertyPairs.containsKey(client) : "Delete Pairing: client is not paired. "
-                + "Pairing does not exist. Pairing deletion unsuccessful.";
+        assert clientPropertyPairs.containsKey(client) : ASSERTION_DELETE_PAIRING_CLIENT_NOT_PAIRED;
 
         boolean isRemoved = clientPropertyPairs.remove(client, property);
-        assert isRemoved : "Delete Pairing: pairing deletion unsuccessful.";
+        assert isRemoved : ASSERTION_DELETE_PAIRING_UNSUCCESSFUL;
 
         LOGGER.log(Level.INFO, LOG_DELETE_PAIR + System.lineSeparator()
                 + client.toString() + System.lineSeparator() + property.toString());
@@ -68,14 +86,13 @@ public class PairingList {
      * @param property Property that has been deleted.
      */
     public void deletePairing(Property property) {
-        assert clientPropertyPairs.containsValue(property) : "Delete Pairing: property is not paired."
-                + "Pairing deletion unsuccessful.";
+        assert clientPropertyPairs.containsValue(property) : ASSERTION_DELETE_PAIRING_PROPERTY_NOT_PAIRED;
 
         // Iterate through the hash map to delete all the entries containing the properties
         clientPropertyPairs.entrySet().removeIf(e -> e.getValue().equals(property));
 
-        assert !clientPropertyPairs.containsValue(property) :
-                "Delete Pairing: pairing deletion unsuccessful.";
+        assert !clientPropertyPairs.containsValue(property) : ASSERTION_DELETE_PAIRING_UNSUCCESSFUL;
+
         LOGGER.log(Level.INFO, LOG_DELETE_PAIR + System.lineSeparator() + LOG_PAIRS_WITH + property.toString());
     }
 
@@ -86,12 +103,11 @@ public class PairingList {
      */
     public void deletePairing(Client client) {
 
-        assert clientPropertyPairs.containsKey(client) : "Delete Pairing: Client is not paired."
-                + "Pairing deletion unsuccessful.";
+        assert clientPropertyPairs.containsKey(client) : ASSERTION_DELETE_PAIRING_CLIENT_NOT_PAIRED;
 
         clientPropertyPairs.remove(client);
 
-        assert !clientPropertyPairs.containsKey(client) : "Delete Pairing: Pairing deletion unsuccessful.";
+        assert !clientPropertyPairs.containsKey(client) : ASSERTION_DELETE_PAIRING_UNSUCCESSFUL;
 
         LOGGER.log(Level.INFO, LOG_DELETE_PAIR + System.lineSeparator() + LOG_PAIRS_WITH + client.toString());
     }
@@ -116,7 +132,7 @@ public class PairingList {
     public boolean isAlreadyPaired(Client client, Property property) {
 
         if (clientPropertyPairs.containsKey(client)) {
-            assert clientPropertyPairs.containsKey(client) : "isAlreadyPaired() : Client is not paired.";
+            assert clientPropertyPairs.containsKey(client) : ASSERTION_CLIENT_IS_NOT_PAIRED;
             return clientPropertyPairs.get(client).equals(property);
         }
         return false;
