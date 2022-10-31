@@ -23,7 +23,7 @@ public class EmptySecretFileException extends ParkingException {
      */
     @Override
     public String getMessage() {
-        return String.format("API key in secretfile.txt is empty. Please check your directory at %s. "
+        return String.format("API key in secret.txt is empty. Please check your directory at %s. "
                 + "Using default API key for now.", directory);
     }
 }
