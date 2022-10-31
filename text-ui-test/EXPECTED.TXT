@@ -13,37 +13,32 @@ Please ensure the file is named correctly and is in the right directory if you h
 Currencies loaded successfully :)
 
 
-EXPENSE-RELATED-COMMANDS:
-___________________________________________
-Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+---- EXPENSE-RELATED-COMMANDS ----
+Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
 View your expenses: View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]
 Delete an expense: Delete-Expense -e EXPENSE-INDEX
-Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
 Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending
 Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
 
-RECURRING-PAYMENT-RELATED-COMMANDS:
-___________________________________________
+---- RECURRING-PAYMENT-RELATED-COMMANDS ----
 Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
 Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
 Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
 
-INCOME-RELATED-COMMANDS:
-___________________________________________
+---- INCOME-RELATED-COMMANDS ----
 Add an income: Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
 View your incomes: View-Income [-e INCOME-INDEX]
 Delete an income: Delete-Income -e INCOME-INDEX
 Edit an income: Edit-Income -e INCOME-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT]
 
-TARGET-RELATED-COMMANDS:
-___________________________________________
+---- TARGET-RELATED-COMMANDS ----
 Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
 View your targets: View-Target [-e TARGET-INDEX]
 Delete a target: Delete-Target -e TARGET-INDEX
 Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
-
 
 
 ERROR: The command entered is invalid.
@@ -54,7 +49,6 @@ Date and Time   : 01 Jan 2022 12:00
 Amount          : 1337.37
 Currency        : SGD
 
-
 The expense was added successfully.
 
 
@@ -62,7 +56,6 @@ Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 
 The expense was added successfully.
 
@@ -72,7 +65,6 @@ Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 
 The expense was added successfully.
 
@@ -84,7 +76,6 @@ Amount          : 30.9
 Category        : Category Alpha
 Currency        : SGD
 
-
 The expense was added successfully.
 
 
@@ -95,7 +86,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 
 The expense was added successfully.
 
@@ -108,17 +98,16 @@ Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
 
-
 The expense was added successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+ERROR: The argument DATETIME must be a valid date in the format dd/MM/yyyy HHmm.
 
 
 ---- EXPENSE INDEX 0 ----
@@ -126,20 +115,17 @@ Name            : Test Expense 1
 Date and Time   : 01 Jan 2022 12:00
 Amount          : 1337.37
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
@@ -147,7 +133,6 @@ Description     : This is a test expense 4
 Amount          : 30.9
 Category        : Category Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -156,7 +141,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 5 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -167,7 +151,6 @@ Remarks         : Remarks Bravo
 Currency        : SGD
 
 
-
 ---- EXPENSE INDEX 0 ----
 Name            : Test Expense 1
 Date and Time   : 01 Jan 2022 12:00
@@ -175,26 +158,22 @@ Amount          : 1337.37
 Currency        : SGD
 
 
-
 ---- EXPENSE INDEX 0 ----
 Name            : Test Expense 1
 Date and Time   : 01 Jan 2022 12:00
 Amount          : 1337.37
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
@@ -202,7 +181,6 @@ Description     : This is a test expense 4
 Amount          : 30.9
 Category        : Category Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -211,7 +189,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 5 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -220,7 +197,6 @@ Amount          : 50.9
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
-
 
 
 ERROR: The expense is not found.
@@ -231,20 +207,17 @@ Name            : Test Expense 1
 Date and Time   : 01 Jan 2022 12:00
 Amount          : 1337.37
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
@@ -252,7 +225,6 @@ Description     : This is a test expense 4
 Amount          : 30.9
 Category        : Category Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -261,7 +233,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 5 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -272,7 +243,6 @@ Remarks         : Remarks Bravo
 Currency        : SGD
 
 
-
 The expense was deleted successfully.
 
 
@@ -281,20 +251,17 @@ Name            : Test Expense 1
 Date and Time   : 01 Jan 2022 12:00
 Amount          : 1337.37
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -303,7 +270,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -314,14 +280,12 @@ Remarks         : Remarks Bravo
 Currency        : SGD
 
 
-
 ---- EXPENSE INDEX 2 ----
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 
 The expense was edited successfully.
 
@@ -332,7 +296,6 @@ Date and Time   : 01 Jan 2022 12:00
 Amount          : 10.7
 Currency        : SGD
 
-
 The expense was edited successfully.
 
 
@@ -345,7 +308,6 @@ Category        : Category Alpha
 Remarks         : Remarks Bravo
 Currency        : SGD
 
-
 The expense was edited successfully.
 
 
@@ -357,20 +319,17 @@ Amount          : 13.37
 Category        : Category Alpha
 Remarks         : Remarks Bravo
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -379,7 +338,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -390,14 +348,13 @@ Remarks         : Remarks Bravo
 Currency        : SGD
 
 
-
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
-
-
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+ERROR: The argument EXPENSE-INDEX must be an integer greater than or equals to 0.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p PayLah/PayNow/Cash/Card]
+ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
+
+
+ERROR: The argument DATETIME must be a valid date in the format dd/MM/yyyy HHmm.
 
 
 ERROR: The expense is not found.
@@ -411,20 +368,17 @@ Amount          : 13.37
 Category        : Category Alpha
 Remarks         : Remarks Bravo
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
 Amount          : 20.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
 Amount          : 10.8
 Currency        : SGD
-
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
@@ -433,7 +387,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -442,7 +395,6 @@ Amount          : 50.9
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
-
 
 
 The expense was deleted successfully.
@@ -462,7 +414,6 @@ Amount          : 40.9
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
-
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
@@ -473,7 +424,6 @@ Remarks         : Remarks Bravo
 Currency        : SGD
 
 
-
 ERROR: The command entered is invalid.
 
 
@@ -482,7 +432,6 @@ Interval (Days) : 30
 Amount          : 7.8
 Currency        : SGD
 
-
 The recurring payment was added successfully.
 
 
@@ -490,7 +439,6 @@ Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.8
 Currency        : SGD
-
 
 The recurring payment was added successfully.
 
@@ -500,7 +448,6 @@ Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.8
 Currency        : SGD
-
 
 The recurring payment was added successfully.
 
@@ -510,13 +457,11 @@ Name            : RecExp1
 Interval (Days) : 30
 Amount          : 7.8
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.8
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
@@ -525,7 +470,6 @@ Amount          : 10.8
 Currency        : SGD
 
 
-
 ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 
 
@@ -538,7 +482,7 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -
 ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
+ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
 
 
 ---- RECURRING PAYMENT INDEX 0 ----
@@ -546,20 +490,17 @@ Name            : RecExp1
 Interval (Days) : 30
 Amount          : 7.8
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.8
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.8
 Currency        : SGD
-
 
 
 The recurring payment was edited successfully.
@@ -571,20 +512,17 @@ Interval (Days) : 31
 Description     : This is a test recurring payment 1
 Amount          : 7.81
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
 Amount          : 9.8
 Currency        : SGD
-
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
 Amount          : 10.8
 Currency        : SGD
-
 
 
 The recurring payment was deleted successfully.
