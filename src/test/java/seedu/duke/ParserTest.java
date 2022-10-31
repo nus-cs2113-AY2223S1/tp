@@ -51,14 +51,6 @@ class ParserTest {
 
         String expected = expectedStringWriter.toString();
         assertEquals(expected, outContent.toString());
-        
-        // String expected = "---Here are the reviews that match the keyword---\r\n" 
-        //     + "\r\nMovies:\r\n"
-        //     + "1. [Movie]  inception2  Rating:10.0 Genre: thriller Date watched:10-01-2020\n" 
-        //     + "\r\nTV Shows:\r\n"
-        //     .replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
-
-        // assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -72,12 +64,16 @@ class ParserTest {
         
         String[] findArray = new String[]{"find","in2"};
         ps.executeFind(findArray);
-        
-        String expected = "---Here are the reviews that match the keyword---\\rn" 
-            + "\r\nMovies:\r\n"
-            + "\r\nTV Shows:\r\n"
-            .replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
 
+        StringWriter expectedStringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(expectedStringWriter);
+
+        printWriter.println("---Here are the reviews that match the keyword---\n");
+        printWriter.println("Movies:");
+        printWriter.println("\nTV Shows:");
+        printWriter.close();
+
+        String expected = expectedStringWriter.toString();
         assertEquals(expected, outContent.toString());
     }
 }
