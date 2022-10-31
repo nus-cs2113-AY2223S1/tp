@@ -217,7 +217,10 @@ Step 2: The ViewUserCommand command checks if the delimiters ('u') is present in
 
 Step 3: If all arguments are valid, then it finds the user in the userList by his/her name, which is unique:
 
-`userList.getUserById(userName);`
+`userList.getUserById(userName);`.
+
+It will also find the items belonging to the user (`ViewUserItemsCommand.getUserItems`), user's loss (`transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted()`)
+and user's gain (`transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted()`)
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
 
@@ -236,7 +239,7 @@ Step 2: The ViewUserItemsCommand checks if the delimiters ('u') are present in t
 
 Step 3: If argument is valid, then `getUserItems()` will return a list of items whose owner's id equals to the argument.
 
-Step 4: The list of items wil then be displayed to the user via `Ui.printResponse()`.
+Step 4: The list of items will then be displayed to the user via `Ui.printResponse()`.
 
 The following sequence diagram shows how the view-user-items operation works:
 ![viewUserItemsSequence](images/ViewUserItemsSequence.png)
@@ -623,6 +626,7 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | update price                      | change the price a user decides to loan his item for          |
 | v2.0    | manager  | update transaction                | change the number of days a user decides to loan his item for |
 | v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
+| v2.0    | manager  | view a user's items               | view the items that belong to a user                          |
 | v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
 | v2.1    | manager  | view a user's lend transactions   | view the transactions in which a user is a lender             |
 | v2.1    | manager  | view a user's loss                | see how much a user has to pay for the items he has borrowed  |
