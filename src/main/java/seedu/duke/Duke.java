@@ -112,7 +112,9 @@ public class Duke {
                                              TimetableManager timetableManager, DeleteCommand deleteCommand)
             throws InvalidUserCommandException {
         try {
-            if (deleteCommand.getLesson() != null) {
+            if (deleteCommand.hasDeleteComment()) {
+                executeDeleteComment(userUniversityListManager, deleteCommand);
+            } else if (deleteCommand.getLesson() != null) {
                 timetableManager.deleteLesson(deleteCommand.getLesson());
                 UserStorageParser.storeTimetable(timetableManager);
             } else {
@@ -127,6 +129,18 @@ public class Duke {
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
             Ui.printExceptionMessage(e);
+        }
+    }
+
+    private static void executeDeleteComment(UserUniversityListManager userUniversityListManager,
+                                             DeleteCommand deleteCommand) throws InvalidUserCommandException {
+        if (deleteCommand.getChecker().equals("")) {
+            String universityName = deleteCommand.getUniversityName();
+            String moduleCode = deleteCommand.getModuleCode();
+            System.out.println(moduleCode);
+            userUniversityListManager.deleteComment(universityName, moduleCode);
+        } else {
+            System.out.println("Error: Please do not enter extra characters after note/");
         }
     }
 
@@ -184,7 +198,7 @@ public class Duke {
      *
      * @param userUniversityListManager User university lists' manager
      * @param timetableManager User timetables' manager
-     * @param addCommand The delete command to be executed
+     * @param addCommand The add command to be executed
      *
      * @throws InvalidUserCommandException if user provided an invalid university name.
      */
@@ -193,15 +207,19 @@ public class Duke {
                                           TimetableManager timetableManager, AddCommand addCommand)
             throws InvalidUserCommandException {
         try {
+            int i = 0;
             Lesson lesson = addCommand.getLesson();
             String universityName = addCommand.getUniversityName();
             String moduleCode = addCommand.getModuleCode();
+            String comment = addCommand.getComment();
             if (lesson != null) {
                 if (!userUniversityListManager.getList(universityName).getMyModules().containModules(moduleCode)) {
                     addModuleToList(userUniversityListManager,addCommand);
                 }
                 timetableManager.addLesson(lesson, false);
                 UserStorageParser.storeTimetable(timetableManager);
+            } else if (addCommand.hasComment()) {
+                addComment(userUniversityListManager, addCommand);
             } else {
                 addModuleToList(userUniversityListManager, addCommand);
             }
@@ -210,8 +228,23 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes the update comment function.
+     * @param userUniversityListManager User university lists' manager
+     * @param addCommand The add command to be executed
+     * @throws InvalidUserCommandException if user provides invalid university name
+     */
+    private static void addComment(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
+            throws InvalidUserCommandException {
+        String universityName = addCommand.getUniversityName();
+        String moduleCode = addCommand.getModuleCode();
+        String comment = addCommand.getComment();
+        userUniversityListManager.updateComment(universityName, moduleCode, comment);
+    }
+
     private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
             throws ModuleNotFoundException, InvalidUserCommandException {
+        int i = 0;
         String moduleCode = addCommand.getModuleCode();
         String universityName = addCommand.getUniversityName();
         ModuleMapping moduleMapping = Database.findPuMapping(moduleCode, universityName);

@@ -28,6 +28,7 @@ public class CommandParser {
     private static final String END_TIME_PREFIX = "en/";
     private static final String ADD_FAVOURITE_PREFIX = "add/";
     private static final String DELETE_FAVOURITE_PREFIX = "del/";
+    private static final String COMMENT_PREFIX = "note/";
     private static final String VIEW_FAVOURITE_PREFIX = "VIEW";
     private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
     private static final String USER_LISTS_OPTION = "LISTS";
@@ -35,6 +36,7 @@ public class CommandParser {
     private static final String DELETE_HISTORY_OPTION = "DELETE HISTORY";
     private static final String TIMETABLES_OPTION = "TIMETABLES";
     private static final int SIX_PARAMETERS_LENGTH = 6;
+    private static final int FOUR_PARAMETERS_LENGTH = 4;
     private static final int THREE_PARAMETERS_LENGTH = 3;
     private static final int TWO_PARAMETERS_LENGTH = 2;
     private static final int ONE_PARAMETER_LENGTH = 1;
@@ -47,6 +49,7 @@ public class CommandParser {
     private static final int DAY_INDEX = 3;
     private static final int LESSON_START_TIME_INDEX = 4;
     private static final int LESSON_END_TIME_INDEX = 5;
+    private static final int COMMENT_INDEX = 3;
 
     /**
      * Creates a user command based on user input.
@@ -106,7 +109,8 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid delete command. "
                         + "Please follow the command format provided");
             }
-            boolean isDeleteModule = userInputTokenized.length == THREE_PARAMETERS_LENGTH;
+            boolean isDeleteModule = (userInputTokenized.length == THREE_PARAMETERS_LENGTH
+                                    || userInputTokenized.length == FOUR_PARAMETERS_LENGTH);
             Lesson lessonToDelete = parseLesson(userInputTokenized);
             DeleteCommand newDeleteCommand = new DeleteCommand(userInputTokenized, CommandType.DELETE,
                     isDeleteModule, lessonToDelete);
@@ -194,7 +198,8 @@ public class CommandParser {
      * @return True if user input is a valid add command. False otherwise.
      */
     private static boolean isValidAddCommand(String[] parameters) {
-        return isValidCommandOnModules(parameters) || isValidCommandOnTimetable(parameters);
+        return isValidCommandOnModules(parameters) || isValidCommandOnTimetable(parameters)
+                || isValidAddCommentOnModules(parameters);
     }
 
     /**
@@ -225,7 +230,7 @@ public class CommandParser {
      */
     private static boolean isValidDeleteCommand(String[] parameters) {
         return isValidCommandOnUniversity(parameters) || isValidCommandOnModules(parameters)
-                || isValidCommandOnTimetable(parameters);
+                || isValidCommandOnTimetable(parameters) || isValidDeleteCommandOnModules(parameters);
     }
 
 
@@ -319,6 +324,20 @@ public class CommandParser {
                 && parameters[DAY_INDEX].startsWith(DAY_PREFIX)
                 && parameters[LESSON_START_TIME_INDEX].startsWith(START_TIME_PREFIX)
                 && parameters[LESSON_END_TIME_INDEX].startsWith(END_TIME_PREFIX);
+    }
+
+    private static boolean isValidAddCommentOnModules(String [] parameters) {
+        return parameters.length == FOUR_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
+                && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
+                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
+    }
+
+    private static boolean isValidDeleteCommandOnModules(String [] parameters) {
+        return parameters.length == FOUR_PARAMETERS_LENGTH
+                && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
+                && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
+                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
     }
 
     /**
