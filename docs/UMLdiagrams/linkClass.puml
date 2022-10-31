@@ -5,6 +5,7 @@ skinparam classAttributeIconSize 0
 
 class Link {
     <u>- DELIMITER: String
+    <u>- DELIMITER_REGEX: String
     <u>- DOMAIN: String
     <u>- LESSON_DELIMITER: String
     <u>- LESSON_TYPE_DELIMITER: String
@@ -17,20 +18,22 @@ class Link {
     <u>- SEMESTER_PARAM_INDEX: int
     <u>- SEMESTER_PROCESS_ERROR_MESSAGE: String
     <u>- SHARE_DELIMITER: String
-    <u>- SUPPOSED_PREFIX: String
+    <u>- SPECIAL_TERM_1_SEMESTER_DELIMITER: String
+    <u>- SPECIAL_TERM_2_SEMESTER_DELIMITER: String
     <u>- SUPPOSED_PREFIX_REGEX: String
-    <u>- POSSIBLE_SEMESTER_NUMBER: String
 
-    <u>- addLessons(String[], SelectedModule, int): void
-    <u>- addValidLesson(SelectedModule, int, LessonType, String): void
+    <u>- addLessons(String[], SelectedModule, int, Ui): void
+    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui): void
     <u>- appendModules(List<SelectedModule>, StringBuilder): void
-    <u>+ getLessonType(String): LessonType
+    <u>- appendSemester(State, StringBuilder): void
+    <u>+ getLessonType(String, Ui): LessonType
     <u>+ getLink(State): String
     <u>- getSemesterFromParam(String): int
     <u>- isEmptyLink(String): boolean
     <u>- isLessonInfo(String): boolean
+    <u>- isValidLink(String): boolean
     <u>- isValidPreviousState(String): boolean
     <u>- joinLessons(Map<LessonType, String>): String
-    <u>+ parseLink(String, State): void
+    <u>+ parseLink(String, State, Ui): void
 }
 @enduml

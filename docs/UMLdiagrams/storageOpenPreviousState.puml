@@ -1,19 +1,22 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+hide footbox
+
 box Storage
-Participant ":Storage" as Storage
+Participant ":Storage" as Storage order 2
 end box
 box Link
-Participant "<<class>>\nLink" as Link
+Participant "<<class>>\nLink" as Link order 3
 end box
 box State
-Participant ":State" as State
+Participant ":State" as State order 4
 end box
 box UI
-Participant ":UI" as UI
+Participant ":UI" as UI order 5
 end box
 
-->Storage:openPreviousState()
+
+-> Storage:openPreviousState()
 activate Storage
 alt Has previous state
     Storage -> Storage: get link from saved file
@@ -30,5 +33,6 @@ else No previous state
     UI --> Storage
     deactivate UI
 end
+deactivate Storage
 
 @enduml

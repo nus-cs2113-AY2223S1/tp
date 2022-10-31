@@ -454,80 +454,74 @@ Here's a list of your current selected module(s)!
 Sem [2] >> --------------------------------------------------------------------------------
 Processing "import https://nusmods.com/timetable/st-i/share?EE4302=PLEC:01,PTUT:01&EE4305E=LEC:1,TUT:1" ...
 
-Error! 	The link you supplied is not valid.
+Semester 3 timetable imported.
+EE4302 added.
+The following lessons were added:
+PACKAGED_LECTURE:01
+PACKAGED_TUTORIAL:01
+
+EE4305E added.
+The following lessons were added:
+LECTURE:1
+TUTORIAL:1
+
+Please check that the format of the link provided is correct if there are missing modules or lessons.
+Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-timetable-import
+for more information.
+Timetable imported to YAMOM!
 --------------------------------------------------------------------------------
-Sem [2] >> --------------------------------------------------------------------------------
+Sem [ST1] >> --------------------------------------------------------------------------------
 Processing "# to fix" ...
 
 Error! 	Cannot process the command
 --------------------------------------------------------------------------------
-Sem [2] >> --------------------------------------------------------------------------------
+Sem [ST1] >> --------------------------------------------------------------------------------
 Processing "list" ...
 
-EG1311   Design and Make
-         LAB[24]   Thur 1500-1700, E4-02-06, weeks: 4, 6, 8, 10, 12
-         LEC[1]    Fri 0900-1000, E-Learn_A, weeks: 1 - 13
+EE4302   Advanced Control Systems
+         PLEC[01]  Wed 1730-2000, E1-06-07, weeks: Nil
+                   Thur 1730-2000, E1-06-07, weeks: Nil
+         PTUT[01]  Thur 2000-2100, E1-06-07, weeks: Nil
+                   Wed 2000-2100, E1-06-07, weeks: Nil
 
-EG3301R  DCP Project
-         LEC[1]    Wed 1800-2100, ENG-AUD, weeks: 1 - 13
-         TUT[G11]  Fri 1500-1800, E2A-03-02, weeks: 1 - 13
-
-EG4301   DCP Dissertation
-         LEC[1]    Sat 0800-1000, , weeks: 1 - 13
-
-EG5302   Design Thinking and Product Development
-         LEC[1]    Thur 1800-2100, E4-04-03, weeks: 1 - 13
+EE4305E  Introduction To Fuzzy/Neural Systems
+         LEC[1]    Mon 1800-2030, E3-06-08, weeks: Nil
+                   Wed 1800-2030, E3-06-08, weeks: Nil
+         TUT[1]    Wed 2030-2130, E3-06-08, weeks: Nil
+                   Mon 2030-2130, E3-06-08, weeks: Nil
 
 
 Here's a list of your current selected module(s)!
 --------------------------------------------------------------------------------
-Sem [2] >> --------------------------------------------------------------------------------
+Sem [ST1] >> --------------------------------------------------------------------------------
 Processing "timetable /simple" ...
 
-                                                                                          
-          : Mon      : Tues     : Wed      : Thur     : Fri      : Sat      : Sun         
-==========================================================================================
-   0800   :          :          :          :          :          +----------+             
-   0830   :          :          :          :          :          |EG4301    |             
-   0900   :          :          :          :          +----------+ LEC[1]   |             
-   0930   :          :          :          :          |EG1311    |          |             
-   1000   :          :          :          :          +-LEC[1]---+----------+             
-   1030   :          :          :          :          :          :          :             
-   1100   :          :          :          :          :          :          :             
-   1130   :          :          :          :          :          :          :             
-   1200   :          :          :          :          :          :          :             
-   1230   :          :          :          :          :          :          :             
-   1300   :          :          :          :          :          :          :             
-   1330   :          :          :          :          :          :          :             
-   1400   :          :          :          :          :          :          :             
-   1430   :          :          :          :          :          :          :             
-   1500   :          :          :          +----------+----------+          :             
-   1530   :          :          :          |EG1311    |EG3301R   |          :             
-   1600   :          :          :          | LAB[24]  | TUT[G11] |          :             
-   1630   :          :          :          |          |          |          :             
-   1700   :          :          :          +----------+          |          :             
-   1730   :          :          :          :          |          |          :             
-   1800   :          :          +----------+----------+----------+          :             
-   1830   :          :          |EG3301R   |EG5302    |          :          :             
-   1900   :          :          | LEC[1]   | LEC[1]   |          :          :             
-   1930   :          :          |          |          |          :          :             
-   2000   :          :          |          |          |          :          :             
-   2030   :          :          |          |          |          :          :             
-   2100   :          :          +----------+----------+          :          :             
-   2130   :          :          :          :          :          :          :             
-   2200   :          :          :          :          :          :          :             
-                                                                                          
+
+          : Mon      : Tues     : Wed                                       : Thur     : Fri
+=====================================================================================================
+   1700   :          :          :                                           :          :
+   1730   :          :          +----------+                                +----------+
+   1800   +----------+          |EE4302    +----------+                     |EE4302    |
+   1830   |EE4305E   |          | PLEC[01] |EE4305E   |                     | PLEC[01] |
+   1900   | LEC[1]   |          |          | LEC[1]   |                     |          |
+   1930   |          |          |          |          |                     |          |
+   2000   |          |          +----------+          +----------+          +----------+
+   2030   +----------+          :          +----------+EE4302    +----------+EE4302    |
+   2100   |EE4305E   |          :                     +-PTUT[01]-+EE4305E   +-PTUT[01]-+
+   2130   +-TUT[1]---+          :                                +-TUT[1]---+          :
+   2200   :          :          :                                           :          :
+
 
 --------------------------------------------------------------------------------
-Sem [2] >> --------------------------------------------------------------------------------
+Sem [ST1] >> --------------------------------------------------------------------------------
 Shutting down......
 Processing "bye" ...
 
 These are your export links:
 https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01
 https://nusmods.com/timetable/sem-2/share?EG1311=LAB:24,LEC:1&EG3301R=LEC:1,TUT:G11&EG4301=LEC:1&EG5302=LEC:1
-https://nusmods.com/timetable/sem-3/share?
-https://nusmods.com/timetable/sem-4/share?
+https://nusmods.com/timetable/st-i/share?EE4302=PLEC:01,PTUT:01&EE4305E=LEC:1,TUT:1
+https://nusmods.com/timetable/st-ii/share?
 --------------------------------------------------------------------------------
 Bye bye, See you again
 --------------------------------------------------------------------------------
