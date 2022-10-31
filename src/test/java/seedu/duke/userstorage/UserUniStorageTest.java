@@ -197,7 +197,7 @@ public class UserUniStorageTest {
         UserStorageParser.storeCreatedLists(testManager);
         String fileContent = getFileContents(filePath);
         assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%\n", fileContent);
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;%\n", fileContent);
     }
 
     @Test
@@ -212,12 +212,12 @@ public class UserUniStorageTest {
         UserStorageParser.storeCreatedLists(testManager);
         String fileContent = getFileContents(filePath);
         assertEquals("Boston University%\n" + "null%\n" + "F%\n"
-                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;null%\n"
+                + "MET CS 248;Discrete Mathematics;3;CS1231;Discrete Structures;4;%\n"
                 + "CS103;Introduction to Internet Technologies and Web Programming;3;"
-                + "IT1001;Introduction to Computing;4;null%\n"
+                + "IT1001;Introduction to Computing;4;%\n"
                 + "/Arizona State University%\n" + "null%\n" + "F%\n"
-                + "CSE412;Database Management;3;CS2102;Database Systems;4;null%\n"
-                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;null%\n",
+                + "CSE412;Database Management;3;CS2102;Database Systems;4;%\n"
+                + "CSE450;Design and Analysis of Algorithms;3;CS3230;Design & Analysis of Algorithm;4;%\n",
                 fileContent);
     }
 

@@ -119,7 +119,7 @@ public class UserModuleMappingTest {
                 "Data Structures & Algorithms", "4", "4", "UCB", "USA");
         myModules.addModule(mod);
         myModules.updateModule("-", "-", "-");
-        assertEquals(myModules.getModuleByPuCode("CS24").getComment(), null);
+        assertEquals("", myModules.getModuleByPuCode("CS24").getComment());
     }
 
     @Test
