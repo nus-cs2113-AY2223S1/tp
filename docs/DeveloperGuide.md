@@ -16,14 +16,17 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Component Interactions](#component-interactions)
   * [Common Component](#common-component)
   * [Exceptions Component](#exceptions-component)
-  * [UserInterface Component](#userInterface-component)
+  * [UserInterface Component](#userinterface-component)
   * [Commands Component](#commands-component)
+  * [Api Component](#api-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
   * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
   * [Viewing an expense: `View-Expense`](#viewing-an-expense-view-expense)
   * [Deleting an expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
   * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
+  * [Sorting expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
+  * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
   * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
   * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
   * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
@@ -92,6 +95,7 @@ The software architecture diagram below describes the program's design and the i
 | Parser        | Provides functions to parse inputs read from standard input.                        |
 | Data          | Stores data and provides functions to operate on data.                              |
 | Storage       | Defines functions to save and load data.                                            |
+| Api           | Defines functions to call the currency Api and store exchange rates in a text file. |
 | Logger        | Defines functions to log the user's actions and the program's behaviour.            |
 
 ### Component Interactions
@@ -176,6 +180,18 @@ The corresponding console command subclass is returned by `ConsoleParser#parse()
 For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
 
+### Api Component
+
+The Api component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
+
+![Component-Api](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp//docs/diagrams/ComponentApi.puml)
+
+The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the Api and transfer that data into a hashmap of exchange rates.
+
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson` to fetch data from the Api URL in the form of a JSON file. The data fetched contains the currency code its corresponding exchange rate with respect to the Singapore Dollar.
+* `CurrencyApi#getJson` calls `CurrencyApi#writeToFile`, which writes the data into a text file. 
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile` which writes the data from the text file into a hashmap of exchange rates, where the key is the currency code in a `String`, and the value is the exchange rate in a `Integer`.
+
 ## Implementation
 ### Printing an expense
 
@@ -204,6 +220,16 @@ The `Delete-Expense` command removes an existing expense from the program.
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditExpense.puml)
+
+### Sorting expenses: `Sort-Expense`
+
+The `Sort-Expense` command sorts the existing expenses in the program.
+
+
+### Converting currencies: `Convert-Currency`
+
+The `Convert-Currency` command converts the currency of an existing expense in the program.
+
 
 ### Printing a recurring payment
 
