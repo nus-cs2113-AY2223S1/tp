@@ -219,8 +219,8 @@ Step 3: If all arguments are valid, then it finds the user in the userList by hi
 
 `userList.getUserById(userName);`.
 
-It will also find the items belonging to the user (`ViewUserItemsCommand.getUserItems`)
-and the user's debt (`transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted()`)
+It will also find the items belonging to the user (`ViewUserItemsCommand.getUserItems`), user's loss (`transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted()`)
+and user's gain (`transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted()`)
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
 
