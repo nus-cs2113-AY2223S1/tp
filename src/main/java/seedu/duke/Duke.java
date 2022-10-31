@@ -5,6 +5,7 @@ import seedu.duke.exception.StoreFailureException;
 import seedu.duke.exception.TransactionFileNotFoundException;
 import seedu.duke.exception.UserFileNotFoundException;
 import seedu.duke.item.ItemList;
+import seedu.duke.logger.DukeLogger;
 import seedu.duke.storage.ItemStorage;
 import seedu.duke.storage.TransactionStorage;
 import seedu.duke.storage.UserStorage;
@@ -32,6 +33,7 @@ public class Duke {
     private final TransactionStorage transactionStorage;
     private final ItemStorage itemStorage;
     private final UserStorage userStorage;
+    private final DukeLogger dukeLogger;
     private boolean isLastCommand = false;
 
     /**
@@ -42,6 +44,7 @@ public class Duke {
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
+        dukeLogger = new DukeLogger();
         userStorage = new UserStorage(userFilePath);
         itemStorage = new ItemStorage(itemFilePath);
         transactionStorage = new TransactionStorage(transactionFilePath);
@@ -120,10 +123,13 @@ public class Duke {
                         CommandParser.createCommand(input, userList, itemList, transactionList);
                 isLastCommand = command.executeCommand();
                 writeDataToFile();
+                dukeLogger.info("Command executes successfully");
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
+                dukeLogger.warning(e.getMessage());
             }
         }
+        dukeLogger.info("Exit Duke");
     }
 
     /**
