@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 
 import seedu.data.CarparkList;
+import seedu.exception.EmptyFavouriteFileException;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
@@ -30,6 +31,7 @@ public class Favourite {
         this.fileStorage = new FileStorage(directory, file);
         this.directory = directory;
         this.file = file;
+        favouriteList = new ArrayList<>();
     }
 
     /**
@@ -38,17 +40,19 @@ public class Favourite {
      * @throws NoFileFoundException If no file found.
      */
     public void updateFavouriteList(CarparkList carparkList)
-            throws NoFileFoundException, FileWriteException, InvalidFormatException {
+            throws NoFileFoundException, FileWriteException, InvalidFormatException, EmptyFavouriteFileException {
         String content = FileReader.readStringFromTxt(file, directory, true);
-        String[] lines = content.split("\\R");
-        ArrayList<String> tempArray = new ArrayList<>();
-        Collections.addAll(tempArray, lines);
-        tempArray = new ArrayList<>(new LinkedHashSet<>(tempArray));
-        boolean isValid = ensureValidity(carparkList, tempArray);
-        if (!isValid) {
-            writeFavouriteList();
-            throw new InvalidFormatException("There was an issue loading some favourites in your favourites.txt file.\n"
-                    + "The problematic items have been skipped and removed from the list.");
+        if (!content.isEmpty()) {
+            String[] lines = content.split("\\R");
+            ArrayList<String> tempArray = new ArrayList<>();
+            Collections.addAll(tempArray, lines);
+            tempArray = new ArrayList<>(new LinkedHashSet<>(tempArray));
+            boolean isValid = ensureValidity(carparkList, tempArray);
+            if (!isValid) {
+                writeFavouriteList();
+                throw new InvalidFormatException("There was an issue loading some favourites in your favourites.txt "
+                        + "file.\nThe problematic items have been skipped and removed from the list.");
+            }
         }
     }
 
@@ -85,8 +89,8 @@ public class Favourite {
      */
     public void writeFavouriteList() throws FileWriteException {
         StringBuilder content = new StringBuilder();
-        for (String id : favouriteList) {
-            content.append(id).append("\n");
+        for (int i = 0; i < favouriteList.size(); i++) {
+            content.append(favouriteList.get(i)).append("\n");
         }
         fileStorage.writeDataToFile(content.toString());
     }
