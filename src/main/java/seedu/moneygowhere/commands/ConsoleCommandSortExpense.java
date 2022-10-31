@@ -1,55 +1,44 @@
 package seedu.moneygowhere.commands;
 
-import seedu.moneygowhere.data.expense.Expense;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
-import java.math.BigDecimal;
-import java.util.Comparator;
+//@@author jeyvia
 
+/**
+ * Stores the command Sort-Expense and its arguments.
+ */
+@SuppressWarnings("FieldMayBeFinal")
 public class ConsoleCommandSortExpense extends ConsoleCommand {
     private String type;
+    private boolean order;
 
-    public ConsoleCommandSortExpense(String type) {
+    /**
+     * Reads in type & order of sorting to run sorting command later.
+     *
+     * @param type defines the type of sorting to be done later, be it by date, amount or alphabetical
+     * @param order if true, sort by ascending. If false, sort by descending
+     */
+    public ConsoleCommandSortExpense(String type, String order) {
         this.type = type;
+        if (order.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING)) {
+            this.order = true;
+        } else if (order.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING)) {
+            this.order = false;
+        }
     }
 
     public String getType() {
         return type;
     }
 
-    public Comparator<Expense> sortByDate = new Comparator<Expense>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            //placeholder as date is not a type yet
-            String expenseName1 = expense1.getName();
-            String expenseName2 = expense2.getName();
+    public boolean getOrderValue() {
+        return order;
+    }
 
-            return expenseName1.compareTo(expenseName2);
+    public String getOrder() {
+        if (order) {
+            return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING;
         }
-    };
-
-    /**
-     * Comparator sorts from A to Z.
-     */
-    public Comparator<Expense> sortByAlphabet = new Comparator<Expense>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            String expenseName1 = expense1.getName();
-            String expenseName2 = expense2.getName();
-
-            return expenseName1.compareTo(expenseName2);
-        }
-    };
-
-    /**
-     * Comparator sorts by amount, in ascending order.
-     */
-    public Comparator<Expense> sortByAmount = new Comparator<Expense>() {
-        @Override
-        public int compare(Expense expense1, Expense expense2) {
-            BigDecimal expenseName1 = expense1.getAmount();
-            BigDecimal expenseName2 = expense2.getAmount();
-
-            return expenseName1.compareTo(expenseName2);
-        }
-    };
+        return ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_DESCENDING;
+    }
 }

@@ -1,0 +1,41 @@
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Colors.puml
+
+skinparam packageStyle Rectangle
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam BackgroundColor #ffffff
+skinparam DefaultTextAlignment center
+skinparam Shadowing false
+
+skinparam Class {
+    BorderThickness 0
+    BorderColor #ffffff
+    FontColor #ffffff
+    StereotypeFontColor #ffffff
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor USER_COLOR
+    Color USER_COLOR
+    FontName Arial
+}
+
+skinparam Sequence {
+    BoxPadding 0
+    BoxFontSize 15
+    BoxFontColor #ffffff
+    MessageAlign center
+    FontName Arial
+}
+
+skinparam Participant {
+    Padding 20
+    FontColor #ffffff
+}
+
+skinparam linetype ortho
+
+hide circle
+hide members
+hide footbox
