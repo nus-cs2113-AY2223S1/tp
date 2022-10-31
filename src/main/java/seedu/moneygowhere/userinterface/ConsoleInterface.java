@@ -506,7 +506,7 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
         if (expenses.isEmpty()) {
-            printErrorMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_EMPTY_LIST);
         }
 
         for (int index = 0; index < expenses.size(); index++) {
