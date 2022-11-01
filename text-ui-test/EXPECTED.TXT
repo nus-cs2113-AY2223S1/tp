@@ -155,7 +155,7 @@ Parameters information:
 Command Word: PURGE
 Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
 Usage: purge
-Parameters information:  -NIL-
+Parameters information: -NIL-
 
 Command Word: BYE
 Exit the application.

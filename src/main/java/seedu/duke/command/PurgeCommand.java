@@ -3,6 +3,7 @@ package seedu.duke.command;
 //@@author brian-vb
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
@@ -11,13 +12,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_PURGE;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_PURGE;
+import static seedu.duke.common.HelpMessages.PURGE_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.PURGE_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_PURGE;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_ABORT;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_EMPTY;
 import static seedu.duke.common.InfoMessages.INFO_PURGE_WARNING;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a purge command object that will execute the operations for Purge command.
@@ -26,14 +26,6 @@ public class PurgeCommand extends Command {
     //@@author brian-vb
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "PURGE";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:  -NIL-";
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_PURGE + LINE_SEPARATOR + COMMAND_USAGE_PURGE + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
     //@@author brian-vb
     private static final Logger purgeLogger = Logger.getLogger(AddCommand.class.getName());
@@ -96,6 +88,26 @@ public class PurgeCommand extends Command {
             return true;
         }
         return false;
+    }
+
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return PURGE_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return PURGE_COMMAND_DETAILED_HELP;
     }
 
     //@@author paullowse

@@ -5,6 +5,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.DateFormats;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 
@@ -26,17 +27,10 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_ENTRY;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_AMOUNT;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DATE;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DESCRIPTION;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_EDIT;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_EDIT;
+import static seedu.duke.common.HelpMessages.EDIT_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.EDIT_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_EDIT_INCOME;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents an edit command object that will execute the operations for Edit command.
@@ -45,17 +39,6 @@ public class EditCommand extends Command {
     //@@author brian-vb
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "EDIT";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_ENTRY + LINE_SEPARATOR + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR + COMMAND_PARAMETERS_DESCRIPTION;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_EDIT + LINE_SEPARATOR + COMMAND_USAGE_EDIT + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
     //@@author paullowse
     private int entryNumber;
@@ -231,6 +214,28 @@ public class EditCommand extends Command {
         editLogger.log(Level.INFO, "This is the end of the edit command.");
 
     }
+
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return EDIT_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return EDIT_COMMAND_DETAILED_HELP;
+    }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

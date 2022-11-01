@@ -1,35 +1,25 @@
 package seedu.duke.command;
 
 //@author wcwy
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_COMMAND;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DETAILED;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_HELP;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_HELP;
+import static seedu.duke.common.HelpMessages.HELP_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.HELP_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
-
+//@@author wcwy
 /**
  * Represents a help command object that will execute the operations for Help command.
  */
 public class HelpCommand extends Command {
-    //@@author wcwy
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_DETAILED + LINE_SEPARATOR + COMMAND_PARAMETERS_COMMAND;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_HELP + LINE_SEPARATOR + COMMAND_USAGE_HELP + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
-    //@@author wcwy
     private boolean isDetailed;
 
     /**
@@ -90,16 +80,16 @@ public class HelpCommand extends Command {
      * @return A string containing all basic help messages of valid commands.
      */
     private String generateBasicHelp() {
-        String helpMessage = HelpCommand.COMMAND_HELP + LINE_SEPARATOR
-                + BudgetCommand.COMMAND_HELP + LINE_SEPARATOR
-                + AddCommand.COMMAND_HELP + LINE_SEPARATOR
-                + ListCommand.COMMAND_HELP + LINE_SEPARATOR
-                + FindCommand.COMMAND_HELP + LINE_SEPARATOR
-                + StatsCommand.COMMAND_HELP + LINE_SEPARATOR
-                + EditCommand.COMMAND_HELP + LINE_SEPARATOR
-                + DeleteCommand.COMMAND_HELP + LINE_SEPARATOR
-                + PurgeCommand.COMMAND_HELP + LINE_SEPARATOR
-                + ByeCommand.COMMAND_HELP;
+        String helpMessage = getHelpMessage().toString() + LINE_SEPARATOR
+                + BudgetCommand.getHelpMessage() + LINE_SEPARATOR
+                + AddCommand.getHelpMessage() + LINE_SEPARATOR
+                + ListCommand.getHelpMessage() + LINE_SEPARATOR
+                + FindCommand.getHelpMessage() + LINE_SEPARATOR
+                + StatsCommand.getHelpMessage() + LINE_SEPARATOR
+                + EditCommand.getHelpMessage() + LINE_SEPARATOR
+                + DeleteCommand.getHelpMessage() + LINE_SEPARATOR
+                + PurgeCommand.getHelpMessage() + LINE_SEPARATOR
+                + ByeCommand.getHelpMessage();
 
         return helpMessage;
     }
@@ -110,18 +100,37 @@ public class HelpCommand extends Command {
      * @return A string containing all detailed help messages of valid commands.
      */
     private String generateDetailedHelp() {
-        String helpMessage = HelpCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + BudgetCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + AddCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + ListCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + FindCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + StatsCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + EditCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + DeleteCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + PurgeCommand.COMMAND_DETAILED_HELP + LINE_SEPARATOR
-                + ByeCommand.COMMAND_DETAILED_HELP;
+
+        String helpMessage = getDetailedHelpMessage().toString() + LINE_SEPARATOR
+                + BudgetCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + AddCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + ListCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + FindCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + StatsCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + EditCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + DeleteCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + PurgeCommand.getDetailedHelpMessage() + LINE_SEPARATOR
+                + ByeCommand.getDetailedHelpMessage();
 
         return helpMessage;
+    }
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return HELP_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return HELP_COMMAND_DETAILED_HELP;
     }
 
     //@@author paullowse
