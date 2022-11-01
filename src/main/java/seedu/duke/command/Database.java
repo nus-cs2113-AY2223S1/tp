@@ -65,29 +65,75 @@ public class Database {
     }
 
     /**
-     * Search for partner university module code in current list of module mappings.
+     * Search for partner university mapping in current databse of universities and
+     * module mappings.
      * 
-     * @param moduleCode Partner university module code to find
+     * @param moduleCode     Partner university module code to find
      * @param universityName Partner university name
      * @return Module mapping which contains partner university module code
-     * @throws ModuleNotFoundException If module code is not found inside current
-     *                                 list of module mappings
+     * @throws ModuleNotFoundException     If module code is not found inside
+     *                                     current
+     *                                     list of module mappings
+     * @throws UniversityNotFoundException If partner university is not found inside
+     *                                     current list of univeristies
      */
     public static ModuleMapping findPuMapping(String moduleCode, String universityName)
             throws ModuleNotFoundException, UniversityNotFoundException {
+        return findPuUniversityMapping(moduleCode, universityName);
+    }
+
+    /**
+     * Checks if partner university can be found in universities database.
+     * 
+     * @param moduleCode     Partner university module code to find
+     * @param universityName Partner university name
+     * @return Module mapping which contains partner university module code
+     * @throws ModuleNotFoundException     If module code is not found inside
+     *                                     current
+     *                                     list of module mappings
+     * @throws UniversityNotFoundException If partner university is not found inside
+     *                                     current list of univeristies
+     */
+    private static ModuleMapping findPuUniversityMapping(String moduleCode, String universityName)
+            throws ModuleNotFoundException, UniversityNotFoundException {
         for (University university : universities) {
-            if (university.getName().equals(universityName)) {
-                for (ModuleMapping moduleMapping : moduleMappings) {
-                    if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)
-                            && moduleMapping.getPartnerUniversityModule()
-                            .getUniversity().getName().equals(universityName)) {
-                        return moduleMapping;
-                    }
-                }
-                throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+            if (isMatchingUniversity(universityName, university)) {
+                return findPuModuleMapping(moduleCode, universityName);
             }
         }
         throw new UniversityNotFoundException("Error! " + universityName + " not found in database");
+    }
+
+    private static boolean isMatchingUniversity(String universityName, University university) {
+        return university.getName().equals(universityName);
+    }
+
+    /**
+     * Checks if partner university module mapping can be found in module mappings
+     * database.
+     * 
+     * @param moduleCode     Partner university module code to find
+     * @param universityName Partner university name
+     * @return Module mapping which contains partner university module code
+     * @throws ModuleNotFoundException If module code is not found inside
+     *                                 current
+     *                                 list of module mappings
+     */
+    private static ModuleMapping findPuModuleMapping(String moduleCode, String universityName)
+            throws ModuleNotFoundException {
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (isMatchingModuleMapping(moduleCode, universityName, moduleMapping)) {
+                return moduleMapping;
+            }
+        }
+        throw new ModuleNotFoundException("Error! " + moduleCode + " not found in database");
+    }
+
+    private static boolean isMatchingModuleMapping(String moduleCode, String universityName,
+            ModuleMapping moduleMapping) {
+        return moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)
+                && moduleMapping.getPartnerUniversityModule()
+                        .getUniversity().getName().equals(universityName);
     }
 
     /**
@@ -140,8 +186,8 @@ public class Database {
     }
 
     public static boolean hasUniversityInDatabase(String universityName) {
-        for (University university: universities) {
-            if (university.getName().equals(universityName)) {
+        for (University university : universities) {
+            if (isMatchingUniversity(universityName, university)) {
                 return true;
             }
         }
