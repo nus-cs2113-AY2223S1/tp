@@ -12,6 +12,7 @@ public class CommandStructure {
     public static final String COMMAND_FIND = "find";
 
     public static final int START_INDEX = 0;
+    public static final int ONE_ITEM_IN_LIST = 1;
     public static final String NAME_FLAG = "n/";
     public static final String PAIR_FLAG = "-pair";
     public static final String CONTACT_NUMBER_FLAG = "c/";

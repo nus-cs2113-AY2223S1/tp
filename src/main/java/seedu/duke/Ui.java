@@ -26,6 +26,15 @@ import static seedu.duke.Messages.MESSAGE_UNPAIRED;
 import static seedu.duke.Messages.MESSAGE_WELCOME;
 import static seedu.duke.Messages.CLIENT;
 import static seedu.duke.Messages.PROPERTY;
+import static seedu.duke.Messages.THERE_IS;
+import static seedu.duke.Messages.THERE_ARE;
+import static seedu.duke.Messages.CLIENT_SINGULAR;
+import static seedu.duke.Messages.CLIENTS_PLURAL;
+import static seedu.duke.Messages.PAIR_SINGULAR;
+import static seedu.duke.Messages.PAIRS_PLURAL;
+import static seedu.duke.Messages.PROPERTY_SINGULAR;
+import static seedu.duke.Messages.PROPERTIES_PLURAL;
+import static seedu.duke.Messages.IN_THIS_LIST;
 
 
 /**
@@ -300,27 +309,27 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
-    public void displayNoOfProperties(int i) {
-        if (i == 1) {
-            System.out.println("There is " + i + " property in the list");
+    public void displayNoOfProperties(int i, boolean isOneProperty) {
+        if (isOneProperty) {
+            System.out.println(THERE_IS + i + PROPERTY_SINGULAR + IN_THIS_LIST);
         } else {
-            System.out.println("There are " + i + " properties in this list");
+            System.out.println(THERE_ARE + i + PROPERTIES_PLURAL + IN_THIS_LIST);
         }
     }
 
-    public void displayNoOfClients(int i) {
-        if (i == 1) {
-            System.out.println("There is " + i + " client in the list");
+    public void displayNoOfClients(int i, boolean isOneClient) {
+        if (isOneClient) {
+            System.out.println(THERE_IS + i + CLIENT_SINGULAR + IN_THIS_LIST);
         } else {
-            System.out.println("There are " + i + " clients in this list");
+            System.out.println(THERE_ARE + i + CLIENTS_PLURAL + IN_THIS_LIST);
         }
     }
 
-    public void displayNoOfPairs(int i) {
-        if (i == 1) {
-            System.out.println("There is " + i + " pair in the list");
+    public void displayNoOfPairs(int i, boolean isOnePair) {
+        if (isOnePair) {
+            System.out.println(THERE_IS + i + PAIR_SINGULAR + IN_THIS_LIST);
         } else {
-            System.out.println("There are " + i + " pairs in this list");
+            System.out.println(THERE_ARE + i + PAIRS_PLURAL + IN_THIS_LIST);
         }
     }
 

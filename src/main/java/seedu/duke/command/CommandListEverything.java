@@ -6,11 +6,10 @@ import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.Messages;
-import seedu.duke.command.CommandListPairs;
-import seedu.duke.command.CommandListClients;
-import seedu.duke.command.CommandListProperties;
 
 public class CommandListEverything extends Command {
+
+    @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
         System.out.println(Messages.CLIENTS);
