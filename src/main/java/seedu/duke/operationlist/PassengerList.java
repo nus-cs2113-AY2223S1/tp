@@ -278,7 +278,7 @@ public class PassengerList extends OperationList {
         try {
             boardingGroup = Integer.parseInt(boardingGroupDetail);
         } catch (Exception e) {
-            throw new SkyControlException(ui.getErrorMessage());
+            throw new SkyControlException(ui.getBoardingGroupError());
         }
         assert boardingGroup >= 0 : "Invalid boarding group";
     }
