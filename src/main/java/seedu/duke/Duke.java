@@ -19,6 +19,7 @@ import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
+import seedu.duke.exceptions.InvalidCommentException;
 import seedu.duke.module.Module;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.timetable.TimetableManager;
@@ -76,7 +77,7 @@ public class Duke {
                 default:
                     break;
                 }
-            } catch (InvalidUserCommandException | InvalidModuleException
+            } catch (InvalidCommentException | InvalidUserCommandException | InvalidModuleException
                      | ModuleNotFoundException | UniversityNotFoundException e) {
                 Ui.printExceptionMessage(e);
             }

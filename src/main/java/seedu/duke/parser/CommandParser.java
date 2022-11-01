@@ -61,7 +61,7 @@ public class CommandParser {
      * @throws InvalidUserCommandException if the user command does not follow the command format laid out
      */
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException,
-            ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException {
+            ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException, InvalidCommentException {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
             throw new InvalidUserCommandException("Error! Missing command. "
@@ -160,7 +160,21 @@ public class CommandParser {
             return new Lesson(puModule.getCode(), puModule.getTitle(), puModule.getCredit(), puModule.getUniversity(),
                     day, startTime, endTime);
         }
+    }
 
+    private static String parseComment(String[] parameters) throws InvalidCommentException {
+        // no comment
+        if (parameters.length <= COMMENT_INDEX) {
+            return "";
+        }
+        
+
+        int commentStartIndex = comment.indexOf("{");
+        int commentEndIndex = comment.indexOf("}");
+
+
+        throw new InvalidCommentException("Error! The comment " + comment + " is invalid!");
+    }
     }
 
     /**
