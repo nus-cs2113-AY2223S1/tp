@@ -13,53 +13,17 @@ import java.util.stream.Collectors;
  * Based off https://github.com/nusmodifications/nusmods/blob/master/scrapers/nus-v2/src/types/modules.ts
  */
 public class Module implements Comparable<Module> {
-    /**
-     * Academic year e.g. "2022/2023".
-     */
     public final String acadYear;
-    /**
-     * Module code.
-     */
     public final String moduleCode;
-    /**
-     * Module title.
-     */
     public final String title;
-    /**
-     * Module description.
-     */
     public final String description;
-    /**
-     * Number of modular credits for this module.
-     */
     public final int moduleCredit;
-    /**
-     * Department in charge of this module.
-     */
     public final String department;
-    /**
-     * Faculty in charge of this module.
-     */
     public final String faculty;
-    /**
-     * Workload represented as a list of 5 integers.
-     */
-    public final List<Integer> workload;
-    /**
-     * Data for each semester this module is offered in.
-     */
+    public final List<Integer> workload; // workload represented as a list of 5 integers.
     public final List<SemesterData> semesterData;
-    /**
-     * Prerequisite list for this module. May not be in a structured format.
-     */
     public final String prerequisite;
-    /**
-     * Corequisites for this module.
-     */
     public final String corequisite;
-    /**
-     * Preclusions for this module.
-     */
     public final String preclusion;
 
     /**
