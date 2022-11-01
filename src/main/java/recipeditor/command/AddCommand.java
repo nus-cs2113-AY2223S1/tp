@@ -30,12 +30,12 @@ public class AddCommand extends Command {
      */
     public CommandResult execute() {
         if (isValid) {
+            assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe);
             RecipeList.addRecipeTitle(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
-
             StringBuilder response = new StringBuilder();
             response.append("\"" + addedRecipe.getTitle() + "\" added to the recipe list.\n");
             response.append(String.format("There are %d recipes in the recipe list",

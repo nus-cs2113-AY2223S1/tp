@@ -30,13 +30,13 @@ public class Add extends EditModeCommand {
         switch (ingredientFlag) {
         case STEP:
             recipe.addStep(content.toString());
-            message = String.format("Step: %s is added", content.toString());
+            message = String.format("Step: %s is added", content);
             return recipe;
         case INGREDIENT:
             try {
                 Ingredient newIngredient = Ingredient.parsedIngredients(content.toString());
                 recipe.addIngredient(newIngredient);
-                message = String.format("Ingredient: %s is added", content.toString());
+                message = String.format("Ingredient: %s is added", content);
                 return recipe;
             } catch (ParseException e) {
                 throw new ParseException();

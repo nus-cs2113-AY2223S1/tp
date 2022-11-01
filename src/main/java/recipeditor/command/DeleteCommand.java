@@ -36,10 +36,6 @@ public class DeleteCommand extends Command {
         }
     }
 
-    public static String getCommandType() {
-        return COMMAND_TYPE;
-    }
-
     /**
      * Delete the recipe at the given title or index.
      *

@@ -2,14 +2,14 @@ package recipeditor.parser;
 
 import recipeditor.command.Command;
 import recipeditor.command.AddCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.ExitCommand;
 import recipeditor.command.DeleteCommand;
 import recipeditor.command.EditCommand;
-import recipeditor.command.ViewCommand;
+import recipeditor.command.ExitCommand;
 import recipeditor.command.FindCommand;
 import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
+import recipeditor.command.ListCommand;
+import recipeditor.command.ViewCommand;
 
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -188,6 +188,9 @@ public class Parser {
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
                 return new InvalidCommand();
+            } catch (IndexOutOfBoundsException e) {
+                Ui.showMessage("Recipe index specified is out of range!");
+                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             } catch (Exception e) {
                 return new InvalidCommand(e.getMessage());
             }
