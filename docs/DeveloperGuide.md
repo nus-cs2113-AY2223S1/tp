@@ -378,6 +378,18 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
+The structure of the application focusing on the Add command is illustrated in the simplified sequence diagram below:
+![Simplified Sequence Diagram of Add Command](images/AddCommandSequenceDiagram.png)
+
+In a command like `add t/expense c/food a/20 d/13092022 i/NIL` OR `add t/income c/salary a/2000 d/30092022 i/jan_salary`
+1. The user input would be parsed via `CommandParser.parse()` method. 
+2. In `CommandParser.parse()`, `getCommand()` would be called which initializes `AddCommand`. Then it would call `ParameterParser.parse()`.
+3. In `ParameterParser.parse()`, the user input will be parsed further before the data is stored into `AddCommand` via  `ParameterParser.setCommand()` , 
+which calls for  `ParameterParser.setParameter()` to set the attributes within the AddCommand instance. 
+4. The `CommandParser.parse()`, would then return the instance of `Addcommand` to Duke class.
+5. `AddCommand.execute()` would be called, in which it will attempt to add its objects to the `TransactionList` based on the type of transaction, either income or expense.  
+6. After the storage or the user input into `TransactionList`, `Storage.writeToFile()` would write the contents of `TransactionList` to the storage file, duke.txt.
+
 _Written by: Yong Chin Han_
 
 ### Edit Command
