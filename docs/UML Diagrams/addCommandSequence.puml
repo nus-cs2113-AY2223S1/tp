@@ -3,53 +3,56 @@
 
 hide footbox
 
- -> Parser: userInput: String
-activate Parser
-Parser -> Parser: processUserInput(userInput)
-activate Parser
+ -> ":Parser": userInput: String
+activate ":Parser"
+":Parser" -> ":Parser": processUserInput(userInput)
+activate ":Parser"
 return parsedCommand: String[]
 
-alt add command is given
-    Parser -> Parser: executeAdd()
-    activate Parser
-        alt review is a movie
-            Parser -> Parser: addMedia(reviewFields,MovieSpacing)
-            activate Parser
-            Parser -> Movie: Movie(title, rating, genre, date)
-            activate Movie
-            return toAdd: Movie
-            create "executor: AddCommand"
-            Parser -> "executor: AddCommand": AddCommand(reviewList, toAdd)
-            activate "executor: AddCommand"
-            "executor: AddCommand" --> Parser
-            deactivate "executor: AddCommand"
-            Parser -> "executor: AddCommand": execute()
-            activate "executor: AddCommand"
-            return output: String
-            destroy "executor: AddCommand"
-            deactivate Parser
+ref over ":Parser"
+addCommand is given
+end ref
 
-        else review is a TV show
-            Parser -> Parser: addMedia(reviewFields,TvSpacing)
-            activate Parser
-            Parser -> TvShow: TvShow(title, rating, genre, date, site)
-            activate TvShow
-            return toAdd: TvShow
-            create "executor: AddCommand"
-            Parser -> "executor: AddCommand": AddCommand(reviewList, toAdd)
-            activate "executor: AddCommand"
-            "executor: AddCommand" --> Parser
-            deactivate "executor: AddCommand"
-            Parser -> "executor: AddCommand": execute()
-            activate "executor: AddCommand"
-            return output: String
-            deactivate Parser
+":Parser" -> ":Parser": executeAdd()
+activate ":Parser"
+alt review is a Movie
+    ":Parser" -> ":Parser": addMedia(reviewFields, MovieSpacing)
+    activate ":Parser"
+    ":Parser" -> ":Movie": Movie(title, rating, genre, date)
+    activate ":Movie"
+    return toAdd: Movie
 
-        end
-        else other command
-        deactivate Parser
+    create "executor: AddCommand"
+    ":Parser" -> "executor: AddCommand": AddCommand(reviewList, toAdd)
+    activate "executor: AddCommand"
+    "executor: AddCommand" --> ":Parser"
+    deactivate "executor: AddCommand"
+    ":Parser" -> "executor: AddCommand": execute()
+    activate "executor: AddCommand"
+    return output: String
+    destroy "executor: AddCommand"
+    deactivate ":Parser"
+
+else review is a TV show
+    ":Parser" -> ":Parser": addMedia(reviewFields, TvSpacing)
+    activate ":Parser"
+    ":Parser" -> ":TvShow": TvShow(title, rating, genre, date, site)
+    activate ":TvShow"
+    return toAdd: TvShow
+
+    create "executor: AddCommand"
+    ":Parser" -> "executor: AddCommand": AddCommand(reviewList, toAdd)
+    activate "executor: AddCommand"
+    "executor: AddCommand" --> ":Parser"
+    deactivate "executor: AddCommand"
+    ":Parser" -> "executor: AddCommand": execute()
+    activate "executor: AddCommand"
+    return output: String
+    deactivate ":Parser"
+    destroy "executor: AddCommand"
 
 end
-destroy "executor: AddCommand"
+
+deactivate ":Parser"
 
 @enduml

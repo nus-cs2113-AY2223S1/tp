@@ -3,41 +3,41 @@
 
 hide footbox
 
- -> Parser: userInput: String
-activate Parser
-Parser -> Parser: processUserInput(userInput)
-activate Parser
+ -> ":Parser": userInput: String
+activate ":Parser"
+":Parser" -> ":Parser": processUserInput(userInput)
+activate ":Parser"
 return parsedCommand: String[]
 
 alt find command is given
-    Parser -> Parser: executeFind()
-    activate Parser
+    ":Parser" -> ":Parser": executeFind()
+    activate ":Parser"
     create "executor: FindCommand"
-    Parser -> "executor: FindCommand": FindCommand(mediaList,keyWord)
+    ":Parser" -> "executor: FindCommand": FindCommand(mediaList,keyWord)
     activate "executor: FindCommand"
-    "executor: FindCommand" --> Parser:
+    "executor: FindCommand" --> ":Parser":
     deactivate "executor: FindCommand"
-    Parser -> "executor: FindCommand": execute()
+    ":Parser" -> "executor: FindCommand": execute()
     activate "executor: FindCommand"
 
     loop for each review
-        participant Movie
-        participant TvShow
+        participant ":Movie"
+        participant ":TvShow"
         opt review exists in reviewList
-            alt review is a movie
-                "executor: FindCommand" -> Movie: toString()
-                activate Movie
+            alt review is a Movie
+                "executor: FindCommand" -> ":Movie": toString()
+                activate ":Movie"
                 return
             else review is a Tv Show
-                "executor: FindCommand" -> TvShow: toString()
-                activate TvShow
+                "executor: FindCommand" -> ":TvShow": toString()
+                activate ":TvShow"
                 return
             end
         end
     end
 else other command is given
 end
-deactivate Parser
+deactivate ":Parser"
 destroy "executor: FindCommand"
 
 @enduml

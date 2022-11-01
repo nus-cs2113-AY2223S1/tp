@@ -1,10 +1,10 @@
 @startuml
 !include style.puml
 
-abstract class Commands {
-    {abstract} String execute()
+class "{abstract} \nCommands"  {
+    String execute()
 }
-hide Commands fields
+hide "{abstract} \nCommands" fields
 
 class AddCommand {
     +media: Media
@@ -55,18 +55,18 @@ class ReviewList {
     +String toString()
 }
 
-Commands -up-> "1" ReviewList : > uses
+"{abstract} \nCommands" -up-> "1" ReviewList : > uses
 
 skinparam groupInheritance 1
 
-Commands <|-right- AddCommand
-Commands <|-right- ClearCommand
-Commands <|-- FavouriteCommand
+"{abstract} \nCommands" <|-right- AddCommand
+"{abstract} \nCommands" <|-right- ClearCommand
+"{abstract} \nCommands" <|-- FavouriteCommand
 
-Commands <|-- FindCommand
-Commands <|-- ListCommand
-Commands <|-left- RemoveCommand
-Commands <|-left- SortCommand
+"{abstract} \nCommands" <|-- FindCommand
+"{abstract} \nCommands" <|-- ListCommand
+"{abstract} \nCommands" <|-left- RemoveCommand
+"{abstract} \nCommands" <|-left- SortCommand
 
 
 @enduml
