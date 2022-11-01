@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 //@@author chydarren
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
@@ -20,39 +21,35 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DATE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_MONTH;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_YEAR;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_PERIOD;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_NUMBER;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_LIST;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a list command object that will execute the operations for List command.
  */
 public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "LIST";
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To list all or some transactions based on selection."
-            + " Note that the tags will be joint in the filter based on the 'AND' operation.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR]";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "(Optional) TYPE - The type of transaction. Only \"income\" or \"expense\" is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "(Optional) DATE: Date of the transaction. The format must be in \"yyyyMMdd\"."
-            + LINE_SEPARATOR
-            + "(Optional) MONTH: Month of the transaction. Only integers within 1 to 12 are accepted. Note that"
-            + " month must be accompanied by a year."
-            + LINE_SEPARATOR
-            + "(Optional) YEAR: Year of the transaction. Only integers from 1000 onwards are accepted.";
-
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_NUMBER;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_LIST + LINE_SEPARATOR + COMMAND_USAGE_LIST + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
@@ -111,7 +108,9 @@ public class ListCommand extends ListAndStatsCommand {
     //@@author chydarren
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "List" command. Ensure that there are no errors in the tag combinations related
+     * to DateIntervals before proceeding to list transactions with/without filters for each transaction
+     * object.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -124,32 +123,35 @@ public class ListCommand extends ListAndStatsCommand {
 
         // Checks if there are any error in the tag combinations related to DateIntervals
         parseDateIntervalsTags();
-        listTransactions(transactions, type, category, date);
+        listTransactions(transactions, ui);
     }
 
     /**
      * List all or some transactions based on selection.
      *
      * @param transactions An instance of the TransactionList class.
-     * @param type         The type of transaction.
-     * @param category     A category for the transaction.
-     * @param date         Date of the transaction with format in "yyyyMMdd".
      * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private void listTransactions(TransactionList transactions, String type, String category, LocalDate date)
-            throws MoolahException {
+    private void listTransactions(TransactionList transactions, Ui ui) throws MoolahException {
+        // Gets array list of transactions based on time filters, if any, i.e. year, month, period
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
+
+        /*
+            Gets the list of transactions from the time-filtered array list based on whether each transaction
+            matches the type, category or date (if any) filter(s) that have been given
+         */
         String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
 
+        // Prints the list if available, else print no matching transactions
         if (transactionsList.isEmpty()) {
-            listLogger.log(Level.INFO, "Transactions list is empty as there are no transactions available.");
-            Ui.showInfoMessage(INFO_LIST_EMPTY.toString());
+            listLogger.log(Level.INFO, "Transactions list is empty as there are no matching transactions.");
+            ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
         }
 
         assert !transactionsList.isEmpty();
-        listLogger.log(Level.INFO, "Transactions list is found to contain transaction records.");
-        Ui.showList(transactionsList, INFO_LIST.toString());
+        listLogger.log(Level.INFO, "There are matching transactions for the Transactions list.");
+        ui.showList(transactionsList, INFO_LIST.toString());
     }
 
     //@@author paullowse

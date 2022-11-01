@@ -9,9 +9,12 @@ import static seedu.duke.common.InfoMessages.INFO_DIVIDER;
 import static seedu.duke.common.InfoMessages.INFO_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_GREET;
 import static seedu.duke.common.InfoMessages.INFO_HELP_PROMPT;
-import static seedu.duke.common.InfoMessages.INFO_REMAINING_BUDGET;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_SET_SUCCESSFUL;
 
+/**
+ * Displays information and error messages based on the user input and the behavior of the
+ * application.
+ */
 public class Ui {
     //@@author chydarren
     private String input;
@@ -20,7 +23,7 @@ public class Ui {
     /**
      * Prints each message from a variable messages string line by line into the output stream.
      *
-     * @param messages A string of variable arguments.
+     * @param messages A string of variable length arguments.
      */
     public static void printMessages(String... messages) {
         System.out.println(INFO_DIVIDER);
@@ -74,7 +77,7 @@ public class Ui {
      * Prepares the greeting messages to be displayed to the user.
      */
     public static void showGreeting() {
-        printMessages(INFO_GREET.toString(), INFO_CURRENT_BUDGET.toString() + Budget.getBudget(),
+        printMessages(INFO_GREET.toString(), Budget.generateCurrentMonthBudgetRemainingMessage(),
                 INFO_HELP_PROMPT.toString()
         );
     }
@@ -93,10 +96,10 @@ public class Ui {
     //@@author chydarren
 
     /**
-     * Prepares the transaction list messages to be displayed to the user.
+     * Prepares the list messages to be displayed to the user.
      *
-     * @param list    A string containing the formatted transaction list.
-     * @param message A message that complements with the transactions list.
+     * @param list    A string containing the formatted list.
+     * @param message A message that complements with the list.
      */
     public static void showList(String list, String message) {
         printMessages(message, list);
@@ -105,14 +108,43 @@ public class Ui {
     //@@author paullowse
 
     /**
-     * Prepares the stats list messages to be displayed to the user.
+     * Prepares the time insights list messages to be displayed to the user.
      *
-     * @param list    A string containing the formatted transaction list.
-     * @param message A message that complements with the transactions list.
+     * @param list           A string containing the formatted time insights list.
+     * @param message        A message that complements with the time insights list.
+     * @param incomeMessage  A string containing the formatted income amount.
+     * @param expenseMessage A string containing the formatted expense amount.
+     * @param savingsMessage A string containing the formatted savings amount.
      */
-    public static void showStatsList(String list, String message, String incomeMessage,
-                                    String expenseMessage, String savingsMessage) {
+    public static void showTimeInsightsList(String list, String message, String incomeMessage,
+            String expenseMessage, String savingsMessage) {
         printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
+    }
+
+    //@@author wcwy
+
+    /**
+     * Prepares the time insights list messages to be displayed to the user for a specific month.
+     *
+     * <p>This is an overload method to specifically catered for display of budget-related message
+     * when the user chose to view the statistic for a specific month. For example,
+     * command 'stats s/time_insights m/2 y/2022' will utilise this function to display also the budget messages to the
+     * user.
+     *
+     * @param list           A string containing the formatted time insights list.
+     * @param message        A message that complements with the time insights list.
+     * @param incomeMessage  A string containing the formatted income amount.
+     * @param expenseMessage A string containing the formatted expense amount.
+     * @param savingsMessage A string containing the formatted savings amount.
+     * @param spendingHabitComment   A string containing the formatted spending habit comment.
+     * @param budgetMessage  A string containing the formatted budget amount.
+     * @param budgetAdvice   A string containing the formatted budget advice.
+     */
+    public static void showTimeInsightsList(String list, String message, String incomeMessage,
+            String expenseMessage, String savingsMessage, String budgetMessage, String spendingHabitComment,
+                                            String budgetAdvice) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage, budgetMessage,
+                spendingHabitComment, budgetAdvice);
     }
 
     //@@author chydarren
@@ -126,12 +158,7 @@ public class Ui {
      * @param budgetInfo         A message that contains the monthly budget information.
      */
     public static void showTransactionAction(String message, String transactionDetails, String budgetInfo) {
-        printMessages(message, transactionDetails, INFO_REMAINING_BUDGET + budgetInfo);
-    }
-
-    // A temporary overload method for backward-compatibility for delete command
-    public static void showTransactionAction(String message, String transactionDetails) {
-        printMessages(message, transactionDetails);
+        printMessages(message, transactionDetails, budgetInfo);
     }
 
     //@author wcwy
@@ -142,7 +169,8 @@ public class Ui {
      * @param currentBudget The string representation of the new budget set.
      */
     public static void showSetBudgetAcknowledgementMessage(String currentBudget) {
-        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget);
+        printMessages(INFO_BUDGET_SET_SUCCESSFUL.toString(), INFO_CURRENT_BUDGET + currentBudget,
+                Budget.generateCurrentMonthBudgetRemainingMessage());
     }
 
 

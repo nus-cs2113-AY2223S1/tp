@@ -3,31 +3,37 @@ package seedu.duke.command;
 //@@author chydarren
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
-import seedu.duke.exception.GlobalMissingPeriodNumberTagException;
+import seedu.duke.exception.GlobalUnsupportedTagCombinationException;
 import seedu.duke.exception.GlobalMissingYearTagException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.GlobalMissingPeriodNumberTagException;
 import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents an object that can be inherited by List and Stats command objects.
+ */
 public abstract class ListAndStatsCommand extends Command {
+    //@@author chydarren
     private static final int UNDEFINED_PARAMETER = -1;
-    private static final int TRUE_AND = 1;
-    private static final int TRUE_OR = 2;
-    private static final int TRUE_INVALID_OR = 3;
+    public static final int CONTAIN_BOTH = 1;
+    public static final int CONTAIN_EITHER = 2;
+    public static final int CONTAIN_EITHER_INVALID = 3;
     private static final int FALSE = 0;
+    private static final String DAYS = "days";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
-    private static Logger datedTransactionsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
+    private static Logger listStatsLogger = Logger.getLogger(ListAndStatsCommand.class.getName());
 
     //@@author paullowse
-    public int month;
-    public int year;
-    public String period;
-    public int number;
+    public static int month;
+    public static int year;
+    public static String period;
+    public static int number;
 
     public ListAndStatsCommand() {
         this.month = UNDEFINED_PARAMETER;
@@ -35,9 +41,11 @@ public abstract class ListAndStatsCommand extends Command {
         this.period = null;
         this.number = UNDEFINED_PARAMETER;
 
-        datedTransactionsLogger.setLevel(Level.SEVERE);
+        //@@author chydarren
+        listStatsLogger.setLevel(Level.SEVERE);
     }
 
+    //@@author paullowse
     @Override
     public void setGlobalMonth(int month) {
         this.month = month;
@@ -66,13 +74,14 @@ public abstract class ListAndStatsCommand extends Command {
      * @return 1 if both tags are given, 2 if only year is given, 3 if only month is given,
      *      0 if both are not given.
      */
-    public int containMonthYear() {
+    public static int containMonthYear() {
         if (month != UNDEFINED_PARAMETER && year != UNDEFINED_PARAMETER) {
-            return TRUE_AND;
+            return CONTAIN_BOTH;
         } else if (year != UNDEFINED_PARAMETER) {
-            return TRUE_OR;
+            return CONTAIN_EITHER;
         } else if (month != UNDEFINED_PARAMETER) {
-            return TRUE_INVALID_OR;
+            // Returns CONTAIN_EITHER_INVALID as it is not allowed for month to not have a year
+            return CONTAIN_EITHER_INVALID;
         }
         return FALSE;
     }
@@ -82,11 +91,11 @@ public abstract class ListAndStatsCommand extends Command {
      *
      * @return 1 if both tags are given, 2 if either period/number is given, 0 if both are not given.
      */
-    public int containPeriodNumber() {
+    public static int containPeriodNumber() {
         if (period != null && number != UNDEFINED_PARAMETER) {
-            return TRUE_AND;
+            return CONTAIN_BOTH;
         } else if (period != null || number != UNDEFINED_PARAMETER) {
-            return TRUE_OR;
+            return CONTAIN_EITHER;
         }
         return FALSE;
     }
@@ -96,23 +105,26 @@ public abstract class ListAndStatsCommand extends Command {
      *
      * @throws MoolahException If any of the below exception conditions are met.
      */
-    public void parseDateIntervalsTags() throws MoolahException {
+    public static void parseDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught "
-                    + "as an invalid combination of tags has been given.");
-            throw new GlobalUnsupportedTagException();
-        } else if (containMonthYear() == TRUE_INVALID_OR) {
-            // Throws a missing tag if number and period was not given together
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
-                    + "a month was given without a year.");
+            // Throws an unsupported tag combination exception if tags are not supposed to be used together
+            listStatsLogger.log(Level.WARNING, "Exception thrown as an invalid combination "
+                    + "of tags has been given.");
+            throw new GlobalUnsupportedTagCombinationException();
+        } else if (containMonthYear() == CONTAIN_EITHER_INVALID) {
+            // Throws a missing tag exception if number and period was not given together
+            listStatsLogger.log(Level.WARNING, "Exception thrown as a month was given without "
+                    + "a year.");
             throw new GlobalMissingYearTagException();
-        } else if (containPeriodNumber() == TRUE_OR) {
-            // Throws a missing tag if number and period was not given together
-            datedTransactionsLogger.log(Level.WARNING, "An exception has been caught as "
-                    + "number and period needs to be given together.");
+        } else if (containPeriodNumber() == CONTAIN_EITHER) {
+            // Throws a missing tag exception if number and period was not given together
+            listStatsLogger.log(Level.WARNING, "Exception thrown as number and period needs "
+                    + "to be given together.");
             throw new GlobalMissingPeriodNumberTagException();
         }
     }
+
+    //@@author paullowse
 
     /**
      * Gets the complete transactions list by date intervals.
@@ -122,18 +134,21 @@ public abstract class ListAndStatsCommand extends Command {
      */
     public ArrayList<Transaction> getTimeTransactions(TransactionList transactions) {
         ArrayList<Transaction> timeTransactions = transactions.getTransactions();
-
-        if (containMonthYear() == TRUE_AND) {
+        if (containMonthYear() == CONTAIN_BOTH) {
             timeTransactions = transactions.getTransactionsByMonth(year, month);
-        } else if (containMonthYear() == TRUE_OR) {
+        } else if (containMonthYear() == CONTAIN_EITHER) {
             assert month == UNDEFINED_PARAMETER;
             timeTransactions = transactions.getTransactionsByYear(year);
-        } else if (containPeriodNumber() == TRUE_AND && period == MONTHS) {
+        } else if (containPeriodNumber() == CONTAIN_BOTH && period == MONTHS) {
             timeTransactions = transactions.getTransactionsByMonthRange(LocalDate.now(), number);
-        } else if (containPeriodNumber() == TRUE_AND && period == WEEKS) {
+        } else if (containPeriodNumber() == CONTAIN_BOTH && period == WEEKS) {
             timeTransactions = transactions.getTransactionsByWeekRange(LocalDate.now(), number);
+        } else if (containPeriodNumber() == CONTAIN_BOTH && period == DAYS) {
+            timeTransactions = transactions.getTransactionsByDayRange(LocalDate.now(), number);
         }
 
+        // Sorts time-filtered transactions array list based on ascending order of date
+        Collections.sort(timeTransactions);
         return timeTransactions;
     }
 }

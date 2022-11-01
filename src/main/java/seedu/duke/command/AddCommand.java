@@ -4,6 +4,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
+import seedu.duke.common.DateFormats;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
@@ -27,6 +28,13 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_AMOUNT;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DESCRIPTION;
+import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_ADD;
+import static seedu.duke.common.HelpMessages.COMMAND_USAGE_ADD;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
@@ -35,27 +43,15 @@ import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
  */
 public class AddCommand extends Command {
     //@@author chinhan99
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
-
-    // The description for the usage of command
-    public static final String COMMAND_DESCRIPTION = "To add a new transaction entry, which could be "
-            + "either an \"income\" or an \"expense\" into the transaction list.";
-    // The guiding information for the usage of command
-    public static final String COMMAND_USAGE = "Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION";
     // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:"
-            + LINE_SEPARATOR
-            + "TYPE: The type of transaction. Only \"income\" or \"expense\" is accepted." + LINE_SEPARATOR
-            + "CATEGORY: A category for the transaction. Only string containing alphabets is accepted."
-            + LINE_SEPARATOR
-            + "AMOUNT: Value of the transaction in numerical form. Only integer within 0 and 10000000 is accepted."
-            + LINE_SEPARATOR + "DATE: Date of the transaction. The format must be in \"yyyyMMdd\"." + LINE_SEPARATOR
-            + "DESCRIPTION: More information regarding the transaction, written without any space.";
+    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR + COMMAND_PARAMETERS_DESCRIPTION;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION + LINE_SEPARATOR + COMMAND_USAGE + LINE_SEPARATOR;
+            + COMMAND_DESCRIPTION_ADD + LINE_SEPARATOR + COMMAND_USAGE_ADD + LINE_SEPARATOR;
     // Detailed help description
     public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
@@ -153,9 +149,10 @@ public class AddCommand extends Command {
             checkTransactionCapacity(transactions);
             String messageBanner = addTransaction(transactions);
             long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(date);
-            String budgetLeft = Budget.getBudgetLeft(addedMonthExpenseSum);
+            String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                    DateFormats.retrieveFormattedMonthAndYear(date));
 
-            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetLeft);
+            Ui.showTransactionAction(messageBanner, transactionCreated.toString(), budgetInfo);
 
             //@@author chinhan99
             storage.writeToFile(transactions.getTransactions());
@@ -178,6 +175,7 @@ public class AddCommand extends Command {
      * @throws MaximumTransactionCountException If the transaction list capacity has been reached.
      */
     public static void checkTransactionCapacity(TransactionList transactions) throws MaximumTransactionCountException {
+        addLogger.setLevel(Level.SEVERE);
         assert transactions != null;
         // The expected maximum number of transactions allowed to store is only one million
         if (transactions.size() == MAX_TRANSACTIONS_COUNT) {
@@ -197,6 +195,7 @@ public class AddCommand extends Command {
      * @throws InputTransactionInvalidTypeException If the type of the transactions
      */
     private String addTransaction(TransactionList transactions) throws InputTransactionInvalidTypeException {
+        addLogger.setLevel(Level.SEVERE);
         assert (transactions != null);
         String messageBanner = "";
         Transaction transaction;
