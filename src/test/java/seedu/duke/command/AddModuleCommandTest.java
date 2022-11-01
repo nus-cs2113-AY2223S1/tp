@@ -8,11 +8,8 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,23 +23,13 @@ class AddModuleCommandTest {
 
     @Test
     void testExecute_validModuleAdded_StateUpdatedWithNewModule() throws YamomException {
-
-        // validate correct module details
         Module module = Module.get("CS1010S");
         assertNotNull(module);
-        assertEquals("CS1010S", module.moduleCode);
-        assertEquals("Programming Methodology", module.title);
-        assertEquals(List.of(2, 1, 1, 3, 3), module.workload);
-        assertEquals(2, module.semesterData.size());
-        assertEquals("Computer Science", module.department);
-        assertEquals("Computing", module.faculty);
-
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
         int semester = 1;
         state.setSemester(semester);
-
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
 

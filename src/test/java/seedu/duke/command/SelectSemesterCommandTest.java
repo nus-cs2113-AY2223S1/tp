@@ -14,14 +14,14 @@ public class SelectSemesterCommandTest {
         Ui ui = new Ui();
         State state = new State();
         new SelectSemesterCommand(new String[]{"semester", "1"}).execute(state, ui, null);
-        assertEquals(state.getSemester(), 1);
+        assertEquals(1, state.getSemester());
         new SelectSemesterCommand(new String[]{"semester", "2"}).execute(state, ui, null);
-        assertEquals(state.getSemester(), 2);
+        assertEquals(2, state.getSemester());
         new SelectSemesterCommand(new String[]{"semester", "st1"}).execute(state, ui, null);
-        assertEquals(state.getSemester(), 3);
+        assertEquals(3, state.getSemester());
         new SelectSemesterCommand(new String[]{"semester", "specialterm2"}).execute(state, ui, null);
-        assertEquals(state.getSemester(), 4);
+        assertEquals(4, state.getSemester());
         new SelectSemesterCommand(new String[]{"semester", "1"}).execute(state, ui, null);
-        assertEquals(state.getSemester(), 1);
+        assertEquals(1, state.getSemester());
     }
 }
