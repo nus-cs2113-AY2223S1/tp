@@ -43,7 +43,7 @@ public class PassengerList extends OperationList {
     protected String name;
     protected String departureDate;
     protected String departureTime;
-    protected static String flightNumber;
+    protected String flightNumber;
     protected String gateNumber;
     protected String seatNumber;
     protected String boardingTime;
@@ -243,7 +243,7 @@ public class PassengerList extends OperationList {
 
     }
 
-    static void getFlightNumber(String passengerDetail) throws SkyControlException {
+    private void getFlightNumber(String passengerDetail) throws SkyControlException {
         if (isAdd) {
             flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                     FLIGHT_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
@@ -253,7 +253,7 @@ public class PassengerList extends OperationList {
         }
     }
 
-    static String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
+    public String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
         flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                 FLIGHT_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
         if (!isValidFlightNumber(flightNumber)) {
@@ -363,7 +363,7 @@ public class PassengerList extends OperationList {
         return isNotValidTime;
     }
 
-    private static boolean isValidFlightNumber(String flightNumber) {
+    private boolean isValidFlightNumber(String flightNumber) {
         int lenOfFlightNum = flightNumber.length();
         if (lenOfFlightNum < FN_MIN_LENGTH) {
             return false;
@@ -381,7 +381,7 @@ public class PassengerList extends OperationList {
         return isPassengerDuplicate;
     }
 
-    private static int checkNumOfDigits() {
+    private int checkNumOfDigits() {
         int numOfDigits = 0;
         for (int i = 0; i < flightNumber.length(); i++) {
             if (Character.isDigit(flightNumber.charAt(i))) {

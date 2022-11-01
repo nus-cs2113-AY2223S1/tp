@@ -15,6 +15,7 @@ public abstract class OperationList extends Parser {
     protected static ArrayList<FlightInfo> flights = new ArrayList<>();
     protected static ArrayList<PassengerInfo> passengers = new ArrayList<>();
     protected static Ui ui = new Ui();
+    protected static PassengerList passengerList = new PassengerList();
     protected static boolean isFlightNumberSync = false;
     protected static boolean isEmptyFlightList = false;
     protected static String flightNumber;
@@ -38,7 +39,7 @@ public abstract class OperationList extends Parser {
     public static String getPassengerDepartureTime(OperationList flights,
                                                    String passengerDetail) throws SkyControlException {
         String departureTime = null;
-        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
+        String flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
         ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
         for (FlightInfo flight : flightsInFlightList) {
             if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
@@ -51,7 +52,7 @@ public abstract class OperationList extends Parser {
     public static String getPassengerGateNumber(OperationList flights,
                                                 String passengerDetail) throws SkyControlException {
         String gateNumber = null;
-        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
+        String flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
         ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
         for (FlightInfo flight : flightsInFlightList) {
             if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
@@ -80,7 +81,7 @@ public abstract class OperationList extends Parser {
 
     private void getFlightSyncDetails(String passengerDetail,
                                       ArrayList<FlightInfo> flightsThatExist) throws SkyControlException {
-        flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
+        flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
         isEmptyFlightList = flightsThatExist.size() == EMPTY_FLIGHT_LIST;
 
     }

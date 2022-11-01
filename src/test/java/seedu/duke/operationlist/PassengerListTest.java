@@ -16,7 +16,7 @@ public class PassengerListTest {
     protected SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
     protected Date dateTest = new Date();
     protected  String dateTodayTest = formatter.format(dateTest);
-    protected static String addLineInput = "passenger add n/Ivan fn/sq832 bg/01 sn/17d bt/2100 dt/2145 gn/05";
+    protected static String addLineInput = "passenger add n/Ivan fn/sq832 bg/01 sn/17d dt/2145 gn/05 bt/2100";
     protected static String deleteLineInput = "passenger delete n/Ivan fn/sq832 sn/17d";
     protected static PassengerList testPassengerList = new PassengerList();
 
