@@ -2,7 +2,7 @@
 !include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 package Commands {
-    Class ConsoleCommand as "                ConsoleCommand                " <<abstract>>PARSER_COLOR_2
+    Class ConsoleCommand as "{abstract}\n        ConsoleCommand        " PARSER_COLOR_2
 
     Class ConsoleCommandAddExpense PARSER_COLOR_2
 
