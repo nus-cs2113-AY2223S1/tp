@@ -180,7 +180,7 @@ public class Storage {
         }
     }
 
-    private static void generateTemplateFile() {
+    public static void generateTemplateFile() {
         FileWriter fileWrite;
         try {
             fileWrite = new FileWriter(TEMPLATE_FILE_PATH);

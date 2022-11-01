@@ -43,8 +43,8 @@ public class RecipeList {
     public static void editRecipe(int index, Recipe newRecipe, String oldTitle) {
         recipes.set(index, newRecipe);
         recipeTitles.set(index, newRecipe.getTitle());
-        String oldFile = Storage.RECIPES_FOLDER_PATH + "/" + oldTitle;
-        String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + newRecipe.getTitle();
+        String oldFile = Storage.titleToFilePath(oldTitle);
+        String recipeFileSourcePath = Storage.titleToFilePath(newRecipe.getTitle());
         Storage.saveRecipe(newRecipe, oldFile, recipeFileSourcePath);
     }
 

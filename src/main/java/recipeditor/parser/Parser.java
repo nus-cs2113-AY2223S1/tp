@@ -53,8 +53,13 @@ public class Parser {
 
 
     private static Command parseAddCommand() {
-        GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
-        return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+        try {
+            GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+            return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+        } catch (FileNotFoundException e) {
+            Storage.generateTemplateFile();
+            return new InvalidCommand("Template file is missing! Regenerate Template File! Please try again");
+        }
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
@@ -117,13 +122,23 @@ public class Parser {
         if (parsed.length == 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                String name = RecipeList.getTitleFromIndex(index);
-                String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
+                Recipe targetRecipe = RecipeList.getRecipe(index);
+                String title = targetRecipe.getTitle();
+                String path = Storage.titleToFilePath(title);
+
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), name);
-            } catch (Exception e) {
+                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), title);
+            } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
-                return new InvalidCommand("Edit GUI Error");
+                Recipe targetRecipe = RecipeList.getRecipe(index);
+                String title = targetRecipe.getTitle();
+                String path = Storage.titleToFilePath(title);
+                Storage.saveRecipe(targetRecipe, "", path);
+                return new InvalidCommand("Recipe File is missing! Regenerate Recipe File! Please try again!");
+            } catch (IndexOutOfBoundsException e) {
+                return new InvalidCommand("The index is out of bound! Please try again");
+            } catch (NumberFormatException e) {
+                return new InvalidCommand("The index format in not a positive integer within list!");
             }
         } else if (parsed.length > 2) {
             try {

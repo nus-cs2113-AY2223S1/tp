@@ -39,69 +39,98 @@ public class RecipeFileParser {
     private static final String EMPTY = "There is an empty field. The recipe is not valid";
     private static final String HASHTAG = "Don't use # in the content if it is not a heading";
 
+
+    Recipe recipe = new Recipe();
+    LineType lineType;
+    LineType stage = LineType.TITLE_START;
+    int[] stageCounter = {0, 0, 0, 0};
+    int descriptionCounter = 0;
+    int ingredientIndex = 1;
+    int stepIndex = 1;
+    String[] parsedLine;
+    String line;
+
     /**
      * Parse the text file into a correct recipe.
      */
+    public RecipeFileParser(){
+    }
+
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
-        Recipe recipe = new Recipe();
-        String[] parsedLine = text.split("\n");
-        LineType lineType;
-        LineType stage = LineType.TITLE_START;
-        int[] stageCounter = {0, 0, 0, 0};
-
-        int descriptionCounter = 0;
-        int ingredientIndex = 1;
-        int stepIndex = 1;
-
+        parsedLine = text.split("\n");
         // Go down line by line
         for (int i = 0; i < parsedLine.length; i++) {
-            String line = parsedLine[i];
-
+            line = parsedLine[i];
             lineType = checkLineType(line, stageCounter);
-            if (!lineType.equals(LineType.NORMAL)) {
-                stage = lineType;
-            } else {
-                switch (stage) {
-                default:
-                    throw new ParseFileException(UNIMPORTANT_TEXT);
-                case TITLE:
-                    if (line.isBlank()) {   //Ignore Blank lines, implement this to allow Description to have blanks
-                        continue;
-                    }
-                    recipe.setTitle(parsedTitle(line));
-                    stage = LineType.TITLE_END;
-                    break;
-                case TITLE_END:
-                    if (line.isBlank()) {   //Ignore Blank lines
-                        continue;
-                    }
-                    throw new ParseFileException(TITLE_ONE_LINE);
-                case DESCRIPTION:
-                    recipe.setDescription(parsedDescription(line, recipe, descriptionCounter));
-                    descriptionCounter++;
-                    break;
-                case INGREDIENT:
-                    if (line.isBlank()) {   //Ignore Blank lines
-                        continue;
-                    }
-                    recipe.addIngredient(parsedIngredient(line, ingredientIndex));
-                    ingredientIndex++;
-                    break;
-                case STEP:
-                    if (line.isBlank()) {   //Ignore Blank lines
-                        continue;
-                    }
-                    recipe.addStep(parsedStep(line, stepIndex));
-                    stepIndex++;
-                    break;
-                }
-            }
+            parsingSequence();
         }
         checkAllStages(stageCounter);
         if (recipe.isNotRecipeValid()) {
             throw new ParseFileException(EMPTY);
         }
         return recipe;
+    }
+
+    private void parsingSequence() throws ParseFileException {
+        if (!lineType.equals(LineType.NORMAL)) {
+            stage = lineType;
+        } else {
+            switch (stage) {
+            default:
+                throw new ParseFileException(UNIMPORTANT_TEXT);
+            case TITLE:
+                caseTitle();
+                break;
+            case TITLE_END:
+                caseTitleEnd();
+                return;
+            case DESCRIPTION:
+                caseDescription();
+                break;
+            case INGREDIENT:
+                caseIngredient();
+                break;
+            case STEP:
+                caseStep();
+                break;
+            }
+        }
+    }
+
+    private void caseStep() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        recipe.addStep(parsedStep(line, stepIndex));
+        stepIndex++;
+    }
+
+    private void caseIngredient() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        recipe.addIngredient(parsedIngredient(line, ingredientIndex));
+        ingredientIndex++;
+    }
+
+    private void caseDescription() {
+        recipe.setDescription(parsedDescription(line, recipe, descriptionCounter));
+        descriptionCounter++;
+    }
+
+    private void caseTitleEnd() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        throw new ParseFileException(TITLE_ONE_LINE);
+    }
+
+    private void caseTitle() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines, implement this to allow Description to have blanks
+            return;
+        }
+        recipe.setTitle(parsedTitle(line));
+        stage = LineType.TITLE_END;
     }
 
     private void checkAllStages(int[] stageCounter) throws ParseFileException {

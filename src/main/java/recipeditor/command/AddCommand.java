@@ -20,9 +20,8 @@ public class AddCommand extends Command {
             RecipeList.addRecipe(addedRecipe);
             RecipeList.recipeTitles.add(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
-            String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + addedRecipe.getTitle();
+            String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
-            assert addedRecipe != null;
 
             StringBuilder response = new StringBuilder();
             response.append("\"" + addedRecipe.getTitle() + "\" added to the recipe list.\n");
@@ -31,7 +30,7 @@ public class AddCommand extends Command {
 
             return new CommandResult(response.toString());
         } else {
-            return new CommandResult("Add unsuccessful");
+            return new CommandResult("Nothing was added");
         }
     }
 }
