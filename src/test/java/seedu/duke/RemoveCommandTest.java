@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 class RemoveCommandTest {
     static final String cannotFind = "Unable to find item for specified type and index";
     static final String expectedMovie = "Noted. I've deleted the following media:\n"
-            + "\t[Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020\n"
+            + "\t[Movie] Harry Potter Rating: 5.0  Genre:SciFi  Date watched: 10-01-2020\n"
             + "Now you have 0 reviews in the list.";
     static final String expectedTvShow = "Noted. I've deleted the following media:\n"
-            + "\t[TV Show] Game of Thrones Rating:5.0 Genre:Fantasy Date watched:10-01-2020 Site: HBO\n"
+            + "\t[TV Show] Game of Thrones Rating: 5.0  Genre:Fantasy Date watched: 10-01-2020  Site:HBO\n"
             + "Now you have 1 reviews in the list.";
     static final String expectedMovieMultiple = "Noted. I've deleted the following media:\n"
-            + "\t[Movie] Star Wars Rating:5.0 Genre:SciFi Date watched:10-02-2020\n"
+            + "\t[Movie] Star Wars Rating: 5.0  Genre:SciFi  Date watched: 10-02-2020\n"
             + "Now you have 1 reviews in the list.";
     ReviewList storedReviews = new ReviewList();
 

@@ -30,7 +30,7 @@ public class TvShow extends Media {
      * Formats the movie review to display as output
      */
     public String toString() {
-        return "[TV Show] " + super.toString() + " Date watched: " + this.dateWatched + "  Site:" + site;
+        return "[TV Show] " + super.toString() + " Date watched: " + this.dateWatched + "  Site:" + this.site;
     }
 
     /**

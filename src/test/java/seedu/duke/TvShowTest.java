@@ -19,7 +19,7 @@ public class TvShowTest {
         assertEquals("Sitcom", assertTvShow.genre);
         assertEquals("Netflix", assertTvShow.site);
         assertEquals("10-01-2022", assertTvShow.dateString);
-        assertEquals("[TV Show] Friends Rating:5.0 Genre:Sitcom Date watched:10-01-2022 Site: Netflix",
+        assertEquals("[TV Show] Friends Rating: 5.0  Genre:Sitcom Date watched: 10-01-2022  Site:Netflix",
                 assertTvShow.toString());
     }
 

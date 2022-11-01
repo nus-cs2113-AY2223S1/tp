@@ -29,7 +29,7 @@ class SortCommandTest {
         SortCommand sort = new SortCommand(storedReviews, userInput);
         sort.execute();
 
-        assertEquals(1.0, storedReviews.inputs.get(0).getRating());
+        assertEquals(99, storedReviews.inputs.get(0).getRating());
     }
 
     @Test
@@ -85,7 +85,7 @@ class SortCommandTest {
 
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-            Date date = dateFormat.parse("15-02-2020");
+            Date date = dateFormat.parse("31-03-2022");
             assertEquals(date, storedReviews.inputs.get(0).getDateWatched());
         } catch (ParseException e) {
             fail("Encountered ParseException.");
