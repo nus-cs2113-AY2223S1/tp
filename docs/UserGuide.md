@@ -13,7 +13,7 @@
         * [Finding builds](#finding-builds-find)
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
-        * [Exporting builds as CSV](#exporting-builds-as-csv-exportcsv)
+        * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
     * [Edit Mode](#edit-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
@@ -27,8 +27,8 @@
     * [Export](#export)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
-    * [Main Mode](#main-mode)
-    * [Edit Mode](#edit-mode)
+    * [Main Mode Summary](#main-mode-summary)
+    * [Edit Mode Summary](#edit-mode-summary)
 
 ## Introduction
 
@@ -62,7 +62,7 @@ build.
 
 Format: `add/NAME`
 
-Examples of usage: User enters `add/test build` to add a build named 'test build' to the list of builds.
+Example of usage: User enters `add/test build` to add a build named 'test build' to the list of builds.
 
 Expected outcome: The program will add a build named 'test build' to the list of builds.
 ```
@@ -80,7 +80,7 @@ build.
 
 Format: `edit/NAME`
 
-Examples of usage: User enters `edit/test build` to edit the build named 'test build'.
+Example of usage: User enters `edit/test build` to edit the build named 'test build'.
 
 Expected outcome: The user is now in edit mode for the build named 'test build'.
 
@@ -99,7 +99,7 @@ build.
 
 Format: `delete/NAME`
 
-Examples of usage: User enters `delete/test build` to delete a build named 'test build' stored in the list of builds.
+Example of usage: User enters `delete/test build` to delete a build named 'test build' stored in the list of builds.
 
 Expected outcome: The program will delete the build named 'test build' from the list of builds.
 ```
@@ -118,7 +118,7 @@ build.
 
 Format: `view/NAME`
 
-Examples of usage: User enters `view/test build` to view a build named 'test build' stored in the list of builds.
+Example of usage: User enters `view/test build` to view a build named 'test build' stored in the list of builds.
 
 Expected outcome: The program will display the components of the build named 'test build' from the list of builds.
 ```
@@ -141,7 +141,7 @@ Lists all builds in the list of builds currently managed by the program.
 
 Format: `list`
 
-Examples of usage: User enters `list` to list all builds stored in the list of builds.
+Example of usage: User enters `list` to list all builds stored in the list of builds.
 
 Expected outcome: The program will display all builds stored in the list of builds.
 ```
@@ -159,7 +159,7 @@ List all builds that contain the keyword in their name.
 
 Format: `find/KEYWORD`
     
-Examples of usage: User enters `find/test` to find all builds that contain the keyword 'test'.
+Example of usage: User enters `find/test` to find all builds that contain the keyword 'test'.
 
 Expected outcome: The program will display all builds that contain the keyword 'test'.
 ``` 
@@ -179,7 +179,7 @@ Range is optional for filtering compatibility.
 
 Format: `filter/TYPE/RANGESTART/RANGEEND`
 
-Examples of usage: User enters `filter/compatibility` to find all builds that are compatible.
+Example of usage: User enters `filter/compatibility` to find all builds that are compatible.
 
 Expected outcome: The program will display "No builds that meet specifications found." as there no components in 
 test build yet.
@@ -197,7 +197,7 @@ Exports all builds to a text file.
 
 Format: `export`
 
-Examples of usage: User enters `export` to export all builds.
+Example of usage: User enters `export` to export all builds.
 
 Expected outcome: The program will export all builds to a text file.
 ```
@@ -214,7 +214,7 @@ Exports all builds to a CSV file.
 
 Format: `exportCSV`
 
-Examples of usage: User enters `exportCSV` to export all builds.
+Example of usage: User enters `exportCSV` to export all builds.
 
 Expected outcome: The program will export all builds to a CSV file.
 ```
@@ -235,7 +235,7 @@ Adds a component to the list of components of a build.
 
 Format: `add/TYPE/NAME/PRICE/POWER/PARAM/PARAM/...`
 
-Examples of usage: User enters `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
+Example of usage: User enters `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
 of 3.8 GHz. Other possible types include: 
 `case, cooler, drive, gpu, motherboard, psu, memory, storage, monitor and other`
@@ -255,7 +255,7 @@ Deletes a component from the list of components of a build.
 
 Format: `delete/TYPE/NAME`
 
-Examples of usage: User enters `delete/cpu/intel 10990x` to delete a cpu named 'intel 10990x' from the list of 
+Example of usage: User enters `delete/cpu/intel 10990x` to delete a cpu named 'intel 10990x' from the list of 
 components.
 
 Expected outcome: The program will delete a cpu named 'intel 10990x' from the list of components.
@@ -273,7 +273,7 @@ Views a component from the list of components of a build.
 
 Format: `view/TYPE/NAME`
 
-Examples of usage: User enters `view/cpu/intel 10990x` to view a cpu named 'intel 10990x' from the list of
+Example of usage: User enters `view/cpu/intel 10990x` to view a cpu named 'intel 10990x' from the list of
 components.
 
 Expected outcome: The program will display the details of a cpu named 'intel 10990x' from the list of components.
@@ -295,7 +295,7 @@ Lists all components from the list of components of a build.
 
 Format: `list`
 
-Examples of usage: User enters `list` to list all components from the list of components.
+Example of usage: User enters `list` to list all components from the list of components.
 
 Expected outcome: The program will display all components from the list of components.
 ```
@@ -311,7 +311,7 @@ Checks if a build is compatible.
 
 Format: `check`
 
-Examples of usage: User enters `check` to check if the build is compatible.
+Example of usage: User enters `check` to check if the build is compatible.
 
 Expected outcome: The program will display a list of compatibilities based on the components of a build.
 ```
@@ -334,7 +334,7 @@ Displays information about a build.
 
 Format: `info`
 
-Examples of usage: User enters `info` to display information about a build.
+Example of usage: User enters `info` to display information about a build.
 
 Expected outcome: The program will display information about a build.
 ```
@@ -355,7 +355,7 @@ Exports a build to a text file.
 
 Format: `export`
 
-Examples of usage: User enters `export` to export a build.
+Example of usage: User enters `export` to export a build.
 
 Expected outcome: The program will export a build to a text file.
 ```
@@ -372,7 +372,7 @@ Exits edit mode.
 
 Format: `back`
 
-Examples of usage: User enters `back` to exit edit mode.
+Example of usage: User enters `back` to exit edit mode.
 
 Expected outcome: The program will exit edit mode.
 ```
@@ -407,7 +407,7 @@ It makes it easier for the user to view the builds and components in a more read
 to the data folder of the new program on your new computer to carry over your data.
 
 ## Command Summary
-### Main Mode
+### Main Mode Summary
 
 | Action    | Format, Examples                                                                                   |
 |-----------|----------------------------------------------------------------------------------------------------|
@@ -422,7 +422,7 @@ to the data folder of the new program on your new computer to carry over your da
 | ExportCSV | `exportCSV`                                                                                        |
 | Bye       | `bye`                                                                                              |
 
-### Edit Mode
+### Edit Mode Summary
 
 | Action | Format, Examples                                                                            |
 |--------|---------------------------------------------------------------------------------------------|
