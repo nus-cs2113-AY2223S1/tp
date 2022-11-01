@@ -505,7 +505,7 @@ public class ConsoleParser {
             return consoleCommandViewExpenseNormalized;
         } catch (ConsoleParserCommandViewExpenseInvalidException exception) {
             throw new ConsoleParserCommandViewExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -599,7 +599,7 @@ public class ConsoleParser {
             return consoleCommandDeleteExpenseNormalized;
         } catch (ConsoleParserCommandDeleteExpenseInvalidException exception) {
             throw new ConsoleParserCommandDeleteExpenseInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -2437,7 +2437,7 @@ public class ConsoleParser {
             return consoleCommandViewRecurringPaymentNormalized;
         } catch (ConsoleParserCommandViewRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandViewRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -2532,7 +2532,7 @@ public class ConsoleParser {
             return consoleCommandDeleteRecurringPaymentNormalized;
         } catch (ConsoleParserCommandDeleteRecurringPaymentInvalidException exception) {
             throw new ConsoleParserCommandDeleteRecurringPaymentInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
