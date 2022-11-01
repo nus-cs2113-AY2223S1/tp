@@ -19,6 +19,7 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [UserInterface Component](#userinterface-component)
   * [Commands Component](#commands-component)
   * [Parser Component](#parser-component)
+  * [Data Component](#data-component)
   * [API Component](#api-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
@@ -150,8 +151,8 @@ In the example above, `UserInterface` calls `UserInterface#convertExpenseToConso
 
 The Common component consists of the classes `Messages` and `Configurations`.\
 \
-The `Messages` class defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.\
-The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
+`Messages` defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.\
+`Configurations` defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
 
 ### Exceptions Component
 
@@ -169,7 +170,7 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentUserInterface.puml)
 
-The `ConsoleInterface` class defines various command handlers which are called based on the command entered by the user.\
+`ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
 For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
 
@@ -187,12 +188,19 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 The Parser component consists of the classes `ConsoleParserConfigurations` and `ConsoleParser`.\
 \
-The `ConsoleParserConfigurations` class defines the syntax and arguments used by `ConsoleParser` when parsing the commands entered by the user.\
-The `ConsoleParser` class defines the `ConsoleParser#parse()` to parse commands and arguments into their corresponding console command subclasses.\
+`ConsoleParserConfigurations` defines the syntax and arguments used by `ConsoleParser` when parsing the commands entered by the user.\
+`ConsoleParser` defines the `ConsoleParser#parse()` to parse commands and arguments into their corresponding console command subclasses.\
 \
 When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 * `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
 * The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
+
+### Data Component
+
+The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.\
+\
+`Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
+`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
 
 ### API Component
 
