@@ -11,6 +11,7 @@ public class CommandStructure {
     public static final String COMMAND_EXIT  = "quit";
     public static final String COMMAND_FIND = "find";
     public static final String NAME_FLAG = "n/";
+    public static final String PAIR_FLAG = "-pair";
     public static final String CONTACT_NUMBER_FLAG = "c/";
     public static final String ADDRESS_FLAG = "a/";
     public static final String TYPE_FLAG = "t/";
