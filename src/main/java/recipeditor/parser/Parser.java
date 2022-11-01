@@ -2,7 +2,6 @@ package recipeditor.parser;
 
 import recipeditor.command.Command;
 import recipeditor.command.AddCommand;
-import recipeditor.command.CommandResult;
 import recipeditor.command.DeleteCommand;
 import recipeditor.command.EditCommand;
 import recipeditor.command.ExitCommand;

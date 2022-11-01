@@ -233,16 +233,21 @@ an edit command.
 
 ## Delete Command
 
-Delete existing recipe with given recipe title from the list. This helps you to organise your recipe list such that those recipes that
+Delete existing recipe with given recipe title or recipe index from the list. This helps you to organise your recipe list such that those recipes that
 'outdated' or no longer used by you can be removed.
 
-Format: `/delete RECIPE_TITLE`
+Format: `/delete [RECIPE_TITLE OR RECIPE_INDEX]`
 
 ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
 
 Example: 
 ```
 /delete carbonara
+
+Carbonara is deleted from the recipe list.
+```
+```
+/delete 1
 
 Carbonara is deleted from the recipe list.
 ```
@@ -321,15 +326,16 @@ Example:
 
 ## Help Command
 
-Shows the available commands in _RecipeEditor_.
+Shows the specific command syntax in _RecipeEditor_.
 
-Format: `/help`
+Format: `/help COMMAND`
 
 Example:
 ```
-/help
+/help find
 
-Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help
+Syntax: /find <ingredient/title>
+Description: For the given ingredient or title, find recipes which contains it.
 ```
 
 [⏫ Back to content page](#content-page)
@@ -341,7 +347,7 @@ Exits the _RecipEditor_.
 Format: `/exit`
 
 ```
-/help
+/exit
 
 RecipEditor ends here...
 Program exiting
