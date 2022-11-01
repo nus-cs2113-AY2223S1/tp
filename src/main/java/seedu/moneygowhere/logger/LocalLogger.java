@@ -12,10 +12,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author xzynos
+
+/**
+ * Provides functions to log data to a file.
+ */
 @SuppressWarnings("FieldMayBeFinal")
 public class LocalLogger {
     private Logger logger;
 
+    /**
+     * Creates an instance of {@link LocalLogger}.
+     *
+     * @throws IOException If an I/O error occurred when creating or writing to a log file.
+     */
     public LocalLogger() throws IOException {
         Path localLoggerLoggingDirectory = Paths.get(Configurations.LOCAL_LOGGER_LOGGING_DIRECTORY);
         if (!Files.exists(localLoggerLoggingDirectory)) {
@@ -38,6 +47,11 @@ public class LocalLogger {
         logger.addHandler(fileHandler);
     }
 
+    /**
+     * Logs an informational message to a log file.
+     *
+     * @param message Informational message.
+     */
     public void logInformationalMessage(String message) {
         String informationalMessageHeader = "INFO - ";
 
@@ -47,6 +61,11 @@ public class LocalLogger {
         );
     }
 
+    /**
+     * Logs a warning message to a log file.
+     *
+     * @param message Warning message.
+     */
     public void logWarningMessage(String message) {
         String warningMessageHeader = "WARN - ";
 
@@ -56,6 +75,11 @@ public class LocalLogger {
         );
     }
 
+    /**
+     * Logs an error message to a log file.
+     *
+     * @param message Error message.
+     */
     public void logErrorMessage(String message) {
         String errorMessageHeader = "ERROR - ";
 
@@ -65,6 +89,11 @@ public class LocalLogger {
         );
     }
 
+    /**
+     * Logs command entered by user to a log file.
+     *
+     * @param command Command string entered by user.
+     */
     public void logCommand(String command) {
         String commandHeader = "COMD - ";
 
