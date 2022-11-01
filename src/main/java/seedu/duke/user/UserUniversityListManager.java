@@ -187,7 +187,7 @@ public class UserUniversityListManager {
     public UserUniversityList getList(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
         if (!myManager.containsKey(input)) {
-            throw new InvalidUserCommandException("HELP!! :: No such universities found");
+            throw new InvalidUserCommandException("Error! No university list named " + input + " is found.");
         }
         return myManager.get(input);
     }
