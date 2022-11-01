@@ -19,7 +19,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILE
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_VALUE_OF_ARGS_INVALID;
 
-//@@author bdthanh
+// @@author bdthanh
 public class UserStorage extends Storage {
     private static final String SEPARATOR = "\\|";
     private static final int USERNAME_INDEX = 0;
@@ -60,9 +60,8 @@ public class UserStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + lineNo + MESSAGE_STORAGE_REASON
-                            + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + lineNo
+                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -85,8 +84,7 @@ public class UserStorage extends Storage {
 
     private void makeUserDir(UserList userList) throws StoreFailureException {
         int startIndex = userFilePath.lastIndexOf("/");
-        String fileDirectory =
-                userFilePath.replace(userFilePath.substring(startIndex), "");
+        String fileDirectory = userFilePath.replace(userFilePath.substring(startIndex), "");
         File file = new File(fileDirectory);
         if (file.mkdir()) {
             writeData(userList);
@@ -102,13 +100,10 @@ public class UserStorage extends Storage {
      * @return A User with full information.
      */
     public User handleUserLine(String[] splitUserLine) throws Exception {
-        try {
-            checkIfArgsEmpty(splitUserLine, NUM_OF_ARGS, MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
-            this.userList.checkValidArgsForUser(splitUserLine);
-            return this.getUserFromUserLine(splitUserLine);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        checkIfArgsEmpty(splitUserLine, NUM_OF_ARGS,
+                MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
+        this.userList.checkValidArgsForUser(splitUserLine);
+        return this.getUserFromUserLine(splitUserLine);
     }
 
     private User getUserFromUserLine(String[] splitUserLine) {

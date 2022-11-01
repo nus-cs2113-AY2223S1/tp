@@ -19,7 +19,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to add a new item.
@@ -42,14 +42,14 @@ public class AddItemCommand extends Command {
     /**
      * Constructor for AddItemCommand.
      *
-     * @param parts           The parts from user input
-     * @param userList        The list of users to work with
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public AddItemCommand(String[] parts, UserList userList, ItemList itemList,
-                          TransactionList transactionList) throws InsufficientArgumentsException {
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
         this.userList = userList;
@@ -89,12 +89,13 @@ public class AddItemCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws UserNotFoundException    If that user cannot be found in the list
-     * @throws DuplicateException       If that user have item with the same name
-     * @throws InvalidPriceException    If price value is less than 0
+     * @throws UserNotFoundException If that user cannot be found in the list
+     * @throws DuplicateException If that user have item with the same name
+     * @throws InvalidPriceException If price value is less than 0
      */
-    public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException,
-            DuplicateException, InvalidPriceException, InvalidCategoryException, InvalidItemException {
+    public boolean executeCommand() throws InvalidArgumentException,
+            UserNotFoundException, DuplicateException, InvalidPriceException,
+            InvalidCategoryException, InvalidItemException {
         String[] args = getArgsAddItemCmd();
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         itemList.checkValidArgsForItem(userList, args);

@@ -135,10 +135,7 @@ The following  diagrams show more details about Storage classes:
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
-The data will be loaded when running the program and will be written to the files after each operation. We also implement a checksum system for our data, including 2 checksums: 
-one for each entry, and one for the whole data in one file. For each user/item/transaction, we use a function of the length of toString() as a checksum. And for the whole list, we use a function of the number of 
-entries as a checksum. Then when loading the data, Duke will check both and throw an exception if the data does not match the checksums.
-These files can be found in ```data``` folder in the same directory as the folder containing project root.
+The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
 ## 4. Implementation
 

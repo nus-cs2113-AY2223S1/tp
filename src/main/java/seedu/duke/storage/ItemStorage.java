@@ -20,7 +20,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVAL
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_VALUE_OF_ARGS_INVALID;
 
-//@@author bdthanh
+// @@author bdthanh
 public class ItemStorage extends Storage {
     private static final String SEPARATOR = "\\|";
     private static final int ITEM_NAME_INDEX = 0;
@@ -65,9 +65,8 @@ public class ItemStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(
-                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + lineNo
-                            + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + lineNo
+                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -90,8 +89,7 @@ public class ItemStorage extends Storage {
 
     private void makeItemDir(ItemList itemList) throws StoreFailureException {
         int startIndex = itemFilePath.lastIndexOf("/");
-        String fileDirectory =
-                itemFilePath.replace(itemFilePath.substring(startIndex), "");
+        String fileDirectory = itemFilePath.replace(itemFilePath.substring(startIndex), "");
         File file = new File(fileDirectory);
         if (file.mkdir()) {
             writeData(itemList);
@@ -107,14 +105,10 @@ public class ItemStorage extends Storage {
      * @return An Item with full information.
      */
     public Item handleItemLine(String[] splitItemLine) throws Exception {
-        try {
-            checkIfArgsEmpty(splitItemLine, NUM_OF_ARGS, MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
-            itemList.checkValidArgsForItem(userList, splitItemLine);
-            itemList.checkValidId(splitItemLine[ITEM_ID_INDEX]);
-            return getItemFromItemLine(splitItemLine);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        checkIfArgsEmpty(splitItemLine, NUM_OF_ARGS, MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
+        itemList.checkValidArgsForItem(userList, splitItemLine);
+        itemList.checkValidId(splitItemLine[ITEM_ID_INDEX]);
+        return getItemFromItemLine(splitItemLine);
     }
 
     private Item getItemFromItemLine(String[] splitItemLine) throws Exception {

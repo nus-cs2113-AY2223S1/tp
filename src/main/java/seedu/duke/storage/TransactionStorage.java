@@ -21,7 +21,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILE
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_VALUE_OF_ARGS_INVALID;
 
-//@@author bdthanh
+// @@author bdthanh
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = "\\|";
     private static final int ITEM_ID_INDEX = 0;
@@ -53,7 +53,8 @@ public class TransactionStorage extends Storage {
      * @return The list of transactions stored in the file.
      * @throws TransactionFileNotFoundException If the file cannot be found.
      */
-    public TransactionList loadData() throws TransactionFileNotFoundException, StoreFailureException {
+    public TransactionList loadData()
+            throws TransactionFileNotFoundException, StoreFailureException {
         int lineNo = 0;
         try {
             File transactionFile = new File(transactionFilePath);
@@ -112,16 +113,12 @@ public class TransactionStorage extends Storage {
      * @return A Transaction with full information.
      */
     public Transaction handleTransactionLine(String[] splitTransactionLine) throws Exception {
-        try {
-            checkIfArgsEmpty(splitTransactionLine, NUM_OF_ARGS,
-                    MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
-            transactionList.checkValidArgs(splitTransactionLine);
-            itemList.checkNameOwnerPriceOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
-                    splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
-            return getTransactionFromTransactionLine(splitTransactionLine);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        checkIfArgsEmpty(splitTransactionLine, NUM_OF_ARGS,
+                MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
+        transactionList.checkValidArgs(splitTransactionLine);
+        itemList.checkNameOwnerPriceOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
+                splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
+        return getTransactionFromTransactionLine(splitTransactionLine);
     }
 
     private static Transaction getTransactionFromTransactionLine(String[] splitTransactionLine) {

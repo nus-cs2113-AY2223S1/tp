@@ -13,15 +13,23 @@ import seedu.duke.user.UserList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-//@@author jorellesee
+// @@author jorellesee
 public class ViewBorrowTransactionsByUserCommand extends Command {
 
     private final String[] parts;
     private final TransactionList transactionList;
     private final UserList userList;
 
-    public ViewBorrowTransactionsByUserCommand(String[] parts, TransactionList transactionList, UserList userList)
-            throws InsufficientArgumentsException {
+    /**
+     * Constructor for ViewBorrowTransactionsByUser.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
+    public ViewBorrowTransactionsByUserCommand(String[] parts, TransactionList transactionList,
+            UserList userList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         this.userList = userList;
@@ -50,14 +58,22 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
         }
     }
 
-    @Override
-    public boolean executeCommand()
-            throws InsufficientArgumentsException, UserNotFoundException,
+    /**
+     * Executes ViewBorrowTransactionsByUserCommand.
+     *
+     * @return false
+     * @throws UserNotFoundException If the user cannot be found
+     * @throws InsufficientArgumentsException If any argument is invalid
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidTransactionException If given transaction is invalid
+     */
+    public boolean executeCommand() throws InsufficientArgumentsException, UserNotFoundException,
             InvalidArgumentException, InvalidTransactionException {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
-            //Ui.printResponse("Listed below are the transactions in which " + arg + "is the borrower.");
+            // Ui.printResponse("Listed below are the transactions in which " + arg + "is the
+            // borrower.");
             Ui.printResponse(returnList.toString());
         }
         return false;

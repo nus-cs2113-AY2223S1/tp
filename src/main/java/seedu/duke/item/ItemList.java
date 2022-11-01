@@ -46,7 +46,17 @@ public class ItemList {
         itemList.add(item);
     }
 
-    public Item updateItemPrice(String itemId, double price) throws ItemNotFoundException, InvalidCategoryException {
+    /**
+     * Updates an item's price.
+     * 
+     * @param itemId id of item to be updated
+     * @param price price to update
+     * @return a new instance Item with updated fields
+     * @throws ItemNotFoundException If item id does not exist in item list
+     * @throws InvalidCategoryException If category does not exist
+     */
+    public Item updateItemPrice(String itemId, double price)
+            throws ItemNotFoundException, InvalidCategoryException {
         for (int i = 0; i < this.itemList.size(); ++i) {
             Item item = this.itemList.get(i);
             if (item.getItemId().equals(itemId)) {
@@ -58,6 +68,14 @@ public class ItemList {
         throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
+    /**
+     * Deletes an item.
+     * 
+     * @param itemId id of item to delete
+     * @param transactionList list containing all transactions
+     * @throws ItemNotFoundException If item id does not exist in item list
+     * @throws InvalidItemException If item cannot be deleted
+     */
     public void deleteItem(String itemId, TransactionList transactionList)
             throws ItemNotFoundException, InvalidItemException {
         Item item = getItemById(itemId);
@@ -68,6 +86,13 @@ public class ItemList {
         }
     }
 
+    /**
+     * Gets an item by its id.
+     * 
+     * @param id id to search item list with
+     * @return Found item if it exists
+     * @throws ItemNotFoundException If no such item exists in item list
+     */
     public Item getItemById(String id) throws ItemNotFoundException {
         for (Item item : this.itemList) {
             if (id.equals(item.getItemId())) {
@@ -77,6 +102,13 @@ public class ItemList {
         throw new ItemNotFoundException(MESSAGE_ITEM_NOT_FOUND);
     }
 
+    /**
+     * Gets an item by keywords.
+     * 
+     * @param keyword a (sub)string to query with
+     * @return Found item if it exists
+     * @throws ItemNotFoundException If no such item exists in item list
+     */
     public ItemList getItemsByKeyword(String keyword) throws ItemNotFoundException {
         ItemList returnList = new ItemList();
         for (Item item : this.itemList) {
@@ -98,6 +130,13 @@ public class ItemList {
         return this.itemList;
     }
 
+    /**
+     * Checks if an item has a given lender.
+     * 
+     * @param username lender name to check with.
+     * @param transactionList list containing all transactions
+     * @return true if a lender has borrowed this item
+     */
     public boolean hasThisLender(String username, TransactionList transactionList) {
         for (Item item : itemList) {
             if (item.getOwnerId().equals(username) && !item.isAvailable(transactionList)) {
@@ -112,6 +151,12 @@ public class ItemList {
             item -> item.getOwnerId().equals(username) && item.isAvailable(transactionList));
     }
 
+    /**
+     * Computes a readable string representation of this list.
+     * 
+     * @param transactionList list containing all transactions
+     * @return A string representation of transaction list
+     */
     public String toString(TransactionList transactionList) {
         StringBuilder listString = new StringBuilder();
         if (itemList.size() == 0) {
@@ -127,6 +172,11 @@ public class ItemList {
         return String.valueOf(listString);
     }
 
+    /**
+     * Computes a suitable string representation of list for file storage.
+     * 
+     * @return A string representation of list for file storage
+     */
     public String convertItemListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
         for (Item item : itemList) {

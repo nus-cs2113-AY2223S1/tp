@@ -139,17 +139,17 @@ public class CommandParser {
     /**
      * Parses the command from user.
      *
-     * @param input           The input from user
-     * @param userList        The list of users
-     * @param itemList        The list of items
+     * @param input The input from user
+     * @param userList The list of users
+     * @param itemList The list of items
      * @param transactionList The list of transactions
      * @return Commands based on the command word
-     * @throws CommandNotFoundException       If the command is unrecognizable
+     * @throws CommandNotFoundException If the command is unrecognizable
      * @throws InsufficientArgumentsException If number of args in the commands is not enough.
      */
     public static Command createCommand(String input, UserList userList, ItemList itemList,
-                                        TransactionList transactionList)
-            throws CommandNotFoundException, InsufficientArgumentsException, InvalidArgumentException {
+            TransactionList transactionList) throws CommandNotFoundException,
+            InsufficientArgumentsException, InvalidArgumentException {
         String command = getCommand(input);
         String[] parts = getParts(input);
         if (isContainingDataSeparator(input)) {

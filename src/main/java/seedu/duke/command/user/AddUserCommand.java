@@ -14,7 +14,7 @@ import seedu.duke.ui.Ui;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to add a new user.
@@ -33,7 +33,7 @@ public class AddUserCommand extends Command {
     /**
      * Constructor for AddUserCommand.
      *
-     * @param parts    The parts from user input
+     * @param parts The parts from user input
      * @param userList The list of users to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -74,10 +74,10 @@ public class AddUserCommand extends Command {
      *
      * @return false If it is not an exit command
      * @throws InsufficientArgumentsException If the number of args is incorrect
-     * @throws InvalidArgumentException       If there is a part that cannot be parsed
-     * @throws ContactNumberInvalidException  If contact number has the wrong length
-     * @throws DuplicateException             If that username is taken
-     * @throws InvalidUserException           If age is out of range
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws ContactNumberInvalidException If contact number has the wrong length
+     * @throws DuplicateException If that username is taken
+     * @throws InvalidUserException If age is out of range
      */
     public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException,
             ContactNumberInvalidException, DuplicateException, InvalidUserException {

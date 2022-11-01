@@ -25,7 +25,7 @@ import static seedu.duke.storage.FilePath.ITEM_FILE_PATH;
 import static seedu.duke.storage.FilePath.TRANSACTION_FILE_PATH;
 import static seedu.duke.storage.FilePath.USER_FILE_PATH;
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A chatbot named Duke.
@@ -43,8 +43,8 @@ public class Duke {
     /**
      * Constructor of Duke.
      *
-     * @param userFilePath        The file path that Duke stores its users.
-     * @param itemFilePath        The file path that Duke stores its items.
+     * @param userFilePath The file path that Duke stores its users.
+     * @param itemFilePath The file path that Duke stores its items.
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
@@ -65,7 +65,8 @@ public class Duke {
     /**
      * Initialize transaction list.
      */
-    private void initializeTransactionList(String transactionFilePath) throws StoreFailureException {
+    private void initializeTransactionList(String transactionFilePath)
+            throws StoreFailureException {
         try {
             transactionStorage = new TransactionStorage(transactionFilePath, itemList);
             this.transactionList = transactionStorage.loadData();
@@ -109,7 +110,8 @@ public class Duke {
     }
 
     private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExist = StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
+        boolean areSimultaneouslyExistOrNotExist
+                = StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
         if (!areSimultaneouslyExistOrNotExist) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }

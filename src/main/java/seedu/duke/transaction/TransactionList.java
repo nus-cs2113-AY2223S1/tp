@@ -21,7 +21,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UPDATE
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
-//@@author bdthanh
+// @@author bdthanh
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
     private static final int DURATION_INDEX = 2;
@@ -75,12 +75,12 @@ public class TransactionList {
      * Updates a transaction duration in the list given its ID.
      *
      * @param transactionId The id of the transaction to be deleted
-     * @param duration      The new duration
+     * @param duration The new duration
      * @throws TransactionNotFoundException If the transaction cannot be found in the list
      * @throws InvalidTransactionException If there is transaction overlapped
      */
 
-    //@@author jorellesee
+    // @@author jorellesee
     public Transaction updateTransaction(String transactionId, int duration, double moneyTransacted)
             throws TransactionNotFoundException, InvalidTransactionException {
         for (int i = 0; i < this.transactionList.size(); ++i) {
@@ -95,7 +95,7 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
-    //@@author bdthanh
+    // @@author bdthanh
 
     /**
      * Deletes a transaction in the list given its ID.
@@ -125,7 +125,13 @@ public class TransactionList {
         throw new TransactionNotFoundException(MESSAGE_TX_NOT_FOUND);
     }
 
-    //@@author jorellesee
+    // @@author jorellesee
+    /**
+     * Gets the transactions of a user who is borrowing.
+     * 
+     * @param userName user to check with
+     * @return A list of all matched transactions
+     */
     public TransactionList getBorrowTransactionsByUser(String userName) {
         TransactionList returnList = new TransactionList();
         for (Transaction transaction : this.transactionList) {
@@ -136,6 +142,12 @@ public class TransactionList {
         return returnList;
     }
 
+    /**
+     * Gets the transactions of a user who is lending.
+     * 
+     * @param userName user to check with
+     * @return A list of all matched transactions
+     */
     public TransactionList getLendTransactionsByUser(String userName) {
         TransactionList returnList = new TransactionList();
         for (Transaction transaction : this.transactionList) {
@@ -146,6 +158,11 @@ public class TransactionList {
         return returnList;
     }
 
+    /**
+     * Computes total transacted sum.
+     * 
+     * @return Total sum
+     */
     public double getTotalMoneyTransacted() {
         double totalProfit = 0;
         for (Transaction transaction : transactionList) {
@@ -154,7 +171,7 @@ public class TransactionList {
         return totalProfit;
     }
 
-    //@@author bdthanh
+    // @@author bdthanh
 
     /**
      * Checks if there is a specific borrower given his/her username among unfinished transactions.
@@ -182,8 +199,8 @@ public class TransactionList {
                 .collect(Collectors.toList());
         int count = transactions.size();
         if (count > 0) {
-            throw new InvalidTransactionException(MESSAGE_ITEM_TRANSACTION_OVERLAP
-                    + transactions.get(0).getTxId() + ")");
+            throw new InvalidTransactionException(
+                    MESSAGE_ITEM_TRANSACTION_OVERLAP + transactions.get(0).getTxId() + ")");
         }
     }
 
@@ -201,8 +218,8 @@ public class TransactionList {
                 .collect(Collectors.toList());
         int count = transactions.size();
         if (count > 0) {
-            throw new InvalidTransactionException(MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP
-                    + transactions.get(0).getTxId() + ")");
+            throw new InvalidTransactionException(
+                    MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP + transactions.get(0).getTxId() + ")");
         }
     }
 
