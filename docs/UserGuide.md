@@ -118,16 +118,16 @@ Creates a university list and the corresponding timetable for user's specified u
 
 Example Input:
 ```
-/create u/UCLA
+/create u/Aalto_University
 ```
 
 Expected Output:
 ```
 ____________________________________________________________________________
-Success! You have created a new list for UCLA
+Success! You have created a new list for Aalto University
 ____________________________________________________________________________
 ____________________________________________________________________________
-Success! You have created a new timetable for UCLA
+Success! You have created a new timetable for Aalto University
 ____________________________________________________________________________
 ```
 
