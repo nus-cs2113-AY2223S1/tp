@@ -179,6 +179,27 @@ ____________________________________________________________
 Duplicate tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+Parameters information: -NIL-
+
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
 Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
