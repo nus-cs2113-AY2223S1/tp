@@ -79,7 +79,7 @@ public class AddCommand extends Command {
         try {
             int weight = getWeightWithValidation(argumentList);
             int set = getSetWithValidation(argumentList);
-            int repetition = getRepetitionWithValidation(argumentList);
+            int repetition = getRepetitionWithValidation(Integer.parseInt(argumentList[4]));
             LocalDate date;
             if (argumentList.length == 6) {
                 date = Parser.parseDate(argumentList[5], 1);
@@ -156,7 +156,7 @@ public class AddCommand extends Command {
         String description = getDescriptionWithValidation(argumentList[1]);
         try {
             double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
-            int repetition = getRepetitionWithValidation(argumentList);
+            int repetition = getRepetitionWithValidation(Integer.parseInt(argumentList[3]));
             LocalDate date;
             if (argumentList.length == 5) {
                 date = Parser.parseDate(argumentList[4], 1);
@@ -181,6 +181,7 @@ public class AddCommand extends Command {
         }
     }
 
+
     private static double getDistanceWithValidation(double distance) throws IllegalValueException {
         if (distance > 100) {
             throw new IllegalValueException("Distance should not be more than 100km!");
@@ -190,8 +191,7 @@ public class AddCommand extends Command {
         return distance;
     }
 
-    private static int getRepetitionWithValidation(String[] argumentList) throws IllegalValueException {
-        int repetition = Integer.parseInt(argumentList[4]);
+    private static int getRepetitionWithValidation(int repetition) throws IllegalValueException {
         if (repetition <= 0 || repetition > 50) {
             throw new IllegalValueException("Invalid value for repetitions");
         }
