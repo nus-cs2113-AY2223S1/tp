@@ -13,11 +13,11 @@ import java.io.File;
 public class StorageTest {
     private String filepath = "./data/stored.txt";
     private String folderpath = "./data/";
-    Storage s = new Storage(filepath, folderpath);
+    Storage store = new Storage(filepath, folderpath);
     
     @Test
     void checkFile() {
-        s.getMakeFile();
+        store.getMakeFile();
         File f = new File(filepath);
         assertTrue(f.exists() && !f.isDirectory());
     }
