@@ -32,19 +32,32 @@ public class UserUniversityListManager {
 
     public UserUniversityListManager() {
         this.myManager = new HashMap<String, UserUniversityList>();
-        this.ttManager = UserStorageParser.getSavedTimetables();
+        this.ttManager = new TimetableManager();
     }
 
     public UserUniversityListManager(String fileContent) throws IOException {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
             this.ttManager = UserStorageParser.getSavedTimetables();
+            UserStorageParser.getTimetables(this);
+            checkTimetables();
+            checkUniversityLists();
         } catch (InvalidUserStorageFileException e) {
             Ui.printExceptionMessage(e);
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
             UserStorage.saveFile("", true);
+            System.out.println("Creating new Timetable Manager");
+            ttManager = new TimetableManager();
         }
+    }
+
+    private void checkTimetables() {
+        
+    }
+
+    private void checkUniversityLists() {
+
     }
 
     public void updateComment(String universityName, String moduleCode, String comment)
