@@ -105,26 +105,10 @@ public class AddCommand extends Command {
         }
     }
 
-    private static LocalDate getDateWithValidation(String date, boolean toDisplay) throws IllegalValueException {
-        LocalDate today = LocalDate.now();
-        LocalDate localDate;
-        try {
-            localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            LocalDate oldestinputDate =  LocalDate.parse("31-12-2023", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            if (toDisplay && today.isAfter(localDate)) {
-                throw new IllegalValueException("Date cannot be before today");
-            } else if (localDate.compareTo(oldestinputDate) > 0) {
-                throw new IllegalValueException("Date input cannot be after 2023");
-            }
-        } catch (DateTimeException e) {
-            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
-        }
-        return localDate;
-    }
 
     private static int getSetWithValidation(String[] argumentList) throws IllegalValueException {
         int set = Integer.parseInt(argumentList[3]);
-        if (set <= 0 || set > 500) {
+        if (set <= 0 || set > 100) {
             throw new IllegalValueException("Invalid value for sets");
         }
         return set;
