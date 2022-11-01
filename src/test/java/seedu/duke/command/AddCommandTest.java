@@ -80,7 +80,7 @@ class AddCommandTest {
         try {
             c.execute();
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), "Date should be in the format dd-mm-yyyy");
+            assertEquals(e.getMessage(), "Date is in the wrong format. Please follow the dd-MM-yyyy format");
         }
     }
 

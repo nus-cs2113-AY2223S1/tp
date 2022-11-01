@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 public class Biometrics {
 
-    private final String[] genderOptions = new String[]{"male", "female", "others"};
+    private static final String[] GENDER_OPTIONS = new String[]{"male", "female", "others"};
+    private static final int MAX_AGE = 120;
+    private static final int MAX_HEIGHT = 300;
 
     private int age;
     private String gender;
@@ -64,21 +66,21 @@ public class Biometrics {
     }
 
     public void setAge(int age) throws IllegalValueException {
-        if (age <= 0 || age > 120) {
+        if (age <= 0 || age > MAX_AGE) {
             throw new IllegalValueException("That age ain't possible");
         }
         this.age = age;
     }
 
     public void setGender(String gender) throws IllegalValueException {
-        if (!Arrays.asList(genderOptions).contains(gender)) {
+        if (!Arrays.asList(GENDER_OPTIONS).contains(gender)) {
             throw new IllegalValueException("Hi, I only recognise others, female and male genders");
         }
         this.gender = gender;
     }
 
     public void setHeight(int height) throws IllegalValueException {
-        if (height <= 0 || height > 300) {
+        if (height <= 0 || height > MAX_HEIGHT) {
             throw new IllegalValueException("That's a strange height...");
         }
         this.height = height;

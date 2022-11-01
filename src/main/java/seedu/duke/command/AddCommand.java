@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private String arguments;
     private boolean toDisplay;
     private Food food;
-    public static final String INVALID_FOOD_INPUT = "Invalid food input";
+    public static final String INVALID_FOOD_INPUT = "Invalid add food command";
     final String[] invalidFoodNames = {"", " ", "[]\\[;]"};
 
     private ExerciseList exerciseList;
@@ -81,10 +81,10 @@ public class AddCommand extends Command {
             int set = getSetWithValidation(argumentList);
             int repetition = getRepetitionWithValidation(argumentList);
             LocalDate date;
-            if (argumentList.length == 5) {
-                date = LocalDate.now();
+            if (argumentList.length == 6) {
+                date = Parser.parseDate(argumentList[5], 1);
             } else {
-                date = getDateWithValidation(argumentList[5], toDisplay);
+                date = LocalDate.now();
             }
             Exercise exercise = new StrengthExercise(description, weight, set, repetition, date);
             exerciseList.addExercise(exercise);
@@ -158,10 +158,10 @@ public class AddCommand extends Command {
             double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
             int repetition = getRepetitionWithValidation(argumentList);
             LocalDate date;
-            if (argumentList.length == 4) {
-                date = LocalDate.now();
+            if (argumentList.length == 5) {
+                date = Parser.parseDate(argumentList[4], 1);
             } else {
-                date = getDateWithValidation(argumentList[4], toDisplay);
+                date = LocalDate.now();
             }
             Exercise exercise = new CardioExercise(description, distance, repetition, date);
             exerciseList.addExercise(exercise);
@@ -210,7 +210,7 @@ public class AddCommand extends Command {
             }
             LocalDate date;
             if (argumentList.length == 4) {
-                date = LocalDate.parse(argumentList[3], DateTimeFormatter.ofPattern("d-M-yyyy"));
+                date = Parser.parseDate(argumentList[3], 0);
             } else {
                 date = LocalDate.now();
             }
@@ -232,15 +232,15 @@ public class AddCommand extends Command {
 
 
     private void addWeightAndFat(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length < 3) {
-            throw new IllegalValueException("INVALID_WEIGHT_INPUT");
+        if (argumentList.length < 3 || argumentList.length > 4) {
+            throw new IllegalValueException("Invalid add weight command");
         }
         try {
             int weight = Integer.parseInt(argumentList[1]);
             int fat = Integer.parseInt(argumentList[2]);
             LocalDate date;
             if (argumentList.length == 4) {
-                date = LocalDate.parse(argumentList[3], DateTimeFormatter.ofPattern("d-M-yyyy"));
+                date = Parser.parseDate(argumentList[3], 0);
             } else {
                 date = LocalDate.now();
             }
@@ -254,8 +254,6 @@ public class AddCommand extends Command {
             }
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Weight and fat percentage should be numerical");
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date should be in the format dd-mm-yyyy");
         }
     }
 

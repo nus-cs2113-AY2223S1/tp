@@ -16,7 +16,7 @@ Help will always be given at Hogwarts to those who ask for it
 Available commands:
 help - to display the help message
 exit - to exit the program
-set biometrics /{age} /{gender} /height /{weight} /{fat percentage} /{activity level}
+set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}
 view {biometrics/food/weight/bmi/maintenance/calories/all} {exercise/strength/cardio /{done}}
 add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]
 add cardio /{description} /{distance} /{repetitions} [/{date}]
@@ -74,25 +74,41 @@ Activity Level: 3
 Invalid value for repetitions
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-Date cannot be before today
+Strength Exercise: bench
+Weight: 3kg
+Sets: 10
+Repetitions: 20
+Date: 18-11-2000
+Status: [ ]
+ This strength exercise is added to the exercise list successfully
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-Date cannot be before today
+Strength Exercise: deadlift
+Weight: 3kg
+Sets: 12
+Repetitions: 15
+Date: 19-11-2000
+Status: [ ]
+ This strength exercise is added to the exercise list successfully
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Exercises to be done: 0
+Exercises to be done: 2
 -------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
+1     | deadlift | 3      | 12   | 15   | -    | -        | 19-11-2000 | [ ]
+2     | bench    | 3      | 10   | 20   | -    | -        | 18-11-2000 | [ ]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Strength exercises to be done: 0
+Strength exercises to be done: 2
 -------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
+1     | deadlift | 3      | 12   | 15   | -    | -        | 19-11-2000 | [ ]
+2     | bench    | 3      | 10   | 20   | -    | -        | 18-11-2000 | [ ]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
@@ -130,7 +146,13 @@ Invalid view command
 Invalid value for repetitions
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-Date cannot be before today
+Strength Exercise: press
+Weight: 3kg
+Sets: 12
+Repetitions: 20
+Date: 21-11-2000
+Status: [ ]
+ This strength exercise is added to the exercise list successfully
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 Invalid mark done command
@@ -156,18 +178,24 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Exercises to be done: 0
+Exercises to be done: 3
 -------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
+1     | press    | 3      | 12   | 20   | -    | -        | 21-11-2000 | [ ]
+2     | deadlift | 3      | 12   | 15   | -    | -        | 19-11-2000 | [ ]
+3     | bench    | 3      | 10   | 20   | -    | -        | 18-11-2000 | [ ]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 
-Strength exercises to be done: 0
+Strength exercises to be done: 3
 -------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
+1     | press    | 3      | 12   | 20   | -    | -        | 21-11-2000 | [ ]
+2     | deadlift | 3      | 12   | 15   | -    | -        | 19-11-2000 | [ ]
+3     | bench    | 3      | 10   | 20   | -    | -        | 18-11-2000 | [ ]
 
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
