@@ -29,12 +29,14 @@ public class ParseListClient extends Parser {
 
     boolean isValidTag(String commandFlags) {
         switch (commandFlags) {
-        case CommandStructure.NAME_FLAG://deliberate fall through till SHORT_FLAG
+        case CommandStructure.NAME_FLAG:
+            //deliberate fall through till SHORT_FLAG
         case CommandStructure.CONTACT_NUMBER_FLAG:
         case CommandStructure.EMAIL_FLAG:
         case CommandStructure.BUDGET_FLAG:
         case CommandStructure.SHORT_FLAG:
-            return true;//break not needed as we are returning
+            return true;
+            //break not needed as we are returning
         default:
             return false;
         }
