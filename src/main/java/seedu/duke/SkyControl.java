@@ -73,13 +73,24 @@ public class SkyControl {
     private void executePassengerCommand(String lineInput, Command command) {
         try {
             if (isAdd) {
+                String departureTime;
+                String gateNumber;
                 command.checkFlightDetailSync(flights, passengers, lineInput);
+                departureTime = command.getPassengerDepartureTime(flights, lineInput);
+                gateNumber = command.getPassengerGateNumber(flights, lineInput);
+                String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime, gateNumber);
+                command.execute(passengers, passengerAddInput);
+            } else {
+                command.execute(passengers, lineInput);
             }
-            command.execute(passengers, lineInput);
             storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
         } catch (SkyControlException | SyncException | IOException e) {
             ui.showError(e.getMessage());
         }
+    }
+
+    private String getLineInputForPassengerAdd(String lineInput, String departureTime, String gateNumber) {
+        return lineInput.trim() + " dt/" + departureTime + " gn/" + gateNumber;
     }
 
     private void checkEntity(String lineInput) throws SkyControlException {
