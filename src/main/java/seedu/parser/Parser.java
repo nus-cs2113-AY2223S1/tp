@@ -69,30 +69,39 @@ public class Parser {
 
         switch (commandWord) {
         case AuthCommand.COMMAND_WORD:
+            //Fallthrough
         case AuthCommand.COMMAND_WORD_SHORT:
             return prepareAuth(arguments);
         case ExitCommand.COMMAND_WORD:
+            //Fallthrough
         case ExitCommand.COMMAND_WORD_SHORT:
             return prepareExit(arguments);
         case FavouriteCommand.COMMAND_WORD:
+            //Fallthrough
         case FavouriteCommand.COMMAND_WORD_SHORT:
             return prepareFavourite(arguments);
         case FindCommand.COMMAND_WORD:
+            //Fallthrough
         case FindCommand.COMMAND_WORD_SHORT:
             return prepareFind(arguments);
         case ListCommand.COMMAND_WORD:
+            //Fallthrough
         case ListCommand.COMMAND_WORD_SHORT:
             return prepareList(arguments);
         case FilterCommand.COMMAND_WORD:
+            //Fallthrough
         case FilterCommand.COMMAND_WORD_SHORT:
             return prepareFilter(argsList, arguments);
         case UpdateCommand.COMMAND_WORD:
+            //Fallthrough
         case UpdateCommand.COMMAND_WORD_SHORT:
             return prepareUpdate(arguments);
         case UnfavouriteCommand.COMMAND_WORD:
+            //Fallthrough
         case UnfavouriteCommand.COMMAND_WORD_SHORT:
             return prepareUnfavourite(arguments);
         case HelpCommand.COMMAND_WORD:
+            //Fallthrough
         case HelpCommand.COMMAND_WORD_SHORT:
             return prepareHelp(arguments);
         default:
