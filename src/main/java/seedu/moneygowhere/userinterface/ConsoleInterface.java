@@ -241,7 +241,7 @@ public class ConsoleInterface {
         if (expense.getDescription() != null) {
             expenseStr += "Description     : " + expense.getDescription() + "\n";
         }
-        expenseStr += "Amount          : " + expense.getAmount() + "\n";
+        expenseStr += "Amount          : " + expense.getAmount().toPlainString() + "\n";
         if (expense.getCategory() != null) {
             expenseStr += "Category        : " + expense.getCategory() + "\n";
         }
@@ -276,8 +276,8 @@ public class ConsoleInterface {
         if (target.getDescription() != null) {
             targetStr += "Description   : " + target.getDescription() + "\n";
         }
-        targetStr += "Amount        : " + target.getAmount() + "\n";
-        targetStr += "Current Amount: " + target.getCurrentAmount();
+        targetStr += "Amount        : " + target.getAmount().toPlainString() + "\n";
+        targetStr += "Current Amount: " + target.getCurrentAmount().toPlainString();
 
         return targetStr;
     }
@@ -301,7 +301,7 @@ public class ConsoleInterface {
         if (income.getDescription() != null) {
             incomeStr += "Description   : " + income.getDescription() + "\n";
         }
-        incomeStr += "Amount        : " + income.getAmount();
+        incomeStr += "Amount        : " + income.getAmount().toPlainString();
 
         return incomeStr;
     }
@@ -321,7 +321,7 @@ public class ConsoleInterface {
         if (recurringPayment.getDescription() != null) {
             recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
         }
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount().toPlainString() + "\n";
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
@@ -667,8 +667,13 @@ public class ConsoleInterface {
             }
         }
 
-        currencyManager.changeCurrency(expense, currency, rate);
-        expenseManager.sortExpenses();
+        try {
+            currencyManager.changeCurrency(expense, currency, rate);
+            expenseManager.sortExpenses();
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
