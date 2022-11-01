@@ -37,10 +37,12 @@ public class CommandListPropertiesWithTags extends Command {
         default:
             break;
         }
+        //newline at the end of command
+        ui.printNewline();
     }
 
     private void displayPropertyAddresses(PropertyList propertyList, Ui ui) {
-        for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < propertyList.getCurrentListSize(); i++) {
             ui.displayOnePropertyAddress(propertyList.getPropertyList().get(i), i + 1);
         }
         ui.displayNoOfProperties(propertyList.getCurrentListSize());

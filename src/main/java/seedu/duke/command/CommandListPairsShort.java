@@ -16,5 +16,7 @@ public class CommandListPairsShort extends Command {
             System.out.println(Messages.LINE_BREAK);
         });
         ui.displayNoOfPairs(pairingList.getClientPropertyPairs().size());
+        //newline at the end of command
+        ui.printNewline();
     }
 }

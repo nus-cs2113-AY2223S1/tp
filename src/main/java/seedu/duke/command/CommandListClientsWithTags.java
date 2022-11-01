@@ -36,38 +36,40 @@ public class CommandListClientsWithTags extends Command {
         default:
             break;
         }
+        //newline at the end of command
+        ui.printNewline();
     }
 
     private void displayClientContacts(ClientList clientList, Ui ui) {
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientContact(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     public void displayClientShort(ClientList clientList, Ui ui) {
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientShort(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientNames(ClientList clientList, Ui ui) {
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientName(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientEmails(ClientList clientList, Ui ui) {
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientEmail(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
     }
 
     private void displayClientBudget(ClientList clientList, Ui ui) {
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
+        for (int i = CommandStructure.START_INDEX; i < clientList.getCurrentListSize(); i++) {
             ui.displayOneClientBudget(clientList.getClientList().get(i), i + 1);
         }
         ui.displayNoOfClients(clientList.getCurrentListSize());
