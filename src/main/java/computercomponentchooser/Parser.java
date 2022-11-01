@@ -62,14 +62,16 @@ public class Parser {
      * @return A boolean value indicating whether the user input is edit.
      */
     public boolean checkEdit(String line) {
-        String name = getParameter(line, NAME_PARAMETER);
-        if (!ComputerComponentChooser.buildManager.doesBuildExist(name)) {
-            Ui.printLine();
-            System.out.println("Build does not exist!");
-            Ui.printLine();
-            return false;
-        }
         String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+        if (edit.equals("edit")) {
+            String name = getParameter(line, NAME_PARAMETER);
+            if (!ComputerComponentChooser.buildManager.doesBuildExist(name)) {
+                Ui.printLine();
+                System.out.println("Build does not exist!");
+                Ui.printLine();
+                return false;
+            }
+        }
         return edit.equals("edit");
     }
 
@@ -98,9 +100,6 @@ public class Parser {
             case "delete":
                 mainParseDelete(line);
                 break;
-            case "back":
-                mainParseBack();
-                break;
             case "export":
                 mainParseExport();
                 break;
@@ -112,6 +111,9 @@ public class Parser {
                 break;
             case "find":
                 mainParseFind(line);
+                break;
+            case "back":
+                mainParseBack();
                 break;
             default:
                 throw new UnknownCommandException();
@@ -126,6 +128,15 @@ public class Parser {
             System.out.println("Please enter a valid number.");
             Ui.printLine();
         }
+    }
+
+    /**
+     * Tells the user that they are already in main mode.
+     */
+    private static void mainParseBack() {
+        Ui.printLine();
+        System.out.println("You are in Main Mode.");
+        Ui.printLine();
     }
 
     /**
@@ -242,16 +253,6 @@ public class Parser {
         }
         System.out.println("Your current builds:");
         System.out.print(buildManager);
-        Ui.printLine();
-    }
-
-    /**
-     * Parses the user input and executes the back command by going back to the main mode. This method is
-     * called when the user is in the edit mode.
-     */
-    private void mainParseBack() {
-        Ui.printLine();
-        System.out.println("Back to main mode.");
         Ui.printLine();
     }
 

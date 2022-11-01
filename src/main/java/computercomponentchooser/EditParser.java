@@ -70,6 +70,11 @@ public class EditParser {
      */
     public static boolean checkBack(String line) {
         String back = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+        if (back.equals("back")) {
+            Ui.printEditLine();
+            System.out.println("Back to main mode.");
+            Ui.printEditLine();
+        }
         return back.equals("back");
     }
 
@@ -180,17 +185,17 @@ public class EditParser {
             } catch (Exception e) {
                 System.out.println("Error saving build");
             }
-            Ui.printLine();
+            Ui.printEditLine();
             System.out.println("You have added " + name);
-            Ui.printLine();
+            Ui.printEditLine();
         } catch (NumberFormatException e) {
-            Ui.printLine();
+            Ui.printEditLine();
             System.out.println("Please input the numbers correctly.");
-            Ui.printLine();
+            Ui.printEditLine();
         } catch (NegativeNumberException e) {
-            Ui.printLine();
+            Ui.printEditLine();
             System.out.println(e.getMessage());
-            Ui.printLine();
+            Ui.printEditLine();
         }
     }
 
@@ -399,9 +404,9 @@ public class EditParser {
         } catch (Exception e) {
             System.out.println("Error saving build");
         }
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println("You have removed " + name);
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -411,15 +416,15 @@ public class EditParser {
      * @param editBuild The build to be edited.
      */
     public void parseList(Build editBuild) {
-        Ui.printLine();
+        Ui.printEditLine();
         if (editBuild.getAllComponents().size() == 0) {
             System.out.println("You have no components");
-            Ui.printLine();
+            Ui.printEditLine();
             return;
         }
         System.out.println("Computer parts for " + buildName + ":");
         System.out.print(editBuild);
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -434,9 +439,9 @@ public class EditParser {
         if (!buildManager.doesBuildExist(buildName)) {
             throw new UnlistedBuildException();
         }
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println("You are now editing " + buildName);
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -454,9 +459,9 @@ public class EditParser {
         if (!editBuild.doesComponentExist(name)) {
             throw new UnlistedComponentException();
         }
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println(editBuild.getComponent(type, name).getDetails());
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -466,10 +471,10 @@ public class EditParser {
      * @param editBuild The build to be edited.
      */
     public void parseCheck(Build editBuild) {
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println("Compatibility Info:");
         System.out.print(editBuild.getCompatibilityInfo());
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -479,10 +484,10 @@ public class EditParser {
      * @param editBuild The build to be edited.
      */
     public void parseInfo(Build editBuild) {
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println("Build Info:");
         System.out.print(editBuild.getBuildInfo());
-        Ui.printLine();
+        Ui.printEditLine();
     }
 
     /**
@@ -491,14 +496,14 @@ public class EditParser {
      * @param editBuild The build to be edited.
      */
     public void parseExport(Build editBuild) {
-        Ui.printLine();
+        Ui.printEditLine();
         System.out.println("Exporting build to text file...");
         try {
             ExportText.exportBuildText(editBuild);
         } catch (Exception e) {
             System.out.println("Error exporting build");
         }
-        Ui.printLine();
+        Ui.printEditLine();
     }
 }
 
