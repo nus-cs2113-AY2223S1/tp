@@ -2,6 +2,8 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.duke.timetable.Timetable;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {

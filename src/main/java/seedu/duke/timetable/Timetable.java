@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.timetable;
 
 import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
@@ -9,10 +9,6 @@ import java.util.List;
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<>();
     public static TimetableDict timetableDict = new TimetableDict();
-
-    public static void initTimetableDict() {
-        timetableDict.init();
-    }
 
     public static String allocateModules() {
         return timetableDict.allocateModules();
@@ -27,7 +23,6 @@ public class Timetable {
         Module newModule = new Module(code, name, lessons);
         listOfModules.add(newModule);
     }
-
 
     public static List<Module> getListOfModules() {
         return listOfModules;

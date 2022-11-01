@@ -1,15 +1,14 @@
 package seedu.duke.data;
 
 import seedu.duke.Exceptions;
-import seedu.duke.Timetable;
 import seedu.duke.commands.CommandAddModule;
 import seedu.duke.module.Module;
+import seedu.duke.timetable.Timetable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ModuleManager {
@@ -53,6 +52,8 @@ public class ModuleManager {
             String response = CommandAddModule.runAddModuleProcedure(currSemester, moduleCode);
             checkForErrors(response);
         }
+
+        scanner.close();
     }
 
     private static void checkForErrors(String response) throws Exceptions.FileLoadException {

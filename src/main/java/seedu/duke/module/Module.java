@@ -1,9 +1,9 @@
 package seedu.duke.module;
 
-import seedu.duke.Timetable;
-import seedu.duke.TimetableDict;
 import seedu.duke.UI;
 import seedu.duke.module.lessons.Lesson;
+import seedu.duke.timetable.Timetable;
+import seedu.duke.timetable.TimetableDict;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +34,23 @@ public class Module {
 
     public List<Lesson> getAttendingList() {
         return attendingList;
+    }
+
+    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getLessonMap() {
+        return lessonMap;
+    }
+
+    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getAttendingMap() {
+        return attendingMap;
+    }
+
+    public List<Lesson> getClassFromLessonMap(String lessonType, String classNumber) {
+        return lessonMap.get(lessonType).get(classNumber);
+    }
+
+    public List<Lesson> getClassFromAttendingMap(String lessonType) {
+        String classNumber = attendingMap.get(lessonType).keySet().iterator().next();
+        return attendingMap.get(lessonType).get(classNumber);
     }
 
     public List<Lesson> getAttendingInListForm() {
@@ -263,7 +280,7 @@ public class Module {
             timetableDict.deleteLesson(lesson);
         }
         for (Lesson lesson : newLessons) {
-            timetableDict.addLesson(lesson, moduleCode);
+            timetableDict.addLesson(lesson);
         }
     }
 
@@ -293,7 +310,7 @@ public class Module {
 
         //Adding to timetableDict
         for (Lesson lesson : newLessonGroup) {
-            Timetable.timetableDict.addLesson(lesson, moduleCode);
+            Timetable.timetableDict.addLesson(lesson);
         }
     }
 
@@ -349,5 +366,29 @@ public class Module {
     @Override
     public String toString() {
         return moduleCode + " : " + moduleName;
+    }
+
+    public boolean checkLessonTypeAttended(String lessonType) {
+        boolean isLessonTypeAttended = false;
+        for (Lesson attendingLesson : attendingList) {
+            String lessonDay = attendingLesson.getDay();
+            String attendingLessonType = attendingLesson.getLessonType();
+            if (attendingLessonType.equals(lessonType)) {
+                if (!lessonDay.equals("Undetermined Day")) {
+                    isLessonTypeAttended = true;
+                } else {
+                    isLessonTypeAttended = false;
+                }
+            }
+        }
+        return isLessonTypeAttended;
+    }
+
+    public List<String> getAttendingLessonTypes() {
+        List<String> attendingLessonTypes = new ArrayList<String>();
+        for (String lessonType : attendingMap.keySet()) {
+            attendingLessonTypes.add(lessonType);
+        }
+        return attendingLessonTypes;
     }
 }
