@@ -1,14 +1,16 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
 
 class ParserTest {
@@ -44,5 +46,54 @@ class ParserTest {
         for (int i = 0; i < results.size(); i++) {
             assertEquals(expected.get(i).toString(), results.get(i).toString());
         }
+    }
+
+    @Test
+    void executeAddTestWrongArguments() {
+        String addString = "add /movieinception /rating 10 /date 10-01-2020";
+
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        ps.executeAdd(addString);
+        
+        assertEquals("Ensure that input format and number of arguments is correct.\n"
+            .replaceAll("\n", System.getProperty("line.separator")), outContent.toString());
+    }
+
+    @Test
+    void illegalCharacterTest() {
+        String addString = "|";
+
+        assertThrows(DukeException.class, () -> {
+            ps.checkIllegalCharacter(addString);
+        });
+    }
+
+    @Test
+    void clearCommandTest() {
+        addTestMovie();
+        ReviewList result = ps.executeClear();
+        assertEquals(0, result.inputs.size());
+    }
+
+    @Test
+    void parserValidDateTest() {
+        String invalidDate = "10-20-30-20";
+        String[] dateFields = invalidDate.split("-");
+        assertFalse(ps.isValidDate(dateFields));
+    }
+
+    @Test
+    void deleteCommandTest() {
+        ps.executeClear();
+        addTestMovie();
+        ReviewList currentList = ps.getReviewList();
+        assertEquals(1, currentList.inputs.size());
+
+        String deleteString = "delete movie 1";
+        String[] splitString = deleteString.split(" ");
+        ps.executeDelete(splitString);
+        currentList = ps.getReviewList();
+        assertEquals(0, currentList.inputs.size());
     }
 }

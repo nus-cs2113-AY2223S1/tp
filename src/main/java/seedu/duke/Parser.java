@@ -8,19 +8,24 @@ import java.util.logging.Logger;
  * Resolves the user input into a command to execute
  */
 public class Parser {
-    final String movieKeyword = "/movie";
-    final int movieSpacing = 5;
-    final String tvKeyword = "/tv";
-    final int tvSpacing = 2;
-    final String ratingKeyword = "/rating";
-    final int ratingSpacing = 6;
-    final String dateKeyword = "/date";
-    final int dateSpacing = 4;
-    final String genreKeyword = "/genre";
-    final int genreSpacing = 5;
-    final String siteKeyword = "/site";
-    final int siteSpacing = 4;
-    final int favouriteSpacing = 9;
+    static final String KEYWORD_MOVIE = "/movie";
+    static final int SPACING_MOVIE = 5;
+    static final String KEYWORD_TV = "/tv";
+    static final int SPACING_TV = 2;
+    static final String KEYWORD_RATING = "/rating";
+    static final int SPACING_RATING = 6;
+    static final String KEYWORD_DATE = "/date";
+    static final int SPACING_DATE = 4;
+    static final String KEYWORD_GENRE = "/genre";
+    static final int SPACING_GENRE = 5;
+    static final String KEYWORD_SITE = "/site";
+    static final int SPACING_SITE = 4;
+    static final int SPACING_FAVORITE = 9;
+    static final int POS_TITLE = 1;
+    static final int POS_RATING = 2;
+    static final int POS_DATE = 3;
+    static final int POS_GENRE = 4;
+    static final int POS_SITE = 5;
     private Commands executor;
     private ReviewList mediaList;
 
@@ -36,12 +41,21 @@ public class Parser {
         return result;
     }
 
+    /**.
+     * Checks user input for illegal "|" character
+     * @param userInput Raw input given by user
+     * @throws DukeException Exception thrown if input contains "|"
+     */
     public void checkIllegalCharacter(String userInput) throws DukeException {
         if (userInput.contains("|")) {
             throw new DukeException();
         }
     }
 
+    /**.
+     * Checks that user input is valid, parses the input and executes any valid commands given
+     * @param userInput Raw input given by user
+     */
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
@@ -160,7 +174,13 @@ public class Parser {
         logger.log(Level.INFO, "\n\tList command executed");
     }
 
+
     //@@author redders7
+    /**.
+     * Determines if added Media is a Movie or TV Show and executes addCommand to add it to the list
+     * @param fields User input containing review data
+     * @param spacingType Identifies if review is for a Movie or TV Show
+     */
     public void addMedia(String[] fields, Integer spacingType) {
         String title;
         double rating;
@@ -170,11 +190,11 @@ public class Parser {
         String[] dateFields;
         
         try {
-            title = fields[1].substring(spacingType);
-            rating = Double.parseDouble(fields[2].substring(ratingSpacing));
-            date = fields[3].substring(dateSpacing);
+            title = fields[POS_TITLE].substring(spacingType);
+            rating = Double.parseDouble(fields[POS_RATING].substring(SPACING_RATING));
+            date = fields[POS_DATE].substring(SPACING_DATE);
+            genre = fields[POS_GENRE].substring(SPACING_GENRE);
             dateFields = date.split("-");
-            genre = fields[4].substring(genreSpacing);
         } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
             Ui.print("Ensure that input format and number of arguments is correct.");
@@ -185,10 +205,10 @@ public class Parser {
                 throw new Exception();
             }
 
-            if (spacingType == movieSpacing) {
+            if (spacingType == SPACING_MOVIE) {
                 toAdd = new Movie(title, rating, genre, date);
             } else {
-                String site = fields[5].substring(siteSpacing);
+                String site = fields[POS_SITE].substring(SPACING_SITE);
                 toAdd = new TvShow(title, rating, genre, date, site);
             }
             executor = new AddCommand(mediaList, toAdd);
@@ -201,6 +221,13 @@ public class Parser {
         }
     }
 
+
+    /**.
+     * Checks if provided date is valid
+     * @param dateFields Date provided by user to be tested
+     * @return True if date is valid, false if invalid
+     */
+    //@@author Naz019
     public boolean isValidDate(String[] dateFields) {
         if (dateFields.length != 3) {
             return false;
@@ -217,43 +244,49 @@ public class Parser {
         return true;
     }
 
+    //@@author redders7
+    /**.
+     * Command executed by Parser to add new reviews to the user's list
+     * @param userInput Raw input given by user containing review details
+     */
     //@@author indraneelrp
-    public void executeAdd(String userInput) {
+    public void executeAdd(String userInput) throws IllegalArgumentException {
         String[] reviewFields = userInput.split("/");
         try {
             //checks the number of / instances to ensure that user does not add extra / which messes up parsing
             int slashInstances = userInput.length() - userInput.replace("/", "").length();
-            if (userInput.contains(movieKeyword)) {
+            if (userInput.contains(KEYWORD_MOVIE)) {
                 if (slashInstances != 4) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
-                addMedia(reviewFields, movieSpacing);
-            } else if (userInput.contains(tvKeyword)) {
+                addMedia(reviewFields, SPACING_MOVIE);
+            } else if (userInput.contains(KEYWORD_TV)) {
                 if (slashInstances != 5) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
-                addMedia(reviewFields, tvSpacing);
+                addMedia(reviewFields, SPACING_TV);
             } else {
-                throw new DukeException();
+                throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
             }
-        } catch (DukeException e) {
+        } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
             Ui.print("Ensure that input format and number of arguments is correct.");
         }
     }
-
+    
     //@@author matthewphua
     /**
      * Executes the clear action by creating a clear object.
      */
-    public void executeClear() {
+    public ReviewList executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
         logger.log(Level.INFO, "\n\tClear command executed");
+        return mediaList;
     }
 
-    //@@author matthewphua
+
     /**
      * Executes the delete action by creating a delete object.
      */
@@ -283,5 +316,13 @@ public class Parser {
             Ui.print("Incomplete or wrongly formatted command, try again.");
         }
 
+    }
+
+    //@@author indraneelrp
+    /**
+     * Gets the private reviewList object.
+     */
+    public ReviewList getReviewList() {
+        return mediaList;
     }
 }
