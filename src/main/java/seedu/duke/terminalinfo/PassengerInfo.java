@@ -87,7 +87,7 @@ public class PassengerInfo {
     }
 
     //@@author ivanthengwr
-    public String getBoardingTime(String reformatDepartureTime) {
+    public String getFormattedBoardingTime(String reformatDepartureTime) {
         LocalTime flightDepartureTime = LocalTime.parse(reformatDepartureTime);
         LocalTime formatBoardingTime = flightDepartureTime
                 .minus(Duration.ofMinutes(BOARDING_TIME_OFFSET));

@@ -143,7 +143,7 @@ public class PassengerList extends OperationList {
     private static void modifyDepartureAndBoardingTime(String newDepartureTime, PassengerInfo passenger) {
         passenger.setDepartureTime(newDepartureTime);
         String reformatDepartureTime = passenger.reformatDepartureTime(newDepartureTime);
-        String newBoardingTime = passenger.getBoardingTime(reformatDepartureTime);
+        String newBoardingTime = passenger.getFormattedBoardingTime(reformatDepartureTime);
         passenger.setBoardingTime(newBoardingTime);
     }
 

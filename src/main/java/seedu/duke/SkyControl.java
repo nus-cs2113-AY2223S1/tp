@@ -94,7 +94,7 @@ public class SkyControl {
         String departureTime = command.getPassengerDepartureTime(flights, lineInput);
         String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
         String gateNumber = command.getPassengerGateNumber(flights, lineInput);
-        String boardingTime = passengerInfo.getBoardingTime(reformatDepartureTime);
+        String boardingTime = passengerInfo.getFormattedBoardingTime(reformatDepartureTime);
         String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime,
                 gateNumber, boardingTime);
         return passengerAddInput;
