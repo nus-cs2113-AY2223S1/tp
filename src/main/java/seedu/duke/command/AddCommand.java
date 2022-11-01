@@ -8,7 +8,7 @@ public class AddCommand extends Command {
 
     boolean hasComment;
 
-    public AddCommand(String[] parameters, CommandType commandType, Lesson lesson) {
+    public AddCommand(String[] parameters, CommandType commandType, Lesson lesson, String comment) {
         super(parameters, commandType);
         this.lesson = lesson;
         this.universityName = parameters[1].substring(2);
@@ -16,7 +16,7 @@ public class AddCommand extends Command {
         this.hasComment = false;
         if (parameters.length == 4) {
             this.hasComment = true;
-            this.comment = parameters[3].substring(5);
+            this.comment = comment;
         }
     }
 
@@ -32,5 +32,4 @@ public class AddCommand extends Command {
     public boolean hasComment() {
         return hasComment;
     }
-
 }
