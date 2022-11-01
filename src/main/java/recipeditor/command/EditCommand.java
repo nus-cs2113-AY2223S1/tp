@@ -50,6 +50,12 @@ public class EditCommand extends Command {
         this.oldTitle = oldTitle;
     }
 
+    /**
+     * Execute the edit command, enter either GUI or CLI interface depending on the
+     * edit command input.
+     *
+     * @return CommandResult successful or failed message on edition
+     */
     @Override
     public CommandResult execute() {
         if (editSuccess) {
@@ -58,7 +64,7 @@ public class EditCommand extends Command {
             return new CommandResult(editedRecipe.getTitle() + " edited.");
         } else if (flags == null) {
             // GUI Unsuccessful
-            return new CommandResult("Edit failed");
+            return new CommandResult("No edit was made");
         } else {
             // CLI
             EditModeCommand cmd;

@@ -1,0 +1,56 @@
+@startuml
+!include Style.puml
+
+Class Recipeditor
+'Abstract Command {
+'    commandType : String
+'    execute() : CommandResult
+'    isExit() : Boolean
+'    getCommandType() : String
+'}
+
+Class Parser
+Class Storage
+Class Ui
+'Class AddMode
+
+Recipeditor ..> Ui : > execute
+Recipeditor ..> Parser : > execute
+Recipeditor ..> CommandResult : > read
+Recipeditor ..> Command : > execute
+Recipeditor ..> Storage : > read
+'Recipeditor <.. isExit
+
+'Storage <.. Ingredient
+'Storage <.. Recipe
+'Storage <.. RecipeList
+'Storage <.. Ui
+
+'Parser <.. Command
+'Parser <.. CommandResult
+
+'Class RecipeList {
+'    Steps : String[]
+'}
+'Class Recipe {
+'    title : String
+'    description : String
+'}
+'Class Ingredient {
+'    name : String
+'    amount : Double
+'    unit : String
+'}
+'RecipeList "0..*" <-- Recipe
+'Recipe <-- "1..*"Ingredient
+'TODO: Convert to list of strings
+
+
+'Command <|---- AddCommand
+'Command <|---- DeleteCommand
+'Command <|---- ExitCommand
+'Command <|---- InvalidCommand
+'Command <|---- ListCommand
+'Command <|---- ViewCommand
+
+@enduml

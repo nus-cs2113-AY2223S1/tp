@@ -1,6 +1,7 @@
 package recipeditor.command;
 
 import recipeditor.recipe.RecipeList;
+import recipeditor.ui.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_TYPE = "/list";
@@ -13,6 +14,8 @@ public class ListCommand extends Command {
      */
     public CommandResult execute() {
         StringBuilder recipeTitlesList = new StringBuilder();
+        recipeTitlesList.append(String.format("There are %d recipes in the recipe list",
+                RecipeList.getRecipes().size()));
         for (int i = 0; i < RecipeList.recipeTitles.size(); i++) {
             recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.recipeTitles.get(i)));
         }

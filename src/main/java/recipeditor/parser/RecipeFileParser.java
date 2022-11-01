@@ -7,13 +7,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.logging.Logger;
 
-//TODO: Better Exception check
-public class TextFileParser {
+public class RecipeFileParser {
 
-    private static final Logger logger = Logger.getLogger(TextFileParser.class.getName());
+    private static final Logger logger = Logger.getLogger(RecipeFileParser.class.getName());
 
+    private static final String UNIMPORTANT_TEXT = "There are unimportant text that cannot be parsed. Please follow "
+            + "the Template";
+    private static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
     private static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
-            + "(except space)";
+            + "(except whitespace)";
     private static final String TITLE_ERROR_LIMIT = "TITLE is too long! TITLE should be less than 255 characters!";
 
     private static final String INGREDIENT_ERROR_FORMAT = "INGREDIENT format is incorrect!\nFORMAT: "
@@ -32,63 +34,103 @@ public class TextFileParser {
     private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
             + "from 1";
     private static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
-    private static final String WRONG_HEADING = "Wrong # HEADING. Please follow the template and do not change the "
-            + "headings!";
+    private static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in "
+            + "content";
     private static final String EMPTY = "There is an empty field. The recipe is not valid";
+    private static final String HASHTAG = "Don't use # in the content if it is not a heading";
+
+
+    Recipe recipe = new Recipe();
+    LineType lineType;
+    LineType stage = LineType.TITLE_START;
+    int[] stageCounter = {0, 0, 0, 0};
+    int descriptionCounter = 0;
+    int ingredientIndex = 1;
+    int stepIndex = 1;
+    String[] parsedLine;
+    String line;
 
     /**
      * Parse the text file into a correct recipe.
      */
+    public RecipeFileParser(){
+    }
+
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
-        Recipe recipe = new Recipe();
-        String[] parsedLine = text.split("\n");
-        LineType lineType;
-        LineType stage = LineType.NORMAL;
-        int[] stageCounter = {0, 0, 0, 0};
-
-
-        String descriptionBlock = "";
-        int descriptionCounter = 0;
-        int ingredientIndex = 1;
-        int stepIndex = 1;
-
+        parsedLine = text.split("\n");
         // Go down line by line
         for (int i = 0; i < parsedLine.length; i++) {
-            String line = parsedLine[i];
-            if (line.isBlank()) {   //Ignore Blank lines
-                continue;
-            }
+            line = parsedLine[i];
             lineType = checkLineType(line, stageCounter);
-            if (!lineType.equals(LineType.NORMAL)) {
-                stage = lineType;
-            } else {
-                switch (stage) {
-                default:
-                    recipe.setTitle(parsedTitle(line));
-                    stage = LineType.TITLE_END;
-                    break;
-                case TITLE_END:
-                    break;
-                case DESCRIPTION:
-                    recipe.setDescription(parsedDescription(line, recipe, descriptionCounter));
-                    descriptionCounter++;
-                    break;
-                case INGREDIENT:
-                    recipe.addIngredient(parsedIngredient(line, ingredientIndex));
-                    ingredientIndex++;
-                    break;
-                case STEP:
-                    recipe.addStep(parsedStep(line, stepIndex));
-                    stepIndex++;
-                    break;
-                }
-            }
+            parsingSequence();
         }
         checkAllStages(stageCounter);
         if (recipe.isNotRecipeValid()) {
             throw new ParseFileException(EMPTY);
         }
         return recipe;
+    }
+
+    private void parsingSequence() throws ParseFileException {
+        if (!lineType.equals(LineType.NORMAL)) {
+            stage = lineType;
+        } else {
+            switch (stage) {
+            default:
+                throw new ParseFileException(UNIMPORTANT_TEXT);
+            case TITLE:
+                caseTitle();
+                break;
+            case TITLE_END:
+                caseTitleEnd();
+                return;
+            case DESCRIPTION:
+                caseDescription();
+                break;
+            case INGREDIENT:
+                caseIngredient();
+                break;
+            case STEP:
+                caseStep();
+                break;
+            }
+        }
+    }
+
+    private void caseStep() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        recipe.addStep(parsedStep(line, stepIndex));
+        stepIndex++;
+    }
+
+    private void caseIngredient() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        recipe.addIngredient(parsedIngredient(line, ingredientIndex));
+        ingredientIndex++;
+    }
+
+    private void caseDescription() {
+        recipe.setDescription(parsedDescription(line, recipe, descriptionCounter));
+        descriptionCounter++;
+    }
+
+    private void caseTitleEnd() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines
+            return;
+        }
+        throw new ParseFileException(TITLE_ONE_LINE);
+    }
+
+    private void caseTitle() throws ParseFileException {
+        if (line.isBlank()) {   //Ignore Blank lines, implement this to allow Description to have blanks
+            return;
+        }
+        recipe.setTitle(parsedTitle(line));
+        stage = LineType.TITLE_END;
     }
 
     private void checkAllStages(int[] stageCounter) throws ParseFileException {
@@ -100,9 +142,10 @@ public class TextFileParser {
     }
 
     private LineType checkLineType(String line, int[] stageCounter) throws ParseFileException {
-        String[] parsedWords = line.split(" ");
-        if (parsedWords[0].equals("#")) {
-            switch (parsedWords[1].toLowerCase()) {
+        String trimmedLine = line.trim();
+        if (trimmedLine.contains("#")) {
+            String[] parsedWords = trimmedLine.replace("#"," ").trim().split(" ");
+            switch (parsedWords[0].toLowerCase()) {
             case "title":
                 incrementStageCounterAt(stageCounter, 0);
                 return LineType.TITLE;
@@ -133,18 +176,17 @@ public class TextFileParser {
 
     private String parsedTitle(String line) throws ParseFileException {
         String trimmedLine = line.trim();
-        String[] parsed = line.split(" ");
-        if (isTitleNotAlphanumeric(parsed)) {
+        if (ParserUtils.isTitleNotAlphanumeric(trimmedLine)) {
             throw new ParseFileException(TITLE_ERROR_ALPHANUMERIC);
         }
-        if (doesTitleExceedLimit(trimmedLine)) {
+        if (ParserUtils.doesTitleExceedLimit(trimmedLine)) {
             throw new ParseFileException(TITLE_ERROR_LIMIT);
         }
         return line.trim();
     }
 
     private String parsedDescription(String line, Recipe recipe, int counter) {
-        String trimmedLine = line.trim();
+        String trimmedLine = line;
         if (counter == 0) {
             return trimmedLine;
         } else {
@@ -158,7 +200,7 @@ public class TextFileParser {
         String[] parsedDot = parsedSlashed[0].split("\\.");
 
 
-        if (parsedSlashed.length != 3) {
+        if (parsedSlashed.length != 3 || parsedDot.length != 2) {
             throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
         }
 
@@ -202,19 +244,6 @@ public class TextFileParser {
     }
 
 
-    private boolean isTitleNotAlphanumeric(String[] parsed) {
-        for (String word : parsed) {
-            if (!StringUtils.isAlphanumeric(word.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean doesTitleExceedLimit(String trimmedLine) {
-        return trimmedLine.length() > 255;
-    }
-
     private int ingredientParsedIndex(String parsed) throws ParseFileException {
         try {
             return Integer.parseInt(parsed.trim());
@@ -245,8 +274,7 @@ public class TextFileParser {
     }
 
     private enum LineType {
-        TITLE, TITLE_END, DESCRIPTION, INGREDIENT, STEP, NORMAL
+        TITLE_START, TITLE, TITLE_END,  DESCRIPTION, INGREDIENT, STEP, NORMAL
     }
-
 
 }

@@ -25,6 +25,12 @@ public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String recipeTitle = null;
 
+    /**
+     * Parse the input command and returns respective executable command.
+     *
+     * @param input the input command as String
+     * @return command that can be executed
+     */
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();
@@ -40,7 +46,6 @@ public class Parser {
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
-            //return parseEditCommandGUI(parsed);
         case ViewCommand.COMMAND_TYPE:
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
@@ -54,8 +59,13 @@ public class Parser {
 
 
     private static Command parseAddCommand() {
-        GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
-        return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+        try {
+            GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+            return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+        } catch (FileNotFoundException e) {
+            Storage.generateTemplateFile();
+            return new InvalidCommand("Template file is missing! Regenerate Template File! Please try again");
+        }
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
@@ -70,8 +80,6 @@ public class Parser {
                 } else {
                     Ui.showMessage(recipeTitleToDelete + " is not present in the list");
                 }
-            } else {
-                Ui.showMessage(DeleteCommand.CORRECT_FORMAT);
             }
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (FileNotFoundException e) {
@@ -92,7 +100,7 @@ public class Parser {
     // To account for case insensitivity of user
     private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
         String actualRecipeTitle = null;
-        String recipeTitles = Storage.loadFileContent(Storage.ALL_RECIPES_FILE_PATH);
+        String recipeTitles = Storage.loadFileContent(Storage.ALL_RECIPES_FILE_PATH);//TODO: Load from model is better!
         String[] recipeTitlesArray = recipeTitles.split("\\r?\\n");
         for (String recipeTitle : recipeTitlesArray) {
             if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
@@ -120,13 +128,23 @@ public class Parser {
         if (parsed.length == 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                String name = RecipeList.getTitleFromIndex(index);
-                String path = Storage.RECIPES_FOLDER_PATH + "/" + name;
+                Recipe targetRecipe = RecipeList.getRecipe(index);
+                String title = targetRecipe.getTitle();
+                String path = Storage.titleToFilePath(title);
+
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), name);
-            } catch (Exception e) {
+                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), title);
+            } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
-                return new InvalidCommand("Edit GUI Error");
+                Recipe targetRecipe = RecipeList.getRecipe(index);
+                String title = targetRecipe.getTitle();
+                String path = Storage.titleToFilePath(title);
+                Storage.saveRecipe(targetRecipe, "", path);
+                return new InvalidCommand("Recipe File is missing! Regenerate Recipe File! Please try again!");
+            } catch (IndexOutOfBoundsException e) {
+                return new InvalidCommand("The index is out of bound! Please try again");
+            } catch (NumberFormatException e) {
+                return new InvalidCommand("The index format in not a positive integer within list!");
             }
         } else if (parsed.length > 2) {
             try {

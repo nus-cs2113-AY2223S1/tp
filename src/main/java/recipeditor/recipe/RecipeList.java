@@ -22,6 +22,10 @@ public class RecipeList {
         return recipes.get(index);
     }
 
+    public static ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
     public static void addRecipe(Recipe recipe) {
         recipes.add(recipe);
     }
@@ -39,8 +43,8 @@ public class RecipeList {
     public static void editRecipe(int index, Recipe newRecipe, String oldTitle) {
         recipes.set(index, newRecipe);
         recipeTitles.set(index, newRecipe.getTitle());
-        String oldFile = Storage.RECIPES_FOLDER_PATH + "/" + oldTitle;
-        String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + newRecipe.getTitle();
+        String oldFile = Storage.titleToFilePath(oldTitle);
+        String recipeFileSourcePath = Storage.titleToFilePath(newRecipe.getTitle());
         Storage.saveRecipe(newRecipe, oldFile, recipeFileSourcePath);
     }
 
@@ -101,4 +105,23 @@ public class RecipeList {
     public static int getSize() {
         return recipes.size();
     }
+
+    public static boolean containsRecipe(Recipe incomingRecipe) {
+        for (Recipe r : recipes) {
+            if (r.getTitle().equals(incomingRecipe.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsRecipeTitle(String title) {
+        for (String r : recipeTitles) {
+            if (r.equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

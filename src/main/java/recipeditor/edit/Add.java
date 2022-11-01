@@ -13,10 +13,17 @@ public class Add extends EditModeCommand {
         super(ingredientFlag, parsedCommand, recipe);
     }
 
+    /**
+     * Add a step or ingredient to the recipe to edit.
+     *
+     * @return the edited recipe
+     * @throws ParseException ingredient does not follow correct format to be parsed
+     * @throws InvalidFlagException edit command contains invalid flags
+     */
     @Override
     public Recipe execute() throws ParseException, InvalidFlagException {
         StringBuilder content = new StringBuilder();
-        for (int i = 2; i < parsedCommand.length; i++) {
+        for (int i = 4; i < parsedCommand.length; i++) {
             content.append(parsedCommand[i]).append(" ");
         }
 
