@@ -1,4 +1,4 @@
-# User Guide for Yet Another Module Organizer/Manager (YAMOM) v2.0 
+# User Guide for Yet Another Module Organizer/Manager (YAMOM) v2.1
 
 [//]: # (CAA - 29/10/2022 11:30hrs, Deen)
 
@@ -62,7 +62,7 @@ Sem [1] >>
 
 > Notes about the command format:
 > - Words in `UPPERCASE` information to be supplied by the user.
-    e.g. in `select [MODULE]`, `[MODULE]` are expected input for the command in the form of `select CS1010`.
+    e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected.
 > - The commands are case-insensitive. E.g. `help` is the same as `HELP`.
 
@@ -357,7 +357,7 @@ Prints out the current user timetable.
 
 Format: `timetable < /fancy | /simple >`
 
-Note: Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
+Note: Fancy mode features sleek unicode characters and coloured output. Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
 
 Example of usage:
 
@@ -555,7 +555,7 @@ Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
   *  LABORATORY                 e.g. *lab, laboratory*
   *  MINI_PROJECT               e.g. *proj, mini_project*
   *  SEMINAR_STYLE_MODULE_CLASS e.g. *sem, seminar, seminar_style_module*
-* The `LESSON_TYPE` need not be an exact match or case-sensitive.
+* The `LESSON_TYPE` need not be an exact match, and is not case-sensitive.
 * The `MODULE_CODE` need to be an exact match.
 
 Example of usage:
