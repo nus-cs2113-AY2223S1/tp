@@ -127,6 +127,9 @@ Sorts your review list according to a given field.
 **Format**: `sort <field>`
 
 - `<field>` must be one of the following strings: 'rating', 'title', 'date' or 'genre'
+- Sorting the review list by 'rating' or 'date' returns the reviews in descending order i.e. from the highest rating to 
+the lowest rating and from the most recent to the least recent
+- Sorting by 'title' or 'genre' returns the reviews in case-sensitive ascending order i.e. from 'A' to 'z'
 
 Usage:
 

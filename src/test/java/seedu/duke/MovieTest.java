@@ -16,7 +16,7 @@ public class MovieTest {
         assertEquals("Harry Potter",assertMovie.title);
         assertEquals(5.0,assertMovie.rating);
         assertEquals("SciFi", assertMovie.genre);
-        assertEquals("[Movie] Harry Potter Rating:5.0 Genre:SciFi Date watched:10-01-2020",
+        assertEquals("[Movie] Harry Potter Rating: 5.0  Genre:SciFi  Date watched: 10-01-2020",
                 harryPotter.toString());
     }
 
