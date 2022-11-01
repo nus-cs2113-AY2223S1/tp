@@ -56,6 +56,6 @@ public class User {
     public String convertItemToFileFormat() {
         String separator = " | ";
         int checkSum = toString().length();
-        return name + separator + age + separator + contactNumber + separator + checkSum;
+        return name + separator + age + separator + contactNumber;
     }
 }

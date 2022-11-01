@@ -143,9 +143,8 @@ public class Transaction {
      */
     public String convertTransactionToFileFormat() {
         String separator = " | ";
-        int checkSum = toString().length();
-        return transactionId + separator + itemName + separator + itemId + separator + lender + separator + borrower
-                + separator + duration + separator + createdAt + separator + moneyTransacted + separator + checkSum;
+        return itemId + separator + borrower + separator + duration + separator + createdAt + separator + lender
+                + separator + itemName + separator + moneyTransacted + separator + transactionId;
     }
 
     //@@author winston-lim
