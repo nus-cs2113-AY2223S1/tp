@@ -6,12 +6,9 @@
 * [Value Proposition](#value-proposition)
 * [User Stories](#user-stories)
 * [Design](#design)
-  * [Architecture](#architecture)
-  * [UI Component](#ui-component)
   * [Client Component](#client-component)
   * [Property Component](#property-component)
   * [List Component](#list-component)
-  * [Model Component](#model-component)
   * [List Component](#list-component)
   * [Storage Component](#storage-component)
   * [Common Classes](#storage-component)
@@ -23,8 +20,7 @@
 * [Glossary](#glossary)
 ___
 ## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
 ___
 ## Setting Up and Getting Started
 ___
@@ -39,7 +35,7 @@ Aids property agent in tracking information related to their property which incl
 - Show expenses from the rented unit
 - Monitor payment dates 
 
-Some of the constraint includes:
+Some constraints include:
 - Single owner unit (Shared ownership will be registered under one owner's name)
 - Unable to calculate tax payment
 ___
@@ -57,7 +53,7 @@ ___
 | v1.0    | Property Manager | pair a client to a property           | record down which client is renting which property                   |
 | v1.0    | Property Manager | unpair a client to a property         | update my rental records when a client is no longer renting property |
 | v1.0    | Property Manager | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | Property Manager | quit the app                          | -                                                                    |
+| v1.0    | Property Manager | quit the app                          | free up memory for other applications                                |
 | v2.0    | Property Manager | check the details of a client         | view the client's information                                        |
 | v2.0    | Property Manager | search clients using their details    | easily find specific clients                                         |
 | v2.0    | Property Manager | search properties using their details | easily find specific properties                                      |
@@ -65,9 +61,7 @@ ___
 ___
 ## Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-### Architecture
-![Software Architecture Diagram](diagrams/ArchitectureDiagram.png)
-### UI Component
+
 ### Parser Component
 ### Client Component
 ### Property Component
@@ -102,17 +96,33 @@ methods to display their information, using methods present in Ui. The class str
   
 
 ### Pairing Component
-API: [```pairingList.java```](../src/main/java/seedu/duke/PairingList.java)
+API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
 
-```PairingList``` is responsible for recording which clients renting which property.
+* `PairingList` is responsible for recording which clients renting which property.
+* `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.
 
-```PairingList``` does not inherit from other classes. It stores references to Client and Property objects.
+Here is how classes involved in the pairing/unpairing actions interact with each other:
 
-This a partial class diagram of the ```PairingList``` class:
+![Pairing List Class Diagram](diagrams/PairingListCD.png)
+1. `PairParser` and `UnpairParser` inherit from a general `PairUnpairParser`, which contains parsing methods that are 
+    common to its subclasses.
+2. `PairParser` and `UnpairParser` are responsible for checking input format. After (successful) checking, they create 
+    `CommandPair` and `CommandUnpair` objects respectively.
+3. `CommandPair` and `CommandUnpair` contain references to `ClientList` and `PropertyList` because the command classes
+    need to validate user input against the data `ClientList` and `PropertyList`.
+4. After input is validated, `PairingList` is updated with the new pairings. `Storage` records these changes and `Ui` 
+    prints the confirmation message for the user action.
 
-![Pairing List Design Diagram](diagrams/PairingListDesignDiagram.png)
-```ParsePair``` and ```ParseUnpair``` contain references to data classes ```PairingList```, ```ClientList``` and 
-```PropertyList``` because the data classes provide the required information to validate user input.
+
+Here is the underlying data structure of `PairingList`:
+
+![Pairing List Data Class Diagram](diagrams/PairingListAPICD.png)
+* `PairingList` is essentially a "wrapper" to the underlying `HashMap` with key-value pairs where the `Client` is the key and `Property` is the value.
+* `PairingList` provides methods to add or delete these key-value pairs to represent the pairing and unpairing of real-life
+    clients and properties.
+* The `Client` and `Property` references must be present in `ClientList` and `PropertyList` as well, since `PairingList` is an
+    implementation of an adjacency list. 
+
 
 ### Storage Component
 For `Storage` feature:
@@ -291,41 +301,43 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 ### PairingList
 
-```PairingList``` facilities that pair and unpair commands by storing client-property pairs.
+`PairingList` facilitates pair and unpair commands by storing client-property pairs.
 
-When client rents a property, the client and property form a pair.
+When a client rents a property, the client and property form a pair.
 
-*  ```PairingList``` uses a hash map to represent these client-property pairs, where the key is a ```Client``` object
-  and the value is a ```Property``` object.
+* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client` object
+  and the value is a `Property` object.
 * A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
   client is renting.
-* Also, the Java HashMap prevents duplicate keys, which dovetails nicely with the fact that real-life tenants only have
+* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants(clients) only have
   one place of residence at any time.
 
 #### Pair
 
-The sequence diagram for the pair command is called is shown below:
+The partial sequence diagram for the pair command, when called from `Duke.java`, is shown below:
 
-![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSD.png)
+![PairingList Pair Sequence Diagram](diagrams/PairingListPairSD.png)
 
-**NOTE**: Some self-invocated calls have been omitted because this diagram emphasises cross-class method calls.
+**NOTE**: Self-invocated calls have been omitted to emphasise inter-object method calls.
 
 The pair command takes in user input of the format:
 ```
 pair ip/PROPERTY_INDEX ic/CLIENT_INDEX
 ```
-where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
-and ```PropertyList``` if their private arrays were 1-indexed.
+where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are indexes present in `ClientList`
+and `PropertyList`, if their arrays were 1-indexed.
 
 How the pair command works:
-1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParsePair```).
-2. ```ParsePair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
-3. ```ParsePair``` also calls helper methods in ```PairingList``` to check that the pairing client and property indexes
-    exists. Also, the client and property must not be already paired. The client must not be renting any property
-    presently as well.
-4. After passing all these checks, the program fetches the desired```Property``` and ```Client``` from
-   ```PropertyList``` and ```ClientList```.
-5. The ```Property``` and ```Client``` objects are inserted as a pair into the hashmap of ```PairingList```.
+1. The user input is first parsed by `Parser` (specifically, `PairParser`).
+2. `PairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+3. After a successful check, a `CommandPair` object is created.
+4. When `CommandPair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
+    `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
+   `PropertyList` and `ClientList`.
+6. A third layer of checks throws exceptions if the `Client` and `Property` objects already match an existing pair, the
+    `Client` is already paired with some other `Property`, or when the user pairs a client whose budget is lower than the property's rental price.
+7. The `Client` and `Property` objects are inserted as a pair into the hashmap of `PairingList`.
  
 #### Unpair
 
@@ -333,17 +345,22 @@ The unpair command takes in user input of the format:
 ```
 unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX
 ```
-where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
-and ```PropertyList``` if their private arrays were 1-indexed.
+where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are indexes present in `ClientList`
+and `PropertyList`, if their private arrays were 1-indexed.
 
+(The sequence diagram for unpair is not provided as the mechanism is similar to that of [pair](#pair))
 
-How the unpair command works:
-1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParseUnpair```).
-2. ```ParseUnpair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
-3. ```ParseUnpair``` also calls helper methods in ```PairingList``` to check that the pairing client and property
-   indexes exist, and that the client-property pair exist in ```PairingList```.
-4. After passing all these checks, the ```PairingList``` deletes the hashmap entry in ```clientPropertyPairings```
-   which contains the client-property pair.
+How the unpair command works :
+1. The user input for an unpair command is first parsed by `Parser` (specifically, `UnpairParser`).
+2. `UnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+3. After a successful check, a `CommandUnpair` object is created.
+4. When `CommandUnpair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
+   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
+   `PropertyList` and `ClientList`.
+6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
+7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
+
 
 ---
 

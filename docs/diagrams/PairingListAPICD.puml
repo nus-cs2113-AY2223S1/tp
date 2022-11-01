@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+
+Class PairingList PAIRING_LIST_COLOR
+Class HashMap #black
+Class Client CLIENT_COLOR
+Class Property PROPERTY_COLOR
+
+
+PairingList *--> "1" HashMap
+HashMap --> "*" Client
+HashMap --> "*" Property
+
+note left of Client: Client and Property \nreferences are stored \nas key-value pairs
+@enduml

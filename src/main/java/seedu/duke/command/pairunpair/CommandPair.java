@@ -62,9 +62,9 @@ public class CommandPair extends CommandPairUnpair {
 
         pairingList.addPairing(client, property);
 
-        String clientFormat = pairingList.convertToPairingData(client);
-        String propertyFormat = pairingList.convertToPairingData(property);
-        storage.addToPairFile(clientFormat, propertyFormat);
+        String clientStorageData = pairingList.convertToPairingData(client);
+        String propertyStorageData = pairingList.convertToPairingData(property);
+        storage.addToPairFile(clientStorageData, propertyStorageData);
 
         ui.showPairedConfirmationMessage(client, property);
     }
