@@ -10,6 +10,12 @@ Given below are my contributions to the project.
 
 * **Code Contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chydarren&breakdown=true)
 
+* **New Feature**: Added the list feature with filtering such as via transaction type, category and date.
+    * What it does: Allows the users to list all transactions or filter them based on the filter tags that they specify.
+    * Justification: This feature is essential for users to be able to get a glance of an overview of the transactions that
+      occurred in the past and for them to track how much they are left with, etc.
+    * Highlights: Listing transactions is extensible and has been used for other purposes such as to generate categorical 
+      savings and monthly expenditure statistics.
 
 * **New Feature**: Added the search feature for user to find specific transaction(s).
     * What it does: Allows the users to find specific transaction(s) by searching partial or full keywords that match
@@ -20,8 +26,7 @@ Given below are my contributions to the project.
     * Highlights: This enhancement increases flexibility in the listing of transactions and provides convenience for users
       to quickly look up the transactions.
 
-
-* **New Feature**: Added the ability to list transactions by the last N days, weeks or months.
+* **New Feature**: Added the ability to retrieve transactions by the last N days, weeks or months.
     * What it does: Allows the users to list transactions that have occurred in the past by a specific date interval
       without having to specify the exact dates.
     * Justification: This feature improves the filtering of transactions that was previously restricted to a specific
@@ -36,7 +41,7 @@ Given below are my contributions to the project.
       [\#12](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/12), 
       [\#59](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/59),
       [\#152](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/152)
-    * Listing and filtering of transactions from transactions list: 
+    * Filtering of transactions from transactions list: 
       [\#46](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/46),
       [\#77](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/77)
     * Implementation of a hashmap to generate categorical savings and monthly expenditure: 
@@ -57,7 +62,6 @@ Given below are my contributions to the project.
     * Setting up team [Project Tracking Board](https://github.com/orgs/AY2223S1-CS2113-W12-2/projects/1) with automated 
       workflows and delegated GitHub issues to the team
     * Merging of pull requests into main repository
-    * Creation of test cases for regression testing
     * Assisted in writing meeting minutes
       [1](https://docs.google.com/document/d/18zvFOPEew3ibDTlziH2LDhJD3XdkgpoRG-NV6DUVzgk/edit?usp=sharing),
       [2](https://docs.google.com/document/d/1BTy0oOmE4DH9Rnh0785crjeH-Cb6xhZu-WzwdBFXYZg/edit?usp=sharing),
@@ -68,6 +72,13 @@ Given below are my contributions to the project.
       [Milestone 1](https://docs.google.com/document/d/19t5Z2X3QGzFonTvqmFf8TvTxZFnufEQu_LSN97hHJaM/edit) and 
       [Milestone 2](https://docs.google.com/document/d/1LB7Vw1-am2sZEjGfl8uZidBJsoFOswOVMnG4L7KwwdE/edit)
 
+* **Testing**:
+    * Creation of cases for regression testing 
+    * Written unit and integration testing using JUnit tests: 
+      [\#65](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/65/files),
+      [\#66](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/66/files),
+      [\#136](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/136),
+      [\#225](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/225)
 
 * **Documentation**: 
     * User Guide:
