@@ -27,7 +27,8 @@ public class Validator {
     public static final int ONE_DECIMAL_PLACE_LENGTH = 1;
     public static final String OUT_OF_BOUND = "Index out of bound";
 
-    public static void validateCommandInput(int slashesCount, int minimum, int maximum, String message, char lastCharacter)
+    public static void validateCommandInput(int slashesCount, int minimum,
+                                            int maximum, String message, char lastCharacter)
             throws IllegalValueException {
         if (slashesCount < minimum || slashesCount > maximum || lastCharacter == ARGUMENT_SEPARATOR) {
             LOGGER.warning(message);
@@ -35,7 +36,8 @@ public class Validator {
         }
     }
 
-    public static void validateCommandInput(int slashesCount, int requiredCount, String message, char lastCharacter)
+    public static void validateCommandInput(int slashesCount, int requiredCount,
+                                            String message, char lastCharacter)
             throws IllegalValueException {
         if (slashesCount != requiredCount || lastCharacter == ARGUMENT_SEPARATOR) {
             LOGGER.warning(message);
@@ -43,7 +45,8 @@ public class Validator {
         }
     }
 
-    public static void validateLoadingForExercise(int requiredLength, String message, boolean toDisplay, int actualLength)
+    public static void validateLoadingForExercise(int requiredLength, String message,
+                                                  boolean toDisplay, int actualLength)
             throws IllegalValueException {
         if (!toDisplay && actualLength != requiredLength) {
             LOGGER.warning(message);

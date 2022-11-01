@@ -77,7 +77,8 @@ public class AddCommand extends Command {
     private void addStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         if (toDisplay) {
             Validator.validateCommandInput(slashesCount, MINIMUM_ADD_STRENGTH_SLASHES,
-                    MAXIMUM_ADD_STRENGTH_SLASHES, INVALID_STRENGTH_INPUT_MESSAGE, arguments.charAt(arguments.length() - 1));
+                    MAXIMUM_ADD_STRENGTH_SLASHES, INVALID_STRENGTH_INPUT_MESSAGE,
+                    arguments.charAt(arguments.length() - 1));
         }
         Validator.validateLoadingForExercise(STRENGTH_LOADING_INPUT_COUNT,
                 INVALID_LOADING_STRENGTH_MESSAGE, toDisplay, argumentList.length);

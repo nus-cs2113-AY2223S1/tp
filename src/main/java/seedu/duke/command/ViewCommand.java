@@ -277,7 +277,8 @@ public class ViewCommand extends Command {
     }
 
 
-    private void handleInvalidViewExerciseCommand(String[] argumentList, int slashesCount) throws IllegalValueException {
+    private void handleInvalidViewExerciseCommand(String[] argumentList,
+                                                  int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, 0, 1, INVALID_VIEW_EXERCISE_COMMAND,
                 arguments.charAt(arguments.length() - 1));
         validateViewDone(argumentList, INVALID_VIEW_EXERCISE_COMMAND);

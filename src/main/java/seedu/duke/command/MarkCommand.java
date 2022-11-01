@@ -52,7 +52,7 @@ public class MarkCommand extends Command {
             markUndone(argumentList, slashesCount);
             break;
         default:
-            handleInvalidInput("Invalid mark command", "Invalid mark command");
+            handleInvalidInput();
         }
     }
 
@@ -60,7 +60,8 @@ public class MarkCommand extends Command {
     private void markDone(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_MARK_DONE_SLASHES, INVALID_MARK_COMMAND,
                 arguments.charAt(arguments.length() - 1));
-        int exerciseIndex = Validator.getIndexWithValidation(argumentList[1], exerciseList.getCurrentExerciseListSize());
+        int exerciseIndex = Validator.getIndexWithValidation(argumentList[1],
+                exerciseList.getCurrentExerciseListSize());
         try {
             Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
             double time = Validator.getTimeWithValidation(argumentList[2]);
@@ -78,8 +79,8 @@ public class MarkCommand extends Command {
 
     private void markUndone(String[] argumentList, int slashesCount) throws IllegalValueException {
         try {
-            Validator.validateCommandInput(slashesCount, REQUIRED_MARK_UNDONE_SLASHES, INVALID_MARK_UNDONE_COMMAND,
-                    arguments.charAt(arguments.length() - 1));
+            Validator.validateCommandInput(slashesCount, REQUIRED_MARK_UNDONE_SLASHES,
+                    INVALID_MARK_UNDONE_COMMAND, arguments.charAt(arguments.length() - 1));
             int exerciseIndex = Validator.getIndexWithValidation(argumentList[1], exerciseList.getCompletedExerciseListSize());
             Exercise exercise = exerciseList.getCompletedExercise(exerciseIndex);
             exerciseList.markUndone(exerciseIndex);
@@ -92,9 +93,9 @@ public class MarkCommand extends Command {
     }
 
 
-    private static void handleInvalidInput(String Invalid_mark_command, String Invalid_mark_command1) throws IllegalValueException {
-        LOGGER.log(Level.WARNING, Invalid_mark_command);
-        throw new IllegalValueException(Invalid_mark_command1);
+    private static void handleInvalidInput() throws IllegalValueException {
+        LOGGER.log(Level.WARNING, INVALID_MARK_COMMAND);
+        throw new IllegalValueException(INVALID_MARK_COMMAND);
     }
 
 
