@@ -14,6 +14,15 @@ public class Messages {
     public static final String PROPERTIES = "Properties:";
     public static final String PAIRS = "Pairs:";
     public static final String INDENT = "        ";
+    public static final String THERE_IS = "There is ";
+    public static final String THERE_ARE = "There are ";
+    public static final String PROPERTY_SINGULAR = " property ";
+    public static final String PROPERTIES_PLURAL = " properties ";
+    public static final String CLIENT_SINGULAR = " client ";
+    public static final String CLIENTS_PLURAL = " clients ";
+    public static final String PAIR_SINGULAR = " pair ";
+    public static final String PAIRS_PLURAL = " pairs ";
+    public static final String IN_THIS_LIST = "in this list";
 
     /* Confirmation Messages */
 
@@ -214,7 +223,10 @@ public class Messages {
             + "Example:\n"
             + "  check -property ip/5";
 
-    public static final String MESSAGE_TRY_AGAIN = "Please try again.";
+    public static final String MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT = "List clients with tags - commandFlags "
+            + "taking illegal values";
+    public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
+            + "taking illegal values";
 
 
     /* List related Error Messages */
