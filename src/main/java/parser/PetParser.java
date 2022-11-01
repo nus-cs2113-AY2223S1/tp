@@ -7,6 +7,7 @@ import command.petcommand.RemovePetCommand;
 import command.petcommand.ViewPetCommand;
 import exception.DukeException;
 import pet.Pet;
+import seedu.duke.Duke;
 
 public class PetParser {
     private int lengthOfSignature;
@@ -49,8 +50,8 @@ public class PetParser {
             int startOfN = input.indexOf(" n/");
             int startOfS = input.indexOf(" s/");
             int startOfH = input.indexOf(" h/");
-
-            if (!input.substring(0,startOfN).isEmpty()) {
+            if (startOfN == -1 || startOfS == -1 || startOfH == -1) {
+                System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
                 throw new DukeException();
             }
 
@@ -60,11 +61,20 @@ public class PetParser {
             }
 
 
-            String name = input.substring(startOfN + lengthOfSignature, startOfS);
-            String species = input.substring(startOfS + lengthOfSignature, startOfH);
+            String name = input.substring(startOfN + lengthOfSignature, startOfS).trim();
+            String species = input.substring(startOfS + lengthOfSignature, startOfH).trim();
             String status = input.substring(startOfH);
 
-            // need to deal with input isHealthy not a number
+            if (name.equals("")) {
+                System.out.println("Please provide the name for pet");
+                throw new DukeException();
+            }
+
+            if (species.equals("")) {
+                System.out.println("Please provide the species for pet");
+                throw new DukeException();
+            }
+
             int statusInt = parser.isHealthy(status);
             if (statusInt != 1 && statusInt != 0) {
                 System.out.println("Invalid Input! health entered invalid for adding a pet");

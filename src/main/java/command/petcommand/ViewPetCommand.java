@@ -11,7 +11,7 @@ public class ViewPetCommand extends Command {
     public void execute() {
         System.out.println("Here are the pets in your pet list:");
         for (Pet pet : PetList.pets) {
-            System.out.println(String.format("%d. %s", (pet.petId + 1), pet));
+            System.out.println(String.format("%d. %s", (pet.petId), pet));
         }
     }
 
