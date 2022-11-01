@@ -944,21 +944,21 @@ School of Computing,National Yang Ming Chiao Tung University,MGIM3003,Informatio
 School of Computing,National Yang Ming Chiao Tung University,MGIM30048,Advanced Computer Algorithms,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,-1
 School of Computing,Northwestern University,CIS330,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,-1
 School of Computing,Northwestern University,CIS494,Project Management Concepts,3,-1,-1,-1,IS4100,IT Project Management,4,-1,-1,-1,-1
-School of Computing,Northwestern University,COMM_ST 352_0,Social Network Analysis,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
-School of Computing,Northwestern University,COMP_ENG361,Computer Architecture I,1,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
-School of Computing,Northwestern University,COMP_SCI 396,Interactive Information Visualization,3,-1,-1,-1,CS5346,Information Visualisation,4,-1,-1,-1,N
-School of Computing,Northwestern University,COMP_SCI211-0,Fundamentals of Computer Programming II,3,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,-1
-School of Computing,Northwestern University,COMP_SCI321,Programming Languages,3,-1,-1,-1,CS4215,Programming Language Implement,4,-1,-1,-1,N
-School of Computing,Northwestern University,COMP_SCI348,Intro to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
-School of Computing,Northwestern University,COMP_SCI349,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
-School of Computing,Northwestern University,COMP_SCI349,Machine Learning,1,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
-School of Computing,Northwestern University,COMP_SCI496,Advanced Topics on Deep Learning,3,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
+School of Computing,Northwestern University,COMM ST 352 0,Social Network Analysis,3,-1,-1,-1,IS4241,Social Media Network Analysis,4,-1,-1,-1,-1
+School of Computing,Northwestern University,COMP ENG361,Computer Architecture I,1,-1,-1,-1,CS2100,Computer Organisation,4,-1,-1,-1,-1
+School of Computing,Northwestern University,COMP SCI 396,Interactive Information Visualization,3,-1,-1,-1,CS5346,Information Visualisation,4,-1,-1,-1,N
+School of Computing,Northwestern University,COMP SCI211-0,Fundamentals of Computer Programming II,3,-1,-1,-1,CS2030,Programming Methodology II,4,-1,-1,-1,-1
+School of Computing,Northwestern University,COMP SCI321,Programming Languages,3,-1,-1,-1,CS4215,Programming Language Implement,4,-1,-1,-1,N
+School of Computing,Northwestern University,COMP SCI348,Intro to Artificial Intelligence,3,-1,-1,-1,CS3243,Introduction to Artificial Int,4,-1,-1,-1,N
+School of Computing,Northwestern University,COMP SCI349,Machine Learning,3,-1,-1,-1,CS3244,Machine Learning,4,-1,-1,-1,N
+School of Computing,Northwestern University,COMP SCI349,Machine Learning,1,-1,-1,-1,BT4240,Machine Learning for Predictiv,4,-1,-1,-1,-1
+School of Computing,Northwestern University,COMP SCI496,Advanced Topics on Deep Learning,3,-1,-1,-1,CS5242,Neural Networks &Deep Learning,4,-1,-1,-1,-1
 School of Computing,Northwestern University,EECS 336,DESIGN & ANALYSIS OF ALGORITHMS,3,-1,-1,-1,CS3230,Design & Analysis of Algorithm,4,-1,-1,-1,N
 School of Computing,Northwestern University,EECS 351-1,INTRO TO COMPUTER GRAPHICS,3,-1,-1,-1,CS3241,Computer Graphics,4,-1,-1,-1,N
 School of Computing,Northwestern University,EECS214,DATA STRUCTURES AND DATA MANAGEMENT,3,-1,-1,-1,CS2040,Data Structures and Algorithms,4,-1,-1,-1,N
 School of Computing,Northwestern University,EECS330,Human Computer Interaction,3,-1,-1,-1,CS3240,Interaction Design,4,-1,-1,-1,N
 School of Computing,Northwestern University,EECS340,Introduction to Computer Networking,3,-1,-1,-1,CS2105,Intro to Computer Networks,4,-1,-1,-1,-1
-School of Computing,Northwestern University,ELEC_ENG 332,Introduction to Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
+School of Computing,Northwestern University,ELEC ENG 332,Introduction to Computer Vision,3,-1,-1,-1,CS4243,Comp Vision & Pattern Recogntn,4,-1,-1,-1,N
 School of Computing,Northwestern University,IEMS351,Optimization Methods In Data Science,3,-1,-1,-1,BT3102,Computational Methods for Busi,4,-1,-1,-1,-1
 School of Computing,Northwestern University,IEMS385,Introduction to Health Systems Management,1,-1,-1,-1,IS4250,IT-enabled Healthcare Solution,4,-1,-1,-1,-1
 School of Computing,Northwestern University,STAT 301-2,Data Science 2,3,-1,-1,-1,BT2101,Econometrics Modeling for Busi,4,-1,-1,-1,-1
