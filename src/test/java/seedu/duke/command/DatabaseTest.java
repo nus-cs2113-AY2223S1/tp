@@ -42,7 +42,7 @@ public class DatabaseTest {
     }
 
     @Test
-    void findPuMapping_validModule_correctList() throws ModuleNotFoundException {
+    void findPuMapping_validModule_correctList() throws ModuleNotFoundException, UniversityNotFoundException {
         DatabaseStorage.loadDatabase();
 
         assertEquals(
@@ -55,7 +55,7 @@ public class DatabaseTest {
     void findPuMapping_invalidModule_throwsException() throws ModuleNotFoundException {
         DatabaseStorage.loadDatabase();
 
-        assertThrows(ModuleNotFoundException.class, () -> Database.findPuMapping("CS2113", "ABCDEFG").toString());
+        assertThrows(UniversityNotFoundException.class, () -> Database.findPuMapping("CS2113", "ABCDEFG").toString());
     }
 
     @Test

@@ -312,15 +312,19 @@ public class Ui {
     public static void printUserFavouriteLists(HashMap<String, UserUniversityList> userFavouriteLists) {
         assert userFavouriteLists.size() > 0 : "Dictionary of university name to favourite lists should not be empty";
         System.out.print(LINE);
-        System.out.println("Your favourite lists are:");
-        int i = 1;
-        for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
-            String universityName = set.getKey();
-            UserUniversityList universityList = set.getValue();
-            if (universityList.isFavourite()) {
-                System.out.println(i + ". " + universityName);
-                universityList.displayModules();
-                i++;
+        if (userFavouriteLists.entrySet().isEmpty()) {
+            System.out.println("You do not have any favourite lists yet!");
+        } else {
+            System.out.println("Your favourite lists are:");
+            int i = 1;
+            for (Map.Entry<String, UserUniversityList> set : userFavouriteLists.entrySet()) {
+                String universityName = set.getKey();
+                UserUniversityList universityList = set.getValue();
+                if (universityList.isFavourite()) {
+                    System.out.println(i + ". " + universityName);
+                    universityList.displayModules();
+                    i++;
+                }
             }
         }
     }

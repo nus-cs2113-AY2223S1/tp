@@ -207,7 +207,6 @@ public class Duke {
                                           TimetableManager timetableManager, AddCommand addCommand)
             throws InvalidUserCommandException {
         try {
-            int i = 0;
             Lesson lesson = addCommand.getLesson();
             String universityName = addCommand.getUniversityName();
             String moduleCode = addCommand.getModuleCode();
@@ -220,10 +219,12 @@ public class Duke {
                 UserStorageParser.storeTimetable(timetableManager);
             } else if (addCommand.hasComment()) {
                 addComment(userUniversityListManager, addCommand);
+                UserStorageParser.storeCreatedLists(userUniversityListManager);
             } else {
                 addModuleToList(userUniversityListManager, addCommand);
             }
-        } catch (ModuleNotFoundException | NoSuchElementException | InvalidUniversityException e) {
+        } catch (ModuleNotFoundException | NoSuchElementException
+                 | InvalidUniversityException | UniversityNotFoundException e) {
             Ui.printExceptionMessage(e);
         }
     }
@@ -243,7 +244,7 @@ public class Duke {
     }
 
     private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
-            throws ModuleNotFoundException, InvalidUserCommandException {
+            throws ModuleNotFoundException, InvalidUserCommandException, UniversityNotFoundException {
         int i = 0;
         String moduleCode = addCommand.getModuleCode();
         String universityName = addCommand.getUniversityName();
