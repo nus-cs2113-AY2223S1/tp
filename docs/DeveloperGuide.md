@@ -133,17 +133,18 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
 
 ### Edit Component
-
-
 <p align="center" width="100%">
   <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Recipe Module Diagram"/>
 </p>
 
 The edit component consists of three parts:
 - Parser
-  - Parses the
+  - Parses the user input, instantiates the EditCommand class
 - EditModeCommand
+  - Handles the edit functions (Add, Swap, Change, Delete, Invalid)
 - EditCommand
+  - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and CLI,
+  handles saving the edited recipe
 
 
 ### Add GUI
