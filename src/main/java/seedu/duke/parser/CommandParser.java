@@ -4,6 +4,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CreateCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.DeleteCommand;
+
+import java.util.Arrays;
+
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.CommandType;
 import seedu.duke.command.FavouriteCommand;
@@ -11,6 +14,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.Database;
+import seedu.duke.exceptions.InvalidCommentException;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -170,6 +174,8 @@ public class CommandParser {
             return "";
         }
         
+        String[] commentArray = Arrays.copyOfRange(parameters, COMMENT_INDEX, parameters.length);
+        String comment = String.join(" ", commentArray);
 
         int commentStartIndex = comment.indexOf("{");
         int commentEndIndex = comment.indexOf("}");
@@ -371,7 +377,7 @@ public class CommandParser {
     }
 
     private static boolean isValidAddCommentOnModules(String [] parameters) {
-        return parameters.length == FOUR_PARAMETERS_LENGTH
+        return parameters.length >= FOUR_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
                 && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
