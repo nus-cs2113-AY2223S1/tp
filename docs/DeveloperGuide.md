@@ -137,9 +137,29 @@ the components of the build into their respective text files. The `deleteBuild()
 `BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
 
 
-#### Components
+### Components
 
-### Storage
+![](/images/Component.png)
+
+Each of the various components are represented by classes stored in the `components` package. The current components represented are the following:
+- `Cpu`
+- `Gpu`
+- `Motherboard`
+- `Memory`
+- `Drive`
+- `Case`
+- `Cooler`
+- `PowerSupply`
+- `Monitor`
+
+An `Other` class is also included to represent any other components that are not currently represented in the application. All the classes inherit from the `Component` class, and any new components added should also inherit from the `Component` class.
+All components have the attributes `name`, `price` and `power`, which represent the name of the component, the price of the component and the power consumption of the component respectively. These attributes hold the same meaning in all subclasses except for the `PowerSupply` class, where the `power` attribute represents the power output of the power supply instead.
+
+In addition to the getters and setters for each of the class fields, the classes share the following methods:
+- `toCsv()` - returns a string representation of the component in CSV format
+- `saveAsString()` - returns a string representation of the component in a format that can be saved to a text file
+- `getDetails()` - returns a string representation of the component in a format that can be displayed to the user
+- `getType()` - returns the type of the component
 
 ### Export
 
