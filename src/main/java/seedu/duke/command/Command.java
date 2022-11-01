@@ -98,4 +98,7 @@ public abstract class Command {
 
     public void setGlobalPeriod(String period) {
     }
+
+    public void setQueryCommand(String queryCommand) {
+    }
 }

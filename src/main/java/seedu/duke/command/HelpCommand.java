@@ -6,8 +6,10 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
+import seedu.duke.exception.HelpUnknownCommandWordException;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
 import static seedu.duke.common.HelpMessages.HELP_COMMAND_BASIC_HELP;
 import static seedu.duke.common.HelpMessages.HELP_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
@@ -21,12 +23,16 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "HELP";
 
     private boolean isDetailed;
+    private boolean hasSpecificCommand;
+    private String queryCommand;
 
     /**
      * Instantiates the ListCommand class with required variables.
      */
     public HelpCommand() {
         this.isDetailed = false;
+        this.hasSpecificCommand = false;
+        this.queryCommand = "";
     }
 
     /**
@@ -43,6 +49,17 @@ public class HelpCommand extends Command {
     }
 
     /**
+     * Sets string the command word queried by user for the help message.
+     *
+     * @param queryCommand A command word queried by the user.
+     */
+    @Override
+    public void setQueryCommand(String queryCommand) {
+        this.queryCommand = queryCommand;
+        this.hasSpecificCommand = true;
+    }
+
+    /**
      * Gets the optional tags of the command.
      *
      * @return A string array containing all optional tags.
@@ -50,7 +67,8 @@ public class HelpCommand extends Command {
     @Override
     public String[] getOptionalTags() {
         String[] optionalTags = new String[]{
-            COMMAND_TAG_HELP_OPTION
+            COMMAND_TAG_HELP_OPTION,
+            COMMAND_TAG_HELP_QUERY
         };
         return optionalTags;
     }
@@ -61,13 +79,22 @@ public class HelpCommand extends Command {
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
+     * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) {
+    public void execute(TransactionList transactions, Ui ui, Storage storage) throws HelpUnknownCommandWordException {
         String helpMessage = "";
-        if (isDetailed) {
+
+        // When the user provided a query tag
+        if (hasSpecificCommand) {
+            helpMessage = generateSpecificHelp();
+        }
+
+        // When the user does not provide a query tag
+        if (!hasSpecificCommand && isDetailed) {
             helpMessage = generateDetailedHelp();
-        } else {
+        }
+        if (!hasSpecificCommand && !isDetailed) {
             helpMessage = generateBasicHelp();
         }
 
@@ -113,6 +140,69 @@ public class HelpCommand extends Command {
                 + ByeCommand.getDetailedHelpMessage();
 
         return helpMessage;
+    }
+
+    /**
+     * Retrieves the help message of the queried command and returns it.
+     *
+     * <p>A basic or detailed help message is returned based on the help option chosen.
+     *
+     * @return A string containing the help message of queried commands.
+     * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
+     */
+    private String generateSpecificHelp() throws HelpUnknownCommandWordException {
+        HelpMessages basicHelpMessage;
+        HelpMessages detailedHelpMessage;
+        switch (queryCommand.toUpperCase()) {
+        case HelpCommand.COMMAND_WORD:
+            basicHelpMessage = HelpCommand.getHelpMessage();
+            detailedHelpMessage = HelpCommand.getDetailedHelpMessage();
+            break;
+        case AddCommand.COMMAND_WORD:
+            basicHelpMessage = AddCommand.getHelpMessage();
+            detailedHelpMessage = AddCommand.getDetailedHelpMessage();
+            break;
+        case EditCommand.COMMAND_WORD:
+            basicHelpMessage = EditCommand.getHelpMessage();
+            detailedHelpMessage = EditCommand.getDetailedHelpMessage();
+            break;
+        case ListCommand.COMMAND_WORD:
+            basicHelpMessage = ListCommand.getHelpMessage();
+            detailedHelpMessage = ListCommand.getDetailedHelpMessage();
+            break;
+        case FindCommand.COMMAND_WORD:
+            basicHelpMessage = FindCommand.getHelpMessage();
+            detailedHelpMessage = FindCommand.getDetailedHelpMessage();
+            break;
+        case StatsCommand.COMMAND_WORD:
+            basicHelpMessage = StatsCommand.getHelpMessage();
+            detailedHelpMessage = StatsCommand.getDetailedHelpMessage();
+            break;
+        case PurgeCommand.COMMAND_WORD:
+            basicHelpMessage = PurgeCommand.getHelpMessage();
+            detailedHelpMessage = PurgeCommand.getDetailedHelpMessage();
+            break;
+        case DeleteCommand.COMMAND_WORD:
+            basicHelpMessage = DeleteCommand.getHelpMessage();
+            detailedHelpMessage = DeleteCommand.getDetailedHelpMessage();
+            break;
+        case BudgetCommand.COMMAND_WORD:
+            basicHelpMessage = BudgetCommand.getHelpMessage();
+            detailedHelpMessage = BudgetCommand.getDetailedHelpMessage();
+            break;
+        case ByeCommand.COMMAND_WORD:
+            basicHelpMessage = ByeCommand.getHelpMessage();
+            detailedHelpMessage = ByeCommand.getDetailedHelpMessage();
+            break;
+        default:
+            throw new HelpUnknownCommandWordException();
+        }
+
+        if (isDetailed) {
+            return detailedHelpMessage.toString();
+        } else {
+            return  basicHelpMessage.toString();
+        }
     }
 
     /**
