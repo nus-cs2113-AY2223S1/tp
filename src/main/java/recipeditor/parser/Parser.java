@@ -121,7 +121,7 @@ public class Parser {
     private static Command parseViewCommand(String[] parsed) {
         String recipeTitleToDelete = "";
         try {
-            if (parsed.length > 2) {
+            if (parsed.length >= 2) {
                 String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
