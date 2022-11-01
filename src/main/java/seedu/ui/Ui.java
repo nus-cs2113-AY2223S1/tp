@@ -1,6 +1,13 @@
 package seedu.ui;
 
+import static org.fusesource.jansi.Ansi.Color.GREEN;
+import static org.fusesource.jansi.Ansi.Color.RED;
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.util.Scanner;
+
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 
 import seedu.commands.CommandResult;
 import seedu.exception.ParkingException;
@@ -10,9 +17,7 @@ import seedu.exception.ParkingException;
  */
 public class Ui {
     private static final String SEPARATOR_STRING = "===========================================";
-    private static final String RED = "\u001b[31m";
-    private static final String GREEN = "\u001b[32m";
-    private static final String CLEAR = "\u001b[0m";
+
     private Scanner in;
     public Ui() {
         this.in = new Scanner(System.in);
@@ -26,6 +31,10 @@ public class Ui {
     public static void println(String line) {
         System.out.println(line);
     }
+    public static void println(Ansi line) {
+        System.out.println(line);
+    }
+
 
     /**
      * Print string to command line without new line.
@@ -36,6 +45,10 @@ public class Ui {
         System.out.print(line);
     }
 
+    public static void print(Ansi line) {
+        System.out.print(line);
+    }
+
     /**
      * Print string in GREEN colour.
      *
@@ -43,17 +56,13 @@ public class Ui {
      * @param isNewLine if true, print newline.
      */
     public static void printGreen(String line, boolean isNewLine) {
-        if (isSupportAnsi()) {
-            print(GREEN);
-        }
+        AnsiConsole.systemInstall();
         if (isNewLine) {
-            println(line);
+            println(ansi().fg(GREEN).a(line).reset());
         } else {
-            print(line);
+            print(ansi().fg(GREEN).a(line).reset());
         }
-        if (isSupportAnsi()) {
-            print(CLEAR);
-        }
+        AnsiConsole.systemUninstall();
     }
 
     /**
@@ -63,17 +72,13 @@ public class Ui {
      * @param isNewLine if true, print newline.
      */
     public static void printRed(String line, boolean isNewLine) {
-        if (isSupportAnsi()) {
-            print(RED);
-        }
+        AnsiConsole.systemInstall();
         if (isNewLine) {
-            println(line);
+            println(ansi().fg(RED).a(line).reset());
         } else {
-            print(line);
+            print(ansi().fg(RED).a(line).reset());
         }
-        if (isSupportAnsi()) {
-            print(CLEAR);
-        }
+        AnsiConsole.systemUninstall();
     }
 
     /**
