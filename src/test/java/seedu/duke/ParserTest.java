@@ -72,7 +72,7 @@ class ParserTest {
     @Test
     void clearCommandTest() {
         addTestMovie();
-        ReviewList result= ps.executeClear();
+        ReviewList result = ps.executeClear();
         assertEquals(0, result.inputs.size());
     }
 
@@ -86,11 +86,11 @@ class ParserTest {
     @Test
     void deleteCommandTest() {
         String deleteString = "delete movie 1";
-        String[] splitString = deleteString.split(" ");
         ps.executeClear();
         addTestMovie();
         ReviewList currentList = ps.getReviewList();
         assertEquals(1, currentList.inputs.size());
+        String[] splitString = deleteString.split(" ");
         ps.executeDelete(splitString);
         currentList = ps.getReviewList();
         assertEquals(0, currentList.inputs.size());
