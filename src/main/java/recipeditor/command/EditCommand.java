@@ -12,8 +12,13 @@ import recipeditor.ui.Ui;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
+    private static final String COMMAND_FUNCTION = "Edit an existing recipe by:"
+            + "- Change the title, description, ingredients or steps"
+            + "- Swap the order of two ingredients or steps"
+            + "- Add a new step or ingredient"
+            + "- Delete an existing step or ingredient";
 
-    public static final String COMMAND_FORMAT = "Syntax for /edit GUI: \n"
+    public static final String COMMAND_SYNTAX = "Syntax for /edit GUI: \n"
             + "\t /edit <index> \n\n"
             + "Syntax for /edit CLI: \n"
             + "\t /edit <index> (flags) (parameters) \n"
@@ -26,15 +31,20 @@ public class EditCommand extends Command {
             + "\t -i: ingredient, -s: step, -t: title, -d: description \n"
             + "Flag order does not matter, but you can only add one command flag and one recipe flag.";
 
-    private final int index;
+    private int index;
     private String oldTitle;
     private Recipe editedRecipe;
     private FlagType[] flags;
     private boolean editSuccess = false;
     private String[] parsed;
 
+    public EditCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
+
     // CLI
     public EditCommand(FlagType[] flags, String[] parsed, int recipeIndex, Recipe editedRecipe, String oldTitle) {
+        this();
         this.flags = flags;
         this.parsed = parsed;
         this.index = recipeIndex;
@@ -44,6 +54,7 @@ public class EditCommand extends Command {
 
     // GUI
     public EditCommand(boolean editSuccess, int recipeIndex, Recipe editedRecipe, String oldTitle) {
+        this();
         this.editSuccess = editSuccess;
         this.index = recipeIndex;
         this.editedRecipe = editedRecipe;

@@ -7,13 +7,21 @@ import recipeditor.ui.Ui;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
-    private final Recipe addedRecipe;
-    private final boolean isValid;
+    private static final String COMMAND_SYNTAX = "/add";
+    private static final String COMMAND_FUNCTION = "Edit a new recipe and add it to recipeditor.";
+    private Recipe addedRecipe;
+    private boolean isValid;
+
+    public AddCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
 
     public AddCommand(boolean isValid, Recipe addedRecipe) {
+        this();
         this.isValid = isValid;
         this.addedRecipe = addedRecipe;
     }
+
 
     /**
      * Execute an add command, which adds recipe into RecipeList and storage.
