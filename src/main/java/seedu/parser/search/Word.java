@@ -33,6 +33,14 @@ public class Word {
         }
     }
 
+    public String getAnsiFormatString() {
+        if (isBold) {
+            return String.format("@|bold,cyan %s|@", text);
+        } else {
+            return text;
+        }
+    }
+
     public String getText() {
         return text;
     }

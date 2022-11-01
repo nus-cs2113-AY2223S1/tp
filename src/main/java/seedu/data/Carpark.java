@@ -58,7 +58,9 @@ public class Carpark implements Comparable<Carpark> {
     }
 
     public String getListViewString() {
-        return String.format("CarparkID %s at %s\n   %s available lots total", carparkId,
+        return String.format("CarparkID @|yellow,bold %s|@ at %s\n@|faint -->|@ @|yellow %s|@ "
+                + "available lots total",
+            carparkId,
             developmentSentence.toString(), availableLots);
     }
 
