@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 

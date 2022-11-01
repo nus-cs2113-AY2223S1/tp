@@ -51,7 +51,7 @@ loop Command not equals "Bye"
         end note
 
         create Expense
-        UserInterface -[USER_INTERFACE_COLOR_1]> Expense
+        UserInterface -[USER_INTERFACE_COLOR_1]> Expense :create
         activate Expense DATA_COLOR_1
 
         Expense --[DATA_COLOR_1]> UserInterface
