@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.timetable.Lesson;
 import seedu.duke.timetable.Timetable;
@@ -266,7 +267,7 @@ public class UserStorageParser {
     private static void isValidPuMapping(String puCode, String puName) throws InvalidUserStorageFileException {
         try {
             ModuleMapping moduleMapping = Database.findPuMapping(puCode, puName);
-        } catch (ModuleNotFoundException e) {
+        } catch (ModuleNotFoundException | UniversityNotFoundException e) {
             throw new InvalidUserStorageFileException("Invalid file format\n"
                     + puCode + " in " + puName + " not found in database");
         }

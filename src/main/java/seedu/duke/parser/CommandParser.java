@@ -14,6 +14,7 @@ import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.timetable.Lesson;
 
@@ -60,7 +61,7 @@ public class CommandParser {
      * @throws InvalidUserCommandException if the user command does not follow the command format laid out
      */
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException,
-            ModuleNotFoundException, InvalidModuleException {
+            ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
             throw new InvalidUserCommandException("Error! Missing command. "
@@ -144,12 +145,14 @@ public class CommandParser {
      * @throws ModuleNotFoundException if user input module code is not found in database
      * @throws InvalidModuleException if module details are invalid when passed into Lesson constructor
      */
-    private static Lesson parseLesson(String[] parameters) throws ModuleNotFoundException, InvalidModuleException {
+    private static Lesson parseLesson(String[] parameters) throws ModuleNotFoundException, InvalidModuleException,
+            UniversityNotFoundException {
         if (!isValidCommandOnTimetable(parameters)) {
             return null;
         } else {
             String code = parameters[MODULE_INDEX].substring(2);
             String universityName = parameters[UNIVERSITY_INDEX].substring(2);
+
             Module puModule = Database.findPuMapping(code, universityName).getPartnerUniversityModule();
             String day = parameters[DAY_INDEX].substring(2);
             String startTime = parameters[LESSON_START_TIME_INDEX].substring(3);
@@ -361,10 +364,9 @@ public class CommandParser {
      * @return User input with underscores removed.
      */
     private static String removeParameterUnderscores(String parameter) {
-        if (parameter.length() > 0 && parameter.substring(0,1).equals("_")) {
-            return parameter.substring(1);
+        if (parameter.startsWith("_") || parameter.endsWith("_")) {
+            return "ERROR";
         }
-
         return parameter.replace("_", " ");
     }
 

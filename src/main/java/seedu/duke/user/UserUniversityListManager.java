@@ -178,8 +178,8 @@ public class UserUniversityListManager {
      */
     public void displayUniversity(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
-        System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
+        System.out.println(input);
         myUniversityList.displayModules();
     }
 
@@ -189,6 +189,9 @@ public class UserUniversityListManager {
      * Method then prints all the modules user has saved for that particular university
      */
     public void displayAll() {
+        if (myManager.isEmpty()) {
+            System.out.println("You do not have any university lists at the moment!");
+        }
         for (Map.Entry<String, UserUniversityList> set : myManager.entrySet()) {
             String universityName = set.getKey();
             UserUniversityList universityList = set.getValue();
@@ -206,7 +209,7 @@ public class UserUniversityListManager {
     public UserUniversityList getList(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
         if (!myManager.containsKey(input)) {
-            throw new InvalidUserCommandException("HELP!! :: No such universities found");
+            throw new InvalidUserCommandException("Error! No university list named " + input + " is found.");
         }
         return myManager.get(input);
     }
