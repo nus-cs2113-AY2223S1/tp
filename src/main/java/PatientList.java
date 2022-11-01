@@ -8,6 +8,10 @@ public class PatientList {
     }
 
     public void addPatient(UI ui, String name, String birthDate, String gender, String id) {
+        assert name != null : "name of patient should not be null!";
+        assert birthDate != null : "birthdate of patient should not be null!";
+        assert gender != null : "gender of patient should not be null!";
+        assert id != null : "id of patient should not be null!";
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
         ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient));
@@ -38,6 +42,7 @@ public class PatientList {
     }
 
     public Patient findPatient(String id) {
+        assert id != null : "id of patient should not be null!";
         for (Patient patient : patients) {
             if (patient.getId().equalsIgnoreCase(id)) {
                 return patient;
