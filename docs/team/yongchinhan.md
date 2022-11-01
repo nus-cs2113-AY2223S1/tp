@@ -38,7 +38,7 @@ Contributed to the followings DG segments with their attached diagrams and descr
   - https://github.com/AY2223S1-CS2113-W12-2/tp/issues/128
   - https://github.com/AY2223S1-CS2113-W12-2/tp/issues/145
   
-  2) Assisted team to fix bugs beyond personalassigned tasking.
+  2) Assisted team to fix bugs beyond personal assigned tasking.
   - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/80
   - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/157
   - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/205
