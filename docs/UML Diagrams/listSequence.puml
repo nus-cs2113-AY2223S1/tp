@@ -3,45 +3,47 @@
 
 hide footbox
 
-participant Parser
+participant ":Parser"
 
-Parser -> Parser : executeList()
-activate Parser
+ref over ":Parser"
+listCommand is given
+end ref
+":Parser" -> ":Parser" : executeList()
+activate ":Parser"
 
 create "executor:\nListCommand"
-Parser -> "executor:\nListCommand"
+":Parser" -> "executor:\nListCommand"
 
 
 activate "executor:\nListCommand"
-"executor:\nListCommand" --> Parser
+"executor:\nListCommand" --> ":Parser"
 deactivate "executor:\nListCommand"
 
-Parser -> "executor:\nListCommand" : execute()
+":Parser" -> "executor:\nListCommand" : execute()
 activate "executor:\nListCommand"
 
     loop For each review
         alt Review is a Movie
-            "executor:\nListCommand" -> Movie: toString()
-            activate Movie
-            Movie --> "executor:\nListCommand"
-            deactivate Movie
+            "executor:\nListCommand" -> ":Movie": toString()
+            activate ":Movie"
+            ":Movie" --> "executor:\nListCommand"
+            deactivate ":Movie"
 
         else Review is a TvShow
-            "executor:\nListCommand" -> TvShow: toString()
-            activate TvShow
-            TvShow --> "executor:\nListCommand"
-            deactivate TvShow
+            "executor:\nListCommand" -> ":TvShow": toString()
+            activate ":TvShow"
+            ":TvShow" --> "executor:\nListCommand"
+            deactivate ":TvShow"
         end
     end
-"executor:\nListCommand" --> Parser: output : String
+"executor:\nListCommand" --> ":Parser": output : String
 deactivate "executor:\nListCommand"
 
-Parser -> Ui : print(output)
-activate Ui
-Ui --> Parser
-deactivate Ui
+":Parser" -> ":Ui" : print(output)
+activate ":Ui"
+":Ui" --> ":Parser"
+deactivate ":Ui"
 
-Parser -> Parser
 destroy "executor:\nListCommand"
-deactivate Parser
+deactivate ":Parser"
 @enduml

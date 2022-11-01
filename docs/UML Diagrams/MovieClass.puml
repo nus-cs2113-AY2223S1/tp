@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-abstract class Media {
+class "{abstract} \n Media" {
     +title: String
     +rating: Double
     +genre: String
@@ -16,7 +16,6 @@ class Movie {
     dateWatchedString: String)
     +void toString()
 }
-hide Movie fields
 
 class TvShow {
     +site: String
@@ -27,7 +26,7 @@ class TvShow {
 }
 
 skinparam groupInheritance 2
-Media <|-down- Movie
-Media <|-down- TvShow
+"{abstract} \n Media" <|-down- Movie
+"{abstract} \n Media" <|-down- TvShow
 
 @enduml
