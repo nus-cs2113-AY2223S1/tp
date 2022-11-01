@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd save to file
+mainframe sd save data
 Participant "consoleInterface\n:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
 Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
 Participant "incomeManager\n:IncomeManager" as incomeManager DATA_COLOR_2
