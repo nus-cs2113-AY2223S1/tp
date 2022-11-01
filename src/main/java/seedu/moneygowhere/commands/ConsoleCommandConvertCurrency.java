@@ -1,11 +1,6 @@
 package seedu.moneygowhere.commands;
 
-import seedu.moneygowhere.common.Configurations;
-import seedu.moneygowhere.data.currency.CurrencyManager;
-import seedu.moneygowhere.data.expense.Expense;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 //@@author jeyvia
 

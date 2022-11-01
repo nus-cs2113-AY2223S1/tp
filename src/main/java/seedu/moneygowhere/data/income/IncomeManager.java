@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.income;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 

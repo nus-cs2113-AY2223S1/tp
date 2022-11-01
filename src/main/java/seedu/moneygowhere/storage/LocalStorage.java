@@ -13,7 +13,6 @@ import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.storage.LocalStorageLoadDataException;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +26,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -571,7 +569,7 @@ public class LocalStorage {
     }
 
     private static void parseRecurringPaymentToXml(Document doc, Element rootElement,
-                                            ArrayList<RecurringPayment> savedRecurringPayments) {
+                                                   ArrayList<RecurringPayment> savedRecurringPayments) {
         int index = 1;
         for (RecurringPayment recurringPayment : savedRecurringPayments) {
             Element recurringPaymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);
