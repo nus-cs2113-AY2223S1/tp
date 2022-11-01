@@ -60,8 +60,8 @@ public class ModuleTest {
 
     @Test
     public void module_getLevel_computedCorrectly() {
-        assertEquals(Module.get("CS2113").getLevel(), 2);
-        assertEquals(Module.get("YSC3209").getLevel(), 3);
+        assertEquals(2, Module.get("CS2113").getLevel());
+        assertEquals(3, Module.get("YSC3209").getLevel());
     }
 
 }
