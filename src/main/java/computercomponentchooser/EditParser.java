@@ -115,13 +115,13 @@ public class EditParser {
             }
         } catch (UnknownCommandException | UnlistedBuildException | UnlistedComponentException
                  | BlankStringException e) {
-            Ui.printLine();
+            Ui.printEditLine();
             System.out.println(e.getMessage());
-            Ui.printLine();
+            Ui.printEditLine();
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-            Ui.printLine();
+            Ui.printEditLine();
             System.out.println("Please input a valid command");
-            Ui.printLine();
+            Ui.printEditLine();
         }
     }
 

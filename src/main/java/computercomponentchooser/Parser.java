@@ -61,7 +61,14 @@ public class Parser {
      * @param line The user input.
      * @return A boolean value indicating whether the user input is edit.
      */
-    static boolean checkEdit(String line) {
+    public boolean checkEdit(String line) {
+        String name = getParameter(line, NAME_PARAMETER);
+        if (!ComputerComponentChooser.buildManager.doesBuildExist(name)) {
+            Ui.printLine();
+            System.out.println("Build does not exist!");
+            Ui.printLine();
+            return false;
+        }
         String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         return edit.equals("edit");
     }
