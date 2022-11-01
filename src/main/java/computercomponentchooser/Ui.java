@@ -95,13 +95,19 @@ public class Ui {
         String line;
         do {
             line = in.nextLine();
-            if (parser.checkEdit(line)) {
-                while (!EditParser.checkBack(line)) {
-                    editParser.parse(line);
-                    line = in.nextLine();
+            try {
+                if (parser.checkEdit(line)) {
+                    while (!EditParser.checkBack(line)) {
+                        editParser.parse(line);
+                        line = in.nextLine();
+                    }
                 }
+                parser.parse(line);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ui.printLine();
+                System.out.println("Please enter a command with the correct number of parameters");
+                Ui.printLine();
             }
-            parser.parse(line);
         } while (!Parser.checkBye(line));
     }
 }
