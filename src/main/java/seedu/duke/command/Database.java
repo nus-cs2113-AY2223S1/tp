@@ -79,7 +79,8 @@ public class Database {
             if (university.getName().equals(universityName)) {
                 for (ModuleMapping moduleMapping : moduleMappings) {
                     if (moduleMapping.getPartnerUniversityModule().getCode().equals(moduleCode)
-                            && moduleMapping.getPartnerUniversityModule().getUniversity().getName().equals(universityName)) {
+                            && moduleMapping.getPartnerUniversityModule()
+                            .getUniversity().getName().equals(universityName)) {
                         return moduleMapping;
                     }
                 }
