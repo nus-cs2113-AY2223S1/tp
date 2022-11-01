@@ -164,7 +164,7 @@ and take note of the format before entering the command.
 - `-s`: *Step*
 - 
 
-Format: `/edit INDEX FLAGS PARAMETERS`
+Format: `/edit RECIPE_INDEX COMMAND_FLAG PARAMETERS`
 
 **Command flags**: Specify the type of function to be used**
 - `-add`: *Adds a new ingredient or step*

@@ -8,11 +8,10 @@ import recipeditor.edit.Delete;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-import recipeditor.ui.Ui;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
-    private static final String COMMAND_FUNCTION = "Edit an existing recipe by: \n"
+    private static final String COMMAND_FUNCTION = "\nEdit an existing recipe by: \n"
             + "-add Add a new step or ingredient \n"
             + "-del Delete an existing step or ingredient \n"
             + "-swp Swap the order of two ingredients or steps \n"
@@ -22,16 +21,14 @@ public class EditCommand extends Command {
     public static final String COMMAND_SYNTAX = "\nSyntax for /edit GUI: \n"
             + "\t /edit <index> \n\n"
             + "Syntax for /edit CLI: \n"
-            + "\t /edit <index> (flags) (parameters) \n"
+            + "\t /edit <recipe index> (command flags) (parameters) \n"
             + "Command flags: \n"
             + "\t -add (recipe flag) (input) \n"
             + "\t -del (recipe flag) (index) \n"
             + "\t -swp (recipe flag) (index 1) (index 2) \n"
             + "\t -chg (recipe flag) (index) (input) \n"
             + "Recipe flags: \n"
-            + "\t -i: ingredient, -s: step, -t: title, -d: description \n"
-            + "Flag order does not matter, but you can only add one command flag and one recipe flag.";
-
+            + "\t -i: ingredient, -s: step, -t: title, -d: description \n";
     private int index;
     private String oldTitle;
     private Recipe editedRecipe;

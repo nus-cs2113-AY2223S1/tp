@@ -3,7 +3,6 @@ package recipeditor.recipe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 public class Recipe {
     private final ArrayList<Ingredient> ingredients;
