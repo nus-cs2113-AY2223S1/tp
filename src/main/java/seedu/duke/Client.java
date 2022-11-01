@@ -4,6 +4,11 @@ package seedu.duke;
  * Represents a client.
  */
 public class Client {
+    public static final String CLIENT_LABEL = "  Client: ";
+    public static final String CONTACT_NUMBER_LABEL = "  Contact Number: ";
+    public static final String EMAIL_LABEL = "  Email: ";
+    public static final String BUDGET_SGD_LABEL = "  Budget: SGD";
+    public static final String PER_MONTH_LABEL = "/month";
     private String clientName;
     private String clientContactNumber;
     private String clientEmail;
@@ -19,13 +24,13 @@ public class Client {
     @Override
     public String toString() {
         StringBuilder clientDetails = new StringBuilder();
-        clientDetails.append("  Client: ").append(clientName).append(System.lineSeparator());
-        clientDetails.append("  Contact Number: ").append(clientContactNumber).append(System.lineSeparator());
+        clientDetails.append(CLIENT_LABEL).append(clientName).append(System.lineSeparator());
+        clientDetails.append(CONTACT_NUMBER_LABEL).append(clientContactNumber).append(System.lineSeparator());
         boolean hasEmail = (!clientEmail.isEmpty());
         if (hasEmail) {
-            clientDetails.append("  Email: ").append(clientEmail).append(System.lineSeparator());
+            clientDetails.append(EMAIL_LABEL).append(clientEmail).append(System.lineSeparator());
         }
-        clientDetails.append("  Budget: SGD").append(clientBudgetPerMonth).append("/month")
+        clientDetails.append(BUDGET_SGD_LABEL).append(clientBudgetPerMonth).append(PER_MONTH_LABEL)
                 .append(System.lineSeparator());
         return clientDetails.toString().trim();
     }

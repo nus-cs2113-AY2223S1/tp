@@ -23,6 +23,7 @@ import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
+import static seedu.duke.CommandStructure.PAIR_FLAG;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;

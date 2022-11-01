@@ -24,13 +24,14 @@ import static seedu.duke.Messages.MESSAGE_PROPERTY_ADDED;
 import static seedu.duke.Messages.MESSAGE_PROPERTY_DELETED;
 import static seedu.duke.Messages.MESSAGE_UNPAIRED;
 import static seedu.duke.Messages.MESSAGE_WELCOME;
+import static seedu.duke.Messages.CLIENT;
+import static seedu.duke.Messages.PROPERTY;
 
 
 /**
  * Handler for all interactions between the user and the command line.
  */
 public class Ui {
-
     private static final String FULL_STOP = ".";
     private static final String CLIENT_NAME_LABEL = "Client Name: ";
     private static final String CLIENT_CONTACT_NUMBER_LABEL = "Client Contact Number: ";
@@ -180,6 +181,38 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
+    public void displayOneClientInPair(Client client) {
+        System.out.println(CLIENT);
+        System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
+        System.out.println(SPACE + CLIENT_CONTACT_NUMBER_LABEL + client.getClientContactNumber());
+        boolean hasEmptyEmail = client.getClientEmail().isEmpty();
+        if (!hasEmptyEmail) {
+            System.out.println(SPACE + CLIENT_EMAIL_LABEL + client.getClientEmail());
+        }
+        System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
+    }
+
+    public void displayOneClientInPairShort(Client client) {
+        System.out.println(CLIENT);
+        System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
+        System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
+    }
+
+    public void displayOnePropertyInPair(Property property) {
+        System.out.println(PROPERTY);
+        System.out.println(SPACE + PROPERTY_LANDLORD_LABEL + property.getLandlordName());
+        System.out.println(SPACE + PROPERTY_ADDRESS_LABEL + property.getPropertyAddress());
+        System.out.println(SPACE + PROPERTY_RENTAL_LABEL + property.getRentingPrice());
+        System.out.println(SPACE + PROPERTY_UNIT_TYPE_LABEL + property.getUnitType());
+    }
+
+    public void displayOnePropertyInPairShort(Property property) {
+        System.out.println(PROPERTY);
+        System.out.println(SPACE + PROPERTY_ADDRESS_LABEL + property.getPropertyAddress());
+        System.out.println(SPACE + PROPERTY_UNIT_TYPE_LABEL + property.getUnitType());
+        System.out.println(SPACE + PROPERTY_RENTAL_LABEL + property.getRentingPrice());
+    }
+
     public void displayOneClientName(Client client, int i) {
         System.out.print(i + FULL_STOP);
         System.out.println(client.getClientName());
@@ -208,7 +241,7 @@ public class Ui {
         System.out.print(i + FULL_STOP);
         System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
         System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
-        System.out.println(SPACE + LINE_BREAK);
+        System.out.println(LINE_BREAK);
     }
 
     //@@author wilsonngja
@@ -264,7 +297,7 @@ public class Ui {
         System.out.println(SPACE + PROPERTY_ADDRESS_LABEL + property.getPropertyAddress());
         System.out.println(SPACE + PROPERTY_UNIT_TYPE_LABEL + property.getUnitType());
         System.out.println(SPACE + PROPERTY_RENTAL_LABEL + property.getRentingPrice());
-        System.out.println(SPACE + LINE_BREAK);
+        System.out.println(LINE_BREAK);
     }
 
     public void displayNoOfProperties(int i) {
@@ -280,6 +313,14 @@ public class Ui {
             System.out.println("There is " + i + " client in the list");
         } else {
             System.out.println("There are " + i + " clients in this list");
+        }
+    }
+
+    public void displayNoOfPairs(int i) {
+        if (i == 1) {
+            System.out.println("There is " + i + " pair in the list");
+        } else {
+            System.out.println("There are " + i + " pairs in this list");
         }
     }
 
