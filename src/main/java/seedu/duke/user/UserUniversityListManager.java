@@ -32,19 +32,32 @@ public class UserUniversityListManager {
 
     public UserUniversityListManager() {
         this.myManager = new HashMap<String, UserUniversityList>();
-        this.ttManager = UserStorageParser.getSavedTimetables();
+        this.ttManager = new TimetableManager();
     }
 
     public UserUniversityListManager(String fileContent) throws IOException {
         try {
             myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
             this.ttManager = UserStorageParser.getSavedTimetables();
+            UserStorageParser.getTimetables(this);
+            checkTimetables();
+            checkUniversityLists();
         } catch (InvalidUserStorageFileException e) {
             Ui.printExceptionMessage(e);
             System.out.println("Creating new University List Manager");
             myManager = new HashMap<String, UserUniversityList>();
             UserStorage.saveFile("", true);
+            System.out.println("Creating new Timetable Manager");
+            ttManager = new TimetableManager();
         }
+    }
+
+    private void checkTimetables() {
+
+    }
+
+    private void checkUniversityLists() {
+
     }
 
     public void updateComment(String universityName, String moduleCode, String comment)
@@ -56,9 +69,16 @@ public class UserUniversityListManager {
             if (comment.equals("")) {
                 System.out.println("Error: No empty updates");
                 return;
+            } else if (isNotValidComment(comment)) {
+                System.out.println("Error: No special characters in comment: ; % /");
+                return;
             }
             getList(universityName).updateComment(moduleCode, comment);
         }
+    }
+
+    private boolean isNotValidComment(String comment) {
+        return comment.contains("%") || comment.contains("/") || comment.contains(";");
     }
 
     public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException {

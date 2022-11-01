@@ -145,7 +145,10 @@ public class UserStorageParser {
             output += module.getNusCode() + ";";
             output += module.getNusTitle() + ";";
             output += module.getNusCredit() + ";";
-            output += module.getComment() + "%\n";
+            if (!module.getComment().equals("") && module.getComment() != null) {
+                output += module.getComment() + ";";
+            }
+            output += "%\n";
         }
         return output;
     }
@@ -248,7 +251,7 @@ public class UserStorageParser {
             isValidNusMapping(details[3]);
             UserModuleMapping userModule = new UserModuleMapping(details[0], details[1],
                     details[3], details[4], details[5], details[2], items[0], puCountry);
-            if (!details[6].equals("default")) {
+            if (details.length == 7) {
                 userModule.setComment(details[6]);
             }
             moduleList.addModule(userModule, true);
@@ -289,7 +292,7 @@ public class UserStorageParser {
      * @return true if it is a valid format
      */
     private static boolean isValidModulesFormat(String[] details) {
-        return details.length == 7;
+        return details.length == 6 || details.length == 7;
     }
 
     /**.
@@ -307,6 +310,7 @@ public class UserStorageParser {
             Ui.printExceptionMessage(e);
             System.out.println("Restarting with empty University List Manager");
         }
+        System.out.println("Restarting with empty Timetable Manager");
         return new UserUniversityListManager();
     }
 
@@ -476,6 +480,20 @@ public class UserStorageParser {
         return details.length == 7;
     }
 
+    public static void getTimetables(UserUniversityListManager userUniversityListManager) {
+        try {
+            String fileContent = UserStorage.loadFile(false);
+            TimetableManager temp = convertFileContentIntoTimetable(fileContent);
+            userUniversityListManager.setTtManager(temp);
+        } catch (IOException | InvalidUserStorageFileException e) {
+            Ui.printExceptionMessage(e);
+            System.out.println("Restarting with empty User University List Manager");
+            System.out.println("Restarting with empty Timetable Manager");
+            userUniversityListManager.setMyManager(new HashMap<String, UserUniversityList>());
+            userUniversityListManager.setTtManager(new TimetableManager());
+        }
+    }
+
     /**.
      * Method to get user's saved lists of timetables from uni/timetable_info.txt
      * and convert it into usable format in TimetableManager
@@ -484,8 +502,7 @@ public class UserStorageParser {
      */
     public static TimetableManager getSavedTimetables() {
         try {
-            isUniStorage = false;
-            String fileContent = UserStorage.loadFile(isUniStorage);
+            String fileContent = UserStorage.loadFile(false);
             return convertFileContentIntoTimetable(fileContent);
         } catch (IOException | InvalidUserStorageFileException e) {
             Ui.printExceptionMessage(e);
@@ -501,8 +518,7 @@ public class UserStorageParser {
     public static void storeTimetable(TimetableManager timetableManager) {
         try {
             String fileContent = convertTimetableIntoFileContent(timetableManager);
-            isUniStorage = false;
-            UserStorage.saveFile(fileContent, isUniStorage);
+            UserStorage.saveFile(fileContent, false);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
