@@ -42,53 +42,62 @@ public class CurrencyManager {
         return exchangeRates.get(currency);
     }
 
-    private BigDecimal convertToSgd(Expense expense) {
-        String currency = expense.getCurrency();
-        BigDecimal amount = expense.getAmount();
-        BigDecimal rate;
-        if (exchangeRates.containsKey(currency)) {
+    private BigDecimal convertToSgd(Expense expense) throws CurrencyInvalidException {
+        try {
+            String currency = expense.getCurrency();
+            BigDecimal amount = expense.getAmount();
+            BigDecimal rate;
             rate = getRate(currency);
-        } else {
-            rate = expense.getRate();
+            BigDecimal amountInSgd = amount.divide(
+                    rate,
+                    Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
+                    RoundingMode.HALF_UP
+            );
+            return amountInSgd;
+        } catch (NullPointerException exception) {
+            throw new CurrencyInvalidException(Messages.CURRENCY_MANAGER_ERROR_CUSTOM_RATE_NOT_FOUND);
         }
-        return (amount.divide(
-                rate,
-                Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
-                RoundingMode.HALF_UP
-        ));
     }
 
-    public BigDecimal exchangeCurrency(Expense expense, String currency, BigDecimal rate) {
-        String oldCurrency = expense.getCurrency();
+    public BigDecimal exchangeCurrency(Expense expense, String currency, BigDecimal rate)
+            throws CurrencyInvalidException {
         BigDecimal amount = expense.getAmount();
-        BigDecimal amountInSgd;
-        if (!(oldCurrency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS))) {
-            amountInSgd = convertToSgd(expense);
-        } else {
-            amountInSgd = amount;
-        }
-        if (currency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
-            return amountInSgd;
-        }
+
         BigDecimal amountInNewCurrency;
-        if (rate == null) {
-            BigDecimal newRate = getRate(currency);
-            amountInNewCurrency = amount.multiply(newRate);
-        } else {
+
+        if (rate != null) {
             amountInNewCurrency = amount.multiply(rate);
-            exchangeRates.put(currency, rate);
-            expense.setRate(rate);
+        } else {
+            String oldCurrency = expense.getCurrency();
+
+            BigDecimal amountInSgd;
+
+            if (!(oldCurrency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS))) {
+                amountInSgd = convertToSgd(expense);
+            } else {
+                amountInSgd = amount;
+            }
+
+            if (currency.equalsIgnoreCase(Configurations.CURRENCY_MANAGER_CURRENCY_CODE_SINGAPORE_DOLLARS)) {
+                return amountInSgd;
+            }
+
+            BigDecimal newRate = getRate(currency);
+
+            amountInNewCurrency = amountInSgd.multiply(newRate);
         }
+
         return amountInNewCurrency;
     }
 
-    public void changeCurrency(Expense expense, String currency, BigDecimal rate) {
+    public void changeCurrency(Expense expense, String currency, BigDecimal rate) throws CurrencyInvalidException {
         BigDecimal newAmount = exchangeCurrency(expense, currency, rate);
         BigDecimal newAmountRounded = newAmount.setScale(
                 Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
                 RoundingMode.HALF_UP
         );
-        expense.setAmount(newAmountRounded);
+        BigDecimal newAmountStrippedTrailingZeros = newAmountRounded.stripTrailingZeros();
+        expense.setAmount(newAmountStrippedTrailingZeros);
         expense.setCurrency(currency);
     }
 }
