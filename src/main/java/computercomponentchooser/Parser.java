@@ -38,7 +38,7 @@ public class Parser {
      * @param mode The desired position of the input to be retrieved.
      * @return The desired text at the desired position.
      */
-    private static String getParameter(String line, int mode) {
+    private static String getParameter(String line, int mode) throws ArrayIndexOutOfBoundsException {
         String[] lineSplit = line.split("/", 2);
         assert mode >= 0 && mode < 2;
         return lineSplit[mode];
@@ -126,6 +126,10 @@ public class Parser {
         } catch (NumberFormatException e) {
             Ui.printLine();
             System.out.println("Please enter a valid number.");
+            Ui.printLine();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printLine();
+            System.out.println("Please enter commands with the correct number of parameters");
             Ui.printLine();
         }
     }
