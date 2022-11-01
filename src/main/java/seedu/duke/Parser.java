@@ -28,6 +28,7 @@ public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static Command parse(String input) {
+        input = input.trim();
         String userCommand = getUserCommand(input);
         LOGGER.info("command: " + userCommand);
         String arguments = getArgumentSubString(input, userCommand);

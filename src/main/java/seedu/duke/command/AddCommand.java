@@ -204,10 +204,10 @@ public class AddCommand extends Command {
 
 
     private void addFood(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length < 3 || argumentList.length > 4) {
+            throw new IllegalValueException(INVALID_FOOD_INPUT);
+        }
         try {
-            if (argumentList.length < 3) {
-                throw new IllegalValueException(INVALID_FOOD_INPUT);
-            }
             LocalDate date;
             if (argumentList.length == 4) {
                 date = Parser.parseDate(argumentList[3], 0);
@@ -268,6 +268,9 @@ public class AddCommand extends Command {
         int calories = Integer.parseInt(input);
         if (calories <= 0) {
             throw new IllegalValueException("Calories inputs need to be positive integer values!");
+        }
+        if (calories > 10000) {
+            throw new IllegalValueException("It is impossible to have consumed more than 10000 kcal in a day!");
         }
         return calories;
     }

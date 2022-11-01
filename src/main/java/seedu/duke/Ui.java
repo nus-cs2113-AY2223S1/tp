@@ -95,7 +95,7 @@ public class Ui {
                                  ArrayList<Food> foodArrayList,
                                  ArrayList<Exercise> exerciseArrayList) {
 
-        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 8, 8, 10, 10, 4, 4, 4, 15};
+        Integer[] columnSpacingArraySubHeader = { 10, 6, 14, 12, 8, 10, 10, 4, 4, 4, 15};
         getAllRecordsColumnsSpacing(weightAndFatArrayList,
                 foodArrayList, exerciseArrayList, columnSpacingArraySubHeader);
 
@@ -269,17 +269,19 @@ public class Ui {
                 printInSameLine(date, weight, fat);
             }
             if (recordArrayList.get(i) instanceof Food) {
-                String date = addRightPadding(recordArrayList.get(i).getDate(),
-                        header.substring(0, header.indexOf("| Description")).length() - 1) + " | ";
+                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+                String extraPadding = addRightPadding("", header.substring(
+                        0, header.indexOf("| Description")).length() - date.length() - 1) + " | ";
                 Food food = (Food) recordArrayList.get(i);
                 String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[3]) + " | ";
                 String calories = addRightPadding(Integer.toString(food.getCalories()),
                         columnSpacingArray[4]) + " | ";
-                printInSameLine(date, foodName, calories);
+                printInSameLine(date, extraPadding, foodName, calories);
             }
             if (recordArrayList.get(i) instanceof Exercise) {
-                String date = addRightPadding(recordArrayList.get(i).getDate(),
-                        header.substring(0, header.indexOf("| Exercise")).length() - 1) + " | ";
+                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+                String extraPadding = addRightPadding("", header.substring(
+                        0, header.indexOf("| Exercise")).length() - date.length() - 1) + " | ";
                 Exercise exercise = (Exercise) recordArrayList.get(i);
                 String exerciseName = addRightPadding(exercise.getExerciseName(), columnSpacingArray[5]) + " | ";
 
@@ -291,7 +293,7 @@ public class Ui {
                 String distance = getDistanceForPrint(exercise, columnSpacingArray[9]) + " | ";
                 String calories = getCaloriesForPrint(exercise, columnSpacingArray[10]) + " | ";
                 String status = exercise.getTaskStatus();
-                printInSameLine(date, exerciseName, weight, sets, repetitions, distance, calories, status);
+                printInSameLine(date, extraPadding,exerciseName, weight, sets, repetitions, distance, calories, status);
             }
         }
     }
@@ -393,10 +395,5 @@ public class Ui {
     private static String addRightPadding(String string, int numberOfSpace) {
         return String.format("%-" + numberOfSpace + "s", string);
     }
-
-    private static String addLeftPadding(String string, int numberOfSpace) {
-        return String.format("%" + numberOfSpace + "s", string);
-    }
-
 
 }
