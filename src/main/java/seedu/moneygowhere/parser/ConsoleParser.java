@@ -2917,7 +2917,7 @@ public class ConsoleParser {
         );
 
         if (mergeFilePathString != null) {
-            if (mergeFilePathString.split(" ").length != 1) {
+            if (!mergeFilePathString.contains(".xml")) {
                 throw new ConsoleParserCommandMergeExternalFileInvalidException();
             }
         }
