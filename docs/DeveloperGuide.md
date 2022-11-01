@@ -25,28 +25,29 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Logger Component](#logger-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
-  * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
-  * [Viewing an expense: `View-Expense`](#viewing-an-expense-view-expense)
-  * [Deleting an expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
-  * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
-  * [Sorting expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
+  * [Saving Data to File](#saving-data-to-file)
+  * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
+  * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
+  * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
+  * [Editing an Expense: `Edit-Expense`](#editing-an-expense-edit-expense)
+  * [Sorting Expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
   * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
-  * [Printing a recurring payment](#printing-a-recurring-payment)
-  * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
-  * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
-  * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
-  * [Editing a recurring payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
-  * [Adding an expense from a recurring payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
-  * [Printing an income](#printing-an-income)
-  * [Adding an income: `Add-Income`](#adding-an-income-add-income)
-  * [Viewing an income: `View-Income`](#viewing-an-income-view-income)
-  * [Deleting an income: `Delete-Income`](#deleting-an-income-delete-income)
-  * [Editing an income: `Edit-Income`](#editing-an-income-edit-income)
-  * [Printing a target](#printing-a-target)
-  * [Adding a target: `Add-Target`](#adding-a-target-add-target)
-  * [Viewing a target: `View-Target`](#viewing-a-target-view-target)
-  * [Deleting a target: `Delete-Target`](#deleting-a-target-delete-target)
-  * [Editing a target: `Edit-Target`](#editing-a-target-edit-target)
+  * [Printing a Recurring Payment](#printing-a-recurring-payment)
+  * [Adding a Recurring Payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
+  * [Viewing a Recurring Payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
+  * [Deleting a Recurring Payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
+  * [Editing a Recurring Payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
+  * [Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+  * [Printing an Income](#printing-an-income)
+  * [Adding an Income: `Add-Income`](#adding-an-income-add-income)
+  * [Viewing an Income: `View-Income`](#viewing-an-income-view-income)
+  * [Deleting an Income: `Delete-Income`](#deleting-an-income-delete-income)
+  * [Editing an Income: `Edit-Income`](#editing-an-income-edit-income)
+  * [Printing a Target](#printing-a-target)
+  * [Adding a Target: `Add-Target`](#adding-a-target-add-target)
+  * [Viewing a Target: `View-Target`](#viewing-a-target-view-target)
+  * [Deleting a Target: `Delete-Target`](#deleting-a-target-delete-target)
+  * [Editing a Target: `Edit-Target`](#editing-a-target-edit-target)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -241,136 +242,136 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
 The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
 
 ## Implementation
-### Printing an expense
+### Printing an Expense
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintExpense.puml)
 
-### Saving data to file
+### Saving Data to File
 
 ![Implementation-SD-Save-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDSaveData.puml)
 
-### Adding an expense: `Add-Expense`
+### Adding an Expense: `Add-Expense`
 
 The `Add-Expense` command adds a new expense to the program.
 
 ![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddExpense.puml)
 
-### Viewing an expense: `View-Expense`
+### Viewing an Expense: `View-Expense`
 
 The `View-Expense` command displays existing expenses in the program.
 
 ![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewExpense.puml)
 
-### Deleting an expense: `Delete-Expense`
+### Deleting an Expense: `Delete-Expense`
 
 The `Delete-Expense` command removes an existing expense from the program.
 
 ![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
 
-### Editing an expense: `Edit-Expense`
+### Editing an Expense: `Edit-Expense`
 
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
-### Sorting expenses: `Sort-Expense`
+### Sorting Expenses: `Sort-Expense`
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
 ![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSortExpense.puml)
 
-### Converting currencies: `Convert-Currency`
+### Converting Currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
 ![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationConvertCurrency.puml)
 
-### Printing a recurring payment
+### Printing a Recurring Payment
 
 ![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintRecurringPayment.puml)
 
-### Adding a recurring payment: `Add-RecurringPayment`
+### Adding a Recurring Payment: `Add-RecurringPayment`
 
 The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
 
-### Viewing a recurring payment: `View-RecurringPayment`
+### Viewing a Recurring Payment: `View-RecurringPayment`
 
 The `View-RecurringPayment` command displays existing recurring payments in the program.
 
 ![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
 
-### Deleting a recurring payment: `Delete-RecurringPayment`
+### Deleting a Recurring Payment: `Delete-RecurringPayment`
 
 The `Delete-RecurringPayment` command removes an existing recurring payment from the program.
 
 ![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
 
-### Editing a recurring payment: `Edit-RecurringPayment`
+### Editing a Recurring Payment: `Edit-RecurringPayment`
 
 The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
-### Adding an expense from a recurring payment: `Pay-RecurringPayment`
+### Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`
 
 The `Pay-RecurringPayment` command adds a new expense based on an existing recurring payment.
 This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
-### Printing an income
+### Printing an Income
 
 ![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintIncome.puml)
 
-### Adding an income: `Add-Income`
+### Adding an Income: `Add-Income`
 
 The `Add-Income` command adds a new income to the program.
 
 ![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddIncome.puml)
 
-### Viewing an income: `View-Income`
+### Viewing an Income: `View-Income`
 
 The `View-Income` command displays existing incomes in the program.
 
 ![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewIncome.puml)
 
-### Deleting an income: `Delete-Income`
+### Deleting an Income: `Delete-Income`
 
 The `Delete-Income` command removes an existing income from the program.
 
 ![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteIncome.puml)
 
-### Editing an income: `Edit-Income`
+### Editing an Income: `Edit-Income`
 
 The `Edit-Income` command changes the attributes of an existing income in the program.
 
 ![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditIncome.puml)
 
-### Printing a target
+### Printing a Target
 
 ![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintTarget.puml)
 
-### Adding a target: `Add-Target`
+### Adding a Target: `Add-Target`
 
 The `Add-Target` command adds a new target to the program.
 
 ![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddTarget.puml)
 
-### Viewing a target: `View-Target`
+### Viewing a Target: `View-Target`
 
 The `View-Target` command displays existing targets in the program.
 
 ![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewTarget.puml)
 
-### Deleting a target: `Delete-Target`
+### Deleting a Target: `Delete-Target`
 
 The `Delete-Target` command removes an existing target from the program.
 
 ![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteTarget.puml)
 
-### Editing a target: `Edit-Target`
+### Editing a Target: `Edit-Target`
 
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
