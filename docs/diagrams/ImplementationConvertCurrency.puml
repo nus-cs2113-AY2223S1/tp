@@ -41,17 +41,14 @@ opt consoleCommand instanceof ConsoleCommandConvertCurrency
 
     ref over consoleInterface: Print Expense
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
-    activate expenseManager DATA_COLOR_1
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
+    activate consoleInterface USER_INTERFACE_COLOR_1
 
-    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expense>\n)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : saveToFile()
     activate LocalStorage STORAGE_COLOR_1
 
-    LocalStorage --[STORAGE_COLOR_1]> expenseManager
+    LocalStorage --[STORAGE_COLOR_1]> consoleInterface
     deactivate LocalStorage
-
-    expenseManager --[DATA_COLOR_1]> consoleInterface
-    deactivate expenseManager
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface

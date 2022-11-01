@@ -4,31 +4,22 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "targetManager:TargetManager" as targetManager DATA_COLOR_4
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-opt consoleCommand instanceof ConsoleCommandSortExpense
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandSortExpense(\n\tconsoleCommand:ConsoleCommandSortExpense\n)
+opt consoleCommand instanceof ConsoleCommandDeleteTarget
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandDeleteTarget(\n\tconsoleCommand:ConsoleCommandDeleteTarget\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : updateSortExpenses()
-    activate expenseManager DATA_COLOR_1
+    consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : deleteTarget(targetIndex:int)
+    activate targetManager DATA_COLOR_4
 
-    expenseManager -[DATA_COLOR_1]> expenseManager : sortExpenses()
-    activate expenseManager DATA_COLOR_1
+    targetManager --[DATA_COLOR_4]> consoleInterface
+    deactivate targetManager
 
-    expenseManager -[DATA_COLOR_1]> expenseManager : getComparator()
-
-    expenseManager --[DATA_COLOR_1]> expenseManager :
-    deactivate expenseManager
-
-    expenseManager --[DATA_COLOR_1]> consoleInterface
-
-    deactivate expenseManager
-
-    ref over consoleInterface: Print Success Message
+    ref over consoleInterface: Print Target
 
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
     activate consoleInterface USER_INTERFACE_COLOR_1

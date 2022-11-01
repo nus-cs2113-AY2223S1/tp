@@ -4,31 +4,31 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "target:Target" as target DATA_COLOR_4
+Participant "targetManager:targetManager" as targetManager DATA_COLOR_4
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-opt consoleCommand instanceof ConsoleCommandSortExpense
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandSortExpense(\n\tconsoleCommand:ConsoleCommandSortExpense\n)
+opt consoleCommand instanceof ConsoleCommandAddTarget
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandAddTarget(\n\tconsoleCommand:ConsoleCommandAddTarget\n)
     activate consoleInterface USER_INTERFACE_COLOR_1
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : updateSortExpenses()
-    activate expenseManager DATA_COLOR_1
+    create target
 
-    expenseManager -[DATA_COLOR_1]> expenseManager : sortExpenses()
-    activate expenseManager DATA_COLOR_1
+    consoleInterface -[USER_INTERFACE_COLOR_1]> target
+    activate target DATA_COLOR_4
 
-    expenseManager -[DATA_COLOR_1]> expenseManager : getComparator()
+    target --[DATA_COLOR_4]> consoleInterface
+    deactivate target
 
-    expenseManager --[DATA_COLOR_1]> expenseManager :
-    deactivate expenseManager
+    consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : addTarget(target:Target)
+    activate targetManager DATA_COLOR_4
 
-    expenseManager --[DATA_COLOR_1]> consoleInterface
+    targetManager --[DATA_COLOR_4]> consoleInterface
+    deactivate targetManager
 
-    deactivate expenseManager
-
-    ref over consoleInterface: Print Success Message
+    ref over consoleInterface: Print Target
 
     consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
     activate consoleInterface USER_INTERFACE_COLOR_1
