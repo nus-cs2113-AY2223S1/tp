@@ -29,8 +29,9 @@ public class UserModuleMapping {
         } catch (InvalidUniversityException | InvalidModuleException e) {
             Ui.printExceptionMessage(e);
         }
-        this.comment = "default";
+        this.comment = "";
     }
+
 
     public String getNusCode() {
         return nusModule.getCode();
@@ -86,6 +87,10 @@ public class UserModuleMapping {
 
     public void setPuTitle(String puTitle) {
         puModule.setTitle(puTitle);
+    }
+
+    public void setDefaultComment() {
+        this.comment = "";
     }
 
     @Override

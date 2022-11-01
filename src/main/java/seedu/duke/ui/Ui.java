@@ -149,7 +149,12 @@ public class Ui {
         assert module.getNusCredit().length() > 0 : "NUS module credits length cannot be empty";
         String message = "NUS: " + module.getNusCode() + " " + module.getNusTitle() + " | Partner University: "
                 + module.getPuName() + " " + module.getPuCode() + " " + module.getPuTitle()
-                + " | Equivalent NUS Credits: " + module.getNusCredit() + " MCs";
+                + " | " + "Equivalent NUS Credits: " + module.getNusCredit() + " MCs";
+        if (module.getComment() != null && module.getComment() != "") {
+            message += "\n";
+            message += "Note: ";
+            message += module.getComment();
+        }
         return message;
     }
 
@@ -172,8 +177,8 @@ public class Ui {
      * @return Formatted string for the module updated.
      */
     public static String printModuleUpdatedAcknowledgement(UserModuleMapping module) {
-        String message = LINE + "Success! You updated:\n" + printModule(module) + "\n" + "With the following comment: "
-                + module.getComment() + "\n" + LINE;
+        String message = LINE + "Success! You updated:\n" + printModule(module) + "\n" + LINE;
+        System.out.println(message);
         return message;
     }
 
