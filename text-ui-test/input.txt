@@ -5,6 +5,10 @@ help o/detailed blablabla
 help /
 help o/
 help o/detailed o/detailed
+help q/
+help q/BYE
+help q/BYE o/detailed
+help q/BYE q/ADD
 budget
 budget /
 budget b/
