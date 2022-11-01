@@ -1,0 +1,42 @@
+@startuml
+
+Abstract Class Command {
+    {static} commandType : String
+    {static} String : getCommandType()
+    {static} Boolean : isExit()
+}
+
+Class CommandResult {
+    {static} message : String
+}
+
+Class AddCommand {
+    addedRecipe : recipe
+}
+
+Class DeleteCommand {
+    index : integer
+}
+
+Class ViewCommand {
+    index : integer
+}
+
+Command -> CommandResult : > execute
+
+InvalidCommand -> Command
+Command <-- AddCommand
+Command <-- DeleteCommand
+Command <--- ListCommand
+Command <--- ViewCommand
+AddCommand ...> RecipeList : > add to
+AddCommand ..> Storage : > write
+DeleteCommand ...> RecipeList : > delete from
+DeleteCommand ..> Storage : > write
+
+
+ListCommand ..> RecipeList : > read
+ViewCommand ..> RecipeList : > read
+
+
+@enduml
