@@ -96,6 +96,12 @@ public class Storage {
         Map<String, Build> builds = buildManager.getBuilds();
         for (String build : builds.keySet()) {
             fileWriter.write(build + "\n");
+            COMPONENT_FILE_PATH = FILE_DIRECTORY + "/" + build + ".txt";
+            Path componentFile = Paths.get(COMPONENT_FILE_PATH);
+            if (!Files.exists(componentFile)) {
+                Files.createFile(componentFile);
+            }
+
         }
         fileWriter.close();
     }
