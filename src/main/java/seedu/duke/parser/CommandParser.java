@@ -4,6 +4,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CreateCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.DeleteCommand;
+
+import java.util.Arrays;
+
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.CommandType;
 import seedu.duke.command.FavouriteCommand;
@@ -11,6 +14,7 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.command.Database;
+import seedu.duke.exceptions.InvalidCommentException;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.ModuleNotFoundException;
@@ -61,7 +65,7 @@ public class CommandParser {
      * @throws InvalidUserCommandException if the user command does not follow the command format laid out
      */
     public static Command getUserCommand(String userInput) throws InvalidUserCommandException,
-            ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException {
+            ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException, InvalidCommentException {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
             throw new InvalidUserCommandException("Error! Missing command. "
@@ -95,8 +99,10 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid add command. "
                         + "Please follow the command format provided");
             }
+            String comment = parseComment(userInputTokenized);
             Lesson lessonToAdd = parseLesson(userInputTokenized);
-            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd);
+            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd, comment);
+
             return newAddCommand;
         case "/view":
             if (!isValidViewCommand(userInputTokenized)) {
@@ -160,7 +166,48 @@ public class CommandParser {
             return new Lesson(puModule.getCode(), puModule.getTitle(), puModule.getCredit(), puModule.getUniversity(),
                     day, startTime, endTime);
         }
+    }
 
+    private static String parseComment(String[] parameters) throws InvalidCommentException {
+        // no comment
+        if (parameters.length <= COMMENT_INDEX) {
+            return "";
+        }
+        
+        String[] commentArray = Arrays.copyOfRange(parameters, COMMENT_INDEX, parameters.length);
+        String comment = String.join(" ", commentArray);
+
+        int commentStartIndex = comment.indexOf("{");
+        int commentEndIndex = comment.indexOf("}");
+
+        if (isValidComment(commentStartIndex, commentEndIndex) && !isEmptyComment(commentStartIndex, commentEndIndex)) {
+            return comment.substring(commentStartIndex + 1, commentEndIndex);
+        }
+
+        throw new InvalidCommentException("Error! The comment " + comment + " is invalid!");
+    }
+
+    private static boolean isValidComment(int commentStartIndex, int commentEndIndex) {
+        if (commentStartIndex == -1) {
+            return false;
+        }
+
+        if (commentEndIndex == -1) {
+            return false;
+        }
+
+        if (commentStartIndex >= commentEndIndex) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean isEmptyComment(int commentStartIndex, int commentEndIndex) {
+        if (commentStartIndex == commentEndIndex - 1) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -330,7 +377,7 @@ public class CommandParser {
     }
 
     private static boolean isValidAddCommentOnModules(String [] parameters) {
-        return parameters.length == FOUR_PARAMETERS_LENGTH
+        return parameters.length >= FOUR_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
                 && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
