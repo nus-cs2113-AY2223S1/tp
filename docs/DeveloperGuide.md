@@ -456,7 +456,12 @@ For example, if 'list' is called, all transactions that are present in Moolah Ma
 Adding tags such as type, category and date will list all transactions to that category
 
 The structure of the application focusing on the list command is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ListCommandSequenceDiagram.png)
+
+<p align="center">
+    <img src="images/ListCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.5: Sequence Diagram for List Command</i>
+</p>
 
 In a command like `list c/transport`
 
@@ -483,7 +488,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.5: Sequence Diagram for Find Command</i>
+    <i>Figure 3.6: Sequence Diagram for Find Command</i>
 </p>
 
 **Step 1.** The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
@@ -516,7 +521,50 @@ _Written by: Chua Han Yong Darren_
 
 ### Bye Command
 
-{Describe the implementation for the Bye Command}
+The `ByeCommand` inherits properties from the abstract `Command'` class. The inheritance of `Command` from `ByeCommand` is
+shown below.
+
+<p align="center">
+    <img src="images/ByeCommandClassDiagram.png">
+    <br />
+    <i>Figure 3.7: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+</p>
+
+The full command for `bye` is `bye`.
+For example, if 'bye' is called, the program prints the exit message and terminates the program.
+
+This is how the command works:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
+4. Within `setCommand()`, there is no parameters required to be set for `bye`.
+
+5. The bye command is undergoing execution in `command.execute()` which will call functions within the ByeCommand Class.
+   1. It calls `ui.showInfoMessage()` which prints the exit message.
+   2. `isExit()` is set as true.
+   
+6. Within `run()` in Duke, the loop is exited and the program ends.
+
+The sequence diagram below shows the interactions of a successful execution of the `ByeCommand`.
+
+<p align="center">
+    <img src="images/ByeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.8: Sequence Diagram for Delete Command</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
@@ -528,7 +576,7 @@ shown below.
 <p align="center">
     <img src="images/DeleteCommandClassDiagram.png">
     <br />
-    <i>Figure 3.6: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+    <i>Figure 3.9: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
 </p>
 
 The full command for `delete` is `delete [e/ENTRY]`.
@@ -577,7 +625,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/DeleteCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.7: Sequence Diagram for Delete Command</i>
+    <i>Figure 3.10: Sequence Diagram for Delete Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -590,7 +638,7 @@ shown below.
 <p align="center">
     <img src="images/PurgeCommandClassDiagram.png">
     <br />
-    <i>Figure 3.8: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
+    <i>Figure 3.11: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
 </p>
 
 The full command for `purge` is `purge`.
@@ -635,7 +683,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/PurgeCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.9: Sequence Diagram for Purge Command</i>
+    <i>Figure 3.12: Sequence Diagram for Purge Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
