@@ -2,11 +2,11 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.AddModuleCommand;
-import seedu.duke.command.DeleteModuleCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.GetModuleCommand;
+import seedu.duke.command.RemoveModuleCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.InfoCommand;
 import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ViewTimetableCommand;
+import seedu.duke.command.TimetableCommand;
 import seedu.duke.command.SelectSlotCommand;
 import seedu.duke.command.SelectSemesterCommand;
 import seedu.duke.command.SearchModuleCommand;
@@ -14,8 +14,11 @@ import seedu.duke.command.ImportCommand;
 import seedu.duke.command.ExportCommand;
 import seedu.duke.exceptions.YamomException;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
@@ -29,7 +32,7 @@ public class ParserTest {
 
     @Test
     public void parse_getInput_returnNewGetCommand() throws YamomException {
-        assertTrue(Parser.parse("get cs2113") instanceof GetModuleCommand);
+        assertTrue(Parser.parse("info cs2113") instanceof InfoCommand);
     }
 
     @Test
@@ -39,14 +42,14 @@ public class ParserTest {
 
     @Test
     public void parse_deleteInput_returnNewDeleteCommand() throws YamomException {
-        assertTrue(Parser.parse("delete cs2113") instanceof DeleteModuleCommand);
+        assertTrue(Parser.parse("remove cs2113") instanceof RemoveModuleCommand);
     }
 
     @Test
-    public void parse_viewInput_returnNewViewCommand() throws Exception {
-        assertTrue(Parser.parse("view") instanceof ViewTimetableCommand);
-        assertTrue(Parser.parse("view /simple") instanceof ViewTimetableCommand);
-        assertTrue(Parser.parse("view /fancy") instanceof ViewTimetableCommand);
+    public void parse_viewInput_returnNewTimetableCommand() throws Exception {
+        assertTrue(Parser.parse("timetable") instanceof TimetableCommand);
+        assertTrue(Parser.parse("timetable /simple") instanceof TimetableCommand);
+        assertTrue(Parser.parse("timetable /fancy") instanceof TimetableCommand);
     }
 
     @Test
@@ -61,7 +64,7 @@ public class ParserTest {
 
     @Test
     public void parse_exitInput_returnNewExitCommand() throws YamomException {
-        assertTrue(Parser.parse("bye") instanceof ExitCommand);
+        assertTrue(Parser.parse("bye") instanceof ByeCommand);
     }
 
     @Test
@@ -91,28 +94,36 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_incorrectSingleWordInput_throwYamomException() {
+    public void singleWordCommandError_incorrectSingleWordInput_throwYamomException() {
         String expectedErrorMessage = "Error! \t0 arguments expected";
-        YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("help me"));
+        YamomException exception = assertThrows(YamomException.class,
+            () -> Parser.singleWordCommandError("help me".split("\\s+")));
         assertEquals(expectedErrorMessage, exception.getMessage());
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("bye bye"));
+        exception = assertThrows(YamomException.class,
+            () -> Parser.singleWordCommandError("bye bye".split("\\s+")));
         assertEquals(expectedErrorMessage, exception.getMessage());
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("export to nusmods"));
+        exception = assertThrows(YamomException.class,
+            () -> Parser.singleWordCommandError("export to nusmods".split("\\s+")));
         assertEquals(expectedErrorMessage, exception.getMessage());
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("list everything"));
+        exception = assertThrows(YamomException.class,
+            () -> Parser.singleWordCommandError("list everything".split("\\s+")));
         assertEquals(expectedErrorMessage, exception.getMessage());
     }
 
     @Test
-    public void parse_incorrectModuleRelatedInput_throwYamomException() {
-        YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("add"));
+    public void moduleRelatedCommandError_incorrectModuleRelatedInput_throwYamomException() {
+        YamomException exception = assertThrows(YamomException.class,
+            () -> Parser.moduleRelatedCommandError("add".split("\\s+"),
+            "Wrong format, should be: add [MODULE_CODE]"));
         assertEquals("Error! \tWrong format, should be: add [MODULE_CODE]" + System.lineSeparator()
                 + "Your command is incomplete.", exception.getMessage());
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("delete me"));
+        exception = assertThrows(YamomException.class,
+            () -> Parser.moduleRelatedCommandError("delete cs1".split("\\s+"),
+            "Wrong format, should be: delete [MODULE_CODE]"));
         assertEquals("Error! \tWrong format, should be: delete [MODULE_CODE]" + System.lineSeparator()
                 + "Module is invalid! Please enter a valid module code." + System.lineSeparator()
                 + "Each module of study has a unique module code consisting of a two- " + System.lineSeparator()
@@ -121,29 +132,44 @@ public class ParserTest {
                 + System.lineSeparator() + "(e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).",
                 exception.getMessage());
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("add me in"));
+        exception = assertThrows(YamomException.class,
+            () -> Parser.moduleRelatedCommandError("add me in".split("\\s+"),
+            "Wrong format, should be: add [MODULE_CODE]"));
         assertEquals("Error! \tWrong format, should be: add [MODULE_CODE]" + System.lineSeparator()
                 + "Unknown command, try again.", exception.getMessage());
     }
 
     @Test
-    public void parse_incorrectSelectSemesterInput_throwYamomException() {
-        String expectedErrorMessage = "Error! \tWrong format, should be: semester [SEMESTER_SELECTED]"
-                + System.lineSeparator() + "Not a valid semester.";
-        YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("semester 5"));
-        assertEquals(expectedErrorMessage, exception.getMessage());
-
-        exception = assertThrows(YamomException.class, () -> Parser.parse("semester special term 3"));
-        assertEquals(expectedErrorMessage, exception.getMessage());
+    public void semesterParser_incorrectSelectSemesterInput_correctReturnValue() {
+        assertFalse(Parser.isValidSemester(new String[]{"semester", "5"}));
+        assertFalse(Parser.isValidSpecialTerm(new String[]{"semester", "5"}));
+        assertFalse(Parser.isValidSemester("semester special term 3".split(" ")));
+        assertFalse(Parser.isValidSpecialTerm("semester special term 3".split(" ")));
     }
 
     @Test
-    public void parse_incorrectViewTimetableInput_throwYamomException() {
-        String expectedErrorMessage = "Error! \tUnknown command. Maybe you meant \"view\".";
-        YamomException exception = assertThrows(YamomException.class, () -> Parser.parse("view timetable"));
-        assertEquals(expectedErrorMessage, exception.getMessage());
+    public void semesterParser_correctSelectSemesterInput_correctReturnValue() {
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "1"}));
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "2"}));
+        assertTrue(Parser.isValidSemester(new String[]{"semester", "3"}));
+        assertTrue(Parser.isValidSpecialTerm("semester special term 1".split(" ")));
+        assertTrue(Parser.isValidSpecialTerm("semester st1".split(" ")));
+        assertTrue(Parser.isValidSpecialTerm("semester st2".split(" ")));
+    }
 
-        exception = assertThrows(YamomException.class, () -> Parser.parse("view fancy"));
-        assertEquals("Error! \tUnknown command. Maybe you forgot a \"/\".", exception.getMessage());
+    @Test
+    public void parseParams_inputContainingBackslash_returnMap() {
+        Map<String, String> actualMap = Parser.parseParams("test /key1 value1 /key2 value2");
+        assertEquals(2, actualMap.size());
+        assertTrue(actualMap.containsKey("key1"));
+        assertTrue(actualMap.get("key1").equals("value1"));
+        assertTrue(actualMap.containsKey("key2"));
+        assertTrue(actualMap.get("key2").equals("value2"));
+    }
+
+    @Test
+    public void parseParams_inputContainingNoBackslash_returnMap() {
+        Map<String, String> actualMap = Parser.parseParams("test ");
+        assertTrue(actualMap.isEmpty());
     }
 }

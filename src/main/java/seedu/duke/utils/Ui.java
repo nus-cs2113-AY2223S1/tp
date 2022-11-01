@@ -1,10 +1,12 @@
 package seedu.duke.utils;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
+
+import seedu.duke.command.ByeCommand;
 
 //@author CheahHaoYi-reused
 //Reused from CheahHaoYi/ip Ui class with slight modification
@@ -16,18 +18,18 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Ui {
 
-    private static final String LOGO = "                      " + System.lineSeparator()
-            + "__ __ _____ _____ _____ _____" + System.lineSeparator()
-            + "|  |  |  _  |     |     |     |" + System.lineSeparator()
-            + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
-            + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
+    public static final String LOGO = "                      " + System.lineSeparator()
+        + "__ __ _____ _____ _____ _____" + System.lineSeparator()
+        + "|  |  |  _  |     |     |     |" + System.lineSeparator()
+        + "|_   _|     | | | |  |  | | | |" + System.lineSeparator()
+        + "  |_| |__|__|_|_|_|_____|_|_|_|" + System.lineSeparator();
 
-
-    private static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
-            + LOGO + System.lineSeparator() + "How can I help you today?"
-            + System.lineSeparator() + "Enter \"help\" to get started!";
-    private static final String MESSAGE_BYE = "Bye bye, See you again";
-    private static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
+    public static final String MESSAGE_GREET = "Hello from" + System.lineSeparator()
+        + LOGO + System.lineSeparator() + "How can I help you today?"
+        + System.lineSeparator() + "Enter \"help\" to get started!";
+    public static final String MESSAGE_BYE = "Bye bye, See you again";
+    public static final String LINE_DIVIDER = StringUtils.repeat("-", 80);
+    public static final String INDENT = StringUtils.repeat(" ", 6);
 
     private ArrayList<String> uiBuffer;
     private Scanner scanner;
@@ -42,8 +44,20 @@ public class Ui {
         scanner.close();
     }
 
+    public void clearUiBuffer() {
+        uiBuffer.clear();
+    }
+
+    private String sanitizeInput(String input) {
+        return input.replaceAll("[\\P{ASCII}]", "");
+    }
+
     public String readNext() {
-        return scanner.nextLine().trim();
+        try {
+            return sanitizeInput(scanner.nextLine().trim());
+        } catch (NoSuchElementException | IllegalStateException e) {
+            return ByeCommand.COMMAND_WORD;
+        }
     }
 
     /**
@@ -78,7 +92,7 @@ public class Ui {
      */
     public void addMessage(String message, boolean hasIndent) {
         if (hasIndent) {
-            uiBuffer.add("\t" + message);
+            uiBuffer.add(INDENT + message);
         } else {
             uiBuffer.add(message);
         }
@@ -130,7 +144,7 @@ public class Ui {
      */
     public void displayUserPrompt(int semester) {
         String promptFormat = "Sem " + "[" + currentUserSemester(semester)
-                + "]" + " >> ";
+            + "]" + " >> ";
         System.out.print(promptFormat);
     }
 

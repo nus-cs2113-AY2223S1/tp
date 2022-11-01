@@ -1,15 +1,38 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+hide footbox
 
-->Storage:openPreviousState()
+box Storage
+Participant ":Storage" as Storage order 2
+end box
+box Link
+Participant "<<class>>\nLink" as Link order 3
+end box
+box State
+Participant ":State" as State order 4
+end box
+box UI
+Participant ":UI" as UI order 5
+end box
+
+
+-> Storage:openPreviousState()
+activate Storage
 alt Has previous state
-    Storage -> Storage: loadPreviousState()
-    Storage -> Link: parseLink(link,state)
-    Link --> Storage: previousState
-    Storage -> State: previousState
-    Storage -> UI: Display success message
+    Storage -> Storage: get link from saved file
+
+    Storage -> Link ++ : parseLink()
+    Link --> Storage -- : previousState
+
+    Storage -> State ++ : previousState
+    Storage -> UI ++ : Display success message
+    UI --> Storage
+    deactivate UI
 else No previous state
-    Storage -> UI : Display error message
+    Storage -> UI ++ : Display error message
+    UI --> Storage
+    deactivate UI
 end
+deactivate Storage
 
 @enduml

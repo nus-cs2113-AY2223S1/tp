@@ -4,29 +4,36 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class Link {
-    - DOMAIN: String
-    - DELIMITER: String
-    - SEMESTER_DELIMITER: String
-    - SHARE_DELIMITER: String
-    - LESSON_TYPE_DELIMITER: String
-    - MODULE_CODE_DELIMITER: String
-    - POSSIBLE_SEMESTER_NUMBER: String
-    - SUPPOSED_PREFIX: String
-    - SUPPOSED_START_REGEX: String
-    - moduleDelimiter: String
-    - lessonDelimiter: String
-    - SEMESTER_PARAM_INDEX: int
-    - MODULES_PARAM_INDEX: int
+    <u>- DELIMITER: String
+    <u>- DELIMITER_REGEX: String
+    <u>- DOMAIN: String
+    <u>- LESSON_DELIMITER: String
+    <u>- LESSON_TYPE_DELIMITER: String
+    <u>- LINK_EXAMPLE: String
+    <u>- LINK_PROCESS_ERROR_MESSAGE: String
+    <u>- MODULE_DELIMITER: String
+    <u>- MODULE_CODE_DELIMITER: String
+    <u>- MODULES_PARAM_INDEX: int
+    <u>- SEMESTER_DELIMITER: String
+    <u>- SEMESTER_PARAM_INDEX: int
+    <u>- SEMESTER_PROCESS_ERROR_MESSAGE: String
+    <u>- SHARE_DELIMITER: String
+    <u>- SPECIAL_TERM_1_SEMESTER_DELIMITER: String
+    <u>- SPECIAL_TERM_2_SEMESTER_DELIMITER: String
+    <u>- SUPPOSED_PREFIX_REGEX: String
 
-    + parseLink(State, Ui): void
-    - getSemesterFromParam(String): int
-    - isValidPreviousState(String): boolean
-    - addLessons(String[], SelectedModule, int): void
-    - addValidLesson(SelectedModule, int, LessonType, String): void
-    - isLessonInfo(String): boolean
-    + getLessonType(String): LessonType
-    + getLink(State, Ui): String
-    - appendModules(List<SelectedModule>, StringBuilder): void
-    - appendLessons(Map<LessonType, String>, StringBuilder): void
+    <u>- addLessons(String[], SelectedModule, int, Ui): void
+    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui): void
+    <u>- appendModules(List<SelectedModule>, StringBuilder): void
+    <u>- appendSemester(State, StringBuilder): void
+    <u>+ getLessonType(String, Ui): LessonType
+    <u>+ getLink(State): String
+    <u>- getSemesterFromParam(String): int
+    <u>- isEmptyLink(String): boolean
+    <u>- isLessonInfo(String): boolean
+    <u>- isValidLink(String): boolean
+    <u>- isValidPreviousState(String): boolean
+    <u>- joinLessons(Map<LessonType, String>): String
+    <u>+ parseLink(String, State, Ui): void
 }
 @enduml

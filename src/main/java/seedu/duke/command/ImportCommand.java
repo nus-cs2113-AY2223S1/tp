@@ -12,18 +12,21 @@ import java.util.logging.Logger;
 
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
-    public static final String COMMAND_USAGE = "import [NUSMods_LINK]";
-    public static final String COMMAND_DESCRIPTION = "Imports a timetable "
-            + " from an NUSMod timetable sharing link";
+    public static final String COMMAND_USAGE = "import [ NUSMODS_LINK ]";
+    public static final String COMMAND_DESCRIPTION = 
+            "Imports a timetable from an NUSMod timetable sharing link.";
 
-    private static String nusModLink;
-
+    private String nusModLink;
 
     public ImportCommand(String[] input) throws YamomException {
         super(input);
 
         if (!Parser.isTwoWordsCommand(input)) {
-            throw new YamomException("No nusmod link given");
+            throw new YamomException("No NUSMod link given.");
+        } else if (!Link.isValidLink(input[1]) && !Link.isEmptyLink(input[1])) {
+            throw new YamomException("The link you supplied is not valid.");
+        } else if (Link.isEmptyLink(input[1])) {
+            throw new YamomException("You are trying to import an empty timetable.");
         }
         nusModLink = input[1];
     }
@@ -33,7 +36,7 @@ public class ImportCommand extends Command {
 
         Logger logger = Logger.getLogger("Importing from NUSMod");
         try {
-            Link.parseLink(nusModLink, state);
+            Link.parseLink(nusModLink, state, ui);
             ui.addMessage(getExecutionMessage());
         } catch (YamomException e) {
             ui.addMessage(e.getMessage());
@@ -50,13 +53,5 @@ public class ImportCommand extends Command {
     @Override
     public String getExecutionMessage() {
         return "Timetable imported to YAMOM!";
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }

@@ -12,54 +12,18 @@ import java.util.stream.Collectors;
  * Module properties are all "public final" as they are not meant to be freely accessed but not modified.
  * Based off https://github.com/nusmodifications/nusmods/blob/master/scrapers/nus-v2/src/types/modules.ts
  */
-public class Module {
-    /**
-     * Academic year e.g. "2022/2023".
-     */
+public class Module implements Comparable<Module> {
     public final String acadYear;
-    /**
-     * Module code.
-     */
     public final String moduleCode;
-    /**
-     * Module title.
-     */
     public final String title;
-    /**
-     * Module description.
-     */
     public final String description;
-    /**
-     * Number of modular credits for this module.
-     */
     public final int moduleCredit;
-    /**
-     * Department in charge of this module.
-     */
     public final String department;
-    /**
-     * Faculty in charge of this module.
-     */
     public final String faculty;
-    /**
-     * Workload represented as a list of 5 integers.
-     */
-    public final List<Integer> workload;
-    /**
-     * Data for each semester this module is offered in.
-     */
+    public final List<Integer> workload; // workload represented as a list of 5 integers.
     public final List<SemesterData> semesterData;
-    /**
-     * Prerequisite list for this module. May not be in a structured format.
-     */
     public final String prerequisite;
-    /**
-     * Corequisites for this module.
-     */
     public final String corequisite;
-    /**
-     * Preclusions for this module.
-     */
     public final String preclusion;
 
     /**
@@ -92,6 +56,7 @@ public class Module {
      * @return Module data for the module.
      */
     public static Module get(String moduleCode) {
+        moduleCode = moduleCode.toUpperCase();
         if (modulesByCode == null) {
             getAll();
         }
@@ -139,6 +104,23 @@ public class Module {
         this.preclusion = preclusion;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Module) {
+            Module module = (Module) other;
+            return this.moduleCode.equals(module.moduleCode);
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(Module other) {
+        return moduleCode.compareTo(other.moduleCode);
+    }
+
     /**
      * Gets the semester data for a particular semester.
      * @param semester An integer from 1 to 4 representing S1, S2, ST1 and ST2 respectively
@@ -153,18 +135,20 @@ public class Module {
         return null;
     }
 
-    public int getModuleLevel(Module module) {
-        String moduleCode = module.moduleCode;
-        int moduleLevel = (Integer.parseInt(moduleCode.replaceAll("[^0-9]", ""))) / 1000;
-        return moduleLevel;
+    public int getLevel() {
+        int level = moduleCode.replaceAll("[^0-9]", "").charAt(0) - '0';
+        return level;
     }
 
-    // get the semesters that the module is offered in
     public List<Integer> getSemestersOffering() {
         List<Integer> semestersOffering = this.semesterData
                 .stream()
                 .map(semesterData -> semesterData.semester)
                 .collect(Collectors.toList());
         return semestersOffering;
+    }
+
+    public boolean isOfferedInSemester(int semester) {
+        return getSemestersOffering().contains(semester);
     }
 }
