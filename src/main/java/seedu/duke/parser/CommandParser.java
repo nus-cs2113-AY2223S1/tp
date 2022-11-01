@@ -342,6 +342,9 @@ public class CommandParser {
      * @return User input with underscores removed.
      */
     private static String removeParameterUnderscores(String parameter) {
+        if (parameter.startsWith("_") || parameter.endsWith("_")) {
+            return "ERROR";
+        }
         return parameter.replace("_", " ");
     }
 
