@@ -218,25 +218,25 @@ public class Parser {
     }
 
     //@@author indraneelrp
-    public void executeAdd(String userInput) {
+    public void executeAdd(String userInput) throws IllegalArgumentException {
         String[] reviewFields = userInput.split("/");
         try {
             //checks the number of / instances to ensure that user does not add extra / which messes up parsing
             int slashInstances = userInput.length() - userInput.replace("/", "").length();
             if (userInput.contains(movieKeyword)) {
                 if (slashInstances != 4) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
                 addMedia(reviewFields, movieSpacing);
             } else if (userInput.contains(tvKeyword)) {
                 if (slashInstances != 5) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
                 addMedia(reviewFields, tvSpacing);
             } else {
-                throw new DukeException();
+                throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
             }
-        } catch (DukeException e) {
+        } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
             Ui.print("Ensure that input format and number of arguments is correct.");
         }
