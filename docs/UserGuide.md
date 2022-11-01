@@ -1,5 +1,34 @@
 # User Guide
 
+## Table of Contents
+* [Introduction](#introduction)
+* [Quick Start](#quick--start)
+* [Features](#features)
+    * [Main Mode](#main-mode)
+        * [Adding a build](#adding-a-build)
+        * [Deleting a build](#deleting-a-build)
+        * [Viewing a build](#viewing-a-build)
+        * [Listing all builds](#listing-all-builds)
+        * [Finding builds](#finding-builds)
+        * [Filtering builds](#filtering-builds)
+        * [Exporting builds](#exporting-builds)
+        * [Exporting builds as CSV](#exporting-builds-as-csv)
+    * [Edit Mode](#edit-mode)
+        * [Adding a component](#adding-a-component)
+        * [Deleting a component](#deleting-a-component)
+        * [Viewing a component](#viewing-a-component)
+        * [Listing all components](#listing-all-components)
+        * [Checking compatibility](#checking-compatibility)
+        * [Information about a build](#information-about-a-build)
+        * [Exporting a build](#exporting-a-build)
+        * [Exit edit mode](#exit-edit-mode)
+    * [Storage](#storage)
+    * [Export](#export)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+    * [Main Mode](#main-mode)
+    * [Edit Mode](#edit-mode)
+
 ## Introduction
 
 ComputerComponentChooser(CCC) is a Command Line Interface(CLI) 
@@ -43,7 +72,7 @@ You have added test build
 ____________________________________________________________
 ```
 
-### Editing a build: `edit`
+#### Editing a build: `edit`
 
 Enters edit mode for the specified build. The user only needs to specify the name of the
 build.
@@ -81,7 +110,7 @@ You have removed test build
 ____________________________________________________________
 ```
 
-### Viewing a build: `view`
+#### Viewing a build: `view`
 
 Views a build in the list of builds current managed by the program. The user only needs to specify the name of the
 build.
@@ -105,7 +134,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-### Listing all builds: `list`
+#### Listing all builds: `list`
 
 Lists all builds in the list of builds currently managed by the program.
 
@@ -123,7 +152,7 @@ Your current builds:
 ____________________________________________________________
 ```
 
-### Finding build(s): `find`
+#### Finding build(s): `find`
     
 List all builds that contain the keyword in their name.
 
@@ -141,7 +170,7 @@ test build
 ____________________________________________________________
 ```
 
-### Filtering build(s): `filter`
+#### Filtering build(s): `filter`
 
 List all builds that fit the specified requirements.
 Filter can filter builds that are compatible or has total cost/power within a specified range.
@@ -161,7 +190,7 @@ No builds that meet specifications found.
 ____________________________________________________________
 ```
 
-### Exporting build(s): `export`
+#### Exporting build(s): `export`
 
 Exports all builds to a text file.
 
@@ -178,7 +207,7 @@ Exporting builds...
 ____________________________________________________________
 ```
 
-### Exporting build(s) as a CSV : `exportCSV`
+#### Exporting build(s) as a CSV : `exportCSV`
 
 Exports all builds to a CSV file.
 
@@ -199,7 +228,7 @@ ____________________________________________________________
 
 Edit mode handles the management of the computer components of a build.
 
-### Adding a component: `add`
+#### Adding a component: `add`
 
 Adds a component to the list of components of a build.
 
@@ -219,7 +248,7 @@ You have added intel 10990x
 <--------------------------------------------------------->
 ```
 
-### Deleting a component: `delete`
+#### Deleting a component: `delete`
 
 Deletes a component from the list of components of a build.
 
@@ -237,7 +266,7 @@ You have removed intel 10990x
 <--------------------------------------------------------->
 ```
 
-### Viewing a component: `view`
+#### Viewing a component: `view`
 
 Views a component from the list of components of a build.
 
@@ -259,7 +288,7 @@ Clock: 3.8 GHz
 <--------------------------------------------------------->
 ```
 
-### Listing all components: `list`
+#### Listing all components: `list`
 
 Lists all components from the list of components of a build.
 
@@ -275,7 +304,7 @@ Computer parts for test build:
 <--------------------------------------------------------->
 ```
 
-### Checking compatibility: `check`
+#### Checking compatibility: `check`
 
 Checks if a build is compatible.
 
@@ -298,7 +327,7 @@ Form factor: false
 <--------------------------------------------------------->
 ```
 
-### Information about a build: `info`
+#### Information about a build: `info`
 
 Displays information about a build.
 
@@ -319,7 +348,7 @@ Compatibility: Not compatible
 <--------------------------------------------------------->
 ```
 
-### Exporting a build: `export`
+#### Exporting a build: `export`
 
 Exports a build to a text file.
 
@@ -336,7 +365,7 @@ Exporting build to text file...
 <--------------------------------------------------------->
 ```
 
-### Exiting edit mode: `back`
+#### Exiting edit mode: `back`
 
 Exits edit mode.
 
