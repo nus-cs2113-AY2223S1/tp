@@ -21,8 +21,17 @@ public class ViewUserCommand extends Command {
     private final TransactionList transactionList;
     private final ItemList itemList;
 
-    public ViewUserCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
-            throws InsufficientArgumentsException {
+    /**
+     * Constructor for ViewUserCommand.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
+    public ViewUserCommand(String[] parts, UserList userList, ItemList itemList,
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.itemList = itemList;
@@ -52,14 +61,26 @@ public class ViewUserCommand extends Command {
         }
     }
 
+    /**
+     * Executes ViewUserCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InsufficientArgumentsException If insufficent parts are given
+     * @throws UserNotFoundException If the user cannot be found in the list
+     */
     public boolean executeCommand()
             throws UserNotFoundException, InvalidArgumentException, InsufficientArgumentsException {
         String userName = getArgsViewUserCmd();
         if (isValidUser(userName)) {
             User user = this.userList.getUserById(userName);
-            ItemList userItems = new ViewUserItemsCommand(parts, userList, itemList, transactionList).getUserItems();
-            double totalLoss = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            double totalGain = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
+            ItemList userItems =
+                    new ViewUserItemsCommand(parts, userList, itemList, transactionList)
+                            .getUserItems();
+            double totalLoss =
+                    transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
+            double totalGain =
+                    transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
             Ui.viewUserMessage(user, userItems, transactionList, totalLoss, totalGain);
         }
         return false;

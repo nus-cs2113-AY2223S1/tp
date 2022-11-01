@@ -18,6 +18,14 @@ public class FindItemCommand extends Command {
     private final ItemList itemList;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for FindItemCommand.
+     *
+     * @param parts The parts from user input
+     * @param itemList The list of items to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public FindItemCommand(String[] parts, ItemList itemList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;

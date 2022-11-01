@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ItemStorageTest {
 
     @Test
-    void handleItemLine_givenItemLine_returnItemObject() throws InvalidCategoryException, StoreFailureException {
+    void handleItemLine_givenItemLine_returnItemObject()
+            throws InvalidCategoryException, StoreFailureException {
         Item item = new Item("pen", 2, 0.1, "bui");
         String itemLine = item.getItemId() + " | pen | 0.1 | bui | 2 | 115";
         String[] splitItemLine = itemLine.split(" \\| ");

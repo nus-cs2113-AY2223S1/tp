@@ -19,7 +19,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_STORAG
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 
-//@@author bdthanh
+// @@author bdthanh
 public class ItemStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private static final int ITEM_ID_INDEX = 0;
@@ -60,7 +60,8 @@ public class ItemStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -83,8 +84,7 @@ public class ItemStorage extends Storage {
 
     private void makeItemDir(ItemList itemList) throws StoreFailureException {
         int startIndex = itemFilePath.lastIndexOf("/");
-        String fileDirectory =
-                itemFilePath.replace(itemFilePath.substring(startIndex), "");
+        String fileDirectory = itemFilePath.replace(itemFilePath.substring(startIndex), "");
         File file = new File(fileDirectory);
         if (file.mkdir()) {
             writeData(itemList);
@@ -103,14 +103,16 @@ public class ItemStorage extends Storage {
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
      */
-    public static Item handleItemLine(String[] splitItemLine) throws InvalidCategoryException, StoreFailureException {
+    public static Item handleItemLine(String[] splitItemLine)
+            throws InvalidCategoryException, StoreFailureException {
         assert splitItemLine.length == 6 : "Invalid Transaction Line";
         try {
             Item item = getItemFromItemLine(splitItemLine);
             checkCheckSumLine(item, Integer.parseInt(splitItemLine[CHECKSUM_INDEX].trim()));
             return item;
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -123,19 +125,23 @@ public class ItemStorage extends Storage {
             int categoryNumber = Integer.parseInt(splitItemLine[CATEGORY_INDEX].trim());
             return new Item(itemId, itemName, categoryNumber, price, ownerId);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumLine(Item item, int checkSum) throws StoreFailureException {
         if (item.toString(new TransactionList()).length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
-    private static void checkCheckSumWhole(ArrayList<Item> itemList, int checkSum) throws StoreFailureException {
+    private static void checkCheckSumWhole(ArrayList<Item> itemList, int checkSum)
+            throws StoreFailureException {
         if (itemList.size() != checkSum) {
-            throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 }

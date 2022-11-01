@@ -16,8 +16,10 @@ class TransactionTest {
 
     @BeforeEach
     void initializeTest() {
-        transaction = new Transaction("pen", "28sd37h2", "bui", "jw", 5, LocalDate.parse("2022-10-03"), 3.2);
-        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", "jw", 5, LocalDate.parse("2022-10-05"), 3.2);
+        transaction = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
+                LocalDate.parse("2022-10-03"), 3.2);
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
+                LocalDate.parse("2022-10-05"), 3.2);
     }
 
     @Test
@@ -61,10 +63,9 @@ class TransactionTest {
 
     @Test
     void updateDurationTest() {
-        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", "jw", 300,
-                LocalDate.parse("2022-10-03"), 192);
-        assertEquals(newTransaction.toString(),
-                transaction.update(300, 192).toString());
+        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2",
+                "bui", "jw", 300, LocalDate.parse("2022-10-03"), 192);
+        assertEquals(newTransaction.toString(), transaction.update(300, 192).toString());
     }
 
     @Test

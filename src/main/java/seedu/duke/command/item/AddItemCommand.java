@@ -26,7 +26,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMA
 
 
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to add a new item.
@@ -49,14 +49,14 @@ public class AddItemCommand extends Command {
     /**
      * Constructor for AddItemCommand.
      *
-     * @param parts           The parts from user input
-     * @param userList        The list of users to work with
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public AddItemCommand(String[] parts, UserList userList, ItemList itemList,
-                          TransactionList transactionList) throws InsufficientArgumentsException {
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.itemList = itemList;
         this.userList = userList;
@@ -95,7 +95,7 @@ public class AddItemCommand extends Command {
      * Checks if an item name is valid or not.
      *
      * @param itemName The input item name
-     * @param price    price of item already listed with the same name
+     * @param price price of item already listed with the same name
      * @return true If that user do not have any item with the same name and price
      * @throws DuplicateException If that user have item with the same name and price
      */
@@ -170,11 +170,11 @@ public class AddItemCommand extends Command {
      * @param args The array of input args
      * @return true If they are all valid
      * @throws UserNotFoundException If that user cannot be found in the list
-     * @throws DuplicateException    If that user have item with the same name
+     * @throws DuplicateException If that user have item with the same name
      * @throws InvalidPriceException If price value is less than 0
      */
-    private boolean areValidArgs(String[] args)
-            throws UserNotFoundException, DuplicateException, InvalidPriceException, InvalidUserException {
+    private boolean areValidArgs(String[] args) throws UserNotFoundException, DuplicateException,
+            InvalidPriceException, InvalidUserException {
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         return isValidName(args[NAME_INDEX], Double.parseDouble(args[PRICE_INDEX]))
                 && isValidCategoryNumber(args[CATEGORY_INDEX]) && isValidPrice(args[PRICE_INDEX])
@@ -186,12 +186,13 @@ public class AddItemCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws UserNotFoundException    If that user cannot be found in the list
-     * @throws DuplicateException       If that user have item with the same name
-     * @throws InvalidPriceException    If price value is less than 0
+     * @throws UserNotFoundException If that user cannot be found in the list
+     * @throws DuplicateException If that user have item with the same name
+     * @throws InvalidPriceException If price value is less than 0
      */
-    public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException,
-            DuplicateException, InvalidPriceException, InvalidCategoryException, InvalidUserException {
+    public boolean executeCommand()
+            throws InvalidArgumentException, UserNotFoundException, DuplicateException,
+            InvalidPriceException, InvalidCategoryException, InvalidUserException {
         String[] args = getArgsAddItemCmd();
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
         if (areValidArgs(args)) {

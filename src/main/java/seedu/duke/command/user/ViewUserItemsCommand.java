@@ -28,14 +28,14 @@ public class ViewUserItemsCommand extends Command {
     /**
      * Constructor for ViewUserItemsCommand.
      *
-     * @param parts           The parts from user input
-     * @param userList        The list of users to work with
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException if arguments is insufficient
      */
-    public ViewUserItemsCommand(String[] parts, UserList userList, ItemList itemList, TransactionList transactionList)
-            throws InsufficientArgumentsException {
+    public ViewUserItemsCommand(String[] parts, UserList userList, ItemList itemList,
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.itemList = itemList;
@@ -82,7 +82,7 @@ public class ViewUserItemsCommand extends Command {
      * Get the list of items that belongs to the user.
      *
      * @return list of items that belong to the user
-     * @throws UserNotFoundException    if user is not found in list of users
+     * @throws UserNotFoundException if user is not found in list of users
      * @throws InvalidArgumentException if arg is invalid
      */
     protected ItemList getUserItems() throws UserNotFoundException, InvalidArgumentException {
@@ -102,8 +102,8 @@ public class ViewUserItemsCommand extends Command {
      * Executes ViewUserItemsCommand.
      *
      * @return false
-     * @throws InvalidArgumentException if the argument is invalid
-     * @throws UserNotFoundException    if the user is not found in list of users
+     * @throws InvalidArgumentException If the argument is invalid
+     * @throws UserNotFoundException If the user is not found in list of users
      */
     @Override
     public boolean executeCommand() throws InvalidArgumentException, UserNotFoundException {

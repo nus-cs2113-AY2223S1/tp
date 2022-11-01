@@ -12,11 +12,18 @@ import seedu.duke.transaction.TransactionList;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-//@@author jingwei55
+// @@author jingwei55
 public class ViewTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for ViewTransactionCommand.
+     *
+     * @param parts The parts from user input
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewTransactionCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -46,6 +53,13 @@ public class ViewTransactionCommand extends Command {
         }
     }
 
+    /**
+     * Executes ViewTransactionCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws TransactionNotFoundException If given transaction is does not exist
+     */
     public boolean executeCommand() throws TransactionNotFoundException, InvalidArgumentException {
         String transactionName = getArgsViewTransactionCmd();
         if (isValidTransaction(transactionName)) {

@@ -20,7 +20,14 @@ public class ViewUserLossCommand extends Command {
     private final UserList userList;
     private final TransactionList transactionList;
 
-
+    /**
+     * Constructor for ViewUserLossCommand.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewUserLossCommand(String[] parts, UserList userList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -51,11 +58,20 @@ public class ViewUserLossCommand extends Command {
         }
     }
 
+    /**
+     * Executes ViewUserLossCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If the argument is invalid
+     * @throws UserNotFoundException If the user is not found in list of users
+     * @throws InvalidTransactionException If given transaction is not valid
+     */
     public boolean executeCommand()
             throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
         String userName = getArgsViewUserDebtCmd();
         if (isValidUser(userName)) {
-            double totalDebt = transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
+            double totalDebt =
+                    transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
             Ui.printResponse("The debt of " + userName + " is: $" + totalDebt);
         }
         return false;
