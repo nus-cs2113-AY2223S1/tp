@@ -6,6 +6,7 @@ import seedu.duke.command.CommandFindProperty;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.parsefindexception.FindEmptyDescriptionException;
 import seedu.duke.exception.parsefindexception.FindIncorrectNumOfTagException;
+import seedu.duke.exception.parsefindexception.NoFindPropertyTagException;
 
 import java.util.ArrayList;
 
@@ -34,15 +35,15 @@ public class ParseFindProperty extends Parser {
 
     }
 
-    private void checkCommandValidity(String commandDescription) throws FindIncorrectNumOfTagException,
-            FindEmptyDescriptionException {
+    public void checkCommandValidity(String commandDescription) throws FindIncorrectNumOfTagException,
+            FindEmptyDescriptionException, NoFindPropertyTagException {
 
         String[] commandSplitByTag = commandDescription.trim().split(REGEX_CHECKER,2);
         boolean hasNoDescription = commandDescription.isEmpty();
 
         // IF the input is empty, throw empty exception
         if (hasNoDescription) {
-            throw new FindEmptyDescriptionException();
+            throw new NoFindPropertyTagException();
         }
 
         boolean hasOtherTag = !commandSplitByTag[0].equals(EMPTY_TEXT);

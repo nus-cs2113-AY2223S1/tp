@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.util.Map;
-
 public class CommandStructure {
 
     public static final String COMMAND_ADD = "add";
@@ -39,50 +37,50 @@ public class CommandStructure {
     //@@author OVReader
     // Unit-Type Command Labels
     // HDB Labels
-    public static final String UNIT_TYPE_ONE   = "HDB 2";
-    public static final String UNIT_TYPE_TWO   = "HDB 3";
-    public static final String UNIT_TYPE_THREE = "HDB 4";
-    public static final String UNIT_TYPE_FOUR  = "HDB 5";
-    public static final String UNIT_TYPE_FIVE  = "HDB 3Gen";
-    public static final String UNIT_TYPE_SIX   = "HDB ExFlat";
-    public static final String UNIT_TYPE_SEVEN = "HDB DBSS";
-    public static final String UNIT_TYPE_EIGHT = "HDB ExMsn";
-    public static final String UNIT_TYPE_NINE  = "HDB Jumbo";
-    public static final String UNIT_TYPE_TEN   = "HDB TH";
+    public static final String UNIT_TYPE_2ROOM_SHORT = "HDB 2";
+    public static final String UNIT_TYPE_3ROOM_SHORT = "HDB 3";
+    public static final String UNIT_TYPE_4ROOM_SHORT = "HDB 4";
+    public static final String UNIT_TYPE_5ROOM_SHORT = "HDB 5";
+    public static final String UNIT_TYPE_3GEN = "HDB 3Gen";
+    public static final String UNIT_TYPE_EXECUTIVE_FLAT_SHORT = "HDB ExFlat";
+    public static final String UNIT_TYPE_DBSS_SHORT = "HDB DBSS";
+    public static final String UNIT_TYPE_MAISONETTE_SHORT = "HDB ExMsn";
+    public static final String UNIT_TYPE_JUMBO_SHORT = "HDB Jumbo";
+    public static final String UNIT_TYPE_HDB_TERRENCE_SHORT = "HDB TH";
 
     // Condominium Label
-    public static final String UNIT_TYPE_ELEVEN = "Condo";
+    public static final String UNIT_TYPE_CONDO_SHORT = "Condo";
 
     // Penthouse Label
-    public static final String UNIT_TYPE_TWELVE = "PH";
+    public static final String UNIT_TYPE_PENTHOUSE_SHORT = "PH";
 
     // Landed Property Labels
-    public static final String UNIT_TYPE_THIRTEEN = "LP TH";
-    public static final String UNIT_TYPE_FOURTEEN = "LP SDH";
-    public static final String UNIT_TYPE_FIFTEEN  = "LP BGL";
+    public static final String UNIT_TYPE_LANDED_TERRENCE_SHORT = "LP TH";
+    public static final String UNIT_TYPE_SEMI_DETEACHED_SHORT = "LP SDH";
+    public static final String UNIT_TYPE_BUNGALOW_SHORT = "LP BGL";
 
     // Actual Unit-Type
     // HDB
-    public static final String ACTUAL_UNIT_TYPE_ONE   = "HDB 2-Room Flexi";
-    public static final String ACTUAL_UNIT_TYPE_TWO   = "HDB 3-Room";
-    public static final String ACTUAL_UNIT_TYPE_THREE = "HDB 4-Room";
-    public static final String ACTUAL_UNIT_TYPE_FOUR  = "HDB 5-Room";
-    public static final String ACTUAL_UNIT_TYPE_FIVE  = "HDB 3Gen";
-    public static final String ACTUAL_UNIT_TYPE_SIX   = "HDB Executive Flat";
-    public static final String ACTUAL_UNIT_TYPE_SEVEN = "HDB Design, Build and Sell Scheme (DBSS) Flat";
-    public static final String ACTUAL_UNIT_TYPE_EIGHT = "HDB Executive Maisonette";
-    public static final String ACTUAL_UNIT_TYPE_NINE  = "HDB Jumbo Flat";
-    public static final String ACTUAL_UNIT_TYPE_TEN   = "HDB Terrace House";
+    public static final String ACTUAL_UNIT_TYPE_2ROOM = "HDB 2-Room Flexi";
+    public static final String ACTUAL_UNIT_TYPE_3ROOM = "HDB 3-Room";
+    public static final String ACTUAL_UNIT_TYPE_4ROOM = "HDB 4-Room";
+    public static final String ACTUAL_UNIT_TYPE_5ROOM = "HDB 5-Room";
+    public static final String ACTUAL_UNIT_TYPE_3GEN = "HDB 3Gen";
+    public static final String ACTUAL_UNIT_TYPE_EXECUTIVE_FLAT = "HDB Executive Flat";
+    public static final String ACTUAL_UNIT_TYPE_DBSS = "HDB Design, Build and Sell Scheme (DBSS) Flat";
+    public static final String ACTUAL_UNIT_TYPE_MAISONETTE = "HDB Executive Maisonette";
+    public static final String ACTUAL_UNIT_TYPE_JUMBO = "HDB Jumbo Flat";
+    public static final String ACTUAL_UNIT_TYPE_TERRENCE = "HDB Terrace House";
 
     // Condominium
-    public static final String ACTUAL_UNIT_TYPE_ELEVEN = "Condominium";
+    public static final String ACTUAL_UNIT_TYPE_CONDO = "Condominium";
 
     // Penthouse
-    public static final String ACTUAL_UNIT_TYPE_TWELVE = "Penthouse";
+    public static final String ACTUAL_UNIT_TYPE_HDB_PENTHOUSE = "Penthouse";
 
     // Landed Property
-    public static final String ACTUAL_UNIT_TYPE_THIRTEEN = "LP Terrace House";
-    public static final String ACTUAL_UNIT_TYPE_FOURTEEN = "LP Semi-Detached House";
-    public static final String ACTUAL_UNIT_TYPE_FIFTEEN  = "LP Bungalow";
+    public static final String ACTUAL_UNIT_TYPE_LANDED_TERRENCE = "LP Terrace House";
+    public static final String ACTUAL_UNIT_TYPE_SEMI_DETACHED = "LP Semi-Detached House";
+    public static final String ACTUAL_UNIT_TYPE_BUNGALOW = "LP Bungalow";
     //@@author
 }

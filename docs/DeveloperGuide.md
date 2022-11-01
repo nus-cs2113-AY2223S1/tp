@@ -44,6 +44,7 @@ Some of the constraint includes:
 - Unable to calculate tax payment
 ___
 ## User Stories
+
 | Version | As a ...         | I want to ...                         | So that I can ...                                                    |
 |---------|------------------|---------------------------------------|----------------------------------------------------------------------|
 | v1.0    | Property Manager | add properties                        | keep track of properties                                             |

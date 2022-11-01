@@ -6,6 +6,7 @@ import seedu.duke.command.CommandFindClient;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.parsefindexception.FindEmptyDescriptionException;
 import seedu.duke.exception.parsefindexception.FindIncorrectNumOfTagException;
+import seedu.duke.exception.parsefindexception.NoFindClientTagException;
 
 import java.util.ArrayList;
 
@@ -34,14 +35,14 @@ public class ParseFindClient extends Parser {
         return new CommandFindClient(queryText.trim());
     }
 
-    private void checkCommandValidity(String commandDescription) throws FindIncorrectNumOfTagException,
-            FindEmptyDescriptionException {
+    public void checkCommandValidity(String commandDescription) throws FindIncorrectNumOfTagException,
+            FindEmptyDescriptionException, NoFindClientTagException {
         String[] commandSplitByTag = commandDescription.trim().split(REGEX_CHECKER, 2);
         boolean hasNoDescription = commandDescription.isEmpty();
 
 
         if (hasNoDescription) {
-            throw new FindEmptyDescriptionException();
+            throw new NoFindClientTagException();
         }
 
         boolean hasOtherTag = !commandSplitByTag[0].equals(EMPTY_TEXT);
