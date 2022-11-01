@@ -8,8 +8,8 @@ Class Property PROPERTY_COLOR
 
 
 PairingList *--> "1" HashMap
-HashMap --> "*" Client
-HashMap --> "*" Property
+HashMap ..> "*" Client
+HashMap ..> "*" Property
 
 note left of Client: Client and Property \nreferences are stored \nas key-value pairs
 @enduml
