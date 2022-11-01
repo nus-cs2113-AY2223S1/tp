@@ -44,7 +44,7 @@ ref over UserInterface, Data, Storage
     load data from file
 end ref
 
-loop Command not equals "Bye"
+loop command not equals "Bye"
     ref over User, UserInterface, Parser, Logger
         get user command
     end ref
