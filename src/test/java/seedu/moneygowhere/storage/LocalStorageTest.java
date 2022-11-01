@@ -44,10 +44,10 @@ class LocalStorageTest {
         ArrayList<Target> testTargets = new ArrayList<>();
         ArrayList<Income> testIncomes = new ArrayList<>();
 
-        int numExpense = 10;
-        int numRecurringPayment = 3;
-        int numTarget = 6;
-        int numIncome = 3;
+        final int numExpense = 10;
+        final int numRecurringPayment = 3;
+        final int numTarget = 6;
+        final int numIncome = 3;
 
         for (int i = 0; i < numExpense; ++i) {
             testExpenses.add(testExpense);
