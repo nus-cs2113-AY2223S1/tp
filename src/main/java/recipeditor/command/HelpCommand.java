@@ -1,7 +1,5 @@
 package recipeditor.command;
 
-import recipeditor.edit.Add;
-
 public class HelpCommand extends Command {
 
     public static final String COMMAND_TYPE = "/help";
@@ -59,8 +57,8 @@ public class HelpCommand extends Command {
                     cmd.toLowerCase(), HELP_MESSAGE));
         }
 
-        String message = "Syntax:" + '\n' + command.getCommandSyntax() + '\n'
-                + "Description:" + '\n' + command.getCommandFunction();
+        String message = "Syntax: " + command.getCommandSyntax() + '\n'
+                + "Description: " + command.getCommandFunction();
 
         return new CommandResult(message);
     }
