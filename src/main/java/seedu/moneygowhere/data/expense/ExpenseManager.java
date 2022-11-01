@@ -4,6 +4,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -41,6 +42,11 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
+    public boolean hasExpense(Expense expense) {
+        return expenses.contains(expense);
+    }
+
+    //@@author xzynos
     public Expense getExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
         try {
             return expenses.get(expenseIndex);
@@ -54,13 +60,19 @@ public class ExpenseManager {
         return expenses;
     }
 
+    //@@author LokQiJun
+    public void setExpenses(ArrayList<Expense> savedExpenses) {
+        this.expenses = new ArrayList<>(savedExpenses);
+    }
+
     //@@author yuu-chennn
     public ArrayList<Expense> getExpensesByCategory(String categoryName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getCategory().equals(categoryName)) {
+                String category = expense.getCategory();
+                if (category != null && category.equalsIgnoreCase(categoryName)) {
                     expensesByCategory.add(expense);
                 }
             }
@@ -77,7 +89,7 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getName().equals(expenseName)) {
+                if (expense.getName().equalsIgnoreCase(expenseName)) {
                     expensesByName.add(expense);
                 }
             }
@@ -89,7 +101,8 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void deleteExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
+    public void deleteExpense(int expenseIndex)
+            throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.remove(expenseIndex);
         } catch (IndexOutOfBoundsException exception) {
@@ -98,7 +111,8 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
+    public void editExpense(int expenseIndex, Expense expense)
+            throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
             sortExpenses();

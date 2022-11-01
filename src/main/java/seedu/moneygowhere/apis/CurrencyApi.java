@@ -20,11 +20,6 @@ import java.util.Scanner;
 
 //@@author jeyvia
 public class CurrencyApi {
-    public static void getCurrencyApi(CurrencyManager currencyManager) {
-        getJson();
-        loadFromFile(currencyManager);
-    }
-
     public static File initialiseFile() {
         File directory = new File(Configurations.LOCAL_STORAGE_DIRECTORY);
         directory.mkdir();
@@ -75,7 +70,7 @@ public class CurrencyApi {
         fw.close();
     }
 
-    private static void getJson() {
+    public static void getJson() {
         HttpsURLConnection con = null;
         try {
             URL u = new URL(Configurations.CURRENCY_API_URL);

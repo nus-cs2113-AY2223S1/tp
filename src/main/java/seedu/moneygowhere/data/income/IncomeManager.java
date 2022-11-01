@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.income;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundException;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,13 @@ public class IncomeManager {
         return new ArrayList<>(incomes);
     }
 
-    public void deleteIncome(int incomeIndex) throws IncomeManagerIncomeNotFoundException {
+    //@@author LokQiJun
+    public void setIncomes(ArrayList<Income> savedIncomes) {
+        this.incomes = new ArrayList<Income>(savedIncomes);
+    }
+
+    public void deleteIncome(int incomeIndex)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.remove(incomeIndex);
         } catch (IndexOutOfBoundsException exception) {
@@ -42,7 +49,8 @@ public class IncomeManager {
         }
     }
 
-    public void editIncome(int incomeIndex, Income income) throws IncomeManagerIncomeNotFoundException {
+    public void editIncome(int incomeIndex, Income income)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.set(incomeIndex, income);
         } catch (IndexOutOfBoundsException exception) {

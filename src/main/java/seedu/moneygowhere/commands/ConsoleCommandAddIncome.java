@@ -42,4 +42,8 @@ public class ConsoleCommandAddIncome extends ConsoleCommand {
     public BigDecimal getAmount() {
         return amount;
     }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 }

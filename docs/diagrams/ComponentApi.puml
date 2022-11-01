@@ -1,0 +1,17 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+package Apis {
+    Class CurrencyApiManager DATA_COLOR_6
+    Class CurrencyApi DATA_COLOR_6
+}
+
+Class "<$documents>" as DataFile DATA_COLOR_6
+
+CurrencyApiManager -right> CurrencyApi
+
+CurrencyApi .down.> DataFile
+@enduml
