@@ -57,7 +57,7 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | jw | bui | 5 | 2022-10-03 | 3.2 | 166",
+        assertEquals("28sd37h2 | bui | 5 | 2022-10-03 | jw | pen | 3.2 | " + transactionId,
                 transaction.convertTransactionToFileFormat());
     }
 

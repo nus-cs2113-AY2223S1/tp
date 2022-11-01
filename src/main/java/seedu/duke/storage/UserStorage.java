@@ -9,57 +9,60 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILE_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUM_OF_ARGS_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORAGE_REASON;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_VALUE_OF_ARGS_INVALID;
 
 // @@author bdthanh
 public class UserStorage extends Storage {
-    private static final String SEPARATOR = " \\| ";
+    private static final String SEPARATOR = "\\|";
     private static final int USERNAME_INDEX = 0;
     private static final int AGE_INDEX = 1;
     private static final int CONTACT_INDEX = 2;
-    private static final int CHECKSUM_INDEX = 3;
+    private static final int NUM_OF_ARGS = 3;
     private final String userFilePath;
+    private final UserList userList;
 
     /**
      * Constructor for Storage of Users.
      */
     public UserStorage(String userFilePath) {
         this.userFilePath = userFilePath;
+        this.userList = new UserList();
     }
 
     /**
      * Read the users from a given file.
      *
-     * @return The list of users stored in the file.
-     * @throws UserFileNotFoundException If the file cannot be found.
+     * @return The list of users stored in the file
+     * @throws UserFileNotFoundException If the file cannot be found
+     * @throws StoreFailureException     If there is a failure loading
      */
-    public ArrayList<User> loadData() throws UserFileNotFoundException, StoreFailureException {
+    public UserList loadData() throws UserFileNotFoundException, StoreFailureException {
+        int lineNo = 0;
         try {
             File userFile = new File(userFilePath);
-            ArrayList<User> userList = new ArrayList<>();
             Scanner scanner = new Scanner(userFile);
-            int checkSum = Integer.parseInt(scanner.nextLine());
             while (scanner.hasNext()) {
+                lineNo++;
                 String userLine = scanner.nextLine();
                 String[] splitUserLine = userLine.split(SEPARATOR);
+                trimArrayValues(splitUserLine);
                 User user = handleUserLine(splitUserLine);
-                userList.add(user);
+                userList.addUser(user);
             }
-            checkCheckSumWhole(userList, checkSum);
             return userList;
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
-                    + MESSAGE_TO_FIX_FILES
-            );
+            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + lineNo
+                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -91,57 +94,24 @@ public class UserStorage extends Storage {
         }
     }
 
-    public boolean hasUserFile() {
-        return new File(userFilePath).exists();
-    }
-
     /**
-     * Analyses the information the users stored in the file.
+     * Analyses the information the users stored in the file
+     * and checks if valid or not.
      *
      * @param splitUserLine The raw user information.
      * @return A User with full information.
      */
-    public static User handleUserLine(String[] splitUserLine) throws StoreFailureException {
-        try {
-            User user = getUserFromUserLine(splitUserLine);
-            checkCheckSumLine(user, Integer.parseInt(splitUserLine[CHECKSUM_INDEX].trim()));
-            return user;
-        } catch (Exception e) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
-                    + MESSAGE_TO_FIX_FILES);
-        }
+    public User handleUserLine(String[] splitUserLine) throws Exception {
+        checkIfArgsEmpty(splitUserLine, NUM_OF_ARGS,
+                MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
+        this.userList.checkValidArgsForUser(splitUserLine);
+        return this.getUserFromUserLine(splitUserLine);
     }
 
-    private static User getUserFromUserLine(String[] splitUserLine) throws StoreFailureException {
-        try {
-            assert splitUserLine.length == 4 : "Invalid User Line";
-            String username = splitUserLine[USERNAME_INDEX].trim();
-            int age = Integer.parseInt(splitUserLine[AGE_INDEX].trim());
-            Integer.parseInt(splitUserLine[CONTACT_INDEX].trim());
-            String contactNumber = splitUserLine[CONTACT_INDEX].trim();
-            return new User(username, age, contactNumber);
-        } catch (Exception e) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
-                    + MESSAGE_TO_FIX_FILES);
-        }
-    }
-
-    private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {
-        if (user.toString().length() != checkSum) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
-                    + MESSAGE_TO_FIX_FILES);
-        }
-    }
-
-    private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum)
-            throws StoreFailureException {
-        if (userList.size() != checkSum) {
-            throw new StoreFailureException(
-                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
-                    + MESSAGE_TO_FIX_FILES);
-        }
+    private User getUserFromUserLine(String[] splitUserLine) {
+        String username = splitUserLine[USERNAME_INDEX];
+        int age = Integer.parseInt(splitUserLine[AGE_INDEX]);
+        String contactNumber = splitUserLine[CONTACT_INDEX];
+        return new User(username, age, contactNumber);
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exception.CommandNotFoundException;
 import seedu.duke.exception.ItemFileNotFoundException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.exception.TransactionFileNotFoundException;
@@ -7,6 +8,7 @@ import seedu.duke.exception.UserFileNotFoundException;
 import seedu.duke.item.ItemList;
 import seedu.duke.logger.DukeLogger;
 import seedu.duke.storage.ItemStorage;
+import seedu.duke.storage.StorageManager;
 import seedu.duke.storage.TransactionStorage;
 import seedu.duke.storage.UserStorage;
 import seedu.duke.transaction.TransactionList;
@@ -33,64 +35,82 @@ public class Duke {
     private UserList userList;
     private ItemList itemList;
     private TransactionList transactionList;
-    private final TransactionStorage transactionStorage;
-    private final ItemStorage itemStorage;
-    private final UserStorage userStorage;
+    private TransactionStorage transactionStorage;
+    private ItemStorage itemStorage;
+    private UserStorage userStorage;
     private final DukeLogger dukeLogger;
-    private boolean isLastCommand = false;
+    private boolean isExit = false;
 
     /**
      * Constructor of Duke.
      *
-     * @param userFilePath The file path that Duke stores its users.
-     * @param itemFilePath The file path that Duke stores its items.
+     * @param userFilePath        The file path that Duke stores its users.
+     * @param itemFilePath        The file path that Duke stores its items.
      * @param transactionFilePath The file path that Duke stores its transactions.
      */
     private Duke(String userFilePath, String itemFilePath, String transactionFilePath) {
         dukeLogger = new DukeLogger();
         userStorage = new UserStorage(userFilePath);
-        itemStorage = new ItemStorage(itemFilePath);
-        transactionStorage = new TransactionStorage(transactionFilePath);
+        itemStorage = new ItemStorage(itemFilePath, userList);
+        transactionStorage = new TransactionStorage(transactionFilePath, itemList);
         try {
             checkIfThreeFilesSimultaneouslyExistOrNotExit();
-            initializeUserList();
-            initializeTransactionList();
-            initializeItemList();
+            initializeUserList(userFilePath);
+            initializeItemList(itemFilePath);
+            initializeTransactionList(transactionFilePath);
         } catch (StoreFailureException e) {
-            exitDukeDueToDataCorruption(e.getMessage());
+            handleDataCorruption(e.getMessage());
+        }
+    }
+
+    private void initializeUserList(String userFilePath) throws StoreFailureException {
+        try {
+            userStorage = new UserStorage(userFilePath);
+            this.userList = userStorage.loadData();
+        } catch (UserFileNotFoundException e) {
+            this.userList = new UserList();
+        }
+    }
+
+    private void initializeItemList(String itemFilePath) throws StoreFailureException {
+        try {
+            itemStorage = new ItemStorage(itemFilePath, userList);
+            this.itemList = itemStorage.loadData();
+        } catch (ItemFileNotFoundException e) {
+            this.itemList = new ItemList();
         }
     }
 
     /**
      * Initialize transaction list.
      */
-    private void initializeTransactionList() throws StoreFailureException {
+    private void initializeTransactionList(String transactionFilePath)
+            throws StoreFailureException {
         try {
-            this.transactionList = new TransactionList(transactionStorage.loadData());
+            transactionStorage = new TransactionStorage(transactionFilePath, itemList);
+            this.transactionList = transactionStorage.loadData();
         } catch (TransactionFileNotFoundException e) {
             this.transactionList = new TransactionList();
         }
     }
 
-    private void initializeItemList() throws StoreFailureException {
-        try {
-            this.itemList = new ItemList(itemStorage.loadData());
-        } catch (ItemFileNotFoundException e) {
-            this.itemList = new ItemList();
-        }
-    }
-
-    private void initializeUserList() throws StoreFailureException {
-        try {
-            this.userList = new UserList(userStorage.loadData());
-        } catch (UserFileNotFoundException e) {
-            this.userList = new UserList();
-        }
-    }
-
-    private void exitDukeDueToDataCorruption(String errorMessage) {
+    private void handleDataCorruption(String errorMessage) {
         Ui.printErrorMessage(errorMessage);
-        isLastCommand = true;
+        try {
+            if (StorageManager.checkForForceReset()) {
+                forceReset();
+            }
+            isExit = true;
+        } catch (CommandNotFoundException | StoreFailureException e) {
+            Ui.printResponse(e.getMessage());
+        }
+    }
+
+    private void forceReset() throws StoreFailureException {
+        this.userList = new UserList();
+        this.itemList = new ItemList();
+        this.transactionList = new TransactionList();
+        writeDataToFile();
     }
 
     /**
@@ -105,9 +125,8 @@ public class Duke {
     }
 
     private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExist =
-                (userStorage.hasUserFile() == itemStorage.hasItemFile())
-                        && (transactionStorage.hasTransactionFile() == itemStorage.hasItemFile());
+        boolean areSimultaneouslyExistOrNotExist
+                = StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
         if (!areSimultaneouslyExistOrNotExist) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }
@@ -117,18 +136,18 @@ public class Duke {
      * Runs the program.
      */
     public void run() {
-        if (!isLastCommand) {
+        if (!isExit) {
             Ui.printGreeting();
             dukeLogger.info(LOG_RUN_DUKE);
         }
-        while (!isLastCommand) {
+        while (!isExit) {
             try {
                 String input = Ui.readInput();
                 Command command =
                         CommandParser.createCommand(input, userList, itemList, transactionList);
-                isLastCommand = command.executeCommand();
+                isExit = command.executeCommand();
                 writeDataToFile();
-                dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY);
+                dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY + input);
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
                 dukeLogger.warning(e.getMessage());

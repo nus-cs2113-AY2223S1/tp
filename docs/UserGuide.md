@@ -131,7 +131,7 @@ ____________________________________________________________
 Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
 Note:
-1. Username is unique, length must be less than 20 chars
+1. Username is unique, length must be no more than 20 chars
 2. Age must be an integer in range from 10 to 100
 3. Contact number must an integer of 8 digits
 
@@ -693,10 +693,49 @@ If Duke crashes, is my data saved?
 
 What will happen if I illegally modify data in the files?
 
-> Duke will detect if the data is modified or not, we have two checksum to detect changes in each entry. If yes, it would give you a chance to try to fix the data in the files, but they would not able
-> to use the app until Duke detect your data is fixed. If you cannot fix it, then you have to delete entire ```data``` folder .However, this also means that your previous data cannot be recovered.
-> Please DO NOT EDIT your data files, otherwise, you might have to input all over again.
+> Duke will detect if the data is modified or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
+> to use the app until Duke detect your data is fixed. If you cannot fix it, then you can choose to delete entire ```data``` folder. However, this also means that your previous data cannot be recovered.
+> Please edit your data files at your own risk, otherwise, you might have to input all over again.
 > 
 > Note: 
 > - Duke is designed not to be able to run with corrupted data file, not Duke crashes
-> - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours and loss of data.
+> - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours afterwards and loss of data.
+
+How can I manually edit data files correctly?
+
+>**User file**
+> 
+> Each line represents one user with the format `[USERNAME] | [AGE] | [CONTACT]`
+> 
+> If you edit this files, please make sure: 
+> - Age range is from 10 to 100
+> - If name is edited, please also edit all items of that user in the item files
+> - Contact number length is 8
+> - If user is removed, please also remove all items of that user in the item files
+> 
+> **Item file**
+> 
+> Each line represents one item with the format:
+> 
+> `[ITEMNAME] | [CATEGORY] | [PRICE] | [OWNER] | [ITEMID]`
+> 
+> If you edit this files, please make sure: 
+> 
+> - Price range from 0 to 10000
+> - Currently, we support 8 categories form 1 to 8
+> - Item's name length is no more than 20 characters
+> - Avoid change the name of owner, it can cause error (you can change both in user and item files)
+> - No item ID occurs twice
+> 
+> **Transaction file**
+> 
+> Each line represents one transaction with the format:
+> 
+> `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [TOTALMONEY] | [TRANSACTIONID]`
+> 
+> If you edit this files, please make sure: 
+> 
+> - If the itemId occurs in item list, make sure the item's name and owner(lender) are matched with that item with given ID
+> - Duration range is from 0 to 1461
+> - Created date range is from 2016-01-01 to today
+> - No transaction ID occurs twice

@@ -130,15 +130,28 @@ Below, we detail the design of the UI class with a class diagram
 ### 3.7. Storage component
 
 Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
-The following  diagrams show more details about Storage classes: 
+The following diagrams show more details about Storage classes: 
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
-The data will be loaded when running the program and will be written to the files after each operation. We also implement a checksum system for our data, including 2 checksums: 
-one for each entry, and one for the whole data in one file. For each user/item/transaction, we use a function of the length of toString() as a checksum. And for the whole list, we use a function of the number of 
-entries as a checksum. Then when loading the data, Duke will check both and throw an exception if the data does not match the checksums.
-These files can be found in ```data``` folder in the same directory as the folder containing project root.
+The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
+
+If Duke detects a change the potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
+```
+____________________________________________________________
+The ITEM files has been corrupted at line 1
+Reason: Category index is invalid
+Please use list-categories to check the index of your chosen categories
+Please try to fix your data in your files before running the app again
+If you fix it correctly, you will see a greeting message in the next run
+If you cannot fix it, you will see this message again. Please delete the entire data folder
+to avoid errors, which also mean that all your data will be gone forever
+In that case, we will create three brand-new lists for your users, items, and transactions
+REMEMBER that all files in data folder must be edited correctly
+Do you want to force reset all files and restart? y or n
+____________________________________________________________
+```
 
 ## 4. Implementation
 
@@ -157,7 +170,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command ```add-user /n [NAME] /a [AGE] /c [CONTACT]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddUserCommand``` class to be processed.
 
-Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') are present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length,...).
+Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') are present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input name, age and contact are valid through `userList.checkValidArgsForUser(args);` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length,...).
 
 Step 3: If all arguments are valid, then it creates a new `User(arg[0], Integer.parseInt(args[1]), args[2])` with `args[0]` is username, `args[2]` is age, and `args[3]` is contact number
 
@@ -294,7 +307,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command ```add-item /n [NAME] /c [CATEGORY] /p [PRICE] /o [OWNER]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddItemCommand``` to be processed.
 
-Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. 
+Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `itemList.checkValidArgsForItem(userList, args)` methods. 
 An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name of item of the same owner, owner not found, wrong range and format price,...).
 
 Step 3: If all arguments are valid, then it creates a new `Item()` with `args[0]` as itemName, `args[2]` as categoryNumber, and `args[3]` as price and `args[4]` as owner's name
@@ -438,7 +451,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command ```add-tx /i [ITEMID]/b [BORROWER] /d [DURATION] /c [createdDate]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the AddTransactionCommand to be processed.
 
-Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidItem()`, `isValidBorrower()`, `isValidDuration()` and `isValidCreatedDate()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
+Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `checkValidInput(args)` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
 
 Step 3: If all arguments are valid, then it creates a new `transaction()` with `args[0]` as itemId, `args[2]` as borrowerId, and `args[3]` as duration and `args[4]` as createdDate
 

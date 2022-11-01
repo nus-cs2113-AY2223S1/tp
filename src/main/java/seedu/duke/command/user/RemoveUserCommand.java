@@ -27,7 +27,7 @@ public class RemoveUserCommand extends Command {
     private final UserList userList;
     private final ItemList itemList;
     private final TransactionList transactionList;
-    private static final String USER_ID_DELIMITER = "t";
+    private static final String USER_ID_DELIMITER = "u";
     private static final int NUMBER_OF_ARGS = 1;
     private static final int ID_INDEX = 0;
 

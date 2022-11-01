@@ -5,9 +5,8 @@ import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.InsufficientArgumentsException;
 import seedu.duke.exception.InvalidArgumentException;
 import seedu.duke.exception.InvalidCategoryException;
+import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.InvalidPriceException;
-import seedu.duke.exception.InvalidUserException;
-import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.ui.Ui;
 import seedu.duke.item.Item;
@@ -18,12 +17,6 @@ import seedu.duke.user.UserList;
 
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SAME_ITEM_NAME_AND_PRICE;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
-
 
 
 // @@author bdthanh
@@ -92,96 +85,6 @@ public class AddItemCommand extends Command {
     }
 
     /**
-     * Checks if an item name is valid or not.
-     *
-     * @param itemName The input item name
-     * @param price price of item already listed with the same name
-     * @return true If that user do not have any item with the same name and price
-     * @throws DuplicateException If that user have item with the same name and price
-     */
-    private boolean isValidName(String itemName, Double price)
-            throws DuplicateException, InvalidUserException {
-        if (itemName.length() > 20) {
-            throw new InvalidUserException(MESSAGE_NAME_LENGTH_INVALID);
-        }
-        try {
-            Item item = itemList.getItemByName(itemName);
-            if (item.getPricePerDay() == price) {
-                throw new DuplicateException(MESSAGE_SAME_ITEM_NAME_AND_PRICE);
-            }
-            return true;
-        } catch (ItemNotFoundException e) {
-            return true;
-        }
-    }
-
-    /**
-     * Checks if a user is valid or not.
-     *
-     * @param userId The input name of owner
-     * @return true If that username can be found in user list
-     * @throws UserNotFoundException If that user cannot be found in the list
-     */
-    private boolean isValidOwner(String userId) throws UserNotFoundException {
-        try {
-            userList.getUserById(userId);
-            return true;
-        } catch (UserNotFoundException e) {
-            throw new UserNotFoundException(e.getMessage());
-        }
-    }
-
-    /**
-     * Checks if a categoryNumber is valid or not.
-     *
-     * @param categoryNumber The input category number
-     * @return true If that number can be parsed
-     */
-    private boolean isValidCategoryNumber(String categoryNumber) {
-        try {
-            Integer.parseInt(categoryNumber);
-            return true;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(MESSAGE_CATEGORY_INDEX_FORMAT_INVALID);
-        }
-    }
-
-    /**
-     * Checks if a price is valid or not.
-     *
-     * @param price The input price
-     * @return true If that number can be parsed and has correct format
-     * @throws InvalidPriceException If price value is less than 0
-     */
-    private boolean isValidPrice(String price) throws InvalidPriceException {
-        try {
-            if (Double.parseDouble(price) < 0 || Double.parseDouble(price) > 10000) {
-                throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
-            }
-            return true;
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException(MESSAGE_PRICE_FORMAT_INVALID);
-        }
-    }
-
-    /**
-     * Check if all args is valid or not.
-     *
-     * @param args The array of input args
-     * @return true If they are all valid
-     * @throws UserNotFoundException If that user cannot be found in the list
-     * @throws DuplicateException If that user have item with the same name
-     * @throws InvalidPriceException If price value is less than 0
-     */
-    private boolean areValidArgs(String[] args) throws UserNotFoundException, DuplicateException,
-            InvalidPriceException, InvalidUserException {
-        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
-        return isValidName(args[NAME_INDEX], Double.parseDouble(args[PRICE_INDEX]))
-                && isValidCategoryNumber(args[CATEGORY_INDEX]) && isValidPrice(args[PRICE_INDEX])
-                && isValidOwner(args[OWNER_INDEX]);
-    }
-
-    /**
      * Executes AddItemCommand.
      *
      * @return false
@@ -190,20 +93,19 @@ public class AddItemCommand extends Command {
      * @throws DuplicateException If that user have item with the same name
      * @throws InvalidPriceException If price value is less than 0
      */
-    public boolean executeCommand()
-            throws InvalidArgumentException, UserNotFoundException, DuplicateException,
-            InvalidPriceException, InvalidCategoryException, InvalidUserException {
+    public boolean executeCommand() throws InvalidArgumentException,
+            UserNotFoundException, DuplicateException, InvalidPriceException,
+            InvalidCategoryException, InvalidItemException {
         String[] args = getArgsAddItemCmd();
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
-        if (areValidArgs(args)) {
-            String name = args[NAME_INDEX];
-            int categoryNumber = Integer.parseInt(args[CATEGORY_INDEX]);
-            double price = Double.parseDouble(args[PRICE_INDEX]);
-            String ownerId = args[OWNER_INDEX];
-            Item item = new Item(name, categoryNumber, price, ownerId);
-            this.itemList.addItem(item);
-            Ui.addItemMessage(item, itemList.getListSize(), transactionList);
-        }
+        itemList.checkValidArgsForItem(userList, args);
+        String name = args[NAME_INDEX];
+        int categoryNumber = Integer.parseInt(args[CATEGORY_INDEX]);
+        double price = Double.parseDouble(args[PRICE_INDEX]);
+        String ownerId = args[OWNER_INDEX];
+        Item item = new Item(name, categoryNumber, price, ownerId);
+        this.itemList.addItem(item);
+        Ui.addItemMessage(item, itemList.getListSize(), transactionList);
         return false;
     }
 }

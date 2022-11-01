@@ -64,6 +64,6 @@ public class UserListTest {
     @Test
     void convertUserListToFileFormat() {
         userList.addUser(user);
-        assertEquals("1\nyixiang | 22 | 98126666 | 44\n", userList.convertUserListToFileFormat());
+        assertEquals("yixiang | 22 | 98126666\n", userList.convertUserListToFileFormat());
     }
 }

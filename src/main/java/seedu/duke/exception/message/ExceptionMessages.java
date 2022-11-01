@@ -24,9 +24,11 @@ public class ExceptionMessages {
 
     // Item-related messages
     public static final String MESSAGE_ITEM_UNAVAILABLE = "This item is currently unavailable";
+    public static final String MESSAGE_DUPLICATE_ITEM_ID = "There are two or more items with the same ID";
+    public static final String MESSAGE_ITEM_NOT_MATCHED
+            = "Item's name or owner do not match with the item with given ID";
+    public static final String MESSAGE_DUPLICATE_TRANSACTION_ID = "There are two or more transactions with the same ID";
     public static final String MESSAGE_ITEM_NOT_FOUND = "This item cannot be found in the list";
-    public static final String MESSAGE_SAME_ITEM_NAME_AND_PRICE =
-            "Item with the same price has already been listed!";
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
     public static final String MESSAGE_PRICE_OUT_OF_RANGE =
             "Price must be in range from 0 to 10000";
@@ -74,25 +76,25 @@ public class ExceptionMessages {
     public static final String MESSAGE_ARGUMENT_EMPTY = "The value cannot be empty";
     public static final String MESSAGE_CONTAIN_DATA_SEPARATOR =
             "Input cannot contain | character because it can cause errors when loading data";
-    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED =
-            "The USER files has been corrupted\n";
-    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED =
-            "The ITEM files has been corrupted\n";
+    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED = "The USER files has been corrupted at line ";
+    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED = "The ITEM files has been corrupted at line ";
     public static final String MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED =
-            "The TRANSACTION files has been corrupted\n";
-    public static final String MESSAGE_FILES_ILLEGALLY_DELETED =
-            "One or more files has been deleted\n";
+            "The TRANSACTION files has been corrupted at line ";
+    public static final String MESSAGE_FILES_ILLEGALLY_DELETED = "One or more files has been deleted\n";
     public static final String MESSAGE_TO_FIX_FILES =
             "Please try to fix your data in your files before running the app again\n"
                     + "If you fix it correctly, you will see a greeting message in the next run\n"
-                    + "If you cannot fix it, you will see this message again."
-                    + " Please delete the entire data folder,\n"
-                    + "which also mean that all your data will be gone forever\n"
-                    + "We will create three brand-new lists for your users,"
-                    + " items, and transaction\n"
-                    + "REMEMBER that all files in data folder must not be edited\n"
-                    + "Exiting Duke...";
-
-    public static final String MESSAGE_NAME_LENGTH_INVALID =
-            "The length of username must be less than 20 characters";
+                    + "If you cannot fix it, you will see this message again. Please delete the entire data folder\n"
+                    + "to avoid errors, which also mean that all your data will be gone forever\n"
+                    + "In that case, we will create three brand-new lists for your users, items, and transactions\n"
+                    + "REMEMBER that all files in data folder must be edited correctly\n"
+                    + "Do you want to force reset all files and restart? y or n";
+    public static final String MESSAGE_EXIT_DUKE = "Exit Duke and please edit correctly...";
+    public static final String MESSAGE_RESET_DUKE = "Force reset files and please restart...";
+    public static final String MESSAGE_NAME_LENGTH_INVALID = "The length of name must be no more than 20 characters";
+    public static final String MESSAGE_NUM_OF_ARGS_INVALID = "The number of args for line is incorrect";
+    public static final String MESSAGE_VALUE_OF_ARGS_INVALID = "The value of args for line is empty";
+    public static final String MESSAGE_STORAGE_REASON = "\nReason: ";
+    public static final String MESSAGE_YES_OR_NO
+            = "Please only input y or n. y for force resetting, n for self-editing";
 }

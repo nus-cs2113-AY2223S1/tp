@@ -1,19 +1,32 @@
 package seedu.duke.transaction;
 
+import seedu.duke.exception.DateFormatInvalidException;
+import seedu.duke.exception.DuplicateException;
+import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.TransactionNotFoundException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CREATED_DATE_RANGE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DATE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DUPLICATE_TRANSACTION_ID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_TRANSACTION_OVERLAP;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 
 // @@author bdthanh
 public class TransactionList {
     private final ArrayList<Transaction> transactionList;
+    private static final int DURATION_INDEX = 2;
+    private static final int CREATED_DATE_INDEX = 3;
+    private static final int TX_ID_INDEX = 7;
 
     /**
      * Constructor for TransactionList.
@@ -229,12 +242,82 @@ public class TransactionList {
      */
     public String convertTransactionListToFileFormat() {
         StringBuilder formattedString = new StringBuilder();
-        int checkSum = transactionList.size();
-        formattedString.append(checkSum).append('\n');
         for (Transaction transaction : transactionList) {
             formattedString.append(transaction.convertTransactionToFileFormat()).append('\n');
         }
         return formattedString.toString();
+    }
+
+    private void checkValidId(String transactionId) throws DuplicateException {
+        try {
+            this.getTransactionById(transactionId);
+            throw new DuplicateException(MESSAGE_DUPLICATE_TRANSACTION_ID);
+        } catch (TransactionNotFoundException e) {
+            return;
+        }
+    }
+
+
+    /**
+     * Checks if the duration is valid or not.
+     *
+     * @param duration The input duration
+     * @throws DurationInvalidException If the number is less than 0
+     */
+    private void checkValidDuration(String duration) throws DurationInvalidException {
+        try {
+            if (Integer.parseInt(duration) < 0 || Integer.parseInt(duration) > 1461) {
+                throw new DurationInvalidException(MESSAGE_DURATION_INVALID);
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MESSAGE_NUMBER_FORMAT_INVALID);
+        }
+    }
+
+    /**
+     * Checks if the created Date is valid or not.
+     *
+     * @param createdAt The input created date of transaction
+     * @throws DateFormatInvalidException If the date is in wrong format or after the current day
+     */
+    private void checkValidCreatedDate(String createdAt) throws DateFormatInvalidException {
+        LocalDate validBeginningDate = LocalDate.parse("2016-01-01");
+        try {
+            if (LocalDate.parse(createdAt).isAfter(LocalDate.now())
+                    || LocalDate.parse(createdAt).isBefore(validBeginningDate)) {
+                throw new DateFormatInvalidException(MESSAGE_CREATED_DATE_RANGE_INVALID);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DateFormatInvalidException(MESSAGE_DATE_FORMAT_INVALID);
+        }
+    }
+
+    /**
+     * Checks if storage duration created date and transaction ID is valid or not.
+     *
+     * @param args The array of input arguments
+     * @throws DateFormatInvalidException If date of wrong format
+     * @throws DurationInvalidException If duration is out of range or wrong format
+     * @throws DuplicateException If there is at least one transaction with the same ID
+     */
+    public void checkValidArgsForStorage(String[] args)
+            throws DateFormatInvalidException, DurationInvalidException, DuplicateException {
+        checkValidDuration(args[DURATION_INDEX]);
+        checkValidCreatedDate(args[CREATED_DATE_INDEX]);
+        checkValidId(args[TX_ID_INDEX]);
+    }
+
+    /**
+     * Checks if input duration and created date is valid or not.
+     *
+     * @param args The array of input arguments
+     * @throws DateFormatInvalidException If date of wrong format
+     * @throws DurationInvalidException If duration is out of range or wrong format
+     */
+    public void checkValidArgsForAdding(String[] args)
+            throws DateFormatInvalidException, DurationInvalidException {
+        checkValidDuration(args[DURATION_INDEX]);
+        checkValidCreatedDate(args[CREATED_DATE_INDEX]);
     }
 
     /**
