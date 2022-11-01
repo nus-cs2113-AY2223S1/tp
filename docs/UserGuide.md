@@ -12,7 +12,7 @@ medicine information via Command Line Interface.
         + [Main Menu](#main-menu)
             - [Going to main menu: `main`](#going-to-main-menu-main)
             - [Choosing an option: `index`](#choosing-an-option-index)
-          - [1. Patient](#1-patient)
+          + [1. Patient](#1-patient)
               - [Adding a patient: `add`](#adding-a-new-patient-add)
               - [Viewing list of patients: `viewAll`](#viewing-all-patients-viewall)
               - [Retrieving a patient: `retrieve`](#retrieving-a-patients-records-retrieve)
