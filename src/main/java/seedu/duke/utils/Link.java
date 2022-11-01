@@ -10,7 +10,6 @@ import seedu.duke.parser.LessonTypeParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -18,16 +17,6 @@ import java.util.regex.Pattern;
 
 /**
  * Handles the creating and parsing of NUSMods export link.
- *
- * <p>It would be in the form</p>
- * https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO etc
- *
- * <p>The MODULE_INFO will be in the form</p>
- * MODULE_CODE=LESSON:LESSON_NUMBER,LESSON:LESSON_NUMBER etc
- *
- * <p>An e.g.</p>
- * <a href="https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1">
- *         https://nusmods.com/timetable/sem-1/share?CS1231=SEC:1,TUT:04&CS2113=TUT:4,LEC:1</a>
  */
 public class Link {
     private static final String DOMAIN = "https://nusmods.com/timetable/";
@@ -78,29 +67,8 @@ public class Link {
      */
     public static void parseLink(String link, State state, Ui ui) throws YamomException {
         String[] infoParam = link.split(DELIMITER_REGEX);
-        /*
-        infoParam[0] = "https:";
-        infoParam[1] = "";
-        infoParam[2] = "nusmods.com";
-        infoParam[3] = "timetable";
-        infoParam[4] = "sem-SEMESTER_NUMBER"; <- SEMESTER_PARAM_INDEX
-        infoParam[5] = "share?MODULE_INFO&MODULE_INFO"; <- MODULES_PARAM_INDEX
-         */
 
-        int semester;
-        try {
-            String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
-            semester = getSemesterFromParam(semesterParam);
-        } catch (NumberFormatException e) {
-            throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
-        }
-
-        if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
-            state.setSemester(semester);
-            ui.addMessage("Semester " + semester + " timetable imported.");
-        } else {
-            throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
-        }
+        int semester = extractSemester(state, ui, infoParam);
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         cleanModuleParam = cleanModuleParam.toUpperCase();
@@ -110,6 +78,25 @@ public class Link {
         }
         String[] moduleAndLessonsArray = cleanModuleParam.split(MODULE_DELIMITER);
         List<SelectedModule> selectedModules = new ArrayList<>();
+        extractModulesAndLessons(ui, semester, moduleAndLessonsArray, selectedModules);
+        ui.addMessage("Please check that the format of the link provided is correct if there are missing "
+                + "modules or lessons.");
+        ui.addMessage("Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-"
+                + "timetable-import");
+        ui.addMessage("for more information.");
+        state.setSelectedModulesList(selectedModules);
+    }
+
+    /**
+     * Extracts all the module code and their respective lesson types and numbers.
+     *
+     * @param ui                    To output to the user.
+     * @param semester              Semester in which lessons are being selected for.
+     * @param moduleAndLessonsArray The segment of user input that contains the modules information.
+     * @param selectedModules       To store all the modules specified in a standardized format.
+     */
+    private static void extractModulesAndLessons(Ui ui, int semester, String[] moduleAndLessonsArray,
+                                                 List<SelectedModule> selectedModules) {
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
             if (splitModuleAndLesson.length == 0) {
@@ -131,12 +118,34 @@ public class Link {
             selectedModules.add(selectedModule);
             ui.addMessage("");
         }
-        ui.addMessage("Please check that the format of the link provided is correct if there are missing "
-                + "modules or lessons.");
-        ui.addMessage("Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-"
-                + "timetable-import");
-        ui.addMessage("for more information.");
-        state.setSelectedModulesList(selectedModules);
+    }
+
+    /**
+     * Extracts the semester number from the supposed <code>SEMESTER_PARAM_INDEX</code> and checks to see if
+     * the semester number is valid.
+     *
+     * @param state     Current state of the application to be saved to.
+     * @param ui        To output to the user.
+     * @param infoParam The user input split by spaces.
+     * @return A valid semester number from 1 to 4 inclusive.
+     * @throws YamomException When the semester number is not a number or is not from 1 to 4 inclusive.
+     */
+    private static int extractSemester(State state, Ui ui, String[] infoParam) throws YamomException {
+        int semester;
+        try {
+            String semesterParam = infoParam[SEMESTER_PARAM_INDEX];
+            semester = getSemesterFromParam(semesterParam);
+        } catch (NumberFormatException e) {
+            throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
+        }
+
+        if (Arrays.asList(1, 2, 3, 4).contains(semester)) {
+            state.setSemester(semester);
+            ui.addMessage("Semester " + semester + " timetable imported.");
+        } else {
+            throw new YamomException(SEMESTER_PROCESS_ERROR_MESSAGE);
+        }
+        return semester;
     }
 
     /**
@@ -186,6 +195,7 @@ public class Link {
      *                       LESSON:LESSON_NUMBER</code>.
      * @param selectedModule Current module to select lessons.
      * @param semester       Semester in which lessons are being selected for.
+     * @param ui             To output to the user.
      */
     private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester, Ui ui) {
         for (String s : lessonsInfo) {
@@ -206,6 +216,7 @@ public class Link {
      * @param semester       Semester in which lessons are being selected for.
      * @param lessonType     Specified lesson type.
      * @param classNo        Specified class number.
+     * @param ui             To output to the user.
      */
     private static void addValidLesson(SelectedModule selectedModule, int semester,
                                        LessonType lessonType, String classNo, Ui ui) {
@@ -235,6 +246,7 @@ public class Link {
      * Translates the short string to its respective <code>LessonType</code>.
      *
      * @param shortString Unique identifier for <code>LessonType</code>.
+     * @param ui          To output to the user.
      * @return Corresponding <code>LessonType</code>. <code>null</code> if the shortString could not be parsed.
      */
     private static LessonType getLessonType(String shortString, Ui ui) {
