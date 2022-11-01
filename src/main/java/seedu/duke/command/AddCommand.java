@@ -204,10 +204,10 @@ public class AddCommand extends Command {
 
 
     private void addFood(String[] argumentList) throws IllegalValueException {
+        if (argumentList.length < 3 || argumentList.length > 4) {
+            throw new IllegalValueException(INVALID_FOOD_INPUT);
+        }
         try {
-            if (argumentList.length < 3) {
-                throw new IllegalValueException(INVALID_FOOD_INPUT);
-            }
             LocalDate date;
             if (argumentList.length == 4) {
                 date = Parser.parseDate(argumentList[3], 0);
