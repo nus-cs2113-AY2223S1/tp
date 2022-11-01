@@ -8,6 +8,7 @@ Actor User USER_COLOR
 Participant ":MoneyGoWhere" as MoneyGoWhere MONEYGOWHERE_COLOR_1
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 Participant ":Parser" as Parser PARSER_COLOR_1
+Participant ":Logger" as Logger LOGGER_COLOR_1
 Participant ":Data" as Data DATA_COLOR_1
 Participant ":Expense" as Expense DATA_COLOR_1
 Participant ":Storage" as Storage STORAGE_COLOR_1
@@ -19,6 +20,13 @@ create UserInterface
 MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface
 activate UserInterface USER_INTERFACE_COLOR_1
 
+create Logger
+UserInterface -[USER_INTERFACE_COLOR_1]> Logger
+activate Logger LOGGER_COLOR_1
+
+Logger --[LOGGER_COLOR_1]> UserInterface
+deactivate Logger
+
 create Data
 UserInterface -[USER_INTERFACE_COLOR_1]> Data
 activate Data DATA_COLOR_1
@@ -27,7 +35,7 @@ Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
 ref over UserInterface, Data, Storage
-        Load Expenses from File
+        load data from file
     end ref
 
 UserInterface -[USER_INTERFACE_COLOR_1]> MoneyGoWhere
@@ -37,8 +45,8 @@ MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface : run()
 activate UserInterface USER_INTERFACE_COLOR_1
 
 loop Command not equals "Bye"
-    ref over User, UserInterface, Parser
-        Get User Command
+    ref over User, UserInterface, Parser, Logger
+        get user command
     end ref
 
     opt consoleCommand is instance of ConsoleCommandAddExpense
@@ -64,11 +72,11 @@ loop Command not equals "Bye"
         deactivate Data
 
         ref over UserInterface
-            Printing an Expense
+            printing an expense
         end ref
 
         ref over UserInterface, Storage
-            Save Expenses to File
+            save data to file
         end ref
 
         UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
@@ -81,6 +89,7 @@ deactivate UserInterface
 
 destroy UserInterface
 destroy Parser
+destroy Logger
 destroy Data
 destroy Expense
 destroy Storage
