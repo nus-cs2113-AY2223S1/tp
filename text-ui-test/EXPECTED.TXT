@@ -20,7 +20,7 @@ set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity
 view {biometrics/food/weight/bmi/maintenance/calories/all} {exercise/strength/cardio /{done}}
 add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]
 add cardio /{description} /{distance} /{repetitions} [/{date}]
-add food /{description} /{calories} /{date}
+add food /{description} /{calories} [/{date}]
 add weight /{weight} /{fat percentage}
 remove {food/exercise} /{food index/current exerciseList index}
 mark {done/undone} /{exercise index} / {time} / {metabolic equivalent}

@@ -71,7 +71,7 @@ Example of usage:
 
 Add user's food consumption in TracknFit
 
-Format: `add food /{description} /{calories} /{date}`
+Format: `add food /{description} /{calories} [/{date}]`
 
 * description needs to be a string
 * calories should be positive integer inputs in the units of kcal

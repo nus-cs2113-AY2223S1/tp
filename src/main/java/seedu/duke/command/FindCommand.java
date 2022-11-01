@@ -17,6 +17,7 @@ import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -129,6 +130,11 @@ public class FindCommand extends Command {
     private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
             throw new IllegalValueException("Invalid find date command");
+        }
+        try {
+            LocalDate.parse(argumentList[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (DateTimeException e) {
+            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
         }
     }
 

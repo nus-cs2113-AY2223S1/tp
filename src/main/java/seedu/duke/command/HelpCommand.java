@@ -33,13 +33,13 @@ public class HelpCommand extends Command {
                 + System.lineSeparator()
                 + "add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]" + System.lineSeparator()
                 + "add cardio /{description} /{distance} /{repetitions} [/{date}]" + System.lineSeparator()
-                + "add food /{description} /{calories} /{date}" + System.lineSeparator()
+                + "add food /{description} /{calories} [/{date}]" + System.lineSeparator()
                 + "add weight /{weight} /{fat percentage}" + System.lineSeparator()
                 + "remove {food/exercise} /{food index/current exerciseList index}" + System.lineSeparator()
                 + "mark {done} /{exercise index} / {time} / {metabolic equivalent}" + System.lineSeparator()
                 + "mark {undone} /{exercise index}" + System.lineSeparator()
                 + "find {strength/cardio/food/date_e/date_f} /{description}" + System.lineSeparator()
-                + "find {calories} /[/{date}]");
+                + "find {calories} //{date}");
     }
 
     @Override

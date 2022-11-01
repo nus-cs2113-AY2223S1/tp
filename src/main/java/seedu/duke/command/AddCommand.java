@@ -86,6 +86,7 @@ public class AddCommand extends Command {
             int weight = Validator.getWeightWithValidation(argumentList[2]);
             int set = Validator.getSetWithValidation(argumentList[3]);
             int repetition = Validator.getRepetitionWithValidation(argumentList[4]);
+
             LocalDate date;
             if (argumentList.length == 6) {
                 date = Parser.parseDate(argumentList[5], 1);
@@ -125,6 +126,7 @@ public class AddCommand extends Command {
         try {
             double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
             int repetition = Validator.getRepetitionWithValidation(argumentList[3]);
+
             LocalDate date;
             if (argumentList.length == 5) {
                 date = Parser.parseDate(argumentList[4], 1);
@@ -228,6 +230,9 @@ public class AddCommand extends Command {
         int calories = Integer.parseInt(input);
         if (calories <= 0) {
             throw new IllegalValueException("Calories inputs need to be positive integer values!");
+        }
+        if (calories > 10000) {
+            throw new IllegalValueException("It is impossible to have consumed more than 10000 kcal in a day!");
         }
         return calories;
     }

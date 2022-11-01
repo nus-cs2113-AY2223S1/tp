@@ -25,7 +25,8 @@ public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static Command parse(String input) {
-        String userCommand = getCommandType(input);
+        input = input.trim();
+        String userCommand = getUserCommand(input);
         LOGGER.info("command: " + userCommand);
         String arguments = getArgumentSubString(input, userCommand);
         LOGGER.info("arguments:" + arguments);
@@ -53,7 +54,7 @@ public class Parser {
         }
     }
 
-    public static String getCommandType(String input) {
+    public static String getUserCommand(String input) {
         String userCommand = input.split(" ")[0];
         return userCommand;
     }
