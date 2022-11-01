@@ -68,6 +68,9 @@ public class Parser {
         String id = input.substring(input.indexOf(format) + lengthOfSignature);
 
         try {
+            if (id == null) {
+                throw new DukeException();
+            }
             isInt(id);
         } catch (DukeException e) {
             throw new DukeException();
@@ -97,6 +100,7 @@ public class Parser {
         try {
             return numberInInput(input, " h/");
         } catch (DukeException e) {
+            System.out.println("Please enter 0 or 1 for health status");
             throw new DukeException();
         }
     }

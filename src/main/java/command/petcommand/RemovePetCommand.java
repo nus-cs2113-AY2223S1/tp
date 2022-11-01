@@ -20,8 +20,7 @@ public class RemovePetCommand extends Command {
             System.out.println(pet.name);
             System.out.println("Now you have " + (PetList.pets.size() - 1) + " pets in the pet list.");
             PetList.pets.remove(pet);
-        }
-        if (pet == null) {
+        } else if (pet == null) {
             System.out.println("Pet not found! Please enter a valid index");
         }
     }
