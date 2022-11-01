@@ -104,7 +104,8 @@ public class EditCommand extends Command {
             } catch (IndexOutOfBoundsException e) {
                 return new CommandResult("Index specified is out of range!");
             } catch (Exception e) {
-                return new CommandResult("/edit syntax is incorrect. Please check again using the '/help edit' command");
+                return new CommandResult("/edit syntax is incorrect. "
+                        + "Please check again using the '/help edit' command");
             }
         }
     }
