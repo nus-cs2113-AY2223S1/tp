@@ -85,11 +85,12 @@ class ParserTest {
 
     @Test
     void deleteCommandTest() {
-        String deleteString = "delete movie 1";
         ps.executeClear();
         addTestMovie();
         ReviewList currentList = ps.getReviewList();
         assertEquals(1, currentList.inputs.size());
+
+        String deleteString = "delete movie 1";
         String[] splitString = deleteString.split(" ");
         ps.executeDelete(splitString);
         currentList = ps.getReviewList();
