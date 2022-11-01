@@ -110,12 +110,41 @@ public class Ui {
     /**
      * Prepares the time insights list messages to be displayed to the user.
      *
-     * @param list    A string containing the formatted time insights list.
-     * @param message A message that complements with the time insights list.
+     * @param list           A string containing the formatted time insights list.
+     * @param message        A message that complements with the time insights list.
+     * @param incomeMessage  A string containing the formatted income amount.
+     * @param expenseMessage A string containing the formatted expense amount.
+     * @param savingsMessage A string containing the formatted savings amount.
      */
     public static void showTimeInsightsList(String list, String message, String incomeMessage,
-                                            String expenseMessage, String savingsMessage) {
+            String expenseMessage, String savingsMessage) {
         printMessages(message, list, incomeMessage, expenseMessage, savingsMessage);
+    }
+
+    //@@author wcwy
+
+    /**
+     * Prepares the time insights list messages to be displayed to the user for a specific month.
+     *
+     * <p>This is an overload method to specifically catered for display of budget-related message
+     * when the user chose to view the statistic for a specific month. For example,
+     * command 'stats s/time_insights m/2 y/2022' will utilise this function to display also the budget messages to the
+     * user.
+     *
+     * @param list           A string containing the formatted time insights list.
+     * @param message        A message that complements with the time insights list.
+     * @param incomeMessage  A string containing the formatted income amount.
+     * @param expenseMessage A string containing the formatted expense amount.
+     * @param savingsMessage A string containing the formatted savings amount.
+     * @param spendingHabitComment   A string containing the formatted spending habit comment.
+     * @param budgetMessage  A string containing the formatted budget amount.
+     * @param budgetAdvice   A string containing the formatted budget advice.
+     */
+    public static void showTimeInsightsList(String list, String message, String incomeMessage,
+            String expenseMessage, String savingsMessage, String budgetMessage, String spendingHabitComment,
+                                            String budgetAdvice) {
+        printMessages(message, list, incomeMessage, expenseMessage, savingsMessage, budgetMessage,
+                spendingHabitComment, budgetAdvice);
     }
 
     //@@author chydarren

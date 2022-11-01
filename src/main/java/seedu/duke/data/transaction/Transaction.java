@@ -9,7 +9,7 @@ import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 /**
  * Represents a transaction made by the user, which could be either an income or an expense.
  */
-public abstract class Transaction {
+public abstract class Transaction implements Comparable<Transaction> {
     //@@author chydarren
     private static final String PREFIX_CATEGORY = "[";
     private static final String POSTFIX_CATEGORY = "]";
@@ -66,6 +66,19 @@ public abstract class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    //@@author chydarren
+
+    /**
+     * A comparator between dates of two transaction objects to facilitate sorting by date.
+     *
+     * @param transaction The transaction object.
+     * @return An integer that informs the order of comparison between two objects of same type.
+     */
+    @Override
+    public int compareTo(Transaction transaction) {
+        return getDate().compareTo(transaction.getDate());
     }
 
     //@@author wcwy
