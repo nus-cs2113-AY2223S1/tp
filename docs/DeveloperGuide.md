@@ -694,4 +694,4 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
     2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
        the first row. Save the changes to the file.
     3. Re-launch the application.<br>
-       **Expected:** The data file will not be loaded into the application, and user will be prompted that the file.
+       **Expected:** The data file will only be partially loaded into the application, and user will be prompted to STOP the program and fix the error before reloading. If users decide to continue using the program, the data would be overwritten.
