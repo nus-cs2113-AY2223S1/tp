@@ -178,8 +178,8 @@ public class UserUniversityListManager {
      */
     public void displayUniversity(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
-        System.out.println(input);
         UserUniversityList myUniversityList = getList(input);
+        System.out.println(input);
         myUniversityList.displayModules();
     }
 
