@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -57,5 +58,42 @@ class ParserTest {
         
         assertEquals("Ensure that input format and number of arguments is correct.\n"
             .replaceAll("\n", System.getProperty("line.separator")), outContent.toString());
+    }
+
+    @Test
+    void illegalCharacterTest() {
+        String addString = "|";
+
+        assertThrows(DukeException.class, () -> {
+            ps.checkIllegalCharacter(addString);
+        });
+    }
+
+    @Test
+    void clearCommandTest() {
+        addTestMovie();
+        ReviewList result = ps.executeClear();
+        assertEquals(0, result.inputs.size());
+    }
+
+    @Test
+    void parserValidDateTest() {
+        String invalidDate = "10-20-30-20";
+        String[] dateFields = invalidDate.split("-");
+        assertFalse(ps.isValidDate(dateFields));
+    }
+
+    @Test
+    void deleteCommandTest() {
+        ps.executeClear();
+        addTestMovie();
+        ReviewList currentList = ps.getReviewList();
+        assertEquals(1, currentList.inputs.size());
+
+        String deleteString = "delete movie 1";
+        String[] splitString = deleteString.split(" ");
+        ps.executeDelete(splitString);
+        currentList = ps.getReviewList();
+        assertEquals(0, currentList.inputs.size());
     }
 }
