@@ -172,9 +172,34 @@ public class CommandParser {
         int commentStartIndex = comment.indexOf("{");
         int commentEndIndex = comment.indexOf("}");
 
+        if (isValidComment(commentStartIndex, commentEndIndex) && !isEmptyComment(commentStartIndex, commentEndIndex)) {
+            return comment.substring(commentStartIndex + 1, commentEndIndex);
+        }
 
         throw new InvalidCommentException("Error! The comment " + comment + " is invalid!");
     }
+
+    private static boolean isValidComment(int commentStartIndex, int commentEndIndex) {
+        if (commentStartIndex == -1) {
+            return false;
+        }
+
+        if (commentEndIndex == -1) {
+            return false;
+        }
+
+        if (commentStartIndex >= commentEndIndex) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean isEmptyComment(int commentStartIndex, int commentEndIndex) {
+        if (commentStartIndex == commentEndIndex - 1) {
+            return true;
+        }
+        return false;
     }
 
     /**
