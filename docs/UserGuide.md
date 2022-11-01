@@ -160,13 +160,18 @@ There are two types of flags:
 
 - **Command flags: Specify the type of function to be used**
     - `-add`: *Adds a new ingredient or step*
+  
+      ℹ Only works for ingredient or step. Cannot add more than 1 recipe title or description.
       - Parameter: `INGREDIENT or STEP`
       - Example:
       ```
       /edit 2 -add 
       ```
     - `-del`: *Deletes an ingredient or step*
-      - Parameter: `INDEX`
+  
+      ℹ Only works for ingredient or step. Cannot delete recipe title or description.
+
+        - Parameter: `INDEX`
         - Exactly **1 (one)** integer must be provided.
       - Example:
       ```
