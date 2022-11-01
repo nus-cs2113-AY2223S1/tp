@@ -394,35 +394,35 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 ## User Stories
 
 | Version Implemented | As a ... | I want to ...                                     | So that I can ...                                 |
-|---------------------|----------|---------------------------------------------------|---------------------------------------------------|
-| v1.0                | user     | add expenses                                      | keep track of my finances                         |
-| v1.0                | user     | view expenses                                     | keep track of my finances                         |
-| v1.0                | user     | view expenses by name                             | search for past expenses easily                   |
-| v1.0                | user     | view expenses by category                         | keep track of my spending across different areas  |
-| v1.0                | user     | delete expenses                                   | keep track of my finances                         |
-| v1.0                | user     | edit expenses                                     | keep track of my finances                         |
-| v1.0                | user     | categorise expenses                               | keep track of my spending across different areas  |
-| v1.0                | user     | sort expenses by alphabetical order               | organise my spending by their names               |
-| v1.0                | user     | sort expenses by amount                           | keep track of the extent of my spending           |
-| v1.0                | user     | sort expenses by date                             | keep track of my spending over time               |
-| v1.0                | user     | save my data to a file                            | store my data easily                              |
-| v1.0                | user     | load my data from a file                          | retrieve my data easily                           |
-| v1.0                | user     | add my income                                     | keep track if my spending exceeds my income       |
-| v1.0                | user     | add expense targets                               | keep track of my financial goals                  |
-| v2.0                | user     | convert between different currencies              | keep track of expenses across multiple currencies |
-| v2.0                | user     | update currency exchange rates                    | convert between currencies using the latest rates |
-| v2.0                | user     | view my income                                    | keep track if my spending exceeds my income       |
-| v2.0                | user     | delete my income                                  | keep track if my spending exceeds my income       |
-| v2.0                | user     | edit my income                                    | keep track if my spending exceeds my income       |
-| v2.0                | user     | view expense targets                              | keep track of my financial goals                  |
-| v2.0                | user     | delete expense targets                            | keep track of my financial goals                  |
-| v2.0                | user     | edit expense targets                              | keep track of my financial goals                  |
-| v2.0                | user     | add recurring payments                            | keep track of my recurring payments               |
-| v2.0                | user     | view recurring payments                           | keep track of my recurring payments               |
-| v2.0                | user     | delete recurring payments                         | keep track of my recurring payments               |
-| v2.0                | user     | edit recurring payments                           | keep track of my recurring payments               |
-| v2.0                | user     | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
-| v2.0                | user     | merge several data files together                 | consolidate my expenses easily                    |
+|:-------------------:|:--------:|---------------------------------------------------|---------------------------------------------------|
+|        v1.0         |   user   | add expenses                                      | keep track of my finances                         |
+|        v1.0         |   user   | view expenses                                     | keep track of my finances                         |
+|        v1.0         |   user   | view expenses by name                             | search for past expenses easily                   |
+|        v1.0         |   user   | view expenses by category                         | keep track of my spending across different areas  |
+|        v1.0         |   user   | delete expenses                                   | keep track of my finances                         |
+|        v1.0         |   user   | edit expenses                                     | keep track of my finances                         |
+|        v1.0         |   user   | categorise expenses                               | keep track of my spending across different areas  |
+|        v1.0         |   user   | sort expenses by alphabetical order               | organise my spending by their names               |
+|        v1.0         |   user   | sort expenses by amount                           | keep track of the extent of my spending           |
+|        v1.0         |   user   | sort expenses by date                             | keep track of my spending over time               |
+|        v1.0         |   user   | save my data to a file                            | store my data easily                              |
+|        v1.0         |   user   | load my data from a file                          | retrieve my data easily                           |
+|        v1.0         |   user   | add my income                                     | keep track if my spending exceeds my income       |
+|        v1.0         |   user   | add expense targets                               | keep track of my financial goals                  |
+|        v2.0         |   user   | convert between different currencies              | keep track of expenses across multiple currencies |
+|        v2.0         |   user   | update currency exchange rates                    | convert between currencies using the latest rates |
+|        v2.0         |   user   | view my income                                    | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | delete my income                                  | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | edit my income                                    | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | view expense targets                              | keep track of my financial goals                  |
+|        v2.0         |   user   | delete expense targets                            | keep track of my financial goals                  |
+|        v2.0         |   user   | edit expense targets                              | keep track of my financial goals                  |
+|        v2.0         |   user   | add recurring payments                            | keep track of my recurring payments               |
+|        v2.0         |   user   | view recurring payments                           | keep track of my recurring payments               |
+|        v2.0         |   user   | delete recurring payments                         | keep track of my recurring payments               |
+|        v2.0         |   user   | edit recurring payments                           | keep track of my recurring payments               |
+|        v2.0         |   user   | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
+|        v2.0         |   user   | merge several data files together                 | consolidate my expenses easily                    |
 
 ## Non-Functional Requirements
 
