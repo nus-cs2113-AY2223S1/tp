@@ -5,45 +5,47 @@ skinparam classAttributeIconSize 0
 hide footbox
 hide circle
 
-abstract class "{abstract}\nStorage"
+abstract class "{abstract}\nStorage" {
+    + checkIfArgsEmpty(String[], int, String, String): void
+    + trimArrayValues(String[]): void
+}
 
 class UserStorage {
     {static} - SEPARATOR: String
+    - userList: UserList
     - userFilePath: String
     + UserStorage(String)
-    + loadData(): ArrayList<User>
+    + loadData(): UserList
     + writeData(UserList): void
     - makeUserDir(UserList): void
     + handleUserLine(String[]): User
     - getUserFromUserLine(String[]): User
-    - checkCheckSumLine(User, int): void
-    - checkCheckSumWhole(ArrayList<User>, int): void
 }
 
 class ItemStorage {
     {static} - SEPARATOR: String
+    - userList: UserList
+    - itemList: ItemList
     - itemFilePath: String
     + ItemStorage(String)
-    + loadData(): ArrayList<Item>
+    + loadData(): ItemList
     + writeData(ItemList): void
     - makeItemDir(ItemList): void
     + handleItemLine(String[]): Item
     - getItemFromItemLine(String[]): Item
-    - checkCheckSumLine(Item, int): void
-    - checkCheckSumWhole(ArrayList<Item>, int): void
 }
 
 class TransactionStorage {
     {static} - SEPARATOR: String
+    - transactionList: TransactionList
+    - itemList: ItemList
     - transactionFilePath: String
     + TransactionStorage(String)
-    + loadData(): ArrayList<Transaction>
+    + loadData(): TransactionList
     + writeData(TransactionList): void
     - makeTransactionDir(TransactionList)): void
     + handleTransactionLine(String[]): Transaction
     - getTransactionFromTransactionLine(String[]): Transaction
-    - checkCheckSumLine(Transaction, int): void
-    - checkCheckSumWhole(ArrayList<Transaction>, int): void
 }
 
 "{abstract}\nStorage" <|-- UserStorage

@@ -91,7 +91,7 @@ public class ExceptionMessages {
                     + "Do you want to force reset all files and restart? y or n";
     public static final String MESSAGE_EXIT_DUKE = "Exit Duke and please edit correctly...";
     public static final String MESSAGE_RESET_DUKE = "Force reset files and please restart...";
-    public static final String MESSAGE_NAME_LENGTH_INVALID = "The length of name must be less than 20 characters";
+    public static final String MESSAGE_NAME_LENGTH_INVALID = "The length of name must be no more than 20 characters";
     public static final String MESSAGE_NUM_OF_ARGS_INVALID = "The number of args for line is incorrect";
     public static final String MESSAGE_VALUE_OF_ARGS_INVALID = "The value of args for line is empty";
     public static final String MESSAGE_STORAGE_REASON = "\nReason: ";
