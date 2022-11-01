@@ -320,7 +320,7 @@ public class Parser {
 
     //@@author indraneelrp
     /**
-     * Gets the private reviewList object
+     * Gets the private reviewList object.
      */
     public ReviewList getReviewList() {
         return mediaList;
