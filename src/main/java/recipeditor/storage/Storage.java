@@ -105,17 +105,21 @@ public class Storage {
         try {
             for (String recipeTitle : RecipeList.recipeTitles) {
                 logger.log(Level.INFO, recipeTitle);
-                String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
+                String recipeFilePath = titleToFilePath(recipeTitle);
                 String content = Storage.loadFileContent(recipeFilePath);
                 Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
                 RecipeList.addRecipe(addedRecipe);
                 logger.log(Level.INFO, recipeTitle + " is added to recipeList");
             }
         } catch (FileNotFoundException e) {
-            Ui.showMessage("File not found :<");
+            Ui.showMessage("RecipesToRecipeList Fail");
         } catch (ParseFileException e) {
             Ui.showMessage("Error in parsing recipe file content.");
         }
+    }
+
+    public static String titleToFilePath(String title) {
+        return RECIPES_FOLDER_PATH + "/" + title + "/";
     }
 
     public static void rewriteRecipeListToFile(String filePath) {
@@ -130,7 +134,7 @@ public class Storage {
         }
     }
 
-    //FIXME: Don't need to append, just overwrite
+    //FIXED: Don't append just overwrite
     public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
         try {
             FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
