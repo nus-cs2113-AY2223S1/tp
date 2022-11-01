@@ -83,7 +83,7 @@ public class ParseAddProperty extends ParseAdd {
             + "{1}[1-9]{1})|([1-9]{1}[0-9]{1,3}))([A-Z]?)";
     private static final String BUILDING_NAME_REGEX = " [^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()"
             + "_+=<>\\s\\n?`~0-9,{}|-]";
-    private static final String POSTAL_CODE_REGEX = ", (Singapore [0-9]{6})$";
+    private static final String POSTAL_CODE_REGEX = ", (S[0-9]{6})$";
 
     // Singapore Landed Property Regex
     private static final String LANDED_PROPERTY_ADDRESS_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX + STREET_NAME_REGEX
@@ -317,6 +317,7 @@ public class ParseAddProperty extends ParseAdd {
 
     private static void showExistingDuplicateProperty(Property property) {
         Ui ui = new Ui();
+        ui.printNewline();
         ui.showToUser(EXISTING_PROPERTY + property.toString());
     }
 }

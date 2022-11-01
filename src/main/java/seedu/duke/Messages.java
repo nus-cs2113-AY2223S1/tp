@@ -8,6 +8,7 @@ public class Messages {
     public static final String EXCEPTION = "EXCEPTION";
     public static final String LINE_BREAK = "----------------------------------------------------------------------"
             + "----------";
+    public static final String INDENT = "        ";
 
     /* Confirmation Messages */
 
@@ -63,7 +64,7 @@ public class Messages {
     public static final String MESSAGE_ADD_PROPERTY_WRONG_FORMAT = "OOPS!!! To add a property, it requires "
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
-            + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 "
+            + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, S119081 "
             + "p/1000 t/LP BGL";
 
     public static final String MESSAGE_ADD_CLIENT_WRONG_FORMAT = "OOPS!!! To add a client, it requires "
@@ -77,21 +78,25 @@ public class Messages {
             + "To add a property, A valid Singapore address must be provided\nwith the following "
             + "format and details:\n"
             + LINE_BREAK
-            + "\nLANDED PROPERTY:\n  Format:  "
-            + "[Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]\n"
-            + "  Example: 60 Aria Street, Singapore 602580\n"
+            + "\n  Format:\n"
+            + INDENT + "[BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]\n"
+            + INDENT + "[BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]\n"
+            + INDENT + "[BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]\n"
             + LINE_BREAK
-            + "\nBUILDINGS (e.g. HDBs, apartments, condominiums):\n"
-            + "  Format (Without Building Name):\n  [Block Number]<space>[Street Name]<space>"
-            + "#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]\n"
-            + "  Example: 101 Marlow Street #12-05, Singapore 059020\n"
-            + "  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020\n"
+            + "\n  Example:\n"
+            + INDENT + "60 Aria Street, S602580\n"
+            + INDENT + "101 Marlow Street #12-05, S059020\n"
+            + INDENT + "101 Marlow Street #12-05 Clife Parkview, S059020\n"
             + LINE_BREAK
-            + "\nNote: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional\n"
-            + "Any deviation from format will lead to invalid address.";
+            + "\n  Note:\n"
+            + INDENT + "1. Format requires single space between [DETAILS] (space sensitive).\n"
+            + INDENT + "2. [DETAIL] must be provided; [detail] is optional.\n"
+            + INDENT + "3. For landed property, treat [Block Number] as its unit number.\n"
+            + INDENT + "4. Any deviation from format will lead to invalid address.\n"
+            + LINE_BREAK;
 
-    public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please enter positive number "
-            + "(No letter/symbols, etc) for renting price per month for property";
+    public static final String MESSAGE_INVALID_PRICE_FORMAT = "OOPS!!! Please only enter positive integer "
+            + "for renting price per month of property";
 
     public static final String MESSAGE_INVALID_UNIT_TYPE_LABEL = "OOPS!!! Please enter one of the following "
             + "valid unit type labels as shown below (Case-Sensitive & Space-Sensitive):\n"
@@ -139,8 +144,8 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_EMAIL = "OOPS!!! Please enter a valid Email Address";
 
-    public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please enter positive number "
-            + "(No letter/symbols, etc) for budget";
+    public static final String MESSAGE_INVALID_BUDGET_FORMAT = "OOPS!!! Please only enter positive integer "
+            + "for budget";
 
     public static final String MESSAGE_DUPLICATE_PROPERTY = "OOPS!!! There is already an existing property with the"
             + " same address.";
