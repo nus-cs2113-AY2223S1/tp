@@ -416,13 +416,14 @@ Here are the categorical savings and expenditure summary for
 The past 4 months:
 
 -----Categorical Savings-----
+[transport] $-10001
 [salary] $2000
 [food] $-20
 
 -----Expenditure Summary-----
 Income: $2000
-Expense: $20
-Savings: $1980
+Expense: $10021
+Savings: $-8021
 ____________________________________________________________
 ____________________________________________________________
 Type of period given is invalid, please enter <help> for the command guide.
@@ -497,13 +498,13 @@ ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $100
-Budget exceeded for current month: $9901
-REMINDER: You have already exceeded the budget set for current month!
+Remaining budget for current month: $100
+REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $10000000000000
-Remaining budget for current month: $9999999989999
+Remaining budget for current month: $10000000000000
 REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ____________________________________________________________
