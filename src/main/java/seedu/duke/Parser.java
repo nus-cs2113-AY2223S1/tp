@@ -12,13 +12,10 @@ import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exception.InvalidDateException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 ;
@@ -89,7 +86,7 @@ public class Parser {
             }
             return date;
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
+            throw new IllegalValueException("Date is in the wrong format or invalid. Please follow the dd-MM-yyyy format");
         }
     }
 }

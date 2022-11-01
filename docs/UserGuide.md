@@ -265,8 +265,8 @@ Format: `add strength /{exercise name} /{weight} /{sets} /{reps} [/{date}]`
 
 - exercise name must be within 50 characters
 - weight must be positive int and less or equal to 1000.
-- sets must be positive int and less or equal to 500
-- reps must be positive int and less or equal to 500
+- sets must be integer ranges from 1 to 100 inclusive
+- reps must be integer ranges from 1 to 100 inclusive.
 - date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not after year 2023.
 - the current date will be set if date is omitted.
 
