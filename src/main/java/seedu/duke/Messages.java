@@ -6,6 +6,7 @@ package seedu.duke;
 public class Messages {
 
     public static final String EXCEPTION = "EXCEPTION";
+    //@@author zoranabc201
     public static final String LINE_BREAK = "----------------------------------------------------------------------"
             + "----------";
     public static final String CLIENT = "Client:";
@@ -13,7 +14,9 @@ public class Messages {
     public static final String CLIENTS = "Clients:";
     public static final String PROPERTIES = "Properties:";
     public static final String PAIRS = "Pairs:";
+    //@@author
     public static final String INDENT = "        ";
+    //@@author zoranabc201
     public static final String THERE_IS = "There is ";
     public static final String THERE_ARE = "There are ";
     public static final String PROPERTY_SINGULAR = " property ";
@@ -23,6 +26,7 @@ public class Messages {
     public static final String PAIR_SINGULAR = " pair ";
     public static final String PAIRS_PLURAL = " pairs ";
     public static final String IN_THIS_LIST = "in this list";
+    //@@author
 
     /* Confirmation Messages */
 
@@ -230,6 +234,7 @@ public class Messages {
 
 
     /* List related Error Messages */
+    //@@author zoranabc201
 
     public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
             + " to list clients, -property to list properties, -pair to list pairs and -everything to list"
@@ -258,6 +263,7 @@ public class Messages {
             + "\nlist -pair to list all pairs with all their information"
             + "\nlist -pair -short to list all pairs with shortened information";
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
+    //@@author
 
 
     //@@author wilsonngja
