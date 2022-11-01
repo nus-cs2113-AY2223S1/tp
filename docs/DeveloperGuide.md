@@ -1,5 +1,22 @@
 # Developer Guide
 
+1. Acknowledgments
+2. Design
+* Architecture
+* Model Component
+* API Component
+* Storage Component
+* UI Component
+* Logic Component
+
+3. Implementation
+4. Project Scope
+5User Stories
+6. Non-Functional Requirements
+7. Glossary
+8. Instructions for Manual Testing
+
+
 ## Acknowledgements
 Our project uses external libraries and services from:
 1. Land Transport Authority DataMall API Service ([link](https://datamall.lta.gov.sg/content/datamall/en.html)).
@@ -9,9 +26,7 @@ Our project uses external libraries and services from:
 
 ### Architecture Level
 
-### Component Level
-
-#### Model Component
+### Model Component
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
 The model component consists of a `CarparkList` (and `CarparkFilteredList`) class that contains
@@ -31,7 +46,7 @@ one object with the HashMap `allAvailableLots` containing a breakdown of lots by
 Note: The `Carpark` class contain many getters, setters and annotations to be used with the `jackson` module. 
 See [`FileLoader`](#FileLoader) for more information.
 
-#### API Component
+### API Component
 ![API Class Diagram](images/ApiClassDiagram.png)
 
 The model component consists of a `Api` class that supports API call to LTA DataMall Services, under the
@@ -78,15 +93,14 @@ The following sequence diagram shows how the API key is loaded.
 ![Api Loading Sequnce Diagram](images/LoadApiSequenceDiagram.png)
 
 
-#### Storage Component
+### Storage Component
 
-#### Implementation
 ![Sequence Diagram](images/LoadFileSequenceDiagram.png)
 ##### FileWriter
 
 ##### FileLoader
 
-#### UI Component
+### UI Component
 
 The user-facing parts of the program are implemented with the Ui class.
 
@@ -102,7 +116,7 @@ different commands.
 - changeScanner() - Changes the scanner for the Ui object. To be used for JUnit testing.
 - getSeparatorString() - Returns a separator string.
 
-#### Logic Component
+### Logic Component
 How the parsing works:
 
 * When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
@@ -124,13 +138,18 @@ and return the respective `CommandResult` result of the Command.
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
 
+
+
+
+## Implementation
+This section describes some noteworthy details on how certain features are implemented.
+
 ### Favourite / Unfavourite feature
 
 ![Favourite Class Diagram](images/FavouriteClassDiagram.png)
 
-#### Implementation
 
-The Favourite class uses the FileReader and FileStorage classes to read and write carpark IDs to a .txt file so that 
+The Favourite class uses the FileReader and FileStorage classes to read and write carpark IDs to a .txt file so that
 user favourited carparks can be saved locally and retrieved even after the user exits the application.
 
 It implements the following operations:
@@ -159,47 +178,45 @@ It implements the following operations:
 
 Given below is an example of how the Favourite class is used to perform favourite / unfavourite operations:
 
-Step 1. On startup, the Favourite is initialised with a directory and file path to the file that contains data, and a 
+Step 1. On startup, the Favourite is initialised with a directory and file path to the file that contains data, and a
 favouriteList attribute.
-The Favourite class calls `updateFavouriteList()` shortly after to populate its ArrayList with the carpark IDs in the 
+The Favourite class calls `updateFavouriteList()` shortly after to populate its ArrayList with the carpark IDs in the
 file.
 
-Step 2. The user executes `favourite 1` to favourite the carpark with carpark ID `1`. The command is passed to the 
+Step 2. The user executes `favourite 1` to favourite the carpark with carpark ID `1`. The command is passed to the
 Parser class which returns a Command with value `FAVOURITE`.
-The main program first checks if the second argument in the command is equal to `list`. If so, the main program calls 
+The main program first checks if the second argument in the command is equal to `list`. If so, the main program calls
 `showList()` and passes it output to the Ui class for printing.
-Else, the main program checks if there exists a carpark with carpark ID `1` by calling `findCarpark()` from the 
+Else, the main program checks if there exists a carpark with carpark ID `1` by calling `findCarpark()` from the
 CarparkList class, which throws `NoCarparkFoundException` if no carpark was found.
-`setFavourite()` is then called to add the valid carpark ID into `favouriteList`, which searches `favouriteList` for 
+`setFavourite()` is then called to add the valid carpark ID into `favouriteList`, which searches `favouriteList` for
 any identical carpark IDs and throws `DuplicateCarparkException` if found, to prevent addition of duplicates.
-`1` is then added into `favouriteList` and `setFavourite()` calls `writeFavouriteList()` which overwrites data from 
+`1` is then added into `favouriteList` and `setFavourite()` calls `writeFavouriteList()` which overwrites data from
 `favouriteList` to the favourites file.
 
-> Note: If any exception is thrown, `1` will not be added into `favouriteList`, and `writeFavouriteList()` will not be 
+> Note: If any exception is thrown, `1` will not be added into `favouriteList`, and `writeFavouriteList()` will not be
 > called, hence preserving the validity of the carpark IDs.
 
 Step 3. The user executes `favourite 2` to favourite the carpark with carpark ID `2`. Same as Step 2.
 
-Step 4. The user realises he/she made a mistake and wants to unfavourite the carpark with carpark ID `2`, and executes 
+Step 4. The user realises he/she made a mistake and wants to unfavourite the carpark with carpark ID `2`, and executes
 `unfavourite 2`.
-The command is passed to the Parser class which returns a Command with value `UNFAVOURITE`. The main program calls 
+The command is passed to the Parser class which returns a Command with value `UNFAVOURITE`. The main program calls
 `setUnfavourite()`,
-which first checks if `favouriteList` contains an entry that matches `2`, and throws `NoCarparkFoundException` if none 
+which first checks if `favouriteList` contains an entry that matches `2`, and throws `NoCarparkFoundException` if none
 is found.
 Next, `2` is removed from `favouriteList` and `setUnfavourite()` calls `writeFavouriteList()` which overwrites data from
 `favouriteList` to the favourites file.
 
-Step 5. The user wants to view all favourited carparks and executes `favourite list`. The command is passed to the 
+Step 5. The user wants to view all favourited carparks and executes `favourite list`. The command is passed to the
 Parser class which returns a Command with value `FAVOURITE`.
 The main program calls `showList()` this time as the second argument in the command is `list`. The `showList()` method
-uses StringBuilder to format all the contents of `favouriteList` into a user-friendly string, and returns it for 
+uses StringBuilder to format all the contents of `favouriteList` into a user-friendly string, and returns it for
 printing.
 
 The following sequence diagrams shows how a favourite / unfavourite command works:
 
 ![Favourite Sequence Diagram](images/FavouriteSequenceDiagram.png)
-
-
 
 #### Design considerations
 
@@ -211,11 +228,7 @@ The following sequence diagrams shows how a favourite / unfavourite command work
     - Pros: Less time needed to favourite after a search result, do not need to key in entire carpark ID again
     - Cons: Need to search before favouriting, even if user already knows the exact carpark ID
 
-
-#### Common Files
-
-## Implementation
-
+### Common Files
 
 ## Product scope
 ### Target user profile
