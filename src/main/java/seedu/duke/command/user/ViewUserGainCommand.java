@@ -21,6 +21,14 @@ public class ViewUserGainCommand extends Command {
     private final TransactionList transactionList;
 
 
+    /**
+     * Constructor for ViewUserGainCommand.
+     *
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewUserGainCommand(String[] parts, UserList userList, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -51,11 +59,20 @@ public class ViewUserGainCommand extends Command {
         }
     }
 
+    /**
+     * Executes ViewUserGainCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidTransactionException If given transaction is invalid
+     * @throws UserNotFoundException If the user cannot be found in the list
+     */
     public boolean executeCommand()
             throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
         String userName = getArgsViewUserProfitCmd();
         if (isValidUser(userName)) {
-            double totalProfit = transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
+            double totalProfit =
+                    transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
             Ui.printResponse("The profit of " + userName + " is: $" + totalProfit);
         }
         return false;

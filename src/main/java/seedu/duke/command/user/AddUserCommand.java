@@ -24,7 +24,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_IN
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_AGE_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CONTACT_DUPLICATE;
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to add a new user.
@@ -47,7 +47,7 @@ public class AddUserCommand extends Command {
     /**
      * Constructor for AddUserCommand.
      *
-     * @param parts    The parts from user input
+     * @param parts The parts from user input
      * @param userList The list of users to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -111,7 +111,8 @@ public class AddUserCommand extends Command {
      */
     private boolean isValidAge(String age) throws InvalidUserException {
         try {
-            if (Integer.parseInt(age) < AGE_LOWER_LIMIT || Integer.parseInt(age) > AGE_UPPER_LIMIT) {
+            if (Integer.parseInt(age) < AGE_LOWER_LIMIT
+                    || Integer.parseInt(age) > AGE_UPPER_LIMIT) {
                 throw new InvalidUserException(MESSAGE_USER_AGE_OUT_OF_RANGE);
             }
             return true;
@@ -154,8 +155,8 @@ public class AddUserCommand extends Command {
      * @param args The array of input args
      * @return true If they are all valid
      * @throws ContactNumberInvalidException If contact number has the wrong length
-     * @throws DuplicateException            If that username is taken
-     * @throws InvalidUserException          If age is out of range
+     * @throws DuplicateException If that username is taken
+     * @throws InvalidUserException If age is out of range
      */
     private boolean areValidArgs(String[] args)
             throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
@@ -169,10 +170,10 @@ public class AddUserCommand extends Command {
      *
      * @return false If it is not an exit command
      * @throws InsufficientArgumentsException If the number of args is incorrect
-     * @throws InvalidArgumentException       If there is a part that cannot be parsed
-     * @throws ContactNumberInvalidException  If contact number has the wrong length
-     * @throws DuplicateException             If that username is taken
-     * @throws InvalidUserException           If age is out of range
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws ContactNumberInvalidException If contact number has the wrong length
+     * @throws DuplicateException If that username is taken
+     * @throws InvalidUserException If age is out of range
      */
     public boolean executeCommand() throws InsufficientArgumentsException, InvalidArgumentException,
             ContactNumberInvalidException, DuplicateException, InvalidUserException {

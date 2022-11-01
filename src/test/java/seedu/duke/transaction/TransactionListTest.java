@@ -65,7 +65,8 @@ class TransactionListTest {
         Transaction unfinishedTransaction = new Transaction("pen", "28sd37h2", "bui", "jw", 300,
                 LocalDate.parse("2022-10-03"), 3.2);
         transactionList.addTransaction(unfinishedTransaction);
-        assertFalse(transactionList.getTransactionById(unfinishedTransaction.getTxId()).isFinished());
+        assertFalse(
+                transactionList.getTransactionById(unfinishedTransaction.getTxId()).isFinished());
     }
 
     @Test
@@ -107,7 +108,7 @@ class TransactionListTest {
     @Test
     void hasThisItemBeingBorrowed_hasItem_returnTrue() {
         Transaction unfinishedTransaction = new Transaction("pen", "28sd37h2", "bui", "jw", 300,
-            LocalDate.parse("2022-10-03"), 3.2);
+                LocalDate.parse("2022-10-03"), 3.2);
         transactionList.addTransaction(unfinishedTransaction);
         assertTrue(transactionList.hasThisItemBeingBorrowed("28sd37h2"));
     }
@@ -122,7 +123,9 @@ class TransactionListTest {
     void convertTransactionListToFileFormat() {
         String transactionId = transaction.getTxId();
         transactionList.addTransaction(transaction);
-        assertEquals("1\n" + transactionId + " | pen | 28sd37h2 | jw | bui | 5 | 2022-10-03 | 3.2 | 166\n",
+        assertEquals(
+                "1\n" + transactionId
+                        + " | pen | 28sd37h2 | jw | bui | 5 | 2022-10-03 | 3.2 | 166\n",
                 transactionList.convertTransactionListToFileFormat());
     }
 
@@ -149,9 +152,7 @@ class TransactionListTest {
         Transaction newTransaction = new Transaction("pen", "28sd37h2", "bui", "jw", 6,
                 LocalDate.parse("2022-10-09"), 3.2);
         transactionList.addTransaction(newTransaction);
-        assertThrows(InvalidTransactionException.class,
-            () -> transactionList
-                    .checkOldTransactionsOverlapWithNew(
-                            transaction.update(10, 6.4)));
+        assertThrows(InvalidTransactionException.class, () -> transactionList
+                .checkOldTransactionsOverlapWithNew(transaction.update(10, 6.4)));
     }
 }

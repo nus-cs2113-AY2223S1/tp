@@ -28,7 +28,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SELF_BORROWER;
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to add a new transaction.
@@ -51,14 +51,14 @@ public class AddTransactionCommand extends Command {
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts           The parts from user input
-     * @param userList        The list of users to work with
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public AddTransactionCommand(String[] parts, UserList userList, ItemList itemList,
-                                 TransactionList transactionList) throws InsufficientArgumentsException {
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         this.itemList = itemList;
@@ -116,7 +116,7 @@ public class AddTransactionCommand extends Command {
      * @param itemId The input item id
      * @param userId The input user id
      * @return true If the item owner is not the borrower
-     * @throws InvalidUserException  If the user borrows him/herself
+     * @throws InvalidUserException If the user borrows him/herself
      * @throws ItemNotFoundException If the item cannot be found
      * @throws UserNotFoundException If the user cannot be found
      */
@@ -168,24 +168,26 @@ public class AddTransactionCommand extends Command {
     }
 
     private boolean areValidArgs(String[] args)
-            throws InvalidUserException, DateFormatInvalidException,
-            ItemNotFoundException, UserNotFoundException, DurationInvalidException {
+            throws InvalidUserException, DateFormatInvalidException, ItemNotFoundException,
+            UserNotFoundException, DurationInvalidException {
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
-        return isValidItem(args[ITEM_ID_INDEX]) && isValidBorrower(args[ITEM_ID_INDEX], args[BORROWER_INDEX])
-                && isValidDuration(args[DURATION_INDEX]) && isValidCreatedDate(args[CREATED_DATE_INDEX]);
+        return isValidItem(args[ITEM_ID_INDEX])
+                && isValidBorrower(args[ITEM_ID_INDEX], args[BORROWER_INDEX])
+                && isValidDuration(args[DURATION_INDEX])
+                && isValidCreatedDate(args[CREATED_DATE_INDEX]);
     }
 
     /**
      * Executes AddTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException   If there is a part that cannot be parsed
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
      * @throws DateFormatInvalidException If the number of args is incorrect
-     * @throws InvalidUserException       If the user borrows themselves
-     * @throws InvalidItemException       If the item is unavailable
-     * @throws ItemNotFoundException      If the item cannot be found in the list
-     * @throws UserNotFoundException      If the user cannot be found
-     * @throws DurationInvalidException   If the number is less than 0
+     * @throws InvalidUserException If the user borrows themselves
+     * @throws InvalidItemException If the item is unavailable
+     * @throws ItemNotFoundException If the item cannot be found in the list
+     * @throws UserNotFoundException If the user cannot be found
+     * @throws DurationInvalidException If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, DateFormatInvalidException,
             InvalidUserException, InvalidItemException, ItemNotFoundException,
@@ -209,7 +211,9 @@ public class AddTransactionCommand extends Command {
         String lenderId = itemList.getItemById(itemId).getOwnerId();
         int duration = Integer.parseInt(args[DURATION_INDEX]);
         LocalDate createdAt = LocalDate.parse(args[CREATED_DATE_INDEX]);
-        double moneyTransacted = itemList.getItemById(args[ITEM_ID_INDEX]).getPricePerDay() * (double) duration;
-        return new Transaction(itemName, itemId, borrowId, lenderId, duration, createdAt, moneyTransacted);
+        double moneyTransacted =
+                itemList.getItemById(args[ITEM_ID_INDEX]).getPricePerDay() * (double) duration;
+        return new Transaction(itemName, itemId, borrowId, lenderId, duration, createdAt,
+                moneyTransacted);
     }
 }

@@ -18,7 +18,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVAL
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED;
 
-//@@author bdthanh
+// @@author bdthanh
 public class TransactionStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private static final int TX_ID_INDEX = 0;
@@ -46,7 +46,8 @@ public class TransactionStorage extends Storage {
      * @return The list of transactions stored in the file.
      * @throws TransactionFileNotFoundException If the file cannot be found.
      */
-    public ArrayList<Transaction> loadData() throws TransactionFileNotFoundException, StoreFailureException {
+    public ArrayList<Transaction> loadData()
+            throws TransactionFileNotFoundException, StoreFailureException {
         try {
             File transactionFile = new File(transactionFilePath);
             ArrayList<Transaction> transactionList = new ArrayList<>();
@@ -63,7 +64,8 @@ public class TransactionStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new TransactionFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -106,14 +108,17 @@ public class TransactionStorage extends Storage {
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.
      */
-    public static Transaction handleTransactionLine(String[] splitTransactionLine) throws StoreFailureException {
+    public static Transaction handleTransactionLine(String[] splitTransactionLine)
+            throws StoreFailureException {
         assert splitTransactionLine.length == 9 : "Invalid Transaction Line";
         try {
             Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
-            checkCheckSumLine(transaction, Integer.parseInt(splitTransactionLine[CHECKSUM_INDEX].trim()));
+            checkCheckSumLine(transaction,
+                    Integer.parseInt(splitTransactionLine[CHECKSUM_INDEX].trim()));
             return transaction;
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -128,23 +133,27 @@ public class TransactionStorage extends Storage {
             int duration = Integer.parseInt(splitTransactionLine[DURATION_INDEX].trim());
             LocalDate createdAt = LocalDate.parse(splitTransactionLine[DATE_INDEX].trim());
             double moneyTransacted = Double.parseDouble(splitTransactionLine[MONEY_INDEX].trim());
-            return new Transaction(transactionId, itemName, itemId, borrowerId,
-                    lenderId, duration, createdAt, moneyTransacted);
+            return new Transaction(transactionId, itemName, itemId, borrowerId, lenderId, duration,
+                    createdAt, moneyTransacted);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
-    private static void checkCheckSumLine(Transaction transaction, int checkSum) throws StoreFailureException {
+    private static void checkCheckSumLine(Transaction transaction, int checkSum)
+            throws StoreFailureException {
         if (transaction.toString().length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumWhole(ArrayList<Transaction> transactionList, int checkSum)
             throws StoreFailureException {
         if (transactionList.size() != checkSum) {
-            throw new StoreFailureException(MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
         }
     }
 }

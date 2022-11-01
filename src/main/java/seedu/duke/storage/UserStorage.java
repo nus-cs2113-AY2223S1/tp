@@ -17,7 +17,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STORE_INVAL
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED;
 
-//@@author bdthanh
+// @@author bdthanh
 public class UserStorage extends Storage {
     private static final String SEPARATOR = " \\| ";
     private static final int USERNAME_INDEX = 0;
@@ -56,7 +56,10 @@ public class UserStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
+                    + MESSAGE_TO_FIX_FILES
+            );
         }
     }
 
@@ -79,8 +82,7 @@ public class UserStorage extends Storage {
 
     private void makeUserDir(UserList userList) throws StoreFailureException {
         int startIndex = userFilePath.lastIndexOf("/");
-        String fileDirectory =
-                userFilePath.replace(userFilePath.substring(startIndex), "");
+        String fileDirectory = userFilePath.replace(userFilePath.substring(startIndex), "");
         File file = new File(fileDirectory);
         if (file.mkdir()) {
             writeData(userList);
@@ -105,7 +107,9 @@ public class UserStorage extends Storage {
             checkCheckSumLine(user, Integer.parseInt(splitUserLine[CHECKSUM_INDEX].trim()));
             return user;
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
+                    + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -118,19 +122,26 @@ public class UserStorage extends Storage {
             String contactNumber = splitUserLine[CONTACT_INDEX].trim();
             return new User(username, age, contactNumber);
         } catch (Exception e) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
+                    + MESSAGE_TO_FIX_FILES);
         }
     }
 
     private static void checkCheckSumLine(User user, int checkSum) throws StoreFailureException {
         if (user.toString().length() != checkSum) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
+                    + MESSAGE_TO_FIX_FILES);
         }
     }
 
-    private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum) throws StoreFailureException {
+    private static void checkCheckSumWhole(ArrayList<User> userList, int checkSum)
+            throws StoreFailureException {
         if (userList.size() != checkSum) {
-            throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + MESSAGE_TO_FIX_FILES);
+            throw new StoreFailureException(
+                    MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED
+                    + MESSAGE_TO_FIX_FILES);
         }
     }
 }

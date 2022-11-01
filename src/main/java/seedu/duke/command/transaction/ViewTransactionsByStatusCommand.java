@@ -14,12 +14,19 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STATUS_INVALID;
 
-//@@author jingwei55
+// @@author jingwei55
 public class ViewTransactionsByStatusCommand extends Command {
 
     private final String[] parts;
     private final TransactionList transactionList;
 
+    /**
+     * Constructor for ViewTransactionsByStatusCommand.
+     *
+     * @param parts The parts from user input
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewTransactionsByStatusCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
@@ -50,7 +57,7 @@ public class ViewTransactionsByStatusCommand extends Command {
     /**
      * Displays the list of transactions based on user input.
      *
-     * @param arg          user input needed to return the appropriate list of transactions
+     * @param arg user input needed to return the appropriate list of transactions
      * @param transactions Overall list of transactions
      */
     void getTransactionsByStatus(String arg, ArrayList<Transaction> transactions) {

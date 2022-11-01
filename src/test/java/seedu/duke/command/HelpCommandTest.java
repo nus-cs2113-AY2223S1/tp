@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.help.HelpCommand;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HelpCommandTest {

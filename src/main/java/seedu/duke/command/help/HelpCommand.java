@@ -73,16 +73,21 @@ public class HelpCommand extends Command {
     private static final String COMMAND_VIEW_ITEM_DESCRIPTION = "View a item";
 
     private static final String COMMAND_VIEW_USER_LOSS = "view-user-loss /u <userName>";
-    private static final String COMMAND_VIEW_USER_LOSS_DESCRIPTION = "View the amount of money loss of a user";
+    private static final String COMMAND_VIEW_USER_LOSS_DESCRIPTION =
+            "View the amount of money loss of a user";
 
     private static final String COMMAND_VIEW_USER_GAIN = "view-user-gain /u <userName>";
-    private static final String COMMAND_VIEW_USER_GAIN_DESCRIPTION = "View the amount of money gain of a user";
+    private static final String COMMAND_VIEW_USER_GAIN_DESCRIPTION =
+            "View the amount of money gain of a user";
 
-    private static final String COMMAND_VIEW_BORROW_TX_BY_USER = "view-borrow-tx-by-user /u <userName>";
-    private static final String COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION = "View list of user's borrow transaction";
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER =
+            "view-borrow-tx-by-user /u <userName>";
+    private static final String COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION =
+            "View list of user's borrow transaction";
 
     private static final String COMMAND_VIEW_LEND_TX_BY_USER = "view-lend-tx-by-user /u <userName>";
-    private static final String COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION = "View list of user's lend transaction";
+    private static final String COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION =
+            "View list of user's lend transaction";
 
     private static final String COMMAND_VIEW_TX = "view-tx /t <transactionId>";
     private static final String COMMAND_VIEW_TX_DESCRIPTION = "View a transaction";
@@ -115,13 +120,17 @@ public class HelpCommand extends Command {
     private static final String ADD_SPACE_REMINDER =
             "Please take note to add a space before and after delimiters! e.g ' /c '\n";
     private static final String CASE_SENSITIVE_REMINDER =
-            "Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!\n";
+            "Please note that except for 'find-item' and 'find-user'"
+                    + ", all other commands are case-sensitive!\n";
     private static final String INVALID_SYMBOLS_REMINDER =
             "Refrain from using '|' and '/' as arguments!";
 
     private static final String UNDERLINE = System.lineSeparator() + "--------------------";
     private final LinkedHashMap<String, String> commandToDetailMap;
 
+    /**
+     * Constructor for HelpCommand.
+     */
     public HelpCommand() {
         this.commandToDetailMap = new LinkedHashMap<>();
         this.commandToDetailMap.put(System.lineSeparator() + ADD_COMMAND_HEADER, UNDERLINE);
@@ -143,8 +152,10 @@ public class HelpCommand extends Command {
         this.commandToDetailMap.put(COMMAND_VIEW_USER_ITEMS_DESCRIPTION, COMMAND_VIEW_USER_ITEMS);
         this.commandToDetailMap.put(COMMAND_VIEW_ITEM_DESCRIPTION, COMMAND_VIEW_ITEM);
         this.commandToDetailMap.put(COMMAND_VIEW_TX_DESCRIPTION, COMMAND_VIEW_TX);
-        this.commandToDetailMap.put(COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_BORROW_TX_BY_USER);
-        this.commandToDetailMap.put(COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION, COMMAND_VIEW_LEND_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_BORROW_TX_BY_USER_DESCRIPTION,
+                COMMAND_VIEW_BORROW_TX_BY_USER);
+        this.commandToDetailMap.put(COMMAND_VIEW_LEND_TX_BY_USER_DESCRIPTION,
+                COMMAND_VIEW_LEND_TX_BY_USER);
         this.commandToDetailMap.put(COMMAND_VIEW_USER_LOSS_DESCRIPTION, COMMAND_VIEW_USER_LOSS);
         this.commandToDetailMap.put(COMMAND_VIEW_USER_GAIN_DESCRIPTION, COMMAND_VIEW_USER_GAIN);
         this.commandToDetailMap.put(System.lineSeparator() + UPDATE_COMMAND_HEADER, UNDERLINE);
