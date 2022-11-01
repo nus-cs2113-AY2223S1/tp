@@ -18,7 +18,7 @@ public class TitleFileParser {
                 Ui.showMessage("RecipeTitle is found without the Recipe. Skip this recipe!");
                 continue;
             }
-            RecipeList.recipeTitles.add(line);
+            RecipeList.addRecipeTitle(line);
         }
     }
 }

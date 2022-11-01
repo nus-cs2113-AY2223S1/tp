@@ -69,18 +69,27 @@ public class Parser {
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
+        String recipeTitleToDelete = "";
         try {
             if (parsed.length >= 2) {
                 String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
-                String recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
+                recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
                 if (actualRecipeTitle != null) {
                     return new DeleteCommand(actualRecipeTitle);
                 } else {
-                    Ui.showMessage(recipeTitleToDelete + " is not present in the list");
+                    int recipeIndexToDelete = Integer.parseInt(parsed[1]) - 1;
+                    assert recipeIndexToDelete > -1;
+                    return new DeleteCommand(recipeIndexToDelete);
                 }
             }
+            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
+        } catch (IndexOutOfBoundsException i) {
+            Ui.showMessage("Index is not present in the list");
+            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
+        } catch (NumberFormatException n) {
+            Ui.showMessage(recipeTitleToDelete + " is not present in the list");
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "File not found when deleting the recipe file");
@@ -100,9 +109,7 @@ public class Parser {
     // To account for case insensitivity of user
     private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
         String actualRecipeTitle = null;
-        String recipeTitles = Storage.loadFileContent(Storage.ALL_RECIPES_FILE_PATH);//TODO: Load from model is better!
-        String[] recipeTitlesArray = recipeTitles.split("\\r?\\n");
-        for (String recipeTitle : recipeTitlesArray) {
+        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
             if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
                 actualRecipeTitle = recipeTitle;
                 break;
@@ -112,13 +119,30 @@ public class Parser {
     }
 
     private static Command parseViewCommand(String[] parsed) {
-        if (parsed.length == 2) {
-            try {
-                int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                return new ViewCommand(index);
-            } catch (Exception e) {
-                return new InvalidCommand("Try: " + ViewCommand.COMMAND_SYNTAX);
+        String recipeTitleToDelete = "";
+        try {
+            if (parsed.length > 2) {
+                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
+                recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
+                // check if recipe title is inside the list
+                String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
+                if (actualRecipeTitle != null) {
+                    return new ViewCommand(actualRecipeTitle);
+                } else {
+                    int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                    assert index > -1;
+                    return new ViewCommand(index);
+                }
             }
+        } catch (IndexOutOfBoundsException i) {
+            Ui.showMessage("Index is not present in the list");
+            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        } catch (NumberFormatException n) {
+            Ui.showMessage(recipeTitleToDelete + " is not present in the list");
+            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        } catch (FileNotFoundException e) {
+            logger.log(Level.WARNING, "File not found when deleting the recipe file");
+            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
         }
         return new InvalidCommand("Try: " + ViewCommand.COMMAND_SYNTAX);
     }
@@ -128,6 +152,7 @@ public class Parser {
         if (parsed.length == 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                assert index > -1;
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
                 String path = Storage.titleToFilePath(title);
@@ -149,6 +174,7 @@ public class Parser {
         } else if (parsed.length > 2) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
+                assert index > -1;
                 Recipe originalRecipe = RecipeList.getRecipe(index);
                 Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
 
@@ -191,5 +217,4 @@ public class Parser {
         }
         return new HelpCommand(parsed[1]);
     }
-
 }
