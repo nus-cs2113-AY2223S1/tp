@@ -2,14 +2,14 @@
 ## **Introducing _RecipEditor_**
 <hr />
 
-_RecipEditor_ is a hybrid CLI-GUI application that allows you to manage your recipes
+_RecipEditor_ is a hybrid CLI-GUI application that allows you to manage your recipes.
 
 _RecipEditor_ can be used across all operating systems such as Windows, Mac OS X, Linux and Unix.
 It is optimised for use via a complement of Command-Line Interface (CLI) and Graphical user interface (GUI).
 Both the CLI and GUI are made to be as simple as possible so that it would be especially beneficial for
 fast typers who needs a platform to keep track of the countless recipes.
 
-If you type fast, and you need an easy and quick way to record your calories, _RecipEditor_ is the app for you! 💯
+If you type fast, and you need an easy and quick way to record your recipes, _RecipEditor_ is the app for you! 💯
 
 ## **About This User Guide**
 <hr />
@@ -89,6 +89,8 @@ A simple GUI text editor will open and loaded with a template file as shown belo
 <p align="center" width="100%">
   <img width="70%" src="./images/UserGuide/TextEditorWithTemplate.png"/>
 </p>
+
+ℹ Ingredient amount takes in floats (eg. 0.5), but not fraction (eg. 1/2)
 
 Edit the corresponding field according to the following convention:
 - `# TITLE`: Only one line, which is the next line after `# TITLE`, will be accepted
@@ -281,9 +283,12 @@ Format: `/view INDEX`
 
 Example: 
 ```
-Recipe Title: Carbonara
+/view 1
+Recipe Title: 
+Carbonara
 
-Recipe Description: Carbonara is an Italian pasta dish from Rome made with eggs, hard cheese, cured pork
+Recipe Description: 
+Carbonara is an Italian pasta dish from Rome made with eggs, hard cheese, cured pork
 and black pepper. Hot pasta tossed with a creamy sauce of raw beaten eggs, accentuated with crisp bits of
 guanciale, and finished with a shower of grated aged Pecorino Romano cheese plus freshly ground black pepper.
 
