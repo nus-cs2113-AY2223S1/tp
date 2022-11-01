@@ -107,7 +107,9 @@ The sequence diagrams referenced by the component interaction diagram can be see
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
 * When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
+* `UserInterface` creates instances of `Logger` and `Data`.
 * `MoneyGoWhere` calls `UserInterface#run()` to start the interface between the program and the user.
+* `UserInterface#run()` calls `UserInterface#runLocalStorageLoadFromFile()` to load data from local storage.
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
 * `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
@@ -115,31 +117,33 @@ In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpen
 `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
-* After the operations are performed, command handler functions calls `Storage` functions to save data.\
-In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
+* After the operations are performed, command handler functions calls `UserInterface#runLocalStorageSaveToFile()` functions to save data to local storage.
 
 #### Component Interaction Reference Diagrams
 
 ![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadDataFromFile.puml)
 
-* `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
-* `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
+1. `UserInterface#runLocalStorageLoadFromFile()` calls `Storage#loadFromFile()` to read any existing data from local storage.
+2. `UserInterface#runLocalStorageLoadFromFile()` calls the corresponding set functions to load the data into the program.
 
 ![Component-Interaction-SD-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDGetUserCommand.puml)
 
-* `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
-* `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
+1. `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
+2. `UserInterface#getConsoleCommand()` calls `Logger#logCommand()` to log the command entered by the user into a log file.
+3. `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into the corresponding console command object.
 
 ![Component-Interaction-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDPrintingAnExpense.puml)
 
-* `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
-In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
-* `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
+1. `UserInterface` calls the corresponding convert object function based on the data object's class.\
+In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+2. `UserInterface` calls `UserInterface#printInformationalMessage()` to print the formatted string.
+3. `UserInterface#printInformationalMessage()` calls `System.out.println()` to print the formatted string to a standard out.
+4. `UserInterface#printInformationalMessage()` calls `Logger#logInformationalMessage()` to log the formatted string to a log file.
 
 ![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDSaveDataToFile.puml)
 
-* `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
-* `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
+* `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
+* `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
 
 ### Common Component
 
