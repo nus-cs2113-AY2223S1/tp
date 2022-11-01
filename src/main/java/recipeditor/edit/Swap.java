@@ -13,8 +13,15 @@ public class Swap extends EditModeCommand {
         super(ingredientFlag, parsedCommand, recipe);
     }
 
+    /**
+     * Swap the position of two steps or ingredient in the recipe to edit.
+     *
+     * @return the edited recipe
+     * @throws InvalidFlagException edit command contains invalid flags
+     * @throws IndexOutOfBoundsException index out of bound
+     */
     @Override
-    public Recipe execute() throws InvalidFlagException {
+    public Recipe execute() throws InvalidFlagException, IndexOutOfBoundsException {
         int index1 = Integer.parseInt(parsedCommand[4]) - 1;
         int index2 = Integer.parseInt(parsedCommand[5]) - 1;
         switch (ingredientFlag) {

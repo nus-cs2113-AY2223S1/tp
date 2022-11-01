@@ -7,30 +7,43 @@ import recipeditor.ui.Ui;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
-    private final Recipe addedRecipe;
-    private final boolean isValid;
+    private static final String COMMAND_SYNTAX = "/add";
+    private static final String COMMAND_FUNCTION = "Edit a new recipe and add it to recipeditor.";
+    private Recipe addedRecipe;
+    private boolean isValid;
+
+    public AddCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
 
     public AddCommand(boolean isValid, Recipe addedRecipe) {
+        this();
         this.isValid = isValid;
         this.addedRecipe = addedRecipe;
     }
 
+
+    /**
+     * Execute an add command, which adds recipe into RecipeList and storage.
+     *
+     * @return CommandResult successful or failed addition message
+     */
     public CommandResult execute() {
         if (isValid) {
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe);
-            RecipeList.recipeTitles.add(addedRecipe.getTitle());
+            RecipeList.addRecipeTitle(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
-            String recipeFileSourcePath = Storage.RECIPES_FOLDER_PATH + "/" + addedRecipe.getTitle();
+            String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
             StringBuilder response = new StringBuilder();
             response.append("\"" + addedRecipe.getTitle() + "\" added to the recipe list.\n");
             response.append(String.format("There are %d recipes in the recipe list",
-                    RecipeList.recipeTitles.size()));
+                    RecipeList.getRecipeTitlesSize()));
 
             return new CommandResult(response.toString());
         } else {
-            return new CommandResult("Add unsuccessful");
+            return new CommandResult("Nothing was added");
         }
     }
 }

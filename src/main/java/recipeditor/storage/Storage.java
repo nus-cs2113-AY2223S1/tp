@@ -103,7 +103,7 @@ public class Storage {
     // Loading the recipe into RecipeList recipe array from individual recipe file
     public static void loadRecipesToRecipeList() {
         try {
-            for (String recipeTitle : RecipeList.recipeTitles) {
+            for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
                 logger.log(Level.INFO, recipeTitle);
                 String recipeFilePath = titleToFilePath(recipeTitle);
                 String content = Storage.loadFileContent(recipeFilePath);
@@ -125,7 +125,7 @@ public class Storage {
     public static void rewriteRecipeListToFile(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            for (String recipeTitle : RecipeList.recipeTitles) {
+            for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
                 fw.write(recipeTitle + "\n");
             }
             fw.close();
@@ -180,7 +180,7 @@ public class Storage {
         }
     }
 
-    private static void generateTemplateFile() {
+    public static void generateTemplateFile() {
         FileWriter fileWrite;
         try {
             fileWrite = new FileWriter(TEMPLATE_FILE_PATH);

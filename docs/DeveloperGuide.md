@@ -12,10 +12,14 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 - [Logic Component](#logic-component)
 - [Ui Component](#ui-component)
 - [Storage Component](#storage-component)
+- [Command Component](#command-component)
+- [Recipe Module](#recipe-module)
+- [Edit Component](#edit-component)
+- [GUI Component](#gui-component)
 - [Implementation](#implementation)
     - [Loading Of Data On Startup](#loading-of-data-on-startup)
     - [Parsing of Commands](#parsing-of-commands)
-    - [Add Recipe](#add-recipe)
+    - [Add a New Recipe](#add-recipe)
     - [Edit an Existing Recipe](#add-an-existing-recipe)
     - [Find Recipe Based on Recipe Name and Ingredient](#find-recipe-based-on-recipe-name-and-ingredient)
 - [Product Scope](#product-scope)
@@ -133,21 +137,61 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
 
 ### Edit Component
-
-
 <p align="center" width="100%">
   <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Recipe Module Diagram"/>
 </p>
 
 The edit component consists of three parts:
 - Parser
-  - Parses the
+  - Parses the user input, instantiates the EditCommand class
 - EditModeCommand
+  - Handles the edit functions (Add, Swap, Change, Delete, Invalid)
 - EditCommand
+  - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and CLI,
+  handles saving the edited recipe
 
 
-### Add GUI
+### GUI Component
 When the user type 
+
+
+## Implementation
+
+### Add new recipe
+The following sequence diagram shows the usage of relevant classes when trying
+to add a new recipe to storage.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
+</p>
+
+Step 1: User will first input a customer `AddCommand`. The user input
+is read by `Main` and is parsed by the static method `Parser.parseCommand()`.
+
+Step 2: If `AddCommand` of correct format is parsed, `Parser` will create a new 
+instance of `GuiWorkFlow`.
+
+Step 3: When the new instance of `GuiWorkFlow` is constructed, it creates a new
+instance of `Editor`, and it calls `enterEditor`. This opens the GUI editor for 
+user input of `recipe`.
+
+Step 4: `GuiWorkFlow` will load a template `recipe` to Editor for user to edit on it.
+
+Step 5: `GuiWorkFlow` will keep listening to changes made in the editor and save them to
+`Template.txt` in `Storage`. This process loops until user exits the editor manually.
+
+Step 6: `GuiWorkFlow` will create an instance of `TextFileParser` and calls `parseTextToRecipe`
+to store the newly added `recipe` in itself.
+
+Step 7: `GuiWorkFlow` checks if the user input of recipe has a valid title, which is not
+the same as titles of any existing `recipe` in `Storage`.
+
+Step 8: The content and validity of `recipe` are used to create an instance of `AddCommand`, 
+which is returned to `Main` for execution.
+
+Step 9: Upon execution of `AddCommand`, its validity is checked. If the `AddCommand` is valid, 
+the `recipe` in it will be written to `RecipeList` and `Storage` successfully. Otherwise, a message
+of invalid `AddCommand` will be returned backed to `Main`.
 
 ## Product scope
 ### Target user profile

@@ -5,6 +5,12 @@ import recipeditor.ui.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_TYPE = "/list";
+    private static final String COMMAND_SYNTAX = "/list";
+    private static final String COMMAND_FUNCTION = "Show a list of all recipe titles in recipeditor.";
+
+    public ListCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
 
     /**
      * execute list command, store all recipes in a string in the
@@ -13,12 +19,16 @@ public class ListCommand extends Command {
      * @return a compiled list of all recipes
      */
     public CommandResult execute() {
-        StringBuilder recipeTitlesList = new StringBuilder();
-        recipeTitlesList.append(String.format("There are %d recipes in the recipe list",
-                RecipeList.getRecipes().size()));
-        for (int i = 0; i < RecipeList.recipeTitles.size(); i++) {
-            recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.recipeTitles.get(i)));
+        try {
+            StringBuilder recipeTitlesList = new StringBuilder();
+            recipeTitlesList.append(String.format("There are %d recipes in the recipe list",
+                    RecipeList.getRecipes().size()));
+            for (int i = 0; i < RecipeList.getRecipeTitlesSize(); i++) {
+                recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipeTitle(i)));
+            }
+            return new CommandResult(recipeTitlesList.toString());
+        } catch (Exception e) {
+            return new CommandResult("An error happened.");
         }
-        return new CommandResult(recipeTitlesList.toString());
     }
 }

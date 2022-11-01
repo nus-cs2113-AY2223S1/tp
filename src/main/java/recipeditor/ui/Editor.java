@@ -12,7 +12,6 @@ import javax.swing.UIManager;
 import javax.swing.ScrollPaneConstants;
 
 
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -50,15 +49,15 @@ public class Editor extends JFrame implements ActionListener {
 
 
         textArea = new JTextArea();
-        textArea.setSize(new Dimension(400,400));
-        textArea.setFont(new Font("Arial", Font.PLAIN,15));
-        scrollPane = new JScrollPane(textArea,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+        textArea.setSize(new Dimension(400, 400));
+        textArea.setFont(new Font("Arial", Font.PLAIN, 15));
+        scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         buttonSave = new JButton("Save and Exit");
         buttonExit = new JButton("Exit Only");
         menu = new JMenuBar();
         frame.add(scrollPane);
-        frame.setSize(600,600);
+        frame.setSize(600, 600);
         frame.setJMenuBar(menu);
         frame.setResizable(false);
         frame.setVisible(true);
@@ -94,7 +93,7 @@ public class Editor extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonSave) {
-            this.state = EditorState.SAVE;
+            state = EditorState.SAVE;
             // Save to temporary
             File temp = new File(Storage.TEMPORARY_FILE_PATH);
             try {
@@ -107,33 +106,41 @@ public class Editor extends JFrame implements ActionListener {
             frame.dispose();
 
         } else if (e.getSource() == buttonExit) {
-            this.state = EditorState.EXIT;
+            state = EditorState.EXIT;
             frame.dispose();
         }
     }
 
     public boolean enterEditor(String path) throws FileNotFoundException {
         Ui.showMessage("Please edit in the GUI editor!");
-        loadFile(path);
-        // Wait until the editor is done
-        while (this.state == EditorState.USING) {
+        try {
+            loadFileToTextArea(path);
+            waitForChangeOfState();
+            logger.log(Level.INFO, "Editor State: " + state);
+            return state.equals(EditorState.SAVE);
+        } catch (FileNotFoundException e) {
+            state = EditorState.EXIT;
+            frame.dispose();
+            throw new FileNotFoundException();
+        }
+    }
+
+    private void waitForChangeOfState() {
+        while (state == EditorState.USING) {
             try {
                 Thread.sleep(500);
             } catch (Exception e) {
                 Ui.showMessage("Break from sleep");
             }
         }
-        logger.log(Level.INFO, "Editor State: " + this.state);
-        return state.equals(EditorState.SAVE);
     }
 
     /**
      * Load file from the path to the editor.
      */
-    private void loadFile(String path) throws FileNotFoundException {
+    private void loadFileToTextArea(String path) throws FileNotFoundException {
         File textFile = new File(path);
-        Scanner scan = null;
-        scan = new Scanner(textFile);
+        Scanner scan = new Scanner(textFile);
         while (scan.hasNext()) {
             String line = scan.nextLine() + "\n";
             textArea.append(line);
