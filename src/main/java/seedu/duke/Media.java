@@ -66,6 +66,12 @@ public class Media {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateWatchedString);
+
+            Date currentDate = new Date();
+            if (currentDate.before(date)) {
+                throw new FutureDateException();
+            }
+
             this.dateWatched = date;
 
             String pattern = "dd-MM-yyyy";
@@ -73,6 +79,8 @@ public class Media {
             dateString = df.format(dateWatched);
         } catch (ParseException e) {
             System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+        } catch (FutureDateException e) {
+            ;
         }
     }
 

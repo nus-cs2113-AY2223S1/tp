@@ -1,6 +1,11 @@
 package seedu.duke;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -202,7 +207,11 @@ public class Parser {
         }
         try {
             if (!isValidDate(dateFields)) {
-                throw new Exception();
+                throw new InvalidDateException();
+            }
+
+            if (isFutureDate(date)) {
+                throw new FutureDateException();
             }
 
             if (spacingType == SPACING_MOVIE) {
@@ -215,12 +224,29 @@ public class Parser {
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tAdd command executed");
-        } catch (Exception e) {
+        } catch (InvalidDateException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
-            Ui.print("Invalid date format");
+            Ui.print("Invalid date. Give a date from the past, in the following format: DD-MM-YYYY.");
+        } catch (FutureDateException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("You have given a date in the future. Give a date from the past, in the following format: "
+                    + "DD-MM-YYYY.");
         }
     }
 
+    public boolean isFutureDate(String dateWatchedString) {
+        Date date = null;
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            dateFormat.setLenient(false);
+            date = dateFormat.parse(dateWatchedString);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+        }
+
+        Date currentDate = new Date();
+        return currentDate.before(date);
+    }
 
     /**.
      * Checks if provided date is valid
