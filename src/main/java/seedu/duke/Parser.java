@@ -11,9 +11,13 @@ import seedu.duke.command.MarkCommand;
 import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.exception.IllegalValueException;
+import seedu.duke.exception.InvalidDateException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,7 +50,7 @@ public class Parser {
         case "find":
             return new FindCommand(arguments);
         case "help":
-            return new HelpCommand();
+            return new HelpCommand(arguments);
         default:
             return new InvalidCommand();
         }
@@ -63,7 +67,7 @@ public class Parser {
 
     public static String[] getArgumentList(String arguments) {
         assert (arguments != null);
-        String[] argumentList = arguments.split("\\s*/\\s*");
+        String[] argumentList = arguments.toLowerCase().split("\\s*/\\s*");
         return argumentList;
     }
 
@@ -75,5 +79,17 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(input, formatter);
         return formatter.format(localDate);
+    }
+
+    public static LocalDate parseDate(String input, int monthsToAdd) throws IllegalValueException {
+        try {
+            LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("d-M-yyyy"));
+            if (date.isAfter(LocalDate.now().plusMonths(monthsToAdd))) {
+                throw new IllegalValueException("Date is too far in the future");
+            }
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
+        }
     }
 }
