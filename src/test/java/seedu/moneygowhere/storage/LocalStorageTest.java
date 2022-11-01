@@ -22,11 +22,6 @@ import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
 class LocalStorageTest {
     @Test
     void save_Load_File() {
-        int numExpense = 10;
-        int numRecurringPayment = 3;
-        int numTarget = 6;
-        int numIncome = 3;
-
         String name = "Test";
         BigDecimal amount = new BigDecimal("7.80");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
@@ -45,26 +40,32 @@ class LocalStorageTest {
 
 
         ArrayList<Expense> testExpenses = new ArrayList<>();
-        ConsoleCommandSortExpense sortCommandSetting = new ConsoleCommandSortExpense(
-                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
-                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
-        );
         ArrayList<RecurringPayment> testRecurringPayments = new ArrayList<>();
         ArrayList<Target> testTargets = new ArrayList<>();
         ArrayList<Income> testIncomes = new ArrayList<>();
 
-        for(int i = 0; i < numExpense; ++i){
+        int numExpense = 10;
+        int numRecurringPayment = 3;
+        int numTarget = 6;
+        int numIncome = 3;
+
+        for (int i = 0; i < numExpense; ++i) {
             testExpenses.add(testExpense);
         }
-        for(int i = 0; i < numRecurringPayment; ++i){
+        for (int i = 0; i < numRecurringPayment; ++i) {
             testRecurringPayments.add(testRecurringPayment);
         }
-        for(int i = 0; i < numTarget; ++i){
+        for (int i = 0; i < numTarget; ++i) {
             testTargets.add(testTarget);
         }
-        for(int i = 0; i < numIncome; ++i){
+        for (int i = 0; i < numIncome; ++i) {
             testIncomes.add(testIncome);
         }
+
+        ConsoleCommandSortExpense sortCommandSetting = new ConsoleCommandSortExpense(
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
+        );
 
         saveToFile(testExpenses, sortCommandSetting, testRecurringPayments, testTargets, testIncomes);
 
