@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
                 + "view {biometrics/food/weight/bmi/maintenance/calories/all} {exercise/strength/cardio /{done}}\n"
                 + "add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]\n"
                 + "add cardio /{description} /{distance} /{repetitions} [/{date}]\n"
-                + "add food /{description} /{calories} /{date}\n"
+                + "add food /{description} /{calories} [/{date}]\n"
                 + "add weight /{weight} /{fat percentage}\n"
                 + "remove {food/exercise} /{food index/current exerciseList index}\n"
                 + "mark {done/undone} /{exercise index} / {time} / {metabolic equivalent}\n"

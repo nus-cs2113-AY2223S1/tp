@@ -269,6 +269,9 @@ public class AddCommand extends Command {
         if (calories <= 0) {
             throw new IllegalValueException("Calories inputs need to be positive integer values!");
         }
+        if (calories > 10000){
+            throw new IllegalValueException("It is impossible to have consumed more than 10000 kcal in a day!");
+        }
         return calories;
     }
 
