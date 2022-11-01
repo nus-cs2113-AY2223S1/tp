@@ -20,6 +20,9 @@ Flight detail of the specific flight number should input first.
 Flight added!
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Passenger IVAN THENG of SQ832 17D has been added.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
