@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.data.TransactionList;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
+import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_COMMAND;
 import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DETAILED;
 import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_HELP;
 import static seedu.duke.common.HelpMessages.COMMAND_USAGE_HELP;
@@ -21,7 +22,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "HELP";
     // The formatting information for the parameters used by the command
     public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_DETAILED;
+            + COMMAND_PARAMETERS_DETAILED + LINE_SEPARATOR + COMMAND_PARAMETERS_COMMAND;
     // Basic help description
     public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
             + COMMAND_DESCRIPTION_HELP + LINE_SEPARATOR + COMMAND_USAGE_HELP + LINE_SEPARATOR;
