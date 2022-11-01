@@ -1,0 +1,31 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "targetManager:TargetManager" as targetManager DATA_COLOR_4
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandDeleteTarget
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandDeleteTarget(\n\tconsoleCommand:ConsoleCommandDeleteTarget\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : deleteTarget(targetIndex:int)
+    activate targetManager DATA_COLOR_4
+
+    targetManager --[DATA_COLOR_4]> consoleInterface
+    deactivate targetManager
+
+    ref over consoleInterface: print target
+
+    ref over consoleInterface, targetManager, LocalStorage: save data
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml

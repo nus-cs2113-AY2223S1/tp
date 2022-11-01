@@ -7,6 +7,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
@@ -15,6 +16,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInv
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -1035,6 +1037,44 @@ class ConsoleParserTest {
                 + recurringPaymentIndex;
 
         assertThrows(ConsoleParserCommandViewRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author LokQiJun
+    @Test
+    void parseCommand_mefPath_ccmefPath() throws
+            MoneyGoWhereException {
+        String filePath = "C:/ValidPath/MoneyGoWhereData.xml";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_MERGE_FILE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
+                + " "
+                + filePath;
+        System.out.print(input);
+        ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile =
+                (ConsoleCommandMergeExternalFile) ConsoleParser.parse(input);
+
+        boolean isFilePathEqual = consoleCommandMergeExternalFile.getFilePath().equals(filePath);
+
+        assertTrue(isFilePathEqual);
+    }
+
+    //@@author LokQiJun
+    @Test
+    void parseCommand_mefInvalidPath_ccmefInvalidException() {
+        String filePath = "This is an invalid path";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_MERGE_FILE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
+                + " "
+                + filePath;
+
+        assertThrows(ConsoleParserCommandMergeExternalFileInvalidException.class, () ->
                 ConsoleParser.parse(input)
         );
     }

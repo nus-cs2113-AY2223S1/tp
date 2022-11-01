@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "incomeManager:IncomeManager" as incomeManager DATA_COLOR_4
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandViewIncome
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewIncome(\n\tconsoleCommand:ConsoleCommandViewIncome\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    alt incomeIndex >= 0
+        consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncome(incomeIndex:int)
+        activate incomeManager DATA_COLOR_4
+
+        incomeManager --[DATA_COLOR_4]> consoleInterface : income:Income
+        deactivate incomeManager
+
+        ref over consoleInterface: print income
+    else else
+            consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncomes()
+            activate incomeManager DATA_COLOR_4
+
+            incomeManager --[DATA_COLOR_4]> consoleInterface : incomes:ArrayList<Income>
+            deactivate incomeManager
+
+            loop through incomes
+            ref over consoleInterface: print income
+            end
+    end
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml

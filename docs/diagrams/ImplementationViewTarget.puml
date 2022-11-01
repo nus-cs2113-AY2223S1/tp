@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "targetManager:TargetManager" as targetManager DATA_COLOR_4
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandViewTarget
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandViewTarget(\n\tconsoleCommand:ConsoleCommandViewTarget\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    alt targetIndex >= 0
+        consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : getTarget(targetIndex:int)
+        activate targetManager DATA_COLOR_4
+
+        targetManager --[DATA_COLOR_4]> consoleInterface : target:Target
+        deactivate targetManager
+
+        ref over consoleInterface: print target
+    else else
+            consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : getTargets()
+            activate targetManager DATA_COLOR_4
+
+            targetManager --[DATA_COLOR_4]> consoleInterface : targets:ArrayList<Target>
+            deactivate targetManager
+
+            loop through targets
+            ref over consoleInterface: print target
+            end
+    end
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml

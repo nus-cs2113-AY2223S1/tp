@@ -25,19 +25,9 @@ opt consoleCommand instanceof ConsoleCommandEditRecurringPayment
     recurringPaymentManager --[DATA_COLOR_4]> consoleInterface
     deactivate recurringPaymentManager
 
-    ref over consoleInterface: Print RecurringPayment
+    ref over consoleInterface: print recurring payment
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : save()
-    activate recurringPaymentManager DATA_COLOR_4
-
-    recurringPaymentManager -[DATA_COLOR_4]> LocalStorage : \lsaveToFile(\n\trecurringPayments:ArrayList<RecurringPayment>\n)
-    activate LocalStorage STORAGE_COLOR_1
-
-    LocalStorage --[STORAGE_COLOR_1]> recurringPaymentManager
-    deactivate LocalStorage
-
-    recurringPaymentManager --[DATA_COLOR_4]> consoleInterface
-    deactivate recurringPaymentManager
+    ref over consoleInterface, recurringPaymentManager, LocalStorage: save data
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface

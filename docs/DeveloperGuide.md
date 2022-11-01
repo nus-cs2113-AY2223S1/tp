@@ -17,21 +17,37 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Common Component](#common-component)
   * [Exceptions Component](#exceptions-component)
   * [UserInterface Component](#userinterface-component)
+  * [Parser Component](#parser-component)
   * [Commands Component](#commands-component)
+  * [Data Component](#data-component)
+  * [Storage Component](#storage-component)
   * [API Component](#api-component)
+  * [Logger Component](#logger-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
-  * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
-  * [Viewing an expense: `View-Expense`](#viewing-an-expense-view-expense)
-  * [Deleting an expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
-  * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
-  * [Sorting expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
+  * [Saving Data to File](#saving-data-to-file)
+  * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
+  * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
+  * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
+  * [Editing an Expense: `Edit-Expense`](#editing-an-expense-edit-expense)
+  * [Sorting Expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
   * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
-  * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
-  * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
-  * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
-  * [Editing a recurring payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
-  * [Adding an expense from a recurring payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+  * [Printing a Recurring Payment](#printing-a-recurring-payment)
+  * [Adding a Recurring Payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
+  * [Viewing a Recurring Payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
+  * [Deleting a Recurring Payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
+  * [Editing a Recurring Payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
+  * [Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+  * [Printing an Income](#printing-an-income)
+  * [Adding an Income: `Add-Income`](#adding-an-income-add-income)
+  * [Viewing an Income: `View-Income`](#viewing-an-income-view-income)
+  * [Deleting an Income: `Delete-Income`](#deleting-an-income-delete-income)
+  * [Editing an Income: `Edit-Income`](#editing-an-income-edit-income)
+  * [Printing a Target](#printing-a-target)
+  * [Adding a Target: `Add-Target`](#adding-a-target-add-target)
+  * [Viewing a Target: `View-Target`](#viewing-a-target-view-target)
+  * [Deleting a Target: `Delete-Target`](#deleting-a-target-delete-target)
+  * [Editing a Target: `Edit-Target`](#editing-a-target-edit-target)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -54,7 +70,7 @@ We would like to acknowledge the following sources which our team has referenced
 
 ## Getting Started
 
-This program was developed using the Java JDK 11 and Intellij IDEA.
+Our team developed this program using Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install JDK 11.
 2. Install Intellij IDEA.
@@ -91,8 +107,8 @@ The software architecture diagram below describes the program's design and the i
 | Common        | Define various parameters used by the program.                           |
 | Exceptions    | Define the exceptions thrown by the program.                             |
 | UserInterface | Interface with the user via standard I/O and handle commands.            |
-| Command       | Define the commands accepted by the program along with its arguments.    |
 | Parser        | Provide functions to parse inputs read from standard input.              |
+| Command       | Define the commands accepted by the program along with its arguments.    |
 | Data          | Defines classes to store data and provides functions to operate on data. |
 | Storage       | Provide functions to save and load data.                                 |
 | API           | Provide functions to interact with external APIs.                        |
@@ -107,7 +123,9 @@ The sequence diagrams referenced by the component interaction diagram can be see
 ![Component-Interaction-On-Command-Entered](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsOnCommandEntered.puml)
 
 * When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
+* `UserInterface` creates instances of `Logger` and `Data`.
 * `MoneyGoWhere` calls `UserInterface#run()` to start the interface between the program and the user.
+* `UserInterface#run()` calls `UserInterface#runLocalStorageLoadFromFile()` to load data from local storage.
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
 * `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
@@ -115,40 +133,40 @@ In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpen
 `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
-* After the operations are performed, command handler functions calls `Storage` functions to save data.\
-In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#saveToFile()` to save the newly added expense to a file.
+* After the operations are performed, command handler functions calls `UserInterface#runLocalStorageSaveToFile()` functions to save data to local storage.
 
 #### Component Interaction Reference Diagrams
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadExpensesFromFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadDataFromFile.puml)
 
-* `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
-* `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
+1. `UserInterface#runLocalStorageLoadFromFile()` calls `Storage#loadFromFile()` to read any existing data from local storage.
+2. `UserInterface#runLocalStorageLoadFromFile()` calls the corresponding set functions to load the data into the program.
 
 ![Component-Interaction-SD-Get-User-Command](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDGetUserCommand.puml)
 
-* `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
-* `UserInterface#getConsoleCommand()` then calls `Parser#parse()` to parse the input string into the corresponding console command object.
+1. `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
+2. `UserInterface#getConsoleCommand()` calls `Logger#logCommand()` to log the command entered by the user into a log file.
+3. `UserInterface#getConsoleCommand()` calls `Parser#parse()` to parse the input string into the corresponding console command object.
 
 ![Component-Interaction-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDPrintingAnExpense.puml)
 
-* `UserInterface#run()` will call the corresponding convert object function based on the data object's class.
-In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
-* `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
+1. `UserInterface` calls the corresponding convert object function based on the data object's class.\
+In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+2. `UserInterface` calls `UserInterface#printInformationalMessage()` to print the formatted string.
+3. `UserInterface#printInformationalMessage()` calls `System.out.println()` to print the formatted string to a standard out.
+4. `UserInterface#printInformationalMessage()` calls `Logger#logInformationalMessage()` to log the formatted string to a log file.
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDSaveExpensesToFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDSaveDataToFile.puml)
 
-* `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
-* `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
+* `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
+* `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
 
 ### Common Component
 
-The Common component consists of the classes `Messages` and `Configurations`.
-
-![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentCommon.puml)
-
-The `Messages` class defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.
-The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
+The Common component consists of the classes `Messages` and `Configurations`.\
+\
+`Messages` defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.\
+`Configurations` defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
 
 ### Exceptions Component
 
@@ -156,7 +174,7 @@ The Exceptions component consists of various exception classes which inherits fr
 
 ![Component-Exceptions](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentExceptions.puml)
 
-The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
+The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.\
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
 Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
 
@@ -166,9 +184,20 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 
 ![Component-UserInterface](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentUserInterface.puml)
 
-The `ConsoleInterface` class defines various command handlers which are called based on the command entered by the user.
+`ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
 For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
+
+### Parser Component
+
+The Parser component consists of the classes `ConsoleParserConfigurations` and `ConsoleParser`.\
+\
+`ConsoleParserConfigurations` defines the syntax and arguments used by `ConsoleParser` when parsing the commands entered by the user.\
+`ConsoleParser` defines the `ConsoleParser#parse()` to parse commands and arguments into their corresponding console command subclasses.\
+\
+When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
+* `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
+* The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
 
 ### Commands Component
 
@@ -180,93 +209,173 @@ The corresponding console command subclass is returned by `ConsoleParser#parse()
 For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
 
+### Data Component
+
+The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.
+
+![Component-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentData.puml)
+
+`Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
+`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
+
+### Storage Component
+
+The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.
+
 ### API Component
 
 The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
 
-![Component-API](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ComponentApi.puml)
+![Component-API](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentApi.puml)
 
-The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the API and transfer that data into a hashmap of exchange rates.
+The `CurrencyApiManager` class calls functions in `CurrencyApi`.\
+The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a hashmap of exchange rates.\
+\
+When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of currencies and their corresponding conversion rates:
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson()` to fetch data from the API in the form of a JSON file. 
+  * The data contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar.
+  The data is written into a text file called `exchangeRates.txt`.
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a hashmap of exchange rates.
 
-* `CurrencyApiManager` calls `CurrencyApi` to fetch data from the API URL in the form of a JSON file. 
-* The data fetched contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar. The data is written into a text file called `exchangeRates.txt`. 
-* `CurrencyApiManager` calls `CurrencyApi` to write the data from `exchangeRates.txt` into a hashmap of exchange rates.
+### Logger Component
+
+The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
 
 ## Implementation
-### Printing an expense
+### Printing an Expense
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintExpense.puml)
 
-### Adding an expense: `Add-Expense`
+### Saving Data to File
+
+![Implementation-SD-Save-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDSaveData.puml)
+
+### Adding an Expense: `Add-Expense`
 
 The `Add-Expense` command adds a new expense to the program.
 
 ![Implementation-Add-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddExpense.puml)
 
-### Viewing an expense: `View-Expense`
+### Viewing an Expense: `View-Expense`
 
 The `View-Expense` command displays existing expenses in the program.
 
 ![Implementation-View-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewExpense.puml)
 
-### Deleting an expense: `Delete-Expense`
+### Deleting an Expense: `Delete-Expense`
 
 The `Delete-Expense` command removes an existing expense from the program.
 
 ![Implementation-Delete-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteExpense.puml)
 
-### Editing an expense: `Edit-Expense`
+### Editing an Expense: `Edit-Expense`
 
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditExpense.puml)
 
-### Sorting expenses: `Sort-Expense`
+### Sorting Expenses: `Sort-Expense`
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
-![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSortExpense.puml)
+![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSortExpense.puml)
 
-### Converting currencies: `Convert-Currency`
+### Converting Currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
-![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationConvertCurrency.puml)
+![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationConvertCurrency.puml)
 
-### Printing a recurring payment
+### Printing a Recurring Payment
 
 ![Implementation-SD-Print-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintRecurringPayment.puml)
 
-### Adding a recurring payment: `Add-RecurringPayment`
+### Adding a Recurring Payment: `Add-RecurringPayment`
 
 The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
 ![Implementation-Add-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddRecurringPayment.puml)
 
-### Viewing a recurring payment: `View-RecurringPayment`
+### Viewing a Recurring Payment: `View-RecurringPayment`
 
 The `View-RecurringPayment` command displays existing recurring payments in the program.
 
 ![Implementation-View-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewRecurringPayment.puml)
 
-### Deleting a recurring payment: `Delete-RecurringPayment`
+### Deleting a Recurring Payment: `Delete-RecurringPayment`
 
 The `Delete-RecurringPayment` command removes an existing recurring payment from the program.
 
 ![Implementation-Delete-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteRecurringPayment.puml)
 
-### Editing a recurring payment: `Edit-RecurringPayment`
+### Editing a Recurring Payment: `Edit-RecurringPayment`
 
 The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditRecurringPayment.puml)
 
-### Adding an expense from a recurring payment: `Pay-RecurringPayment`
+### Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`
 
 The `Pay-RecurringPayment` command adds a new expense based on an existing recurring payment.
 This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
+
+### Printing an Income
+
+![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintIncome.puml)
+
+### Adding an Income: `Add-Income`
+
+The `Add-Income` command adds a new income to the program.
+
+![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddIncome.puml)
+
+### Viewing an Income: `View-Income`
+
+The `View-Income` command displays existing incomes in the program.
+
+![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewIncome.puml)
+
+### Deleting an Income: `Delete-Income`
+
+The `Delete-Income` command removes an existing income from the program.
+
+![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteIncome.puml)
+
+### Editing an Income: `Edit-Income`
+
+The `Edit-Income` command changes the attributes of an existing income in the program.
+
+![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditIncome.puml)
+
+### Printing a Target
+
+![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintTarget.puml)
+
+### Adding a Target: `Add-Target`
+
+The `Add-Target` command adds a new target to the program.
+
+![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddTarget.puml)
+
+### Viewing a Target: `View-Target`
+
+The `View-Target` command displays existing targets in the program.
+
+![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewTarget.puml)
+
+### Deleting a Target: `Delete-Target`
+
+The `Delete-Target` command removes an existing target from the program.
+
+![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteTarget.puml)
+
+### Editing a Target: `Edit-Target`
+
+The `Edit-Target` command changes the attributes of an existing target in the program.
+
+![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditTarget.puml)
 
 ## Product Scope
 ### Target User Profile
@@ -286,35 +395,35 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 ## User Stories
 
 | Version Implemented | As a ... | I want to ...                                     | So that I can ...                                 |
-|---------------------|----------|---------------------------------------------------|---------------------------------------------------|
-| v1.0                | user     | add expenses                                      | keep track of my finances                         |
-| v1.0                | user     | view expenses                                     | keep track of my finances                         |
-| v1.0                | user     | view expenses by name                             | search for past expenses easily                   |
-| v1.0                | user     | view expenses by category                         | keep track of my spending across different areas  |
-| v1.0                | user     | delete expenses                                   | keep track of my finances                         |
-| v1.0                | user     | edit expenses                                     | keep track of my finances                         |
-| v1.0                | user     | categorise expenses                               | keep track of my spending across different areas  |
-| v1.0                | user     | sort expenses by alphabetical order               | organise my spending by their names               |
-| v1.0                | user     | sort expenses by amount                           | keep track of the extent of my spending           |
-| v1.0                | user     | sort expenses by date                             | keep track of my spending over time               |
-| v1.0                | user     | save my data to a file                            | store my data easily                              |
-| v1.0                | user     | load my data from a file                          | retrieve my data easily                           |
-| v1.0                | user     | add my income                                     | keep track if my spending exceeds my income       |
-| v1.0                | user     | add expense targets                               | keep track of my financial goals                  |
-| v2.0                | user     | convert between different currencies              | keep track of expenses across multiple currencies |
-| v2.0                | user     | update currency exchange rates                    | convert between currencies using the latest rates |
-| v2.0                | user     | view my income                                    | keep track if my spending exceeds my income       |
-| v2.0                | user     | delete my income                                  | keep track if my spending exceeds my income       |
-| v2.0                | user     | edit my income                                    | keep track if my spending exceeds my income       |
-| v2.0                | user     | view expense targets                              | keep track of my financial goals                  |
-| v2.0                | user     | delete expense targets                            | keep track of my financial goals                  |
-| v2.0                | user     | edit expense targets                              | keep track of my financial goals                  |
-| v2.0                | user     | add recurring payments                            | keep track of my recurring payments               |
-| v2.0                | user     | view recurring payments                           | keep track of my recurring payments               |
-| v2.0                | user     | delete recurring payments                         | keep track of my recurring payments               |
-| v2.0                | user     | edit recurring payments                           | keep track of my recurring payments               |
-| v2.0                | user     | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
-| v2.0                | user     | merge several data files together                 | consolidate my expenses easily                    |
+|:-------------------:|:--------:|---------------------------------------------------|---------------------------------------------------|
+|        v1.0         |   user   | add expenses                                      | keep track of my finances                         |
+|        v1.0         |   user   | view expenses                                     | keep track of my finances                         |
+|        v1.0         |   user   | view expenses by name                             | search for past expenses easily                   |
+|        v1.0         |   user   | view expenses by category                         | keep track of my spending across different areas  |
+|        v1.0         |   user   | delete expenses                                   | keep track of my finances                         |
+|        v1.0         |   user   | edit expenses                                     | keep track of my finances                         |
+|        v1.0         |   user   | categorise expenses                               | keep track of my spending across different areas  |
+|        v1.0         |   user   | sort expenses by alphabetical order               | organise my spending by their names               |
+|        v1.0         |   user   | sort expenses by amount                           | keep track of the extent of my spending           |
+|        v1.0         |   user   | sort expenses by date                             | keep track of my spending over time               |
+|        v1.0         |   user   | save my data to a file                            | store my data easily                              |
+|        v1.0         |   user   | load my data from a file                          | retrieve my data easily                           |
+|        v1.0         |   user   | add my income                                     | keep track if my spending exceeds my income       |
+|        v1.0         |   user   | add expense targets                               | keep track of my financial goals                  |
+|        v2.0         |   user   | convert between different currencies              | keep track of expenses across multiple currencies |
+|        v2.0         |   user   | update currency exchange rates                    | convert between currencies using the latest rates |
+|        v2.0         |   user   | view my income                                    | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | delete my income                                  | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | edit my income                                    | keep track if my spending exceeds my income       |
+|        v2.0         |   user   | view expense targets                              | keep track of my financial goals                  |
+|        v2.0         |   user   | delete expense targets                            | keep track of my financial goals                  |
+|        v2.0         |   user   | edit expense targets                              | keep track of my financial goals                  |
+|        v2.0         |   user   | add recurring payments                            | keep track of my recurring payments               |
+|        v2.0         |   user   | view recurring payments                           | keep track of my recurring payments               |
+|        v2.0         |   user   | delete recurring payments                         | keep track of my recurring payments               |
+|        v2.0         |   user   | edit recurring payments                           | keep track of my recurring payments               |
+|        v2.0         |   user   | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
+|        v2.0         |   user   | merge several data files together                 | consolidate my expenses easily                    |
 
 ## Non-Functional Requirements
 

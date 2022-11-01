@@ -3,23 +3,23 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd print expense
+mainframe sd print target
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
 Participant "localLogger:Logger" as localLogger LOGGER_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertExpenseToConsoleString(expense:Expense)
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertTargetToConsoleString(target:Target)
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : expenseStr:String
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : targetStr:String
 deactivate consoleInterface
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : printInformationalMessage(expenseStr:String)
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : printInformationalMessage(targetStr:String)
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> localLogger : logInformationalMessage(expenseStr:String)
+consoleInterface -[USER_INTERFACE_COLOR_1]> localLogger : logInformationalMessage(targetStr:String)
 activate localLogger LOGGER_COLOR_1
 
 localLogger --[LOGGER_COLOR_1]> consoleInterface

@@ -117,9 +117,11 @@ public class Messages {
     //region Defines messages for CurrencyManager
     public static final String CURRENCY_MANAGER_ERROR_RATES_NOT_FOUND = ""
             + "There may be an error obtaining the updated Exchange Rate for your desired currency. " + '\n'
-            + "Please enter the exchange rate manually.";
+            + "Please restart the program to connect to the currency API or you may enter the exchange rate manually.";
     public static final String CURRENCY_MANAGER_ERROR_CURRENCY_NOT_FOUND = ""
-            + "Currency not found. Please try again.";
+            + "Currency entered cannot be found. Please try again or you may enter the exchange rate manually.";
+    public static final String CURRENCY_MANAGER_ERROR_CUSTOM_RATE_NOT_FOUND = ""
+            + "Expense currency rate not found. Please try again or you may enter the exchange rate manually.";
 
     //endregion
 

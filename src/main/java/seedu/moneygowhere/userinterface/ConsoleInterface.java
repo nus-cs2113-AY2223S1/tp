@@ -82,6 +82,11 @@ import java.util.Scanner;
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {
     private LocalLogger localLogger;
+
+    private boolean isLocalLoggerInitialized() {
+        return localLogger != null;
+    }
+
     private Scanner scanner;
     private ExpenseManager expenseManager;
     private TargetManager targetManager;
@@ -100,11 +105,11 @@ public class ConsoleInterface {
         try {
             localLogger = new LocalLogger();
         } catch (IOException e) {
-            printErrorMessage("An IO error occurred in the console logger. The logger will be disabled");
+            printErrorMessage("An IO error occurred in the local logger. The logger will be disabled");
         }
 
-        if (localLogger != null) {
-            localLogger.logInfo("Initializing MoneyGoWhere");
+        if (isLocalLoggerInitialized()) {
+            localLogger.logInformationalMessage("Initializing MoneyGoWhere");
         }
 
         scanner = new Scanner(System.in);
@@ -172,8 +177,10 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printInformationalMessage(String message) {
+    public void printInformationalMessage(String message) {
         System.out.println(message);
+
+        localLogger.logInformationalMessage(message);
     }
 
     //@@author xzynos
@@ -183,8 +190,11 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printWarningMessage(String message) {
-        System.out.println("WARN: " + message);
+    public void printWarningMessage(String message) {
+        String warningMessageHeader = "WARN: ";
+        System.out.println(warningMessageHeader + message);
+
+        localLogger.logWarningMessage(message);
     }
 
     //@@author xzynos
@@ -194,8 +204,11 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printErrorMessage(String message) {
-        System.out.println("ERROR: " + message);
+    public void printErrorMessage(String message) {
+        String errorMessageHeader = "ERROR: ";
+        System.out.println(errorMessageHeader + message);
+
+        localLogger.logErrorMessage(message);
     }
 
     //@@author xzynos
@@ -228,7 +241,7 @@ public class ConsoleInterface {
         if (expense.getDescription() != null) {
             expenseStr += "Description     : " + expense.getDescription() + "\n";
         }
-        expenseStr += "Amount          : " + expense.getAmount() + "\n";
+        expenseStr += "Amount          : " + expense.getAmount().toPlainString() + "\n";
         if (expense.getCategory() != null) {
             expenseStr += "Category        : " + expense.getCategory() + "\n";
         }
@@ -263,8 +276,8 @@ public class ConsoleInterface {
         if (target.getDescription() != null) {
             targetStr += "Description   : " + target.getDescription() + "\n";
         }
-        targetStr += "Amount        : " + target.getAmount() + "\n";
-        targetStr += "Current Amount: " + target.getCurrentAmount();
+        targetStr += "Amount        : " + target.getAmount().toPlainString() + "\n";
+        targetStr += "Current Amount: " + target.getCurrentAmount().toPlainString();
 
         return targetStr;
     }
@@ -288,7 +301,7 @@ public class ConsoleInterface {
         if (income.getDescription() != null) {
             incomeStr += "Description   : " + income.getDescription() + "\n";
         }
-        incomeStr += "Amount        : " + income.getAmount();
+        incomeStr += "Amount        : " + income.getAmount().toPlainString();
 
         return incomeStr;
     }
@@ -308,7 +321,7 @@ public class ConsoleInterface {
         if (recurringPayment.getDescription() != null) {
             recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
         }
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount().toPlainString() + "\n";
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
@@ -324,7 +337,7 @@ public class ConsoleInterface {
     //@@author xzynos
     private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
         if (localLogger != null) {
-            localLogger.logInfo("Terminating MoneyGoWhere");
+            localLogger.logInformationalMessage("Terminating MoneyGoWhere");
         }
     }
 
@@ -654,8 +667,13 @@ public class ConsoleInterface {
             }
         }
 
-        currencyManager.changeCurrency(expense, currency, rate);
-        expenseManager.sortExpenses();
+        try {
+            currencyManager.changeCurrency(expense, currency, rate);
+            expenseManager.sortExpenses();
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
@@ -1147,6 +1165,10 @@ public class ConsoleInterface {
         String consoleInput = getConsoleInput();
 
         printBlankLine();
+
+        if (isLocalLoggerInitialized()) {
+            localLogger.logCommand(consoleInput);
+        }
 
         ConsoleCommand consoleCommand = null;
         try {

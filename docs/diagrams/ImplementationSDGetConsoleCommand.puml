@@ -3,7 +3,7 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd Get Console Command
+mainframe sd get console command
 
 Actor User USER_COLOR
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1

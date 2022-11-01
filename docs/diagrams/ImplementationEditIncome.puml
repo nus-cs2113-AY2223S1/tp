@@ -1,0 +1,37 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "incomeManager:IncomeManager" as incomeManager DATA_COLOR_4
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandEditIncome
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandEditIncome(\n\tconsoleCommand:ConsoleCommandEditIncome\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncome(incomeIndex:int)
+    activate incomeManager DATA_COLOR_4
+
+    incomeManager --[DATA_COLOR_4]> consoleInterface : oldIncome:Income
+    deactivate incomeManager
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : \leditIncome(\n\tincomeIndex:int,\n\tnewIncome:Income\n)
+    activate incomeManager DATA_COLOR_4
+
+    incomeManager --[DATA_COLOR_4]> consoleInterface
+    deactivate incomeManager
+
+    ref over consoleInterface: print income
+
+    ref over consoleInterface, incomeManager, LocalStorage: save data
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml
