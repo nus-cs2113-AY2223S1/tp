@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddExpense
 
     create expense
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expense
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expense : create
     activate expense DATA_COLOR_1
 
     expense --[DATA_COLOR_1]> consoleInterface

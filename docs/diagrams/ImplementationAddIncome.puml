@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddIncome
 
     create income
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> income
+    consoleInterface -[USER_INTERFACE_COLOR_1]> income : create
     activate income DATA_COLOR_4
 
     income --[DATA_COLOR_4]> consoleInterface

@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddRecurringPayment
 
     create recurringPayment
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPayment
+    consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPayment : create
     activate recurringPayment DATA_COLOR_4
 
     recurringPayment --[DATA_COLOR_4]> consoleInterface

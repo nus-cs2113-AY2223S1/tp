@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddTarget
 
     create target
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> target
+    consoleInterface -[USER_INTERFACE_COLOR_1]> target : create
     activate target DATA_COLOR_4
 
     target --[DATA_COLOR_4]> consoleInterface
