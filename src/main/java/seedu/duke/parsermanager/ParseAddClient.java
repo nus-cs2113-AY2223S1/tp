@@ -202,6 +202,7 @@ public class ParseAddClient extends ParseAdd {
 
     private static void showExistingDuplicateClient(Client client) {
         Ui ui = new Ui();
+        ui.printNewline();
         ui.showToUser(EXISTING_CLIENT + client.toString());
     }
 }
