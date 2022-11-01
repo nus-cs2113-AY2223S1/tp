@@ -95,8 +95,10 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid add command. "
                         + "Please follow the command format provided");
             }
+            String comment = parseComment(userInputTokenized);
             Lesson lessonToAdd = parseLesson(userInputTokenized);
-            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd);
+            AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd, comment);
+
             return newAddCommand;
         case "/view":
             if (!isValidViewCommand(userInputTokenized)) {
