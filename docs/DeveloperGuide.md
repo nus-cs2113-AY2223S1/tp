@@ -234,6 +234,10 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintExpense.puml)
 
+### Saving data to file
+
+![Implementation-SD-Save-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDSaveData.puml)
+
 ### Adding an expense: `Add-Expense`
 
 The `Add-Expense` command adds a new expense to the program.
