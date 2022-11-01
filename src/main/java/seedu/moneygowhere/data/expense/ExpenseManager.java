@@ -4,7 +4,6 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -37,9 +36,8 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void addExpense(Expense expense, LocalStorage localStorage) {
+    public void addExpense(Expense expense) {
         expenses.add(expense);
-        localStorage.setSavedExpenses(expenses);
     }
 
     //@@author xzynos
@@ -102,23 +100,21 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void deleteExpense(int expenseIndex, LocalStorage localStorage)
+    public void deleteExpense(int expenseIndex)
             throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.remove(expenseIndex);
-            localStorage.setSavedExpenses(expenses);
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
     }
 
     //@@author xzynos
-    public void editExpense(int expenseIndex, Expense expense, LocalStorage localStorage)
+    public void editExpense(int expenseIndex, Expense expense)
             throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
             sortExpenses();
-            localStorage.setSavedExpenses(expenses);
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
@@ -136,16 +132,6 @@ public class ExpenseManager {
         String order = commandSortExpense.getOrder();
         sortCommandSetting = new ConsoleCommandSortExpense(type, order);
         sortExpenses();
-    }
-
-    //@@author LokQiJun
-    public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense,
-                                   LocalStorage localStorage) {
-        String type = commandSortExpense.getType();
-        String order = commandSortExpense.getOrder();
-        sortCommandSetting = new ConsoleCommandSortExpense(type, order);
-        sortExpenses();
-        localStorage.setSortCommandSetting(sortCommandSetting);
     }
 
     //@@author jeyvia

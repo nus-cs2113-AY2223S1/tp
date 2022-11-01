@@ -8,7 +8,6 @@ Package " "<<Rectangle>>{
     Class MoneyGoWhere MONEYGOWHERE_COLOR_1
 
     Class Common COMMON_COLOR_1
-
     Class Exceptions EXCEPTIONS_COLOR_1
 
     Class UserInterface USER_INTERFACE_COLOR_1
@@ -26,23 +25,26 @@ Package " "<<Rectangle>>{
 }
 
 Class "<$user>" as User USER_INTERFACE_COLOR_2
-Class "<$documents>" as DataFile STORAGE_COLOR_2
-Class "<$documents>" as LogFile LOGGER_COLOR_2
+Class "<$documents>" as LogFile LOGGER_COLOR_1
+Class "<$documents>" as DataFile STORAGE_COLOR_1
+Class "<$documents>" as ApiDataFile DATA_COLOR_6
 
 MoneyGoWhere -down-> UserInterface
 
-User -down-> UserInterface
+User --down-> UserInterface
 
-UserInterface -right-> Parser
+UserInterface -right-> Logger
+UserInterface -down-> Apis
 UserInterface -down-> Data
-UserInterface -left-> Logger
+UserInterface -left-> Parser
 
-Logger .left.> LogFile
+Logger ...down.> LogFile
 
 Parser -down-> Command
 
 Data -down-> Storage
-Data -down-> Apis
 
-Storage .left.> DataFile
+Storage .down.> DataFile
+
+Apis ..down.> ApiDataFile
 @enduml

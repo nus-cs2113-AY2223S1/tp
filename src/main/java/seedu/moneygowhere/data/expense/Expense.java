@@ -19,7 +19,6 @@ public class Expense {
     private String remarks;
     private String currency;
     private String modeOfPayment;
-    private BigDecimal rate;
 
     public Expense(String name,
                    LocalDateTime dateTime,
@@ -109,14 +108,6 @@ public class Expense {
         this.modeOfPayment = modeOfPayment;
     }
 
-    public BigDecimal getRate() {
-        return rate;
-    }
-
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o instanceof Expense) {
@@ -129,8 +120,7 @@ public class Expense {
                     && Objects.equals(e.getCategory(), category)
                     && Objects.equals(e.getRemarks(), remarks)
                     && Objects.equals(e.getCurrency(), currency)
-                    && Objects.equals(e.getModeOfPayment(), modeOfPayment)
-                    && Objects.equals(e.getRate(), rate);
+                    && Objects.equals(e.getModeOfPayment(), modeOfPayment);
 
             return isEqual;
         } else {

@@ -18,7 +18,7 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Exceptions Component](#exceptions-component)
   * [UserInterface Component](#userinterface-component)
   * [Commands Component](#commands-component)
-  * [Api Component](#api-component)
+  * [API Component](#api-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
   * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
@@ -27,11 +27,22 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
   * [Sorting expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
   * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
+  * [Printing a recurring payment](#printing-a-recurring-payment)
   * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
   * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
   * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
   * [Editing a recurring payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
   * [Adding an expense from a recurring payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+  * [Printing an income](#printing-an-income)
+  * [Adding an income: `Add-Income`](#adding-an-income-add-income)
+  * [Viewing an income: `View-Income`](#viewing-an-income-view-income)
+  * [Deleting an income: `Delete-Income`](#deleting-an-income-delete-income)
+  * [Editing an income: `Edit-Income`](#editing-an-income-edit-income)
+  * [Printing a target](#printing-a-target)
+  * [Adding a target: `Add-Target`](#adding-a-target-add-target)
+  * [Viewing a target: `View-Target`](#viewing-a-target-view-target)
+  * [Deleting a target: `Delete-Target`](#deleting-a-target-delete-target)
+  * [Editing a target: `Edit-Target`](#editing-a-target-edit-target)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -85,18 +96,18 @@ The software architecture diagram below describes the program's design and the i
 
 ### Core Components
 
-| Component     | Function                                                                            |
-|---------------|-------------------------------------------------------------------------------------|
-| MoneyGoWhere  | Main entrypoint of the program.                                                     |
-| Common        | Defines various parameters used by the program.                                     |
-| Exceptions    | Defines exceptions thrown by the program.                                           |
-| UserInterface | Provides functions to interface with the user via standard I/O and handle commands. |
-| Command       | Defines the commands accepted by the program along with its arguments.              |
-| Parser        | Provides functions to parse inputs read from standard input.                        |
-| Data          | Stores data and provides functions to operate on data.                              |
-| Storage       | Defines functions to save and load data.                                            |
-| Api           | Defines functions to call the currency Api and store exchange rates in a text file. |
-| Logger        | Defines functions to log the user's actions and the program's behaviour.            |
+| Component     | Function                                                                 |
+|---------------|--------------------------------------------------------------------------|
+| MoneyGoWhere  | Main entrypoint of the program.                                          |
+| Common        | Define various parameters used by the program.                           |
+| Exceptions    | Define the exceptions thrown by the program.                             |
+| UserInterface | Interface with the user via standard I/O and handle commands.            |
+| Command       | Define the commands accepted by the program along with its arguments.    |
+| Parser        | Provide functions to parse inputs read from standard input.              |
+| Data          | Defines classes to store data and provides functions to operate on data. |
+| Storage       | Provide functions to save and load data.                                 |
+| API           | Provide functions to interact with external APIs.                        |
+| Logger        | Provide functions to log user actions and the program's behaviour.       |
 
 ### Component Interactions
 The sequence diagram below describes the interaction between the various core components when a command is entered.
@@ -148,7 +159,7 @@ The Common component consists of the classes `Messages` and `Configurations`.
 ![Component-Common](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentCommon.puml)
 
 The `Messages` class defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.
-The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as formatting information, directory and file paths, and the URLs of different APIs.
+The `Configurations` class defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
 
 ### Exceptions Component
 
@@ -180,15 +191,15 @@ The corresponding console command subclass is returned by `ConsoleParser#parse()
 For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
 
-### Api Component
+### API Component
 
-The Api component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
+The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
 
-![Component-Api](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ComponentApi.puml)
+![Component-API](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ComponentApi.puml)
 
-The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the Api and transfer that data into a hashmap of exchange rates.
+The `CurrencyApiManager` class calls methods in `CurrencyApi`. The `CurrencyApi` class contains methods that would fetch data from the API and transfer that data into a hashmap of exchange rates.
 
-* `CurrencyApiManager` calls `CurrencyApi` to fetch data from the Api URL in the form of a JSON file. 
+* `CurrencyApiManager` calls `CurrencyApi` to fetch data from the API URL in the form of a JSON file. 
 * The data fetched contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar. The data is written into a text file called `exchangeRates.txt`. 
 * `CurrencyApiManager` calls `CurrencyApi` to write the data from `exchangeRates.txt` into a hashmap of exchange rates.
 
@@ -268,11 +279,68 @@ This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
 
+### Printing an income
+
+![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintIncome.puml)
+
+### Adding an income: `Add-Income`
+
+The `Add-Income` command adds a new income to the program.
+
+![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddIncome.puml)
+
+### Viewing an income: `View-Income`
+
+The `View-Income` command displays existing incomes in the program.
+
+![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewIncome.puml)
+
+### Deleting an income: `Delete-Income`
+
+The `Delete-Income` command removes an existing income from the program.
+
+![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteIncome.puml)
+
+### Editing an income: `Edit-Income`
+
+The `Edit-Income` command changes the attributes of an existing income in the program.
+
+![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditIncome.puml)
+
+### Printing a target
+
+![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintTarget.puml)
+
+### Adding a target: `Add-Target`
+
+The `Add-Target` command adds a new target to the program.
+
+![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddTarget.puml)
+
+### Viewing a target: `View-Target`
+
+The `View-Target` command displays existing targets in the program.
+
+![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewTarget.puml)
+
+### Deleting a target: `Delete-Target`
+
+The `Delete-Target` command removes an existing target from the program.
+
+![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteTarget.puml)
+
+### Editing a target: `Edit-Target`
+
+The `Edit-Target` command changes the attributes of an existing target in the program.
+
+![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditTarget.puml)
+
 ## Product Scope
 ### Target User Profile
 
 MoneyGoWhere is targeted at users who
 * Prefer command line interfaces to graphical interfaces
+* Use multiple operating systems concurrently
 * Type fast
 
 ### Value Proposition
@@ -284,36 +352,36 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 ## User Stories
 
-| Version | As a ... | I want to ...                                     | So that I can ...                                 |
-|---------|----------|---------------------------------------------------|---------------------------------------------------|
-| v1.0    | user     | add expenses                                      | keep track of my finances                         |
-| v1.0    | user     | view expenses                                     | keep track of my finances                         |
-| v1.0    | user     | view expenses by name                             | search for past expenses easily                   |
-| v1.0    | user     | view expenses by category                         | keep track of my spending across different areas  |
-| v1.0    | user     | delete expenses                                   | keep track of my finances                         |
-| v1.0    | user     | edit expenses                                     | keep track of my finances                         |
-| v1.0    | user     | categorise expenses                               | keep track of my spending across different areas  |
-| v1.0    | user     | sort expenses by alphabetical order               | organise my spending by their names               |
-| v1.0    | user     | sort expenses by amount                           | keep track of the extent of my spending           |
-| v1.0    | user     | sort expenses by date                             | keep track of my spending over time               |
-| v1.0    | user     | save my data to a file                            | store my data easily                              |
-| v1.0    | user     | load my data from a file                          | retrieve my data easily                           |
-| v1.0    | user     | add my income                                     | keep track if my spending exceeds my income       |
-| v1.0    | user     | add expense targets                               | keep track of my financial goals                  |
-| v2.0    | user     | convert between different currencies              | keep track of expenses across multiple currencies |
-| v2.0    | user     | update currency exchange rates                    | convert between currencies using the latest rates |
-| v2.0    | user     | view my income                                    | keep track if my spending exceeds my income       |
-| v2.0    | user     | delete my income                                  | keep track if my spending exceeds my income       |
-| v2.0    | user     | edit my income                                    | keep track if my spending exceeds my income       |
-| v2.0    | user     | view expense targets                              | keep track of my financial goals                  |
-| v2.0    | user     | delete expense targets                            | keep track of my financial goals                  |
-| v2.0    | user     | edit expense targets                              | keep track of my financial goals                  |
-| v2.0    | user     | add recurring payments                            | keep track of my recurring payments               |
-| v2.0    | user     | view recurring payments                           | keep track of my recurring payments               |
-| v2.0    | user     | delete recurring payments                         | keep track of my recurring payments               |
-| v2.0    | user     | edit recurring payments                           | keep track of my recurring payments               |
-| v2.0    | user     | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
-| v2.0    | user     | merge several data files together                 | consolidate my expenses easily                    |
+| Version Implemented | As a ... | I want to ...                                     | So that I can ...                                 |
+|---------------------|----------|---------------------------------------------------|---------------------------------------------------|
+| v1.0                | user     | add expenses                                      | keep track of my finances                         |
+| v1.0                | user     | view expenses                                     | keep track of my finances                         |
+| v1.0                | user     | view expenses by name                             | search for past expenses easily                   |
+| v1.0                | user     | view expenses by category                         | keep track of my spending across different areas  |
+| v1.0                | user     | delete expenses                                   | keep track of my finances                         |
+| v1.0                | user     | edit expenses                                     | keep track of my finances                         |
+| v1.0                | user     | categorise expenses                               | keep track of my spending across different areas  |
+| v1.0                | user     | sort expenses by alphabetical order               | organise my spending by their names               |
+| v1.0                | user     | sort expenses by amount                           | keep track of the extent of my spending           |
+| v1.0                | user     | sort expenses by date                             | keep track of my spending over time               |
+| v1.0                | user     | save my data to a file                            | store my data easily                              |
+| v1.0                | user     | load my data from a file                          | retrieve my data easily                           |
+| v1.0                | user     | add my income                                     | keep track if my spending exceeds my income       |
+| v1.0                | user     | add expense targets                               | keep track of my financial goals                  |
+| v2.0                | user     | convert between different currencies              | keep track of expenses across multiple currencies |
+| v2.0                | user     | update currency exchange rates                    | convert between currencies using the latest rates |
+| v2.0                | user     | view my income                                    | keep track if my spending exceeds my income       |
+| v2.0                | user     | delete my income                                  | keep track if my spending exceeds my income       |
+| v2.0                | user     | edit my income                                    | keep track if my spending exceeds my income       |
+| v2.0                | user     | view expense targets                              | keep track of my financial goals                  |
+| v2.0                | user     | delete expense targets                            | keep track of my financial goals                  |
+| v2.0                | user     | edit expense targets                              | keep track of my financial goals                  |
+| v2.0                | user     | add recurring payments                            | keep track of my recurring payments               |
+| v2.0                | user     | view recurring payments                           | keep track of my recurring payments               |
+| v2.0                | user     | delete recurring payments                         | keep track of my recurring payments               |
+| v2.0                | user     | edit recurring payments                           | keep track of my recurring payments               |
+| v2.0                | user     | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
+| v2.0                | user     | merge several data files together                 | consolidate my expenses easily                    |
 
 ## Non-Functional Requirements
 
