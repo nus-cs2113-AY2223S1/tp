@@ -200,7 +200,9 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 ### Data Component
 
 The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.\
-\
+
+![Component-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentData.puml)
+
 `Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
 
