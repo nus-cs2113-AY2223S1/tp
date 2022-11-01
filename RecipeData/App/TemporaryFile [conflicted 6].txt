@@ -1,19 +1,8 @@
 # TITLE 
-asdfasdasdf
+Example             as       dfads itle 
 
 # DESCRIPTION
-asdfasd
-fas
-df
-as                  
-      
-sadfasdfasdf    
-     
-  
-        asdfasdfasd
-
- asdfasdfasdfasdfasd
-sadfasdf
+Example Description
 
 # INGREDIENTS ingredient_name / amount / unit 
 1. Example ingredient / 1.2 / example unit 

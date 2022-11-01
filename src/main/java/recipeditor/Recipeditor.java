@@ -29,7 +29,7 @@ public class Recipeditor {
     private static void start(String[] args) {
         Storage.createAppFolder();
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
-        Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
+        //Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);  This was triggered in the next line
         Storage.loadRecipesToRecipeTitlesList();
         Storage.loadRecipesToRecipeList(); //TODO: Check existence and validity
         Ui.showGreeting();

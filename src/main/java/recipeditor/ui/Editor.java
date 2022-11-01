@@ -47,7 +47,7 @@ public class Editor extends JFrame implements ActionListener {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.toFront();
+
 
         textArea = new JTextArea();
         textArea.setSize(new Dimension(400,400));
@@ -60,8 +60,11 @@ public class Editor extends JFrame implements ActionListener {
         frame.add(scrollPane);
         frame.setSize(600,600);
         frame.setJMenuBar(menu);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setVisible(true);
+        frame.toFront();
+        frame.setAlwaysOnTop(true);
+
 
         frame.add(buttonSave);
         frame.add(buttonExit);

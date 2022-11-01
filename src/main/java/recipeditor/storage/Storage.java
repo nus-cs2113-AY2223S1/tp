@@ -12,7 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import recipeditor.exception.ParseFileException;
-import recipeditor.parser.TextFileParser;
+import recipeditor.parser.RecipeFileParser;
+import recipeditor.parser.TitleFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
@@ -92,8 +93,7 @@ public class Storage {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
-            RecipeList.recipeTitles.addAll(Arrays.asList(recipeTitles));
-            //TODO: Check duplicate?
+            TitleFileParser.parseTitleFileToRecipeTitles(recipeTitles); //Check Title Validity
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
@@ -107,7 +107,7 @@ public class Storage {
                 logger.log(Level.INFO, recipeTitle);
                 String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
                 String content = Storage.loadFileContent(recipeFilePath);
-                Recipe addedRecipe = new TextFileParser().parseTextToRecipe(content);
+                Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
                 RecipeList.addRecipe(addedRecipe);
                 logger.log(Level.INFO, recipeTitle + " is added to recipeList");
             }
@@ -130,6 +130,7 @@ public class Storage {
         }
     }
 
+    //FIXME: Don't need to append, just overwrite
     public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
         try {
             FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
@@ -198,6 +199,7 @@ public class Storage {
         return getContent.toString();
     }
 
+    //FIXME: Don't need to copy temporary file over but generated from model
     public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
         FileWriter fileWrite;
         try {

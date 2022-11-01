@@ -4,13 +4,12 @@ import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.Ingredient;
 import org.apache.commons.lang3.StringUtils;
-import recipeditor.ui.Ui;
 
 import java.util.logging.Logger;
 
-public class TextFileParser {
+public class RecipeFileParser {
 
-    private static final Logger logger = Logger.getLogger(TextFileParser.class.getName());
+    private static final Logger logger = Logger.getLogger(RecipeFileParser.class.getName());
 
     private static final String UNIMPORTANT_TEXT = "There are unimportant text that cannot be parsed. Please follow "
             + "the Template";
@@ -148,11 +147,10 @@ public class TextFileParser {
 
     private String parsedTitle(String line) throws ParseFileException {
         String trimmedLine = line.trim();
-        String[] parsed = line.split(" ");
-        if (isTitleNotAlphanumeric(parsed)) {
+        if (ParserUtils.isTitleNotAlphanumeric(trimmedLine)) {
             throw new ParseFileException(TITLE_ERROR_ALPHANUMERIC);
         }
-        if (doesTitleExceedLimit(trimmedLine)) {
+        if (ParserUtils.doesTitleExceedLimit(trimmedLine)) {
             throw new ParseFileException(TITLE_ERROR_LIMIT);
         }
         return line.trim();
@@ -216,19 +214,6 @@ public class TextFileParser {
         return (number <= 0);
     }
 
-
-    private boolean isTitleNotAlphanumeric(String[] parsed) {
-        for (String word : parsed) {
-            if (!StringUtils.isAlphanumeric(word.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean doesTitleExceedLimit(String trimmedLine) {
-        return trimmedLine.length() > 255;
-    }
 
     private int ingredientParsedIndex(String parsed) throws ParseFileException {
         try {

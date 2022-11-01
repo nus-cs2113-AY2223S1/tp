@@ -14,12 +14,11 @@ public class ListCommand extends Command {
      */
     public CommandResult execute() {
         StringBuilder recipeTitlesList = new StringBuilder();
+        recipeTitlesList.append(String.format("There are %d recipes in the recipe list",
+                RecipeList.recipeTitles.size()));
         for (int i = 0; i < RecipeList.recipeTitles.size(); i++) {
             recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.recipeTitles.get(i)));
         }
-        Ui.showMessage("This is the number of recipe in the model RecipeList.recipes");
-        Ui.showMessage(String.valueOf(RecipeList.getRecipes().size()));
-        Ui.showMessage("Below are in RecipeList.recipeTitles");
         return new CommandResult(recipeTitlesList.toString());
     }
 }

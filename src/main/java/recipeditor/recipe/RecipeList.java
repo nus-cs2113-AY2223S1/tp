@@ -114,4 +114,13 @@ public class RecipeList {
         }
         return false;
     }
+    public static boolean containsRecipeTitle(String title) {
+        for (String r : recipeTitles){
+            if(r.equals(title)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
