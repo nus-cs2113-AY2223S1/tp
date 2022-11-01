@@ -18,20 +18,18 @@ import seedu.duke.operationlist.OperationList;
 import seedu.duke.operationlist.PassengerList;
 import seedu.duke.parsers.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalTime;
 
 public class SkyControl {
-    public static final int BOARDING_TIME_OFFSET = 45;
-    public static final int MID_INDEX = 2;
     private Ui ui;
     private OperationList passengers;
     private OperationList flights;
     private Storage storage;
+    private PassengerInfo passengerInfo;
     private static boolean isPassenger = false;
     private static boolean isFlight = false;
     private static boolean isModify = false;
@@ -47,6 +45,7 @@ public class SkyControl {
         passengers = new PassengerList();
         flights = new FlightList();
         storage = new Storage();
+        passengerInfo = new PassengerInfo();
     }
 
     private void executeEntity(String lineInput, Command command) throws SkyControlException {
@@ -93,33 +92,12 @@ public class SkyControl {
     private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
         command.checkFlightDetailSync(flights, passengers, lineInput);
         String departureTime = command.getPassengerDepartureTime(flights, lineInput);
-        String reformatDepartureTime = reformatDepartureTime(departureTime);
+        String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
         String gateNumber = command.getPassengerGateNumber(flights, lineInput);
-        String boardingTime = getBoardTime(reformatDepartureTime);
+        String boardingTime = passengerInfo.getBoardingTime(reformatDepartureTime);
         String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime,
                 gateNumber, boardingTime);
         return passengerAddInput;
-    }
-
-    //@@author ivanthengwr
-    private String getBoardTime(String reformatDepartureTime) {
-        LocalTime flightDepartureTime = LocalTime.parse(reformatDepartureTime);
-        LocalTime formatBoardingTime = flightDepartureTime
-                .minus(Duration.ofMinutes(BOARDING_TIME_OFFSET));
-        String boardingTime = reformatBoardingTime(formatBoardingTime);
-        return boardingTime;
-    }
-
-    private String reformatDepartureTime(String departureTime) {
-        StringBuilder formatDepartureTime = new StringBuilder(departureTime);
-        formatDepartureTime.insert(MID_INDEX,":");
-        return formatDepartureTime.toString();
-    }
-
-    private String reformatBoardingTime(LocalTime boardingTime) {
-        String reformatBoardingTime = boardingTime.toString();
-        reformatBoardingTime = reformatBoardingTime.replace(":", "");
-        return reformatBoardingTime;
     }
 
     //@@author shengiv

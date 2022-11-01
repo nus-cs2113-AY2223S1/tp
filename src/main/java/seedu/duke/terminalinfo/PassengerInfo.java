@@ -31,6 +31,10 @@ public class PassengerInfo {
         this.boardingTime = boardingTime;
     }
 
+    public PassengerInfo() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -83,7 +87,7 @@ public class PassengerInfo {
     }
 
     //@@author ivanthengwr
-    public String getBoardTime(String reformatDepartureTime) {
+    public String getBoardingTime(String reformatDepartureTime) {
         LocalTime flightDepartureTime = LocalTime.parse(reformatDepartureTime);
         LocalTime formatBoardingTime = flightDepartureTime
                 .minus(Duration.ofMinutes(BOARDING_TIME_OFFSET));
