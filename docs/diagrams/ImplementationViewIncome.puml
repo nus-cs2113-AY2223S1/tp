@@ -21,14 +21,14 @@ opt consoleCommand instanceof ConsoleCommandViewIncome
 
         ref over consoleInterface: Print Income
     else else
-            consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncome()
+            consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncomes()
             activate incomeManager DATA_COLOR_4
 
-            incomeManager --[DATA_COLOR_4]> consoleInterface : income:ArrayList<Income>
+            incomeManager --[DATA_COLOR_4]> consoleInterface : incomes:ArrayList<Income>
             deactivate incomeManager
 
-            loop through income
-            ref over consoleInterface: Print income
+            loop through incomes
+            ref over consoleInterface: Print Income
             end
     end
 

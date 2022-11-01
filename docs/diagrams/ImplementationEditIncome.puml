@@ -16,10 +16,10 @@ opt consoleCommand instanceof ConsoleCommandEditIncome
     consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncome(incomeIndex:int)
     activate incomeManager DATA_COLOR_4
 
-    incomeManager --[DATA_COLOR_4]> consoleInterface : income:Income
+    incomeManager --[DATA_COLOR_4]> consoleInterface : oldIncome:Income
     deactivate incomeManager
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : \leditIncome(\n\tincomeIndex:int,\n\tincome:Income\n)
+    consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : \leditIncome(\n\tincomeIndex:int,\n\tnewIncome:Income\n)
     activate incomeManager DATA_COLOR_4
 
     incomeManager --[DATA_COLOR_4]> consoleInterface
