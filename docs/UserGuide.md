@@ -14,7 +14,7 @@ compatible with one another.
 [here](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
 3. Copy the file to an empty folder you want to use as the _home folder_
 4. Open a command window in that folder
-5. Run the command `java -jar CCC.jar` to start the app
+5. Run the command `java -jar tp.jar` to start the app
 6. Refer to the [Features](#features) below to try out some commands!
 
 ## Features 
@@ -57,9 +57,9 @@ Expected outcome: The user is now in edit mode for the build named 'test build'.
 ```
 ____________________________________________________________
 edit/test build
-____________________________________________________________
+<--------------------------------------------------------->
 You are now editing test build
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 #### Deleting a build: `delete`
@@ -134,8 +134,10 @@ Examples of usage: User enters `find/test` to find all builds that contain the k
 Expected outcome: The program will display all builds that contain the keyword 'test'.
 ``` 
 ____________________________________________________________
+find/test
+____________________________________________________________
 Found Builds:
-testbuild
+test build
 ____________________________________________________________
 ```
 
@@ -209,11 +211,11 @@ of 3.8 GHz.
 
 Expected outcome: The program will add a cpu named 'intel 10990x' to the list of components.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 add/cpu/intel 10990x/1200/80/lga1511/3.8
-____________________________________________________________
+<--------------------------------------------------------->
 You have added intel 10990x
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Deleting a component: `delete`
@@ -227,11 +229,11 @@ components.
 
 Expected outcome: The program will delete a cpu named 'intel 10990x' from the list of components.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 delete/cpu/intel 10990x
-____________________________________________________________
+<--------------------------------------------------------->
 You have removed intel 10990x
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Viewing a component: `view`
@@ -245,15 +247,15 @@ components.
 
 Expected outcome: The program will display the details of a cpu named 'intel 10990x' from the list of components.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 view/cpu/intel 10990x
-____________________________________________________________
+<--------------------------------------------------------->
 Name: intel 10990x
 Price: $1200
 Power: 80 W
 Socket: lga1511
 Clock: 3.8 GHz
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Listing all components: `list`
@@ -266,10 +268,10 @@ Examples of usage: User enters `list` to list all components from the list of co
 
 Expected outcome: The program will display all components from the list of components.
 ```
-____________________________________________________________
-Computer parts for testbuild:
+<--------------------------------------------------------->
+Computer parts for test build:
 1. intel 10990x [$1200] [80 W] [lga1511] [3.8 GHz]
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Checking compatibility: `check`
@@ -282,17 +284,17 @@ Examples of usage: User enters `check` to check if the build is compatible.
 
 Expected outcome: The program will display a list of compatibilities based on the components of a build.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 check
-____________________________________________________________
+<--------------------------------------------------------->
 Compatibility Info:
 Power supply: false
-Socket: true
+Socket: false
 GPU slot: false
 Memory slot: false
 Expansion slots: false
 Form factor: false
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Information about a build: `info`
@@ -305,15 +307,15 @@ Examples of usage: User enters `info` to display information about a build.
 
 Expected outcome: The program will display information about a build.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 info
-____________________________________________________________
+<--------------------------------------------------------->
 Build Info:
-Build name: testbuild
+Build name: test build
 Total cost: 1200.0
 Total power: 80
 Compatibility: Not compatible
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Exporting a build: `export`
@@ -326,11 +328,11 @@ Examples of usage: User enters `export` to export a build.
 
 Expected outcome: The program will export a build to a text file.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 export
-____________________________________________________________
+<--------------------------------------------------------->
 Exporting build to text file...
-____________________________________________________________
+<--------------------------------------------------------->
 ```
 
 ### Exiting edit mode: `back`
@@ -343,10 +345,13 @@ Examples of usage: User enters `back` to exit edit mode.
 
 Expected outcome: The program will exit edit mode.
 ```
-____________________________________________________________
+<--------------------------------------------------------->
 back
-____________________________________________________________
+<--------------------------------------------------------->
 Back to main mode.
+<--------------------------------------------------------->
+____________________________________________________________
+You are in Main Mode.
 ____________________________________________________________
 ```
 

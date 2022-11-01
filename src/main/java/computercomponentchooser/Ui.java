@@ -29,6 +29,7 @@ public class Ui {
      */
     private static final String LINEBREAK = "____________________________________________________________";
 
+    private static final String EDIT_LINEBREAK = "<--------------------------------------------------------->";
     private final Parser parser;
 
     private final EditParser editParser;
@@ -45,10 +46,17 @@ public class Ui {
     }
 
     /**
-     * prints the LINEBREAK String.
+     * Prints the LINEBREAK String.
      */
     public static void printLine() {
         System.out.println(LINEBREAK);
+    }
+
+    /**
+     * Prints the EDIT_LINEBREAK String.
+     */
+    public static void printEditLine() {
+        System.out.println(EDIT_LINEBREAK);
     }
 
     /**
@@ -87,7 +95,7 @@ public class Ui {
         String line;
         do {
             line = in.nextLine();
-            if (Parser.checkEdit(line)) {
+            if (parser.checkEdit(line)) {
                 while (!EditParser.checkBack(line)) {
                     editParser.parse(line);
                     line = in.nextLine();
