@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+class EditCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - entryNumber: int
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +getOptionalTags()
+    +{abstract}execute()
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +getOptionalTags()
+    +{abstract}execute()
+}
+
+EditCommand -up-|> "{abstract}\n Command"
+@enduml

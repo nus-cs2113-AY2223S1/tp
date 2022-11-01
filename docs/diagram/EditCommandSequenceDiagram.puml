@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:EditCommand" as EditCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+Participant ":Budget" as Budget
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("edit e/2 t/expense c/food a/10 d/20102022 i/chicken")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("edit e/2 t/expense c/food a/10 d/20102022 i/chicken")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create EditCommand
+CommandParser -> EditCommand
+activate EditCommand
+return
+
+return command: EditCommand
+
+return command: EditCommand
+deactivate CommandParser
+
+Duke -> EditCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate EditCommand
+
+EditCommand -> Transactions:transactions.size()
+activate Transactions
+return numberOfTransactions: int
+
+alt isInputValid is true
+    EditCommand -> Transactions:getEntry(index: int)
+    activate Transactions
+    opt newType is null
+        EditCommand -> 
+    end
+    Transactions -> Transactions:getDate()
+    return date: LocalDate
+    EditCommand -> Transactions:deleteTransaction(index: int)
+    activate Transactions
+    EditCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
+    return addedMonthExpenseSum: long
+    EditCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
+    activate Budget
+    return BudgetInfo: String
+    EditCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
+    activate Ui
+else else
+    EditCommand -> Ui:showErrorMessage(message: String)
+    return
+end
+
+@enduml
