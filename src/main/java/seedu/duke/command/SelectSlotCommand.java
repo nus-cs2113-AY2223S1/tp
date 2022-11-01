@@ -30,6 +30,7 @@ public class SelectSlotCommand extends Command {
     public static final String ERROR_MODULE_DOES_NOT_EXIST = "Module does not exist!";
     public static final String ERROR_MODULE_NOT_SELECTED = 
             "You need to add the module to your timetable first. Use the add command.";
+    public static final String ERROR_UNEXPECTED_PARAMETER = "Unexpected parameter: ";
 
     public static final String SUCCESSFUL_MESSAGE = "Slot selected successfully!";
     private Map<String, String> params;
@@ -104,6 +105,13 @@ public class SelectSlotCommand extends Command {
         } 
         if (!params.containsKey("code") || params.get("code").isEmpty()) {
             throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /code");
+        }
+        List<String> extraParams = params.keySet()
+            .stream()
+            .filter(k -> !List.of("module", "type", "code").contains(k))
+            .collect(Collectors.toList());
+        for (String p : extraParams) {
+            throw new YamomException(ERROR_UNEXPECTED_PARAMETER + p);
         }
     }
 
