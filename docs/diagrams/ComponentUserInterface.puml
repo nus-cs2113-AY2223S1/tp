@@ -2,22 +2,36 @@
 !include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
 package UserInterface {
-    Class ConsoleInterface USER_INTERFACE_COLOR_1
+    Class "        ConsoleInterface        " as ConsoleInterface USER_INTERFACE_COLOR_1
 }
 
 package Parser {
-    Class Hidden1 #ffffff
+    Class ConsoleParser PARSER_COLOR_1
 }
 
 package Data {
-    Class Hidden2 #ffffff
+    Class ExpenseManager DATA_COLOR_1
+    Class IncomeManager DATA_COLOR_2
+    Class RecurringPaymentManager DATA_COLOR_3
+    Class TargetManager DATA_COLOR_4
+}
+
+package Apis {
+    Class CurrencyApiManager DATA_COLOR_6
 }
 
 package Logger {
-    Class Hidden3 #ffffff
+    Class LocalLogger LOGGER_COLOR_1
 }
 
-ConsoleInterface -down-> Parser
-ConsoleInterface -down-> Data
-ConsoleInterface -down-> Logger
+ExpenseManager -down[hidden]-> RecurringPaymentManager
+IncomeManager -down[hidden]-> TargetManager
+
+ConsoleInterface -left-> "1" ConsoleParser
+ConsoleInterface -down-> "1" ExpenseManager
+ConsoleInterface -down-> "1" IncomeManager
+ConsoleInterface -down-> "1" RecurringPaymentManager
+ConsoleInterface -down-> "1" TargetManager
+ConsoleInterface -down-> "1" CurrencyApiManager
+ConsoleInterface -right-> "1" LocalLogger
 @enduml
