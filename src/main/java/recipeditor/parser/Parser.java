@@ -51,7 +51,7 @@ public class Parser {
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         case HelpCommand.COMMAND_TYPE:
-            return new HelpCommand();
+            return parseHelpCommand(parsed);
         default:
             return new InvalidCommand(InvalidCommand.INVALID_MESSAGE);
         }
@@ -144,7 +144,7 @@ public class Parser {
             logger.log(Level.WARNING, "File not found when deleting the recipe file");
             return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
         }
-        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        return new InvalidCommand("Try: " + ViewCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseEditCommand(String[] parsed) {
@@ -192,7 +192,7 @@ public class Parser {
                 return new InvalidCommand(e.getMessage());
             }
         }
-        return new InvalidCommand(EditCommand.COMMAND_FORMAT);
+        return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseFindCommand(String[] parsed) {
@@ -205,5 +205,16 @@ public class Parser {
             Ui.showMessage(FindCommand.CORRECT_FORMAT);
         }
         return new InvalidCommand(FindCommand.CORRECT_FORMAT);
+    }
+
+    public static Command parseHelpCommand(String[] parsed) {
+
+        if (parsed.length > 2) {
+            return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
+        } else if (parsed.length == 1) {
+            return new HelpCommand("help");
+            // no argument input, show help message for /help
+        }
+        return new HelpCommand(parsed[1]);
     }
 }
