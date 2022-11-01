@@ -81,7 +81,8 @@ public class MarkCommand extends Command {
         try {
             Validator.validateCommandInput(slashesCount, REQUIRED_MARK_UNDONE_SLASHES,
                     INVALID_MARK_UNDONE_COMMAND, arguments.charAt(arguments.length() - 1));
-            int exerciseIndex = Validator.getIndexWithValidation(argumentList[1], exerciseList.getCompletedExerciseListSize());
+            int exerciseIndex = Validator.getIndexWithValidation(argumentList[1],
+                    exerciseList.getCompletedExerciseListSize());
             Exercise exercise = exerciseList.getCompletedExercise(exerciseIndex);
             exerciseList.markUndone(exerciseIndex);
             assert !exercise.getDone() : "exercise should be undone";

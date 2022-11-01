@@ -92,8 +92,8 @@ public class Parser {
             }
             return date;
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date is in the wrong format or invalid." +
-                    " Please follow the dd-MM-yyyy format");
+            throw new IllegalValueException("Date is in the wrong format or invalid."
+                    + " Please follow the dd-MM-yyyy format");
         }
     }
 }

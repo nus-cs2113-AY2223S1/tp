@@ -93,7 +93,8 @@ public class Validator {
         }
     }
 
-    public static double getMetabolicEquivalentWithValidation(String metabolicEquivalentString) throws IllegalValueException {
+    public static double getMetabolicEquivalentWithValidation(String metabolicEquivalentString)
+            throws IllegalValueException {
         validateDecimalPlace(metabolicEquivalentString);
         double metabolicEquivalent = Double.parseDouble(metabolicEquivalentString);
         validateDouble(metabolicEquivalent, MAXIMUM_MET, ZERO, INVALID_MET_MESSAGE);
