@@ -207,7 +207,8 @@ Format: `add/TYPE/NAME/PRICE/POWER/PARAM/PARAM/...`
 
 Examples of usage: User enters `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
-of 3.8 GHz.
+of 3.8 GHz. Other possible types include: 
+`case, cooler, drive, gpu, motherboard, psu, memory, storage, monitor and other`
 
 Expected outcome: The program will add a cpu named 'intel 10990x' to the list of components.
 ```
