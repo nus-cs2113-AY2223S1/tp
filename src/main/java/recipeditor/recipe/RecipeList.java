@@ -4,21 +4,20 @@ import recipeditor.storage.Storage;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class RecipeList {
-    public static ArrayList<String> recipeTitles = new ArrayList<>();
+    private static ArrayList<String> recipeTitles = new ArrayList<>();
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
     private RecipeList(ArrayList<Recipe> load) {
         recipes = new ArrayList<>();
+        recipeTitles = new ArrayList<>();
         recipes.addAll(load);
     }
 
-    private RecipeList() {
-        this(null);
-    }
-
     public static Recipe getRecipe(int index) throws IndexOutOfBoundsException {
+        assert index > -1;
         return recipes.get(index);
     }
 
@@ -30,17 +29,32 @@ public class RecipeList {
         recipes.add(recipe);
     }
 
-    public static void deleteRecipeFromIndex(int index) throws IndexOutOfBoundsException {
-        recipeTitles.remove(index);
-        recipes.remove(index);
+    public static void addRecipeTitle(String title) {
+        recipeTitles.add(title);
+    }
+
+    public static Iterable<String> iterateRecipeTitles() {
+        return recipeTitles;
+    }
+
+    public static int getRecipeTitlesSize() {
+        return recipeTitles.size();
+    }
+
+    public static String getRecipeTitle(int index) throws IndexOutOfBoundsException {
+        return recipeTitles.get(index);
     }
 
     public static void deleteRecipeFromTitle(String recipeTitle) {
+        if (getRecipeIndexFromTitle(recipeTitle) < 0) {
+            throw new NullPointerException();
+        }
         recipes.remove(getRecipeFromTitle(recipeTitle));
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
 
     public static void editRecipe(int index, Recipe newRecipe, String oldTitle) {
+        assert index > -1;
         recipes.set(index, newRecipe);
         recipeTitles.set(index, newRecipe.getTitle());
         String oldFile = Storage.titleToFilePath(oldTitle);
@@ -57,7 +71,8 @@ public class RecipeList {
         return null;
     }
 
-    public static String getTitleFromIndex(int index) {
+    public static String getTitleFromIndex(int index) throws IndexOutOfBoundsException {
+        assert index > -1;
         return getRecipe(index).getTitle();
     }
 

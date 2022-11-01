@@ -23,7 +23,7 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         if (isValid) {
             RecipeList.addRecipe(addedRecipe);
-            RecipeList.recipeTitles.add(addedRecipe.getTitle());
+            RecipeList.addRecipeTitle(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             StringBuilder response = new StringBuilder();
             response.append("\"" + addedRecipe.getTitle() + "\" added to the recipe list.\n");
             response.append(String.format("There are %d recipes in the recipe list",
-                    RecipeList.recipeTitles.size()));
+                    RecipeList.getRecipeTitlesSize()));
 
             return new CommandResult(response.toString());
         } else {
