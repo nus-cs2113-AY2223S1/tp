@@ -147,16 +147,16 @@ public class EditCommand extends Command {
             editLogger.log(Level.INFO, "Edit Command checks whether the index is valid "
                     + "before executing the command.");
             int index = entryNumber;
+            boolean isInputValid = true;
             int numberOfTransactions = transactions.size();
             if ((index > numberOfTransactions) || (index <= 0)) {
-                throw new GlobalInvalidIndexException();
+                isInputValid = false;
             }
-            Transaction entry = transactions.getEntry(index - 1);
-            boolean isInputValid = true;
 
             assert index > 0;
 
             if (isInputValid) {
+                Transaction entry = transactions.getEntry(index - 1);
                 String newType = type;
                 String newDescription = description;
                 int newAmount = amount;
