@@ -1,6 +1,6 @@
 # MoneyGoWhere
 
-{Give product intro here}
+MoneyGoWhere is a financial planner to help you manage your finances.
 
 Useful links:
 * [User Guide](UserGuide.md)
