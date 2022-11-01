@@ -31,11 +31,11 @@ public class CarparkListTest {
     @Test
     void testToString() throws NoFileFoundException, FileWriteException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Assertions.assertEquals("CarparkID 1 at Suntec City\n"
-            + "   1882 available lots total\n"
-            + "CarparkID 2 at Marina Square\n"
-            + "   1003 available lots total\n"
-            + "CarparkID 3 at Raffles City\n"
-            + "   522 available lots total\n", carparkList.toString());
+        Assertions.assertEquals("CarparkID @|yellow,bold 1|@ at Suntec City\n"
+            + "@|faint -->|@ @|yellow 1882|@ available lots total\n"
+            + "CarparkID @|yellow,bold 2|@ at Marina Square\n"
+            + "@|faint -->|@ @|yellow 1003|@ available lots total\n"
+            + "CarparkID @|yellow,bold 3|@ at Raffles City\n"
+            + "@|faint -->|@ @|yellow 522|@ available lots total\n", carparkList.toString());
     }
 }

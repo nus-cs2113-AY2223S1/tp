@@ -82,6 +82,23 @@ public class Ui {
     }
 
     /**
+     * Print string to render.
+     *
+     * @param line String to print
+     * @param isNewLine if true, print newline.
+     */
+    public static void printRenderedString(String line, boolean isNewLine) {
+        AnsiConsole.systemInstall();
+        if (isNewLine) {
+            println(ansi().render(line));
+        } else {
+            print(ansi().render(line));
+        }
+        AnsiConsole.systemUninstall();
+    }
+
+
+    /**
      * Checks whether the system support ANSI encoding.
      *
      * @return true if it supports ANSI.
@@ -153,7 +170,7 @@ public class Ui {
             printGreen(result.showToUser, true);
             break;
         default:
-            println(result.showToUser);
+            printRenderedString(result.showToUser, true);
             break;
         }
     }

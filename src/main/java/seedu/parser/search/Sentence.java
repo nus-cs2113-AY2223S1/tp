@@ -9,6 +9,7 @@ import java.util.List;
 public class Sentence {
     private final List<Word> words = new ArrayList<>();
     private final String textString;
+    private List<Character> delimiters = new ArrayList<>();
 
     /**
      * Constructor for the {@link Sentence} object. Splits an input string
@@ -17,8 +18,8 @@ public class Sentence {
      * @param input Text to be split and processed.
      */
     public Sentence(String input) {
-        String[] wordStrings = input.trim().split("[ /,-]");
         textString = input;
+        String[] wordStrings = splitAndExtractDelimiters(input.trim());
         for (String word : wordStrings) {
             words.add(new Word(word));
         }
@@ -33,6 +34,7 @@ public class Sentence {
     public Sentence(List<String> wordStrings) {
         String bufferText = "";
         for (String word : wordStrings) {
+            delimiters.add(' ');
             bufferText += word + " ";
             words.add(new Word(word));
         }
@@ -48,13 +50,13 @@ public class Sentence {
 
     @Override
     public String toString() {
-        String outputString = textString;
+        StringBuilder outputString = new StringBuilder();
+        int ind = 0;
         for (Word word : words) {
-            if (word.isBold()) {
-                outputString = outputString.replace(word.getText(), word.toString());
-            }
+            outputString.append(word.getAnsiFormatString());
+            outputString.append(delimiters.get(ind++));
         }
-        return outputString.trim();
+        return outputString.toString().trim();
     }
 
     public List<Word> getWords() {
@@ -65,4 +67,21 @@ public class Sentence {
         return words.size();
     }
 
+
+    /**
+     * Keeps track of which delimiter is at which point for reconstruction of string later.
+     *
+     * @param input input string
+     * @return split array of input
+     */
+    private String[] splitAndExtractDelimiters(String input) {
+        String[] wordStrings = input.split("[ /,-]");
+        for (char character : textString.toCharArray()) {
+            if (character == ' ' || character == '/' || character == ',' || character == '-') {
+                delimiters.add(character);
+            }
+        }
+        delimiters.add(' ');
+        return wordStrings;
+    }
 }

@@ -1,5 +1,6 @@
 package seedu.commands;
 
+import seedu.data.CarparkFilteredList;
 import seedu.data.CarparkList;
 import seedu.exception.NoCarparkFoundException;
 import seedu.parser.search.Sentence;
@@ -30,12 +31,13 @@ public class FilterAddressCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            String result = carparkList.filterByAddress(searchQuery).getSearchListString();
+            CarparkFilteredList searchResult = carparkList.filterByAddress(searchQuery);
+            String result = searchResult.getSearchListString();
             if (result.isEmpty()) {
                 throw new NoCarparkFoundException();
             }
             carparkList.resetBoldForAllCarparks();
-            return new CommandResult(result, CommandStatus.MESSAGE);
+            return new CommandResult(result, CommandStatus.FILTERSTRING);
         } catch (NoCarparkFoundException e) {
             carparkList.resetBoldForAllCarparks();
             return new CommandResult(e.getMessage(), CommandStatus.FAIL);
