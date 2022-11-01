@@ -219,6 +219,7 @@ public class Duke {
                 UserStorageParser.storeTimetable(timetableManager);
             } else if (addCommand.hasComment()) {
                 addComment(userUniversityListManager, addCommand);
+                UserStorageParser.storeCreatedLists(userUniversityListManager);
             } else {
                 addModuleToList(userUniversityListManager, addCommand);
             }

@@ -53,7 +53,7 @@ public class UserUniversityListManager {
     }
 
     private void checkTimetables() {
-        
+
     }
 
     private void checkUniversityLists() {
@@ -69,9 +69,16 @@ public class UserUniversityListManager {
             if (comment.equals("")) {
                 System.out.println("Error: No empty updates");
                 return;
+            } else if (isNotValidComment(comment)) {
+                System.out.println("Error: No special characters in comment: ; % /");
+                return;
             }
             getList(universityName).updateComment(moduleCode, comment);
         }
+    }
+
+    private boolean isNotValidComment(String comment) {
+        return comment.contains("%") || comment.contains("/") || comment.contains(";");
     }
 
     public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException {
