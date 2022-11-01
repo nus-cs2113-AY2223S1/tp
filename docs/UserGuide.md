@@ -140,8 +140,10 @@ finished with a shower of grated aged Pecorino Romano cheese plus freshly ground
 Edit existing recipe with the given _INDEX_ as shown in the recipe list. To see the index of the recipe, you can use the `/list` command to
 show all the recipe titles that is in your current recipe list. The _INDEX_ will be the number on the left of the recipe title.
 
-ℹ This feature will bring out the GUI editor and load the recipe information that was previously saved by the user.
+ℹ This feature allows you to choose between using GUI editor or CLI editor. For GUI editor, it will load the recipe information that was previously 
+saved by the user. For CLI, you can make the relevant edits using the commands and flags as shown below.
 
+### GUI Editor
 The GUI Editor workflow is similar to [GUI Editor](#gui-editor)
 
 Format: `/edit INDEX`
@@ -151,69 +153,76 @@ Example:
 /edit 1
 ```
 
-The CLI Editor updates the recipe without bringing out the GUI. Users have to input the appropriate flags and take note of the
-format before entering the command.
+### CLI Editor
+The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
+and take note of the format before entering the command.
+
+**Recipe flags**: Specify the part of recipe that will be changed
+- `-t`: *Title*
+- `-d`: *Description*
+- `-i`: *Ingredient*
+- `-s`: *Step*
+- 
 
 Format: `/edit INDEX FLAGS PARAMETERS`
 
-There are two types of flags:
-
-- **Command flags: Specify the type of function to be used**
-    - `-add`: *Adds a new ingredient or step*
+**Command flags**: Specify the type of function to be used**
+- `-add`: *Adds a new ingredient or step*
   
-      ℹ Only works for ingredient or step. Cannot add more than 1 recipe title or description.
+      ℹ Only works for ingredient or step. Cannot add moreout  than 1 recipe title or description.
       - Parameter: `INGREDIENT or STEP`
       - Example:
       ```
       /edit 2 -add 
       ```
-    - `-del`: *Deletes an ingredient or step*
-  
-      ℹ Only works for ingredient or step. Cannot delete recipe title or description.
 
-        - Parameter: `INDEX`
-        - Exactly **1 (one)** integer must be provided.
-      - Example:
-      ```
-      /edit 2 -del -i 2 
+- `-del`: *Deletes an ingredient or step*
+  
+  ℹ Only works for ingredient or step. Cannot delete recipe title or description.
+
+    - Parameter: `INDEX`
+    - Exactly **1 (one)** integer must be provided.
+  - Example:
+  ```
+  /edit 2 -del -i 2 
       
-      Delete "Lettuce"
-      Caesar salad: ingredient edited.
-      ```
-    - `-swp`: *Swaps two ingredients or steps*
-      - Parameter: `INDEX_1 INDEX_2`
-        - Exactly **2 (two)** integers must be provided.
-      - Example:
-      ```
-      /edit 1 -swp -s 2 3
+  Delete "Lettuce"
+  Caesar salad: ingredient edited.
+  ```
+  
+- `-swp`: *Swaps two ingredients or steps*
+  - Parameter: `INDEX_1 INDEX_2`
+    - Exactly **2 (two)** integers must be provided.
+  - Example:
+  ```
+  /edit 1 -swp -s 2 3
       
-      Swap "Heat oil in a frying pan" and "Pour sauce into the pan"
-      Fried rice: step edited.
-      ```
-    - `-chg`: *Changes the ingredient, step, title or description*
-      - Parameter: `INDEX [INGREDIENT or STEP]` or `[TITLE or DESCRIPTION]`
-        - For ingredient and step, exactly **1 (one) index** must be provided before the changes.
-          - Ingredient format: `INGREDIENT_NAME / AMOUNT / UNIT`
-          - Step format: `STEP`
-        - For title and description, type the changes right after the flags.
-      - Examples: 
-      ```
-      /edit 3 -chg -i 2 Oyster sauce / 1.0 / tbsp
+  Swap "Heat oil in a frying pan" and "Pour sauce into the pan"
+  Fried rice: step edited.
+  ```
+
+- `-chg`: *Changes the ingredient, step, title or description*
+  - Parameter: `INDEX [INGREDIENT or STEP]` or `[TITLE or DESCRIPTION]`
+
+    ℹ For title and description, type the changes right after the flags. No need for index.
+
+    ℹ For ingredient and step, exactly **1 (one) index** must be provided before the changes.
+        
+      - Ingredient format: `INGREDIENT_NAME / AMOUNT / UNIT`
+      - Step format: `STEP`
+  - Examples: 
+  ```
+  /edit 2 -chg -d Lettuce salad with croutons and dressing
       
-      Change "Soy sauce / 2.0 / tsp" to "Oyster sauce / 1.0 / tbsp"
-      Stir fry: ingredient edited.
-      ```
-      ```
-      /edit 2 -chg -d Lettuce salad with croutons and dressing
+  Change "Green salad" to "Lettuce salad with croutons and dressing"
+  Caesar salad: description edited.
+  ```
+  ```
+  /edit 3 -chg -i 2 Oyster sauce / 1.0 / tbsp
       
-      Change "Green salad" to "Lettuce salad with croutons and dressing"
-      Caesar salad: description edited.
-      ```
-- **Recipe flags: Specify the part of recipe that will be changed**
-  - `-i`: *Ingredient*
-  - `-s`: *Step*
-  - `-t`: *Title*
-  - `-d`: *Description*
+  Change "Soy sauce / 2.0 / tsp" to "Oyster sauce / 1.0 / tbsp"
+  Stir fry: ingredient edited.
+  ```
 
 ℹ The flag order does not matter, but exactly 1 (one) command flag and 1 (one) recipe flag are allowed in 
 an edit command.
