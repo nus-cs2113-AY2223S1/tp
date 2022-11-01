@@ -19,7 +19,7 @@ opt consoleCommand instanceof ConsoleCommandViewTarget
         targetManager --[DATA_COLOR_4]> consoleInterface : target:Target
         deactivate targetManager
 
-        ref over consoleInterface: Print Target
+        ref over consoleInterface: print target
     else else
             consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : getTargets()
             activate targetManager DATA_COLOR_4
@@ -28,7 +28,7 @@ opt consoleCommand instanceof ConsoleCommandViewTarget
             deactivate targetManager
 
             loop through targets
-            ref over consoleInterface: Print Target
+            ref over consoleInterface: print target
             end
     end
 
