@@ -4,7 +4,6 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
