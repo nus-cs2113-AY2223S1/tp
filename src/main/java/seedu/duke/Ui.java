@@ -32,7 +32,6 @@ import static seedu.duke.Messages.PROPERTY;
  * Handler for all interactions between the user and the command line.
  */
 public class Ui {
-
     private static final String FULL_STOP = ".";
     private static final String CLIENT_NAME_LABEL = "Client Name: ";
     private static final String CLIENT_CONTACT_NUMBER_LABEL = "Client Contact Number: ";

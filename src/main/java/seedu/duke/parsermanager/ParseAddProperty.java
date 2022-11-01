@@ -71,26 +71,28 @@ public class ParseAddProperty extends ParseAdd {
     public static final String EXISTING_PROPERTY = "Existing Property:\n  ";
 
 
-    // Add Property Regex for Validation
-    // Singapore Address Related Regex
-    private static final String LANDED_PROPERTY_UNIT_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
-    private static final String BUILDING_BLOCK_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
+    // Add Property Address Validation Regex
+    // Singapore Address Common Component Regex
     private static final String STREET_NAME_REGEX = "[^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()_+"
             + "=<>\\s\\n?`~0-9,{}|-]";
     private static final String STREET_NUMBER_REGEX = " ([1-9]{1}[0-9]{0,3})";
-    private static final String BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX = " #(([0]{1}[1-9]{1})|([1-9]{1}[0-9]{1,2}))-(([0]"
-            + "{1}[1-9]{1})|([1-9]{1}[0-9]{1,3}))([A-Z]?)";
-    private static final String BUILDING_NAME_REGEX = " [^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()"
-            + "_+=<>\\s\\n?`~0-9,{}|-]";
     private static final String POSTAL_CODE_REGEX = ", (S[0-9]{6})$";
 
     // Singapore Landed Property Regex
+    private static final String LANDED_PROPERTY_UNIT_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
+
     private static final String LANDED_PROPERTY_ADDRESS_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX + STREET_NAME_REGEX
             + POSTAL_CODE_REGEX;
     private static final String LANDED_PROPERTY_ADDRESS_WITH_STREET_NUMBER_REGEX = LANDED_PROPERTY_UNIT_NUMBER_REGEX
             + STREET_NAME_REGEX + STREET_NUMBER_REGEX + POSTAL_CODE_REGEX;
 
     // Singapore Building Regex
+    private static final String BUILDING_BLOCK_NUMBER_REGEX = "^([0-9]{1,4})([A-Z]?) ";
+    private static final String BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX = " #(([0]{1}[1-9]{1})|([1-9]{1}[0-9]{1,2}))-(([0]"
+            + "{1}[1-9]{1})|([1-9]{1}[0-9]{1,3}))([A-Z]?)";
+    private static final String BUILDING_NAME_REGEX = " [^.!@#$%^&*()_+=<>\\s\\n?`~0-9,{}|-]([a-zA-Z\\s]+)[^.!@#$%^&*()"
+            + "_+=<>\\s\\n?`~0-9,{}|-]";
+
     private static final String BUILDING_ADDRESS_REGEX = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX
             + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + POSTAL_CODE_REGEX;
     private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER_REGEX = BUILDING_BLOCK_NUMBER_REGEX
@@ -104,8 +106,7 @@ public class ParseAddProperty extends ParseAdd {
     // Accepts only positive whole number for price.
     private static final String VALID_PRICE_REGEX = "^[1-9]\\d*$";
 
-    private static HashMap<String, String> UNIT_TYPE_HASHMAP;
-
+    private static HashMap<String, String> unitTypeHashmap;
 
 
     public ParseAddProperty(String addCommandDescription, PropertyList propertyList) {
@@ -128,7 +129,7 @@ public class ParseAddProperty extends ParseAdd {
         unitTypeHashMap.put(UNIT_TYPE_LANDED_TERRENCE_SHORT, ACTUAL_UNIT_TYPE_LANDED_TERRENCE);
         unitTypeHashMap.put(UNIT_TYPE_SEMI_DETEACHED_SHORT, ACTUAL_UNIT_TYPE_SEMI_DETACHED);
         unitTypeHashMap.put(UNIT_TYPE_BUNGALOW_SHORT, ACTUAL_UNIT_TYPE_BUNGALOW);
-        UNIT_TYPE_HASHMAP = unitTypeHashMap;
+        unitTypeHashmap = unitTypeHashMap;
     }
 
     public Command parseCommand() throws ParseAddPropertyException {
@@ -202,7 +203,6 @@ public class ParseAddProperty extends ParseAdd {
             checkForEmptyAddPropertyDetails(propertyDetail);
         }
 
-        // Checks Format for Address (Singapore) and Renting Price.
         checkForValidSingaporeAddress(propertyDetails.get(PROPERTY_ADDRESS_INDEX));
         checkForPriceNumberFormat(propertyDetails.get(PROPERTY_PRICE_INDEX));
         propertyDetails.set(PROPERTY_UNIT_TYPE_INDEX,
@@ -249,7 +249,7 @@ public class ParseAddProperty extends ParseAdd {
     }
 
     private String checkForValidUnitType(String unitTypeLabel) throws  InvalidUnitTypeLabelException {
-        String actualUnitType = UNIT_TYPE_HASHMAP.get(unitTypeLabel);
+        String actualUnitType = unitTypeHashmap.get(unitTypeLabel);
         boolean hasValidUnitType = (actualUnitType != null);
         if (!hasValidUnitType) {
             throw new InvalidUnitTypeLabelException();
