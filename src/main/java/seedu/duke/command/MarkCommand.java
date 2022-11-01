@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
@@ -15,11 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MarkCommand extends Command {
-    public static final int MAXIMUM_TIME = 1440;
-    public static final int ZERO = 0;
-    public static final String INVALID_TIME_MESSAGE = "Invalid value for time";
-    public static final String INVALID_MET_MESSAGE = "Invalid met value";
-    public static final int MAXIMUM_MET = 50;
+
+    public static final String INVALID_MARK_COMMAND = "Invalid mark command";
+    public static final String INVALID_MARK_UNDONE_COMMAND = "Invalid mark undone command";
+    public static final int REQUIRED_MARK_UNDONE_SLASHES = 1;
+    public static final int REQUIRED_MARK_DONE_SLASHES = 3;
     private Ui ui;
     private Biometrics biometrics;
     private ExerciseList exerciseList;
@@ -35,98 +36,67 @@ public class MarkCommand extends Command {
     public void execute() throws IllegalValueException {
         LOGGER.entering(getClass().getName(), "execute");
         String[] argumentList = Parser.getArgumentList(arguments);
-        markExercise(argumentList);
+        int slashesCount = Parser.getArgumentsCount(arguments);
+        markExercise(argumentList, slashesCount);
         LOGGER.exiting(getClass().getName(), "execute");
     }
 
-    private void markExercise(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length < 2) {
-            LOGGER.log(Level.WARNING, "Invalid arguments length");
-            throw new IllegalValueException("Invalid mark command");
-        }
-        assert argumentList.length >= 2 : "Invalid mark command";
-        String exerciseStatus = argumentList[0];
-        int exerciseIndex;
-        try {
-            exerciseIndex = Integer.parseInt(argumentList[1]) - 1;
+    private void markExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
 
-        } catch (NumberFormatException e) {
-            LOGGER.log(Level.WARNING, "Error converting string to integer", e);
-            throw new IllegalValueException("Index must be an integer");
-        }
-
+        String exerciseStatus = Parser.getClassType(argumentList);
         switch (exerciseStatus) {
         case "done":
-            if (argumentList.length != 4) {
-                LOGGER.warning("Invalid mark done command");
-                throw new IllegalValueException("Invalid mark done command");
-            }
-            if (exerciseIndex >= exerciseList.getCurrentExerciseListSize() || exerciseIndex < 0) {
-                LOGGER.log(Level.WARNING, "Invalid exercise index for mark done");
-                throw new IllegalValueException("Exercise not found");
-            }
-            try {
-                Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
-                double time = getTimeWithValidation(argumentList);
-                double metabolicEquivalent = getMetabolicEquivalentWithValidation(argumentList);
-                int calories = Calculator.calculateExerciseCalories(biometrics, time, metabolicEquivalent);
-                exerciseList.markDone(exerciseIndex, time, calories);
-                assert exercise.getDone() : "exercise should be done";
-                ui.output(exercise.getExerciseName() + " is marked as done successfully",
-                        "calories:" + exercise.getCaloriesBurnt());
-            } catch (NumberFormatException e) {
-                LOGGER.log(Level.WARNING, "Error converting string to double", e);
-                throw new IllegalValueException("time and met must be decimal");
-            }
+            markDone(argumentList, slashesCount);
             break;
         case "undone":
-            if (argumentList.length != 2) {
-                LOGGER.warning("Invalid mark undone command");
-                throw new IllegalValueException("Invalid mark undone command");
-            }
-            if (exerciseIndex >= exerciseList.getCompletedExerciseListSize() || exerciseIndex < 0) {
-                LOGGER.log(Level.WARNING, "Invalid exercise index for mark undone");
-                throw new IllegalValueException("Exercise not found");
-            }
+            markUndone(argumentList, slashesCount);
+            break;
+        default:
+            handleInvalidInput("Invalid mark command", "Invalid mark command");
+        }
+    }
+
+
+    private void markDone(String[] argumentList, int slashesCount) throws IllegalValueException {
+        Validator.validateCommandInput(slashesCount, REQUIRED_MARK_DONE_SLASHES, INVALID_MARK_COMMAND,
+                arguments.charAt(arguments.length() - 1));
+        int exerciseIndex = Validator.getIndexWithValidation(argumentList[1], exerciseList.getCurrentExerciseListSize());
+        try {
+            Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
+            double time = Validator.getTimeWithValidation(argumentList[2]);
+            double metabolicEquivalent = Validator.getMetabolicEquivalentWithValidation(argumentList[3]);
+            int calories = Calculator.calculateExerciseCalories(biometrics, time, metabolicEquivalent);
+            exerciseList.markDone(exerciseIndex, time, calories);
+            assert exercise.getDone() : "exercise should be done";
+            ui.output(exercise.getExerciseName() + " is marked as done successfully",
+                    "calories:" + exercise.getCaloriesBurnt());
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Error converting string to int or double", e);
+            throw new IllegalValueException("index must be integer, time and met must be decimal: 1 d.p");
+        }
+    }
+
+    private void markUndone(String[] argumentList, int slashesCount) throws IllegalValueException {
+        try {
+            Validator.validateCommandInput(slashesCount, REQUIRED_MARK_UNDONE_SLASHES, INVALID_MARK_UNDONE_COMMAND,
+                    arguments.charAt(arguments.length() - 1));
+            int exerciseIndex = Validator.getIndexWithValidation(argumentList[1], exerciseList.getCompletedExerciseListSize());
             Exercise exercise = exerciseList.getCompletedExercise(exerciseIndex);
             exerciseList.markUndone(exerciseIndex);
             assert !exercise.getDone() : "exercise should be undone";
             ui.output(String.format("%s is marked as undone successfully", exercise.getExerciseName()));
-            break;
-        default:
-            LOGGER.log(Level.WARNING, "Invalid mark command");
-            throw new IllegalValueException("Invalid mark command");
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, "Error converting strings to int or double", e);
+            throw new IllegalValueException("index must be integer");
         }
     }
 
-    private static double getMetabolicEquivalentWithValidation(String[] argumentList) throws IllegalValueException {
-        validateDecimalPlace(argumentList[3]);
-        double metabolicEquivalent = Double.parseDouble(argumentList[3]);
-        validateDouble(metabolicEquivalent, MAXIMUM_MET, ZERO, INVALID_MET_MESSAGE);
-        return metabolicEquivalent;
+
+    private static void handleInvalidInput(String Invalid_mark_command, String Invalid_mark_command1) throws IllegalValueException {
+        LOGGER.log(Level.WARNING, Invalid_mark_command);
+        throw new IllegalValueException(Invalid_mark_command1);
     }
 
-
-    private static void validateDecimalPlace(String doubleString) throws IllegalValueException {
-        String[] doubleArray = doubleString.split("\\.");
-        if (doubleArray.length == 2 && doubleArray[1].length() > 1) {
-            throw new IllegalValueException("Double must be 1 decimal place");
-        }
-    }
-
-    private static double getTimeWithValidation(String[] argumentList) throws IllegalValueException {
-        validateDecimalPlace(argumentList[2]);
-        double time = Double.parseDouble(argumentList[2]);
-        validateDouble(time, MAXIMUM_TIME, ZERO, INVALID_TIME_MESSAGE);
-        return time;
-    }
-
-    private static void validateDouble(double value, int maximumAcceptableValue, int maximumRejectedValue,
-                                       String rejectMessage) throws IllegalValueException {
-        if (value <= maximumRejectedValue || value > maximumAcceptableValue) {
-            throw new IllegalValueException(rejectMessage);
-        }
-    }
 
     @Override
     public void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,

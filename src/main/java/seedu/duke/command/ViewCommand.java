@@ -1,31 +1,34 @@
 package seedu.duke.command;
 
-import seedu.duke.records.biometrics.Calculator;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.Validator;
+import seedu.duke.exception.IllegalValueException;
+import seedu.duke.records.Calories;
+import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.Calculator;
 import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
-import seedu.duke.records.Calories;
-import seedu.duke.records.CaloriesList;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 public class ViewCommand extends Command {
 
+    public static final String INVALID_VIEW_EXERCISE_COMMAND = "Invalid view exercise command";
+    public static final String DONE = "done";
+    public static final int ARRAY_LENGTH_FOR_VIEW_DONE = 2;
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;
@@ -43,6 +46,7 @@ public class ViewCommand extends Command {
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
         String viewType = Parser.getClassType(argumentList);
+        int slashesCount = Parser.getArgumentsCount(arguments);
         switch (viewType) {
         case ("biometrics"):
             viewBiometrics();
@@ -51,16 +55,16 @@ public class ViewCommand extends Command {
             viewFood(argumentList);
             break;
         case ("exercise"):
-            viewExercise(argumentList);
+            viewExercise(argumentList, slashesCount);
             break;
         case ("weight"):
             viewWeight();
             break;
         case ("strength"):
-            viewStrengthExercise(argumentList);
+            viewStrengthExercise(argumentList, slashesCount);
             break;
         case ("cardio"):
-            viewCardioExercise(argumentList);
+            viewCardioExercise(argumentList, slashesCount);
             break;
         case ("bmi"):
             viewBmi();
@@ -94,38 +98,38 @@ public class ViewCommand extends Command {
         int inputCaloriesConsumedEntry = 0;
         int inputnetCaloriesEntry = 0;
         CaloriesList caloriesList = new CaloriesList();
-        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
-                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
+                biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
-        for (Food f: foodArrayList) {
-            newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList,f.getDate());
+        for (Food f : foodArrayList) {
+            newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList, f.getDate());
             if (!datesConsumption.contains(f.getDate())) {
                 caloriesConsumed.add(newCaloriesConsumedEntry);
                 datesConsumption.add(f.getDate());
             }
         }
         ArrayList<Exercise> completedExerciseArrayList = exerciseList.getCompletedExerciseList();
-        for (Exercise e: completedExerciseArrayList) {
-            newCaloriesBurntEntry = calculator.calculateTotalCaloriesBurnt(completedExerciseArrayList,e.getDate());
+        for (Exercise e : completedExerciseArrayList) {
+            newCaloriesBurntEntry = calculator.calculateTotalCaloriesBurnt(completedExerciseArrayList, e.getDate());
             if (!datesBurnt.contains(e.getDate())) {
                 caloriesBurnt.add(newCaloriesBurntEntry);
                 datesBurnt.add(e.getDate());
             }
         }
-        for (String d: datesConsumption) {
+        for (String d : datesConsumption) {
             if (!datesNetCalories.contains(d)) {
                 netCalories.add(calculator.calculateNetCalories(completedExerciseArrayList, foodArrayList, d));
                 datesNetCalories.add(d);
             }
         }
-        for (String d: datesBurnt) {
+        for (String d : datesBurnt) {
             if (!datesNetCalories.contains(d)) {
-                netCalories.add(calculator.calculateNetCalories(completedExerciseArrayList,foodArrayList,d));
+                netCalories.add(calculator.calculateNetCalories(completedExerciseArrayList, foodArrayList, d));
                 datesNetCalories.add(d);
             }
         }
-        for (String d:datesNetCalories) {
+        for (String d : datesNetCalories) {
             if (datesConsumption.indexOf(d) != -1) {
                 inputCaloriesConsumedEntry = caloriesConsumed.get(datesConsumption.indexOf(d));
             }
@@ -150,7 +154,7 @@ public class ViewCommand extends Command {
                 }
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate localdate = LocalDate.parse(d,formatter);
+            LocalDate localdate = LocalDate.parse(d, formatter);
             Calories caloriesinput = new Calories(inputCaloriesConsumedEntry,
                     inputCaloriesBurntEntry, inputnetCaloriesEntry, localdate, message);
             caloriesList.addCalories(caloriesinput);
@@ -161,16 +165,16 @@ public class ViewCommand extends Command {
 
     private void viewMaintenanceCalories() {
 
-        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
-                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
+        Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
+                biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
         ui.output(calculator.getActivityStatus());
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
     }
 
     private void viewBmi() {
-        Calculator calculator = new Calculator(biometrics.getGender(),biometrics.getWeight(),
-                biometrics.getHeight(),biometrics.getAge(),biometrics.getActivityLevel());
-        calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
+        Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
+                biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
+        calculator.setBmi(biometrics.getWeight(), biometrics.getHeight());
         ui.output("Your current BMI is : " + calculator.getBmi());
         ui.output(calculator.getBmiStatus());
     }
@@ -224,8 +228,8 @@ public class ViewCommand extends Command {
         }
     }
 
-    private void viewStrengthExercise(String[] argumentList) throws IllegalValueException {
-        handleInvalidViewExerciseCommand(argumentList);
+    private void viewStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
         ui.showExerciseListCaption(strengthExerciseArrayList.size(), argumentList, "Strength exercises");
         ui.outputExerciseList(strengthExerciseArrayList);
@@ -240,8 +244,8 @@ public class ViewCommand extends Command {
                 .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
     }
 
-    private void viewCardioExercise(String[] argumentList) throws IllegalValueException {
-        handleInvalidViewExerciseCommand(argumentList);
+    private void viewCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> cardioExerciseArrayList = getCardioExerciseArrayListByCommand(argumentList);
         ui.showExerciseListCaption(cardioExerciseArrayList.size(), argumentList, "Cardio exercises");
         ui.outputExerciseList(cardioExerciseArrayList);
@@ -257,8 +261,8 @@ public class ViewCommand extends Command {
     }
 
 
-    private void viewExercise(String[] argumentList) throws IllegalValueException {
-        handleInvalidViewExerciseCommand(argumentList);
+    private void viewExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
+        handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
         ui.showExerciseListCaption(exerciseArrayList.size(), argumentList, "Exercises");
         ui.outputExerciseList(exerciseArrayList);
@@ -273,9 +277,15 @@ public class ViewCommand extends Command {
     }
 
 
-    private static void handleInvalidViewExerciseCommand(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length == 2 && !argumentList[1].equals("done") || argumentList.length > 2) {
-            throw new IllegalValueException("Invalid view command");
+    private void handleInvalidViewExerciseCommand(String[] argumentList, int slashesCount) throws IllegalValueException {
+        Validator.validateCommandInput(slashesCount, 0, 1, INVALID_VIEW_EXERCISE_COMMAND,
+                arguments.charAt(arguments.length() - 1));
+        validateViewDone(argumentList, INVALID_VIEW_EXERCISE_COMMAND);
+    }
+
+    private void validateViewDone(String[] argumentList, String message) throws IllegalValueException {
+        if (argumentList.length == ARRAY_LENGTH_FOR_VIEW_DONE && !argumentList[1].equals(DONE)) {
+            throw new IllegalValueException(message);
         }
     }
 

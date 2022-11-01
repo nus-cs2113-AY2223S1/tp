@@ -25,7 +25,7 @@ public class Parser {
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static Command parse(String input) {
-        String userCommand = getUserCommand(input);
+        String userCommand = getCommandType(input);
         LOGGER.info("command: " + userCommand);
         String arguments = getArgumentSubString(input, userCommand);
         LOGGER.info("arguments:" + arguments);
@@ -33,7 +33,7 @@ public class Parser {
         case "greet":
             return new GreetCommand();
         case "exit":
-            return new ExitCommand();
+            return new ExitCommand(arguments);
         case "set":
             return new SetCommand(arguments, true);
         case "add":
@@ -53,13 +53,18 @@ public class Parser {
         }
     }
 
-    private static String getUserCommand(String input) {
+    public static String getCommandType(String input) {
         String userCommand = input.split(" ")[0];
         return userCommand;
     }
 
-    private static String getArgumentSubString(String input, String userCommand) {
+    public static String getArgumentSubString(String input, String userCommand) {
         return input.substring(userCommand.length()).trim();
+    }
+
+    public static int getArgumentsCount(String arguments) {
+        int argumentsCount = (int) arguments.chars().filter(character -> character == '/').count();
+        return argumentsCount;
     }
 
     public static String[] getArgumentList(String arguments) {
