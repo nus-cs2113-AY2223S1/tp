@@ -50,6 +50,12 @@ public class EditCommand extends Command {
         this.oldTitle = oldTitle;
     }
 
+    /**
+     * Execute the edit command, enter either GUI or CLI interface depending on the
+     * edit command input.
+     *
+     * @return CommandResult successful or failed message on edition
+     */
     @Override
     public CommandResult execute() {
         if (editSuccess) {

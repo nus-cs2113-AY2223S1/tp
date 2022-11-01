@@ -17,6 +17,13 @@ public class Change extends EditModeCommand {
         super(ingredientFlag, parsedCommand, recipe);
     }
 
+    /**
+     * Change an attribute in the recipe to edit.
+     *
+     * @return the edited recipe
+     * @throws ParseException ingredient does not follow correct format to be parsed
+     * @throws InvalidFlagException edit command contains invalid flags
+     */
     @Override
     public Recipe execute() throws InvalidFlagException, ParseException {
         StringBuilder newInput = new StringBuilder();

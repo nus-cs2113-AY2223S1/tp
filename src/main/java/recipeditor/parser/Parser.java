@@ -25,6 +25,12 @@ public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String recipeTitle = null;
 
+    /**
+     * Parse the input command and returns respective executable command.
+     *
+     * @param input the input command as String
+     * @return command that can be executed
+     */
     public static Command parseCommand(String input) {
         String[] parsed = input.split(" ");
         String commandWord = parsed[0].toLowerCase();

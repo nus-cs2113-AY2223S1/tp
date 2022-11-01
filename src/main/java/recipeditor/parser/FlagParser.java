@@ -6,6 +6,12 @@ import java.util.ArrayList;
 
 public interface FlagParser {
 
+    /**
+     * Fina all the flags in a given command.
+     *
+     * @param parsedCommand the parsed command which to find flags from
+     * @return the list of flags found in command
+     */
     static FlagType[] getFlags(String[] parsedCommand) {
         FlagType[] flags = new FlagType[2];
         int commandFlagCount = 0;
