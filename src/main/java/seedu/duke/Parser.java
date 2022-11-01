@@ -278,11 +278,12 @@ public class Parser {
     /**
      * Executes the clear action by creating a clear object.
      */
-    public void executeClear() {
+    public ReviewList executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
         logger.log(Level.INFO, "\n\tClear command executed");
+        return mediaList;
     }
 
 
@@ -315,5 +316,13 @@ public class Parser {
             Ui.print("Incomplete or wrongly formatted command, try again.");
         }
 
+    }
+
+    //@@author indraneelrp
+    /**
+     * Gets the private reviewList object
+     */
+    public ReviewList getReviewList() {
+        return mediaList;
     }
 }
