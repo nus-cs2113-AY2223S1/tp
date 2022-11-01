@@ -6,10 +6,16 @@ import recipeditor.ui.Ui;
 
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "/view";
-    public static final String COMMAND_SYNTAX = "Syntax for /view \n" + "\t /view <index>";
+    public static final String COMMAND_SYNTAX = "/view <index>";
+    public static final String COMMAND_FUNCTION = "View the full recipe of "
+            + "the sepcific index in the list of recipes";
 
 
-    private final int index;
+    private int index;
+
+    public ViewCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
 
     /**
      * Construct a view command including task to view.
@@ -17,6 +23,7 @@ public class ViewCommand extends Command {
      * @param index the index of task view
      */
     public ViewCommand(int index) {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
         this.index = index;
     }
 
