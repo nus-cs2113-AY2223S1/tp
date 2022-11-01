@@ -195,6 +195,14 @@ public class UserList {
         }
     }
 
+    /**
+     * Checks if arguments for new user is valid or not.
+     *
+     * @param args The array containing arguments.
+     * @throws ContactNumberInvalidException If contact is invalid
+     * @throws DuplicateException If there are duplicate names or contacts
+     * @throws InvalidUserException If user is invalid
+     */
     public void checkValidArgsForUser(String[] args)
             throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
         assert args.length == NUMBER_OF_ARGS : "Args length is invalid";

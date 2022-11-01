@@ -51,7 +51,8 @@ public class TransactionStorage extends Storage {
      * Read the transactions from a given file.
      *
      * @return The list of transactions stored in the file.
-     * @throws TransactionFileNotFoundException If the file cannot be found.
+     * @throws TransactionFileNotFoundException If the file cannot be found
+     * @throws StoreFailureException            If there is a failure loading.
      */
     public TransactionList loadData()
             throws TransactionFileNotFoundException, StoreFailureException {
@@ -107,7 +108,8 @@ public class TransactionStorage extends Storage {
     }
 
     /**
-     * Analyses the information the transactions stored in the file.
+     * Analyses the information the transactions stored in the file
+     * and checks if valid or not.
      *
      * @param splitTransactionLine The raw transaction information.
      * @return A Transaction with full information.
@@ -115,10 +117,12 @@ public class TransactionStorage extends Storage {
     public Transaction handleTransactionLine(String[] splitTransactionLine) throws Exception {
         checkIfArgsEmpty(splitTransactionLine, NUM_OF_ARGS,
                 MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
-        transactionList.checkValidArgs(splitTransactionLine);
+        transactionList.checkValidArgsForStorage(splitTransactionLine);
         itemList.checkNameOwnerPriceOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
                 splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
-        return getTransactionFromTransactionLine(splitTransactionLine);
+        Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
+        transactionList.checkOldTransactionsOverlapWithNew(transaction);
+        return transaction;
     }
 
     private static Transaction getTransactionFromTransactionLine(String[] splitTransactionLine) {

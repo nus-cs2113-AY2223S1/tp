@@ -48,11 +48,11 @@ public class ItemList {
 
     /**
      * Updates an item's price.
-     * 
+     *
      * @param itemId id of item to be updated
-     * @param price price to update
+     * @param price  price to update
      * @return a new instance Item with updated fields
-     * @throws ItemNotFoundException If item id does not exist in item list
+     * @throws ItemNotFoundException    If item id does not exist in item list
      * @throws InvalidCategoryException If category does not exist
      */
     public Item updateItemPrice(String itemId, double price)
@@ -70,11 +70,11 @@ public class ItemList {
 
     /**
      * Deletes an item.
-     * 
-     * @param itemId id of item to delete
+     *
+     * @param itemId          id of item to delete
      * @param transactionList list containing all transactions
      * @throws ItemNotFoundException If item id does not exist in item list
-     * @throws InvalidItemException If item cannot be deleted
+     * @throws InvalidItemException  If item cannot be deleted
      */
     public void deleteItem(String itemId, TransactionList transactionList)
             throws ItemNotFoundException, InvalidItemException {
@@ -88,7 +88,7 @@ public class ItemList {
 
     /**
      * Gets an item by its id.
-     * 
+     *
      * @param id id to search item list with
      * @return Found item if it exists
      * @throws ItemNotFoundException If no such item exists in item list
@@ -104,7 +104,7 @@ public class ItemList {
 
     /**
      * Gets an item by keywords.
-     * 
+     *
      * @param keyword a (sub)string to query with
      * @return Found item if it exists
      * @throws ItemNotFoundException If no such item exists in item list
@@ -132,8 +132,8 @@ public class ItemList {
 
     /**
      * Checks if an item has a given lender.
-     * 
-     * @param username lender name to check with.
+     *
+     * @param username        lender name to check with.
      * @param transactionList list containing all transactions
      * @return true if a lender has borrowed this item
      */
@@ -153,7 +153,7 @@ public class ItemList {
 
     /**
      * Computes a readable string representation of this list.
-     * 
+     *
      * @param transactionList list containing all transactions
      * @return A string representation of transaction list
      */
@@ -174,7 +174,7 @@ public class ItemList {
 
     /**
      * Computes a suitable string representation of list for file storage.
-     * 
+     *
      * @return A string representation of list for file storage
      */
     public String convertItemListToFileFormat() {
@@ -186,11 +186,11 @@ public class ItemList {
     }
 
     //@@author bdthanh
+
     /**
      * Checks if an item name is valid or not.
      *
      * @param itemName The input item name
-     *
      * @throws InvalidItemException If item name is longer than 20 chars
      */
     private void checkValidName(String itemName) throws InvalidItemException {
@@ -242,6 +242,12 @@ public class ItemList {
         }
     }
 
+    /**
+     * Check if there is any item with the same ID.
+     *
+     * @param itemId The item ID to be checked
+     * @throws DuplicateException If there is at least one item with the same ID
+     */
     public void checkValidId(String itemId) throws DuplicateException {
         try {
             this.getItemById(itemId);
@@ -274,6 +280,15 @@ public class ItemList {
         }
     }
 
+    /**
+     * Checks if given owner and item name matches with item with that ID or not.
+     *
+     * @param itemId   The item ID to be checked
+     * @param itemName The given item's name
+     * @param owner    The given owner
+     * @throws InvalidItemException  If they match
+     * @throws ItemNotFoundException If item cannot be found in the list
+     */
     public void checkNameOwnerPriceOfItemMatching(String itemId, String itemName, String owner)
             throws InvalidItemException, ItemNotFoundException {
         if (hasThisItem(itemId)) {

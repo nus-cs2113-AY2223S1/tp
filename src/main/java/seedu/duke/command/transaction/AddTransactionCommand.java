@@ -46,14 +46,14 @@ public class AddTransactionCommand extends Command {
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts The parts from user input
-     * @param userList The list of users to work with
-     * @param itemList The list of items to work with
+     * @param parts           The parts from user input
+     * @param userList        The list of users to work with
+     * @param itemList        The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public AddTransactionCommand(String[] parts, UserList userList, ItemList itemList,
-            TransactionList transactionList) throws InsufficientArgumentsException {
+                                 TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         this.itemList = itemList;
@@ -88,25 +88,24 @@ public class AddTransactionCommand extends Command {
         return args;
     }
 
-    private void checkValidInput(String[] args) throws ItemNotFoundException,
-            UserNotFoundException, InvalidUserException, DurationInvalidException,
-            DateFormatInvalidException, DuplicateException {
+    private void checkValidInput(String[] args) throws ItemNotFoundException, InvalidUserException,
+            UserNotFoundException, DateFormatInvalidException, DurationInvalidException {
         itemList.checkValidItem(args);
         userList.checkValidBorrower(args, itemList);
-        transactionList.checkValidArgs(args);
+        transactionList.checkValidArgsForAdding(args);
     }
 
     /**
      * Executes AddTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws InvalidArgumentException   If there is a part that cannot be parsed
      * @throws DateFormatInvalidException If the number of args is incorrect
-     * @throws InvalidUserException If the user borrows themselves
-     * @throws InvalidItemException If the item is unavailable
-     * @throws ItemNotFoundException If the item cannot be found in the list
-     * @throws UserNotFoundException If the user cannot be found
-     * @throws DurationInvalidException If the number is less than 0
+     * @throws InvalidUserException       If the user borrows themselves
+     * @throws InvalidItemException       If the item is unavailable
+     * @throws ItemNotFoundException      If the item cannot be found in the list
+     * @throws UserNotFoundException      If the user cannot be found
+     * @throws DurationInvalidException   If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, DateFormatInvalidException,
             InvalidUserException, InvalidItemException, ItemNotFoundException, DuplicateException,

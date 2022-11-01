@@ -27,14 +27,14 @@ public class Transaction {
     /**
      * Constructor method for transaction.
      *
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
+     * @param itemName   The name of the item involved.
+     * @param itemId     The id of the item involved.
      * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param duration   The length of transaction(days).
+     * @param createdAt  The day when transaction created.
      */
     public Transaction(String itemName, String itemId, String borrowerId, String lenderId,
-            int duration, LocalDate createdAt, double moneyTransacted) {
+                       int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = IdGenerator.generateId();
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -50,14 +50,14 @@ public class Transaction {
      * Constructor method for transaction.
      *
      * @param transactionId The id of the transaction.
-     * @param itemName The name of the item involved.
-     * @param itemId The id of the item involved.
-     * @param borrowerId The id(name) of the user who borrows.
-     * @param duration The length of transaction(days).
-     * @param createdAt The day when transaction created.
+     * @param itemName      The name of the item involved.
+     * @param itemId        The id of the item involved.
+     * @param borrowerId    The id(name) of the user who borrows.
+     * @param duration      The length of transaction(days).
+     * @param createdAt     The day when transaction created.
      */
     public Transaction(String transactionId, String itemName, String itemId, String borrowerId,
-            String lenderId, int duration, LocalDate createdAt, double moneyTransacted) {
+                       String lenderId, int duration, LocalDate createdAt, double moneyTransacted) {
         this.transactionId = transactionId;
         this.itemName = itemName;
         this.borrower = borrowerId;
@@ -174,8 +174,8 @@ public class Transaction {
     }
 
     /**
-     * Chcks if there is an overlap with a given transaction.
-     * 
+     * Checks if there is an overlap with a given transaction.
+     *
      * @param transactionToCheck the transaction to compare with.
      * @return true if there is an overlap
      */
@@ -186,12 +186,12 @@ public class Transaction {
         return (transactionToCheck.createdAt.isAfter(this.createdAt)
                 && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
                 || (transactionToCheck.getReturnDate().isAfter(this.createdAt)
-                        && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
+                && transactionToCheck.getReturnDate().isBefore(this.getReturnDate()))
                 || (transactionToCheck.createdAt.isBefore(this.createdAt)
-                        && transactionToCheck.getReturnDate().isAfter(this.getReturnDate()))
+                && transactionToCheck.getReturnDate().isAfter(this.getReturnDate()))
                 || (transactionToCheck.createdAt.isAfter(this.createdAt)
-                        && transactionToCheck.createdAt.isBefore(this.getReturnDate())
-                        || transactionToCheck.getReturnDate().isEqual(this.getReturnDate()));
+                && transactionToCheck.createdAt.isBefore(this.getReturnDate())
+                || transactionToCheck.getReturnDate().isEqual(this.getReturnDate()));
     }
 
     /**
@@ -211,6 +211,7 @@ public class Transaction {
         BigDecimal money = new BigDecimal(this.moneyTransacted);
         String moneyTransactedString =
                 "   MoneyTransacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
+
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())
                     + " day(s) left)";
@@ -219,6 +220,7 @@ public class Transaction {
             return transactionIcon + transactionId + itemName + itemId + lenderId + borrowerId
                     + duration + returnDate + moneyTransactedString;
         }
+
         String returnedDate =
                 "   ReturnedDate: " + DateParser.formatDateToString(returnedAt) + "\n";
         return transactionIcon + transactionId + itemName + itemId + lenderId + borrowerId

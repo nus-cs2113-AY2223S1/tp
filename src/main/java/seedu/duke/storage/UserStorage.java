@@ -40,8 +40,9 @@ public class UserStorage extends Storage {
     /**
      * Read the users from a given file.
      *
-     * @return The list of users stored in the file.
-     * @throws UserFileNotFoundException If the file cannot be found.
+     * @return The list of users stored in the file
+     * @throws UserFileNotFoundException If the file cannot be found
+     * @throws StoreFailureException     If there is a failure loading
      */
     public UserList loadData() throws UserFileNotFoundException, StoreFailureException {
         int lineNo = 0;
@@ -94,7 +95,8 @@ public class UserStorage extends Storage {
     }
 
     /**
-     * Analyses the information the users stored in the file.
+     * Analyses the information the users stored in the file
+     * and checks if valid or not.
      *
      * @param splitUserLine The raw user information.
      * @return A User with full information.

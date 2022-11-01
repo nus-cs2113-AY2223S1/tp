@@ -292,11 +292,32 @@ public class TransactionList {
         }
     }
 
-    public void checkValidArgs(String[] args)
+    /**
+     * Checks if storage duration created date and transaction ID is valid or not.
+     *
+     * @param args The array of input arguments
+     * @throws DateFormatInvalidException If date of wrong format
+     * @throws DurationInvalidException If duration is out of range or wrong format
+     * @throws DuplicateException If there is at least one transaction with the same ID
+     */
+    public void checkValidArgsForStorage(String[] args)
             throws DateFormatInvalidException, DurationInvalidException, DuplicateException {
         checkValidDuration(args[DURATION_INDEX]);
         checkValidCreatedDate(args[CREATED_DATE_INDEX]);
         checkValidId(args[TX_ID_INDEX]);
+    }
+
+    /**
+     * Checks if input duration and created date is valid or not.
+     *
+     * @param args The array of input arguments
+     * @throws DateFormatInvalidException If date of wrong format
+     * @throws DurationInvalidException If duration is out of range or wrong format
+     */
+    public void checkValidArgsForAdding(String[] args)
+            throws DateFormatInvalidException, DurationInvalidException {
+        checkValidDuration(args[DURATION_INDEX]);
+        checkValidCreatedDate(args[CREATED_DATE_INDEX]);
     }
 
     /**

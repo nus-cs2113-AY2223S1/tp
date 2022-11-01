@@ -45,8 +45,9 @@ public class ItemStorage extends Storage {
     /**
      * Read the items from a given file.
      *
-     * @return The list of items stored in the file.
-     * @throws ItemFileNotFoundException If the file cannot be found.
+     * @return The list of items stored in the file
+     * @throws ItemFileNotFoundException If the file cannot be found
+     * @throws StoreFailureException     If there is a failure loading
      */
     public ItemList loadData() throws ItemFileNotFoundException, StoreFailureException {
         int lineNo = 0;
@@ -99,7 +100,8 @@ public class ItemStorage extends Storage {
     }
 
     /**
-     * Analyses the information the items stored in the file.
+     * Analyses the information the items stored in the file
+     * and checks if valid or not.
      *
      * @param splitItemLine The raw item information.
      * @return An Item with full information.
