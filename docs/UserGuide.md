@@ -116,7 +116,7 @@ Syntax: `View-Expense [-e EXPENSE_NUMBER]`
 > * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
-Example of usage:
+Examples of usage:
 * `View-Expense`
 * `View-Expense -e 1`
 
@@ -147,7 +147,7 @@ Syntax: `Edit-Expense -e EXPENSE_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
-Example of usage:
+Examples of usage:
 * `Edit-Expense -e 1 -n Subscription -a 13.37`
 * `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
 
@@ -167,7 +167,7 @@ Syntax: `Sort-Expense -t TYPE -o ORDER`
 > * `TYPE` is a text string. It can be either `alphabetical`, `amount`, `date` or `currency`.
 > * `ORDER` is a text string. It can be either `ascending` or `descending`.
 
-Example of usage:
+Examples of usage:
 * `Sort-Expense -t date -o ascending`
 * `Sort-Expense -t amount -o descending`
 * `Sort-Expense -t alphabetical -o ascending`
@@ -183,7 +183,7 @@ Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
 > ⚠️️️️ Syntax Notes
 > * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
-> * `RATE` is a decimal value. This rate should be the rate to convert the expense amount from the old currency to the new currency.
+> * `RATE` is a decimal value. This value should be greater than 0. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
 Example of usage:
 * `Convert-Currency -e 1 -x USD -r 1.35`
@@ -200,7 +200,7 @@ Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `MODE_OF_PAYMENT` is a text string.
 
-Example of usage:
+Examples of usage:
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
 * `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 
@@ -214,7 +214,7 @@ Syntax: `View-RecurringPayment [-r RECURRING_PAYMENT_INDEX]`
 > ⚠️️️️ Syntax Notes
 > * `RECURRING_PAYMENT_INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
-Example of usage:
+Examples of usage:
 * `View-RecurringPayment`
 * `View-RecurringPayment -r 1`
 
@@ -244,7 +244,7 @@ Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL
 > * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 
-Example of usage:
+Examples of usage:
 * `Edit-RecurringPayment -r 1 -a 20.00`
 * `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
 
@@ -289,7 +289,7 @@ Syntax: `View-Income [-e INCOME_NUMBER]`
 > * `INCOME_NUMBER` is an integer value.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
-Example of usage:
+Examples of usage:
 * `View-Income`
 * `View-Income -e 1`
 
@@ -319,7 +319,7 @@ Syntax: `Edit-Income -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t D
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
-Example of usage:
+Examples of usage:
 * `Edit-Income -e 1 -n Payout -a 100.00`
 * `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`
 
@@ -352,7 +352,7 @@ Syntax: `View-Target [-e TARGET_NUMBER]`
 > * `TARGET_NUMBER` is an integer value.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
-Example of usage:
+Examples of usage:
 * `View-Target`
 * `View-Target -e 1`
 
@@ -382,7 +382,7 @@ Syntax: `Edit-Target -e TARGET_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] 
 > * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value. The values should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
-Example of usage:
+Examples of usage:
 * `Edit-Target -e 1 -n "October Target" -a 100.00`
 * `Edit-Target -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"`
 
