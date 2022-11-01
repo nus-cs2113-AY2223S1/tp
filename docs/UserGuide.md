@@ -390,9 +390,13 @@ Example of usage:
 
 ## Handling your data
 ### Merging a data file: `Merge-File`
-Merges save file from an external source given path to the save file (.xml)
+Merges save file from an external source given path to the .xml save file
 
-Syntax: `Merge-File -p PATH_STRING`
+Syntax: `Merge-File -p PATH_STRING` 
+
+> ⚠️️️️ Syntax Notes
+> * `PATH_STRING` is text string. If your path contains spaces, you would need to wrap the text with double quotes.
+
 
 Example of usage:
 * `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
