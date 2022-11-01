@@ -4,6 +4,7 @@ import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.expense.ExpenseManagerExpenseNotFoundException;
 import seedu.moneygowhere.parser.ConsoleParserConfigurations;
+import seedu.moneygowhere.storage.LocalStorage;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -36,8 +37,14 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void addExpense(Expense expense) {
+    public void addExpense(Expense expense, LocalStorage localStorage) {
         expenses.add(expense);
+        localStorage.setSavedExpenses(expenses);
+    }
+
+    //@@author xzynos
+    public boolean hasExpense(Expense expense) {
+        return expenses.contains(expense);
     }
 
     //@@author xzynos
@@ -54,13 +61,19 @@ public class ExpenseManager {
         return expenses;
     }
 
+    //@@author LokQiJun
+    public void setExpenses(ArrayList<Expense> savedExpenses) {
+        this.expenses = new ArrayList<>(savedExpenses);
+    }
+
     //@@author yuu-chennn
     public ArrayList<Expense> getExpensesByCategory(String categoryName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getCategory().equals(categoryName)) {
+                String category = expense.getCategory();
+                if (category != null && category.equalsIgnoreCase(categoryName)) {
                     expensesByCategory.add(expense);
                 }
             }
@@ -77,7 +90,7 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getName().equals(expenseName)) {
+                if (expense.getName().equalsIgnoreCase(expenseName)) {
                     expensesByName.add(expense);
                 }
             }
@@ -89,19 +102,23 @@ public class ExpenseManager {
     }
 
     //@@author xzynos
-    public void deleteExpense(int expenseIndex) throws ExpenseManagerExpenseNotFoundException {
+    public void deleteExpense(int expenseIndex, LocalStorage localStorage)
+            throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.remove(expenseIndex);
+            localStorage.setSavedExpenses(expenses);
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
     }
 
     //@@author xzynos
-    public void editExpense(int expenseIndex, Expense expense) throws ExpenseManagerExpenseNotFoundException {
+    public void editExpense(int expenseIndex, Expense expense, LocalStorage localStorage)
+            throws ExpenseManagerExpenseNotFoundException {
         try {
             expenses.set(expenseIndex, expense);
             sortExpenses();
+            localStorage.setSavedExpenses(expenses);
         } catch (IndexOutOfBoundsException exception) {
             throw new ExpenseManagerExpenseNotFoundException(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
         }
@@ -119,6 +136,16 @@ public class ExpenseManager {
         String order = commandSortExpense.getOrder();
         sortCommandSetting = new ConsoleCommandSortExpense(type, order);
         sortExpenses();
+    }
+
+    //@@author LokQiJun
+    public void updateSortExpenses(ConsoleCommandSortExpense commandSortExpense,
+                                   LocalStorage localStorage) {
+        String type = commandSortExpense.getType();
+        String order = commandSortExpense.getOrder();
+        sortCommandSetting = new ConsoleCommandSortExpense(type, order);
+        sortExpenses();
+        localStorage.setSortCommandSetting(sortCommandSetting);
     }
 
     //@@author jeyvia
