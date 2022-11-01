@@ -16,20 +16,20 @@ public class Add extends EditModeCommand {
     @Override
     public Recipe execute() throws ParseException, InvalidFlagException {
         StringBuilder content = new StringBuilder();
-        for (int i = 2; i < parsedCommand.length; i++) {
+        for (int i = 4; i < parsedCommand.length; i++) {
             content.append(parsedCommand[i]).append(" ");
         }
 
         switch (ingredientFlag) {
         case STEP:
             recipe.addStep(content.toString());
-            message = String.format("Step: %s is added", content.toString());
+            message = String.format("Step: %s is added", content);
             return recipe;
         case INGREDIENT:
             try {
                 Ingredient newIngredient = Ingredient.parsedIngredients(content.toString());
                 recipe.addIngredient(newIngredient);
-                message = String.format("Ingredient: %s is added", content.toString());
+                message = String.format("Ingredient: %s is added", content);
                 return recipe;
             } catch (ParseException e) {
                 throw new ParseException();
