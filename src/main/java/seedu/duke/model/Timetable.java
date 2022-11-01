@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -77,22 +78,23 @@ public class Timetable {
         this.firstHour = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
         this.lastHour = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
         this.numTimeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
-        boolean hasWeekendClasses = sortedLessons.stream().map(Pair::getRight).map(s -> s.day)
-            .anyMatch(d -> d == Day.SUNDAY || d == Day.SATURDAY);
-        this.days = hasWeekendClasses ? List.of(Day.values()) : List.of(Day.values()).subList(0, 5);
-        // check whether any classes need to be indented
-        // classes need to be indented if their timeslots overlap
+        this.days = hasWeekendClasses() ? List.of(Day.values()) : List.of(Day.values()).subList(0, 5);
+        // check whether any classes need to be indented - classes need to be indented if their timeslots overlap
         Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons); 
         this.columnWidths = res.getLeft();
         this.indents = res.getRight();
-        int columnTotal = this.columnWidths.stream().mapToInt(Integer::intValue).sum() + 1; // add one for labels
+        int columnTotal = columnWidths.stream().mapToInt(Integer::intValue).sum() + 1; // add one for label column
         this.width = columnTotal * (COLUMN_WIDTH + 1) + RIGHT_PADDING;
         this.height = HEADER_ROWS + numTimeslots * ROWS_PER_TIME + BOTTOM_PADDING;
         this.buffer = new String[height][width];
-        // write data into the buffer
         initialiseBuffer();
         writeHeader();
         writeLessons(sortedLessons, indents);
+    }
+
+    private boolean hasWeekendClasses() {
+        return sortedLessons.stream().map(Pair::getRight).map(s -> s.day)
+            .anyMatch(d -> d == Day.SUNDAY || d == Day.SATURDAY);
     }
 
     private List<Pair<Module, RawLesson>> filterNonviewableLessons(List<Pair<Module, RawLesson>> lessons) {
@@ -170,6 +172,20 @@ public class Timetable {
     }
 
     /**
+     * Pads a list to a minimum length.
+     * @param <T> Type of elements in the list.
+     * @param list The list.
+     * @param length The length to pad until.
+     * @param supplier Generates the elements to be used to pad the list.
+     */
+    private <T> List<T> padList(List<T> list, int length, Supplier<T> supplier) {
+        while (list.size() < length) {
+            list.add(supplier.get());
+        }
+        return list;
+    }
+
+    /**
      * Computes whether any indentation of lessons is required.
      * @param days The days.
      * @param sortedLessons The lessons, sorted.
@@ -179,39 +195,25 @@ public class Timetable {
      */
     private Pair<List<Integer>, List<Integer>> computeIndentation(List<Day> days,
             List<Pair<Module, RawLesson>> sortedLessons) {
-        List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
-        for (int i = 0; i < days.size(); i++) {
-            lessonStack.add(new ArrayList<>());
-            for (int j = 0; j < numTimeslots; j++) {
-                lessonStack.get(i).add(new ArrayList<>());
-            }
-        }
+        // 2D list with size [days][numTimeslots][0]
+        List<List<List<Pair<Module, RawLesson>>>> lessonStack = padList(new ArrayList<>(), days.size(),
+            () -> padList(new ArrayList<>(), numTimeslots, () -> new ArrayList<>()));
         List<Integer> indents = new ArrayList<>();
-        for (int i = 0; i < sortedLessons.size(); i++) {
-            Pair<Module, RawLesson> lesson = sortedLessons.get(i);
+        for (Pair<Module, RawLesson> lesson : sortedLessons) {
             int dayIndex = days.indexOf(lesson.getRight().day);
             int startRow = timeToIndex(lesson.getRight().startTime);
-            int indent = lessonStack.get(dayIndex).get(startRow).size();
-            for (int j = 0; j < lessonStack.get(dayIndex).get(startRow).size(); j++) {
-                if (lessonStack.get(dayIndex).get(startRow).get(j) == null) {
-                    indent = j;
-                    break;
-                }
-            }
+            List<Pair<Module, RawLesson>> firstCell = lessonStack.get(dayIndex).get(startRow);
+            int indent = firstCell.indexOf(null) == -1 ? firstCell.size() : firstCell.indexOf(null);
             indents.add(indent);
-            for (int j = startRow; j < timeToIndex(lesson.getRight().endTime); j++) {
-                while (lessonStack.get(dayIndex).get(j).size() < indent) {
-                    lessonStack.get(dayIndex).get(j).add(null); // pad
-                }
-                lessonStack.get(dayIndex).get(j).add(lesson);
+            for (int i = startRow; i < timeToIndex(lesson.getRight().endTime); i++) {
+                List<Pair<Module, RawLesson>> cell = lessonStack.get(dayIndex).get(i);
+                padList(cell, indent + 1, () -> null);
+                cell.set(indent, lesson);
             }
         }
         List<Integer> columns = new ArrayList<>();
         for (int i = 0; i < days.size(); i++) {
-            columns.add(1);
-            for (int j = 0; j < lessonStack.get(i).size(); j++) {
-                columns.set(i, Math.max(columns.get(i), lessonStack.get(i).get(j).size()));
-            }
+            columns.add(lessonStack.get(i).stream().map(list -> list.size()).reduce(1, Integer::max));
         }
         return Pair.of(columns, indents);
     }
