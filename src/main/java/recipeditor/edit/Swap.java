@@ -14,7 +14,7 @@ public class Swap extends EditModeCommand {
     }
 
     /**
-     * Swap the position of two steps or ingredient in the recipe to edit
+     * Swap the position of two steps or ingredient in the recipe to edit.
      *
      * @return the edited recipe
      * @throws InvalidFlagException edit command contains invalid flags

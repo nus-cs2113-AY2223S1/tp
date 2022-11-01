@@ -17,7 +17,7 @@ public class FindCommand extends Command {
 
     /**
      * Execute find command, which find the name of recipes containing a given string
-     * in its title or ingredients
+     * in its title or ingredients.
      *
      * @return CommandResult list of found results
      */

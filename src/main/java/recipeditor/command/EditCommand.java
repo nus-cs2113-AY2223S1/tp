@@ -52,7 +52,7 @@ public class EditCommand extends Command {
 
     /**
      * Execute the edit command, enter either GUI or CLI interface depending on the
-     * edit command input
+     * edit command input.
      *
      * @return CommandResult successful or failed message on edition
      */

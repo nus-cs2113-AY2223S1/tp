@@ -26,7 +26,7 @@ public class Parser {
     private static final String recipeTitle = null;
 
     /**
-     * Parse the input command and returns respective executable command
+     * Parse the input command and returns respective executable command.
      *
      * @param input the input command as String
      * @return command that can be executed

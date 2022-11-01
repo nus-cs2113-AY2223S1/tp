@@ -18,7 +18,7 @@ public class Change extends EditModeCommand {
     }
 
     /**
-     * Change an attribute in the recipe to edit
+     * Change an attribute in the recipe to edit.
      *
      * @return the edited recipe
      * @throws ParseException ingredient does not follow correct format to be parsed

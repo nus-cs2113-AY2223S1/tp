@@ -15,7 +15,7 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Execute invalid result, which only returns a message on invalid command details
+     * Execute invalid result, which only returns a message on invalid command details.
      *
      * @return CommandResult message on invalid command details
      */

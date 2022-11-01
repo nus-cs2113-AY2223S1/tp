@@ -14,7 +14,7 @@ public class Add extends EditModeCommand {
     }
 
     /**
-     * Add a step or ingredient to the recipe to edit
+     * Add a step or ingredient to the recipe to edit.
      *
      * @return the edited recipe
      * @throws ParseException ingredient does not follow correct format to be parsed

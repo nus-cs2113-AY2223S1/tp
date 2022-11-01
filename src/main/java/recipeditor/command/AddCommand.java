@@ -16,7 +16,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute an add command, which adds recipe into RecipeList and storage
+     * Execute an add command, which adds recipe into RecipeList and storage.
      *
      * @return CommandResult successful or failed addition message
      */

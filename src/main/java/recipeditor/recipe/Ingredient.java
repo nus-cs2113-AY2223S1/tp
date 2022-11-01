@@ -46,7 +46,7 @@ public class Ingredient {
     }
 
     /**
-     * Parse ingredient into name, amount, unit
+     * Parse ingredient into name, amount, unit.
      *
      * @param input the ingredient to be parsed as String
      * @return parsed ingredient

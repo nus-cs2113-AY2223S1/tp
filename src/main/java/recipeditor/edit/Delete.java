@@ -13,7 +13,7 @@ public class Delete extends EditModeCommand {
     }
 
     /**
-     * Delete an attribute in the recipe, either an ingredient or a step
+     * Delete an attribute in the recipe, either an ingredient or a step.
      *
      * @return the edited recipe
      * @throws InvalidFlagException edit command contains invalid flags

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface FlagParser {
 
     /**
-     * Fina all the flags in a given command
+     * Fina all the flags in a given command.
      *
      * @param parsedCommand the parsed command which to find flags from
      * @return the list of flags found in command

@@ -7,7 +7,7 @@ public class HelpCommand extends Command {
             "\n" + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
 
     /**
-     * Execute help command, which shows some helper messages
+     * Execute help command, which shows some helper messages.
      *
      * @return CommandResult list of avaliable commands
      */
