@@ -1161,7 +1161,7 @@ public class ConsoleInterface {
 
         printBlankLine();
 
-        if (isLocalLoggerInitialized()){
+        if (isLocalLoggerInitialized()) {
             localLogger.logCommand(consoleInput);
         }
 
