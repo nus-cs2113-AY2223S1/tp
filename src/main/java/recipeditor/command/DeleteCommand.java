@@ -1,20 +1,26 @@
 package recipeditor.command;
 
+import recipeditor.edit.Delete;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
-
+    private static final String COMMAND_SYNTAX = "/delete <title>";
+    private static final String COMMAND_FUNCTION = "Delete the recipe of given title from recipeditor.";
     public static final String CORRECT_FORMAT = "The input should be '/delete (recipeTitle).'";
     private String recipeTitleToDelete;
 
+    public DeleteCommand() {
+        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+    }
+
     /**
      * Construct a delete command including task to delete.
-     *
      */
     public DeleteCommand(String recipeTitleToDelete) {
+        this();
         this.recipeTitleToDelete = recipeTitleToDelete;
     }
 
