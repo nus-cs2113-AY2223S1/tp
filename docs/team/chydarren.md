@@ -78,7 +78,8 @@ Given below are my contributions to the project.
         * Added implementation details for the Transaction object
         * Added implementation details for the `find` and `stats` features
         * Created class diagram for the UI component, class and sequence diagrams for `find` and `stats`
-
+        * Transferred team product scope, user stories and non-functional requirements into appendices
+        * Added details for glossary and instructions for manual testing 
 
 * **Community**:
     * PRs Reviewed (with non-trivial review comments): 
