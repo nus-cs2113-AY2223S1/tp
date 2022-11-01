@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class FindCommand extends Command {
     public static final String COMMAND_TYPE = "/find";
     public static final String COMMAND_SYNTAX = "Syntax for /find \n";
-    public char flagType;
 
     public static final String CORRECT_FORMAT = "The input should be '/find (recipeTitle or ingredientName).'";
     public String findInput;
@@ -16,6 +15,12 @@ public class FindCommand extends Command {
         this.findInput = findInput;
     }
 
+    /**
+     * Execute find command, which find the name of recipes containing a given string
+     * in its title or ingredients
+     *
+     * @return CommandResult list of found results
+     */
     public CommandResult execute() {
         ArrayList<String> foundRecipeList = RecipeList.findRecipeTitles(findInput);
         StringBuilder output = new StringBuilder();

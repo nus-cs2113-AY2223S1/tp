@@ -45,6 +45,13 @@ public class Ingredient {
         this.unit = unit;
     }
 
+    /**
+     * Parse ingredient into name, amount, unit
+     *
+     * @param input the ingredient to be parsed as String
+     * @return parsed ingredient
+     * @throws ParseException the ingredient is of wrong format and cannot be parsed
+     */
     public static Ingredient parsedIngredients(String input) throws ParseException {
         String[] parsed = input.split("/", 3);
         try {

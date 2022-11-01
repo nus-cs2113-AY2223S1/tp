@@ -14,6 +14,11 @@ public class InvalidCommand extends Command {
         this.message = INVALID_MESSAGE;
     }
 
+    /**
+     * Execute invalid result, which only returns a message on invalid command details
+     *
+     * @return CommandResult message on invalid command details
+     */
     public CommandResult execute() {
         return new CommandResult(message);
     }

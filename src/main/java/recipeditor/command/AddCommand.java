@@ -15,6 +15,11 @@ public class AddCommand extends Command {
         this.addedRecipe = addedRecipe;
     }
 
+    /**
+     * Execute an add command, which adds recipe into RecipeList and storage
+     *
+     * @return CommandResult successful or failed addition message
+     */
     public CommandResult execute() {
         if (isValid) {
             RecipeList.addRecipe(addedRecipe);

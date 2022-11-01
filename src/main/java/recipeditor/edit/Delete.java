@@ -12,6 +12,12 @@ public class Delete extends EditModeCommand {
         super(ingredientFlag, parsedCommand, recipe);
     }
 
+    /**
+     * Delete an attribute in the recipe, either an ingredient or a step
+     *
+     * @return the edited recipe
+     * @throws InvalidFlagException edit command contains invalid flags
+     */
     @Override
     public Recipe execute() throws InvalidFlagException {
         Recipe oldRecipe = recipe;
