@@ -1,6 +1,8 @@
 package seedu.duke.terminalinfo;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class PassengerInfo {
@@ -8,6 +10,8 @@ public class PassengerInfo {
     private static Date date = new Date();
     private static String dateToday = formatter.format(date);
     private static String departureDate = dateToday;
+    private static final int MID_INDEX = 2;
+    public static final int BOARDING_TIME_OFFSET = 45;
     private String name;
     private String departureTime;
     private String flightNumber;
@@ -25,6 +29,10 @@ public class PassengerInfo {
         this.boardingGroup = boardingGroup;
         this.seatNumber = seatNumber;
         this.boardingTime = boardingTime;
+    }
+
+    public PassengerInfo() {
+
     }
 
     public String getName() {
@@ -76,5 +84,30 @@ public class PassengerInfo {
 
     public void setDepartureTime(String newDepartureTime) {
         this.departureTime = newDepartureTime;
+    }
+
+    //@@author ivanthengwr
+    public String getFormattedBoardingTime(String reformatDepartureTime) {
+        LocalTime flightDepartureTime = LocalTime.parse(reformatDepartureTime);
+        LocalTime formatBoardingTime = flightDepartureTime
+                .minus(Duration.ofMinutes(BOARDING_TIME_OFFSET));
+        String boardingTime = reformatBoardingTime(formatBoardingTime);
+        return boardingTime;
+    }
+
+    private String reformatBoardingTime(LocalTime boardingTime) {
+        String reformatBoardingTime = boardingTime.toString();
+        reformatBoardingTime = reformatBoardingTime.replace(":", "");
+        return reformatBoardingTime;
+    }
+
+    public String reformatDepartureTime(String departureTime) {
+        StringBuilder formatDepartureTime = new StringBuilder(departureTime);
+        formatDepartureTime.insert(MID_INDEX,":");
+        return formatDepartureTime.toString();
+    }
+
+    public void setBoardingTime(String newBoardingTime) {
+        this.boardingTime = newBoardingTime;
     }
 }

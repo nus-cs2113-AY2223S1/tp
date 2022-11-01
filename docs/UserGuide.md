@@ -99,13 +99,13 @@ Thank you, come again! :)
 passenger already exists in the flight list and the seat number is not already occupied by another
 passenger in the passenger list.
 
-**Format**: `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER bt/BOARDING_TIME`
+**Format**: `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`
 
 Example:
 
 **Input**
 
-`passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`
+`passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d`
 
 **Output**
 
@@ -178,7 +178,7 @@ _If passenger details logbook has/have existing passenger(s)_.
 +------------------------------------------------------------------------------------------------------------------------------+
 |           NAME           | DEPARTURE DATE | DEPARTURE TIME | FLIGHT NUM | GATE NUM | BOARDING GRP | SEAT NUM | BOARDING TIME |
 +------------------------------------------------------------------------------------------------------------------------------+
-| IVAN THENG               | 26-10-22       | 2145           | SQ832      | 05       | 1            | 17D      | 2100          |
+| IVAN THENG               | 26-10-22       | 2145           | SQ832      | 05       | 1            | 17D      | 2115          |
 +------------------------------------------------------------------------------------------------------------------------------+
 ````
 
@@ -384,7 +384,6 @@ an error may be generated if these standards are not adhered to.
 | NEW_GATE_NUMBER    | Input gate number should follow GATE_NUMBER constraints but must not be the same value                                                                                                                      | `22`                                |
 | BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
 | SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
-| BOARDING_TIME      | Input boarding time should be in 24 Hours format                                                                                                                                                            | `2015`                              |
 
 <br>
 
@@ -406,6 +405,15 @@ day?
 
 **A**: No SkyControl is currently limited to a single airport terminal and can only log flights/passengers within the
 same day.
-However, this can be a future implementation outside the CS2113 curriculum.
+However, this can be a future implementation outside the CS2113 curriculum.  
+  
+**Q**: How is boarding time deduced?  
+  
+**A**: Boarding time for any airline would always be set to **45 minutes** before departure time.  
+  
+**Q**: Do I have to manually update the Boarding time for every passenger if I were to set a delay on a flight?  
+  
+**A**: Thankful, you do not need too, SkyControl would automatically update the Boarding time for every
+passenger if a delay in departure time is present.
 
 <br>

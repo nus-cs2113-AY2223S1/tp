@@ -64,7 +64,7 @@ The command Add a passenger adds passenger details of a particular passenger to 
 
 **_NOTE:_** Minimal representation of structure of `AddPassengerCommand`
 
-![class diagram](../docs/ug-diagrams/images/passengerAddCmdClassDiagram.jpg)
+![class diagram](ug-diagrams/images/passengerAddCmdClassDiagram.jpg)
 
 When the main class `SkyControl` receives a user input, it parses the input with the
 help of the `Parser` class which then forwards the input to the `Passenger Parser` class accordingly.
@@ -75,7 +75,7 @@ further methods will be triggered as explained below.
 
 **_NOTE:_** Exceptions are omitted for readability.
 
-![sequence diagram](../docs/ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
 
 1. Once the `AddPassengerCommand` is instantiated, the `execute` method is called from the `SkyControl`
    class with passenger list and user input as method parameters.
@@ -118,7 +118,7 @@ Part 1:
   the type of command that needs to be executed.
 * Once validated, a new Command called `DeletePassengerCommand` should be instantiated.
 
-![class diagram](../docs/ug-diagrams/images/passengerdltcmdClassDiagram_0.jpg)
+![class diagram](ug-diagrams/images/passengerdltcmdClassDiagram_0.jpg)
 
 Part 2:
 
@@ -128,11 +128,11 @@ Part 2:
   passenger
   found or when a passenger is removed.
 
-![class diagram](../docs/ug-diagrams/images/passengerdltcmdClassDiagram_1.jpg)
+![class diagram](ug-diagrams/images/passengerdltcmdClassDiagram_1.jpg)
 
 **Sequence diagram**
 
-![sequence diagram](../docs/ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
 When `paser` verifies that the command is an entity `passenger` and `delete` operation,
 `DeletePassengerCommend` is instantiated.
@@ -170,7 +170,7 @@ Part 1:
   the type of command that needs to be executed.
 * Once validated, a new Command called `ListPassengerCommand` should be instantiated.
 
-![class diagram](../docs/ug-diagrams/images/passengerListcmdClassDiagram_0.jpg)
+![class diagram](ug-diagrams/images/passengerListcmdClassDiagram_0.jpg)
 
 Part 2:
 
@@ -179,11 +179,11 @@ Part 2:
 * From there, `listOperation` method would run within method `execute` and
   prints out all `passengers` details on a table format.
 
-![class diagram](../docs/ug-diagrams/images/passengerListcmdClassDiagram_1.jpg)
+![class diagram](ug-diagrams/images/passengerListcmdClassDiagram_1.jpg)
 
 **Sequence diagram**
 
-![sequence diagram](../docs/ug-diagrams/images/passengerListcmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/passengerListcmdSeqDiagram.jpg)
 
 When `paser` verifies that the command is an entity `passenger` and `list` operation,
 `ListPassengerCommend` is instantiated.
@@ -204,7 +204,7 @@ The Add a flight function adds a flight with its corresponding details to the fl
 
 **_NOTE:_** Exceptions are omitted for readability.
 
-![sequence diagram](../docs/ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
 
 When the `Parser` recognizes the `add flight` command, `AddFlightCommand` is instantiated.
 
@@ -234,7 +234,7 @@ assumes that the manager has given a valid 'flight delete' command as an input f
 
 **Sequence Diagram**
 
-![sequence diagram](../docs/ug-diagrams/images/flightDeleteCmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/flightDeleteCmdSeqDiagram.jpg)
 
 Assuming that the manager has entered a valid 'flight delete' command, `parser()` will verify that the command
 is an entity `flight` and a `delete` operation. `executeEntity()` runs within SkyControl which will
@@ -256,7 +256,7 @@ create an instantiation of `DeleteFlightCommand`.
 The list function lists out all flight details in a table form which is facilitated by `ListFlightCommand`.
 It extends an abstract `Command` class with an override method called `execute`.
 
-![sequence diagram](../docs/ug-diagrams/images/flightListCmdSeqDiagram.jpg)
+![sequence diagram](ug-diagrams/images/flightListCmdSeqDiagram.jpg)
 
 When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is instantiated.
 

@@ -18,6 +18,7 @@ import seedu.duke.operationlist.OperationList;
 import seedu.duke.operationlist.PassengerList;
 import seedu.duke.parsers.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
@@ -28,6 +29,7 @@ public class SkyControl {
     private OperationList passengers;
     private OperationList flights;
     private Storage storage;
+    private PassengerInfo passengerInfo;
     private static boolean isPassenger = false;
     private static boolean isFlight = false;
     private static boolean isModify = false;
@@ -43,6 +45,7 @@ public class SkyControl {
         passengers = new PassengerList();
         flights = new FlightList();
         storage = new Storage();
+        passengerInfo = new PassengerInfo();
     }
 
     private void executeEntity(String lineInput, Command command) throws SkyControlException {
@@ -73,12 +76,7 @@ public class SkyControl {
     private void executePassengerCommand(String lineInput, Command command) {
         try {
             if (isAdd) {
-                String departureTime;
-                String gateNumber;
-                command.checkFlightDetailSync(flights, passengers, lineInput);
-                departureTime = command.getPassengerDepartureTime(flights, lineInput);
-                gateNumber = command.getPassengerGateNumber(flights, lineInput);
-                String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime, gateNumber);
+                String passengerAddInput = syncFlightDetail(lineInput, command);
                 command.execute(passengers, passengerAddInput);
             } else {
                 command.execute(passengers, lineInput);
@@ -89,10 +87,26 @@ public class SkyControl {
         }
     }
 
-    private String getLineInputForPassengerAdd(String lineInput, String departureTime, String gateNumber) {
-        return lineInput.trim() + " dt/" + departureTime + " gn/" + gateNumber;
+
+    //@@author shengiv
+    private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
+        command.checkFlightDetailSync(flights, passengers, lineInput);
+        String departureTime = command.getPassengerDepartureTime(flights, lineInput);
+        String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
+        String gateNumber = command.getPassengerGateNumber(flights, lineInput);
+        String boardingTime = passengerInfo.getFormattedBoardingTime(reformatDepartureTime);
+        String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime,
+                gateNumber, boardingTime);
+        return passengerAddInput;
     }
 
+    //@@author shengiv
+    private String getLineInputForPassengerAdd(String lineInput, String departureTime,
+                                               String gateNumber, String boardingTime) {
+        return lineInput.trim() + " dt/" + departureTime + " gn/" + gateNumber + " bt/" + boardingTime;
+    }
+
+    //@@author ivanthengwr
     private void checkEntity(String lineInput) throws SkyControlException {
         isPassenger = Parser.isPassengerEntity(lineInput);
         isFlight = Parser.isFlightEntity(lineInput);
@@ -116,16 +130,22 @@ public class SkyControl {
         DelayFlightCommand.setupLogger();
     }
 
-    public void run() {
-        ui.showWelcomeMessage();
-        Storage.checkFileStatus();
-        setUpAllLogger();
+    //@@author JordanKwua
+    private void loadStorage() {
         try {
             storage.loadPassengers(passengers);
             storage.loadFlights(flights);
         } catch (FileNotFoundException e) {
             ui.showFileNotFoundMessage();
         }
+    }
+
+    //@@author ivanthengwr
+    public void run() {
+        ui.showWelcomeMessage();
+        Storage.checkFileStatus();
+        setUpAllLogger();
+        loadStorage();
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -142,6 +162,7 @@ public class SkyControl {
         }
     }
 
+    //@@author shengiv
     public static void main(String[] args) {
         new SkyControl().run();
     }
