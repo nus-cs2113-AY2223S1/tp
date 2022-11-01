@@ -54,7 +54,7 @@ We would like to acknowledge the following sources which our team has referenced
 
 ## Getting Started
 
-This program was developed using the Java JDK 11 and Intellij IDEA.
+Our team developed this program using Java JDK 11 and Intellij IDEA.
 The following steps will guide you through the setup process to get your development environment up and running.
 1. Install JDK 11.
 2. Install Intellij IDEA.
@@ -120,7 +120,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 
 #### Component Interaction Reference Diagrams
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadExpensesFromFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDLoadDataFromFile.puml)
 
 * `UserInterface()` calls `Data#load()` to load any existing data stored in a file.
 * `Data#load()` calls `Storage#loadFromFile()` to load the data from a file.
@@ -136,7 +136,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Storage#save
 In the example above, `UserInterface#run()` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 * `UserInterface#run()` will then call `UserInterface#printInformationalMessage()` to print the converted object.
 
-![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDSaveExpensesToFile.puml)
+![Component-Interaction-SD-Save-Expense-To-File](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentInteractionsSDSaveDataToFile.puml)
 
 * `UserInterface#run()` calls `Data#save()` to save the data managed by the data manager class.
 * `Data#save()` calls `Storage#saveToFile()` to write the data to a file.
