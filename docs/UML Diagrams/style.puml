@@ -4,3 +4,5 @@
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
 skinparam classAttributeIconSize 0
+hide circle
+skinparam classAttributeIconSize 0

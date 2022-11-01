@@ -3,38 +3,38 @@
 
 hide footbox
 
-participant Parser
+participant ":Parser"
 
-Parser -> Parser : executeDelete()
-activate Parser
+":Parser" -> ":Parser" : executeDelete()
+activate ":Parser"
 
 alt Less than 3 words given as input
 
-    create DukeException
-    Parser -> DukeException
-    activate DukeException
-    DukeException --> Parser
-    destroy DukeException
+    create "e:\nDukeException"
+    ":Parser" -> "e:\nDukeException"
+    activate "e:\nDukeException"
+    "e:\nDukeException" --> ":Parser"
+    destroy "e:\nDukeException"
 
 else User input contains 3 words
     alt Invalid media type given
 
-        create DukeException
-            Parser -> DukeException
-            activate DukeException
-            DukeException --> Parser
-            destroy DukeException
+        create "e:\nDukeException"
+            ":Parser" -> "e:\nDukeException"
+            activate "e:\nDukeException"
+            "e:\nDukeException" --> ":Parser"
+            destroy "e:\nDukeException"
 
     end
 
     create "executor:\nRemoveCommand"
-    Parser -> "executor:\nRemoveCommand"
+    ":Parser" -> "executor:\nRemoveCommand"
 
     activate "executor:\nRemoveCommand"
-    "executor:\nRemoveCommand" --> Parser
+    "executor:\nRemoveCommand" --> ":Parser"
     deactivate "executor:\nRemoveCommand"
 
-    Parser -> "executor:\nRemoveCommand" : execute()
+    ":Parser" -> "executor:\nRemoveCommand" : execute()
     activate "executor:\nRemoveCommand"
 
     loop For each review
@@ -53,24 +53,24 @@ else User input contains 3 words
 
     end
 
-    "executor:\nRemoveCommand" --> Parser: output : String
+    "executor:\nRemoveCommand" --> ":Parser": output : String
     deactivate "executor:\nRemoveCommand"
 
-    participant Ui
+    participant ":Ui"
 
-    Parser -> Ui : print(output)
-    activate Ui
-    Ui --> Parser
-    deactivate Ui
+    ":Parser" -> ":Ui" : print(output)
+    activate ":Ui"
+    ":Ui" --> ":Parser"
+    deactivate ":Ui"
 
 
 end
 
 
 
-Parser -> Parser
+":Parser" -> ":Parser"
 destroy "executor:\nRemoveCommand"
-deactivate Parser
+deactivate ":Parser"
 
 
 @enduml
