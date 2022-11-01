@@ -36,12 +36,4 @@ public class ExportCommand extends Command {
     public String getExecutionMessage() {
         return "Here is your NUSMod Link:";
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
 }

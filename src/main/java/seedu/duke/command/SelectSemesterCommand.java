@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 public class SelectSemesterCommand extends Command {
     public static final String COMMAND_WORD = "semester";
     public static final String COMMAND_USAGE = "semester [ SEMESTER ]";
-    public static final String COMMAND_DESCRIPTION = "Select another semester "
-            + "to plan and organize timetable";
+    public static final String COMMAND_DESCRIPTION =
+            "Select another semester to plan and organize timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
@@ -25,8 +25,9 @@ public class SelectSemesterCommand extends Command {
 
     public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
-        Parser.selectSemesterCommandError(input, ERROR_WRONG_FORMAT);
-
+        if (!Parser.isValidSpecialTerm(input) && !Parser.isValidSemester(input)) {
+            throw new YamomException(ERROR_WRONG_FORMAT + System.lineSeparator() + "Not a valid semester.");
+        }
         this.updatedSemester = Integer.parseInt(input[1]);
     }
 
@@ -68,13 +69,5 @@ public class SelectSemesterCommand extends Command {
         }
 
         return outputMessage;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }

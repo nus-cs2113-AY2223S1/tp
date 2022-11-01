@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ViewTimetableCommand extends Command {
-    public static final String COMMAND_WORD = "view";
-    public static final String COMMAND_USAGE = "view < /fancy | /simple >";
-    public static final String COMMAND_DESCRIPTION = "Display current user timetable";
+public class TimetableCommand extends Command {
+    public static final String COMMAND_WORD = "timetable";
+    public static final String COMMAND_USAGE = "timetable < /fancy | /simple >";
+    public static final String COMMAND_DESCRIPTION = "Display current timetable.";
 
     private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
             + System.lineSeparator() + "Please select your modules first before viewing.";
@@ -27,7 +27,7 @@ public class ViewTimetableCommand extends Command {
     private boolean showFancy;
     private boolean showSimple;
 
-    public ViewTimetableCommand(String input) throws YamomException {
+    public TimetableCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         var params = Parser.parseParams(input);
         showFancy = params.containsKey("fancy");
@@ -48,20 +48,18 @@ public class ViewTimetableCommand extends Command {
     @Override
     public void execute(State state, Ui ui, Storage storage) {
         List<SelectedModule> selectedModules = state.getSelectedModulesList();
-        int numOfNotSelectedModules = 0;
         List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
         for (SelectedModule selectedModule: selectedModules) {
             Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-            numOfNotSelectedModules = getNumOfNotSelectedModules(numOfNotSelectedModules, selectedSlots);
             addToLessonsList(state, lessons, selectedModule, selectedSlots);
         }
-        try {
-            checkForEmptyTimetable(numOfNotSelectedModules, selectedModules);
-        } catch (YamomException e) {
-            ui.addMessage(e.getMessage());
+        if (lessons.isEmpty()) {
+            ui.addMessage(ERROR_MESSAGE_EMPTY_TIMETABLE);
             ui.displayUi();
             return;
+
         }
+        
         Timetable timetable;
         if (showFancy) {
             timetable = new Timetable(lessons, true, false);
@@ -74,21 +72,7 @@ public class ViewTimetableCommand extends Command {
         ui.displayUi();
     }
 
-    private static int getNumOfNotSelectedModules(int numOfNotSelectedModules, Map<LessonType, String> selectedSlots) {
-        if (selectedSlots.isEmpty()) {
-            numOfNotSelectedModules++;
-        }
-        return numOfNotSelectedModules;
-    }
-
-    private static void checkForEmptyTimetable(int numOfNotSelectedModules, List<SelectedModule> selectedModules)
-            throws YamomException {
-        if (numOfNotSelectedModules == selectedModules.size()) {
-            throw new YamomException(ERROR_MESSAGE_EMPTY_TIMETABLE);
-        }
-    }
-
-    private static void addToLessonsList(State state, List<Pair<Module, RawLesson>> lessons,
+    private void addToLessonsList(State state, List<Pair<Module, RawLesson>> lessons,
                                          SelectedModule selectedModule, Map<LessonType, String> selectedSlots) {
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
             Module module = selectedModule.getModule();
@@ -99,10 +83,9 @@ public class ViewTimetableCommand extends Command {
         }
     }
 
-    private static void addValidLesson(List<Pair<Module, RawLesson>> lessons, Module module,
+    private void addValidLesson(List<Pair<Module, RawLesson>> lessons, Module module,
                                        List<RawLesson> potentialLesson) {
-        if (!potentialLesson.isEmpty()) {
-            RawLesson lesson = potentialLesson.get(0);
+        for (RawLesson lesson : potentialLesson) {
             lessons.add(Pair.of(module, lesson));
         }
     }
@@ -116,12 +99,5 @@ public class ViewTimetableCommand extends Command {
     public String getExecutionMessage() {
         return null;
     }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
-    }
+    
 }

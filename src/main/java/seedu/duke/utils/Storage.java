@@ -43,7 +43,7 @@ public class Storage {
         try {
             ArrayList<String> links = readPreviousState();
             for (String link: links) {
-                Link.parseLink(link, state);
+                Link.parseLink(link, state, ui);
                 if (Link.isEmptyLink(link)) {
                     ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
                 }
@@ -89,22 +89,27 @@ public class Storage {
      * @param ui    to output to the user
      * @throws IOException failed or interrupted I/O operations
      */
-    public void saveState(State state, Ui ui) throws IOException {
+    public void saveState(State state, Ui ui, boolean isExit) throws IOException {
         assert state != null : "State should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
-                + " modules into a file. The format will be NUSMods export link.");
+            + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
         if (file.getParentFile().mkdirs()) {
             file.createNewFile();
         }
         ui.addMessage(EXPORT_MESSAGE);
         FileWriter fw = new FileWriter(file);
+        int currSem = state.getSemester();
         for (int i = 1; i <= 4; i++) {
             state.setSemester(i);
             String toSave = Link.getLink(state);
             ui.addMessage(toSave);
             fw.write(toSave + System.lineSeparator());
+        }
+        state.setSemester(currSem);
+        if (!isExit) {
+            ui.clearUiBuffer();
         }
         ui.displayUi();
         fw.close();

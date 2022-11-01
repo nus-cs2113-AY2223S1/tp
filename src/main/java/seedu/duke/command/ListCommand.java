@@ -20,8 +20,8 @@ public class ListCommand extends Command {
     private boolean successful;
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_USAGE = "list";
-    public static final String COMMAND_DESCRIPTION = "List out all the selected modules "
-            + "and lesson slots.";
+    public static final String COMMAND_DESCRIPTION = 
+            "List out all the selected modules and lesson slots.";
     public static final int HEADING_LENGTH = 9;
     public static final int DETAILS_INDENT = 10 + HEADING_LENGTH;
 
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
 
     private String formatWeeks(List<Integer> weeks) {
         if (weeks.size() == 0) {
-            return "Nil";
+            return "No info";
         }
         if (weeks.size() == 1) {
             return Integer.toString(weeks.get(0));
@@ -56,7 +56,17 @@ public class ListCommand extends Command {
                 DETAILS_INDENT - HEADING_LENGTH);
         return classNoString + module.getSemesterData(semester).getLessonsByTypeAndNo(type, classNo)
                 .stream()
-                .map(r -> r.venue + ", weeks: " + formatWeeks(r.weeks))
+                .map(r -> {
+                    String result = Timetable.dayToShortString(r.day);
+                    result += " " + r.startTime + "-" + r.endTime;
+                    if (!r.venue.isEmpty()) {
+                        result += ", " + r.venue;
+                    }
+                    if (!r.weeks.isEmpty()) {
+                        result += ", weeks: " + formatWeeks(r.weeks);
+                    }
+                    return result;
+                })
                 .collect(Collectors.joining("\n" + StringUtils.repeat(" ", DETAILS_INDENT)));
     }
 
@@ -138,13 +148,5 @@ public class ListCommand extends Command {
             outputMessage = "You currently have no selected module(s)!";
         }
         return outputMessage;
-    }
-
-    public static String getCommandDescription() {
-        return COMMAND_WORD + DESCRIPTION_DELIMITER + COMMAND_DESCRIPTION;
-    }
-
-    public static String getUsage() {
-        return COMMAND_USAGE;
     }
 }

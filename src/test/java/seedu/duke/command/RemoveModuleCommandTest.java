@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class DeleteModuleCommandTest {
+class RemoveModuleCommandTest {
 
     @Test
     public void testDeleteCommand_withoutModuleCode_throwsException() {
-        assertThrows(YamomException.class, () -> new DeleteModuleCommand(new String[]{ "delete" }));
+        assertThrows(YamomException.class, () -> new RemoveModuleCommand(new String[]{"delete"}));
     }
 
     @Test
@@ -31,21 +31,21 @@ class DeleteModuleCommandTest {
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
 
-        String[] testInputToAdd = { "add", "cs1010s" };
+        String[] testInputToAdd = {"add", "cs1010s"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(testInputToAdd);
         addModuleCommand.execute(state, ui, storage);
         assertTrue(state.getSelectedModulesList().contains(selectedModule));
 
-        String[] testInputToDelete = { "delete", "cs1010s" };
-        DeleteModuleCommand deleteModuleCommand = new DeleteModuleCommand(testInputToDelete);
+        String[] testInputToDelete = {"delete", "cs1010s"};
+        RemoveModuleCommand deleteModuleCommand = new RemoveModuleCommand(testInputToDelete);
         deleteModuleCommand.execute(state, ui, storage);
         assertFalse(state.getSelectedModulesList().contains(selectedModule));
     }
 
     @Test
     void testIsExit_false() throws YamomException {
-        String[] testInput = { "remove", "cs2113" };
-        assertFalse(new DeleteModuleCommand(testInput).isExit());
+        String[] testInput = {"remove", "cs2113"};
+        assertFalse(new RemoveModuleCommand(testInput).isExit());
     }
 
 }

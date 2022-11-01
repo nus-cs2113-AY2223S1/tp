@@ -31,21 +31,21 @@ public class Timetable {
 
     public static final String SUBSYSTEM_NAME = "timetable";
 
-    // private boolean isStyleSimple;
-    private boolean withColor;
-    private int firstHour;
-    private int lastHour;
-    private int timeslots;
+    private final boolean withColor;
+    private final int firstHour;
+    private final int lastHour;
+    private final int numTimeslots;
     private String[][] buffer;
-    private int height;
-    private int width;
-    private List<Day> days;
-    private List<Integer> columns;
-    private List<Integer> indents;
-    private List<Module> modules;
-    private List<Pair<Module, RawLesson>> sortedLessons;
-    private ConsoleBorder consoleBorder;
-    private Logger logger;
+    private final int height;
+    private final int width;
+    private final List<Day> days;
+    private final List<Integer> columnWidths;
+    private final List<Integer> indents;
+    private final List<Module> modules;
+    private final List<Pair<Module, RawLesson>> sortedLessons;
+    private final ConsoleBorder consoleBorder;
+    private final Logger logger;
+    private String errorMessages;
 
     /**
      * Creates a timetable with default settings. Default for windows is simple style and no colour. Default
@@ -66,35 +66,46 @@ public class Timetable {
         assert lessons != null : "List of lessons should not be null";
         logger = Logger.getLogger(SUBSYSTEM_NAME);
         logger.log(Level.FINE, "Creating a timetable with " + lessons.size() + " lessons");
+        this.errorMessages = "";
         this.withColor = withColor;
         this.consoleBorder = ConsoleBorder.getInstance(isStyleSimple);
-        this.sortedLessons = sortLessons(lessons);
-        // collect a sorted list of modules
-        this.modules = new ArrayList<>(lessons.stream().map(s -> s.getLeft()).collect(Collectors.toSet()));
-        this.modules.sort((a, b) -> a.moduleCode.compareTo(b.moduleCode));
-        // find the earliest and latest time in the schedule
-        String earliest = lessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElseThrow();
+        this.sortedLessons = filterNonviewableLessons(sortLessons(lessons)); // side effect of updating errorMessages
+        this.modules = sortedLessons.stream().map(Pair::getLeft).distinct()
+            .sorted(Module::compareTo).collect(Collectors.toList());
+        String earliest = sortedLessons.stream().map(s -> s.getRight().startTime).min(String::compareTo).orElse("0900");
+        String latest = sortedLessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElse("0900");
         this.firstHour = Integer.parseInt(earliest.substring(0, 2)); // round down to the hour
-        String latest = lessons.stream().map(s -> s.getRight().endTime).max(String::compareTo).orElseThrow();
         this.lastHour = Integer.parseInt(latest.substring(0, 2)) + 1; // round up to next hour
-        this.timeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
-        this.days = List.of(Day.values()).subList(0, 5); // monday to friday
+        this.numTimeslots = (this.lastHour - this.firstHour) * 2 + 1; // every half an hour
+        boolean hasWeekendClasses = sortedLessons.stream().map(Pair::getRight).map(s -> s.day)
+            .anyMatch(d -> d == Day.SUNDAY || d == Day.SATURDAY);
+        this.days = hasWeekendClasses ? List.of(Day.values()) : List.of(Day.values()).subList(0, 5);
         // check whether any classes need to be indented
         // classes need to be indented if their timeslots overlap
         Pair<List<Integer>, List<Integer>> res = computeIndentation(days, sortedLessons); 
-        this.columns = res.getLeft();
+        this.columnWidths = res.getLeft();
         this.indents = res.getRight();
-        int columnTotal = 1; // time column
-        for (int c : columns) {
-            columnTotal += c;
-        }
+        int columnTotal = this.columnWidths.stream().mapToInt(Integer::intValue).sum() + 1; // add one for labels
         this.width = columnTotal * (COLUMN_WIDTH + 1) + RIGHT_PADDING;
-        this.height = HEADER_ROWS + timeslots * ROWS_PER_TIME + BOTTOM_PADDING;
+        this.height = HEADER_ROWS + numTimeslots * ROWS_PER_TIME + BOTTOM_PADDING;
         this.buffer = new String[height][width];
         // write data into the buffer
         initialiseBuffer();
         writeHeader();
         writeLessons(sortedLessons, indents);
+    }
+
+    private List<Pair<Module, RawLesson>> filterNonviewableLessons(List<Pair<Module, RawLesson>> lessons) {
+        for (var lessonPair : lessons) {
+            RawLesson lesson = lessonPair.getRight();
+            if (!isLessonViewable(lesson)) {
+                errorMessages += lessonTypeToShortString(lesson.lessonType) 
+                    + "[" + lesson.classNo + "] is not viewable. This is not a bug.\n";
+            }
+        }
+        return lessons.stream()
+            .filter(lesson -> isLessonViewable(lesson.getRight()))
+            .collect(Collectors.toList());
     }
 
     private void initialiseBuffer() {
@@ -111,17 +122,17 @@ public class Timetable {
             buffer[2][i] = "=";
         }
         // left time column
-        for (int i = 0; i < timeslots; i++) {
+        for (int i = 0; i < numTimeslots; i++) {
             write(indexToTime(i), HEADER_ROWS + i * ROWS_PER_TIME, LEFT_PADDING);
         }
         // write day headers
         for (int i = 0; i < days.size(); i++) {
             write(ConsoleBorder.DOTTED_CHAR + " " + dayToShortString(days.get(i)), TOP_PADDING,
-                    getColumnOfDay(days.get(i)) - 1);
+                getColumnOfDay(days.get(i)) - 1);
         }
         // draw border between day columns
         for (int i = 0; i < days.size(); i++) {
-            for (int j = 0; j < timeslots * ROWS_PER_TIME; j++) {
+            for (int j = 0; j < numTimeslots * ROWS_PER_TIME; j++) {
                 write("" + ConsoleBorder.DOTTED_CHAR, j + HEADER_ROWS, getColumnOfDay(days.get(i)) - 1);
             }
         }
@@ -171,7 +182,7 @@ public class Timetable {
         List<List<List<Pair<Module, RawLesson>>>> lessonStack = new ArrayList<>();
         for (int i = 0; i < days.size(); i++) {
             lessonStack.add(new ArrayList<>());
-            for (int j = 0; j < timeslots; j++) {
+            for (int j = 0; j < numTimeslots; j++) {
                 lessonStack.get(i).add(new ArrayList<>());
             }
         }
@@ -181,6 +192,12 @@ public class Timetable {
             int dayIndex = days.indexOf(lesson.getRight().day);
             int startRow = timeToIndex(lesson.getRight().startTime);
             int indent = lessonStack.get(dayIndex).get(startRow).size();
+            for (int j = 0; j < lessonStack.get(dayIndex).get(startRow).size(); j++) {
+                if (lessonStack.get(dayIndex).get(startRow).get(j) == null) {
+                    indent = j;
+                    break;
+                }
+            }
             indents.add(indent);
             for (int j = startRow; j < timeToIndex(lesson.getRight().endTime); j++) {
                 while (lessonStack.get(dayIndex).get(j).size() < indent) {
@@ -203,7 +220,7 @@ public class Timetable {
         int index = days.indexOf(day);
         int cols = 1;
         for (int i = 0; i < index; i++) {
-            cols += columns.get(i);
+            cols += columnWidths.get(i);
         }
         return cols * (COLUMN_WIDTH + 1);
     }
@@ -224,7 +241,6 @@ public class Timetable {
 
     private void addSingleLesson(Module module, RawLesson lesson, int indent) {
         Day day = lesson.day;
-        // int dayIndex = days.indexOf(day);
         int startColumn = getColumnOfDay(day) - 1 + indent * (COLUMN_WIDTH + 1);
         int endColumn = startColumn + COLUMN_WIDTH + 1;
         int startRow = timeToIndex(lesson.startTime) * ROWS_PER_TIME + HEADER_ROWS;
@@ -271,6 +287,7 @@ public class Timetable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(errorMessages);
         for (int i = 0; i < height; i++) {
             builder.append(String.join("", buffer[i]));
             if (withColor) {
@@ -308,6 +325,16 @@ public class Timetable {
         map.put(Day.SATURDAY, "Sat");
         map.put(Day.SUNDAY, "Sun");
         return Optional.ofNullable(map.get(day)).orElse("<Invalid>");
+    }
+
+    private boolean isLessonViewable(RawLesson lesson) {
+        if (!lesson.startTime.endsWith("00") && !lesson.startTime.endsWith("30")) {
+            return false;
+        }
+        if (!lesson.endTime.endsWith("00") && !lesson.endTime.endsWith("30")) {
+            return false;
+        }
+        return true;
     }
 
 }

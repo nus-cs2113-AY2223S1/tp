@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.duke.command.GetModuleCommand.isModuleOfferedInCurrentSem;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -20,20 +19,20 @@ import seedu.duke.model.Module;
 import seedu.duke.utils.Ui;
 
 
-public class GetModuleCommandTest {
+public class InfoCommandTest {
     @Test
-    void getModuleCommand_validModuleCodeCS1010X_expectModuleDetailsOutput() throws YamomException, IOException {
+    void infoCommand_validModuleCodeCS1010X_expectModuleDetailsOutput() throws YamomException, IOException {
         Ui ui = new Ui();
         State state = new State();
 
         state.setSemester(1);
 
-        String[] input = {"get", "CS1010X"};
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+        String[] input = {"info", "CS1010X"};
+        InfoCommand infoCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader()
+        infoCommand.execute(state, ui, null);
+        InputStream stream = InfoCommandTest.class.getClassLoader()
                 .getResourceAsStream("moduleDetailsCS1010X.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
@@ -42,18 +41,18 @@ public class GetModuleCommandTest {
     }
 
     @Test
-    void getModuleCommand_validModuleCodeCS2113_expectCorrectModuleDetailsOutput() throws YamomException, IOException {
+    void infoCommand_validModuleCodeCS2113_expectCorrectModuleDetailsOutput() throws YamomException, IOException {
         Ui ui = new Ui();
         State state = new State();
 
         state.setSemester(1);
-        String[] input = {"get", "CS2113"};
+        String[] input = {"info", "CS2113"};
 
-        GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+        InfoCommand infoCommand = new InfoCommand(input);
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        getModuleCommand.execute(state, ui, null);
-        InputStream stream = GetModuleCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
+        infoCommand.execute(state, ui, null);
+        InputStream stream = InfoCommandTest.class.getClassLoader().getResourceAsStream("moduleDetailsCS2113.txt");
         String expectedOutput = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
         stream.close();
         assertEquals(expectedOutput.replaceAll("\\s+", ""),
@@ -68,8 +67,8 @@ public class GetModuleCommandTest {
         state.setSemester(1);
 
         try {
-            String[] input = {"get", "X1010SC"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
+            String[] input = {"info", "X1010SC"};
+            InfoCommand getModuleCommand = new InfoCommand(input);
             getModuleCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
@@ -79,50 +78,18 @@ public class GetModuleCommandTest {
     }
 
     @Test
-    void getModuleCommand_emptyModuleCode_exceptionThrown() {
+    void infoCommand_emptyModuleCode_exceptionThrown() {
         Ui ui = new Ui();
         State state = new State();
-
         state.setSemester(1);
-
         try {
-            String[] input = {"get"};
-            GetModuleCommand getModuleCommand = new GetModuleCommand(input);
-            getModuleCommand.execute(state, ui, null);
+            String[] input = {"info"};
+            InfoCommand infoCommand = new InfoCommand(input);
+            infoCommand.execute(state, ui, null);
             fail();
         } catch (YamomException e) {
             assertEquals("Error! \tPlease enter a module code!", e.getMessage());
         }
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113OfferedInCurrentSemester_expectsTrue() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 1
-
-        state.setSemester(1);
-
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertTrue(testResult);
-    }
-
-    @Test
-    void isModuleOfferedInCurrentSem_moduleCS2113NotOfferedInCurrentSemester_expectsFalse() {
-        // check if module is offered in current semester
-        State state = new State();
-        String moduleCode = "CS2113";
-        Module testModule = Module.get(moduleCode);
-        // setting current semester to 4
-
-        state.setSemester(4);
-
-        // check if module is offered in current semester
-        boolean testResult = isModuleOfferedInCurrentSem(testModule, state);
-        assertFalse(testResult);
     }
 
     @Test
@@ -151,5 +118,13 @@ public class GetModuleCommandTest {
             }
         }
         assertFalse(moduleExistsInModuleList);
+    }
+
+    @Test
+    void infoCommand_weekendClass_noErrors() throws YamomException {
+        Ui ui = new Ui();
+        State state = new State();
+        new InfoCommand(new String[]{"info", "bpm1701"}).execute(state, ui, null);
+        new InfoCommand(new String[]{"info", "eg3301r"}).execute(state, ui, null);
     }
 }

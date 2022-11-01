@@ -7,13 +7,12 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SelectSlotCommandTest {
 
     @Test
-    void addModuleCommand_validInputsToChangeCS2113Tutorial_expectCorrectChangeInTutorial() throws YamomException {
+    void selectSlotCommand_validInputsToChangeCS2113Tutorial_expectSuccessfulChangeInTutorial() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
@@ -38,13 +37,13 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void addModuleCommand_validInputsToChangeIE2141Lecture_expectCorrectChangeInLecture() throws YamomException {
+    void selectSlotCommand_validInputsToChangeIE2141Lecture_expectSuccessfulChangeInLecture() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
 
         // add ie2141 to timetable. ie2141 lecture slots default to lec 1
-        String[] input1 = { "add", "ie2141" };
+        String[] input1 = {"add", "ie2141"};
         AddModuleCommand addModuleCommand = new AddModuleCommand(input1);
         addModuleCommand.execute(state, ui, storage);
 
@@ -60,47 +59,83 @@ public class SelectSlotCommandTest {
     }
 
     @Test
-    void addModuleCommand_invalidInputsEmptyParams_exceptionThrown() {
+    void selectSlotCommand_invalidInputsEmptyParams_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        try {
+
+        assertThrows(YamomException.class, () -> {
             String input = "select";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertTrue(e.getMessage().contains("Wrong format"));
-        }
+        });
     }
 
     @Test
-    void addModuleCommand_invalidInputsEmptyParamsValue_exceptionThrown() {
+    void selectSlotCommand_invalidInputsEmptyParamsValue_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        try {
+
+        assertThrows(YamomException.class, () -> {
             String input = "select /module /type /code";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertTrue(e.getMessage().contains("Wrong format"));
-        }
+        });
     }
 
     @Test
-    void addModuleCommand_invalidInputsIncompleteParams_exceptionThrown() {
+    void selectSlotCommand_invalidInputsIncompleteParams_exceptionThrown() {
         State state = new State();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        try {
+
+        assertThrows(YamomException.class, () -> {
             String input = "select /module cs2113 /type";
             SelectSlotCommand selectSlotCommand = new SelectSlotCommand(input);
             selectSlotCommand.execute(state, ui, storage);
-            fail();
-        } catch (YamomException e) {
-            assertTrue(e.getMessage().contains("Wrong format"));
-        }
+        });
     }
+
+    @Test
+    void selectSlotCommand_enteredCorrectLessonTypeAndClassNumber_noErrors() throws YamomException {
+        State state = new State();
+        state.setSemester(1);
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        new SelectSlotCommand("select /module cs1010s /type tut /code 24c")
+                .execute(state, ui, null);
+    }
+
+    @Test
+    void selectSlotCommand_moduleNotInState_throwsException() {
+        State state = new State();
+        state.setSemester(1);
+        Ui ui = new Ui();
+        assertThrows(YamomException.class, () -> new SelectSlotCommand("select /module cs1010s /type tut /code 24c")
+            .execute(state, ui, null));
+    }
+
+    @Test
+    void selectSlotCommand_inputWrongClassNo_throwsException() throws YamomException {
+        State state = new State();
+        state.setSemester(1);
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type tut /code 2").execute(state, ui, null));
+    }
+
+    @Test
+    void selectSlotCommand_inputNonExistingLesson_throwsException() throws YamomException {
+        State state = new State();
+        state.setSemester(1);
+        Ui ui = new Ui();
+        new AddModuleCommand("add cs1010s".split(" ")).execute(state, ui, null);
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type lab /code 02A").execute(state, ui, null));
+        assertThrows(YamomException.class, () -> 
+                new SelectSlotCommand("select /module cs1010s /type tut /code 17284").execute(state, ui, null));
+    }
+
 }
