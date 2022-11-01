@@ -91,7 +91,7 @@ Given below are my contributions to the project.
     * Contributed to Forum Discussions: 
       [1](https://github.com/nus-cs2113-AY2223S1/forum/issues/6#issuecomment-1219989835),
       [2](https://github.com/nus-cs2113-AY2223S1/forum/issues/7#issuecomment-1231422849)
-    * Reported Bugs and Suggestions for Pet Clinic Manager by Team F12-2 (severe bugs reported):
+    * Reported Bugs and Suggestions for Pet Clinic Manager by Team F11-2 (severe bugs reported):
       [1](https://github.com/chydarren/ped/issues/2), [2](https://github.com/chydarren/ped/issues/3),
       [3](https://github.com/chydarren/ped/issues/10), [4](https://github.com/chydarren/ped/issues/16),
       [5](https://github.com/chydarren/ped/issues/17)
