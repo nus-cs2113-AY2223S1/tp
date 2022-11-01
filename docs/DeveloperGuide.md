@@ -23,11 +23,25 @@ ___
 * [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
 ___
 ## Setting Up and Getting Started
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `PropertyRentalManager.jar` from [here](https://github.com/AY2223S1-CS2113-F11-1/tp/releases).
+3. Put the JAR file into an empty folder.
+4. Open a command window and change the current working directory to the directory that the JAR file is located in using
+   following command:
+```
+cd [PATH_TO_JAR_DIRECTORY]
+```
+5. Run Property Rental Manager
+```
+java -jar PropertyRentalManager.jar
+```
 ___
 ## Product scope
 ___
 ## Target user profile
-This application is for property agent who is managing single owner rental units and is looking to reduce the overhead to filter appropriate tenants. The property agent would also want to monitor the expenses such as damages, utility bills and payment dates for rent.
+This application is for property agents who are managing single owner rental units and would like to keep track of 
+information of properties and prospective tenants (clients). The target user is a fast typist who favors a command-line 
+interface.
 ___
 ## Value proposition
 Aids property agent in tracking information related to their property which includes:
@@ -478,3 +492,114 @@ ___
 
 
 ## Instructions for manual testing
+
+### Launch
+1. Download the JAR file and move it into an empty folder.
+2. On a command line application, change the current working directory to the same folder as the JAR file and run the app using:
+```
+java -jar PropertyRentalManager.jar
+```
+3. Expected: The app's welcome message is printed onto the terminal. 
+    
+### Add
+
+### Delete
+
+### List
+
+### Pair
+1. Successful Pairing
+    1. Prerequisites: 
+       * Have at least 1 client and 1 property added to the app. 
+       * Ensure that the client's budget is higher than or equal to the property's rental price.
+       * Ensure that the client and property have **NOT** been paired.
+    2. Test case: `pair ip/1 ic/1`
+
+        Expected: Pairing is added. Terminal shows successful pairing message, the name of the paired client, 
+        and the address of the paired property.
+
+
+2. Failed Pairing (budget exceeded)
+   1. Prerequisites:
+       * Have at least 1 client and 1 property added to the app.
+       * Ensure that the client's budget is lower than the property's rental price.
+   2. Test case: `pair ip/1 ic/1`
+   
+       Expected: Terminal shows unsuccessful pairing message, name and budget of client, and the address and rental 
+       price of the property.
+
+
+3. Failed Pairing (client already paired to another property)
+   1. Prerequisites:
+       * Have at least 1 client and 2 properties added to the app.
+       * Ensure that the client's budgets is higher than or equal to the rental prices of both properties.
+       * Have paired the client and a property e.g `pair ip/1 ic/1`
+   2. Test case: `pair ip/2 ic/1` (pair a different property to the same client)
+   
+      Expected: Terminal shows unsuccessful pairing message.
+
+
+4. Failed Pairing (client and property form an existing pairing)
+    1. Prerequisites:
+        * Have at least 1 client and 1 property added to the app.
+        * Ensure that the client's budgets is higher than or equal to the property's rental price.
+        * Have paired the client and property e.g `pair ip/1 ic/1`
+    2. Test case: `pair ip/1 ic/1` (re-pair using the same indexes)
+   
+        Expected: Terminal shows unsuccessful pairing message.
+
+
+### Unpair
+1. Successful unpairing:
+   1. Prerequisites:
+      * Have at least 1 client and 1 property added to the app.
+      * Have paired the client and property e.g. `pair ip/1 ic/1`
+   2. Test case: `unpair ip/1 ic/1` (unpair using the same indexes as the pair command)
+      
+       Expected: Pairing is deleted. Terminal shows successful unpairing message showing the client's name and the 
+       property address.
+
+
+2. Failed unpairing (unpairing a property and a client that have not been paired):
+   1. Prerequisites:
+      * Have at least 1 client and 1 property added to the app.
+      * Have **NOT** paired the client and property.
+   2. Test case: `unpair ip/1 ic/1`
+       
+       Expected: Terminal shows unsuccessful pairing message.
+
+
+### Check
+
+#### Check Property
+1. Successful check property
+   1. Prerequisites:
+      * Have at least 2 clients and 2 properties added to the app.
+      * Ensure that all clients have budgets equal to or greater than that of the properties.
+      * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
+   2. Test case: `check -property ip/1`
+      
+      Expected: Terminal shows details of the property and information of the clients renting the property. Number of list results is greater than 0.
+   3. Test case: `check -property ip/2`
+      
+       Expected: Terminal shows details of the property, number of list results is 0. 
+   
+
+2. Failed check property
+   1. Test case: `check -property ip/0`
+   
+        Expected: Terminal shows error message.
+   
+   2. Test case: `check -property ip/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
+   
+        Expected: Terminal shows error message.
+
+   3. Test case: `check -property ip/1r2342`
+   
+        Expected: Terminal shows error message.
+
+### Find
+
+### Storage
+
+### Quit
