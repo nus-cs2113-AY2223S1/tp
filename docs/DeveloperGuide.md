@@ -17,10 +17,12 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Common Component](#common-component)
   * [Exceptions Component](#exceptions-component)
   * [UserInterface Component](#userinterface-component)
-  * [Commands Component](#commands-component)
   * [Parser Component](#parser-component)
+  * [Commands Component](#commands-component)
   * [Data Component](#data-component)
+  * [Storage Component](#storage-component)
   * [API Component](#api-component)
+  * [Logger Component](#logger-component)
 * [Implementation](#implementation)
   * [Printing an expense](#printing-an-expense)
   * [Adding an expense: `Add-Expense`](#adding-an-expense-add-expense)
@@ -93,8 +95,8 @@ The software architecture diagram below describes the program's design and the i
 | Common        | Define various parameters used by the program.                           |
 | Exceptions    | Define the exceptions thrown by the program.                             |
 | UserInterface | Interface with the user via standard I/O and handle commands.            |
-| Command       | Define the commands accepted by the program along with its arguments.    |
 | Parser        | Provide functions to parse inputs read from standard input.              |
+| Command       | Define the commands accepted by the program along with its arguments.    |
 | Data          | Defines classes to store data and provides functions to operate on data. |
 | Storage       | Provide functions to save and load data.                                 |
 | API           | Provide functions to interact with external APIs.                        |
@@ -174,16 +176,6 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
 
-### Commands Component
-
-The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
-
-![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentCommands.puml)
-
-The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
-For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
-Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
-
 ### Parser Component
 
 The Parser component consists of the classes `ConsoleParserConfigurations` and `ConsoleParser`.\
@@ -195,12 +187,26 @@ When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 * `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
 * The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
 
+### Commands Component
+
+The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
+
+![Component-Commands](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentCommands.puml)
+
+The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
+For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
+Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
+
 ### Data Component
 
 The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.\
 \
 `Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
+
+### Storage Component
+
+The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.
 
 ### API Component
 
@@ -216,6 +222,10 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
   * The data contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar.
   The data is written into a text file called `exchangeRates.txt`.
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a hashmap of exchange rates.
+
+### Logger Component
+
+The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
 
 ## Implementation
 ### Printing an expense
