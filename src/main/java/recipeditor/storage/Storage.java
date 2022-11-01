@@ -12,7 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import recipeditor.exception.ParseFileException;
-import recipeditor.parser.TextFileParser;
+import recipeditor.parser.RecipeFileParser;
+import recipeditor.parser.TitleFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
@@ -21,10 +22,10 @@ public class Storage {
 
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
-    private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
-    private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
     public static final String ALL_RECIPES_FILE_PATH = "./RecipeData/AllRecipes.txt";
+    private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
+    private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
     private static final String TEMPLATE_FILE = "# TITLE \n"
             + "Example Title \n\n"
             + "# DESCRIPTION\n"
@@ -64,7 +65,7 @@ public class Storage {
     /**
      * Create storage folder for recipes and Template files.
      */
-    public static void createDataFolder() {
+    public static void createAppFolder() {
         try {
             Files.createDirectories(Paths.get(DATA_STORAGE_FOLDER_PATH));
             Files.createDirectories(Paths.get(DATA_TEMPORARY_FOLDER_PATH));
@@ -92,7 +93,7 @@ public class Storage {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
-            RecipeList.recipeTitles.addAll(Arrays.asList(recipeTitles));
+            TitleFileParser.parseTitleFileToRecipeTitles(recipeTitles); //Check Title Validity
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
@@ -104,17 +105,21 @@ public class Storage {
         try {
             for (String recipeTitle : RecipeList.recipeTitles) {
                 logger.log(Level.INFO, recipeTitle);
-                String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitle;
+                String recipeFilePath = titleToFilePath(recipeTitle);
                 String content = Storage.loadFileContent(recipeFilePath);
-                Recipe addedRecipe  = new TextFileParser().parseTextToRecipe(content);
+                Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
                 RecipeList.addRecipe(addedRecipe);
                 logger.log(Level.INFO, recipeTitle + " is added to recipeList");
             }
         } catch (FileNotFoundException e) {
-            Ui.showMessage("File not found :<");
+            Ui.showMessage("RecipesToRecipeList Fail");
         } catch (ParseFileException e) {
             Ui.showMessage("Error in parsing recipe file content.");
         }
+    }
+
+    public static String titleToFilePath(String title) {
+        return RECIPES_FOLDER_PATH + "/" + title + "/";
     }
 
     public static void rewriteRecipeListToFile(String filePath) {
@@ -129,6 +134,7 @@ public class Storage {
         }
     }
 
+    //FIXED: Don't append just overwrite
     public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
         try {
             FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
@@ -197,6 +203,7 @@ public class Storage {
         return getContent.toString();
     }
 
+    //FIXME: Don't need to copy temporary file over but generated from model
     public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
         FileWriter fileWrite;
         try {

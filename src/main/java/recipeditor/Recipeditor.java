@@ -1,6 +1,5 @@
 package recipeditor;
 
-import recipeditor.command.HelpCommand;
 import recipeditor.parser.Parser;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
@@ -28,11 +27,11 @@ public class Recipeditor {
      * @param args arguments
      */
     private static void start(String[] args) {
-        Storage.createDataFolder();
+        Storage.createAppFolder();
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.loadRecipesToRecipeTitlesList();
-        Storage.loadRecipesToRecipeList();
+        Storage.loadRecipesToRecipeList(); //TODO: Check existence and validity
         Ui.showGreeting();
     }
 

@@ -22,6 +22,10 @@ public class RecipeList {
         return recipes.get(index);
     }
 
+    public static ArrayList<Recipe> getRecipes() {
+        return recipes;
+    }
+
     public static void addRecipe(Recipe recipe) {
         recipes.add(recipe);
     }
@@ -101,4 +105,23 @@ public class RecipeList {
     public static int getSize() {
         return recipes.size();
     }
+
+    public static boolean containsRecipe(Recipe incomingRecipe) {
+        for (Recipe r : recipes) {
+            if (r.getTitle().equals(incomingRecipe.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean containsRecipeTitle(String title) {
+        for (String r : recipeTitles) {
+            if (r.equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
