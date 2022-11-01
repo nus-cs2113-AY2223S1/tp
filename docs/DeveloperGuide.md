@@ -31,11 +31,22 @@ You may need to refresh the webpage several times if the diagrams are not loaded
   * [Editing an expense: `Edit-Expense`](#editing-an-expense-edit-expense)
   * [Sorting expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
   * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
+  * [Printing a recurring payment](#printing-a-recurring-payment)
   * [Adding a recurring payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
   * [Viewing a recurring payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
   * [Deleting a recurring payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
   * [Editing a recurring payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
   * [Adding an expense from a recurring payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+  * [Printing an income](#printing-an-income)
+  * [Adding an income: `Add-Income`](#adding-an-income-add-income)
+  * [Viewing an income: `View-Income`](#viewing-an-income-view-income)
+  * [Deleting an income: `Delete-Income`](#deleting-an-income-delete-income)
+  * [Editing an income: `Edit-Income`](#editing-an-income-edit-income)
+  * [Printing a target](#printing-a-target)
+  * [Adding a target: `Add-Target`](#adding-a-target-add-target)
+  * [Viewing a target: `View-Target`](#viewing-a-target-view-target)
+  * [Deleting a target: `Delete-Target`](#deleting-a-target-delete-target)
+  * [Editing a target: `Edit-Target`](#editing-a-target-edit-target)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -308,6 +319,62 @@ The `Pay-RecurringPayment` command adds a new expense based on an existing recur
 This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationPayRecurringPayment.puml)
+
+### Printing an income
+
+![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintIncome.puml)
+
+### Adding an income: `Add-Income`
+
+The `Add-Income` command adds a new income to the program.
+
+![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddIncome.puml)
+
+### Viewing an income: `View-Income`
+
+The `View-Income` command displays existing incomes in the program.
+
+![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewIncome.puml)
+
+### Deleting an income: `Delete-Income`
+
+The `Delete-Income` command removes an existing income from the program.
+
+![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteIncome.puml)
+
+### Editing an income: `Edit-Income`
+
+The `Edit-Income` command changes the attributes of an existing income in the program.
+
+![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditIncome.puml)
+
+### Printing a target
+
+![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintTarget.puml)
+
+### Adding a target: `Add-Target`
+
+The `Add-Target` command adds a new target to the program.
+
+![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddTarget.puml)
+
+### Viewing a target: `View-Target`
+
+The `View-Target` command displays existing targets in the program.
+
+![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewTarget.puml)
+
+### Deleting a target: `Delete-Target`
+
+The `Delete-Target` command removes an existing target from the program.
+
+![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteTarget.puml)
+
+### Editing a target: `Edit-Target`
+
+The `Edit-Target` command changes the attributes of an existing target in the program.
+
+![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditTarget.puml)
 
 ## Product Scope
 ### Target User Profile
