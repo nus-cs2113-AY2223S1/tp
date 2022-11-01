@@ -225,7 +225,7 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 
 The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
 
-![Component-API](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ComponentApi.puml)
+![Component-API](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ComponentApi.puml)
 
 The `CurrencyApiManager` class calls functions in `CurrencyApi`.\
 The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a hashmap of exchange rates.\
@@ -277,13 +277,13 @@ The `Edit-Expense` command changes the attributes of an existing expense in the 
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
-![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSortExpense.puml)
+![Implementation-Sort-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSortExpense.puml)
 
 ### Converting currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
-![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationConvertCurrency.puml)
+![Implementation-Convert-Currency](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationConvertCurrency.puml)
 
 ### Printing a recurring payment
 
@@ -322,59 +322,59 @@ This command helps the user to track when recurring payments are paid.
 
 ### Printing an income
 
-![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintIncome.puml)
+![Implementation-SD-Print-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintIncome.puml)
 
 ### Adding an income: `Add-Income`
 
 The `Add-Income` command adds a new income to the program.
 
-![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddIncome.puml)
+![Implementation-Add-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddIncome.puml)
 
 ### Viewing an income: `View-Income`
 
 The `View-Income` command displays existing incomes in the program.
 
-![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewIncome.puml)
+![Implementation-View-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewIncome.puml)
 
 ### Deleting an income: `Delete-Income`
 
 The `Delete-Income` command removes an existing income from the program.
 
-![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteIncome.puml)
+![Implementation-Delete-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteIncome.puml)
 
 ### Editing an income: `Edit-Income`
 
 The `Edit-Income` command changes the attributes of an existing income in the program.
 
-![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditIncome.puml)
+![Implementation-Edit-Income](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditIncome.puml)
 
 ### Printing a target
 
-![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationSDPrintTarget.puml)
+![Implementation-SD-Print-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintTarget.puml)
 
 ### Adding a target: `Add-Target`
 
 The `Add-Target` command adds a new target to the program.
 
-![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationAddTarget.puml)
+![Implementation-Add-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationAddTarget.puml)
 
 ### Viewing a target: `View-Target`
 
 The `View-Target` command displays existing targets in the program.
 
-![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationViewTarget.puml)
+![Implementation-View-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationViewTarget.puml)
 
 ### Deleting a target: `Delete-Target`
 
 The `Delete-Target` command removes an existing target from the program.
 
-![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationDeleteTarget.puml)
+![Implementation-Delete-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationDeleteTarget.puml)
 
 ### Editing a target: `Edit-Target`
 
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
-![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jeyvia/tp/javierOng-dgUpdates/docs/diagrams/ImplementationEditTarget.puml)
+![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditTarget.puml)
 
 ## Product Scope
 ### Target User Profile
