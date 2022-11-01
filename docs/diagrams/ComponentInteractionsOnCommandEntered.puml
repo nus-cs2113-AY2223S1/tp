@@ -34,15 +34,15 @@ activate Data DATA_COLOR_1
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
-ref over UserInterface, Data, Storage
-        load data from file
-    end ref
-
 UserInterface -[USER_INTERFACE_COLOR_1]> MoneyGoWhere
 deactivate UserInterface
 
 MoneyGoWhere -[MONEYGOWHERE_COLOR_1]> UserInterface : run()
 activate UserInterface USER_INTERFACE_COLOR_1
+
+ref over UserInterface, Data, Storage
+    load data from file
+end ref
 
 loop Command not equals "Bye"
     ref over User, UserInterface, Parser, Logger
