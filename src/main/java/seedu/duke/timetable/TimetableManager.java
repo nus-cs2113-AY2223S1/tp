@@ -1,12 +1,9 @@
 package seedu.duke.timetable;
 
 import seedu.duke.exceptions.InvalidUniversityException;
-import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
-import seedu.duke.parser.UserStorageParser;
 import seedu.duke.ui.Ui;
-import seedu.duke.user.UserUniversityList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +101,7 @@ public class TimetableManager {
         } else {
             Timetable timetable = timetableManager.get(universityName);
             System.out.println("Timetable for " + universityName + ":");
-            Ui.printTimetable(timetable.getTimetable());
+            System.out.println(Ui.printTimetable(timetable.getTimetable()));
         }
     }
 
@@ -117,7 +114,7 @@ public class TimetableManager {
             String universityName = set.getKey();
             Timetable timetable = timetableManager.get(universityName);
             System.out.println("Timetable for " + universityName + ":");
-            Ui.printTimetable(timetable.getTimetable());
+            System.out.println(Ui.printTimetable(timetable.getTimetable()));
         }
     }
 }

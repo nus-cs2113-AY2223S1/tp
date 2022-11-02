@@ -1,8 +1,11 @@
 package seedu.duke.userstorage;
 
+import seedu.duke.command.Database;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,8 +17,14 @@ import java.util.logging.Logger;
  */
 public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
+    private static HashMap<String, String> filePaths = new HashMap<>();
+    private static final String directory = "data/";
     private static final String UNI_STORAGE_FILE_PATH = "data/uni_info.txt";
     private static final String TIMETABLE_STORAGE_FILE_PATH = "data/timetable_info.txt";
+
+    public static HashMap<String, String> getFilePaths() {
+        return filePaths;
+    }
 
     /**.
      * Clears content in the file and writes new text into the file.
@@ -31,6 +40,47 @@ public class UserStorage {
         fw.write(textToAdd);
         fw.close();
         logger.log(Level.INFO, "End of file saving");
+    }
+
+    public static void saveFileNew(String uniName, String textToAdd) throws IOException {
+        logger.log(Level.INFO, "Going to start file saving");
+        String filePath;
+        if (filePaths.get(uniName) == null) {
+            filePath = directory + uniName + ".txt";
+        } else {
+            filePath = filePaths.get(uniName);
+        }
+        FileWriter fw = new FileWriter(filePath);
+        logger.log(Level.INFO, "Going to add text into file");
+        fw.write(textToAdd);
+        fw.close();
+        logger.log(Level.INFO, "End of file saving");
+    }
+
+    public static void deleteFile(String uniName) {
+        String filePath = filePaths.get(uniName);
+        File file = new File(filePath);
+        file.delete();
+        filePaths.remove(uniName);
+    }
+
+    public static String loadFileNew(String uniName) throws IOException {
+        logger.log(Level.INFO, "Going to start loading file");
+        File dir = new File(directory);
+        if (!dir.isDirectory()) {   //directory "data/" does not exist yet
+            dir.mkdir();
+        }
+
+        String uniListFilePath = filePaths.get(uniName);
+        File f = new File(uniListFilePath);
+        Scanner s = new Scanner(f);
+        String fileContent = "";
+        while (s.hasNext()) {
+            fileContent += s.nextLine();
+        }
+        logger.log(Level.INFO, "End of file loading");
+        s.close();
+        return fileContent;
     }
 
     /**.
@@ -55,6 +105,7 @@ public class UserStorage {
             logger.log(Level.INFO, "Creating new text file as it does not exist yet");
             f.createNewFile();
         }
+        f.setWritable(true);
         Scanner s = new Scanner(f);
         String fileContent = "";
         logger.log(Level.INFO, "Going to start retrieving file information from text file");
@@ -81,5 +132,19 @@ public class UserStorage {
             userStorageFilePath = TIMETABLE_STORAGE_FILE_PATH;
         }
         return userStorageFilePath;
+    }
+
+    public static void setFilePaths() {
+        File dir = new File(directory);
+        for (File file : dir.listFiles()) {
+            String filePath = file.getPath();
+            String uniName = filePath.substring(5, filePath.length()-4);
+            if (!Database.hasUniversityInDatabase(uniName) && !filePath.equals("data" + File.separator + "data.csv")) {
+                file.delete();
+                System.out.println("Invalid file name, deleting " + filePath);
+            } else if (!filePath.equals("data" + File.separator + "data.csv")) {
+                filePaths.put(uniName, filePath);
+            }
+        }
     }
 }

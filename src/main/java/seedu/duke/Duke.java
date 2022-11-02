@@ -12,6 +12,7 @@ import seedu.duke.command.DatabaseStorage;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InvalidUniversityException;
+import seedu.duke.parser.UserStorageParser;
 import seedu.duke.timetable.Lesson;
 import seedu.duke.command.Database;
 import seedu.duke.exceptions.InvalidModuleException;
@@ -29,7 +30,7 @@ import seedu.duke.university.University;
 import seedu.duke.user.UserDeletedModules;
 import seedu.duke.user.UserModuleMapping;
 import seedu.duke.user.UserUniversityListManager;
-import seedu.duke.parser.UserStorageParser;
+import seedu.duke.userstorage.UserStorage;
 
 public class Duke {
 
@@ -42,6 +43,7 @@ public class Duke {
         System.err.close();
         System.out.print(Ui.greetUser());
         DatabaseStorage.loadDatabase();
+        UserStorage.setFilePaths();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
         TimetableManager timetableManager = userUniversityListManager.getTtManager();
 
@@ -60,7 +62,7 @@ public class Duke {
                     executeDeleteCommand(userUniversityListManager, timetableManager, (DeleteCommand) newUserCommand);
                     break;
                 case CREATE:
-                    executeCreateCommand(userUniversityListManager, timetableManager, (CreateCommand) newUserCommand);
+                    executeCreateCommand(userUniversityListManager, (CreateCommand) newUserCommand);
                     break;
                 case VIEW:
                     executeViewCommand(userUniversityListManager, timetableManager, (ViewCommand) newUserCommand);
@@ -117,16 +119,16 @@ public class Duke {
                 executeDeleteComment(userUniversityListManager, deleteCommand);
             } else if (deleteCommand.getLesson() != null) {
                 timetableManager.deleteLesson(deleteCommand.getLesson());
-                UserStorageParser.storeTimetable(timetableManager);
+                UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(), userUniversityListManager);
             } else {
                 if (deleteCommand.getModuleCode() == null) {
                     userUniversityListManager.deleteList(deleteCommand.getUniversityName());
+                    UserStorageParser.deleteUserStorageByUni(deleteCommand.getUniversityName());
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());
+                    UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(), userUniversityListManager);
                 }
-                UserStorageParser.storeTimetable(timetableManager);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
             Ui.printExceptionMessage(e);
@@ -150,16 +152,14 @@ public class Duke {
      * Updates user storage.
      *
      * @param userUniversityListManager User university lists' manager
-     * @param timetableManager          User timetables' manager
      * @param createCommand             The create command to be executed
      */
-    private static void executeCreateCommand(UserUniversityListManager userUniversityListManager,
-                                             TimetableManager timetableManager, CreateCommand createCommand) throws
+    private static void executeCreateCommand(UserUniversityListManager userUniversityListManager, 
+                                             CreateCommand createCommand) throws
             UniversityNotFoundException {
         if (Database.hasUniversityInDatabase(createCommand.getUniversityName())) {
             userUniversityListManager.createList(createCommand.getUniversityName());
-            UserStorageParser.storeCreatedLists(userUniversityListManager);
-            UserStorageParser.storeTimetable(timetableManager);
+            UserStorageParser.storeInfoToUserStorageByUni(createCommand.getUniversityName(), userUniversityListManager);
         } else {
             throw new UniversityNotFoundException("Error! " + createCommand.getUniversityName() + " does not exist "
                     + "in database!");
@@ -217,14 +217,12 @@ public class Duke {
                     addModuleToList(userUniversityListManager,addCommand);
                 }
                 timetableManager.addLesson(lesson, false);
-                UserStorageParser.storeTimetable(timetableManager);
             } else if (addCommand.hasComment()) {
                 addComment(userUniversityListManager, addCommand);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
             } else {
-                System.out.println("executing this");
                 addModuleToList(userUniversityListManager, addCommand);
             }
+            UserStorageParser.storeInfoToUserStorageByUni(addCommand.getUniversityName(), userUniversityListManager);
         } catch (ModuleNotFoundException | NoSuchElementException
                  | InvalidUniversityException | UniversityNotFoundException e) {
             Ui.printExceptionMessage(e);
@@ -262,7 +260,6 @@ public class Duke {
                 nusModule.getCredit(), puModule.getCredit(), puModule.getUniversity().getName(),
                 puModule.getUniversity().getCountry());
         userUniversityListManager.addModule(universityName, userModuleToAdd);
-        UserStorageParser.storeCreatedLists(userUniversityListManager);
     }
 
     /**
@@ -308,11 +305,11 @@ public class Duke {
             } else if (favouriteCommand.getFavouriteOption().equals("ADD")) {
                 String universityName = favouriteCommand.getUniversityName();
                 userUniversityListManager.addFavourite(universityName);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
+                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(), userUniversityListManager);
             } else if (favouriteCommand.getFavouriteOption().equals("DELETE")) {
                 String universityName = favouriteCommand.getUniversityName();
                 userUniversityListManager.deleteFavourite(universityName);
-                UserStorageParser.storeCreatedLists(userUniversityListManager);
+                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(), userUniversityListManager);
             }
         } catch (NoSuchElementException e) {
             Ui.printExceptionMessage(e);
