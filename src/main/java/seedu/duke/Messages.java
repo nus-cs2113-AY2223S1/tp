@@ -14,6 +14,15 @@ public class Messages {
     public static final String PROPERTIES = "Properties:";
     public static final String PAIRS = "Pairs:";
     public static final String INDENT = "        ";
+    public static final String THERE_IS = "There is ";
+    public static final String THERE_ARE = "There are ";
+    public static final String PROPERTY_SINGULAR = " property ";
+    public static final String PROPERTIES_PLURAL = " properties ";
+    public static final String CLIENT_SINGULAR = " client ";
+    public static final String CLIENTS_PLURAL = " clients ";
+    public static final String PAIR_SINGULAR = " pair ";
+    public static final String PAIRS_PLURAL = " pairs ";
+    public static final String IN_THIS_LIST = "in this list";
 
     /* Confirmation Messages */
 
@@ -70,7 +79,7 @@ public class Messages {
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
             + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, S119081 "
-            + "p/1000 t/HDB 3";
+            + "p/1000 t/LP BGL";
 
     public static final String MESSAGE_ADD_CLIENT_WRONG_FORMAT = "OOPS!!! To add a client, it requires "
             + "the following format and details:\n"
@@ -131,6 +140,18 @@ public class Messages {
             + "  <LP BGL> for LP Bungalow\n"
             + LINE_BREAK
             + "\nNote: Only unit type labels (Singapore-Based) are accepted by the program";
+
+    public static final String MESSAGE_ADDRESS_FORMAT_UNIT_TYPE_MISMATCH = "OOPS!!! There seem to be a mismatch"
+            + " between address format and unit type provided.\n"
+            + "Certain unit types will require specific address format. Please refer to the description below:\n"
+            + "  1. Unit type with <LP> must not have #[unit level]-[unit number] in address.\n"
+            + "     Format:\n"
+            + "       [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]\n"
+            + "  2. Unit type without <LP> must have #[unit level]-[unit number] in address.\n"
+            + "     Format:\n"
+            + "       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]\n"
+            + "       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]\n"
+            + "Note: HDB Terrace House (special case) is not restricted by any format.";
 
     public static final String MESSAGE_INVALID_CONTACT_NUMBER = "OOPS!!! Please enter a valid Singapore Contact Number "
             + "(No extension)";
@@ -214,7 +235,10 @@ public class Messages {
             + "Example:\n"
             + "  check -property ip/5";
 
-    public static final String MESSAGE_TRY_AGAIN = "Please try again.";
+    public static final String MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT = "List clients with tags - commandFlags "
+            + "taking illegal values";
+    public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
+            + "taking illegal values";
 
 
     /* List related Error Messages */

@@ -144,12 +144,15 @@ public class ParserManager {
         boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
         boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
         boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(0).equals(PAIR_FLAG);
         if (isListProperty) {
             return new ParseListProperty(listCommandTypeAndFlags.get(1));
         } else if (isListClient) {
             return new ParseListClient(listCommandTypeAndFlags.get(1));
         } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
             return new ParseListEverything();
+        } else if (isListPairs) {
+            return new ParseListPair(listCommandTypeAndFlags.get(1));
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
         }

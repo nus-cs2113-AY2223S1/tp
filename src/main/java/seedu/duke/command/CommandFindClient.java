@@ -59,8 +59,10 @@ public class CommandFindClient extends Command {
         String clientBudget = currentClient.getClientBudgetPerMonth().toLowerCase();
         String queryTextLowerCase = queryText.toLowerCase();
 
-        return clientName.contains(queryTextLowerCase) || clientContactNumber.contains(queryTextLowerCase)
+        boolean hasQueryTextInClient = clientName.contains(queryTextLowerCase)
+                || clientContactNumber.contains(queryTextLowerCase)
                 || clientEmail.contains(queryTextLowerCase) || clientBudget.contains(queryTextLowerCase);
+        return hasQueryTextInClient;
     }
 }
 //@@author

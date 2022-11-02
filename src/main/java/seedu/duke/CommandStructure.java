@@ -10,6 +10,9 @@ public class CommandStructure {
     public static final String COMMAND_CHECK = "check";
     public static final String COMMAND_EXIT  = "quit";
     public static final String COMMAND_FIND = "find";
+
+    public static final int START_INDEX = 0;
+    public static final int ONE_ITEM_IN_LIST = 1;
     public static final String NAME_FLAG = "n/";
     public static final String PAIR_FLAG = "-pair";
     public static final String CONTACT_NUMBER_FLAG = "c/";
@@ -18,6 +21,7 @@ public class CommandStructure {
     public static final String PRICE_FLAG = "p/";
     public static final String EMAIL_FLAG = "e/";
     public static final String BUDGET_FLAG = "b/";
+
     public static final String FIND_FLAGS = "f/";
     
     public static final String PROPERTY_FLAG = "-property";
