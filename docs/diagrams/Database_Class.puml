@@ -1,4 +1,6 @@
 @startuml
+hide circle
+skinparam classAttributeIconSize 0
 
 class DatabaseStorage {
     {static} + loadDatabase() : void
