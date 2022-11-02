@@ -28,19 +28,11 @@ public class Authentication {
                 isProgramEnd = true;
                 BasicUi.showExitMessage();
                 break;
-            case NEW_CURRENCY:
-                NewCurrency.addNewCurrency();
-                break;
-            case REMOVE:
-                NewCurrency.removeCurrency();
-                break;
             default:
                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
             }
         } catch (FinanceException e) {
             e.handleException();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return isProgramEnd;
     }
