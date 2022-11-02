@@ -5,7 +5,6 @@ package seedu.duke;
 import seedu.duke.commands.*;
 import seedu.duke.exceptions.*;
 
-
 public class Parser {
 
     /**
