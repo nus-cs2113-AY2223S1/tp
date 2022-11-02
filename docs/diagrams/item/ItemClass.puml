@@ -5,7 +5,7 @@ skinparam classAttributeIconSize 0
 hide footbox
 hide circle
 
-class item {
+class Item {
     - itemId: String
     - itemName: String
     - ownerId: String
@@ -21,7 +21,7 @@ class item {
 
 }
 
-class itemList {
+class ItemList {
     + addItem(item): void
     + updateItemPrice(String, double): Item
     + deleteItem(String, TransactionList) : void
@@ -31,8 +31,8 @@ class itemList {
     + getListSize(): int
 }
 
-class itemStorage {
-    + loadData(): ArrayList<item>
+class ItemStorage {
+    + loadData(): ArrayList<Item>
     + writeData(itemList): void
     + makeItemDir(ItemList): void
     + hasItemFile(): boolean
@@ -53,12 +53,12 @@ class TransactionList {
     {static} -transactionList: ArrayList<Transaction>
 }
 
-itemStorage .> itemList : > loads and writes
-itemList *--> "0..*" item: itemList
-item ..> IdGenerator
-item ..> TransactionList
-itemList ..> TransactionList
-item ..> Category
-"{abstract}\nStorage" <|-- itemStorage
+ItemStorage .> ItemList : > loads and writes
+ItemList *--> "0..*" Item: ItemList
+Item ..> IdGenerator
+Item ..> TransactionList
+ItemList ..> TransactionList
+Item ..> Category
+"{abstract}\nStorage" <|-- ItemStorage
 
 @enduml
