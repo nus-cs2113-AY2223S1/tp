@@ -26,7 +26,9 @@ The system is unable to read your command, please try again.
 Passenger IVAN THENG of SQ832 17D has been added.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-The system is unable to read your command, please try again.
+Stop! The boarding group input format is wrong.
+Boarding group should not be more than 10 and should be in digit form,
+please try again.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 The system is unable to read your command, please try again.
@@ -100,7 +102,8 @@ Gate number of flight SQ234 is updated to 04.
 The system is unable to read your command, please try again.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Unable to add Flight! Flight already exist.
+Unable to modify flight number.
+The new flight number is already taken up by another flight in the flight list.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Thank you, come again! :)

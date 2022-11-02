@@ -264,6 +264,14 @@ public class Ui {
     }
 
     //@@author shengiv
+
+    public String getDuplicateModifyFlightError() {
+        String modificationFailed = "Unable to modify flight number.\n";
+        String reasonForError = "The new flight number is already taken up by another flight in the flight list.";
+        String error = modificationFailed + reasonForError;
+        return error;
+    }
+
     public String getMissingDetailsError() {
         return "Please fill up details for all fields.\n Invalid input. Try again!";
     }
@@ -274,6 +282,14 @@ public class Ui {
 
     public void showUpdatedGateNumber(String flightNum, String newGateNum) {
         System.out.println("Gate number of flight " + flightNum + " is updated to " + newGateNum + ".");
+    }
+
+    public String getDuplicateModifyGateError() {
+        String modificationFailed = "Unable to modify gate number.\n";
+        String reasonForError = "The new gate number is already taken by another flight in the "
+                + "flight list with the same departure time.";
+        String error = modificationFailed + reasonForError;
+        return error;
     }
 
     //@@author Franky4566

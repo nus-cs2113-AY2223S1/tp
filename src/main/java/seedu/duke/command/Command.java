@@ -21,11 +21,11 @@ public abstract class Command extends Parser {
         if (isAdd) {
             passengerDetailArray = lineInput.split("add");
             checkBlankDetailInput();
-            passengerDetail = passengerDetailArray[DETAIL_INDEX].trim();
+            passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
         } else if (isDelete) {
             passengerDetailArray = lineInput.split("delete");
             checkBlankDetailInput();
-            passengerDetail = passengerDetailArray[DETAIL_INDEX].trim();
+            passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
         } else {
             throw new SkyControlException(ui.getOperationError());
         }

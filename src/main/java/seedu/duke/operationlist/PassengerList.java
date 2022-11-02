@@ -11,7 +11,7 @@ public class PassengerList extends OperationList {
     protected static final String REGEX_LETTER = "[a-zA-Z ]*";
     protected static final String REGEX_NUMBER = "[0-9]*";
     protected static final String REGEX_TIME = "([01]\\d|2[0-3])[0-5]\\d";
-    protected static final String NAME_DELIMITER = "n/";
+    protected static final String NAME_DELIMITER = " n/";
     protected static final String DEPARTURE_TIME_DELIMITER = " dt/";
     protected static final String FLIGHT_NUMBER_DELIMITER = " fn/";
     protected static final String GATE_NUMBER_DELIMITER = " gn/";
@@ -27,6 +27,7 @@ public class PassengerList extends OperationList {
     public static final int SECOND_INDEX = 1;
     public static final int MIN_FN_LENGTH = 2;
     public static final int MAX_FN_LENGTH = 4;
+    public static final int INVALID_NUMBER = 0;
     public static final int SEAT_NUM_SECOND_INDEX = 1;
     public static final int SEAT_NUM_FIRST_INDEX = 0;
     public static final int SEAT_NUM_THIRD_INDEX = 2;
@@ -277,7 +278,7 @@ public class PassengerList extends OperationList {
         try {
             boardingGroup = Integer.parseInt(boardingGroupDetail);
         } catch (Exception e) {
-            throw new SkyControlException(ui.getErrorMessage());
+            throw new SkyControlException(ui.getBoardingGroupError());
         }
         assert boardingGroup >= 0 : "Invalid boarding group";
     }
@@ -290,7 +291,9 @@ public class PassengerList extends OperationList {
             int indexOfSeatNumber = passengerDetail.indexOf(SEAT_NUMBER_DELIMITER);
             int indexOfFlightNumber = passengerDetail.indexOf(FLIGHT_NUMBER_DELIMITER);
             int startIndex = indexOfSeatNumber + SEAT_NUMBER_DELIMITER.length();
-            if (indexOfSeatNumber < 0 || indexOfSeatNumber < indexOfFlightNumber) {
+            boolean isNotCorrectFormat = indexOfSeatNumber < indexOfFlightNumber;
+            boolean isSeatNumberNotFound = indexOfSeatNumber < 0;
+            if (isSeatNumberNotFound || isNotCorrectFormat) {
                 throw new SkyControlException(ui.getErrorMessage());
             }
             seatNumber = passengerDetail.substring(startIndex).toUpperCase();
@@ -312,7 +315,10 @@ public class PassengerList extends OperationList {
         int indexOfStartDelimiter = inputString.indexOf(startDelimiter);
         int startIndex = indexOfStartDelimiter + startDelimiter.length();
         int endIndex = inputString.lastIndexOf(endDelimiter);
-        if (endIndex < startIndex || endIndex < 0 || indexOfStartDelimiter < 0) {
+        boolean isNotCorrectFormat = endIndex < startIndex;
+        boolean isEndDelimiterNotFound = endIndex < 0;
+        boolean isStartDelimiterNotFound = indexOfStartDelimiter < 0;
+        if (isNotCorrectFormat || isEndDelimiterNotFound || isStartDelimiterNotFound) {
             throw new SkyControlException(ui.getErrorMessage());
         }
         String outputString = inputString.substring(startIndex, endIndex).trim();
@@ -383,9 +389,11 @@ public class PassengerList extends OperationList {
 
     private int checkNumOfDigits() {
         int numOfDigits = 0;
-        for (int i = 0; i < flightNumber.length(); i++) {
+        for (int i = 2; i < flightNumber.length(); i++) {
             if (Character.isDigit(flightNumber.charAt(i))) {
                 numOfDigits++;
+            } else {
+                return INVALID_NUMBER;
             }
         }
         return numOfDigits;
