@@ -58,10 +58,10 @@ public class Messages {
 
     public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE = "OOPS!!! Please specify sub-command type.\n"
             + "For client: <command> -client\n"
-            + "For property: <command> -property";
+            + "For property: <command> -property\n";
 
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter index(es) that appears within the "
-            + "property list or client list";
+            + "property list or client list\n";
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index\n";
 
@@ -233,15 +233,16 @@ public class Messages {
             + "following format:\n"
             + "  check -property ip/INDEX\n"
             + "Example:\n"
-            + "  check -property ip/5";
-
-    public static final String MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT = "List clients with tags - commandFlags "
-            + "taking illegal values";
-    public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
-            + "taking illegal values";
+            + "  check -property ip/5\n";
 
 
     /* List related Error Messages */
+    
+    public static final String MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT = "List clients with tags - commandFlags "
+            + "taking illegal values";
+            
+    public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
+            + "taking illegal values";
 
     public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
             + " to list clients, -property to list properties, -pair to list pairs and -everything to list"

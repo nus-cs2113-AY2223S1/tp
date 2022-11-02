@@ -3,7 +3,6 @@ package seedu.duke.parsermanager.pairunpair;
 //@@author ngdeqi
 import seedu.duke.command.Command;
 import seedu.duke.command.pairunpair.CommandPair;
-import seedu.duke.exception.pairunpair.PairUnpairNotIntegerException;
 import seedu.duke.exception.pairunpair.ParsePairUnpairException;
 import seedu.duke.exception.pairunpair.pair.PairIncorrectFlagOrderException;
 import seedu.duke.exception.pairunpair.pair.PairMissingDescriptionException;
@@ -17,7 +16,7 @@ import static seedu.duke.CommandStructure.PAIR_FLAGS;
 /**
  * Parser for pair commands.
  */
-public class PairParser extends Parser {
+public class PairParser extends PairUnpairParser {
     private final String commandDescription;
 
     public PairParser(String pairCommandDescription) {
@@ -29,10 +28,10 @@ public class PairParser extends Parser {
     public Command parseCommand() throws ParsePairUnpairException {
 
         checkForEmptyDescription(commandDescription);
-        ArrayList<String> pairDetailsString = processCommandDetails(commandDescription);
-        ArrayList<Integer> pairDetailsInt = convertPairCommandDetailsToInteger(pairDetailsString);
+        ArrayList<String> stringPairDetails = processCommandDetails(commandDescription);
+        ArrayList<Integer> integersPairDetails = convertPairUnpairCommandDetailsToInteger(stringPairDetails);
 
-        return new CommandPair(pairDetailsInt);
+        return new CommandPair(integersPairDetails);
     }
 
 
@@ -74,10 +73,6 @@ public class PairParser extends Parser {
         }
     }
 
-    private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
-    }
-
     private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition)
             throws PairIncorrectFlagOrderException {
         boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
@@ -86,26 +81,6 @@ public class PairParser extends Parser {
         }
     }
 
-    private ArrayList<Integer> convertPairCommandDetailsToInteger(ArrayList<String> pairDetailsString)
-        throws PairUnpairNotIntegerException {
 
-        ArrayList<Integer> integerDetails = new ArrayList<>();
-        ArrayList<String> nonIntegerDetails = new ArrayList<>();
-        for (String detail : pairDetailsString) {
-            int integer;
-            try {
-                integer = Integer.parseInt(detail);
-                // Convert to 0-index
-                integerDetails.add(integer - UNIT_VALUE);
-            } catch (NumberFormatException e) {
-                nonIntegerDetails.add(detail);
-            }
-        }
-
-        if (!nonIntegerDetails.isEmpty()) {
-            throw new PairUnpairNotIntegerException(nonIntegerDetails);
-        }
-        return integerDetails;
-    }
 
 }

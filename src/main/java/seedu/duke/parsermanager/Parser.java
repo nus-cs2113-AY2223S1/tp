@@ -11,6 +11,7 @@ import static seedu.duke.Messages.EXCEPTION;
 
 public abstract class Parser {
     protected static final int UNIT_VALUE = 1;
+    protected static final int FLAG_ABSENT_RETURN_VALUE = -1;
 
     public abstract Command parseCommand() throws DukeException;
     /**
