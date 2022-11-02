@@ -136,8 +136,14 @@ public class UI {
     }
 
     public static void NOCIneligibleMessage() {
-        System.out.println("You are not eligible for NOC :(");
-        System.out.println("Criteria: obtained >70 MCs, completed four semesters of study");
+        System.out.println("Sorry, You are ineligible for NOC.");
+        System.out.println("----------------------------------------");
+        System.out.println("These may be possible reasons for ineligibility:");
+        System.out.println(" - You have yet to complete 4 semesters of study");
+        System.out.println(" - You are currently in your final academic semester");
+        System.out.println(" - You have yet to obtain more than 70MC");
+        System.out.println("----------------------------------------");
+
     }
 
     public static void SEPEligibleMessage() {
@@ -145,8 +151,13 @@ public class UI {
     }
 
     public static void SEPIneligibleMessage() {
-        System.out.println("You are not eligible for SEP :(");
-        System.out.println("CAP >3.0, completed two semesters of study");
+        System.out.println("Sorry, You are ineligible for SEP.");
+        System.out.println("----------------------------------------");
+        System.out.println("These may be possible reasons for ineligibility:");
+        System.out.println(" - You have yet to complete 2 semesters of study");
+        System.out.println(" - You are currently in your final year");
+        System.out.println(" - Your CAP is below 3.0");
+        System.out.println("----------------------------------------");
     }
 
     public static void helpMessage(String message) {
