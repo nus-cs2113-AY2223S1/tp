@@ -397,11 +397,27 @@ public class CommandParser {
      * @return An array of user input parameters split by spaces with underscores removed.
      */
     private static String[] parseUserCommand(String userInput) {
+        if (userInput.contains("note/{") && userInput.charAt(userInput.length() - 1) == '}') {
+            return parseUserCommandWithComments(userInput);
+        }
         String[] userInputTokenized = userInput.split(" +");
         for (int i = 0; i < userInputTokenized.length; i++) {
             userInputTokenized[i] = removeParameterUnderscores(userInputTokenized[i]);
         }
         return userInputTokenized;
+    }
+
+    private static String[] parseUserCommandWithComments(String userInput) {
+        int index =  getParametersBeforeComment(userInput);
+        String before = userInput.substring(0, index);
+        String after = userInput.substring(index);
+        String[] userInputTokenized = before.split(" +");
+        for (int i = 0; i < userInputTokenized.length; i++) {
+            userInputTokenized[i] = removeParameterUnderscores(userInputTokenized[i]);
+        }
+        String [] allTokens = Arrays.copyOf(userInputTokenized, userInputTokenized.length + 1);
+        allTokens[userInputTokenized.length] = after;
+        return allTokens;
     }
 
     /**
@@ -417,4 +433,16 @@ public class CommandParser {
         return parameter.replace("_", " ");
     }
 
+    private static int getParametersBeforeComment(String parameter) {
+        System.out.println(parameter);
+        int start = 0;
+        String temp = "";
+        for (int i = 0; i < parameter.length() - 6; ++i) {
+            temp = parameter.substring(i, i +   6);
+            if (temp.equals("note/{")) {
+                start = i;
+            }
+        }
+        return start;
+    }
 }

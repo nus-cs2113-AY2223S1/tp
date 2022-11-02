@@ -60,13 +60,25 @@ public class UserUniversityListManager {
 
     }
 
+    private boolean checkEmpty(String comment) {
+        if (comment.length() == 0) {
+            return true;
+        }
+        for (int i = 0; i < comment.length(); ++i) {
+            if (comment.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void updateComment(String universityName, String moduleCode, String comment)
             throws InvalidUserCommandException {
         if (!containsKey(universityName)) {
             System.out.println("Error: No list containing such university");
             System.out.println("Please create university and add relevant module before adding a comment");
         } else {
-            if (comment.equals("")) {
+            if (checkEmpty(comment)) {
                 System.out.println("Error: No empty updates");
                 return;
             } else if (isNotValidComment(comment)) {
