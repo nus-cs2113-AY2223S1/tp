@@ -13,8 +13,11 @@ public class AddCommand extends Command {
         this.lesson = lesson;
         this.universityName = parameters[1].substring(2);
         this.moduleCode = parameters[2].substring(2);
-        this.hasComment = false;
-        if (parameters.length == 4) {
+
+        if (parameters.length == 3) {
+            this.hasComment = false;
+            this.comment = "";
+        } else {
             this.hasComment = true;
             this.comment = comment;
         }
