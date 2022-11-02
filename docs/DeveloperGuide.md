@@ -25,6 +25,23 @@ Our project uses external libraries and services from:
 ## Design 
 
 ### Architecture Level
+The Architecture Diagram below explains the high level design of the app.
+
+Given below is a quick overview of the main components and how they interact with one another.
+#### Main Components of the architecture
+Our program flow is managed by the Parking class.
+
+![Architecture Class Diagram](images/ArchClassDiagram.png)
+
+User input is passed to the Command class, which then calls the Parser to parse the user input string as a command. 
+Each command subclass handles its own execution.
+
+![Architecture Sequence Diagram](images/ArchSequenceDiagram.png)
+Below are the main subcomponents that Parking and the command subclass delegate work to:
+* `Ui`: Deals with user interaction, such as reading input and printing output.
+* `CommandResult`: Returns the results of the command instructed.
+* `Parser`: Takes in the user input string to determine what is the command the user has instructed the program to do.
+
 
 ### Model Component
 ![Model Class Diagram](images/ModelClassDiagram.png)
