@@ -53,7 +53,7 @@ public class Calculator {
         return this.bmi;
     }
 
-    public void setBmi(int weight,int height) {
+    public void setBmi(int weight, int height) {
         this.bmi = Double.valueOf(Double.valueOf(weight)
                 / (Double.valueOf(height) / 100 * Double.valueOf(height) / 100));
     }
@@ -193,7 +193,7 @@ public class Calculator {
         if (biometrics.getWeight() == 0) {
             throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
         }
-        return (int) (0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
+        return (int) Math.round(0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
     }
 
     public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date) {
@@ -209,7 +209,7 @@ public class Calculator {
     }
 
     public int calculateNetCalories(ArrayList<Exercise> completedExerciseArrayList,
-                                                    ArrayList<Food> foodArrayList, String date) {
+                                    ArrayList<Food> foodArrayList, String date) {
         return calculateTotalCaloriesConsumed(foodArrayList, date)
                 - calculateTotalCaloriesBurnt(completedExerciseArrayList, date);
     }

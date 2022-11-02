@@ -12,13 +12,10 @@ import seedu.duke.command.RemoveCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exception.InvalidDateException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 ;
@@ -37,7 +34,7 @@ public class Parser {
         case "greet":
             return new GreetCommand();
         case "exit":
-            return new ExitCommand();
+            return new ExitCommand(arguments);
         case "set":
             return new SetCommand(arguments, true);
         case "add":
@@ -57,13 +54,18 @@ public class Parser {
         }
     }
 
-    private static String getUserCommand(String input) {
+    public static String getUserCommand(String input) {
         String userCommand = input.split(" ")[0];
         return userCommand;
     }
 
-    private static String getArgumentSubString(String input, String userCommand) {
+    public static String getArgumentSubString(String input, String userCommand) {
         return input.substring(userCommand.length()).trim();
+    }
+
+    public static int getArgumentsCount(String arguments) {
+        int argumentsCount = (int) arguments.chars().filter(character -> character == '/').count();
+        return argumentsCount;
     }
 
     public static String[] getArgumentList(String arguments) {
@@ -90,7 +92,8 @@ public class Parser {
             }
             return date;
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
+            throw new IllegalValueException("Date is in the wrong format or invalid."
+                    + " Please follow the dd-MM-yyyy format");
         }
     }
 }

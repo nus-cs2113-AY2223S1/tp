@@ -3,10 +3,10 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
@@ -80,7 +80,7 @@ class AddCommandTest {
         try {
             c.execute();
         } catch (IllegalValueException e) {
-            assertEquals(e.getMessage(), "Date is in the wrong format. Please follow the dd-MM-yyyy format");
+            assertEquals(e.getMessage(), "Date is in the wrong format or invalid. Please follow the dd-MM-yyyy format");
         }
     }
 

@@ -214,7 +214,7 @@ public class Ui {
     }
 
     private static String getCaloriesForPrint(Exercise exercise, int numberOfSpace) {
-        if (exercise.getCaloriesBurnt() == 0) {
+        if (exercise.getCaloriesBurnt() == 0 && !exercise.getDone()) {
             return addRightPadding("-", numberOfSpace);
         }
         return addRightPadding(Integer.toString(exercise.getCaloriesBurnt()),
@@ -253,8 +253,8 @@ public class Ui {
                     columnSpacingArray[2]) + " | ";
             String netCalories = addRightPadding(Integer.toString(caloriesList.get(i).getNetCalories()),
                     columnSpacingArray[3]) + " | ";
-            String message = addRightPadding(caloriesList.get(i).getMessage(),columnSpacingArray[4]) + " | ";
-            printInSameLine(date,caloriesConsumed,caloriesBurnt,netCalories,message);
+            String message = addRightPadding(caloriesList.get(i).getMessage(), columnSpacingArray[4]) + " | ";
+            printInSameLine(date, caloriesConsumed, caloriesBurnt, netCalories, message);
         }
     }
 

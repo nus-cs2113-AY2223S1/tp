@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
@@ -27,6 +28,8 @@ public class FindCommand extends Command {
     public static final String STRENGTH_EXERCISE_FOUND = "Here are the matching strength exercises in your list:";
     public static final String CARDIO_EXERCISE_FOUND = "Here are the matching cardio exercises in your list:";
     public static final String CARDIO_EXERCISE_NOT_FOUND = "No matching cardio exercise found";
+    public static final String INVALID_FIND_STRENGTH_COMMAND = "Invalid find strength command";
+    public static final int REQUIRED_COUNT = 1;
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
@@ -39,23 +42,24 @@ public class FindCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
+        int slashesCount = Parser.getArgumentsCount(arguments);
         String[] argumentList = Parser.getArgumentList(arguments);
         String findType = Parser.getClassType(argumentList);
         switch (findType) {
         case "strength":
-            findStrength(argumentList);
+            findStrength(argumentList, slashesCount);
             break;
         case "cardio":
-            findCardio(argumentList);
+            findCardio(argumentList, slashesCount);
             break;
         case "food":
-            findFood(argumentList);
+            findFood(argumentList, slashesCount);
             break;
         case "date_e":
-            findDateExercise(argumentList);
+            findDateExercise(argumentList, slashesCount);
             break;
         case "date_f":
-            findDateFood(argumentList);
+            findDateFood(argumentList, slashesCount);
             break;
         case "calories":
             findCalories(argumentList);
@@ -109,14 +113,14 @@ public class FindCommand extends Command {
         ui.outputCalories(clist);
     }
 
-    private void findDateExercise(String[] argumentList) throws IllegalValueException {
+    private void findDateExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindDateCommand(argumentList);
         ArrayList<Exercise> filteredDateList = getFilteredDateList(argumentList);
         ui.output("", "Here are the exercises in your list matching this date:");
         ui.outputExerciseList(filteredDateList);
     }
 
-    private void findDateFood(String[] argumentList) throws IllegalValueException {
+    private void findDateFood(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindDateCommand(argumentList);
         ArrayList<Food> filteredFoodDateList = getFilteredFoodDateList(argumentList);
         ui.output("", "Here are the food records in your list matching this date:");
@@ -135,7 +139,7 @@ public class FindCommand extends Command {
     }
 
 
-    private void findCardio(String[] argumentList) throws IllegalValueException {
+    private void findCardio(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindCardioCommand(argumentList);
         ArrayList<Exercise> filteredExerciseList = getFilteredCardioExerciseList(argumentList);
         outputFilteredExerciseList(filteredExerciseList, CARDIO_EXERCISE_NOT_FOUND, CARDIO_EXERCISE_FOUND);
@@ -147,9 +151,11 @@ public class FindCommand extends Command {
         }
     }
 
-    private void findStrength(String[] argumentList) throws IllegalValueException {
-        handleInvalidFindStrengthCommand(argumentList);
-        ArrayList<Exercise> filteredExerciseList = getFilteredExerciseList(argumentList);
+    private void findStrength(String[] argumentList, int slashesCount) throws IllegalValueException {
+        Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_STRENGTH_COMMAND,
+                arguments.charAt(arguments.length() - 1));
+        String description = Validator.getDescriptionWithValidation(argumentList[1]);
+        ArrayList<Exercise> filteredExerciseList = getFilteredExerciseList(description);
         outputFilteredExerciseList(filteredExerciseList,
                 STRENGTH_EXERCISE_NOT_FOUND, STRENGTH_EXERCISE_FOUND);
     }
@@ -164,20 +170,13 @@ public class FindCommand extends Command {
         }
     }
 
-    private void findFood(String[] argumentList) throws IllegalValueException {
+    private void findFood(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindFoodCommand(argumentList);
         ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
         ui.output("Here are the matching food in your food list:");
         ui.outputFoodList(filteredFoodList);
     }
 
-    private static void handleInvalidFindStrengthCommand(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 2) {
-            throw new IllegalValueException("Invalid find strength command");
-        } else if (argumentList[1].length() > 50) {
-            throw new IllegalValueException("Length of exercise name must be within 50 characters");
-        }
-    }
 
     private static void handleInvalidFindFoodCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
@@ -235,14 +234,14 @@ public class FindCommand extends Command {
         return totalCaloriesBurnt;
     }
 
-    private ArrayList<Exercise> getFilteredExerciseList(String[] argumentList) {
+    private ArrayList<Exercise> getFilteredExerciseList(String description) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance)
-                .filter(e -> e.getExerciseName().contains(argumentList[1]))
+                .filter(e -> e.getExerciseName().contains(description))
                 .collect(Collectors.toList());
         filteredExerciseList.addAll(exerciseList.getCurrentExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance)
-                .filter(e -> e.getExerciseName().contains(argumentList[1]))
+                .filter(e -> e.getExerciseName().contains(description))
                 .collect(Collectors.toList()));
         return filteredExerciseList;
     }

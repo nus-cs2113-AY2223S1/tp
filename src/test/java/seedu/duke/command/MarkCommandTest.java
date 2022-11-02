@@ -3,10 +3,9 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
-import seedu.duke.records.Record;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
@@ -70,25 +69,12 @@ class MarkCommandTest {
             fail();
         }
 
-        String[] testInputList = {"mark x", "mark done", "mark undone"};
+        String[] testInputList = {"mark undone"};
         for (String input : testInputList) {
-            assertInvalidMarkCommand(input, "Invalid mark command", exerciseList);
+            assertInvalidMarkCommand(input, "Invalid mark undone command", exerciseList);
         }
     }
 
-    @Test
-    void execute_MarkWithTwoParametersWithNonIntegerIndex_exceptionThrown() {
-        ExerciseList exerciseList = new ExerciseList();
-        try {
-            addExercise(exerciseList);
-        } catch (IllegalValueException e) {
-            fail();
-        }
-        String[] testInputList = {"mark done /0x", "mark undone /0a"};
-        for (String input : testInputList) {
-            assertInvalidMarkCommand(input, "Index must be an integer", exerciseList);
-        }
-    }
 
     @Test
     void execute_MarkUndoneWithTwoParametersWithOutOfBoundIndex_exceptionThrown() {
@@ -105,7 +91,7 @@ class MarkCommandTest {
         testInputList.add("mark undone /-1");
         testInputList.add("mark undone /" + completedExerciseListSize + 1);
         for (String input : testInputList) {
-            assertInvalidMarkCommand(input, "Exercise not found", exerciseList);
+            assertInvalidMarkCommand(input, "Index out of bound", exerciseList);
         }
     }
 
@@ -193,7 +179,7 @@ class MarkCommandTest {
         commandList.add("add strength /bench /30 /10 /40");
         commandList.add("add strength /press /40 /8 /28");
         commandList.add("add strength /deadlift /20 /6 /30");
-        biometrics.setBiometrics(20, "male", 166, 76, 20,2);
+        biometrics.setBiometrics(20, "male", 166, 76, 20, 2);
 
         for (String input : commandList) {
             Command c = Parser.parse(input);
