@@ -140,7 +140,7 @@ public class Duke {
                 dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY + input);
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
-                dukeLogger.warning(e.getMessage());
+                dukeLogger.logDukeException(e);
             }
         }
         dukeLogger.info(LOG_EXIT_DUKE);
