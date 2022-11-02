@@ -34,6 +34,7 @@ public class Add extends Command {
      * @param indexes an array containing the positions from which the details need to be extracted
      */
     private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException {
+        input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
@@ -43,7 +44,7 @@ public class Add extends Command {
         String grade = extractingContent(input, indexes[6], indexes[7]);
         checkGrade(grade);
 
-        this.mod = new Module(course.toUpperCase(), semester.toUpperCase(), grade.toUpperCase(), mc);
+        this.mod = new Module(course, semester, grade, mc);
     }
 
     /**
@@ -120,6 +121,7 @@ public class Add extends Command {
             throw new InvalidMcException();
         }
     }
+
     public void checkGrade(String grade) throws InvalidGradeException {
         if (!checkGradeFormat(grade)) {
             throw new InvalidGradeException();
