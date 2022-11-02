@@ -181,11 +181,12 @@ public class UI {
         System.out.println("INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
         System.out.println("input 'help' if you are unsure about the requirements");
     }
-
+    public static void invalidYearMessage() {
+        System.out.println("The year or semester or format of semester entered is invalid");
+    }
     /**
      * Message to be displayed when an exception is encountered due to an invalid command word
      */
-
     public static void invalidCommandWordMessage() {
         System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
         System.out.println("input 'help' if you are unsure about the requirements");
