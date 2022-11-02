@@ -17,8 +17,7 @@ public class AddCommand extends Command {
         if (parameters.length == 3) {
             this.hasComment = false;
             this.comment = "";
-        }
-        else {
+        } else {
             this.hasComment = true;
             this.comment = comment;
         }
