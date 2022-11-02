@@ -36,6 +36,7 @@ public class DelayFlightCommand extends Command {
     }
 
     public void execute(OperationList entityList, String lineInput) throws SkyControlException {
+        String [] inputWords;
         inputWords = lineInput.split("\\s+");
         String flightNum = getFlightNumFromModifyCmd(inputWords);
         String newDepartureTime = getModifiedDetail(inputWords);

@@ -34,6 +34,7 @@ public class SkyControl {
     private static boolean isFlight = false;
     private static boolean isModify = false;
     private static boolean isAdd = false;
+    private static boolean isDelete = false;
     private static boolean isDelay = false;
 
 
@@ -75,9 +76,14 @@ public class SkyControl {
 
     private void executePassengerCommand(String lineInput, Command command) {
         try {
+            String passengerDetail;
             if (isAdd) {
                 String passengerAddInput = syncFlightDetail(lineInput, command);
-                command.execute(passengers, passengerAddInput);
+                passengerDetail = Parser.getPassengerDetail(passengerAddInput);
+                command.execute(passengers, passengerDetail);
+            } else if (isDelete) {
+                passengerDetail = Parser.getPassengerDetail(lineInput);
+                command.execute(passengers, passengerDetail);
             } else {
                 command.execute(passengers, lineInput);
             }
@@ -87,13 +93,13 @@ public class SkyControl {
         }
     }
 
-
     //@@author shengiv
     private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
-        command.checkFlightDetailSync(flights, passengers, lineInput);
-        String departureTime = command.getPassengerDepartureTime(flights, lineInput);
+        String passengerDetail = Parser.getPassengerDetail(lineInput);
+        command.checkFlightDetailSync(flights, passengers, passengerDetail);
+        String departureTime = command.getPassengerDepartureTime(flights, passengerDetail);
         String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
-        String gateNumber = command.getPassengerGateNumber(flights, lineInput);
+        String gateNumber = command.getPassengerGateNumber(flights, passengerDetail);
         String boardingTime = passengerInfo.getFormattedBoardingTime(reformatDepartureTime);
         String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime,
                 gateNumber, boardingTime);
@@ -114,6 +120,7 @@ public class SkyControl {
         isDelay = Parser.isDelayCommand(lineInput);
         if (isPassenger) {
             isAdd = Parser.getAdd(lineInput);
+            isDelete = Parser.getDelete(lineInput);
         }
     }
 
