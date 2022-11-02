@@ -4,6 +4,7 @@ import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandDeleteProperty;
 import seedu.duke.exception.EmptyDetailException;
+import seedu.duke.exception.ExtraFlagsException;
 import seedu.duke.exception.IncorrectFlagOrderException;
 import seedu.duke.exception.InvalidIndexException;
 import seedu.duke.exception.MissingFlagException;
@@ -21,6 +22,10 @@ public class ParseDeleteProperty extends Parser {
     private final String commandDescription;
     private final PropertyList propertyList;
 
+
+    private static final int CORRECT_FLAG_POSITION = 0;
+
+
     public ParseDeleteProperty(String deleteCommandDescription, PropertyList propertyList) {
         this.commandDescription = deleteCommandDescription;
         this.propertyList = propertyList;
@@ -28,7 +33,7 @@ public class ParseDeleteProperty extends Parser {
 
     @Override
     public Command parseCommand() throws InvalidIndexException, MissingFlagException, IncorrectFlagOrderException,
-            NotIntegerException, EmptyDetailException {
+            NotIntegerException, EmptyDetailException, ExtraFlagsException {
         try {
             checkForEmptyDetails(commandDescription);
             ArrayList<String> deletePropertyDetailsString = processCommandDetails(commandDescription);
@@ -48,17 +53,26 @@ public class ParseDeleteProperty extends Parser {
             throw new NotIntegerException(MESSAGE_NOT_INTEGER);
         } catch (EmptyDetailException e) {
             throw new EmptyDetailException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
+        } catch (ExtraFlagsException e) {
+            throw new ExtraFlagsException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
         }
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException {
+            throws MissingFlagException, IncorrectFlagOrderException, ExtraFlagsException {
 
         String[] flags = DELETE_PROPERTY_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
+        checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);
         checkFlagsOrder(flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
+    }
+
+    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraFlagsException {
+        if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
+            throw new ExtraFlagsException(EXCEPTION);
+        }
     }
 
     private void checkForInvalidPropertyIndexDelete(int propertyIndex) throws InvalidIndexException {
