@@ -45,7 +45,7 @@ public class EmployeeParser {
 
     public Command prepareAddEmployee(String input) {
         try {
-            int startOfN = input.indexOf(" n/");
+            int startOfN = input.indexOf(parser.NAME_FLAG);
 
             if (startOfN == -1 || !input.substring(0,startOfN).isEmpty()) {
                 throw new DukeException();

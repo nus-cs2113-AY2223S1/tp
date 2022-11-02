@@ -54,9 +54,9 @@ public class AppointmentParser {
 
     public Command prepareAddAppointment(String input) {
         try {
-            int s = input.indexOf(" s/");
-            int p = input.indexOf(" p/");
-            int d = input.indexOf(" d/");
+            int s = input.indexOf(parser.SERVICE_FLAG);
+            int p = input.indexOf(parser.PET_FLAG);
+            int d = input.indexOf(parser.DATE_FLAG);
 
             if (s > p || p > d || s == -1 || p == -1 || d == -1) {
                 throw new DukeException();

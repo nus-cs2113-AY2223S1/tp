@@ -47,9 +47,9 @@ public class PetParser {
 
     public Command prepareAddPet(String input) {
         try {
-            int startOfN = input.indexOf(" n/");
-            int startOfS = input.indexOf(" s/");
-            int startOfH = input.indexOf(" h/");
+            int startOfN = input.indexOf(parser.NAME_FLAG);
+            int startOfS = input.indexOf(parser.SPECIES_FLAG);
+            int startOfH = input.indexOf(parser.HEALTH_FLAG);
             if (startOfN == -1 || startOfS == -1 || startOfH == -1) {
                 System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
                 throw new DukeException();
@@ -65,12 +65,12 @@ public class PetParser {
             String species = input.substring(startOfS + lengthOfSignature, startOfH).trim();
             String status = input.substring(startOfH);
 
-            if (name.equals("")) {
+            if (name.isEmpty()) {
                 System.out.println("Please provide the name for pet");
                 throw new DukeException();
             }
 
-            if (species.equals("")) {
+            if (species.isEmpty()) {
                 System.out.println("Please provide the species for pet");
                 throw new DukeException();
             }

@@ -12,6 +12,20 @@ public class Parser {
     private static AppointmentParser appointmentParser;
     private static TaskParser taskParser;
 
+    public final String INDEX_FLAG = " i/";
+    public final String EMPLOYEE_FLAG = " e/";
+    public final String HEALTH_FLAG = " h/";
+    public final String DATE_FLAG = " d/";
+
+    public final String NAME_FLAG = " n/";
+
+    public final String SERVICE_FLAG = " s/";
+    public final String PET_FLAG = " p/";
+
+    public final String SPECIES_FLAG = " s/";
+
+    public final String DESCRIPTION_FLAG = " d/";
+
     public Parser() {
         serviceParser = new ServiceParser(this, lengthOfSignature);
         employeeParser = new EmployeeParser(this, lengthOfSignature);
@@ -53,7 +67,7 @@ public class Parser {
 
     public int indexOfInput(String input) throws DukeException {
         try {
-            return numberInInput(input, " i/");
+            return numberInInput(input, INDEX_FLAG);
         } catch (DukeException e) {
             System.out.println("Please enter a valid index");
             throw new DukeException();
@@ -88,17 +102,9 @@ public class Parser {
         throw new DukeException();
     }
 
-    public int isStatus(String input) throws DukeException {
-        try {
-            return numberInInput(input, " s/");
-        } catch (DukeException e) {
-            throw new DukeException();
-        }
-    }
-
     public int employeeId(String input) throws DukeException {
         try {
-            return numberInInput(input, " e/");
+            return numberInInput(input, EMPLOYEE_FLAG);
         } catch (DukeException e) {
             throw new DukeException();
         }
@@ -106,7 +112,7 @@ public class Parser {
 
     public int isHealthy(String input) throws DukeException {
         try {
-            return numberInInput(input, " h/");
+            return numberInInput(input, HEALTH_FLAG);
         } catch (DukeException e) {
             System.out.println("Please enter 0 or 1 for health status");
             throw new DukeException();

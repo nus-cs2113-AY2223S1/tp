@@ -43,7 +43,7 @@ public class ServiceParser {
 
     public Command prepareAddService(String input) {
         try {
-            int startOfD = input.indexOf(" d/");
+            int startOfD = input.indexOf(parser.DESCRIPTION_FLAG);
             if (startOfD == -1 || !input.substring(0, startOfD).isEmpty()) {
                 throw new DukeException();
             }
