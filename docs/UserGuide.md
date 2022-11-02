@@ -20,7 +20,7 @@
 ## Introduction
 
 SkyControl is a program which optimizes the use of the Command Line Interface (CLI) to manage flights and passengers in
-an airport terminal.
+an airport terminal for the present operation day.
 
 SkyControl allows an Airport Operations Planning & Airside Manager to add, delete, update flight and passenger
 information, add delays to flights
