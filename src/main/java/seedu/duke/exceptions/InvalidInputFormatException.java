@@ -3,22 +3,41 @@ package seedu.duke.exceptions;
 public class InvalidInputFormatException extends Exception {
 
     public static boolean checkMod(String input) {
-        return input.contains("m/");
+        boolean isCorrect = input.contains("m/");
+        if (isCorrect) {
+            isCorrect = repetitionField(input, "m/");
+        }
+        return isCorrect;
     }
 
     public static boolean checkSem(String input) {
-        return input.contains("s/");
+        boolean isCorrect = input.contains("s/");
+        if (isCorrect) {
+            isCorrect = repetitionField(input, "s/");
+        }
+        return isCorrect;
     }
 
     public static boolean checkMC(String input) {
-        return input.contains("mc/");
+        boolean isCorrect = input.contains("mc/");
+        if (isCorrect) {
+            isCorrect = repetitionField(input, "mc/");
+        }
+        return isCorrect;
     }
 
     public static boolean checkGrade(String input) {
-        return input.contains("g/");
+        boolean isCorrect = input.contains("g/");
+        if (isCorrect) {
+            isCorrect = repetitionField(input, "g/");
+        }
+        return isCorrect;
     }
 
-    //more to add: repetition of fields with diff content,
-    //extra words in btw fields eg add jkdvn m/cs1231..
-    //additional info that is not required
+    public static boolean repetitionField(String input, String type) {
+        int i = input.indexOf(type);
+        i += type.length();
+        input = input.substring(i);
+        return !input.contains(type);
+    }
 }
