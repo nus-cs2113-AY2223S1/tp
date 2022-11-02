@@ -1,4 +1,6 @@
 @startuml Command Class Diagram
+hide circle
+skinparam classAttributeIconSize 0
 
 enum CommandType {
     CREATE
