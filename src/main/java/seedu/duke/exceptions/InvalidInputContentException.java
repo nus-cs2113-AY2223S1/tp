@@ -19,5 +19,4 @@ public class InvalidInputContentException extends Exception {
         }
     }
 
-    //more to add: if content is wrong/not as required ...
 }
