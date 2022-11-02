@@ -8,25 +8,6 @@ towards their fitness journeys.
 
 - Quick Start
 - Features
-    - Viewing help: `help`
-    - Setting your biometrics within the app: `set biometrics`
-    - Add a record of weight and fat percentage: `add weight`
-    - View records of weight and fat percentage: `view weight`
-    - Adding food consumption: `add food`
-    - Viewing food consumptions: `view food`
-    - Remove food: `remove food`
-    - Find food consumptions: `find food`
-    - Adding a strength exercise: `add strength`
-    - Viewing strength exercise: `view strength`
-    - Finding strength exercise: `find strength`
-    - Adding a cardio exercise: `add cardio`
-    - Viewing cardio exercise: `view cardio`
-    - Finding cardio exercise: `find cardio`
-    - Viewing exercise: `view exercise`
-    - Marking exercise as done or undone: `mark`
-    - Viewing BMI: `view BMI`
-    - Viewing maintenance calories: `view maintenance`
-    - Viewing daily calorie consumption, burn and net intake: `view calories`
 - FAQ
 - Command summary
 
@@ -37,194 +18,32 @@ towards their fitness journeys.
 
 ## Features
 
-- **Records are displayed in order of date by default**
-- **Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit**
-- **Words in curly brackets are parameters to be supplied by the user which are separated by forward slash.  
-  e.g. in `set biometrics /{age} / {gender} /{height}`, age, gender and height are parameters separated by `/` which can
-  be
-  used as part of set biometrics command.**
-- **Items in square brackets are optional.  
-  e.g. `add strength /{name} /{weight} /{sets} /{reps} [/{date}]`, date can be omitted from the add exercise command and
-  the
-  date for the current day will be used.**
-- **Parameters must follow the order as instructed**
+TracknFit offers 3 main components: **Biometrics, Exercises, and Food**  
+For each component, you can **add, remove and view** records.  
+- Records are displayed in order of date by default
 
-### Setting Biometrics: `set biometrics`
+TracknFit can also summarise your caloric balance for each day.  
+Please follow these guidelines when entering commands into the terminal:
+- Words in curly brackets are parameters to be supplied, separated by backslashes `/`.  
+e.g. in `set biometrics /{age} /{gender} /{height} /{activity level}`, age, gender, height and activity level 
+are parameters separated by `/` to be provided when using the `set biometrics` command.
+  - **Parameters must be entered in the same order as described.**
 
-Sets user biometrics in TracknFit
+- Parameters in square brackets `[]` are optional.  
+e.g. in `add strength /{name} /{weight} /{sets} /{reps} [/{date}]`, the `add strength` command can be used with or
+without a date parameter
+  - **If no date is entered for a new record, the current local date on your computer will be used**
+- All dates should be entered in the format `DD-MM-YYYY`. For example, `31-12-2020`.
 
-Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}`
+Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit
 
-* age, height, weight and fat percentage should be integer values
-* age must be less than 120
-* gender can only be female, male or others
-* height should be in units of cm and cannot exceed 300cm
-* weight should be in units of kg and cannot exceed 400kg
-* fat percentage should be between 1% and 99%
-* activity level should be between 1 and 5
+### General
 
-Example of usage:
+#### Display help message: `help`
+Display the help message  
+Format: `help`
 
-`set biometrics /15 /male /146 /98 /55 /2`
-
-### Adding Food Consumptions: `add food`
-
-Add user's food consumption in TracknFit
-
-Format: `add food /{description} /{calories} [/{date}]`
-
-* description needs to be a string
-* calories should be positive integer inputs in the units of kcal
-* date is an optional parameter. If user does not input a specific date,
-  the program will automatically fill it with today's date
-
-Example of usage:
-
-Adding without date:
-
-`add food /dumplings /300`
-
-Expected outcome:
-Food is added to the dietary consumption list.
-
-```
-add food /dumplings /300
--------------------------------------------------------------------------------
-Food Description: dumplings
-calories: 300
-Recorded on: 25-10-2022
- This food is added to the food list successfully
--------------------------------------------------------------------------------
-```
-
-Adding with date:
-
-`add food /noodles /300 /24-10-2022`
-
-Expected outcome:
-Food is added to the dietary consumption list.
-
-```
-add food /noodles /300 /24-10-2022
--------------------------------------------------------------------------------
-Food Description: noodles
-calories: 300
-Recorded on: 24-10-2022
- This food is added to the food list successfully
--------------------------------------------------------------------------------
-```
-
-### Viewing Food Consumptions: `view food`
-
-View user's food consumption over time in TracknFit
-
-Format: `view food`
-
-Example of usage:
-`view food`
-
-Expected outcome:
-All historical records of the food consumed are displayed.
-
-```
--------------------------------------------------------------------------------
---------------------------------------------------------------------------------------
-Index | Description                                         | Calories | Date       | 
---------------------------------------------------------------------------------------
-1     | noodles                                             | 300      | 24-10-2022 | 
-2     | chicken rice                                        | 200      | 25-10-2022 | 
-3     | laksa                                               | 400      | 25-10-2022 | 
-4     | cola                                                | 1000     | 25-10-2022 | 
-5     | this is just for testing                            | 100      | 25-10-2022 | 
-6     | ice cream                                           | 200      | 25-10-2022 | 
-7     | very very very very long food name for testing view | 300      | 25-10-2022 | 
-8     | dumplings                                           | 300      | 25-10-2022 | 
-
--------------------------------------------------------------------------------
-
-```
-
-### Remove Food Consumptions: `remove food`
-
-Remove a specified record from food list in TracknFit
-
-Format: `remove food /{index}`
-
-Example of usage:
-`remove food /1`
-
-Expected outcome:
-The first record in the food list will be deleted.
-
-```
--------------------------------------------------------------------------------
-remove food /1
--------------------------------------------------------------------------------
- This food has been deleted from the food list successfully
-Food Description: noodles
-calories: 300
-Recorded on: 24-10-2022
--------------------------------------------------------------------------------
-
-```
-
-### Find Food Consumptions Based On Description: `find food`
-
-Find specific food records from user's food consumption over time using keyword in TracknFit
-
-Format: `find food /{description}`
-
-Example of usage:
-`find food /laksa`
-
-Expected outcome:
-All relevant records from the history would be printed out for the user to see how much of a specific food they
-have been consuming.
-
-```
--------------------------------------------------------------------------------
-Here are the matching food in your food list:
------------------------------------------------
-Index | Description  | Calories | Date       | 
------------------------------------------------
-1     | laksa        | 400      | 25-10-2022 | 
-
--------------------------------------------------------------------------------
-```
-
-### Find Food Consumptions Based On Date: `find date_f`
-
-Find specific food records from user's food consumption over time using keyword in TracknFit
-
-Format: `find date_f /{date}`
-
-Example of usage:
-`find date_f /25-10-2022`
-
-Expected outcome:
-All relevant records from the history would be printed out for the user to see how much of a specific food they
-have been consuming.
-
-```
--------------------------------------------------------------------------------
-
-Here are the food records in your list matching this date:
---------------------------------------------------------------------------------------
-Index | Description                                         | Calories | Date       | 
---------------------------------------------------------------------------------------
-1     | chicken rice                                        | 200      | 25-10-2022 | 
-2     | laksa                                               | 400      | 25-10-2022 | 
-3     | cola                                                | 1000     | 25-10-2022 | 
-4     | this is just for testing                            | 100      | 25-10-2022 | 
-5     | ice cream                                           | 200      | 25-10-2022 | 
-6     | very very very very long food name for testing view | 300      | 25-10-2022 | 
-7     | dumplings                                           | 300      | 25-10-2022 | 
-
--------------------------------------------------------------------------------
-
-```
-
-### Viewing All Daily Records: `view all`
+#### Viewing All Daily Records: `view all`
 
 View user's daily records over time in TracknFit
 
@@ -257,7 +76,108 @@ Date       | Weight | Fat Percentage | Description                              
 
 ```
 
-### Adding strength exercise: `add strength`
+### View Calories : `view calories`
+
+Allows the user to check his/her total calorie consumption/burn and net surplus/deficit by date
+
+Format : view calories
+
+Example of usage: `view calories`
+
+Expected outcome: The total calorie consumption/burn and net surplus/deficit of the user will be displayed by date
+
+```
+--------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             | 
+------------------------------------------------------------------------------------------------------
+31-10-2022 | 400               | 1071           | -671         | Your calorie deficit is too high!  | 
+30-10-2022 | 600               | 96             | 504          | Your calorie surplus is too much!  | 
+--------------------------------------------------------------------------------
+```
+
+### Find Calories : `find calories`
+
+Allows the user to check his/her total calorie consumption/burn and net surplus/deficit on that date
+
+Format: `find calories /date`
+
+Example of usage: `find calories /30-11-2022`
+
+Expected outcome:  The total calorie consumption/burn and net surplus/deficit of the user on that date will be
+displayed.
+
+```
+--------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             |
+------------------------------------------------------------------------------------------------------
+30-11-2022 | 600               | 96             | 504          | Your calorie surplus is too much!  |
+--------------------------------------------------------------------------------
+```
+
+### Biometrics
+
+<details>
+<summary>Setting Biometrics</summary>
+
+#### Setting Biometrics: `set biometrics`
+Sets user biometrics in TracknFit  
+Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}`
+
+* age, height, weight and fat percentage should be integer values
+* age must be less than 120
+* gender can only be female, male or others
+* height should be in units of cm and cannot exceed 300cm
+* weight should be in units of kg and cannot exceed 400kg
+* fat percentage should be between 1% and 99%
+* activity level should be between 1 and 5
+
+Example of usage: `set biometrics /15 /male /146 /98 /55 /2`
+</details>
+
+
+#### Adding weight and fat record: `add weight`
+Adds a record of weight and fat to TracknFit
+Format: `add weight /{weight} /{fat percentage}`
+
+* weight should be in units of kg and cannot exceed 400kg
+* fat percentage should be between 1% and 99%
+
+Example of usage: `add weight /133 /42`
+
+#### View BMI : `view bmi`
+
+Allows the user to check their BMI  
+Format : view bmi
+
+Example of usage: `view bmi`
+
+Expected outcome: bmi of user will be displayed
+
+```
+Your current BMI is : 25.2
+You are currently in the overweight range
+```
+
+#### View Maintenance Calories : `view Maintenance`
+
+Allows the user to check his/her maintenance calories based on her biometrics
+
+Format : view maintenance
+
+Example of usage: `view maintenance`
+
+Expected outcome: Suggested maintenance calories of user will be displayed
+
+```
+You have a moderately active lifestyle!
+Thus your maintenance calories is 2350
+```
+
+### Exercises
+
+#### Adding strength exercise: `add strength`
 
 Add strength exercise into the exercise list
 
@@ -446,13 +366,13 @@ Format:
 - Metabolic equivalent (met) a double with 1 d.p, must be positive and smaller than 50.
 - met can be used to measure the intensity of the activity and is used to calculate calories burnt for the exercise. Use
   the reference below as a guide to estimate the intensity of the exercise.
-    - e.g.
-        - Walking: 3.0
-        - Light calisthenics (e.g. push ups, jumping jacks): 4.0
-        - WeightLifting: 6.0
-        - circuit training: 8.0
-        - Running(7min/km): 8.0
-        - Running(5min/km): 12.0
+  - e.g.
+    - Walking: 3.0
+    - Light calisthenics (e.g. push ups, jumping jacks): 4.0
+    - WeightLifting: 6.0
+    - circuit training: 8.0
+    - Running(7min/km): 8.0
+    - Running(5min/km): 12.0
 
 Example of usage: `mark undone /1`
 
@@ -476,75 +396,165 @@ calories:62
 -------------------------------------------------------------------------------
 ```
 
-### View BMI : `view bmi`
+### Food
 
-Allows the user to check his/her BMI
+### Adding Food Consumptions: `add food`
 
-Format : view bmi
+Add user's food consumption in TracknFit
 
-Example of usage: `view bmi`
+Format: `add food /{description} /{calories} [/{date}]`
 
-Expected outcome: bmi of user will be displayed
+* description needs to be a string
+* calories should be positive integer inputs in the units of kcal
+* date is an optional parameter. If user does not input a specific date,
+  the program will automatically fill it with today's date
 
-```
-Your current BMI is : 25.2
-You are currently in the overweight range
-```
+Example of usage:
 
-### View Maintenance Calories : `view Maintenance`
+Adding without date:
 
-Allows the user to check his/her maintenance calories based on her biometrics
+`add food /dumplings /300`
 
-Format : view maintenance
-
-Example of usage: `view maintenance`
-
-Expected outcome: Suggested maintenance calories of user will be displayed
+Expected outcome:
+Food is added to the dietary consumption list.
 
 ```
-You have a moderately active lifestyle!
-Thus your maintenance calories is 2350
+add food /dumplings /300
+-------------------------------------------------------------------------------
+Food Description: dumplings
+calories: 300
+Recorded on: 25-10-2022
+ This food is added to the food list successfully
+-------------------------------------------------------------------------------
 ```
 
-### View Calories : `view calories`
+Adding with date:
 
-Allows the user to check his/her total calorie consumption/burn and net surplus/deficit by date
+`add food /noodles /300 /24-10-2022`
 
-Format : view calories
-
-Example of usage: `view calories`
-
-Expected outcome: The total calorie consumption/burn and net surplus/deficit of the user will be displayed by date
+Expected outcome:
+Food is added to the dietary consumption list.
 
 ```
---------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------
-Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             | 
-------------------------------------------------------------------------------------------------------
-31-10-2022 | 400               | 1071           | -671         | Your calorie deficit is too high!  | 
-30-10-2022 | 600               | 96             | 504          | Your calorie surplus is too much!  | 
---------------------------------------------------------------------------------
+add food /noodles /300 /24-10-2022
+-------------------------------------------------------------------------------
+Food Description: noodles
+calories: 300
+Recorded on: 24-10-2022
+ This food is added to the food list successfully
+-------------------------------------------------------------------------------
 ```
 
-### Find Calories : `find calories`
+### Viewing Food Consumptions: `view food`
 
-Allows the user to check his/her total calorie consumption/burn and net surplus/deficit on that date
+View user's food consumption over time in TracknFit
 
-Format: `find calories /date`
+Format: `view food`
 
-Example of usage: `find calories /30-11-2022`
+Example of usage:
+`view food`
 
-Expected outcome:  The total calorie consumption/burn and net surplus/deficit of the user on that date will be
-displayed.
+Expected outcome:
+All historical records of the food consumed are displayed.
 
 ```
---------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------
-Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             |
-------------------------------------------------------------------------------------------------------
-30-11-2022 | 600               | 96             | 504          | Your calorie surplus is too much!  |
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+Index | Description                                         | Calories | Date       | 
+--------------------------------------------------------------------------------------
+1     | noodles                                             | 300      | 24-10-2022 | 
+2     | chicken rice                                        | 200      | 25-10-2022 | 
+3     | laksa                                               | 400      | 25-10-2022 | 
+4     | cola                                                | 1000     | 25-10-2022 | 
+5     | this is just for testing                            | 100      | 25-10-2022 | 
+6     | ice cream                                           | 200      | 25-10-2022 | 
+7     | very very very very long food name for testing view | 300      | 25-10-2022 | 
+8     | dumplings                                           | 300      | 25-10-2022 | 
+
+-------------------------------------------------------------------------------
+
 ```
+
+### Remove Food Consumptions: `remove food`
+
+Remove a specified record from food list in TracknFit
+
+Format: `remove food /{index}`
+
+Example of usage:
+`remove food /1`
+
+Expected outcome:
+The first record in the food list will be deleted.
+
+```
+-------------------------------------------------------------------------------
+remove food /1
+-------------------------------------------------------------------------------
+ This food has been deleted from the food list successfully
+Food Description: noodles
+calories: 300
+Recorded on: 24-10-2022
+-------------------------------------------------------------------------------
+
+```
+
+### Find Food Consumptions Based On Description: `find food`
+
+Find specific food records from user's food consumption over time using keyword in TracknFit
+
+Format: `find food /{description}`
+
+Example of usage:
+`find food /laksa`
+
+Expected outcome:
+All relevant records from the history would be printed out for the user to see how much of a specific food they
+have been consuming.
+
+```
+-------------------------------------------------------------------------------
+Here are the matching food in your food list:
+-----------------------------------------------
+Index | Description  | Calories | Date       | 
+-----------------------------------------------
+1     | laksa        | 400      | 25-10-2022 | 
+
+-------------------------------------------------------------------------------
+```
+
+### Find Food Consumptions Based On Date: `find date_f`
+
+Find specific food records from user's food consumption over time using keyword in TracknFit
+
+Format: `find date_f /{date}`
+
+Example of usage:
+`find date_f /25-10-2022`
+
+Expected outcome:
+All relevant records from the history would be printed out for the user to see how much of a specific food they
+have been consuming.
+
+```
+-------------------------------------------------------------------------------
+
+Here are the food records in your list matching this date:
+--------------------------------------------------------------------------------------
+Index | Description                                         | Calories | Date       | 
+--------------------------------------------------------------------------------------
+1     | chicken rice                                        | 200      | 25-10-2022 | 
+2     | laksa                                               | 400      | 25-10-2022 | 
+3     | cola                                                | 1000     | 25-10-2022 | 
+4     | this is just for testing                            | 100      | 25-10-2022 | 
+5     | ice cream                                           | 200      | 25-10-2022 | 
+6     | very very very very long food name for testing view | 300      | 25-10-2022 | 
+7     | dumplings                                           | 300      | 25-10-2022 | 
+
+-------------------------------------------------------------------------------
+
+```
+
 
 ## FAQ
 
@@ -563,3 +573,23 @@ Date       | Calories Consumed | Calories Burnt | Net Calories | Status         
 * View food records `view food`
 * Delete a food record `remove food /{index}`
 * Find food records using a keyword `find food /{description}`
+
+  - Viewing help: `help`
+  - Setting your biometrics within the app: `set biometrics`
+  - Add a record of weight and fat percentage: `add weight`
+  - View records of weight and fat percentage: `view weight`
+  - Adding food consumption: `add food`
+  - Viewing food consumptions: `view food`
+  - Remove food: `remove food`
+  - Find food consumptions: `find food`
+  - Adding a strength exercise: `add strength`
+  - Viewing strength exercise: `view strength`
+  - Finding strength exercise: `find strength`
+  - Adding a cardio exercise: `add cardio`
+  - Viewing cardio exercise: `view cardio`
+  - Finding cardio exercise: `find cardio`
+  - Viewing exercise: `view exercise`
+  - Marking exercise as done or undone: `mark`
+  - Viewing BMI: `view BMI`
+  - Viewing maintenance calories: `view maintenance`
+  - Viewing daily calorie consumption, burn and net intake: `view calories`
