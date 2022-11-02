@@ -222,6 +222,7 @@ public class Duke {
                 addComment(userUniversityListManager, addCommand);
                 UserStorageParser.storeCreatedLists(userUniversityListManager);
             } else {
+                System.out.println("executing this");
                 addModuleToList(userUniversityListManager, addCommand);
             }
         } catch (ModuleNotFoundException | NoSuchElementException
@@ -238,10 +239,14 @@ public class Duke {
      */
     private static void addComment(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
             throws InvalidUserCommandException {
-        String universityName = addCommand.getUniversityName();
-        String moduleCode = addCommand.getModuleCode();
-        String comment = addCommand.getComment();
-        userUniversityListManager.updateComment(universityName, moduleCode, comment);
+        if (addCommand.getValidatedComment()) {
+            String universityName = addCommand.getUniversityName();
+            String moduleCode = addCommand.getModuleCode();
+            String comment = addCommand.getComment();
+            userUniversityListManager.updateComment(universityName, moduleCode, comment);
+        } else {
+            System.out.println("Error! Invalid Comment");
+        }
     }
 
     private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)

@@ -79,10 +79,10 @@ public class UserUniversityListManager {
             System.out.println("Please create university and add relevant module before adding a comment");
         } else {
             if (checkEmpty(comment)) {
-                System.out.println("Error: No empty updates");
+                System.out.println("Error: Invalid Comment");
                 return;
             } else if (isNotValidComment(comment)) {
-                System.out.println("Error: No special characters in comment: _ ; % /");
+                System.out.println("Error: Invalid Comment");
                 return;
             }
             getList(universityName).updateComment(moduleCode, comment);
