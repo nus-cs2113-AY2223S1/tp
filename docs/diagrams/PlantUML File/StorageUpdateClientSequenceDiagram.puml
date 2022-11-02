@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant "storage : Storage" as Storage #F4F4B6
+Participant "clientFile : FileWriter" as FileWriter #F4F4B6
+Participant "clientList : ClientList" as ClientList #F4F4B6
+Participant "client : Client" as Client #F4F4B6
+
+->Storage:updateClient()
+activate Storage #CDEFF9
+
+create FileWriter
+Storage -> FileWriter:FileWriter(CLIENT_PATH)
+activate FileWriter #CDEFF9
+return
+
+Storage->ClientList:getClientList()
+activate ClientList #CDEFF9
+return clientList
+
+    loop for each client in clientList
+        Storage -> Client:getClientName()
+        activate Client #CDEFF9
+        return clientBudgetPerMonth
+
+        Storage -> Client:getClientContactNumber()
+        activate Client #CDEFF9
+        return clientContactNumber
+
+        Storage -> Client:getClientEmail()
+        activate Client #CDEFF9
+        return clientEmail
+
+        Storage -> Client:getClientBudgetPerMonth()
+        activate Client #CDEFF9
+        return clientBudgetPerMonth
+    end
+Storage -> FileWriter:write(String: clientText)
+activate FileWriter #CDEFF9
+return
+Storage -> FileWriter:close()
+activate FileWriter #CDEFF9
+return
+
+return
+
+@enduml
