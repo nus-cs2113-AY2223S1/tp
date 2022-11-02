@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    static String filePath;
-
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -20,13 +19,12 @@ public class Storage {
      * @param module module which has to be formatted.
      * @return Returns a text with formatted content from module. Format: String
      */
-    public static String formatText(Module module) {
+    public String formatText(Module module) {
         String course = module.getCourse();
         String semesterTaken = module.getSemesterTaken();
         String grade = module.getGrade();
         int mcs = module.getMcs();
-        String text = "m/" + course + " s/" + semesterTaken + " mc/" + mcs + " g/" + grade + "\n";
-        return text;
+        return "m/" + course + " s/" + semesterTaken + " mc/" + mcs + " g/" + grade + "\n";
     }
 
     /**
@@ -37,25 +35,23 @@ public class Storage {
     public Scanner load() throws FileNotFoundException {
         try {
             File data = new File(filePath);
-            Scanner fileReader = new Scanner(data);
-            return fileReader;
+            return new Scanner(data);
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException();
         }
     }
 
     /**
-     * Function to save the entire list of modules into a file
-     * @param modules list of modules to be saved
+     * Function to save the entire list of modules into the data file
      */
-    public static void save(ModuleList modules) {
+    public void save() {
         try {
-            String text = "";
+            StringBuilder text = new StringBuilder();
             for (Module module : ModuleList.modules) {
-                text += formatText(module);
+                text.append(formatText(module));
             }
             FileWriter fw = new FileWriter(filePath);
-            fw.write(text);
+            fw.write(text.toString());
             fw.close();
         } catch (IOException e) {
             System.out.println("The file does not exist yet!");

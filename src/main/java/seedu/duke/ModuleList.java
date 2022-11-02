@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.commands.Command;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
 
