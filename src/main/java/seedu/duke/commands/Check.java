@@ -24,7 +24,7 @@ public class Check extends Command {
      * @param input input entered by user. Format: String
      */
     public Check(String input) throws InvalidInputContentException {
-        this.type = input.toUpperCase();
+        this.type = input.toUpperCase().trim();
         switch (type) {
         case "NOC":
         case "SEP":
