@@ -2,7 +2,6 @@ package parser;
 
 import command.Command;
 import command.EmptyCommand;
-import command.appointmentcommand.RemoveAppointmentCommand;
 import command.taskcommand.AddTaskCommand;
 import command.taskcommand.FinishTaskCommand;
 import command.taskcommand.ReassignTaskCommand;
@@ -51,9 +50,9 @@ public class TaskParser {
 
     public Command prepareAddTask(String input) {
         try {
-            int startOfI = input.indexOf(" i/");
-            int startOfE = input.indexOf(" e/");
-            int startOfD = input.indexOf(" d/");
+            int startOfI = input.indexOf(parser.INDEX_FLAG);
+            int startOfE = input.indexOf(parser.EMPLOYEE_FLAG);
+            int startOfD = input.indexOf(parser.DATE_FLAG);
 
             if (startOfI > startOfE || startOfE > startOfD || startOfI == -1 || !input.substring(0, startOfI).isEmpty()) {
                 throw new DukeException();
@@ -89,8 +88,8 @@ public class TaskParser {
 
     public Command prepareReassignTask(String input) {
         try {
-            int startOfI = input.indexOf(" i/");
-            int startOfE = input.indexOf(" e/");
+            int startOfI = input.indexOf(parser.INDEX_FLAG);
+            int startOfE = input.indexOf(parser.EMPLOYEE_FLAG);
             if (startOfI > startOfE || startOfI == -1) {
                 throw new DukeException();
             }

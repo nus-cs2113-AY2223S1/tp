@@ -35,6 +35,7 @@ Note:
 
 * Parameters appear in the form of a/PARAMETER
 * Words in UPPER_CASE are parameters to be specified by the user.
+* Indexes are absolute index that will not change even after some items are deleted.
 
 ### Appointment Management
 
