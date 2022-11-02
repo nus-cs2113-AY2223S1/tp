@@ -1,23 +1,21 @@
 # Property Rental Manager - Developer Guide
 * [Acknowledgements](#acknowledgements)
 * [Setting Up and Getting Started](#setting-up-and-getting-started)
-* [Product Scope](#product-scope)
-* [Target User Profile](#target-user-profile)
-* [Value Proposition](#value-proposition)
-* [User Stories](#user-stories)
 * [Design](#design)
-  * [Client Component](#client-component)
-  * [Property Component](#property-component)
   * [List Component](#list-component)
-  * [List Component](#list-component)
+  * [Pairing Component](#pairing-component)
   * [Storage Component](#storage-component)
-  * [Common Classes](#storage-component)
 * [Implementation](#implementation)
-* [Documentation, logging, testing, configuration and dev-ops](#documentation-logging-testing-configuration-and-dev-ops)
-* [Appendix: Requirements](#appendix-requirements)
-* [Appendix: Instruction for manual testing](#appendix-instruction-for-manual-testing)
-* [Non Functional Requirement (NFR)](#non-functional-requirements)
-* [Glossary](#glossary)
+  * [Add Feature](#add-feature)
+  * [Delete Client/Property Feature](#delete-clientproperty-feature)
+  * [Pairing and Unpairing Features](#pairing-and-unpairing-features)
+  * [Storage Feature](#storage-feature)
+  * [List Feature](#list-feature)
+* [Appendix A: Product Scope](#appendix-a-product-scope)
+* [Appendix B: User Stories](#appendix-b-user-stories)
+* [Appendix C: Non Functional Requirement (NFR)](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 ___
 ## Acknowledgements
 * [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
@@ -36,49 +34,8 @@ cd [PATH_TO_JAR_DIRECTORY]
 java -jar PropertyRentalManager.jar
 ```
 ___
-## Product scope
-___
-## Target user profile
-This application is for property agents who are managing single owner rental units and would like to keep track of 
-information of properties and prospective tenants (clients). The target user is a fast typist who favors a command-line 
-interface.
-___
-## Value proposition
-Aids property agent in tracking information related to their property which includes:
-- Filtering appropriate tenants (Based on tags e.g.: gender, occupations and age)
-- Show expenses from the rented unit
-- Monitor payment dates 
-
-Some constraints include:
-- Single owner unit (Shared ownership will be registered under one owner's name)
-- Unable to calculate tax payment
-___
-## User Stories
-
-| Version | As a ...         | I want to ...                         | So that I can ...                                                    |
-|---------|------------------|---------------------------------------|----------------------------------------------------------------------|
-| v1.0    | Property Manager | add properties                        | keep track of properties                                             |
-| v1.0    | Property Manager | add clients                           | keep track of clients                                                |
-| v1.0    | Property Manager | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
-| v1.0    | Property Manager | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
-| v1.0    | Property Manager | view a list of properties             | find out what and how many properties I manage                       |
-| v1.0    | Property Manager | view a list of clients                | find out what and how many clients I manage                          |
-| v1.0    | Property Manager | check the details of a property       | view the property's information                                      |
-| v1.0    | Property Manager | pair a client to a property           | record down which client is renting which property                   |
-| v1.0    | Property Manager | unpair a client to a property         | update my rental records when a client is no longer renting property |
-| v1.0    | Property Manager | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | Property Manager | quit the app                          | free up memory for other applications                                |
-| v2.0    | Property Manager | check the details of a client         | view the client's information                                        |
-| v2.0    | Property Manager | search clients using their details    | easily find specific clients                                         |
-| v2.0    | Property Manager | search properties using their details | easily find specific properties                                      |
-
-___
 ## Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### Parser Component
-### Client Component
-### Property Component
 ### List Component
 The list feature has the following commands in it -
 * `list -client` This lists every client, along with all their information
@@ -107,7 +64,7 @@ display selected information - i.e. CommandListClientsWithTags and CommandListPr
 methods to display their information, using methods present in Ui. The class structure is as follows - 
 ![ListClassDiagram](diagrams/ListClassDiagram.png)
 
-  
+---  
 
 ### Pairing Component
 API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
@@ -137,7 +94,7 @@ Here is the underlying data structure of `PairingList`:
 * The `Client` and `Property` references must be present in `ClientList` and `PropertyList` as well, since `PairingList` is an
     implementation of an adjacency list. 
 
-
+---
 ### Storage Component
 For `Storage` feature:
 
@@ -161,7 +118,6 @@ It has an association with other class which includes:
 Since the arraylist changes by **adding** and **deleting** operations while hashmap changes by **pair** and **unpair** 
 operations, the text files will be updated when `add`, `delete`, `pair` or `unpair` is invoked.
 
-### Common Classes
 ___
 ## Implementation
 
@@ -313,7 +269,7 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 ---
 
-### PairingList
+### Pairing and Unpairing Features
 
 `PairingList` facilitates pair and unpair commands by storing client-property pairs.
 
@@ -375,10 +331,10 @@ How the unpair command works :
 6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
 
-
 ---
 
-### Storage
+### Storage Feature
+
 The implementation of Storage class requires consists of different level of operations:
 
 - Load Files
@@ -428,6 +384,7 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
 
+---
 
 ### List feature
 
@@ -472,26 +429,57 @@ The above is an example for CommandListClients. It reads from ClientList. Then, 
 using the displayOneClient function in Ui.  
 The sequence diagram of the operation is as follows - 
 ![ListSequence](diagrams/ListSequenceUpdated.png)
+___
 
+## Appendix A: Product Scope
+
+### Target user profile
+* Property agent who are managing single owner rental units
+* has a need to keep track of information of properties that are being put out for rental.
+* has a need to keep track of information of clients' (prospective tenants) information.
+* is a fast typist
+* favors a command-line interface over a Graphic User Interface.
+
+### Value proposition
+Aids property agent in tracking information related to the properties and clients (prospective tenants) they manage:
+- Record down information of properties (landlord, address, rental price, unit type).
+- Record down information of clients (name, contact number, budget), who are looking to rent properties.
+- Record down instances where a client decides to rent a property/ stop renting a property.
+- View client and property information quickly.
+
+___
+
+## Appendix B: User Stories
+
+| Version | As a ... | I want to ...                         | So that I can ...                                                    |
+|---------|----------|---------------------------------------|----------------------------------------------------------------------|
+| v1.0    | user     | add properties                        | keep track of properties                                             |
+| v1.0    | user     | add clients                           | keep track of clients                                                |
+| v1.0    | user     | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | user     | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | user     | view a list of properties             | find out what and how many properties I manage                       |
+| v1.0    | user     | view a list of clients                | find out what and how many clients I manage                          |
+| v1.0    | user     | check the details of a property       | view the property's information                                      |
+| v1.0    | user     | pair a client to a property           | record down which client is renting which property                   |
+| v1.0    | user     | unpair a client to a property         | update my rental records when a client is no longer renting property |
+| v1.0    | user     | save my data                          | used the data created from a previous use of the app                 |
+| v1.0    | user     | quit the app                          | free up memory for other applications                                |
+| v2.0    | user     | check the details of a client         | view the client's information                                        |
+| v2.0    | user     | search clients using their details    | easily find specific clients                                         |
+| v2.0    | user     | search properties using their details | easily find specific properties                                      |
 
 ---
 
-## Documentation, logging, testing, configuration and dev-ops
-___
-## Appendix: Requirements
-___
-## Appendix: Instruction for Manual Testing
+## Appendix C: Non-Functional Requirements
 
-## Non-Functional Requirements
 
-{Give non-functional requirements}
-
-## Glossary
+---
+## Appendix D: Glossary
 
 * *client* - Person who is seeking for property to rent
 
-
-## Instructions for manual testing
+---
+## Appendix E: Instructions for Manual Testing
 
 ### Launch
 1. Download the JAR file and move it into an empty folder.
