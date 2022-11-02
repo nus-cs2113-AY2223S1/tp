@@ -165,7 +165,7 @@ The first section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.jpg)
+![](diagrams/ParseAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -175,17 +175,21 @@ Parse Add Related Classes Diagram
 
 As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. These methods are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
     - `checkForValidEmail(String)`
     - `checkForBudgetNumberFormat(String)`
+    - `checkForDuplicateClient(ClientList, ArrayList<String>)`
 - Property:
     - `checkForValidSingaporeAddress(String)`
     - `checkForValidSingaporeLandedPropertyAddress(String)`
     - `checkForValidSingaporeBuildingAddress(String)`
     - `checkForPriceNumberFormat(String)`
+    - `checkForValidUnitType(String)`
+    - `checkForValidAddressFormatUnitTypeMatching(String, String)`
+    - `checkForDuplicateProperty(PropertyList, String)`
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
@@ -204,7 +208,7 @@ The following is a simple class diagram of the three classes:
 
 <p align="center">
 
-![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.jpg)
+![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.png)
 
 </p>
 
