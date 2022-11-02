@@ -680,6 +680,74 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 
 ## 9. Instructions for manual testing
 
+This section provides guidance to the tester to manually test Upcycle by providing some test inputs the tester can
+enter into the app.
+
+There are 2 categories of test cases:
+- **Positive test cases:** follow the user guide in the sequence from 3.1 to 3.5
+- **Negative test cases:** listed below
+
+Here are the negative test cases you can test:
+- **Invalid general commands:**
+   - Empty command: ``
+   - Not supported command: `cap 5.0`
+- **Invalid User-related features:**
+   - Invalid `user` commands:
+      - Missing user prefix: `user`
+      - Wrong user prefix: `destroy-user`
+   - Invalid `add-user` commands:
+      - Missing all command arguments: `add-user`
+      - Missing some command arguments: `add-user /n bui /a 20 /c`
+      - Invalid age: `add-user /n bui /a twenty /c 91234567`
+   - Invalid `remove-user` commands:
+      - Invalid userName: `remove-user /u tate` (tate does not exist)
+      - Missing command arguments: `remove-user`
+   - Invalid `view-user`/`view-user-items`/`view-user-loss`/`view-user-gain` commands:
+      - Invalid userName ((tate does not exist):
+         - `view-user /u tate`
+         - `view-user-items /u tate`
+         - `view-user-loss /u tate`
+         - `view-user-gain /u tate`
+   - Invalid `find-user` commands:
+      - Missing keyword: `find-user /k`
+- **Invalid Item-related feature:**
+   - Invalid `item` commands:
+      - Missing item prefix: `item`
+      - Wrong item prefix: `destroy-item`
+   - Invalid `add-item` commands:
+      - Invalid category: `add-item /n battery /c 21 /p 3.5 /o bui`
+      - Invalid owner: `add-item /n battery /c 3 /p 3.5 /o tate` (tate does not exist)
+      - Invalid price: `add-item /n battery /c 3 /p -1 /o bui`
+   - Invalid `remove-item` commands:
+      - Invalid item ID: `remove-item /i 1234567` (ID 1234567 does not exist)
+   - Invalid `view-item` commands:
+      - Invalid item ID: `view-item /i 1234567` (ID 1234567 does not exist)
+   - Invalid `update-item` commands:
+      - Invalid item ID: `update-item /i 1234567 /p 2.3` (ID 1234567 does not exist)
+      - Invalid price: `update-item /i 99995bb2 /p -2.0`
+   - Invalid `sort-items` commands:
+      - Invalid sort mode: `sort-items /mode medium`
+      - Invalid price: `sort-items /mode lh /min -2.1`
+      - Invalid price boundaries: `sort-items /min 10 /max 1`
+      - Invalid category number: `sort-items /cat 21`
+   - Invalid `find-item` commands:
+      - Missing keyword: `find-item /k`
+- **Invalid Transaction-related commands:**
+   - Invalid `add-tx` commands:
+      - Invalid item ID: `add-tx /i 1234567 /b winston /d 2 /c 2022-10-28`
+      - Invalid borrower: `add-tx /i 99995bb2 /b tate /d 2 /c 2022-10-28`
+      - Invalid duration: `add-tx /i 99995bb2 /b winston /d 1462 /c 2022-10-28` (duration must be less than 1461)
+      - Invalid created date: `add-tx /i 99995bb2 /b winston /d 2 /c 28-10-2022`
+   - Invalid `remove-tx` commands:
+      - Invalid transaction ID: `remove-tx /t 1234567` (ID 1234567 does not exist)
+   - Invalid `view-tx` commands:
+      -  Invalid transaction ID: `view-tx /t 1234567` (ID 1234567 does not exist)
+   - Invalid `find-tx` commands:
+      - Invalid status: `find-tx /s ended`
+   - Invalid `update-tx` commands:
+      - Invalid transaction ID: `update-tx /t 1234567 /d 3` (ID 1234567 does not exist)
+      - Invalid duration: `update-tx /t 99995bb2 /d -5`
+
 ...To be updated
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
