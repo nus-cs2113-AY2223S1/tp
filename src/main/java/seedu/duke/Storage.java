@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandTag;
 import seedu.duke.common.DateFormats;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
@@ -41,6 +42,13 @@ public class Storage {
     private static final String APPENDED_ZERO_TO_YEAR_BELOW_THOUSAND = "0";
     private static final String APPENDED_ZEROES_TO_YEAR_BELOW_HUNDRED = "00";
     private static final String APPENDED_ZEROES_TO_YEAR_BELOW_TEN = "000";
+    private static final String TYPE_TAG = CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+
+    // A spacing has to be added in front of the tags so that the string vcan be properly parsed
+    private static final String CATEGORY_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+    private static final String AMOUNT_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+    private static final String DATE_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+    private static final String DESCRIPTION_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 
 
     private TransactionList storedTransactions;
@@ -148,8 +156,10 @@ public class Storage {
 
             String description = splits[4];
 
-            String parametersInput = "t/" + type + " c/" + category + " a/" + amountString + " d/" + dateString
-                    + " i/" + description;
+            String parametersInput = TYPE_TAG + type + CATEGORY_TAG_WITH_SPACE + category
+                    + AMOUNT_TAG_WITH_SPACE + amountString + DATE_TAG_WITH_SPACE + dateString
+                    + DESCRIPTION_TAG_WITH_SPACE + description;
+
             command = getCommand("add", parametersInput);
 
             ParameterParser.parse(command, parametersInput);
@@ -171,6 +181,7 @@ public class Storage {
             // If the date format is incorrect, which is due to corrupted date information
             throw new StorageFileCorruptedTransactionException();
         } catch (MoolahException e) {
+            // If any other exceptions are caught from the parser, throw corrupted transaction exception
             throw new StorageFileCorruptedTransactionException();
         }
     }
@@ -251,6 +262,7 @@ public class Storage {
         fileWriter.write(monthlyBudget + System.lineSeparator());
         for (Transaction transaction : transactions) {
 
+            // Delimiter constant cannot be used here as it is synthesized into a string
             transactionEntry = transaction.getType() + " | " + transaction.getCategory() + " | "
                     + transaction.getAmount() + " | " + transaction.getDate() + " | "
                     + transaction.getDescription();
