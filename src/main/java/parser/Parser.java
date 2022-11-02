@@ -12,6 +12,20 @@ public class Parser {
     private static AppointmentParser appointmentParser;
     private static TaskParser taskParser;
 
+    public final String indexFlag = " i/";
+    public final String employeeFlag = " e/";
+    public final String healthFlag = " h/";
+    public final String dateFlag = " d/";
+
+    public final String nameFlag = " n/";
+
+    public final String serviceFlag = " s/";
+    public final String petFlag = " p/";
+
+    public final String speciesFlag = " s/";
+
+    public final String descriptionFlag = " d/";
+
     public Parser() {
         serviceParser = new ServiceParser(this, lengthOfSignature);
         employeeParser = new EmployeeParser(this, lengthOfSignature);
@@ -53,7 +67,7 @@ public class Parser {
 
     public int indexOfInput(String input) throws DukeException {
         try {
-            return numberInInput(input, " i/");
+            return numberInInput(input, indexFlag);
         } catch (DukeException e) {
             System.out.println("Please enter a valid index");
             throw new DukeException();
@@ -61,13 +75,16 @@ public class Parser {
     }
 
     public int numberInInput(String input, String format) throws DukeException {
-        if (!input.contains(format)) {
+        if (!input.contains(format) || input.indexOf(format) != 0) {
             throw new DukeException();
         }
 
         String id = input.substring(input.indexOf(format) + lengthOfSignature);
 
         try {
+            if (id == null) {
+                throw new DukeException();
+            }
             isInt(id);
         } catch (DukeException e) {
             throw new DukeException();
@@ -85,9 +102,9 @@ public class Parser {
         throw new DukeException();
     }
 
-    public int isStatus(String input) throws DukeException {
+    public int employeeId(String input) throws DukeException {
         try {
-            return numberInInput(input, " s/");
+            return numberInInput(input, employeeFlag);
         } catch (DukeException e) {
             throw new DukeException();
         }
@@ -95,8 +112,9 @@ public class Parser {
 
     public int isHealthy(String input) throws DukeException {
         try {
-            return numberInInput(input, " h/");
+            return numberInInput(input, healthFlag);
         } catch (DukeException e) {
+            System.out.println("Please enter 0 or 1 for health status");
             throw new DukeException();
         }
     }

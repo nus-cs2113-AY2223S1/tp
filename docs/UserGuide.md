@@ -35,6 +35,7 @@ Note:
 
 * Parameters appear in the form of a/PARAMETER
 * Words in UPPER_CASE are parameters to be specified by the user.
+* Indexes are absolute index that will not change even after some items are deleted.
 
 ### Appointment Management
 
@@ -171,8 +172,8 @@ Example of usage:
 Add a pet to the list of pets in the clinic. 
 Base on the value of health, 1 out of 10 different status of pets will be generated and assigned to pet. 
 
-`HEALTH = 0`: happy / boring / sleepy / energetic / fantastic
-`HEALTH = 1`: exhausted / painful / injured / bleeding / dying
+* `HEALTH = 1`: happy / boring / sleepy / energetic / fantastic
+* `HEALTH = 0`: exhausted / painful / injured / bleeding / dying
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
@@ -228,7 +229,7 @@ Format: `service view`
 ### Exit: `bye`
 
 ---
-## command.command Summary
+## Command Summary
 
 * Add appointment `appointment add s/SERVICE p/PET d/DATE`
 * Remove appointment `appointment remove i/APPOINTMENT_ID`

@@ -45,12 +45,15 @@ public class EmployeeParser {
 
     public Command prepareAddEmployee(String input) {
         try {
-            int startOfN = input.indexOf(" n/");
+            int startOfN = input.indexOf(parser.nameFlag);
+
             if (startOfN == -1 || !input.substring(0,startOfN).isEmpty()) {
                 throw new DukeException();
             }
+
+
             String name = input.substring(startOfN + lengthOfSignature);
-            if (name.equals("")) {
+            if (name.isEmpty()) {
                 throw new DukeException();
             }
             return new AddEmployeeCommand(name);

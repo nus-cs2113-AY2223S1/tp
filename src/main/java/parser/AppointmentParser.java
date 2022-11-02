@@ -55,15 +55,15 @@ public class AppointmentParser {
 
     public Command prepareAddAppointment(String input) {
         try {
-            int s = input.indexOf(" s/");
-            int p = input.indexOf(" p/");
-            int d = input.indexOf(" d/");
+            int s = input.indexOf(parser.serviceFlag);
+            int p = input.indexOf(parser.petFlag);
+            int d = input.indexOf(parser.dateFlag);
 
-            if (!input.substring(0,s).isEmpty()) {
+            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
                 throw new DukeException();
             }
 
-            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
+            if (!input.substring(0,s).isEmpty()) {
                 throw new DukeException();
             }
 

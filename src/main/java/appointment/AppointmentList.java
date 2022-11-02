@@ -6,6 +6,7 @@ import pet.Pet;
 import pet.PetList;
 import service.Service;
 import service.ServiceList;
+import appointment.Appointment;
 
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
@@ -47,6 +48,7 @@ public class AppointmentList {
         Service service = ServiceList.findService(appointment.service);
         if (service == null) {
             System.out.println("Sorry, no corresponding service found to add the appointment.");
+            Appointment.id--;
             throw new DukeException();
         }
 
@@ -54,6 +56,7 @@ public class AppointmentList {
         Pet pet = PetList.findPetById(appointment.petId);
         if (pet == null) {
             System.out.println("Sorry, no corresponding pet found to add the appointment.");
+            Appointment.id--;
             throw new DukeException();
         }
 
