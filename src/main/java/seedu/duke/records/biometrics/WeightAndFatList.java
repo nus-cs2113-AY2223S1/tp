@@ -17,6 +17,11 @@ public class WeightAndFatList {
         weightAndFatArrayList.sort(new WeightAndFatComparator());
     }
 
+    public boolean isMostRecent(WeightAndFat weightAndFat) {
+        assert weightAndFatArrayList.size() > 0;
+        return weightAndFat == weightAndFatArrayList.get(0);
+    }
+
     public void removeWeightAndFat(int index) throws IllegalValueException {
         if (index < 0 || index >= weightAndFatArrayList.size()) {
             throw new IllegalValueException("Weight and fat record does not exist");

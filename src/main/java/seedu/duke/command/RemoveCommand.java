@@ -25,7 +25,7 @@ public class RemoveCommand extends Command {
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
         if (argumentList.length != 2) {
-            throw new IllegalValueException("INVALID_NUMBER_INPUT");
+            throw new IllegalValueException("Invalid number input");
         }
         try {
             int index = Integer.parseInt(argumentList[1]);
@@ -58,7 +58,7 @@ public class RemoveCommand extends Command {
         try {
             int index = Integer.parseInt(argumentList[1]);
             if (index > exerciseList.getCurrentExerciseList().size() || index < 1) {
-                throw new IllegalValueException("INVALID_INDEX_INPUT");
+                throw new IllegalValueException("Invalid index input");
             }
             String exerciseName = exerciseList.getCurrentExercise(index - 1).getExerciseName();
             exerciseList.removeCurrentExercise(index - 1);

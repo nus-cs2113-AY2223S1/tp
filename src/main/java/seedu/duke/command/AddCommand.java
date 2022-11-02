@@ -209,8 +209,10 @@ public class AddCommand extends Command {
             }
             WeightAndFat weightAndFat = new WeightAndFat(weight, fat, date);
             biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
-            biometrics.setWeight(weight);
-            biometrics.setFat(fat);
+            if(biometrics.weightAndFatList.isMostRecent(weightAndFat)) {
+                biometrics.setWeight(weight);
+                biometrics.setFat(fat);
+            }
             if (toDisplay) {
                 ui.output(weightAndFat.toString());
                 ui.output(" Weight and fat percentage are recorded successfully");
