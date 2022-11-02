@@ -9,6 +9,8 @@ import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
+import seedu.duke.parsermanager.pairunpair.PairParser;
+import seedu.duke.parsermanager.pairunpair.UnpairParser;
 
 import java.util.ArrayList;
 
@@ -66,10 +68,10 @@ public class ParserManager {
             parser = parseDeleteCommand(commandDetail);
             break;
         case COMMAND_PAIR:
-            parser = new ParsePair(commandDetail);
+            parser = new PairParser(commandDetail);
             break;
         case COMMAND_UNPAIR:
-            parser = new ParseUnpair(commandDetail);
+            parser = new UnpairParser(commandDetail);
             break;
         case COMMAND_CHECK:
             parser = parseCheckCommand(commandDetail);

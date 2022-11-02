@@ -1,4 +1,4 @@
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.pairunpair;
 
 //@@author ngdeqi
 import seedu.duke.command.Command;
@@ -8,6 +8,7 @@ import seedu.duke.exception.pairunpair.ParsePairUnpairException;
 import seedu.duke.exception.pairunpair.pair.PairIncorrectFlagOrderException;
 import seedu.duke.exception.pairunpair.pair.PairMissingDescriptionException;
 import seedu.duke.exception.pairunpair.pair.PairMissingFlagException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,10 @@ import static seedu.duke.CommandStructure.PAIR_FLAGS;
 /**
  * Parser for pair commands.
  */
-public class ParsePair extends Parser {
+public class PairParser extends Parser {
     private final String commandDescription;
 
-    public ParsePair(String pairCommandDescription) {
+    public PairParser(String pairCommandDescription) {
         commandDescription = pairCommandDescription;
 
     }
