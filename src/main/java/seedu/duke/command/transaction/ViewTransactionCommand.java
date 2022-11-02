@@ -9,22 +9,28 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
-//@@author jingwei55
+// @@author jingwei55
 public class ViewTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
-
     private static final String TX_ID_DELIM = "t";
 
+    /**
+     * Constructor for ViewTransactionCommand.
+     *
+     * @param parts The parts from user input
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewTransactionCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -48,6 +54,13 @@ public class ViewTransactionCommand extends Command {
         }
     }
 
+    /**
+     * Executes ViewTransactionCommand.
+     *
+     * @return false
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws TransactionNotFoundException If given transaction is does not exist
+     */
     public boolean executeCommand() throws TransactionNotFoundException, InvalidArgumentException {
         String transactionName = getArgsViewTransactionCmd();
         if (isValidTransaction(transactionName)) {

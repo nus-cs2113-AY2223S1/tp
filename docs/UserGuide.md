@@ -97,6 +97,10 @@ View a user: view-user /u <userName>
 View a user's items: view-user-items /u <userName>
 View a item: view-item /i <itemId>
 View a transaction: view-tx /t <transactionId>
+View list of user's borrow transaction: view-borrow-tx-by-user /u <userName>
+View list of user's lend transaction: view-lend-tx-by-user /u <userName>
+View the amount of money loss of a user: view-user-loss /u <userName>
+View the amount of money gain of a user: view-user-gain /u <userName>
 
 UPDATE-RELATED-COMMANDS: 
 --------------------
@@ -113,7 +117,7 @@ Sort all items in a range: sort-items /mode <mode: hl or lh> /min <min> /max <ma
 
 ADDITIONAL-DETAILS: 
 --------------------
-Please take note to add a space after delimiters!
+Please take note to add a space before and after delimiters! e.g ' /c '
 Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!
 Refrain from using '|' and '/' as arguments!
 ____________________________________________________________
@@ -127,7 +131,7 @@ ____________________________________________________________
 Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
 Note:
-1. Username is unique, length must be less than 20 chars
+1. Username is unique, length must be no more than 20 chars
 2. Age must be an integer in range from 10 to 100
 3. Contact number must an integer of 8 digits
 
@@ -179,7 +183,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.4. ```view-user``` - View a user
->View the details of a user in the list including the user's items and debt
+>View the details of a user in the list including the user's items and his/her gain and loss
 
 Format: ```view-user /u [USERNAME]```
 
@@ -192,11 +196,20 @@ Expected outcome:
 ```
 ____________________________________________________________
 Here is the user you have requested to view: 
-Username: jingwei Age: 19 Contact: 22384729 
-The user's debt is $0.0
+Username: bui Age: 20 Contact: 12345678 
+The user's loss is $0.0
+The user's gain is $0.0
 Here are 2 item(s) in your list:
-   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
-   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+1. [Available] ItemId: 69b69ff2
+   Item name: charger
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $1.00
+2. [Available] ItemId: 63583a01
+   Item name: battery
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $20.00
 ____________________________________________________________
 ```
 
@@ -208,13 +221,23 @@ Format: `view-user-items /u [USERNAME]`
 Note:
 1. Username must be present in the user list
 
-Example of usage: `view-user-items /u jingwei`
+Example of usage: `view-user-items /u bui`
 
 Expected outcome:
 ```
-Here are 2 item(s) in your list:
-   1. Status: [Available] ItemId: 895c7dd6 Item: scale Category: SPORTS_EQUIPMENT Owner: jingwei PricePerDay: $1.0
-   2. Status: [Available] ItemId: e084cd0a Item: battery Category: ELECTRICAL_APPLIANCES Owner: jingwei PricePerDay: $1.5
+____________________________________________________________
+Here are 2 item(s) in the list:
+1. [Available] ItemId: 69b69ff2
+   Item name: charger
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $1.00
+2. [Available] ItemId: 63583a01
+   Item name: battery
+   Category: ELECTRICAL_APPLIANCES
+   Owner: bui
+   PricePerDay: $20.00
+____________________________________________________________
 ```
 
 #### 3.2.6. ```find-user``` - Find users using keyword
@@ -235,6 +258,8 @@ Here are 2 user(s) in your list:
 2. Username: yixiang Age: 21 Contact: 69324729 
 ____________________________________________________________
 ```
+
+**...To be updated(View-user-loss, view-user-gain)**
 
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
@@ -296,7 +321,7 @@ Example of usage: ```list-items```
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 1 item(s) in your list:
+Here are 1 item(s) in the list:
 1. Status: [On loan] ItemId: ea608c61 
    Item: toy 
    Category: SPORTS_EQUIPMENT 
@@ -362,7 +387,7 @@ Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] 
 Note:
 
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
-2. Mode, minimum price, maximum price and category filters are optional. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
+2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
 3. Minimum and Maximum price must be more than 0 and less than 10000
 4. Minimum price must be less than maximum price
 5. Category number must be an integer, (default: 0, which means all categories)
@@ -424,7 +449,7 @@ Example of usage: ```find-item /k book```
 Expected outcome: 
 ```
 ____________________________________________________________
-Here are 3 item(s) in your list:
+Here are 3 item(s) in the list:
 1. Status: [Available] ItemId: 18c90077 
    Item: book 
    Category: SPORTS_EQUIPMENT 
@@ -465,11 +490,12 @@ Expected outcome:
 ____________________________________________________________
 OK! I will add the following transaction:
 [Finished] TxID: 7ddc865f 
-   ItemName: speaker ItemID: 3ff10798 
+   ItemName: speaker ItemID: 3ff10798
+   Lender: thanh 
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -490,10 +516,11 @@ ____________________________________________________________
 OK! I will remove the following item:
 [Finished] TxID: 7ddc865f 
    ItemName: speaker ItemID: 3ff10798 
+   Lender: thanh 
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -508,19 +535,21 @@ Example of usage: ```list-tx```
 Expected outcome:
 ```
 ____________________________________________________________
-Here are 2 transaction(s) in your list:
+Here are 2 transaction(s) you want to view:
 1. [Unfinished] TxID: 55e36921 
    ItemName: scale ItemID: f15dff20 
+   Lender: thanh 
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: 5.0 
+   MoneyTransacted: $5.0 
 2. [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -540,10 +569,11 @@ ____________________________________________________________
 Here is the transaction you requested to view: 
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -559,17 +589,19 @@ Expected outcome:
 ____________________________________________________________
 Here are the uncompleted transactions: 
 [Unfinished] TxID: 55e36921 
-   ItemName: scale ItemID: f15dff20 
+   ItemName: scale ItemID: f15dff20
+   Lender: thanh  
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: 5.0 
+   MoneyTransacted: $5.0 
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
+   Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: 900.0 
+   MoneyTransacted: $900.0 
 ____________________________________________________________
 ```
 
@@ -590,12 +622,14 @@ ____________________________________________________________
 Done! Here is the updated transaction:
 [Unfinished] TxID: 55e36921 
    ItemName: scale ItemID: f15dff20 
+   Lender: thanh 
    Borrower: jorelle 
    Duration: 10 
    ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
-   MoneyTransacted: 10.0 
+   MoneyTransacted: $10.0 
 ____________________________________________________________
 ```
+**...To be updated(View-borrow-tx, view-lend-tx)**
 
 ### 3.5. Exit Program
 
@@ -621,6 +655,7 @@ ____________________________________________________________
 | Add a new user                     | add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]                                                        |
 | Remove a user                      | remove-user /u [USERNAME]                                                                                  |
 | View a user                        | view-user /u [USERNAME]                                                                                    |
+| View a user's items                | view-user-items /u [USERNAME]                                                                              |
 | List all users                     | list-users                                                                                                 |
 | Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
 | __*Item-related features*__        |                                                                                                            |
@@ -658,10 +693,49 @@ If Duke crashes, is my data saved?
 
 What will happen if I illegally modify data in the files?
 
-> Duke will detect if the data is modified or not, we have two checksum to detect changes in each entry. If yes, it would give you a chance to try to fix the data in the files, but they would not able
-> to use the app until Duke detect your data is fixed. If you cannot fix it, then you have to delete entire ```data``` folder .However, this also means that your previous data cannot be recovered.
-> Please DO NOT EDIT your data files, otherwise, you might have to input all over again.
+> Duke will detect if the data is modified or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
+> to use the app until Duke detect your data is fixed. If you cannot fix it, then you can choose to delete entire ```data``` folder. However, this also means that your previous data cannot be recovered.
+> Please edit your data files at your own risk, otherwise, you might have to input all over again.
 > 
 > Note: 
 > - Duke is designed not to be able to run with corrupted data file, not Duke crashes
-> - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours and loss of data.
+> - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours afterwards and loss of data.
+
+How can I manually edit data files correctly?
+
+>**User file**
+> 
+> Each line represents one user with the format `[USERNAME] | [AGE] | [CONTACT]`
+> 
+> If you edit this files, please make sure: 
+> - Age range is from 10 to 100
+> - If name is edited, please also edit all items of that user in the item files
+> - Contact number length is 8
+> - If user is removed, please also remove all items of that user in the item files
+> 
+> **Item file**
+> 
+> Each line represents one item with the format:
+> 
+> `[ITEMNAME] | [CATEGORY] | [PRICE] | [OWNER] | [ITEMID]`
+> 
+> If you edit this files, please make sure: 
+> 
+> - Price range from 0 to 10000
+> - Currently, we support 8 categories form 1 to 8
+> - Item's name length is no more than 20 characters
+> - Avoid change the name of owner, it can cause error (you can change both in user and item files)
+> - No item ID occurs twice
+> 
+> **Transaction file**
+> 
+> Each line represents one transaction with the format:
+> 
+> `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [TOTALMONEY] | [TRANSACTIONID]`
+> 
+> If you edit this files, please make sure: 
+> 
+> - If the itemId occurs in item list, make sure the item's name and owner(lender) are matched with that item with given ID
+> - Duration range is from 0 to 1461
+> - Created date range is from 2016-01-01 to today
+> - No transaction ID occurs twice

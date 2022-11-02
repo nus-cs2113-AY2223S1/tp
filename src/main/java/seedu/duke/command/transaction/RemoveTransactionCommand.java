@@ -9,7 +9,7 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 //@@author bdthanh
@@ -20,6 +20,9 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 public class RemoveTransactionCommand extends Command {
     private final String[] parts;
     private final TransactionList transactionList;
+    private static final String TX_ID_DELIMITER = "t";
+    private static final int NUMBER_OF_ARGS = 1;
+    private static final int ID_INDEX = 0;
 
     /**
      * Constructor for RemoveItemCommand.
@@ -32,8 +35,8 @@ public class RemoveTransactionCommand extends Command {
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
-        if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+        if (parts.length != NUMBER_OF_ARGS) {
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -44,11 +47,11 @@ public class RemoveTransactionCommand extends Command {
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsRemoveTxCmd() throws InvalidArgumentException {
-        String[] args = new String[1];
+        String[] args = new String[NUMBER_OF_ARGS];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("t")) {
-                args[0] = CommandParser.getArgValue(part);
+            if (delimiter.equals(TX_ID_DELIMITER)) {
+                args[ID_INDEX] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -66,8 +69,8 @@ public class RemoveTransactionCommand extends Command {
     public boolean executeCommand()
             throws TransactionNotFoundException, InvalidArgumentException {
         String[] args = getArgsRemoveTxCmd();
-        assert args.length == 1 : "Args length is invalid";
-        String transactionId = args[0].trim();
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
+        String transactionId = args[ID_INDEX].trim();
         Transaction deletedTransaction = transactionList.getTransactionById(transactionId);
         transactionList.deleteTransaction(transactionId);
         Ui.deleteTransactionMessage(deletedTransaction, transactionList.getSize());

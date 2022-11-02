@@ -27,6 +27,6 @@ public class UserTest {
 
     @Test
     void convertUserToFileFormatTest() {
-        assertEquals("yixiang | 22 | 98126666 | 44", user.convertItemToFileFormat());
+        assertEquals("yixiang | 22 | 98126666", user.convertItemToFileFormat());
     }
 }

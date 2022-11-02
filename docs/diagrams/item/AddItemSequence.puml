@@ -15,7 +15,7 @@ activate ":AddItemCommand"
 ":AddItemCommand" -> ":AddItemCommand": getArgsAddItemCmd()
 activate ":AddItemCommand"
 return args
-alt args is valid
+opt args are valid
     ":AddItemCommand" -> ":Item"**: new Item()
     activate ":Item"
     ":Item" --> ":AddItemCommand"
@@ -28,20 +28,8 @@ alt args is valid
     deactivate ":ItemList"
     deactivate "<<class>>\nUi"
     deactivate ":Item"
-else args is invalid
-    ":AddItemCommand" -> ":DukeException"** : new
-    destroy ":AddItemCommand"
-    activate ":DukeException"
-    ":DukeException" --> ":Duke"
-    deactivate ":DukeException"
-    ":Duke" -> "<<class>>\nUi" : print error
-    activate "<<class>>\nUi"
-    "<<class>>\nUi" -> ":DukeException": getMessage()
-    activate ":DukeException"
-    return
-    destroy ":DukeException"
-    "<<class>>\nUi" --> ":Duke"
-    deactivate "<<class>>\nUi"
+":AddItemCommand" --> ":Duke"
+destroy ":AddItemCommand"
 end
 
 @enduml

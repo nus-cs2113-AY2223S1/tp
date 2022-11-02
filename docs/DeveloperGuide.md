@@ -32,7 +32,8 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 
 ## 1. Introduction
 
-...To be updated
+The goal of Upcycle to create a perfect desktop app dedicated to managing rental businesses. The target audience are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
+The aim of this guide is to help readers understand how the different components of Upcycle is implemented and integrated to create a functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
 
 ## 2. Setup the environment
 
@@ -56,10 +57,10 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
 ### 3.1. Duke
+Duke is the main class where Upcycle will run. Upon running it, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
+Afterwards, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke and sent to the CommandParser class to be parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the data is stored in Storage. If not, an appropriate error is displayed instead.
 
 ![DukeSequence](images/DukeSequence.png)
-
-... To be updated
 
 ### 3.2. Command component
 
@@ -92,14 +93,21 @@ All user-related commands operate mainly on a list of users (userList:UserList).
 
 ### 3.4. Item component
 
-...To be updated
+The Class diagram below show how Item-related classes interact with each other. `Item` object contains `itemId`, `itemName`, `ownerId`, `pricePerDay` and `category` 
+attributes. Among those, `itemId` is created by `IdGenerator`'s static method to create a unique id for each item (To allow for duplicate items), and `category` is created by `Category`'s method to map the item to its specific category.
+Items are stored in `itemList`, which will be loaded and written on the file by `itemStorage` (inherits from `Item`) whenever Upcycle runs or exits. All item-related 
+commands operate mainly on a list of items (itemList:ItemList).
+Both `item` and `itemList` classes have methods that depend on TransactionList as well for cross-checking of information between the classes.
+
+![ItemClassDiagram](images/ItemClassDiagram.png)
 
 ### 3.5. Transaction component
 
-The Class diagram below show how Transaction-related classes interact with each other. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
-attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are parsed by `DateParser`, therefore, Transaction class depends on those two classes.
-Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related 
-commands operate mainly on a list of transaction (transactionList:TransactionList)
+The Class diagram below show how Transaction-related classes interact with each other and theirs components. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
+attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are formatted by `DateParser`. Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` 
+(inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
+
+Some unimportant methods are ignored in this diagram, for example, some "get" methods
 
 ![TransactionClassDiagram](images/TransactionClassDiagram.png)
 
@@ -122,15 +130,28 @@ Below, we detail the design of the UI class with a class diagram
 ### 3.7. Storage component
 
 Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
-The following  diagrams show more details about Storage classes: 
+The following diagrams show more details about Storage classes: 
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
-The data will be loaded when running the program and will be written to the files after each operation. We also implement a checksum system for our data, including 2 checksums: 
-one for each entry, and one for the whole data in one file. For each user/item/transaction, we use a function of the length of toString() as a checksum. And for the whole list, we use a function of the number of 
-entries as a checksum. Then when loading the data, Duke will check both and throw an exception if the data does not match the checksums.
-These files can be found in ```data``` folder in the same directory as the folder containing project root.
+The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
+
+If Duke detects a change the potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
+```
+____________________________________________________________
+The ITEM files has been corrupted at line 1
+Reason: Category index is invalid
+Please use list-categories to check the index of your chosen categories
+Please try to fix your data in your files before running the app again
+If you fix it correctly, you will see a greeting message in the next run
+If you cannot fix it, you will see this message again. Please delete the entire data folder
+to avoid errors, which also mean that all your data will be gone forever
+In that case, we will create three brand-new lists for your users, items, and transactions
+REMEMBER that all files in data folder must be edited correctly
+Do you want to force reset all files and restart? y or n
+____________________________________________________________
+```
 
 ## 4. Implementation
 
@@ -149,7 +170,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command ```add-user /n [NAME] /a [AGE] /c [CONTACT]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddUserCommand``` class to be processed.
 
-Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') are present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidAge()`, `isValidContactNumber()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length,...).
+Step 2: The AddUserCommand command checks if the delimiters ('n', 'a', 'c') are present in the user input through the getArgsAddUserCmd() method. If not present, an exception will be thrown. The command also checks whether the input name, age and contact are valid through `userList.checkValidArgsForUser(args);` methods. An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name, wrong range or format age, wrong contact length,...).
 
 Step 3: If all arguments are valid, then it creates a new `User(arg[0], Integer.parseInt(args[1]), args[2])` with `args[0]` is username, `args[2]` is age, and `args[3]` is contact number
 
@@ -209,7 +230,10 @@ Step 2: The ViewUserCommand command checks if the delimiters ('u') is present in
 
 Step 3: If all arguments are valid, then it finds the user in the userList by his/her name, which is unique:
 
-`userList.getUserById(userName);`
+`userList.getUserById(userName);`.
+
+It will also find the items belonging to the user (`ViewUserItemsCommand.getUserItems`), user's loss (`transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted()`)
+and user's gain (`transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted()`)
 
 Step 4: After finding the user, a message will be displayed to the user via `Ui.viewUserMessage()` method which show the specified user's details.
 
@@ -228,12 +252,50 @@ Step 2: The ViewUserItemsCommand checks if the delimiters ('u') are present in t
 
 Step 3: If argument is valid, then `getUserItems()` will return a list of items whose owner's id equals to the argument.
 
-Step 4: The list of items wil then be displayed to the user via `Ui.printResponse()`.
+Step 4: The list of items will then be displayed to the user via `Ui.printResponse()`.
 
 The following sequence diagram shows how the view-user-items operation works:
 ![viewUserItemsSequence](images/ViewUserItemsSequence.png)
 
 **...To be updated(Find user, View user debt)**
+
+### 4.1.6. Find Users by Keyword
+
+>This feature allows users to find items through the command ```find-user```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```find-user /u [keyword]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```FindUserCommand``` and execute it.
+
+Step 3: FindUserCommand will check for the delimiter "/k". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by Ui.printResponse.
+
+The following sequence diagram models the operation: PENDING DIAGRAM
+
+### 4.1.7. View User Debt
+
+>This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```view-user-debt /u [username]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```ViewUserDebtCommand``` and execute it.
+
+Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
+
+Step 5: `getBorrowTransactionsByUser(username)` is run. The TransactionList is iterated through to find Transactions in which said User is the Borrower. If User is Borrower, the Transaction is added to a new TransactionList, which is then returned.
+
+Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The moneyTransacted in each of the Transactions in the new TransactionList is summed together to give a return value.
+
+Step 7: The total User debt is printed by `Ui.printResponse()`.
+
+The following sequence diagram models the operation: PENDING DIAGRAM
 
 ### 4.2. Item-related Features
 
@@ -245,7 +307,7 @@ Given below is an example usage scenario and how the command mechanism behaves a
 
 Step 1: The user types in the command ```add-item /n [NAME] /c [CATEGORY] /p [PRICE] /o [OWNER]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the ```AddItemCommand``` to be processed.
 
-Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidName()`, `isValidOwner()`, `isValidPrice()` and `isValidCatgoryNumber()` methods. 
+Step 2: The AddItemCommand command checks if the delimiters ('n', 'c', 'p', 'o') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `itemList.checkValidArgsForItem(userList, args)` methods. 
 An exception will also be thrown if the final argument does not satisfy the requirements (duplicate name of item of the same owner, owner not found, wrong range and format price,...).
 
 Step 3: If all arguments are valid, then it creates a new `Item()` with `args[0]` as itemName, `args[2]` as categoryNumber, and `args[3]` as price and `args[4]` as owner's name
@@ -350,7 +412,7 @@ The following sequence diagram shows how the sort items operation works:
 
 ### 4.2.7. List categories
 
->This feature allow users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
+>This feature allows users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -364,7 +426,7 @@ Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will re
 
 ### 4.2.8. Find Items by Keyword
 
->This feature allow users to find items through the command ```find-item```.
+>This feature allows users to find items through the command ```find-item```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -383,13 +445,13 @@ The following sequence diagram models the operation:
 
 #### 4.3.1. Add a Transaction
 
-> This feature allows user to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
+> This feature allows users to add a new transaction to their list and upon successful adding, a confirmation response about the new transaction will be sent from Ui to user
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
 Step 1: The user types in the command ```add-tx /i [ITEMID]/b [BORROWER] /d [DURATION] /c [createdDate]```. The CommandParser class checks if the command is valid through the createCommand() method, and sends the input to the AddTransactionCommand to be processed.
 
-Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `isValidItem()`, `isValidBorrower()`, `isValidDuration()` and `isValidCreatedDate()` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
+Step 2: The AddTransactionCommand command checks if the delimiters ('i', 'b', 'd', 'c') are present in the user input through the getArgsAddItemCmd() method. If not present, an exception will be thrown. The command also checks whether the input's final argument is valid through `checkValidInput(args)` methods. An exception will also be thrown if the final argument does not satisfy the requirements (item not found, user not found, duration wrong format, createdDate wrong format...).
 
 Step 3: If all arguments are valid, then it creates a new `transaction()` with `args[0]` as itemId, `args[2]` as borrowerId, and `args[3]` as duration and `args[4]` as createdDate
 
@@ -453,7 +515,7 @@ Step 4: After finding the transaction, a message will be displayed to the user v
 The following sequence diagram shows how the view transaction operation works:
 ![viewTransactionSequence](images/ViewTransactionSequence.png)
 
-#### 4.3.5. View Transactions By Status
+#### 4.3.5. Find Transactions By Status
 
 > The viewTransactionsByStatus feature is facilitated by the TransactionList class. It extends the command class to add a command for users to view the history of finished or ongoing transactions for recording purposes. The feature implements the following commands:
 
@@ -496,11 +558,32 @@ The following sequence diagram models the operation:
 ![updateTransactionSequence](images/UpdateTransactionSequence.png)
 
 
-**...To be updated(List transaction by User)**
+#### 4.3.7. List Transaction By User
+
+> This feature allows the user to list all the Transactions in which a given User is a Borrower. 
+> - `view-tx-by-user /u [username]`: Lists down all the transactions that have been completed.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the createCommand() method, and either throws an exception, or forwards the input to `ViewTransactionsByUserCommand` class to be processed.
+
+Step 2: `ViewTransactionsByUserCommand::executeCommand` checks if the delimiters ('u') are present in the user input with the `getArgs()` method. If argument not present, an exception will be thrown.
+
+Step 3: If argument is present, it then checks if the User specified exists/ is valid with `ViewTransactionsByUserCommand::isValidUser` . A UserNotFoundException is thrown otherwise.
+
+Step 4: If User is found, it then delegates to `TransactionList::getBorrowTransactionsByUser` which finds the transactions in which a given User is Borrower and returns a TransactionList containing all of them.
+
+Step 5: The returned TransactionList printed to the User via `Ui.printResponse()`
+
+The following sequence diagram models the operation:
 
 ### 4.4. Help Command
 
-**...To be updated**
+>This feature allows users to see all the commands and command format required by Upcycle
+
+Usage is very simple, and is prompted when the user first opens the Upcycle application.
+
+Step 1: Type ```help``` in the command line. A list of all relevant commands are displayed for the user's reference.
 
 ### 4.5. Exit Command
 
@@ -535,50 +618,33 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 
 ## 6. User Stories
 
-| Version | As a ... | I want to ...               | So that I can ...                                             |
-|---------|----------|-----------------------------|---------------------------------------------------------------|
-| v1.0    | new user | see usage instructions      | refer to them when I forget how to use the application        |
-| v1.0    | manager  | add a user                  | he/she may borrow and loan items                              |
-| v1.0    | manager  | view a specific user        | know what items he/she is borrowing and loaning               |
-| v1.0    | manager  | view all users              | see who are available for loaning and borrowing               |
-| v1.0    | manager  | delete a user               | remove the user if he violates community guidelines           |
-| v1.0    | manager  | add an item                 | make the item available for loan                              |
-| v1.0    | manager  | delete an item              | remove the item when a user decides not to loan it            |
-| v1.0    | manager  | create a transaction        | keep a record of that transaction                             |
-| v1.0    | manager  | view a transaction          | keep track of the status of the transaction                   |
-| v1.0    | manager  | delete a transaction        | remove transaction when users change their mind               |
-| v2.0    | manager  | find a item by keyword      | locate an item without going through the list                 |
-| v2.0    | manager  | find a user by keyword      | locate a user without going through the list                  |
-| v2.0    | manager  | view transactions by status | view the transactions that are finished or not finished       |
-| v2.0    | manager  | sort items                  | view items based on its price                                 |
-| v2.0    | manager  | update price                | change the price a user decides to loan his item for          |
-| v2.0    | manager  | update transaction          | change the number of days a user decides to loan his item for |
-| v2.0    | manager  | store my database           | maintain the database without losing my data                  |
+| Version | As a ... | I want to ...                     | So that I can ...                                             |
+|---------|----------|-----------------------------------|---------------------------------------------------------------|
+| v1.0    | new user | see usage instructions            | refer to them when I forget how to use the application        |
+| v1.0    | manager  | add a user                        | he/she may borrow and loan items                              |
+| v1.0    | manager  | view a specific user              | know what items he/she is borrowing and loaning               |
+| v1.0    | manager  | view all users                    | see who are available for loaning and borrowing               |
+| v1.0    | manager  | delete a user                     | remove the user if he violates community guidelines           |
+| v1.0    | manager  | add an item                       | make the item available for loan                              |
+| v1.0    | manager  | delete an item                    | remove the item when a user decides not to loan it            |
+| v1.0    | manager  | view a specific item              | know what the details of the item like itemID and price       |
+| v1.0    | manager  | view all items                    | see what items are available/unavailable for loan             |
+| v1.0    | manager  | create a transaction              | keep a record of that transaction                             |
+| v1.0    | manager  | view a specific transaction       | keep track of the status of the transaction                   |
+| v1.0    | manager  | delete a transaction              | remove transaction when users change their mind               |
+| v2.0    | manager  | find a item by keyword            | locate an item without going through the list                 |
+| v2.0    | manager  | find a user by keyword            | locate a user without going through the list                  |
+| v2.0    | manager  | view transactions by status       | view the transactions that are finished or not finished       |
+| v2.0    | manager  | sort items                        | view items based on its price and categories                  |
+| v2.0    | manager  | update price                      | change the price a user decides to loan his item for          |
+| v2.0    | manager  | update transaction                | change the number of days a user decides to loan his item for |
+| v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
+| v2.0    | manager  | view a user's items               | view the items that belong to a user                          |
+| v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
+| v2.1    | manager  | view a user's lend transactions   | view the transactions in which a user is a lender             |
+| v2.1    | manager  | view a user's loss                | see how much a user has to pay for the items he has borrowed  |
+| v2.1    | manager  | view a user's gain                | see how much a user has earned for items he has lent          |
 
-Feature: Find Item/ User by keyword.
-
-The FindByKeyword feature is mainly facilitated by the classes ItemList and UserList. With this feature, users can search for and easily view all Users/Items that match the keyword they enter. The exact commands to be entered by the user are as follows:
-
-find-item /k [keyword] - prints a list of items which match or contain the given keyword
-find-user /k [keyword] - prints a list of users which match or contain the given keyword
-
-The operations and functions implemented are as follows:
-
-FindItemCommand(parts, itemList)
-
-FindUserCommand(parts, userList)
-
-ItemList.getItemsByKeyword(keyword, itemList)
-
-UserList.getUsersByKeyword(keyword,userList)
-
-Given below is an example usage scenario and how the FindItem mechanism works at each step. There are 5 Items in the ItemList, as shown in the object diagram below.
-
-![Figure: ItemList Object Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/ItemList.png)
-
-The user enters the following command: “find-item /k Book”. In this case, the keyword is book. The entire ItemList is iterated through, and an ItemList containing all the Items which contain the keyword is returned. 3 Items contain the keyword “Book”, hence these 3 items are returned by the function ItemList.getItemsByKeyword. This ItemList is then converted to a String via the method ItemList.toString, and printed by Ui.printResponse so that the user is able to see all the matching Items. The sequence diagram is shown below.
-
-![Figure: FindItem Sequence Diagram](https://raw.githubusercontent.com/AY2223S1-CS2113-W12-1/tp/master/docs/diagrams/FindItemSequence.png)
 
 ## 7. Non-Functional Requirements
 
@@ -589,7 +655,15 @@ The user enters the following command: “find-item /k Book”. In this case, th
 
 ## 8. Glossary
 
-|||
+| Term          | Definition                 |
+|---------------|----------------------------|
+| tx            | Transaction                |
+| UI            | User Interface             |
+| Mainstream OS | Windows, Linux, Unix, OS-X |
+
+...TO BE UPDATED
+
+
 
 ## 9. Instructions for manual testing
 

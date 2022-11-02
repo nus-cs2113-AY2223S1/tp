@@ -12,12 +12,12 @@ import seedu.duke.transaction.TransactionList;
 import seedu.duke.user.User;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_BORROWING;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_USER_LENDING;
 
-//@@author bdthanh
+// @@author bdthanh
 
 /**
  * A representation of a command to remove a user.
@@ -27,24 +27,27 @@ public class RemoveUserCommand extends Command {
     private final UserList userList;
     private final ItemList itemList;
     private final TransactionList transactionList;
+    private static final String USER_ID_DELIMITER = "u";
+    private static final int NUMBER_OF_ARGS = 1;
+    private static final int ID_INDEX = 0;
 
     /**
      * Constructor for RemoveUserCommand.
      *
-     * @param parts           The parts from user input
-     * @param userList        The list of users to work with
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param userList The list of users to work with
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
     public RemoveUserCommand(String[] parts, UserList userList, ItemList itemList,
-                             TransactionList transactionList) throws InsufficientArgumentsException {
+            TransactionList transactionList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.userList = userList;
         this.itemList = itemList;
         this.transactionList = transactionList;
-        if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+        if (parts.length != NUMBER_OF_ARGS) {
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -55,11 +58,11 @@ public class RemoveUserCommand extends Command {
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      */
     private String[] getArgsRemoveUserCmd() throws InvalidArgumentException {
-        String[] args = new String[1];
+        String[] args = new String[NUMBER_OF_ARGS];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("u")) {
-                args[0] = CommandParser.getArgValue(part);
+            if (delimiter.equals(USER_ID_DELIMITER)) {
+                args[ID_INDEX] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
             }
@@ -106,14 +109,14 @@ public class RemoveUserCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws InvalidUserException     If he/har is currently lending or borrowing
-     * @throws UserNotFoundException    If the user cannot be found in the list
+     * @throws InvalidUserException If he/har is currently lending or borrowing
+     * @throws UserNotFoundException If the user cannot be found in the list
      */
     public boolean executeCommand()
             throws InvalidArgumentException, InvalidUserException, UserNotFoundException {
         String[] args = getArgsRemoveUserCmd();
-        assert args.length == 1 : "Args length is invalid";
-        String username = args[0];
+        assert args.length == NUMBER_OF_ARGS : "Args length is invalid";
+        String username = args[ID_INDEX];
         User user = userList.getUserById(username);
         if (canDeleteUser(username, transactionList)) {
             userList.deleteUser(username);
