@@ -34,9 +34,8 @@ public class AddPassengerCommand extends Command {
     }
 
     @Override
-    public void execute(OperationList passengers, String lineInput) {
+    public void execute(OperationList passengers, String passengerDetail) {
         try {
-            getPassengerDetail(lineInput);
             passengers.addOperation(passengerDetail);
         } catch (Exception e) {
             ui.showError(e.getMessage());
