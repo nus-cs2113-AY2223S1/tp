@@ -150,8 +150,8 @@ public class ModuleList {
      */
     public boolean findMatch(String keyword, Module mod) {
         try {
-            return mod.getCourse().equals(keyword) || mod.getGrade().equals(keyword) ||
-                    mod.getSemesterTaken().equals(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
+            return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
+                    mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
         } catch (NumberFormatException e) {
             return false;
         }
