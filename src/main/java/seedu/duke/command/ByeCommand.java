@@ -3,12 +3,12 @@ package seedu.duke.command;
 //@@author paullowse
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_BYE;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_BYE;
+import static seedu.duke.common.HelpMessages.BYE_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.BYE_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_EXIT;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a bye command object that will execute the operations for Bye command.
@@ -17,14 +17,6 @@ public class ByeCommand extends Command {
     //@@author paullowse
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "BYE";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information: -NIL-";
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_BYE + LINE_SEPARATOR + COMMAND_USAGE_BYE + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
     //@@author paullowse
     public ByeCommand() {
@@ -41,6 +33,28 @@ public class ByeCommand extends Command {
     public void execute(TransactionList transactions, Ui ui, Storage storage) {
         Ui.showInfoMessage(INFO_EXIT.toString());
     }
+
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return BYE_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return BYE_COMMAND_DETAILED_HELP;
+    }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

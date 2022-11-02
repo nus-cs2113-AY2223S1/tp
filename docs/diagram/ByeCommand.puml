@@ -1,0 +1,32 @@
+@startuml
+!include Style.puml
+
+class ByeCommand {
++ COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+
+    +{abstract}execute()
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +{abstract}execute()
+}
+
+
+"{abstract}\n Command" <|-- ByeCommand
+@enduml

@@ -1,5 +1,18 @@
 package seedu.duke.common;
 
+import seedu.duke.command.AddCommand;
+import seedu.duke.command.ByeCommand;
+import seedu.duke.command.BudgetCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.StatsCommand;
+import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.PurgeCommand;
+
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+
 /**
  * Provides enum variables for storing help messages across all command classes.
  */
@@ -15,57 +28,168 @@ public enum HelpMessages {
             + "specified."),
     COMMAND_DESCRIPTION_HELP("Display basic or detailed help information explaining the commands available in the "
             + "application."),
-    COMMAND_DESCRIPTION_LIST("List all or some transactions based on selection. If tag filters are used, the "
-            + "transactions retrieved from the records must match all the filter tags that have been specified in "
-            + "order to be recognized as a valid record. The m/MONTH and y/YEAR tags should not be used together "
-            + "with p/PERIOD and n/NUMBER tags."),
+    COMMAND_DESCRIPTION_LIST("List all or some transactions based on selection." + LINE_SEPARATOR
+            + "If tag filters are used, the transactions retrieved from the records must match all the filter tags"
+            + LINE_SEPARATOR + "that have been specified in order to be recognized as a valid record."),
     COMMAND_DESCRIPTION_PURGE("Delete all transaction entries from the list of transactions. User must enter 'Y' "
             + "to confirm the purge."),
     COMMAND_DESCRIPTION_STATS("View financial insights such as categorical savings and periodic expenditure based on "
-            + "the transaction entries in the application. The m/MONTH and y/YEAR tags should not be used together "
-            + "with p/PERIOD and n/NUMBER tags."),
+            + "the transaction entries in the application."),
 
     // The guiding information for the usage of command
-    COMMAND_USAGE_ADD("Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION"),
-    COMMAND_USAGE_BUDGET("Usage: budget b/BUDGET"),
-    COMMAND_USAGE_BYE("Usage: bye"),
-    COMMAND_USAGE_DELETE("Usage: delete e/ENTRY"),
-    COMMAND_USAGE_EDIT("Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]"),
-    COMMAND_USAGE_FIND("Usage: find KEYWORDS"),
-    COMMAND_USAGE_HELP("Usage: help [o/detailed]"),
-    COMMAND_USAGE_LIST("Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]"),
-    COMMAND_USAGE_PURGE("Usage: purge"),
-    COMMAND_USAGE_STATS("Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]"),
+    COMMAND_USAGE_ADD("add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION"),
+    COMMAND_USAGE_BUDGET("budget b/BUDGET"),
+    COMMAND_USAGE_BYE("bye"),
+    COMMAND_USAGE_DELETE("delete e/ENTRY"),
+    COMMAND_USAGE_EDIT("edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]"),
+    COMMAND_USAGE_FIND("find KEYWORDS"),
+    COMMAND_USAGE_HELP("help [o/detailed] [q/COMMAND]"),
+    COMMAND_USAGE_LIST(LINE_SEPARATOR
+            + "\t(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]" + LINE_SEPARATOR
+            + "\t(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR"
+            + LINE_SEPARATOR
+            + "\t(3) Listing on last N weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER"),
+    COMMAND_USAGE_PURGE("purge"),
+    COMMAND_USAGE_STATS(LINE_SEPARATOR
+            + "\t(1) Categorical savings: stats s/categorical_savings" + LINE_SEPARATOR
+            + "\t(2) Monthly expenditure: stats s/monthly_expenditure" + LINE_SEPARATOR
+            + "\t(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]" + LINE_SEPARATOR
+            + "\t(4) Insights on last N weeks or months: stats s/time_insights p/PERIOD n/NUMBER"),
 
     // The formatting information for the parameters used by the command
-    COMMAND_PARAMETERS_DETAILED("- detailed: A detailed version of the guide."),
-    COMMAND_PARAMETERS_TYPE("- TYPE: The type of transaction. It should either be \"expense\" or \"income\"."),
-    COMMAND_PARAMETERS_CATEGORY("- CATEGORY: A category for the transaction. It is a one-word parameter "
-            + "flexibly defined by the user. No numeral, symbol or spacing is allowed."),
     COMMAND_PARAMETERS_AMOUNT("- AMOUNT: The amount for the transaction. It is a positive whole number ranging "
-            + "from 1 to 10000000. No alphabet, symbol or spacing is allowed."),
+            + "from 1 to 10000000 (Ten Million)."),
+    COMMAND_PARAMETERS_BUDGET("- BUDGET: An estimate of expense for every month. It is a "
+            + "positive whole number ranging from 1 to 10^13 (Ten Trillion)."),
+    COMMAND_PARAMETERS_CATEGORY("- CATEGORY: A category for the transaction. "
+            + "It can be any word without numeral, symbol or spacing."),
+    COMMAND_PARAMETERS_COMMAND("- COMMAND: A case-insensitive command word to search for."),
     COMMAND_PARAMETERS_DATE("- DATE: The date when the transaction took place on. It must be in ddMMyyyy "
             + "format, e.g. 29102022."),
-    COMMAND_PARAMETERS_DESCRIPTION("- DESCRIPTION: More information regarding the transaction. It is a one-word"
-            + " parameter defined by the user without any spacing."),
+    COMMAND_PARAMETERS_DESCRIPTION("- DESCRIPTION: More information regarding the transaction. "
+            + "It is any word without any spacing."),
+    COMMAND_PARAMETERS_DETAILED("- detailed: A detailed version of the guide."),
     COMMAND_PARAMETERS_ENTRY("- ENTRY: A list entry value for the transaction. It is a positive whole number "
             + "ranging from 1 to 1000000."),
     COMMAND_PARAMETERS_KEYWORDS("- KEYWORDS: A string that represents a single or a group of words used to find "
             + "matching transactions. Spacing is allowed."),
-    COMMAND_PARAMETERS_BUDGET("- BUDGET: An estimate of expense for every month. . It is a "
-            + "positive whole number that is from 1 to 10^13 (Ten Trillion). No alphabet, symbol or spacing is "
-            + "allowed."),
+    COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is in numerical form, i.e. "
+            + "from 1 to 12, where 1 represents January." + LINE_SEPARATOR
+            + "\t\t<!> - MONTH parameter must be used together with the YEAR parameter."),
+    COMMAND_PARAMETERS_NUMBER("- NUMBER: The last N number of weeks or months. "
+            + "It is a positive whole number ranging from 1 to 100." + LINE_SEPARATOR
+            + "\t\t<!> - NUMBER parameter must be used together with the PERIOD parameter."),
+    COMMAND_PARAMETERS_PERIOD("- PERIOD: The period which the transaction falls on. "
+            + "It should either be weeks or months." + LINE_SEPARATOR
+            + "\t\t<!> - PERIOD parameter must be used together with the NUMBER parameter."),
     COMMAND_PARAMETERS_STATS_TYPE("- STATS_TYPE: The type of statistics. It can be \"categorical_savings\", "
             + "\"monthly_expenditure\", or \"time_insights\"."),
+
+    COMMAND_PARAMETERS_TYPE("- TYPE: The type of transaction. It should either be \"expense\" or \"income\"."),
     COMMAND_PARAMETERS_YEAR("- YEAR: The year which the transaction falls on. It must be in yyyy format and "
             + "only year 1000 and onwards are accepted."),
-    COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is in numerical form, i.e. "
-            + "from 1 to 12, where 1 represents January. This parameter must be used together with the YEAR "
-            + "parameter."),
-    COMMAND_PARAMETERS_PERIOD("- PERIOD: The period which the transaction falls on. It should either be weeks or "
-            + "months. This parameter must be used together with the NUMBER parameter."),
-    COMMAND_PARAMETERS_NUMBER("- NUMBER: The last N number of weeks or months. It is a positive whole number that "
-            + "is from 1 to 100. This parameter must be used together with the PERIOD parameter.");
+    COMMAND_HEADER_USAGE("Usage: "),
+    COMMAND_HEADER_USAGES("Usages: "),
+    COMMAND_HEADER_COMMAND_WORD("Command Word: "),
+    COMMAND_HEADER_PARAMETERS("Parameters information:"),
+    COMMAND_HEADER_EMPTY_PARAMETER("Parameters information: -NIL-"),
+
+    //@@author chinhan99
+    ADD_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DESCRIPTION),
+    ADD_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + AddCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_ADD + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_ADD + LINE_SEPARATOR),
+    ADD_COMMAND_DETAILED_HELP(ADD_COMMAND_BASIC_HELP.toString() + ADD_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR),
+
+    //@@author wcwy
+    BUDGET_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_BUDGET),
+    BUDGET_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + BudgetCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_BUDGET + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_BUDGET + LINE_SEPARATOR),
+    BUDGET_COMMAND_DETAILED_HELP(BUDGET_COMMAND_BASIC_HELP.toString() + BUDGET_COMMAND_PARAMETERS_INFO
+            + LINE_SEPARATOR),
+
+    //@@author paullowse
+    BYE_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD +  ByeCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_BYE + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_BYE + LINE_SEPARATOR),
+    BYE_COMMAND_DETAILED_HELP(BYE_COMMAND_BASIC_HELP.toString() + COMMAND_HEADER_EMPTY_PARAMETER + LINE_SEPARATOR),
+
+    //@@author brian-vb
+    DELETE_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_ENTRY),
+    DELETE_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + DeleteCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_DELETE + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_DELETE + LINE_SEPARATOR),
+    DELETE_COMMAND_DETAILED_HELP(DELETE_COMMAND_BASIC_HELP.toString() + DELETE_COMMAND_PARAMETERS_INFO
+            + LINE_SEPARATOR),
+
+    //@@author brian-vb
+    EDIT_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_ENTRY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DESCRIPTION),
+    EDIT_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + EditCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_EDIT + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_EDIT + LINE_SEPARATOR),
+    EDIT_COMMAND_DETAILED_HELP(EDIT_COMMAND_BASIC_HELP.toString() + EDIT_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR),
+
+    //@@author chydarren
+    FIND_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_KEYWORDS),
+    FIND_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + FindCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_FIND + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_FIND + LINE_SEPARATOR),
+    FIND_COMMAND_DETAILED_HELP(FIND_COMMAND_BASIC_HELP.toString() + FIND_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR),
+
+    //@@author wcwy
+    HELP_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DETAILED + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_COMMAND),
+    HELP_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + HelpCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_HELP + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_HELP + LINE_SEPARATOR),
+    HELP_COMMAND_DETAILED_HELP(HELP_COMMAND_BASIC_HELP.toString() + HELP_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR),
+
+    //@@author chydarren
+    LIST_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_NUMBER),
+    LIST_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + ListCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_LIST + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGES + COMMAND_USAGE_LIST + LINE_SEPARATOR),
+    LIST_COMMAND_DETAILED_HELP(LIST_COMMAND_BASIC_HELP.toString() + LIST_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR),
+
+    //@@author brian-vb
+    PURGE_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + PurgeCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_PURGE + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGE + COMMAND_USAGE_PURGE + LINE_SEPARATOR),
+    PURGE_COMMAND_DETAILED_HELP(PURGE_COMMAND_BASIC_HELP.toString() + COMMAND_HEADER_EMPTY_PARAMETER + LINE_SEPARATOR),
+
+    //@@author paullowse
+    STATS_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_STATS_TYPE + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_NUMBER),
+    STATS_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + StatsCommand.COMMAND_WORD + LINE_SEPARATOR
+            + COMMAND_DESCRIPTION_STATS + LINE_SEPARATOR
+            + COMMAND_HEADER_USAGES + COMMAND_USAGE_STATS + LINE_SEPARATOR),
+    STATS_COMMAND_DETAILED_HELP(STATS_COMMAND_BASIC_HELP.toString() + STATS_COMMAND_PARAMETERS_INFO + LINE_SEPARATOR);
 
     //@@author chydarren
     public final String message;

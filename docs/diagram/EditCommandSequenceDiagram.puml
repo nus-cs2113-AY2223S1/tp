@@ -1,0 +1,133 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:EditCommand" as EditCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "Transaction" as Transaction
+Participant "ui:Ui" as Ui
+Participant ":Budget" as Budget
+
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("edit e/2 t/expense c/food a/10 d/20102022 i/chicken")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("edit e/2 t/expense c/food a/10 d/20102022 i/chicken")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create EditCommand
+CommandParser -> EditCommand
+activate EditCommand
+return
+
+return command: EditCommand
+
+return command: EditCommand
+deactivate CommandParser
+
+Duke -> EditCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate EditCommand
+
+EditCommand -> Transactions:transactions.size()
+activate Transactions
+return numberOfTransactions: int
+
+alt isInputValid is true
+    EditCommand -> Transactions:getEntry(index: int)
+    activate Transactions
+    return entry: Transaction
+    opt newType is null
+        EditCommand -> Transaction:getType()
+        activate Transaction
+        return newType: String
+    end
+    alt newType is Expense
+        opt newDate is null
+            EditCommand -> Transaction:getDate()
+            activate Transaction
+            return newDate: LocalDate
+        end
+        opt newDescription is null
+            EditCommand -> Transaction:getDescription()
+            activate Transaction
+            return newDescription: String
+        end
+        opt newCategory is null
+            EditCommand -> Transaction:getCategory()
+            activate Transaction
+            return newCategory: String
+        end
+        opt newAmount is zero
+            EditCommand -> Transaction:getAmount()
+            activate Transaction
+            return newAmount: String
+        end
+        EditCommand -> Transactions:deleteTransaction(index: int)
+        activate Transactions
+        return
+        EditCommand -> Transactions:editExpense(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
+        activate Transactions
+        return message: String
+        EditCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
+        activate Transactions
+        return addedMonthExpenseSum: long
+        EditCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
+        activate Budget
+        return BudgetInfo: String
+        EditCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
+        activate Ui
+        return
+    else else
+        opt newDate is null
+            EditCommand -> Transaction:getDate()
+            activate Transaction
+            return newDate: LocalDate
+        end
+        opt newDescription is null
+            EditCommand -> Transaction:getDescription()
+            activate Transaction
+            return newDescription: String
+        end
+        opt newCategory is null
+            EditCommand -> Transaction:getCategory()
+            activate Transaction
+            return newCategory: String
+        end
+        opt newAmount is zero
+            EditCommand -> Transaction:getAmount()
+            activate Transaction
+            return newAmount: String
+        end
+        EditCommand -> Transactions:deleteTransaction(index: int)
+        activate Transactions
+        return
+        EditCommand -> Transactions:editIncome(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
+        activate Transactions
+        return message: String
+        EditCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
+        activate Transactions
+        return addedMonthExpenseSum: long
+        EditCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
+        activate Budget
+        return BudgetInfo: String
+        EditCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
+        activate Ui
+        return
+    end
+else else
+    EditCommand -> Ui:showErrorMessage(message: String)
+    activate Ui
+    return
+end
+
+@enduml
