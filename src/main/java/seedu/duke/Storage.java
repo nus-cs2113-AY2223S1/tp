@@ -44,7 +44,7 @@ public class Storage {
     private static final String APPENDED_ZEROES_TO_YEAR_BELOW_TEN = "000";
     private static final String TYPE_TAG = CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
-    // A spacing has to be added in front of the tags so that the string vcan be properly parsed
+    // A spacing has to be added in front of the tags so that the string can be properly parsed
     private static final String CATEGORY_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
     private static final String AMOUNT_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
     private static final String DATE_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DATE;
