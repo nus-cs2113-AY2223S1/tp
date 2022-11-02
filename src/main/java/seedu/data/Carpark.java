@@ -1,15 +1,19 @@
 package seedu.data;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.jetbrains.annotations.NotNull;
 
 import seedu.common.CommonData;
+import seedu.exception.InvalidFormatException;
 import seedu.parser.search.Sentence;
 import seedu.parser.search.Word;
 import seedu.ui.Ui;
@@ -92,14 +96,32 @@ public class Carpark implements Comparable<Carpark> {
         return bufferString.toString();
     }
 
+    public String getSaveString() {
+        String saveStringFormat = "%s || %s || %s || %s || %s || %s || %s || %s || %s \n";
+        String allAvailableLotsString = String.format("%s %s %s", allAvailableLots.get(LotType.CAR),
+                allAvailableLots.get(LotType.MOTORCYCLE), allAvailableLots.get(LotType.HEAVY_VEHICLE));
+        return String.format(saveStringFormat, carparkId, area, development, location, availableLots,
+                allAvailableLotsString, isFavourited, agency, lastUpdated.format(CommonData.DATE_TIME_FORMATTER));
+    }
+
     @JsonProperty("CarParkID")
     public String getCarparkId() {
         return carparkId;
     }
 
     @JsonProperty("CarParkID")
-    public void setCarparkId(String carparkId) {
+    public void setCarparkId(String carparkId) throws InvalidFormatException {
+        exceptIfBlank(carparkId);
+        validateFormat(carparkId);
         this.carparkId = carparkId;
+    }
+
+    private void validateFormat(String carparkId) throws InvalidFormatException {
+        Pattern carparkIdPattern = Pattern.compile("^[a-zA-Z]*[0-9]*[a-zA-Z]*$|^[0-9]$");
+        Matcher carparkIdMatcher = carparkIdPattern.matcher(carparkId);
+        if (!carparkIdMatcher.matches()){
+            throw new InvalidFormatException("Invalid Carpark ID format!");
+        }
     }
 
     @JsonProperty("Area")
@@ -118,7 +140,8 @@ public class Carpark implements Comparable<Carpark> {
     }
 
     @JsonProperty("Development")
-    public void setDevelopment(String development) {
+    public void setDevelopment(String development) throws InvalidFormatException {
+        exceptIfBlank(development);
         this.development = development;
         developmentSentence = new Sentence(development);
     }
@@ -160,13 +183,28 @@ public class Carpark implements Comparable<Carpark> {
     }
 
     @JsonProperty("AvailableLots")
-    public void setAvailableLots(String availableLots) {
+    public void setAvailableLots(String availableLots) throws InvalidFormatException {
+        exceptIfBlank(availableLots);
+        int parsedValue;
+
         try {
-            this.availableLots = Integer.parseInt(availableLots);
+            parsedValue = Integer.parseInt(availableLots);
         } catch (NumberFormatException e) {
-            this.availableLots = 0;
+            throw new InvalidFormatException("Invalid number format!");
         }
+
+        validateAvailableLots(parsedValue, availableLots);
+        this.availableLots = parsedValue;
         lastUpdated = LocalDateTime.now();
+    }
+
+    private void validateAvailableLots(int value, String compareString) throws InvalidFormatException {
+        if (!Integer.toString(value).equals(compareString)) {
+            throw new InvalidFormatException("Invalid number format! Available lots cannot be a float.");
+        }
+        if (value < 0) {
+            throw new InvalidFormatException("Invalid number format! Number cannot be negative!");
+        }
     }
 
     @JsonProperty("Agency")
@@ -183,8 +221,12 @@ public class Carpark implements Comparable<Carpark> {
         isFavourited = bool;
     }
 
-    public void setLastUpdated(String dateTimeString) {
-        lastUpdated = LocalDateTime.parse(dateTimeString, CommonData.DATE_TIME_FORMATTER);
+    public void setLastUpdated(String dateTimeString) throws InvalidFormatException {
+        try {
+            lastUpdated = LocalDateTime.parse(dateTimeString, CommonData.DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidFormatException("Invalid last updated string!");
+        }
     }
 
     /**
@@ -222,20 +264,60 @@ public class Carpark implements Comparable<Carpark> {
         return developmentSentence;
     }
 
-    public String getSaveString() {
-        String saveStringFormat = "%s || %s || %s || %s || %s || %s || %s || %s || %s \n";
-        String allAvailableLotsString = String.format("%s %s %s", allAvailableLots.get(LotType.CAR),
-                allAvailableLots.get(LotType.MOTORCYCLE), allAvailableLots.get(LotType.HEAVY_VEHICLE));
-        return String.format(saveStringFormat, carparkId, area, development, location, availableLots,
-                allAvailableLotsString, isFavourited, agency, lastUpdated.format(CommonData.DATE_TIME_FORMATTER));
+    public void setAllAvailableLots(String params) throws InvalidFormatException {
+        int carLots;
+        int motorCycleLots;
+        int heavyVehicleLots;
+        String[] lots = params.split(" ");
+
+        try {
+            carLots = Integer.parseInt(lots[0]);
+            motorCycleLots = Integer.parseInt(lots[1]);
+            heavyVehicleLots = Integer.parseInt(lots[2]);
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException("Invalid number format!");
+        }
+        validateLotNumbers(carLots, motorCycleLots, heavyVehicleLots, lots);
+        validateNonNegative(lots);
+
+        addCarparkLotType(LotType.CAR, Integer.parseInt(lots[0]));
+        addCarparkLotType(LotType.MOTORCYCLE, Integer.parseInt(lots[1]));
+        addCarparkLotType(LotType.HEAVY_VEHICLE, Integer.parseInt(lots[2]));
+        updateAvailableLotsTotal();
     }
+
+    private void validateNonNegative(String[] lots) throws InvalidFormatException {
+        for (String lot : lots) {
+            if (Integer.parseInt(lot) < 0) {
+                throw new InvalidFormatException("No negative numbers allowed!");
+            }
+        }
+    }
+
+    private static void validateLotNumbers(int carLots, int motorCycleLots, int heavyVehicleLots, String[] lots) throws InvalidFormatException {
+        if (!Integer.toString(carLots).equals(lots[0]) && !Integer.toString(motorCycleLots).equals(lots[1])
+                && !Integer.toString(heavyVehicleLots).equals(lots[2])) {
+            throw new InvalidFormatException("Invalid number format!");
+        }
+    }
+
+    public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
+        allAvailableLots = newAvailableLots;
+        updateAvailableLotsTotal();
+    }
+
+    public void setFavourite(boolean setFavourite) {
+        isFavourited = setFavourite;
+    }
+
 
     /**
      * Static method to generate a {@link CarparkList} object from a save string.
      * @param saveString string to be parsed
      * @return generated object.
      */
-    public static Carpark parseCarpark(String saveString) {
+    public static Carpark parseCarpark(String saveString) throws InvalidFormatException {
+        validateNumberOfParams(saveString);
         String[] params = removeWhitespaces(saveString.split("\\|\\|"));
         Carpark parsedCarpark = new Carpark();
         parsedCarpark.setCarparkId(params[0]);
@@ -251,22 +333,23 @@ public class Carpark implements Comparable<Carpark> {
         return parsedCarpark;
     }
 
+    private static void validateNumberOfParams(String saveString) throws InvalidFormatException {
+        Pattern delimiterPattern = Pattern.compile("\\|\\|");
+        Matcher patternMatcher = delimiterPattern.matcher(saveString);
+
+        int count = 0;
+        while (patternMatcher.find()) {
+            count++;
+        }
+        if (count != 8) {
+            throw new InvalidFormatException("Invalid format in save string!");
+        }
+    }
+
     public void updateTime() {
         lastUpdated = LocalDateTime.now();
     }
 
-    public void setAllAvailableLots(String params) {
-        String[] lots = params.split(" ");
-        addCarparkLotType(LotType.CAR, Integer.parseInt(lots[0]));
-        addCarparkLotType(LotType.MOTORCYCLE, Integer.parseInt(lots[1]));
-        addCarparkLotType(LotType.HEAVY_VEHICLE, Integer.parseInt(lots[2]));
-        updateAvailableLotsTotal();
-    }
-
-    public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
-        allAvailableLots = newAvailableLots;
-        updateAvailableLotsTotal();
-    }
 
     private static String[] removeWhitespaces(String[] arr) {
         for (int i = 0; i < arr.length; ++i) {
@@ -275,9 +358,6 @@ public class Carpark implements Comparable<Carpark> {
         return arr;
     }
 
-    public void setFavourite(boolean setFavourite) {
-        isFavourited = setFavourite;
-    }
 
     public HashMap<LotType, Integer> getAllAvailableLots() {
         return allAvailableLots;
@@ -367,6 +447,12 @@ public class Carpark implements Comparable<Carpark> {
             return Integer.parseInt(string.replaceAll("[^0-9]", ""));
         } catch (NumberFormatException e) {
             return 0;
+        }
+    }
+
+    private void exceptIfBlank(String input) throws InvalidFormatException {
+        if (input.isBlank()) {
+            throw new InvalidFormatException("A field is empty! This should not be.");
         }
     }
 }
