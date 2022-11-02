@@ -2,6 +2,7 @@ package seedu.duke;
 
 import exceptions.DukeException;
 import exceptions.IllegalCharacterException;
+import exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -67,6 +68,14 @@ class ParserTest {
         String addString = "|";
         assertThrows(IllegalCharacterException.class, () -> {
             ps.checkIllegalCharacter(addString);
+        });
+    }
+
+    @Test
+    void emptyCommandFieldsTest() {
+        String empty = "";
+        assertThrows(InvalidCommandException.class, () -> {
+            ps.checkEmptyCommand(empty);
         });
     }
 
