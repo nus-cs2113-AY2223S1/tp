@@ -1,4 +1,7 @@
-package seedu.duke;
+package commands;
+
+import seedu.duke.Media;
+import seedu.duke.ReviewList;
 
 public class RemoveCommand extends Commands {
     private final String cannotFind = "Unable to find item for specified type and index";

@@ -1,4 +1,9 @@
-package seedu.duke;
+package commands;
+
+import seedu.duke.Media;
+import seedu.duke.Movie;
+import seedu.duke.ReviewList;
+import seedu.duke.TvShow;
 
 public class ListCommand extends Commands {
     private final String outputString = "---Here are the reviews in your list---\n";

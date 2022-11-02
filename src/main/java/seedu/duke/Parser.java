@@ -1,5 +1,17 @@
 package seedu.duke;
 
+import commands.Commands;
+import commands.AddCommand;
+import commands.ClearCommand;
+import commands.RemoveCommand;
+import commands.FavouriteCommand;
+import commands.ListCommand;
+import commands.SortCommand;
+import commands.FindCommand;
+import exceptions.DukeException;
+import exceptions.IllegalCharacterException;
+import exceptions.InvalidCommandException;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,11 +56,17 @@ public class Parser {
     /**.
      * Checks user input for illegal "|" character
      * @param userInput Raw input given by user
-     * @throws DukeException Exception thrown if input contains "|"
+     * @throws IllegalCharacterException Exception thrown if input contains "|"
      */
-    public void checkIllegalCharacter(String userInput) throws DukeException {
+    public void checkIllegalCharacter(String userInput) throws IllegalCharacterException {
         if (userInput.contains("|")) {
-            throw new DukeException();
+            throw new IllegalCharacterException();
+        }
+    }
+
+    public void checkEmptyCommand(String parsedInput) throws InvalidCommandException {
+        if (parsedInput.isEmpty()) {
+            throw new InvalidCommandException();
         }
     }
 
@@ -115,7 +133,7 @@ public class Parser {
                 Ui.print("Unrecognised command");
                 break;
             }
-        } catch (DukeException e) {
+        } catch (IllegalCharacterException e) {
             Ui.print("Illegal character entered!");
         }
     }
@@ -146,7 +164,7 @@ public class Parser {
     //@@author naz019
     public void executeSort(String[] words) {
         try {
-            executor = new SortCommand(mediaList, words);
+            Commands executor = new SortCommand(mediaList, words);
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tSort command executed");
@@ -188,18 +206,27 @@ public class Parser {
         String genre;
         Media toAdd;
         String[] dateFields;
-        
+
         try {
             title = fields[POS_TITLE].substring(spacingType);
+            checkEmptyCommand(title);
             rating = Double.parseDouble(fields[POS_RATING].substring(SPACING_RATING));
+            checkEmptyCommand(Double.toString(rating));
             date = fields[POS_DATE].substring(SPACING_DATE);
+            checkEmptyCommand(date);
             genre = fields[POS_GENRE].substring(SPACING_GENRE);
+            checkEmptyCommand(genre);
             dateFields = date.split("-");
         } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
             Ui.print("Ensure that input format and number of arguments is correct.");
             return;
+        } catch (InvalidCommandException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("Fields cannot be left empty!");
+            return;
         }
+
         try {
             if (!isValidDate(dateFields)) {
                 throw new Exception();
@@ -273,7 +300,7 @@ public class Parser {
             Ui.print("Ensure that input format and number of arguments is correct.");
         }
     }
-    
+
     //@@author matthewphua
     /**
      * Executes the clear action by creating a clear object.

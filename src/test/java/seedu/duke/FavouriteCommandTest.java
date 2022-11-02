@@ -1,7 +1,7 @@
 package seedu.duke;
 
+import commands.FavouriteCommand;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.ls.LSOutput;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;

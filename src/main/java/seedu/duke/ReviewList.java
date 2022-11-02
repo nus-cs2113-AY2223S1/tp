@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class ReviewList {
-    protected ArrayList<Media> inputs;
+    public ArrayList<Media> inputs;
 
     public ReviewList() {
         this.inputs = new ArrayList<Media>();

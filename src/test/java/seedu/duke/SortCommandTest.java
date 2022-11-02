@@ -1,10 +1,10 @@
 package seedu.duke;
 
+import commands.SortCommand;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;

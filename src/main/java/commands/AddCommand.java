@@ -1,9 +1,10 @@
-package seedu.duke;
+package commands;
 
-import java.util.Objects;
+import seedu.duke.Media;
+import seedu.duke.ReviewList;
 
 public class AddCommand extends Commands {
-    Media media;
+    public Media media;
 
     public AddCommand(ReviewList reviews, Media media) {
         super(reviews);

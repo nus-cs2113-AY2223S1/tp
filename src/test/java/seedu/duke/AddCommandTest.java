@@ -1,5 +1,7 @@
+//@@author redders7
 package seedu.duke;
 
+import commands.AddCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

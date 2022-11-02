@@ -1,4 +1,7 @@
-package seedu.duke;
+package commands;
+
+import seedu.duke.Media;
+import seedu.duke.ReviewList;
 
 import java.util.Comparator;
 
