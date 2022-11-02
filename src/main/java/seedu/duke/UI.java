@@ -35,6 +35,8 @@ public class UI {
         System.out.println("Welcome to PlanIT!");
         System.out.println("Start planning out your 4 years in NUS with us!");
         printSeparationLine();
+        System.out.println("To get started, type 'help' to see the list of available commands.");
+        printSeparationLine();
     }
 
     /**
