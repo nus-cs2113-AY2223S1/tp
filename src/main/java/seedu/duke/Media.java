@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import exceptions.FutureDateException;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
