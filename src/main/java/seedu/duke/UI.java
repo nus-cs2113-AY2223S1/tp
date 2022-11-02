@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
@@ -13,8 +12,9 @@ public class UI {
         System.out.println(separationLine);
     }
 
-    /*
-    Function to get input from Command Line Interface
+    /**
+     * Function to get user input.
+     * @return user input
      */
     public static String getInput() {
         Scanner in = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class UI {
     }
 
     /**
-     *Message to be printed in the beginning;
+     * Message to be printed in the beginning;
      */
     public static void helloMessage() {
         printSeparationLine();
@@ -36,13 +36,15 @@ public class UI {
         System.out.println("Start planning out your 4 years in NUS with us!");
         printSeparationLine();
     }
+
     /**
-     *Message to be printed in the end
+     * Message to be printed in the end
      */
     public static void endMessage() {
         System.out.println("Thank you for using PlanIT!");
         System.out.println("See you again next time!");
     }
+
     /**
      * Message to be printed after adding a module
      */
@@ -80,6 +82,7 @@ public class UI {
         System.out.println("The module " + modCode + " is not found in your plan!!");
         System.out.println("Please add the module first before you want to delete.");
     }
+
     public static void fileLoadingErrorMessage() {
         System.out.println("Could not find any previous usage.");
     }
@@ -90,7 +93,7 @@ public class UI {
      * @param semester Semester for which the modules need to be printed
      */
     public static void listMessage(ArrayList<Module> modules, String semester) {
-        System.out.println("These are your mods for " + semester);
+        System.out.println("These are your module(s) for " + semester);
         int counter = 1;
         for (Module mod : modules) {
             System.out.println(counter + ". " + mod.toString());
@@ -166,6 +169,7 @@ public class UI {
      */
     public static void invalidFormatMessage() {
         System.out.println("INPUT FORMAT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
+        System.out.println("input 'help' if you are unsure about the requirements");
     }
 
     /**
@@ -173,6 +177,7 @@ public class UI {
      */
     public static void invalidContentMessage() {
         System.out.println("INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
+        System.out.println("input 'help' if you are unsure about the requirements");
     }
 
     /**
@@ -181,6 +186,7 @@ public class UI {
 
     public static void invalidCommandWordMessage() {
         System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
+        System.out.println("input 'help' if you are unsure about the requirements");
     }
 
     public static void invalidMcMessage() {
