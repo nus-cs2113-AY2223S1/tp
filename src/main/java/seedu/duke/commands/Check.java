@@ -11,8 +11,10 @@ import java.util.List;
 public class Check extends Command {
     public static int MC_MINIMUM_NOC = 70;
     public static int SEMESTER_MINIMUM_NOC = 4;
+    public static int SEMESTER_MAXIMUM_NOC = 8;
     public static double CAP_MINIMUM_SEP = 3.0;
     public static int SEMESTER_MINIMUM_SEP = 2;
+    public static int SEMESTER_MAXIMUM_SEP = 7;
     private ArrayList<Module> modules = ModuleList.modules;
     private String type;
 
@@ -35,14 +37,14 @@ public class Check extends Command {
     @Override
     public void execute(ModuleList moduleList) {
         if (type.equals("NOC")) {
-            //obtained >70 MCs, completed four semesters of study
+            //obtained >70 MCs, completed four semesters of study and not in last semester
             if (checkNOC()) {
                 UI.NOCEligibleMessage();
             } else {
                 UI.NOCIneligibleMessage();
             }
         } else if (type.equals("SEP")) {
-            //completed two semesters of study cap above 3.0
+            //completed two semesters of study, cap above 3.0 and not in last year
             if (checkSEP()) {
                 UI.SEPEligibleMessage();
             } else {
@@ -80,7 +82,7 @@ public class Check extends Command {
      */
     public boolean checkNOCSem() {
         int currentSemester = findCurrentSemester();
-        return currentSemester >= SEMESTER_MINIMUM_NOC;
+        return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC) ;
     }
 
     /**
@@ -129,7 +131,7 @@ public class Check extends Command {
      */
     public boolean checkSEPSem() {
         int currentSemester = findCurrentSemester();
-        return currentSemester >= SEMESTER_MINIMUM_SEP;
+        return (currentSemester >= SEMESTER_MINIMUM_SEP) && (currentSemester <= SEMESTER_MAXIMUM_SEP) ;
     }
 
     /**
