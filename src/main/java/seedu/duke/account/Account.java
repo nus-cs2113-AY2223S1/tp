@@ -8,7 +8,6 @@ import java.util.List;
 import seedu.duke.*;
 import seedu.duke.exception.FinanceException;
 import seedu.duke.exception.FinanceException.ExceptionCollection;
-import seedu.duke.newcurrency.NewCurrency;
 
 public class Account {
     protected Wallet wallet;
@@ -80,6 +79,14 @@ public class Account {
                 String commandArg = splits[1];
                 try {
                     switch (commandType) {
+                        case "setdefault":
+                            setDefaultCurrency(commandArg);
+                          AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            break;
+                        case "convertall":
+                            MoneyCommand.convertAllCommand(wallet,commandArg);
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            break;
                         case "save":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
@@ -93,18 +100,6 @@ public class Account {
                                 AccountHistoryFile.printFile(wallet.getUserName(), loginTime);
                                 AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             }
-                            else if(in.equals("convert all")){
-                                MoneyCommand.convertAllCommand(wallet,commandArg);
-                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                            }
-                            else if(in.equals("add currency")){
-                                NewCurrency.addNewCurrency();
-                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                            }
-                            else if(in.equals("remove currency")){
-                                NewCurrency.removeCurrency();
-                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                            }
                             else{
                                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                             }
@@ -112,8 +107,6 @@ public class Account {
 
                 } catch (FinanceException e) {
                     e.handleException();
-                } catch (IOException e) {
-                    System.out.println("Unlucky");
                 }
             }
             else if (splits.length == 3) {
@@ -121,6 +114,7 @@ public class Account {
                 String commandArg = splits[1] + " " + splits[2];
                 try {
                     switch (commandType) {
+
                         case "save":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
@@ -144,14 +138,15 @@ public class Account {
                 String transferCurrency = splits[3];
 
                 try {
+
                     switch (commandType) {
                     case "convert":
                         MoneyCommand.exchangeCommand(wallet, splits[1]+" "+splits[2]+" "+splits[3]);
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                         break;
                     case "transfer":
-                        MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
-                        AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
+                        MoneyCommand.transferMoney(wallet, recipientUsername, trasnferCurrency, amount);
+                        AccountUi.showTransfer(recipientUsername, trasnferCurrency, amount);
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                         break;
                     default:
