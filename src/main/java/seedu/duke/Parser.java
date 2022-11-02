@@ -33,6 +33,8 @@ public class Parser {
             UI.invalidMcMessage();
         } catch (InvalidGradeException e) {
             UI.invalidGradeMessage();
+        } catch (InvalidSemesterException e) {
+            UI.invalidYearMessage();
         }
 
         return c;
@@ -57,7 +59,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
         switch (commandWord) {
         case "add":
             return new Add(input);

@@ -2,14 +2,12 @@ package seedu.duke.commands;
 
 import seedu.duke.Module;
 import seedu.duke.ModuleList;
-import seedu.duke.exceptions.InvalidGradeException;
-import seedu.duke.exceptions.InvalidInputContentException;
-import seedu.duke.exceptions.InvalidInputFormatException;
-import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.*;
 
 import static seedu.duke.exceptions.InvalidGradeException.checkGradeFormat;
 import static seedu.duke.exceptions.InvalidGradeException.checkValidGrade;
 import static seedu.duke.exceptions.InvalidMcException.invalidMc;
+import static seedu.duke.exceptions.InvalidSemesterException.*;
 
 public class Add extends Command {
     private Module mod;
@@ -20,7 +18,7 @@ public class Add extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -33,10 +31,11 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException {
+    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
+        checkYear(semester);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
         checkMcString(mcString);
         int mc = Integer.parseInt(mcString);
@@ -113,6 +112,15 @@ public class Add extends Command {
     public void checkMcString(String mcString) throws InvalidMcException {
         if (!mcString.matches("[0-9]+")) {
             throw new InvalidMcException();
+        }
+    }
+
+    public void checkYear(String semester) throws InvalidSemesterException {
+        if(invalidFormat(semester)) {
+            throw new InvalidSemesterException();
+        }
+        if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
+            throw new InvalidSemesterException();
         }
     }
 
