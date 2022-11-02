@@ -1,3 +1,6 @@
+/**
+ * Prescription is a class that represents a Prescription object and specify what are the parameters a prescription has.
+ */
 public class Prescription {
     private String medicine;
     private String timeInterval;
@@ -79,5 +82,23 @@ public class Prescription {
                 + "\tDosage: " + dosage + System.lineSeparator()
                 + "\tTime Interval: " + timeInterval + System.lineSeparator()
                 + "\tStatus: " + getStatusString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Prescription)) {
+            return false;
+        }
+
+        Prescription otherPrescription = (Prescription)other;
+
+        return patientId.equalsIgnoreCase(otherPrescription.getPatientId())
+                && medicine.equalsIgnoreCase(otherPrescription.getMedicine())
+                && dosage.equalsIgnoreCase(otherPrescription.getDosage())
+                && timeInterval.equalsIgnoreCase(otherPrescription.getTimeInterval());
     }
 }

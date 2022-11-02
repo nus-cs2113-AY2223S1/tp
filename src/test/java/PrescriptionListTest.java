@@ -82,7 +82,7 @@ class PrescriptionListTest {
     void viewAll_threePrescriptions_printThreePrescriptions() {
         PrescriptionList prescriptionsList = new PrescriptionList();
         prescriptionsList.add(ui, "S123456G", "Ventolin", "4 mg", "Once every 6 hours");
-        prescriptionsList.add(ui, "S987655G", "Losartan Potassium", "50 mg", "Once every day", false);
+        prescriptionsList.add(ui, "S987655G", "Losartan Potassium", "50 mg", "Once every day");
         prescriptionsList.add(ui, "K323232J", "Hydrocodone-Acetaminophen", "1 capsule", "3 times a day");
         prescriptionsList.viewAll(ui);
 
@@ -103,7 +103,7 @@ class PrescriptionListTest {
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
                 + "\tDosage: 50 mg" + System.lineSeparator()
                 + "\tTime Interval: Once every day" + System.lineSeparator()
-                + "\tStatus: Inactive" + System.lineSeparator()
+                + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have added a prescription!" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
@@ -128,7 +128,7 @@ class PrescriptionListTest {
                 + "\tMedicine: Losartan Potassium" + System.lineSeparator()
                 + "\tDosage: 50 mg" + System.lineSeparator()
                 + "\tTime Interval: Once every day" + System.lineSeparator()
-                + "\tStatus: Inactive" + System.lineSeparator()
+                + "\tStatus: Active" + System.lineSeparator()
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "Prescription #3" + System.lineSeparator()
                 + "\tID: K323232J" + System.lineSeparator()
