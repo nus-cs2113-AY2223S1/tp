@@ -8,11 +8,11 @@ public class Find extends Command {
 
     /**
      * Constructor to create an object of the Find Command class
-     * @param keyword the keyword inputted by the user. Format: String
+     * @param input the keyword inputted by the user. Format: String
      * @throws InvalidInputContentException if the user does not add a keyword
      */
-    public Find(String keyword) throws InvalidInputContentException {
-        this.keyword = keyword.toUpperCase();
+    public Find(String input) throws InvalidInputContentException {
+        this.keyword = input.toUpperCase().trim();
         checkContent(keyword);
     }
 
@@ -22,7 +22,7 @@ public class Find extends Command {
      * @throws InvalidInputContentException exception thrown if input content is empty
      */
     public void checkContent(String input) throws InvalidInputContentException {
-        if (input.equals(" ")) {
+        if (input.equals("")) {
             throw new InvalidInputContentException();
         }
     }
