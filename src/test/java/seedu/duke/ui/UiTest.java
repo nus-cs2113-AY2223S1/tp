@@ -1,9 +1,15 @@
 package seedu.duke.ui;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidUniversityException;
+import seedu.duke.timetable.Lesson;
+import seedu.duke.timetable.Timetable;
+import seedu.duke.university.University;
 import seedu.duke.user.UserModuleMapping;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +35,12 @@ public class UiTest {
     @Test
     public void testGoodbye() {
         String expectedGoodbye = "____________________________________________________________________________\n"
-                + "Goodbye. Hope to see you again soon!\n"
+                + " ___               _  _             \n"
+                + "/  _>  ___  ___  _| || |_  _ _  ___ \n"
+                + "| <_/\\/ . \\/ . \\/ . || . \\| | |/ ._>\n"
+                + "`____/\\___/\\___/\\___||___/`_. |\\___.\n"
+                + "                          <___'     \n"
+                + "Hope to see you again soon!\n"
                 + "____________________________________________________________________________\n";
         assertEquals(expectedGoodbye, Ui.sayByeToUser());
     }
@@ -197,5 +208,142 @@ public class UiTest {
                 + " | Equivalent NUS Credits: " + "4 MCs" + "\n"
                 + "____________________________________________________________________________\n";
         assertEquals(expected, Ui.printModulesInUserList(modules));
+    }
+
+    @Test
+    public void printDeletedModulesHistory_normalOperation() {
+        ArrayDeque<UserModuleMapping> deletedModules = new ArrayDeque<>();
+        UserModuleMapping testModule1 = new UserModuleMapping("MET CS 248", "Discrete Mathematics", "CS1231",
+                "Discrete Structures", "4", "3", "Boston University", "USA");
+        UserModuleMapping testModule2 = new UserModuleMapping("CS103",
+                "Introduction to Internet Technologies and Web Programming",
+                "IT1001", "Introduction to Computing", "4", "3", "Boston University", "USA");
+        UserModuleMapping testModule3 = new UserModuleMapping("CS201",
+                "INTRODUCTION TO PROGRAMMING WITH PYTHON",
+                "CS1010S", "Programming Methodology", "4", "3", "Boston University", "USA");
+        deletedModules.add(testModule1);
+        deletedModules.add(testModule2);
+        deletedModules.add(testModule3);
+        String expected = "____________________________________________________________________________\n"
+            + "Your most recently deleted modules are:\n"
+            + "1. NUS: CS1231 Discrete Structures | Partner University: Boston University MET CS 248 Discrete "
+                + "Mathematics | Equivalent NUS Credits: 4 MCs\n"
+            + "2. NUS: IT1001 Introduction to Computing | Partner University: Boston University CS103 Introduction"
+                + " to Internet Technologies and Web Programming | Equivalent NUS Credits: 4 MCs\n"
+            + "3. NUS: CS1010S Programming Methodology | Partner University: Boston University CS201 INTRODUCTION"
+                + " TO PROGRAMMING WITH PYTHON | Equivalent NUS Credits: 4 MCs\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printDeletedModulesHistory(deletedModules));
+    }
+
+    @Test
+    public void printFavouriteListAddedAcknowledgement_normalOperation() {
+        String universityName = "Stanford University";
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You added:\n" + "Stanford University" + " to your favourite lists\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printFavouriteListAddedAcknowledgement(universityName));
+    }
+
+    @Test
+    public void printFavouriteListDeletedAcknowledgement_normalOperation() {
+        String universityName = "Stanford University";
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You deleted:\n" + "Stanford University" + " from your favourite lists\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printFavouriteListDeletedAcknowledgement(universityName));
+    }
+
+    @Test
+    public void printTimetableCreatedAcknowledgement_normalOperation() {
+        String universityName = "UC Berkeley";
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You have created a new timetable for UC Berkeley\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printTimetableCreatedAcknowledgement(universityName));
+    }
+
+    @Test
+    public void printTimetableDeletedAcknowledgement_normalOperation() {
+        String universityName = "UC Berkeley";
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You deleted the timetable for UC Berkeley\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printTimetableDeletedAcknowledgement(universityName));
+    }
+
+    @Test
+    public void printLessonAddedAcknowledgement_normalOperation() throws InvalidUniversityException,
+            InvalidModuleException {
+        University university = new University("Stanford University", "USA");
+        Lesson lesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "11:00", "13:00");
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You have added a new lesson:\n"
+                + "Stanford University Tuesday 11:00hrs-13:00hrs: CS229 Machine Learning\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printLessonAddedAcknowledgement(lesson));
+    }
+
+    @Test
+    public void printLessonDeletedAcknowledgement_normalOperation() throws InvalidUniversityException,
+            InvalidModuleException {
+        University university = new University("Stanford University", "USA");
+        Lesson lesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "11:00", "13:00");
+        String expected = "____________________________________________________________________________\n"
+                + "Success! You have deleted the lesson:\n"
+                + "Stanford University Tuesday 11:00hrs-13:00hrs: CS229 Machine Learning\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printLessonDeletedAcknowledgement(lesson));
+    }
+
+    @Test
+    public void printLesson_normalOperation() throws InvalidUniversityException, InvalidModuleException {
+        University university = new University("Stanford University", "USA");
+        Lesson lesson = new Lesson("CS229", "Machine Learning", "5", university,"Tuesday", "11:00", "13:00");
+        String expected = "11:00hrs-13:00hrs: CS229 Machine Learning";
+        assertEquals(expected, Ui.printLesson(lesson));
+    }
+
+    @Test
+    public void printTimetable_normalOperation() throws InvalidUniversityException, InvalidModuleException {
+        Timetable timetable = new Timetable();
+        University university = new University("Stanford University", "USA");
+        Lesson lesson1 = new Lesson("CS229", "Machine Learning", "5", university,"Monday", "09:00", "13:00");
+        Lesson lesson2 = new Lesson("CS103", "Mathematical Foundations of Computing", "5", university,
+                "Tuesday", "11:00", "13:00");
+        Lesson lesson3 = new Lesson("CS106A", "Programming Methodology", "5", university,
+                "Wednesday", "11:00", "12:00");
+        Lesson lesson4 = new Lesson("CS106B", "Programming Abstractions", "5", university,
+                "Thursday", "13:00", "15:00");
+        Lesson lesson5 = new Lesson("CS109", "Intro to Probability for Computer Scientists", "5", university,
+                "Thursday", "09:00", "10:30");
+        Lesson lesson6 = new Lesson("CS148", "Introduction to Computer Graphics and Imaging", "5", university,
+                "Friday", "11:00", "13:00");
+        Lesson lesson7 = new Lesson("CS161", "Design and Analysis of Algorithms", "5", university,
+                "Friday", "08:30", "10:30");
+        Lesson lesson8 = new Lesson("CS193C", "Client-Side Internet Technologies", "5", university,
+                "Saturday", "10:00", "12:00");
+        Lesson lesson9 = new Lesson("CS339", "Independent Project", "5", university,"Sunday", "09:00", "12:00");
+        timetable.addLesson(lesson1, false);
+        timetable.addLesson(lesson2, false);
+        timetable.addLesson(lesson3, false);
+        timetable.addLesson(lesson4, false);
+        timetable.addLesson(lesson5, false);
+        timetable.addLesson(lesson6, false);
+        timetable.addLesson(lesson7, false);
+        timetable.addLesson(lesson8, false);
+        timetable.addLesson(lesson9, false);
+        String expected = "____________________________________________________________________________\n"
+                + "Monday:\n" + "1. 09:00hrs-13:00hrs: CS229 Machine Learning\n"
+                + "Tuesday:\n" + "1. 11:00hrs-13:00hrs: CS103 Mathematical Foundations of Computing\n"
+                + "Wednesday:\n" + "1. 11:00hrs-12:00hrs: CS106A Programming Methodology\n"
+                + "Thursday:\n" + "1. 09:00hrs-10:30hrs: CS109 Intro to Probability for Computer Scientists\n"
+                + "2. 13:00hrs-15:00hrs: CS106B Programming Abstractions\n"
+                + "Friday:\n" + "1. 08:30hrs-10:30hrs: CS161 Design and Analysis of Algorithms\n"
+                + "2. 11:00hrs-13:00hrs: CS148 Introduction to Computer Graphics and Imaging\n"
+                + "Saturday:\n" + "1. 10:00hrs-12:00hrs: CS193C Client-Side Internet Technologies\n"
+                + "Sunday:\n" + "1. 09:00hrs-12:00hrs: CS339 Independent Project\n"
+                + "____________________________________________________________________________\n";
+        assertEquals(expected, Ui.printTimetable(timetable.getTimetable()));
     }
 }
