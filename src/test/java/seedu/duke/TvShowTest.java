@@ -1,3 +1,5 @@
+//@@author redders7
+
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
@@ -7,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TvShowTest {
     ReviewList storedReviews = new ReviewList();
 
-    //@@author redders7
     @Test
     void addTvShow_Friends() {
         TvShow friends = new TvShow("Friends",5.0, "Sitcom","10-01-2022", "Netflix");

@@ -2,6 +2,7 @@ package seedu.duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import commands.ListCommand;
 import org.junit.jupiter.api.Test;
 
 class ListCommandTest {

@@ -1,6 +1,6 @@
-package seedu.duke;
+package commands;
 
-import java.util.ArrayList;
+import seedu.duke.ReviewList;
 
 public class ClearCommand extends Commands {
     public ClearCommand(ReviewList reviews) {

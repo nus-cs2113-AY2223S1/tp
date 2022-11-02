@@ -1,9 +1,11 @@
-package seedu.duke;
+package commands;
+
+import seedu.duke.ReviewList;
 
 import java.util.ArrayList;
 
 public abstract class Commands {
-    protected ReviewList reviewList;
+    public ReviewList reviewList;
 
     public Commands(ReviewList reviews) {
         this.reviewList = reviews;

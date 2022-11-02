@@ -1,6 +1,7 @@
-package seedu.duke;
+package commands;
 
-import java.util.ArrayList;
+import seedu.duke.Media;
+import seedu.duke.ReviewList;
 
 public class FavouriteCommand extends Commands {
     String[] userInput;

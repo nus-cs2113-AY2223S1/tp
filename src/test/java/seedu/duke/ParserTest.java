@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import exceptions.DukeException;
+import exceptions.IllegalCharacterException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -63,8 +65,7 @@ class ParserTest {
     @Test
     void illegalCharacterTest() {
         String addString = "|";
-
-        assertThrows(DukeException.class, () -> {
+        assertThrows(IllegalCharacterException.class, () -> {
             ps.checkIllegalCharacter(addString);
         });
     }

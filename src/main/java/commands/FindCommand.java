@@ -1,4 +1,9 @@
-package seedu.duke;
+package commands;
+
+import seedu.duke.Media;
+import seedu.duke.Movie;
+import seedu.duke.ReviewList;
+import seedu.duke.TvShow;
 
 import java.util.ArrayList;
 
