@@ -121,6 +121,7 @@ public class Add extends Command {
             throw new InvalidMcException();
         }
     }
+
     public void checkGrade(String grade) throws InvalidGradeException {
         if (!checkGradeFormat(grade)) {
             throw new InvalidGradeException();
