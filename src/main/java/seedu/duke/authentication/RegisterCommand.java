@@ -27,8 +27,10 @@ public class RegisterCommand {
         } catch (IOException e) {
             throw new FinanceException(ExceptionCollection.USERFILE_WRITE_EXCEPTION);
         }
-        Wallet newWallet = new Wallet(username,
-                passWord);
+        if(username.equals("exit")){
+            throw new FinanceException(ExceptionCollection.INVALID_USERNAME);
+        }
+        Wallet newWallet = new Wallet(username, passWord);
         try {
             WalletFile.createNewWallet(newWallet);
         } catch (IOException e) {

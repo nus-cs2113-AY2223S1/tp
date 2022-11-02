@@ -10,12 +10,15 @@ public class LoginCommand {
     public static void handleLogin() throws FinanceException {
         boolean isLoginSuccess = false;
         while(!isLoginSuccess){
+            String username = null;
+            String password = null;
             try {
                 AuthenticationUi.showLoginInfo();
                 String[] userInputs = InputManager.receiveLoginInputs();
-                String username = userInputs[0];
-                String password = userInputs[1];
+                username = userInputs[0];
+                password = userInputs[1];
                 Wallet wallet = WalletFile.getWallet(username);
+
                 if (wallet.getPassWord().equals(password)) {
                     isLoginSuccess = true;
                     AuthenticationUi.showLoginResults(isLoginSuccess);
@@ -33,7 +36,12 @@ public class LoginCommand {
                     AuthenticationUi.showLoginResults(isLoginSuccess);
                 }
             } catch (FinanceException e) {
-                AuthenticationUi.showLoginResults(isLoginSuccess);
+                if(username.equals("exit") || password.equals("exit")){
+                    throw new FinanceException(FinanceException.ExceptionCollection.EXIT_LOGIN_TERMINAL);
+                }
+                else {
+                    AuthenticationUi.showLoginResults(isLoginSuccess);
+                }
             }
         }
     }

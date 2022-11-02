@@ -22,7 +22,7 @@ public class FinanceException extends Throwable {
         NOT_PERSONAL_CURRENCY,
         CURRENCY_ARRAY_FULL,
         SET_DEFAULT_CURRENCY_EXCEPTION,
-        ACCOUNT_OVERDRAW
+        INVALID_USERNAME, EXIT_LOGIN_TERMINAL, ACCOUNT_OVERDRAW
     }
 
     private final ExceptionCollection exceptionType;
@@ -85,6 +85,12 @@ public class FinanceException extends Throwable {
             break;
         case ACCOUNT_OVERDRAW:
             errorMessage = "The amount you have entered will lead the account to overdraw\nCancelling withdrawal";
+            break;
+        case INVALID_USERNAME:
+            errorMessage = "The username you have entered is invalid, please enter another username";
+            break;
+        case EXIT_LOGIN_TERMINAL:
+            errorMessage = "You have exited the login sequence";
             break;
         default:
             errorMessage = "Unknown exception happens.";
