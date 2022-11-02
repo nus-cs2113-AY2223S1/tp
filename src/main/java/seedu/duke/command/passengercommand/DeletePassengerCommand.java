@@ -35,9 +35,8 @@ public class DeletePassengerCommand extends Command {
     }
 
     @Override
-    public void execute(OperationList passengers, String lineInput) {
+    public void execute(OperationList passengers, String passengerDetail) {
         try {
-            getPassengerDetail(lineInput);
             passengers.deleteOperation(passengerDetail);
         } catch (SkyControlException e) {
             ui.showError(e.getMessage());

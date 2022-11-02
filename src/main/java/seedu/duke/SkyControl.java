@@ -23,6 +23,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class SkyControl {
     private Ui ui;
@@ -112,6 +113,21 @@ public class SkyControl {
     }
 
     /**
+     * Checks the boolean if the User is engaging a delete command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isFlight which is a check to see if it is a delete command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isDelete(String lineInput) throws SkyControlException {
+        boolean isDelete = false;
+        if (isPassenger(lineInput)) {
+            isDelete = Parser.getDelete(lineInput);
+        }
+        return isDelete;
+    }
+
+    /**
      * Executes the type of entity that the manager chooses.
      * I.e. Either a passenger, flight, modify, delay or exit command.
      *
@@ -151,9 +167,15 @@ public class SkyControl {
      */
     private void executePassengerCommand(String lineInput, Command command) {
         try {
+            String passengerDetail;
             if (isAdd(lineInput)) {
+                Parser.checkAddOperationDetail(lineInput);
                 String passengerAddInput = syncFlightDetail(lineInput, command);
-                command.execute(passengers, passengerAddInput);
+                passengerDetail = Parser.getPassengerDetail(passengerAddInput);
+                command.execute(passengers, passengerDetail);
+            } else if (isDelete(lineInput)) {
+                passengerDetail = Parser.getPassengerDetail(lineInput);
+                command.execute(passengers, passengerDetail);
             } else {
                 command.execute(passengers, lineInput);
             }
@@ -162,7 +184,6 @@ public class SkyControl {
             ui.showError(e.getMessage());
         }
     }
-
 
     //@@author shengiv
     private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
@@ -173,10 +194,12 @@ public class SkyControl {
     }
 
     //@@author ivanthengwr
-    private String getPassengerAddInput(String lineInput, Command command) throws SkyControlException {
-        String departureTime = command.getPassengerDepartureTime(flights, lineInput);
+    private String getPassengerAddInput(String lineInput, Command command) throws SkyControlException, SyncException {
+        String passengerDetail = Parser.getPassengerDetail(lineInput);
+        command.checkFlightDetailSync(flights, passengers, passengerDetail);
+        String departureTime = command.getPassengerDepartureTime(flights, passengerDetail);
         String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
-        String gateNumber = command.getPassengerGateNumber(flights, lineInput);
+        String gateNumber = command.getPassengerGateNumber(flights, passengerDetail);
         String boardingTime = passengerInfo.getFormattedBoardingTime(reformatDepartureTime);
         return getLineInputForPassengerAdd(lineInput, departureTime, gateNumber, boardingTime);
     }
