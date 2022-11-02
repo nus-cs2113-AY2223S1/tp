@@ -237,12 +237,12 @@ Given below is an example scenario on how add client/property behaves at each st
 - **Step 5**: Lastly, method `Ui#showClientAddedConfirmationMessage()` or `Ui#showPropertyAddedConfirmationMessage()` is called to notify user about the successful addition of new client or property. Also, method `Storage#addToClientFile` or `Storage#addToPropertyFile` is called to update their respective storage files.
 
 The following are simplified sequence diagrams of add feature for client and property:
-![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.JPG)
+![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.png)
 <p align="center">
 Add Client Sequence Diagram
 </p>
 
-![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.JPG)
+![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.png)
 <p align="center">
 Add Property Sequence Diagram
 </p>
