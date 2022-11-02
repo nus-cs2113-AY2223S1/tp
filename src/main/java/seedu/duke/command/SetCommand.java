@@ -43,23 +43,21 @@ public class SetCommand extends Command {
 
     private void setBiometrics(String[] argumentList) throws IllegalValueException {
         try {
-            if (argumentList.length < 7) {
+            if (argumentList.length != 5) {
                 throw new IllegalValueException("Insufficient parameters");
             }
             int age = Integer.parseInt(argumentList[1]);
             String gender = argumentList[2];
             int height = Integer.parseInt(argumentList[3]);
-            int weight = Integer.parseInt(argumentList[4]);
-            int fat = Integer.parseInt(argumentList[5]);
-            int activitylevel = Integer.parseInt(argumentList[6]);
-            biometrics.setBiometrics(age, gender, height, weight, fat, activitylevel);
+            int activityLevel = Integer.parseInt(argumentList[4]);
+            biometrics.setBiometrics(age, gender, height, activityLevel);
             logger.log(Level.FINE, "parameters: "
-                    + String.format("%d %s %d %d %d", age, gender, height, weight, fat));
+                    + String.format("%d %s %d %d", age, gender, height, activityLevel));
             if (toDisplay) {
                 ui.output("Biometrics set:\n" + biometrics.toString());
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Biometrics, except for gender, should be numerical");
+            throw new IllegalValueException("Parameters, except for gender, should be integers");
         }
     }
 

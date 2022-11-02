@@ -6,11 +6,13 @@ import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -179,7 +181,8 @@ class MarkCommandTest {
         commandList.add("add strength /bench /30 /10 /40");
         commandList.add("add strength /press /40 /8 /28");
         commandList.add("add strength /deadlift /20 /6 /30");
-        biometrics.setBiometrics(20, "male", 166, 76, 20, 2);
+        biometrics.setBiometrics(20, "male", 166, 2);
+        biometrics.weightAndFatList.addWeightAndFat(new WeightAndFat(76, 20, LocalDate.now()));
 
         for (String input : commandList) {
             Command c = Parser.parse(input);

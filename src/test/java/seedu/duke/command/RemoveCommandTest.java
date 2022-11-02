@@ -41,7 +41,7 @@ class RemoveCommandTest {
     @Test
     void execute_RemoveWithNoParameter_exceptionThrown() {
         String command = "remove food";
-        assertInvalidRemoveCommand(command, "INVALID_NUMBER_INPUT");
+        assertInvalidRemoveCommand(command, "Invalid number input");
     }
 
 

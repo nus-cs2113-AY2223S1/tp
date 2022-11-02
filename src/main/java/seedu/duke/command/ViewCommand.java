@@ -103,18 +103,19 @@ public class ViewCommand extends Command {
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
         for (Food f : foodArrayList) {
-            newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList, f.getDate());
-            if (!datesConsumption.contains(f.getDate())) {
+            newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList, f.getDateString());
+            if (!datesConsumption.contains(f.getDateString())) {
                 caloriesConsumed.add(newCaloriesConsumedEntry);
-                datesConsumption.add(f.getDate());
+                datesConsumption.add(f.getDateString());
             }
         }
         ArrayList<Exercise> completedExerciseArrayList = exerciseList.getCompletedExerciseList();
         for (Exercise e : completedExerciseArrayList) {
-            newCaloriesBurntEntry = calculator.calculateTotalCaloriesBurnt(completedExerciseArrayList, e.getDate());
-            if (!datesBurnt.contains(e.getDate())) {
+            newCaloriesBurntEntry = calculator.calculateTotalCaloriesBurnt(completedExerciseArrayList,
+                    e.getDateString());
+            if (!datesBurnt.contains(e.getDateString())) {
                 caloriesBurnt.add(newCaloriesBurntEntry);
-                datesBurnt.add(e.getDate());
+                datesBurnt.add(e.getDateString());
             }
         }
         for (String d : datesConsumption) {

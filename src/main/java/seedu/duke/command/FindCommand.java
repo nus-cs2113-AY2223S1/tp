@@ -195,7 +195,7 @@ public class FindCommand extends Command {
     private ArrayList<Food> getFilteredFoodDateList(String[] argumentList) {
         ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodList.getFoodList()
                 .stream().filter(Food.class::isInstance)
-                .filter(f -> f.getDate().contains(argumentList[1]))
+                .filter(f -> f.getDateString().contains(argumentList[1]))
                 .collect(Collectors.toList());
         return filteredFoodDateList;
     }
@@ -249,11 +249,11 @@ public class FindCommand extends Command {
     private ArrayList<Exercise> getFilteredDateList(String[] argumentList) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance)
-                .filter(e -> e.getDate().contains(argumentList[1]))
+                .filter(e -> e.getDateString().contains(argumentList[1]))
                 .collect(Collectors.toList());
         filteredExerciseList.addAll(exerciseList.getCurrentExerciseList()
                 .stream().filter(StrengthExercise.class::isInstance)
-                .filter(e -> e.getDate().contains(argumentList[1]))
+                .filter(e -> e.getDateString().contains(argumentList[1]))
                 .collect(Collectors.toList()));
         return filteredExerciseList;
     }

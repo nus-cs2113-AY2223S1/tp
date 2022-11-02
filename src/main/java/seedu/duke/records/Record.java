@@ -10,12 +10,16 @@ public class Record {
         this.date = date;
     }
 
-    public String getDate() {
+    public String getDateString() {
         return date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return "Data is recorded on: " + getDate();
+        return "Data is recorded on: " + getDateString();
     }
 }

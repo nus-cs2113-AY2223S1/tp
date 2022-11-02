@@ -3,7 +3,6 @@ package seedu.duke.records.food;
 import seedu.duke.records.Record;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Food extends Record {
     private String foodDescription;
@@ -29,7 +28,7 @@ public class Food extends Record {
     public String toString() {
         return "Food Description: " + foodDescription + System.lineSeparator()
                 + "calories: " + calories + System.lineSeparator()
-                +  "Recorded on: " + getDate();
+                +  "Recorded on: " + getDateString();
     }
 
     public String saveFood() {

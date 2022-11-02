@@ -52,9 +52,9 @@ public class DateCommand extends Command {
              * @return sorted array list by date.
              */
             public int compare(Exercise e1, Exercise e2) {
-                LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDate()),
+                LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDate()),
+                LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 return o2Date.compareTo(o1Date);
             }
@@ -82,9 +82,9 @@ public class DateCommand extends Command {
         Collections.sort(foodArrayList, new Comparator<Food>() {
             @Override
             public int compare(Food f1, Food f2) {
-                LocalDate f1Date = LocalDate.parse(Parser.getDateNoDateTracker(f1.getDate()),
+                LocalDate f1Date = LocalDate.parse(Parser.getDateNoDateTracker(f1.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalDate f2Date = LocalDate.parse(Parser.getDateNoDateTracker(f2.getDate()),
+                LocalDate f2Date = LocalDate.parse(Parser.getDateNoDateTracker(f2.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 return f1Date.compareTo(f2Date);
             }
@@ -95,9 +95,9 @@ public class DateCommand extends Command {
         Collections.sort(recordArrayList, new Comparator<Record>() {
             @Override
             public int compare(Record r1, Record r2) {
-                LocalDate r1Date = LocalDate.parse(Parser.getDateNoDateTracker(r1.getDate()),
+                LocalDate r1Date = LocalDate.parse(Parser.getDateNoDateTracker(r1.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalDate r2Date = LocalDate.parse(Parser.getDateNoDateTracker(r2.getDate()),
+                LocalDate r2Date = LocalDate.parse(Parser.getDateNoDateTracker(r2.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 return r1Date.compareTo(r2Date);
             }

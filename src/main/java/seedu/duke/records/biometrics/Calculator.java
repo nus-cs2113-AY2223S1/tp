@@ -180,7 +180,7 @@ public class Calculator {
         int totalCaloriesConsumed = 0;
         ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodArrayList
                 .stream().filter(Food.class::isInstance)
-                .filter(f -> f.getDate().contains(date))
+                .filter(f -> f.getDateString().contains(date))
                 .collect(Collectors.toList());
         for (Food f : filteredFoodDateList) {
             totalCaloriesConsumed += f.getCalories();
@@ -200,7 +200,7 @@ public class Calculator {
         int totalCaloriesBurnt = 0;
         ArrayList<Exercise> filteredExerciseDateList = (ArrayList<Exercise>) completedExerciseArrayList
                 .stream().filter(Exercise.class::isInstance)
-                .filter(e -> e.getDate().contains(date))
+                .filter(e -> e.getDateString().contains(date))
                 .collect(Collectors.toList());
         for (Exercise e : filteredExerciseDateList) {
             totalCaloriesBurnt += e.getCaloriesBurnt();

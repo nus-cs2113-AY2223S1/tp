@@ -50,7 +50,7 @@ public class RemoveCommand extends Command {
 
     private void removeWeight(int index) throws IllegalValueException {
         biometrics.weightAndFatList.removeWeightAndFat(index - 1);
-        ui.output(" Weight and fat record removed successfully");
+        ui.output("Weight and fat record removed successfully");
     }
 
     //@@junhaoliu2468

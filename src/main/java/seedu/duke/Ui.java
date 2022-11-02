@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.records.Calories;
-import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
@@ -133,7 +132,7 @@ public class Ui {
         for (Food food : foodArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], food.getFoodDescription().length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(food.getCalories()).length());
-            columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDate().length());
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], food.getDateString().length());
         }
     }
 
@@ -152,7 +151,7 @@ public class Ui {
         for (WeightAndFat weightAndFat : weightAndFatArrayList) {
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], String.valueOf(weightAndFat.getWeight()).length());
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], String.valueOf(weightAndFat.getFat()).length());
-            columnSpacingArray[3] = Math.max(columnSpacingArray[3], weightAndFat.getDate().length());
+            columnSpacingArray[3] = Math.max(columnSpacingArray[3], weightAndFat.getDateString().length());
         }
     }
 
@@ -161,7 +160,7 @@ public class Ui {
                                              ArrayList<Exercise> exerciseArrayList,
                                              Integer[] columnSpacingArray) {
         for (WeightAndFat weightAndFat : weightAndFatArrayList) {
-            columnSpacingArray[0] = Math.max(columnSpacingArray[0], weightAndFat.getDate().length());
+            columnSpacingArray[0] = Math.max(columnSpacingArray[0], weightAndFat.getDateString().length());
             columnSpacingArray[1] = Math.max(columnSpacingArray[1], weightAndFat.getWeight() % 10 + 1);
             columnSpacingArray[2] = Math.max(columnSpacingArray[2], weightAndFat.getFat() % 10 + 1);
         }
@@ -207,7 +206,7 @@ public class Ui {
                     columnSpacingArray[4]) + " | ";
             String distance = getDistanceForPrint(exercise, columnSpacingArray[5]) + " | ";
             String calories = getCaloriesForPrint(exercise, columnSpacingArray[6]) + " | ";
-            String date = addRightPadding(exercise.getDate(), columnSpacingArray[7]) + " | ";
+            String date = addRightPadding(exercise.getDateString(), columnSpacingArray[7]) + " | ";
             String status = exercise.getTaskStatus();
             printInSameLine(index, exerciseName, weight, sets, repetitions, distance, calories, date, status);
         }
@@ -228,7 +227,7 @@ public class Ui {
             String foodName = addRightPadding(food.getFoodDescription(), columnSpacingArray[1]) + " | ";
             String calories = addRightPadding(Integer.toString(food.getCalories()),
                     columnSpacingArray[2]) + " | ";
-            String date = addRightPadding(food.getDate(), columnSpacingArray[3]) + " | ";
+            String date = addRightPadding(food.getDateString(), columnSpacingArray[3]) + " | ";
             printInSameLine(index, foodName, calories, date);
         }
     }
@@ -239,7 +238,7 @@ public class Ui {
             String index = addRightPadding(Integer.toString(i + 1), columnSpacingArray[0]) + " | ";
             String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()), columnSpacingArray[1]) + " | ";
             String fat = addRightPadding(Integer.toString(weightAndFat.getFat()), columnSpacingArray[2]) + " | ";
-            String date = addRightPadding(weightAndFat.getDate(), columnSpacingArray[3]) + " | ";
+            String date = addRightPadding(weightAndFat.getDateString(), columnSpacingArray[3]) + " | ";
             printInSameLine(index, weight, fat, date);
         }
     }
@@ -261,7 +260,7 @@ public class Ui {
     private void printAllRecords(ArrayList<Record> recordArrayList, Integer[] columnSpacingArray, String header) {
         for (int i = 0; i < recordArrayList.size(); i++) {
             if (recordArrayList.get(i) instanceof WeightAndFat) {
-                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+                String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[0]) + " | ";
                 WeightAndFat weightAndFat = (WeightAndFat) recordArrayList.get(i);
                 String weight = addRightPadding(Integer.toString(weightAndFat.getWeight()),
                         columnSpacingArray[1]) + " | ";
@@ -269,7 +268,7 @@ public class Ui {
                 printInSameLine(date, weight, fat);
             }
             if (recordArrayList.get(i) instanceof Food) {
-                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+                String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[0]) + " | ";
                 String extraPadding = addRightPadding("", header.substring(
                         0, header.indexOf("| Description")).length() - date.length() - 1) + " | ";
                 Food food = (Food) recordArrayList.get(i);
@@ -279,7 +278,7 @@ public class Ui {
                 printInSameLine(date, extraPadding, foodName, calories);
             }
             if (recordArrayList.get(i) instanceof Exercise) {
-                String date = addRightPadding(recordArrayList.get(i).getDate(), columnSpacingArray[0]) + " | ";
+                String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[0]) + " | ";
                 String extraPadding = addRightPadding("", header.substring(
                         0, header.indexOf("| Exercise")).length() - date.length() - 1) + " | ";
                 Exercise exercise = (Exercise) recordArrayList.get(i);
