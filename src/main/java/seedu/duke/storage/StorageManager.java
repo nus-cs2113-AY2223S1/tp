@@ -6,8 +6,11 @@ import seedu.duke.ui.Ui;
 
 import java.io.File;
 
-import static seedu.duke.exception.message.ExceptionMessages.*;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_EXIT_DUKE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILES_ILLEGALLY_DELETED;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_RESET_DUKE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_YES_OR_NO;
 
 public class StorageManager {
     private static boolean hasItemFile() {
@@ -25,7 +28,7 @@ public class StorageManager {
     /**
      * Checks if any file is illegally deleted or not.
      *
-     * @return true If any
+     * @throws StoreFailureException If one or two files are deleted
      */
     public static void checkThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
         if (!((hasUserFile() == hasItemFile()) && (hasTransactionFile() == hasItemFile()))) {
