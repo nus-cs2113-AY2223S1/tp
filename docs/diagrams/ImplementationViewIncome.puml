@@ -19,7 +19,7 @@ opt consoleCommand instanceof ConsoleCommandViewIncome
         incomeManager --[DATA_COLOR_4]> consoleInterface : income:Income
         deactivate incomeManager
 
-        ref over consoleInterface: Print Income
+        ref over consoleInterface: print income
     else else
             consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncomes()
             activate incomeManager DATA_COLOR_4
@@ -28,7 +28,7 @@ opt consoleCommand instanceof ConsoleCommandViewIncome
             deactivate incomeManager
 
             loop through incomes
-            ref over consoleInterface: Print Income
+            ref over consoleInterface: print income
             end
     end
 

@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddExpense
 
     create expense
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expense
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expense : create
     activate expense DATA_COLOR_1
 
     expense --[DATA_COLOR_1]> consoleInterface
@@ -28,19 +28,9 @@ opt consoleCommand instanceof ConsoleCommandAddExpense
     expenseManager --[DATA_COLOR_1]> consoleInterface
     deactivate expenseManager
 
-    ref over consoleInterface: Print Expense
+    ref over consoleInterface: print expense
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : save()
-    activate expenseManager DATA_COLOR_1
-
-    expenseManager -[DATA_COLOR_1]> LocalStorage : \lsaveToFile(\n\texpenses:ArrayList<Expense>\n)
-    activate LocalStorage STORAGE_COLOR_1
-
-    LocalStorage --[STORAGE_COLOR_1]> expenseManager
-    deactivate LocalStorage
-
-    expenseManager --[DATA_COLOR_1]> consoleInterface
-    deactivate expenseManager
+    ref over consoleInterface, expenseManager, LocalStorage: save data
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface

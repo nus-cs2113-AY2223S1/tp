@@ -1,0 +1,32 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #707070
+    FontColor #ffffff
+    StereotypeFontColor #ffffff
+    FontName Arial
+}
+
+package Data {
+    Class ExpenseManager DATA_COLOR_1
+    Class Expense DATA_COLOR_1
+    Class IncomeManager DATA_COLOR_2
+    Class Income DATA_COLOR_2
+    Class RecurringPaymentManager DATA_COLOR_3
+    Class RecurringPayment DATA_COLOR_3
+    Class TargetManager DATA_COLOR_4
+    Class Target DATA_COLOR_4
+}
+
+ExpenseManager -right[hidden]-> IncomeManager
+IncomeManager -right[hidden]-> RecurringPaymentManager
+RecurringPaymentManager -right[hidden]-> TargetManager
+
+ExpenseManager -down-> "*" Expense
+IncomeManager -down-> "*" Income
+RecurringPaymentManager -down-> "*" RecurringPayment
+TargetManager -down-> "*" Target
+
+@enduml

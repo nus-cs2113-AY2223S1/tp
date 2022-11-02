@@ -1,0 +1,58 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd save data
+Participant "consoleInterface\n:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "incomeManager\n:IncomeManager" as incomeManager DATA_COLOR_2
+Participant "recurringPaymentManager\n:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_3
+Participant "targetManager\n:TargetManager" as targetManager DATA_COLOR_4
+
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpenses()
+activate expenseManager DATA_COLOR_1
+
+expenseManager --[DATA_COLOR_1]> consoleInterface : currentExpenses:ArrayList<Expense>
+deactivate expenseManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getSortCommandSetting()
+activate expenseManager DATA_COLOR_1
+
+expenseManager --[DATA_COLOR_1]> consoleInterface : sortCommandSetting:ConsoleCommandSortExpense
+deactivate expenseManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayments()
+activate recurringPaymentManager DATA_COLOR_3
+
+recurringPaymentManager --[DATA_COLOR_3]> consoleInterface : currentRecurringPayments:ArrayList<RecurringPayments>
+deactivate recurringPaymentManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncomes()
+activate incomeManager DATA_COLOR_2
+
+incomeManager --[DATA_COLOR_2]> consoleInterface : currentIncomes:ArrayList<Income>
+deactivate incomeManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : getTargets()
+activate targetManager DATA_COLOR_4
+
+targetManager --[DATA_COLOR_4]> consoleInterface : currentTargets:ArrayList<Target>
+deactivate targetManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lsaveToFile(\n\tcurrentExpenses,\n\tsortCommandSetting,\n\tcurrentRecurringPayments,\n\tcurrentIncomes,\n\tcurrentTargets\n)
+activate LocalStorage STORAGE_COLOR_1
+
+LocalStorage --[STORAGE_COLOR_1]> consoleInterface
+deactivate LocalStorage
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+deactivate consoleInterface
+@enduml
