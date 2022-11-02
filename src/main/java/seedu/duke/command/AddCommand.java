@@ -10,7 +10,7 @@ public class AddCommand extends Command {
 
     boolean hasComment;
 
-    private final int START_INDEX_COMMENT = 6;
+    private static final int START_INDEX_COMMENT = 6;
     boolean isValidComment;
 
     public AddCommand(String[] parameters, CommandType commandType, Lesson lesson, String comment) {
@@ -19,7 +19,7 @@ public class AddCommand extends Command {
         this.universityName = parameters[1].substring(2);
         this.moduleCode = parameters[2].substring(2);
 
-        if (parameters.length == 4){
+        if (parameters.length == 4) {
             this.hasComment = true;
             this.isValidComment = isValidComment(comment);
             if (this.isValidComment) {
