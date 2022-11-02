@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam ParticipantBackgroundColor MODEL_COLOR
+
+
+title Architecture Sequence Diagram
+
+box Parking
+participant ":Parking" as Parking
+end box
+
+box Ui
+participant ":Ui" as Ui
+end box
+
+
+box Command
+participant ":Command" as Command
+endbox
+
+box CommandResult
+participant ":CommandResult" as CommandResult
+endbox
+
+box Parser
+participant ":Parser" as Parser
+end box
+
+loop until ExitCommand()
+    Parking -> Ui : getCommand()
+    activate Parking
+    activate Ui
+
+    Ui -> Command** : new()
+    activate Command
+
+    Command -> Parser ++ : parseCommand(input, api, carparkList, favourite)
+    Parser --> Command : Command
+    deactivate Parser
+    destroy Parser
+
+    Command --> Parking : Command
+    deactivate Command
+    destroy Command
+
+    Parking -> CommandResult : executeCommand(Command)
+    activate CommandResult
+
+    CommandResult --> Ui : CommandResult
+    deactivate CommandResult
+    destroy CommandResult
+
+    Ui --> Parking : printResult(CommandResult)
+    deactivate Ui
+
+    deactivate Parking
+end
+
+@enduml
