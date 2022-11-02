@@ -12,19 +12,19 @@ public class Parser {
     private static AppointmentParser appointmentParser;
     private static TaskParser taskParser;
 
-    public final String INDEX_FLAG = " i/";
-    public final String EMPLOYEE_FLAG = " e/";
-    public final String HEALTH_FLAG = " h/";
-    public final String DATE_FLAG = " d/";
+    public final String indexFlag = " i/";
+    public final String employeeFlag = " e/";
+    public final String healthFlag = " h/";
+    public final String dateFlag = " d/";
 
-    public final String NAME_FLAG = " n/";
+    public final String nameFlag = " n/";
 
-    public final String SERVICE_FLAG = " s/";
-    public final String PET_FLAG = " p/";
+    public final String serviceFlag = " s/";
+    public final String petFlag = " p/";
 
-    public final String SPECIES_FLAG = " s/";
+    public final String speciesFlag = " s/";
 
-    public final String DESCRIPTION_FLAG = " d/";
+    public final String descriptionFlag = " d/";
 
     public Parser() {
         serviceParser = new ServiceParser(this, lengthOfSignature);
@@ -67,7 +67,7 @@ public class Parser {
 
     public int indexOfInput(String input) throws DukeException {
         try {
-            return numberInInput(input, INDEX_FLAG);
+            return numberInInput(input, indexFlag);
         } catch (DukeException e) {
             System.out.println("Please enter a valid index");
             throw new DukeException();
@@ -104,7 +104,7 @@ public class Parser {
 
     public int employeeId(String input) throws DukeException {
         try {
-            return numberInInput(input, EMPLOYEE_FLAG);
+            return numberInInput(input, employeeFlag);
         } catch (DukeException e) {
             throw new DukeException();
         }
@@ -112,7 +112,7 @@ public class Parser {
 
     public int isHealthy(String input) throws DukeException {
         try {
-            return numberInInput(input, HEALTH_FLAG);
+            return numberInInput(input, healthFlag);
         } catch (DukeException e) {
             System.out.println("Please enter 0 or 1 for health status");
             throw new DukeException();
