@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class WeightAndFatTest {
     private WeightAndFat weightAndFat;
@@ -18,6 +18,7 @@ public class WeightAndFatTest {
     void weightAndFat_invalidInput_exceptionThrown() {
         try {
             weightAndFat = new WeightAndFat(54, 121, date);
+            fail();
         } catch (IllegalValueException e) {
             assertEquals("Invalid fat percentage", e.getMessage());
         }

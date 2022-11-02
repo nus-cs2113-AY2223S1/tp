@@ -196,7 +196,7 @@ public class AddCommand extends Command {
 
 
     private void addWeightAndFat(String[] argumentList, int argumentsCount) throws IllegalValueException {
-        Validator.validateCommandInput(argumentsCount, 3, 4, "Invalid add weight command",
+        Validator.validateCommandInput(argumentsCount, 2, 3, "Invalid add weight command",
                 arguments.charAt(arguments.length() - 1));
         try {
             int weight = Integer.parseInt(argumentList[1]);
@@ -209,8 +209,6 @@ public class AddCommand extends Command {
             }
             WeightAndFat weightAndFat = new WeightAndFat(weight, fat, date);
             biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
-            biometrics.setWeight(weight);
-            biometrics.setFat(fat);
             if (toDisplay) {
                 ui.output(weightAndFat.toString());
                 ui.output(" Weight and fat percentage are recorded successfully");

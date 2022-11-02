@@ -69,7 +69,7 @@ class AddCommandTest {
         WeightAndFat weightAndFat = biometrics.weightAndFatList.getWeightAndFatList().get(0);
         assertEquals(weightAndFat.getWeight(), 74);
         assertEquals(weightAndFat.getFat(), 17);
-        assertEquals(weightAndFat.getDate(), "11-08-2011");
+        assertEquals(weightAndFat.getDateString(), "11-08-2011");
     }
 
     @Test

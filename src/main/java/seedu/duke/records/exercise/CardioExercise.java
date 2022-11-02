@@ -19,7 +19,7 @@ public class CardioExercise extends Exercise {
     @Override
     public String saveExercise() {
         return "cardio /" + getExerciseName() + " /" + getDistance()
-                + " /" + getRepetition() + " /" + getDate() + " /"
+                + " /" + getRepetition() + " /" + getDateString() + " /"
                 + getTime() + " /" + getCaloriesBurnt() + " | " + getTaskStatusInNumber();
     }
 
@@ -28,7 +28,7 @@ public class CardioExercise extends Exercise {
         return "Cardio Exercise: " + getExerciseName() + System.lineSeparator()
                 + "Distance: " + getDistance() + "km" + System.lineSeparator()
                 + "Repetitions: " + getRepetition() + System.lineSeparator()
-                + "Date: " + getDate() + System.lineSeparator()
+                + "Date: " + getDateString() + System.lineSeparator()
                 + String.format("Status: %s", getTaskStatus());
     }
 }

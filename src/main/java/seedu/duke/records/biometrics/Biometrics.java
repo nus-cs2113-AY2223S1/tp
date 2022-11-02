@@ -13,8 +13,6 @@ public class Biometrics {
     private int age;
     private String gender;
     private int height;
-    private int weight;
-    private int fat;
     private int activityLevel;
     public boolean isSet;
     public WeightAndFatList weightAndFatList;
@@ -23,8 +21,6 @@ public class Biometrics {
         age = 0;
         gender = "-";
         height = 0;
-        weight = 0;
-        fat = 0;
         activityLevel = 0;
         isSet = false;
         weightAndFatList = new WeightAndFatList();
@@ -43,65 +39,52 @@ public class Biometrics {
     }
 
     public int getWeight() {
-        return weight;
-    }
-
-    public int getFat() {
-        return fat;
+        if (weightAndFatList.getSize() == 0) {
+            return 0;
+        }
+        return weightAndFatList.getMostRecent().getWeight();
     }
 
     public int getActivityLevel() {
         return activityLevel;
     }
 
-    public void setBiometrics(int age, String gender, int height, int weight, int fat, int activityLevel)
+    public void setBiometrics(int age, String gender, int height, int activityLevel)
             throws IllegalValueException {
         setAge(age);
         setGender(gender);
         setHeight(height);
-        setWeight(weight);
-        setFat(fat);
         setActivityLevel(activityLevel);
         isSet = true;
     }
 
-    public void setAge(int age) throws IllegalValueException {
+    private void setAge(int age) throws IllegalValueException {
         if (age <= 0 || age > MAX_AGE) {
             throw new IllegalValueException("That age ain't possible");
         }
         this.age = age;
     }
 
-    public void setGender(String gender) throws IllegalValueException {
+    private void setGender(String gender) throws IllegalValueException {
         if (!Arrays.asList(GENDER_OPTIONS).contains(gender)) {
             throw new IllegalValueException("Hi, I only recognise others, female and male genders");
         }
         this.gender = gender;
     }
 
-    public void setHeight(int height) throws IllegalValueException {
+    private void setHeight(int height) throws IllegalValueException {
         if (height <= 0 || height > MAX_HEIGHT) {
             throw new IllegalValueException("That's a strange height...");
         }
         this.height = height;
     }
 
-    public void setWeight(int weight) throws IllegalValueException {
-        WeightAndFat.checkWeight(weight);
-        this.weight = weight;
-    }
-
-    public void setFat(int fat) throws IllegalValueException {
-        WeightAndFat.checkFat(fat);
-        this.fat = fat;
-    }
-
     public void setActivityLevel(int activityLevel) throws IllegalValueException {
         if (activityLevel < 1 || activityLevel > 5) {
             throw new IllegalValueException(
                     "You should only input a number between 1 to 5" + System.lineSeparator()
-                    + "Input your activity level based on your activity level" + System.lineSeparator()
-                    + "with 1 being the least active and 5 being the most active!"
+                            + "Input your activity level based on your activity level" + System.lineSeparator()
+                            + "with 1 being the least active and 5 being the most active!"
             );
         }
         this.activityLevel = activityLevel;
@@ -112,16 +95,19 @@ public class Biometrics {
         if (!isSet) {
             return "Biometrics are not set";
         }
-        assert (age != 0 && !gender.equals("-") && height != 0 && weight != 0 && fat != 0);
-        return "Age: " + age + System.lineSeparator()
+        assert (age != 0 && !gender.equals("-") && height != 0 && activityLevel != 0);
+        String output = "Age: " + age + System.lineSeparator()
                 + "Gender: " + gender + System.lineSeparator()
-                + "Height: " + height + "cm" + System.lineSeparator()
-                + "Weight: " + weight + "kg" + System.lineSeparator()
-                + "Fat percentage: " + fat + "%" + System.lineSeparator()
-                + "Activity Level: " + activityLevel;
+                + "Height: " + height + "cm" + System.lineSeparator();
+        if (weightAndFatList.getSize() > 0) {
+            output += "Weight: " + weightAndFatList.getMostRecent().getWeight() + "kg" + System.lineSeparator()
+                    + "Fat percentage: " + weightAndFatList.getMostRecent().getFat() + "%" + System.lineSeparator();
+        }
+        output += "Activity Level: " + activityLevel;
+        return output;
     }
 
     public String saveBiometrics() {
-        return String.format("/%d /%s /%d /%d /%d /%d", age, gender, height, weight, fat, activityLevel);
+        return String.format("/%d /%s /%d /%d", age, gender, height, activityLevel);
     }
 }

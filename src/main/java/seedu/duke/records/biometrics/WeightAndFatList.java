@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class WeightAndFatList {
 
-    private ArrayList<WeightAndFat> weightAndFatArrayList;
+    private final ArrayList<WeightAndFat> weightAndFatArrayList;
 
     public WeightAndFatList() {
         weightAndFatArrayList = new ArrayList<>();
@@ -15,6 +15,11 @@ public class WeightAndFatList {
     public void addWeightAndFat(WeightAndFat weightAndFat) {
         weightAndFatArrayList.add(weightAndFat);
         weightAndFatArrayList.sort(new WeightAndFatComparator());
+    }
+
+    public WeightAndFat getMostRecent() {
+        assert (weightAndFatArrayList.size() > 0);
+        return weightAndFatArrayList.get(0);
     }
 
     public void removeWeightAndFat(int index) throws IllegalValueException {

@@ -4,7 +4,6 @@ import seedu.duke.records.Record;
 import seedu.duke.exception.IllegalValueException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class WeightAndFat extends Record {
@@ -56,7 +55,7 @@ public class WeightAndFat extends Record {
     }
 
     public String saveWeightAndFat() {
-        return String.format("/%d /%d /%s", weight, fat, getDate());
+        return String.format("/%d /%d /%s", weight, fat, getDateString());
     }
 
     public String listWeightAndFat(ArrayList<WeightAndFat> weightAndFatArrayList) {
@@ -67,6 +66,6 @@ public class WeightAndFat extends Record {
     public String toString() {
         return "Weight: " + weight + "kg" + System.lineSeparator()
                 + "Fat percentage: " + fat + "%" + System.lineSeparator()
-                + "Recorded on: " + getDate();
+                + "Recorded on: " + getDateString();
     }
 }
