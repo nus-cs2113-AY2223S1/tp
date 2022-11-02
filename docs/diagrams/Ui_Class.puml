@@ -6,6 +6,7 @@ skinparam classAttributeIconSize 0
 class Ui {
     {static} - LINE : String
     {static} - LOGO : String
+    {static} - GOODBYE : String
     {static} - SPACING : String
     {static} + greetUser() : String
     {static} + getUserInput() : String
@@ -32,7 +33,7 @@ class Ui {
     {static} + printLessonsByDayInTimetable(lessons: ArrayList<Lesson>) : String
     {static} + printLessonAddedAcknowledgement(lesson: Lesson) : String
     {static} + printLessonDeletedAcknowledgement(lesson: Lesson) : String
-    {static} + printTimetable(timetable:HashMap<String, ArrayList<Lesson>>) : void
+    {static} + printTimetable(timetable:HashMap<String, ArrayList<Lesson>>) : String
 }
 
 @enduml
