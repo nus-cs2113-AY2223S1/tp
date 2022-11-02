@@ -4,13 +4,13 @@
 Property Rental Manager (PRM) is a desktop application that helps property agents manage, filter and monitor single owner rental units for appropriate tenants. This application uses Command Line Interface (CLI) and has approximately 7500 lines of code.
 
 Given below are my contributions to the project.
-- **New Features:** Added the ability to dynamically load and update Client, Property and Pairing data.
+- **New Feature:** Added the ability to dynamically load and update Client, Property and Pairing data.
 
   - What it does: Stores the Client, Property and Pairing data into a text file whenever a new entries is added or when pairings is made between a Client and Property. When the program is ran, the stored information will be loaded before the user can use.
   - Justification: This feature allows the data to be retained despite terminating the program while also allowing the user to update the data offline (when the program is not running) if they are familiar with the formatting.
   - Highlights: This feature requires management of 3 different text files. The complexities is shown with the scope of potential bugs where files can be corrupted through the insertion of text in the wrong format. <br/><br/> 
 
-- **New Features:** Added the ability to search for matching Client or Property.
+- **New Feature:** Added the ability to search for matching Client or Property.
 
   - What it does: Search through the Client List or Property List, depending on what the user entry, for matching entity with the string inputted by the client.
   - Justification: This feature allows filtering of entities. For example, if the user wants to look for all the properties in the list that is a 3 Room Flat, he/she could query for "HDB 3-Room", and all the 3 room flats will be displayed.
