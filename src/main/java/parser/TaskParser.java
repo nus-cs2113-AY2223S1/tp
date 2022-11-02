@@ -50,11 +50,15 @@ public class TaskParser {
 
     public Command prepareAddTask(String input) {
         try {
-            int startOfI = input.indexOf(parser.INDEX_FLAG);
-            int startOfE = input.indexOf(parser.EMPLOYEE_FLAG);
-            int startOfD = input.indexOf(parser.DATE_FLAG);
+            int startOfI = input.indexOf(parser.indexFlag);
+            int startOfE = input.indexOf(parser.employeeFlag);
+            int startOfD = input.indexOf(parser.dateFlag);
 
-            if (startOfI > startOfE || startOfE > startOfD || startOfI == -1 || !input.substring(0, startOfI).isEmpty()) {
+            if (startOfI > startOfE || startOfE > startOfD || startOfI == -1) {
+                throw new DukeException();
+            }
+
+            if (!input.substring(0, startOfI).isEmpty()) {
                 throw new DukeException();
             }
 
@@ -88,8 +92,8 @@ public class TaskParser {
 
     public Command prepareReassignTask(String input) {
         try {
-            int startOfI = input.indexOf(parser.INDEX_FLAG);
-            int startOfE = input.indexOf(parser.EMPLOYEE_FLAG);
+            int startOfI = input.indexOf(parser.indexFlag);
+            int startOfE = input.indexOf(parser.employeeFlag);
             if (startOfI > startOfE || startOfI == -1) {
                 throw new DukeException();
             }

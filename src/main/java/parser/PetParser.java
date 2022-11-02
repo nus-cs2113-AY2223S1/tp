@@ -6,8 +6,6 @@ import command.petcommand.AddPetCommand;
 import command.petcommand.RemovePetCommand;
 import command.petcommand.ViewPetCommand;
 import exception.DukeException;
-import pet.Pet;
-import seedu.duke.Duke;
 
 public class PetParser {
     private int lengthOfSignature;
@@ -47,9 +45,9 @@ public class PetParser {
 
     public Command prepareAddPet(String input) {
         try {
-            int startOfN = input.indexOf(parser.NAME_FLAG);
-            int startOfS = input.indexOf(parser.SPECIES_FLAG);
-            int startOfH = input.indexOf(parser.HEALTH_FLAG);
+            int startOfN = input.indexOf(parser.nameFlag);
+            int startOfS = input.indexOf(parser.speciesFlag);
+            int startOfH = input.indexOf(parser.healthFlag);
             if (startOfN == -1 || startOfS == -1 || startOfH == -1) {
                 System.out.println("Invalid Input! format of parameters entered for adding a pet is invalid");
                 throw new DukeException();
