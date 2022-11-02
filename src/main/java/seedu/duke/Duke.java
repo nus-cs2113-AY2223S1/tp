@@ -17,8 +17,6 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.ui.Ui;
 import seedu.duke.user.UserList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_FILES_ILLEGALLY_DELETED;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TO_FIX_FILES;
 import static seedu.duke.logger.LoggerMessages.LOG_EXECUTE_SUCCESSFULLY;
 import static seedu.duke.logger.LoggerMessages.LOG_EXIT_DUKE;
 import static seedu.duke.logger.LoggerMessages.LOG_RUN_DUKE;
@@ -54,7 +52,7 @@ public class Duke {
         itemStorage = new ItemStorage(itemFilePath, userList);
         transactionStorage = new TransactionStorage(transactionFilePath, itemList);
         try {
-            checkIfThreeFilesSimultaneouslyExistOrNotExit();
+            StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
             initializeUserList(userFilePath);
             initializeItemList(itemFilePath);
             initializeTransactionList(transactionFilePath);
@@ -122,14 +120,6 @@ public class Duke {
         userStorage.writeData(userList);
         itemStorage.writeData(itemList);
         transactionStorage.writeData(transactionList);
-    }
-
-    private void checkIfThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
-        boolean areSimultaneouslyExistOrNotExist
-                = StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
-        if (!areSimultaneouslyExistOrNotExist) {
-            throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
-        }
     }
 
     /**
