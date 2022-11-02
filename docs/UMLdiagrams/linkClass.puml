@@ -22,10 +22,12 @@ class Link {
     <u>- SPECIAL_TERM_2_SEMESTER_DELIMITER: String
     <u>- SUPPOSED_PREFIX_REGEX: String
 
-    <u>- addLessons(String[], SelectedModule, int, Ui): void
-    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui): void
-    <u>- appendModules(List<SelectedModule>, StringBuilder): void
-    <u>- appendSemester(State, StringBuilder): void
+    <u>- addLessons(String[], SelectedModule, int, Ui)
+    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui)
+    <u>- appendModules(List<SelectedModule>, StringBuilder)
+    <u>- appendSemester(State, StringBuilder)
+    <u>- extractModulesAndLessons(Ui, int, String[], List<SelectedModule>)
+    <u>- extractSemester(State, Ui, String[]): int
     <u>+ getLessonType(String, Ui): LessonType
     <u>+ getLink(State): String
     <u>- getSemesterFromParam(String): int
@@ -34,6 +36,6 @@ class Link {
     <u>- isValidLink(String): boolean
     <u>- isValidPreviousState(String): boolean
     <u>- joinLessons(Map<LessonType, String>): String
-    <u>+ parseLink(String, State, Ui): void
+    <u>+ parseLink(String, State, Ui)
 }
 @enduml
