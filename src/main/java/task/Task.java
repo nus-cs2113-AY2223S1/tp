@@ -5,7 +5,7 @@ import employee.EmployeeList;
 
 public class Task {
 
-    private static int id = 0;
+    public static int id = 0;
 
     public final int taskId;
 

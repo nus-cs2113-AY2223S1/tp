@@ -61,7 +61,7 @@ public class Parser {
     }
 
     public int numberInInput(String input, String format) throws DukeException {
-        if (!input.contains(format)) {
+        if (!input.contains(format) || input.indexOf(format) != 0) {
             throw new DukeException();
         }
 
@@ -91,6 +91,14 @@ public class Parser {
     public int isStatus(String input) throws DukeException {
         try {
             return numberInInput(input, " s/");
+        } catch (DukeException e) {
+            throw new DukeException();
+        }
+    }
+
+    public int employeeId(String input) throws DukeException {
+        try {
+            return numberInInput(input, " e/");
         } catch (DukeException e) {
             throw new DukeException();
         }

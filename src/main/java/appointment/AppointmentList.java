@@ -6,6 +6,7 @@ import pet.Pet;
 import pet.PetList;
 import service.Service;
 import service.ServiceList;
+import appointment.Appointment;
 
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
@@ -40,6 +41,7 @@ public class AppointmentList {
         // appointment should refer to one existing service
         Service service = ServiceList.findService(appointment.service);
         if (service == null) {
+            Appointment.id--;
             throw new DukeException();
         }
 
@@ -47,6 +49,7 @@ public class AppointmentList {
         // in that case, add a new pet accordingly
         Pet pet = PetList.findPet(appointment.petName);
         if (pet == null) {
+            Appointment.id--;
             throw new DukeException();
         }
 
