@@ -1,5 +1,6 @@
 package seedu.duke.logger;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Ui;
 
 import java.io.File;
@@ -51,5 +52,14 @@ public class DukeLogger {
      */
     public void warning(String message) {
         logger.warning(message);
+    }
+
+    /**
+     * Logs DukeException.
+     */
+    public void logDukeException(Exception e) {
+        if (e instanceof DukeException) {
+            warning(e.getMessage());
+        }
     }
 }
