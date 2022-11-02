@@ -228,7 +228,7 @@ Format: `service view`
 ### Exit: `bye`
 
 ---
-## command.command Summary
+## Command Summary
 
 * Add appointment `appointment add s/SERVICE p/PET d/DATE`
 * Remove appointment `appointment remove i/APPOINTMENT_ID`

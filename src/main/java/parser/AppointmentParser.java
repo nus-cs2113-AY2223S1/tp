@@ -58,11 +58,11 @@ public class AppointmentParser {
             int p = input.indexOf(" p/");
             int d = input.indexOf(" d/");
 
-            if (!input.substring(0,s).isEmpty()) {
+            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
                 throw new DukeException();
             }
 
-            if (s > p || p > d || s == -1 || p == -1 || d == -1) {
+            if (!input.substring(0,s).isEmpty()) {
                 throw new DukeException();
             }
 
