@@ -438,7 +438,7 @@ public class CommandParser {
         int start = 0;
         String temp = "";
         for (int i = 0; i < parameter.length() - 6; ++i) {
-            temp = parameter.substring(i, i+6);
+            temp = parameter.substring(i, i +   6);
             if (temp.equals("note/{")) {
                 start = i;
             }
