@@ -11,10 +11,8 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import java.math.BigDecimal;
-
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
@@ -31,7 +29,7 @@ public class UpdateTransactionCommand extends Command {
     /**
      * Constructor for AddTransactionCommand.
      *
-     * @param parts           The parts from user input
+     * @param parts The parts from user input
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
@@ -40,7 +38,7 @@ public class UpdateTransactionCommand extends Command {
         this.parts = parts;
         this.transactionList = transactionList;
         if (parts.length != 2) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -109,9 +107,9 @@ public class UpdateTransactionCommand extends Command {
      * Executes UpdateTransactionCommand.
      *
      * @return false
-     * @throws InvalidArgumentException     If there is a part that cannot be parsed
-     * @throws TransactionNotFoundException If the user cannot be found
-     * @throws DurationInvalidException     If the number is less than 0
+     * @throws InvalidArgumentException If there is a part that cannot be parsed
+     * @throws TransactionNotFoundException If the transaction cannot be found
+     * @throws DurationInvalidException If the number is less than 0
      */
     public boolean executeCommand() throws InvalidArgumentException, TransactionNotFoundException,
             DurationInvalidException, InvalidTransactionException {
@@ -120,9 +118,12 @@ public class UpdateTransactionCommand extends Command {
             String txId = args[0];
             int duration = Integer.parseInt(args[1]);
             int oldDuration = transactionList.getTransactionById(txId).getDuration();
-            double oldMoneyTransacted = transactionList.getTransactionById(txId).getMoneyTransacted();
-            double newMoneyTransacted = (double) duration / (double) oldDuration * oldMoneyTransacted;
-            Transaction updatedTx = this.transactionList.updateTransaction(txId, duration, newMoneyTransacted);
+            double oldMoneyTransacted =
+                    transactionList.getTransactionById(txId).getMoneyTransacted();
+            double newMoneyTransacted =
+                    (double) duration / (double) oldDuration * oldMoneyTransacted;
+            Transaction updatedTx =
+                    this.transactionList.updateTransaction(txId, duration, newMoneyTransacted);
             Ui.updateTransactionMessage(updatedTx);
         }
         return false;

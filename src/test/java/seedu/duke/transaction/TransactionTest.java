@@ -16,8 +16,10 @@ class TransactionTest {
 
     @BeforeEach
     void initializeTest() {
-        transaction = new Transaction("pen", "28sd37h2", "bui", 5, LocalDate.parse("2022-10-03"), 3.2);
-        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5, LocalDate.parse("2022-10-05"), 3.2);
+        transaction = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
+                LocalDate.parse("2022-10-03"), 3.2);
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
+                LocalDate.parse("2022-10-05"), 3.2);
     }
 
     @Test
@@ -32,7 +34,7 @@ class TransactionTest {
 
     @Test
     void isFinished_notFinishedTx_expectFalse() {
-        transaction = new Transaction("pen", "28sd37h2", "bui", 300,
+        transaction = new Transaction("pen", "28sd37h2", "bui", "jw", 300,
                 LocalDate.parse("2022-10-03"), 192);
         assertFalse(transaction.isFinished());
     }
@@ -55,16 +57,15 @@ class TransactionTest {
     @Test
     void convertTransactionToFileFormatTest() {
         String transactionId = transaction.getTxId();
-        assertEquals(transactionId + " | pen | 28sd37h2 | bui | 5 | 2022-10-03 | 3.2 | 153",
+        assertEquals("28sd37h2 | bui | 5 | 2022-10-03 | jw | pen | 3.2 | " + transactionId,
                 transaction.convertTransactionToFileFormat());
     }
 
     @Test
     void updateDurationTest() {
-        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2", "bui", 300,
-                LocalDate.parse("2022-10-03"), 192);
-        assertEquals(newTransaction.toString(),
-                transaction.update(300, 192).toString());
+        Transaction newTransaction = new Transaction(transaction.getTxId(), "pen", "28sd37h2",
+                "bui", "jw", 300, LocalDate.parse("2022-10-03"), 192);
+        assertEquals(newTransaction.toString(), transaction.update(300, 192).toString());
     }
 
     @Test
@@ -79,14 +80,14 @@ class TransactionTest {
 
     @Test
     void isOverlapWithTransactionWithEquality_notOverlap_returnFalse() {
-        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
                 LocalDate.parse("2022-10-10"), 3.2);
         assertFalse(transaction.checkOverlapToAddTx(transactionToCompare));
     }
 
     @Test
     void isOverlapWithTransactionWithEquality_overlapWithEquality_returnTrue() {
-        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", 5,
+        transactionToCompare = new Transaction("pen", "28sd37h2", "bui", "jw", 5,
                 LocalDate.parse("2022-10-03"), 3.2);
         assertTrue(transaction.checkOverlapToAddTx(transactionToCompare));
     }

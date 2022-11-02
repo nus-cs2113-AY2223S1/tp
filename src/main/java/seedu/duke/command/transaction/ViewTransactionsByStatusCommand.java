@@ -10,24 +10,30 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INSUFFICIENT_ARGUMENTS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_STATUS_INVALID;
 
-//@@author jingwei55
+// @@author jingwei55
 public class ViewTransactionsByStatusCommand extends Command {
 
     private final String[] parts;
     private final TransactionList transactionList;
-
     private static final String STATUS_DELIM = "s";
 
+    /**
+     * Constructor for ViewTransactionsByStatusCommand.
+     *
+     * @param parts The parts from user input
+     * @param transactionList The list of transactions to work with
+     * @throws InsufficientArgumentsException If the number of args is incorrect
+     */
     public ViewTransactionsByStatusCommand(String[] parts, TransactionList transactionList)
             throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
         if (parts.length != 1) {
-            throw new InsufficientArgumentsException(MESSAGE_INSUFFICIENT_ARGUMENTS);
+            throw new InsufficientArgumentsException(MESSAGE_INVALID_NUMBER_OF_ARGS);
         }
     }
 
@@ -52,7 +58,7 @@ public class ViewTransactionsByStatusCommand extends Command {
     /**
      * Displays the list of transactions based on user input.
      *
-     * @param arg          user input needed to return the appropriate list of transactions
+     * @param arg user input needed to return the appropriate list of transactions
      * @param transactions Overall list of transactions
      */
     void getTransactionsByStatus(String arg, ArrayList<Transaction> transactions) {

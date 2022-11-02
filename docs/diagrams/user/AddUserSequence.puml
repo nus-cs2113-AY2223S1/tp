@@ -15,7 +15,7 @@ activate ":AddUserCommand"
 ":AddUserCommand" -> ":AddUserCommand": getArgsAddUserCmd()
 activate ":AddUserCommand"
 return args
-alt args is valid
+opt args are valid
     ":AddUserCommand" -> ":User"**: new User()
     activate ":User"
     ":User" --> ":AddUserCommand"
@@ -27,20 +27,8 @@ alt args is valid
     deactivate ":UserList"
     deactivate "<<class>>\nUi"
     deactivate ":User"
-else args is invalid
-    ":AddUserCommand" -> ":DukeException"** : new
+    ":AddUserCommand" --> ":Duke"
     destroy ":AddUserCommand"
-    activate ":DukeException"
-    ":DukeException" --> ":Duke"
-    deactivate ":DukeException"
-    ":Duke" -> "<<class>>\nUi" : print error
-    activate "<<class>>\nUi"
-    "<<class>>\nUi" -> ":DukeException": getMessage()
-    activate ":DukeException"
-    return
-    destroy ":DukeException"
-    "<<class>>\nUi" --> ":Duke"
-    deactivate "<<class>>\nUi"
 end
 
 @enduml

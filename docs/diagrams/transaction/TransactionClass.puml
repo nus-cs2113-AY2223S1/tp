@@ -9,6 +9,7 @@ class Transaction {
     - transactionId: String
     - itemName: String
     - itemId: String
+    - lender: String
     - borrower: String
     - duration: Integer
     - createdAt: LocalDate
@@ -17,9 +18,8 @@ class Transaction {
 
     + Transaction(String, String, String, int, LocalDate, double)
     + Transaction(String, String, String, String, int, LocalDate, double)
-    + getTxId(): String
-    + getItemId(): String
-    + getBorrower(): String
+    + checkOverlapToAddTx(Transaction): boolean
+    + checkOverlapToUpdateTx(Transaction): boolean
     + getReturnDate(): LocalDate
     + isFinished(): boolean
     + convertTransactionToFileFormat(): String
@@ -30,8 +30,6 @@ class Transaction {
 class TransactionList {
     + TransactionList()
     + TransactionList(ArrayList<Transaction>)
-    + getSize(): int
-    + getTransactionList(): ArrayList<Transaction>
     + addTransaction(Transaction): void
     + updateTransaction(String, int, double): Transaction
     + getBorrowTransactionsByUser(String): TransactionList
@@ -40,6 +38,8 @@ class TransactionList {
     + getTransactionById(String): Transaction
     + hasThisBorrower(String): boolean
     + hasThisItemBeingBorrowed(String): boolean
+    + checkOldTransactionsOverlapWithUpdated(Transaction): void
+    + checkOldTransactionsOverlapWithNew(Transaction): void
     + convertTransactionListToFileFormat(): String
     + toString(): String
 }
@@ -65,7 +65,7 @@ class DateParser {
 }
 
 TransactionStorage .> TransactionList : > loads and writes
-TransactionList *--> "0..*" Transaction: transactionList
+TransactionList *--> "*" Transaction: transactionList
 Transaction ..> IdGenerator
 Transaction ..> DateParser
 "{abstract}\nStorage" <|-- TransactionStorage

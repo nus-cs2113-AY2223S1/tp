@@ -12,7 +12,7 @@ return
 deactivate
 ":Duke" -> ":SortItemCommand" : executeCommand()
 activate ":SortItemCommand"
-":SortItemCommand" -> ":SortItemCommand": sortAndFilter()
+":SortItemCommand" -> ":SortItemCommand": sortItems()
 activate ":SortItemCommand"
 ":SortItemCommand" -> ":SortItemCommand": getArgsSortItemsCmd()
 activate ":SortItemCommand"

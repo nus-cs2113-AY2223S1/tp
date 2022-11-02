@@ -4,7 +4,7 @@ import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.transaction.TransactionList;
 
-//@@author jingwei55
+// @@author jingwei55
 public class Item {
     private final String itemId;
     private final String name;
@@ -12,7 +12,17 @@ public class Item {
     private final double pricePerDay;
     private final Category.Categories category;
 
-    public Item(String name, int categoryNumber, double price, String ownerId) throws InvalidCategoryException {
+    /**
+     * Default constructor for Item.
+     * 
+     * @param name The name of item
+     * @param categoryNumber The category number of an item
+     * @param price The price of an item
+     * @param ownerId The ownerId of an item
+     * @throws InvalidCategoryException If given category number is invalid
+     */
+    public Item(String name, int categoryNumber, double price, String ownerId)
+            throws InvalidCategoryException {
         this.itemId = IdGenerator.generateId();
         this.name = name;
         this.pricePerDay = price;
@@ -20,6 +30,16 @@ public class Item {
         this.category = Category.mapCategory(categoryNumber);
     }
 
+    /**
+     * Overloaded constructor for Item.
+     * 
+     * @param itemId The id of item
+     * @param name The name of item
+     * @param categoryNumber The category number of an item
+     * @param price The price of an item
+     * @param ownerId The ownerId of an item
+     * @throws InvalidCategoryException If given category number is invalid
+     */
     public Item(String itemId, String name, int categoryNumber, double price, String ownerId)
             throws InvalidCategoryException {
         this.itemId = itemId;
@@ -62,6 +82,12 @@ public class Item {
         return (this.isAvailable(transactionList) ? "YES" : "NO");
     }
 
+    /**
+     * Gives a readable string representation of an item.
+     * 
+     * @param transactionList A list of all transactions
+     * @return A string representation of an item
+     */
     public String toString(TransactionList transactionList) {
         String itemId = "ItemId: " + this.itemId + "\n";
         String itemIcon = "[" + (isAvailable(transactionList) ? "Available" : "On loan") + "] ";
@@ -72,10 +98,14 @@ public class Item {
         return itemIcon + itemId + itemName + itemCategory + itemOwner + itemPrice;
     }
 
+    /**
+     * Converts and Item to a suitable format for file storage.
+     * 
+     * @return A suitable string representation of an item for storage
+     */
     public String convertItemToFileFormat() {
         String separator = " | ";
-        int checkSum = toString(new TransactionList()).length();
-        return itemId + separator + name + separator + pricePerDay + separator + ownerId
-                + separator + Category.setCategory(category) + separator + checkSum;
+        return name + separator + Category.setCategory(category) + separator
+                + pricePerDay + separator + ownerId + separator + itemId;
     }
 }

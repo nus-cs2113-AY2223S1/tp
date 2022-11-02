@@ -32,7 +32,13 @@ alt user is valid
     ":TransactionList" -> ":TransactionList": getTotalMoneyTransacted()
     activate ":TransactionList"
     return totalMoney
-    return debt
+    return loss
+    ":ViewUserCommand" -> ":TransactionList": getLendTransactionsByUser()
+    activate ":TransactionList"
+    ":TransactionList" -> ":TransactionList": getTotalMoneyTransacted()
+    activate ":TransactionList"
+    return totalMoney
+    return gain
     ":ViewUserCommand" -> "<<class>>\nUi": viewUserMessage()
     activate "<<class>>\nUi"
     return

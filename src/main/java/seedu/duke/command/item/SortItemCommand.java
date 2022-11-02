@@ -26,7 +26,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMA
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
 
-//@@author chiewyx
+// @@author chiewyx
 
 /**
  * A representation of a command to sort items based on its price.
@@ -38,6 +38,10 @@ public class SortItemCommand extends Command {
     private static final String MAX_AMT = "10000";
     private static final String DEFAULT_SORT = "lh";
     private static final String NO_CATEGORY = "0";
+    private static final String MODE_DELIM = "mode";
+    private static final String MIN_DELIM = "min";
+    private static final String MAX_DELIM = "max";
+    private static final String CAT_DELIM = "cat";
 
     private final String[] parts;
 
@@ -48,8 +52,8 @@ public class SortItemCommand extends Command {
     /**
      * Constructor for SortItemCommand.
      *
-     * @param parts           The parts from user input
-     * @param itemList        The list of items to work with
+     * @param parts The parts from user input
+     * @param itemList The list of items to work with
      * @param transactionList The list of transactions to work with
      */
     public SortItemCommand(String[] parts, ItemList itemList, TransactionList transactionList) {
@@ -68,13 +72,13 @@ public class SortItemCommand extends Command {
         String[] args = new String[4];
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("mode")) {
+            if (delimiter.equals(MODE_DELIM)) {
                 args[0] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("min")) {
+            } else if (delimiter.equals(MIN_DELIM)) {
                 args[1] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("max")) {
+            } else if (delimiter.equals(MAX_DELIM)) {
                 args[2] = CommandParser.getArgValue(part);
-            } else if (delimiter.equals("cat")) {
+            } else if (delimiter.equals(CAT_DELIM)) {
                 args[3] = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
@@ -197,42 +201,58 @@ public class SortItemCommand extends Command {
     }
 
     /**
-     * Sorts and filters the list of items.
+     * Sorts the list of items.
      *
-     * @return a list containing the sorted and filtered items
-     * @throws InvalidArgumentException        if the arguments are invalid
-     * @throws InvalidSortModeException        if the mode of sorting is invalid
-     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
+     * @return a list containing the sorted items
+     * @throws InvalidArgumentException if the arguments are invalid
+     * @throws InvalidSortModeException if the mode of sorting is invalid
+     * @throws InvalidPriceException if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
-    private List<Item> sortAndFilter() throws InvalidArgumentException, InvalidSortModeException,
-            InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
+    private List<Item> sortItems() throws InvalidArgumentException, InvalidSortModeException,
+            InvalidPriceException, InvalidPriceBoundariesException {
         String[] args = getArgsSortItemsCmd();
         String[] mainArgs = removeOptionalArgs(args);
         List<Item> sortedItems = new ArrayList<>();
         if (areValidArgs(mainArgs)) {
             String mode = mainArgs[0];
+            if (mode.equals(LOW_HIGH)) {
+                sortedItems = itemList.getItemList().stream()
+                        .sorted(comparingDouble(Item::getPricePerDay)).collect(Collectors.toList());
+            } else if (mode.equals(HIGH_LOW)) {
+                sortedItems = itemList.getItemList().stream()
+                        .sorted(Comparator.comparingDouble(Item::getPricePerDay).reversed())
+                        .collect(Collectors.toList());
+            }
+        }
+        return sortedItems;
+    }
+
+    /**
+     * Filters the list of items.
+     *
+     * @param sortedItems takes in sorted list to filter
+     * @return filtered list based on price and category
+     * @throws InvalidArgumentException if arguments are invalid
+     * @throws InvalidSortModeException if mode of sorting is invalid
+     * @throws InvalidPriceException if minPrice and maxPrice are invalid
+     * @throws InvalidPriceBoundariesException if minPrice > maxPrice
+     * @throws InvalidCategoryException if category number is invalid
+     */
+    private List<Item> filterItems(List<Item> sortedItems)
+            throws InvalidArgumentException, InvalidSortModeException, InvalidPriceException,
+            InvalidPriceBoundariesException, InvalidCategoryException {
+        String[] args = getArgsSortItemsCmd();
+        String[] mainArgs = removeOptionalArgs(args);
+        if (areValidArgs(mainArgs)) {
             double min = Double.parseDouble(mainArgs[1]);
             double max = Double.parseDouble(mainArgs[2]);
-            if (mode.equals(LOW_HIGH)) {
-                sortedItems =
-                        itemList.getItemList().stream()
-                                .sorted(comparingDouble(Item::getPricePerDay))
-                                .filter(item -> item.getPricePerDay() >= min
-                                        && item.getPricePerDay() <= max)
-                                .collect(Collectors.toList());
-            } else if (mode.equals(HIGH_LOW)) {
-                sortedItems =
-                        itemList.getItemList().stream()
-                                .sorted(Comparator.comparingDouble(Item::getPricePerDay).reversed())
-                                .filter(item -> item.getPricePerDay() >= min
-                                        && item.getPricePerDay() <= max)
-                                .collect(Collectors.toList());
-            }
+            sortedItems = sortedItems.stream()
+                    .filter(item -> item.getPricePerDay() >= min && item.getPricePerDay() <= max)
+                    .collect(Collectors.toList());
             if (!mainArgs[3].equals(NO_CATEGORY)) {
                 Category.Categories cat = Category.mapCategory(Integer.parseInt(mainArgs[3]));
-                sortedItems = sortedItems.stream()
-                        .filter(item -> item.getCategory() == cat)
+                sortedItems = sortedItems.stream().filter(item -> item.getCategory() == cat)
                         .collect(Collectors.toList());
             }
         }
@@ -243,15 +263,15 @@ public class SortItemCommand extends Command {
      * Executes SortItemsCommand.
      *
      * @return false
-     * @throws InvalidArgumentException        if the arguments are invalid
-     * @throws InvalidSortModeException        if the mode of sorting is invalid
-     * @throws InvalidPriceException           if minPrice and maxPrice are invalid
+     * @throws InvalidArgumentException if the arguments are invalid
+     * @throws InvalidSortModeException if the mode of sorting is invalid
+     * @throws InvalidPriceException if minPrice and maxPrice are invalid
      * @throws InvalidPriceBoundariesException if minPrice > maxPrice
      */
     public boolean executeCommand() throws InvalidArgumentException, InvalidSortModeException,
             InvalidPriceException, InvalidPriceBoundariesException, InvalidCategoryException {
         StringBuilder listString = new StringBuilder();
-        List<Item> itemsList = sortAndFilter();
+        List<Item> itemsList = filterItems(sortItems());
         if (itemsList.size() == 0) {
             listString.append("There is no items in your filtered list right now");
         } else {
