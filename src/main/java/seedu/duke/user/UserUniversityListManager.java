@@ -70,7 +70,7 @@ public class UserUniversityListManager {
                 System.out.println("Error: No empty updates");
                 return;
             } else if (isNotValidComment(comment)) {
-                System.out.println("Error: No special characters in comment: ; % /");
+                System.out.println("Error: No special characters in comment: _ ; % /");
                 return;
             }
             getList(universityName).updateComment(moduleCode, comment);
@@ -78,7 +78,7 @@ public class UserUniversityListManager {
     }
 
     private boolean isNotValidComment(String comment) {
-        return comment.contains("%") || comment.contains("/") || comment.contains(";");
+        return comment.contains("_") || comment.contains("%") || comment.contains("/") || comment.contains(";");
     }
 
     public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException {
