@@ -8,11 +8,11 @@ Here are my contributions to the project:
 
 * **New Feature**: Added the ability to pair properties with clients.
     * What it does: Allows the user to record the event where a client rents a property, by pairing them together.
-    * Justification: This feature helps the user track which clients(s) is/are renting which property.
+    * Justification: This feature helps the user track which client(s) is/are renting which property.
 
 * **New Feature**: Added the ability to unpair properties from clients.
   * What it does: Allows the user to record the event where a client is no longer renting a property, by unpairing them.
-  * Justification: This feature helps the user track which clients(s) is/are renting which property.
+  * Justification: This feature helps the user track which client(s) is/are renting which property.
 
 * **New Feature**: Added the ability to check the information of properties.
   * What it does: Allows the user to view all information relating to a property, including the tenants who are renting it.
