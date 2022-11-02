@@ -16,26 +16,18 @@ import seedu.duke.exception.FinanceException.ExceptionCollection;
 
 public class Currency {
     public static List<CurrencyStructure> getListOfAllCurrencies() throws FinanceException {
-
         List<CurrencyStructure> currencies = new ArrayList<>();
-        Path path = Paths.get("src", "main", "data");
 
-        currencies = readInCurrencies(path);
+        currencies = readInCurrencies();
         return currencies;
     }
 
-    public static List<CurrencyStructure> readInCurrencies(Path path) throws FinanceException {
+    public static List<CurrencyStructure> readInCurrencies() throws FinanceException {
         List<CurrencyStructure> currencyList = new ArrayList<>();
-        Path filePath = Paths.get(path.toString(), "currencies.txt");
-        File file = new File(filePath.toString());
-        Scanner scanner;
-        try {
-            scanner = new Scanner(file,"UTF-8");
-        } catch (FileNotFoundException e) {
-            throw new FinanceException(ExceptionCollection.CURRENCY_FILE_NOT_FOUND_EXCEPTION);
-        } // create a Scanner using the File as the source
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
+        String[] currenciesArray = Currency2D.getArray();
+
+        for (int i = 0; i < Currency2D.getEmptyIndex(); i++) {
+            String line = currenciesArray[i];
             String[] items = line.split(",");
             String abbrName = items[0];
             String fullName = items[1];
@@ -45,7 +37,6 @@ public class Currency {
             currencyList.add(currency);
         }
 
-        scanner.close();
         return currencyList;
     }
 

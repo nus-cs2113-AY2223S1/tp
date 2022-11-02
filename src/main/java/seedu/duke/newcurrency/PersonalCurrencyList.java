@@ -1,5 +1,6 @@
 package seedu.duke.newcurrency;
 
+import seedu.duke.Currency2D;
 import seedu.duke.CurrencyStructure;
 import seedu.duke.exception.FinanceException;
 
@@ -20,23 +21,16 @@ public class PersonalCurrencyList {
 
     protected static List<CurrencyStructure> getListOfAllCurrencies() throws FinanceException {
         List<CurrencyStructure> currencies = new ArrayList<>();
-        Path path = Paths.get("src", "main", "data");
-        currencies = readInCurrencies(path);
+        currencies = readInCurrencies();
         return currencies;
     }
 
-    protected static List<CurrencyStructure> readInCurrencies(Path path) throws FinanceException {
+    protected static List<CurrencyStructure> readInCurrencies() throws FinanceException {
         List<CurrencyStructure> personalCurrencyList = new ArrayList<>();
-        Path filePath = Paths.get(path.toString(), "currencies.txt");
-        File file = new File(filePath.toString());
-        Scanner scanner;
-        try {
-            scanner = new Scanner(file,"UTF-8");
-        } catch (FileNotFoundException e) {
-            throw new FinanceException(FinanceException.ExceptionCollection.CURRENCY_FILE_NOT_FOUND_EXCEPTION);
-        } // create a Scanner using the File as the source
-        while (scanner.hasNext()) {
-            String line = scanner.nextLine();
+        String[] currenciesArray = Currency2D.getArray();
+
+        for (int i = 0; i < Currency2D.getEmptyIndex(); i++) {
+            String line = currenciesArray[i];
             String[] items = line.split(",");
             String abbrName = items[0];
             if (abbrName.charAt(0) == '!') {
@@ -49,7 +43,6 @@ public class PersonalCurrencyList {
             }
 
         }
-        scanner.close();
         return personalCurrencyList;
     }
 
