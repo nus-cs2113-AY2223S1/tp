@@ -25,6 +25,16 @@ class MediaTest {
     }
 
     @Test
+    void newEmptyMediaTest() {
+        Media test = new Media();
+        assertEquals("",test.title);
+        assertEquals(0,test.rating);
+        assertEquals("",test.genre);
+        assertEquals(null,test.dateWatched);
+        assertEquals("",test.createFileString());
+    }
+
+    @Test
     void convertDate_invalidDay_throwParseException() {
         String dateWatchedString = "32-01-2022";
         Throwable ex = null;

@@ -53,6 +53,7 @@ public class Parser {
         this.mediaList = reviewList;
     }
 
+    //@@author redders7
     public String[] getCommandWord(String input) {
         String[] result = input.split(" ");
         return result;
@@ -79,6 +80,7 @@ public class Parser {
      * Checks that user input is valid, parses the input and executes any valid commands given
      * @param userInput Raw input given by user
      */
+    //@@author indraneelrp
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
