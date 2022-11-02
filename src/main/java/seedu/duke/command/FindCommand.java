@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 //@@author chydarren
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.HelpMessages;
@@ -36,6 +37,7 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
+
     /**
      * Checks the format of find to ensure that it contains keywords used in the search expression.
      *
@@ -43,6 +45,7 @@ public class FindCommand extends Command {
      * @throws FindTransactionMissingKeywordsException If a user does not enter a search expression for Find.
      */
     public static void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
+        findLogger.setLevel(Level.SEVERE);
         if (keywords.isBlank()) {
             findLogger.log(Level.WARNING, "Exception thrown as there are no keywords found.");
             throw new FindTransactionMissingKeywordsException();
