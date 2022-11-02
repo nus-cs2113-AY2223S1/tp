@@ -56,6 +56,19 @@ The aim of this guide is to help readers understand how the different components
 
 This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
+The overall architecture loosely follows the following diagram:
+![Architecture](images/architecture.png)
+
+A few things to note about the overall architecture:
+- The UI and CommandParser class are helper classess and therefore only have dependencies and not associations
+- The Exception, List and Storage components showed above are simplified representations. In reality:
+  - There are close to 20 created exceptions that extend the base DukeException class
+  - For List, there are 3 specific lists we work with: UserList, ItemList and StorageList
+  - Similarly, for Storage, 3 Storage classes that correspond to the lists are: ItemStorage, ItemList and StorageList.
+- All classes have some dependency on the Exception class, which we exclude for simplicity since the actual exceptions are handled in Duke
+
+Knowing the overall architecture of the application, we cover the specifics below.
+
 ### 3.1. Duke
 Duke is the main class where Upcycle will run. Upon running it, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
 Afterwards, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke and sent to the CommandParser class to be parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the data is stored in Storage. If not, an appropriate error is displayed instead.
