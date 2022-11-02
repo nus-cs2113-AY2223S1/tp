@@ -150,7 +150,7 @@ The following diagrams show more details about Storage classes:
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
 The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
-If Duke detects a change the potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
+If Duke detects a change that potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
 ```
 ____________________________________________________________
 The ITEM files has been corrupted at line 1
@@ -684,7 +684,7 @@ This section provides guidance to the tester to manually test Upcycle by providi
 enter into the app.
 
 There are 2 categories of test cases:
-- **Positive test cases:** follow the user guide in the sequence from 3.1 to 3.5
+- **Positive test cases:** follow the [user guide](UserGuide.md) in the sequence from 3.1 to 3.5
 - **Negative test cases:** listed below
 
 Here are the negative test cases you can test:
