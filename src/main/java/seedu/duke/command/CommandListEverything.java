@@ -8,16 +8,17 @@ import seedu.duke.Ui;
 import seedu.duke.Messages;
 
 public class CommandListEverything extends Command {
+
+    @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        for (int i = 0; i < propertyList.getCurrentListSize(); i++) {
-            ui.displayOneProperty(propertyList.getPropertyList().get(i), i + 1);
-        }
-        ui.displayNoOfProperties(propertyList.getCurrentListSize());
+        System.out.println(Messages.CLIENTS);
+        new CommandListClients().execute(ui, storage, propertyList, clientList, pairingList);
         System.out.println(Messages.LINE_BREAK);
-        for (int i = 0; i < clientList.getCurrentListSize(); i++) {
-            ui.displayOneClient(clientList.getClientList().get(i), i + 1);
-        }
-        ui.displayNoOfClients(clientList.getCurrentListSize());
+        System.out.println(Messages.PROPERTIES);
+        new CommandListProperties().execute(ui, storage, propertyList, clientList, pairingList);
+        System.out.println(Messages.LINE_BREAK);
+        System.out.println(Messages.PAIRS);
+        new CommandListPairs().execute(ui, storage, propertyList, clientList, pairingList);
     }
 }

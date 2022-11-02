@@ -4,6 +4,11 @@ package seedu.duke;
  * Represents a property.
  */
 public class Property {
+    public static final String LANDLORD_LABEL = "  Landlord: ";
+    public static final String ADDRESS_LABEL = "  Address: ";
+    public static final String PRICE_SGD_LABEL = "  Renting Price: SGD";
+    public static final String PER_MONTH_LABEL = "/month";
+    public static final String UNIT_TYPE_LABEL = "  Unit Type: ";
     private String landlordName;
     private String propertyAddress;
     private String rentingPrice;
@@ -33,10 +38,10 @@ public class Property {
     }
 
     public String toString() {
-        String propertyDetails = "  Landlord: " + landlordName + System.lineSeparator()
-                + "  Address: " + propertyAddress + System.lineSeparator()
-                + "  Renting Price: SGD" + rentingPrice + "/month" + System.lineSeparator()
-                + "  Unit Type: " + unitType + System.lineSeparator();
+        String propertyDetails = LANDLORD_LABEL + landlordName + System.lineSeparator()
+                + ADDRESS_LABEL + propertyAddress + System.lineSeparator()
+                + PRICE_SGD_LABEL + rentingPrice + PER_MONTH_LABEL + System.lineSeparator()
+                + UNIT_TYPE_LABEL + unitType + System.lineSeparator();
         return propertyDetails.trim();
     }
 }
