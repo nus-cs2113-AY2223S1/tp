@@ -29,4 +29,12 @@ public class FindCommandTest {
         String resultString = result.toString();
         Assertions.assertEquals("CarparkID 3 at Raffles City: 522 lots available", resultString);
     }
+
+    @Test
+    void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
+        CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        Assertions.assertThrows(NoCarparkFoundException.class, () -> {
+            new FindCommand("ZZ", carparkList).execute();
+        });
+    }
 }
