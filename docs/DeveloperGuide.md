@@ -59,7 +59,7 @@ The list feature has the following commands in it -
 There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
 the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
 these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
-CommandListEverything read and display using loops inside the overriden execute() method itself. The Commands which 
+CommandListEverything read and display using loops inside the overridden execute() method itself. The Commands which 
 display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
 methods to display their information, using methods present in Ui. The class structure is as follows - 
 ![ListClassDiagram](diagrams/ListClassDiagram.png)
@@ -282,13 +282,13 @@ When a client rents a property, the client and property form a pair.
 * Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants(clients) only have
   one place of residence at any time.
 
-#### Pair
+#### Pair Feature
 
 The partial sequence diagram for the pair command, when called from `Duke.java`, is shown below:
 
 ![PairingList Pair Sequence Diagram](diagrams/PairingListPairSD.png)
 
-**NOTE**: Self-invocated calls have been omitted to emphasise inter-object method calls.
+**NOTE**: Self-invocations have been omitted to emphasise inter-object method calls.
 
 The pair command takes in user input of the format:
 ```
@@ -309,7 +309,7 @@ How the pair command works:
     `Client` is already paired with some other `Property`, or when the user pairs a client whose budget is lower than the property's rental price.
 7. The `Client` and `Property` objects are inserted as a pair into the hashmap of `PairingList`.
  
-#### Unpair
+#### Unpair Feature
 
 The unpair command takes in user input of the format:
 ```
@@ -318,7 +318,7 @@ unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX
 where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are indexes present in `ClientList`
 and `PropertyList`, if their private arrays were 1-indexed.
 
-(The sequence diagram for unpair is not provided as the mechanism is similar to that of [pair](#pair))
+(The sequence diagram for unpair is not provided as the mechanism is similar to that of [Pair](#pair-feature))
 
 How the unpair command works :
 1. The user input for an unpair command is first parsed by `Parser` (specifically, `UnpairParser`).
@@ -330,6 +330,22 @@ How the unpair command works :
    `PropertyList` and `ClientList`.
 6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
+
+---
+### Check Feature
+
+#### Check property
+
+
+
+The check property command takes in user input of the format:
+```
+check -property ip/PROPERTY_INDEX
+```
+where `PROPERTY_INDEX` is a positive integer which is also an index found in `PropertyList`, if its array were 1-indexed.
+
+
+
 
 ---
 
