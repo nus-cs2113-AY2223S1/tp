@@ -40,7 +40,7 @@ public class Account {
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                         AccountUi.showTotalBalance(totalBalance, currency);
                         break;
-                    case "detail":
+                    case "details":
                         String username = wallet.getUserName();
                         currency = wallet.getDefaultCurrency();
                         List<Deposit> deposits = wallet.getDeposits();
@@ -55,7 +55,7 @@ public class Account {
                             System.out.println("Back in the main account, please enter any commands.");
                         }
                         break;
-                    case "exit":
+                    case "logout":
                         isAccountExit = true;
                         AccountHistoryFile.deleteFile(wallet.getUserName(), loginTime);
                         AccountUi.showAccountExitMessage(wallet.getUserName());
@@ -79,15 +79,7 @@ public class Account {
                 String commandArg = splits[1];
                 try {
                     switch (commandType) {
-                        case "setdefault":
-                            setDefaultCurrency(commandArg);
-                          AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                            break;
-                        case "convertall":
-                            MoneyCommand.convertAllCommand(wallet,commandArg);
-                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                            break;
-                        case "save":
+                        case "deposit":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             break;
@@ -99,6 +91,11 @@ public class Account {
                             if(in.equals("account history")){
                                 AccountHistoryFile.printFile(wallet.getUserName(), loginTime);
                                 AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            }
+                            else if(in.equals("log out")){
+                                isAccountExit = true;
+                                AccountHistoryFile.deleteFile(wallet.getUserName(), loginTime);
+                                AccountUi.showAccountExitMessage(wallet.getUserName());
                             }
                             else{
                                 throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
@@ -112,10 +109,11 @@ public class Account {
             else if (splits.length == 3) {
                 String commandType = splits[0];
                 String commandArg = splits[1] + " " + splits[2];
+                String commandType2 = splits[0] + " " + splits[1];
+                String commandArg2 = splits[2];
                 try {
                     switch (commandType) {
-
-                        case "save":
+                        case "deposit":
                             MoneyCommand.saveCommand(wallet,commandArg);
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             break;
@@ -124,6 +122,10 @@ public class Account {
                             AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             break;
                         default:
+                            if(commandType2.equals("convert all")){
+                                MoneyCommand.convertAllCommand(wallet,commandArg2);
+                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            }
                             throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                     }
 
