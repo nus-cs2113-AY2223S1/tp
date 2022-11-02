@@ -2,14 +2,13 @@
 
 ## Introduction
 
-Stores all of the forex rates in one place and allows the user to store many different types of currency within one “bank” account/wallet.
+Stores all the forex rates in one place and allows the user to store different types of currency within one “bank” account/wallet.
 
 ## Quick Start
 
-{Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features 
 
@@ -24,7 +23,7 @@ Format:
   3. `Please enter your password: <password>`
 
 * The <username> has to be a unique username.
-* The <password> has to be atleast 8 characters long.  
+* The <password> has to be at least 8 characters long.  
 
 Example of usage: 
 
@@ -35,7 +34,7 @@ Example of usage:
   
 
 ### Logging into an existing wallet: `login`
-Logs you into your wallet so you can do your actions there
+Logs you into your wallet, so you can do your actions there
 
 Format: 
   1. `login`
@@ -72,9 +71,7 @@ Example of usage:
 `Please enter your new currency's symbol: bc`
   
 `Please enter your new currency's rate: 0.000049`
-  
 
-  
   
 ### Removing your personal currency: `remove`
 Removes your personal currency from the list of currencies
@@ -88,11 +85,7 @@ Format:
 Example of usage: 
 
 `OK, which currency would you like to remove? Enter the abbreviation of that currency: btc`
-  
-  
 
-  
-  
   
 ### Help center: `help`
 Helps you deal with settings, such as changing your password, username, or default currency or deleting your account.
@@ -106,15 +99,15 @@ Format:
 Example of usage: 
 
   1. `change default currency`
-  2. `password: password123`
+  2. `current password: password123`
   3. `Enter the currency you would like to change your default to: eur`
   
   1. `change password`
-  2. `password: password123`
+  2. `current password: password123`
   3. `Enter the currency you would like to change your default to: eur`
   
   1. `change username`
-  2. `password: password123`
+  2. `current password: password123`
   3. `New username: testing1`
   
   1. `delete account`
@@ -135,30 +128,32 @@ Example of usage:
 
 `balance`
   
-### Getting details: `detail`
+### Getting details: `details`
 Getting a detailed view of your wallet
 
 Format: 
-  1. `detail`
+  1. `details`
   
 #You need to be logged into your wallet
 
 Example of usage: 
 
-`detail`
+`details`
   
   
-### Depositing money to your account: `save`
-Adding more money to your wallet
+### Depositing money to your account: `deposit`
+Deposit money to your wallet
 
 Format: 
-  1. `save <currency> <amount>`
+  1. `deposit <currency> <amount>`
+2. `deposit <amount>`
   
 #You need to be logged into your wallet
 
 Example of usage: 
 
-`save sgd 100`
+`deposit sgd 100`
+`deposit 100`
   
   
 ### Withdrawing money from your account: `withdraw`
@@ -189,33 +184,19 @@ Example of usage:
 
 In the example above, the command means converting 10 units of SGD to USD
 
-### Convert all money: `convertAll`
+### Convert all money: `convert all`
 Convert all money in your wallet to a certain currency
 
 Format: 
-  1. `convertAll <currency>`
+  1. `convert all <currency>`
   
 #You need to be logged into your wallet
 
 Example of usage: 
 
-`convertAll sgd`
+`convert all sgd`
 
 In the example above, the command means converting all the money in the wallet to SGD
-
-### Set default currency: `setDefault`
-Set default currency of your wallet
-
-Format: 
-  1. `setDefault <currency>`
-  
-#You need to be logged into your wallet
-
-Example of usage: 
-
-`setDefault sgd`
-
-In the example above, the command means setting default currency to SGD
 
 ### Listing currencies: `list`
 Lists a detailed view of all the currencies that are available
@@ -230,7 +211,7 @@ Example of usage:
 `list`
   
  
-### Trasnfering currencies: `transfer`
+### Transferring currencies: `transfer`
 Transfer an amount of money to another wallet
 
 Format: 
@@ -245,6 +226,8 @@ Example of usage:
  
 ### Currencies section: `currencies`
 Get to the currencies section
+
+#Can be called inside or outside your wallet
 
 Format: 
   1. `currencies`
@@ -269,6 +252,8 @@ Example of usage:
 ### Conversion: `conversion`
 Get information about a certain currency
 
+Use number 1 when inside your account to get the conversion from the given currency to your default currency
+
 Format: 
   1. `conversion <abbreviation>`
   2. `conversion <abbreviation> <abbreviation>`
@@ -276,7 +261,24 @@ Format:
 Example of usage: 
 `conversion sgd`
 `conversion sgd usd`
-  
+
+### Exit: `exit`
+Exit from the currency center
+
+Format:
+1. `exit`
+
+Example of usage:
+`exit`
+
+### Log Out: `logout/ log out`
+Log out of your account
+
+Format:
+1. `logout`
+2. `log out`
+
+Log out of your account and get back to the home screen
   
 ## FAQ
 **Q**: How do I transfer my data to another computer? 
