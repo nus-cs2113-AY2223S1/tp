@@ -21,6 +21,7 @@ import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.Module;
 import seedu.duke.timetable.Lesson;
+import seedu.duke.ui.Ui;
 
 /**
  * Class to handle parsing user input and creating Command after checking for validity of user input.
@@ -55,6 +56,7 @@ public class CommandParser {
     private static final int LESSON_START_TIME_INDEX = 4;
     private static final int LESSON_END_TIME_INDEX = 5;
     private static final int COMMENT_INDEX = 3;
+    private static final int NOTE_INDEX = 5;
 
     /**
      * Creates a user command based on user input.
@@ -99,7 +101,10 @@ public class CommandParser {
                 throw new InvalidUserCommandException("Error! Invalid add command. "
                         + "Please follow the command format provided");
             }
-            String comment = parseComment(userInputTokenized);
+            String comment = "";
+            if (userInputTokenized.length == 4) {
+                comment = userInputTokenized[3];
+            }
             Lesson lessonToAdd = parseLesson(userInputTokenized);
             AddCommand newAddCommand = new AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd, comment);
 
@@ -168,6 +173,8 @@ public class CommandParser {
         }
     }
 
+
+    /**
     private static String parseComment(String[] parameters) throws InvalidCommentException {
         // no comment
         if (parameters.length <= COMMENT_INDEX) {
@@ -209,6 +216,7 @@ public class CommandParser {
         }
         return false;
     }
+    */
 
     /**
      * Checks whether a line of user input is empty.
@@ -377,10 +385,11 @@ public class CommandParser {
     }
 
     private static boolean isValidAddCommentOnModules(String [] parameters) {
-        return parameters.length >= FOUR_PARAMETERS_LENGTH
+        return parameters.length == FOUR_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
-                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
+                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX)
+                && parameters[COMMENT_INDEX].charAt(parameters[COMMENT_INDEX].length() - 1) == '}';
     }
 
     private static boolean isValidDeleteCommandOnModules(String [] parameters) {
