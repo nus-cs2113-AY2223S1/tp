@@ -332,22 +332,6 @@ How the unpair command works :
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
 
 ---
-### Check Feature
-
-#### Check property
-
-
-
-The check property command takes in user input of the format:
-```
-check -property ip/PROPERTY_INDEX
-```
-where `PROPERTY_INDEX` is a positive integer which is also an index found in `PropertyList`, if its array were 1-indexed.
-
-
-
-
----
 
 ### Storage Feature
 
