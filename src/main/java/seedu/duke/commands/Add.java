@@ -2,8 +2,14 @@ package seedu.duke.commands;
 
 import seedu.duke.Module;
 import seedu.duke.ModuleList;
+import seedu.duke.exceptions.InvalidGradeException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+
+import static seedu.duke.exceptions.InvalidGradeException.checkGradeFormat;
+import static seedu.duke.exceptions.InvalidGradeException.checkValidGrade;
+import static seedu.duke.exceptions.InvalidMcException.invalidMc;
 
 public class Add extends Command {
     private Module mod;
@@ -14,7 +20,7 @@ public class Add extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -27,12 +33,15 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) {
+    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException {
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
+        checkMcString(mcString);
         int mc = Integer.parseInt(mcString);
+        checkMc(mc);
         String grade = extractingContent(input, indexes[6], indexes[7]);
+        checkGrade(grade);
 
         this.mod = new Module(course.toUpperCase(), semester.toUpperCase(), grade.toUpperCase(), mc);
     }
@@ -100,6 +109,26 @@ public class Add extends Command {
         }
     }
 
+    public void checkMcString(String mcString) throws InvalidMcException {
+        if (!mcString.matches("[0-9]+")) {
+            throw new InvalidMcException();
+        }
+    }
+
+    public void checkMc(int mcs) throws InvalidMcException {
+        if (invalidMc(mcs)) {
+            throw new InvalidMcException();
+        }
+    }
+    public void checkGrade(String grade) throws InvalidGradeException {
+        if (!checkGradeFormat(grade)) {
+            throw new InvalidGradeException();
+        }
+        if (!checkValidGrade(grade)) {
+            throw new InvalidGradeException();
+        }
+    }
+
     /**
      * function to return the positions of the details in input
      * @param input the input given by user. Format: String
@@ -120,6 +149,6 @@ public class Add extends Command {
 
     @Override
     public void execute(ModuleList modulelist) {
-        modulelist.add(this.mod);
+        modulelist.add(this.mod, false);
     }
 }

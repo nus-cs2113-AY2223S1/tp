@@ -3,9 +3,8 @@ package seedu.duke;
 
 
 import seedu.duke.commands.*;
-import seedu.duke.exceptions.InvalidCommandWordException;
-import seedu.duke.exceptions.InvalidInputContentException;
-import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.*;
+
 
 public class Parser {
 
@@ -31,9 +30,22 @@ public class Parser {
             UI.invalidFormatMessage();
         } catch (InvalidInputContentException e) {
             UI.invalidContentMessage();
+        } catch (InvalidMcException e) {
+            UI.invalidMcMessage();
+        } catch (InvalidGradeException e) {
+            UI.invalidGradeMessage();
         }
 
         return c;
+    }
+    public static Module parseFileInput(String input) throws InvalidInputFormatException, InvalidInputContentException {
+        String[] splitText = input.split(" ");
+        String course = splitText[0].substring(2);
+        String semesterTaken = splitText[1].substring(2);
+        int mcs = Integer.parseInt(splitText[2].substring(3));
+        String grade = splitText[3].substring(2);
+        Module module = new Module(course,semesterTaken,grade,mcs);
+        return module;
     }
 
     /**
@@ -46,7 +58,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException {
         switch (commandWord) {
         case "add":
             return new Add(input);

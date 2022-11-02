@@ -80,6 +80,9 @@ public class UI {
         System.out.println("The module " + modCode + " is not found in your plan!!");
         System.out.println("Please add the module first before you want to delete.");
     }
+    public static void fileLoadingErrorMessage() {
+        System.out.println("Could not find any previous usage.");
+    }
 
     /**
      * Function to print a list of modules in a particular semester
@@ -165,6 +168,14 @@ public class UI {
 
     public static void invalidCommandWordMessage() {
         System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
+    }
+
+    public static void invalidMcMessage() {
+        System.out.println("The number of MCs is invalid (0 < mcs <= 20). Please try again!");
+    }
+
+    public static void invalidGradeMessage() {
+        System.out.println("Invalid grade. Please try again!");
     }
 
 }

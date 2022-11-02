@@ -239,6 +239,10 @@ Thank you for using PlanIt!
 
 **A**: {your answer here}
 
+**Q**: What if I forget how to use PlanIt?
+
+**A**: You can always view the commands available in PlanIt through the help command.
+
 ## Command Summary
 
 * Add module `add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE`
