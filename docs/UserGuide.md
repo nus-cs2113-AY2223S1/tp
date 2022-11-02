@@ -41,22 +41,23 @@ one-stop movie review companion.
 ## Features 
 
 The following features are supported by Duke.
-1) User can add reviews on watched movies and tv shows
-2) User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie
-3) User can delete unwanted reviews
-4) User can view all added reviews
-5) User can clear all reviews
-6) User can sort reviews by genre, title, date and rating
-7) User can find reviews by keyword
-8) User can set specific reviews as a favourite
-9) User can list all favourite reviews
-10) User input is automatically saved and loaded every session
+1. User can add reviews on watched movies and tv shows
+2. User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie
+3. User can delete unwanted reviews
+4. User can view all added reviews
+5. User can clear all reviews
+6. User can sort reviews by genre, title, date and rating
+7. User can find reviews by keyword
+8. User can set specific reviews as a favourite
+9. User can list all favourite reviews
+10. User input is automatically saved and loaded every session
 
 ## Commands
 ### Adding a movie or TV show: `add`
 Adds a new movie or TV show review to your list.
 
-**Note:** title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
+**Note:** 
+Title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
 
 **Format**: 
 
@@ -79,7 +80,13 @@ Output:
 Got it. I've added the following item to the list:
         [Movie] inception Rating: 90.0 Genre: thriller Date watched:10-01-2020
 
-        Now you have 5 reviews in the list.
+        Now you have 1 reviews in the list.
+```
+```
+Got it. I've added the following item to the list:
+	[TV Show]  game of thrones  Rating: 5.0  Genre: fantasy  Date watched:  02-02-2022   Site: hbo
+
+	Now you have 2 reviews in the list.
 ```
 
 ### Displaying reviews: `list`
@@ -116,17 +123,33 @@ Usage:
 
 `delete tv 2`
 
+Output:
+
+```
+Noted. I've deleted the following media:
+	[Movie]  Cars  Rating: 92.0  Genre: animated  Date watched: 20-01-2020
+Now you have 8 reviews in the list.
+```
+
 ### Clearing all reviews: 'clear'
 Deletes all reviews in your list.
 
 **Format and usage**: `clear`
 
+Output: 
+
+```
+Your list is now cleared.
+```
 ### Sorting reviews: 'sort'
 Sorts your review list according to a given field.
 
 **Format**: `sort <field>`
 
 - `<field>` must be one of the following strings: 'rating', 'title', 'date' or 'genre'
+- Sorting the review list by 'rating' or 'date' returns the reviews in descending order i.e. from the highest rating to 
+the lowest rating and from the most recent to the least recent
+- Sorting by 'title' or 'genre' returns the reviews in case-sensitive ascending order i.e. from 'A' to 'z'
 
 Usage:
 
@@ -153,7 +176,7 @@ TV Shows:
 ```
 
 ### Finding reviews: 'find'
-Searches your review list to find movies whose titles contain the given keyword.
+Searches your review list to find movies whose **titles** contain the given keyword.
 
 **Format**: `find <keyword>`
 

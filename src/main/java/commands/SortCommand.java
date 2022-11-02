@@ -19,7 +19,7 @@ public class SortCommand extends Commands {
 
         switch (userInput[1]) {
         case "rating":
-            this.reviewList.inputs.sort(Comparator.comparing(Media::getRating));
+            this.reviewList.inputs.sort(Comparator.comparing(Media::getRating).reversed());
             break;
 
         case "title":
@@ -31,7 +31,7 @@ public class SortCommand extends Commands {
             break;
 
         case "date":
-            this.reviewList.inputs.sort(Comparator.comparing(Media::getDateWatched));
+            this.reviewList.inputs.sort(Comparator.comparing(Media::getDateWatched).reversed());
             break;
 
         default:

@@ -190,17 +190,30 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 
 ## Instructions for manual testing
 
-- Load Main 
-- Add a movie or tv show 
-  - Command:
-    - add /movie test /rating 5  /date 02-02-2022 /genre horror)
-    - add /tvshow test /rating 5  /date 02-02-2022 /genre horror /site e
-- List movies and tv shows 
-  - Command: list
-- Remove a movie or tv show
-  - Command: delete <type> <index #>
-- Clear history
-  - Command: clear
+Set Up:
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
+3. Copy the jar file into the folder you want to store your reviews.
+4. Open terminal application and change directory to the above folder.
+5. Run the jar file by entering java -jar tp.jar into the terminal.
+
+Testing: 
+1. Duke will display a greeting message. Enter a command and press Enter to execute it.
+2. Add a Movie or TvShow:
+
+`add /movie <title> /rating <rating> /date <dateWatched> /genre <genre>`
+
+`add /tv <title> /rating <rating>  /date <dateWatched> /genre <genre> /site <location>`
+3. Input additional commands for testing 
+(refer to user guide for command parameters): 
+   1. `list`
+   2. `sort`
+   3. `favourite`
+   4. `favourite list`
+   5. `find`
+   6. `delete`
+   7. `clear`
+
 
 
 

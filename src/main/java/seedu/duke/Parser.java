@@ -12,7 +12,12 @@ import exceptions.DukeException;
 import exceptions.IllegalCharacterException;
 import exceptions.InvalidCommandException;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -211,6 +216,10 @@ public class Parser {
             title = fields[POS_TITLE].substring(spacingType);
             checkEmptyCommand(title);
             rating = Double.parseDouble(fields[POS_RATING].substring(SPACING_RATING));
+            //ensure rating is not above 100
+            if (rating > 100) {
+                throw new IllegalArgumentException();
+            }
             checkEmptyCommand(Double.toString(rating));
             date = fields[POS_DATE].substring(SPACING_DATE);
             checkEmptyCommand(date);
@@ -229,7 +238,11 @@ public class Parser {
 
         try {
             if (!isValidDate(dateFields)) {
-                throw new Exception();
+                throw new InvalidDateException();
+            }
+
+            if (isFutureDate(date)) {
+                throw new FutureDateException();
             }
 
             if (spacingType == SPACING_MOVIE) {
@@ -242,12 +255,29 @@ public class Parser {
             String output = executor.execute();
             Ui.print(output);
             logger.log(Level.INFO, "\n\tAdd command executed");
-        } catch (Exception e) {
+        } catch (InvalidDateException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
-            Ui.print("Invalid date format");
+            Ui.print("Invalid date. Give a date from the past, in the following format: DD-MM-YYYY.");
+        } catch (FutureDateException e) {
+            logger.log(Level.WARNING, "\n\tAdd command failed");
+            Ui.print("You have given a date in the future. Give a date from the past, in the following format: "
+                    + "DD-MM-YYYY.");
         }
     }
 
+    public boolean isFutureDate(String dateWatchedString) {
+        Date date = null;
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+            dateFormat.setLenient(false);
+            date = dateFormat.parse(dateWatchedString);
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+        }
+
+        Date currentDate = new Date();
+        return currentDate.before(date);
+    }
 
     /**.
      * Checks if provided date is valid
@@ -277,25 +307,25 @@ public class Parser {
      * @param userInput Raw input given by user containing review details
      */
     //@@author indraneelrp
-    public void executeAdd(String userInput) {
+    public void executeAdd(String userInput) throws IllegalArgumentException {
         String[] reviewFields = userInput.split("/");
         try {
             //checks the number of / instances to ensure that user does not add extra / which messes up parsing
             int slashInstances = userInput.length() - userInput.replace("/", "").length();
             if (userInput.contains(KEYWORD_MOVIE)) {
                 if (slashInstances != 4) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
                 addMedia(reviewFields, SPACING_MOVIE);
             } else if (userInput.contains(KEYWORD_TV)) {
                 if (slashInstances != 5) {
-                    throw new DukeException();
+                    throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
                 }
                 addMedia(reviewFields, SPACING_TV);
             } else {
-                throw new DukeException();
+                throw new IllegalArgumentException("Ensure that input format and number of arguments is correct");
             }
-        } catch (DukeException e) {
+        } catch (IllegalArgumentException e) {
             logger.log(Level.WARNING, "\n\tAdd command failed");
             Ui.print("Ensure that input format and number of arguments is correct.");
         }
@@ -305,11 +335,12 @@ public class Parser {
     /**
      * Executes the clear action by creating a clear object.
      */
-    public void executeClear() {
+    public ReviewList executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
         Ui.print(output);
         logger.log(Level.INFO, "\n\tClear command executed");
+        return mediaList;
     }
 
 
@@ -342,5 +373,13 @@ public class Parser {
             Ui.print("Incomplete or wrongly formatted command, try again.");
         }
 
+    }
+
+    //@@author indraneelrp
+    /**
+     * Gets the private reviewList object.
+     */
+    public ReviewList getReviewList() {
+        return mediaList;
     }
 }
