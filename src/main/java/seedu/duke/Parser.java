@@ -197,6 +197,10 @@ public class Parser {
         try {
             title = fields[POS_TITLE].substring(spacingType);
             rating = Double.parseDouble(fields[POS_RATING].substring(SPACING_RATING));
+            //ensure rating is not above 100
+            if (rating > 100) {
+                throw new IllegalArgumentException();
+            }
             date = fields[POS_DATE].substring(SPACING_DATE);
             genre = fields[POS_GENRE].substring(SPACING_GENRE);
             dateFields = date.split("-");
