@@ -16,6 +16,7 @@ import seedu.common.CommonFiles;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
+import seedu.exception.InvalidFormatException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
 import seedu.files.parsing.LtaJsonWrapper;
@@ -39,7 +40,11 @@ public class FileReader {
             if (filepath == CommonFiles.LTA_BACKUP_FILE_PATH && filepathBackup == CommonFiles.LTA_BACKUP_FILE_PATH) {
                 // Backup file timestamp
                 for (Carpark carpark : carparks) {
-                    carpark.setLastUpdated("24-10-2022 16:06:09");
+                    try {
+                        carpark.setLastUpdated("24-10-2022 16:06:09");
+                    } catch (InvalidFormatException ignored) {
+                        // Will always be valid (backup timestamp guaranteed)
+                    }
                 }
             }
             return carparks;
@@ -50,7 +55,11 @@ public class FileReader {
                 System.out.println("Backup load successful!");
                 // Backup file timestamp
                 for (Carpark carpark : carparks) {
-                    carpark.setLastUpdated("24-10-2022 16:06:09");
+                    try {
+                        carpark.setLastUpdated("24-10-2022 16:06:09");
+                    } catch (InvalidFormatException ignored) {
+                        // Will always be valid (backup timestamp guaranteed)
+                    }
                 }
                 return carparks;
             } catch (IOException backupException) {
