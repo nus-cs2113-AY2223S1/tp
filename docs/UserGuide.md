@@ -92,7 +92,7 @@ Helps you deal with settings, such as changing your password, username, or defau
 
 Format: 
   1. `help`
-  2. `change default currency` , `change password`, `change username`, `delete account`
+  2. `change default currency` , `change password`, `change username`, `delete account`, `exit`
   
 #You have to be logged into an account to do that
 
@@ -112,6 +112,7 @@ Example of usage:
   
   1. `delete account`
   2. `y`
+3. `exit`
   
   
   

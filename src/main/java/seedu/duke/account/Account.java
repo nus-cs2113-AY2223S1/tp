@@ -66,7 +66,10 @@ public class Account {
                         break;
                     case "currencies":
                         Currency.exchangeCommands(wallet.getDefaultCurrency());
+                        System.out.println("Hi");
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                        System.out.println("Back in the main account, please enter any commands.");
+                        break;
                     default:
                         throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                     }
@@ -180,7 +183,7 @@ public class Account {
                                 try {
                                     String tempCurr = InputManager.receiveInputLine();
                                     setDefaultCurrency(tempCurr);
-                                    System.out.println("Your default currency has changed to: " + tempCurr + "please enter exit to leave the help menu.");
+                                    System.out.println("Please enter exit to leave the help menu or enter another help command.");
                                 } catch (FinanceException e) {
                                     e.handleException();
                                 }
@@ -283,9 +286,6 @@ public class Account {
     }
 
     private void setDefaultCurrency(String commandArg) throws FinanceException {
-        if (commandArg.isEmpty()) {
-            throw new FinanceException(ExceptionCollection.SET_DEFAULT_CURRENCY_EXCEPTION);
-        }
         CurrencyStructure oldCurrency = wallet.getDefaultCurrency();
         CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(commandArg);
         wallet.setDefaultCurrency(currency);
