@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+
+participant "command:CommandAddClient" as CommandAddClient #lightgreen
+participant "clientList:ClientList" as ClientList #lightblue
+participant ":Client" as Client #yellow
+participant "ui:Ui" as Ui #lightgrey
+participant "storage:Storage" as Storage #orange
+
+->CommandAddClient:execute(Ui, Storage, PropertyList, ClientList, PairingList)
+activate CommandAddClient #lightgreen
+
+CommandAddClient -> ClientList : addClient(clientName:String, clientContactNumber:String, \nclientEmail:String, clientBudgetPerMonth:String)
+activate ClientList #lightblue
+
+create Client
+ClientList -> Client : Client(clientName:String, clientContactNumber:String, clientEmail:String, clientBudgetPerMonth:String)
+activate Client #yellow
+
+return
+return
+
+CommandAddClient -> Ui : showClientAddedConfirmationMessage(clientList:ClientList)
+activate Ui #lightgrey
+return
+
+CommandAddClient -> Storage : addToClientFile(clientName:String, clientContactNumber:String, clientEmail:String, clientBudgetPerMonth:String)
+activate Storage #orange
+return
+return
+
+@enduml

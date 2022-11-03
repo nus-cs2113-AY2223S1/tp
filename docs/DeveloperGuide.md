@@ -369,9 +369,9 @@ When file is appended into the text file, it's being stored in different formats
 The text file of which Client, Property and Pairing is being stored is `client.txt`, `property.txt` and `pairing.txt` 
 respectively.
 
-![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.jpg)
-![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.jpg)
-![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.jpg)
+![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.png)
+![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.png)
+![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.png)
 
 The three sequence diagram above shows the sequence of which the append operation is being invoked. All three
 operations are similar in operations but are invoked with different `parameter` and `path`.
@@ -381,9 +381,9 @@ The update operation happens when entries in ClientList and PropertyList is bein
 PairingList is being removed.
 
 The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be seen below:
-![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.jpg)
-![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.jpg)
-![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.jpg)
+![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.png)
+![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.png)
+![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.png)
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
