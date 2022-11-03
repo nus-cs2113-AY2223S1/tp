@@ -1,9 +1,11 @@
 @startuml
 !include style.puml
 
-package Pair {
-    Class ParsePair PARSER_COLOR_T1
-    Class CommandPair COMMAND_COLOR_T1
+package "pair and unpair parser classes" {
+    Class "{abstract}\nParser" as Parser PARSER_COLOR_T4
+    Class "{abstract}\nPairUnpairParser" as PairUnpairParser PARSER_COLOR_T2
+    Class PairParser PARSER_COLOR_T1
+    Class UnpairParser PARSER_COLOR_T1
 }
 
 Class PairingList PAIRING_LIST_COLOR
@@ -12,31 +14,38 @@ Class PropertyList PROPERTY_LIST_COLOR
 Class Storage STORAGE_COLOR
 Class Ui UI_COLOR
 
-package Unpair {
-    Class ParseUnpair PARSER_COLOR_T2
+Class "{abstract}\nCommand" as Command COMMAND_COLOR_T2
+
+package "pair and unpair command classes" {
+    Class "{abstract}\nCommandPairUnpair" as CommandPairUnpair COMMAND_COLOR_T3
     Class CommandUnpair COMMAND_COLOR_T2
+    Class CommandPair COMMAND_COLOR_T4
 }
 
-ParsePair -right[hidden]- PairingList
-PairingList -down[hidden]- ClientList
-ClientList -down[hidden]- PropertyList
-PropertyList -down[hidden]- Storage
-Storage -down[hidden]- Ui
-CommandPair -right[hidden]- Ui
-Ui -right[hidden] CommandUnpair
+CommandPairUnpair -up-|> Command
+CommandPair -up-|> CommandPairUnpair
+CommandUnpair -up-|> CommandPairUnpair
 
 
-ParsePair ...down..> CommandPair : creates >
-ParsePair -->"1" PairingList
-ParsePair -->"1" ClientList
-ParsePair -->"1" PropertyList
+PairUnpairParser -up-|> Parser
+PairParser -left-|> PairUnpairParser
+UnpairParser -right-|> PairUnpairParser
 
-ParseUnpair ...down..> CommandUnpair : creates >
-ParseUnpair -->"1" PairingList
-ParseUnpair -->"1" ClientList
-ParseUnpair -->"1" PropertyList
+PairParser .down.> CommandPair : creates >
+UnpairParser .down.> CommandUnpair : creates >
 
-CommandPair .right.> Ui
+CommandPair ..> ClientList
+CommandPair ..> PropertyList
+CommandPair ..> PairingList
+CommandPair ..> Storage
+CommandPair ..> Ui
+
+CommandUnpair ..> ClientList
+CommandUnpair ..> PropertyList
+CommandUnpair ..> PairingList
+CommandUnpair ..> Storage
+CommandUnpair ..> Ui
+
 
 @enduml
 
