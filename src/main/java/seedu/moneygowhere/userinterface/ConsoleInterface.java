@@ -1118,10 +1118,10 @@ public class ConsoleInterface {
         ArrayList<Target> savedTargets = new ArrayList<>();
         ArrayList<Income> savedIncomes = new ArrayList<>();
         LocalStorage.loadFromExternalFile(filePath, savedExpenses, savedRecurringPayments, savedTargets, savedIncomes);
-        expenseManager.setExpenses(savedExpenses);
-        recurringPaymentManager.setRecurringPayments(savedRecurringPayments);
-        targetManager.setTargets(savedTargets);
-        incomeManager.setIncomes(savedIncomes);
+        expenseManager.updateExpenses(savedExpenses);
+        recurringPaymentManager.updateRecurringPayments(savedRecurringPayments);
+        targetManager.updateTargets(savedTargets);
+        incomeManager.updateIncomes(savedIncomes);
     }
 
     private void runLocalStorageLoadFromFile() {

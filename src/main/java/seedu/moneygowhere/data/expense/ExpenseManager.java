@@ -64,6 +64,15 @@ public class ExpenseManager {
         this.expenses = new ArrayList<>(savedExpenses);
     }
 
+    //@@author LokQiJun
+    public void updateExpenses(ArrayList<Expense> newExpenses) {
+        for (Expense newExpens : newExpenses) {
+            if (!hasExpense(newExpens)) {
+                this.expenses.add(newExpens);
+            }
+        }
+    }
+
     //@@author yuu-chennn
     public ArrayList<Expense> getExpensesByCategory(String categoryName) throws ExpenseManagerExpenseNotFoundException {
         ArrayList<Expense> expensesByCategory = new ArrayList<>();
