@@ -44,7 +44,16 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98
 
 ### Contributions to the User Guide UG
 
+1. Update UG for list command, providing brief description, usage format, example usage, and example output.
+
 ### Contributions to the Developer Guide DG
+
+1. Update DG for database implementation with a brief description.
+1. Construct class diagram for database implementation to illustrate relationships between the various database classes such as Database, DatabaseParser, and DatabaseStorage.
+1. Construct sequence diagram for database implementation to illustrate how data is read and stored in memory.
+1. Update DG for list command implementation with a brief description.
+1. Construct class diagram for list command implementation to illustrate relationships between Duke, CommandParser, Ui, List Command, and Database.
+1. Construct sequence diagram for list command implementation to illustrate how the user input leads to a list command being instantiated and executed.
 
 ### Contributions to Team-Based Tasks
 
