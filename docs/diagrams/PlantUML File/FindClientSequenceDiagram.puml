@@ -7,7 +7,7 @@ Participant "clientList : ClientList" as ClientList #F4F4B6
 Participant "client : Client" as Client #F4F4B6
 Participant "ui: Ui" as Ui #F4F4B6
 
-->CommandFindClient:execute(Ui:ui, Storage: storage, PropertyList: propertyList, \nClientList: clientList, PairingList: pairingList
+->CommandFindClient:execute(ui: Ui, storage: Storage, propertyList: PropertyList, \nclientList: ClientList, pairingList: PairingList)
 activate CommandFindClient #CDEFF9
 
 CommandFindClient->ClientList:getCurrentListSize()
@@ -17,12 +17,12 @@ return currentListSize
     loop i < currentListSize
         CommandFindClient->ClientList:getCurrentList()
         activate ClientList #CDEFF9
-        ClientList->Client:get(int: i)
+        ClientList->Client:get(i: int)
         activate Client #CDEFF9
         return client
         return currentClient
 
-        CommandFindClient->CommandFindClient:hasQueryText(String: queryText, Client: currentClient)
+        CommandFindClient->CommandFindClient:hasQueryText(queryText: String, currentClient: Client)
         activate CommandFindClient #E2CDF9
         CommandFindClient -> Client:getClientName()
         activate Client #CDEFF9
@@ -42,7 +42,7 @@ return currentListSize
 
         return hasQueryTextInClient
         opt hasQueryTextInClients
-            CommandFindClient->Ui:displayOneClient(Client: currentClient, int: clientIndex)
+            CommandFindClient->Ui:displayOneClient(currentClient: Client, clientIndex: int)
             activate Ui #CDEFF9
             return
         end
