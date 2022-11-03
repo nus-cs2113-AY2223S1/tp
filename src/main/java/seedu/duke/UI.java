@@ -7,7 +7,7 @@ public class UI {
     private static final String PRINTED_GAP = "     ";
 
     public static final String DOTTED_CHAR = ":";
-    public static final String HORIZONTAL_BORDER = "─";
+    public static final String HORIZONTAL_BORDER = "-";
     public static final String TABLE_HEADER = "=";
 
     public static final String CLASH_CHAR = "X";

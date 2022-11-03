@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.Stack;
 import java.util.logging.Logger;
 
-
+//@@author HT-T
 
 public class CommandPrintTimetable {
 
@@ -26,7 +26,7 @@ public class CommandPrintTimetable {
     private static final Integer DAY_PER_WEEK = 5; // only considering Mon to Fri
     private static final Integer TIMETABLE_WIDTH = 78;
     private static final Integer TIMETABLE_TIME_WIDTH = 13;
-    private static final Integer TIMETABLE_HEIGHT = 28;
+    private static final Integer TIMETABLE_HEIGHT = 32;
     private static final Integer END_SLOT_DIFFERENCE = 1;
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -35,7 +35,7 @@ public class CommandPrintTimetable {
     // rawTimetable stores the lesson objects for data handling 
     private static ArrayList<ArrayList<Integer[]>> emptySlotList = new ArrayList<>(DAY_PER_WEEK);
     // array of 5 arraylist of integer pairs
-
+    private static ArrayList<String> clashModCodeList = new ArrayList<>();
 
     public static String viewTimetable() {
         populateRawTimetable(Timetable.getListOfModules());
@@ -49,17 +49,21 @@ public class CommandPrintTimetable {
 
 
     private static void initializeRawTimeTable() {
+        //clashModCodeList.add("");
         for (int i = 0; i < DAY_PER_WEEK; i++) {
             rawTimetable.add(new ArrayList<>());
             emptySlotList.add(new ArrayList<>());
+
         }
     }
+
+
 
 
     private static void populateRawTimetable(List<Module> listOfModules) {
         rawTimetable = new ArrayList<>(DAY_PER_WEEK);
         emptySlotList = new ArrayList<>(DAY_PER_WEEK);
-
+        clashModCodeList = new ArrayList<>(DAY_PER_WEEK);
         initializeRawTimeTable();
 
         for (Module module : listOfModules) {
@@ -99,6 +103,7 @@ public class CommandPrintTimetable {
         Integer[] rawLessonSlot = new Integer[2];
         rawLessonSlot[0] = info[1];
         rawLessonSlot[1] = info[2] + END_SLOT_DIFFERENCE;
+
 
         try {
             rawTimetable.get(info[0]).add(rawLesson); // add each rawLesson into respective day
@@ -249,8 +254,8 @@ public class CommandPrintTimetable {
 
     private static void createTimetableString(int day, ArrayList<Object[]> dayIterator) {
         for (Object[] rawLesson : dayIterator) {
-            int modStartSlot = (Integer) rawLesson[0];
-            int modEndSlot = (Integer) rawLesson[1];
+            int modStartSlot = Integer.parseInt(rawLesson[0].toString());
+            int modEndSlot = Integer.parseInt(rawLesson[1].toString());
             assert modStartSlot < modEndSlot;
             String currentModCode = (String) rawLesson[2];
             String currentModType = (String) rawLesson[3];
@@ -371,6 +376,7 @@ public class CommandPrintTimetable {
             }
             output.append(System.lineSeparator());
         }
+        addClashModList(output);
         addRemarks(output);
         return output.toString();
     }
@@ -403,10 +409,50 @@ public class CommandPrintTimetable {
         ArrayList<Integer[]> clashSlotList = createClashList(stack);
 
         removeUnclashSlot(day, clashSlotList);
+        populateClashMod(day, clashSlotList);
 
         return clashSlotList;
 
     }
+
+
+    private static void populateClashMod(Integer day, ArrayList<Integer[]> clashSlotList) {
+        ArrayList<Object[]> todayRawTimetable = rawTimetable.get(day);
+        // find the rawTimetable of that particular day
+        for (Integer[] clashInterval : clashSlotList) {
+            addClashLesson(todayRawTimetable, clashInterval);
+        }
+
+        //// if String is inside, no need to add
+        //clashModCodeList.add( -String- );
+    }
+
+    private static void addClashLesson(ArrayList<Object[]> todayRawTimetable, Integer[] clashInterval) {
+        for (Object[] lesson : todayRawTimetable) {
+            // compare original lessons with clash interval one by one
+            Integer startInterval = Integer.parseInt(lesson[0].toString());
+            Integer endInterval = Integer.parseInt(lesson[1].toString());
+
+            boolean isInStartRange = startInterval >= clashInterval[0];
+            boolean isInEndRange = endInterval <= clashInterval[1];
+
+            // if the lesson is within the clash interval, add to printing list
+            if (isInStartRange && isInEndRange) {
+                addCodeToList(lesson);
+            }
+        }
+    }
+
+    private static void addCodeToList(Object[] lesson) {
+        // make sure there are no duplicates in list before adding
+        String modToAdd = lesson[2].toString();
+        boolean isDuplicateMod = clashModCodeList.contains(modToAdd);
+        if (!isDuplicateMod) {
+            clashModCodeList.add(modToAdd);
+        }
+
+    }
+
 
     private static ArrayList<Integer[]> createClashList(Stack<Integer[]> stack) {
         ArrayList<Integer[]> clashSlotList = new ArrayList<>();
@@ -431,7 +477,7 @@ public class CommandPrintTimetable {
             if (top[1] < emptySlotList.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
                 stack.pop();
                 stack.push(emptySlotList.get(day).get(i));
-            } else if (top[1] == emptySlotList.get(day).get(i)[0]) {
+            } else if (top[1].equals(emptySlotList.get(day).get(i)[0])) {
                 continue;
             } else if (top[1] < emptySlotList.get(day).get(i)[1]) {
                 top[1] = emptySlotList.get(day).get(i)[1];
@@ -449,13 +495,31 @@ public class CommandPrintTimetable {
 
 
     private static String addRemarks(StringBuilder timetable) {
-        timetable.append("\n * Note that timings indicated refers to the start of "
-                + "the corresponding 30 minutes timeslot.\n"
-                + " * Slots with XXXXXX indicates that there is a clash between two or more lessons.\n"
-                + " * Modules, if any, that start or end beyond the 8am to 8pm timings are excluded.\n"
+        timetable.append(System.lineSeparator()
+                + " * Note that timings indicated refers to the start of "
+                + "the corresponding 30 minutes timeslot." + System.lineSeparator()
+                + " * Slots with XXXXXX indicates that there is a clash between two or more lessons."
+                + System.lineSeparator()
+                + " * Modules, if any, that start before 8am or ends after 10pm timings are excluded."
+                + System.lineSeparator()
                 + " * Timings are approximated to 30 minutes block with valid assumption that "
-                + "NUS mods are typically designed in such blocks.\n");
+                + "NUS mods are typically designed in such blocks." + System.lineSeparator());
         return timetable.toString();
+    }
+
+    private static String addClashModList(StringBuilder timetable) {
+        boolean isClashListEmpty = clashModCodeList.isEmpty();
+        if (isClashListEmpty) {
+            timetable.append(" ");
+            return timetable.toString(); // nothing is to be printed
+        } else {
+            timetable.append(System.lineSeparator()
+                    + " These are the clashed modules : " + System.lineSeparator());
+            for (String modCode : clashModCodeList) {
+                timetable.append(modCode + System.lineSeparator());
+            }
+            return timetable.toString();
+        }
     }
 
 
