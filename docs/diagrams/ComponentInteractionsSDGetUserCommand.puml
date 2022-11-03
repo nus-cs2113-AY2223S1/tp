@@ -3,10 +3,11 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd Get User Command
+mainframe sd get user command
 Actor User USER_COLOR
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 Participant ":Parser" as Parser PARSER_COLOR_1
+Participant ":Logger" as Logger LOGGER_COLOR_1
 Participant ":ConsoleCommandAddExpense" as ConsoleCommandAddExpense PARSER_COLOR_1
 
 activate UserInterface USER_INTERFACE_COLOR_1
@@ -26,6 +27,12 @@ end note
 
 UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput:String
 deactivate UserInterface
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Logger : logCommand(consoleInput:String)
+activate Logger LOGGER_COLOR_1
+
+Logger --[LOGGER_COLOR_1]> UserInterface
+deactivate Logger
 
 UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
 activate Parser PARSER_COLOR_1

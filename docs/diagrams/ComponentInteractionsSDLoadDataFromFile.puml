@@ -1,0 +1,53 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd load data from file
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Data" as Data DATA_COLOR_1
+Participant ":Storage" as Storage STORAGE_COLOR_1
+
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runLocalStorageLoadFromFile()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Storage : \lloadFromFile(\n\tsavedExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedTargets:ArrayList<Target>,\n\tsavedIncomes:ArrayList<Income>\n);
+activate Storage STORAGE_COLOR_1
+
+note right
+    Parameters of loadFromFile()
+    are passed as references
+end note
+
+Storage --[STORAGE_COLOR_1]> UserInterface
+deactivate Storage
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetExpenses(\n\tsavedExpenses:ArrayList<Expense>\n)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetRecurringPayments(\n\tsavedRecurringPayments:ArrayList<RecurringPayment>\n)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetIncomes(\n\tsavedIncomes:ArrayList<Incomes>\n)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetTargets(\n\tsavedTargets:ArrayList<Targets>\n)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+deactivate UserInterface
+@enduml

@@ -19,16 +19,9 @@ opt consoleCommand instanceof ConsoleCommandDeleteTarget
     targetManager --[DATA_COLOR_4]> consoleInterface
     deactivate targetManager
 
-    ref over consoleInterface: Print Target
+    ref over consoleInterface: print target
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
-    activate consoleInterface USER_INTERFACE_COLOR_1
-
-    consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : saveToFile()
-    activate LocalStorage STORAGE_COLOR_1
-
-    LocalStorage --[STORAGE_COLOR_1]> consoleInterface
-    deactivate LocalStorage
+    ref over consoleInterface, targetManager, LocalStorage: save data
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface

@@ -3,9 +3,10 @@
 
 skinparam noteTextAlignment left
 
-mainframe sd Print Recurring Payment
+mainframe sd print recurring payment
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "localLogger:Logger" as localLogger LOGGER_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
@@ -17,6 +18,12 @@ deactivate consoleInterface
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : printInformationalMessage(recurringPaymentStr:String)
 activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> localLogger : logInformationalMessage(recurringPaymentStr:String)
+activate localLogger LOGGER_COLOR_1
+
+localLogger --[LOGGER_COLOR_1]> consoleInterface
+deactivate localLogger
 
 consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
 deactivate consoleInterface

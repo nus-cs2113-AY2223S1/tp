@@ -16,7 +16,7 @@ opt consoleCommand instanceof ConsoleCommandAddIncome
 
     create income
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> income
+    consoleInterface -[USER_INTERFACE_COLOR_1]> income : create
     activate income DATA_COLOR_4
 
     income --[DATA_COLOR_4]> consoleInterface
@@ -28,16 +28,9 @@ opt consoleCommand instanceof ConsoleCommandAddIncome
     incomeManager --[DATA_COLOR_4]> consoleInterface
     deactivate incomeManager
 
-    ref over consoleInterface: Print Income
+    ref over consoleInterface: print income
 
-    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageSaveToFile()
-    activate consoleInterface USER_INTERFACE_COLOR_1
-
-    consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : saveToFile()
-    activate LocalStorage STORAGE_COLOR_1
-
-    LocalStorage --[STORAGE_COLOR_1]> consoleInterface
-    deactivate LocalStorage
+    ref over consoleInterface, incomeManager, LocalStorage: save data
 
     consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
     deactivate consoleInterface

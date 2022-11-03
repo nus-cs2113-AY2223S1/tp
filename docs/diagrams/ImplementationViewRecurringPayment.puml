@@ -19,7 +19,7 @@ opt consoleCommand instanceof ConsoleCommandViewRecurringPayment
         recurringPaymentManager --[DATA_COLOR_4]> consoleInterface : recurringPayment:RecurringPayment
         deactivate recurringPaymentManager
 
-        ref over consoleInterface: Print Recurring Payment
+        ref over consoleInterface: print recurring payment
     else else
             consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayments()
             activate recurringPaymentManager DATA_COLOR_4
@@ -28,7 +28,7 @@ opt consoleCommand instanceof ConsoleCommandViewRecurringPayment
             deactivate recurringPaymentManager
 
             loop through recurringPayments
-            ref over consoleInterface: Print Recurring Payment
+            ref over consoleInterface: print recurring payment
             end
     end
 

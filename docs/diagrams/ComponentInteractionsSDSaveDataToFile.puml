@@ -1,0 +1,54 @@
+@startuml
+!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd save expenses to file
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Data" as Data DATA_COLOR_1
+Participant ":Storage" as Storage STORAGE_COLOR_1
+
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : runLocalStorageSaveToFile()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : getExpenses()
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface : currentExpenses:ArrayList<Expense>
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : getSortCommandSetting()
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface : sortCommandSetting:ConsoleCommandSortExpense
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : getRecurringPayments()
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface : currentRecurringPayments:ArrayList<RecurringPayments>
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : getIncomes()
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface : currentIncomes:ArrayList<Income>
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : getTargets()
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface : currentTargets:ArrayList<Target>
+deactivate Data
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Storage : \lsaveToFile(\n\tcurrentExpenses,\n\tsortCommandSetting,\n\tcurrentRecurringPayments,\n\tcurrentIncomes,\n\tcurrentTargets\n)
+activate Storage STORAGE_COLOR_1
+
+Storage --[STORAGE_COLOR_1]> UserInterface
+deactivate Storage
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
+deactivate UserInterface
+@enduml
