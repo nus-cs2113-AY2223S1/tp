@@ -57,6 +57,12 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98
 
 ### Contributions to Team-Based Tasks
 
+1. Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
+1. Populate GitHub issue tracker with user stories to tackle.
+1. Maintain GitHub issue tracker by updating user stories with new descriptions as necessary
+1. Maintain GitHub issue tracker by updating labels for issues.
+1. Closed v2.0 milestone
+
 ### Review / mentoring contributions
 
 ### Contributions beyond the project team
