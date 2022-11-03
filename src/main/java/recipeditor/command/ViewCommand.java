@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
             String commandResultOutput = recipe.getRecipeAttributesFormatted();
             return new CommandResult(commandResultOutput);
         } catch (IndexOutOfBoundsException e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipeSize()));
             return new CommandResult("View recipe index out of bound.");
         }
     }

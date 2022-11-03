@@ -1,6 +1,5 @@
 package recipeditor.command;
 
-import recipeditor.edit.Delete;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
@@ -49,7 +48,7 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format("\n" + recipeTitleToDelete
                     + " is deleted from the recipe list. %n"));
         } catch (Exception e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getSize()));
+            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipeSize()));
             return new CommandResult("Delete recipe index out of bound.");
         }
     }
