@@ -28,14 +28,14 @@ Here are my contributions to the project:
   + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub
 
 + ### Enhancement to existing features:
-  + Updated order of input workflow between `add flight` and `add passenger` commend. Order of priority changed to
+  + Updated order of input workflow between `add flight` and `add passenger` command. Order of priority changed to
   `add flight` command first were the manager has to add in an existing flight number before he/she is able to add in the
   passengers details of the same flight number. Rational is that the flight has to exist first before the passengers can
   be assigned to it, which is for syncing purposes. (Pull request [#46](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/46))
   + Optimise `passenger add` command to omit `BOARDING TIME` and automate it be always set as an earlier time than before `DEPARTURE TIME`.
   This would prevent bugs from occuring. i.e. the manage keys in a `BOARDING TIME` that is later than the `DEPARTURE TIME`.
     (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87))
-  + Improved `modify` commend to auto update the `BOARDING TIME` for all passengers who had their flights delayed (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87)) 
+  + Improved `modify` command to auto update the `BOARDING TIME` for all passengers who had their flights delayed (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87)) 
   + Wrote additional test and more catch exceptions to make code more defensive.
   (Pull requests [#17](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/17),
   [#28](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/28), [#42](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/42))
