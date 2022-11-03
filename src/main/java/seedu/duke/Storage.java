@@ -150,6 +150,8 @@ public class Storage {
         boolean hasClientFile = checkClientFile();
         boolean hasPairingFile = checkPair();
 
+        LOGGER.setLevel(Level.INFO);
+
         try {
             loadFiles(hasDirectory, hasPropertyFile, hasClientFile, hasPairingFile);
         } catch (StorageException e) {
@@ -289,7 +291,7 @@ public class Storage {
             }
 
         }
-        LOGGER.log(Level.INFO, LOG_CLIENT_LOAD_LABEL);
+        LOGGER.log(Level.FINEST, LOG_CLIENT_LOAD_LABEL);
 
         updateClient();
     }
@@ -321,7 +323,7 @@ public class Storage {
                 skipPropertyEntries();
             }
         }
-        LOGGER.log(Level.INFO, LOG_PROPERTY_LOAD_LABEL);
+        LOGGER.log(Level.FINEST, LOG_PROPERTY_LOAD_LABEL);
 
         updateProperty();
     }
@@ -336,7 +338,7 @@ public class Storage {
         // Update pairing hash map
         scanPairingFile(pairFile);
 
-        LOGGER.log(Level.INFO, LOG_PAIRING_LOAD_LABEL);
+        LOGGER.log(Level.FINEST, LOG_PAIRING_LOAD_LABEL);
         // Re-populate pairing.txt
         updatePair();
 
@@ -362,7 +364,7 @@ public class Storage {
             fw.close();
 
             String logMessage = LOG_ADD_PROPERTY_LABEL + newText;
-            LOGGER.log(Level.INFO, logMessage);
+            LOGGER.log(Level.FINEST, logMessage);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_PROPERTY_FILE);
@@ -389,7 +391,7 @@ public class Storage {
             fw.close();
 
             String logMessage = LOG_ADD_CLIENT_LABEL + newText;
-            LOGGER.log(Level.INFO, logMessage);
+            LOGGER.log(Level.FINEST, logMessage);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_CLIENT_FILE);
@@ -412,7 +414,7 @@ public class Storage {
             fw.close();
 
             String logMessage = LOG_ADD_PAIRING_LABEL + finalFormat;
-            LOGGER.log(Level.INFO, logMessage);
+            LOGGER.log(Level.FINEST, logMessage);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_PAIRING_FILE);
@@ -441,7 +443,7 @@ public class Storage {
 
             clientFile.write(clientText);
             clientFile.close();
-            LOGGER.log(Level.INFO, LOG_CLIENT_UPDATE_LABEL);
+            LOGGER.log(Level.FINEST, LOG_CLIENT_UPDATE_LABEL);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_CLIENT_FILE);
@@ -473,7 +475,7 @@ public class Storage {
 
             propertyFile.write(propertyText);
             propertyFile.close();
-            LOGGER.log(Level.INFO, LOG_PROPERTY_UPDATE_LABEL);
+            LOGGER.log(Level.FINEST, LOG_PROPERTY_UPDATE_LABEL);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_PROPERTY_FILE);
@@ -494,7 +496,7 @@ public class Storage {
             // Write the pairing list into a file.
             pairFile.write(pairText);
             pairFile.close();
-            LOGGER.log(Level.INFO, LOG_PAIRING_UPDATE_LABEL);
+            LOGGER.log(Level.FINEST, LOG_PAIRING_UPDATE_LABEL);
 
         } catch (IOException e) {
             System.out.println(Messages.MESSAGE_NO_PAIRING_FILE);

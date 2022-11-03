@@ -6,6 +6,7 @@ package seedu.duke;
 public class Messages {
 
     public static final String EXCEPTION = "EXCEPTION";
+    //@@author zoranabc201
     public static final String LINE_BREAK = "----------------------------------------------------------------------"
             + "----------";
     public static final String CLIENT = "Client:";
@@ -13,7 +14,9 @@ public class Messages {
     public static final String CLIENTS = "Clients:";
     public static final String PROPERTIES = "Properties:";
     public static final String PAIRS = "Pairs:";
+    //@@author
     public static final String INDENT = "        ";
+    //@@author zoranabc201
     public static final String THERE_IS = "There is ";
     public static final String THERE_ARE = "There are ";
     public static final String PROPERTY_SINGULAR = " property ";
@@ -23,6 +26,7 @@ public class Messages {
     public static final String PAIR_SINGULAR = " pair ";
     public static final String PAIRS_PLURAL = " pairs ";
     public static final String IN_THIS_LIST = "in this list";
+    //@@author
 
     /* Confirmation Messages */
 
@@ -53,12 +57,6 @@ public class Messages {
     public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
-
-
-    public static final String MESSAGE_CHECK_CLIENT = "Showing check results for this client:";
-
-    public static final String MESSAGE_CHECK_CLIENT_RESULT = "Here is the property this client is renting:";
-
 
 
     /* General Error Messages */
@@ -181,13 +179,14 @@ public class Messages {
 
     /* Delete Property/Client Related Error Messages */
 
+    //@@author FeliciaBeatrice
     public static final String MESSAGE_DELETE_CLIENT_WRONG_FORMAT = "OOPS!!! Please use this format to delete client:\n"
             + "delete -client ic/CLIENT_INDEX\n";
 
     public static final String MESSAGE_DELETE_PROPERTY_WRONG_FORMAT = "OOPS!!! Please use this format to delete "
             + "property\n"
             + "delete -property ip/PROPERTY_INDEX\n";
-
+    //@@author
 
     //@@author ngdeqi
     /* Pair/Unpair Related Error Messages */
@@ -223,6 +222,12 @@ public class Messages {
 
     /* Check property/client related Error Messages */
 
+
+    //@@author FeliciaBeatrice
+    public static final String MESSAGE_CHECK_CLIENT = "Showing check results for this client:";
+
+    public static final String MESSAGE_CHECK_CLIENT_RESULT = "Here is the property this client is renting:";
+
     public static final String MESSAGE_CHECK_CLIENT_NO_PAIR = "There are no pairings involving this client.";
 
     public static final String MESSAGE_CHECK_CLIENT_WRONG_FORMAT = "OOPS!! To check client, please use the "
@@ -230,6 +235,7 @@ public class Messages {
             + "  check -client ic/INDEX\n"
             + "Example:\n"
             + "  check -client ic/5\n";
+    //@@author
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
             + "following format:\n"
@@ -248,6 +254,10 @@ public class Messages {
             
     public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
             + "taking illegal values";
+
+
+    /* List related Error Messages */
+    //@@author zoranabc201
 
     public static final String MESSAGE_INCORRECT_LIST_DETAILS = "OOPS!!! Please enter -client"
             + " to list clients, -property to list properties, -pair to list pairs and -everything to list"
@@ -276,6 +286,7 @@ public class Messages {
             + "\nlist -pair to list all pairs with all their information"
             + "\nlist -pair -short to list all pairs with shortened information";
     public static final String MESSAGE_BYE = "Goodbye :). See you soon!";
+    //@@author
 
 
     //@@author wilsonngja
