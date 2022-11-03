@@ -171,13 +171,14 @@ public class Messages {
 
     /* Delete Property/Client Related Error Messages */
 
+    //@@author FeliciaBeatrice
     public static final String MESSAGE_DELETE_CLIENT_WRONG_FORMAT = "OOPS!!! Please use this format to delete client:\n"
             + "delete -client ic/CLIENT_INDEX\n";
 
     public static final String MESSAGE_DELETE_PROPERTY_WRONG_FORMAT = "OOPS!!! Please use this format to delete "
             + "property\n"
             + "delete -property ip/PROPERTY_INDEX\n";
-
+    //@@author
 
     //@@author ngdeqi
     /* Pair/Unpair Related Error Messages */
@@ -213,6 +214,7 @@ public class Messages {
 
     /* Check property/client related Error Messages */
 
+    //@@author FeliciaBeatrice
     public static final String MESSAGE_CHECK_CLIENT = "Showing check results for this client:";
 
     public static final String MESSAGE_CHECK_CLIENT_RESULT = "Here is the property this client is renting:";
@@ -224,7 +226,8 @@ public class Messages {
             + "  check -client ic/INDEX\n"
             + "Example:\n"
             + "  check -client ic/5\n";
-
+    //@@author
+    
     public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
