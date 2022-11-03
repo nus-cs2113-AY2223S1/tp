@@ -35,7 +35,6 @@ import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 public class ParserManager {
     private static ClientList clientList;
     private static PropertyList propertyList;
-    private static PairingList pairingList;
 
     private static final String EMPTY_SPACE = " ";
     private static final String EMPTY_STRING = "";
@@ -47,10 +46,9 @@ public class ParserManager {
     private static final int SINGLE_LENGTH = 1;
 
 
-    public ParserManager(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
+    public ParserManager(ClientList clientL, PropertyList propertyL) {
         clientList = clientL;
         propertyList = propertyL;
-        pairingList = pairingL;
     }
 
     public Parser parseCommand(String input) throws DukeParseException, ExistingPairException,

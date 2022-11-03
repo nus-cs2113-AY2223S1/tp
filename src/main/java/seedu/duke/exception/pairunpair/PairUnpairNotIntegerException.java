@@ -15,6 +15,7 @@ public class PairUnpairNotIntegerException extends ParsePairUnpairException {
     private ArrayList<String> errorStrings;
     private static final String INVERTED_COMMAS = "\"";
     private static final String WHITE_SPACE = "  ";
+    private static final String EMPTY_STRING_MESSAGE = "[EMPTY INPUT]";
 
     public PairUnpairNotIntegerException(ArrayList<String> errorStrings) {
         this.errorStrings = errorStrings;
@@ -35,7 +36,13 @@ public class PairUnpairNotIntegerException extends ParsePairUnpairException {
         StringBuilder sb = new StringBuilder();
         for (String errorString: errorStrings) {
             sb.append(INVERTED_COMMAS);
-            sb.append(errorString);
+
+            if (errorString.isEmpty()) {
+                sb.append(EMPTY_STRING_MESSAGE);
+            } else {
+                sb.append(errorString);
+            }
+
             sb.append(INVERTED_COMMAS);
             sb.append(WHITE_SPACE);
         }
