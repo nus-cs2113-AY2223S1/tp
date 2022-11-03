@@ -146,6 +146,7 @@ Add an employee to the list of employee in the clinic
 
 Format: `employee add n/NAME`
 * The `Name` is the name of the employee
+* Duplicate employee names are allowed
 
 Example of usage:
 `employee add n/chris`
@@ -186,6 +187,7 @@ Base on the value of health, 1 out of 10 different status of pets will be genera
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
+* Duplicate pet names are allowed
 * The `SPECIES` is the species of the pet
 * The `HEALTH` must be either 0(unhealthy) or 1(healthy)
 
@@ -216,6 +218,7 @@ Add a service to the list of services provided in the clinic
 
 Format: `service add d/DESCRIPTION`
 * The `Description` is the description of the service
+* Service cannot be added when a service with same name already exist in the service list.
 
 Example of usage:
 `service add d/haircut`
