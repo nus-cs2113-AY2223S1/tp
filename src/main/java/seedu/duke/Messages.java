@@ -203,7 +203,7 @@ public class Messages {
 
     public static final String MESSAGE_BUDGET_CLIENT = "The client's name and budget:\n";
 
-    public static final String MESSAGE_BUDGET_PROPERTY = "The property's name and price:\n";
+    public static final String MESSAGE_BUDGET_PROPERTY = "The property's name and rental price:\n";
 
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.\n";
