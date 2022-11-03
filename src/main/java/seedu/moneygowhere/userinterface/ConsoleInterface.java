@@ -241,7 +241,7 @@ public class ConsoleInterface {
         if (expense.getDescription() != null) {
             expenseStr += "Description     : " + expense.getDescription() + "\n";
         }
-        expenseStr += "Amount          : " + expense.getAmount().toPlainString() + "\n";
+        expenseStr += "Amount          : " + expense.getAmount().setScale(2).toPlainString() + "\n";
         if (expense.getCategory() != null) {
             expenseStr += "Category        : " + expense.getCategory() + "\n";
         }
@@ -276,8 +276,8 @@ public class ConsoleInterface {
         if (target.getDescription() != null) {
             targetStr += "Description   : " + target.getDescription() + "\n";
         }
-        targetStr += "Amount        : " + target.getAmount().toPlainString() + "\n";
-        targetStr += "Current Amount: " + target.getCurrentAmount().toPlainString();
+        targetStr += "Amount        : " + target.getAmount().setScale(2).toPlainString() + "\n";
+        targetStr += "Current Amount: " + target.getCurrentAmount().setScale(2).toPlainString();
 
         return targetStr;
     }
@@ -301,7 +301,7 @@ public class ConsoleInterface {
         if (income.getDescription() != null) {
             incomeStr += "Description   : " + income.getDescription() + "\n";
         }
-        incomeStr += "Amount        : " + income.getAmount().toPlainString();
+        incomeStr += "Amount        : " + income.getAmount().setScale(2).toPlainString();
 
         return incomeStr;
     }
@@ -321,7 +321,7 @@ public class ConsoleInterface {
         if (recurringPayment.getDescription() != null) {
             recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
         }
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount().toPlainString() + "\n";
+        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount().setScale(2).toPlainString() + "\n";
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
@@ -1122,6 +1122,8 @@ public class ConsoleInterface {
         recurringPaymentManager.updateRecurringPayments(savedRecurringPayments);
         targetManager.updateTargets(savedTargets);
         incomeManager.updateIncomes(savedIncomes);
+
+        runLocalStorageSaveToFile();
     }
 
     private void runLocalStorageLoadFromFile() {
