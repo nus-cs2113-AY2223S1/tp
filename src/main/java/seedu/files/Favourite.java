@@ -68,7 +68,7 @@ public class Favourite {
      *
      * @return true if all items were valid, false if some invalid items were found.
      */
-    private boolean ensureValidity(CarparkList carparkList, ArrayList<String> idArray) {
+    public boolean ensureValidity(CarparkList carparkList, ArrayList<String> idArray) {
         favouriteList = new ArrayList<>(idArray);
         boolean isValid = true;
         for (String id : idArray) {
@@ -98,10 +98,6 @@ public class Favourite {
             content.append(favouriteList.get(i)).append("\n");
         }
         fileStorage.writeDataToFile(content.toString());
-    }
-
-    public void replaceFavouriteList(ArrayList<String> content) {
-        favouriteList = content;
     }
 
     public static ArrayList<String> getFavouriteList() {
