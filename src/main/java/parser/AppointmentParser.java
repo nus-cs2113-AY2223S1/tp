@@ -92,10 +92,10 @@ public class AppointmentParser {
             }
 
             String service = input.substring(s + lengthOfSignature, p);
-            String petIdStr = input.substring(p + lengthOfSignature, d);
+            String petIdStr = input.substring(p, d);
+            int petId = parser.numberInInput(petIdStr, parser.petFlag);
             String appointmentDate = input.substring(d + lengthOfSignature);
-            // TODO: Extract petId from input
-            int petId = Pet.id;
+
             return new AddAppointmentCommand(petId, appointmentDate, service);
         } catch (DukeException e) {
             System.out.println("Sorry, format of parameters entered for adding an appointment is invalid");
