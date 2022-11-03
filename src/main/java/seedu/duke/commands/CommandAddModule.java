@@ -32,7 +32,7 @@ public class CommandAddModule {
         } catch (InterruptedException e) {
             return "The API request was interrupted, please try again.";
         } catch (Exceptions.InvalidSemException e) {
-            return "Sorry, this module is not available in the current semester.";
+            return "Sorry, this module is not available in the current semester or this semester is invalid.";
         } catch (Exceptions.InvalidModuleCodeException e) {
             return "Module not found, please enter a valid module code next time!";
         }

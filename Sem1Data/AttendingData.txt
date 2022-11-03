@@ -1,0 +1,5 @@
+CG1111A|Laboratory|Monday|1400|1700|"02"|Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+CG1111A|Laboratory|Wednesday|1400|1700|"02"|Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+CS1231|Sectional Teaching|Friday|1200|1300|"1"|Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+CS1231|Sectional Teaching|Wednesday|1200|1400|"1"|Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+CS1231|Tutorial|Undetermined Day|Undetermined|Undetermined|NA|Weeks: NA

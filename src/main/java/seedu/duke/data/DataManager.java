@@ -18,7 +18,7 @@ public class DataManager {
         return dataDirectoryPath;
     }
 
-    public static void initDataFile(String semester) {
+    public static void initDataFile(String semester, String dir) {
 
         //Handle quit/invalid entry
         if (!semester.equals("1") && !semester.equals("2")) {
@@ -27,7 +27,7 @@ public class DataManager {
 
         //Set global variables
         currSemester = semester;
-        dataDirectoryPath = "./Sem" + currSemester + "DataDirectory";
+        dataDirectoryPath = "./Sem" + currSemester + dir;
 
         //Create directory
         File dataDir = new File(dataDirectoryPath);
