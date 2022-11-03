@@ -333,8 +333,8 @@ public class Messages {
             + " t/<UNIT_TYPE>\nwhere the tags (represented by brackets)  are replaced as accordingly\n"
             + "Note that email address is optional\n" + LINE_BREAK;
 
-    public static final String DELETE_HELP_COMMAND = "\nDELETE COMMAND\n" + LINE_BREAK + "\ndelete -client ic/<INDEX>"
-            + "\ndelete -property ip/<INDEX>\nwhere <INDEX> represents the index of entity to be deleted.\n"
+    public static final String DELETE_HELP_COMMAND = "\nDELETE COMMAND\n" + LINE_BREAK + "\ndelete -client i/<INDEX>"
+            + "\ndelete -property i/<INDEX>\nwhere <INDEX> represents the index of entity to be deleted.\n"
             + LINE_BREAK;
 
     public static final String PAIR_UNPAIR_HELP_COMMAND = "\nPAIR/UNPAIR COMMAND\n" + LINE_BREAK + "\npair ip/<INDEX>"
