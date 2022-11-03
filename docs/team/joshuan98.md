@@ -30,7 +30,11 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98
 1. Store the data and provide ease of retrieval by other parts of the program.
 1. Filters the data based on name and module code for both NUS and partner university for ease of searching data in the database.
 
-#### /view Command
+#### /list Command
+
+1. Check validity of list command
+1. Create new list command
+1. Execute list command accordingly
 
 #### Testing
 
