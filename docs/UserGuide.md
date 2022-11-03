@@ -241,7 +241,7 @@ ____________________________________________________________
 ```
 
 #### 3.2.6. ```find-user``` - Find users using keyword
->List all items that are associated with a given keyword
+>List all users that are associated with a given keyword
 
 Format: ```find-user /k [KEYWORD]```
 
@@ -259,8 +259,89 @@ Here are 2 user(s) in your list:
 ____________________________________________________________
 ```
 
-**...To be updated(View-user-loss, view-user-gain)**
+#### 3.2.7. ```view-user-loss``` - Find user's loss
+>View user's gain or loss based on transactions
 
+Format: ```view-user-loss /u [USERNAME]```
+
+Example of usage: ```view-user-loss /u jingwei```
+
+Expected outcome:
+```
+____________________________________________________________
+The debt of jingwei is: $2.5
+____________________________________________________________
+```
+
+#### 3.2.8. ```view-user-gain``` - Find user's gain
+>View user's gain or loss based on transactions
+
+Format: ```view-user-gain /u [USERNAME]```
+
+Example of usage: ```view-user-gain /u bui```
+
+Expected outcome:
+```
+____________________________________________________________
+The profit of bui is: $2.5
+____________________________________________________________
+```
+
+#### 3.2.9. ```view-borrow-tx-by-user``` - Find user's gain
+>View transactions in which given user is a borrower
+
+Format: ```view-borrow-tx-by-user /u [USERNAME]```
+
+Example of usage: ```view-borrow-tx-by-user /u jingwei```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 2 transaction(s) you want to view:
+1. [Finished] TxID: 88de8884
+   ItemName: weight ItemID: fc3f71ae
+   Lender: bui
+   Borrower: jingwei
+   Duration: 5
+   ReturnedDate: Tue, Oct 25 2022
+   MoneyTransacted: $2.50 
+2. [Finished] TxID: 6a99ef95
+   ItemName: book ItemID: 8362c71a
+   Lender: bui
+   Borrower: jingwei
+   Duration: 5
+   ReturnedDate: Tue, Oct 25 2022
+   MoneyTransacted: $2.50 
+____________________________________________________________
+```
+
+#### 3.2.10. ```view-lend-tx-by-user``` - Find user's gain
+>View transactions in which given user is a borrower
+
+Format: ```view-lend-tx-by-user /u [USERNAME]```
+
+Example of usage: ```view-lend-tx-by-user /u bui```
+
+Expected outcome:
+```
+____________________________________________________________
+Here are 2 transaction(s) you want to view:
+1. [Finished] TxID: 88de8884
+   ItemName: weight ItemID: fc3f71ae
+   Lender: bui
+   Borrower: jingwei
+   Duration: 5
+   ReturnedDate: Tue, Oct 25 2022
+   MoneyTransacted: $2.50 
+2. [Finished] TxID: 6a99ef95
+   ItemName: book ItemID: 8362c71a
+   Lender: bui
+   Borrower: jingwei
+   Duration: 5
+   ReturnedDate: Tue, Oct 25 2022
+   MoneyTransacted: $2.50 
+____________________________________________________________
+```
 ### 3.3. Item-related features
 #### 3.3.1. ```add-item``` - Add a new item
 >Add a new item to the list
@@ -452,17 +533,17 @@ ____________________________________________________________
 Here are 3 item(s) in the list:
 1. Status: [Available] ItemId: 18c90077 
    Item: book 
-   Category: SPORTS_EQUIPMENT 
+   Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
    PricePerDay: $99.0
 2. Status: [Available] ItemId: 4e6f4b89 
    Item: books1 
-   Category: SPORTS_EQUIPMENT 
+   Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
    PricePerDay: $99.0
 3. Status: [Available] ItemId: 75d7d384 
-   Item: tbookie 
-   Category: SPORTS_EQUIPMENT 
+   Item: textbook 
+   Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
    PricePerDay: $99.0
 ____________________________________________________________
@@ -656,6 +737,10 @@ ____________________________________________________________
 | Remove a user                      | remove-user /u [USERNAME]                                                                                  |
 | View a user                        | view-user /u [USERNAME]                                                                                    |
 | View a user's items                | view-user-items /u [USERNAME]                                                                              |
+| View a user's borrow transactions  | view-user-borrow /k [KEYWORD]                                                                              |
+| View a user's lend transactions    | view-user-lend /u [KEYWORD]                                                                                |
+| View a user's gain                 | view-user-gain /k [KEYWORD]                                                                                |
+| View a user's loss                 | view-user-loss /k [KEYWORD]                                                                                |
 | List all users                     | list-users                                                                                                 |
 | Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
 | __*Item-related features*__        |                                                                                                            |

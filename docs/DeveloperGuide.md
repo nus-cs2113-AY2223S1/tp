@@ -60,7 +60,7 @@ The overall architecture loosely follows the following diagram:
 ![Architecture](images/architecture.png)
 
 A few things to note about the overall architecture:
-- The UI and CommandParser class are helper classess and therefore only have dependencies and not associations
+- The UI and CommandParser class are helper classes and therefore only have dependencies and not associations
 - The Exception, List and Storage components showed above are simplified representations. In reality:
   - There are close to 20 created exceptions that extend the base DukeException class
   - For List, there are 3 specific lists we work with: UserList, ItemList and StorageList
@@ -288,15 +288,15 @@ Step 4: The UserList is iterated through to check for Users that match the provi
 
 The following sequence diagram models the operation: PENDING DIAGRAM
 
-### 4.1.7. View User Debt
+### 4.1.7. View User Loss
 
 >This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
-Step 1: The user types in the command ```view-user-debt /u [username]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+Step 1: The user types in the command ```view-user-loss /u [username]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
 
-Step 2: Duke will receive the ```ViewUserDebtCommand``` and execute it.
+Step 2: Duke will receive the ```ViewUserLossCommand``` and execute it.
 
 Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
 
@@ -309,6 +309,28 @@ Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The money
 Step 7: The total User debt is printed by `Ui.printResponse()`.
 
 The following sequence diagram models the operation: PENDING DIAGRAM
+
+### 4.1.8. View User Gain
+
+>This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command ```view-user-gain /u [username]``` in the command line. The CommandParser class checks if the command is valid through the createCommand() method.
+
+Step 2: Duke will receive the ```ViewUserGainCommand``` and execute it.
+
+Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
+
+Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
+
+Step 5: `getLendTransactionsByUser(username)` is run. The TransactionList is iterated through to find Transactions in which said User is the Lender. If User is Lender, the Transaction is added to a new TransactionList, which is then returned.
+
+Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The moneyTransacted in each of the Transactions in the new TransactionList is summed together to give a return value.
+
+Step 7: The total User gain is printed by `Ui.printResponse()`.
+
+The following sequence diagram models the operation: PENDING
 
 ### 4.2. Item-related Features
 
@@ -574,7 +596,7 @@ The following sequence diagram models the operation:
 #### 4.3.7. List Transaction By User
 
 > This feature allows the user to list all the Transactions in which a given User is a Borrower. 
-> - `view-tx-by-user /u [username]`: Lists down all the transactions that have been completed.
+> - `view-borrow-tx-by-user /u [username]` and `view-lend-tx-by-user /u [username]`: Lists down all the transactions in which a given user is a borrower/lender.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -589,7 +611,7 @@ Step 4: If User is found, it then delegates to `TransactionList::getBorrowTransa
 Step 5: The returned TransactionList printed to the User via `Ui.printResponse()`
 
 The following sequence diagram models the operation:
-
+![ViewBorrowTxByuUser](images/ViewBorrowTxByUser.png)
 ### 4.4. Help Command
 
 >This feature allows users to see all the commands and command format required by Upcycle
