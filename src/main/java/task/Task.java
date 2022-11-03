@@ -5,7 +5,7 @@ import employee.EmployeeList;
 
 public class Task {
 
-    public static int id = 0;
+    private static int id = 4000;
 
     public final int taskId;
 
@@ -59,7 +59,8 @@ public class Task {
     }
 
     public void printTask() {
-        System.out.println("Task " + this.taskId + ": " + this.taskDescription);
+        System.out.println("Task ID:" + this.taskId);
+        System.out.println("Description: " + this.taskDescription);
         System.out.println("Performed by: " + EmployeeList.findEmployee(this.employeeId).getEmployeeName());
         AppointmentList.findAppointment(this.appointmentId).printAppointmentDetails();
         System.out.println("Status: " + this.getStatus());

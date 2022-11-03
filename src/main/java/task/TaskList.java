@@ -8,6 +8,7 @@ import exception.DukeException;
 import task.Task;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static appointment.AppointmentList.findAppointment;
 
@@ -51,8 +52,8 @@ public class TaskList {
 
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
-        System.out.println("Performed by: " + task.taskDescription);
-        System.out.println("Appointment: " + task.appointmentId);
+        System.out.println("Performed by: " + Objects.requireNonNull(EmployeeList.findEmployee(task.getEmployeeId())).getEmployeeName());
+        System.out.println("Appointment: ID " + task.getAppointmentId() );
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
@@ -93,6 +94,7 @@ public class TaskList {
                 break;
             }
         }
+        System.out.println("Sorry, no corresponding task found.");
     }
 
     public static Task findTask(int taskId) {
@@ -104,20 +106,21 @@ public class TaskList {
         return null;
     }
 
-    public static void finishTask(int taskId) throws DukeException {
-        if (findTask(taskId) == null) {
-            System.out.println("Sorry, no corresponding task found.");
-            throw new DukeException();
-        } else {
-            findTask(taskId).setDone();
+    public static void finishTask(int taskId) {
+        for (Task task : tasks) {
+            if (task.getTaskId() == taskId) {
+                task.setDone();
+                System.out.print("Got it. I've finished this task: ");
+                System.out.println(task.getTaskDescription());
+                return;
+            }
         }
-        System.out.print("Got it. I've finished this task: ");
-        System.out.println(findTask(taskId).getTaskDescription());
-        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
-        if (appointment == null) {
-            throw new DukeException();
-        }
-        appointment.updateAppointmentStatus();
+        System.out.println("Sorry, no corresponding task found.");
+//        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
+//        if (appointment == null) {
+//            throw new DukeException();
+//        }
+//        appointment.updateAppointmentStatus();
     }
 
 }
