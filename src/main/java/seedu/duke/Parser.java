@@ -8,8 +8,10 @@ import commands.FavouriteCommand;
 import commands.ListCommand;
 import commands.SortCommand;
 import commands.FindCommand;
-import exceptions.DukeException;
 import exceptions.IllegalCharacterException;
+import exceptions.FutureDateException;
+import exceptions.InvalidDateException;
+import exceptions.DukeException;
 import exceptions.InvalidCommandException;
 
 import java.text.DateFormat;
@@ -53,6 +55,7 @@ public class Parser {
         this.mediaList = reviewList;
     }
 
+    //@@author redders7
     public String[] getCommandWord(String input) {
         String[] result = input.split(" ");
         return result;
@@ -79,6 +82,7 @@ public class Parser {
      * Checks that user input is valid, parses the input and executes any valid commands given
      * @param userInput Raw input given by user
      */
+    //@@author indraneelrp
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
@@ -180,11 +184,16 @@ public class Parser {
 
     public void executeFavourite(String[] words) {
         try {
-            executor = new FavouriteCommand(mediaList, words);
-            String output = executor.execute();
-            Ui.print(output);
-            logger.log(Level.INFO, "\n\tFavourites command executed");
-        } catch (Exception e) {
+            if (words.length > 3 || words.length < 2) {
+                throw new DukeException();
+            } else {
+                executor = new FavouriteCommand(mediaList, words);
+                String output = executor.execute();
+                Ui.print(output);
+                logger.log(Level.INFO, "\n\tFavourite command executed");
+            }
+        } catch (DukeException e) {
+            logger.log(Level.WARNING, "\n\tFavourite command failed");
             Ui.print("Incomplete or wrongly formatted command, try again.");
         }
     }
@@ -345,7 +354,7 @@ public class Parser {
 
 
     /**
-     * Executes the delete action by creating a delete object.
+     * Executes the delete action by creating a deleted object.
      */
     public void executeDelete(String[] words) {
         try {
