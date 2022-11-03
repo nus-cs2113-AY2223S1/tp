@@ -42,7 +42,7 @@ class AppointmentListTest {
         AddPetCommand addPetCommand = new AddPetCommand("Yuhuan", "cat", true);
         addPetCommand.execute();
         int numOfAppointment = AppointmentList.appointments.size();
-        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(Pet.id, "11-28", "Trim");
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(Pet.id, "2022-11-28", "Trim");
         addAppointmentCommand.execute();
         int numOfAppointmentAfterAdd = AppointmentList.appointments.size();
         assertEquals(numOfAppointmentAfterAdd - numOfAppointment, 1);
@@ -54,7 +54,7 @@ class AppointmentListTest {
         addServiceCommand.execute();
         AddPetCommand addPetCommand = new AddPetCommand("Mimi", "cat", true);
         addPetCommand.execute();
-        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(Pet.id, "11-28", "Brush");
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(Pet.id, "2022-11-28", "Brush");
         addAppointmentCommand.execute();
         int numOfAppointments = AppointmentList.appointments.size();
         RemoveAppointmentCommand removeAppointmentCommand = new RemoveAppointmentCommand(Appointment.id);
