@@ -13,7 +13,7 @@ import seedu.parser.search.Sentence;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FilterAddressCommandTest {
+public class FilterCarparkIdCommandTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
     private final Path validPathAndFile = Paths.get(testFileDirectory, "ltaResponse.json");
     private final Path validBackupPathAndFile = Paths.get(testFileDirectory, "ltaResponseBackup.json");
@@ -21,17 +21,18 @@ public class FilterAddressCommandTest {
     @Test
     void testFilterAddressCommand() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Sentence searchQuery = new Sentence("raffles");
-        String result = carparkList.filterByAddress(searchQuery).toString();
-        Assertions.assertEquals("CarparkID @|yellow,bold 3|@ at @|bold,cyan Raffles|@ City\n" +
-                "@|faint -->|@ @|yellow 522|@ available lots total\n", result);
+        Sentence searchQuery = new Sentence("1");
+        String result = carparkList.filterByCarparkId(searchQuery).toString();
+        Assertions.assertEquals("CarparkID @|yellow,bold 1|@ at Suntec City\n" +
+                "@|faint -->|@ @|yellow 1882|@ available lots total\n", result);
     }
 
     @Test
     void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Sentence searchQuery = new Sentence("malaysia");
-        String result = new FilterAddressCommand(carparkList, searchQuery).execute().showToUser;
+        Sentence searchQuery = new Sentence("999");
+        String result = new FilterCarparkIdCommand(carparkList, searchQuery).execute().showToUser;
         Assertions.assertEquals("No carpark was found.", result);
     }
+
 }
