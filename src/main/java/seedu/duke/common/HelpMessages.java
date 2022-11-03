@@ -71,12 +71,12 @@ public enum HelpMessages {
     COMMAND_PARAMETERS_DETAILED("- detailed: A detailed version of the guide."),
     COMMAND_PARAMETERS_ENTRY("- ENTRY: A list entry value for the transaction. It is a positive whole number "
             + "ranging from 1 to 1000000."),
-    COMMAND_PARAMETERS_KEYWORDS("- KEYWORDS: A string that represents a single or a group of words used to find "
-            + "matching transactions. Spacing is allowed."),
+    COMMAND_PARAMETERS_KEYWORDS("- KEYWORDS: A case-insensitive string that represents a single or a group of words "
+            + "used to find matching transactions. Spacing is allowed."),
     COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is in numerical form, i.e. "
             + "from 1 to 12, where 1 represents January." + LINE_SEPARATOR
             + "\t\t<!> - MONTH parameter must be used together with the YEAR parameter."),
-    COMMAND_PARAMETERS_NUMBER("- NUMBER: The last N number of weeks or months. "
+    COMMAND_PARAMETERS_NUMBER("- NUMBER: The last N number of days, weeks or months. "
             + "It is a positive whole number ranging from 1 to 100." + LINE_SEPARATOR
             + "\t\t<!> - NUMBER parameter must be used together with the PERIOD parameter."),
     COMMAND_PARAMETERS_PERIOD("- PERIOD: The period which the transaction falls on. "
@@ -87,7 +87,7 @@ public enum HelpMessages {
 
     COMMAND_PARAMETERS_TYPE("- TYPE: The type of transaction. It should either be \"expense\" or \"income\"."),
     COMMAND_PARAMETERS_YEAR("- YEAR: The year which the transaction falls on. It must be in yyyy format and "
-            + "only year 1000 and onwards are accepted."),
+            + "only year 0 and onwards are accepted."),
     COMMAND_HEADER_USAGE("Usage: "),
     COMMAND_HEADER_USAGES("Usages: "),
     COMMAND_HEADER_COMMAND_WORD("Command Word: "),
