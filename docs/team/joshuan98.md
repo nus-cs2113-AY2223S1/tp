@@ -74,6 +74,26 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98
 
 ### Contributions beyond the project team
 
+1. Attempted to provide solutions to problems faced by others in CS2113 forum
+
+- [Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3)
+- [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8)
+- [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9)
+
+2. Clarified doubts that may be applicable to others in CS2113 forum
+
+- [Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12)
+- [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24)
+
+3. Consistently reported bugs faced by other teams during tutorial exercises.
+
+- [Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4)
+- [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1)
+
+4. Reported bugs faced by other teams during the CS2113 Practical Examination Dry-Run
+
+- [Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues)
+
 ## Contributions to the Developer Guide (Extracts)
 
 ## Contributions to the User Guide (Extracts)
