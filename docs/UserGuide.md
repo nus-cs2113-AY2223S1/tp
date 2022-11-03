@@ -41,16 +41,17 @@ one-stop movie review companion.
 ## Features 
 
 The following features are supported by Duke.
-1. User can add reviews on watched movies and tv shows
-2. User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie
-3. User can delete unwanted reviews
-4. User can view all added reviews
-5. User can clear all reviews
-6. User can sort reviews by genre, title, date and rating
-7. User can find reviews by keyword
-8. User can set specific reviews as a favourite
-9. User can list all favourite reviews
-10. User input is automatically saved and loaded every session
+
+1. User can add reviews on watched movies and tv shows.
+2. User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie.
+3. User can delete unwanted reviews.
+4. User can view all added reviews.
+5. User can clear all reviews.
+6. User can sort reviews by genre, title, date and rating.
+7. User can find reviews by keyword.
+8. User can set specific reviews as a favourite.
+9. User can list all favourite reviews.
+10. User input is automatically saved and loaded every session.
 
 ## Commands
 ### Adding a movie or TV show: `add`
