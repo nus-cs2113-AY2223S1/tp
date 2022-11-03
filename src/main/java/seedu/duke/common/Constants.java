@@ -11,7 +11,7 @@ package seedu.duke.common;
 public class Constants {
     //@@author paullowse
 
-    public static final int MINIMUM_YEAR = 1000;
+    public static final int MINIMUM_YEAR = 0;
     public static final int MAXIMUM_YEAR = 9999;
     public static final int MAXIMUM_STATS_NUMBER = 100;
     public static final int MINIMUM_STATS_NUMBER = 1;
