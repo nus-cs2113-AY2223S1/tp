@@ -5,29 +5,23 @@ skinparam classAttributeIconSize 0
 hide footbox
 hide circle
 
-class item {
+class Item {
     - itemId: String
     - itemName: String
     - ownerId: String
     - pricePerDay: double
     - category: Category
 
-    + item(String, int, double, String)
-    + item(String, String, int, double, String)
     + getOwnerId(): String
     + getName(): String
     + getPricePerDay(): Double
     + getCategory(): Category
     + updatePrice(double): Item
     + isAvailable(TransactionList): boolean
-    + getStatus(TransactionList): String
-    + convertItemToFileFormat(): String
-    + toString(): String
+
 }
 
-class itemList {
-    + itemList()
-    + itemList(ArrayList<item>)
+class ItemList {
     + addItem(item): void
     + updateItemPrice(String, double): Item
     + deleteItem(String, TransactionList) : void
@@ -35,24 +29,13 @@ class itemList {
     + getItemByName(String): Item
     + getItemsByKeyword(String): ItemList
     + getListSize(): int
-    + getItemList(): ArrayList<Item>
-    + hasThisLender(String, TransactionList): boolean
-    + deleteAllItemOfAnUser(String, TransactionList): void
-    + toString(TransactionList): String
 }
 
-class itemStorage {
-    {static} - SEPARATOR: String
-    - itemFilePath: String
-    + itemStorage(String)
-    + loadData(): ArrayList<item>
+class ItemStorage {
+    + loadData(): ArrayList<Item>
     + writeData(itemList): void
     + makeItemDir(ItemList): void
     + hasItemFile(): boolean
-    + handleItemLine(String[]): Item
-    - getItemFromItemLine(String[]): Item
-    - checkCheckSumLine(Item, int): void
-    - checkCheckSumWhole(ArrayList<Item>, int): void
 }
 
 class IdGenerator {
@@ -70,12 +53,12 @@ class TransactionList {
     {static} -transactionList: ArrayList<Transaction>
 }
 
-itemStorage .> itemList : > loads and writes
-itemList *--> "0..*" item: itemList
-item ..> IdGenerator
-item ..> TransactionList
-itemList ..> TransactionList
-item ..> Category
-"{abstract}\nStorage" <|-- itemStorage
+ItemStorage .> ItemList : > loads and writes
+ItemList *--> "0..*" Item: ItemList
+Item ..> IdGenerator
+Item ..> TransactionList
+ItemList ..> TransactionList
+Item ..> Category
+"{abstract}\nStorage" <|-- ItemStorage
 
 @enduml

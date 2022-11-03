@@ -1,8 +1,8 @@
 @startuml
 hide footbox
 
-Actor Transaction
-"Transaction" -> ":Duke": "view-tx..."
+Actor User
+"User" -> ":Duke": "view-tx..."
 activate ":Duke"
 ":Duke" -> ":CommandParser": createCommand()
 activate ":CommandParser"

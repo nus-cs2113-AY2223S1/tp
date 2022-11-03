@@ -29,7 +29,6 @@ public class ItemList {
     private static final int OWNER_INDEX = 3;
 
     public ItemList() { // store files from data.txt
-        // this.itemList = fileItems;
         this.itemList = new ArrayList<>();
     }
 

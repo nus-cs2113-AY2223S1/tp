@@ -547,7 +547,7 @@ Step 4: Once the transactionList has been completely iterated through, a message
 
 The following sequence diagram shows how the viewTransactionsByStatus operation works:
 
-![viewTransactionsByStatus](images/ViewTransactionByStatusSequence.png)
+![viewTransactionsByStatus](images/ViewTransactionsByStatusSequence.png)
 
 #### 4.3.6. Update an transaction
 

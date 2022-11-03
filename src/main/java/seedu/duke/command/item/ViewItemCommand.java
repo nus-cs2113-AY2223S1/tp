@@ -18,6 +18,7 @@ public class ViewItemCommand extends Command {
     private final String[] parts;
     private final ItemList itemList;
     private final TransactionList transactionList;
+    private static final String ITEM_ID_DELIM = "i";
 
     /**
      * Constructor for ViewItemCommand.
@@ -40,7 +41,7 @@ public class ViewItemCommand extends Command {
     private String getArgsViewItemCmd() throws InvalidArgumentException {
         String arg;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("i")) {
+        if (delimiter.equals(ITEM_ID_DELIM)) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
