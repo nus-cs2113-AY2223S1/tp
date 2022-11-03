@@ -1,12 +1,9 @@
 package command.appointmentcommand;
 
-import appointment.Appointment;
 import appointment.AppointmentList;
 import command.Command;
 import task.Task;
 import task.TaskList;
-
-import java.util.ArrayList;
 
 public class RemoveAppointmentCommand extends Command {
 

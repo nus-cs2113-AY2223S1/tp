@@ -51,7 +51,7 @@ public class Appointment {
         if (formattedDate.compareTo(currentDate) > 0 && appointmentYear < 10000) {
             return formattedDate;
         }
-        System.out.println("Pls enter valid appointment year!");
+        System.out.println("Pls enter valid appointment date!");
         return null;
     }
 
@@ -87,15 +87,13 @@ public class Appointment {
     public String getAppointmentStatus() {
         if (appointmentStatus == AppointmentStatus.PENDING) {
             return "PENDING";
-        }
-        if (appointmentStatus == AppointmentStatus.PROCESSING) {
+        } else if (appointmentStatus == AppointmentStatus.PROCESSING) {
             return "PROCESSING";
-        }
-        if (appointmentStatus == AppointmentStatus.PROCESSED) {
+        } else if (appointmentStatus == AppointmentStatus.PROCESSED) {
             return "PROCESSED";
+        } else {
+            return "";
         }
-        // control should never reach here
-        return "";
     }
 
     public String getAppointmentDateStr() {

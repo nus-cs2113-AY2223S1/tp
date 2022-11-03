@@ -6,23 +6,22 @@ import pet.Pet;
 import pet.PetList;
 import service.Service;
 import service.ServiceList;
-import appointment.Appointment;
 
 import java.util.ArrayList;
-import java.util.zip.DataFormatException;
 
 public class AppointmentList {
     static ArrayList<Appointment> appointments = new ArrayList<>();
 
     public static void listAppointment() {
         System.out.println("Here are the appointments in your list:");
+        int count = 0;
         for (Appointment appointment : appointments) {
-            System.out.print(appointment.appointmentId + " ");
-            System.out.print(appointment.petId + " ");
-            System.out.print(PetList.findPetById(appointment.petId) + " ");
-            System.out.print(appointment.service + " ");
-            System.out.print(appointment.getAppointmentDateStr() + " ");
-            System.out.println(appointment.getAppointmentStatus());
+            System.out.print(++count + ". ");
+            System.out.print("ID:" + appointment.appointmentId + "\t");
+            System.out.print("PetID:" + appointment.petId + "\t");
+            System.out.print("Service:" + appointment.service + "\t");
+            System.out.print("Date:" + appointment.getAppointmentDateStr() + "\t");
+            System.out.println("Status:" + appointment.getAppointmentStatus());
         }
     }
 

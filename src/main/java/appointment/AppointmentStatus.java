@@ -2,7 +2,8 @@ package appointment;
 
 public enum AppointmentStatus {
     PENDING,
-    PROCESSING, // means the appointment has been allocated
+    // means the appointment has been allocated
+    PROCESSING,
     PROCESSED
     ;
 }
