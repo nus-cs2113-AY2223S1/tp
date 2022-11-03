@@ -1,6 +1,7 @@
 package employee;
 
 import task.Task;
+import ui.Ui;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ public class Employee {
     public void viewTasks() {
         System.out.println("Employee " + employeeName + "'s Task List:");
         for (Task task: tasks) {
-            System.out.println("________________________");
+            System.out.println(Ui.LINE_DIVIDER);
             task.printTask();
         }
     }

@@ -25,8 +25,10 @@ public class Ui {
         return "bye";
     }
 
+    public static String LINE_DIVIDER = "____________________________________________________________";
+
     public void showLine() {
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE_DIVIDER);
     }
 
     public void showError(String message) {

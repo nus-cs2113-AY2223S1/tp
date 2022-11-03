@@ -2,6 +2,7 @@ package appointment;
 
 import pet.PetList;
 import task.Task;
+import ui.Ui;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class Appointment {
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
         for (Task task: tasks) {
-            System.out.println("________________________");
+            System.out.println(Ui.LINE_DIVIDER);
             task.printTask();
         }
     }

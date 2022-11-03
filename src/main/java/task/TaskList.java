@@ -4,7 +4,7 @@ import appointment.Appointment;
 import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
-
+import ui.Ui;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ public class TaskList {
     public static void viewTasks() {
         System.out.println("Here are all the tasks for the clinic:");
         for (Task task : tasks) {
-            System.out.println("_______________________________________");
+            System.out.println(Ui.LINE_DIVIDER);
             task.printTask();
         }
     }
