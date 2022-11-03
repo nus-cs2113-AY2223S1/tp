@@ -89,7 +89,7 @@ public class Parser {
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
-                        + "\nn - The name should be one of two words"
+                        + "\nn - The name should be one or two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY"
                         + "\ni - The id can be a sequence of numbers or letters"

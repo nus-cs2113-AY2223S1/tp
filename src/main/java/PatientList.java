@@ -23,7 +23,7 @@ public class PatientList {
     }
 
     public void printIndexOfPatient(Patient patient) {
-        System.out.print("(" + patients.indexOf(patient) + ")\n");
+        System.out.println("\tPatient #" + (patients.indexOf(patient) + 1) + ")");
     }
 
     public void retrievePatient(UI ui, String id) {
@@ -96,7 +96,7 @@ public class PatientList {
         System.out.println("Here are the list of patients in the system");
         for (int i = 0; i < getTotalNumberofPatients(); i++) {
             ui.printLine();
-            System.out.println((i + 1) + ")");
+            System.out.println("\tPatient #" + (i + 1) + ")");
             System.out.println(getPatient(i));
         }
 

@@ -117,7 +117,7 @@ public class UI {
     public void printMessageAndObject(String object, String message, int index, String type) {
         System.out.println(message);
         printLine();
-        System.out.println(type + " #" + (index + 1));
+        System.out.println("\t" + type + " #" + (index + 1));
         System.out.println(object);
         printLine();
     }
@@ -238,7 +238,7 @@ public class UI {
      * @param prescription a String that represents the object
      */
     public void printPrescriptionWithIndex(int index, String prescription) {
-        System.out.println(PRESCRIPTION_INDEX_FORMAT + index);
+        System.out.println("\t" + PRESCRIPTION_INDEX_FORMAT + index);
         System.out.println(prescription);
         printLine();
     }
