@@ -704,7 +704,7 @@ How can I manually edit data files correctly?
 > 
 > Each line represents one user with the format `[USERNAME] | [AGE] | [CONTACT]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > - Age range is from 10 to 100
 > - If name is edited, please also edit all items of that user in the item files
 > - Contact number length is 8
@@ -716,13 +716,14 @@ How can I manually edit data files correctly?
 > 
 > `[ITEMNAME] | [CATEGORY] | [PRICE] | [OWNER] | [ITEMID]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > 
 > - Price range from 0 to 10000
 > - Currently, we support 8 categories form 1 to 8
 > - Item's name length is no more than 20 characters
 > - Avoid change the name of owner, it can cause error (you can change both in user and item files)
 > - No item ID occurs twice
+> - If user is currently borrowing/lending something, do not delete him/her, or you can delete that unfinished transaction.
 > 
 > **Transaction file**
 > 
@@ -730,9 +731,10 @@ How can I manually edit data files correctly?
 > 
 > `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [TOTALMONEY] | [TRANSACTIONID]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > 
 > - If the itemId occurs in item list, make sure the item's name and owner(lender) are matched with that item with given ID
 > - Duration range is from 0 to 1461
 > - Created date range is from 2016-01-01 to today
 > - No transaction ID occurs twice
+> - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.

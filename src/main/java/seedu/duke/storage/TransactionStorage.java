@@ -125,7 +125,7 @@ public class TransactionStorage extends Storage {
                 splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
         Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
         transactionList.checkOldTransactionsOverlapWithNew(transaction);
-        transactionList.checkLenderAndBorrowerUnfinishedTx(transaction, userList);
+        transactionList.checkLenderAndBorrowerUnfinishedTx(transaction, userList, itemList);
         return transaction;
     }
 

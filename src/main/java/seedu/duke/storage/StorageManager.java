@@ -50,6 +50,10 @@ public class StorageManager {
 
     /**
      * Initialize user list.
+     *
+     * @param userFilePath The file path for user.txt
+     * @return The list of user
+     * @throws StoreFailureException If there is an error occurred during loading process
      */
     public UserList initializeUserList(String userFilePath)
             throws StoreFailureException {
@@ -66,7 +70,10 @@ public class StorageManager {
     /**
      * Initialize item list.
      *
-     * @return The list of items
+     * @param itemFilePath The file path for item.txt
+     * @param userList The list of user
+     * @return The list of item
+     * @throws StoreFailureException If there is an error occurred during loading process
      */
     public ItemList initializeItemList(String itemFilePath, UserList userList)
             throws StoreFailureException {
@@ -82,6 +89,12 @@ public class StorageManager {
 
     /**
      * Initialize transaction list.
+     *
+     * @param transactionFilePath The file path for transaction.txt
+     * @param userList The list of user
+     * @param itemList The list of item
+     * @return The list of transaction
+     * @throws StoreFailureException If there is an error occurred during loading process
      */
     public TransactionList initializeTransactionList(String transactionFilePath, UserList userList, ItemList itemList)
             throws StoreFailureException {
@@ -95,6 +108,12 @@ public class StorageManager {
         return transactionList;
     }
 
+    /**
+     * Handles when there is any data corruption.
+     *
+     * @param errorMessage The message of error
+     * @return true
+     */
     public boolean handleDataCorruption(String errorMessage) {
         Ui.printErrorMessage(errorMessage);
         try {
@@ -108,7 +127,7 @@ public class StorageManager {
         }
     }
 
-    public void forceReset()
+    private void forceReset()
             throws StoreFailureException {
         UserList userList = new UserList();
         ItemList itemList = new ItemList();
