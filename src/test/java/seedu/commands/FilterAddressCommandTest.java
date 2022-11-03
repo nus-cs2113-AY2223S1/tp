@@ -1,0 +1,38 @@
+package seedu.commands;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import seedu.data.CarparkFilteredList;
+import seedu.data.CarparkList;
+import seedu.data.CarparkListTest;
+import seedu.exception.FileWriteException;
+import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoFileFoundException;
+import seedu.parser.search.Sentence;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class FilterAddressCommandTest {
+    private final String testFileDirectory = "./src/test/java/seedu/testfiles";
+    private final Path validPathAndFile = Paths.get(testFileDirectory, "ltaResponse.json");
+    private final Path validBackupPathAndFile = Paths.get(testFileDirectory, "ltaResponseBackup.json");
+
+    @Test
+    void testFilterAddressCommand() throws FileWriteException, NoFileFoundException {
+        CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        Sentence searchQuery = new Sentence("raffles");
+        String result = carparkList.filterByAddress(searchQuery).toString();
+        Assertions.assertEquals("CarparkID @|yellow,bold 3|@ at @|bold,cyan Raffles|@ City\n" +
+                "@|faint -->|@ @|yellow 522|@ available lots total\n", result);
+    }
+
+    @Test
+    void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
+        CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        Assertions.assertThrows(NoCarparkFoundException.class, () -> {
+            new FindCommand("ZZ", carparkList).execute();
+        });
+    }
+
+}
