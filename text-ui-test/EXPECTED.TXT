@@ -54,7 +54,7 @@ The expense was added successfully.
 
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 
 The expense was added successfully.
@@ -63,7 +63,7 @@ The expense was added successfully.
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 
 The expense was added successfully.
@@ -72,7 +72,7 @@ The expense was added successfully.
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
 Description     : This is a test expense 4
-Amount          : 30.9
+Amount          : 30.90
 Category        : Category Alpha
 Currency        : SGD
 
@@ -82,7 +82,7 @@ The expense was added successfully.
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -93,7 +93,7 @@ The expense was added successfully.
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -118,26 +118,26 @@ Currency        : SGD
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
 Description     : This is a test expense 4
-Amount          : 30.9
+Amount          : 30.90
 Category        : Category Alpha
 Currency        : SGD
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -145,7 +145,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -166,26 +166,26 @@ Currency        : SGD
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
 Description     : This is a test expense 4
-Amount          : 30.9
+Amount          : 30.90
 Category        : Category Alpha
 Currency        : SGD
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -193,7 +193,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -210,26 +210,26 @@ Currency        : SGD
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 4
 Date and Time   : 03 Jan 2022 12:03
 Description     : This is a test expense 4
-Amount          : 30.9
+Amount          : 30.90
 Category        : Category Alpha
 Currency        : SGD
 ---- EXPENSE INDEX 4 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -237,7 +237,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -254,19 +254,19 @@ Currency        : SGD
 ---- EXPENSE INDEX 1 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -274,7 +274,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -284,7 +284,7 @@ Currency        : SGD
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 
 The expense was edited successfully.
@@ -293,7 +293,7 @@ The expense was edited successfully.
 ---- EXPENSE INDEX 1 ----
 Name            : Exp2
 Date and Time   : 01 Jan 2022 12:00
-Amount          : 10.7
+Amount          : 10.70
 Currency        : SGD
 
 The expense was edited successfully.
@@ -323,18 +323,18 @@ Currency        : SGD
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -342,7 +342,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -372,18 +372,18 @@ Currency        : SGD
 Name            : Exp3
 Date and Time   : 02 Jan 2022 12:02
 Description     : This is a test expense 3
-Amount          : 20.8
+Amount          : 20.80
 Currency        : SGD
 ---- EXPENSE INDEX 2 ----
 Name            : Test Expense 2
 Date and Time   : 01 Jan 2022 12:01
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 ---- EXPENSE INDEX 3 ----
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -391,7 +391,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -410,7 +410,7 @@ The expense was deleted successfully.
 Name            : Test Expense 5
 Date and Time   : 04 Jan 2022 12:04
 Description     : This is a test expense 5
-Amount          : 40.9
+Amount          : 40.90
 Category        : Category Bravo
 Remarks         : Remarks Alpha
 Currency        : SGD
@@ -418,7 +418,7 @@ Currency        : SGD
 Name            : Test Expense 6
 Date and Time   : 04 Jan 2022 12:05
 Description     : This is a test expense 6
-Amount          : 50.9
+Amount          : 50.90
 Category        : Category Charlie
 Remarks         : Remarks Bravo
 Currency        : SGD
@@ -429,7 +429,7 @@ ERROR: The command entered is invalid.
 
 Name            : RecExp1
 Interval (Days) : 30
-Amount          : 7.8
+Amount          : 7.80
 Currency        : SGD
 
 The recurring payment was added successfully.
@@ -437,7 +437,7 @@ The recurring payment was added successfully.
 
 Name            : Rec Exp 2
 Interval (Days) : 40
-Amount          : 9.8
+Amount          : 9.80
 Currency        : SGD
 
 The recurring payment was added successfully.
@@ -446,7 +446,7 @@ The recurring payment was added successfully.
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 
 The recurring payment was added successfully.
@@ -455,18 +455,18 @@ The recurring payment was added successfully.
 ---- RECURRING PAYMENT INDEX 0 ----
 Name            : RecExp1
 Interval (Days) : 30
-Amount          : 7.8
+Amount          : 7.80
 Currency        : SGD
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
-Amount          : 9.8
+Amount          : 9.80
 Currency        : SGD
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 
 
@@ -488,18 +488,18 @@ ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
 ---- RECURRING PAYMENT INDEX 0 ----
 Name            : RecExp1
 Interval (Days) : 30
-Amount          : 7.8
+Amount          : 7.80
 Currency        : SGD
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
-Amount          : 9.8
+Amount          : 9.80
 Currency        : SGD
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 
 
@@ -515,13 +515,13 @@ Currency        : SGD
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Rec Exp 2
 Interval (Days) : 40
-Amount          : 9.8
+Amount          : 9.80
 Currency        : SGD
 ---- RECURRING PAYMENT INDEX 2 ----
 Name            : Rec Exp 3
 Interval (Days) : 50
 Description     : This is a test recurring payment 3
-Amount          : 10.8
+Amount          : 10.80
 Currency        : SGD
 
 
