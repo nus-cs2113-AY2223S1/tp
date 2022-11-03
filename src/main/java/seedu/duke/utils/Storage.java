@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -15,7 +18,7 @@ import java.util.logging.Logger;
  * Handles the saving and loading of states.
  */
 public class Storage {
-    public static final String FILE_PATH = "data/duke.txt";
+    public static final String FILE_PATH = "data/.duke.txt";
 
     public static final String NO_PREVIOUS_STATE_ERROR_MESSAGE = "There was no previously saved state.";
 
@@ -33,8 +36,8 @@ public class Storage {
      * Tries to open the file containing the previously saved state from specified file path.
      * Then outputs to the user if the opening of file was successful.
      *
-     * @param state current state of the application to be saved
-     * @param ui    to output to the user
+     * @param state Current state of the application to be saved.
+     * @param ui    To output to the user.
      */
     public void openPreviousState(State state, Ui ui) {
         assert state != null : "List of lessons should not be null";
@@ -65,8 +68,8 @@ public class Storage {
      * Opens the previously saved file. The saved file should only contain one line which is the
      * link for exporting to NUSMods.
      *
-     * @return the links for exporting to NUSMods
-     * @throws FileNotFoundException the file in the file path cannot be found
+     * @return The links for exporting to NUSMods.
+     * @throws FileNotFoundException The file in the file path cannot be found.
      */
     private ArrayList<String> readPreviousState() throws FileNotFoundException {
         ArrayList<String> links = new ArrayList<>();
@@ -85,9 +88,9 @@ public class Storage {
     /**
      * Saves all current selected modules for all semesters by overriding the file.
      *
-     * @param state the current state of the application
-     * @param ui    to output to the user
-     * @throws IOException failed or interrupted I/O operations
+     * @param state The current state of the application.
+     * @param ui    To output to the user.
+     * @throws IOException Failed or interrupted I/O operations.
      */
     public void saveState(State state, Ui ui, boolean isExit) throws IOException {
         assert state != null : "State should not be null";
@@ -95,9 +98,13 @@ public class Storage {
         logger.log(Level.FINE, "Saving current state with " + state.getSelectedModulesList().size()
             + " modules into a file. The format will be NUSMods export link.");
         File file = new File(FILE_PATH);
-        if (file.getParentFile().mkdirs()) {
-            file.createNewFile();
-        }
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        file.setWritable(true);
+        Path path = Paths.get(FILE_PATH);
+
+        Files.setAttribute(path, "dos:hidden", false);
         ui.addMessage(EXPORT_MESSAGE);
         FileWriter fw = new FileWriter(file);
         int currSem = state.getSemester();
@@ -113,5 +120,8 @@ public class Storage {
         }
         ui.displayUi();
         fw.close();
+        file.setReadOnly();
+        //set hidden attribute
+        //Files.setAttribute(path, "dos:hidden", true);
     }
 }

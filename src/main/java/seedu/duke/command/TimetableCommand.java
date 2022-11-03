@@ -16,48 +16,65 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Display the user's timetable for that semester.
+ */
 public class TimetableCommand extends Command {
     public static final String COMMAND_WORD = "timetable";
-    public static final String COMMAND_USAGE = "timetable < /fancy | /simple >";
+
+    public static final String FANCY_KEYWORD = "fancy";
+
+    public static final String SIMPLE_KEYWORD = "simple";
+
+    public static final String COMMAND_USAGE = "timetable < /" + FANCY_KEYWORD + " | /" + SIMPLE_KEYWORD + " >";
+
     public static final String COMMAND_DESCRIPTION = "Display current timetable.";
 
-    private static final String ERROR_MESSAGE_EMPTY_TIMETABLE = "Your timetable is empty."
+    private static final String EMPTY_TIMETABLE_ERROR_MESSAGE = "Your timetable is empty."
             + System.lineSeparator() + "Please select your modules first before viewing.";
 
+    private static final String CONFLICTING_ERROR_MESSAGE = "Timetable cannot be both simple and fancy!";
+
+    private static final String MISSING_BACKSLASH_ERROR_MESSAGE = "Unknown command. Maybe you forgot a \"/\".";
+
+    private static final String UNKNOWN_PARAMETER_ERROR_MESSAGE = "Unknown command. Maybe you meant \""
+            + COMMAND_USAGE + "\".";
+
     private boolean showFancy;
+
     private boolean showSimple;
 
     public TimetableCommand(String input) throws YamomException {
         super(input.split("\\s+"));
         var params = Parser.parseParams(input);
-        showFancy = params.containsKey("fancy");
-        showSimple = params.containsKey("simple");
+        showFancy = params.containsKey(FANCY_KEYWORD);
+        showSimple = params.containsKey(SIMPLE_KEYWORD);
         boolean isConflictingCommand = showFancy && showSimple;
-        boolean hasMissingBackslash = !input.contains("/") && (input.contains("fancy") || input.contains("simple"));
-        boolean unknownParametersEntered = input.split("\\s+").length > 2 || ((!showFancy && !showSimple)
-                && !Parser.isOneWordCommand(input.split("\\s+")));
+        boolean hasMissingBackslash = !input.contains("/") && (input.contains(FANCY_KEYWORD)
+                || input.contains(SIMPLE_KEYWORD));
+        boolean unknownParametersEntered = Parser.isMultiWordsCommand(input.split("\\s+"))
+                || ((!showFancy && !showSimple) && Parser.isTwoWordsCommand(input.split("\\s+")));
         if (isConflictingCommand) {
-            throw new YamomException("Timetable cannot be both simple and fancy!");
+            throw new YamomException(CONFLICTING_ERROR_MESSAGE);
         } else if (hasMissingBackslash) {
-            throw new YamomException("Unknown command. Maybe you forgot a \"/\".");
+            throw new YamomException(MISSING_BACKSLASH_ERROR_MESSAGE);
         } else if (unknownParametersEntered) {
-            throw new YamomException("Unknown command. Maybe you meant \"view\".");
+            throw new YamomException(UNKNOWN_PARAMETER_ERROR_MESSAGE);
         }
     }
 
     @Override
     public void execute(State state, Ui ui, Storage storage) {
+        int semester = state.getSemester();
         List<SelectedModule> selectedModules = state.getSelectedModulesList();
         List<Pair<Module, RawLesson>> lessons = new ArrayList<>();
         for (SelectedModule selectedModule: selectedModules) {
-            Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-            addToLessonsList(state, lessons, selectedModule, selectedSlots);
+            addToLessonsList(semester, lessons, selectedModule);
         }
         if (lessons.isEmpty()) {
-            ui.addMessage(ERROR_MESSAGE_EMPTY_TIMETABLE);
+            ui.addMessage(EMPTY_TIMETABLE_ERROR_MESSAGE);
             ui.displayUi();
             return;
-
         }
         
         Timetable timetable;
@@ -72,17 +89,33 @@ public class TimetableCommand extends Command {
         ui.displayUi();
     }
 
-    private void addToLessonsList(State state, List<Pair<Module, RawLesson>> lessons,
-                                         SelectedModule selectedModule, Map<LessonType, String> selectedSlots) {
+    /**
+     * Goes through the selected lessons for <code>SelectedModule</code> and gets the potential
+     * lessons.
+     *
+     * @param semester       The current semester.
+     * @param lessons        To store all the valid lessons of all modules selected.
+     * @param selectedModule The current module that lessons are selected for.
+     */
+    private void addToLessonsList(int semester, List<Pair<Module, RawLesson>> lessons,
+                                         SelectedModule selectedModule) {
+        Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
         for (Map.Entry<LessonType, String> slot: selectedSlots.entrySet()) {
             Module module = selectedModule.getModule();
-            int semester = state.getSemester();
             List<RawLesson> potentialLesson = module.getSemesterData(semester)
                     .getLessonsByTypeAndNo(slot.getKey(), slot.getValue());
             addValidLesson(lessons, module, potentialLesson);
         }
     }
 
+    /**
+     * Adds all the <code>RawLesson</code> that previously matches the <code>LessonType</code> and <code>ClassNo</code>.
+     *
+     * @param lessons         To store all the valid lessons of all modules selected.
+     * @param module          The current module that lessons are selected for.
+     * @param potentialLesson <code>RawLesson</code> that previously matches the <code>LessonType</code>
+     *                        and <code>ClassNo</code>.
+     */
     private void addValidLesson(List<Pair<Module, RawLesson>> lessons, Module module,
                                        List<RawLesson> potentialLesson) {
         for (RawLesson lesson : potentialLesson) {
