@@ -132,7 +132,7 @@ public class StorageManager {
         UserList userList = new UserList();
         ItemList itemList = new ItemList();
         TransactionList transactionList = new TransactionList();
-        writeDataToFile(userList, itemList, transactionList);
+        writeDataToFiles(userList, itemList, transactionList);
     }
 
     /**
@@ -140,7 +140,7 @@ public class StorageManager {
      *
      * @throws StoreFailureException If something went wrong when storing the data
      */
-    public void writeDataToFile(UserList userList, ItemList itemList, TransactionList transactionList)
+    public void writeDataToFiles(UserList userList, ItemList itemList, TransactionList transactionList)
             throws StoreFailureException {
         userStorage.writeData(userList);
         itemStorage.writeData(itemList);
@@ -152,7 +152,7 @@ public class StorageManager {
      *
      * @throws StoreFailureException If one or two files are deleted
      */
-    public static void checkThreeFilesSimultaneouslyExistOrNotExit() throws StoreFailureException {
+    public static void checkThreeFilesSimultaneouslyExistOrNotExist() throws StoreFailureException {
         if (!((hasUserFile() == hasItemFile()) && (hasTransactionFile() == hasItemFile()))) {
             throw new StoreFailureException(MESSAGE_FILES_ILLEGALLY_DELETED + MESSAGE_TO_FIX_FILES);
         }

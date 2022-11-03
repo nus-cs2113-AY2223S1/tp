@@ -42,7 +42,7 @@ public class Duke {
         dukeLogger = new DukeLogger();
         storageManager = new StorageManager(userFilePath, itemFilePath, transactionFilePath);
         try {
-            StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
+            StorageManager.checkThreeFilesSimultaneouslyExistOrNotExist();
             userList = storageManager.initializeUserList(userFilePath);
             itemList = storageManager.initializeItemList(itemFilePath, userList);
             transactionList = storageManager.initializeTransactionList(transactionFilePath, userList, itemList);
@@ -62,7 +62,7 @@ public class Duke {
         Command command =
                 CommandParser.createCommand(input, userList, itemList, transactionList);
         isExit = command.executeCommand();
-        storageManager.writeDataToFile(userList, itemList, transactionList);
+        storageManager.writeDataToFiles(userList, itemList, transactionList);
         dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY + input);
     }
 

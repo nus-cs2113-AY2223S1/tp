@@ -143,6 +143,7 @@ Below, we detail the design of the UI class with a class diagram
 ### 3.7. Storage component
 
 Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
+Moreover, we also `StorageManager` class as a bridge between main class `Duke` and other storage, which handles data corruption in the files, writes data/loads data from/to all three lists.
 The following diagrams show more details about Storage classes: 
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
@@ -151,20 +152,6 @@ Upcycle stores the user's data, including the user list, item list, and transact
 The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
 If Duke detects a change that potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
-```
-____________________________________________________________
-The ITEM files has been corrupted at line 1
-Reason: Category index is invalid
-Please use list-categories to check the index of your chosen categories
-Please try to fix your data in your files before running the app again
-If you fix it correctly, you will see a greeting message in the next run
-If you cannot fix it, you will see this message again. Please delete the entire data folder
-to avoid errors, which also mean that all your data will be gone forever
-In that case, we will create three brand-new lists for your users, items, and transactions
-REMEMBER that all files in data folder must be edited correctly
-Do you want to force reset all files and restart? y or n
-____________________________________________________________
-```
 
 ## 4. Implementation
 
