@@ -60,6 +60,7 @@ public class TargetManager {
     public boolean hasTarget(Target target) {
         return targets.contains(target);
     }
+
     public void updateTargets(ArrayList<Target> newTargets) {
         for (Target newTarget : newTargets) {
             if (!hasTarget(newTarget)) {

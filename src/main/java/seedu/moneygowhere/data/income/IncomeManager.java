@@ -60,6 +60,7 @@ public class IncomeManager {
     public boolean hasIncome(Income income) {
         return incomes.contains(income);
     }
+
     public void updateIncomes(ArrayList<Income> newIncomes) {
         for (Income newIncome : newIncomes) {
             if (!hasIncome(newIncome)) {
