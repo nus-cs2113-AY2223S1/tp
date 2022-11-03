@@ -104,20 +104,24 @@ public class TimetableManager {
         } else {
             Timetable timetable = timetableManager.get(universityName);
             System.out.println("Timetable for " + universityName + ":");
-            Ui.printTimetable(timetable.getTimetable());
+            System.out.print(Ui.printTimetable(timetable.getTimetable()));
         }
     }
 
     /**
      * Sequentially prints all the timetables that the user has created for various universities.
      */
-    public void printAllTimetables() {
-        System.out.println("_____________________________________________________________________________");
-        for (Map.Entry<String, Timetable> set : timetableManager.entrySet()) {
-            String universityName = set.getKey();
-            Timetable timetable = timetableManager.get(universityName);
-            System.out.println("Timetable for " + universityName + ":");
-            Ui.printTimetable(timetable.getTimetable());
+    public void printAllTimetables() throws TimetableNotFoundException {
+        if (timetableManager.isEmpty()) {
+            throw new TimetableNotFoundException("No timetables saved!");
+        } else {
+            System.out.println("_____________________________________________________________________________");
+            for (Map.Entry<String, Timetable> set : timetableManager.entrySet()) {
+                String universityName = set.getKey();
+                Timetable timetable = timetableManager.get(universityName);
+                System.out.println("Timetable for " + universityName + ":");
+                System.out.print(Ui.printTimetable(timetable.getTimetable()));
+            }
         }
     }
 }
