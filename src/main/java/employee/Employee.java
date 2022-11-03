@@ -28,7 +28,7 @@ public class Employee {
     public void viewTasks() {
         System.out.println("Employee " + employeeName + "'s Task List:");
         for (Task task: tasks) {
-            System.out.println(Ui.LINE_DIVIDER);
+            Ui.showLine();
             task.printTask();
         }
     }

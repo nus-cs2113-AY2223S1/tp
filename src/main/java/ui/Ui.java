@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static String LOGO = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String LINE_DIVIDER = "____________________________________________________________";
+    private static final String LINE_DIVIDER = "____________________________________________________________";
 
 
     public Ui() {
@@ -28,7 +28,7 @@ public class Ui {
         return "bye";
     }
 
-    public void showLine() {
+    public static void showLine() {
         System.out.println(LINE_DIVIDER);
     }
 

@@ -17,7 +17,7 @@ public class TaskList {
     public static void viewTasks() {
         System.out.println("Here are all the tasks for the clinic:");
         for (Task task : tasks) {
-            System.out.println(Ui.LINE_DIVIDER);
+            Ui.showLine();
             task.printTask();
         }
     }

@@ -60,7 +60,7 @@ public class Appointment {
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
         for (Task task: tasks) {
-            System.out.println(Ui.LINE_DIVIDER);
+            Ui.showLine();
             task.printTask();
         }
     }
