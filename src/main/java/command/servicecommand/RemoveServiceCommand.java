@@ -15,7 +15,7 @@ public class RemoveServiceCommand extends Command {
 
     @Override
     public void execute() {
-        try{
+        try {
             ServiceList.removeService(serviceId);
         } catch (DukeException e) {
             System.out.println("Sorry, No corresponding service found. Remove service failed.");
