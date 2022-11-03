@@ -33,10 +33,10 @@ public class PrescriptionList {
         if (!prescriptionsList.contains(prescription)) {
             prescriptionsList.add(prescription);
             ui.printMessageAndObject(prescription.toString(),UI.ADD_PRESCRIPTION,
-                    prescriptionsList.indexOf(prescription));
+                    prescriptionsList.indexOf(prescription), UI.PRESCRIPTION);
         } else {
             ui.printMessageAndObject(prescription.toString(),UI.DUPLICATE_PRESCRIPTION_MESSAGE,
-                    prescriptionsList.indexOf(prescription));
+                    prescriptionsList.indexOf(prescription), UI.PRESCRIPTION);
         }
     }
 
@@ -123,7 +123,7 @@ public class PrescriptionList {
         // Check if the updated record has a duplicate in the list already.
         if (prescriptionsList.contains(newPrescription)) {
             ui.printMessageAndObject(newPrescription.toString(),UI.DUPLICATE_PRESCRIPTION_MESSAGE,
-                    prescriptionsList.indexOf(newPrescription));
+                    prescriptionsList.indexOf(newPrescription),UI.PRESCRIPTION);
             return;
         }
 
@@ -139,7 +139,7 @@ public class PrescriptionList {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
-        ui.printMessageAndObject(prescriptionEdited.toString(),UI.EDIT_PRESCRIPTION,index);
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.EDIT_PRESCRIPTION,index, UI.PRESCRIPTION);
     }
 
     private boolean hasPatientPrescription(String patientId) {
@@ -177,7 +177,7 @@ public class PrescriptionList {
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setActive();
 
-        ui.printMessageAndObject(prescriptionEdited.toString(),UI.ACTIVATE_PRESCRIPTION,index);
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.ACTIVATE_PRESCRIPTION,index,UI.PRESCRIPTION);
     }
 
     /**
@@ -195,7 +195,7 @@ public class PrescriptionList {
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setInactive();
         ui.printMessageAndObject(prescriptionEdited.toString(),UI.DEACTIVATE_PRESCRIPTION,
-                prescriptionsList.indexOf(prescriptionEdited));
+                prescriptionsList.indexOf(prescriptionEdited), UI.PRESCRIPTION);
     }
 
     private Integer getIndex(UI ui, String prescriptionNumber) {

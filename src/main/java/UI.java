@@ -105,10 +105,10 @@ public class UI {
         System.out.println(PATIENT_MAIN_MENU);
     }
 
-    public void printMessageAndObject(String object, String message, int index) {
+    public void printMessageAndObject(String object, String message, int index, String type) {
         System.out.println(message);
         printLine();
-        System.out.println("#" + (index + 1) + ")");
+        System.out.println(type + " #" + (index + 1));
         System.out.println(object);
         printLine();
     }
@@ -204,6 +204,10 @@ public class UI {
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
+    public static final String PRESCRIPTION = "Prescription";
+    public static final String VISIT = "Visit";
+    public static final String PATIENT = "Patient";
+
 
     /**
      * Print message that there are no prescription from the patient.

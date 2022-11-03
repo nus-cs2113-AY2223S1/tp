@@ -81,12 +81,12 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + "The prescription is already existing." + System.lineSeparator()
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE;
 
@@ -109,7 +109,7 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + "Here are all the prescriptions:" + System.lineSeparator()
@@ -131,17 +131,17 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#2)" + System.lineSeparator()
+                + "Prescription #2" + System.lineSeparator()
                 + PRESCRIPTION_STRING_2
                 + LINE_NEWLINE
                 + ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#3)" + System.lineSeparator()
+                + "Prescription #3" + System.lineSeparator()
                 + PRESCRIPTION_STRING_3
                 + LINE_NEWLINE
                 + "Here are all the prescriptions:" + System.lineSeparator()
@@ -168,12 +168,12 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + EDIT_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1_EDIT_ALL_DETAILS
                 + LINE;
 
@@ -188,12 +188,12 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + EDIT_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1_EDIT_SOME_DETAILS
                 + LINE;
 
@@ -208,7 +208,7 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + "The index number is out of range. Try again.";
@@ -225,17 +225,17 @@ class PrescriptionListTest {
 
         String expectedOutput = ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE_NEWLINE
                 + ADD_MESSAGE
                 + LINE_NEWLINE
-                + "#2)" + System.lineSeparator()
+                + "Prescription #2" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1_EDIT_SOME_DETAILS
                 + LINE_NEWLINE
                 + "The prescription is already existing." + System.lineSeparator()
                 + LINE_NEWLINE
-                + "#1)" + System.lineSeparator()
+                + "Prescription #1" + System.lineSeparator()
                 + PRESCRIPTION_STRING_1
                 + LINE;
 
