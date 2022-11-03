@@ -1,4 +1,4 @@
-package seedu.duke.data;
+package seedu.duke.storage;
 
 import seedu.duke.Exceptions;
 import seedu.duke.commands.CommandAddModule;
