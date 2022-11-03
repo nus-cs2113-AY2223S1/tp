@@ -38,6 +38,10 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98
 
 #### Testing
 
+1. Add JUnit tests for all database and list command components
+1. Ensure that valid inputs returns the correct outputs.
+1. Ensure that invalid inputs throws exceptions accordingly.
+
 ### Contributions to the User Guide UG
 
 ### Contributions to the Developer Guide DG
