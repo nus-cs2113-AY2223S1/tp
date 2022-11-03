@@ -110,9 +110,13 @@ public class Add extends Command {
     }
 
     public void checkMcString(String mcString) throws InvalidMcException {
+        if (mcString.length() > 2) {
+            throw new InvalidMcException();
+        }
         if (!mcString.matches("[0-9]+")) {
             throw new InvalidMcException();
         }
+
     }
 
     public void checkYear(String semester) throws InvalidSemesterException {
