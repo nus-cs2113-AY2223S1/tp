@@ -73,4 +73,12 @@ public class RecurringPaymentManager {
             );
         }
     }
+    public void updateRecurringPayments(ArrayList<RecurringPayment> newRecurringPayments) {
+        for (RecurringPayment newRecurringPayment : newRecurringPayments) {
+            if (!hasRecurringPayment(newRecurringPayment)) {
+                this.recurringPayments.add(newRecurringPayment);
+            }
+        }
+    }
+
 }
