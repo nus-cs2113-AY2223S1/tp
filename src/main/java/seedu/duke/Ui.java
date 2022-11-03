@@ -194,6 +194,7 @@ public class Ui {
         System.out.println(LINE_BREAK);
     }
 
+    //@@author zoranabc201
     public void displayOneClientInPair(Client client) {
         System.out.println(CLIENT);
         System.out.println(SPACE + CLIENT_NAME_LABEL + client.getClientName());
@@ -256,6 +257,7 @@ public class Ui {
         System.out.println(SPACE + CLIENT_BUDGET_LABEL + client.getClientBudgetPerMonth());
         System.out.println(LINE_BREAK);
     }
+    //@@author
 
     //@@author wilsonngja
     public void displayOneProperty(Property property, int i) {
@@ -280,6 +282,7 @@ public class Ui {
     }
     //@@author
 
+    //@@author zoranabc201
     public void displayOnePropertyAddress(Property property, int i) {
         System.out.print(i + FULL_STOP);
         System.out.println(SPACE + property.getPropertyAddress());
@@ -336,6 +339,7 @@ public class Ui {
             System.out.println(THERE_ARE + i + PAIRS_PLURAL + IN_THIS_LIST);
         }
     }
+    //@@author
 
     public void showCheckClient(Client client, Property property) {
         showToUser(MESSAGE_CHECK_CLIENT);
