@@ -16,53 +16,22 @@ Given below are my contributions to the project:
   - Justification: The user may not know what module mappings or universities are available to be added into their planning. This feature allows them to search and filter modules mappings that they are interested in.
   - Highlights: Check the validity of the list command query, execute the list command according to the 4 discrete types, throws errors when invalid inputs are provided, informs user when there are no valid module mappings that match their query.
 - Code contributed: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true)
-
-### Contributions to the User Guide UG
-
-1. Update UG for list command, providing brief description, usage format, example usage, and example output.
-
-### Contributions to the Developer Guide DG
-
-1. Update DG for database implementation with a brief description.
-1. Construct class diagram for database implementation to illustrate relationships between the various database classes such as Database, DatabaseParser, and DatabaseStorage.
-1. Construct sequence diagram for database implementation to illustrate how data is read and stored in memory.
-1. Update DG for list command implementation with a brief description.
-1. Construct class diagram for list command implementation to illustrate relationships between Duke, CommandParser, Ui, List Command, and Database.
-1. Construct sequence diagram for list command implementation to illustrate how the user input leads to a list command being instantiated and executed.
-
-### Contributions to Team-Based Tasks
-
-1. Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
-1. Populate GitHub issue tracker with user stories to tackle.
-1. Maintain GitHub issue tracker by updating labels for issues.
-
-### Review / mentoring contributions
-
-1. Reviewed PRs from all team members.
-1. Verified that bugs were fixed.
-1. Verified that new bugs were not introduced.
-
-### Contributions beyond the project team
-
-1. Attempted to provide solutions to problems faced by others in CS2113 forum
-
-- [Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3)
-- [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8)
-- [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9)
-
-2. Clarified doubts that may be applicable to others in CS2113 forum
-
-- [Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12)
-- [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24)
-
-3. Consistently reported bugs faced by other teams during tutorial exercises.
-
-- [Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4)
-- [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1)
-
-4. Reported bugs faced by other teams during the CS2113 Practical Examination Dry-Run
-
-- [Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues)
+- Documentation:
+  - User Guide:
+    - Added documentation for list command
+  - Developer Guide:
+    - Added documentation for database implementation, with relevant class and sequence diagrams for illustration
+    - Added documentation for list command implementation, with relevant class and sequence diagrams for illustration
+- Project Management:
+  - Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
+  - Populate GitHub issue tracker with user stories to tackle.
+  - Maintain GitHub issue tracker by updating labels for issues.
+  - Reviewed PRs from all team members, verifying that bugs were fixed, and no new bugs were introduced.
+- Community:
+  - Attempted to provide solutions to problems faced by others in CS2113 forum ([Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3), [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8), [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9))
+  - Clarified doubts that may be applicable to others in CS2113 forum ([Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12), [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24))
+  - Consistently reported bugs faced by other teams during tutorial exercises ([Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4), [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1))
+  - Reported bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
 
 ## Contributions to the Developer Guide (Extracts)
 
