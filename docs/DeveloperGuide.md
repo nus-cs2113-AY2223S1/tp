@@ -185,10 +185,10 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 
 ## Non-Functional Requirements
 
-1) Performance: The program should respond within 2 seconds of user input.
-2) Quality: With guidance by the user guide, a new user should be able to navigate the program.
-3) Technical: The program should work with all environments that load the program with Java 11.
-4) Project Scope: The program is only required to handle reviews for movies and tv shows.
+1. Performance: The program should respond within 2 seconds of user input.
+2. Quality: With guidance by the user guide, a new user should be able to navigate the program.
+3. Technical: The program should work with all environments that load the program with Java 11.
+4. Project Scope: The program is only required to handle reviews for movies and tv shows.
 
 ## Glossary
 
