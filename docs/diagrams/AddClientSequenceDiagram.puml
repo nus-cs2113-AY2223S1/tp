@@ -1,31 +1,33 @@
 @startuml
+!include style.puml
+
 hide footbox
 
-participant "command:CommandAddClient" as CommandAddClient #lightgreen
-participant "clientList:ClientList" as ClientList #lightblue
-participant ":Client" as Client #yellow
-participant "ui:Ui" as Ui #lightgrey
-participant "storage:Storage" as Storage #orange
+participant "command:CommandAddClient" as CommandAddClient COMMAND_COLOR
+participant "clientList:ClientList" as ClientList CLIENT_LIST_COLOR
+participant ":Client" as Client CLIENT_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
 
 ->CommandAddClient:execute(Ui, Storage, PropertyList, ClientList, PairingList)
-activate CommandAddClient #lightgreen
+activate CommandAddClient COMMAND_COLOR
 
 CommandAddClient -> ClientList : addClient(clientName:String, clientContactNumber:String, \nclientEmail:String, clientBudgetPerMonth:String)
-activate ClientList #lightblue
+activate ClientList CLIENT_LIST_COLOR
 
 create Client
 ClientList -> Client : Client(clientName:String, clientContactNumber:String, clientEmail:String, clientBudgetPerMonth:String)
-activate Client #yellow
+activate Client CLIENT_COLOR
 
 return
 return
 
 CommandAddClient -> Ui : showClientAddedConfirmationMessage(clientList:ClientList)
-activate Ui #lightgrey
+activate Ui UI_COLOR
 return
 
 CommandAddClient -> Storage : addToClientFile(clientName:String, clientContactNumber:String, clientEmail:String, clientBudgetPerMonth:String)
-activate Storage #orange
+activate Storage STORAGE_COLOR
 return
 return
 
