@@ -18,7 +18,11 @@ public class ServiceList {
         }
     }
 
-    public static void addService(Service service) {
+    public static void addService(Service service) throws DukeException {
+        if (findService(service.getServiceDescription()) != null) {
+            throw new DukeException();
+        }
+
         services.add(service);
         System.out.println("Got it. I've added this service:");
         System.out.println(service.getServiceDescription());
