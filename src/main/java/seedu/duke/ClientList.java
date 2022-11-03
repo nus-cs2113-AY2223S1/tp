@@ -36,6 +36,7 @@ public class ClientList {
         currentListSize++;
     }
 
+    //@@author FeliciaBeatrice
     /**
      * Deletes a client from the client list and updates client list size.
      *
@@ -48,4 +49,5 @@ public class ClientList {
         currentListSize--;
         return deletedClient;
     }
+    //@@author
 }

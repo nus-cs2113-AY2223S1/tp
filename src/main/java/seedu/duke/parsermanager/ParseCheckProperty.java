@@ -4,6 +4,7 @@ package seedu.duke.parsermanager;
 import seedu.duke.command.Command;
 import seedu.duke.command.check.CommandCheckProperty;
 import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.check.CheckExtraParametersException;
 import seedu.duke.exception.check.CheckNotIntegerException;
 import seedu.duke.exception.check.ParseCheckException;
 import seedu.duke.exception.check.checkproperty.CheckPropertyMissingFlagException;
@@ -11,6 +12,7 @@ import seedu.duke.exception.check.checkproperty.CheckPropertyMissingFlagExceptio
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.START_INDEX;
 
 /**
  * Parser for check property commands.
@@ -38,10 +40,13 @@ public class ParseCheckProperty extends Parser {
     }
 
 
-    private ArrayList<String> processCommandDetails(String rawCommandDetail) throws CheckPropertyMissingFlagException {
+    private ArrayList<String> processCommandDetails(String rawCommandDetail) throws CheckPropertyMissingFlagException,
+            CheckExtraParametersException {
+
         String[] flags = CHECK_PROPERTY_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForMissingFlags(flagIndexPositions);
+        checkExtraArguments(commandDescription, flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
@@ -56,6 +61,17 @@ public class ParseCheckProperty extends Parser {
 
     private boolean isFlagPresent(int flagIndexPosition) {
         return (flagIndexPosition != FLAG_ABSENT_RETURN_VALUE);
+    }
+
+    private void checkExtraArguments(String commandDescription, int[] flagIndexPositions)
+            throws CheckExtraParametersException {
+
+        int firstFlagIndex = flagIndexPositions[START_INDEX];
+        if (firstFlagIndex != START_INDEX) {
+            String extraArgument = commandDescription.substring(START_INDEX, firstFlagIndex);
+            throw new CheckExtraParametersException(extraArgument);
+        }
+
     }
 
 }

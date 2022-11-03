@@ -9,6 +9,8 @@ import seedu.duke.exception.IncorrectListFlagsException;
 
 import static seedu.duke.Messages.MESSAGE_INCORRECT_PROPERTY_LIST_FLAG;
 
+//@@author zoranabc201
+
 public class ParseListProperty extends Parser {
 
     private final String commandFlags;

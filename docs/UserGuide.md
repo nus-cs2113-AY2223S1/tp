@@ -22,9 +22,8 @@ information quickly with minimal latency.
     * [Exit: `quit`](#exit-quit)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
-* [FAQ](#faq)
 * [Command Summary](#command-summary)
-
+---
 
 ## Quick Start
 
@@ -40,6 +39,7 @@ cd [PATH_TO_JAR_DIRECTORY]
 ```
 java -jar PropertyRentalManager.jar
 ```
+---
 
 ## Features 
 
@@ -120,8 +120,13 @@ Deletes the specified property from the property list and subsequently deletes a
 
 <u>Example:</u> `delete -property ip/2`
 
+---
+
 ### List Properties: `list -property`
 Lists all properties present in the list
+
+---
+
 ### List Properties With Tags: `list -property TAG` 
 Lists only selected details of all the properties, depending on the TAG. The commands for these are -
 * `list -property a/` This is for address
@@ -130,14 +135,30 @@ Lists only selected details of all the properties, depending on the TAG. The com
 * `list -property t/` This is for unit type
 * `list -property -short` This is for the shorthand version(displays address, price and unit type)
 
+---
 
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
 
-<u>Format</u>: `check -property ip/PROPERTY_INDEX`
+<u>Format</u>: `check -property i/PROPERTY_INDEX`
 
-<u>Example</u>: `check -property ip/2`
+<u>Example</u>: `check -property i/2`
 
+<u>Expected Output</u>:
+```
+Showing check results for this property:
+Landlord: Bob Tan Bee Bee
+  Address: 25 Lower Kent Ridge Rd, S119081
+  Renting Price: SGD1000/month
+  Unit Type: LP Bungalow
+
+Here are the tenants renting this property:
+  1. Client: Joseph Joestar
+  Contact Number: 83625471
+  Email: jojofirst@jmail.com
+  Budget: SGD9000/month
+Number of entries in the list: 1
+```
 ---
 
 ### Add Client: `add -client`
@@ -173,8 +194,12 @@ Deletes the specified client from the client list and subsequently deletes any p
 
 <u>Example:</u> `delete -client ic/3`
 
+---
+
 ### List Clients: `list -client`
 Lists all the clients present in the list
+
+---
 ### List Clients With Tags `list -client TAG` 
 List only selected details of all the clients, depending on TAG. The commands for these are-
 * `list -client c/` This is for contact number
@@ -183,12 +208,16 @@ List only selected details of all the clients, depending on TAG. The commands fo
 * `list -client e/` This is for e-mail
 * `list -client -short` This is for the shorthand version(displays just name and budget)
 
+---
+
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
 
 <u>Format</u>: `check -client ic/CLIENT_INDEX`
 
 <u>Example</u>: `check -client ic/5`
+
+---
 
 ### Pair Client and Property: `pair`
 Pairs the client to the specified property, to record that the client is renting the property.
@@ -200,6 +229,13 @@ Pairs the client to the specified property, to record that the client is renting
 
 <u>Example</u>: `pair ip/1 ic/5`
 
+<u>Expected Output</u>:
+```
+Pairing the following client and property: 
+	Kujou Jotaro and 25 Lower Kent Ridge Rd, S119081
+```
+---
+
 ### Unpair Client and Property: `unpair`
 Unpairs the client from the specified property, to record that the client is no longer renting the property.
 
@@ -209,9 +245,17 @@ Unpairs the client from the specified property, to record that the client is no 
 
 <u>Example</u>: `unpair ip/1 ic/5`
 
+<u>Expected Output</u>:
+```
+Unpairing the following client and property: 
+	Kujou Jotaro and 25 Lower Kent Ridge Rd, S119081
+```
+---
+
 ### List everything `list -everything`
 Lists all information about every client and every property in the list
 
+---
 ### Find Client and Property: `find`
 This feature allows for the queried text to be filtered. The queried text is not constrained within any field.
 This means that if the queried text matches the name of the first list and the address of second list, both entries
@@ -232,6 +276,8 @@ will be counted as a match.
 
 The 1st command above search through the property list for any matches with `Bob the Builder` while the 2nd command 
 search through the client list for any matches with `Amos`.
+
+---
 ### Exit: `quit`
 
 ---
@@ -254,6 +300,7 @@ The `pairing list` will be the last to load. This is done so to verify that the 
 Client's list and Property's list respectively. In the scenario where either of the entries is not in, the **pair 
 would not be loaded and will be considered as incorrect data inputted**.
 
+---
 ### Saving data
 
 Saving of data occurs in 3 instances of operation:
@@ -269,6 +316,7 @@ When client, property and pairing is added, text will be appended to the text fi
 - `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
 PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
 
+---
 ### Updating data
 
 Updating of data occurs in 6 instances of operation:
@@ -284,6 +332,7 @@ When the updating operation occurs, it will iterate through the list, depending 
 While iterating through the list, the program will **convert each entry into the correct format** and **store in their 
 respective text files.**
 
+---
 ### Manual input of data
 
 Since the data is stored in a text file, it **allows for user to manually key in the entries** and will be loaded
@@ -301,13 +350,7 @@ PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]`
 Note that if the entries are stored incorrectly, the program will automatically remove the entries from the text file
 during the next run of the program. This is done so to **prevent overcrowding** of junk data.
 
---- 
-## FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: {your answer here}
-
+---
 ## Command Summary
 
 * Add Property: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
@@ -318,7 +361,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 * List Property Budgets: `list -property b/`
 * List Property Unit Type: `list -property t/`
 * List Property Short: `list -property -short`
-* Check Property: `check -property ip/PROPERTY_INDEX`
+* Check Property: `check -property i/PROPERTY_INDEX`
 * Find Property: `find -property f/QUERY_TEXT`
 
 
@@ -339,11 +382,3 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 * Pair: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
-
-
-## Common Error Messages
-
-| Error Message                | Reason               | Remedy                |
-|------------------------------|----------------------|-----------------------|
-| *INSERT ERROR MESSAGE HERE*  | *INSERT REASON HERE* | *INSERT REMEDY HERE*  |
-| *INSERT ERROR MESSAGE HERE*  | *INSERT REASON HERE* | *INSERT REMEDY HERE*  |
