@@ -41,6 +41,7 @@ public class AppointmentList {
 
         // appointment should have a valid date
         if (appointment.getAppointmentDate() == null) {
+            Appointment.id--;
             throw new DukeException();
         }
 

@@ -1,5 +1,7 @@
 package parser;
 
+import appointment.Appointment;
+import appointment.AppointmentList;
 import command.Command;
 import command.EmptyCommand;
 import command.appointmentcommand.AddAppointmentCommand;
@@ -45,10 +47,32 @@ public class AppointmentParser {
 
     public Command prepareRemoveAppointment(String input) {
         try {
-            int index = parser.indexOfInput(input);
-            return new RemoveAppointmentCommand(index);
+            int index = input.indexOf(parser.indexFlag);
+            if (index == -1 || !input.substring(0, index).isEmpty()) {
+                throw new DukeException();
+            }
+
+            String indexStr = input.substring(index + lengthOfSignature);
+            if (indexStr.isEmpty()) {
+                throw new DukeException();
+            }
+
+            int appointmentId = -1;
+            try {
+                appointmentId = Integer.parseInt(indexStr);
+            } catch (NumberFormatException nfe) {
+                System.out.println("Sorry, pls enter an integer for removing appointment");
+                return new EmptyCommand();
+            }
+
+            Appointment appointment = AppointmentList.findAppointment(appointmentId);
+            if (appointment == null) {
+                System.out.println("Sorry, pls enter a valid index for removing appointment");
+                return new EmptyCommand();
+            }
+            return new RemoveAppointmentCommand(appointmentId);
         } catch (DukeException e) {
-            System.out.println("Sorry, index entered invalid for removing an appointment");
+            System.out.println("Sorry, input invalid for removing an appointment");
             return new EmptyCommand();
         }
     }

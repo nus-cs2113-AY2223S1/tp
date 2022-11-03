@@ -25,7 +25,6 @@ public class RemoveAppointmentCommand extends Command {
             TaskList.removeTask(currTask.taskId);
         }
 
-
         AppointmentList.removeAppointment(appointmentId);
     }
 
