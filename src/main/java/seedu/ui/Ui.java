@@ -111,6 +111,7 @@ public class Ui {
         return false;
     }
 
+    //@@author eehongchan
     /**
      * Asks for input and returns user input.
      *
@@ -154,6 +155,7 @@ public class Ui {
     public void greetUser() {
         showLogo();
     }
+    //@@author
 
     /**
      * Shows the result of a command execution to the user.
@@ -175,6 +177,7 @@ public class Ui {
         }
     }
 
+    //@@author eehongchan
     /**
      * Print exception message.
      *
@@ -232,7 +235,7 @@ public class Ui {
      * @param in New Scanner object to be used.
      */
     public void changeScanner(Scanner in) {
-        assert in != null : "Invalid Scanner object!";
+        assert in != null : "Invalid Scanner object! Scanner object cannot be null!";
         this.in = in;
     }
     public static String getSeparatorString() {
