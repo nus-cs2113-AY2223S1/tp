@@ -332,6 +332,37 @@ How the unpair command works :
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
 
 ---
+### Find Feature
+
+The find command takes in an input from the user in the following format:
+```
+find -client f/<QUERY_TEXT>
+find -property f/<QUERY_TEXT>
+```
+where `QUERY_TEXT` refers to the text that will be searched through the Client List when the user indicates `-client` and Property List when the user indicates `-property`.
+
+The sequence diagram for both find client and find property is as shown below:
+![Find Client Sequence Diagram](diagrams/FindClientSequenceDiagram.png)
+![Find Property Sequence Diagram](diagrams/FindPropertySequenceDiagram.png)
+
+The program will iterate through all the entities to search for any matches with the query text. 
+
+For clients, it will identify if the query text matches:
+- Name
+- Contact Number
+- Email
+- Budget
+
+For properties, it will identify if the query text matches:
+- Landlord Name
+- Address
+- Rental Price
+- Unit Type
+
+For example, if a query text is "Ken" and the address is "Kent Ridge", it will be identified as a match since the word is contained within part of the address.
+
+Upon identifying a match, the program will print out the message to the console providing the full details, inclusive of their respective index number. This is to help facilitate other commands such as pairing or checking.
+---
 
 ### Storage Feature
 
@@ -365,9 +396,9 @@ When file is appended into the text file, it's being stored in different formats
 The text file of which Client, Property and Pairing is being stored is `client.txt`, `property.txt` and `pairing.txt` 
 respectively.
 
-![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.jpg)
-![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.jpg)
-![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.jpg)
+![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.png)
+![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.png)
+![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.png)
 
 The three sequence diagram above shows the sequence of which the append operation is being invoked. All three
 operations are similar in operations but are invoked with different `parameter` and `path`.
@@ -377,9 +408,9 @@ The update operation happens when entries in ClientList and PropertyList is bein
 PairingList is being removed.
 
 The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be seen below:
-![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.jpg)
-![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.jpg)
-![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.jpg)
+![Update Client Sequence Diagram](diagrams/StorageUpdateClientSequenceDiagram.png)
+![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySequenceDiagram.png)
+![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSequenceDiagram.png)
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.

@@ -7,7 +7,7 @@ Participant "propertyList : PropertyList" as PropertyList #F4F4B6
 Participant "property : Property" as Property #F4F4B6
 Participant "ui: Ui" as Ui #F4F4B6
 
-->CommandFindProperty:execute(Ui:ui, Storage: storage, PropertyList: propertyList, \nClientList: clientList, PairingList: pairingList
+->CommandFindProperty:execute(ui: Ui, storage: Storage, propertyList: PropertyList, \nclientList: ClientList, pairingList: PairingList)
 activate CommandFindProperty #CDEFF9
 
 CommandFindProperty->PropertyList:getCurrentListSize()
@@ -17,12 +17,12 @@ return currentListSize
     loop i < currentListSize
         CommandFindProperty->PropertyList:getCurrentList()
         activate PropertyList #CDEFF9
-        PropertyList->Property:get(int: i)
+        PropertyList->Property:get(i: int)
         activate Property #CDEFF9
         return property
         return currentProperty
 
-        CommandFindProperty->CommandFindProperty:hasQueryText(String: queryText, Property: currentProperty)
+        CommandFindProperty->CommandFindProperty:hasQueryText(queryText: String, currentProperty: Property)
         activate CommandFindProperty #E2CDF9
         CommandFindProperty -> Property:getLandlordName()
         activate Property #CDEFF9
@@ -42,7 +42,7 @@ return currentListSize
 
         return hasQueryTextInProperty
         opt hasQueryTextInClients
-            CommandFindProperty->Ui:displayOneProperty(Property: currentProperty, int: clientIndex)
+            CommandFindProperty->Ui:displayOneProperty(currentProperty: Property, clientIndex: int)
             activate Ui #CDEFF9
             return
         end
