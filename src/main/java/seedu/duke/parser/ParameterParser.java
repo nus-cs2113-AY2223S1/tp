@@ -27,6 +27,8 @@ import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StatsInvalidNumberException;
 import seedu.duke.exception.StatsInvalidTypeException;
+import seedu.duke.exception.HelpUnknownCommandWordException;
+import seedu.duke.exception.GlobalInvalidCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,6 +53,7 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
 
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
@@ -307,7 +310,6 @@ public class ParameterParser {
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
-            // TODO: To standardise the format for transaction type for add and list
             if (command instanceof ListCommand) {
                 command.setType(parseTypeTagForListing(parameter));
             } else {
@@ -349,6 +351,9 @@ public class ParameterParser {
             break;
         case COMMAND_TAG_BUDGET_AMOUNT:
             command.setBudgetAmount(parseBudgetTag(parameter));
+            break;
+        case COMMAND_TAG_HELP_QUERY:
+            command.setQueryCommand(parseHelpQueryTag(parameter));
             break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
@@ -526,6 +531,24 @@ public class ParameterParser {
                     + parameter);
             throw new HelpUnknownOptionException();
         }
+    }
+
+    /**
+     * Returns the string containing the command queried by user for the help message if the command is valid.
+     *
+     * @param parameter The user input after the user tag.
+     * @return The received parameter.
+     * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
+     */
+    public static String parseHelpQueryTag(String parameter) throws HelpUnknownCommandWordException {
+        // An invalid command word queried by the user will result in an exception
+        try {
+            CommandParser.getCommand(parameter, "");
+        } catch (GlobalInvalidCommandException exception) {
+            throw new HelpUnknownCommandWordException();
+        }
+
+        return parameter;
     }
 
     /**

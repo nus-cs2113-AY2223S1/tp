@@ -162,11 +162,31 @@ public class TransactionList {
 
     //@@author chinhan99
 
+    /**
+     * Adds a transaction of class type Income into the transactions list during storage.
+     * This method functions the same as addIncome , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
+
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
     }
 
+
+    /**
+     * Adds a transaction of class type Expense into the transactions list during storage.
+     * This method functions the same as addExpense , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
 
     public void addExpenseDuringStorage(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);

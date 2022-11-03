@@ -378,9 +378,84 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
+The structure of the application focusing on the Add command is illustrated in the simplified sequence diagram below:
+![Simplified Sequence Diagram of Add Command](images/AddCommandSequenceDiagram.png)
+
+In a command like `add t/expense c/food a/20 d/13092022 i/NIL` OR `add t/income c/salary a/2000 d/30092022 i/jan_salary`
+1. The user input would be parsed via `CommandParser.parse()` method. 
+2. In `CommandParser.parse()`, `getCommand()` would be called which initializes `AddCommand`. Then it would call `ParameterParser.parse()`.
+3. In `ParameterParser.parse()`, the user input will be parsed further before the data is stored into `AddCommand` via  `ParameterParser.setCommand()` , 
+which calls for  `ParameterParser.setParameter()` to set the attributes within the AddCommand instance. 
+4. The `CommandParser.parse()`, would then return the instance of `Addcommand` to Duke class.
+5. `AddCommand.execute()` would be called, in which it will attempt to add its objects to the `TransactionList` based on the type of transaction, either income or expense.  
+6. After the storage or the user input into `TransactionList`, `Storage.writeToFile()` would write the contents of `TransactionList` to the storage file, duke.txt.
+
 _Written by: Yong Chin Han_
 
 ### Edit Command
+
+The `EditCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `EditCommand` is
+shown below.
+
+<p align="center">
+    <img src="images/EditCommandClassDiagram.png">
+    <br />
+    <i>Figure 3.3: Class Diagram for EditCommand Showing Inheritance of Command</i>
+</p>
+
+The full command for `edit` is `edit [e/ENTRY] [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`.
+
+For example, if 'edit' is called, the specific entry inputted in the command is edited based on the parameters inputted.
+Only the entry and at least one tag is needed for this command to work.
+
+In a command like `edit e/2 t/expense c/food a/10 d/20102022 i/chicken`:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
+4. Within `setCommand()`, more functions are called internally.
+    1. `setParameter()` is called to set the index of the transaction to be deleted.
+    2. The setting is done via `command.setEntryNumber()` which takes in the parameter and executes it in the DeleteCommand Class.
+    3. The parameter, however, needs to be further parsed through the execution of the `parseEntryTag()` function.
+    4. It converts the parameter, which is currently a `String`, to a `Int`.
+
+5. The edit command is undergoing execution in `command.execute()` which will call functions within the EditCommand Class.
+    1. The index, which is the local `entryNumber` variable, goes under further checks by ascertaining whether it is greater than the total
+       number of transactions in the list or lesser than or equal to zero.
+    2. It tells the total size via the local `numberOfTransactions` variable which takes the value called by `transactions.size()`
+       which is located in the TransactionList class.
+    3. If the checks fail, i.e. the index is invalid, `isInputValid` is set as false.
+
+6. The if-else statements does the following:
+    1. Retrieves the transaction to be edited via `transactions.getEntry()`.
+    2. Checks if the local variable `newType` is `null`. This implies that no `t/expense` or `t/income` was indicated by the user.
+       The program then retrieves the type of transaction via `entry.getType()`
+    3. It then splits to another if-else branches which handles the edits using either `transactions.editExpense()` or `transactions.editIncome()`.
+    4. For each of these branches, should the optional tag be left blank, retrieves the relevant field using the getter functions.
+    5. In order to edit the following transaction, it has to be deleted first and then reinserted. This is done by calling `transactions.deleteTransaction()`
+       and then inserts back in at the same spot which is handled by `transactions.add()` at the specific entry.
+
+7. The display shows the successful deletion via `ui.showTransactionAction()` and writes it to file by `storage.writeToFile()`.
+
+The sequence diagram below shows the interactions of a successful execution of the `EditCommand`.
+
+<p align="center">
+    <img src="images/EditCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.4: Sequence Diagram for Edit Command</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
@@ -391,7 +466,12 @@ For example, if 'list' is called, all transactions that are present in Moolah Ma
 Adding tags such as type, category and date will list all transactions to that category
 
 The structure of the application focusing on the list command is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ListCommandSequenceDiagram.png)
+
+<p align="center">
+    <img src="images/ListCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.5: Sequence Diagram for List Command</i>
+</p>
 
 In a command like `list c/transport`
 
@@ -420,7 +500,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.3: Sequence Diagram for Find Command</i>
+    <i>Figure 3.6: Sequence Diagram for Find Command</i>
 </p>
 
 **Step 1.** The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
@@ -453,7 +533,50 @@ _Written by: Chua Han Yong Darren_
 
 ### Bye Command
 
-{Describe the implementation for the Bye Command}
+The `ByeCommand` inherits properties from the abstract `Command'` class. The inheritance of `Command` from `ByeCommand` is
+shown below.
+
+<p align="center">
+    <img src="images/ByeCommandClassDiagram.png">
+    <br />
+    <i>Figure 3.7: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+</p>
+
+The full command for `bye` is `bye`.
+For example, if 'bye' is called, the program prints the exit message and terminates the program.
+
+This is how the command works:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
+4. Within `setCommand()`, there is no parameters required to be set for `bye`.
+
+5. The bye command is undergoing execution in `command.execute()` which will call functions within the ByeCommand Class.
+   1. It calls `ui.showInfoMessage()` which prints the exit message.
+   2. `isExit()` is set as true.
+   
+6. Within `run()` in Duke, the loop is exited and the program ends.
+
+The sequence diagram below shows the interactions of a successful execution of the `ByeCommand`.
+
+<p align="center">
+    <img src="images/ByeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.8: Sequence Diagram for Delete Command</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
@@ -465,7 +588,7 @@ shown below.
 <p align="center">
     <img src="images/DeleteCommandClassDiagram.png">
     <br />
-    <i>Figure 3.4: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+    <i>Figure 3.9: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
 </p>
 
 The full command for `delete` is `delete [e/ENTRY]`.
@@ -514,7 +637,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/DeleteCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.5: Sequence Diagram for Delete Command</i>
+    <i>Figure 3.10: Sequence Diagram for Delete Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -527,7 +650,7 @@ shown below.
 <p align="center">
     <img src="images/PurgeCommandClassDiagram.png">
     <br />
-    <i>Figure 3.6: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
+    <i>Figure 3.11: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
 </p>
 
 The full command for `purge` is `purge`.
@@ -566,6 +689,14 @@ This is how the command works:
    1. The `transactions.clear()` function is called which deletes every single entry in Moolah Manager
 
 7. The display shows the successful purging via `ui.showInfoMessage()` and writes it to file by `storage.writeToFile()`.
+
+The sequence diagram below shows the interactions of a successful execution of the `DeleteCommand`.
+
+<p align="center">
+    <img src="images/PurgeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 3.12: Sequence Diagram for Purge Command</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
@@ -694,4 +825,4 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
     2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
        the first row. Save the changes to the file.
     3. Re-launch the application.<br>
-       **Expected:** The data file will not be loaded into the application, and user will be prompted that the file.
+       **Expected:** The data file will only be partially loaded into the application, and user will be prompted to STOP the program and fix the error before reloading. If users decide to continue using the program, the data would be overwritten.

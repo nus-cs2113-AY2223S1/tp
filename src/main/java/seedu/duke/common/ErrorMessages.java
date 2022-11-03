@@ -38,6 +38,8 @@ public enum ErrorMessages {
             + "Please enter <help> for the command guide."),
     ERROR_UNKNOWN_HELP_OPTION("The parameter used for help option is unknown, "
             + "please enter <help> for the command guide."),
+    ERROR_UNKNOWN_HELP_COMMAND_WORD("The command word queried is not a valid command, "
+            + "please enter <help> to list all available commands."),
     ERROR_STORAGE_TRANSACTION_CORRUPTED("Transaction values corrupted."
             + " To PREVENT DATA OVERWRITE, please STOP the program and EDIT your duke.txt file correctly."),
     ERROR_STORAGE_BUDGET_CORRUPTED("Budget parameter is invalid or missing."

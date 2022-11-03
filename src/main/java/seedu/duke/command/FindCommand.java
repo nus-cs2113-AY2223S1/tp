@@ -1,8 +1,10 @@
 package seedu.duke.command;
 
 //@@author chydarren
+
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.FindTransactionMissingKeywordsException;
 import seedu.duke.exception.MoolahException;
@@ -10,12 +12,10 @@ import seedu.duke.exception.MoolahException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_KEYWORDS;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_FIND;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_FIND;
+import static seedu.duke.common.HelpMessages.FIND_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.FIND_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED;
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED_EMPTY;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a find command object that will execute the operations for Find command.
@@ -24,17 +24,7 @@ public class FindCommand extends Command {
     //@@author chydarren
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "FIND";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_KEYWORDS;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_FIND + LINE_SEPARATOR + COMMAND_USAGE_FIND + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
-    //@@author chydarren
     private static Logger findLogger = Logger.getLogger(FindCommand.class.getName());
     private String keywords;
 
@@ -47,6 +37,7 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
+
     /**
      * Checks the format of find to ensure that it contains keywords used in the search expression.
      *
@@ -54,6 +45,7 @@ public class FindCommand extends Command {
      * @throws FindTransactionMissingKeywordsException If a user does not enter a search expression for Find.
      */
     public static void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
+        findLogger.setLevel(Level.SEVERE);
         if (keywords.isBlank()) {
             findLogger.log(Level.WARNING, "Exception thrown as there are no keywords found.");
             throw new FindTransactionMissingKeywordsException();
@@ -102,6 +94,26 @@ public class FindCommand extends Command {
         assert !transactionsList.isEmpty();
         findLogger.log(Level.INFO, "There are matching transactions for the Transactions list.");
         ui.showList(transactionsList, INFO_LIST_FILTERED.toString());
+    }
+
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return FIND_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return FIND_COMMAND_DETAILED_HELP;
     }
 
     //@@author paullowse
