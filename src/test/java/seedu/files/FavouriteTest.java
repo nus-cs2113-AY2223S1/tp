@@ -54,6 +54,8 @@ public class FavouriteTest {
     @Test
     void testWriteToFile() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        FileStorage fileStorage = new FileStorage(testFileDirectory, emptyFile);
+        fileStorage.writeDataToFile(" ");
         Favourite favourite = new Favourite(testFileDirectory, emptyFile);
         Favourite.getFavouriteList().add("1");
         Favourite.getFavouriteList().add("2");
