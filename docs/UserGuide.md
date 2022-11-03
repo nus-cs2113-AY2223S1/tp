@@ -18,7 +18,7 @@ medicine information via Command Line Interface.
             - [Retrieving a patient's records: `retrieve`](#retrieving-a-patients-records-retrieve)
             - [Modifying the details of a patient: `edit`](#modifying-the-details-of-a-patient-edit)
         + [2.Visit](#2-visit)
-            - [Adding a visit: `add](#adding-a-visit-add)
+            - [Adding a visit: add](#adding-a-visit-add)
             - [Adding/editing a reason for existing visit: `edit`](#addingediting-a-reason-for-existing-visit-edit)
             - [Deleting a reason for existing visit: `deleteReason`](#deleting-a-reason-for-existing-visit-deletereason)
             - [Viewing all visits: `viewAll`](#viewing-all-visits-viewall)

@@ -1,6 +1,21 @@
 import java.util.Scanner;
 
 public class UI {
+    public static final String FILE_WRITER_CREATION_ERROR_MESSAGE = "Error! File writer could not be created";
+    public static final String WRITE_ERROR_MESSAGE = "Error! Data could not be written into data file!";
+    public static final String FILE_WRITER_CLOSURE_ERROR_MESSAGE = "Error! File writer could not be closed!";
+    public static final String MISSING_DATA_FILES_ERROR_MESSAGE = "Error! Data files could not be found!";
+    public static final String PRESCRIPTION_LOADED_MESSAGE =
+            "Valid prescription data found in prescription.txt loaded successfully!";
+    public static final String INVALID_PRESCRIPTION_DATA_MESSAGE =
+            "Invalid lines detected while reading prescription.txt! They will be discarded.";
+    public static final String VISIT_LOADED_MESSAGE = "Valid visit data found in visit.txt loaded successfully!";
+    public static final String INVALID_VISIT_DATA_MESSAGE =
+            "Invalid lines detected while reading visit.txt! They will be discarded.";
+    public static final String PATIENT_LOADED_MESSAGE = "Valid patient data found in patient.txt loaded successfully!";
+    public static final String INVALID_PATIENT_DATA_MESSAGE =
+            "Invalid lines detected while reading patient.txt! They will be discarded.";
+    public static final String FILE_CREATION_ERROR_MESSAGE = "Error! Data files could not be created";
     private static Scanner scanner;
 
     protected static final String LOGO = "ıllıllı OneDoc ıllıllı";
