@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * PrscriptionList is a class that handles the array operations for Prescription objects.
+ */
 public class PrescriptionList {
     private final ArrayList<Prescription> prescriptionsList;
 
@@ -11,25 +14,30 @@ public class PrescriptionList {
         return prescriptionsList;
     }
 
+    /**
+     * Add a new prescription to the list.
+     * It will only be added successfully if the prescription does not previously exist in the list.
+     * @param ui is the user interface of OneDoc
+     * @param patientId is a String of the patient's identification number
+     * @param medicine is a String of medicine name
+     * @param dosage is a String of the dosage
+     * @param timeInterval is a String of the time interval
+     */
     public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval) {
         assert patientId != null : "ID should not be null";
         assert medicine != null : "medicine should not be null";
         assert dosage != null : "dosage should not be null";
         assert timeInterval != null : "time interval should not be null";
         Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval);
-        prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
 
-    }
-
-    public void add(UI ui, String patientId, String medicine, String dosage, String timeInterval, boolean isActive) {
-        assert patientId != null : "ID should not be null";
-        assert medicine != null : "medicine should not be null";
-        assert dosage != null : "dosage should not be null";
-        assert timeInterval != null : "time interval should not be null";
-        Prescription prescription = new Prescription(patientId, medicine, dosage, timeInterval, isActive);
-        prescriptionsList.add(prescription);
-        ui.printAddPrescriptionMessage(prescription.toString());
+        if (!prescriptionsList.contains(prescription)) {
+            prescriptionsList.add(prescription);
+            ui.printMessageAndObject(prescription.toString(),UI.ADD_PRESCRIPTION,
+                    prescriptionsList.indexOf(prescription), UI.PRESCRIPTION);
+        } else {
+            ui.printMessageAndObject(prescription.toString(),UI.DUPLICATE_PRESCRIPTION_MESSAGE,
+                    prescriptionsList.indexOf(prescription), UI.PRESCRIPTION);
+        }
     }
 
     public void loadPrescription(String patientID,
@@ -49,11 +57,8 @@ public class PrescriptionList {
         }
 
         ui.printViewAllPrescriptionsMessage();
-        ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            System.out.println("Prescription #" + (i + 1));
-            System.out.println(prescriptionsList.get(i));
-            ui.printLine();
+            ui.printPrescriptionWithIndex(i + 1, prescriptionsList.get(i).toString());
         }
     }
 
@@ -64,12 +69,9 @@ public class PrescriptionList {
         }
 
         ui.printViewAllPrescriptionsMessage();
-        ui.printLine();
         for (int i = 0; i < prescriptionsList.size(); i++) {
             if (prescriptionsList.get(i).isMatchedPatient(patientId.toUpperCase())) {
-                System.out.println("Prescription #" + (i + 1));
-                System.out.println(prescriptionsList.get(i));
-                ui.printLine();
+                ui.printPrescriptionWithIndex(i + 1, prescriptionsList.get(i).toString());
             }
         }
     }
@@ -80,20 +82,23 @@ public class PrescriptionList {
             return;
         }
 
-        ui.printViewAllPrescriptionsMessage();
-        ui.printLine();
+        ui.printViewAllActivePrescriptionsMessage();
         for (int i = 0; i < prescriptionsList.size(); i++) {
             if (prescriptionsList.get(i).isMatchedPatientActive(patientId.toUpperCase())) {
-                System.out.println("Prescription #" + (i + 1));
-                System.out.println(prescriptionsList.get(i));
-                ui.printLine();
+                ui.printPrescriptionWithIndex(i + 1, prescriptionsList.get(i).toString());
             }
         }
     }
 
-    // TODO one potential improvement is to make this three different methods
-    //  edit(String id, String medicine), edit(String id, String dosage)
-    //  and edit(String id, String timeInterval)
+    /**
+     * Edit an existing prescription's detail.
+     * The prescription will be edited only if it has a valid prescription number and it is unique.
+     * @param ui is the user interface of OneDoc
+     * @param prescriptionNumber is the prescription index shown to user in viewings, ranging from 1 to the size of list
+     * @param medicine is a String of medicine name
+     * @param dosage is a String of the dosage
+     * @param timeInterval is a String of the time interval
+     */
     public void edit(UI ui, int prescriptionNumber, String medicine, String dosage, String timeInterval) {
         assert medicine != null : "medicine should not be null";
         assert dosage != null : "dosage should not be null";
@@ -108,6 +113,20 @@ public class PrescriptionList {
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
 
+        String newMedicine = medicine.isEmpty() ? prescriptionEdited.getMedicine() : medicine;
+        String newDosage = dosage.isEmpty() ? prescriptionEdited.getDosage() : dosage;
+        String newTimeInterval = timeInterval.isEmpty() ? prescriptionEdited.getTimeInterval() : timeInterval;
+
+        Prescription newPrescription = new Prescription(prescriptionEdited.getPatientId(), newMedicine, newDosage,
+                newTimeInterval);
+
+        // Check if the updated record has a duplicate in the list already.
+        if (prescriptionsList.contains(newPrescription)) {
+            ui.printMessageAndObject(newPrescription.toString(),UI.DUPLICATE_PRESCRIPTION_MESSAGE,
+                    prescriptionsList.indexOf(newPrescription),UI.PRESCRIPTION);
+            return;
+        }
+
         if (!medicine.isEmpty()) {
             prescriptionEdited.setMedicine(medicine);
         }
@@ -120,7 +139,7 @@ public class PrescriptionList {
             prescriptionEdited.setTimeInterval(timeInterval);
         }
 
-        ui.printEditPrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.EDIT_PRESCRIPTION,index, UI.PRESCRIPTION);
     }
 
     private boolean hasPatientPrescription(String patientId) {
@@ -143,6 +162,12 @@ public class PrescriptionList {
         return false;
     }
 
+    /**
+     * Set the prescription status as active.
+     * The prescription will only be activated if the prescription number is valid.
+     * @param ui is the user interface of OneDoc
+     * @param prescriptionNumber is the prescription index shown to user in viewings, ranging from 1 to the size of list
+     */
     public void activatePrescription(UI ui, String prescriptionNumber) {
         Integer index = getIndex(ui, prescriptionNumber);
         if (index == null) {
@@ -152,9 +177,15 @@ public class PrescriptionList {
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setActive();
 
-        ui.printActivatePrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.ACTIVATE_PRESCRIPTION,index,UI.PRESCRIPTION);
     }
 
+    /**
+     * Set the prescription status as inactive.
+     * The prescription will only be deactivated if the prescription number is valid.
+     * @param ui is the user interface of OneDoc
+     * @param prescriptionNumber is the prescription index shown to user in viewings, ranging from 1 to the size of list
+     */
     public void deactivatePrescription(UI ui, String prescriptionNumber) {
         Integer index = getIndex(ui, prescriptionNumber);
         if (index == null) {
@@ -163,8 +194,8 @@ public class PrescriptionList {
 
         Prescription prescriptionEdited = prescriptionsList.get(index);
         prescriptionEdited.setInactive();
-
-        ui.printDeactivatePrescriptionMessage(prescriptionEdited.toString());
+        ui.printMessageAndObject(prescriptionEdited.toString(),UI.DEACTIVATE_PRESCRIPTION,
+                prescriptionsList.indexOf(prescriptionEdited), UI.PRESCRIPTION);
     }
 
     private Integer getIndex(UI ui, String prescriptionNumber) {

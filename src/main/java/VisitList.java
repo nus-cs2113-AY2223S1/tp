@@ -17,7 +17,7 @@ public class VisitList {
         assert timeOfVisit != null : "time of visit should not be null";
         Visit visit = new Visit(id,dateOfVisit,timeOfVisit,reason);
         visitList.add(visit);
-        ui.printAddVisitMessage(visit.toString());
+        ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
     }
 
     public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit) {
@@ -26,7 +26,7 @@ public class VisitList {
         assert timeOfVisit != null : "time of visit should not be null";
         Visit visit = new Visit(id,dateOfVisit,timeOfVisit);
         visitList.add(visit);
-        ui.printAddVisitMessage(visit.toString());
+        ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
     }
 
     public void loadVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
@@ -40,7 +40,8 @@ public class VisitList {
             System.out.println("There is no such visit in the system with index " + index + "!");
         } else {
             visitList.get(index - 1).setReason(reason);
-            ui.printEditVisitReasonMessage(visitList.get(index - 1).toString());
+            ui.printMessageAndObject(visitList.get(index - 1).toString(), UI.EDIT_VISIT_REASON, index - 1,
+                    UI.VISIT);
         }
     }
 
@@ -49,7 +50,8 @@ public class VisitList {
             System.out.println("There is no such visit in the system with index " + index + "!");
         } else {
             visitList.get(index - 1).setReason("");
-            ui.printDeleteVisitReasonMessage(visitList.get(index - 1).toString());
+            ui.printMessageAndObject(visitList.get(index - 1).toString(),UI.DELETE_VISIT_REASON, index - 1,
+                    UI.VISIT);
         }
     }
 

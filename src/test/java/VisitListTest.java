@@ -79,6 +79,8 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
                         + System.lineSeparator()
+                        + "Visit #1"
+                        + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
@@ -98,6 +100,8 @@ public class VisitListTest {
         String expectedOutput =
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "Visit #1"
                         + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
@@ -125,6 +129,7 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                 + "\t____________________________________________________________"
                 + System.lineSeparator()
+                + "Visit #1" + System.lineSeparator()
                 + "\tID: S123" + System.lineSeparator()
                 + "\tDate: 23-05-2020" + System.lineSeparator()
                 + "\tTime: 13:00" + System.lineSeparator()
@@ -148,6 +153,8 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                 + "\t____________________________________________________________"
                 + System.lineSeparator()
+                + "Visit #1"
+                + System.lineSeparator()
                 + "\tID: S123" + System.lineSeparator()
                 + "\tDate: 23-05-2020" + System.lineSeparator()
                 + "\tTime: 13:00" + System.lineSeparator()
@@ -155,6 +162,8 @@ public class VisitListTest {
                 + "\t____________________________________________________________" + System.lineSeparator()
                 + "You have added a visit!" + System.lineSeparator()
                 + "\t____________________________________________________________"
+                + System.lineSeparator()
+                + "Visit #2"
                 + System.lineSeparator()
                 + "\tID: S123" + System.lineSeparator()
                 + "\tDate: 24-05-2020" + System.lineSeparator()
@@ -196,6 +205,8 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
                         + System.lineSeparator()
+                        + "Visit #1"
+                        + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
@@ -203,6 +214,8 @@ public class VisitListTest {
                         + "\t____________________________________________________________" + System.lineSeparator()
                         + "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "Visit #2"
                         + System.lineSeparator()
                         + "\tID: S124" + System.lineSeparator()
                         + "\tDate: 24-05-2020" + System.lineSeparator()
@@ -236,6 +249,8 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
                         + System.lineSeparator()
+                        + "Visit #1"
+                        + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
@@ -244,6 +259,8 @@ public class VisitListTest {
                         + System.lineSeparator()
                         + "You have edited reason for the visit. Here's the updated visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "Visit #1"
                         + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
@@ -262,6 +279,8 @@ public class VisitListTest {
                 "You have added a visit!" + System.lineSeparator()
                         + "\t____________________________________________________________"
                         + System.lineSeparator()
+                        + "Visit #1"
+                        + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
@@ -271,6 +290,8 @@ public class VisitListTest {
                         + "You have deleted the reason for the visit. Here's the updated visit!"
                         + System.lineSeparator()
                         + "\t____________________________________________________________"
+                        + System.lineSeparator()
+                        + "Visit #1"
                         + System.lineSeparator()
                         + "\tID: S123" + System.lineSeparator()
                         + "\tDate: 23-05-2020" + System.lineSeparator()
