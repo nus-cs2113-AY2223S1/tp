@@ -13,7 +13,7 @@ import static seedu.duke.Messages.MESSAGE_UNPAIR_WRONG_FORMAT;
 public class UnpairExtraArgumentsException extends ParsePairUnpairException {
 
     private String extraArgument;
-    private final String INVERTED_COMMAS = "\"";
+    private static final String INVERTED_COMMAS = "\"";
 
     public UnpairExtraArgumentsException(String extraArgument) {
         this.extraArgument = extraArgument;
