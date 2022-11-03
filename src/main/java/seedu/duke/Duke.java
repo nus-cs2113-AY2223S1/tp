@@ -34,7 +34,7 @@ public class Duke {
 
         Command command;
         Parser parser;
-        ParserManager parserManager = new ParserManager(clientList, propertyList, pairingList);
+        ParserManager parserManager = new ParserManager(clientList, propertyList);
         boolean isCommandQuit = false;
 
         ui.showWelcomeMessage();

@@ -3,18 +3,19 @@ package seedu.duke.parsermanager.pairunpair;
 //@@author ngdeqi
 import seedu.duke.command.Command;
 import seedu.duke.command.pairunpair.CommandUnpair;
+import seedu.duke.exception.ExtraParametersException;
 import seedu.duke.exception.pairunpair.ParsePairUnpairException;
+import seedu.duke.exception.pairunpair.unpair.UnpairExtraArgumentsException;
 import seedu.duke.exception.pairunpair.unpair.UnpairIncorrectFlagOrderException;
 import seedu.duke.exception.pairunpair.unpair.UnpairMissingDescriptionException;
 import seedu.duke.exception.pairunpair.unpair.UnpairMissingFlagException;
-import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.UNPAIR_FLAGS;
 
 /**
- * Parser for unpair commmands.
+ * Parser for unpair commands.
  */
 
 public class UnpairParser extends PairUnpairParser {
@@ -45,12 +46,19 @@ public class UnpairParser extends PairUnpairParser {
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws UnpairMissingFlagException, UnpairIncorrectFlagOrderException {
+            throws UnpairMissingFlagException, UnpairIncorrectFlagOrderException, UnpairExtraArgumentsException {
 
         String[] flags = UNPAIR_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
+
         checkForMissingFlags(flagIndexPositions, flags);
         checkFlagsOrder(flagIndexPositions);
+        try {
+            super.checkForExtraArguments(rawCommandDetail, flagIndexPositions);
+        } catch (ExtraParametersException e) {
+            throw new UnpairExtraArgumentsException(e.toString());
+        }
+
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 

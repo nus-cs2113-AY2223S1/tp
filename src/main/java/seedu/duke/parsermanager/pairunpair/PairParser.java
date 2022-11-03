@@ -3,11 +3,12 @@ package seedu.duke.parsermanager.pairunpair;
 //@@author ngdeqi
 import seedu.duke.command.Command;
 import seedu.duke.command.pairunpair.CommandPair;
+import seedu.duke.exception.ExtraParametersException;
 import seedu.duke.exception.pairunpair.ParsePairUnpairException;
+import seedu.duke.exception.pairunpair.pair.PairExtraArgumentsException;
 import seedu.duke.exception.pairunpair.pair.PairIncorrectFlagOrderException;
 import seedu.duke.exception.pairunpair.pair.PairMissingDescriptionException;
 import seedu.duke.exception.pairunpair.pair.PairMissingFlagException;
-import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
@@ -43,12 +44,18 @@ public class PairParser extends PairUnpairParser {
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws PairMissingFlagException, PairIncorrectFlagOrderException {
+            throws PairMissingFlagException, PairIncorrectFlagOrderException, PairExtraArgumentsException {
 
         String[] flags = PAIR_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
+
         checkForMissingFlags(flagIndexPositions, flags);
         checkFlagsOrder(flagIndexPositions);
+        try {
+            super.checkForExtraArguments(rawCommandDetail, flagIndexPositions);
+        } catch (ExtraParametersException e) {
+            throw new PairExtraArgumentsException(e.toString());
+        }
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 

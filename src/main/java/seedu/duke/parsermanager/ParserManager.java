@@ -36,7 +36,6 @@ import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 public class ParserManager {
     private static ClientList clientList;
     private static PropertyList propertyList;
-    private static PairingList pairingList;
 
     private static final String EMPTY_SPACE = " ";
     private static final String EMPTY_STRING = "";
@@ -45,12 +44,12 @@ public class ParserManager {
     private static final int SUB_COMMAND_INDEX = 0;
     private static final int COMMAND_FLAG_INDEX = 1;
     private static final int COMMAND_DESCRIPTION_INDEX = 1;
+    private static final int SINGLE_LENGTH = 1;
 
 
-    public ParserManager(ClientList clientL, PropertyList propertyL, PairingList pairingL) {
+    public ParserManager(ClientList clientL, PropertyList propertyL) {
         clientList = clientL;
         propertyList = propertyL;
-        pairingList = pairingL;
     }
 
     public Parser parseCommand(String input) throws DukeParseException, ExistingPairException,
@@ -137,31 +136,35 @@ public class ParserManager {
         if (isClient) {
             return new ParseCheckClient(commandDetail, clientList);
         } else if (isProperty) {
-            return new ParseCheckProperty(commandDetail);
+            String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
+            return new ParseCheckProperty(commandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
                     + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
         }
     }
 
+    //@@author zoranabc201
+
     private Parser parseListCommand(String commandDetail) throws UndefinedSubCommandTypeException {
         ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
-        boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
-        boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
-        boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
-        boolean isListPairs = listCommandTypeAndFlags.get(0).equals(PAIR_FLAG);
+        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_FLAG);
+        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_FLAG);
+        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_FLAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_FLAG);
         if (isListProperty) {
-            return new ParseListProperty(listCommandTypeAndFlags.get(1));
+            return new ParseListProperty(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
         } else if (isListClient) {
-            return new ParseListClient(listCommandTypeAndFlags.get(1));
-        } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
+            return new ParseListClient(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListEverything && listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX).isEmpty()) {
             return new ParseListEverything();
         } else if (isListPairs) {
-            return new ParseListPair(listCommandTypeAndFlags.get(1));
+            return new ParseListPair(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
         }
     }
+    //@@author
 
     private Parser parseFindCommand(String commandDetail) throws UndefinedSubCommandTypeException {
         ArrayList<String> findCommandTypeAndFlag = splitCommandAndCommandType(commandDetail);
@@ -193,16 +196,16 @@ public class ParserManager {
         return processedCommandDetails;
     }
 
+    //@@author zoranabc201
     private ArrayList<String> getListCommandType(String commandDetail) {
         ArrayList<String> listCommandTypeAndFlags = new ArrayList<>();
         String[] listTypeAndFlagsArray = commandDetail.split(EMPTY_SPACE, MAX_LENGTH);
-        listCommandTypeAndFlags.add(listTypeAndFlagsArray[0].trim());
-        if (listTypeAndFlagsArray.length == 1) {
-            listCommandTypeAndFlags.add("");
+        listCommandTypeAndFlags.add(listTypeAndFlagsArray[SUB_COMMAND_INDEX].trim());
+        if (listTypeAndFlagsArray.length == SINGLE_LENGTH) {
+            listCommandTypeAndFlags.add(EMPTY_STRING);
         } else {
-            listCommandTypeAndFlags.add(listTypeAndFlagsArray[1].trim());
+            listCommandTypeAndFlags.add(listTypeAndFlagsArray[COMMAND_FLAG_INDEX].trim());
         }
         return listCommandTypeAndFlags;
     }
 }
-//@@author

@@ -145,7 +145,7 @@ The first section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.jpg)
+![](diagrams/ParseAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -155,17 +155,21 @@ Parse Add Related Classes Diagram
 
 As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. These methods are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
     - `checkForValidEmail(String)`
     - `checkForBudgetNumberFormat(String)`
+    - `checkForDuplicateClient(ClientList, ArrayList<String>)`
 - Property:
     - `checkForValidSingaporeAddress(String)`
     - `checkForValidSingaporeLandedPropertyAddress(String)`
     - `checkForValidSingaporeBuildingAddress(String)`
     - `checkForPriceNumberFormat(String)`
+    - `checkForValidUnitType(String)`
+    - `checkForValidAddressFormatUnitTypeMatching(String, String)`
+    - `checkForDuplicateProperty(PropertyList, String)`
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
@@ -184,7 +188,7 @@ The following is a simple class diagram of the three classes:
 
 <p align="center">
 
-![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.jpg)
+![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -217,12 +221,12 @@ Given below is an example scenario on how add client/property behaves at each st
 - **Step 5**: Lastly, method `Ui#showClientAddedConfirmationMessage()` or `Ui#showPropertyAddedConfirmationMessage()` is called to notify user about the successful addition of new client or property. Also, method `Storage#addToClientFile` or `Storage#addToPropertyFile` is called to update their respective storage files.
 
 The following are simplified sequence diagrams of add feature for client and property:
-![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.JPG)
+![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.png)
 <p align="center">
 Add Client Sequence Diagram
 </p>
 
-![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.JPG)
+![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.png)
 <p align="center">
 Add Property Sequence Diagram
 </p>
@@ -365,9 +369,9 @@ When file is appended into the text file, it's being stored in different formats
 The text file of which Client, Property and Pairing is being stored is `client.txt`, `property.txt` and `pairing.txt` 
 respectively.
 
-![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.jpg)
-![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.jpg)
-![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.jpg)
+![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.png)
+![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.png)
+![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.png)
 
 The three sequence diagram above shows the sequence of which the append operation is being invoked. All three
 operations are similar in operations but are invoked with different `parameter` and `path`.
@@ -377,9 +381,9 @@ The update operation happens when entries in ClientList and PropertyList is bein
 PairingList is being removed.
 
 The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be seen below:
-![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.jpg)
-![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.jpg)
-![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.jpg)
+![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.png)
+![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.png)
+![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.png)
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
@@ -479,7 +483,6 @@ ___
 5. The system stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
 6. This system is contrained under a single user. Multiple users are not supported
 
-
 ---
 ## Appendix D: Glossary
 
@@ -572,29 +575,54 @@ java -jar PropertyRentalManager.jar
       * Have at least 2 clients and 2 properties added to the app.
       * Ensure that all clients have budgets equal to or greater than that of the properties.
       * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
-   2. Test case: `check -property ip/1`
+   2. Test case: `check -property i/1`
       
       Expected: Terminal shows details of the property and information of the clients renting the property. Number of list results is greater than 0.
-   3. Test case: `check -property ip/2`
+   3. Test case: `check -property i/2`
       
        Expected: Terminal shows details of the property, number of list results is 0. 
    
 
 2. Failed check property
-   1. Test case: `check -property ip/0`
+   1. Test case: `check -property i/0`
    
         Expected: Terminal shows error message.
    
-   2. Test case: `check -property ip/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
+   2. Test case: `check -property i/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
    
         Expected: Terminal shows error message.
 
-   3. Test case: `check -property ip/1r2342`
+   3. Test case: `check -property i/1r2342`
    
         Expected: Terminal shows error message.
 
 ### Find
 
+1. Querying for Client/Property stored in the Client/Property List:
+  
+    1. Prerequisites: List the clients using `list -client` command to verify that there is at least 1 client  in the database.
+    2. Test case: `find -client f/<QUERY_TEXT>`
+        - Enter the name (or part of the name) of the client that is shown in the list for the `<QUERY_TEXT>` portion. Omit the directional brackets when entering query text.
+        - Expected: All the clients that matches the entered name is displayed with their respective index shown.
+    3. Test case: `find -client f/<QUERY_TEXT>`
+        - Enter a random text that does not match with any of the client. Omit the direction brackets when entering query text.
+        - Expected: An error message will be displayed stating that there is no client that matches with the queried text.
+    4. Test case: `find -client n/ f/`
+        - Expected: An error message will be displayed indicating that there should only be 1 flag and the flag should be `f/`
+    5. Test case: `find -client`
+        - Expected: An error message will be displayed indicating that the tag is missing.
+    6. Test case: `find -property f/<QUERY_TEXT>`
+        - Enter the address (or part of an address) of the property that is in the list for the `<QUERY_TEXT>` portion. Omit the directional brackets when entering the query text.
+        - Expected: All the property that matches the address will be displayed along with their respective index.
+    7. Test case: `find -property f/<NON_EXISTENT_QUERY_TEXT>`
+        - Enter a random text, that is not in the property list. Omit the directional bracket when entering the text.
+        - Expected: A message stating that no property matches the text will be displayed.
+    8. Test case: `find -property t/3-Room f/`
+        - Expected: An error message will be displayed showing that there should only be one tag and the tag should be `f/`.
+    9. Test case: `find -property`
+        - Expected: An error stating that the tag is missing will be shown.
+    10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
+    
 ### Storage
 
 ## Instructions for manual testing
@@ -627,3 +655,4 @@ java -jar PropertyRentalManager.jar
     10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
     
 ### Quit
+
