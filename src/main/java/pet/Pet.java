@@ -26,8 +26,9 @@ public class Pet {
     }
 
     public String toString() {
-        return String.format("I am a cute %s, my name is %s, and I am currently %s",
-                species, name, status);
+        String health = isHealthy ? "healthy" : "unhealthy";
+        return String.format("I am a cute %s, my name is %s, and I am currently %s and %s",
+                species, name, health, status);
     }
 
     private void initPetStatus() {
