@@ -61,6 +61,15 @@ public class UI {
                     + UI.RETURN_TO_MAIN
                     + UI.EXIT_PROGRAM;
 
+    public static final String DUPLICATE_VISIT_MESSAGE =
+            "There is already an existing visit record with the same ID, date, and time."
+                    + System.lineSeparator()
+                    + "Use editReason if you're trying to add a reason to existing visit or"
+                    + System.lineSeparator()
+                    + "deleteReason if you're trying to delete reason for an existing visit."
+                    + System.lineSeparator()
+                    + "Else, please try adding another visit with unique details.";
+
     public UI() {
         scanner = new Scanner(System.in);
     }
