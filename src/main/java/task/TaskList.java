@@ -52,8 +52,9 @@ public class TaskList {
 
         System.out.print("Got it. I've added this task: ");
         System.out.println(task.getTaskDescription());
-        System.out.println("Performed by: " + Objects.requireNonNull(EmployeeList.findEmployee(task.getEmployeeId())).getEmployeeName());
-        System.out.println("Appointment: ID " + task.getAppointmentId() );
+        System.out.print("Performed by: ");
+        System.out.println(Objects.requireNonNull(EmployeeList.findEmployee(task.getEmployeeId())).getEmployeeName());
+        System.out.println("Appointment: ID " + task.getAppointmentId());
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
@@ -116,11 +117,6 @@ public class TaskList {
             }
         }
         System.out.println("Sorry, no corresponding task found.");
-//        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
-//        if (appointment == null) {
-//            throw new DukeException();
-//        }
-//        appointment.updateAppointmentStatus();
     }
 
 }
