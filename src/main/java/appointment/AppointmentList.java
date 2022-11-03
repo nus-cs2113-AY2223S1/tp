@@ -15,7 +15,7 @@ public class AppointmentList {
     static ArrayList<Appointment> appointments = new ArrayList<>();
 
     public static void listAppointment() {
-        System.out.println("Here are the appointments in your employee list:");
+        System.out.println("Here are the appointments in your list:");
         for (Appointment appointment : appointments) {
             System.out.print(appointment.appointmentId + " ");
             System.out.print(appointment.petId + " ");
