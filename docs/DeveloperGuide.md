@@ -145,7 +145,7 @@ The first section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.jpg)
+![](diagrams/ParseAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -155,17 +155,21 @@ Parse Add Related Classes Diagram
 
 As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. These methods are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
     - `checkForValidEmail(String)`
     - `checkForBudgetNumberFormat(String)`
+    - `checkForDuplicateClient(ClientList, ArrayList<String>)`
 - Property:
     - `checkForValidSingaporeAddress(String)`
     - `checkForValidSingaporeLandedPropertyAddress(String)`
     - `checkForValidSingaporeBuildingAddress(String)`
     - `checkForPriceNumberFormat(String)`
+    - `checkForValidUnitType(String)`
+    - `checkForValidAddressFormatUnitTypeMatching(String, String)`
+    - `checkForDuplicateProperty(PropertyList, String)`
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
@@ -184,7 +188,7 @@ The following is a simple class diagram of the three classes:
 
 <p align="center">
 
-![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.jpg)
+![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -217,12 +221,12 @@ Given below is an example scenario on how add client/property behaves at each st
 - **Step 5**: Lastly, method `Ui#showClientAddedConfirmationMessage()` or `Ui#showPropertyAddedConfirmationMessage()` is called to notify user about the successful addition of new client or property. Also, method `Storage#addToClientFile` or `Storage#addToPropertyFile` is called to update their respective storage files.
 
 The following are simplified sequence diagrams of add feature for client and property:
-![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.JPG)
+![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.png)
 <p align="center">
 Add Client Sequence Diagram
 </p>
 
-![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.JPG)
+![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.png)
 <p align="center">
 Add Property Sequence Diagram
 </p>
@@ -411,6 +415,7 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 ![Update Client Sequence Diagram](diagrams/StorageUpdateClientSequenceDiagram.png)
 ![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySequenceDiagram.png)
 ![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSequenceDiagram.png)
+
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
@@ -601,24 +606,24 @@ java -jar PropertyRentalManager.jar
       * Have at least 2 clients and 2 properties added to the app.
       * Ensure that all clients have budgets equal to or greater than that of the properties.
       * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
-   2. Test case: `check -property ip/1`
+   2. Test case: `check -property i/1`
       
       Expected: Terminal shows details of the property and information of the clients renting the property. Number of list results is greater than 0.
-   3. Test case: `check -property ip/2`
+   3. Test case: `check -property i/2`
       
        Expected: Terminal shows details of the property, number of list results is 0. 
    
 
 2. Failed check property
-   1. Test case: `check -property ip/0`
+   1. Test case: `check -property i/0`
    
         Expected: Terminal shows error message.
    
-   2. Test case: `check -property ip/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
+   2. Test case: `check -property i/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
    
         Expected: Terminal shows error message.
 
-   3. Test case: `check -property ip/1r2342`
+   3. Test case: `check -property i/1r2342`
    
         Expected: Terminal shows error message.
 
