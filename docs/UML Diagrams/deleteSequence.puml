@@ -5,6 +5,10 @@ hide footbox
 
 participant ":Parser"
 
+ref over ":Parser"
+deleteCommand is given
+end ref
+
 ":Parser" -> ":Parser" : executeDelete()
 activate ":Parser"
 
@@ -68,7 +72,7 @@ end
 
 
 
-":Parser" -> ":Parser"
+":Parser" --> ":Parser"
 destroy "executor:\nRemoveCommand"
 deactivate ":Parser"
 
