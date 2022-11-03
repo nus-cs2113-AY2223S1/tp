@@ -1,32 +1,33 @@
 @startuml
+!include style.puml
 
 hide footbox
 
-participant "command:CommandAddProperty" as CommandAddProperty #FFE497
-participant "propertyList:PropertyList" as PropertyList #FC9492
-participant ":Property" as Property #violet
-participant "ui:Ui" as Ui #lightgrey
-participant "storage:Storage" as Storage #orange
+participant "command:CommandAddProperty" as CommandAddProperty COMMAND_COLOR_T2
+participant "propertyList:PropertyList" as PropertyList PROPERTY_LIST_COLOR
+participant ":Property" as Property PROPERTY_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
 
 ->CommandAddProperty:execute(Ui, Storage, PropertyList, ClientList, PairingList)
-activate CommandAddProperty #FFE497
+activate CommandAddProperty COMMAND_COLOR_T2
 
 CommandAddProperty -> PropertyList : addProperty(landlordName:String, \npropertyAddress:String, rentingPrice:String, unitType:String)
-activate PropertyList #FC9492
+activate PropertyList PROPERTY_LIST_COLOR
 
 create Property
 PropertyList -> Property : Property(landlordName:String, propertyAddress:String, rentingPrice:String, unitType:String)
-activate Property #violet
+activate Property PROPERTY_COLOR
 
 return
 return
 
 CommandAddProperty -> Ui : showPropertyAddedConfirmationMessage(propertyList:PropertyList)
-activate Ui #lightgrey
+activate Ui UI_COLOR
 return
 
 CommandAddProperty -> Storage : addToPropertyFile(landlordName:String, propertyAddress:String, rentingPrice:String, unitType:String)
-activate Storage #orange
+activate Storage STORAGE_COLOR
 return
 return
 
