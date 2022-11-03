@@ -72,8 +72,6 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
-            // Ui.printResponse("Listed below are the transactions in which " + arg + "is the
-            // borrower.");
             Ui.printResponse(returnList.toString());
         }
         return false;

@@ -72,8 +72,6 @@ public class ViewLendTransactionsByUserCommand extends Command {
         String arg = getArgs();
         if (isValidUser(arg)) {
             TransactionList returnList = transactionList.getLendTransactionsByUser(arg);
-            // Ui.printResponse("Listed below are the transactions in which " + arg + "is the
-            // lender.");
             Ui.printResponse(returnList.toString());
         }
         return false;
