@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class PatientList {
@@ -23,7 +24,7 @@ public class PatientList {
     }
 
     public void printIndexOfPatient(Patient patient) {
-        System.out.println("\tPatient #" + (patients.indexOf(patient) + 1) + ")");
+        System.out.println("\tPatient #" + (patients.indexOf(patient) + 1));
     }
 
     public void retrievePatient(UI ui, String id) {
@@ -88,6 +89,15 @@ public class PatientList {
         return patients.get(patientNumber);
     }
 
+    public boolean containsPatientID(String id) {
+        for (Patient patient: patients) {
+            if (patient.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void listPatients(UI ui) {
         if (isEmpty()) {
             System.out.println("There are no patients in the system right now!");
@@ -96,7 +106,7 @@ public class PatientList {
         System.out.println("Here are the list of patients in the system");
         for (int i = 0; i < getTotalNumberofPatients(); i++) {
             ui.printLine();
-            System.out.println("\tPatient #" + (i + 1) + ")");
+            System.out.println("\tPatient #" + (i + 1));
             System.out.println(getPatient(i));
         }
 
