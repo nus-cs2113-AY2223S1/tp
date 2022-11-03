@@ -55,14 +55,17 @@ The list feature has the following commands in it -
     * `p/` This is for price
     * `t/` This is for unit type
     * `-short` This is for the shorthand version(displays address, price and unit type)
+* `list -pair` This lists all clients and properties that have been paired, in no particular order.
+* `list -pair -short` This lists the -short version of all clients and properties that have been paired, in 
+no particular order
 
-There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
-the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
-these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
-CommandListEverything read and display using loops inside the overridden execute() method itself. The Commands which 
-display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
-methods to display their information, using methods present in Ui. The class structure is as follows - 
-![ListClassDiagram](diagrams/ListClassDiagram.png)
+There are 7 different classes, which each inherit from the Command class, and work in similar ways - 
+* They are executed when an object is created in the corresponding Parse class.
+* On execution, they read information about a single client or property and send it to the corresponding 
+display function in Ui
+* The Ui function then displays the necessary information.
+* Finally, it states the number of items present, and the Command object is no longer used.
+![ListClassDiagram](diagrams/ListClassDiagramIncludePairs.png)
 
 ---  
 
