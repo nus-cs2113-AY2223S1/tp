@@ -2,6 +2,7 @@ package seedu.data;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import seedu.exception.InvalidFormatException;
 
 public class CarparkTest {

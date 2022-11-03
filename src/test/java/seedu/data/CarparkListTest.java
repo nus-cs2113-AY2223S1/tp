@@ -1,11 +1,16 @@
 package seedu.data;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import seedu.exception.*;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import seedu.exception.DuplicateCarparkIdException;
+import seedu.exception.FileWriteException;
+import seedu.exception.InvalidFormatException;
+import seedu.exception.NoCarparkFoundException;
+import seedu.exception.NoFileFoundException;
 
 public class CarparkListTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
@@ -19,10 +24,10 @@ public class CarparkListTest {
                    + "756 || 756 0 0 || false || LTA || 03-11-2022 00:56:14 \n5 || Marina || Millenia Singapore || 1"
                    + ".29251 103.86009 || 1269 || 1269 0 0 || false || LTA || 03-11-2022 00:56:14 \n";
 
-    private final String validNewSaveString = "5 || Marina || Millenia Singapore || 1.29251 103.86009 || 2200 || 2200" +
-            " 0 0 || false || LTA || 03-11-2022 00:56:14 \n6 || Marina || Singapore Flyer || 1.28944 103.86311 || " +
-            "286 || 286 0 0 || false || LTA || 02-11-2022 23:20:37 \n7 || Orchard || Orchard Point || 1.30135 103" +
-            ".84061 || 187 || 187 0 0 || false || LTA || 03-11-2022 00:47:22 ";
+    private final String validNewSaveString = "5 || Marina || Millenia Singapore || 1.29251 103.86009 || 2200 || 2200"
+            + " 0 0 || false || LTA || 03-11-2022 00:56:14 \n6 || Marina || Singapore Flyer || 1.28944 103.86311 || "
+            + "286 || 286 0 0 || false || LTA || 02-11-2022 23:20:37 \n7 || Orchard || Orchard Point || 1.30135 103"
+            + ".84061 || 187 || 187 0 0 || false || LTA || 03-11-2022 00:47:22 ";
 
     @Test
     void findCarparkValidStringTest() throws NoFileFoundException, NoCarparkFoundException, FileWriteException {

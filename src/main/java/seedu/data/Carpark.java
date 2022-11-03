@@ -119,7 +119,7 @@ public class Carpark implements Comparable<Carpark> {
     private void validateFormat(String carparkId) throws InvalidFormatException {
         Pattern carparkIdPattern = Pattern.compile("^[a-zA-Z]*[0-9]*[a-zA-Z]*$|^[0-9]$");
         Matcher carparkIdMatcher = carparkIdPattern.matcher(carparkId);
-        if (!carparkIdMatcher.matches()){
+        if (!carparkIdMatcher.matches()) {
             throw new InvalidFormatException("Invalid Carpark ID format!");
         }
     }
@@ -172,7 +172,7 @@ public class Carpark implements Comparable<Carpark> {
             return LotType.HEAVY_VEHICLE;
         } else if (lotTypeString.equals("Y")) {
             return LotType.MOTORCYCLE;
-        } else if (lotTypeString.equals("C")){
+        } else if (lotTypeString.equals("C")) {
             return LotType.CAR;
         } else {
             throw new InvalidFormatException("Lot type not recognised!");
@@ -288,6 +288,11 @@ public class Carpark implements Comparable<Carpark> {
         updateAvailableLotsTotal();
     }
 
+    public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
+        allAvailableLots = newAvailableLots;
+        updateAvailableLotsTotal();
+    }
+
     private void validateNonNegative(String[] lots) throws InvalidFormatException {
         for (String lot : lots) {
             if (Integer.parseInt(lot) < 0) {
@@ -296,16 +301,12 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
-    private static void validateLotNumbers(int carLots, int motorCycleLots, int heavyVehicleLots, String[] lots) throws InvalidFormatException {
+    private static void validateLotNumbers(int carLots, int motorCycleLots, int heavyVehicleLots, String[] lots)
+            throws InvalidFormatException {
         if (!Integer.toString(carLots).equals(lots[0]) && !Integer.toString(motorCycleLots).equals(lots[1])
                 && !Integer.toString(heavyVehicleLots).equals(lots[2])) {
             throw new InvalidFormatException("Invalid number format!");
         }
-    }
-
-    public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
-        allAvailableLots = newAvailableLots;
-        updateAvailableLotsTotal();
     }
 
     public void setFavourite(boolean setFavourite) {
