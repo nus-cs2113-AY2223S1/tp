@@ -90,8 +90,8 @@ public class PetParser {
     public Command prepareRemovePet(String input) {
         try {
             int index = parser.indexOfInput(input);
-            if (index <= 2000) {
-                System.out.println("Invalid Input! please enter a valid id");
+            if (index <= 2000 || index >= 3000) {
+                System.out.println("Invalid Input! a valid pet id is in the format of 2xxx");
                 throw new DukeException();
             }
             return new RemovePetCommand(index);

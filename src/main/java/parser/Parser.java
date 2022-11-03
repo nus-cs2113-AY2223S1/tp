@@ -82,7 +82,7 @@ public class Parser {
         String id = input.substring(input.indexOf(format) + lengthOfSignature);
 
         try {
-            if (id == null) {
+            if (id == null || id.length() > 4) {
                 throw new DukeException();
             }
             isInt(id);
