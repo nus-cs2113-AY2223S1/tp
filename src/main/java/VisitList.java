@@ -111,7 +111,7 @@ public class VisitList {
                 }
                 noOfPatientVisits++;
                 ui.printLine();
-                System.out.println("Visit #" + (i + 1) + ":");
+                System.out.println("\tVisit #" + (i + 1) + ":");
                 System.out.println(visitList.get(i));
             }
         }
