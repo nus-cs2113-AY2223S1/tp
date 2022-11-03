@@ -106,17 +106,17 @@ Parameters information:
 - DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
 - MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.
 		<!> - MONTH parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
+- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 0 and onwards are accepted.
 - PERIOD: The period which the transaction falls on. It should either be weeks or months.
 		<!> - PERIOD parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number ranging from 1 to 100.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
 		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: FIND
 Find a specific or multiple transactions based on any keywords that have been specified.
 Usage: find KEYWORDS
 Parameters information:
-- KEYWORDS: A string that represents a single or a group of words used to find matching transactions. Spacing is allowed.
+- KEYWORDS: A case-insensitive string that represents a single or a group of words used to find matching transactions. Spacing is allowed.
 
 Command Word: STATS
 View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
@@ -129,10 +129,10 @@ Parameters information:
 - STATS_TYPE: The type of statistics. It can be "categorical_savings", "monthly_expenditure", or "time_insights".
 - MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.
 		<!> - MONTH parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
+- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 0 and onwards are accepted.
 - PERIOD: The period which the transaction falls on. It should either be weeks or months.
 		<!> - PERIOD parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number ranging from 1 to 100.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
 		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: EDIT
