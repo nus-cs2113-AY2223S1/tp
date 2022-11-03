@@ -160,7 +160,9 @@ Students might also have doubts of their eligibility for the exchange programs. 
 
 ## Glossary
 
-* *Module* - A class that a student takes for their current semester in NUS
+* *Module* - A class that a student takes for their current semester in NUS.
+* *NOC* - NUS Overseas College is an entrepreneurial program for full-time students to learn more about entrepreneurship through interning at start-up companies and taking up courses part-time from other universities. Further details can be found in the following link: https://fass.nus.edu.sg/nus-overseas-college-programme-noc/#:~:text=Eligibility,refer%20to%20application%20details%20here.
+* *SEP* - Student Exchange Program allows students to live and study in another country while earning credits for their NUS degree. Further information and eligibility can be found in the following link: https://www.nus.edu.sg/gro/global-programmes/student-exchange/outgoing-exchangers.
 
 ## Instructions for manual testing
 
