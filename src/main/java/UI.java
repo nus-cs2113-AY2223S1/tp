@@ -45,6 +45,9 @@ public class UI {
     private static final String NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE = "There are currently no active prescriptions "
             + "from this patient.";
 
+    public static final String DUPLICATE_PRESCRIPTION_MESSAGE = "The prescription is already existing.";
+    private static final String PRESCRIPTION_INDEX_FORMAT = "Prescription #";
+
     // Visit
     private static final String VISIT_MAIN_MENU =
             "This is the Visits Main Menu!" + System.lineSeparator()
@@ -134,6 +137,12 @@ public class UI {
 
     public void printViewAllPrescriptionsMessage() {
         System.out.println("Here are all the prescriptions:");
+        printLine();
+    }
+
+    public void printViewAllActivePrescriptionsMessage() {
+        System.out.println("Here are all the active prescriptions:");
+        printLine();
     }
 
     public void printExitMessage() {
@@ -196,13 +205,29 @@ public class UI {
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
 
-
+    /**
+     * Print message that there are no prescription from the patient.
+     */
     public void printNoMatchingPrescriptionMessage() {
         System.out.println(NO_MATCHING_PRESCRIPTION_MESSAGE);
     }
 
+    /**
+     * Print message that there are no active prescription from the patient.
+     */
     public void printNoMatchingActivePrescriptionMessage() {
         System.out.println(NO_MATCHING_ACTIVE_PRESCRIPTION_MESSAGE);
+    }
+
+    /**
+     * Print the prescription details with index.
+     * @param index the index number starting from 1 onward
+     * @param prescription a String that represents the object
+     */
+    public void printPrescriptionWithIndex(int index, String prescription) {
+        System.out.println(PRESCRIPTION_INDEX_FORMAT + index);
+        System.out.println(prescription);
+        printLine();
     }
 }
 

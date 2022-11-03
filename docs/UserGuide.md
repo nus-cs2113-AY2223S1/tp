@@ -12,19 +12,19 @@ medicine information via Command Line Interface.
         + [Main Menu](#main-menu)
             - [Going to main menu: `main`](#going-to-main-menu-main)
             - [Choosing an option: `index`](#choosing-an-option-index)
-          + [1. Patient](#1-patient)
-              - [Adding a patient: `add`](#adding-a-new-patient-add)
-              - [Viewing list of patients: `viewAll`](#viewing-all-patients-viewall)
-              - [Retrieving a patient: `retrieve`](#retrieving-a-patients-records-retrieve)
-              - [Modifying a patient’s record: `edit`](#modifying-the-details-of-a-patient-edit)
-          + [2.Visit](#2-visit)
+        + [1. Patient](#1-patient)
+            - [Adding a patient: `add`](#adding-a-new-patient-add)
+            - [Viewing list of patients: `viewAll`](#viewing-all-patients-viewall)
+            - [Retrieving a patient: `retrieve`](#retrieving-a-patients-records-retrieve)
+            - [Modifying a patient’s record: `edit`](#modifying-the-details-of-a-patient-edit)
+        + [2.Visit](#2-visit)
             - [Adding a visit: `add`](#adding-a-new-visit-add)
             - [Adding/editing a reason for existing visit: `edit`](#edit-reason-for-visit-editReason)
             - [Deleting a reason for existing visit: `deleteReason`](#delete-reason-for-visit-deleteReason)
             - [Viewing all visits: `viewAll`](#viewing-all-visits-viewAll)
             - [Viewing a patient's visits: `viewPatient`](#viewing-all-visits-of-patient-viewPatient)
             - [Viewing a specific visit: `viewVisit`](#view-specific-visit-viewVisit)
-          + [3. Prescription](#3-prescription)
+        + [3. Prescription](#3-prescription)
             - [Adding New Prescription: `add`](#adding-new-prescription-add)
             - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
             - [Viewing List of All Existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
@@ -342,6 +342,7 @@ Format: `add i/patientID n/medicine_name d/medicine_dosage t/time_interval`
 * The `medicine_name` should be either one or two words
 * The `medicine_dosage` should be formatted as a number followed by a unit
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
+* The prescription can only be added if it does not exist in the list.
 
 Example of usage:
 
@@ -370,6 +371,7 @@ Format: `edit x/index n/medicine_name` or `edit x/index d/medicine_dosage` or `e
 * The `medicine_name` should be either one or two words
 * The `medicine_dosage` should be formatted as a number followed by a unit
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
+* The prescription can only be edited if the updated version does not exist in the list.
 
 Example of usage:
 
@@ -467,7 +469,7 @@ There are currently no active prescriptions from this patient.
 prescriptions would be shown.
 
 ```
-Here are all the prescriptions:
+Here are all the active prescriptions:
     ____________________________________________________________
 Prescription #2
     ID: T2
