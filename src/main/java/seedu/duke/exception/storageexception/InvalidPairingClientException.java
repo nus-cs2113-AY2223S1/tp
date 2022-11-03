@@ -1,4 +1,4 @@
-package seedu.duke.exception.storagexception;
+package seedu.duke.exception.storageexception;
 
 
 public class InvalidPairingClientException extends StorageException {

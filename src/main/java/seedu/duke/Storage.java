@@ -3,12 +3,12 @@ package seedu.duke;
 //@@author wilsonngja
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeParseException;
-import seedu.duke.exception.storagexception.ClientFileNotFoundException;
-import seedu.duke.exception.storagexception.InvalidPairingClientException;
-import seedu.duke.exception.storagexception.InvalidPairingPropertyException;
-import seedu.duke.exception.storagexception.PairFileNotFoundException;
-import seedu.duke.exception.storagexception.PropertyFileNotFoundException;
-import seedu.duke.exception.storagexception.StorageException;
+import seedu.duke.exception.storageexception.ClientFileNotFoundException;
+import seedu.duke.exception.storageexception.InvalidPairingClientException;
+import seedu.duke.exception.storageexception.InvalidPairingPropertyException;
+import seedu.duke.exception.storageexception.PairFileNotFoundException;
+import seedu.duke.exception.storageexception.PropertyFileNotFoundException;
+import seedu.duke.exception.storageexception.StorageException;
 import seedu.duke.parsermanager.ParseAddClient;
 import seedu.duke.parsermanager.ParseAddProperty;
 

@@ -1,4 +1,4 @@
-package seedu.duke.exception.storagexception;
+package seedu.duke.exception.storageexception;
 
 import seedu.duke.exception.DukeException;
 

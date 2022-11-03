@@ -1,4 +1,4 @@
-package seedu.duke.exception.storagexception;
+package seedu.duke.exception.storageexception;
 
 import static seedu.duke.Messages.MESSAGE_NO_CLIENT_FILE;
 
