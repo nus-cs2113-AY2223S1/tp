@@ -70,8 +70,12 @@ A few things to note about the overall architecture:
 Knowing the overall architecture of the application, we cover the specifics below.
 
 ### 3.1. Duke
-Duke is the main class where Upcycle will run. Upon running it, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
-Afterwards, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke and sent to the CommandParser class to be parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the data is stored in Storage. If not, an appropriate error is displayed instead.
+Duke is the main class where Upcycle will run. Upon running it, Duke checks if there is any data corruption in the data files first, then if there is an error in the data files, 
+it calls Ui to print the error and ask if the user wants to force reset his/her data. If yes, all data will be deleted, if no, the user has to edit it until there is no error. 
+Otherwise, they cannot use the app. If there is no error in the data files, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
+Afterward, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke, and sent to the CommandParser class to be 
+parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the 
+data is stored in Storage. If not, an appropriate error is displayed instead.
 
 ![DukeSequence](images/DukeSequence.png)
 
@@ -120,7 +124,7 @@ The Class diagram below show how Transaction-related classes interact with each 
 attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are formatted by `DateParser`. Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` 
 (inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
 
-Some unimportant methods are ignored in this diagram, for example, some "get" methods
+Some unimportant methods are ignored in this diagram, for example, some "get" methods, and some in [Storage class](#37-storage-component)
 
 ![TransactionClassDiagram](images/TransactionClassDiagram.png)
 
@@ -660,6 +664,7 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | tx            | Transaction                |
 | UI            | User Interface             |
 | Mainstream OS | Windows, Linux, Unix, OS-X |
+| CLI           | Command Line Interface     |
 
 ...TO BE UPDATED
 
@@ -676,7 +681,7 @@ There are 2 categories of test cases:
 
 Here are the negative test cases you can test:
 - **Invalid general commands:**
-   - Empty command: ``
+   - Empty command: ` `
    - Not supported command: `cap 5.0`
 - **Invalid User-related features:**
    - Invalid `user` commands:
@@ -686,11 +691,14 @@ Here are the negative test cases you can test:
       - Missing all command arguments: `add-user`
       - Missing some command arguments: `add-user /n bui /a 20 /c`
       - Invalid age: `add-user /n bui /a twenty /c 91234567`
+      - Invalid contact (length must be 8): `add-user /n yixiang /a 20 /c 1234567`
+      - Invalid contact (only contains digits 0-9): `add-user /n yixiang /a 20 /c -1234567`
+      - Invalid age: `add-user /n yixiang /a 9 /c 12345678` (age out of range 10-10000)
    - Invalid `remove-user` commands:
       - Invalid userName: `remove-user /u tate` (tate does not exist)
       - Missing command arguments: `remove-user`
    - Invalid `view-user`/`view-user-items`/`view-user-loss`/`view-user-gain` commands:
-      - Invalid userName ((tate does not exist):
+      - Invalid userName (tate does not exist):
          - `view-user /u tate`
          - `view-user-items /u tate`
          - `view-user-loss /u tate`
@@ -702,9 +710,9 @@ Here are the negative test cases you can test:
       - Missing item prefix: `item`
       - Wrong item prefix: `destroy-item`
    - Invalid `add-item` commands:
-      - Invalid category: `add-item /n battery /c 21 /p 3.5 /o bui`
-      - Invalid owner: `add-item /n battery /c 3 /p 3.5 /o tate` (tate does not exist)
-      - Invalid price: `add-item /n battery /c 3 /p -1 /o bui`
+      - Invalid category: `add-item /n khdsa982 /c 21 /p 3.5 /o bui`
+      - Invalid owner: `add-item /n khdsa982 /c 3 /p 3.5 /o tate` (tate does not exist)
+      - Invalid price: `add-item /n khdsa982 /c 3 /p -1 /o bui`
    - Invalid `remove-item` commands:
       - Invalid item ID: `remove-item /i 1234567` (ID 1234567 does not exist)
    - Invalid `view-item` commands:
@@ -721,20 +729,19 @@ Here are the negative test cases you can test:
       - Missing keyword: `find-item /k`
 - **Invalid Transaction-related commands:**
    - Invalid `add-tx` commands:
-      - Invalid item ID: `add-tx /i 1234567 /b winston /d 2 /c 2022-10-28`
+      - Invalid item ID: `add-tx /i 1234567 /b winston /d 2 /c 2022-10-28` (ID 1234567 does not exist)
       - Invalid borrower: `add-tx /i 99995bb2 /b tate /d 2 /c 2022-10-28`
       - Invalid duration: `add-tx /i 99995bb2 /b winston /d 1462 /c 2022-10-28` (duration must be less than 1461)
       - Invalid created date: `add-tx /i 99995bb2 /b winston /d 2 /c 28-10-2022`
    - Invalid `remove-tx` commands:
       - Invalid transaction ID: `remove-tx /t 1234567` (ID 1234567 does not exist)
    - Invalid `view-tx` commands:
-      -  Invalid transaction ID: `view-tx /t 1234567` (ID 1234567 does not exist)
+      - Invalid transaction ID: `view-tx /t 1234567` (ID 1234567 does not exist)
    - Invalid `find-tx` commands:
       - Invalid status: `find-tx /s ended`
    - Invalid `update-tx` commands:
       - Invalid transaction ID: `update-tx /t 1234567 /d 3` (ID 1234567 does not exist)
       - Invalid duration: `update-tx /t 99995bb2 /d -5`
-
-...To be updated
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+  - Invalid `view-borrow-tx-by-user`/`view-lend-tx-by-user` commands:
+      - Invalid username: `view-borrow-tx-by-user /u tate` (tate does not exist)
+      - Invalid username: `view-lend-tx-by-user /u tate` (tate does not exist)

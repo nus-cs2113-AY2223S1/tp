@@ -67,7 +67,7 @@ class DateParser {
 TransactionStorage .> TransactionList : > loads and writes
 TransactionList *--> "*" Transaction: transactionList
 Transaction ..> IdGenerator
-Transaction ..> DateParser
+Transaction .left..> DateParser
 "{abstract}\nStorage" <|-- TransactionStorage
 
 @enduml
