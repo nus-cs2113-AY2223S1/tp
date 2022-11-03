@@ -2,12 +2,9 @@ package seedu.commands;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import seedu.api.Api;
-import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
-import seedu.files.Favourite;
 import seedu.parser.Parser;
 
 public class ExitCommandTest {
