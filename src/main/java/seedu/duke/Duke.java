@@ -9,7 +9,7 @@ import java.util.logging.LogManager;
 import java.util.logging.FileHandler;
 import java.util.logging.ConsoleHandler;
 
-import seedu.duke.data.DataManager;
+import seedu.duke.Storage.DataManager;
 
 public class Duke {
     private static final String EXIT_FLAG = "quit";

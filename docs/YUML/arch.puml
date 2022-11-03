@@ -6,23 +6,23 @@ map Duke {
 }
 map Parser {
 }
-map data {
+map Storage {
 }
 map Timetable {
 }
-map commands {
+map Commands {
 }
 
 UI-r->Duke
 Duke-->UI
 Duke-u->Parser
-Parser-l->commands
-commands-->UI
-UI-->commands
-data..>Timetable
-Timetable..>data
-Duke-r->data
-commands-u->Timetable
+Parser-l->Commands
+Commands-->UI
+UI-->Commands
+Storage..>Timetable
+Timetable..>Storage
+Duke-r->Storage
+Commands-u->Timetable
 
 
 @enduml

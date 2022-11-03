@@ -1,9 +1,8 @@
-package seedu.duke.data;
+package seedu.duke.Storage;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
