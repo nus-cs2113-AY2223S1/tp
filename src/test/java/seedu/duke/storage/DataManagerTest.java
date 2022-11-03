@@ -1,4 +1,4 @@
-package seedu.duke.Storage;
+package seedu.duke.storage;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

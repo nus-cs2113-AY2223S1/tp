@@ -1,4 +1,4 @@
-package seedu.duke.Storage;
+package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
