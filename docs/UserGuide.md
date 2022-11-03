@@ -134,9 +134,9 @@ Lists only selected details of all the properties, depending on the TAG. The com
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
 
-<u>Format</u>: `check -property ip/PROPERTY_INDEX`
+<u>Format</u>: `check -property i/PROPERTY_INDEX`
 
-<u>Example</u>: `check -property ip/2`
+<u>Example</u>: `check -property i/2`
 
 ---
 
@@ -318,7 +318,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 * List Property Budgets: `list -property b/`
 * List Property Unit Type: `list -property t/`
 * List Property Short: `list -property -short`
-* Check Property: `check -property ip/PROPERTY_INDEX`
+* Check Property: `check -property i/PROPERTY_INDEX`
 * Find Property: `find -property f/QUERY_TEXT`
 
 
