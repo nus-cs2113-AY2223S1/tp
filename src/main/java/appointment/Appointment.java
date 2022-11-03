@@ -3,24 +3,27 @@ package appointment;
 import pet.PetList;
 import task.Task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Appointment {
-    public static int id = 0;
+
+    public static int id = 3000;
+    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public final int appointmentId;
-    public String petName;
+    public int petId;
     public String service;
 
-    private String appointmentDate;
+    private Date appointmentDate;
     private AppointmentStatus appointmentStatus;
 
     public ArrayList<Task> tasks = new ArrayList<>();
 
-    public Appointment(String petName, String appointmentDate, String service) {
+    public Appointment(int petId, Date appointmentDate, String service) {
         this.appointmentId = ++id;
-        this.petName = petName;
+        this.petId = petId;
         this.appointmentStatus = AppointmentStatus.PENDING;
         this.appointmentDate = appointmentDate;
         this.service = service;
@@ -30,6 +33,26 @@ public class Appointment {
         System.out.println("Appointment ID: " + appointmentId);
         System.out.println("Service: " + service);
         System.out.println("Date: " + appointmentDate);
+    }
+
+    // check appointment date format
+    public static Date checkFormattedDate(String appointmentDateStr) {
+        Date formattedDate;
+        try {
+            formatter.setLenient(false);
+            formattedDate = formatter.parse(appointmentDateStr);
+        } catch (ParseException e) {
+            System.out.println("Invalid appointment date format! Pls follow yyyy-M(M)-d(d)!");
+            return null;
+        }
+        String appointmentYearStr = appointmentDateStr.split("-")[0];
+        int appointmentYear = Integer.parseInt(appointmentYearStr);
+        Date currentDate = new Date(System.currentTimeMillis());
+        if (formattedDate.compareTo(currentDate) > 0 && appointmentYear < 10000) {
+            return formattedDate;
+        }
+        System.out.println("Pls enter valid appointment year!");
+        return null;
     }
 
     // view tasks for a find appointment
@@ -57,7 +80,7 @@ public class Appointment {
         }
         if (isDone) {
             appointmentStatus = AppointmentStatus.PROCESSED;
-            PetList.findPet(petName).changePetStatus();
+            PetList.findPetById(petId).changePetStatus();
         }
     }
 
@@ -75,7 +98,12 @@ public class Appointment {
         return "";
     }
 
-    public String getAppointmentDate() {
+    public String getAppointmentDateStr() {
+        String dateStr = formatter.format(appointmentDate);
+        return dateStr;
+    }
+
+    public Date getAppointmentDate() {
         return appointmentDate;
     }
 

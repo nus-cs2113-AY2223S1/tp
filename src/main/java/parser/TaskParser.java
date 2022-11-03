@@ -50,28 +50,32 @@ public class TaskParser {
 
     public Command prepareAddTask(String input) {
         try {
-            int startOfI = input.indexOf(" i/");
-            int startOfE = input.indexOf(" e/");
-            int startOfD = input.indexOf(" d/");
+            int startOfI = input.indexOf(parser.indexFlag);
+            int startOfE = input.indexOf(parser.employeeFlag);
+            int startOfD = input.indexOf(parser.dateFlag);
+
+            if (startOfI > startOfE || startOfE > startOfD || startOfI == -1) {
+                throw new DukeException();
+            }
 
             if (!input.substring(0, startOfI).isEmpty()) {
                 throw new DukeException();
             }
 
-            if (startOfI > startOfE || startOfE > startOfD || startOfI == -1) {
-                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
-                throw new DukeException();
-            }
 
             String appointmentIdString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
             String employeeIdString = input.substring(startOfE + lengthOfSignature, startOfD).trim();
             String description = input.substring(startOfD + lengthOfSignature).trim();
+            if (appointmentIdString.isEmpty() || employeeIdString.isEmpty() || description.isEmpty()) {
+                throw new DukeException();
+            }
 
             int appointmentIdInt = Integer.parseInt(appointmentIdString);
             int employeeIdInt = Integer.parseInt(employeeIdString);
 
             return new AddTaskCommand(appointmentIdInt, employeeIdInt, description);
         } catch (DukeException e) {
+            System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
             return new EmptyCommand();
         }
     }
@@ -88,33 +92,25 @@ public class TaskParser {
 
     public Command prepareReassignTask(String input) {
         try {
-            int startOfI = input.indexOf(" i/");
-            int startOfE = input.indexOf(" e/");
+            int startOfI = input.indexOf(parser.indexFlag);
+            int startOfE = input.indexOf(parser.employeeFlag);
             if (startOfI > startOfE || startOfI == -1) {
-                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
                 throw new DukeException();
             }
 
-            String taskIndexString = input.substring(startOfI + lengthOfSignature, startOfE).trim();
-            String employeeIndexString = input.substring(startOfE + lengthOfSignature).trim();
-            int taskIndexInt = Integer.parseInt(taskIndexString);
-            int employeeIndexInt = Integer.parseInt(employeeIndexString);
+            int taskIndex = parser.indexOfInput(input.substring(0,startOfE));
+            int employeeIndex = parser.employeeId(input.substring(startOfE));
 
-            return new ReassignTaskCommand(taskIndexInt, employeeIndexInt);
+            return new ReassignTaskCommand(taskIndex, employeeIndex);
         } catch (DukeException e) {
+            System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
             return new EmptyCommand();
         }
     }
 
     public Command prepareFinishTask(String input) {
         try {
-            int startOfI = input.indexOf(" i/");
-            if (startOfI == -1) {
-                System.out.println("Invalid Input! format of parameters entered for adding a task is invalid");
-                throw new DukeException();
-            }
-            String taskIndexString = input.substring(startOfI + lengthOfSignature).trim();
-            int taskIndexInt = Integer.parseInt(taskIndexString);
+            int taskIndexInt = parser.indexOfInput(input);
             return new FinishTaskCommand(taskIndexInt);
         } catch (DukeException e) {
             return new EmptyCommand();
