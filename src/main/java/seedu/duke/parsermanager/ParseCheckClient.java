@@ -25,7 +25,7 @@ public class ParseCheckClient extends Parser {
     private final ClientList clientList;
 
 
-    private static final int CORRECT_FLAG_POSITION = 0;
+    private static final int CORRECT_FLAG_POSITION = 8;
 
 
     public ParseCheckClient(String checkCommandDescription, ClientList clientList) {
