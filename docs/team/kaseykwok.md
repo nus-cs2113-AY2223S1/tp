@@ -25,10 +25,11 @@ and Prescription menu)
   [#64](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/64))
   * Added duplicate checks in `PrescriptionList` class to avoid redundant prescription records (Pull Request 
   [#197](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/197))
+  * Added the `help` command to avoid printing all commands every time an invalid input is received.
 * **Documentation**:
   * User Guide:
     * Added documentation for all prescription manipulation commands.
-    * Added documentation for the `exit` command.
+    * Added documentation for the `help` and `exit` command.
     * Did cosmetic tweaks to structure the user guide and the table of content.
   * Developer Guide
     * Added class details for the `Prescription` component, including a class diagram. 
