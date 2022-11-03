@@ -2,7 +2,6 @@ package recipeditor.ui;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import recipeditor.command.InvalidCommand;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
