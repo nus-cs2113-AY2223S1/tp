@@ -76,7 +76,7 @@ public class Duke {
     }
 
     private static boolean loadData(String currentSemester) {
-        DataManager.initDataFile(currentSemester);
+        DataManager.initDataFile(currentSemester, "Data");
         try {
             DataManager.loadTimetableFromDataFile();
         } catch (FileNotFoundException | IndexOutOfBoundsException | Exceptions.FileLoadException e) {
