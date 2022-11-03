@@ -10,7 +10,7 @@ import service.ServiceList;
 import java.util.ArrayList;
 
 public class AppointmentList {
-    static ArrayList<Appointment> appointments = new ArrayList<>();
+    public static ArrayList<Appointment> appointments = new ArrayList<>();
 
     public static void listAppointment() {
         System.out.println("Here are the appointments in your list:");

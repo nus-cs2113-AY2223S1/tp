@@ -36,6 +36,7 @@ Note:
 * Parameters appear in the form of a/PARAMETER
 * Words in UPPER_CASE are parameters to be specified by the user.
 * Indexes are absolute index that will not change even after some items are deleted.
+* For employee, pet, appointment, task, and service, a maximum of 9999 items can be stored in each list.
 Index list
 * 1XXX: employee
 * 2XXX: pet 
@@ -235,6 +236,8 @@ Format: `service view`
 
 ---
 ### Exit: `bye`
+
+### [Proposed] Storage: TBC
 
 ---
 ## Command Summary
