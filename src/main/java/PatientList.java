@@ -14,7 +14,7 @@ public class PatientList {
         assert id != null : "id of patient should not be null!";
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
-        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient));
+        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient),UI.PATIENT);
     }
 
     public void loadPatient(String name, String birthDate, String gender, String id) {
@@ -73,7 +73,7 @@ public class PatientList {
         }
         System.out.println();
         ui.printMessageAndObject(patientToBeModified.toString(),UI.PATIENT_EDITED,
-                patients.indexOf(patientToBeModified));
+                patients.indexOf(patientToBeModified), UI.PATIENT);
     }
 
     public boolean isEmpty() {
