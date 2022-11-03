@@ -23,6 +23,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class SkyControl {
     private Ui ui;
@@ -30,13 +31,6 @@ public class SkyControl {
     private OperationList flights;
     private Storage storage;
     private PassengerInfo passengerInfo;
-    private static boolean isPassenger = false;
-    private static boolean isFlight = false;
-    private static boolean isModify = false;
-    private static boolean isAdd = false;
-    private static boolean isDelete = false;
-    private static boolean isDelay = false;
-
 
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -49,20 +43,111 @@ public class SkyControl {
         passengerInfo = new PassengerInfo();
     }
 
+    //@@ivanthengwr
+    /**
+     * Checks the boolean if the User is engaging a passenger command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isPassenger which is a check to see if it is a passenger command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+
+    public boolean isPassenger(String lineInput) throws SkyControlException {
+        boolean isPassenger;
+        isPassenger = Parser.isPassengerEntity(lineInput);
+        return isPassenger;
+    }
+
+    /**
+     * Checks the boolean if the User is engaging a flight command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isFlight which is a check to see if it is a passenger command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isFlight(String lineInput) throws SkyControlException {
+        boolean isFlight;
+        isFlight = Parser.isFlightEntity(lineInput);
+        return isFlight;
+    }
+
+    /**
+     * Checks the boolean if the User is engaging a modify command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isModify which is a check to see if it is a modify command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isModify(String lineInput) throws SkyControlException {
+        boolean isModify;
+        isModify = Parser.isModifyCommand(lineInput);
+        return isModify;
+    }
+
+    /**
+     * Checks the boolean if the User is engaging a delay command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isFlight which is a check to see if it is a Delay command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isDelay(String lineInput) throws SkyControlException {
+        boolean isDelay;
+        isDelay = Parser.isDelayCommand(lineInput);
+        return isDelay;
+    }
+
+    /**
+     * Checks the boolean if the User is engaging an add command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isFlight which is a check to see if it is an add command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isAdd(String lineInput) throws SkyControlException {
+        boolean isAdd = false;
+        if (isPassenger(lineInput)) {
+            isAdd = Parser.getAdd(lineInput);
+        }
+        return isAdd;
+    }
+
+    /**
+     * Checks the boolean if the User is engaging a delete command or not.
+     *
+     * @param lineInput Manager's line command input.
+     * @return isFlight which is a check to see if it is a delete command or not.
+     * @throws SkyControlException if the command is invalid.
+     */
+    public boolean isDelete(String lineInput) throws SkyControlException {
+        boolean isDelete = false;
+        if (isPassenger(lineInput)) {
+            isDelete = Parser.getDelete(lineInput);
+        }
+        return isDelete;
+    }
+
+    /**
+     * Executes the type of entity that the manager chooses.
+     * I.e. Either a passenger, flight, modify, delay or exit command.
+     *
+     * @param lineInput Manager's line command input.
+     * @param command obtains functions from command class to carry out execute commands.
+     * @throws SkyControlException if the command is invalid.
+     */
     private void executeEntity(String lineInput, Command command) throws SkyControlException {
         assert lineInput != null;
-        checkEntity(lineInput);
         try {
-            if (isPassenger) {
+            if (isPassenger(lineInput)) {
                 executePassengerCommand(lineInput, command);
-            } else if (isFlight) {
+            } else if (isFlight(lineInput)) {
                 command.execute(flights, lineInput);
                 storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
-            } else if (isModify) {
+            } else if (isModify(lineInput)) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
                 storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
-            } else if (isDelay) {
+            } else if (isDelay(lineInput)) {
                 command.execute(flights, lineInput);
                 command.execute(passengers, lineInput);
                 storage.insertIntoFile(flights.getFlights(), passengers.getPassengers());
@@ -74,14 +159,21 @@ public class SkyControl {
         }
     }
 
+    /**
+     *Executes the Passenger command based on the type of operation that the manager chooses.
+     *
+     * @param lineInput Manager's line command input.
+     * @param command obtains functions from command class to carry out execute commands.
+     */
     private void executePassengerCommand(String lineInput, Command command) {
         try {
             String passengerDetail;
-            if (isAdd) {
+            if (isAdd(lineInput)) {
+                Parser.checkAddOperationDetail(lineInput);
                 String passengerAddInput = syncFlightDetail(lineInput, command);
                 passengerDetail = Parser.getPassengerDetail(passengerAddInput);
                 command.execute(passengers, passengerDetail);
-            } else if (isDelete) {
+            } else if (isDelete(lineInput)) {
                 passengerDetail = Parser.getPassengerDetail(lineInput);
                 command.execute(passengers, passengerDetail);
             } else {
@@ -95,15 +187,21 @@ public class SkyControl {
 
     //@@author shengiv
     private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
+        command.checkFlightDetailSync(flights, passengers, lineInput);
+        String passengerAddInput;
+        passengerAddInput =  getPassengerAddInput(lineInput, command);
+        return passengerAddInput;
+    }
+
+    //@@author ivanthengwr
+    private String getPassengerAddInput(String lineInput, Command command) throws SkyControlException, SyncException {
         String passengerDetail = Parser.getPassengerDetail(lineInput);
         command.checkFlightDetailSync(flights, passengers, passengerDetail);
         String departureTime = command.getPassengerDepartureTime(flights, passengerDetail);
         String reformatDepartureTime = passengerInfo.reformatDepartureTime(departureTime);
         String gateNumber = command.getPassengerGateNumber(flights, passengerDetail);
         String boardingTime = passengerInfo.getFormattedBoardingTime(reformatDepartureTime);
-        String passengerAddInput = getLineInputForPassengerAdd(lineInput, departureTime,
-                gateNumber, boardingTime);
-        return passengerAddInput;
+        return getLineInputForPassengerAdd(lineInput, departureTime, gateNumber, boardingTime);
     }
 
     //@@author shengiv
@@ -112,18 +210,10 @@ public class SkyControl {
         return lineInput.trim() + " dt/" + departureTime + " gn/" + gateNumber + " bt/" + boardingTime;
     }
 
-    //@@author ivanthengwr
-    private void checkEntity(String lineInput) throws SkyControlException {
-        isPassenger = Parser.isPassengerEntity(lineInput);
-        isFlight = Parser.isFlightEntity(lineInput);
-        isModify = Parser.isModifyCommand(lineInput);
-        isDelay = Parser.isDelayCommand(lineInput);
-        if (isPassenger) {
-            isAdd = Parser.getAdd(lineInput);
-            isDelete = Parser.getDelete(lineInput);
-        }
-    }
-
+    /**
+     * Sets up all loggers from all the respective classes.
+     *
+     */
     private void setUpAllLogger() {
         Parser.setupLogger();
         AddPassengerCommand.setupLogger();
@@ -148,6 +238,11 @@ public class SkyControl {
     }
 
     //@@author ivanthengwr
+    /**
+     * This is the main execution function of the bot. It runs the necessary set up and parameters that is
+     * responsible for the behaviour of the program.
+     *
+     */
     public void run() {
         ui.showWelcomeMessage();
         Storage.checkFileStatus();

@@ -173,19 +173,27 @@ public class Parser {
     public static String getPassengerDetail(String lineInput) throws SkyControlException {
         Parser.getInputWords(lineInput);
         Parser.checkOperation(inputWords);
-        String passengerDetail = null;
+        String passengerDetail;
         if (isAdd) {
-            passengerDetailArray = lineInput.split("add");
-            checkBlankDetailInput();
+            checkAddOperationDetail(lineInput);
             passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
         } else if (isDelete) {
-            passengerDetailArray = lineInput.split("delete");
-            checkBlankDetailInput();
+            checkDeleteOperationDetail(lineInput);
             passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
         } else {
             throw new SkyControlException(ui.getOperationError());
         }
         return passengerDetail;
+    }
+
+    private static void checkDeleteOperationDetail(String lineInput) throws SkyControlException {
+        passengerDetailArray = lineInput.split("delete");
+        checkBlankDetailInput();
+    }
+
+    public static void checkAddOperationDetail(String lineInput) throws SkyControlException {
+        passengerDetailArray = lineInput.split("add");
+        checkBlankDetailInput();
     }
 
     public static void checkBlankDetailInput() throws SkyControlException {
