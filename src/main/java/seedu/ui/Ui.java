@@ -235,7 +235,7 @@ public class Ui {
      * @param in New Scanner object to be used.
      */
     public void changeScanner(Scanner in) {
-        assert in != null : "Invalid Scanner object!";
+        assert in != null : "Invalid Scanner object! Scanner object cannot be null!";
         this.in = in;
     }
     public static String getSeparatorString() {
