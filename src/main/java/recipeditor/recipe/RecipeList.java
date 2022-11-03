@@ -4,7 +4,6 @@ import recipeditor.storage.Storage;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class RecipeList {
     private static ArrayList<String> recipeTitles = new ArrayList<>();
@@ -117,7 +116,7 @@ public class RecipeList {
         return foundRecipeTitlesList;
     }
 
-    public static int getSize() {
+    public static int getRecipeSize() {
         return recipes.size();
     }
 
