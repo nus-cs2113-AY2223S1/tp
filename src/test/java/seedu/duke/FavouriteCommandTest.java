@@ -1,6 +1,8 @@
 package seedu.duke;
 
+import commands.Commands;
 import commands.FavouriteCommand;
+import commands.ListCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,7 +15,7 @@ class FavouriteCommandTest {
 
     @Test
     void execute_markFavouriteMovieByExistingIndex_pass() {
-        String[] userInput = {"favourite", "1"};
+        String[] userInput = {"favourite", "movie", "1"};
         String index = "1";
         int favouriteIndex = Integer.parseInt(index) - 1;
 
@@ -28,7 +30,7 @@ class FavouriteCommandTest {
 
     @Test
     void execute_unmarkFavouriteMovieByExistingIndex_pass() {
-        String[] userInput = {"favourite", "1"};
+        String[] userInput = {"favourite", "movie", "1"};
         String index = "1";
         int favouriteIndex = Integer.parseInt(index) - 1;
 
@@ -58,7 +60,9 @@ class FavouriteCommandTest {
         String[] userInput = {"favourite", "list"};
         FavouriteCommand favourite = new FavouriteCommand(storedReviews, userInput);
 
-        String assertOutput = "Your favourites are:\n" + assertMovie.toString() + '\n';
+        String assertOutput = "You have 1 favourite in total.\n" +  "---Here are the reviews in your list---\n\n"
+                + "Movies:\n" + "1. [Movie] Harry Potter Rating: 1.0  Genre:SciFi  Date watched: 10-01-2020\n\n"
+                + "TV Shows:";
 
         assertEquals(assertOutput, favourite.execute());
     }
