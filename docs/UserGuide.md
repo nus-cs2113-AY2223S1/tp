@@ -15,18 +15,18 @@ Command Line Interface (CLI) and is able to display information quickly with min
 2. pet view
 3. service add d/haircut
 4. employee add n/chris
-5. appointment add s/haircut p/2001 d/30/02/2022
+5. appointment add s/haircut p/2001 d/2022-12-29
 6. appointment view
-7. task add i/1 e/1001 d/prepare hot water
-8. task add i/1 e/1001 d/wash hair
+7. task add i/3001 e/1001 d/prepare hot water
+8. task add i/3001 e/1001 d/wash hair
 9. task view
-10. task finish i/1
-11. task finish i/2
+10. task finish i/4001
+11. task finish i/4002
 12. task view
 13. appointment view
 14. pet view
-15. appointment remove i/1
-16. pet remove i/1
+15. appointment remove i/3001
+16. pet remove i/2001
 17. bye
 
 
