@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+CommandParser -> Command: createCommand()
+Command -> Command: getArgs()
+Command -> Command: isValidArgument(arg)
+
+Command -> transactionList: getTransactions(arg)
+loop n times
+transactionList -> transactionList: iterate through list
+note right
+Check transaction.borrowerId.equals(arg)
+end note
+end
+transactionList -> Command: getTransactions(),
+note right
+Return array of transactions
+end note
+
+Command -> Ui: viewResponse()
+@enduml

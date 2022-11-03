@@ -75,7 +75,7 @@ public class CommandParser {
     private static final String COMMAND_VIEW_BORROW_TX_BY_USER = "view-borrow-tx-by-user";
     private static final String COMMAND_VIEW_LEND_TX_BY_USER = "view-lend-tx-by-user";
     private static final String COMMAND_VIEW_USER_LOSS = "view-user-loss";
-    private static final String COMMAND_VIEW_USER_PROFIT = "view-user-gain";
+    private static final String COMMAND_VIEW_USER_GAIN = "view-user-gain";
     private static final String COMMAND_VIEW_USER_ITEMS = "view-user-items";
     private static final String COMMAND_SORT_ITEMS = "sort-items";
     private static final String COMMAND_LIST_CATEGORIES = "list-categories";
@@ -183,7 +183,7 @@ public class CommandParser {
             return new RemoveUserCommand(parts, userList, itemList, transactionList);
         case COMMAND_VIEW_USER_LOSS:
             return new ViewUserLossCommand(parts, userList, transactionList);
-        case COMMAND_VIEW_USER_PROFIT:
+        case COMMAND_VIEW_USER_GAIN:
             return new ViewUserGainCommand(parts, userList, transactionList);
         case COMMAND_VIEW_USER_ITEMS:
             return new ViewUserItemsCommand(parts, userList, itemList, transactionList);
