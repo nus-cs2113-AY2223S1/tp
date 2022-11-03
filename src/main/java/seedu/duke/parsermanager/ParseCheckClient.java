@@ -12,7 +12,7 @@ import seedu.duke.exception.NotIntegerException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.CommandStructure.CHECK_CLIENT_FLAGS;
+import static seedu.duke.CommandStructure.INDEX_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
@@ -51,7 +51,7 @@ public class ParseCheckClient extends Parser {
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
             throws MissingFlagException, IncorrectFlagOrderException {
 
-        String[] flags = CHECK_CLIENT_FLAGS;
+        String[] flags = INDEX_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForMissingFlags(flagIndexPositions);
         checkFlagsOrder(flagIndexPositions);
