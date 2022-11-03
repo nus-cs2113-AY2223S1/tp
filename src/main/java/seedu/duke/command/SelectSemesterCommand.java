@@ -54,17 +54,19 @@ public class SelectSemesterCommand extends Command {
     public String getExecutionMessage() {
 
         String outputMessage;
+        final String PLANNING_FOR = "You are now planning for ";
+        final String INVALID_SEMESTER_SELECTED = "A valid semester was not selected";
 
         if (updatedSemester == 1) {
-            outputMessage = "You are now planning for semester 1";
+            outputMessage = PLANNING_FOR + "semester 1";
         } else if (updatedSemester == 2) {
-            outputMessage = "You are now planning for semester 2";
+            outputMessage = PLANNING_FOR+ "semester 2";
         } else if (updatedSemester == 3) {
-            outputMessage = "You are now planning for special term I";
+            outputMessage = PLANNING_FOR + "special term I";
         } else if (updatedSemester == 4) {
-            outputMessage = "You are now planning for special term II";
+            outputMessage = PLANNING_FOR + "special term II";
         } else {
-            outputMessage = "A valid semester was not selected";
+            outputMessage = INVALID_SEMESTER_SELECTED;
         }
 
         return outputMessage;
