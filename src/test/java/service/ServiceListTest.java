@@ -15,7 +15,7 @@ class ServiceListTest {
     @Test
     void addService() {
         int numOfServices = ServiceList.services.size();
-        AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Wash");
         addServiceCommand.execute();
         int numOfServicesAfterAdd = ServiceList.services.size();
         assertEquals(1, numOfServicesAfterAdd - numOfServices);
@@ -24,7 +24,7 @@ class ServiceListTest {
 
     @Test
     void removeService() {
-        AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Disinfect");
         addServiceCommand.execute();
         int numOfServices = ServiceList.services.size();
         RemoveServiceCommand removeServiceCommand = new RemoveServiceCommand(Service.idCounter);
