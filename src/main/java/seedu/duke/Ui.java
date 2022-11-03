@@ -117,6 +117,7 @@ public class Ui {
 
     /* Delete-Command-related showMessage methods. */
 
+    //@@author FeliciaBeatrice
     public void showPropertyDeletedConfirmationMessage(Property deletedProperty) {
         showToUser(MESSAGE_PROPERTY_DELETED);
         showToUser("  " + deletedProperty);
@@ -151,7 +152,7 @@ public class Ui {
             }
         }
     }
-
+    //@@author
 
     /* Pair/Unpair-Command-related showMessage methods. */
     //@@author ngdeqi
@@ -341,6 +342,7 @@ public class Ui {
     }
     //@@author
 
+    //@@author FeliciaBeatrice
     public void showCheckClient(Client client, Property property) {
         showToUser(MESSAGE_CHECK_CLIENT);
         showToUser("  " + client.toString() + "\n");
@@ -353,6 +355,7 @@ public class Ui {
         showToUser("  " + client.toString() + "\n");
         showToUser(MESSAGE_CHECK_CLIENT_NO_PAIR);
     }
+    //@@author
 
     //@@author ngdeqi
     public void showCheckProperty(Property property, ArrayList<Client> tenants) {

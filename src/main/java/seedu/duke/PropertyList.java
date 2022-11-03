@@ -35,13 +35,20 @@ public class PropertyList {
         currentListSize++;
     }
 
+    //@@author FeliciaBeatrice
+    /**
+     * Deletes a property from the property list and updates property list size.
+     *
+     * @param propertyIndex Index of property to be deleted.
+     * @return Property deleted.
+     */
     public Property deleteProperty(int propertyIndex) {
         Property deletedProperty = propertyList.get(propertyIndex);
         propertyList.remove(propertyIndex);
         currentListSize--;
         return deletedProperty;
     }
-
+    //@@author
 }
 
 
