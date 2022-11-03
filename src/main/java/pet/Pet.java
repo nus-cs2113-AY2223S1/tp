@@ -83,6 +83,7 @@ public class Pet {
             status = PetHealthyStatus.fantastic;
             break;
         default:
+            System.out.println("Sorry, the pet status is invalid");
             break;
         }
     }
