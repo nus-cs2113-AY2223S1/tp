@@ -87,14 +87,11 @@ public class Appointment {
     public String getAppointmentStatus() {
         if (appointmentStatus == AppointmentStatus.PENDING) {
             return "PENDING";
-        }
-        else if (appointmentStatus == AppointmentStatus.PROCESSING) {
+        } else if (appointmentStatus == AppointmentStatus.PROCESSING) {
             return "PROCESSING";
-        }
-        else if (appointmentStatus == AppointmentStatus.PROCESSED) {
+        } else if (appointmentStatus == AppointmentStatus.PROCESSED) {
             return "PROCESSED";
-        }
-        else {
+        } else {
             return "";
         }
     }
