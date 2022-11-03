@@ -207,17 +207,17 @@ Expected Output:
 ```
 List of commands: 
 * To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]
-	n - The name should be one or two words
-	g - The gender should be one letter, M or F
-	d - The date of birth should be formatted as DD-MM-YYYY
-	i - The id can be a sequence of numbers or letters
+    n - The name should be one or two words
+    g - The gender should be one letter, M or F
+    d - The date of birth should be formatted as DD-MM-YYYY
+    i - The id can be a sequence of numbers or letters
 * To list all patients: viewall
 * To retrieve information about a specific patient: retrieve i/[ID]
 * To edit a patient's information: edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])
-	n/g/d - Please edit only one aspect of a patient at a time
+    n/g/d - Please edit only one aspect of a patient at a time
 * To return to main menu: main
 * To quit OneDoc: bye
-	____________________________________________________________
+    ____________________________________________________________
 ```
 
 ### 2. Visit
@@ -398,19 +398,19 @@ Expected Output:
 ```
 List of commands:
 * To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])
-	d - The date should be formatted as DD-MM-YYYY
-	t - The time should be formatted as HH:MM
-	r - The reason is optional, and can be any number of words
+    d - The date should be formatted as DD-MM-YYYY
+    t - The time should be formatted as HH:MM
+    r - The reason is optional, and can be any number of words
 * To edit a visit's reason: edit x/[index] r/[reason]
-	x - The index should be a displayed number next to the visit
-	r - The reason can be added or edited with any number of words
+    x - The index should be a displayed number next to the visit
+    r - The reason can be added or edited with any number of words
 * To delete a visit's reason: deleteReason x/[index]
 * To list all visits: viewall
 * To list all visits of one patient: viewPatient i/[ID]
 * To view a patient's specific visit: viewVisit x/[index]
 * To return to main menu: main
 * To quit OneDoc: bye
-	____________________________________________________________
+    ____________________________________________________________
 ```
 
 ### 3. Prescription
@@ -631,20 +631,20 @@ Expected Output:
 ```
 List of commands:
 * To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]
-	n - The prescription name should be one or two words
-	d - The dosage should be a number followed by an amount
-	t - The time instruction should be instructions on how to take, with any number of words
+    n - The prescription name should be one or two words
+    d - The dosage should be a number followed by an amount
+    t - The time instruction should be instructions on how to take, with any number of words
 * To edit a prescription: edit x/[index] (n/[name] or d/[dosage] or t/[time interval])
-	n/d/t - Please edit only one aspect of a prescription at a time
+    n/d/t - Please edit only one aspect of a prescription at a time
 * To list all prescriptions: viewall
 * To list all prescriptions of one patient: viewPatientPres i/[ID]
 * To list all active prescriptions of one patient: viewActPatientPres i/[ID]
 * To change a prescription record to be active: activate x/[index]
 * To change a prescription record to be inactive: deactivate x/[index]
-	x - The index should be relative to all the visits of a patient
+    x - The index should be relative to all the visits of a patient
 * To return to main menu: main
 * To quit OneDoc: bye
-	____________________________________________________________
+    ____________________________________________________________
 ```
 
 ### Exit program: `bye`
