@@ -5,7 +5,7 @@ import employee.EmployeeList;
 
 public class Task {
 
-    static int id = 4000;
+    static int idCounter = 4000;
 
     public final int taskId;
 
@@ -18,7 +18,7 @@ public class Task {
     public boolean isDone;
 
     public Task(int appointmentId, int employeeId, String taskDescription) {
-        this.taskId = ++id;
+        this.taskId = ++idCounter;
         this.appointmentId = appointmentId;
         this.employeeId = employeeId;
         this.taskDescription = taskDescription;

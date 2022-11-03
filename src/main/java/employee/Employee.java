@@ -5,14 +5,14 @@ import task.Task;
 import java.util.ArrayList;
 
 public class Employee {
-    public static int id = 1000;
+    public static int idCounter = 1000;
     private final int employeeId;
     private String employeeName;
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public Employee(String employeeName) {
-        this.employeeId = ++id;
+        this.employeeId = ++idCounter;
         this.employeeName = employeeName;
     }
 

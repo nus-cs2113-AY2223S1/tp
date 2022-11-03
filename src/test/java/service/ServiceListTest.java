@@ -1,6 +1,5 @@
 package service;
 
-import command.petcommand.RemovePetCommand;
 import command.servicecommand.AddServiceCommand;
 import command.servicecommand.RemoveServiceCommand;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ class ServiceListTest {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
         addServiceCommand.execute();
         int numOfServices = ServiceList.services.size();
-        RemoveServiceCommand removeServiceCommand = new RemoveServiceCommand(Service.id);
+        RemoveServiceCommand removeServiceCommand = new RemoveServiceCommand(Service.idCounter);
         removeServiceCommand.execute();
         int numOfServicesAfterRemove = ServiceList.services.size();
         assertEquals(-1, numOfServicesAfterRemove - numOfServices);

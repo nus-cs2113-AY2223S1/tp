@@ -1,11 +1,9 @@
 package task;
 
 import appointment.Appointment;
-import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
-import task.Task;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,14 +31,14 @@ public class TaskList {
         // appointment aggregate task
         Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
-            Task.id--;
+            Task.idCounter--;
             throw new DukeException();
         }
 
         // employee aggregate task
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
-            Task.id--;
+            Task.idCounter--;
             throw new DukeException();
         }
 

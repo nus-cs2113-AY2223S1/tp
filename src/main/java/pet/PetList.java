@@ -1,7 +1,5 @@
 package pet;
 
-import exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.Objects;
 

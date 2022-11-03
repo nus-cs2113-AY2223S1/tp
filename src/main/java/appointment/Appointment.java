@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Appointment {
 
-    public static int id = 3000;
+    public static int idCounter = 3000;
     public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public final int appointmentId;
     public int petId;
@@ -22,7 +22,7 @@ public class Appointment {
     public ArrayList<Task> tasks = new ArrayList<>();
 
     public Appointment(int petId, Date appointmentDate, String service) {
-        this.appointmentId = ++id;
+        this.appointmentId = ++idCounter;
         this.petId = petId;
         this.appointmentStatus = AppointmentStatus.PENDING;
         this.appointmentDate = appointmentDate;
