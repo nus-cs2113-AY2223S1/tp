@@ -205,9 +205,8 @@ public class Parser {
             String input = convertStringArrayToString(inputArray);
             return new FindCommand(input);
         } else {
-            Ui.showMessage(FindCommand.CORRECT_FORMAT);
+            return new InvalidCommand(FindCommand.CORRECT_FORMAT);
         }
-        return new InvalidCommand(FindCommand.CORRECT_FORMAT);
     }
 
     public static Command parseHelpCommand(String[] parsed) {
