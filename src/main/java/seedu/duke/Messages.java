@@ -227,7 +227,7 @@ public class Messages {
             + "Example:\n"
             + "  check -client ic/5\n";
     //@@author
-    
+
     public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
 
     public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
