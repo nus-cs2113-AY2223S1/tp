@@ -135,7 +135,8 @@ public class ParserManager {
         if (isClient) {
             return new ParseCheckClient(commandDetail, clientList);
         } else if (isProperty) {
-            return new ParseCheckProperty(commandDetail);
+            String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
+            return new ParseCheckProperty(commandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
                     + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);

@@ -54,6 +54,10 @@ public class Messages {
     public static final String MESSAGE_PAIRED_CLIENTS_DELETED = "\nThe pairing(s) this property has with "
             + "the following client(s) will be deleted:";
 
+    public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
+
+    public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
+
 
     /* General Error Messages */
 
@@ -218,6 +222,7 @@ public class Messages {
 
     /* Check property/client related Error Messages */
 
+
     //@@author FeliciaBeatrice
     public static final String MESSAGE_CHECK_CLIENT = "Showing check results for this client:";
 
@@ -232,15 +237,14 @@ public class Messages {
             + "  check -client ic/5\n";
     //@@author
 
-    public static final String MESSAGE_CHECK_PROPERTY = "Showing check results for this property:";
-
-    public static final String MESSAGE_CHECK_PROPERTY_RESULT = "Here are the tenants renting this property:";
-
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
             + "following format:\n"
-            + "  check -property ip/INDEX\n"
+            + "  check -property i/INDEX\n"
             + "Example:\n"
-            + "  check -property ip/5\n";
+            + "  check -property i/5\n";
+
+    public static final String MESSAGE_CHECK_EXTRA_ARGUMENTS = "OOPS!! The following argument(s) is/are not "
+            + "recognised:\n";
 
 
     /* List related Error Messages */

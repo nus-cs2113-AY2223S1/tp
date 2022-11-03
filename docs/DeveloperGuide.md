@@ -574,24 +574,24 @@ java -jar PropertyRentalManager.jar
       * Have at least 2 clients and 2 properties added to the app.
       * Ensure that all clients have budgets equal to or greater than that of the properties.
       * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
-   2. Test case: `check -property ip/1`
+   2. Test case: `check -property i/1`
       
       Expected: Terminal shows details of the property and information of the clients renting the property. Number of list results is greater than 0.
-   3. Test case: `check -property ip/2`
+   3. Test case: `check -property i/2`
       
        Expected: Terminal shows details of the property, number of list results is 0. 
    
 
 2. Failed check property
-   1. Test case: `check -property ip/0`
+   1. Test case: `check -property i/0`
    
         Expected: Terminal shows error message.
    
-   2. Test case: `check -property ip/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
+   2. Test case: `check -property i/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
    
         Expected: Terminal shows error message.
 
-   3. Test case: `check -property ip/1r2342`
+   3. Test case: `check -property i/1r2342`
    
         Expected: Terminal shows error message.
 
