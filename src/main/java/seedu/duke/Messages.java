@@ -341,13 +341,17 @@ public class Messages {
             + " ic/<INDEX>\nunpair ip/<INDEX> ic/<INDEX>\nwhere <INDEX> represents the index of property and client"
             + " to pair together with.\n" + LINE_BREAK;
 
+    public static final String CHECK_HELP_COMMAND = "\nCHECK COMMAND\n" + LINE_BREAK + "\ncheck -client i/<INDEX>"
+            + "\ncheck -property i/<INDEX>\nwhere <INDEX> refers to the index of the client or property to check "
+            + "for.\n" + LINE_BREAK;
+
     public static final String FIND_HELP_COMMAND = "\nFIND COMMAND\n" + LINE_BREAK + "\nfind -client f/<QUERY_TEXT>\n"
             + "find -property f/<QUERY_TEXT>\nwhere <QUERY_TEXT> refers to the text to search for in either client "
             + "or property.\n";
 
     public static final String HELP_COMMAND_PRINT_LIST = "The list of available commands are stated below:\n\n"
             + LIST_HELP_COMMAND + ADD_HELP_COMMAND + DELETE_HELP_COMMAND + PAIR_UNPAIR_HELP_COMMAND
-            + FIND_HELP_COMMAND + LINE_BREAK;
+            + CHECK_HELP_COMMAND + FIND_HELP_COMMAND + LINE_BREAK;
 
     //@@author
 }
