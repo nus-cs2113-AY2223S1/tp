@@ -1,6 +1,5 @@
 package appointment;
 
-import employee.Employee;
 import exception.DukeException;
 import pet.Pet;
 import pet.PetList;
@@ -40,7 +39,7 @@ public class AppointmentList {
 
         // appointment should have a valid date
         if (appointment.getAppointmentDate() == null) {
-            Appointment.id--;
+            Appointment.idCounter--;
             throw new DukeException();
         }
 
@@ -48,7 +47,7 @@ public class AppointmentList {
         Service service = ServiceList.findService(appointment.service);
         if (service == null) {
             System.out.println("Sorry, no corresponding service found to add the appointment.");
-            Appointment.id--;
+            Appointment.idCounter--;
             throw new DukeException();
         }
 
@@ -56,7 +55,7 @@ public class AppointmentList {
         Pet pet = PetList.findPetById(appointment.petId);
         if (pet == null) {
             System.out.println("Sorry, no corresponding pet found to add the appointment.");
-            Appointment.id--;
+            Appointment.idCounter--;
             throw new DukeException();
         }
 

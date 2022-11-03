@@ -1,12 +1,10 @@
 package task;
 
 import appointment.Appointment;
-import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
-import task.Task;
-
+import ui.Ui;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,7 +17,7 @@ public class TaskList {
     public static void viewTasks() {
         System.out.println("Here are all the tasks for the clinic:");
         for (Task task : tasks) {
-            System.out.println("_______________________________________");
+            Ui.showLine();
             task.printTask();
         }
     }
@@ -33,14 +31,14 @@ public class TaskList {
         // appointment aggregate task
         Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
-            Task.id--;
+            Task.idCounter--;
             throw new DukeException();
         }
 
         // employee aggregate task
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
-            Task.id--;
+            Task.idCounter--;
             throw new DukeException();
         }
 

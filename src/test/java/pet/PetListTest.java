@@ -3,7 +3,6 @@ package pet;
 import command.petcommand.AddPetCommand;
 import command.petcommand.InitPetStatusCommand;
 import command.petcommand.RemovePetCommand;
-import employee.EmployeeList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ class PetListTest {
         AddPetCommand addPetCommand = new AddPetCommand("Yuhuan", "cat", true);
         addPetCommand.execute();
         int currNumOfPet = PetList.pets.size();
-        RemovePetCommand removePetCommand = new RemovePetCommand(Pet.id);
+        RemovePetCommand removePetCommand = new RemovePetCommand(Pet.idCounter);
         removePetCommand.execute();
         int numOfPetAfterRemove = PetList.pets.size();
         assertEquals(numOfPetAfterRemove - currNumOfPet, -1);
