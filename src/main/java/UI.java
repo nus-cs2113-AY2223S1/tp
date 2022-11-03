@@ -10,15 +10,15 @@ public class UI {
             + "2 - Visits" + System.lineSeparator()
             + "3 - Prescription" + System.lineSeparator()
             + "bye - Quit OneDoc";
+    private static final String EXIT_MESSAGE = "Goodbye!";
 
     // General Invalid Error Message
     private static final String INVALID_MAIN_MENU_COMMAND_MESSAGE = "Incorrect input. Please type 1, 2, 3 or bye";
     private static final String INDEX_OUT_OF_RANGE_MESSAGE = "The index number is out of range. Try again.";
 
     // Patient
-    private static final String PATIENT_MAIN_MENU =
-            "This is the Patient Main Menu!" + System.lineSeparator()
-            + "List of commands: "
+    private static final String PATIENT_START_MESSAGE = "This is the Patient Main Menu!";
+    private static final String PATIENT_MAIN_MENU = "List of commands: "
             + UI.PATIENT_ADD
             + UI.PATIENT_VIEW_ALL
             + UI.PATIENT_RETRIEVE
@@ -28,9 +28,8 @@ public class UI {
 
     // Prescription
     private static final String NO_PRESCRIPTION_MESSAGE = "There are currently no prescriptions in the record.";
-    private static final String PRESCRIPTION_MAIN_MENU =
-            "This is the Prescription Main Menu!" + System.lineSeparator()
-                    + "List of commands:"
+    private static final String PRESCRIPTION_START_MESSAGE = "This is the Prescription Main Menu!";
+    private static final String PRESCRIPTION_MAIN_MENU = "List of commands:"
                     + UI.PRESCRIPTION_ADD
                     + UI.PRESCRIPTION_EDIT
                     + UI.PRESCRIPTION_VIEW_ALL
@@ -47,11 +46,12 @@ public class UI {
 
     public static final String DUPLICATE_PRESCRIPTION_MESSAGE = "The prescription is already existing.";
     private static final String PRESCRIPTION_INDEX_FORMAT = "Prescription #";
+    private static final String ALL_PRESCRIPTIONS_HEADING = "Here are all the prescriptions:";
+    public static final String ALL_ACTIVE_PRESCRIPTIONS_HEADING = "Here are all the active prescriptions:";
 
     // Visit
-    private static final String VISIT_MAIN_MENU =
-            "This is the Visits Main Menu!" + System.lineSeparator()
-                    + "List of commands:"
+    private static final String VISIT_START_MESSAGE = "This is the Visits Main Menu!";
+    private static final String VISIT_MAIN_MENU = "List of commands:"
                     + UI.VISIT_ADD
                     + UI.VISIT_EDIT
                     + UI.VISIT_DELETE_REASON
@@ -94,23 +94,54 @@ public class UI {
         System.out.println(INDEX_OUT_OF_RANGE_MESSAGE);
     }
 
-    public void printSubMenu(MainMenuState mainMenuState) {
+    /**
+     * Print welcome message on start of the sub menu.
+     * @param mainMenuState is an enum representing which sub menu the program is at.
+     */
+    public void printSubMenuStart(MainMenuState mainMenuState) {
         switch (mainMenuState) {
         case PATIENT:
-            printPatientMenuMessage();
+            printPatientStartMessage();
             break;
         case VISIT:
-            printVisitsMenuMessage();
+            printVisitStartMessage();
             break;
         case PRESCRIPTION:
-            printPrescriptionMenuMessage();
+            printPrescriptionStartMessage();
             break;
         default:
             break;
         }
     }
 
-    public void printPatientMenuMessage() {
+    /**
+     * Print the corresponding sub menu according to the mainMenuState.
+     * @param mainMenuState is an enum representing which sub menu the program is at.
+     */
+    public void printSubMenu(MainMenuState mainMenuState) {
+        switch (mainMenuState) {
+        case PATIENT:
+            printPatientMenu();
+            printLine();
+            break;
+        case VISIT:
+            printVisitsMenu();
+            printLine();
+            break;
+        case PRESCRIPTION:
+            printPrescriptionMenu();
+            printLine();
+            break;
+        default:
+            break;
+        }
+    }
+
+    private void printPatientStartMessage() {
+        System.out.println(PATIENT_START_MESSAGE);
+    }
+
+    private void printPatientMenu() {
         System.out.println(PATIENT_MAIN_MENU);
     }
 
@@ -128,15 +159,19 @@ public class UI {
         printLine();
     }
 
-    public void printVisitsMenuMessage() {
+    private void printVisitStartMessage() {
+        System.out.println(VISIT_START_MESSAGE);
+    }
+
+    private void printVisitsMenu() {
         System.out.println(VISIT_MAIN_MENU);
     }
 
-    public void printViewAllVisitsMessage() {
-        System.out.println("Here are all the visits:");
+    private void printPrescriptionStartMessage() {
+        System.out.println(PRESCRIPTION_START_MESSAGE);
     }
 
-    public void printPrescriptionMenuMessage() {
+    private void printPrescriptionMenu() {
         System.out.println(PRESCRIPTION_MAIN_MENU);
     }
 
@@ -145,17 +180,17 @@ public class UI {
     }
 
     public void printViewAllPrescriptionsMessage() {
-        System.out.println("Here are all the prescriptions:");
+        System.out.println(ALL_PRESCRIPTIONS_HEADING);
         printLine();
     }
 
     public void printViewAllActivePrescriptionsMessage() {
-        System.out.println("Here are all the active prescriptions:");
+        System.out.println(ALL_ACTIVE_PRESCRIPTIONS_HEADING);
         printLine();
     }
 
     public void printExitMessage() {
-        System.out.println("Goodbye!");
+        System.out.println(EXIT_MESSAGE);
     }
 
     public static void printLine() {
@@ -166,15 +201,27 @@ public class UI {
         System.out.println();
     }
 
-    public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]";
+    // Patient commands
+    public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
+            + "\n\tn - The name should be one or two words"
+            + "\n\tg - The gender should be one letter, M or F"
+            + "\n\td - The date of birth should be formatted as DD-MM-YYYY"
+            + "\n\ti - The id can be a sequence of numbers or letters";
     public static final String PATIENT_EDIT = "\n* To edit a patient's information: "
-            + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])";
+            + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
+            + "\n\tn/g/d - Please edit only one aspect of a patient at a time";
     public static final String PATIENT_RETRIEVE = "\n* To retrieve information about a specific patient:"
             + " retrieve i/[ID]";
-
     public static final String PATIENT_VIEW_ALL = "\n* To list all patients: viewall";
-    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])";
-    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit x/[index] r/[reason]";
+
+    // Visit commands
+    public static final String VISIT_ADD = "\n* To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])"
+            + "\n\td - The date should be formatted as DD-MM-YYYY"
+            + "\n\tt - The time should be formatted as HH:MM"
+            + "\n\tr - The reason is optional, and can be any number of words";
+    public static final String VISIT_EDIT = "\n* To edit a visit's reason: edit x/[index] r/[reason]"
+            + "\n\tx - The index should be a displayed number next to the visit"
+            + "\n\tr - The reason can be added or edited with any number of words";
     public static final String VISIT_DELETE_REASON = "\n* To delete a visit's reason: deleteReason x/[index]";
     public static final String VISIT_VIEW_ALL = "\n* To list all visits: viewall";
     public static final String VISIT_VIEW_PATIENT = "\n* To list all visits of one patient: viewPatient i/[ID]";
@@ -191,10 +238,15 @@ public class UI {
     public static final String DEACTIVATE_PRESCRIPTION = "Ok, I've deactivated the prescription below:";
     public static final String ACTIVATE_PRESCRIPTION = "You have edited the prescription!";
 
+    // Prescription commands
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
-            + "n/[name] d/[dosage] t/[time interval]";
+            + "n/[name] d/[dosage] t/[time interval]"
+            + "\n\tn - The prescription name should be one or two words"
+            + "\n\td - The dosage should be a number followed by an amount"
+            + "\n\tt - The time instruction should be instructions on how to take, with any number of words";
     public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit x/[index] "
-            + "(n/[name] or d/[dosage] or t/[time interval])";
+            + "(n/[name] or d/[dosage] or t/[time interval])"
+            + "\n\tn/d/t - Please edit only one aspect of a prescription at a time";
 
     public static final String PRESCRIPTION_VIEW_ALL = "\n* To list all prescriptions: viewall";
 
@@ -208,7 +260,8 @@ public class UI {
             + "active: activate x/[index]";
 
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
-            + "inactive: deactivate x/[index]";
+            + "inactive: deactivate x/[index]"
+            + "\n\tx - The index should be relative to all the visits of a patient";
 
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
@@ -216,7 +269,6 @@ public class UI {
     public static final String PRESCRIPTION = "Prescription";
     public static final String VISIT = "Visit";
     public static final String PATIENT = "Patient";
-
 
     /**
      * Print message that there are no prescription from the patient.

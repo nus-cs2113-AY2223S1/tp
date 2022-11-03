@@ -9,6 +9,7 @@ public class Parser {
 
     private static final String VIEW_ALL_COMMAND = "viewall";
     private static final String BACK_TO_MAIN_COMMAND = "main";
+    private static final String HELP_COMMAND = "help";
 
     private final PatientList patientList;
     private final VisitList visitList;
@@ -33,6 +34,11 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parse the main menu input and retrieve the corresponding main menu state.
+     * @param input is a String given by user
+     * @return `MainMenuState` enum
+     */
     public MainMenuState mainMenuParser(String input) {
         switch (input.toLowerCase()) {
         case MAIN_PATIENT_COMMAND:
@@ -46,7 +52,6 @@ public class Parser {
         default:
             return MainMenuState.INVALID;
         }
-
     }
 
     private boolean shouldExit(String input) {
@@ -57,6 +62,10 @@ public class Parser {
         return input.equalsIgnoreCase(BACK_TO_MAIN_COMMAND);
     }
 
+    private boolean shouldShowSubMenu(String input) {
+        return input.equalsIgnoreCase(HELP_COMMAND);
+    }
+
     public SubMenuState patientParser(String input) {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
@@ -64,6 +73,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -89,12 +102,7 @@ public class Parser {
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
-                        + "\nn - The name should be one or two words"
-                        + "\ng - The gender should be one letter, M or F"
-                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters"
                         + UI.PATIENT_EDIT
-                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
                         + UI.PATIENT_RETRIEVE
                         + UI.PATIENT_VIEW_ALL);
             }
@@ -114,6 +122,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -157,12 +169,7 @@ public class Parser {
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
-                        + "\nd - The date should be formatted as DD-MM-YYYY"
-                        + "\nt - The time should be formatted as HH:MM"
-                        + "\nr - The reason is optional, and can be any number of words"
                         + UI.VISIT_EDIT
-                        + "\nx - The index should be a displayed number next to the visit"
-                        + "\nr - The reason can be added or edited with any number of words"
                         + UI.VISIT_DELETE_REASON
                         + UI.VISIT_VIEW_ALL
                         + UI.VISIT_VIEW_PATIENT
@@ -184,6 +191,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -225,17 +236,12 @@ public class Parser {
             } else {
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
-                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
                         + UI.PRESCRIPTION_VIEW_ALL
                         + UI.PRESCRIPTION_VIEW_PATIENT
                         + UI.PRESCRIPTION_VIEW_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
-                        + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\nx - The index should be relative to all the visits of a patient");
+                        + UI.PRESCRIPTION_CHANGE_INACTIVE);
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
