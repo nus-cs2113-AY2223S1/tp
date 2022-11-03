@@ -1122,6 +1122,8 @@ public class ConsoleInterface {
         recurringPaymentManager.updateRecurringPayments(savedRecurringPayments);
         targetManager.updateTargets(savedTargets);
         incomeManager.updateIncomes(savedIncomes);
+
+        runLocalStorageSaveToFile();
     }
 
     private void runLocalStorageLoadFromFile() {
