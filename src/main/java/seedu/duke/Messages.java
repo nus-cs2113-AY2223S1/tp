@@ -62,10 +62,10 @@ public class Messages {
 
     public static final String MESSAGE_MISSING_SUB_COMMAND_TYPE = "OOPS!!! Please specify sub-command type.\n"
             + "For client: <command> -client\n"
-            + "For property: <command> -property";
+            + "For property: <command> -property\n";
 
     public static final String MESSAGE_INVALID_INDEX = "OOPS!!! Please enter index(es) that appears within the "
-            + "property list or client list";
+            + "property list or client list\n";
 
     public static final String MESSAGE_NOT_INTEGER = "OOPS!! Please enter a positive integer as index\n";
 
@@ -83,7 +83,7 @@ public class Messages {
             + "the following format and details:\n"
             + "Format: add -property n/NAME a/ADDRESS p/PRICE t/TYPE\n"
             + "Example: add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, S119081 "
-            + "p/1000 t/HDB 3";
+            + "p/1000 t/LP BGL";
 
     public static final String MESSAGE_ADD_CLIENT_WRONG_FORMAT = "OOPS!!! To add a client, it requires "
             + "the following format and details:\n"
@@ -145,6 +145,18 @@ public class Messages {
             + LINE_BREAK
             + "\nNote: Only unit type labels (Singapore-Based) are accepted by the program";
 
+    public static final String MESSAGE_ADDRESS_FORMAT_UNIT_TYPE_MISMATCH = "OOPS!!! There seem to be a mismatch"
+            + " between address format and unit type provided.\n"
+            + "Certain unit types will require specific address format. Please refer to the description below:\n"
+            + "  1. Unit type with <LP> must not have #[unit level]-[unit number] in address.\n"
+            + "     Format:\n"
+            + "       [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]\n"
+            + "  2. Unit type without <LP> must have #[unit level]-[unit number] in address.\n"
+            + "     Format:\n"
+            + "       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]\n"
+            + "       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]\n"
+            + "Note: HDB Terrace House (special case) is not restricted by any format.";
+
     public static final String MESSAGE_INVALID_CONTACT_NUMBER = "OOPS!!! Please enter a valid Singapore Contact Number "
             + "(No extension)";
 
@@ -195,7 +207,7 @@ public class Messages {
 
     public static final String MESSAGE_BUDGET_CLIENT = "The client's name and budget:\n";
 
-    public static final String MESSAGE_BUDGET_PROPERTY = "The property's name and price:\n";
+    public static final String MESSAGE_BUDGET_PROPERTY = "The property's name and rental price:\n";
 
     public static final String MESSAGE_NO_EXISTING_PAIR = "OOPS!! This property is not being rented by the tenant. "
             + "Unpair unsuccessful.\n";
@@ -225,10 +237,14 @@ public class Messages {
             + "following format:\n"
             + "  check -property ip/INDEX\n"
             + "Example:\n"
-            + "  check -property ip/5";
+            + "  check -property ip/5\n";
 
+
+    /* List related Error Messages */
+    
     public static final String MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT = "List clients with tags - commandFlags "
             + "taking illegal values";
+            
     public static final String MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT = "List properties with tags - commandFlags "
             + "taking illegal values";
 

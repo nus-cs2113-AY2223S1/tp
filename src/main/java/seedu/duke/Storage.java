@@ -684,17 +684,17 @@ public class Storage {
      */
     public String getPairingFileText(HashMap<Client, Property> clientPropertyPair) {
         String pairText = "";
-        for (Client clientText : clientPropertyPair.keySet()) {
+        for (Client client : clientPropertyPair.keySet()) {
 
-            String clientName = clientText.getClientName();
-            String clientContact = clientText.getClientContactNumber();
-            String clientEmail = clientText.getClientEmail();
-            String clientBudget = clientText.getClientBudgetPerMonth();
+            String clientName = client.getClientName();
+            String clientContact = client.getClientContactNumber();
+            String clientEmail = client.getClientEmail();
+            String clientBudget = client.getClientBudgetPerMonth();
 
-            String landlordName = clientPropertyPair.get(clientText).getLandlordName();
-            String propertyAddress = clientPropertyPair.get(clientText).getPropertyAddress();
-            String propertyPrice = clientPropertyPair.get(clientText).getRentingPrice();
-            String propertyType = clientPropertyPair.get(clientText).getUnitType();
+            String landlordName = clientPropertyPair.get(client).getLandlordName();
+            String propertyAddress = clientPropertyPair.get(client).getPropertyAddress();
+            String propertyPrice = clientPropertyPair.get(client).getRentingPrice();
+            String propertyType = clientPropertyPair.get(client).getUnitType();
 
             String finalText = getPairingText(clientName, clientContact, clientEmail, clientBudget, landlordName,
                     propertyAddress, propertyPrice, propertyType) + NEXT_LINE;

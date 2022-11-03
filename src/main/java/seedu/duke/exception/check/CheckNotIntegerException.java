@@ -9,15 +9,13 @@ import static seedu.duke.Messages.MESSAGE_NOT_INTEGER_INSTANCES;
  */
 public class CheckNotIntegerException extends ParseCheckException {
 
-    private String errorDetail;
 
-    public CheckNotIntegerException(String errorDetail) {
-        this.errorDetail = errorDetail;
+    public CheckNotIntegerException() {
     }
 
     @Override
     public String toString() {
-        return MESSAGE_NOT_INTEGER + MESSAGE_NOT_INTEGER_INSTANCES + errorDetail;
+        return MESSAGE_NOT_INTEGER;
     }
 
 }

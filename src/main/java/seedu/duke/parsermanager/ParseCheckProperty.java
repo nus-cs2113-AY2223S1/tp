@@ -3,6 +3,7 @@ package seedu.duke.parsermanager;
 //@@author ngdeqi
 import seedu.duke.command.Command;
 import seedu.duke.command.check.CommandCheckProperty;
+import seedu.duke.exception.NotIntegerException;
 import seedu.duke.exception.check.CheckNotIntegerException;
 import seedu.duke.exception.check.ParseCheckException;
 import seedu.duke.exception.check.checkproperty.CheckPropertyMissingFlagException;
@@ -24,10 +25,16 @@ public class ParseCheckProperty extends Parser {
     @Override
     public Command parseCommand() throws ParseCheckException {
 
-        ArrayList<String> checkDetailsString = processCommandDetails(commandDescription);
-        ArrayList<Integer> checkDetailsInt = convertCheckCommandDetailsToInteger(checkDetailsString);
+        ArrayList<String> stringCheckDetails = processCommandDetails(commandDescription);
+        ArrayList<Integer> integerCheckDetails;
 
-        return new CommandCheckProperty(checkDetailsInt);
+        try {
+            integerCheckDetails = convertProcessedCommandDetailsToInteger(stringCheckDetails);
+        } catch (NotIntegerException e) {
+            throw new CheckNotIntegerException();
+        }
+
+        return new CommandCheckProperty(integerCheckDetails);
     }
 
 
@@ -48,23 +55,7 @@ public class ParseCheckProperty extends Parser {
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
+        return (flagIndexPosition != FLAG_ABSENT_RETURN_VALUE);
     }
 
-    private ArrayList<Integer> convertCheckCommandDetailsToInteger(ArrayList<String> checkDetailsString)
-            throws CheckNotIntegerException {
-        ArrayList<Integer> integerDetails = new ArrayList<>();
-        for (String detail : checkDetailsString) {
-            int integer;
-            try {
-                integer = Integer.parseInt(detail);
-                // Convert to 0-index
-                integerDetails.add(integer - UNIT_VALUE);
-            } catch (NumberFormatException e) {
-                throw new CheckNotIntegerException(detail);
-            }
-        }
-
-        return integerDetails;
-    }
 }
