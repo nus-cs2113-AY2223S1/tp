@@ -33,15 +33,15 @@ public class StorageManager {
     public StorageManager(String userFilePath, String itemFilePath, String transactionFilePath) {
         this.userStorage = new UserStorage(userFilePath);
         this.itemStorage = new ItemStorage(itemFilePath, new UserList());
-        this.transactionStorage = new TransactionStorage(transactionFilePath, new ItemList());
-    }
-
-    private static boolean hasItemFile() {
-        return new File(FilePath.ITEM_FILE_PATH).exists();
+        this.transactionStorage = new TransactionStorage(transactionFilePath, new UserList(), new ItemList());
     }
 
     private static boolean hasUserFile() {
         return new File(FilePath.USER_FILE_PATH).exists();
+    }
+
+    private static boolean hasItemFile() {
+        return new File(FilePath.ITEM_FILE_PATH).exists();
     }
 
     private static boolean hasTransactionFile() {
@@ -83,12 +83,11 @@ public class StorageManager {
     /**
      * Initialize transaction list.
      */
-    public TransactionList initializeTransactionList(String transactionFilePath,
-                                                     ItemList itemList)
+    public TransactionList initializeTransactionList(String transactionFilePath, UserList userList, ItemList itemList)
             throws StoreFailureException {
         TransactionList transactionList;
         try {
-            transactionStorage = new TransactionStorage(transactionFilePath, itemList);
+            transactionStorage = new TransactionStorage(transactionFilePath, userList, itemList);
             transactionList = transactionStorage.loadData();
         } catch (TransactionFileNotFoundException e) {
             transactionList = new TransactionList();
@@ -96,12 +95,11 @@ public class StorageManager {
         return transactionList;
     }
 
-    public boolean handleDataCorruption(String errorMessage, UserList userList,
-                                         ItemList itemList, TransactionList transactionList) {
+    public boolean handleDataCorruption(String errorMessage) {
         Ui.printErrorMessage(errorMessage);
         try {
-            if (StorageManager.checkForForceReset()) {
-                forceReset(userList, itemList, transactionList);
+            if (checkForForceReset()) {
+                forceReset();
             }
             return true;
         } catch (CommandNotFoundException | StoreFailureException e) {
@@ -110,11 +108,11 @@ public class StorageManager {
         }
     }
 
-    public void forceReset(UserList userList, ItemList itemList, TransactionList transactionList)
+    public void forceReset()
             throws StoreFailureException {
-        userList = new UserList();
-        itemList = new ItemList();
-        transactionList = new TransactionList();
+        UserList userList = new UserList();
+        ItemList itemList = new ItemList();
+        TransactionList transactionList = new TransactionList();
         writeDataToFile(userList, itemList, transactionList);
     }
 
@@ -141,7 +139,7 @@ public class StorageManager {
         }
     }
 
-    public static boolean checkForForceReset() throws CommandNotFoundException {
+    private static boolean checkForForceReset() throws CommandNotFoundException {
         while (true) {
             String input = Ui.readInput();
             switch (input.toLowerCase()) {

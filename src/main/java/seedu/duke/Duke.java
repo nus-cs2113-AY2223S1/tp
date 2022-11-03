@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.exception.StoreFailureException;
 import seedu.duke.item.ItemList;
 import seedu.duke.logger.DukeLogger;
@@ -44,10 +45,25 @@ public class Duke {
             StorageManager.checkThreeFilesSimultaneouslyExistOrNotExit();
             userList = storageManager.initializeUserList(userFilePath);
             itemList = storageManager.initializeItemList(itemFilePath, userList);
-            transactionList = storageManager.initializeTransactionList(itemFilePath, itemList);
+            transactionList = storageManager.initializeTransactionList(transactionFilePath, userList, itemList);
         } catch (StoreFailureException e) {
-            isExit = storageManager.handleDataCorruption(e.getMessage(), userList, itemList, transactionList);
+            isExit = storageManager.handleDataCorruption(e.getMessage());
         }
+    }
+
+    /**
+     * Main activity of Duke: reads input from user and parses command,
+     * and execute it.
+     *
+     * @throws DukeException If there is any error
+     */
+    private void readInputAndParseCommand() throws DukeException {
+        String input = Ui.readInput();
+        Command command =
+                CommandParser.createCommand(input, userList, itemList, transactionList);
+        isExit = command.executeCommand();
+        storageManager.writeDataToFile(userList, itemList, transactionList);
+        dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY + input);
     }
 
     /**
@@ -60,12 +76,7 @@ public class Duke {
         }
         while (!isExit) {
             try {
-                String input = Ui.readInput();
-                Command command =
-                        CommandParser.createCommand(input, userList, itemList, transactionList);
-                isExit = command.executeCommand();
-                storageManager.writeDataToFile(userList, itemList, transactionList);
-                dukeLogger.info(LOG_EXECUTE_SUCCESSFULLY + input);
+                readInputAndParseCommand();
             } catch (Exception e) {
                 Ui.printErrorMessage(e.getMessage());
                 dukeLogger.logDukeException(e);
