@@ -46,6 +46,7 @@ public class CarparkList {
      * @param carparks {@link List} of {@link Carpark} objects.
      */
     CarparkList(List<Carpark> carparks) {
+        assert carparks != null : "Error creating carparks from list. Please contact the developer!";
         this.carparks = carparks;
         sortCarparksById();
     }
