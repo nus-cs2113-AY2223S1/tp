@@ -37,16 +37,23 @@ public class Appointment {
 
     // check appointment date format
     public static Date checkFormattedDate(String appointmentDateStr) {
-        Date formattedDate = null;
+        Date formattedDate;
         try {
+            formatter.setLenient(false);
             formattedDate = formatter.parse(appointmentDateStr);
         } catch (ParseException e) {
-            System.out.println("Invalid appointment date format! Pls follow yyyy-MM-dd!");
+            System.out.println("Invalid appointment date format! Pls follow yyyy-M(M)-d(d)!");
             return null;
         }
-        return formattedDate;
+        String appointmentYearStr = appointmentDateStr.split("-")[0];
+        int appointmentYear = Integer.parseInt(appointmentYearStr);
+        Date currentDate = new Date(System.currentTimeMillis());
+        if (formattedDate.compareTo(currentDate) > 0 && appointmentYear < 10000) {
+            return formattedDate;
+        }
+        System.out.println("Pls enter valid appointment year!");
+        return null;
     }
-
 
     // view tasks for a find appointment
     public void viewTasks() {
