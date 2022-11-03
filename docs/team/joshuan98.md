@@ -9,7 +9,7 @@ In particular, it is a useful utility for exploring potential module mappings fo
 
 ### Code Contributed
 
-This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
+[This link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
 
 ### Enhancements Implemented
 
