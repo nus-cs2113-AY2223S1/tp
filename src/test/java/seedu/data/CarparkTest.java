@@ -133,4 +133,10 @@ public class CarparkTest {
         carpark.addCarparkLotType(LotType.CAR, 200);
         Assertions.assertEquals(230, carpark.getAvailableLots());
     }
+
+    @Test
+    void carparkLotTypeParseTest() throws InvalidFormatException {
+        Carpark carpark = Carpark.parseCarpark(DEFAULT_CARPARK_STRING);
+        Assertions.assertThrows(InvalidFormatException.class, () -> carpark.setLotType("Invalid"));
+    }
 }

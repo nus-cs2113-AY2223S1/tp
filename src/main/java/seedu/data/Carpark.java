@@ -162,18 +162,20 @@ public class Carpark implements Comparable<Carpark> {
     }
 
     @JsonProperty("LotType")
-    public void setLotType(String lotType) {
+    public void setLotType(String lotType) throws InvalidFormatException {
         this.lotType = chooseLotType(lotType);
         allAvailableLots.put(this.lotType, this.availableLots);
     }
 
-    private LotType chooseLotType(String lotTypeString) {
+    private LotType chooseLotType(String lotTypeString) throws InvalidFormatException {
         if (lotTypeString.equals("H")) {
             return LotType.HEAVY_VEHICLE;
         } else if (lotTypeString.equals("Y")) {
             return LotType.MOTORCYCLE;
-        } else {
+        } else if (lotTypeString.equals("C")){
             return LotType.CAR;
+        } else {
+            throw new InvalidFormatException("Lot type not recognised!");
         }
     }
 
