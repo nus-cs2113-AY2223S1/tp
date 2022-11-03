@@ -69,9 +69,11 @@ public class ParserManager {
             parser = parseDeleteCommand(commandDetail);
             break;
         case COMMAND_PAIR:
-            return new PairParser(commandDetail);
+            parser = new PairParser(commandDetail);
+            break;
         case COMMAND_UNPAIR:
-            return new UnpairParser(commandDetail);
+            parser = new UnpairParser(commandDetail);
+            break;
         case COMMAND_CHECK:
             parser = parseCheckCommand(commandDetail);
             break;

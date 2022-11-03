@@ -7,6 +7,7 @@ import seedu.duke.exception.pairunpair.ParsePairUnpairException;
 import seedu.duke.exception.pairunpair.pair.PairIncorrectFlagOrderException;
 import seedu.duke.exception.pairunpair.pair.PairMissingDescriptionException;
 import seedu.duke.exception.pairunpair.pair.PairMissingFlagException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 

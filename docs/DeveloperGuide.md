@@ -1,76 +1,41 @@
 # Property Rental Manager - Developer Guide
 * [Acknowledgements](#acknowledgements)
 * [Setting Up and Getting Started](#setting-up-and-getting-started)
-* [Product Scope](#product-scope)
-* [Target User Profile](#target-user-profile)
-* [Value Proposition](#value-proposition)
-* [User Stories](#user-stories)
 * [Design](#design)
-  * [Architecture](#architecture)
-  * [UI Component](#ui-component)
-  * [Client Component](#client-component)
-  * [Property Component](#property-component)
   * [List Component](#list-component)
-  * [Model Component](#model-component)
-  * [List Component](#list-component)
+  * [Pairing Component](#pairing-component)
   * [Storage Component](#storage-component)
-  * [Common Classes](#storage-component)
 * [Implementation](#implementation)
-* [Documentation, logging, testing, configuration and dev-ops](#documentation-logging-testing-configuration-and-dev-ops)
-* [Appendix: Requirements](#appendix-requirements)
-* [Appendix: Instruction for manual testing](#appendix-instruction-for-manual-testing)
-* [Non Functional Requirement (NFR)](#non-functional-requirements)
-* [Glossary](#glossary)
+  * [Add Feature](#add-feature)
+  * [Delete Client/Property Feature](#delete-clientproperty-feature)
+  * [Pairing and Unpairing Features](#pairing-and-unpairing-features)
+  * [Storage Feature](#storage-feature)
+  * [List Feature](#list-feature)
+* [Appendix A: Product Scope](#appendix-a-product-scope)
+* [Appendix B: User Stories](#appendix-b-user-stories)
+* [Appendix C: Non Functional Requirement (NFR)](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 ___
 ## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
 ___
 ## Setting Up and Getting Started
-___
-## Product scope
-___
-## Target user profile
-This application is for property agent who is managing single owner rental units and is looking to reduce the overhead to filter appropriate tenants. The property agent would also want to monitor the expenses such as damages, utility bills and payment dates for rent.
-___
-## Value proposition
-Aids property agent in tracking information related to their property which includes:
-- Filtering appropriate tenants (Based on tags e.g.: gender, occupations and age)
-- Show expenses from the rented unit
-- Monitor payment dates 
-
-Some of the constraint includes:
-- Single owner unit (Shared ownership will be registered under one owner's name)
-- Unable to calculate tax payment
-___
-## User Stories
-
-| Version | As a ...         | I want to ...                         | So that I can ...                                                    |
-|---------|------------------|---------------------------------------|----------------------------------------------------------------------|
-| v1.0    | Property Manager | add properties                        | keep track of properties                                             |
-| v1.0    | Property Manager | add clients                           | keep track of clients                                                |
-| v1.0    | Property Manager | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
-| v1.0    | Property Manager | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
-| v1.0    | Property Manager | view a list of properties             | find out what and how many properties I manage                       |
-| v1.0    | Property Manager | view a list of clients                | find out what and how many clients I manage                          |
-| v1.0    | Property Manager | check the details of a property       | view the property's information                                      |
-| v1.0    | Property Manager | pair a client to a property           | record down which client is renting which property                   |
-| v1.0    | Property Manager | unpair a client to a property         | update my rental records when a client is no longer renting property |
-| v1.0    | Property Manager | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | Property Manager | quit the app                          | -                                                                    |
-| v2.0    | Property Manager | check the details of a client         | view the client's information                                        |
-| v2.0    | Property Manager | search clients using their details    | easily find specific clients                                         |
-| v2.0    | Property Manager | search properties using their details | easily find specific properties                                      |
-
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `PropertyRentalManager.jar` from [here](https://github.com/AY2223S1-CS2113-F11-1/tp/releases).
+3. Put the JAR file into an empty folder.
+4. Open a command window and change the current working directory to the directory that the JAR file is located in using
+   following command:
+```
+cd [PATH_TO_JAR_DIRECTORY]
+```
+5. Run Property Rental Manager
+```
+java -jar PropertyRentalManager.jar
+```
 ___
 ## Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-### Architecture
-![Software Architecture Diagram](diagrams/ArchitectureDiagram.png)
-### UI Component
-### Parser Component
-### Client Component
-### Property Component
+
 ### List Component
 The list feature has the following commands in it -
 * `list -client` This lists every client, along with all their information
@@ -94,26 +59,42 @@ The list feature has the following commands in it -
 There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
 the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
 these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
-CommandListEverything read and display using loops inside the overriden execute() method itself. The Commands which 
+CommandListEverything read and display using loops inside the overridden execute() method itself. The Commands which 
 display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
 methods to display their information, using methods present in Ui. The class structure is as follows - 
 ![ListClassDiagram](diagrams/ListClassDiagram.png)
 
-  
+---  
 
 ### Pairing Component
-API: [```pairingList.java```](../src/main/java/seedu/duke/PairingList.java)
+API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
 
-```PairingList``` is responsible for recording which clients renting which property.
+* `PairingList` is responsible for recording which clients renting which property.
+* `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.
 
-```PairingList``` does not inherit from other classes. It stores references to Client and Property objects.
+Here is how classes involved in the pairing/unpairing actions interact with each other:
 
-This a partial class diagram of the ```PairingList``` class:
+![Pairing List Class Diagram](diagrams/PairingListCD.png)
+1. `PairParser` and `UnpairParser` inherit from a general `PairUnpairParser`, which contains parsing methods that are 
+    common to its subclasses.
+2. `PairParser` and `UnpairParser` are responsible for checking input format. After (successful) checking, they create 
+    `CommandPair` and `CommandUnpair` objects respectively.
+3. `CommandPair` and `CommandUnpair` contain references to `ClientList` and `PropertyList` because the command classes
+    need to validate user input against the data `ClientList` and `PropertyList`.
+4. After input is validated, `PairingList` is updated with the new pairings. `Storage` records these changes and `Ui` 
+    prints the confirmation message for the user action.
 
-![Pairing List Design Diagram](diagrams/PairingListDesignDiagram.png)
-```ParsePair``` and ```ParseUnpair``` contain references to data classes ```PairingList```, ```ClientList``` and 
-```PropertyList``` because the data classes provide the required information to validate user input.
 
+Here is the underlying data structure of `PairingList`:
+
+![Pairing List Data Class Diagram](diagrams/PairingListAPICD.png)
+* `PairingList` is essentially a "wrapper" to the underlying `HashMap` with key-value pairs where the `Client` is the key and `Property` is the value.
+* `PairingList` provides methods to add or delete these key-value pairs to represent the pairing and unpairing of real-life
+    clients and properties.
+* The `Client` and `Property` references must be present in `ClientList` and `PropertyList` as well, since `PairingList` is an
+    implementation of an adjacency list. 
+
+---
 ### Storage Component
 For `Storage` feature:
 
@@ -137,7 +118,6 @@ It has an association with other class which includes:
 Since the arraylist changes by **adding** and **deleting** operations while hashmap changes by **pair** and **unpair** 
 operations, the text files will be updated when `add`, `delete`, `pair` or `unpair` is invoked.
 
-### Common Classes
 ___
 ## Implementation
 
@@ -289,65 +269,72 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 ---
 
-### PairingList
+### Pairing and Unpairing Features
 
-```PairingList``` facilities that pair and unpair commands by storing client-property pairs.
+`PairingList` facilitates pair and unpair commands by storing client-property pairs.
 
-When client rents a property, the client and property form a pair.
+When a client rents a property, the client and property form a pair.
 
-*  ```PairingList``` uses a hash map to represent these client-property pairs, where the key is a ```Client``` object
-  and the value is a ```Property``` object.
+* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client` object
+  and the value is a `Property` object.
 * A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
   client is renting.
-* Also, the Java HashMap prevents duplicate keys, which dovetails nicely with the fact that real-life tenants only have
+* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants(clients) only have
   one place of residence at any time.
 
-#### Pair
+#### Pair Feature
 
-The sequence diagram for the pair command is called is shown below:
+The partial sequence diagram for the pair command, when called from `Duke.java`, is shown below:
 
-![PairingList Add Pair Sequence Diagram](diagrams/PairingListAddPairSD.png)
+![PairingList Pair Sequence Diagram](diagrams/PairingListPairSD.png)
 
-**NOTE**: Some self-invocated calls have been omitted because this diagram emphasises cross-class method calls.
+**NOTE**: Self-invocations have been omitted to emphasise inter-object method calls.
 
 The pair command takes in user input of the format:
 ```
 pair ip/PROPERTY_INDEX ic/CLIENT_INDEX
 ```
-where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
-and ```PropertyList``` if their private arrays were 1-indexed.
+where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are indexes present in `ClientList`
+and `PropertyList`, if their arrays were 1-indexed.
 
 How the pair command works:
-1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParsePair```).
-2. ```ParsePair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
-3. ```ParsePair``` also calls helper methods in ```PairingList``` to check that the pairing client and property indexes
-    exists. Also, the client and property must not be already paired. The client must not be renting any property
-    presently as well.
-4. After passing all these checks, the program fetches the desired```Property``` and ```Client``` from
-   ```PropertyList``` and ```ClientList```.
-5. The ```Property``` and ```Client``` objects are inserted as a pair into the hashmap of ```PairingList```.
+1. The user input is first parsed by `Parser` (specifically, `PairParser`).
+2. `PairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+3. After a successful check, a `CommandPair` object is created.
+4. When `CommandPair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
+    `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
+   `PropertyList` and `ClientList`.
+6. A third layer of checks throws exceptions if the `Client` and `Property` objects already match an existing pair, the
+    `Client` is already paired with some other `Property`, or when the user pairs a client whose budget is lower than the property's rental price.
+7. The `Client` and `Property` objects are inserted as a pair into the hashmap of `PairingList`.
  
-#### Unpair
+#### Unpair Feature
 
 The unpair command takes in user input of the format:
 ```
 unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX
 ```
-where ```PROERTY_INDEX``` and ```CLIENT_INDEX``` must be positive integers which are indexes present in ```ClientList```
-and ```PropertyList``` if their private arrays were 1-indexed.
+where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are indexes present in `ClientList`
+and `PropertyList`, if their private arrays were 1-indexed.
 
+(The sequence diagram for unpair is not provided as the mechanism is similar to that of [Pair](#pair-feature))
 
-How the unpair command works:
-1. The user input for a pair command is first parsed by ```Parser``` (specifically, ```ParseUnpair```).
-2. ```ParseUnpair``` checks the user input for formatting mistakes such as missing flags and wrong flag orders.
-3. ```ParseUnpair``` also calls helper methods in ```PairingList``` to check that the pairing client and property
-   indexes exist, and that the client-property pair exist in ```PairingList```.
-4. After passing all these checks, the ```PairingList``` deletes the hashmap entry in ```clientPropertyPairings```
-   which contains the client-property pair.
+How the unpair command works :
+1. The user input for an unpair command is first parsed by `Parser` (specifically, `UnpairParser`).
+2. `UnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+3. After a successful check, a `CommandUnpair` object is created.
+4. When `CommandUnpair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
+   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
+   `PropertyList` and `ClientList`.
+6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
+7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
 
 ---
 
-### Storage
+### Storage Feature
+
 The implementation of Storage class requires consists of different level of operations:
 
 - Load Files
@@ -397,6 +384,7 @@ The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.
 
+---
 
 ### List feature
 
@@ -441,17 +429,49 @@ The above is an example for CommandListClients. It reads from ClientList. Then, 
 using the displayOneClient function in Ui.  
 The sequence diagram of the operation is as follows - 
 ![ListSequence](diagrams/ListSequenceUpdated.png)
+___
 
+## Appendix A: Product Scope
+
+### Target user profile
+* Property agent who are managing single owner rental units
+* has a need to keep track of information of properties that are being put out for rental.
+* has a need to keep track of information of clients' (prospective tenants) information.
+* is a fast typist
+* favors a command-line interface over a Graphic User Interface.
+
+### Value proposition
+Aids property agent in tracking information related to the properties and clients (prospective tenants) they manage:
+- Record down information of properties (landlord, address, rental price, unit type).
+- Record down information of clients (name, contact number, budget), who are looking to rent properties.
+- Record down instances where a client decides to rent a property/ stop renting a property.
+- View client and property information quickly.
+
+___
+
+
+## Appendix B: User Stories
+
+| Version | As a ... | I want to ...                         | So that I can ...                                                    |
+|---------|----------|---------------------------------------|----------------------------------------------------------------------|
+| v1.0    | user     | add properties                        | keep track of properties                                             |
+| v1.0    | user     | add clients                           | keep track of clients                                                |
+| v1.0    | user     | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | user     | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | user     | view a list of properties             | find out what and how many properties I manage                       |
+| v1.0    | user     | view a list of clients                | find out what and how many clients I manage                          |
+| v1.0    | user     | check the details of a property       | view the property's information                                      |
+| v1.0    | user     | pair a client to a property           | record down which client is renting which property                   |
+| v1.0    | user     | unpair a client to a property         | update my rental records when a client is no longer renting property |
+| v1.0    | user     | save my data                          | used the data created from a previous use of the app                 |
+| v1.0    | user     | quit the app                          | free up memory for other applications                                |
+| v2.0    | user     | check the details of a client         | view the client's information                                        |
+| v2.0    | user     | search clients using their details    | easily find specific clients                                         |
+| v2.0    | user     | search properties using their details | easily find specific properties                                      |
 
 ---
 
-## Documentation, logging, testing, configuration and dev-ops
-___
-## Appendix: Requirements
-___
-## Appendix: Instruction for Manual Testing
-
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
 2. The system should respond to the user input within 2 seconds.
 3. The system adheres to stict user input formatting to prevent corruption of data.
@@ -459,10 +479,123 @@ ___
 5. The system stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
 6. This system is contrained under a single user. Multiple users are not supported
 
-## Glossary
+
+---
+## Appendix D: Glossary
 
 * *client* - Person who is seeking for property to rent
 
+---
+## Appendix E: Instructions for Manual Testing
+
+### Launch
+1. Download the JAR file and move it into an empty folder.
+2. On a command line application, change the current working directory to the same folder as the JAR file and run the app using:
+```
+java -jar PropertyRentalManager.jar
+```
+3. Expected: The app's welcome message is printed onto the terminal. 
+    
+### Add
+
+### Delete
+
+### List
+
+### Pair
+1. Successful Pairing
+    1. Prerequisites: 
+       * Have at least 1 client and 1 property added to the app. 
+       * Ensure that the client's budget is higher than or equal to the property's rental price.
+       * Ensure that the client and property have **NOT** been paired.
+    2. Test case: `pair ip/1 ic/1`
+
+        Expected: Pairing is added. Terminal shows successful pairing message, the name of the paired client, 
+        and the address of the paired property.
+
+
+2. Failed Pairing (budget exceeded)
+   1. Prerequisites:
+       * Have at least 1 client and 1 property added to the app.
+       * Ensure that the client's budget is lower than the property's rental price.
+   2. Test case: `pair ip/1 ic/1`
+   
+       Expected: Terminal shows unsuccessful pairing message, name and budget of client, and the address and rental 
+       price of the property.
+
+
+3. Failed Pairing (client already paired to another property)
+   1. Prerequisites:
+       * Have at least 1 client and 2 properties added to the app.
+       * Ensure that the client's budgets is higher than or equal to the rental prices of both properties.
+       * Have paired the client and a property e.g `pair ip/1 ic/1`
+   2. Test case: `pair ip/2 ic/1` (pair a different property to the same client)
+   
+      Expected: Terminal shows unsuccessful pairing message.
+
+
+4. Failed Pairing (client and property form an existing pairing)
+    1. Prerequisites:
+        * Have at least 1 client and 1 property added to the app.
+        * Ensure that the client's budgets is higher than or equal to the property's rental price.
+        * Have paired the client and property e.g `pair ip/1 ic/1`
+    2. Test case: `pair ip/1 ic/1` (re-pair using the same indexes)
+   
+        Expected: Terminal shows unsuccessful pairing message.
+
+
+### Unpair
+1. Successful unpairing:
+   1. Prerequisites:
+      * Have at least 1 client and 1 property added to the app.
+      * Have paired the client and property e.g. `pair ip/1 ic/1`
+   2. Test case: `unpair ip/1 ic/1` (unpair using the same indexes as the pair command)
+      
+       Expected: Pairing is deleted. Terminal shows successful unpairing message showing the client's name and the 
+       property address.
+
+
+2. Failed unpairing (unpairing a property and a client that have not been paired):
+   1. Prerequisites:
+      * Have at least 1 client and 1 property added to the app.
+      * Have **NOT** paired the client and property.
+   2. Test case: `unpair ip/1 ic/1`
+       
+       Expected: Terminal shows unsuccessful pairing message.
+
+
+### Check
+
+#### Check Property
+1. Successful check property
+   1. Prerequisites:
+      * Have at least 2 clients and 2 properties added to the app.
+      * Ensure that all clients have budgets equal to or greater than that of the properties.
+      * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
+   2. Test case: `check -property ip/1`
+      
+      Expected: Terminal shows details of the property and information of the clients renting the property. Number of list results is greater than 0.
+   3. Test case: `check -property ip/2`
+      
+       Expected: Terminal shows details of the property, number of list results is 0. 
+   
+
+2. Failed check property
+   1. Test case: `check -property ip/0`
+   
+        Expected: Terminal shows error message.
+   
+   2. Test case: `check -property ip/[INDEX]`, where INDEX is an index that is not in the property list (1-indexed).
+   
+        Expected: Terminal shows error message.
+
+   3. Test case: `check -property ip/1r2342`
+   
+        Expected: Terminal shows error message.
+
+### Find
+
+### Storage
 
 ## Instructions for manual testing
 
@@ -493,3 +626,4 @@ ___
         - Expected: An error stating that the tag is missing will be shown.
     10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
     
+### Quit
