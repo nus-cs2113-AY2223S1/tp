@@ -35,7 +35,7 @@ public class CommandStructure {
     public static final String[] DELETE_CLIENT_FLAGS = {"ic/"};
     public static final String[] PAIR_FLAGS = {"ip/", "ic/"};
     public static final String[] UNPAIR_FLAGS = {"ip/", "ic/"};
-    public static final String[] CHECK_PROPERTY_FLAGS = {"ip/"};
+    public static final String[] CHECK_PROPERTY_FLAGS = {"i/"};
     public static final String[] CHECK_CLIENT_FLAGS = {"ic/"};
 
     //@@author OVReader

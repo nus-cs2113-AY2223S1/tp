@@ -231,9 +231,9 @@ public class Messages {
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
             + "following format:\n"
-            + "  check -property ip/INDEX\n"
+            + "  check -property i/INDEX\n"
             + "Example:\n"
-            + "  check -property ip/5\n";
+            + "  check -property i/5\n";
 
 
     /* List related Error Messages */
