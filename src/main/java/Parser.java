@@ -416,4 +416,46 @@ public class Parser {
         }
     }
 
+    public static boolean isPatientInputValid(String[] inputs) {
+        if (inputs == null) {
+            return false;
+        }
+        if (inputs.length != 4) {
+            return false;
+        }
+        if (!inputs[2].equals("M") && !inputs[2].equals("F")) {
+            return false;
+        }
+        return !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[3].isEmpty();
+    }
+
+    public static boolean isVisitInputValid(String[] inputs, PatientList patientList) {
+        if (inputs == null) {
+            return false;
+        }
+        if (inputs.length != 4) {
+            return false;
+        }
+        if (inputs[0].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        return patientList.containsPatientID(inputs[0]);
+    }
+
+    public static boolean isPrescriptionInputValid(String[] inputs, PatientList patientList) {
+        if (inputs == null) {
+            return false;
+        }
+        if (inputs.length != 5) {
+            return false;
+        }
+        if (!inputs[4].equals("T") && !inputs[4].equals("F")) {
+            return false;
+        }
+        if (inputs[0].isEmpty() || inputs[1].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        return patientList.containsPatientID(inputs[0]);
+    }
+
 }

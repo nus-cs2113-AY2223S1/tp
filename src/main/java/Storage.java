@@ -36,12 +36,11 @@ public class Storage {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            UI.printErrorMessage("Error! Data files could not be created");
+            UI.printErrorMessage(UI.FILE_CREATION_ERROR_MESSAGE);
         }
     }
 
     public void loadData(PatientList patientList, VisitList visitList, PrescriptionList prescriptionList) {
-        System.out.println("Loading existing data...");
         if (!patientFile.exists()) {
             createDataFile(patientFile);
         }
@@ -50,48 +49,91 @@ public class Storage {
         if (!visitFile.exists()) {
             createDataFile(visitFile);
         }
-        loadVisits(visitList);
+        loadVisits(visitList, patientList);
 
         if (!prescriptionFile.exists()) {
             createDataFile(prescriptionFile);
         }
-        loadPrescriptions(prescriptionList);
+        loadPrescriptions(prescriptionList, patientList);
+        savePatientData(patientList);
+        saveVisitData(visitList);
+        savePrescriptionData(prescriptionList);
     }
+
 
     private void loadPatients(PatientList patientList) {
         Scanner fileScanner = setScanner(patientFile);
         if (fileScanner == null) {
             return;
         }
+        boolean loaded = false;
+        boolean invalid = false;
         while (fileScanner.hasNext()) {
             String input = fileScanner.nextLine().trim();
             String[] inputs = input.split(" \\| ", 4);
-            patientList.loadPatient(inputs[0], inputs[1], inputs[2], inputs[3]);
+            if (Parser.isPatientInputValid(inputs)) {
+                patientList.loadPatient(inputs[0], inputs[1], inputs[2], inputs[3]);
+                loaded = true;
+            } else {
+                invalid = true;
+            }
+        }
+        if (invalid) {
+            System.out.println(UI.INVALID_PATIENT_DATA_MESSAGE);
+        }
+        if (loaded) {
+            System.out.println(UI.PATIENT_LOADED_MESSAGE);
         }
     }
 
-    private void loadVisits(VisitList visitList) {
+    private void loadVisits(VisitList visitList, PatientList patientList) {
         Scanner fileScanner = setScanner(visitFile);
         if (fileScanner == null) {
             return;
         }
+        boolean loaded = false;
+        boolean invalid = false;
         while (fileScanner.hasNext()) {
             String input = fileScanner.nextLine().trim();
             String[] inputs = input.split(" \\| ", 4);
-            visitList.loadVisit(inputs[0], inputs[2], inputs[3], inputs[1]);
+            if (Parser.isVisitInputValid(inputs, patientList)) {
+                visitList.loadVisit(inputs[0], inputs[2], inputs[3], inputs[1]);
+                loaded = true;
+            } else {
+                invalid = true;
+            }
+        }
+        if (invalid) {
+            System.out.println(UI.INVALID_VISIT_DATA_MESSAGE);
+        }
+        if (loaded) {
+            System.out.println(UI.VISIT_LOADED_MESSAGE);
         }
     }
 
-    private void loadPrescriptions(PrescriptionList prescriptionList) {
+    private void loadPrescriptions(PrescriptionList prescriptionList, PatientList patientList) {
         Scanner fileScanner = setScanner(prescriptionFile);
         if (fileScanner == null) {
             return;
         }
+        boolean loaded = false;
+        boolean invalid = false;
         while (fileScanner.hasNext()) {
             String input =  fileScanner.nextLine().trim();
             String[] inputs = input.split(" \\| ", 5);
-            boolean active = (inputs[4].equals("T"));
-            prescriptionList.loadPrescription(inputs[0], inputs[1], inputs[2], inputs[3], active);
+            if (Parser.isPrescriptionInputValid(inputs, patientList)) {
+                boolean active = (inputs[4].equals("T"));
+                prescriptionList.loadPrescription(inputs[0], inputs[1], inputs[2], inputs[3], active);
+                loaded = true;
+            } else {
+                invalid = true;
+            }
+        }
+        if (invalid) {
+            System.out.println(UI.INVALID_PRESCRIPTION_DATA_MESSAGE);
+        }
+        if (loaded) {
+            System.out.println(UI.PRESCRIPTION_LOADED_MESSAGE);
         }
     }
 
@@ -100,7 +142,7 @@ public class Storage {
         try {
             fileScanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            UI.printErrorMessage("Error! Data files could not be found!");
+            UI.printErrorMessage(UI.MISSING_DATA_FILES_ERROR_MESSAGE);
         }
         return fileScanner;
     }
@@ -110,23 +152,30 @@ public class Storage {
         try {
             fileWriter = new FileWriter(patientFile);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! File writer could not be created");
+            UI.printErrorMessage(UI.FILE_WRITER_CREATION_ERROR_MESSAGE);
             return;
         }
 
         try {
-            for (Patient patient : patientList.getPatients()) {
-                logPatientIntoDataFile(fileWriter, patient);
-            }
+            logPatients(patientList, fileWriter);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! Data could not be written into data file!");
+            UI.printErrorMessage(UI.WRITE_ERROR_MESSAGE);
         } finally {
-            try {
-                fileWriter.close();
-            } catch (IOException e) {
-                UI.printErrorMessage("Error! File writer could not be closed!");
-                return;
-            }
+            closeFileWriter(fileWriter);
+        }
+    }
+
+    private void logPatients(PatientList patientList, FileWriter fileWriter) throws IOException {
+        for (Patient patient : patientList.getPatients()) {
+            logPatientIntoDataFile(fileWriter, patient);
+        }
+    }
+
+    private static void closeFileWriter(FileWriter fileWriter) {
+        try {
+            fileWriter.close();
+        } catch (IOException e) {
+            UI.printErrorMessage(UI.FILE_WRITER_CLOSURE_ERROR_MESSAGE);
         }
     }
 
@@ -135,23 +184,22 @@ public class Storage {
         try {
             fileWriter = new FileWriter(prescriptionFile);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! File writer could not be created");
+            UI.printErrorMessage(UI.FILE_WRITER_CREATION_ERROR_MESSAGE);
             return;
         }
 
         try {
-            for (Prescription prescription: prescriptionList.getPrescriptions()) {
-                logPrescriptionIntoDataFile(fileWriter, prescription);
-            }
+            logPrescriptions(prescriptionList, fileWriter);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! Data could not be written into data file!");
+            UI.printErrorMessage(UI.WRITE_ERROR_MESSAGE);
         } finally {
-            try {
-                fileWriter.close();
-            } catch (IOException e) {
-                UI.printErrorMessage("Error! File writer could not be closed!");
-                return;
-            }
+            closeFileWriter(fileWriter);
+        }
+    }
+
+    private void logPrescriptions(PrescriptionList prescriptionList, FileWriter fileWriter) throws IOException {
+        for (Prescription prescription: prescriptionList.getPrescriptions()) {
+            logPrescriptionIntoDataFile(fileWriter, prescription);
         }
     }
 
@@ -160,23 +208,22 @@ public class Storage {
         try {
             fileWriter = new FileWriter(visitFile);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! File writer could not be created");
+            UI.printErrorMessage(UI.FILE_WRITER_CREATION_ERROR_MESSAGE);
             return;
         }
 
         try {
-            for (Visit visit: visitList.getVisits()) {
-                logVisitIntoDataFile(fileWriter, visit);
-            }
+            logVisits(visitList, fileWriter);
         } catch (IOException e) {
-            UI.printErrorMessage("Error! Data could not be written into data file!");
+            UI.printErrorMessage(UI.WRITE_ERROR_MESSAGE);
         } finally {
-            try {
-                fileWriter.close();
-            } catch (IOException e) {
-                UI.printErrorMessage("Error! File writer could not be closed!");
-                return;
-            }
+            closeFileWriter(fileWriter);
+        }
+    }
+
+    private void logVisits(VisitList visitList, FileWriter fileWriter) throws IOException {
+        for (Visit visit: visitList.getVisits()) {
+            logVisitIntoDataFile(fileWriter, visit);
         }
     }
 
