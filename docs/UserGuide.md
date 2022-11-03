@@ -46,8 +46,6 @@ ____________________________________________________________
 ```
 6. Type the valid command and press Enter to run the command. See [Feature](#3-features) or [Command Summary](#4-command-summary) for more information of commands.
 
-><span style="color: #FF1A00;">**IMPORTANT**</span>: **DO NOT** edit any files in ```/data/``` folder. This action potentially cause unfixable bugs when execute the program, and you may have to edit again or in the worst case, delete all storage file and all of your data will be gone forever.
-
 ## 3. Features 
 
 This section allows users to understand all the features that we offer, including the format, and the constraint. We also demonstrate some examples of usage and the expected outcome.
@@ -57,7 +55,7 @@ This section allows users to understand all the features that we offer, includin
 >1. Upcycle commands (except ```find-item``` and ```find-user```) are case-sensitive and space-insensitive. For example, ```upcycle``` and ```Upcycle``` are different words, ```Upcycle``` and ```Upcycle ``` are the same words.
 >2. Parameters can be shuffled. For example, ```update-item /i [ITEM_ID] /p [PRICE]``` and ```update-item /p [PRICE] /i [ITEM_ID]``` are the same.
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
->4. Argument value cannot contain ```\``` or ```|```.
+>4. Argument value cannot contain ```/``` or ```|```.
 >5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
 
 
@@ -199,7 +197,7 @@ Here is the user you have requested to view:
 Username: bui Age: 20 Contact: 12345678 
 The user's loss is $0.0
 The user's gain is $0.0
-Here are 2 item(s) in your list:
+Here are 2 item(s) in the list:
 1. [Available] ItemId: 69b69ff2
    Item name: charger
    Category: ELECTRICAL_APPLIANCES
@@ -268,10 +266,9 @@ ____________________________________________________________
 Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]```
 
 Note:
-1. Owner cannot have duplicate items (items have the same name)
-2. Item name length must be less than 20 chars
-3. To choose category, please use ```list-categories``` to list them out and use the index
-4. Price must be a float, and in range from 0 to 10000
+1. Item name length must be less than 20 chars
+2. To choose category, please use ```list-categories``` to list them out and use the index
+3. Price must be a float, and in range from 0 to 10000
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -388,7 +385,7 @@ Note:
 
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
 2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
-3. Minimum and Maximum price must be more than 0 and less than 10000
+3. Minimum and Maximum price must be no less than 0 and no more than 10000
 4. Minimum price must be less than maximum price
 5. Category number must be an integer, (default: 0, which means all categories)
 
@@ -477,7 +474,7 @@ Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE
 
 Note:
 1. The unit of duration is days
-2. Duration must be an integer, greater than 0 and less than 1461 (4 years)
+2. Duration must be an integer, in range from 0 to 1461 days (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
 4. The item must be available during the period of new transaction.
 5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.
@@ -707,7 +704,7 @@ How can I manually edit data files correctly?
 > 
 > Each line represents one user with the format `[USERNAME] | [AGE] | [CONTACT]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > - Age range is from 10 to 100
 > - If name is edited, please also edit all items of that user in the item files
 > - Contact number length is 8
@@ -719,13 +716,14 @@ How can I manually edit data files correctly?
 > 
 > `[ITEMNAME] | [CATEGORY] | [PRICE] | [OWNER] | [ITEMID]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > 
 > - Price range from 0 to 10000
 > - Currently, we support 8 categories form 1 to 8
 > - Item's name length is no more than 20 characters
 > - Avoid change the name of owner, it can cause error (you can change both in user and item files)
 > - No item ID occurs twice
+> - If user is currently borrowing/lending something, do not delete him/her, or you can delete that unfinished transaction.
 > 
 > **Transaction file**
 > 
@@ -733,9 +731,10 @@ How can I manually edit data files correctly?
 > 
 > `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [TOTALMONEY] | [TRANSACTIONID]`
 > 
-> If you edit this files, please make sure: 
+> If you edit this files, please take note: 
 > 
 > - If the itemId occurs in item list, make sure the item's name and owner(lender) are matched with that item with given ID
 > - Duration range is from 0 to 1461
 > - Created date range is from 2016-01-01 to today
 > - No transaction ID occurs twice
+> - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.

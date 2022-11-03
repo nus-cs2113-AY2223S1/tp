@@ -48,6 +48,10 @@ public class ExceptionMessages {
             "Duration cannot be less than 0 or more than 1461 days (4 years)";
     public static final String MESSAGE_STATUS_INVALID =
             "The status argument is invalid (only 2 status are accepted: finished or unfinished)";
+    public static final String MESSAGE_UNFINISHED_USER_NOT_FOUND =
+            "The transaction is uncompleted but lender or borrower cannot be found in the list";
+    public static final String MESSAGE_UNFINISHED_ITEM_NOT_FOUND =
+            "The transaction is uncompleted but item cannot be found in the list";
     public static final String MESSAGE_ITEM_TRANSACTION_OVERLAP =
             "Your item was/is unavailable during the input period (overlap with transaction: ";
     public static final String MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP =

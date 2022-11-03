@@ -4,7 +4,11 @@ import seedu.duke.exception.DateFormatInvalidException;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.DurationInvalidException;
 import seedu.duke.exception.InvalidTransactionException;
+import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
+import seedu.duke.exception.UserNotFoundException;
+import seedu.duke.item.ItemList;
+import seedu.duke.user.UserList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -20,6 +24,8 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_TRANSA
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_UNFINISHED_ITEM_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_UNFINISHED_USER_NOT_FOUND;
 
 // @@author bdthanh
 public class TransactionList {
@@ -201,6 +207,21 @@ public class TransactionList {
         if (count > 0) {
             throw new InvalidTransactionException(
                     MESSAGE_ITEM_TRANSACTION_OVERLAP + transactions.get(0).getTxId() + ")");
+        }
+    }
+
+    public void checkLenderAndBorrowerUnfinishedTx(Transaction transactionToCheck, UserList userList, ItemList itemList)
+            throws InvalidTransactionException {
+        if (!transactionToCheck.isFinished()) {
+            try {
+                userList.getUserById(transactionToCheck.getBorrower());
+                userList.getUserById(transactionToCheck.getLender());
+                itemList.getItemById(transactionToCheck.getItemId());
+            } catch (UserNotFoundException e) {
+                throw new InvalidTransactionException(MESSAGE_UNFINISHED_USER_NOT_FOUND);
+            } catch (ItemNotFoundException e) {
+                throw new InvalidTransactionException(MESSAGE_UNFINISHED_ITEM_NOT_FOUND);
+            }
         }
     }
 

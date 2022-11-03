@@ -5,6 +5,7 @@ import seedu.duke.exception.TransactionFileNotFoundException;
 import seedu.duke.item.ItemList;
 import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
+import seedu.duke.user.UserList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,14 +36,16 @@ public class TransactionStorage extends Storage {
     private static final int NUM_OF_ARGS = 8;
 
     private final String transactionFilePath;
+    private final UserList userList;
     private final ItemList itemList;
     private final TransactionList transactionList;
 
     /**
      * Constructor for Storage of Transactions.
      */
-    public TransactionStorage(String transactionFilePath, ItemList itemList) {
+    public TransactionStorage(String transactionFilePath, UserList userList, ItemList itemList) {
         this.transactionFilePath = transactionFilePath;
+        this.userList = userList;
         this.itemList = itemList;
         this.transactionList = new TransactionList();
     }
@@ -122,6 +125,7 @@ public class TransactionStorage extends Storage {
                 splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
         Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
         transactionList.checkOldTransactionsOverlapWithNew(transaction);
+        transactionList.checkLenderAndBorrowerUnfinishedTx(transaction, userList, itemList);
         return transaction;
     }
 

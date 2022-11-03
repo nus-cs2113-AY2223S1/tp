@@ -47,8 +47,30 @@ class TransactionStorage {
     + handleTransactionLine(String[]): Transaction
     - getTransactionFromTransactionLine(String[]): Transaction
 }
+class StorageManager {
+    - userFilePath: String
+    - itemFilePath: String
+    - transactionFilePath: String
+    + StorageManager(String, String, String)
+    + writeDataToFile(): void
+    + checkThreeFilesSimultaneouslyExistOrNotExit(): void
+    + handleDataCorruption(String): boolean
+    + initializeUserList(String): UserList
+    + initializeItemList(String, UserList): ItemList
+    + initializeTransactionList(String, UserList, ItemList): TransactionList
+}
+
+together {
+    class UserStorage
+    class ItemStorage
+    class TransactionStorage
+}
 
 "{abstract}\nStorage" <|-- UserStorage
 "{abstract}\nStorage" <|-- ItemStorage
 "{abstract}\nStorage" <|-- TransactionStorage
+StorageManager -up-> "1" UserStorage: userStorage
+StorageManager -up-> "1" ItemStorage: itemStorage
+StorageManager -up-> "1" TransactionStorage: transactionStorage
+
 @enduml
