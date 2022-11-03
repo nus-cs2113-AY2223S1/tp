@@ -1,46 +1,21 @@
-# Project Portfolio Page (PPP)
+# joshuan98's Project Portfolio Page
 
 ## Product Overview
 
-easySEP is a CLI application created to assist NUS Computer Engineering undergraduates intending to embark on a Student Exchange Programme in their planning for student exchange.
+easySEP is a CLI application created to assist NUS Computer Engineering (CEG) undergraduates intending to embark on a Student Exchange Programme (SEP) in their planning for student exchange.
 In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones for easier reference. As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
-## Summary of Contributions
+Given below are my contributions to the project:
 
-### Code Contributed
-
-[This link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
-
-### Enhancements Implemented
-
-#### Database Storage
-
-1. Cleaned up the data file that used as sample database.
-1. Read the data line-by-line and verify that the data is valid.
-1. Write the data into memory for use by other parts of the program.
-
-#### Database Parser
-
-1. Verify that each line of data is valid.
-1. Filter the relevant data to be used in the program.
-1. Parse the data into a easily usable form.
-
-#### Database
-
-1. Store the data and provide ease of retrieval by other parts of the program.
-1. Filters the data based on name and module code for both NUS and partner university for ease of searching data in the database.
-
-#### /list Command
-
-1. Check validity of list command
-1. Create new list command
-1. Execute list command accordingly
-
-#### Testing
-
-1. Add JUnit tests for all database and list command components
-1. Ensure that valid inputs returns the correct outputs.
-1. Ensure that invalid inputs throws exceptions accordingly.
+- New Feature: Added the ability to store module mapping information in memory.
+  - What it does: Reads in data from a `csv` file, verify its authenticity, and writes the data into memory for use by other parts of the program.
+  - Justification: This feature is the backdone to keep track of the approved CEG SEP moduble mappings
+  - Highlights: Cleaned up the given data file, filter the relevant data from the `csv` for our application, parse the data into a usable form for other parts of the program, provide easy retrieval by filtering data based on name and module code for both NUS and partner university for ease of searching data in the database
+- New Feature: Added the ability for users to list information from the database
+  - What it does: 4 sub-capabilities, displays the list of all modules in the database, displays the list of all universities in the database, filters module mappings based on NUS module code, filters module mappings based on partner university name.
+  - Justification: The user may not know what module mappings or universities are available to be added into their planning. This feature allows them to search and filter modules mappings that they are interested in.
+  - Highlights: Check the validity of the list command query, execute the list command according to the 4 discrete types, throws errors when invalid inputs are provided, informs user when there are no valid module mappings that match their query.
+- Code contributed: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true)
 
 ### Contributions to the User Guide UG
 
@@ -57,20 +32,15 @@ In particular, it is a useful utility for exploring potential module mappings fo
 
 ### Contributions to Team-Based Tasks
 
-1. Set up GitHub team organisation and repository.
 1. Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
 1. Populate GitHub issue tracker with user stories to tackle.
-1. Maintain GitHub issue tracker by updating user stories with new descriptions as necessary
 1. Maintain GitHub issue tracker by updating labels for issues.
-1. Closed v2.0 milestone
 
 ### Review / mentoring contributions
 
 1. Reviewed PRs from all team members.
 1. Verified that bugs were fixed.
 1. Verified that new bugs were not introduced.
-1. Conducted checkstyle tests to ensure that there were no formatting errors.
-1. Conducted JUnit tests for integration testing.
 
 ### Contributions beyond the project team
 
