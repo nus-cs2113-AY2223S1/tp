@@ -5,8 +5,9 @@ import seedu.duke.timetable.Timetable;
 
 import java.util.logging.Logger;
 
+//@@author HT-T
 
-public class    CommandDeleteModule {
+public class CommandDeleteModule {
 
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
