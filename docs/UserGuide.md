@@ -42,16 +42,16 @@ Note:
 #### Add an appointment: `appointment add`
 Adds a new appointment given service, pet, and date involved.
 
-Format: `appointment add s/SERVICE p/PET d/DATE`
-* The `SERVICE` and `PET` must already exist in service list and pet list.
-* Service list can be found by `service view`
-* Pet list can be found by `pet view`
+Format: `appointment add s/SERVICE_ID p/PET_ID d/DATE`
+* The service and pet that `SERVICE_ID` and `PET_ID` refer to must already exist in service list and pet list.
+* `SERVICE_ID` can be found by `service view`
+* `PET_ID` can be found by `pet view`
 
 Example of usage:
 
-`appointment add s/bath p/Muse d/01/02/2022`
+`appointment add s/1 p/1 d/01/02/2022`
 
-`appointment add s/haircut p/Donald d/30/02/2022`
+`appointment add s/2 p/2 d/30/02/2022`
 
 #### Remove an appointment: `appointment remove`
 Remove a particular appointment by INDEX. All tasks belong to this appointment will also be deleted.
@@ -231,7 +231,7 @@ Format: `service view`
 ---
 ## Command Summary
 
-* Add appointment `appointment add s/SERVICE p/PET d/DATE`
+* Add appointment `appointment add s/SERVICE_ID p/PET_ID d/DATE`
 * Remove appointment `appointment remove i/APPOINTMENT_ID`
 * View appointments `appointment view`
 
