@@ -75,6 +75,8 @@ public class Messages {
 
     public static final String MESSAGE_MISSING_FLAG = "OOPS!! You are missing the following flag(s):\n";
 
+    public static final String MESSAGE_EXTRA_ARGUMENTS = "OOPS!! The following argument(s) is/are not recognised:\n";
+
 
 
     //@@author OVReader
