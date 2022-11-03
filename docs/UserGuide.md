@@ -236,6 +236,8 @@ Format: `service view`
 ---
 ### Exit: `bye`
 
+### [Proposed] Storage: TBC
+
 ---
 ## Command Summary
 
