@@ -453,6 +453,7 @@ Aids property agent in tracking information related to the properties and client
 
 ___
 
+
 ## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                         | So that I can ...                                                    |
@@ -624,7 +625,34 @@ java -jar PropertyRentalManager.jar
     
 ### Storage
 
-    
+## Instructions for manual testing
 
+
+### Finding for Client/Property:
+1. Querying for Client/Property stored in the Client/Property List:
+  
+    1. Prerequisites: List the clients using `list -client` command to verify that there is at least 1 client  in the database.
+    2. Test case: `find -client f/<QUERY_TEXT>`
+        - Enter the name (or part of the name) of the client that is shown in the list for the `<QUERY_TEXT>` portion. Omit the directional brackets when entering query text.
+        - Expected: All the clients that matches the entered name is displayed with their respective index shown.
+    3. Test case: `find -client f/<QUERY_TEXT>`
+        - Enter a random text that does not match with any of the client. Omit the direction brackets when entering query text.
+        - Expected: An error message will be displayed stating that there is no client that matches with the queried text.
+    4. Test case: `find -client n/ f/`
+        - Expected: An error message will be displayed indicating that there should only be 1 flag and the flag should be `f/`
+    5. Test case: `find -client`
+        - Expected: An error message will be displayed indicating that the tag is missing.
+    6. Test case: `find -property f/<QUERY_TEXT>`
+        - Enter the address (or part of an address) of the property that is in the list for the `<QUERY_TEXT>` portion. Omit the directional brackets when entering the query text.
+        - Expected: All the property that matches the address will be displayed along with their respective index.
+    7. Test case: `find -property f/<NON_EXISTENT_QUERY_TEXT>`
+        - Enter a random text, that is not in the property list. Omit the directional bracket when entering the text.
+        - Expected: A message stating that no property matches the text will be displayed.
+    8. Test case: `find -property t/3-Room f/`
+        - Expected: An error message will be displayed showing that there should only be one tag and the tag should be `f/`.
+    9. Test case: `find -property`
+        - Expected: An error stating that the tag is missing will be shown.
+    10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
+    
 ### Quit
 

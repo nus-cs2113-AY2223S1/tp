@@ -334,5 +334,42 @@ public class Messages {
     public static final String MESSAGE_NO_CLIENT_FILE = "Client file not found.";
 
     public static final String MESSAGE_NO_PAIRING_FILE = "Pairing file does not exist.";
+
+
+
+    /* Message for Help Command */
+    public static final String INVALID_HELP_COMMAND = "It seems like you have entered more than what is expected.\n"
+            + "Please only enter 'help' to see the list of commands available.";
+
+    public static final String LIST_HELP_COMMAND = LINE_BREAK + "\nLIST COMMAND\n" + LINE_BREAK + "\nlist -client\n"
+            + "list -property\n" + "list -everything\n" + "list -client <TAG>\n" + "list -property <TAG>\n"
+            + "where <TAG> is replaced by the tag you would like " + "to look into. \nFor example: list -client n/\n"
+            + LINE_BREAK;
+
+    public static final String ADD_HELP_COMMAND = "\nADD COMMAND\n" + LINE_BREAK + "\nadd -client n/<CLIENT_NAME> "
+            + "c/<CONTACT_NUMBER> e/<EMAIL> b/<BUDGET>\nadd -property n/<LANDLORD_NAME> a/<ADDRESS> p/<RENTAL_PRICE>"
+            + " t/<UNIT_TYPE>\nwhere the tags (represented by brackets)  are replaced as accordingly\n"
+            + "Note that email address is optional\n" + LINE_BREAK;
+
+    public static final String DELETE_HELP_COMMAND = "\nDELETE COMMAND\n" + LINE_BREAK + "\ndelete -client i/<INDEX>"
+            + "\ndelete -property i/<INDEX>\nwhere <INDEX> represents the index of entity to be deleted.\n"
+            + LINE_BREAK;
+
+    public static final String PAIR_UNPAIR_HELP_COMMAND = "\nPAIR/UNPAIR COMMAND\n" + LINE_BREAK + "\npair ip/<INDEX>"
+            + " ic/<INDEX>\nunpair ip/<INDEX> ic/<INDEX>\nwhere <INDEX> represents the index of property and client"
+            + " to pair together with.\n" + LINE_BREAK;
+
+    public static final String CHECK_HELP_COMMAND = "\nCHECK COMMAND\n" + LINE_BREAK + "\ncheck -client i/<INDEX>"
+            + "\ncheck -property i/<INDEX>\nwhere <INDEX> refers to the index of the client or property to check "
+            + "for.\n" + LINE_BREAK;
+
+    public static final String FIND_HELP_COMMAND = "\nFIND COMMAND\n" + LINE_BREAK + "\nfind -client f/<QUERY_TEXT>\n"
+            + "find -property f/<QUERY_TEXT>\nwhere <QUERY_TEXT> refers to the text to search for in either client "
+            + "or property.\n";
+
+    public static final String HELP_COMMAND_PRINT_LIST = "The list of available commands are stated below:\n\n"
+            + LIST_HELP_COMMAND + ADD_HELP_COMMAND + DELETE_HELP_COMMAND + PAIR_UNPAIR_HELP_COMMAND
+            + CHECK_HELP_COMMAND + FIND_HELP_COMMAND + LINE_BREAK;
+
     //@@author
 }

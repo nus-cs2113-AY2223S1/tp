@@ -10,6 +10,7 @@ public class CommandStructure {
     public static final String COMMAND_CHECK = "check";
     public static final String COMMAND_EXIT  = "quit";
     public static final String COMMAND_FIND = "find";
+    public static final String COMMAND_HELP = "help";
 
     //@@author zoranabc201
     public static final int START_INDEX = 0;

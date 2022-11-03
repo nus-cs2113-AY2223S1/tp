@@ -22,6 +22,7 @@ import static seedu.duke.CommandStructure.COMMAND_FIND;
 import static seedu.duke.CommandStructure.COMMAND_LIST;
 import static seedu.duke.CommandStructure.COMMAND_PAIR;
 import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
+import static seedu.duke.CommandStructure.COMMAND_HELP;
 import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
 import static seedu.duke.CommandStructure.PROPERTY_FLAG;
 import static seedu.duke.CommandStructure.CLIENT_FLAG;
@@ -83,6 +84,8 @@ public class ParserManager {
             break;
         case COMMAND_EXIT:
             return new ParseExit(commandDetail);
+        case COMMAND_HELP:
+            return new ParseHelp(input);
         default:
             return new ParseUndefined();
         }
