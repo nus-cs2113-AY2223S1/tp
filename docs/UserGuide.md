@@ -32,6 +32,7 @@ medicine information via Command Line Interface.
             - [Viewing all patient’s active prescription: `viewActPatientPres`](#viewing-all-patients-active-prescription-viewactpatientpres)
             - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
             - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
+        + [Exit Program: `bye`](#exit-program-bye)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
@@ -214,7 +215,7 @@ You have added a visit!
 	____________________________________________________________
 ```
 
-### Adding/editing a reason for existing visit: `edit`
+#### Adding/editing a reason for existing visit: `edit`
 Add/edit reason for an existing visit in the list of visits
 
 Format: `edit x/[index] r/[reason]`
@@ -235,7 +236,7 @@ You have edited reason for the visit. Here's the updated visit!
 	Reason: fever
 	____________________________________________________________
 ```
-### Deleting a reason for existing visit: `deleteReason`
+#### Deleting a reason for existing visit: `deleteReason`
 Add/edit reason for an existing visit in the list of visits
 
 Format: `deleteReason x/[index]`
@@ -255,7 +256,7 @@ You have deleted the reason for the visit. Here's the updated visit!
 	Reason: NIL
 	____________________________________________________________
 ```
-### Viewing all visits: `viewall`
+#### Viewing all visits: `viewall`
 View all the current visits in the list of visits.
 
 Format: `viewall`
@@ -289,7 +290,7 @@ VisitIndex #3)
 
 ```
 
-### Viewing a patient's visits: `viewPatient`
+#### Viewing a patient's visits: `viewPatient`
 View all visits belonging to a specific patient.
 
 Format: `viewPatient i/[ID]`
@@ -310,7 +311,7 @@ VisitIndex #3)
 	Reason: NIL
 	____________________________________________________________
 ```
-### Viewing a specific visit: `viewVisit`
+#### Viewing a specific visit: `viewVisit`
 Viewing a specific visit belonging to some patient.
 
 Format: `viewVisit x/[index]`
@@ -528,6 +529,16 @@ Prescription #3
     Time Interval: take 15 minutes after every meal
     Status: Inactive
     ____________________________________________________________
+```
+
+### Exit Program: `bye`
+Quit the program.
+
+Format: `bye`
+
+Expected output:
+```
+Goodbye!
 ```
 
 ## FAQ
