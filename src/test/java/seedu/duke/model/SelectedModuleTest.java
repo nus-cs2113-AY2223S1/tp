@@ -52,7 +52,7 @@ class SelectedModuleTest {
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertNotNull(selectedModule.getModule());
 
-        SelectedModule selectedModuleWithDifferentSemester = new SelectedModule(module,semesterDifferent);
+        SelectedModule selectedModuleWithDifferentSemester = new SelectedModule(module, semesterDifferent);
         // Use assert true over assert equals to for test coverage of equals method
         assertFalse(selectedModule.equals(selectedModuleWithDifferentSemester));
     }
@@ -84,7 +84,7 @@ class SelectedModuleTest {
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertNotNull(selectedModule.getModule());
 
-        SelectedModule selectedModuleWithDifferentModule = new SelectedModule(moduleDifferent,semester);
+        SelectedModule selectedModuleWithDifferentModule = new SelectedModule(moduleDifferent, semester);
         // Use assert false over assert equals to for test coverage of equals method
         assertFalse(selectedModule.equals(selectedModuleWithDifferentModule));
     }
@@ -126,16 +126,16 @@ class SelectedModuleTest {
 
         SelectedModule selectedModule = new SelectedModule(module, semester);
         assertNotNull(selectedModule.getModule());
-        selectedModule.selectSlot(LessonType.TUTORIAL,"02A");
+        selectedModule.selectSlot(LessonType.TUTORIAL, "02A");
 
         SelectedModule selectedModuleDifferentSlot = new SelectedModule(module, semester);
         selectedModuleDifferentSlot.selectSlot(LessonType.TUTORIAL, "02B");
 
         Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-        assertEquals("02A",selectedSlots.get(LessonType.TUTORIAL));
+        assertEquals("02A", selectedSlots.get(LessonType.TUTORIAL));
 
         Map<LessonType, String> selectedSlotsDifferent = selectedModuleDifferentSlot.getSelectedSlots();
-        assertEquals("02B",selectedSlotsDifferent.get(LessonType.TUTORIAL));
+        assertEquals("02B", selectedSlotsDifferent.get(LessonType.TUTORIAL));
 
         // Use assert true over assert equals to for test coverage of equals method
         assertTrue(selectedModule.equals(selectedModuleDifferentSlot));
@@ -160,9 +160,9 @@ class SelectedModuleTest {
         assertNotNull(selectedModule.getModule());
 
         Map<LessonType, String> selectedSlots = selectedModule.getSelectedSlots();
-        assertEquals("02A",selectedSlots.get(LessonType.TUTORIAL));
+        assertEquals("02A", selectedSlots.get(LessonType.TUTORIAL));
         selectedModule.selectSlot(LessonType.TUTORIAL, "02B");
-        assertEquals("02B",selectedSlots.get(LessonType.TUTORIAL));
+        assertEquals("02B", selectedSlots.get(LessonType.TUTORIAL));
     }
 
 }

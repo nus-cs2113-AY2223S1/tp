@@ -16,10 +16,10 @@ public class ImportCommandTest {
     public void importCommand_invalidUrl_throwException() throws YamomException {
         State state = new State();
         Ui ui = new Ui();
-        new ImportCommand(new String[]{ 
-            "import", 
-            "https://nusmods.com/timetable/sem-1/share?CS101010=LAB:B03,SEC:1,TUT:01" })
-                .execute(state, ui, null);
+        new ImportCommand(new String[]{
+            "import",
+            "https://nusmods.com/timetable/sem-1/share?CS101010=LAB:B03,SEC:1,TUT:01"
+        }).execute(state, ui, null);
         assertEquals(0, state.getSelectedModulesList().size());
     }
 
@@ -44,6 +44,6 @@ public class ImportCommandTest {
 
     @Test
     public void importCommand_withoutUrl_throwsException() {
-        assertThrows(YamomException.class, () -> new ImportCommand(new String[]{ "import" }));
+        assertThrows(YamomException.class, () -> new ImportCommand(new String[]{"import"}));
     }
 }

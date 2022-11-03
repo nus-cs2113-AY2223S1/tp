@@ -36,7 +36,7 @@ public class ImportCommand extends Command {
 
         Logger logger = Logger.getLogger("Importing from NUSMod");
         try {
-            Link.parseLink(nusModLink, state);
+            Link.parseLink(nusModLink, state, ui);
             ui.addMessage(getExecutionMessage());
         } catch (YamomException e) {
             ui.addMessage(e.getMessage());

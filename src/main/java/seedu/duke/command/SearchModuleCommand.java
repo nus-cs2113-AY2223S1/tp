@@ -10,9 +10,9 @@ import seedu.duke.parser.Parser;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,6 +39,8 @@ public class SearchModuleCommand extends Command {
 
     public static final String ERROR_MISSING_TITLE = "Search require at least a title field, in the format of: "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
+
+    public static final String ERROR_UNEXPECTED_PARAMETER = "Unexpected parameter: ";
 
     public static final String FOOTER = "\nTo get full details of the module, type 'info <module code>'";
 
@@ -89,6 +91,13 @@ public class SearchModuleCommand extends Command {
     private void processParams() throws YamomException {
         if (params.isEmpty()) {
             throw new YamomException(ERROR_WRONG_FORMAT);
+        }
+        List<String> extraParams = params.keySet()
+            .stream()
+            .filter(k -> !List.of("code", "title", "level", "sem").contains(k))
+            .collect(Collectors.toList());
+        for (String p : extraParams) {
+            throw new YamomException(ERROR_UNEXPECTED_PARAMETER + p);
         }
         toSearchModuleCode = params.getOrDefault("code", null);
         toSearchModuleTitle = params.getOrDefault("title", null);
