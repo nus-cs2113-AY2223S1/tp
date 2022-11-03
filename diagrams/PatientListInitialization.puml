@@ -1,7 +1,8 @@
 @startuml
+hide footbox
 'https://plantuml.com/sequence-diagram
 
-participant "<<class>>\n:OneDoc" as B
+
 participant ":OneDoc" as A
 participant ":Storage" as D
 participant ":PatientList" as C
@@ -9,10 +10,6 @@ participant ":PatientList" as C
 participant ":ArrayList" as E
 participant ":File" as F
 
-[-> B : main(args)
-activate B
-
-B -> A : new()
 activate A
 
 A -> C: new()
@@ -66,13 +63,8 @@ return
 
 return
 
-return
 
-B -> B: run()
-activate B
-return
 
-return
 
 
 @enduml
