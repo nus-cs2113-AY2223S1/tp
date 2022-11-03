@@ -4,16 +4,19 @@ import java.util.Scanner;
 
 public class Ui {
 
+    public static String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    public static String LINE_DIVIDER = "____________________________________________________________";
+
+
     public Ui() {
     }
 
     public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello from\n" + LOGO);
         System.out.println("I am the nurse helper!");
     }
 
@@ -24,8 +27,6 @@ public class Ui {
         }
         return "bye";
     }
-
-    public static String LINE_DIVIDER = "____________________________________________________________";
 
     public void showLine() {
         System.out.println(LINE_DIVIDER);
