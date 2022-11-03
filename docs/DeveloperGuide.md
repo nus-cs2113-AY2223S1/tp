@@ -145,7 +145,7 @@ The first section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.jpg)
+![](diagrams/ParseAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -155,17 +155,21 @@ Parse Add Related Classes Diagram
 
 As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. These methods are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
     - `checkForValidEmail(String)`
     - `checkForBudgetNumberFormat(String)`
+    - `checkForDuplicateClient(ClientList, ArrayList<String>)`
 - Property:
     - `checkForValidSingaporeAddress(String)`
     - `checkForValidSingaporeLandedPropertyAddress(String)`
     - `checkForValidSingaporeBuildingAddress(String)`
     - `checkForPriceNumberFormat(String)`
+    - `checkForValidUnitType(String)`
+    - `checkForValidAddressFormatUnitTypeMatching(String, String)`
+    - `checkForDuplicateProperty(PropertyList, String)`
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
@@ -184,7 +188,7 @@ The following is a simple class diagram of the three classes:
 
 <p align="center">
 
-![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.jpg)
+![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.png)
 
 </p>
 
@@ -217,12 +221,12 @@ Given below is an example scenario on how add client/property behaves at each st
 - **Step 5**: Lastly, method `Ui#showClientAddedConfirmationMessage()` or `Ui#showPropertyAddedConfirmationMessage()` is called to notify user about the successful addition of new client or property. Also, method `Storage#addToClientFile` or `Storage#addToPropertyFile` is called to update their respective storage files.
 
 The following are simplified sequence diagrams of add feature for client and property:
-![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.JPG)
+![Add Client Sequence Diagram](diagrams/AddClientSequenceDiagram.png)
 <p align="center">
 Add Client Sequence Diagram
 </p>
 
-![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.JPG)
+![Add Property Sequence Diagram](diagrams/AddPropertySequenceDiagram.png)
 <p align="center">
 Add Property Sequence Diagram
 </p>
@@ -365,9 +369,9 @@ When file is appended into the text file, it's being stored in different formats
 The text file of which Client, Property and Pairing is being stored is `client.txt`, `property.txt` and `pairing.txt` 
 respectively.
 
-![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.jpg)
-![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.jpg)
-![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.jpg)
+![Add Client to Storage Diagram](diagrams/StorageAddClientSequenceDiagram.png)
+![Add Property to Storage Diagram](diagrams/StorageAddPropertySequenceDiagram.png)
+![Add Pair to Storage Diagram](diagrams/StorageAddPairSequenceDiagram.png)
 
 The three sequence diagram above shows the sequence of which the append operation is being invoked. All three
 operations are similar in operations but are invoked with different `parameter` and `path`.
@@ -377,9 +381,9 @@ The update operation happens when entries in ClientList and PropertyList is bein
 PairingList is being removed.
 
 The sequence diagram of `updateClient`, `updateProperty` and `updatePair` can be seen below:
-![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.jpg)
-![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.jpg)
-![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.jpg)
+![Update Client Sequence Diagram](diagrams/StorageUpdateClientSD.png)
+![Update Property Sequence Diagram](diagrams/StorageUpdatePropertySD.png)
+![Update Pairing Sequence Diagram](diagrams/StorageUpdatePairSD.png)
 
 Note that when delete operation is being invoked on client and property, the `updatePair` method will also be invoked to
 prevent entries retaining within pairingList after it has been deleted from clientList or propertyList.

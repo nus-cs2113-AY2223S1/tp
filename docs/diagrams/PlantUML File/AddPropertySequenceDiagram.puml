@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant "command:CommandAddProperty" as CommandAddProperty COMMAND_COLOR_T2
+participant "propertyList:PropertyList" as PropertyList PROPERTY_LIST_COLOR
+participant ":Property" as Property PROPERTY_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
+
+->CommandAddProperty:execute(Ui, Storage, PropertyList, ClientList, PairingList)
+activate CommandAddProperty COMMAND_COLOR_T2
+
+CommandAddProperty -> PropertyList : addProperty(landlordName:String, \npropertyAddress:String, rentingPrice:String, unitType:String)
+activate PropertyList PROPERTY_LIST_COLOR
+
+create Property
+PropertyList -> Property : Property(landlordName:String, propertyAddress:String, rentingPrice:String, unitType:String)
+activate Property PROPERTY_COLOR
+
+return
+return
+
+CommandAddProperty -> Ui : showPropertyAddedConfirmationMessage(propertyList:PropertyList)
+activate Ui UI_COLOR
+return
+
+CommandAddProperty -> Storage : addToPropertyFile(landlordName:String, propertyAddress:String, rentingPrice:String, unitType:String)
+activate Storage STORAGE_COLOR
+return
+return
+
+@enduml
