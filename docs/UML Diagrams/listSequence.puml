@@ -5,6 +5,12 @@ hide footbox
 
 participant ":Parser"
 
+-> ":Parser" : userInput: String
+activate ":Parser"
+":Parser" -> ":Parser": processUserInput(userInput)
+activate ":Parser"
+return parsedCommand: String[]
+
 ref over ":Parser"
 listCommand is given
 end ref
