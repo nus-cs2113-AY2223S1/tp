@@ -169,7 +169,7 @@ public class Motherboard extends Component {
      * @return all the information of the Motherboard
      */
     public String getDetails() {
-        return super.getDetails() + String.format("\nSocket: %s\nformFactor: %s\nRAM Slots: %s\nGPU Slots: %s", socket,
+        return super.getDetails() + String.format("\nSocket: %s\nForm Factor: %s\nRAM Slots: %s\nGPU Slots: %s", socket,
                 formFactor, memorySlots, gpuSlots);
     }
 
