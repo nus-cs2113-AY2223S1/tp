@@ -93,7 +93,7 @@ are the component names. The values of the inner map are the components themselv
 The user can add, delete, and view the components in the build. The user can also
 perform aggregate operations on the build such as viewing the total price of the build and viewing the total wattage of the build.
 There are also check compatibility functions that check if the build's components are compatible with each other in different ways. Such as:
-- Check if the power supply is compatible with the build's total power consumption
+- Checking if the power supply is compatible with the build's total power consumption
 - Checking if the build's motherboard is compatible with the build's CPU and Cooler
 - Checking if the form factor of the build's case is compatible with the build's motherboard
 - Checking if the build's storage is compatible with the case expansion slots
