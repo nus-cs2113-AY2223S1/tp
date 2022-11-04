@@ -1,7 +1,6 @@
 # Developer Guide
 
 ## Table of Contents
-* [Acknowledgements](#acknowledgements)
 * [Design & Implementation](#design--implementation)
   * [Main Mode](#main-mode)
     * [Build Manager](#build-manager) 
@@ -19,11 +18,6 @@
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
-
-
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
 
@@ -170,7 +164,7 @@ all builds to a CSV file.
 ## Product scope
 ### Target user profile
 
-This product is targeted towards PC building enthusiasts and professional System builds who have a need and want to 
+This product is targeted towards PC building enthusiasts and commercial custom PC builders who have a need and want to 
 keep track of their PC builds. It is optimized for users to work with a Command Line Interface (CLI).
 
 ### Value proposition
@@ -180,6 +174,8 @@ their total power consumption and the total cost of their builds. Compatibility 
 that the build is able to function properly..
 
 ## User Stories
+The following user stories will be implemented in the version stated in the table and will be available as a feature
+from that version onwards.
 
 | Version | As a ... | I want to ...              | So that I can ...                                           |
 |---------|----------|----------------------------|-------------------------------------------------------------|
