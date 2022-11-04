@@ -6,12 +6,11 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
-import seedu.duke.exception.FindTransactionMissingKeywordsException;
-import seedu.duke.exception.MoolahException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static seedu.duke.command.CommandTag.COMMAND_TAG_FIND_KEYWORD;
 import static seedu.duke.common.HelpMessages.FIND_COMMAND_BASIC_HELP;
 import static seedu.duke.common.HelpMessages.FIND_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_LIST_FILTERED;
@@ -26,30 +25,26 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "FIND";
 
     private static Logger findLogger = Logger.getLogger(FindCommand.class.getName());
-    private String keywords;
+    private String keyword;
 
-    /**
-     * Initialises the variables of the FindCommand class.
-     *
-     * @param keywords A string containing the keywords used in the search expression.
-     */
-    public FindCommand(String keywords) {
-        this.keywords = keywords;
+    public FindCommand() {
+        keyword = "";
     }
 
-
     /**
-     * Checks the format of find to ensure that it contains keywords used in the search expression.
+     * Gets the mandatory tags of the command.
      *
-     * @param keywords A string containing the keywords used in the search expression.
-     * @throws FindTransactionMissingKeywordsException If a user does not enter a search expression for Find.
+     * @return A string array containing all mandatory tags.
      */
-    public static void checkFindFormat(String keywords) throws FindTransactionMissingKeywordsException {
-        findLogger.setLevel(Level.SEVERE);
-        if (keywords.isBlank()) {
-            findLogger.log(Level.WARNING, "Exception thrown as there are no keywords found.");
-            throw new FindTransactionMissingKeywordsException();
-        }
+    @Override
+    public String[] getMandatoryTags() {
+        String[] mandatoryTags = new String[]{COMMAND_TAG_FIND_KEYWORD};
+        return mandatoryTags;
+    }
+
+    @Override
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -61,27 +56,24 @@ public class FindCommand extends Command {
      * @param storage      An instance of the Storage class.
      */
     @Override
-    public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
+    public void execute(TransactionList transactions, Ui ui, Storage storage) {
         findLogger.setLevel(Level.SEVERE);
         findLogger.log(Level.INFO, "Entering execution of the Find command.");
 
-        // Checks the format of find to ensure that it contains keywords used in the search expression
-        checkFindFormat(keywords);
-        assert !keywords.isBlank();
-
-        findTransactions(transactions, ui, keywords);
+        assert !keyword.isBlank();
+        findTransactions(transactions, ui, keyword);
     }
 
     /**
-     * Finds a specific or multiple transactions based on any keywords that have been specified.
+     * Finds a specific or multiple transactions based on any keyword that have been specified.
      *
      * @param transactions An instance of the TransactionList class.
      * @param ui           An instance of the Ui class.
-     * @param keywords     A string containing the keywords used in the search expression.
+     * @param keyword      A string containing the keyword used in the search expression.
      */
-    public void findTransactions(TransactionList transactions, Ui ui, String keywords) {
-        // Gets the list of transactions where their description match the searching keywords
-        String transactionsList = transactions.findTransactions(keywords);
+    public void findTransactions(TransactionList transactions, Ui ui, String keyword) {
+        // Gets the list of transactions where their description match the searching keyword
+        String transactionsList = transactions.findTransactions(keyword);
 
         // Prints the list if available, else print no matching transactions
         if (transactionsList.isEmpty()) {

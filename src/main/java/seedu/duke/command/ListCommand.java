@@ -26,7 +26,6 @@ import static seedu.duke.common.HelpMessages.LIST_COMMAND_BASIC_HELP;
 import static seedu.duke.common.HelpMessages.LIST_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a list command object that will execute the operations for List command.
