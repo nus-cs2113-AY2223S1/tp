@@ -2036,18 +2036,16 @@ public class ConsoleParser {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG
         );
-        String incomeIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
-        );
-        String amountStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
-        );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditIncomeInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
             );
         }
+
+        String incomeIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
+        );
 
         if (incomeIndexStr == null) {
             throw new ConsoleParserCommandEditIncomeInvalidException(
@@ -2060,6 +2058,10 @@ public class ConsoleParser {
                     Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID
             );
         }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
+        );
 
         if (amountStr != null) {
             try {
