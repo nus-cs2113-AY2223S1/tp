@@ -39,6 +39,7 @@ public class Duke {
                 isExit = c.checkExit();
             }
             UI.printSeparationLine();
+            storage.save();
         }
         storage.save();
     }
