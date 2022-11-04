@@ -207,7 +207,7 @@ public class ComponentsTest {
     }
 
     @Test
-    public void testToCSV() {
+    public void testToCsv() {
         assertEquals("cpu1,123,12,1,4.0", cpu1.toCsv());
         assertEquals("gpu1,456,45,4,5", gpu1.toCsv());
         assertEquals("mobo1,123,12,1,Full ATX,2,2", mobo1.toCsv());
@@ -260,18 +260,18 @@ public class ComponentsTest {
     public void testGetDetails() {
         assertEquals("Name: cpu1\nPrice: $123\nPower: 12 W\nSocket: 1\nClock: 4.0 GHz", cpu1.getDetails());
         assertEquals("Name: gpu1\nPrice: $456\nPower: 45 W\nMemory: 4 GB\nClock: 5 MHz", gpu1.getDetails());
-        assertEquals("Name: mobo1\nPrice: $123\nPower: 12 W\nSocket: 1\nformFactor: Full ATX\n" +
-                "RAM Slots: 2\nGPU Slots: 2", mobo1.getDetails());
-        assertEquals("Name: cooler1\nPrice: $123\nPower: 12 W\nSocket: 1\nFan Speed: 1500 RPM\n" +
-                        "Noise Level: 40 dB", cooler1.getDetails());
+        assertEquals("Name: mobo1\nPrice: $123\nPower: 12 W\nSocket: 1\nformFactor: Full ATX\n"
+                + "RAM Slots: 2\nGPU Slots: 2", mobo1.getDetails());
+        assertEquals("Name: cooler1\nPrice: $123\nPower: 12 W\nSocket: 1\nFan Speed: 1500 RPM\n"
+                + "Noise Level: 40 dB", cooler1.getDetails());
         assertEquals("Name: case1\nPrice: $123\nPower: 1 W\nForm Factor: Full ATX\nExpansion Slots: 2",
                 case1.getDetails());
         assertEquals("Name: powersupply1\nPrice: $123\nPower: 850 W", powersupply1.getDetails());
-        assertEquals("Name: memory1\nPrice: $123\nPower: 12 W\nSize: 8 GB\nSpeed: 4 MHz", memory1.
-                getDetails());
+        assertEquals("Name: memory1\nPrice: $123\nPower: 12 W\nSize: 8 GB\nSpeed: 4 MHz",
+                memory1.getDetails());
         assertEquals("Name: drive1\nPrice: $123\nPower: 12 W\nSize: 200 GB\nType: SSD", drive1.getDetails());
-        assertEquals("Name: monitor1\nPrice: $123\nPower: 12 W\nRefresh Rate: 144 Hz\nResponse Time: 4 ms\n" +
-                "Resolution: 3440x1440 p", monitor1.getDetails());
+        assertEquals("Name: monitor1\nPrice: $123\nPower: 12 W\nRefresh Rate: 144 Hz\nResponse Time: 4 ms\n"
+                + "Resolution: 3440x1440 p", monitor1.getDetails());
         assertEquals("Name: other1\nPrice: $123\nPower: 12 W", other1.getDetails());
 
         assertNotNull(cpu1.getDetails());
