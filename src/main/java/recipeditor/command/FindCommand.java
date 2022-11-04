@@ -11,21 +11,21 @@ public class FindCommand extends Command {
     private static final String COMMAND_FUNCTION = "For the given ingredient or title,"
             + " find recipes which contains it.";
 
-    private static final String FLAG_SYNTAX = "\nFlags:" + "\n-t: Recipe Title" + "\n-i: Ingredient name";
+    public static final String FLAG_SYNTAX = "\nFlags:" + "\n-t: Recipe Title" + "\n-i: Ingredient name";
 
     public static final String CORRECT_FORMAT = "The correct format should be " + "'" + COMMAND_SYNTAX + "'."
             + FLAG_SYNTAX;
     public String findInput;
-    private FlagType[] flags;
+    private FlagType flag;
 
 
     public FindCommand() {
         super(COMMAND_SYNTAX, COMMAND_FUNCTION);
     }
 
-    public FindCommand(FlagType[] flags, String findInput) {
+    public FindCommand(FlagType flag, String findInput) {
         this();
-        this.flags = flags;
+        this.flag = flag;
         this.findInput = findInput;
     }
 
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
     public CommandResult execute() {
         try {
             ArrayList<String> foundRecipeList = null;
-            switch (flags[ 1 ]) {
+            switch (flag) {
             case TITLE:
                 foundRecipeList = RecipeList.findRecipeTitlesFromRecipeTitle(findInput);
                 break;

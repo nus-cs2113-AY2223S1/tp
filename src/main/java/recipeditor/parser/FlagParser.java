@@ -1,5 +1,8 @@
 package recipeditor.parser;
 
+import recipeditor.command.CommandResult;
+import recipeditor.command.FindCommand;
+
 public interface FlagParser {
 
     /**
@@ -8,7 +11,7 @@ public interface FlagParser {
      * @param parsedCommand the parsed command which to find flags from
      * @return the list of flags found in command
      */
-    static FlagType[] getFlags(String[] parsedCommand) {
+    static FlagType[] getCommandAndRecipeFlags(String[] parsedCommand) {
         FlagType[] flags = new FlagType[2];
         int commandFlagCount = 0;
         int recipeFlagCount = 0;
@@ -55,9 +58,22 @@ public interface FlagParser {
         if (commandFlagCount == 1 && recipeFlagCount == 1) {
             return flags;
         }
-        if (recipeFlagCount == 1) {
-            return flags;
-        }
         return null;
+    }
+
+    static FlagType getRecipeFlag(String[] parsedCommand) {
+        FlagType flag = null;
+        switch (parsedCommand[1]) {
+        case "-i":
+            flag = FlagType.INGREDIENT;
+            break;
+        case "-t":
+            flag = FlagType.TITLE;
+            break;
+        default:
+            new CommandResult(FindCommand.CORRECT_FORMAT);
+            break;
+        }
+        return flag;
     }
 }

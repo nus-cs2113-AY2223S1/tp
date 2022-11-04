@@ -181,7 +181,7 @@ public class Parser {
                 editedRecipe.addIngredients(originalRecipe.getIngredients());
                 editedRecipe.addSteps(originalRecipe.getSteps());
 
-                FlagType[] flags = FlagParser.getFlags(parsed);
+                FlagType[] flags = FlagParser.getCommandAndRecipeFlags(parsed);
                 if (flags == null) {
                     return new InvalidCommand();
                 }
@@ -201,10 +201,10 @@ public class Parser {
     private static Command parseFindCommand(String[] parsed) {
 
         if (parsed.length >= 3) {
-            FlagType[] flags = FlagParser.getFlags(parsed);
+            FlagType flag = FlagParser.getRecipeFlag(parsed);
             String[] inputArray = Arrays.copyOfRange(parsed, 2, parsed.length);
             String input = convertStringArrayToString(inputArray);
-            return new FindCommand(flags, input);
+            return new FindCommand(flag, input);
         } else {
             return new InvalidCommand(FindCommand.CORRECT_FORMAT);
         }
