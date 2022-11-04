@@ -315,7 +315,7 @@ and every ingredient names for all recipes, and list out the recipe title that c
 
 ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
 
-Format: `/find -RECIPE_FLAG USER_INPUT_STRING`
+Format: `/find -RECIPE_FLAG [RECIPE_TITLE or INGREDIENT_NAME]`
 
 Example: 
 ```
