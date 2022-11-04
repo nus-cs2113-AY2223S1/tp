@@ -235,7 +235,8 @@ public class Parser {
                 return prepareFilterAddress(actualArgument);
             default:
                 return new InvalidCommand(String.format("Invalid dashed argument.\n", 1)
-                        + CommonData.FILTER_ADDRESS_FORMAT + "\n" + CommonData.FILTER_ID_FORMAT);            }
+                        + CommonData.FILTER_ADDRESS_FORMAT + "\n" + CommonData.FILTER_ID_FORMAT);
+            }
         }
 
         //if there exists more than one dashed argument

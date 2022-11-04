@@ -29,13 +29,15 @@ public class FilterAddressCommandTest {
     }
 
     @Test
-    void testEmptyArgument() throws FileWriteException, NoFileFoundException, NoCarparkFoundException, InvalidCommandException {
+    void testEmptyArgument() throws FileWriteException, NoFileFoundException, NoCarparkFoundException,
+            InvalidCommandException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         String input = "filter -add ";
         Command command = new Parser().parseCommand(input, null, carparkList, null);
         String result = command.execute().showToUser;
         Assertions.assertEquals("Empty argument. Valid command(s): \n"
-                + "`filter -address QUERY` or `fil -add QUERY`\t: Filter carparks based on its Carpark address.", result);
+                + "`filter -address QUERY` or `fil -add QUERY` \t: Filter carparks based on its Carpark address.",
+                result);
     }
     @Test
     void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {

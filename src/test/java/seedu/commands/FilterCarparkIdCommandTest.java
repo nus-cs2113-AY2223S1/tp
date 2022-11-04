@@ -30,7 +30,8 @@ public class FilterCarparkIdCommandTest {
     }
 
     @Test
-    void testEmptyArgument() throws FileWriteException, NoFileFoundException, NoCarparkFoundException, InvalidCommandException {
+    void testEmptyArgument() throws FileWriteException, NoFileFoundException, NoCarparkFoundException,
+            InvalidCommandException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         String input = "filter -id";
         Command command = new Parser().parseCommand(input, null, carparkList, null);
