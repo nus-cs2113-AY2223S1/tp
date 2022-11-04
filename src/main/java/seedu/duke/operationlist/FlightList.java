@@ -279,6 +279,7 @@ public class FlightList extends OperationList {
         validateTime(departureTime);
         validateCheckIn(checkIn);
         validateGateNumber(gateNumber);
+        checkValidFlightNumber(flightNumber);
     }
 
     private void checkFlightNumberDuplicates() throws SkyControlException {
