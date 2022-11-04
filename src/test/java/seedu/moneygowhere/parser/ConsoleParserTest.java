@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
@@ -13,7 +15,9 @@ import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
@@ -94,8 +98,8 @@ class ConsoleParserTest {
     void parseCommand_aeNameAmountDateTime_ccaeNameAmountDateTime() throws
             MoneyGoWhereException {
         String name = "Exp";
-        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
         BigDecimal amount = new BigDecimal("7.80");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE
@@ -157,8 +161,8 @@ class ConsoleParserTest {
     void parseCommand_aeNameAmountDescription_ccaeNameAmountDescription() throws
             MoneyGoWhereException {
         String name = "Exp";
-        String description = "Test Desc";
         BigDecimal amount = new BigDecimal("7.80");
+        String description = "Test Desc";
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE
@@ -579,7 +583,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_aeNameAmount1_ccaeInvalidException() {
+    void parseCommand_aeNameInvalidAmount1_ccaeInvalidException() {
         String name = "Exp";
         String amount = "InvalidAmount";
 
@@ -600,7 +604,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_aeNameAmount2_ccaeInvalidException() {
+    void parseCommand_aeNameInvalidAmount2_ccaeInvalidException() {
         String name = "Exp";
         String amount = "-7.80";
 
@@ -621,7 +625,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_aeNameAmountDateTime1_ccaeInvalidException() {
+    void parseCommand_aeNameAmountInvalidDateTime1_ccaeInvalidException() {
         String name = "Exp";
         String amount = "7.80";
         String dateTime = "InvalidDateTime";
@@ -648,7 +652,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_aeNameAmountDateTime2_ccaeInvalidException() {
+    void parseCommand_aeNameAmountInvalidDateTime2_ccaeInvalidException() {
         String name = "Exp";
         String amount = "7.80";
         String dateTime = "29/02/2022 2359";
@@ -715,7 +719,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_veIndex1_ccveInvalidException() {
+    void parseCommand_veInvalidIndex1_ccveInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
 
         String input = ""
@@ -731,7 +735,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_veIndex2_ccveInvalidException() {
+    void parseCommand_veInvalidIndex2_ccveInvalidException() {
         String expenseIndex = "-1";
 
         String input = ""
@@ -747,7 +751,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_veIndex3_ccveInvalidException() {
+    void parseCommand_veInvalidIndex3_ccveInvalidException() {
         String expenseIndex = "999999999999999999999999";
 
         String input = ""
@@ -798,7 +802,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_deIndex1_ccdeInvalidException() {
+    void parseCommand_deInvalidIndex1_ccdeInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
 
         String input = ""
@@ -814,7 +818,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_deIndex2_ccdeInvalidException() {
+    void parseCommand_deInvalidIndex2_ccdeInvalidException() {
         String expenseIndex = "-1";
 
         String input = ""
@@ -830,7 +834,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_deIndex3_ccdeInvalidException() {
+    void parseCommand_deInvalidIndex3_ccdeInvalidException() {
         String expenseIndex = "999999999999999999999999";
 
         String input = ""
@@ -1449,7 +1453,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndex1_cceeInvalidException() {
+    void parseCommand_eeInvalidIndex1_cceeInvalidException() {
         String expenseIndex = "InvalidExpenseIndex";
 
         String input = ""
@@ -1466,7 +1470,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndex2_cceeInvalidException() {
+    void parseCommand_eeInvalidIndex2_cceeInvalidException() {
         String expenseIndex = "-1";
 
         String input = ""
@@ -1483,7 +1487,24 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndexAmount1_cceeInvalidException() {
+    void parseCommand_eeInvalidIndex3_cceeInvalidException() {
+        String expenseIndex = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX
+                + " \""
+                + expenseIndex
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_eeIndexInvalidAmount1_cceeInvalidException() {
         String expenseIndex = "0";
         String amount = "InvalidAmount";
 
@@ -1505,9 +1526,9 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndexAmount2_cceeInvalidException() {
+    void parseCommand_eeIndexInvalidAmount2_cceeInvalidException() {
         String expenseIndex = "0";
-        String amount = "-1";
+        String amount = "-7.80";
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE
@@ -1527,7 +1548,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndexDateTime1_cceeInvalidException() {
+    void parseCommand_eeIndexInvalidDateTime1_cceeInvalidException() {
         String expenseIndex = "0";
         String dateTime = "InvalidDateTime";
 
@@ -1549,7 +1570,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_eeIndexDateTime2_cceeInvalidException() {
+    void parseCommand_eeIndexInvalidDateTime2_cceeInvalidException() {
         String expenseIndex = "0";
         String dateTime = "29/02/2022 2359";
 
@@ -1570,11 +1591,12 @@ class ConsoleParserTest {
     }
     //endregion
 
+    //region Defines JUnit test cases for command Add-RecurringPayment
     //@@author xzynos
     @Test
     void parseCommand_arpNameIntervalAmount_ccarpNameIntervalAmount() throws
             MoneyGoWhereException {
-        String name = "RecurPay1";
+        String name = "RecPay1";
         int interval = 30;
         BigDecimal amount = new BigDecimal("7.80");
 
@@ -1602,14 +1624,30 @@ class ConsoleParserTest {
         boolean isIntervalEqual = consoleCommandAddRecurringPayment
                 .getInterval()
                 == interval;
+        boolean isDescriptionEqual = consoleCommandAddRecurringPayment
+                .getDescription()
+                == null;
         boolean isAmountEqual = consoleCommandAddRecurringPayment
                 .getAmount()
                 .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(defaultCurrency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                == null;
 
         assertTrue(
                 isNameEqual
                         && isIntervalEqual
+                        && isDescriptionEqual
                         && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
         );
     }
 
@@ -1617,7 +1655,7 @@ class ConsoleParserTest {
     @Test
     void parseCommand_arpNameIntervalAmountDescription_ccarpNameIntervalAmountDescription() throws
             MoneyGoWhereException {
-        String name = "RecurPay1";
+        String name = "RecPay1";
         int interval = 30;
         BigDecimal amount = new BigDecimal("7.80");
         String description = "Test Desc";
@@ -1638,8 +1676,9 @@ class ConsoleParserTest {
                 + amount
                 + " -"
                 + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION
-                + " "
-                + "\"" + description + "\"";
+                + " \""
+                + description
+                + "\"";
 
         ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment =
                 (ConsoleCommandAddRecurringPayment) ConsoleParser.parse(input);
@@ -1650,18 +1689,305 @@ class ConsoleParserTest {
         boolean isIntervalEqual = consoleCommandAddRecurringPayment
                 .getInterval()
                 == interval;
-        boolean isAmountEqual = consoleCommandAddRecurringPayment
-                .getAmount()
-                .equals(amount.stripTrailingZeros());
         boolean isDescriptionEqual = consoleCommandAddRecurringPayment
                 .getDescription()
                 .equals(description);
+        boolean isAmountEqual = consoleCommandAddRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(defaultCurrency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                == null;
 
         assertTrue(
                 isNameEqual
                         && isIntervalEqual
-                        && isAmountEqual
                         && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpNameIntervalAmountCategory_ccarpNameIntervalAmountCategory() throws
+            MoneyGoWhereException {
+        String name = "RecPay1";
+        int interval = 30;
+        BigDecimal amount = new BigDecimal("7.80");
+        String category = "Test Cat";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY
+                + " \""
+                + category
+                + "\"";
+
+        ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment =
+                (ConsoleCommandAddRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandAddRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandAddRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                .equals(category);
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(defaultCurrency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpNameIntervalAmountCurrency_ccarpNameIntervalAmountCurrency() throws
+            MoneyGoWhereException {
+        String name = "RecPay1";
+        int interval = 30;
+        BigDecimal amount = new BigDecimal("7.80");
+        String currency = "USD";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY
+                + " \""
+                + currency
+                + "\"";
+
+        ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment =
+                (ConsoleCommandAddRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandAddRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandAddRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(currency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpNameIntervalAmountModeOfPayment_ccarpNameIntervalAmountModeOfPayment() throws
+            MoneyGoWhereException {
+        String name = "RecPay1";
+        int interval = 30;
+        BigDecimal amount = new BigDecimal("7.80");
+        String modeOfPayment = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+                + " \""
+                + modeOfPayment
+                + "\"";
+
+        ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment =
+                (ConsoleCommandAddRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandAddRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandAddRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(defaultCurrency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                .equals(modeOfPayment);
+
+        assertTrue(
+                isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpAllArguments_ccarpAllArguments() throws
+            MoneyGoWhereException {
+        String name = "RecPay1";
+        int interval = 30;
+        BigDecimal amount = new BigDecimal("7.80");
+        String description = "Test Desc";
+        String category = "Test Cat";
+        String currency = "USD";
+        String modeOfPayment = "Card";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CATEGORY
+                + " \""
+                + category
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY
+                + " \""
+                + currency
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+                + " \""
+                + modeOfPayment
+                + "\"";
+
+        ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment =
+                (ConsoleCommandAddRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandAddRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandAddRecurringPayment
+                .getDescription()
+                .equals(description);
+        boolean isAmountEqual = consoleCommandAddRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandAddRecurringPayment
+                .getCategory()
+                .equals(category);
+        boolean isCurrencyEqual = consoleCommandAddRecurringPayment
+                .getCurrency()
+                .equals(currency);
+        boolean isModeOfPaymentEqual = consoleCommandAddRecurringPayment
+                .getModeOfPayment()
+                .equals(modeOfPayment);
+
+        assertTrue(
+                isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
         );
     }
 
@@ -1679,7 +2005,7 @@ class ConsoleParserTest {
     //@@author xzynos
     @Test
     void parseCommand_arpName_ccarpInvalidException() {
-        String name = "RecurPay1";
+        String name = "RecPay1";
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
@@ -1695,8 +2021,25 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
+    void parseCommand_arpInterval_ccarpInvalidException() {
+        String interval = "30";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval;
+
+        assertThrows(
+                ConsoleParserCommandAddRecurringPaymentInvalidException.class, () -> ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
     void parseCommand_arpNameInterval_ccarpInvalidException() {
-        String name = "RecurPay1";
+        String name = "RecPay1";
         int interval = 30;
 
         String input = ""
@@ -1717,9 +2060,10 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_arpNameInvalidInterval_ccarpInvalidException() {
-        String name = "RecurPay1";
+    void parseCommand_arpNameInvalidInterval1Amount_ccarpInvalidException() {
+        String name = "RecPay1";
         String interval = "InvalidInterval";
+        String amount = "7.80";
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
@@ -1730,7 +2074,11 @@ class ConsoleParserTest {
                 + " -"
                 + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
                 + " "
-                + interval;
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount;
 
         assertThrows(
                 ConsoleParserCommandAddRecurringPaymentInvalidException.class, () -> ConsoleParser.parse(input)
@@ -1739,8 +2087,62 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_arpNameIntervalInvalidAmount_ccarpInvalidException() {
-        String name = "RecurPay1";
+    void parseCommand_arpNameInvalidInterval2Amount_ccarpInvalidException() {
+        String name = "RecPay1";
+        String interval = "-1";
+        String amount = "7.80";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(
+                ConsoleParserCommandAddRecurringPaymentInvalidException.class, () -> ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpNameInvalidInterval3Amount_ccarpInvalidException() {
+        String name = "RecPay1";
+        String interval = "999999999999999999999999";
+        String amount = "7.80";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(
+                ConsoleParserCommandAddRecurringPaymentInvalidException.class, () -> ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_arpNameIntervalInvalidAmount1_ccarpInvalidException() {
+        String name = "RecPay1";
         int interval = 30;
         String amount = "InvalidAmount";
 
@@ -1766,6 +2168,35 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
+    void parseCommand_arpNameIntervalInvalidAmount2_ccarpInvalidException() {
+        String name = "RecPay1";
+        int interval = 30;
+        String amount = "-7.80";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(
+                ConsoleParserCommandAddRecurringPaymentInvalidException.class, () -> ConsoleParser.parse(input)
+        );
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command View-RecurringPayment
+    //@@author xzynos
+    @Test
     void parseCommand_vrp_ccvrp() throws
             MoneyGoWhereException {
         String input = ""
@@ -1785,7 +2216,7 @@ class ConsoleParserTest {
     @Test
     void parseCommand_vrpIndex_ccvrpIndex() throws
             MoneyGoWhereException {
-        int recurringPaymentIndex = 1337;
+        int recurringPaymentIndex = 0;
 
         String input = ""
                 + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
@@ -1806,7 +2237,7 @@ class ConsoleParserTest {
 
     //@@author xzynos
     @Test
-    void parseCommand_vrpInvalidIndex_ccvrpInvalidException() {
+    void parseCommand_vrpInvalidIndex1_ccvrpInvalidException() {
         String recurringPaymentIndex = "InvalidIndex";
 
         String input = ""
@@ -1821,9 +2252,810 @@ class ConsoleParserTest {
         );
     }
 
+    //@@author xzynos
+    @Test
+    void parseCommand_vrpInvalidIndex2_ccvrpInvalidException() {
+        String recurringPaymentIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandViewRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_vrpInvalidIndex3_ccvrpInvalidException() {
+        String recurringPaymentIndex = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandViewRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Delete-RecurringPayment
+    //@@author xzynos
+    @Test
+    void parseCommand_drpIndex_ccdrpIndex() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        ConsoleCommandDeleteRecurringPayment consoleCommandDeleteRecurringPayment =
+                (ConsoleCommandDeleteRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandDeleteRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+
+        assertTrue(isRecurringPaymentIndexEqual);
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_drp_ccdrpInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT;
+
+        assertThrows(ConsoleParserCommandDeleteRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_drpInvalidIndex1_ccdrpInvalidException() {
+        String recurringPaymentIndex = "InvalidIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandDeleteRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_drpInvalidIndex2_ccdrpInvalidException() {
+        String recurringPaymentIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandDeleteRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_drpInvalidIndex3_ccdrpInvalidException() {
+        String recurringPaymentIndex = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandDeleteRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Edit-RecurringPayment
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexName_ccerpIndexName() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String name = "RecPay1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME
+                + " "
+                + name;
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInterval_ccerpIndexInterval() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        int interval = 30;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+                + " "
+                + interval;
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexDescription_ccerpIndexDescription() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String description = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                .equals(description);
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexAmount_ccerpIndexAmount() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        BigDecimal amount = new BigDecimal("7.80");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT
+                + " "
+                + amount;
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexCategory_ccerpIndexCategory() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String category = "Test Cat";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY
+                + " \""
+                + category
+                + "\"";
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                .equals(category);
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexCurrency_ccerpIndexCurrency() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String currency = "USD";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
+                + " \""
+                + currency
+                + "\"";
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                .equals(currency);
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                == null;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexModeOfPayment_ccerpIndexModeOfPayment() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String modeOfPayment = "Cash";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+                + " \""
+                + modeOfPayment
+                + "\"";
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                == null;
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == 0;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                == null;
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                == null;
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                == null;
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                .equals(modeOfPayment);
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexAllArguments_ccerpIndexAllArguments() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        String name = "RecPay1";
+        int interval = 30;
+        String description = "Test Desc";
+        BigDecimal amount = new BigDecimal("7.80");
+        String category = "Test Cat";
+        String currency = "USD";
+        String modeOfPayment = "Cash";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME
+                + " \""
+                + name
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+                + " \""
+                + interval
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT
+                + " \""
+                + amount
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CATEGORY
+                + " \""
+                + category
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
+                + " \""
+                + currency
+                + "\" -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+                + " \""
+                + modeOfPayment
+                + "\"";
+
+        ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment =
+                (ConsoleCommandEditRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandEditRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isNameEqual = consoleCommandEditRecurringPayment
+                .getName()
+                .equals(name);
+        boolean isIntervalEqual = consoleCommandEditRecurringPayment
+                .getInterval()
+                == interval;
+        boolean isDescriptionEqual = consoleCommandEditRecurringPayment
+                .getDescription()
+                .equals(description);
+        boolean isAmountEqual = consoleCommandEditRecurringPayment
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCategoryEqual = consoleCommandEditRecurringPayment
+                .getCategory()
+                .equals(category);
+        boolean isCurrencyEqual = consoleCommandEditRecurringPayment
+                .getCurrency()
+                .equals(currency);
+        boolean isModeOfPaymentEqual = consoleCommandEditRecurringPayment
+                .getModeOfPayment()
+                .equals(modeOfPayment);
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isNameEqual
+                        && isIntervalEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCategoryEqual
+                        && isCurrencyEqual
+                        && isModeOfPaymentEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erp_ccerpInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT;
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpInvalidIndex1_ccerpInvalidException() {
+        String recurringPaymentIndex = "InvalidIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpInvalidIndex2_ccerpInvalidException() {
+        String recurringPaymentIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpInvalidIndex3_ccerpInvalidException() {
+        String recurringPaymentIndex = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInvalidInterval1_ccerpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String interval = "InvalidInterval";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+                + " \""
+                + interval
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInvalidInterval2_ccerpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String interval = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+                + " \""
+                + interval
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInvalidInterval3_ccerpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String interval = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL
+                + " \""
+                + interval
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInvalidIAmount1_ccerpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String amount = "InvalidAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT
+                + " \""
+                + amount
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_erpIndexInvalidIAmount2_ccerpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String amount = "-7.80";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT
+                + " \""
+                + amount
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Merge-File
     //@@author LokQiJun
     @Test
-    void parseCommand_mefPath_ccmefPath() throws
+    void parseCommand_mfPath_ccmefPath() throws
             MoneyGoWhereException {
         String filePath = "C:/ValidPath/MoneyGoWhereData.xml";
 
@@ -1844,7 +3076,7 @@ class ConsoleParserTest {
 
     //@@author LokQiJun
     @Test
-    void parseCommand_mefInvalidPath_ccmefInvalidException() {
+    void parseCommand_mfInvalidPath_ccmfInvalidException() {
         String filePath = "This is an invalid path";
 
         String input = ""
@@ -1858,4 +3090,5 @@ class ConsoleParserTest {
                 ConsoleParser.parse(input)
         );
     }
+    //endregion
 }
