@@ -22,13 +22,14 @@ public enum HelpMessages {
             + "the transactions list."),
     COMMAND_DESCRIPTION_BUDGET("Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion)."),
     COMMAND_DESCRIPTION_BYE("Exit the application."),
-    COMMAND_DESCRIPTION_DELETE("Delete a transaction entry from the list of transactions."),
-    COMMAND_DESCRIPTION_EDIT("Edit a transaction entry from the list of transactions."),
+    COMMAND_DESCRIPTION_DELETE("Delete a transaction entry from the unfiltered list of transactions."),
+    COMMAND_DESCRIPTION_EDIT("Edit a transaction entry from the unfiltered list of transactions."),
     COMMAND_DESCRIPTION_FIND("Find a specific or multiple transactions based on any keyword that have been "
             + "specified."),
     COMMAND_DESCRIPTION_HELP("Display basic or detailed help information explaining the commands available in the "
             + "application."),
-    COMMAND_DESCRIPTION_LIST("List all or some transactions based on selection." + LINE_SEPARATOR
+    COMMAND_DESCRIPTION_LIST("List all or some transactions based on selection by the ascending order of date of"
+            + " transaction." + LINE_SEPARATOR
             + "If tag filters are used, the transactions retrieved from the records must match all the filter tags"
             + LINE_SEPARATOR + "that have been specified in order to be recognized as a valid record."),
     COMMAND_DESCRIPTION_PURGE("Delete all transaction entries from the list of transactions. User must enter 'Y' "

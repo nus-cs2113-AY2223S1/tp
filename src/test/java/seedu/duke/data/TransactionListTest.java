@@ -96,7 +96,7 @@ public class TransactionListTest {
         transactions.addIncome("sell_a_pear", 2, "fruits", LocalDate.of(2002, 1, 1));
 
         String transactionsList = transactions.findTransactions("sell");
-        assertEquals(transactionsList, "[+][fruits] $2 on Jan 01 2002 | Description: sell_a_pear"
+        assertEquals(transactionsList, "1: [+][fruits] $2 on Jan 01 2002 | Description: sell_a_pear"
                 + System.lineSeparator());
     }
 

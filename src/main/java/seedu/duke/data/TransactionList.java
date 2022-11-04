@@ -10,6 +10,7 @@ import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -113,6 +114,9 @@ public class TransactionList {
     public String deleteTransaction(int index) {
         Transaction transaction = transactions.get(index);
         transactions.remove(index);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return transaction.toString();
     }
 
@@ -120,6 +124,9 @@ public class TransactionList {
         transactions.remove(index - 1);
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(index - 1, expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense.toString();
     }
 
@@ -127,6 +134,9 @@ public class TransactionList {
         transactions.remove(index - 1);
         Income income = new Income(description, amount, category, date);
         transactions.add(index - 1, income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income.toString();
     }
 
@@ -144,6 +154,9 @@ public class TransactionList {
     public Expense addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense;
     }
 
@@ -159,6 +172,9 @@ public class TransactionList {
     public Income addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income;
     }
 
@@ -177,6 +193,9 @@ public class TransactionList {
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
 
@@ -193,6 +212,9 @@ public class TransactionList {
     public void addExpenseDuringStorage(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
     //@@author chydarren
@@ -247,10 +269,12 @@ public class TransactionList {
         String transactionsList = "";
 
         // Loops each transaction from the time transactions list
+        int count = 1;
         for (Transaction transaction : timeTransactions) {
             // Applies generic filter against each time transaction entry
             if (isMatchListFilters(transaction, type, category, date)) {
-                transactionsList += transaction.toString() + LINE_SEPARATOR;
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction.toString() + LINE_SEPARATOR;
+                count++;
             }
         }
         return transactionsList;
@@ -264,12 +288,14 @@ public class TransactionList {
      */
     public String findTransactions(String keyword) {
         String transactionsList = "";
+        int count = 1;
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions with their description matching the searching keywords
             if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
                     && keyword != "") {
-                transactionsList += transaction + LINE_SEPARATOR.toString();
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR.toString();
+                count++;
             }
         }
         return transactionsList;

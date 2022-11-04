@@ -91,6 +91,8 @@ General illustrations about the text format used for the commands in this guide 
 
 4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter.
 
+5. Each parameter can only be used at most once. 
+
 _Written by: Chia Thin Hong_
 
 ## 3. Getting Started
@@ -158,16 +160,17 @@ Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 ____________________________________________________________
 ```
 
-Viewing Detailed Help for Bye Command 
+Viewing Detailed Help for Delete Command 
 
 ```
-help o/detailed q/bye
+help o/detailed q/delete
 ____________________________________________________________
 Gotcha! Here are the commands that you may use:
-Command Word: BYE
-Exit the application.
-Usage: bye
-Parameters information: -NIL-
+Command Word: DELETE
+Delete a transaction entry from the unfiltered list of transactions.
+Usage: delete e/ENTRY
+Parameters information:
+- ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
 
 ____________________________________________________________
 ```
