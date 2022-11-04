@@ -17,30 +17,30 @@
 
 ## Introduction
 
-Duke is a movie review application allowing you to keep track of movies you have watched. With various commands at your 
+myReviews is a movie review application allowing you to keep track of movies you have watched. With various commands at your 
 disposal and the ability to store your review list, it has never been easier to keep track of all the movies you have 
 watched!
 
-The main features of Duke include:
+The main features of myReviews include:
 - Tracking watched movies and TV shows with ratings attached
 - Gain insight into your movie preferences by sorting according to rating, category and more!
 - Mark the movies and TV shows that you consider your favourites!
 
-Duke is optimized for use via a Command Line Interface (CLI). If you can type fast, look no further for your perfect, 
+myReviews is optimized for use via a Command Line Interface (CLI). If you can type fast, look no further for your perfect, 
 one-stop movie review companion.
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
+2. Download the latest version of `myReviews` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
 3. Copy the jar file into the folder you want to store your reviews.
 4. Open terminal application and change directory to the above folder.
 5. Run the jar file by entering java -jar tp.jar into the terminal.
-6. Duke will display a greeting message. Enter a command and press Enter to execute it.
+6. myReviews will display a greeting message. Enter a command and press Enter to execute it.
 
 ## Features 
 
-The following features are supported by Duke.
+The following features are supported by myReviews.
 
 1. User can add reviews on watched movies and tv shows.
 2. User can save their ratings, date watched, genre, location watched (only for tv) to a particular tv show/movie.
