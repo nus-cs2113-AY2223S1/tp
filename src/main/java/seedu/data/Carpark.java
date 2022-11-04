@@ -168,14 +168,15 @@ public class Carpark implements Comparable<Carpark> {
     }
 
     private LotType chooseLotType(String lotTypeString) throws InvalidFormatException {
+        if (!lotTypeString.trim().matches("^[a-zA-Z]$")) {
+            throw new InvalidFormatException("Lot type can only be alphabetic!");
+        }
         if (lotTypeString.equals("H")) {
             return LotType.HEAVY_VEHICLE;
-        } else if (lotTypeString.equals("Y")) {
+        } else if (lotTypeString.equals("Y") | lotTypeString.equals("M")) {
             return LotType.MOTORCYCLE;
-        } else if (lotTypeString.equals("C")) {
-            return LotType.CAR;
         } else {
-            throw new InvalidFormatException("Lot type not recognised!");
+            return LotType.CAR;
         }
     }
 

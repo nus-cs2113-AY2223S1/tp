@@ -33,8 +33,10 @@ public class Parser {
     private static final String EMPTY_RESPONSE_HEADER = "Empty argument. Valid command(s): \n";
     private static final String INVALID_NUMBER_OF_ARGS_HEADER = "This command only takes exactly %s argument(s). Valid "
         + "command(s): \n";
-    private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)"
-        + ".\n";
+    private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)."
+            + " Valid command(s):";
+    private static final String INVALID_DASHED_ARGUMENT = "The dashed argument `-%s` is not recognised. Valid "
+            + "format:\n";
 
     private CarparkList carparkList;
     private Api api;
@@ -222,7 +224,7 @@ public class Parser {
                 }
                 return prepareFilterCarparkId(actualArgument);
             }
-            if (dashedCommand.equalsIgnoreCase("add")
+            else if (dashedCommand.equalsIgnoreCase("add")
                     || dashedCommand.equalsIgnoreCase("address")) {
                 if (actualArgument.getWordCount() == 0) {
                     return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
