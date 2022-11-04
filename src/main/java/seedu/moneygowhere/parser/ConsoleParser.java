@@ -194,6 +194,34 @@ public class ConsoleParser {
         }
     }
 
+    private static boolean isIncomeIndexArgumentInvalid(String incomeIndexStr) {
+        if (incomeIndexStr == null) {
+            return true;
+        }
+
+        try {
+            int expenseIndex = Integer.parseInt(incomeIndexStr);
+
+            return expenseIndex < 0;
+        } catch (NumberFormatException exception) {
+            return true;
+        }
+    }
+
+    private static boolean isTargetIndexArgumentInvalid(String targetIndexStr) {
+        if (targetIndexStr == null) {
+            return true;
+        }
+
+        try {
+            int expenseIndex = Integer.parseInt(targetIndexStr);
+
+            return expenseIndex < 0;
+        } catch (NumberFormatException exception) {
+            return true;
+        }
+    }
+
     //region Defines functions to parse command Bye
     //@@author xzynos
     private static ConsoleCommandBye parseCommandBye() {
@@ -1000,6 +1028,10 @@ public class ConsoleParser {
             throw new ConsoleParserCommandConvertCurrencyInvalidException();
         }
 
+        if (isExpenseIndexArgumentInvalid(expenseIndexStr)) {
+            throw new ConsoleParserCommandConvertCurrencyInvalidException();
+        }
+
         if (rateStr != null) {
             BigDecimal rate = new BigDecimal(rateStr);
             if (rate.compareTo(BigDecimal.ZERO) != 1) {
@@ -1285,7 +1317,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandViewTargetInvalidException(exception);
+            throw new ConsoleParserCommandViewTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID
+            );
         }
     }
 
@@ -1296,18 +1330,10 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
-
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandViewTargetInvalidException(exception);
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandViewTargetInvalidException();
-            }
+        if (targetIndexStr != null && isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandViewTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1348,7 +1374,7 @@ public class ConsoleParser {
             return consoleCommandViewTarget;
         } catch (ConsoleParserCommandViewTargetInvalidException exception) {
             throw new ConsoleParserCommandViewTargetInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1374,7 +1400,10 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID,
+                    exception
+            );
         }
     }
 
@@ -1385,18 +1414,16 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
+        if (targetIndexStr == null) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID
+            );
+        }
 
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandDeleteTargetInvalidException();
-            }
+        if (isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1407,12 +1434,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        int targetIndex;
-        if (targetIndexStr == null) {
-            targetIndex = -1;
-        } else {
-            targetIndex = Integer.parseInt(targetIndexStr);
-        }
+        int targetIndex = Integer.parseInt(targetIndexStr);
 
         return new ConsoleCommandDeleteTarget(targetIndex);
     }
@@ -1435,7 +1457,7 @@ public class ConsoleParser {
             return consoleCommandDeleteTarget;
         } catch (ConsoleParserCommandDeleteTargetInvalidException exception) {
             throw new ConsoleParserCommandDeleteTargetInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1532,22 +1554,16 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
+        if (targetIndexStr == null) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID
+            );
+        }
 
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
-                );
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
-                );
-            }
+        if (isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1834,7 +1850,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandViewIncomeInvalidException(exception);
+            throw new ConsoleParserCommandViewIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID
+            );
         }
     }
 
@@ -1845,18 +1863,10 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG
         );
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
-
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandViewIncomeInvalidException(exception);
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandViewIncomeInvalidException();
-            }
+        if (incomeIndexStr != null && isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandViewIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
     }
 
@@ -1897,7 +1907,7 @@ public class ConsoleParser {
             return consoleCommandViewIncome;
         } catch (ConsoleParserCommandViewIncomeInvalidException exception) {
             throw new ConsoleParserCommandViewIncomeInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1923,7 +1933,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandDeleteIncomeInvalidException(exception);
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID
+            );
         }
     }
 
@@ -1934,18 +1946,16 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG
         );
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
+        if (incomeIndexStr == null) {
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID
+            );
+        }
 
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandDeleteIncomeInvalidException(exception);
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandDeleteIncomeInvalidException();
-            }
+        if (isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
     }
 
@@ -1957,11 +1967,7 @@ public class ConsoleParser {
         );
 
         int incomeIndex;
-        if (incomeIndexStr == null) {
-            incomeIndex = -1;
-        } else {
-            incomeIndex = Integer.parseInt(incomeIndexStr);
-        }
+        incomeIndex = Integer.parseInt(incomeIndexStr);
 
         return new ConsoleCommandDeleteIncome(incomeIndex);
     }
@@ -1984,7 +1990,7 @@ public class ConsoleParser {
             return consoleCommandDeleteIncome;
         } catch (ConsoleParserCommandDeleteIncomeInvalidException exception) {
             throw new ConsoleParserCommandDeleteIncomeInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -2030,12 +2036,6 @@ public class ConsoleParser {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG
         );
-        String incomeIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
-        );
-        String amountStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
-        );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditIncomeInvalidException(
@@ -2043,23 +2043,25 @@ public class ConsoleParser {
             );
         }
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
+        String incomeIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
+        );
 
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
-                );
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
-                );
-            }
+        if (incomeIndexStr == null) {
+            throw new ConsoleParserCommandEditIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
+
+        if (isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandEditIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID
+            );
+        }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
+        );
 
         if (amountStr != null) {
             try {
