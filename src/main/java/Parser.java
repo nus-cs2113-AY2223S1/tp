@@ -221,53 +221,6 @@ public class Parser {
         return SubMenuState.IN_SUB_MENU;
     }
 
-    public void errorIfNoMatchPrescription(Matcher matcher, String message) throws OneDocException {
-        if (matcher == null || !matcher.find()) {
-            switch (message) {
-            case "add":
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
-            case "edit":
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_EDIT
-                        + "\nx - The index should be a displayed number next to the prescription"
-                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
-            case "viewPatientPres":
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_VIEW_PATIENT
-                        + "\nx - The index should be a displayed number next to the visit");
-//            case "viewPatient":
-//                throw new OneDocException("Your input is incorrect! Please format it as such:"
-//                        + UI.VISIT_VIEW_PATIENT
-//                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
-//            case "viewVisit":
-//                throw new OneDocException("Your input is incorrect! Please format it as such:"
-//                        + UI.VISIT_VIEW
-//                        + "\nx - The index should be a displayed number next to the visit");
-            default:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words"
-                        + UI.PRESCRIPTION_EDIT
-                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
-                        + UI.PRESCRIPTION_VIEW_ALL
-                        + UI.PRESCRIPTION_VIEW_PATIENT
-                        + UI.PRESCRIPTION_VIEW_ACTIVE
-                        + UI.PRESCRIPTION_CHANGE_ACTIVE
-                        + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\nx - The index should be relative to all the visits of a patient");
-            }
-        }
-    }
-
     public void errorIfNoMatchPatient(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
@@ -277,10 +230,10 @@ public class Parser {
                         + "\nn - The name should be one of two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters");
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
             case "edit":
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_ADD
+                        + UI.PATIENT_EDIT
                         + "\nn/g/d - Please edit only one aspect of a patient at a time"
                         + "\nn - The name should be one of two words"
                         + "\ng - The gender should be one letter, M or F"
@@ -295,11 +248,12 @@ public class Parser {
                         + "\nn - The name should be one of two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters"
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces"
                         + UI.PATIENT_EDIT
                         + "\nn/g/d - Please edit only one aspect of a patient at a time"
                         + UI.PATIENT_RETRIEVE
-                        + UI.PATIENT_VIEW_ALL);
+                        + UI.PATIENT_VIEW_ALL
+                        + UI.RETURN_TO_MAIN);
             }
         }
     }
@@ -342,14 +296,67 @@ public class Parser {
                         + UI.VISIT_DELETE_REASON
                         + UI.VISIT_VIEW_ALL
                         + UI.VISIT_VIEW_PATIENT
-                        + UI.VISIT_VIEW);
+                        + UI.VISIT_VIEW
+                        + UI.RETURN_TO_MAIN);
+            }
+        }
+    }
+
+    public void errorIfNoMatchPrescription(Matcher matcher, String message) throws OneDocException {
+        if (matcher == null || !matcher.find()) {
+            switch (message) {
+            case "add":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_ADD
+                        + "\nn - The prescription name should be one or two words"
+                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
+            case "edit":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_EDIT
+                        + "\nx - The index should be a displayed number next to the prescription"
+                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
+                        + "\nn - The prescription name should be one or two words"
+                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
+            case "viewPatientPres":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_VIEW_PATIENT
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+            case "viewActPatientPres":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_VIEW_ACTIVE
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+            case "activate":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_CHANGE_ACTIVE
+                        + "\nx - The index should be a displayed number next to the prescription");
+            case "deactivate":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_CHANGE_INACTIVE
+                        + "\nx - The index should be a displayed number next to the prescription");
+            default:
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PRESCRIPTION_ADD
+                        + "\nn - The prescription name should be one or two words"
+                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nt - The time instruction should be instructions on how to take, with any number of words"
+                        + UI.PRESCRIPTION_EDIT
+                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
+                        + UI.PRESCRIPTION_VIEW_ALL
+                        + UI.PRESCRIPTION_VIEW_PATIENT
+                        + UI.PRESCRIPTION_VIEW_ACTIVE
+                        + UI.PRESCRIPTION_CHANGE_ACTIVE
+                        + UI.PRESCRIPTION_CHANGE_INACTIVE
+                        + "\nx - The index should be displayed number next to the prescription"
+                        + UI.RETURN_TO_MAIN);
             }
         }
     }
 
     private void checkViewAllCommand(String inputLower, String type) {
         if (inputLower.length() > VIEW_ALL_COMMAND.length()) {
-            System.out.println("A viewall command will print all " + type + "s, and anything after it will be disregarded");
+            System.out.println("A viewall command will print all " + type + "s, and anything after it will be disregarded.");
         }
     }
 
