@@ -148,14 +148,14 @@ Below, we detail the design of the UI class with a class diagram
 
 Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
 Moreover, we also `StorageManager` class as a bridge between main class `Duke` and other storage, which handles data corruption in the files, writes data/loads data from/to all three lists.
-The following diagrams show more details about Storage classes: 
+The following diagrams show more details about Storage classes _(some unimportant methods is removed from the diagram)_: 
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
 The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
-If Duke detects a change that potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list, for example:
+If Duke detects a change that potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list.
 
 ## 4. Implementation
 
@@ -261,8 +261,6 @@ Step 4: The list of items will then be displayed to the user via `Ui.printRespon
 The following sequence diagram shows how the view-user-items operation works:
 ![viewUserItemsSequence](images/ViewUserItemsSequence.png)
 
-**...To be updated(Find user, View user debt)**
-
 ### 4.1.6. Find Users by Keyword
 
 >This feature allows users to find items through the command ```find-user```.
@@ -289,7 +287,7 @@ Step 1: The user types in the command ```view-user-loss /u [username]``` in the 
 
 Step 2: Duke will receive the ```ViewUserLossCommand``` and execute it.
 
-Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
+Step 3: ViewUserLossCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
 
 Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
 
@@ -311,7 +309,7 @@ Step 1: The user types in the command ```view-user-gain /u [username]``` in the 
 
 Step 2: Duke will receive the ```ViewUserGainCommand``` and execute it.
 
-Step 3: ViewUserDebtCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
+Step 3: ViewUserGainCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
 
 Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
 
@@ -687,10 +685,6 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | UI            | User Interface             |
 | Mainstream OS | Windows, Linux, Unix, OS-X |
 | CLI           | Command Line Interface     |
-
-...TO BE UPDATED
-
-
 
 ## 9. Instructions for manual testing
 
