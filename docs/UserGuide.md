@@ -12,6 +12,7 @@
   - [Authentication status](#authentication-status)
   - [Find number of lots by carpark ID](#find-number-of-lots-by-carpark-id)
   - [Filter carparks based on address](#filter-carparks-based-on-address)
+  - [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
   - [Get a list of carparks on the app](#get-a-list-of-carparks-on-the-app)
   - [Update data from API](#update-data-from-api)
   - [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)
@@ -53,7 +54,7 @@ module in Q4 2022**.
    4. Use [`favourite CARPARK_ID`](#favourite-carparks-by-carpark-id)/[`unfavourite CARPARK_ID`](#unfavourite-carparks-by-carpark-id)
    to add / remove certain carparks into your favourite list.
       
-Read in more detail at the [Features Section](#features) section below.
+See more detail in the [Features Section](#features) section below.
 
 ## Features
 
@@ -67,6 +68,7 @@ Read in more detail at the [Features Section](#features) section below.
 | `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
 | `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
 | `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
 | `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
 | `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
@@ -177,31 +179,37 @@ Example of usage:
 BLK 202/203 ANG MO KIO STREET 22
 ===========================================
 Carpark code: A9
-Favourited: Yes
-Number of available lots (total): 132
-  Cars: 66 lots
+Favourited: No
+Number of available lots (total): 52
+  Cars: 52 lots
   Motorcycles: 0 lots
   Heavy Vehicles: 0 lots
+Last Updated: 04-11-2022 19:28:10
 ===========================================
 ```
 
 ### Filter carparks based on address
 
-**Shows a summarised list of carparks that match a given query.**
-> Format: `filter QUERY` or `fil QUERY`
+**Shows a summarised list of carparks that match a given query based on its address.**
+> Format: `filter QUERY`, `fil QUERY` (dashed argument `-address` optional)
 
 - The filter command allows the user to search a carpark based on the name of the carpark. For example,
   a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
   carpark as one of its results.
+- The query is case-insensitive.
 - Multiple words can be input to narrow the filtered results further. Given the previous example, `clementi ave` will
-  also give the above carpark as one of its results.
+  also give the above carpark as one of its results. The carparks displayed will have matches for **all** the space-separated words in the query.
+- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
+  example, `clem` will also match the above carpark, but `ti` will not.
 - Only a summarised list of carparks with minimal information will be shown.
 - Note that it will also show empty car park lots.
-- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
-  example, `clem` will also match the above carpark.
-- In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched.
+- If supported by your console and operating system, matched words will be highlighted for ease of viewing.
 
-Example of usage
+> **Note:**  The `filter` command allows for dashed arguments `-address` and `-id` to switch modes, but if none is provided it defaults to address mode above.
+
+Related: [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
+
+Example of usage:
 
 **Input:**
 
@@ -209,16 +217,50 @@ Example of usage
 
 **Output:**
 ```    
-CarparkID C5 at BLK 358-360,36`2`-363,366-367 `CLEMENTI` `AVE` `2`
-    806 available lots total
-CarparkID C8 at BLK 335/338 `CLEMENTI` `AVE` `2`
-    356 available lots total
-CarparkID C28M at BLK `208` `CLEMENTI` `AVE` 6
-    370 available lots total
-CarparkID C6 at BLK 3`2`8-334 `CLEMENTI` `AVE` `2`
-    226 available lots total
-CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
-    304 available lots total
+CarparkID C28M at BLK 208 CLEMENTI AVE 6
+--> 233 available lots total
+CarparkID C5 at BLK 358-360,362-363,366-367 CLEMENTI AVE 2
+--> 173 available lots total
+CarparkID C6 at BLK 328-334 CLEMENTI AVE 2
+--> 129 available lots total
+CarparkID C7 at BLK 349-355 CLEMENTI AVE 2
+--> 223 available lots total
+CarparkID C8 at BLK 335/338 CLEMENTI AVE 2
+--> 240 available lots total
+```
+
+### Filter carparks based on carpark ID
+
+**Shows a summarised list of carparks that match a given query.**
+> Format: `filter -id QUERY` or `fil -id QUERY`
+
+- The filter command allows the user to search a carpark based on the carpark ID. Different from the `find` command, the `filter -id` command displays a list of partial matches. For example, a carpark with ID `A35` can be matched by `fil -id A` or `fil -id 35`.
+- The query is case-insensitive.
+- Unlike the `filter` command in address mode, rather than matching **all** words in the query, a carpark only needs to match **one or more** words in the query.
+- For convenience, the `filter -id` command also matches substrings _anywhere_ in the ID. For example, any of `A35`, `a`, `5` will match the above carpark.
+- Only a summarised list of carparks with minimal information will be shown.
+- Note that it will also show empty car park lots.
+
+> **Note:**  To use the `filter` command in ID mode, a dashed argument `-id` is **required**.
+
+Related: [Filter carparks based on address](#filter-carparks-based-on-address)
+
+Example of usage:
+
+**Input:**
+
+```filter -id 7a 8a```
+
+**Output:**
+```    
+CarparkID B7A at BLK 216/218 BEDOK NORTH ST 1
+--> 0 available lots total
+CarparkID C18A at BLK 426/427 CLEMENTI AVE 3
+--> 25 available lots total
+CarparkID CK8A at BLK 203A CHOA CHU KANG AVE 1/CENTRAL
+--> 297 available lots total
+CarparkID T47A at BLK 864B TAMPINES STREET 83
+--> 123 available lots total
 ```
 
 ### Get a list of carparks on the app
@@ -387,8 +429,9 @@ Here are the list of available commands to use! Refer to the user guide at https
 `auth default` or `a default` 	: to authenticate using the default key provided by parKING.
 `auth status` or `a status` 	: to get the authentication status.
 `update` or `u` 	: To fetch the latest data from LTA.
-`filter KEYWORD` or `fil KEYWORD` 	: Find carpark based on its address.
-`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the queried carpark.
+`filter QUERY` or `fil QUERY` or `fil -address QUERY` 	: Find carparks based on its address.
+`filter -id QUERY` or `fil -id QUERY` 	: Find carparks based on its Carpark Id.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark.
 `favourite list` or `fav list` 	: to get the list of favourited carparks.
 `favourite CARPARK_ID` or `fav CARPARK_ID` 	: favourite carpark by its ID.
 `unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: unfavourite carpark by its ID.
@@ -419,6 +462,7 @@ when you restart the program.
 | `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
 | `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
 | `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
 | `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
 | `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
