@@ -117,12 +117,14 @@ public class TransactionList {
     }
 
     public String editExpense(String description, int amount, String category, LocalDate date, int index) {
+        transactions.remove(index - 1);
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(index - 1, expense);
         return expense.toString();
     }
 
     public String editIncome(String description, int amount, String category, LocalDate date, int index) {
+        transactions.remove(index - 1);
         Income income = new Income(description, amount, category, date);
         transactions.add(index - 1, income);
         return income.toString();

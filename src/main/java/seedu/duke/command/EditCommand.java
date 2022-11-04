@@ -10,10 +10,10 @@ import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 
 import seedu.duke.data.transaction.Transaction;
+import seedu.duke.exception.EditCommandEmptyTagsException;
+import seedu.duke.exception.EditCommandUnchangedException;
 import seedu.duke.exception.GlobalInvalidIndexException;
-
 import seedu.duke.exception.MoolahException;
-
 import seedu.duke.exception.StorageWriteErrorException;
 
 import java.io.IOException;
@@ -128,44 +128,29 @@ public class EditCommand extends Command {
             editLogger.setLevel(Level.SEVERE);
             editLogger.log(Level.INFO, "Edit Command checks whether the index is valid "
                     + "before executing the command.");
-            int index = entryNumber;
-            boolean isInputValid = true;
-            int numberOfTransactions = transactions.size();
-            if ((index > numberOfTransactions) || (index <= 0)) {
-                isInputValid = false;
-            }
 
+            int index = entryNumber;
+            String newType = type;
+            String newDescription = description;
+            int newAmount = amount;
+            LocalDate newDate = date;
+            String newCategory = category;
+            Transaction entry = transactions.getEntry(index - 1);
+
+            boolean check = isIndexValid(transactions, index);
+            boolean secondCheck = isTagsNonEmpty(newType, newDescription, newAmount, newCategory, newDate);
+            boolean thirdCheck = isParametersChanged(entry, newType, newDescription, newAmount, newCategory, newDate);
             assert index > 0;
 
-            if (isInputValid) {
-                Transaction entry = transactions.getEntry(index - 1);
-                String newType = type;
-                String newDescription = description;
-                int newAmount = amount;
-                LocalDate newDate = date;
-                String newCategory = category;
-
-                if (newType == null) {
-                    newType = entry.getType();
-                }
+            if (check && secondCheck && thirdCheck) {
+                newType = updateType(entry, newType);
 
                 if (newType.equals("expense")) {
-                    if (newDate == null) {
-                        newDate = entry.getDate();
-                    }
+                    newDate = updateDate(entry, newDate);
+                    newDescription = updateDescription(entry, newDescription);
+                    newCategory = updateCategory(entry, newCategory);
+                    newAmount = updateAmount(entry, newAmount);
 
-                    if (newDescription == null) {
-                        newDescription = entry.getDescription();
-                    }
-
-                    if (newCategory == null) {
-                        newCategory = entry.getCategory();
-                    }
-
-                    if (newAmount == 0) {
-                        newAmount = entry.getAmount();
-                    }
-                    transactions.deleteTransaction(index - 1);
                     String message = transactions.editExpense(newDescription, newAmount, newCategory, newDate, index);
 
                     long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
@@ -176,22 +161,11 @@ public class EditCommand extends Command {
                     editLogger.log(Level.INFO, "The requested transaction has been edited "
                             + "and the UI should display the confirmation message respectively.");
                 } else {
-                    if (newDate == null) {
-                        newDate = entry.getDate();
-                    }
+                    newDate = updateDate(entry, newDate);
+                    newDescription = updateDescription(entry, newDescription);
+                    newCategory = updateCategory(entry, newCategory);
+                    newAmount = updateAmount(entry, newAmount);
 
-                    if (newDescription == null) {
-                        newDescription = entry.getDescription();
-                    }
-
-                    if (newCategory == null) {
-                        newCategory = entry.getCategory();
-                    }
-
-                    if (newAmount == 0) {
-                        newAmount = entry.getAmount();
-                    }
-                    transactions.deleteTransaction(index - 1);
                     String message = transactions.editIncome(newDescription, newAmount, newCategory, newDate, index);
 
                     long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
@@ -203,9 +177,15 @@ public class EditCommand extends Command {
                             + "and the UI should display the confirmation message respectively.");
                 }
             } else {
-                editLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
-                        + "is invalid.");
-                throw new GlobalInvalidIndexException();
+                if (check) {
+                    editLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
+                            + "is invalid.");
+                    throw new GlobalInvalidIndexException();
+                } else if (secondCheck) {
+                    throw new EditCommandEmptyTagsException();
+                } else {
+                    throw new EditCommandUnchangedException();
+                }
             }
             storage.writeToFile(transactions.getTransactions());
         } catch (IOException e) {
@@ -245,5 +225,58 @@ public class EditCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    public boolean isTagsNonEmpty(String newType, String newDescription, int newAmount, String newCategory,
+                                  LocalDate newDate) {
+        return (newType != null) || (newDescription != null) || (newAmount != 0) || (newCategory != null)
+                || (newDate != null);
+    }
+
+    public boolean isIndexValid(TransactionList transactions, int index) {
+        int numberOfTransactions = transactions.size();
+        return (index <= numberOfTransactions) && (index > 0);
+    }
+
+    public boolean isParametersChanged(Transaction entry, String newType, String newDescription, int newAmount,
+                                       String newCategory, LocalDate newDate) {
+        return (entry.getType() != newType) || (entry.getDescription() != newDescription)
+                || (entry.getAmount() != newAmount) || (entry.getCategory() != newCategory)
+                || (entry.getDate() != newDate);
+    }
+
+    public String updateType(Transaction entry, String type) {
+        if (type == null) {
+            type = entry.getType();
+        }
+        return type;
+    }
+
+    public LocalDate updateDate(Transaction entry, LocalDate date) {
+        if (date == null) {
+            date = entry.getDate();
+        }
+        return date;
+    }
+
+    public String updateDescription(Transaction entry, String description) {
+        if (description == null) {
+            description = entry.getDescription();
+        }
+        return description;
+    }
+
+    public String updateCategory(Transaction entry, String category) {
+        if (category == null) {
+            category = entry.getCategory();
+        }
+        return category;
+    }
+
+    public int updateAmount(Transaction entry, int amount) {
+        if (amount == 0) {
+            amount = entry.getAmount();
+        }
+        return amount;
     }
 }

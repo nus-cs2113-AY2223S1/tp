@@ -50,7 +50,11 @@ public enum ErrorMessages {
 
     ERROR_INVALID_BUDGET("Invalid budget amount! (Note: Budget must be a positive whole number of valid range)"
             + " Please enter <help> for the command guide."),
-    ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value.");
+    ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value."),
+
+    ERROR_EDIT_TAGS_EMPTY("Your tags cannot be empty. Please enter <help> for the command guide."),
+
+    ERROR_EDIT_UNCHANGED("Your tags inputted does not edit the transaction.");
 
     //@@author chydarren
     public final String message;
