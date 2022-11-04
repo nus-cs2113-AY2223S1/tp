@@ -193,7 +193,7 @@ public class EditParser {
             Ui.printEditLine();
             System.out.println("Please input the numbers correctly.");
             Ui.printEditLine();
-        } catch (NegativeNumberException|UnlistedComponentTypeException e) {
+        } catch (NegativeNumberException | UnlistedComponentTypeException e) {
             Ui.printEditLine();
             System.out.println(e.getMessage());
             Ui.printEditLine();
