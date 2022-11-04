@@ -51,7 +51,7 @@ Updated class diagrams to follow standard notation.
 ### Contributions to Team-Based Tasks
 * Performed extensive testing to find and fix bugs for all features of the app
 * Maintained issue tracker by tagging and labelling various pull requests for effective reference
-* Exhibited strong project management skills, reminding team members about uncompleted tasks and voluntarily complete submissions (eg. release v1.0)
+* Exhibited strong project management skills, reminding team members about uncompleted tasks and voluntarily do submissions (eg. release v1.0)
 
 ### Contributions beyond the project team
 #### Review/mentoring contributions
