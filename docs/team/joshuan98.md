@@ -73,3 +73,19 @@ As an added feature, users can also curate their timetables to prevent potential
 - Reported 24 bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
 
 ## Contributions to the User Guide (Extracts)
+
+- User Guide:
+  - [List Command](/docs/UserGuide.md/#list-command-list)
+  - [Command Summary](/docs/UserGuide.md/#command-summary)
+
+## Contributions to the Developer Guide (Extracts)
+
+- Developer Guide Diagrams:
+  - [Database Class Diagram](/docs/images/Database_Class.png)
+  - [Database Sequence Diagram](/docs/images/Database_Sequence.png)
+  - [List Class Diagram](/docs/images/ListCommand_Class.png)
+  - [List Sequence Diagram](/docs/images/ListCommand_Sequence.png)
+- [Product Scope](/docs/DeveloperGuide.md/#2-product-scope-1)
+- [User Stories](/docs/DeveloperGuide.md/#3-user-stories-1)
+- [Non-Functional Requirements](/docs//DeveloperGuide.md/#4-non-functional-requirements-1)
+- [Glossary](/docs/DeveloperGuide.md/#5-glossary-1)
