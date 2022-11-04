@@ -1,15 +1,16 @@
 package seedu.commands;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class FindCommandTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";

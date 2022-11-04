@@ -1,10 +1,10 @@
 package seedu.commands;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
@@ -18,14 +18,16 @@ public class FavouriteCommandTest {
     private final Path validBackupPathAndFile = Paths.get(testFileDirectory, "ltaResponseBackup.json");
     private final String newDirectory = "./new_directory";
     private final String newFilename = "new_filename.txt";
-    private final String validFavouriteFile = "favouriteValid.txt";
-    private final String invalidFavouriteFile = "favouriteInvalid.txt";
-    private final String emptyFile = "favouriteEmpty.txt";
+    private final String validFavouriteFile = "favouriteCommandValid.txt";
+
+    private final String validFavouriteList = "favouriteCommandList.txt";
+    private final String invalidFavouriteFile = "favouriteCommandInvalid.txt";
+    private final String emptyFile = "favouriteCommandEmpty.txt";
 
     @Test
     void testFavouriteCommand() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Favourite favourite = new Favourite(testFileDirectory, newFilename);
+        Favourite favourite = new Favourite(testFileDirectory, validFavouriteFile);
         String argument = "1";
         String result = new FavouriteCommand(argument, favourite, carparkList).execute().showToUser;
         Assertions.assertEquals("Added Carpark 1 to favourites!", result);
@@ -34,7 +36,7 @@ public class FavouriteCommandTest {
     @Test
     void testFavouriteList() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Favourite favourite =  new Favourite(testFileDirectory, validFavouriteFile);
+        Favourite favourite = new Favourite(testFileDirectory, validFavouriteList);
         String argument = "list";
         String result = new FavouriteCommand(argument, favourite, carparkList).execute().showToUser;
         Assertions.assertEquals("===========================================\n"
@@ -48,7 +50,7 @@ public class FavouriteCommandTest {
     @Test
     void testInvalidFavouriteList() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Favourite favourite =  new Favourite(testFileDirectory, invalidFavouriteFile);
+        Favourite favourite = new Favourite(testFileDirectory, invalidFavouriteFile);
         String argument = "list";
         String result = new FavouriteCommand(argument, favourite, carparkList).execute().showToUser;
         Assertions.assertEquals("===========================================\n"
@@ -62,7 +64,7 @@ public class FavouriteCommandTest {
     @Test
     void testEmptyFavouriteList() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
-        Favourite favourite =  new Favourite(testFileDirectory, emptyFile);
+        Favourite favourite = new Favourite(testFileDirectory, emptyFile);
         String argument = "list";
         String result = new FavouriteCommand(argument, favourite, carparkList).execute().showToUser;
         Assertions.assertEquals("There are no favourites in the list!", result);

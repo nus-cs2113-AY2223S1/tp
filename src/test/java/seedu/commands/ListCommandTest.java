@@ -1,16 +1,17 @@
 package seedu.commands;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.parser.Parser;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ListCommandTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
@@ -32,12 +33,13 @@ public class ListCommandTest {
     }
 
     @Test
-    void testExtraParameters() throws FileWriteException, NoCarparkFoundException, InvalidCommandException, NoFileFoundException {
+    void testExtraParameters() throws FileWriteException, NoCarparkFoundException, InvalidCommandException,
+            NoFileFoundException {
         String input = "list please";
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Command command = new Parser().parseCommand(input, null, carparkList, null);
         String result = command.execute().showToUser;
-        Assertions.assertEquals("There were unrecognized arguments after the `list` command. " +
-                "Please try the `list` command again by itself.", result);
+        Assertions.assertEquals("There were unrecognized arguments after the `list` command. "
+                + "Please try the `list` command again by itself.", result);
     }
 }
