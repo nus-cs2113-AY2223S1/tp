@@ -55,9 +55,19 @@ Note:
 ### Add Property: `add -property`
 Adds a new property into property list, along with Singapore address and unit-type validations. Also, duplicate property entries of the same **address** will not be accepted.
 
-<u>Full Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
+<u>Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 
-<u>Full Example</u>: `add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 p/1000 t/HDB 3` 
+
+<u>Example</u>: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+
+<u>Expected Output</u>:
+```
+Adding a property with the following information:
+  Landlord: Ash Ketchun
+  Address: 25A Pallet Town, S121111
+  Renting Price: SGD1600/month
+  Unit Type: LP Bungalow
+```
 
 The descriptions of `add -property` PARAMETERS are as follows:
 - `NAME`: Name of property owner (Landlord)
@@ -70,20 +80,24 @@ As there are validations involved, some PARAMETERS must adhere to specific forma
 For valid `ADDRESS`, a valid Singapore address must be provided with the following format and details:
 ```
 --------------------------------------------------------------------------------
-LANDED PROPERTY:
-  Format:  [Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]
-  Example: 60 Aria Street, Singapore 602580
+  Format:
+        [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
 --------------------------------------------------------------------------------
-BUILDINGS (e.g. HDBs, apartments, condominiums):
-  Format (Without Building Name):
-  [Block Number]<space>[Street Name]<space>#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]
-  Example: 101 Marlow Street #12-05, Singapore 059020
-  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020
+  Example:
+        60 Aria Street, S602580
+        101 Marlow Street #12-05, S059020
+        101 Marlow Street #12-05 Clife Parkview, S059020
 --------------------------------------------------------------------------------
-Note: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional
-Any deviation from format will lead to invalid address.
+  Note:
+        1. Format requires single space between [DETAILS] (space sensitive).
+        2. [DETAIL] must be provided; [detail] is optional.
+        3. For landed property, treat [Block Number] as its unit number.
+        4. Any deviation from format will lead to invalid address.
+--------------------------------------------------------------------------------
 ```
-For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (System Pre-Defined) must be provided with the following format:
+For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (App Pre-Defined) must be provided with the following format:
 ```
 Format: t/<label>
 --------------------------------------------------------------------------------
@@ -113,16 +127,23 @@ Landed Property Labels
 ```
 Lastly, for valid `PRICE`, a positive integer must be provided.
 
-Example: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+There is also another validation which checks for mismatch between address format and unit type of property. Certain unit types will require specific address format. Please refer to the description below:
+```
+  1. Unit type with <LP> must not have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+  2. Unit type without <LP> must have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
+Note: HDB Terrace House (special case) is not restricted by any format.
+```
 
-Expected Output:
-```
-Adding a property with the following information:
-  Landlord: Ash Ketchun
-  Address: 25A Pallet Town, S121111
-  Renting Price: SGD1600/month
-  Unit Type: LP Bungalow
-```
+**DISCLAIMER**:
+
+Currently, there are some illogical inputs allowed by the application as shown below. Although validation can be done to prevent such cases, such validations will hinder normal operation and thus not implemented.
+1. Properties with the same street name but of different address format (with / without unit level and number) are allowed to be added.
+2. Properties with different street name but of the same postal code are also allowed to be added. 
 
 ---
 
