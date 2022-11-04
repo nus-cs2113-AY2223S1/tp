@@ -20,6 +20,7 @@ public class UserStorage {
     private static Logger logger = Logger.getLogger("UserStorage");
     private static HashMap<String, String> filePaths = new HashMap<>();
     private static final String directory = "data/";
+
     public static HashMap<String, String> getFilePaths() {
         return filePaths;
     }
@@ -94,7 +95,7 @@ public class UserStorage {
         File dir = new File(directory);
         for (File file : dir.listFiles()) {
             String filePath = file.getPath();
-            String uniName = filePath.substring(5, filePath.length()-4);
+            String uniName = filePath.substring(5, filePath.length() - 4);
             if (!Database.hasUniversityInDatabase(uniName) && !filePath.equals("data" + File.separator + "data.csv")) {
                 file.delete();
                 System.out.println("Invalid file name, deleting " + filePath);

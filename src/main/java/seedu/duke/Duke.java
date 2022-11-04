@@ -119,7 +119,8 @@ public class Duke {
                 executeDeleteComment(userUniversityListManager, deleteCommand);
             } else if (deleteCommand.getLesson() != null) {
                 timetableManager.deleteLesson(deleteCommand.getLesson());
-                UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(), userUniversityListManager);
+                UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(),
+                        userUniversityListManager);
             } else {
                 if (deleteCommand.getModuleCode() == null) {
                     userUniversityListManager.deleteList(deleteCommand.getUniversityName());
@@ -127,7 +128,8 @@ public class Duke {
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());
-                    UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(), userUniversityListManager);
+                    UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(),
+                                userUniversityListManager);
                 }
             }
         } catch (NoSuchElementException | TimetableNotFoundException e) {
@@ -305,11 +307,13 @@ public class Duke {
             } else if (favouriteCommand.getFavouriteOption().equals("ADD")) {
                 String universityName = favouriteCommand.getUniversityName();
                 userUniversityListManager.addFavourite(universityName);
-                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(), userUniversityListManager);
+                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(),
+                        userUniversityListManager);
             } else if (favouriteCommand.getFavouriteOption().equals("DELETE")) {
                 String universityName = favouriteCommand.getUniversityName();
                 userUniversityListManager.deleteFavourite(universityName);
-                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(), userUniversityListManager);
+                UserStorageParser.storeInfoToUserStorageByUni(favouriteCommand.getUniversityName(),
+                        userUniversityListManager);
             }
         } catch (NoSuchElementException e) {
             Ui.printExceptionMessage(e);

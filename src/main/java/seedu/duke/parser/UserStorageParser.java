@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Database;
-import seedu.duke.exceptions.*;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.timetable.Lesson;
@@ -13,6 +12,15 @@ import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 import seedu.duke.userstorage.UserStorage;
+
+import seedu.duke.exceptions.InvalidUserStorageFileException;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidUniversityException;
+import seedu.duke.exceptions.InvalidLessonDayException;
+import seedu.duke.exceptions.InvalidTimeFormatException;
+import seedu.duke.exceptions.InvalidTimingException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -54,10 +62,10 @@ public class UserStorageParser {
     public static String convertUniIntoFileContent(String uniName, UserUniversityListManager userUniversityListManager) {
         String fileContent = "";
         fileContent += addFavouritesToOutputString(userUniversityListManager.getUserUniversityList(uniName));
-        fileContent += addModulesToOutputString(userUniversityListManager.getMyManager().get(uniName).
-                getMyModules().getModules());
-        fileContent += "#" + addLessonTimingsToOutputString(userUniversityListManager.getTtManager().
-                getTimetableByUniversityName(uniName));
+        fileContent += addModulesToOutputString(userUniversityListManager.getMyManager().get(uniName)
+                .getMyModules().getModules());
+        fileContent += "#" + addLessonTimingsToOutputString(userUniversityListManager.getTtManager()
+                .getTimetableByUniversityName(uniName));
         return fileContent;
     }
 
@@ -163,11 +171,13 @@ public class UserStorageParser {
         String[] splitFileContent = fileContent.split("#");
         String fileContentForUniList = splitFileContent[0];
         if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
-                fileContentForUniList))
+                fileContentForUniList)) {
             return;
+        }
         if (extractTimetableInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
-                splitFileContent))
+                splitFileContent)) {
             return;
+        }
         handleLessonModuleCodeNotInSavedModules(uniName, splitFileContent);
     }
 
