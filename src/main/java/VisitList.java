@@ -92,7 +92,7 @@ public class VisitList {
         System.out.println("Here are the list of visits in the system:");
         for (int i = 0; i < getTotalVisits(); i++) {
             ui.printLine();
-            System.out.println("Visit #" + (i + 1) + ":");
+            System.out.println("\tVisit #" + (i + 1));
             System.out.println(visitList.get(i));
         }
         ui.printLine();
@@ -111,7 +111,7 @@ public class VisitList {
                 }
                 noOfPatientVisits++;
                 ui.printLine();
-                System.out.println("Visit #" + (i + 1) + ":");
+                System.out.println("\tVisit #" + (i + 1));
                 System.out.println(visitList.get(i));
             }
         }
@@ -129,7 +129,7 @@ public class VisitList {
         if (index < 1 || index > getTotalVisits()) {
             System.out.println("There is no such visit in the system with index " + index + "!");
         } else {
-            System.out.println("Here is Visit #" + index + ":");
+            System.out.println("Here is Visit #" + index);
             ui.printLine();
             System.out.println(visitList.get(index - 1));
         }

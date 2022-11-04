@@ -26,6 +26,11 @@ public class Parser {
         this.storage = storage;
     }
 
+    /**
+     * Parse the main menu input and retrieve the corresponding main menu state.
+     * @param input is a String given by user
+     * @return `MainMenuState` enum
+     */
     public MainMenuState mainMenuParser(String input) {
         switch (input.toLowerCase()) {
         case MAIN_PATIENT_COMMAND:
@@ -39,7 +44,6 @@ public class Parser {
         default:
             return MainMenuState.INVALID;
         }
-
     }
 
     private boolean shouldExit(String input) {
@@ -50,6 +54,10 @@ public class Parser {
         return input.equalsIgnoreCase(BACK_TO_MAIN_COMMAND);
     }
 
+    private boolean shouldShowSubMenu(String input) {
+        return input.equalsIgnoreCase(HELP_COMMAND);
+    }
+
     public SubMenuState patientParser(String input) {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
@@ -57,6 +65,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -99,6 +111,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -155,6 +171,10 @@ public class Parser {
 
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
+        }
+
+        if (shouldShowSubMenu(input)) {
+            return SubMenuState.HELP;
         }
 
         try {
@@ -335,7 +355,6 @@ public class Parser {
                         + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
                         + "\nt - The time instruction should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
-                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
                         + UI.PRESCRIPTION_VIEW_ALL
                         + UI.PRESCRIPTION_VIEW_PATIENT
                         + UI.PRESCRIPTION_VIEW_ACTIVE
@@ -548,15 +567,57 @@ public class Parser {
             break;
         default:
             throw new OneDocException("Type is incorrectly formatted!"
-                    + "Please use n/ for name, d/ for dosage, and t/ for time instruction");
+                    + "Please use n/ for name, d/ for dosage, and t/ for time instruction");  
+       }
+    }
+    
+  public static boolean isPatientInputValid(String[] inputs) {
+        if (inputs == null) {
+            return false;
         }
+        if (inputs.length != 4) {
+            return false;
+        }
+        if (!inputs[2].equals("M") && !inputs[2].equals("F")) {
+            return false;
+        }
+        return !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[3].isEmpty();
     }
 
+    public static boolean isVisitInputValid(String[] inputs, PatientList patientList) {
+        if (inputs == null) {
+            return false;
+        }
+        if (inputs.length != 4) {
+            return false;
+        }
+        if (inputs[0].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        return patientList.containsPatientID(inputs[0]);
+    }
+
+    public static boolean isPrescriptionInputValid(String[] inputs, PatientList patientList) {
+        if (inputs == null) {
+            return false;
+        }
+        if (inputs.length != 5) {
+            return false;
+        }
+        if (!inputs[4].equals("T") && !inputs[4].equals("F")) {
+            return false;
+        }
+        if (inputs[0].isEmpty() || inputs[1].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        return patientList.containsPatientID(inputs[0]);
+    }
     private static final String MAIN_PATIENT_COMMAND = "1";
     private static final String MAIN_VISIT_COMMAND = "2";
     private static final String MAIN_PRESCRIPTION_COMMAND = "3";
     private static final String EXIT_COMMAND = "bye";
     private static final String VIEW_ALL_COMMAND = "viewall";
+    private static final String HELP_COMMAND = "help";
     private static final String BACK_TO_MAIN_COMMAND = "main";
     private static final String ADD_COMMAND = "add";
     private static final String EDIT_COMMAND = "edit";
