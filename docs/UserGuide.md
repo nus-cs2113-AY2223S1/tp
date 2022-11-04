@@ -12,6 +12,7 @@
   - [Authentication status](#authentication-status)
   - [Find number of lots by carpark ID](#find-number-of-lots-by-carpark-id)
   - [Filter carparks based on address](#filter-carparks-based-on-address)
+  - [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
   - [Get a list of carparks on the app](#get-a-list-of-carparks-on-the-app)
   - [Update data from API](#update-data-from-api)
   - [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)
@@ -19,6 +20,7 @@
   - [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks)
   - [Help](#help)
   - [Exiting the program](#exiting-the-program)
+- [Editing Files](#editing-files)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -53,7 +55,7 @@ module in Q4 2022**.
    4. Use [`favourite CARPARK_ID`](#favourite-carparks-by-carpark-id)/[`unfavourite CARPARK_ID`](#unfavourite-carparks-by-carpark-id)
    to add / remove certain carparks into your favourite list.
       
-Read in more detail at the [Features Section](#features) section below.
+See more detail in the [Features Section](#features) section below.
 
 ## Features
 
@@ -67,6 +69,7 @@ Read in more detail at the [Features Section](#features) section below.
 | `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
 | `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
 | `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
 | `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
 | `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
@@ -177,31 +180,37 @@ Example of usage:
 BLK 202/203 ANG MO KIO STREET 22
 ===========================================
 Carpark code: A9
-Favourited: Yes
-Number of available lots (total): 132
-  Cars: 66 lots
+Favourited: No
+Number of available lots (total): 52
+  Cars: 52 lots
   Motorcycles: 0 lots
   Heavy Vehicles: 0 lots
+Last Updated: 04-11-2022 19:28:10
 ===========================================
 ```
 
 ### Filter carparks based on address
 
-**Shows a summarised list of carparks that match a given query.**
-> Format: `filter QUERY` or `fil QUERY`
+**Shows a summarised list of carparks that match a given query based on its address.**
+> Format: `filter QUERY`, `fil QUERY` (dashed argument `-address` optional)
 
 - The filter command allows the user to search a carpark based on the name of the carpark. For example,
   a carpark may have the name of `BLK 208 CLEMENTI AVE 6` - a query of `clementi` or `208` will return this
   carpark as one of its results.
+- The query is case-insensitive.
 - Multiple words can be input to narrow the filtered results further. Given the previous example, `clementi ave` will
-  also give the above carpark as one of its results.
+  also give the above carpark as one of its results. The carparks displayed will have matches for **all** the space-separated words in the query.
+- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
+  example, `clem` will also match the above carpark, but `ti` will not.
 - Only a summarised list of carparks with minimal information will be shown.
 - Note that it will also show empty car park lots.
-- For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
-  example, `clem` will also match the above carpark.
-- In carpark names, matched words will be wrapped with ` to easily see at a glance what was matched.
+- If supported by your console and operating system, matched words will be highlighted for ease of viewing.
 
-Example of usage
+> **Note:**  The `filter` command allows for dashed arguments `-address` and `-id` to switch modes, but if none is provided it defaults to address mode above.
+
+Related: [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
+
+Example of usage:
 
 **Input:**
 
@@ -209,16 +218,50 @@ Example of usage
 
 **Output:**
 ```    
-CarparkID C5 at BLK 358-360,36`2`-363,366-367 `CLEMENTI` `AVE` `2`
-    806 available lots total
-CarparkID C8 at BLK 335/338 `CLEMENTI` `AVE` `2`
-    356 available lots total
-CarparkID C28M at BLK `208` `CLEMENTI` `AVE` 6
-    370 available lots total
-CarparkID C6 at BLK 3`2`8-334 `CLEMENTI` `AVE` `2`
-    226 available lots total
-CarparkID C7 at BLK 349-355 `CLEMENTI` `AVE` `2`
-    304 available lots total
+CarparkID C28M at BLK 208 CLEMENTI AVE 6
+--> 233 available lots total
+CarparkID C5 at BLK 358-360,362-363,366-367 CLEMENTI AVE 2
+--> 173 available lots total
+CarparkID C6 at BLK 328-334 CLEMENTI AVE 2
+--> 129 available lots total
+CarparkID C7 at BLK 349-355 CLEMENTI AVE 2
+--> 223 available lots total
+CarparkID C8 at BLK 335/338 CLEMENTI AVE 2
+--> 240 available lots total
+```
+
+### Filter carparks based on carpark ID
+
+**Shows a summarised list of carparks that match a given query.**
+> Format: `filter -id QUERY` or `fil -id QUERY`
+
+- The filter command allows the user to search a carpark based on the carpark ID. Different from the `find` command, the `filter -id` command displays a list of partial matches. For example, a carpark with ID `A35` can be matched by `fil -id A` or `fil -id 35`.
+- The query is case-insensitive.
+- Unlike the `filter` command in address mode, rather than matching **all** words in the query, a carpark only needs to match **one or more** words in the query.
+- For convenience, the `filter -id` command also matches substrings _anywhere_ in the ID. For example, any of `A35`, `a`, `5` will match the above carpark.
+- Only a summarised list of carparks with minimal information will be shown.
+- Note that it will also show empty car park lots.
+
+> **Note:**  To use the `filter` command in ID mode, a dashed argument `-id` is **required**.
+
+Related: [Filter carparks based on address](#filter-carparks-based-on-address)
+
+Example of usage:
+
+**Input:**
+
+```filter -id 7a 8a```
+
+**Output:**
+```    
+CarparkID B7A at BLK 216/218 BEDOK NORTH ST 1
+--> 0 available lots total
+CarparkID C18A at BLK 426/427 CLEMENTI AVE 3
+--> 25 available lots total
+CarparkID CK8A at BLK 203A CHOA CHU KANG AVE 1/CENTRAL
+--> 297 available lots total
+CarparkID T47A at BLK 864B TAMPINES STREET 83
+--> 123 available lots total
 ```
 
 ### Get a list of carparks on the app
@@ -387,8 +430,9 @@ Here are the list of available commands to use! Refer to the user guide at https
 `auth default` or `a default` 	: to authenticate using the default key provided by parKING.
 `auth status` or `a status` 	: to get the authentication status.
 `update` or `u` 	: To fetch the latest data from LTA.
-`filter KEYWORD` or `fil KEYWORD` 	: Find carpark based on its address.
-`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the queried carpark.
+`filter QUERY` or `fil QUERY` or `fil -address QUERY` 	: Find carparks based on its address.
+`filter -id QUERY` or `fil -id QUERY` 	: Find carparks based on its Carpark Id.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark.
 `favourite list` or `fav list` 	: to get the list of favourited carparks.
 `favourite CARPARK_ID` or `fav CARPARK_ID` 	: favourite carpark by its ID.
 `unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: unfavourite carpark by its ID.
@@ -399,6 +443,106 @@ Here are the list of available commands to use! Refer to the user guide at https
 **Terminates the program.**
 
 > Format: `exit` or `e`
+
+## Editing Files
+
+Advanced users may want to enter data more efficiently, or customise the data in ways currently not possible through the CLI. 
+For example, you may want to enter favourites without the need to run the program in a command prompt, or edit the names of carparks 
+for convenient finding. Below are the various files generated by parKING.
+
+### How files are generated
+
+If no files exist at the time of running the program, the necessary files and directories will be created within the directory that the .jar file was run from.
+
+### `favourites.txt`  Favourites list
+#### How files are saved and loaded
+
+#### Supported editing behaviour
+
+
+### `secret.txt` Access token file
+#### How files are saved and loaded
+
+#### Supported editing behaviour
+
+### `carparkList.txt`  Carparks list
+Location: `.\resources\carparkList.txt`
+#### How files are saved and loaded
+- The `carparksList.txt` contains data for all the carparks found in the program. It reflects the data stored within the program that is used by the commands. 
+- After data is fetched from the LTA API, the resulting carpark list generated will update this file, changing the number of available lots.
+- The file is read and written to and saved on initialisation of the program and every time the `update` command is called.
+
+#### Supported editing behaviour
+Each row corresponds to one carpark, and fields can be edited and retained to be updated. For example, a
+carpark with a development of `BLK 309 CLEMENTI AVE 1` can be renamed to `Mum's place`, and future updates to this file
+will retain that information for easy tracking and use within the program.
+
+
+> Any files with invalid format will be **erased and written over** with a valid format from within the program. Please make sure that the format is strictly adhered to or risk losing all your data.
+
+>**Note:** Updating this file requires both the incoming carpark data and the existing data to have the same Carpark ID. Changing the Carpark ID is **not recommended**, and files with duplicate Carpark ID will be discarded and regenerated.
+
+Format of one row in the `carparkList.txt` file is shown below:
+```
+1 || Marina || Suntec City || 1.29375 103.85718 || 1051 || 1051 0 0 || false || LTA || 04-11-2022 19:28:10 
+```
+- Each row must be separated by a linebreak.
+- Each field of data is separated by the double pipes delimiter `||`.
+- The fields in order and what values are valid is below:
+  - **Carpark ID**: 
+    - Must not be blank
+    - Can be in the following configurations:
+      - Any number of letters: `a`, `B`, `ABCDE`
+      - Any number of numbers: `1`, `34`, `340`
+      - Any number of letters followed by any number of numbers: `A5`, `p3`, `abc123`
+      - Any number of numbers followed by any number of letters: `5A`, `3b`, `123abc`
+      - Any number of letters followed by any number of numbers and then any numbers of letters: `A5R`, `p3NBC`, `B132A` 
+    - Any other configuration or characters will result in an invalid format. E.g. `35A9`, `29+A_`
+  - **Area** (unused by ParKING): 
+    - Typically the region or area the carpark is in.
+    - Can be blank
+    - Any values not containing `||`
+  - **Development**: 
+    - Typically the address or name of the mall. 
+    - Any values not containing `||`
+  - **Location** (unused by ParKING):
+    - Longitude and latitude of the carpark.
+    - Can be blank
+    - Any values not containing `||`
+  - **Available Lots**:
+    - The total number of available lots.
+    - Must not be blank
+    - Must be a non-negative integer: any floats or negative values will be defaulted to `0`
+    - _Note: Typically unused. This value is updated based on the "All Available Lots" field below._
+  - **All Available Lots**
+    - Space-separated breakdown of available lots for different lot types.
+    - Must not be blank
+    - Must have exactly **three** space-separated numbers, representing three different lot types in order: Car, Motorcycle, Heavy Vehicle
+    - Each number must be a non-negative integer: any floats or negative values will be defaulted to `0`
+  - **Favourited**
+    - If at the time of saving the list was favourited (true/false).
+    - **Note:** This value is only for the convenience of the user when viewing the file and **will not update the program on change**. Edit `favourites.txt` to change the favourites list.
+  - **Agency**  (unused by ParKING)
+    - Represents the agency which provided the data.
+    - Can be blank
+  - **Last Updated Time**
+    - Represents the last time this carpark was updated.
+    - Must be in `DD-MM-YY HH:MM:SS` format, and must be a valid date-time (`36:99:99` is an invalid time)
+    - **Note:** May be overwritten in the program, if the carpark was updated upon initialisation or with the `update` command.
+  
+- Any extra delimiters `||` or not enough delimiters will result in an invalid format.
+- Unused fields exist only for the convenience of the user to view the carpark list, and are free to be edited or even left blank. These fields do not affect the program in any way and are left over from the API.
+
+### `ltaResponse.json` and `ltaResponseSample.json` JSON files from the API
+> **WARNING:** These are raw files generated from data fetched from the API, and are not recommended to be edited. Any files with formatting errors will be deleted completely and **will not** be loaded in to the program. As such, **editing these files is unsupported**.
+
+`ltaResponse.json` is a file with data generated by the API over the internet, fetched whenever `update` is used or on initialisation of the program. If the program fails to fetch data from the API or it is in an incorrect format, this file will be skipped and **not loaded in**.
+
+`ltaResponseSample.json` is backup data generated from the program internally, meant as a "demo mode" to test and use parKING's features offline if there isn't an internet connection. If the program fails to load properly the data from `ltaResponse.json`, data from `ltaResponseSample.json` is loaded in instead. 
+
+If both `.json` files produce errors, a valid `.json` file is regenerated from within the program and then loaded in.
+
+>**Do not edit** these files unless you know what you are doing. Edit the `carpark.txt` file instead if you would like to change details about the carparks.
 
 ## FAQ
 
@@ -419,6 +563,7 @@ when you restart the program.
 | `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
 | `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
 | `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
+| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
 | `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
 | `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |

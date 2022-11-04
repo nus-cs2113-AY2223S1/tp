@@ -61,7 +61,7 @@ public class CarparkList {
         HashSet<String> carparkIds = new HashSet<>();
         String filePath = Paths.get(CommonFiles.CARPARK_LIST_DIRECTORY, CommonFiles.CARPARK_LIST_FILE).toString();
 
-        if (saveStringFull.equals("")) {
+        if (saveStringFull.isBlank()) {
             throw new InvalidFormatException("Save string empty! Loading from backup: ");
         } else {
             try {
