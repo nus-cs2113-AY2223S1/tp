@@ -36,7 +36,8 @@ Given below are my contributions to the project.
 
 + ### Enhancement to Existing Features:
   + Created SkyControl Exception class to handle exceptions [#11](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/11)
-  + Improved Code Defensiveness   
+  + Improved Code Defensiveness by creating checks for valid gate number, 24HR time and check in.
+  + Reformatted part of class FlightList to improve code quality and modularity for easier implementation of future methods.
 
 + ### Documentation:
   + User Guide:
