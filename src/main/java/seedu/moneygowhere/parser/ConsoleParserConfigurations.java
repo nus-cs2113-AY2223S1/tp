@@ -279,7 +279,7 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG = "current-amount";
     public static final String COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_DESC = "Current Amount";
     public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL = true;
-    public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = true;
+    public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME = "d";
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG = "datetime";
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_DESC = "Date & time";
