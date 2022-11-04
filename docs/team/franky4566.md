@@ -45,8 +45,8 @@ Given below are my contributions to the project.
     + Contributed to the FAQ and Command Summary section [#85](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/85)
   + Developer Guide:
     + Added implementation details of the `flight add`, `flight list` and `delay` feature with their respective sequence diagrams. 
-    [#45](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/45), [#]()
-    + Populated Non-Functional Requirements, Glossary and Manual Testing Instructions section. [#]()
+    [#45](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/45)
+    + Populated Non-Functional Requirements, Glossary and Manual Testing Instructions section.
 
 + ### Community:
   + PRs reviewed (with non-trivial review comments): [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21)
