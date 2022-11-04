@@ -16,6 +16,7 @@ import computercomponentchooser.exceptions.NegativeNumberException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.exceptions.UnlistedComponentException;
+import computercomponentchooser.exceptions.UnlistedComponentTypeException;
 import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
@@ -178,7 +179,7 @@ public class EditParser {
                 parseAddOther(editBuild, type, name, price, power);
                 break;
             default:
-                break;
+                throw new UnlistedComponentTypeException();
             }
             try {
                 storage.saveComponent(editBuild);
@@ -192,7 +193,7 @@ public class EditParser {
             Ui.printEditLine();
             System.out.println("Please input the numbers correctly.");
             Ui.printEditLine();
-        } catch (NegativeNumberException e) {
+        } catch (NegativeNumberException | UnlistedComponentTypeException e) {
             Ui.printEditLine();
             System.out.println(e.getMessage());
             Ui.printEditLine();

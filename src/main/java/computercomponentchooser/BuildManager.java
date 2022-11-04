@@ -6,7 +6,7 @@ import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.exceptions.NegativeNumberException;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -20,7 +20,7 @@ public class BuildManager {
      * Initializes a new BuildManager object.
      */
     public BuildManager() {
-        builds = new HashMap<>();
+        builds = new LinkedHashMap<>();
     }
 
     /**
