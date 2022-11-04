@@ -125,8 +125,8 @@ class ParserTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: /help <command>\n"
-               + "Description: Show help message for the given command.";
+        String expected = "Try /help <command type>\n"
+                + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(HelpCommand.class, Parser.parseCommand(input).getClass());
     }
