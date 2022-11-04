@@ -174,7 +174,7 @@ ____________________________________________________________
 
 _Written by: Chia Thin Hong_
 
-## 4.1. Managing Transactions
+## 4 Managing Transactions
 
 ### 4.1. Adding a Transaction
 
