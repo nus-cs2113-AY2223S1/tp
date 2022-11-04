@@ -518,18 +518,18 @@ Format of one row in the `carparkList.txt` file is shown below:
     - Must not be blank
     - Must be a non-negative integer: any floats or negative values will be defaulted to `0`
     - _Note: Typically unused. This value is updated based on the "All Available Lots" field below._
-  - **All Available Lots**
+  - **All Available Lots**:
     - Space-separated breakdown of available lots for different lot types.
     - Must not be blank
     - Must have exactly **three** space-separated numbers, representing three different lot types in order: Car, Motorcycle, Heavy Vehicle
     - Each number must be a non-negative integer: any floats or negative values will be defaulted to `0`
-  - **Favourited**
+  - **Favourited**:
     - If at the time of saving the list was favourited (true/false).
     - **Note:** This value is only for the convenience of the user when viewing the file and **will not update the program on change**. Edit `favourites.txt` to change the favourites list.
-  - **Agency**  (unused by ParKING)
+  - **Agency**  (unused by ParKING):
     - Represents the agency which provided the data.
     - Can be blank
-  - **Last Updated Time**
+  - **Last Updated Time**:
     - Represents the last time this carpark was updated.
     - Must be in `DD-MM-YY HH:MM:SS` format, and must be a valid date-time (`36:99:99` is an invalid time)
     - **Note:** May be overwritten in the program, if the carpark was updated upon initialisation or with the `update` command.
