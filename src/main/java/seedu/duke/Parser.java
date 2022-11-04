@@ -78,11 +78,11 @@ public class Parser {
         }
     }
 
+    //@@author indraneelrp
     /**.
      * Checks that user input is valid, parses the input and executes any valid commands given
      * @param userInput Raw input given by user
      */
-    //@@author indraneelrp
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
