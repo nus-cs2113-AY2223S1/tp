@@ -2,15 +2,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private static final String MAIN_PATIENT_COMMAND = "1";
-    private static final String MAIN_VISIT_COMMAND = "2";
-    private static final String MAIN_PRESCRIPTION_COMMAND = "3";
-    private static final String EXIT_COMMAND = "bye";
-
-    private static final String VIEW_ALL_COMMAND = "viewall";
-    private static final String BACK_TO_MAIN_COMMAND = "main";
-
-
 
     private final PatientList patientList;
     private final VisitList visitList;
@@ -76,18 +67,18 @@ public class Parser {
             if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
                 checkViewAllCommand(inputLower, "patient");
                 patientList.listPatients(ui);
-            } else if (inputLower.startsWith("add")) {
-                errorIfNoMatchPatient(matcherAdd, "add");
+            } else if (inputLower.startsWith(ADD_COMMAND)) {
+                errorIfNoMatchPatient(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(4).toUpperCase();
                 errorIfPatientExists(patientId);
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
-            } else if (inputLower.startsWith("retrieve")) {
-                errorIfNoMatchPatient(matcherRetrieve, "retrieve");
+            } else if (inputLower.startsWith(RETRIEVE_PATIENT_COMMAND)) {
+                errorIfNoMatchPatient(matcherRetrieve, RETRIEVE_PATIENT_COMMAND);
                 patientList.retrievePatient(ui, matcherRetrieve.group(1).toUpperCase());
-            } else if (inputLower.startsWith("edit")) {
-                errorIfNoMatchPatient(matcherEdit, "edit");
+            } else if (inputLower.startsWith(EDIT_COMMAND)) {
+                errorIfNoMatchPatient(matcherEdit, EDIT_COMMAND);
                 parseEditPatient(matcherEdit.group(1).toUpperCase(), matcherEdit.group(2), matcherEdit.group(3));
             } else {
                 errorIfNoMatchPatient(null, "default");
@@ -120,29 +111,29 @@ public class Parser {
             if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
                 checkViewAllCommand(inputLower, "visit");
                 visitList.viewAll(ui);
-            } else if (inputLower.startsWith("add")) {
-                errorIfNoMatchVisit(matcherAdd, "add");
+            } else if (inputLower.startsWith(ADD_COMMAND)) {
+                errorIfNoMatchVisit(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(1).toUpperCase();
                 errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 parseAddVisit(matcherAdd, patientId);
-            } else if (inputLower.startsWith("edit")) {
-                errorIfNoMatchVisit(matcherEdit, "edit");
+            } else if (inputLower.startsWith(EDIT_COMMAND)) {
+                errorIfNoMatchVisit(matcherEdit, EDIT_COMMAND);
                 String reason = matcherEdit.group(2);
                 errorIfReasonEmpty(reason);
                 visitList.editReason(ui, Integer.parseInt(matcherEdit.group(1)), reason);
                 storage.saveVisitData(visitList);
-            } else if (inputLower.startsWith("deletereason")) {
-                errorIfNoMatchVisit(matcherEdit, "delete");
+            } else if (inputLower.startsWith(DELETE_REASON_COMMAND.toLowerCase())) {
+                errorIfNoMatchVisit(matcherEdit, DELETE_REASON_COMMAND);
                 visitList.deleteReason(ui, Integer.parseInt(matcherDelete.group(1)));
-            } else if (inputLower.startsWith("viewpatient")) {
-                errorIfNoMatchVisit(matcherViewPatient, "viewPatient");
+            } else if (inputLower.startsWith(VIEW_PATIENT_COMMAND.toLowerCase())) {
+                errorIfNoMatchVisit(matcherViewPatient, VIEW_PATIENT_COMMAND);
                 String patientId = matcherViewPatient.group(1).toUpperCase();
                 errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 visitList.viewPatient(ui, patientId);
-            } else if (inputLower.startsWith("viewvisit")) {
-                errorIfNoMatchVisit(matcherViewVisit, "viewVisit");
+            } else if (inputLower.startsWith(VIEW_VISIT_COMMAND.toLowerCase())) {
+                errorIfNoMatchVisit(matcherViewVisit, VIEW_VISIT_COMMAND);
                 visitList.viewVisit(ui, Integer.parseInt(matcherViewVisit.group(1)));
             } else {
                 errorIfNoMatchVisit(null, "default");
@@ -177,36 +168,36 @@ public class Parser {
             if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
                 checkViewAllCommand(inputLower, "prescription");
                 prescriptionList.viewAll(ui);
-            } else if (inputLower.startsWith("add")) {
-                errorIfNoMatchPrescription(matcherAdd, "add");
+            } else if (inputLower.startsWith(ADD_COMMAND)) {
+                errorIfNoMatchPrescription(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(1).toUpperCase();
                 errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
                 storage.savePrescriptionData(prescriptionList);
-            } else if (inputLower.startsWith("edit")) {
-                errorIfNoMatchPrescription(matcherEdit, "edit");
+            } else if (inputLower.startsWith(EDIT_COMMAND)) {
+                errorIfNoMatchPrescription(matcherEdit, EDIT_COMMAND);
                 parseEditPrescription(Integer.parseInt(matcherEdit.group(1)),
                         matcherEdit.group(2), matcherEdit.group(3));
-            } else if (inputLower.startsWith("viewpatientpres")) {
-                errorIfNoMatchPrescription(matcherViewPatient, "viewPatientPres");
+            } else if (inputLower.startsWith(VIEW_PATIENT_PRES_COMMAND.toLowerCase())) {
+                errorIfNoMatchPrescription(matcherViewPatient, VIEW_PATIENT_PRES_COMMAND);
                 String patientId = matcherViewPatient.group(1);
                 errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.viewPatientPrescription(ui, patientId);
-            } else if (inputLower.startsWith("viewactpatientpres")) {
-                errorIfNoMatchPrescription(matcherViewActive, "viewActPatientPres");
+            } else if (inputLower.startsWith(VIEW_ACT_PATIENT_PRES_COMMAND.toLowerCase())) {
+                errorIfNoMatchPrescription(matcherViewActive, VIEW_ACT_PATIENT_PRES_COMMAND);
                 String patientId = matcherViewActive.group(1);
                 errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.viewActivePatientPrescription(ui, patientId);
-            } else if (inputLower.startsWith("activate")) {
-                errorIfNoMatchPrescription(matcherChangeActive, "activate");
+            } else if (inputLower.startsWith(ACTIVATE_COMMAND.toLowerCase())) {
+                errorIfNoMatchPrescription(matcherChangeActive, ACTIVATE_COMMAND);
                 prescriptionList.activatePrescription(ui, matcherChangeActive.group(1));
                 storage.savePrescriptionData(prescriptionList);
-            } else if (inputLower.startsWith("deactivate")) {
-                errorIfNoMatchPrescription(matcherChangeInactive, "deactivate");
+            } else if (inputLower.startsWith(DEACTIVATE_COMMAND.toLowerCase())) {
+                errorIfNoMatchPrescription(matcherChangeInactive, DEACTIVATE_COMMAND);
                 prescriptionList.deactivatePrescription(ui, matcherChangeInactive.group(1));
                 storage.savePrescriptionData(prescriptionList);
             } else {
@@ -224,28 +215,28 @@ public class Parser {
     public void errorIfNoMatchPatient(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
-            case "add":
+            case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
-                        + "\nn - The name should be one of two words"
+                        + "\nn - The name should be one or two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY"
                         + "\ni - The id can be a sequence of numbers or letters without any spaces");
-            case "edit":
+            case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_EDIT
                         + "\nn/g/d - Please edit only one aspect of a patient at a time"
-                        + "\nn - The name should be one of two words"
+                        + "\nn - The name should be one or two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY");
-            case "retrieve":
+            case RETRIEVE_PATIENT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_RETRIEVE
                         + "\ni - The id can be a sequence of numbers or letters without any spaces");
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
-                        + "\nn - The name should be one of two words"
+                        + "\nn - The name should be one or two words"
                         + "\ng - The gender should be one letter, M or F"
                         + "\nd - The date of birth should be formatted as DD-MM-YYYY"
                         + "\ni - The id can be a sequence of numbers or letters without any spaces"
@@ -253,7 +244,8 @@ public class Parser {
                         + "\nn/g/d - Please edit only one aspect of a patient at a time"
                         + UI.PATIENT_RETRIEVE
                         + UI.PATIENT_VIEW_ALL
-                        + UI.RETURN_TO_MAIN);
+                        + UI.RETURN_TO_MAIN
+                        + UI.EXIT_PROGRAM);
             }
         }
     }
@@ -261,26 +253,26 @@ public class Parser {
     public void errorIfNoMatchVisit(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
-            case "add":
+            case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
                         + "\nd - The date should be formatted as DD-MM-YYYY"
                         + "\nt - The time should be formatted as HH:MM"
                         + "\nr - The reason is optional, and can be any number of words");
-            case "edit":
+            case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_EDIT
                         + "\nx - The index should be a displayed number next to the visit"
                         + "\nr - The reason can be added or edited with any number of words");
-            case "delete":
+            case DELETE_REASON_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_DELETE_REASON
                         + "\nx - The index should be a displayed number next to the visit");
-            case "viewPatient":
+            case VIEW_PATIENT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_VIEW_PATIENT
                         + "\ni - The id can be a sequence of numbers or letters without any spaces");
-            case "viewVisit":
+            case VIEW_VISIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_VIEW
                         + "\nx - The index should be a displayed number next to the visit");
@@ -297,7 +289,8 @@ public class Parser {
                         + UI.VISIT_VIEW_ALL
                         + UI.VISIT_VIEW_PATIENT
                         + UI.VISIT_VIEW
-                        + UI.RETURN_TO_MAIN);
+                        + UI.RETURN_TO_MAIN
+                        + UI.EXIT_PROGRAM);
             }
         }
     }
@@ -305,41 +298,41 @@ public class Parser {
     public void errorIfNoMatchPrescription(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
-            case "add":
+            case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nn - The prescription name can be multiple words, including -"
+                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
                         + "\nt - The time instruction should be instructions on how to take, with any number of words");
-            case "edit":
+            case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_EDIT
                         + "\nx - The index should be a displayed number next to the prescription"
                         + "\nn/d/t - Please edit only one aspect of a prescription at a time"
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nn - The prescription name can be multiple words, including -"
+                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
                         + "\nt - The time instruction should be instructions on how to take, with any number of words");
-            case "viewPatientPres":
+            case VIEW_PATIENT_PRES_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_VIEW_PATIENT
                         + "\ni - The id can be a sequence of numbers or letters without any spaces");
-            case "viewActPatientPres":
+            case VIEW_ACT_PATIENT_PRES_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_VIEW_ACTIVE
                         + "\ni - The id can be a sequence of numbers or letters without any spaces");
-            case "activate":
+            case ACTIVATE_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
                         + "\nx - The index should be a displayed number next to the prescription");
-            case "deactivate":
+            case DEACTIVATE_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_CHANGE_INACTIVE
                         + "\nx - The index should be a displayed number next to the prescription");
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name should be one or two words"
-                        + "\nd - The dosage should be a number followed by an amount"
+                        + "\nn - The prescription name can be multiple words, including -"
+                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
                         + "\nt - The time instruction should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
                         + "\nn/d/t - Please edit only one aspect of a prescription at a time"
@@ -349,7 +342,8 @@ public class Parser {
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_INACTIVE
                         + "\nx - The index should be displayed number next to the prescription"
-                        + UI.RETURN_TO_MAIN);
+                        + UI.RETURN_TO_MAIN
+                        + UI.EXIT_PROGRAM);
             }
         }
     }
@@ -385,28 +379,28 @@ public class Parser {
 
     private Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
-                "^add\\s*n/\\s*(\\w+\\s*\\w+|\\w+)\\s*g/\\s*(M|F)\\s*"
-                        + "d/\\s*(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*i/\\s*(\\w+)\\s*$",
+                "^add\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
+                        + "d/" + DATE_REGEX + "i/" + ID_REGEX + "$",
                 Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
     }
 
     private  Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
-                "^retrieve\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^retrieve\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/\\s*(\\w+)\\s*(n|g|d)/\\s*([\\w-\\s]+)$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$", Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
 
     private void parseEditPatient(String id, String type, String input) throws OneDocException {
         switch (type) {
         case "n":
-            Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
+            Pattern matchName = Pattern.compile("^" + PATIENT_NAME_REGEX + "$", Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
                 patientList.modifyPatientDetails(ui, id, input, "", "");
                 storage.savePatientData(patientList);
@@ -416,7 +410,7 @@ public class Parser {
             }
             break;
         case "d":
-            Pattern matchDob = Pattern.compile("^(\\d\\d-\\d\\d-\\d\\d\\d\\d)$", Pattern.CASE_INSENSITIVE);
+            Pattern matchDob = Pattern.compile("^" + DATE_REGEX + "$", Pattern.CASE_INSENSITIVE);
             if (matchDob.matcher(input).find()) {
                 patientList.modifyPatientDetails(ui, id, "", input, "");
                 storage.savePatientData(patientList);
@@ -425,7 +419,7 @@ public class Parser {
             }
             break;
         case "g":
-            Pattern matchGender = Pattern.compile("^(M|F)$", Pattern.CASE_INSENSITIVE);
+            Pattern matchGender = Pattern.compile("^" + GENDER_REGEX + "$", Pattern.CASE_INSENSITIVE);
             if (matchGender.matcher(input).find()) {
                 patientList.modifyPatientDetails(ui, id, "", "", input);
                 storage.savePatientData(patientList);
@@ -441,109 +435,151 @@ public class Parser {
 
     private static Matcher addVisitMatcher(String input) {
         Pattern addVisitPattern = Pattern.compile(
-                "^add\\s*i/\\s*(\\w+)\\s*d/\\s*(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*t/\\s*(\\d\\d:\\d\\d)\\s*"
-                        + "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "d/" + DATE_REGEX + "t/" + TIME_REGEX +
+                        OPTIONAL_REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return addVisitPattern.matcher(input);
     }
 
     private static Matcher editVisitMatcher(String input) {
         Pattern editVisitPattern = Pattern.compile(
-                "^edit\\s*x/\\s*(\\d+)\\s*r/\\s*((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + EDIT_COMMAND + "\\s*x/" + INDEX_REGEX + "r/"
+                        + REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
     }
 
     private static Matcher deleteReasonMatcher(String input) {
         Pattern deleteReasonPattern = Pattern.compile(
-                "^deleteReason\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + DELETE_REASON_COMMAND + "\\s*x/"
+                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return deleteReasonPattern.matcher(input);
     }
 
     private static Matcher viewVisitPatientMatcher(String input) {
         Pattern viewVisitPatientPattern = Pattern.compile(
-                "^viewPatient\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + VIEW_PATIENT_COMMAND + "\\s*i/"
+                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewVisitPatientPattern.matcher(input);
     }
 
     private static Matcher viewOneVisitMatcher(String input) {
         Pattern viewOneVisitPattern = Pattern.compile(
-                "^viewVisit\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + VIEW_VISIT_COMMAND + "\\s*x/"
+                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewOneVisitPattern.matcher(input);
     }
 
     private static Matcher addPrescriptionMatcher(String input) {
         Pattern addPrescriptionPattern = Pattern.compile(
-                "^add\\s*i/\\s*(\\w+)\\s*n/\\s*(\\w+\\s*\\w+|\\w+)\\s*"
-                        + "d/\\s*(\\d+\\s*\\w+)\\s*t/\\s*((?:\\w+\\s*)*\\w+)\\s*$",
+                "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "n/" + PRESCRIPTION_NAME_REGEX
+                        + "d/" + DOSAGE_REGEX + "t/" + TIME_INSTRUCTION_REGEX + "$",
                 Pattern.CASE_INSENSITIVE);
         return addPrescriptionPattern.matcher(input);
     }
 
     private static Matcher editPrescriptionMatcher(String input) {
         Pattern editPrescriptionPattern = Pattern.compile(
-                "^edit\\s*x/\\s*(\\d+)\\s*(n|d|t)/\\s*([\\w-\\s]+)$",
+                "^" + EDIT_COMMAND + "\\s*x/"  + INDEX_REGEX + "(n|d|t)/\\s*(.+)$",
                 Pattern.CASE_INSENSITIVE);
         return editPrescriptionPattern.matcher(input);
     }
 
     private static Matcher viewPrescriptionPatientMatcher(String input) {
         Pattern viewPrescriptionPatientPattern = Pattern.compile(
-                "^viewPatientPres\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + VIEW_PATIENT_PRES_COMMAND + "\\s*i/"
+                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionPatientPattern.matcher(input);
     }
 
     private static Matcher viewPrescriptionActiveMatcher(String input) {
         Pattern viewPrescriptionActivePattern = Pattern.compile(
-                "^viewActPatientPres\\s*i/\\s*(\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + VIEW_ACT_PATIENT_PRES_COMMAND + "\\s*i/"
+                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionActivePattern.matcher(input);
     }
 
     private static Matcher changePrescriptionActiveMatcher(String input) {
         Pattern changePrescriptionActivePattern = Pattern.compile(
-                "^activate\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + ACTIVATE_COMMAND + "\\s*x/" + INDEX_REGEX
+                        + "$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionActivePattern.matcher(input);
     }
 
     private static Matcher changePrescriptionInactiveMatcher(String input) {
         Pattern changePrescriptionInactivePattern = Pattern.compile(
-                "^deactivate\\s*x/\\s*(\\d+)\\s*$", Pattern.CASE_INSENSITIVE);
+                "^" + DEACTIVATE_COMMAND + "\\s*x/" + INDEX_REGEX
+                        + "$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionInactivePattern.matcher(input);
     }
 
     private void parseEditPrescription(int id, String type, String input) throws OneDocException {
         switch (type) {
         case "n":
-            Pattern matchName = Pattern.compile("^(\\w+\\s*\\w+|\\w+)$", Pattern.CASE_INSENSITIVE);
+            Pattern matchName = Pattern.compile("^" + PRESCRIPTION_NAME_REGEX + "$",
+                    Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
                 prescriptionList.edit(ui, id, input, "", "");
                 storage.savePrescriptionData(prescriptionList);
             } else {
                 throw new OneDocException("Prescription name is incorrectly formatted! "
-                        + "Please use one or two names without dashes or special characters");
+                        + "The prescription name can be multiple words, including - and /");
             }
             break;
         case "d":
-            Pattern matchDosage = Pattern.compile("^(\\d+\\s*\\w+)$", Pattern.CASE_INSENSITIVE);
+            Pattern matchDosage = Pattern.compile("^" + DOSAGE_REGEX + "$",
+                    Pattern.CASE_INSENSITIVE);
             if (matchDosage.matcher(input).find()) {
                 prescriptionList.edit(ui, id, "", input, "");
                 storage.savePrescriptionData(prescriptionList);
             } else {
                 throw new OneDocException("Dosage is incorrectly formatted! "
-                        + "Please use [amount] [portion] format, i.e. 10 mg");
+                        + "The dosage can be a number followed by an amount, i.e. 10 mg");
             }
             break;
         case "t":
-            Pattern matchTimeInst = Pattern.compile("^((?:\\w+\\s*)*\\w+)\\s*$", Pattern.CASE_INSENSITIVE);
+            Pattern matchTimeInst = Pattern.compile("^" + TIME_INSTRUCTION_REGEX + "$",
+                    Pattern.CASE_INSENSITIVE);
             if (matchTimeInst.matcher(input).find()) {
                 prescriptionList.edit(ui, id, "", "", input);
                 storage.savePrescriptionData(prescriptionList);
             } else {
                 throw new OneDocException("Time instruction is incorrectly formatted! "
-                        + "Please use words and numbers to describe the time interval");
+                        + "Please use words and numbers to describe the time instruction");
             }
             break;
         default:
             throw new OneDocException("Type is incorrectly formatted!"
-                    + "Please use n/ for name, d/ for dosage, and t/ for time interval");
+                    + "Please use n/ for name, d/ for dosage, and t/ for time instruction");
         }
     }
+
+    private static final String MAIN_PATIENT_COMMAND = "1";
+    private static final String MAIN_VISIT_COMMAND = "2";
+    private static final String MAIN_PRESCRIPTION_COMMAND = "3";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String VIEW_ALL_COMMAND = "viewall";
+    private static final String BACK_TO_MAIN_COMMAND = "main";
+    private static final String ADD_COMMAND = "add";
+    private static final String EDIT_COMMAND = "edit";
+    private static final String RETRIEVE_PATIENT_COMMAND = "retrieve";
+    private static final String DELETE_REASON_COMMAND = "deleteReason";
+    private static final String VIEW_PATIENT_COMMAND = "viewPatient";
+    private static final String VIEW_PATIENT_PRES_COMMAND = "viewPatientPres";
+    private static final String VIEW_ACT_PATIENT_PRES_COMMAND = "viewActPatientPres";
+    private static final String ACTIVATE_COMMAND = "activate";
+    private static final String DEACTIVATE_COMMAND = "deactivate";
+    private static final String VIEW_VISIT_COMMAND = "viewVisit";
+    private static final String ID_REGEX = "\\s*(\\w+)\\s*";
+    private static final String PATIENT_NAME_REGEX = "\\s*(\\w+\\s*\\w+|\\w+)\\s*";
+    private static final String GENDER_REGEX = "\\s*(M|F)\\s*";
+    private static final String DATE_REGEX = "\\s*(\\d\\d-\\d\\d-\\d\\d\\d\\d)\\s*";
+    private static final String TIME_REGEX = "\\s*(\\d\\d:\\d\\d)\\s*";
+    private static final String PRESCRIPTION_NAME_REGEX =
+            "\\s*((?:[\\w.+\\\\\\/-]+\\s*)*[\\w.+\\\\\\/-]+)\\s*";
+    private static final String DOSAGE_REGEX = "\\s*(\\d+(?:\\.\\d+)?\\s*\\w+)\\s*";
+    private static final String TIME_INSTRUCTION_REGEX =
+            "\\s*((?:[\\w.+\\\\\\/-]+\\s*)*[\\w.+\\\\\\/-]+)\\s*";
+    private static final String OPTIONAL_REASON_REGEX =
+            "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*";
+    private static final String REASON_REGEX = "\\s*((?:\\w+\\s*)*\\w+)\\s*";
+    private static final String INDEX_REGEX = "\\s*(\\d+)\\s";
 }
