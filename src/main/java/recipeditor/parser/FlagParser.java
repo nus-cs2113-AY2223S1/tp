@@ -4,6 +4,15 @@ import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
 
 public interface FlagParser {
+    String FLAG_INITIAL = "-";
+    String ADD_FLAG = FLAG_INITIAL + "add";
+    String DELETE_FLAG = FLAG_INITIAL + "del";
+    String SWAP_FLAG = FLAG_INITIAL + "swp";
+    String CHANGE_FLAG = FLAG_INITIAL + "chg";
+    String INGREDIENT_FLAG = FLAG_INITIAL + "i";
+    String STEP_FLAG = FLAG_INITIAL + "s";
+    String TITLE_FLAG = FLAG_INITIAL + "t";
+    String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
 
     /**
      * Fina all the flags in a given command.
@@ -16,37 +25,37 @@ public interface FlagParser {
         int commandFlagCount = 0;
         int recipeFlagCount = 0;
         for (String s: parsedCommand) {
-            if (s.contains("-")) {
+            if (s.contains(FLAG_INITIAL)) {
                 switch (s) {
-                case "-add":
+                case ADD_FLAG:
                     flags[0] = FlagType.ADD;
                     commandFlagCount += 1;
                     break;
-                case "-del":
+                case DELETE_FLAG:
                     flags[0] = FlagType.DELETE;
                     commandFlagCount += 1;
                     break;
-                case "-swp":
+                case SWAP_FLAG:
                     flags[0] = FlagType.SWAP;
                     commandFlagCount += 1;
                     break;
-                case "-chg":
+                case CHANGE_FLAG:
                     flags[0] = FlagType.CHANGE;
                     commandFlagCount += 1;
                     break;
-                case "-i":
+                case INGREDIENT_FLAG:
                     flags[1] = FlagType.INGREDIENT;
                     recipeFlagCount += 1;
                     break;
-                case "-s":
+                case STEP_FLAG:
                     flags[1] = FlagType.STEP;
                     recipeFlagCount += 1;
                     break;
-                case "-t":
+                case TITLE_FLAG:
                     flags[1] = FlagType.TITLE;
                     recipeFlagCount += 1;
                     break;
-                case "-d":
+                case DESCRIPTION_FLAG:
                     flags[1] = FlagType.DESCRIPTION;
                     recipeFlagCount += 1;
                     break;
@@ -64,10 +73,10 @@ public interface FlagParser {
     static FlagType getRecipeFlag(String[] parsedCommand) {
         FlagType flag = null;
         switch (parsedCommand[1]) {
-        case "-i":
+        case INGREDIENT_FLAG:
             flag = FlagType.INGREDIENT;
             break;
-        case "-t":
+        case TITLE_FLAG:
             flag = FlagType.TITLE;
             break;
         default:
