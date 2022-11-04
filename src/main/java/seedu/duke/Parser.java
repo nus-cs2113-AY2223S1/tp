@@ -344,6 +344,7 @@ public class Parser {
     /**
      * Executes the clear action by creating a clear object.
      */
+    //@@author indraneelrp
     public ReviewList executeClear() {
         executor = new ClearCommand(mediaList);
         String output = executor.execute();
