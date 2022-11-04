@@ -104,7 +104,7 @@ public class Storage {
 
         file.setWritable(true);
         Path path = Paths.get(FILE_PATH);
-        if (!SystemUtils.IS_OS_LINUX) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             Files.setAttribute(path, "dos:hidden", false);
         }
         ui.addMessage(EXPORT_MESSAGE);
@@ -124,7 +124,7 @@ public class Storage {
         fw.close();
         file.setReadOnly();
         //set hidden attribute
-        if (!SystemUtils.IS_OS_LINUX) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             Files.setAttribute(path, "dos:hidden", true);
         }
 
