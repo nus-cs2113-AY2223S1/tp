@@ -29,7 +29,6 @@ When an invalid file format is detected, the corresponding text file will be del
 To help users recall the modules that they had recently deleted, ```/view DELETE_HISTORY``` allows them to view up to 5 most
 recently deleted module mappings. This feature can help them to add the module mappings back to the lists without having to search for the specific
 module code again.
-Do note that delete history information is not stored upon exiting the app (ie. it is not stored in User Storage).
 
 * **Some notable PRs**: [#60](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/60)
 #### Help Command
@@ -56,12 +55,14 @@ Added class and sequence diagrams for the implementation of User Storage and Del
 Updated class diagrams to follow standard notation.
 * **Some notable PRs**: [#84](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/84), [#102](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/102), [#179](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/179)
 ### Contributions to Team-Based Tasks
-* Some description
+* Performed extensive testing to find and fix bugs
+* Maintained issue tracker by tagging and labelling various pull requests for effective reference
+* Exhibited strong project management skills, reminding team members on impending deadlines and voluntarily complete submissions (eg. release v1.0)
 
 ### Contributions beyond the project team
-
-#### Other Contributions
-* Review/mentoring contributions: Gave suggestions to other students taking the modules for their individual/team projects:
+#### Review/mentoring contributions
+Gave suggestions to other students taking the modules for their individual/team projects:
   [iP #40](https://github.com/nus-cs2113-AY2223S1/ip/pull/40), [iP #63](https://github.com/nus-cs2113-AY2223S1/ip/pull/63),
   [tP #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/1)
-* Other Contributions: I reported a total of [14 program bugs](https://github.com/alfred-leong/ped/issues) for another team during the module's PED.
+#### Other Contributions
+Reported a total of [14 program bugs](https://github.com/alfred-leong/ped/issues) for another team during the module's PED.
