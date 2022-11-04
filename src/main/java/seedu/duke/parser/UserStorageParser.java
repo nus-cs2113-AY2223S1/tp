@@ -35,7 +35,8 @@ public class UserStorageParser {
      * @param uniName Partner university name
      * @param userUniversityListManager Lists of partner universities that user is interested in
      */
-    public static void storeInfoToUserStorageByUni(String uniName, UserUniversityListManager userUniversityListManager) {
+    public static void storeInfoToUserStorageByUni(String uniName, UserUniversityListManager userUniversityListManager)
+    {
         try {
             String fileContent = convertUniIntoFileContent(uniName, userUniversityListManager);
             UserStorage.saveFile(uniName, fileContent);
@@ -59,7 +60,8 @@ public class UserStorageParser {
      * @param userUniversityListManager Lists of partner universities that user is interested in
      * @return
      */
-    public static String convertUniIntoFileContent(String uniName, UserUniversityListManager userUniversityListManager) {
+    public static String convertUniIntoFileContent(String uniName, UserUniversityListManager userUniversityListManager)
+    {
         String fileContent = "";
         fileContent += addFavouritesToOutputString(userUniversityListManager.getUserUniversityList(uniName));
         fileContent += addModulesToOutputString(userUniversityListManager.getMyManager().get(uniName)
