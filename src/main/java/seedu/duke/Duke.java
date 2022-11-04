@@ -43,7 +43,7 @@ public class Duke {
         System.err.close();
         System.out.print(Ui.greetUser());
         DatabaseStorage.loadDatabase();
-        UserStorage.setFilePaths();
+        UserStorage.setFilePathsAtStartUp();
         UserUniversityListManager userUniversityListManager = UserStorageParser.getSavedLists();
         TimetableManager timetableManager = userUniversityListManager.getTtManager();
 
@@ -123,7 +123,7 @@ public class Duke {
             } else {
                 if (deleteCommand.getModuleCode() == null) {
                     userUniversityListManager.deleteList(deleteCommand.getUniversityName());
-                    UserStorageParser.deleteUserStorageByUni(deleteCommand.getUniversityName());
+                    UserStorageParser.deleteUserStorageByUni(deleteCommand.getUniversityName(), false);
                 } else {
                     userUniversityListManager.deleteModule(deleteCommand.getUniversityName(),
                             deleteCommand.getModuleCode());

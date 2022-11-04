@@ -15,29 +15,49 @@ import seedu.duke.user.UserUniversityListManager;
 import seedu.duke.userstorage.UserStorage;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserStorageParser {
+    /**.
+     * Method to store information from UserUniversityListManager to text file, for a specific univesity
+     * @param uniName Partner university name
+     * @param userUniversityListManager Lists of partner universities that user is interested in
+     */
     public static void storeInfoToUserStorageByUni(String uniName, UserUniversityListManager userUniversityListManager) {
         try {
             String fileContent = convertUniIntoFileContent(uniName, userUniversityListManager);
-            UserStorage.saveFileNew(uniName, fileContent);
+            UserStorage.saveFile(uniName, fileContent);
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
     }
 
-    public static void deleteUserStorageByUni(String uniName) {
-        UserStorage.deleteFile(uniName);
+    /**.
+     * Method to delete text file given an input university name
+     * @param uniName Partner university name
+     * @param fromStartUp Boolean variable that indicates if the method is called from program start up
+     */
+    public static void deleteUserStorageByUni(String uniName, boolean fromStartUp) {
+        UserStorage.deleteFile(uniName, fromStartUp);
     }
 
+    /**.
+     * Method to convert university information to a string to store into the text file
+     * @param uniName Partner university name
+     * @param userUniversityListManager Lists of partner universities that user is interested in
+     * @return
+     */
     public static String convertUniIntoFileContent(String uniName, UserUniversityListManager userUniversityListManager) {
         String fileContent = "";
         fileContent += addFavouritesToOutputString(userUniversityListManager.getUserUniversityList(uniName));
-        fileContent += addModulesToOutputString(userUniversityListManager.getMyManager().get(uniName).getMyModules().getModules());
-        fileContent += "#" + addLessonTimingsToOutputString(userUniversityListManager.getTtManager().getTimetableByUniversityName(uniName));
+        fileContent += addModulesToOutputString(userUniversityListManager.getMyManager().get(uniName).
+                getMyModules().getModules());
+        fileContent += "#" + addLessonTimingsToOutputString(userUniversityListManager.getTtManager().
+                getTimetableByUniversityName(uniName));
         return fileContent;
     }
 
@@ -104,6 +124,10 @@ public class UserStorageParser {
         return output;
     }
 
+    /**.
+     * Method to convert saved information in all uncorrupted text files to a single UserUniversityListManager
+     * @return UserUniversityListManager, restored with saved information from all uncorrupted text files
+     */
     public static UserUniversityListManager getSavedLists() {
         try {
             HashMap<String, String> filePaths = UserStorage.getFilePaths();
@@ -111,44 +135,163 @@ public class UserStorageParser {
             if (filePaths.isEmpty()) {
                 return userUniversityListManager;
             }
+            HashMap<String, String> newFilePaths = new HashMap<>();
             for (HashMap.Entry<String, String> entry : filePaths.entrySet()) {
-                String fileContent = UserStorage.loadFileNew(entry.getKey());
-                String uniName = entry.getKey();
-                String[] splitFileContent = fileContent.split("#");
-                String fileContentForUniList = splitFileContent[0];
-                try {
-                    UserUniversityList uniList = convertFileContentIntoUniList(fileContentForUniList, uniName);
-                    userUniversityListManager.getMyManager().put(uniName, uniList);
-                } catch (InvalidUserStorageFileException e) {
-                    deleteUserStorageByUni(uniName);
-                    filePaths.remove(entry.getKey());
-                    Ui.printExceptionMessage(e);
-                    continue;
-                }
-                if (splitFileContent.length == 2) {
-                    String fileContentForTimetable = splitFileContent[1];
-                    try {
-                        Timetable timetable = convertFileContentIntoTimetable(fileContentForTimetable, uniName);
-                        userUniversityListManager.getTtManager().getTimetableManager().put(uniName, timetable);
-                    } catch (InvalidUserStorageFileException e) {
-                        deleteUserStorageByUni(uniName);
-                        filePaths.remove(entry.getKey());
-                        userUniversityListManager.getMyManager().remove(uniName);
-                        Ui.printExceptionMessage(e);
-                    }
-                } else {
-                    userUniversityListManager.getTtManager().getTimetableManager().put(uniName, new Timetable());
-                }
+                extractInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, entry);
             }
+            UserStorage.setFilePaths(newFilePaths);
             return userUniversityListManager;
-        } catch (IOException | InvalidUniversityException | InvalidModuleException e) {
+        } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
         return new UserUniversityListManager();
     }
 
+    /**.
+     * Method to extract information from a text file
+     * @param newFilePaths New hashmap containing valid files
+     * @param filePaths Hashmap containing all files on start up
+     * @param userUniversityListManager Lists of partner universities that user is interested in
+     * @param entry Hashmap entry, mapping university name to file path
+     * @throws IOException if input/output operations fail or are interrupted
+     */
+    private static void extractInfoFromTextFile(HashMap<String, String> newFilePaths, HashMap<String, String> filePaths,
+                                                 UserUniversityListManager userUniversityListManager, 
+                                                 Map.Entry<String, String> entry) throws IOException {
+        String fileContent = UserStorage.loadFile(entry.getKey());
+        String uniName = entry.getKey();
+        String[] splitFileContent = fileContent.split("#");
+        String fileContentForUniList = splitFileContent[0];
+        if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName, fileContentForUniList))
+            return;
+        if (extractTimetableInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName, splitFileContent))
+            return;
+        handleLessonModuleCodeNotInSavedModules(uniName, splitFileContent);
+    }
+
+    /**.
+     * Method to handle if lesson module code in text file does not exist in saved modules
+     * @param uniName Partner university name
+     * @param splitFileContent Array of strings containing text file information
+     *                         splitFileContent[0] = modules information
+     *                         splitFileContent[1] = timetable information
+     */
+    private static void handleLessonModuleCodeNotInSavedModules(String uniName, String[] splitFileContent) {
+        try {
+            lookForLessonModuleCodeInSavedModules(uniName, splitFileContent);
+        } catch (InvalidUserStorageFileException e) {
+            deleteUserStorageByUni(uniName, true);
+            Ui.printExceptionMessage(e);
+        }
+    }
+
+    /**.
+     * Method to throw exception if lesson module code does not exist in saved modules
+     * @param uniName Partner university name
+     * @param splitFileContent Array of strings containing text file information
+     *                         splitFileContent[0] = modules information
+     *                         splitFileContent[1] = timetable information
+     * @throws InvalidUserStorageFileException if lesson module code not found in saved modules
+     */
+    private static void lookForLessonModuleCodeInSavedModules(String uniName, String[] splitFileContent) throws InvalidUserStorageFileException {
+        if (splitFileContent.length == 2) {
+            String[] modules = splitFileContent[0].split("%");
+            modules = Arrays.copyOfRange(modules, 1, modules.length);
+            String[] lessons = splitFileContent[1].split("%");
+            isLessonModuleCodeExistInSavedModules(uniName, modules, lessons);
+        }
+    }
+
+    /**.
+     * Method to check if lesson module code exists in saved modules
+     * @param uniName Partner university name
+     * @param modules String array containing module information
+     * @param lessons String array containing lesson information
+     * @throws InvalidUserStorageFileException if lesson module code not found in saved modules
+     */
+    private static void isLessonModuleCodeExistInSavedModules(String uniName, String[] modules, String[] lessons) throws InvalidUserStorageFileException {
+        for (String lesson: lessons) {
+            String lessonModuleCode = lesson.split(";")[0];
+            boolean isFound = false;
+            for (String module : modules) {
+                String moduleCode = module.split(";")[0];
+                if (moduleCode.equals(lessonModuleCode)) {
+                    isFound = true;
+                }
+            }
+            if (!isFound) {
+                throw new InvalidUserStorageFileException("Lesson module code not found in saved modules\n"
+                + getDeleteMessage(uniName));
+            }
+        }
+    }
+
+    /**.
+     * Method to extract timetable information from a text file given an input partner university
+     * @param newFilePaths New hashmap containing valid files
+     * @param filePaths Hashmap containing all files on start up
+     * @param userUniversityListManager Lists of partner universities that user is interested in
+     * @param uniName Partner university name
+     * @param splitFileContent Array of strings containing text file information
+     *                         splitFileContent[0] = modules information
+     *                         splitFileContent[1] = timetable information
+     * @return true if InvalidUserStorageException is caught, false otherwise
+     */
+    private static boolean extractTimetableInfoFromTextFile(HashMap<String, String> newFilePaths,
+                                                         HashMap<String, String> filePaths,
+                                                         UserUniversityListManager userUniversityListManager,
+                                                         String uniName, String[] splitFileContent) {
+        if (splitFileContent.length == 2) {
+            String fileContentForTimetable = splitFileContent[1];
+            try {
+                Timetable timetable = convertFileContentIntoTimetable(fileContentForTimetable, uniName);
+                userUniversityListManager.getTtManager().getTimetableManager().put(uniName, timetable);
+                newFilePaths.put(uniName, filePaths.get(uniName));
+            } catch (InvalidUserStorageFileException e) {
+                deleteUserStorageByUni(uniName, true);
+                userUniversityListManager.getMyManager().remove(uniName);
+                Ui.printExceptionMessage(e);
+                return true;
+            }
+        } else {
+            userUniversityListManager.getTtManager().getTimetableManager().put(uniName, new Timetable());
+        }
+        return false;
+    }
+
+    /**.
+     * Method to extract university list information from text file
+     * @param newFilePaths New hashmap containing valid files
+     * @param filePaths Hashmap containing all files on start up
+     * @param userUniversityListManager Lists of partner universities that user is interested in
+     * @param uniName Partner university name
+     * @param fileContentForUniList String containing information for saved modules
+     * @return true if InvalidUserStorageException is caught, false otherwise
+     */
+    private static boolean extractUniListInfoFromTextFile(HashMap<String, String> newFilePaths, HashMap<String, String> filePaths,
+                                                          UserUniversityListManager userUniversityListManager,
+                                                          String uniName, String fileContentForUniList) {
+        try {
+            UserUniversityList uniList = convertFileContentIntoUniList(fileContentForUniList, uniName);
+            userUniversityListManager.getMyManager().put(uniName, uniList);
+            newFilePaths.put(uniName, filePaths.get(uniName));
+        } catch (InvalidUserStorageFileException e) {
+            deleteUserStorageByUni(uniName, true);
+            Ui.printExceptionMessage(e);
+            return true;
+        }
+        return false;
+    }
+
+    /**.
+     * Method to convert string into university list
+     * @param fileContent String containing information for saved modules
+     * @param uniName Partner university name
+     * @return UserUnivesityList, containing saved modules information
+     * @throws InvalidUserStorageFileException if invalid file format
+     */
     public static UserUniversityList convertFileContentIntoUniList(String fileContent, String uniName)
-            throws InvalidUserStorageFileException, InvalidUniversityException {
+            throws InvalidUserStorageFileException {
         UserUniversityList newUni = new UserUniversityList(uniName);
         String[] items = splitLineInFileContent(fileContent);
         if (!isValidUniFormat(items)) {
@@ -166,53 +309,68 @@ public class UserStorageParser {
         return "Deleted university list and timetable for " + uniName + " from storage\n";
     }
 
+    /**.
+     * Method to convert string into timetable
+     * @param fileContent String containing information for timetable
+     * @param uniName Partner university name
+     * @return Timetable containing various lessons
+     * @throws InvalidUserStorageFileException if invalid file format or if module code not found in database
+     */
     public static Timetable convertFileContentIntoTimetable(String fileContent, String uniName)
-            throws InvalidUserStorageFileException, InvalidUniversityException, InvalidModuleException {
+            throws InvalidUserStorageFileException {
         Timetable timetable = new Timetable();
         String[] lessons = splitLineInFileContent(fileContent);
         for (String lesson : lessons) {
-            String[] details = splitModuleInformationInFileContent(lesson);
-            if (!isValidTimetableFormat(details)) {
-                throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(uniName));
-            }
-            String moduleCode = details[0];
-            ModuleMapping moduleMapping;
-            try {
-                moduleMapping = Database.findPuMapping(moduleCode, uniName);
-            } catch (ModuleNotFoundException | UniversityNotFoundException e) {
-                throw new InvalidUserStorageFileException("Invalid module code " + moduleCode + " for " + uniName + "\n"
-                        + getDeleteMessage(uniName));
-            }
-            Module puModule = moduleMapping.getPartnerUniversityModule();
-            String day = details[1];
-            String startTime = details[2];
-            String endTime = details[3];
-            University pu = new University(uniName, puModule.getUniversity().getCountry());
-            Lesson newLesson = new Lesson(moduleCode, puModule.getTitle(), puModule.getCredit(), pu,
-                    day, startTime, endTime);
-            timetable.addLesson(newLesson, true);
+            convertFileContentIntoLesson(uniName, timetable, lesson);
         }
         return timetable;
+    }
+
+    /**.
+     * Method to convert string into lesson
+     * @param uniName Partner university name
+     * @param timetable Timetable containing various lessons
+     * @param lesson Lesson containing lesson information
+     * @throws InvalidUserStorageFileException if invalid file format or if module code not found in database
+     */
+    private static void convertFileContentIntoLesson(String uniName, Timetable timetable, String lesson) throws InvalidUserStorageFileException {
+        String[] details = splitModuleInformationInFileContent(lesson);
+        if (!isValidTimetableFormat(details)) {
+            throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(uniName));
+        }
+        String moduleCode = details[0];
+        ModuleMapping moduleMapping;
+        try {
+            moduleMapping = Database.findPuMapping(moduleCode, uniName);
+        } catch (ModuleNotFoundException | UniversityNotFoundException e) {
+            throw new InvalidUserStorageFileException("Invalid module code " + moduleCode + " for " + uniName + "\n"
+                    + getDeleteMessage(uniName));
+        }
+        Module puModule = moduleMapping.getPartnerUniversityModule();
+        String day = details[1];
+        String startTime = details[2];
+        String endTime = details[3];
+        Lesson newLesson;
+        try {
+            University pu = new University(uniName, puModule.getUniversity().getCountry());
+            newLesson = new Lesson(moduleCode, puModule.getTitle(), puModule.getCredit(), pu,
+                    day, startTime, endTime);
+            Timetable.isValidDay(newLesson);
+            Timetable.isValidTiming(newLesson);
+            Timetable.isValidStartTime(newLesson);
+            Timetable.isValidEndTime(newLesson);
+        } catch (InvalidUniversityException | InvalidModuleException e) {
+            throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(uniName));
+        } catch (InvalidLessonDayException | InvalidTimingException | InvalidTimeFormatException | ParseException e) {
+            throw new InvalidUserStorageFileException("Invalid lesson format\n" + getDeleteMessage(uniName));
+        }
+        timetable.addLesson(newLesson, true);
     }
 
     private static boolean isValidTimetableFormat(String[] details) {
         return details.length == 4;
     }
 
-    /**.
-     * Method to check if file content in data/uni_info.txt is empty
-     * @param fileContent string from data/uni_info.txt
-     * @return true if file content is empty
-     */
-    private static boolean isFileContentEmpty(String fileContent) {
-        return fileContent.equals("");
-    }
-
-    /**.
-     * Method to split file content by line, using regex "%"
-     * @param uni string containing PU information, separated by "%"
-     * @return array of strings, holding PU information ie. PU name and modules
-     */
     private static String[] splitLineInFileContent(String uni) {
         return uni.split("%");
     }
@@ -271,8 +429,6 @@ public class UserStorageParser {
             moduleList.addModule(userModuleToAdd, true);
         }
     }
-
-
 
     /**.
      * Method to split module information, using regex ";"
