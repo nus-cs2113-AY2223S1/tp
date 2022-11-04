@@ -1,5 +1,16 @@
 # joshuan98's Project Portfolio Page
 
+## Table of Contents
+
+- [Product Overview](#product-overview)
+- [Project Contribution](#project-contribution)
+  - [Database](#database)
+  - [/list Command](#list-command)
+  - [Testing](#testing)
+  - [Documentation](#documentation)
+  - [Contributions to Team-based Tasks](#contributions-to-team-based-tasks)
+  - [Contributions Beyond The Project Team](#contributions-beyond-the-project-team)
+
 ## Product Overview
 
 easySEP is a CLI application created to assist NUS Computer Engineering (CEG) undergraduates intending to embark on a Student Exchange Programme (SEP) in their planning for student exchange.
