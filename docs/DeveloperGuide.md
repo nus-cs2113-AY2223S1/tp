@@ -61,8 +61,10 @@ The sort command sorts reviews based on a given input.
 
 1. The sort command sequence begins with a `Parser` object.
 2. The `Parser` object calls on `executeSort` which is responsible for creating a `SortCommand` Object. Then it calls on `SortCommands`'s `execute` method to execute the proper actions.
-3. The `execute` function returns the sorted outputted string.
-4. Finally, the `Parser` class calls on the `UI` object to print out the output to the user.
+3. The `execute` method sorts the review list by the given field. When sorting by rating or date, the sorting is done in
+reverse order while whereas when sorting by title or genre, the sorting is done in default order.
+4. The `execute` function returns the sorted outputted string.
+5. Finally, the `Parser` class calls on the `UI` object to print out the output to the user.
 
 ![img.png](imgs/sortSequence.png)
 
@@ -107,19 +109,23 @@ The "favourite" command covers two user scenarios:
 2) The user wants to list all favourites.
 
 **Scenario 1**:
-To mark or unmark a review, the user will use the following command: "favourite [index]", which triggers the 
+To mark or unmark a review, the user will use the following command: "favourite [type] [index]", which triggers the 
 executeFavourite() method in Parser. For example, "favourite 3" mark the review at index 3 if it has not been marked as 
 favourite, or unmark it if it has already been marked as favourite.
 
 Step 1: A FavouriteCommand object is created and its execute() method is called.
 
-Step 2: The program checks that an index is given in the user input.
+Step 2: The program checks that a valid media type is given in the user input i.e. "movie" or "tv" failing which a 
+DukeException will be thrown.
 
-Step 3: If the review at the given index has not been marked as favourite, the setFavourite(true) method of the Media 
+Step 3: The program then loops through the review list to check whether the review is of the given media type and at 
+the given index.
+
+Step 4: If the review at the given index has not been marked as favourite, the setFavourite(true) method of the Media 
 class is called to mark the review as favourite. Conversely, if the review at the given index has already been marked 
 as favourite, the setFavourite(false) method of the Media class is called to unmark the review as favourite.
 
-Step 4: A string confirming the successful marking or unmarking of the review as favourite is generated and printed for 
+Step 5: A string confirming the successful marking or unmarking of the review as favourite is generated and printed for 
 the user.
 
 **Scenario 2**:
@@ -179,10 +185,10 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 
 ## Non-Functional Requirements
 
-1) Performance: The program should respond within 2 seconds of user input.
-2) Quality: With guidance by the user guide, a new user should be able to navigate the program.
-3) Technical: The program should work with all environments that load the program with Java 11.
-4) Project Scope: The program is only required to handle reviews for movies and tv shows.
+1. Performance: The program should respond within 2 seconds of user input.
+2. Quality: With guidance by the user guide, a new user should be able to navigate the program.
+3. Technical: The program should work with all environments that load the program with Java 11.
+4. Project Scope: The program is only required to handle reviews for movies and tv shows.
 
 ## Glossary
 

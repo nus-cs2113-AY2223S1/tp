@@ -5,6 +5,10 @@ hide footbox
 
 participant ":Parser"
 
+ref over ":Parser"
+sortCommand is given
+end ref
+
 ":Parser" -> ":Parser" : executeSort()
 activate ":Parser"
 
@@ -17,6 +21,34 @@ deactivate "executor:\nSortCommand"
 
 ":Parser" -> "executor:\nSortCommand" : execute()
 activate "executor:\nSortCommand"
+
+participant "reviewList :ReviewList"
+alt Sort by rating
+    "executor:\nSortCommand" -> "reviewList :ReviewList" : sort reviewList by rating in reverse order
+    activate "reviewList :ReviewList"
+    "reviewList :ReviewList" --> "executor:\nSortCommand"
+    deactivate "reviewList :ReviewList"
+
+else Sort by title
+    "executor:\nSortCommand" -> "reviewList :ReviewList" : sort reviewList by title
+    activate "reviewList :ReviewList"
+    "reviewList :ReviewList" --> "executor:\nSortCommand"
+    deactivate "reviewList :ReviewList"
+
+else Sort by genre
+    "executor:\nSortCommand" -> "reviewList :ReviewList" : sort reviewList by genre
+    activate "reviewList :ReviewList"
+    "reviewList :ReviewList" --> "executor:\nSortCommand"
+    deactivate "reviewList :ReviewList"
+
+else Sort by date
+    "executor:\nSortCommand" -> "reviewList :ReviewList" : sort reviewList by date in reverse order
+    activate "reviewList :ReviewList"
+    "reviewList :ReviewList" --> "executor:\nSortCommand"
+    deactivate "reviewList :ReviewList"
+
+end
+
 "executor:\nSortCommand" --> ":Parser": output : String
 deactivate "executor:\nSortCommand"
 
@@ -27,7 +59,7 @@ activate ":Ui"
 ":Ui" --> ":Parser"
 deactivate ":Ui"
 
-":Parser" -> ":Parser"
+":Parser" --> ":Parser"
 destroy "executor:\nSortCommand"
 deactivate ":Parser"
 

@@ -5,7 +5,11 @@ hide footbox
 
 participant ":Parser"
 
-":Parser" -> ":Parser" : executeClear()
+ref over ":Parser"
+favouriteCommand is given
+end ref
+
+":Parser" -> ":Parser" : executeFavourite()
 activate ":Parser"
 
 create "executor:\nFavouriteCommand"
@@ -18,9 +22,23 @@ deactivate "executor:\nFavouriteCommand"
 ":Parser" -> "executor:\nFavouriteCommand" : execute()
 activate "executor:\nFavouriteCommand"
 
+alt Invalid media type given
+
+    create "e:\nDukeException"
+        "executor:\nFavouriteCommand" -> "e:\nDukeException"
+        activate "e:\nDukeException"
+        "e:\nDukeException" --> "executor:\nFavouriteCommand"
+        destroy "e:\nDukeException"
+
+end
+
 alt User wants to mark/unmark a review as favourite
 
     participant ":Media"
+
+    loop For each review
+
+    alt Review is of the type to be marked/unmarked and is at the given index
 
     alt The review is not a favourite
 
@@ -35,6 +53,10 @@ alt User wants to mark/unmark a review as favourite
         activate ":Media"
         ":Media" --> "executor:\nFavouriteCommand"
         deactivate ":Media"
+
+    end
+
+    end
 
     end
 
@@ -61,7 +83,7 @@ activate ":Ui"
 ":Ui" --> ":Parser"
 deactivate ":Ui"
 
-":Parser" -> ":Parser"
+":Parser" --> ":Parser"
 destroy "executor:\nFavouriteCommand"
 deactivate ":Parser"
 
