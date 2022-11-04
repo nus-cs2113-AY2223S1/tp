@@ -287,7 +287,11 @@ public class FlightList extends OperationList {
             validateFlight(i);
             if (isFlightDuplicate()) {
                 resetChecks();
-                throw new SkyControlException(ui.getDuplicateFlightError());
+                if (isModify) {
+                    throw new SkyControlException(ui.getDuplicateModifyFlightError());
+                } else {
+                    throw new SkyControlException(ui.getDuplicateFlightError());
+                }
             }
         }
     }
@@ -298,7 +302,11 @@ public class FlightList extends OperationList {
             validateFlight(i);
             if (isGateOccupied()) {
                 resetChecks();
-                throw new SkyControlException(ui.getGateOccupiedError());
+                if (isModify) {
+                    throw new SkyControlException(ui.getDuplicateModifyGateError());
+                } else {
+                    throw new SkyControlException(ui.getGateOccupiedError());
+                }
             }
         }
     }

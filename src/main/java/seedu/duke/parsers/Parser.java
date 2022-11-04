@@ -22,7 +22,9 @@ public class Parser {
     protected static final String FLIGHT_ENTITY = "flight";
     protected static final int ENTITY_INDEX = 0;
     protected static final int OPERATION_INDEX = 1;
+    public static final int MIN_LENGTH = 2;
     protected static final int ONE_WORD = 1;
+    protected static final int DETAIL_INDEX = 1;
     protected static boolean isPassengerEntity = false;
     protected static boolean isFlightEntity = false;
     protected static boolean isAdd = false;
@@ -35,6 +37,7 @@ public class Parser {
     protected static String[] inputWords;
     protected static String entity;
     protected static String operation;
+    protected static String[] passengerDetailArray;
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
@@ -152,11 +155,50 @@ public class Parser {
         inputWords = lineInput.split("\\s+");
     }
 
+    public static boolean getDelete(String lineInput) {
+        getInputWords(lineInput);
+        operation = inputWords[OPERATION_INDEX];
+        isDelete = operation.equalsIgnoreCase("delete");
+        return isDelete;
+    }
+
     //@@author ivanthengwr
     private static void checkBlankOperation(String lineInput) {
         boolean isNotBye = !lineInput.contains(EXIT_ENTITY);
         if (inputWords.length == ONE_WORD && isNotBye) {
             isBlankOperation = true;
+        }
+    }
+
+    public static String getPassengerDetail(String lineInput) throws SkyControlException {
+        Parser.getInputWords(lineInput);
+        Parser.checkOperation(inputWords);
+        String passengerDetail;
+        if (isAdd) {
+            checkAddOperationDetail(lineInput);
+            passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
+        } else if (isDelete) {
+            checkDeleteOperationDetail(lineInput);
+            passengerDetail = passengerDetailArray[DETAIL_INDEX].stripTrailing();
+        } else {
+            throw new SkyControlException(ui.getOperationError());
+        }
+        return passengerDetail;
+    }
+
+    private static void checkDeleteOperationDetail(String lineInput) throws SkyControlException {
+        passengerDetailArray = lineInput.split("delete");
+        checkBlankDetailInput();
+    }
+
+    public static void checkAddOperationDetail(String lineInput) throws SkyControlException {
+        passengerDetailArray = lineInput.split("add");
+        checkBlankDetailInput();
+    }
+
+    public static void checkBlankDetailInput() throws SkyControlException {
+        if (passengerDetailArray.length < MIN_LENGTH) {
+            throw new SkyControlException(ui.getBlankOpsError());
         }
     }
 }

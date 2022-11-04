@@ -6,30 +6,10 @@ import seedu.duke.operationlist.OperationList;
 import seedu.duke.parsers.Parser;
 import seedu.duke.ui.Ui;
 
-public abstract class Command extends Parser {
-    public static final int MIN_LENGTH = 2;
+public abstract class Command {
     public static final int START_INDEX = 3;
     protected static Ui ui = new Ui();
     protected static final int DETAIL_INDEX = 1;
-
-    protected static String passengerDetail;
-    protected static String[] passengerDetailArray;
-
-    public static void getPassengerDetail(String lineInput) throws SkyControlException {
-        Parser.getInputWords(lineInput);
-        Parser.checkOperation(inputWords);
-        if (isAdd) {
-            passengerDetailArray = lineInput.split("add");
-            checkBlankDetailInput();
-            passengerDetail = passengerDetailArray[DETAIL_INDEX].trim();
-        } else if (isDelete) {
-            passengerDetailArray = lineInput.split("delete");
-            checkBlankDetailInput();
-            passengerDetail = passengerDetailArray[DETAIL_INDEX].trim();
-        } else {
-            throw new SkyControlException(ui.getOperationError());
-        }
-    }
 
     public static String getFlightNumFromModifyCmd(String[] inputWords) {
         return inputWords[DETAIL_INDEX].toUpperCase();
@@ -39,27 +19,18 @@ public abstract class Command extends Parser {
         return inputWords[2].substring(START_INDEX).toUpperCase();
     }
 
-    public static void checkBlankDetailInput() throws SkyControlException {
-        if (passengerDetailArray.length < MIN_LENGTH) {
-            throw new SkyControlException(ui.getBlankOpsError());
-        }
-    }
-
     public void checkFlightDetailSync(OperationList flights,
                                       OperationList passengers,
-                                      String lineInput) throws SkyControlException, SyncException {
-        getPassengerDetail(lineInput);
+                                      String passengerDetail) throws SkyControlException, SyncException {
         passengers.checkPassengerFlightSync(flights, passengerDetail);
     }
 
-    public String getPassengerDepartureTime(OperationList flights, String lineInput) throws SkyControlException {
-        getPassengerDetail(lineInput);
+    public String getPassengerDepartureTime(OperationList flights, String passengerDetail) throws SkyControlException {
         String departureTime = OperationList.getPassengerDepartureTime(flights, passengerDetail);
         return departureTime;
     }
 
-    public String getPassengerGateNumber(OperationList flights, String lineInput) throws SkyControlException {
-        getPassengerDetail(lineInput);
+    public String getPassengerGateNumber(OperationList flights, String passengerDetail) throws SkyControlException {
         String gateNumber = OperationList.getPassengerGateNumber(flights, passengerDetail);
         return gateNumber;
     }
