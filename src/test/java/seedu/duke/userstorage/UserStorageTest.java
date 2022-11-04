@@ -36,8 +36,8 @@ public class UserStorageTest {
     Lesson testLesson1 = new Lesson("MET CS 248", "Discrete Mathematics", "3",
         testBU, "monday", "10:00", "12:00");
     University testWU = new University("Western University", "nil");
-    Lesson testLesson2 = new Lesson("CS4472", "Software Specification Testing and Quality Assurance", "0.5",
-            testWU, "tuesday", "10:00", "12:00");
+    Lesson testLesson2 = new Lesson("CS4472", "Software Specification Testing and Quality Assurance",
+            "0.5", testWU, "tuesday", "10:00", "12:00");
 
     public UserStorageTest() throws InvalidUniversityException, InvalidModuleException {
     }
@@ -118,7 +118,8 @@ public class UserStorageTest {
         assertEquals("4", testUniversityList.getMyModules().getModules().get(0).getNusCredit());
         testUniversityList = testManager.getMyManager().get("Western University");
         assertEquals("CS4472", testUniversityList.getMyModules().getModules().get(0).getPuCode());
-        assertEquals("Software Specification Testing and Quality Assurance", testUniversityList.getMyModules().getModules().get(0).getPuTitle());
+        assertEquals("Software Specification Testing and Quality Assurance", testUniversityList.getMyModules()
+                .getModules().get(0).getPuTitle());
         assertEquals("0.5", testUniversityList.getMyModules().getModules().get(0).getPuCredit());
         assertEquals("CS4218", testUniversityList.getMyModules().getModules().get(0).getNusCode());
         assertEquals("Software Testing", testUniversityList.getMyModules().getModules().get(0).getNusTitle());

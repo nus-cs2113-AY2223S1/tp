@@ -162,9 +162,11 @@ public class UserStorageParser {
         String uniName = entry.getKey();
         String[] splitFileContent = fileContent.split("#");
         String fileContentForUniList = splitFileContent[0];
-        if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName, fileContentForUniList))
+        if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
+                fileContentForUniList))
             return;
-        if (extractTimetableInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName, splitFileContent))
+        if (extractTimetableInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
+                splitFileContent))
             return;
         handleLessonModuleCodeNotInSavedModules(uniName, splitFileContent);
     }
@@ -193,7 +195,8 @@ public class UserStorageParser {
      *                         splitFileContent[1] = timetable information
      * @throws InvalidUserStorageFileException if lesson module code not found in saved modules
      */
-    private static void lookForLessonModuleCodeInSavedModules(String uniName, String[] splitFileContent) throws InvalidUserStorageFileException {
+    private static void lookForLessonModuleCodeInSavedModules(String uniName, String[] splitFileContent)
+            throws InvalidUserStorageFileException {
         if (splitFileContent.length == 2) {
             String[] modules = splitFileContent[0].split("%");
             modules = Arrays.copyOfRange(modules, 1, modules.length);
@@ -209,7 +212,8 @@ public class UserStorageParser {
      * @param lessons String array containing lesson information
      * @throws InvalidUserStorageFileException if lesson module code not found in saved modules
      */
-    private static void isLessonModuleCodeExistInSavedModules(String uniName, String[] modules, String[] lessons) throws InvalidUserStorageFileException {
+    private static void isLessonModuleCodeExistInSavedModules(String uniName, String[] modules, String[] lessons)
+            throws InvalidUserStorageFileException {
         for (String lesson: lessons) {
             String lessonModuleCode = lesson.split(";")[0];
             boolean isFound = false;
@@ -268,7 +272,8 @@ public class UserStorageParser {
      * @param fileContentForUniList String containing information for saved modules
      * @return true if InvalidUserStorageException is caught, false otherwise
      */
-    private static boolean extractUniListInfoFromTextFile(HashMap<String, String> newFilePaths, HashMap<String, String> filePaths,
+    private static boolean extractUniListInfoFromTextFile(HashMap<String, String> newFilePaths,
+                                                          HashMap<String, String> filePaths,
                                                           UserUniversityListManager userUniversityListManager,
                                                           String uniName, String fileContentForUniList) {
         try {
@@ -333,7 +338,8 @@ public class UserStorageParser {
      * @param lesson Lesson containing lesson information
      * @throws InvalidUserStorageFileException if invalid file format or if module code not found in database
      */
-    private static void convertFileContentIntoLesson(String uniName, Timetable timetable, String lesson) throws InvalidUserStorageFileException {
+    private static void convertFileContentIntoLesson(String uniName, Timetable timetable, String lesson)
+            throws InvalidUserStorageFileException {
         String[] details = splitModuleInformationInFileContent(lesson);
         if (!isValidTimetableFormat(details)) {
             throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(uniName));
@@ -350,6 +356,23 @@ public class UserStorageParser {
         String day = details[1];
         String startTime = details[2];
         String endTime = details[3];
+        addLessonIntoTimetable(uniName, timetable, moduleCode, puModule, day, startTime, endTime);
+    }
+
+    /**.
+     * Method to add lesson using file contents
+     * @param uniName Partner university name
+     * @param timetable Timetable containing various lessons
+     * @param moduleCode Lesson module code
+     * @param puModule Partner university module
+     * @param day Lesson day
+     * @param startTime Lesson start time
+     * @param endTime Lesson end time
+     * @throws InvalidUserStorageFileException if university, module or lesson is not in valid format
+     */
+    private static void addLessonIntoTimetable(String uniName, Timetable timetable, String moduleCode,
+                                               Module puModule, String day, String startTime, String endTime)
+                                                throws InvalidUserStorageFileException {
         Lesson newLesson;
         try {
             University pu = new University(uniName, puModule.getUniversity().getCountry());
