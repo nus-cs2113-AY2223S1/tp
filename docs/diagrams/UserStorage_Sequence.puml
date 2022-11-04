@@ -1,78 +1,57 @@
 @startuml
-
 == Initialisation ==
-
--> UserStorageParser : getSavedLists()
-activate UserStorageParser
-
-UserStorageParser -> UserStorage : loadFile(isUniStorage = true)
+activate Duke
+participant UserStorageParser
+Duke -> UserStorage : setFilePathsAtStartUp()
 activate UserStorage
-UserStorage --> UserStorageParser : fileContent : String
+UserStorage --> Duke
 deactivate UserStorage
 
-create UserUniversityListManager
-UserStorageParser -> UserUniversityListManager : new(fileContent)
-activate UserUniversityListManager
-UserUniversityListManager -> UserStorageParser : convertFileContentIntoUniversityList(fileContent)
-UserStorageParser --> UserUniversityListManager : myManager : HashMap<String, UserUniversityList>
-deactivate UserUniversityListManager
-<-- UserStorageParser : UserUniversityListManager
-deactivate UserStorageParser
-
--> UserStorageParser : getSavedTimetables()
+Duke -> UserStorageParser : getSavedLists()
 activate UserStorageParser
-UserStorageParser -> UserStorage : loadFile(isUniStorage = false)
+UserStorageParser -> UserStorage : getFilePaths()
 activate UserStorage
-UserStorage --> UserStorageParser : fileContent : String
+UserStorage --> UserStorageParser : filePaths : HashMap<String, String>
 deactivate UserStorage
+alt filePaths is empty
+UserStorageParser --> Duke : userUniversityListManager : UserUniversityListManager
 
-UserStorageParser -> UserStorageParser : convertFileContentIntoTimetable(fileContent)
-activate UserStorageParser
-create TimetableManager
-UserStorageParser -> TimetableManager : new
-activate TimetableManager
+else filePaths not empty
 loop
-TimetableManager -> TimetableManager : addLesson(lesson)
-activate TimetableManager
-TimetableManager --> TimetableManager
-deactivate TimetableManager
-end
-TimetableManager --> UserStorageParser
-deactivate TimetableManager
+UserStorageParser -> UserStorageParser : extractInfoFromTextFile()
+activate UserStorageParser
 UserStorageParser --> UserStorageParser
 deactivate UserStorageParser
-<-- UserStorageParser : TimetableManager
-deactivate UserStorageParser
-
-== Getting User Input ==
-
-opt add modules/delete modules/create uni lists
--> UserStorageParser : storeCreatedLists(userUniversityListManager)
-activate UserStorageParser
-UserStorageParser -> UserStorageParser : convertUniversityListIntoFileContent(userUniversityListManager)
-activate UserStorageParser
-UserStorageParser --> UserStorageParser : fileContent : String
-deactivate UserStorageParser
-UserStorageParser -> UserStorage : saveFile(fileContent)
+end
+UserStorageParser -> UserStorage : setFilePaths(newFilePaths : HashMap<String, String>)
 activate UserStorage
 UserStorage --> UserStorageParser
-deactivate UserStorage
+UserStorageParser --> Duke : userUniversityListManager : UserUniversityListManager
 deactivate UserStorageParser
 end
 
-opt add lessons/delete lessons/create uni lists
--> UserStorageParser : storeTimetable(timetableManager)
+== During Program Execution ==
+loop getting user commands
+alt add modules/add lessons/add favourites/create university lists/delete modules/delete lessons/delete favourites
+Duke -> UserStorageParser : storeInfoToUserStorageByUni(uniName : String, userUniversityListManager : UserUniversityListManager)
 activate UserStorageParser
-UserStorageParser -> UserStorageParser : convertTimetableIntoFileContent(timetableManager)
-activate UserStorageParser
-UserStorageParser --> UserStorageParser : fileContent : String
-deactivate UserStorageParser
-UserStorageParser -> UserStorage : saveFile(fileContent)
+UserStorageParser -> UserStorage : saveFile(uniName : String, fileContent : String)
 activate UserStorage
 UserStorage --> UserStorageParser
 deactivate UserStorage
+UserStorageParser --> Duke
+deactivate UserStorageParser
+
+else delete university lists
+Duke -> UserStorageParser : deleteUserStorageByUni(uniName : String, fromStartUp : boolean)
+activate UserStorageParser
+UserStorageParser -> UserStorage : deleteFile(uniName : String, fromStartUp : boolean)
+activate UserStorage
+UserStorage --> UserStorageParser
+deactivate UserStorage
+UserStorageParser --> Duke
 deactivate UserStorageParser
 end
-
+end
 
 @enduml

@@ -60,7 +60,7 @@ public class UserStorageParser {
      * @param userUniversityListManager Lists of partner universities that user is interested in
      * @return
      */
-    public static String convertUniIntoFileContent(String uniName,
+    private static String convertUniIntoFileContent(String uniName,
                                                    UserUniversityListManager userUniversityListManager) {
         String fileContent = "";
         fileContent += addFavouritesToOutputString(userUniversityListManager.getUserUniversityList(uniName));
@@ -307,7 +307,7 @@ public class UserStorageParser {
      * @return UserUnivesityList, containing saved modules information
      * @throws InvalidUserStorageFileException if invalid file format
      */
-    public static UserUniversityList convertFileContentIntoUniList(String fileContent, String uniName)
+    private static UserUniversityList convertFileContentIntoUniList(String fileContent, String uniName)
             throws InvalidUserStorageFileException {
         UserUniversityList newUni = new UserUniversityList(uniName);
         String[] items = splitLineInFileContent(fileContent);
@@ -322,6 +322,11 @@ public class UserStorageParser {
         return newUni;
     }
 
+    /**.
+     * Method to get String containing delete message
+     * @param uniName Partner university name
+     * @return String containing delete message with corresponding partner university name
+     */
     private static String getDeleteMessage(String uniName) {
         return "Deleted university list and timetable for " + uniName + " from storage\n";
     }
@@ -333,7 +338,7 @@ public class UserStorageParser {
      * @return Timetable containing various lessons
      * @throws InvalidUserStorageFileException if invalid file format or if module code not found in database
      */
-    public static Timetable convertFileContentIntoTimetable(String fileContent, String uniName)
+    private static Timetable convertFileContentIntoTimetable(String fileContent, String uniName)
             throws InvalidUserStorageFileException {
         Timetable timetable = new Timetable();
         String[] lessons = splitLineInFileContent(fileContent);
@@ -402,14 +407,29 @@ public class UserStorageParser {
         timetable.addLesson(newLesson, true);
     }
 
+    /**.
+     * Method to check if lesson is in valid format ie. has exactly 4 fields
+     * @param details Array of strings containing lesson information
+     * @return true if details is size 4, otherwise false
+     */
     private static boolean isValidTimetableFormat(String[] details) {
         return details.length == 4;
     }
 
-    private static String[] splitLineInFileContent(String uni) {
-        return uni.split("%");
+    /**.
+     * Method to split file content by their lines, indicated by '%'
+     * @param fileContent String holding file content
+     * @return fileContent split by '%'
+     */
+    private static String[] splitLineInFileContent(String fileContent) {
+        return fileContent.split("%");
     }
 
+    /**.
+     * Method to check if university list is in valid format
+     * @param items Array of strings containing university list information
+     * @return true if items is at least size 1, and first item must be either 'T' or 'F'
+     */
     private static boolean isValidUniFormat(String[] items) {
         return items.length >= 1 && (items[0].equals("T") || items[0].equals("F"));
     }

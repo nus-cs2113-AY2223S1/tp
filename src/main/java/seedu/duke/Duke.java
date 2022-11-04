@@ -117,6 +117,8 @@ public class Duke {
         try {
             if (deleteCommand.hasDeleteComment()) {
                 executeDeleteComment(userUniversityListManager, deleteCommand);
+                UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(),
+                        userUniversityListManager);
             } else if (deleteCommand.getLesson() != null) {
                 timetableManager.deleteLesson(deleteCommand.getLesson());
                 UserStorageParser.storeInfoToUserStorageByUni(deleteCommand.getUniversityName(),
