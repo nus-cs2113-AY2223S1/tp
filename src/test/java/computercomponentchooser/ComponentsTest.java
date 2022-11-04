@@ -260,7 +260,7 @@ public class ComponentsTest {
     public void testGetDetails() {
         assertEquals("Name: cpu1\nPrice: $123\nPower: 12 W\nSocket: 1\nClock: 4.0 GHz", cpu1.getDetails());
         assertEquals("Name: gpu1\nPrice: $456\nPower: 45 W\nMemory: 4 GB\nClock: 5 MHz", gpu1.getDetails());
-        assertEquals("Name: mobo1\nPrice: $123\nPower: 12 W\nSocket: 1\nformFactor: Full ATX\n"
+        assertEquals("Name: mobo1\nPrice: $123\nPower: 12 W\nSocket: 1\nForm Factor: Full ATX\n"
                 + "RAM Slots: 2\nGPU Slots: 2", mobo1.getDetails());
         assertEquals("Name: cooler1\nPrice: $123\nPower: 12 W\nSocket: 1\nFan Speed: 1500 RPM\n"
                 + "Noise Level: 40 dB", cooler1.getDetails());
