@@ -80,7 +80,7 @@ public class Add extends Command {
         }
 
         if(!errorMessage.equals("")){
-            System.out.println("Unable to ADD module due to these issues:");
+            System.out.println("Unable to ADD module due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
         }
