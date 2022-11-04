@@ -84,30 +84,7 @@ This component:
 * Only reads from the secret.txt file once and stores the API as a variable (will only read from the file
 if requested again).
 
-How the API component of data fetching works
-1. The initialisation of the class will make an instance of the `Storage`, `HttpClient` and `Ui` class.
-2. If the program just started, the Parking class will call the `loadApiKey` method.
-   - If no file called `secret.txt` is found, file will be created.
-   - If the file is empty, default key will be loaded to the Api instance (but not written to the local file).
-3. To get a certain data set from the Api Service,
-   - Call `asyncExecuteRequest` method to construct the HTTP request packet header and sends the request
-     asynchronously.
-   - Call `fetchData` method to get response immediately from the Api.
-      - This method will also validate the response from the Api by identifying the response code.
-      - Unless its 401 Unauthorised Access (due to invalid Api key), the method will try to fetch data
-        at most 5 times.
 
-Since each API call only returns 500 data, we need to make multiple api calls. Thus, there is another function 
-that handles the API calls all at once. The process is still similar.
-1. Same step 1 and 2 above.
-2. Call `syncFetchData` method, which calls both the `asyncExecuteRequest` and `fetchData` five times (LTA only has 2312 
-Parking lot data)
-   - This method makes all 5 request asynchronously and receives in sequence.
-   - The method will concatenate the data together for data processing by other parts of the program.
-   - The processed data will then be stored in a local data file.
-   
-The following sequence diagram shows how data is fetched using the `update` command.
-![Update Data API](images/UpdateApiSequenceDiagram.png)
 
 
 The API component is also able to:
@@ -252,6 +229,38 @@ The following sequence diagrams shows how a favourite / unfavourite command work
     - Cons: Need to search before favouriting, even if user already knows the exact carpark ID
 
 ### 3.2 Common Files
+
+### 3.3 Update data from API feature
+
+Before going deep into how the data is fetched from the LTA API, we will run through how the API component of data fetching works.
+
+1. The initialisation of the class will make an instance of the `Storage`, `HttpClient` and `Ui` class.
+2. If the program just started, the Parking class will call the `loadApiKey` method.
+    - If no file called `secret.txt` is found, file will be created.
+    - If the file is empty, default key will be loaded to the Api instance (but not written to the local file).
+3. To get a certain data set from the Api Service,
+    - Call `asyncExecuteRequest` method to construct the HTTP request packet header and sends the request
+      asynchronously.
+    - Call `fetchData` method to get response immediately from the Api.
+        - This method will also validate the response from the Api by identifying the response code.
+        - Unless its 401 Unauthorised Access (due to invalid Api key), the method will try to fetch data
+          at most 5 times.
+
+Since each API call only returns 500 data, we need to make multiple api calls. Thus, there is another function
+that handles the API calls all at once. The process is still similar.
+1. Same step 1 and 2 above.
+2. Call `syncFetchData` method, which calls both the `asyncExecuteRequest` and `fetchData` five times (LTA only has less
+   than 2500 Parking lot data)
+    - This method makes all 5 request asynchronously and receives the response in sequence.
+    - The method will concatenate the data together for data processing by other parts of the program.
+    - The processed data will then be stored in a local data file.
+
+The following sequence diagram shows how data is fetched using the `update` command.
+![Update Data API](images/UpdateApiSequenceDiagram.png)
+
+These are the reference sequence diagram to complement the above diagram.
+![Execute Http Requests](images/asyncExecuteRequestApiSequenceDiagram.png)
+![Fetch Data](images/fetchDataApiSequenceDiagram.png)
 
 ## 4 Product scope
 ### 4.1 Target user profile

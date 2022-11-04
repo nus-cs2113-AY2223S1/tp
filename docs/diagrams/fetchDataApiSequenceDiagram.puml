@@ -6,22 +6,21 @@ skinparam classBackgroundColor MODEL_COLOR
 show field
 show methods
 
-title Fetch Data from LTA (update command)
+title Fetch Data
 
 box Api LOGIC_COLOR_T1
 participant ":Api" as Api LOGIC_COLOR
 end box
 
-box Storage LOGIC_COLOR_T1
-participant ":FileReader" as FileReader LOGIC_COLOR
-end box
-
-box System Files LOGIC_COLOR_T2
-end box
-
-[-> Api : syncFetchData()
 activate Api
-
-ref over Api : asyncExecuteRequest
-
+loop tries 5 times and empty result
+Api -> Api : asyncGetResponse(index)
+activate Api
+Api -> Api : isValidResponse(responseCode)
+activate Api
+Api --> Api : valid
+deactivate Api
+Api --> Api : result
+deactivate Api
+end
 @enduml
