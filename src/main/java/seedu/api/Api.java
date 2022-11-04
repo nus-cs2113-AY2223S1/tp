@@ -30,7 +30,7 @@ import seedu.ui.Ui;
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
-public class Api {
+public class Api implements ApiInterface {
     private static final int FETCH_TRIES = 5;
     private final HttpClient client;
     private final FileStorage storage;
@@ -84,7 +84,7 @@ public class Api {
     public void asyncExecuteRequest(int skip, int index) {
         generateHttpRequestCarpark(skip);
         responseFutureList.add(index, client.sendAsync(request, HttpResponse.BodyHandlers.ofString()));
-    } // todo: stub
+    }
 
     /**
      * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
@@ -109,7 +109,7 @@ public class Api {
             ui.showFetchTimeout();
         }
         return result;
-    } // todo: stub
+    }
 
     /**
      * Execute the data fetching subroutine for a specific index from the asynchronous call.
@@ -142,7 +142,7 @@ public class Api {
             throw new EmptyResponseException();
         }
         return result;
-    } // todo: stub
+    }
 
     /**
      * Synchronous version of multiple data fetching from the API. If the result is fetched successfully, it will be
@@ -327,7 +327,7 @@ public class Api {
                     + " but you are using our default key!";
             break;
         default:
-            assert false: "Program has entered an invalid state, please restart the program.";
+            assert false : "Program has entered an invalid state, please restart the program.";
             message = "";
             break;
         }

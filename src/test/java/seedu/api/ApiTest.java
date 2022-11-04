@@ -3,13 +3,18 @@ package seedu.api;
 import static seedu.common.CommonData.API_KEY_DEFAULT;
 import static seedu.common.CommonData.LTA_BASE_URL;
 
+import java.net.URI;
+import java.net.http.HttpRequest;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.exception.*;
-
-import java.net.URI;
-import java.net.http.HttpRequest;
+import seedu.exception.EmptySecretFileException;
+import seedu.exception.NoFileFoundException;
+import seedu.exception.ParkingException;
+import seedu.exception.ServerNotReadyApiException;
+import seedu.exception.UnauthorisedAccessApiException;
+import seedu.exception.UnknownResponseApiException;
 
 public class ApiTest {
     private final String testJsonFileDirectory = "./src/test/java/seedu/testfiles";
@@ -111,7 +116,7 @@ public class ApiTest {
     @Test
     public void getApiAuthStatusStringTest() {
         Api api = new Api(testJsonFile, testJsonFileDirectory);
-        String messageFail =  "You have not authenticated your API key. API key stored in the local file is "
+        String messageFail = "You have not authenticated your API key. API key stored in the local file is "
                 + "\nUse command `auth APIKEY` to re-authenticate or change your key";
         String messageSuccess = "You have authenticated your API key successfully. "
                 + "API key stored in the local file is ";
