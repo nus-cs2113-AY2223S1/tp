@@ -6,6 +6,7 @@ import command.employeecommand.ViewEmployeeCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class EmployeeListTest {
 
@@ -28,6 +29,12 @@ class EmployeeListTest {
         assertEquals(employeeFound.getEmployeeId(), Employee.idCounter);
     }
 
+    @Test
+    void findInvalidEmployeeTest() {
+        Employee employeeFound = EmployeeList.findEmployee(1099);
+        assertNull(employeeFound);
+    }
+
 
     @Test
     void listEmployeeTest() {
@@ -43,14 +50,36 @@ class EmployeeListTest {
         AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Yogurt");
         addEmployeeCommand.execute();
         int numOfEmployee = EmployeeList.employees.size();
-        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1001);
+        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1002);
         removeEmployeeCommand.execute();
         int numOfEmployeeAfterRemove = EmployeeList.employees.size();
         assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 1);
     }
 
     @Test
-    void viewEmployeeTasks() {
+    void removeInvalidEmployeeTest() {
+        int numOfEmployee = EmployeeList.employees.size();
+        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1099);
+        removeEmployeeCommand.execute();
+        int numOfEmployeeAfterRemove = EmployeeList.employees.size();
+        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+    }
 
+    @Test
+    void removeTwoEmployeeTest() {
+        AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Yogurt");
+        addEmployeeCommand.execute();
+        addEmployeeCommand.execute();
+        int numOfEmployee = EmployeeList.employees.size();
+        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1001);
+        removeEmployeeCommand.execute();
+        removeEmployeeCommand.execute();
+        int numOfEmployeeAfterRemove = EmployeeList.employees.size();
+        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 2);
+    }
+
+    @Test
+    void viewEmployeeTasks() {
+        
     }
 }
