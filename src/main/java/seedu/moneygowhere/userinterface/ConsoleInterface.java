@@ -1149,6 +1149,7 @@ public class ConsoleInterface {
                 savedIncomes);
 
         expenseManager.setExpenses(savedExpenses);
+        expenseManager.updateSortExpenses(sortCommandSetting);
         recurringPaymentManager.setRecurringPayments(savedRecurringPayments);
         targetManager.setTargets(savedTargets);
         incomeManager.setIncomes(savedIncomes);
