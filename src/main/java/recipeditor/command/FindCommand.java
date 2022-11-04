@@ -41,11 +41,9 @@ public class FindCommand extends Command {
             switch (flags[ 1 ]) {
             case TITLE:
                 foundRecipeList = RecipeList.findRecipeTitlesFromRecipeTitle(findInput);
-                System.out.println("TITLE: ");
                 break;
             case INGREDIENT:
                 foundRecipeList = RecipeList.findRecipeTitlesFromIngredientName(findInput);
-                System.out.println("ING: ");
                 break;
             default:
                 return new CommandResult("Incorrect flag!\n" + FindCommand.FLAG_SYNTAX);
