@@ -21,6 +21,8 @@ information quickly with minimal latency.
     * [List Pairs: `list -pair`](#list-pairs-list--pair)
     * [List Pairs Short: `list -pair -short`](#list-pairs-short-list--pair--short)
     * [List Everything `list -everything`](#list-everything-list--everything)
+    * [Find Client and Property: `find`](#find-client-and-property-find)
+    * [Help Command: `help`](#help-command-help)
     * [Exit: `quit`](#exit-quit)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
@@ -111,7 +113,18 @@ Landed Property Labels
   <LP BGL> for LP Bungalow
 --------------------------------------------------------------------------------
 ```
-Lastly, for valid `PRICE`, a positive number excluding any letters/symbols/spaces must be provided.
+Lastly, for valid `PRICE`, a positive integer must be provided.
+
+Example: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+
+Expected Output:
+```
+Adding a property with the following information:
+  Landlord: Ash Ketchun
+  Address: 25A Pallet Town, S121111
+  Renting Price: SGD1600/month
+  Unit Type: LP Bungalow
+```
 
 ---
 
@@ -210,6 +223,17 @@ For valid `EMAIL`, it must adhere to the RFC 5322 Official Email Standard.
 
 For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces must be provided.
 
+Example: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+
+Expected Output:
+```
+Adding a client with the following information:
+  Client: Gary Oaks
+  Contact Number: 90876543
+  Email: garyoaks@example.com
+  Budget: SGD1550/month
+
+```
 ---
 
 ### Delete Client: `delete -client`
@@ -394,6 +418,75 @@ will be counted as a match.
 The 1st command above search through the property list for any matches with `Bob the Builder` while the 2nd command 
 search through the client list for any matches with `Amos`.
 
+Expected Output:
+```
+find -property f/Bob The Builder
+1.	Landlord Name: Bob The Builder
+	Property Address: 25A Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+find -client f/Amos
+1.	Client Name: Amos
+	Client Contact Number: 91283543
+	Client Email: abc@examplemail.com
+	Client Budget: 1500
+--------------------------------------------------------------------------------
+```
+### Help Command: `help`
+By entering the `help` command, users can see a condense version of the list of commands available while using the application. To invoke the help command, type `help` without any additional text.
+
+The list of commands will be as show below:
+```
+help
+The list of available commands are stated below:
+
+--------------------------------------------------------------------------------
+LIST COMMAND
+--------------------------------------------------------------------------------
+list -client
+list -property
+list -everything
+list -client <TAG>
+list -property <TAG>
+where <TAG> is replaced by the tag you would like to look into. 
+For example: list -client n/
+--------------------------------------------------------------------------------
+ADD COMMAND
+--------------------------------------------------------------------------------
+add -client n/<CLIENT_NAME> c/<CONTACT_NUMBER> e/<EMAIL> b/<BUDGET>
+add -property n/<LANDLORD_NAME> a/<ADDRESS> p/<RENTAL_PRICE> t/<UNIT_TYPE>
+where the tags (represented by brackets)  are replaced as accordingly
+Note that email address is optional
+--------------------------------------------------------------------------------
+DELETE COMMAND
+--------------------------------------------------------------------------------
+delete -client i/<INDEX>
+delete -property i/<INDEX>
+where <INDEX> represents the index of entity to be deleted.
+--------------------------------------------------------------------------------
+PAIR/UNPAIR COMMAND
+--------------------------------------------------------------------------------
+pair ip/<INDEX> ic/<INDEX>
+unpair ip/<INDEX> ic/<INDEX>
+where <INDEX> represents the index of property and client to pair together with.
+--------------------------------------------------------------------------------
+CHECK COMMAND
+--------------------------------------------------------------------------------
+check -client i/<INDEX>
+check -property i/<INDEX>
+where <INDEX> refers to the index of the client or property to check for.
+--------------------------------------------------------------------------------
+FIND COMMAND
+--------------------------------------------------------------------------------
+find -client f/<QUERY_TEXT>
+find -property f/<QUERY_TEXT>
+where <QUERY_TEXT> refers to the text to search for in either client or property.
+--------------------------------------------------------------------------------
+```
+
+
+
 ---
 ### Exit: `quit`
 Leaves the application with a goodbye message  
@@ -435,10 +528,24 @@ Saving of data occurs in 3 instances of operation:
 When client, property and pairing is added, text will be appended to the text file as shown below:
 
 - `Client`: Appends `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET` to `client.txt`.
+
+An example of the client text file is as shown below:
+
+![Client text file screenshot](./Storage%20File%20Screenshot/client.jpg)
+
+
 - `Property`: Appends `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE` to `property.txt`.
+
+An example of the property text file is as shown below:
+
+![Property text file screenshot](./Storage%20File%20Screenshot/property.jpg)
+
 - `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
 PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
 
+An example of the pairing text file is as shown below:
+
+![Pairing text file screenshot](./Storage%20File%20Screenshot/pair.jpg)
 ---
 ### Updating data
 
@@ -476,6 +583,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 ---
 ## Command Summary
 
+
 * Add Property: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 * Delete Property: `delete -property ip/PROPERTY_INDEX`
 * List Properties: `list -property`
@@ -507,3 +615,5 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * List Pairs: `list -pair`
 * List Pairs Short: `list -pair -short`
+
+* Help Command: `help`

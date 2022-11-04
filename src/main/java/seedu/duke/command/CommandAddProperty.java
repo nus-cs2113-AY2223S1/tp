@@ -44,7 +44,7 @@ public class CommandAddProperty extends CommandAdd {
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        logger.log(Level.INFO, "Adding new property now");
+        logger.log(Level.FINEST, "Adding new property now");
         propertyList.addProperty(landlordName, propertyAddress, rentingPrice, unitType);
         ui.showPropertyAddedConfirmationMessage(propertyList);
 
