@@ -55,7 +55,11 @@ public class Ui {
     private static final String CHECK_PROPERTY_FORMAT = "  %d. %s";
 
     private static final String SPACE = "\t";
+    private static final String NEXT_LINE = "\n";
+    private static final String DOUBLE_SPACE = "  ";
     private static final String AND = " and ";
+
+    private static final int FIRST_INDEX = 1;
 
     //@@author wilsonngja
     private static boolean isInputEmpty(String rawInput) {
@@ -139,11 +143,11 @@ public class Ui {
 
     public void showPairedClientsDeletedConfirmationMessage(Property deletedProperty, PairingList pairingList) {
         HashMap<Client, Property> clientPropertyPairs = pairingList.getClientPropertyPairs();
-        int currentIndex = 1;
+        int currentIndex = FIRST_INDEX;
 
         for (Map.Entry<Client, Property> entry : clientPropertyPairs.entrySet()) {
             if (entry.getValue().equals(deletedProperty)) {
-                if (currentIndex == 1) {
+                if (currentIndex == FIRST_INDEX) {
                     showToUser(MESSAGE_PAIRED_CLIENTS_DELETED);
                 }
                 Client pairedClient = entry.getKey();
@@ -345,14 +349,14 @@ public class Ui {
     //@@author FeliciaBeatrice
     public void showCheckClient(Client client, Property property) {
         showToUser(MESSAGE_CHECK_CLIENT);
-        showToUser("  " + client.toString() + "\n");
+        showToUser(DOUBLE_SPACE + client.toString() + NEXT_LINE);
         showToUser(MESSAGE_CHECK_CLIENT_RESULT);
-        showToUser("  " + property.toString());
+        showToUser(DOUBLE_SPACE + property.toString());
     }
 
     public void showCheckClientNoPair(Client client) {
         showToUser(MESSAGE_CHECK_CLIENT);
-        showToUser("  " + client.toString() + "\n");
+        showToUser(DOUBLE_SPACE + client.toString() + NEXT_LINE);
         showToUser(MESSAGE_CHECK_CLIENT_NO_PAIR);
     }
     //@@author
