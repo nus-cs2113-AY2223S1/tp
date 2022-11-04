@@ -1,4 +1,4 @@
-# Bui Duc Thanh - Project Portfolio Page
+# Winston Lim Cher Hong - Project Portfolio Page
 
 ## Overview
 
