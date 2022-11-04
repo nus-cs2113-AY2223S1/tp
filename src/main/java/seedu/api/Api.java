@@ -30,7 +30,7 @@ import seedu.ui.Ui;
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
-public class Api {
+public class Api implements ApiInterface {
     private static final int FETCH_TRIES = 5;
     private final HttpClient client;
     private final FileStorage storage;
@@ -58,12 +58,21 @@ public class Api {
      *
      * @param skip The number of data sets to skip.
      */
-    private void generateHttpRequestCarpark(int skip) {
+    public void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL + "?$skip=" + skip))
             .header(authHeaderName, apiKey)
             .build();
+    }
+
+    /**
+     * Getter function for request.
+     *
+     * @return request attribute.
+     */
+    public HttpRequest getRequest() {
+        return request;
     }
 
     /**
@@ -168,7 +177,7 @@ public class Api {
         Ui.println(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
-    }
+    } // todo: stub
 
     /**
      * Process the data from the API to adhere to concatenating format.
@@ -202,7 +211,7 @@ public class Api {
      * @throws ServerNotReadyApiException if server request timeout.
      * @throws UnknownResponseApiException if received response code besides 200, 401 or 503.
      */
-    private boolean isValidResponse(int responseCode)
+    public boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
         case 200:
@@ -216,6 +225,15 @@ public class Api {
         default:
             throw new UnknownResponseApiException(responseCode);
         }
+    }
+
+    /**
+     * Getter function for authStatus attribute.
+     *
+     * @return authStatus.
+     */
+    public AuthenticationStatus getAuthStatus() {
+        return authStatus;
     }
 
     /**
@@ -290,7 +308,7 @@ public class Api {
      *
      * @return formatted message for authentication status.
      */
-    public String getApiAuthStatus() {
+    public String getApiAuthStatusString() {
         String message;
         switch(authStatus) {
         case FAIL:
@@ -309,9 +327,19 @@ public class Api {
                     + " but you are using our default key!";
             break;
         default:
+            assert false : "Program has entered an invalid state, please restart the program.";
             message = "";
             break;
         }
         return message;
+    }
+
+    /**
+     * Setter function for authStatus. Only for testing purposes.
+     * @param status Authentication Status.
+     */
+
+    public void setAuthStatus(AuthenticationStatus status) {
+        authStatus = status;
     }
 }

@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.api.Api;
+import seedu.api.ApiInterface;
 import seedu.common.CommonFiles;
 import seedu.data.CarparkList;
 import seedu.exception.ParkingException;
@@ -12,7 +13,7 @@ import seedu.files.FileStorage;
 public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
     public static final String COMMAND_WORD_SHORT = "u";
-    private final Api api;
+    private final ApiInterface api;
 
     /**
      * Constructor for the {@link UpdateCommand} class.
@@ -20,7 +21,7 @@ public class UpdateCommand extends Command {
      * @param api {@link Api} instance to be used to fetch data.
      * @param carparkList {@link CarparkList} instance to be updated.
      */
-    public UpdateCommand(Api api, CarparkList carparkList) {
+    public UpdateCommand(ApiInterface api, CarparkList carparkList) {
         this.api = api;
         this.carparkList = carparkList;
     }
@@ -31,9 +32,8 @@ public class UpdateCommand extends Command {
      * @param api api that the programme has authenticated.
      * @return updated carpark list
      */
-    private String updateCarparkList(Api api, CarparkList carparkList) {
+    private String updateCarparkList(ApiInterface api, CarparkList carparkList) {
         try {
-            //fetch api
             api.syncFetchData();
             CarparkList newCarparkList = new CarparkList(CommonFiles.LTA_FILE_PATH, CommonFiles.LTA_BACKUP_FILE_PATH);
             carparkList.update(newCarparkList);
