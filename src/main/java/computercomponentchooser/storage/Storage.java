@@ -42,7 +42,7 @@ public class Storage {
     /**
      * The relative path to the file that stores the build names.
      */
-    private static String BUILD_FILE_PATH = "data/builds.txt";
+    private static String BUILD_FILE_PATH = "data/AllSavedBuilds.txt";
 
     /**
      * The relative path to the file that stores the build parts.
