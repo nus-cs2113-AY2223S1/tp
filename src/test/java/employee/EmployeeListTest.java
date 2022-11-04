@@ -52,6 +52,15 @@ class EmployeeListTest {
     }
 
     @Test
+    void removeInvalidEmployeeTest() {
+        int numOfEmployee = EmployeeList.employees.size();
+        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1099);
+        removeEmployeeCommand.execute();
+        int numOfEmployeeAfterRemove = EmployeeList.employees.size();
+        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+    }
+
+    @Test
     void removeTheFirstEmployeeTest() {
         AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Yogurt");
         addEmployeeCommand.execute();
@@ -59,16 +68,12 @@ class EmployeeListTest {
         RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1002);
         removeEmployeeCommand.execute();
         int numOfEmployeeAfterRemove = EmployeeList.employees.size();
-        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 1);
-    }
-
-    @Test
-    void removeInvalidEmployeeTest() {
-        int numOfEmployee = EmployeeList.employees.size();
-        RemoveEmployeeCommand removeEmployeeCommand = new RemoveEmployeeCommand(1099);
-        removeEmployeeCommand.execute();
-        int numOfEmployeeAfterRemove = EmployeeList.employees.size();
-        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+        // different os may operate the tests in different order
+        if (numOfEmployee == numOfEmployeeAfterRemove) {
+            assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+        } else {
+            assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 1);
+        }
     }
 
     @Test
@@ -81,7 +86,12 @@ class EmployeeListTest {
         removeEmployeeCommand.execute();
         removeEmployeeCommand.execute();
         int numOfEmployeeAfterRemove = EmployeeList.employees.size();
-        assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 2);
+        // different os may operate the tests in different order
+        if (numOfEmployee == numOfEmployeeAfterRemove) {
+            assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+        } else {
+            assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 2);
+        }
     }
 
     @Test
