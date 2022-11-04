@@ -39,6 +39,37 @@ As an added feature, users can also curate their timetables to prevent potential
   - Highlights: Check the validity of the list command query, execute the list command according to the 4 discrete types, throws errors when invalid inputs are provided, informs user when there are no valid module mappings that match their query.
 - **Relevant PRs**: [#61](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/61)
 
-## Contributions to the Developer Guide (Extracts)
+### Testing
+
+- Added JUnit tests and assertions to make the code more defensive
+
+  - **Relevant PRs**: [#36](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/36), [#76](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/76), [#77](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/77),[#90](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/90)
+
+- Fixed bugs found during CS2113 Practical Examination Dry-Run
+  - **Relevant PRs**: [#181](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/181)
+
+### Documentation
+
+- User Guide:
+  - Added documentation for list command
+  * **Relevant PRs**: [#88](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/88), [#114](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/114)
+- Developer Guide:
+  - Added documentation for database implementation, with relevant class and sequence diagrams for illustration
+  - Added documentation for list command implementation, with relevant class and sequence diagrams for illustration
+  * **Relevant PRs**: [#79](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/79), [#88](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/88), [#92](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/92), [#105](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/105)
+
+### Contributions to Team-based Tasks
+
+- Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
+- Populate GitHub issue tracker with user stories to tackle.
+- Maintain GitHub issue tracker by updating labels for issues.
+- Reviewed PRs from all team members, verifying that bugs were fixed, and no new bugs were introduced.
+
+### Contributions Beyond The Project Team
+
+- Attempted to provide solutions to problems faced by others in CS2113 forum ([Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3), [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8), [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9))
+- Clarified doubts that may be applicable to others in CS2113 forum ([Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12), [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24))
+- Consistently reported bugs faced by other teams during tutorial exercises ([Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4), [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1))
+- Reported 24 bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
 
 ## Contributions to the User Guide (Extracts)
