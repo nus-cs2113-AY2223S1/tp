@@ -458,9 +458,12 @@ The <code>Storage</code> component can:
 - save to the hard disk
 
 Different checks have been implemented to ensure that even
-if the data file is modified in any way, it would not crash the programme.
-Data for the saved state will be overwritten each run of the application to prevent
-persistent data corruption and not require the user to manually edit the data file.
+if the data file is modified in any way, it would not crash the programme. The parts
+that are valid will be parsed while the rest are ignored. The data file is set to be hidden
+and read-only to discourage users from modifying the file although this can not prevent
+them from changing the file. Data for the saved state will be overwritten each run of the 
+application to prevent persistent data corruption and not require the user to manually 
+edit the data file.
 
 ##### 3.5.3.1 Why it is implemented this way
 

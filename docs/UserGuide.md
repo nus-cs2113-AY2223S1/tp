@@ -724,12 +724,12 @@ Possible error:
 
 ### Data Storage
 
-The user data is stored in `duke.txt` under the data folder in the directory where the jar file is being run from. The data is stored as NUSMods links for each semester. The data will be overwritten each time so there will not be any persistent corrupt data file.
+The user data will be saved in the same directory where the jar file is being run from. The user should not modify the data file in any way. The data is stored as NUSMods links for each semester. The data will be overwritten each time so there will not be any persistent corrupt data file.
 
 ### Data Loading
 
 The data of the previous saved state in the form of links will be loaded every time the application starts.
-How the links in the `duke.txt` file is parsed is similar to command `import` just without having to use the 
+How the links in the data file is parsed is similar to command `import` just without having to use the 
 keyword `import`, see [import](#import-a-timetable-import).
 
 ### Transfer to another computer
@@ -741,10 +741,6 @@ Copy the application file with the corresponding `duke.txt` data file and `data`
 (Recommended)
 Enter the command `export` and the current timetable will be exported as a sharable NUSMod Link. 
 Or you can close the program by inputting `bye` and the links for all semesters will be provided.
-
-Alternatively:
-The NUSMOD url is available in `duke.txt`, copy the content of the file and paste it in the browser to view the
-timetable on NUSMOD.
 
 ## FAQ
 

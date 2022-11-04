@@ -122,6 +122,6 @@ public class Storage {
         fw.close();
         file.setReadOnly();
         //set hidden attribute
-        //Files.setAttribute(path, "dos:hidden", true);
+        Files.setAttribute(path, "dos:hidden", true);
     }
 }
