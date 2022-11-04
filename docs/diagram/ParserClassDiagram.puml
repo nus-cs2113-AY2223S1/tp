@@ -1,7 +1,5 @@
 @startuml
 !include Style.puml
-skinparam monochrome true
-skinparam shadowing false
 'https://plantuml.com/sequence-diagram
 
 hide circle

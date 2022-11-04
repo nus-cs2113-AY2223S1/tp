@@ -2,13 +2,15 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
-class EditCommand {
+hide circle
+skinparam classAttributeIconSize 0
+
+class AddCommand {
 + COMMAND_WORD: String
     + COMMAND_DESCRIPTION: String
     + COMMAND_USAGE: String
     + COMMAND_PARAMETERS_INFO: String
 
-    - entryNumber: int
     - type: String
     - category: String
     - description: String
@@ -16,7 +18,6 @@ class EditCommand {
     - date: LocalDate
 
     +getMandatoryTags()
-    +getOptionalTags()
     +{abstract}execute()
 }
 
@@ -34,9 +35,10 @@ class "{abstract}\n Command"{
     - date: LocalDate
 
     +getMandatoryTags()
-    +getOptionalTags()
     +{abstract}execute()
 }
 
-EditCommand -up-|> "{abstract}\n Command"
+
+
+AddCommand --|> "{abstract}\n Command"
 @enduml
