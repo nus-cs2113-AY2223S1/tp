@@ -14,21 +14,16 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=alfred-le
 ### Enhancements Implemented
 
 #### User Storage
-User storage refers to saving and loading the necessary user information into text files.
-Saving of user information into text file occurs when user inputs an add/delete/create command while loading of user information from text files occurs at the start of the program.
-
-Initially, all user information was stored in a single text file. After the implementation of the timetable feature, user information was stored in two text files, one for all saved modules and another for all timetables.
+User storage refers to saving and loading the necessary user information into text files. Initially, all user information was stored in a single text file. After the implementation of the timetable feature, user information was stored in two text files, one for all saved modules and another for all timetables.
 In the most recent version, user information is stored in various text files, where each text file stores the relevant information (saved modules and timetable) for the respective partner university.
-The text files are named after the corresponding partner university. 
 
 Special mention should be given to handling of various cases where user tampers with the text files.
 When an invalid file format is detected, the corresponding text file will be deleted, and an error message will inform the user of the invalid file format and deletion.
 
 * **Some notable PRs**: [#33](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/33), [#48](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/48), [#98](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/98), [#206](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/206)
 #### Delete History
-To help users recall the modules that they had recently deleted, ```/view DELETE_HISTORY``` allows them to view up to 5 most
-recently deleted module mappings. This feature can help them to add the module mappings back to the lists without having to search for the specific
-module code again.
+To help users recall the modules that they had recently deleted, the delete history feature allows them to view up to 5 most recently deleted module mappings.
+This feature helps users to add module mappings back to the lists without having to search for the specific module code again.
 
 * **Some notable PRs**: [#60](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/60)
 #### Help Command
@@ -53,11 +48,11 @@ Also fixed minor bugs pointed out during PED, such as updating abbreviations, in
 ### Contributions to the Developer Guide DG
 Added class and sequence diagrams for the implementation of User Storage and Delete History using PlantUML.
 Updated class diagrams to follow standard notation.
-* **Some notable PRs**: [#84](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/84), [#102](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/102), [#179](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/179)
+* **Some notable PRs**: [#84](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/84), [#102](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/102), [#179](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/179), [#208](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/208)
 ### Contributions to Team-Based Tasks
-* Performed extensive testing to find and fix bugs
+* Performed extensive testing to find and fix bugs for all features of the app
 * Maintained issue tracker by tagging and labelling various pull requests for effective reference
-* Exhibited strong project management skills, reminding team members on impending deadlines and voluntarily complete submissions (eg. release v1.0)
+* Exhibited strong project management skills, reminding team members about uncompleted tasks and voluntarily complete submissions (eg. release v1.0)
 
 ### Contributions beyond the project team
 #### Review/mentoring contributions
