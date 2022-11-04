@@ -2,8 +2,13 @@ package employee;
 
 
 import appointment.Appointment;
+import command.appointmentcommand.AddAppointmentCommand;
+import command.employeecommand.AddEmployeeCommand;
+import command.petcommand.AddPetCommand;
+import command.servicecommand.AddServiceCommand;
 import command.taskcommand.AddTaskCommand;
 import org.junit.jupiter.api.Test;
+import pet.Pet;
 import task.Task;
 import task.TaskList;
 
@@ -32,6 +37,27 @@ class EmployeeTest {
         newEmployee.removeTaskFromEmployee(4002);
         int numOfTaskAfterRemove = TaskList.getTasks().size();
         assertEquals(numOfTaskAfterRemove - numOfTask, 0);
+    }
+
+    @Test
+    public void viewTasksTest() {
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Feed");
+        addServiceCommand.execute();
+        AddPetCommand addPetCommand = new AddPetCommand("Meow", "cat", true);
+        addPetCommand.execute();
+        AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Yogurt");
+        addEmployeeCommand.execute();
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2003, "2022-11-28", "Feed");
+        addAppointmentCommand.execute();
+        AddTaskCommand addTaskCommand = new AddTaskCommand(3001, 1003, "water");
+        addTaskCommand.execute();
+        Employee newEmployee = new Employee("Yogurt");
+        newEmployee.addTaskToEmployee(new Task(3001, 1003, "wash"));
+        addTaskCommand.execute();
+        int numOfTask = TaskList.getTasks().size();
+        newEmployee.viewTasks();
+        int numOfTaskAfterView = TaskList.getTasks().size();
+        assertEquals(numOfTaskAfterView - numOfTask, 0);
     }
 
 }
