@@ -47,7 +47,7 @@ activate targetManager DATA_COLOR_4
 targetManager --[DATA_COLOR_4]> consoleInterface : currentTargets:ArrayList<Target>
 deactivate targetManager
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lsaveToFile(\n\tcurrentExpenses,\n\tsortCommandSetting,\n\tcurrentRecurringPayments,\n\tcurrentIncomes,\n\tcurrentTargets\n)
+consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lsaveToFile(\n\tcurrentExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tcurrentRecurringPayments:ArrayList<RecurringPayment>,\n\tcurrentIncomes:ArrayList<Income>,\n\tcurrentTargets:ArrayList<Target>\n)
 activate LocalStorage STORAGE_COLOR_1
 
 LocalStorage --[STORAGE_COLOR_1]> consoleInterface
