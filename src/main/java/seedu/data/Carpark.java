@@ -277,7 +277,9 @@ public class Carpark implements Comparable<Carpark> {
         int motorCycleLots;
         int heavyVehicleLots;
         String[] lots = params.split(" ");
-
+        if (lots.length != 3) {
+            throw new InvalidFormatException("Invalid number of lot types! Must be exactly 3.");
+        }
         try {
             carLots = Integer.parseInt(lots[0]);
             motorCycleLots = Integer.parseInt(lots[1]);
