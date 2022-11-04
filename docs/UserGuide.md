@@ -612,8 +612,6 @@ Your most recently deleted modules are:
 ____________________________________________________________________________
 ```
 
-## FAQ
-
 ## Command Summary
 
 | Command   | Format                                                                                          | Purpose                                                                                                                                                                                                                                                     |
