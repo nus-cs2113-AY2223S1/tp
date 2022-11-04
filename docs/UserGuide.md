@@ -12,7 +12,7 @@
   - [Authentication status](#authentication-status)
   - [Find number of lots by carpark ID](#find-number-of-lots-by-carpark-id)
   - [Filter carparks based on address](#filter-carparks-based-on-address)
-  - [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
+  - [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)
   - [Get a list of carparks on the app](#get-a-list-of-carparks-on-the-app)
   - [Update data from API](#update-data-from-api)
   - [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)
@@ -208,7 +208,7 @@ Last Updated: 04-11-2022 19:28:10
 
 > **Note:**  The `filter` command allows for dashed arguments `-address` and `-id` to switch modes, but if none is provided it defaults to address mode above.
 
-Related: [Filter carparks by carpark ID](#filter-carparks-by-carpark-id)
+Related: [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)
 
 Example of usage:
 
@@ -270,6 +270,8 @@ CarparkID T47A at BLK 864B TAMPINES STREET 83
 > Format: `list` or `l`
 
 - Using data from the API, after the user has inputted the command, the function will return a list of carparks from the API.
+> **Note:** This produces a very long list with Carpark ID in alphabetical order and result in a long output list in your terminal. Do not use if you need to refer 
+to output already printed to the console before this.
 
 Example of usage:
 
@@ -296,11 +298,13 @@ CarparkID HG80 at BLK 941A HOUGANG STREET 92
 
 > Format: `update` or `u`
 
-- The command requires a valid API access token to function.
-- This overwrites any previous availability data for any carparks fetched by the API.
+- The command requires a valid API access token and internet access to function.
+- This overwrites any previous carpark availability data for any carparks fetched by the API.
 - This command is useful for when the program is left opened for a very long time, and the data that has been fetched by
 the API at the start of the program becomes outdated. The user can then use this command to update the data fetched by
 the API without having to exit and terminate the program.
+
+>  **Note:** Tampering with the `.json` files generated can result in the data fetched from the `update` command to be skipped and not loaded in. For more information see [`ltaResponse.json` and `ltaResponseSample.json` JSON files from the API](#ltaresponsejson-and-ltaresponsesamplejson-json-files-from-the-api)
 
 Example of usage:
 
@@ -540,7 +544,7 @@ Format of one row in the `carparkList.txt` file is shown below:
 
 `ltaResponseSample.json` is backup data generated from the program internally, meant as a "demo mode" to test and use parKING's features offline if there isn't an internet connection. If the program fails to load properly the data from `ltaResponse.json`, data from `ltaResponseSample.json` is loaded in instead. 
 
-If both `.json` files produce errors, a valid `.json` file is regenerated from within the program and then loaded in.
+If both `.json` files produce errors, a valid `ltaResponseSample.json` file is regenerated from within the program and then loaded in.
 
 >**Do not edit** these files unless you know what you are doing. Edit the `carpark.txt` file instead if you would like to change details about the carparks.
 
@@ -561,7 +565,7 @@ when you restart the program.
 | `auth API_KEY`           | `a API_KEY`       | [Authenticate API using user's API key](#authenticate-user-api)                             |
 | `auth default`           | `a default`       | [Authenticate API using default key](#authenticate-default)                                 |
 | `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
-| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
+| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots by carpark ID](#find-number-of-lots-by-carpark-id)                     | 
 | `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
 | `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
 | `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
