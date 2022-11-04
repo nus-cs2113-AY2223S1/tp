@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.design.ASCIIArtGenerator;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,10 +32,12 @@ public class UI {
     /**
      * Message to be printed in the beginning;
      */
-    public static void helloMessage() {
+    public static void helloMessage() throws Exception {
+        printSeparationLine();
+        ASCIIArtGenerator.printTextArt("PlanIT!", ASCIIArtGenerator.ART_SIZE_MEDIUM);
         printSeparationLine();
         System.out.println("Welcome to PlanIT!");
-        System.out.println("Start planning out your 4 years in NUS with us!");
+        System.out.println("Start planning out your 4 years in NUS with us :)");
         printSeparationLine();
         System.out.println("To get started, type 'help' to see the list of available commands.");
         printSeparationLine();
