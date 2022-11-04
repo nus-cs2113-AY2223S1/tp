@@ -19,9 +19,9 @@
   * [5.2. Viewing the Monthly Expenditure](#52-viewing-the-monthly-expenditure)
   * [5.3. Viewing the Financial Insights for Specific Time Periods](#53-viewing-the-financial-insights-for-specific-time-periods)
   * [5.4. Managing the Budget](#54-managing-the-budget)
-- [6. General](#6-general)
+- [6. Others](#6-others)
   * [6.1. Persistent Data](#61-persistent-data)
-  * [6.2. Exiting the Program`](#62-exiting-the-program)
+  * [6.2. Exiting the Application](#62-exiting-the-application)
 - [7. Command Summary](#7-command-summary)
   * [7.1. Command Syntax](#71-command-syntax)
   * [7.2. Information for Parameters](#72-information-for-parameters)
@@ -653,7 +653,7 @@ _Written by: Brian Wong Yun Long_
 
 _Written by: Yong Chin Han_
 
-## FAQ
+## 8. FAQ
 
 **Q**: Why does running the command `java -jar duke.jar` in the command prompt or terminal not open up the application?
 * **A**: It could be that you are not in the home directory of that application. Type `cd [PATH TO DIRECTORY CONTAINING .JAR FILE]`.
