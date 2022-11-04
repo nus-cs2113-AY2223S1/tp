@@ -1,8 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.commands.*;
+import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +13,14 @@ public class ModuleList {
     public static ArrayList<Module> modules = new ArrayList<>();
     public static int viewCount;
     public static int mcsCount;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public ModuleList() {
 
+    }
+
+    public ModuleList(ArrayList<Module> modules) {
+        this.modules = modules;
     }
 
     /**
@@ -28,6 +36,8 @@ public class ModuleList {
             add(module, true);
         }
     }
+
+
 
 
     /**
@@ -139,6 +149,8 @@ public class ModuleList {
         if(modules.isEmpty()) {
             UI.noModulesFoundMessage();
         }
+
+        System.out.println("\n" + "Cumulative Average Point (CAP) : " + df.format(calculateCap()));
     }
 
     /**
@@ -202,6 +214,90 @@ public class ModuleList {
     }
 
     /**
+     * Returns total graded Mcs taken in whole plan
+     */
+    public Integer totalGradedMcs() {
+        Integer totalGradedMc = 0;
+        for (Module mod : modules) {
+            if(!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))){
+                totalGradedMc += mod.getMcs();
+            }
+        }
+        return totalGradedMc;
+    }
+
+    /**
+     * Returns total ungraded (S/U/-) Mcs taken in whole plan
+     */
+    public Integer totalUngradedMcs() {
+        return totalMcs() - totalGradedMcs();
+    }
+
+    /**
+     * Returns total Mcs taken in whole plan
+     */
+    public Integer totalMcs() {
+        Integer totalMcs = 0;
+        for (Module mod : modules) {
+            totalMcs += mod.getMcs();
+        }
+        return totalMcs;
+    }
+
+    /**
+     * Calculates CAP
+     */
+    public double calculateCap() {
+        double numerator = 0.0;
+        for (Module mod: modules) {
+            numerator += gradePoint(mod.getGrade()) * mod.getMcs();
+        }
+        return numerator/totalGradedMcs();
+    }
+
+    /**
+     * Function to convert a grade into grade point
+     * @param grade The letter grade of a module. Format: String
+     * @return The equivalent gradePoint of the grade
+     */
+    public double gradePoint(String grade) {
+        switch (grade) {
+            case "A+":
+                return 5.0;
+            case "A":
+                return 5.0;
+            case "A-":
+                return 4.5;
+            case "B+":
+                return 4.0;
+            case "B":
+                return 3.5;
+            case "B-":
+                return 3.0;
+            case "C+":
+                return 2.5;
+            case "C":
+                return 2.0;
+            case "D+":
+                return 1.5;
+            case "D":
+                return 1.0;
+            case "F":
+                return 0.0;
+            case "F*":
+                return 0.0;
+            case "S":
+                return 0.0;
+            case "U":
+                return 0.0;
+            case "-":
+                return 0.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    /**
      * For checking whether the module contains the keyword in its fields and return a boolean result.
      * @param keyword the word to search for in existing modules
      * @param mod the existing module to be checked
@@ -242,6 +338,9 @@ public class ModuleList {
         }
     }
 
+
+
+
     // Returns total number of Modules in modules Array
     public int getCount() {
         return modules.size();
@@ -256,5 +355,6 @@ public class ModuleList {
     public int getMcsCount() {
         return mcsCount;
     }
+
 
 }
