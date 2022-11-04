@@ -136,6 +136,41 @@ public class ModuleList {
                 }
             }
         }
+        if(modules.isEmpty()) {
+            UI.noModulesFoundMessage();
+        }
+    }
+
+    /**
+     * Function to clear modules in a particular or all semester
+     */
+    public void clear(String semester) {
+        boolean isFound = false;
+        if (semester.equals("all")) {
+            isFound = true;
+            clearAll();
+            UI.allClearedMessage();
+
+        } else {
+            ArrayList<Module> updatedModules = new ArrayList<>();
+            for (Module mod : modules) {
+                if (!mod.getSemesterTaken().matches(semester)) {
+                    isFound = true;
+                    updatedModules.add(mod);
+                }
+            }
+            modules = updatedModules;
+        }
+        if (!isFound) {
+            UI.notFoundClearMessage(semester);
+        }
+    }
+
+    /**
+     *
+     */
+    public void clearAll() {
+        modules = new ArrayList<>();
     }
 
     /**
