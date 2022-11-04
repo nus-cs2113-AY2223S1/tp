@@ -90,7 +90,7 @@ public class HelpCommandTest {
         String input = "/help find";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: /find <ingredient/title>\n"
+        String expected = "Syntax: /find -<flag> <recipe title/ingredient name>\n"
                 + "Description: For the given ingredient or title, find recipes which contains it.";
         assertEquals(expected, commandExecutedResult.getMessage());
     }

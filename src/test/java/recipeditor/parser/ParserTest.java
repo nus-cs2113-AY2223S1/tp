@@ -87,11 +87,11 @@ class ParserTest {
     }
 
     @Test
-    void completeFindCommand_correctFindCommandFormat_FindRecipeTitleThatContainsFindInput() {
+    void completeFindRecipeTitleCommand_correctFindCommandFormat_FindRecipeTitleThatContainsFindInput() {
         Recipe addedRecipe = new Recipe("Example Title for Find Command");
         RecipeList.addRecipe(addedRecipe);
         RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/find title";
+        String input = "/find -t title";
         String expected = System.lineSeparator() + "1. Example Title for Find Command";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
