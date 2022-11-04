@@ -128,7 +128,7 @@ class ParserTest {
         String expected = "Try /help <command type>\n"
                 + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
         assertEquals(expected, commandExecutedResult.getMessage());
-        assertEquals(HelpCommand.class, Parser.parseCommand(input).getClass());
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }
 
     @Test
