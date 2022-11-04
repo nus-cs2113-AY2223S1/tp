@@ -5,7 +5,12 @@ import seedu.duke.module.lessons.Lesson;
 import seedu.duke.timetable.Timetable;
 import seedu.duke.UI;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Comparator;
+import java.util.Stack;
+import java.util.Collections;
 import java.util.logging.Logger;
 
 import static seedu.duke.timetable.Timetable.listOfModules;
@@ -101,7 +106,7 @@ public class CommandPrintTimetable {
         Integer[] rawLessonSlot = new Integer[2];
         rawLessonSlot[0] = info[1];
         rawLessonSlot[1] = info[2] + END_SLOT_DIFFERENCE;
-        
+
 
         try {
             rawTimetable.get(info[0]).add(rawLesson); // add each rawLesson into respective day
@@ -491,15 +496,15 @@ public class CommandPrintTimetable {
     }
 
 
-    private static void sortSlotList(Integer day, Stack<Integer[]> stack,ArrayList<ArrayList<Integer[]>> newESL) {
+    private static void sortSlotList(Integer day, Stack<Integer[]> stack,ArrayList<ArrayList<Integer[]>> newEsl) {
         Integer[] top = stack.peek();
-        for (int i = 1; i < newESL.get(day).size(); i++) {
-            if (top[1] < newESL.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
-                stack.push(newESL.get(day).get(i));
-            } else if (top[1].equals(newESL.get(day).get(i)[0])) {
+        for (int i = 1; i < newEsl.get(day).size(); i++) {
+            if (top[1] < newEsl.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
+                stack.push(newEsl.get(day).get(i));
+            } else if (top[1].equals(newEsl.get(day).get(i)[0])) {
                 continue;
-            } else if (top[1] < newESL.get(day).get(i)[1]) {
-                top[1] = newESL.get(day).get(i)[1];
+            } else if (top[1] < newEsl.get(day).get(i)[1]) {
+                top[1] = newEsl.get(day).get(i)[1];
                 stack.pop();
                 stack.push(top);
             }
