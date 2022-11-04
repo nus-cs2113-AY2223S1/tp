@@ -42,7 +42,7 @@ public class AuthCommand extends Command {
     public CommandResult execute() {
         try {
             if (apiKey.equals("status")) {
-                String message = api.getApiAuthStatus();
+                String message = api.getApiAuthStatusString();
                 return new CommandResult(message, CommandStatus.MESSAGE);
             } else if (apiKey.equals("default")) {
                 api.loadDefaultApiKey();

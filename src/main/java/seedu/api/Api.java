@@ -58,12 +58,21 @@ public class Api {
      *
      * @param skip The number of data sets to skip.
      */
-    private void generateHttpRequestCarpark(int skip) {
+    public void generateHttpRequestCarpark(int skip) {
         String authHeaderName = "AccountKey";
         request = HttpRequest.newBuilder(
                 URI.create(LTA_BASE_URL + "?$skip=" + skip))
             .header(authHeaderName, apiKey)
             .build();
+    }
+
+    /**
+     * Getter function for request.
+     *
+     * @return request attribute.
+     */
+    public HttpRequest getRequest() {
+        return request;
     }
 
     /**
@@ -75,7 +84,7 @@ public class Api {
     public void asyncExecuteRequest(int skip, int index) {
         generateHttpRequestCarpark(skip);
         responseFutureList.add(index, client.sendAsync(request, HttpResponse.BodyHandlers.ofString()));
-    }
+    } // todo: stub
 
     /**
      * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
@@ -100,7 +109,7 @@ public class Api {
             ui.showFetchTimeout();
         }
         return result;
-    }
+    } // todo: stub
 
     /**
      * Execute the data fetching subroutine for a specific index from the asynchronous call.
@@ -133,7 +142,7 @@ public class Api {
             throw new EmptyResponseException();
         }
         return result;
-    }
+    } // todo: stub
 
     /**
      * Synchronous version of multiple data fetching from the API. If the result is fetched successfully, it will be
@@ -168,7 +177,7 @@ public class Api {
         Ui.println(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
-    }
+    } // todo: stub
 
     /**
      * Process the data from the API to adhere to concatenating format.
@@ -202,7 +211,7 @@ public class Api {
      * @throws ServerNotReadyApiException if server request timeout.
      * @throws UnknownResponseApiException if received response code besides 200, 401 or 503.
      */
-    private boolean isValidResponse(int responseCode)
+    public boolean isValidResponse(int responseCode)
             throws UnauthorisedAccessApiException, ServerNotReadyApiException, UnknownResponseApiException {
         switch (responseCode) {
         case 200:
@@ -216,6 +225,15 @@ public class Api {
         default:
             throw new UnknownResponseApiException(responseCode);
         }
+    }
+
+    /**
+     * Getter function for authStatus attribute.
+     *
+     * @return authStatus.
+     */
+    public AuthenticationStatus getAuthStatus() {
+        return authStatus;
     }
 
     /**
@@ -290,7 +308,7 @@ public class Api {
      *
      * @return formatted message for authentication status.
      */
-    public String getApiAuthStatus() {
+    public String getApiAuthStatusString() {
         String message;
         switch(authStatus) {
         case FAIL:
@@ -309,9 +327,19 @@ public class Api {
                     + " but you are using our default key!";
             break;
         default:
+            assert false: "Program has entered an invalid state, please restart the program.";
             message = "";
             break;
         }
         return message;
+    }
+
+    /**
+     * Setter function for authStatus. Only for testing purposes.
+     * @param status Authentication Status.
+     */
+
+    public void setAuthStatus(AuthenticationStatus status) {
+        authStatus = status;
     }
 }
