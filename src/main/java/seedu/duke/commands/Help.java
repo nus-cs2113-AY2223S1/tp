@@ -16,6 +16,7 @@ public class Help extends Command {
             "* Calculate MCs taken : mcs s/YEAR_NUMBER_SEMESTER_NUMBER \n" +
             "* Finds module information : find <KEYWORD> \n" +
             "* Checks for SEP/NOC program eligibility : check <PROGRAM> \n" +
+            "* Overview of your Plan (MCs, CAP, Eligibility) : overview \n" +
             "* Exits the App : exit ";
 
     public Help() {
