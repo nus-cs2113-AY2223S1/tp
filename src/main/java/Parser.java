@@ -10,6 +10,8 @@ public class Parser {
     private static final String VIEW_ALL_COMMAND = "viewall";
     private static final String BACK_TO_MAIN_COMMAND = "main";
 
+
+
     private final PatientList patientList;
     private final VisitList visitList;
     private final PrescriptionList prescriptionList;
@@ -67,36 +69,28 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
+            String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = patientAddMatcher(input);
             Matcher matcherRetrieve = patientRetrieveMatcher(input);
             Matcher matcherEdit = patientEditMatcher(input);
-            if (matchesView) {
+            if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
+                checkViewAllCommand(inputLower, "patient");
                 patientList.listPatients(ui);
-            } else if (matcherAdd.find()) {
+            } else if (inputLower.startsWith("add")) {
+                errorIfNoMatchPatient(matcherAdd, "add");
                 String patientId = matcherAdd.group(4).toUpperCase();
-                if (!patientList.isUniqueId(patientId)) {
-                    throw new OneDocException("Please only use unique IDs to create patients!"
-                            + " A patient with this ID already exists");
-                }
+                errorIfPatientExists(patientId);
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
             } else if (matcherRetrieve.find()) {
+                errorIfNoMatchPatient(matcherRetrieve, "retrieve");
                 patientList.retrievePatient(ui, matcherRetrieve.group(1).toUpperCase());
             } else if (matcherEdit.find()) {
+                errorIfNoMatchPatient(matcherEdit, "edit");
                 parseEditPatient(matcherEdit.group(1).toUpperCase(), matcherEdit.group(2), matcherEdit.group(3));
             } else {
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_ADD
-                        + "\nn - The name should be one of two words"
-                        + "\ng - The gender should be one letter, M or F"
-                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters"
-                        + UI.PATIENT_EDIT
-                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
-                        + UI.PATIENT_RETRIEVE
-                        + UI.PATIENT_VIEW_ALL);
+                errorIfNoMatchPatient(null, "default");
             }
         } catch (OneDocException e) {
             System.out.println("Incorrect format: " + e.getMessage());
@@ -117,17 +111,19 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
+            String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addVisitMatcher(input);
             Matcher matcherEdit = editVisitMatcher(input);
             Matcher matcherDelete = deleteReasonMatcher(input);
             Matcher matcherViewPatient = viewVisitPatientMatcher(input);
             Matcher matcherViewVisit = viewOneVisitMatcher(input);
-            if (matchesView) {
+            if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
+                checkViewAllCommand(inputLower, "visit");
                 visitList.viewAll(ui);
-            } else if (matcherAdd.find()) {
+            } else if (inputLower.startsWith("add")) {
+                errorIfNoMatchVisit(matcherAdd, "add");
                 String patientId = matcherAdd.group(1).toUpperCase();
-                checkPatientExists(patientId);
+                errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 String reason = matcherAdd.group(4);
                 if (reason == null || reason.isEmpty()) {
@@ -138,23 +134,64 @@ public class Parser {
                             matcherAdd.group(3), matcherAdd.group(4));
                     storage.saveVisitData(visitList);
                 }
-            } else if (matcherEdit.find()) {
+            } else if (inputLower.startsWith("edit")) {
+                errorIfNoMatchVisit(matcherEdit, "edit");
                 String reason = matcherEdit.group(2);
                 if (reason.isEmpty()) {
                     throw new OneDocException("Please don't use edit to put in an empty reason! Use deleteReason");
                 }
                 visitList.editReason(ui, Integer.parseInt(matcherEdit.group(1)), reason);
                 storage.saveVisitData(visitList);
-            } else if (matcherDelete.find()) {
+            } else if (inputLower.startsWith("deletereason")) {
+                errorIfNoMatchVisit(matcherEdit, "delete");
                 visitList.deleteReason(ui, Integer.parseInt(matcherDelete.group(1)));
-            } else if (matcherViewPatient.find()) {
+            } else if (inputLower.startsWith("viewpatient")) {
+                errorIfNoMatchVisit(matcherViewPatient, "viewPatient");
                 String patientId = matcherViewPatient.group(1).toUpperCase();
-                checkPatientExists(patientId);
+                errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 visitList.viewPatient(ui, patientId);
-            } else if (matcherViewVisit.find()) {
+            } else if (inputLower.startsWith("viewvisit")) {
+                errorIfNoMatchVisit(matcherViewVisit, "viewVisit");
                 visitList.viewVisit(ui, Integer.parseInt(matcherViewVisit.group(1)));
             } else {
+                errorIfNoMatchVisit(null, "default");
+            }
+        } catch (OneDocException e) {
+            System.out.println("Incorrect format: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Unexpected issue: " + e.getMessage());
+        }
+
+        return SubMenuState.IN_SUB_MENU;
+    }
+    public void errorIfNoMatchVisit(Matcher matcher, String message) throws OneDocException {
+        if (matcher == null || !matcher.find()) {
+            switch (message) {
+            case "add":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.VISIT_ADD
+                        + "\nd - The date should be formatted as DD-MM-YYYY"
+                        + "\nt - The time should be formatted as HH:MM"
+                        + "\nr - The reason is optional, and can be any number of words");
+            case "edit":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.VISIT_EDIT
+                        + "\nx - The index should be a displayed number next to the visit"
+                        + "\nr - The reason can be added or edited with any number of words");
+            case "delete":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.VISIT_DELETE_REASON
+                        + "\nx - The index should be a displayed number next to the visit");
+            case "viewPatient":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.VISIT_VIEW_PATIENT
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+            case "viewVisit":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.VISIT_VIEW
+                        + "\nx - The index should be a displayed number next to the visit");
+            default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
                         + "\nd - The date should be formatted as DD-MM-YYYY"
@@ -168,13 +205,7 @@ public class Parser {
                         + UI.VISIT_VIEW_PATIENT
                         + UI.VISIT_VIEW);
             }
-        } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unexpected issue: " + e.getMessage());
         }
-
-        return SubMenuState.IN_SUB_MENU;
     }
 
     public SubMenuState prescriptionParser(String input) {
@@ -187,18 +218,19 @@ public class Parser {
         }
 
         try {
-            boolean matchesView = input.equalsIgnoreCase(VIEW_ALL_COMMAND);
+            String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addPrescriptionMatcher(input);
             Matcher matcherEdit = editPrescriptionMatcher(input);
             Matcher matcherViewPatient = viewPrescriptionPatientMatcher(input);
             Matcher matcherViewActive = viewPrescriptionActiveMatcher(input);
             Matcher matcherChangeActive = changePrescriptionActiveMatcher(input);
             Matcher matcherChangeInactive = changePrescriptionInactiveMatcher(input);
-            if (matchesView) {
+            if (inputLower.startsWith(VIEW_ALL_COMMAND)) {
+                checkViewAllCommand(inputLower, "prescription");
                 prescriptionList.viewAll(ui);
             } else if (matcherAdd.find()) {
                 String patientId = matcherAdd.group(1).toUpperCase();
-                checkPatientExists(patientId);
+                errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
@@ -208,12 +240,12 @@ public class Parser {
                         matcherEdit.group(2), matcherEdit.group(3));
             } else if (matcherViewPatient.find()) {
                 String patientId = matcherViewPatient.group(1);
-                checkPatientExists(patientId);
+                errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.viewPatientPrescription(ui, patientId);
             } else if (matcherViewActive.find()) {
                 String patientId = matcherViewActive.group(1);
-                checkPatientExists(patientId);
+                errorIfPatientExists(patientId);
                 assert !patientId.contains(" ");
                 prescriptionList.viewActivePatientPrescription(ui, patientId);
             } else if (matcherChangeActive.find()) {
@@ -246,7 +278,49 @@ public class Parser {
         return SubMenuState.IN_SUB_MENU;
     }
 
-    private void checkPatientExists(String patientId) throws OneDocException {
+    public void errorIfNoMatchPatient(Matcher matcher, String message) throws OneDocException {
+        if (matcher == null || !matcher.find()) {
+            switch (message) {
+            case "add":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PATIENT_ADD
+                        + "\nn - The name should be one of two words"
+                        + "\ng - The gender should be one letter, M or F"
+                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
+                        + "\ni - The id can be a sequence of numbers or letters");
+            case "edit":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PATIENT_ADD
+                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
+                        + "\nn - The name should be one of two words"
+                        + "\ng - The gender should be one letter, M or F"
+                        + "\nd - The date of birth should be formatted as DD-MM-YYYY");
+            case "retrieve":
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PATIENT_RETRIEVE
+                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+            default:
+                throw new OneDocException("Your input is incorrect! Please format it as such:"
+                        + UI.PATIENT_ADD
+                        + "\nn - The name should be one of two words"
+                        + "\ng - The gender should be one letter, M or F"
+                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
+                        + "\ni - The id can be a sequence of numbers or letters"
+                        + UI.PATIENT_EDIT
+                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
+                        + UI.PATIENT_RETRIEVE
+                        + UI.PATIENT_VIEW_ALL);
+            }
+        }
+    }
+
+    private void checkViewAllCommand(String inputLower, String type) {
+        if (inputLower.length() > VIEW_ALL_COMMAND.length()) {
+            System.out.println("A viewall command will print all " + type + "s, and anything after it will be disregarded");
+        }
+    }
+
+    private void errorIfPatientExists(String patientId) throws OneDocException {
         if (patientList.findPatient(patientId) == null) {
             throw new OneDocException("That patient ID doesn't exist!");
         }
@@ -415,5 +489,4 @@ public class Parser {
                     + "Please use n/ for name, d/ for dosage, and t/ for time interval");
         }
     }
-
 }
