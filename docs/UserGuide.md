@@ -357,7 +357,9 @@ Prints out the current user timetable.
 
 Format: `timetable < /fancy | /simple >`
 
-Note: Fancy mode features sleek unicode characters and coloured output. Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
+> Note: Fancy mode features sleek unicode characters and coloured output. Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
+
+> Note: If you have too many lessons overlapping in terms of timing, the width of your timetable may overflow the window size and thus the timetable will be difficult to view. In that case, increase your window width or use the `select` command to resolve some of the timing collisions.
 
 Example of usage:
 
