@@ -53,7 +53,7 @@ class ParseAddClientTest {
 
 
     @Test
-    public void parseCommand() throws DukeException {
+    public void parseCommand_validAddClientInput_matchingClientDetails() throws DukeException {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient = new ParseAddClient(VALID_TEST_CASE, clientList);
 
@@ -75,7 +75,7 @@ class ParseAddClientTest {
     }
 
     @Test
-    public void checkForEmptyClientDetails_emptyClientDetail_exceptionThrown() {
+    public void checkForEmptyAddClientDetails_emptyClientDetail_exceptionThrown() {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient = new ParseAddClient(EMPTY_CLIENT_INPUT, clientList);
         assertThrows(EmptyAddClientDetailException.class, parseAddClient::parseCommand);
@@ -89,7 +89,7 @@ class ParseAddClientTest {
     }
 
     @Test
-    public void checkForInvalidClientFlagsOrder_incorrectClientFlagOrder_exceptionThrown() {
+    public void checkClientFlagsOrder_incorrectClientFlagOrder_exceptionThrown() {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient = new ParseAddClient(INCORRECT_CLIENT_FLAG_ORDER, clientList);
         assertThrows(IncorrectAddClientFlagOrderException.class, parseAddClient::parseCommand);
@@ -103,7 +103,7 @@ class ParseAddClientTest {
     }
 
     @Test
-    public void checkForSingaporeValidContactNumber_invalidSingaporeContactNumber_exceptionThrown() {
+    public void checkForValidSingaporeContactNumber_invalidSingaporeContactNumber_exceptionThrown() {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient;
 
@@ -135,7 +135,7 @@ class ParseAddClientTest {
     }
 
     @Test
-    public void checkForBudget_invalidBudget_exceptionThrown() {
+    public void checkForBudgetNumberFormat_invalidBudget_exceptionThrown() {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient;
         // Budget must be positive integer
