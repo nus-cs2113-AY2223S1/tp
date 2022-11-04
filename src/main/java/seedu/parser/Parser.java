@@ -54,7 +54,7 @@ public class Parser {
         this.api = api;
         this.carparkList = carparkList;
         this.favourite = favourite;
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim().toLowerCase());
         if (!matcher.matches()) {
             return new InvalidCommand("Invalid Command");
         }
