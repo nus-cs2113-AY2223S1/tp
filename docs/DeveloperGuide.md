@@ -137,6 +137,32 @@ the components of the build into their respective text files. The `deleteBuild()
 `BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
 
 
+#### Load
+
+![](images/StorageLoadSequence.png)
+
+The `loadBuild()` method is called when the program starts. The `loadBuild()` method reads the text file with the path `BUILD_FILE_PATH` and
+creates a `Build` object for each build name in the text file. If there are duplicate build names in the text file or the text file does not exist,
+respective error messages will be printed out. The `loadComponent()` method is called for each build name in the text file. The `loadComponent()` method
+reads the text file with the path `COMPONENT_FILE_PATH` and creates a `Component` object for each component in the text file. These `Component` objects
+are then added to the `Build` object. If the text file does not exist, an error message will be printed out.
+
+#### Save
+
+Save is split into two parts, saving the build names and saving the components of the build.
+
+![](images/StorageSaveBuildSequence.png)
+
+The `saveBuild()` method is called when the user adds a build. The `saveBuild()` method writes the build names in the `BuildManager` object
+into the text file with the path `BUILD_FILE_PATH`. Same process applies to the method `deleteBuild()` when the user deletes a build.
+
+![](images/StorageSaveComponentSequence.png)
+
+The `saveComponent()` method is called when the user adds or delete a component to a build. The `saveComponent()` method writes the components of the build
+into the text file with the path `COMPONENT_FILE_PATH`. If the text file does not exist, the `saveComponent()` method will create a new text file with the path `COMPONENT_FILE_PATH`.
+
+
+
 ### Components
 
 ![](/images/Component.png)

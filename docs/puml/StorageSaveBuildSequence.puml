@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Participant "Ui" as Ui
+Participant "Parser" as parser
+Participant "Storage" as Storage
+Participant "DuplicateBuildException" as DuplicateBuildException
+Participant "BlankStringException" as BlankStringException
+
+activate Ui
+Ui -> Ui: readline()
+activate Ui
+Ui -> parser: parse()
+activate parser
+parser -> parser : mainParseAdd()
+activate parser
+
+alt the build does not exist
+    parser -> Storage: saveBuild(BuildManager)
+    activate Storage
+    opt file directory does not exist
+        Storage -> Storage: createFileDirectory()
+        activate Storage
+        return
+    end
+    opt file does not exist
+        Storage -> Storage: createFile()
+        activate Storage
+        return
+    end
+    Storage -> Storage: write()
+    activate Storage
+    ref over Storage: write all the existing builds to file
+    return
+    return
+end
+
+return
+return
+
+deactivate Ui
+
+
+
+@enduml

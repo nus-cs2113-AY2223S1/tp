@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Actor User
+Participant "ComputerComponentChooser" as ComputerComponentChooser
+Participant "Storage" as Storage
+Participant "BuildManager" as BuildManager
+Participant "DuplicateBuildException" as DuplicateBuildException
+Participant "FileNotFoundException" as FileNotFoundException
+Participant "CPU" as CPU
+
+activate ComputerComponentChooser
+User -> ComputerComponentChooser: run()
+ComputerComponentChooser -> Storage: loadBuild(BuildManager)
+activate Storage
+
+loop for each saved entry in file
+    alt there is no such existing build
+        Storage -> BuildManager: addBuild(Build)
+        activate BuildManager
+        return
+    else no duplicate build allowed
+        Storage -> DuplicateBuildException
+        activate DuplicateBuildException
+        return print error message
+    else if file is not found
+        Storage -> FileNotFoundException
+        activate FileNotFoundException
+        return print error message
+    end
+end
+return
+
+ComputerComponentChooser -> Storage: loadComponent(BuildManager)
+activate Storage
+loop for each build in BuildManager
+    loop for each saved entry in file
+        alt saved entry in a cpu
+            Storage -> CPU: addCPU(CPU)
+            activate CPU
+            return
+        else saved entry in a gpu
+            Storage -> GPU: addGPU(GPU)
+            activate GPU
+            return
+        else saved entry in a motherboard
+            Storage -> Motherboard: addMotherboard(Motherboard)
+            activate Motherboard
+            return
+        else if file is not found
+                Storage -> FileNotFoundException
+                activate FileNotFoundException
+                return print error message
+    end
+end
+
+return
+
+
+
+
+
+
+
+@enduml
