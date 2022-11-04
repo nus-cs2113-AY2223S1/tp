@@ -234,9 +234,9 @@ public class Messages {
 
     public static final String MESSAGE_CHECK_CLIENT_WRONG_FORMAT = "OOPS!! To check client, please use the "
             + "following format:\n"
-            + "  check -client ic/INDEX\n"
+            + "  check -client i/INDEX\n"
             + "Example:\n"
-            + "  check -client ic/5\n";
+            + "  check -client i/5\n";
     //@@author
 
     public static final String MESSAGE_CHECK_PROPERTY_WRONG_FORMAT = "OOPS!! To check property, please use the "
