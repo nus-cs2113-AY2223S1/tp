@@ -66,7 +66,7 @@ import java.util.List;
 /**
  * Provide functions to parse inputs read from standard input.
  */
-@SuppressWarnings("ReplaceNullCheck")
+@SuppressWarnings({"ReplaceNullCheck", "UnnecessaryLocalVariable"})
 public class ConsoleParser {
     //@@author xzynos
 
@@ -372,9 +372,11 @@ public class ConsoleParser {
             ConsoleCommandAddExpense consoleCommandAddExpense
     ) {
         BigDecimal amount = consoleCommandAddExpense.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandAddExpense.setAmount(amountNormalized);
+            consoleCommandAddExpense.setAmount(amountNormalized);
+        }
 
         LocalDateTime dateTime = consoleCommandAddExpense.getDateTime();
         LocalDateTime dateTimeNormalized;
@@ -2301,9 +2303,11 @@ public class ConsoleParser {
             ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
     ) {
         BigDecimal amount = consoleCommandAddRecurringPayment.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandAddRecurringPayment.setAmount(amountNormalized);
+            consoleCommandAddRecurringPayment.setAmount(amountNormalized);
+        }
 
         String currency = consoleCommandAddRecurringPayment.getCurrency();
         String currencyNormalized;
@@ -2726,9 +2730,11 @@ public class ConsoleParser {
             ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
     ) {
         BigDecimal amount = consoleCommandEditRecurringPayment.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandEditRecurringPayment.setAmount(amountNormalized);
+            consoleCommandEditRecurringPayment.setAmount(amountNormalized);
+        }
 
         return consoleCommandEditRecurringPayment;
     }
