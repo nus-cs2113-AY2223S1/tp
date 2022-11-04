@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=wcwy&breakdown=true)
 
 
-* **New Feature**: Added the budget feature for user to set monthly budget.
+* **Feature Implemented**: Added the budget feature for user to set monthly budget.
     * What it does: allow users to set their monthly budget. 
       Budget reminders, tips and advices are displayed to the users whenever appropriate.
     * Justification: This feature completes the money management component of the application by informing the users 
@@ -21,7 +21,7 @@ Given below are my contributions to the project.
       list and viewing of monthly statistics.
 
 
-* **New Feature**: Added the ability to display help messages to users to aid user's application usage.
+* **Feature Implemented**: Added the ability to display help messages to users to aid user's application usage.
     * What it does: allow users to list the help messages in either basic or detailed version. 
     * Justification: This feature improves the usability of the application especially for the new users 
       as it conveniently shows the usages and explaination of all available commands to the users.
@@ -45,17 +45,28 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-    * Setting up GitHub team repository 
+    * Set up GitHub team repository 
+    * Protected master branch of team repository
     * Managed release `v2.0` on GitHub
-    * Merging of pull requests into main repository
-    * Creation of [forking workflow guide](https://docs.google.com/document/d/1d-yTa5fhnyMyF6ABKGbYfh4Zi_q82gQgbxMp86cPO44/edit?usp=sharing) when project was first started
-    * Creation of test cases for regression testing
+    * Merged team members' pull requests into main repository frequently
+    * Created [forking workflow guide](https://docs.google.com/document/d/1d-yTa5fhnyMyF6ABKGbYfh4Zi_q82gQgbxMp86cPO44/edit?usp=sharing) when project was first started
+    * Tested the program in every milestone, with the following bugs created as an issue
+      [\#130](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/130)
+      [\#133](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/133)
+      [\#239](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/239)
     * Assisted in writing meeting minutes
       [1](https://docs.google.com/document/d/18zvFOPEew3ibDTlziH2LDhJD3XdkgpoRG-NV6DUVzgk/edit?usp=sharing),
       [2](https://docs.google.com/document/d/1BTy0oOmE4DH9Rnh0785crjeH-Cb6xhZu-WzwdBFXYZg/edit?usp=sharing),
       [3](https://docs.google.com/document/d/1YD_K-qJWD71bubg9NmO2Fk8da-m2jHnCxVfmOH-D1-o/edit?usp=sharing),
       [4](https://docs.google.com/document/d/16B4PsU8XksoOgPL4_LH8KSqvOimmlXA7SmXdmdsaLXs/edit?usp=sharing),
       [5](https://docs.google.com/document/d/1AJXFNDYvx4OPPSjxEO8yk8ahnYf_ddSTyPUaruKqVa4/edit?usp=sharing)
+
+
+* **Testing**:
+    * Created test cases for regression testing consistently
+    * Wrote unit and integration testing using JUnit tests:
+      [\#69](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/69),
+      [\#121](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/121),
 
 
 * **Documentation**:
