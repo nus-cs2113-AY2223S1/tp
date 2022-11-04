@@ -292,8 +292,8 @@ public class Parser {
     public boolean isDuplicate(String title, int spacingType) {
         for (int i = 0; i < mediaList.inputs.size(); i++) {
             Media comparisonItem = mediaList.inputs.get(i);
-            if (title.equals(comparisonItem.title) && 
-                comparisonItem.getClass().toString().equals(getMediaTypeString(spacingType))) {
+            if (title.equals(comparisonItem.title) 
+                && comparisonItem.getClass().toString().equals(getMediaTypeString(spacingType))) {
                 return true;
             }
         }
