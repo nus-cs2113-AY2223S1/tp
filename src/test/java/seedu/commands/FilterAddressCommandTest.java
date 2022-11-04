@@ -1,17 +1,16 @@
 package seedu.commands;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import seedu.data.CarparkFilteredList;
+
 import seedu.data.CarparkList;
-import seedu.data.CarparkListTest;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.parser.search.Sentence;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class FilterAddressCommandTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
@@ -23,8 +22,8 @@ public class FilterAddressCommandTest {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Sentence searchQuery = new Sentence("raffles");
         String result = carparkList.filterByAddress(searchQuery).toString();
-        Assertions.assertEquals("CarparkID @|yellow,bold 3|@ at @|bold,cyan Raffles|@ City\n" +
-                "@|faint -->|@ @|yellow 522|@ available lots total\n", result);
+        Assertions.assertEquals("CarparkID @|yellow,bold 3|@ at @|bold,cyan Raffles|@ City\n"
+                + "@|faint -->|@ @|yellow 522|@ available lots total\n", result);
     }
 
     @Test

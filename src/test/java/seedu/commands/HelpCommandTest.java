@@ -2,6 +2,7 @@ package seedu.commands;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
@@ -28,8 +29,7 @@ public class HelpCommandTest {
                 + "`find CARPARK_ID` or `fin CARPARK_ID` \t: Display information about the specific queried carpark.\n"
                 + "`favourite list` or `fav list` \t: to get the list of favourited carparks.\n"
                 + "`favourite CARPARK_ID` or `fav CARPARK_ID` \t: favourite carpark by its ID.\n"
-                + "`unfavourite CARPARK_ID` or `ufav CARPARK_ID` \t: unfavourite carpark by its ID."
-                , result);
+                + "`unfavourite CARPARK_ID` or `ufav CARPARK_ID` \t: unfavourite carpark by its ID.", result);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class HelpCommandTest {
         String input = "help please";
         Command command = new Parser().parseCommand(input, null, null, null);
         String result = command.execute().showToUser;
-        Assertions.assertEquals("There were unrecognized arguments after the `help` command. " +
-                "Please try the `help` command again by itself.", result);
+        Assertions.assertEquals("There were unrecognized arguments after the `help` command. "
+                + "Please try the `help` command again by itself.", result);
     }
 }
