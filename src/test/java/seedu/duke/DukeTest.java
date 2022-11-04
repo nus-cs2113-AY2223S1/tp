@@ -63,7 +63,8 @@ class DukeTest {
                     currArp)
     );
 
-
+    DukeTest() throws FinanceException {
+    }
 
 
     @Test

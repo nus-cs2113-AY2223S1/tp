@@ -106,9 +106,12 @@ public class AccountUi {
 
     public static void listCommands() {
         final String MESSAGE = "Your available commands are : \n"
-                + INDENTATION + "1) help" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
-                + "4) save" + INDENTATION + "5) withdraw" + INDENTATION + "6) delete" + INDENTATION + "7) exit"
-                + INDENTATION + "8) list" + INDENTATION + "9) transfer" + INDENTATION + "10) currencies";
+                + INDENTATION + "1) help" + "\n" + INDENTATION
+                + "2) balance" + "\n" + INDENTATION + "3) details" + "\n" +  INDENTATION
+                + "4) deposit <abbreviation> <amount>" +  "\n" + INDENTATION + "5) withdraw <amount>/ <abbreviation> <amount>"
+                +  "\n" + INDENTATION + "6) delete account" +  "\n" + INDENTATION + "7) exit"
+                +  "\n" + INDENTATION + "8) list" +  "\n" + INDENTATION + "9) transfer <username> <amount> <abbreviaton>"
+                +  "\n" + INDENTATION + "10) currencies" + "\n" + INDENTATION + "10) account history";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 

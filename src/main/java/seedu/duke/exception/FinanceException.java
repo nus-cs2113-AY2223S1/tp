@@ -22,7 +22,8 @@ public class FinanceException extends Throwable {
         NOT_PERSONAL_CURRENCY,
         CURRENCY_ARRAY_FULL,
         SET_DEFAULT_CURRENCY_EXCEPTION,
-        INVALID_USERNAME, EXIT_LOGIN_TERMINAL, ACCOUNT_OVERDRAW
+        INVALID_USERNAME, EXIT_LOGIN_TERMINAL, ACCOUNT_OVERDRAW,
+        SAME_USER_TRANSFER
     }
 
     private final ExceptionCollection exceptionType;
@@ -91,6 +92,9 @@ public class FinanceException extends Throwable {
             break;
         case EXIT_LOGIN_TERMINAL:
             errorMessage = "You have exited the login sequence";
+            break;
+        case SAME_USER_TRANSFER:
+            errorMessage = "You can't transfer money to yourself";
             break;
         default:
             errorMessage = "Unknown exception happens.";

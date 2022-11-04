@@ -12,7 +12,7 @@ public class Authentication {
         boolean isProgramEnd = false;
         try {
             AuthenticationUi.showPromptInfo();
-            String userInput = InputManager.receiveInputLine();
+            String userInput = InputManager.receiveInputLine().replaceAll("\\s", "");
             Commands commandType = getCommandType(userInput);
             switch (commandType) {
             case REGISTER:

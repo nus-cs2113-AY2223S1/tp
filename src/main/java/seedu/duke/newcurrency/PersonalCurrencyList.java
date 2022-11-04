@@ -57,7 +57,7 @@ public class PersonalCurrencyList {
     }
 
     public static String getPersonalCurrencyFileLine(String abbrName, String fullName, String symbol, Double rate) {
-        String newCurrency = "!" + abbrName + "," + fullName + "," + symbol + "," + rate;
+        String newCurrency = abbrName + "," + fullName + "," + symbol + "," + rate;
         return newCurrency;
     }
 }
