@@ -108,7 +108,8 @@ public class AccountUi {
         final String MESSAGE = "Your available commands are : \n"
                 + INDENTATION + "1) help" + INDENTATION + "2) balance" + INDENTATION + "3) detail" + INDENTATION
                 + "4) save" + INDENTATION + "5) withdraw" + INDENTATION + "6) delete" + INDENTATION + "7) exit"
-                + INDENTATION + "8) list" + INDENTATION + "9) transfer" + INDENTATION + "10) currencies";
+                + INDENTATION + "8) list" + INDENTATION + "9) transfer" + INDENTATION + "10) currencies"
+                + INDENTATION + "11) convert <oldCurrency> <oldAmount> <newCurrency>" + INDENTATION + "12) convert all <currency>";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 
