@@ -103,15 +103,39 @@ public class ModuleList {
      * @param semester The semester for which the modules need to be printed
      */
     public void view(String semester) {
-        ArrayList<Module> matchingModules = new ArrayList<>();
-        viewCount = 0;
-        for (Module mod : modules) {
-            if (mod.getSemesterTaken().matches(semester)) {
-                matchingModules.add(mod);
-                viewCount++;  // increments the count for this particular semester (For JUnit Purpose)
+        if (semester.equals("all")) {
+            viewAll();
+        } else {
+            ArrayList<Module> matchingModules = new ArrayList<>();
+            viewCount = 0;
+            for (Module mod : modules) {
+                if (mod.getSemesterTaken().matches(semester)) {
+                    matchingModules.add(mod);
+                    viewCount++;  // increments the count for this particular semester (For JUnit Purpose)
+                }
+            }
+            printResponse(semester, matchingModules);
+        }
+    }
+
+    /**
+     * Function to find lists of all modules taken in every semester.
+     */
+    public void viewAll() {
+        for (int i = 1; i <= 6; i++) {
+            for (int j = 1; j <= 2; j++) {
+                ArrayList<Module> matchingModules = new ArrayList<>();
+                String sem = "Y" + i + "S" + j;
+                for (Module mod : modules) {
+                    if (mod.getSemesterTaken().matches(sem)) {
+                        matchingModules.add(mod);
+                    }
+                }
+                if (!matchingModules.isEmpty()) {
+                    printResponse(sem, matchingModules);
+                }
             }
         }
-        printResponse(semester, matchingModules);
     }
 
     /**
