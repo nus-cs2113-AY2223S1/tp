@@ -139,7 +139,8 @@ public class Parser {
                 errorIfReasonEmpty(reason);
                 visitList.editReason(ui, Integer.parseInt(matcherEdit.group(1)), reason);
                 storage.saveVisitData(visitList);
-            } else if (inputLower.startsWith(DELETE_REASON_COMMAND.toLowerCase())) {
+            } else if (inputLower.startsWith(DELETE_REASON_COMMAND.toLowerCase())
+                    || inputLower.startsWith("delete")) {
                 errorIfNoMatchVisit(matcherEdit, DELETE_REASON_COMMAND);
                 visitList.deleteReason(ui, Integer.parseInt(matcherDelete.group(1)));
             } else if (inputLower.startsWith(VIEW_PATIENT_COMMAND.toLowerCase())) {
@@ -200,7 +201,8 @@ public class Parser {
                 errorIfNoMatchPrescription(matcherEdit, EDIT_COMMAND);
                 parseEditPrescription(Integer.parseInt(matcherEdit.group(1)),
                         matcherEdit.group(2), matcherEdit.group(3));
-            } else if (inputLower.startsWith(VIEW_PATIENT_PRES_COMMAND.toLowerCase())) {
+            } else if (inputLower.startsWith(VIEW_PATIENT_PRES_COMMAND.toLowerCase())
+                    || inputLower.startsWith(VIEW_PATIENT_COMMAND.toLowerCase())) {
                 errorIfNoMatchPrescription(matcherViewPatient, VIEW_PATIENT_PRES_COMMAND);
                 String patientId = matcherViewPatient.group(1);
                 errorIfPatientExists(patientId);
@@ -237,31 +239,21 @@ public class Parser {
             switch (message) {
             case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_ADD
-                        + "\nn - The name should be one or two words"
-                        + "\ng - The gender should be one letter, M or F"
-                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+                        + UI.PATIENT_ADD);
             case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_EDIT
-                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
-                        + "\nn - The name should be one or two words"
-                        + "\ng - The gender should be one letter, M or F"
-                        + "\nd - The date of birth should be formatted as DD-MM-YYYY");
+                        + "\n\tn - The name should be one or two space-separated words"
+                        + "\n\tg - The gender should be one letter, M or F"
+                        + "\n\td - The date of birth should be formatted as DD-MM-YYYY");
             case RETRIEVE_PATIENT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_RETRIEVE
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
-                        + "\nn - The name should be one or two words"
-                        + "\ng - The gender should be one letter, M or F"
-                        + "\nd - The date of birth should be formatted as DD-MM-YYYY"
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces"
                         + UI.PATIENT_EDIT
-                        + "\nn/g/d - Please edit only one aspect of a patient at a time"
                         + UI.PATIENT_RETRIEVE
                         + UI.PATIENT_VIEW_ALL
                         + UI.RETURN_TO_MAIN
@@ -275,36 +267,26 @@ public class Parser {
             switch (message) {
             case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_ADD
-                        + "\nd - The date should be formatted as DD-MM-YYYY"
-                        + "\nt - The time should be formatted as HH:MM"
-                        + "\nr - The reason is optional, and can be any number of words");
+                        + UI.VISIT_ADD);
             case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_EDIT
-                        + "\nx - The index should be a displayed number next to the visit"
-                        + "\nr - The reason can be added or edited with any number of words");
+                        + UI.VISIT_EDIT);
             case DELETE_REASON_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_DELETE_REASON
-                        + "\nx - The index should be a displayed number next to the visit");
+                        + "\n\tx - The index should be a displayed number next to the visit");
             case VIEW_PATIENT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_VIEW_PATIENT
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
             case VIEW_VISIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_VIEW
-                        + "\nx - The index should be a displayed number next to the visit");
+                        + "\n\tx - The index should be a displayed number next to the visit");
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
-                        + "\nd - The date should be formatted as DD-MM-YYYY"
-                        + "\nt - The time should be formatted as HH:MM"
-                        + "\nr - The reason is optional, and can be any number of words"
                         + UI.VISIT_EDIT
-                        + "\nx - The index should be a displayed number next to the visit"
-                        + "\nr - The reason can be added or edited with any number of words"
                         + UI.VISIT_DELETE_REASON
                         + UI.VISIT_VIEW_ALL
                         + UI.VISIT_VIEW_PATIENT
@@ -320,47 +302,39 @@ public class Parser {
             switch (message) {
             case ADD_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name can be multiple words, including -"
-                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
+                        + UI.PRESCRIPTION_ADD);
             case EDIT_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_EDIT
-                        + "\nx - The index should be a displayed number next to the prescription"
-                        + "\nn/d/t - Please edit only one aspect of a prescription at a time"
-                        + "\nn - The prescription name can be multiple words, including -"
-                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words");
+                        + "\n\tx - The index should be a displayed number next to the prescription"
+                        + "\n\tn - The prescription name can be multiple words, including -"
+                        + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
+                        + "\n\tt - The time instruction should be instructions on how to take, with any number of words");
             case VIEW_PATIENT_PRES_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_VIEW_PATIENT
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
             case VIEW_ACT_PATIENT_PRES_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_VIEW_ACTIVE
-                        + "\ni - The id can be a sequence of numbers or letters without any spaces");
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
             case ACTIVATE_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
-                        + "\nx - The index should be a displayed number next to the prescription");
+                        + "\n\tx - The index should be a displayed number next to the prescription");
             case DEACTIVATE_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\nx - The index should be a displayed number next to the prescription");
+                        + "\n\tx - The index should be a displayed number next to the prescription");
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
-                        + "\nn - The prescription name can be multiple words, including -"
-                        + "\nd - The dosage can be a number followed by an amount, i.e. 10 mg"
-                        + "\nt - The time instruction should be instructions on how to take, with any number of words"
                         + UI.PRESCRIPTION_EDIT
                         + UI.PRESCRIPTION_VIEW_ALL
                         + UI.PRESCRIPTION_VIEW_PATIENT
                         + UI.PRESCRIPTION_VIEW_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_ACTIVE
                         + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\nx - The index should be displayed number next to the prescription"
                         + UI.RETURN_TO_MAIN
                         + UI.EXIT_PROGRAM);
             }
@@ -369,7 +343,8 @@ public class Parser {
 
     private void checkViewAllCommand(String inputLower, String type) {
         if (inputLower.length() > VIEW_ALL_COMMAND.length()) {
-            System.out.println("A viewall command will print all " + type + "s, and anything after it will be disregarded.");
+            System.out.println("A viewall command will print all "
+                    + type + "s, and anything after it will be disregarded.");
         }
     }
 
@@ -381,9 +356,11 @@ public class Parser {
 
     private void errorIfReasonEmpty(String reason) throws OneDocException {
         if (reason.isEmpty()) {
-            throw new OneDocException("Please don't use edit to put in an empty reason! Use deleteReason");
+            throw new OneDocException("Please don't use edit to put in an empty reason! "
+                    + "Use deleteReason");
         }
     }
+
     private void parseAddVisit(Matcher matcher, String patientId) {
         String reason = matcher.group(4);
         if (reason == null || reason.isEmpty()) {
@@ -412,14 +389,16 @@ public class Parser {
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$", Pattern.CASE_INSENSITIVE);
+                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
+                Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
 
     private void parseEditPatient(String id, String type, String input) throws OneDocException {
         switch (type) {
         case "n":
-            Pattern matchName = Pattern.compile("^" + PATIENT_NAME_REGEX + "$", Pattern.CASE_INSENSITIVE);
+            Pattern matchName = Pattern.compile("^" + PATIENT_NAME_REGEX + "$",
+                    Pattern.CASE_INSENSITIVE);
             if (matchName.matcher(input).find()) {
                 patientList.modifyPatientDetails(ui, id, input, "", "");
                 storage.savePatientData(patientList);
@@ -454,8 +433,8 @@ public class Parser {
 
     private static Matcher addVisitMatcher(String input) {
         Pattern addVisitPattern = Pattern.compile(
-                "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "d/" + DATE_REGEX + "t/" + TIME_REGEX +
-                        OPTIONAL_REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "d/" + DATE_REGEX + "t/" + TIME_REGEX
+                        + OPTIONAL_REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return addVisitPattern.matcher(input);
     }
 
@@ -568,10 +547,10 @@ public class Parser {
         default:
             throw new OneDocException("Type is incorrectly formatted!"
                     + "Please use n/ for name, d/ for dosage, and t/ for time instruction");  
-       }
+        }
     }
     
-  public static boolean isPatientInputValid(String[] inputs) {
+    public static boolean isPatientInputValid(String[] inputs) {
         if (inputs == null) {
             return false;
         }
@@ -612,6 +591,7 @@ public class Parser {
         }
         return patientList.containsPatientID(inputs[0]);
     }
+
     private static final String MAIN_PATIENT_COMMAND = "1";
     private static final String MAIN_VISIT_COMMAND = "2";
     private static final String MAIN_PRESCRIPTION_COMMAND = "3";
