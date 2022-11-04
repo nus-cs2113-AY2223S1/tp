@@ -262,6 +262,7 @@ edit e/1 t/expense c/food
 ____________________________________________________________
 I have edited the following Expense transaction:
 [-][food] $20 at Jan 30 2022 | Description: banana_pudding
+Remaining budget for Jan 2022: $980. Keep it up!
 ____________________________________________________________
 ```
 
@@ -269,10 +270,15 @@ _Written by: Brian Wong Yun Long_
 
 ### 4.3. Listing the Transactions
 
-List all or some transactions based on selection. 
+List all or some transactions based on selection by the ascending order of transaction date. 
 If tag filters are used, the transactions retrieved from the records must match all the filter tags that have been specified in order to be recognized as a valid record.
 
-**Format:** `list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]`
+**Formats:** 
+```
+list [t/TYPE] [c/CATEGORY] [d/DATE]
+list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
+list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
+```
 
 | Parameter  | Description                                                                                                                                                                                      |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -306,8 +312,8 @@ Listing All Transactions in November 2022
 list y/2022 m/11
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $80 on Nov 13 2022 | Description: toilet_cake 
-[+][education] $20 on Nov 30 2022 | Description: sold_my_pe_bugs
+1: [-][food] $80 on Nov 13 2022 | Description: toilet_cake 
+2: [+][education] $20 on Nov 30 2022 | Description: sold_my_pe_bugs
 ____________________________________________________________
 ```
 
@@ -319,9 +325,9 @@ Listing All Transactions in the Last 4 Weeks
 list n/4 p/weeks
 ____________________________________________________________
 Here are your transaction records:
-[-][beauty] $40 on Oct 11 2022 | Description: bought_a_facial_wash
-[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
-[-][food] $120 on Oct 25 2022 | Description: enjoyed_my_steamboat
+1: [-][beauty] $40 on Oct 11 2022 | Description: bought_a_facial_wash
+2: [+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+3: [-][food] $120 on Oct 25 2022 | Description: enjoyed_my_steamboat
 ____________________________________________________________
 ```
 
@@ -333,7 +339,7 @@ Listing All Transactions in the Last 1 Month with a Date as 20 October 2022
 list d/20102022 n/1 p/months
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+1: [+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
 ____________________________________________________________
 ```
 
@@ -345,8 +351,8 @@ Listing All Transactions in the Last 7 Days (or Past 1 Week) for Expenses on Lei
 list t/expense c/leisure n/7 p/days
 ____________________________________________________________
 Here are your transaction records:
-[-][leisure] $40 on Nov 2 2022 | Description: went_for_salon_treatment
-[-][leisure] $120 on Nov 3 2022 | Description: spa_at_sentosa
+1: [-][leisure] $40 on Nov 2 2022 | Description: went_for_salon_treatment
+2: [-][leisure] $120 on Nov 3 2022 | Description: spa_at_sentosa
 ____________________________________________________________
 ```
 
@@ -364,15 +370,15 @@ Find a specific or multiple transactions based on any keyword that have been spe
 
 **Example:**
 
-- `find worked_at`
+- `find k/worked_at`
 
 **Expected Output:**
 
 ```
-find worked_at
+find k/worked_at
 ____________________________________________________________
 Here are the transaction records that match your search expression:
-[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+1: [+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
 ____________________________________________________________
 ```
 
@@ -400,6 +406,7 @@ delete e/1
 ____________________________________________________________
 I have deleted the following transaction:
 [+][food] $20 at Jan 30 2022 | Description: banana_pudding
+Remaining budget for Jan 2022: $1000. Keep it up!
 ____________________________________________________________
 ```
 
@@ -486,7 +493,11 @@ ____________________________________________________________
 
 View monthly expenditure, total income, expense and savings values of all transactions in the specified time period.
 
-**Format:** `stats s/time_insights y/YEAR [m/MONTH] [p/PERIOD] [n/NUMBER]`
+**Formats:** 
+```
+stats s/time_insights y/YEAR [m/MONTH]
+stats s/time_insights p/PERIOD n/NUMBER
+```
 
 | Field      | Description                                                                                                                                                                                      |
 |------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -576,6 +587,8 @@ budget b/52013149999
 ____________________________________________________________
 You have successfully updated the budget.
 Monthly budget set as: $52013149999
+Remaining budget for current month: $52013140000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
 ____________________________________________________________
 ```
 
@@ -619,7 +632,7 @@ _Written by: Brian Wong Yun Long_
 | Action                                                              | Command Syntax                                                           | Examples                                                                                                                 |
 |---------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | Viewing Help                                                        | `help`                                                                   | `help`                                                                                                                   |
-| Viewing Help (Detailed)                                             | `help o/detailed [q/QUERY]`                                              | `help o/detailed`                                                                                                        |
+| Viewing Help (Detailed)                                             | `help o/detailed [q/QUERY]`                                              | `help o/detailed` <br/> `help o/detailed q/budget`                                                                       |
 | Adding a Transaction                                                | `add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION`                    | `add t/expense c/transport a/1 d/02102022 i/bus_fare` <br> `add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss` |
 | Editing a Transaction                                               | `edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]` | `edit e/1 t/expense c/food <br/> edit e/2 a/10 d/10202022 i/games`                                                       |
 | Listing the Transactions                                            | `list  [t/TYPE] [c/CATEGORY] [d/DATE]`                                   | `list` <br/> `list c/food d/13092022`                                                                                    |
@@ -639,7 +652,6 @@ _Written by: Brian Wong Yun Long_
 
 | Parameter     | Description                                                                                  | Restrictions                                                                                                                                     |
 |---------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| `detailed`    | A detailed version of the guide.                                                             | -                                                                                                                                                |
 | `COMMAND`     | A case-insensitive command word to search for.                                               | `help`, `add`, `edit`, `list`, `find`, `delete`, `purge`, `stats` or `budget`.                                                                   |
 | `TYPE`        | The type of transaction.                                                                     | `expense` or `income`.                                                                                                                           |
 | `CATEGORY`    | A category for the transaction.                                                              | Any word without numeral, symbol or spacing.                                                                                                     |

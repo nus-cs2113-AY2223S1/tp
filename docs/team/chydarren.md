@@ -4,7 +4,7 @@
 
 Moolah Manager is a financial bookkeeping application used for management of the monetary transactions.
 The user is encouraged to take ownership of managing their finances via a time-saving and efficient command-line interface.
-It is written in Java, and has about 8 kLoC.
+It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 

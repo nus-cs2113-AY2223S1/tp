@@ -55,6 +55,9 @@ class Budget{
     + setBudget(long) {static}
 }
 
+class Duke{
+}
+
 together {
   class Command
   class Income
@@ -69,15 +72,18 @@ together {
 }
 
 
-Income -up-|> "Transaction"
-Expense -up-|> "Transaction"
+Income --|> "Transaction"
+Expense --|> "Transaction"
 
-TransactionList "1" *-right> "*" "Transaction" : contains
-Storage -[dashed]down-> "Budget" : initialize >
-Storage -[dashed]up-> "TransactionList" : initialize >
-Command -[dashed]down-> "Budget" : set >
-Command -[dashed]up-> "TransactionList" : add, edit, delete, purge, find, list, stats >
+TransactionList "1" *-down> "*" "Transaction" : contains
+Storage -[dashed]up-> "Budget" : initialize >
+Storage -[dashed]down-> "TransactionList" : initialize >
+Command -[dashed]up-> "Budget" : set >
+Command -[dashed]right-> "TransactionList" : add, edit, delete, purge, find, list, stats >
 
+Duke -down-> "1" "TransactionList"
+Duke  -> "1" "Storage"
+Duke -[dashed]left-> "Command" : executes >
 
 
 @enduml

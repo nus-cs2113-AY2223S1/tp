@@ -41,7 +41,7 @@ activate duke
 
     destroy storedList
     note over storedList
-        Due to UML tool limitation, the lifeline is not shown ended after the red cross
+        Due to UML tool limitation, the lifeline is not shown ended after the cross
     end note
 
     alt Successful initialization
