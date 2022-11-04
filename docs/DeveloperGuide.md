@@ -66,6 +66,7 @@ display function in Ui
 * The Ui function then displays the necessary information.
 * Finally, it states the number of items present, and the Command object is no longer used.
 ![ListClassDiagram](diagrams/ListClassDiagramIncludePairs.png)
+Note: The C symbols are a result of the PlantUml layout.
 
 ---  
 
@@ -419,7 +420,7 @@ has been added or not.
     }
   ```
 This block of code is part of ParseManager. It determines the type of list operation(-client, 
--property or -everything) and returns the corresponding object.  
+-property, -pair, or -everything) and returns the corresponding object.  
 Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
 throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
 
@@ -513,6 +514,125 @@ java -jar PropertyRentalManager.jar
 ### Delete
 
 ### List
+1. List clients with or without tags
+   1. Test case `list -client`  
+      Expected: All clients all listed with all their details. The format of details of each client is given below -  
+      ```
+      1. Client Name: Doja Cat
+         Client Contact Number: 93437878
+         Client Email: doja88@example.com
+         Client Budget: 2000
+      ```
+      It also lists the number of clients present at the time, after listing them all. The format for that is as follows - 
+      ```There are 2 clients in this list```
+   2. Test case: list -client TAG. We will use `list -client n/` to demonstrate  
+    Expected: Lists only the names of the clients. The format for each client is as follows -  
+      ```1.Doja Cat```  
+    It also lists the number of clients present in the list at the end
+   3. Test case: `list -client -short`  
+    Expected: Lists only the name and budget of all the clients present. The format is as follows -  
+    ```
+    1. Client Name: Doja Cat
+       Client Budget: 2000
+    ```
+    It also lists the number of clients present in the list in the end.  
+    All of these display the following when no clients are present in the list -  
+    ```There are 0 clients in this list```
+2. List properties with or without tags
+    1. Test case: `list -property`  
+       Expected: Lists all the properties with all their details  
+       The format for each property listed is as follows -  
+       ```
+       1. Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       ```
+       This also lists the number of properties present in the list at the end. The format for 
+       that is as follows -  
+       ```There is 1 property in this list```  
+   2. Test case: list -property TAG - `We will use list -property a/` to demonstrate  
+      Expected: Lists the address of every property present in the list. The format is - 
+        `1.	25 Lower Kent Ridge Rd, S119081`
+    It also lists the total number of properties present in the list
+   3. Test case: `list -property -short`  
+    Expected: Lists the address, unit type, and Rental Price of each property in the list. The format
+    is as follows - 
+      ```
+      1. Property Address: 25 Lower Kent Ridge Rd, S119081
+         Unit Type: LP Bungalow
+         Property Rental Price: 1000
+      ```
+      All of these display the following when no properties are present in the list -  
+    `There are 0 properties in this list`
+3. List pairs
+    1. Test case `list -pair`  
+     Expected: Lists all the pairs present in the list, in no particular order. It shows all the information
+     about the clients and properties present in each pair.
+       ```
+       Client:
+           Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       Property:
+           Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       ```
+       It also lists the number of pairs present in the list. The format is as follows -  
+       ```There is 1 pair in this list```
+   2. Test case `list -pair -short`
+    Expected: Lists the short details of both clients and properties described earlier, for every 
+    pair in the list. The format is as follows -  
+       ```
+       Client:
+          Client Name: Doja Cat
+          Client Budget: 2000
+       Property:
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Unit Type: LP Bungalow
+          Property Rental Price: 1000
+       ```
+      It also lists the total number of pairs present in the list.
+4. List everything
+    1. Test case `list -everything`  
+    Expected behaviour: Lists all information including and all details present in the list about clients, properties, and pairs.  
+    In this case, a single client and property are present in the list, and they are paired. This is the expected output -  
+       ```
+       Clients:
+       1.  Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       --------------------------------------------------------------------------------
+       There is 1 client in this list
+
+       --------------------------------------------------------------------------------
+       Properties:
+       1.  Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 property in this list
+
+       --------------------------------------------------------------------------------
+       Pairs:
+       Client:
+          Client Name: Doja Cat
+          Client Contact Number: 93437878
+          Client Email: doja88@example.com
+          Client Budget: 2000
+       Property:
+          Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 pair in this list
+       ```
 
 ### Pair
 1. Successful Pairing
