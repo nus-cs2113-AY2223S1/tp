@@ -27,6 +27,7 @@ public class OneDoc {
     public static void subMenuRun() {
         SubMenuState subMenuState = SubMenuState.IN_SUB_MENU;
 
+        ui.printSubMenuStart(mainMenuState);
         ui.printSubMenu(mainMenuState);
         while (true) {
             String input = ui.readLine();
@@ -49,6 +50,8 @@ public class OneDoc {
             } else if (subMenuState == SubMenuState.EXIT) {
                 mainMenuState = MainMenuState.EXIT;
                 break;
+            } else if (subMenuState == SubMenuState.HELP) {
+                ui.printSubMenu(mainMenuState);
             }
         }
     }
