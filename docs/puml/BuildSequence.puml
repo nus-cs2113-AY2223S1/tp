@@ -3,18 +3,18 @@
 
 autonumber
 
-activate Build
-Build -> LinkedHashMap2D: Initialize
+activate ":Build"
+":Build" -> ":LinkedHashMap2D": Initialize
 
-activate LinkedHashMap2D
+activate ":LinkedHashMap2D"
 
-Build -> LinkedHashMap2D: addComponent(type, component)
+":Build" -> ":LinkedHashMap2D": addComponent(type, component)
 
-LinkedHashMap2D -> LinkedHashMap2D: addElement(type, component.getName(), component)
+":LinkedHashMap2D" -> ":LinkedHashMap2D": addElement(type, component.getName(), component)
 
-Build -> LinkedHashMap2D: deleteComponent(type, component)
+":Build" -> ":LinkedHashMap2D": deleteComponent(type, component)
 
-LinkedHashMap2D -> LinkedHashMap2D: removeElement(type, component.getName())
+":LinkedHashMap2D" -> ":LinkedHashMap2D": removeElement(type, component.getName())
 
 
 @enduml
