@@ -45,6 +45,8 @@ public class Parser {
     static final int POS_DATE = 3;
     static final int POS_GENRE = 4;
     static final int POS_SITE = 5;
+    static final String MOVIE_TYPE = "class seedu.duke.Movie";
+    static final String TV_TYPE = "class seedu.duke.TvShow";
     private Commands executor;
     private ReviewList mediaList;
 
@@ -245,6 +247,17 @@ public class Parser {
             return;
         }
 
+        //@@author indraneelrp
+        try {
+            if (isDuplicate(title, spacingType)) {
+                throw new UnsupportedOperationException("List already contains item.");
+            }
+        } catch (UnsupportedOperationException e) {
+            Ui.print(e.getMessage());
+            return;
+        }
+
+        //@@author naz019
         try {
             if (!isValidDate(dateFields)) {
                 throw new InvalidDateException();
@@ -254,6 +267,7 @@ public class Parser {
                 throw new FutureDateException();
             }
 
+            //@@author redders7
             if (spacingType == SPACING_MOVIE) {
                 toAdd = new Movie(title, rating, genre, date);
             } else {
@@ -274,6 +288,30 @@ public class Parser {
         }
     }
 
+    //@@author indraneelrp
+    public boolean isDuplicate(String title, int spacingType) {
+        for (int i = 0; i < mediaList.inputs.size(); i++) {
+            Media comparisonItem = mediaList.inputs.get(i);
+            if (title.equals(comparisonItem.title) && 
+                comparisonItem.getClass().toString().equals(getMediaTypeString(spacingType))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getMediaTypeString(int spacingType) {
+        if (spacingType == SPACING_MOVIE) {
+            return MOVIE_TYPE;
+        } else if (spacingType == SPACING_TV) {
+            return TV_TYPE;
+        } else {
+            return "";
+        }
+    }
+
+
+    //@@author naz019
     public boolean isFutureDate(String dateWatchedString) {
         Date date = null;
         try {
