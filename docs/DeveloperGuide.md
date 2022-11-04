@@ -17,6 +17,9 @@
   - [3.1 Favourite / Unfavourite Feature](#31-favourite--unfavourite-feature)
     - [3.1.1 Design Considerations](#311-design-considerations)
   - [3.2 Common Files](#32-common-files)
+  - [3.3 Update Data from LTA API Feature](#33-update-data-from-lta-api-feature)
+    - [3.3.1 Design Consideration](#331-design-considerations)
+    - [3.3.2 Limitations of the LTA API](#332-limitations-of-the-lta-api)
 - [4 Project Scope](#4-product-scope)
   - [4.1 Target user profile](#41-target-user-profile)
   - [4.2 Value Proposition](#42-value-proposition)
@@ -218,7 +221,7 @@ The following sequence diagrams shows how a favourite / unfavourite command work
 
 ![Favourite Sequence Diagram](images/FavouriteSequenceDiagram.png)
 
-#### 3.1.1 Design considerations
+#### 3.1.1 Design Considerations
 
 **Aspect: Format of input after `favourite` or `unfavourite` command**
 - **Alternative 1 (current choice):** Carpark ID
@@ -230,7 +233,7 @@ The following sequence diagrams shows how a favourite / unfavourite command work
 
 ### 3.2 Common Files
 
-### 3.3 Update data from API feature
+### 3.3 Update Data from LTA API Feature
 
 Before going deep into how the data is fetched from the LTA API, we will run through how the API component of data fetching works.
 
@@ -261,6 +264,54 @@ The following sequence diagram shows how data is fetched using the `update` comm
 These are the reference sequence diagram to complement the above diagram.
 ![Execute Http Requests](images/asyncExecuteRequestApiSequenceDiagram.png)
 ![Fetch Data](images/fetchDataApiSequenceDiagram.png)
+
+### 3.3.1 Design Considerations
+
+**Asynchronous request**
+
+We chose Land Transport Authority's API service to provide us with the carpark availability due to
+it having access to multiple agency's database. Thus by using only one API we can get more carpark
+lots. Government API services usually utilise pagination (in this case the `skip` parameter), such that
+each query only gives you a maximum of 500 data. As a result, multiple calls are needed to capture
+the complete database that the API service can offer.
+
+Thus, we utilise asynchronous calls to make all the HTTP request first, and then fetch the response
+one by one. This means that the responses coming into our program are not bottlenecked and will be
+faster than if we were to use synchronous request.
+
+After receiving all the data from the responses, we need to concatenate them into one file 
+such that the parser only needs to read from one file. This is done so as to minimise the possibility
+of read failure or exception being thrown.
+
+**Synchronous request capability**
+
+Although we focus more on the asynchronous part, the program right now also supports synchronous calls
+for future development such as updating a specific value instead of the whole data. By calling the 
+`asyncExecuteRequest` and `fetchData` function we can simulate synchronous HTTP request.
+
+### 3.3.2 Limitations of the LTA API
+
+**Inconsistent dataset received**
+
+During the course of our development, we found out that sometimes the responses we receive are not the
+full set of 500 data per call. This led to some confusion at first but the behaviour seems random
+and definitely not caused by our program. Thus, we have to do multiple checks such as checking whether 
+any data is being send over (even if response is 200 OK) and tabulate the number of carpark that exists
+in the response.
+
+**Dataset does not adhere to the documentation**
+
+Coming to the end of our development where we are placing more emphasis on unit testing, we found out
+that LTA may give us invalid data. For example, in the documentation, only 3 types 
+of carpark lot type exists: C (Car), H (Heavy Vehicles) and Y (Motorcycle). However, upon further inspection
+we found out that there is a fourth type, M.
+
+Another problem we found out is that LTA does not do its own data validation. Thus we found some 
+carparks having negative number of available lots. This is a big problem as from the user's perspective
+it can be that our program is at fault. 
+
+Due to such bug discoveries, we made our carparkList parser much more robust and does our own data
+validation to ensure no such stray data are presented to the user.
 
 ## 4 Product scope
 ### 4.1 Target user profile
