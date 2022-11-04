@@ -114,16 +114,9 @@ public class Check extends Command {
      * @return true if fulfilled, false otherwise
      */
     public boolean checkSEPCAP() {
-        double totalCAP = 0;
-        int currentSemester = findCurrentSemester();
-        for (Module mod: modules) {
-            int semesterTaken = convertSem(mod.getSemesterTaken());
-            if (currentSemester > semesterTaken) {
-                double CAP = convertCAP(mod.getGrade());
-                totalCAP += CAP;
-            }
-        }
-        return totalCAP >= CAP_MINIMUM_SEP;
+        ModuleList ml = new ModuleList(modules);
+        double CAP = ml.calculateCap();
+        return CAP >= CAP_MINIMUM_SEP;
     }
 
     /**
@@ -160,36 +153,6 @@ public class Check extends Command {
             return 8;
         default:
             return 0;
-        }
-    }
-
-    /**
-     * Function to convert a letter grade into CAP
-     * @param grade The letter grade of a module. Format: String
-     * @return The equivalent CAP of the module.
-     */
-    private static double convertCAP(String grade) {
-        switch (grade) {
-        case "F":
-            return 0.0;
-        case "D":
-            return 1.0;
-        case "D+":
-            return 1.5;
-        case "C":
-            return 2.0;
-        case "C+":
-            return 2.5;
-        case "B-":
-            return 3.0;
-        case "B":
-            return 3.5;
-        case "B+":
-            return 4.0;
-        case "A-":
-            return 4.5;
-        default:
-            return 5.0;
         }
     }
 }
