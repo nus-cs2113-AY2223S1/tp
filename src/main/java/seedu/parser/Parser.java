@@ -34,7 +34,7 @@ public class Parser {
     private static final String INVALID_NUMBER_OF_ARGS_HEADER = "This command only takes exactly %s argument(s). Valid "
         + "command(s): \n";
     private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)."
-            + " Valid command(s):";
+            + " Valid command(s):\n";
     private static final String INVALID_DASHED_ARGUMENT = "The dashed argument `-%s` is not recognised. Valid "
             + "format:\n";
 
@@ -216,41 +216,48 @@ public class Parser {
     private Command prepareFilter(Arguments argsList, String arguments) {
         String dashedCommand;
         Sentence actualArgument = argsList.getArguments();
+
+        //If there exists a dashed argument
         if (argsList.getDashedArgsCount() == 1) {
             dashedCommand = argsList.getDashedArgs().get(0);
-            if (dashedCommand.equalsIgnoreCase("id")) {
+            switch (dashedCommand.toLowerCase()) {
+            case "id":
                 if (actualArgument.getWordCount() == 0) {
-                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_ID_FORMAT);
                 }
                 return prepareFilterCarparkId(actualArgument);
-            }
-            else if (dashedCommand.equalsIgnoreCase("add")
-                    || dashedCommand.equalsIgnoreCase("address")) {
+            case "add":
+                //Fallthrough
+            case "address":
                 if (actualArgument.getWordCount() == 0) {
-                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+                    return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_ADDRESS_FORMAT);
                 }
                 return prepareFilterAddress(actualArgument);
-            }
-        } else if (argsList.getDashedArgsCount() > 1) {
+            default:
+                return new InvalidCommand(String.format("Invalid dashed argument.\n", 1)
+                        + CommonData.FILTER_ADDRESS_FORMAT + "\n" + CommonData.FILTER_ID_FORMAT);            }
+        }
+
+        //if there exists more than one dashed argument
+        if (argsList.getDashedArgsCount() > 1) {
             return new InvalidCommand(String.format(TOO_MANY_DASHED_ARGS_HEADER, 1)
-                    + CommonData.FILTER_FORMAT);
-        } else {
-            if (actualArgument.getWordCount() == 0) {
-                return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
-            }
-            return prepareFilterAddress(actualArgument);
+                    + CommonData.FILTER_FORMAT + "\n" + CommonData.FILTER_ADDRESS_FORMAT + "\n"
+                    + CommonData.FILTER_ID_FORMAT);
         }
-        if (arguments.isEmpty()) {
+
+        //If there is no argument
+        if (arguments.isBlank()) {
             return new InvalidCommand(EMPTY_RESPONSE_HEADER + CommonData.FILTER_FORMAT);
+        } else {
+            Sentence searchQuery = new Sentence(arguments);
+            return new FilterCommand(carparkList, searchQuery);
         }
-        Sentence searchQuery = new Sentence(arguments);
-        return new FilterCommand(carparkList, searchQuery);
     }
 
     /**
      * To prepare the arguments to be taken in for Search Command.
      *
-     * @param arguments arguments given by the user after the command word
+     * @param searchQuery arguments given by the user after the command word
      * @return command to be carried out
      */
     private Command prepareFilterAddress(Sentence searchQuery) {
@@ -260,7 +267,7 @@ public class Parser {
     /**
      * To prepare the arguments to be taken in for Search Command.
      *
-     * @param arguments arguments given by the user after the command word
+     * @param searchQuery arguments given by the user after the command word
      * @return command to be carried out
      */
     private Command prepareFilterCarparkId(Sentence searchQuery) {
