@@ -18,7 +18,7 @@ public class Add extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -31,19 +31,59 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException {
+    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
-        checkYear(semester);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
-        checkMcString(mcString);
-        int mc = Integer.parseInt(mcString);
-        checkMc(mc);
+        int mcInt = Integer.parseInt(mcString);
         String grade = extractingContent(input, indexes[6], indexes[7]);
-        checkGrade(grade);
 
-        this.mod = new Module(course, semester, grade, mc);
+        checkOverallExceptionForAdd(course, semester, mcString, mcInt, grade);
+
+        this.mod = new Module(course, semester, grade, mcInt);
+
+    }
+
+    private void checkOverallExceptionForAdd(String course, String semester,
+                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
+        String errorMessage = "";
+
+        try{
+            checkCourse(course);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        try{
+            checkYear(semester);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        try{
+            checkMcString(mcString);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        try{
+            checkMc(mcInt);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        try{
+            checkGrade(grade);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        if(!errorMessage.equals("")){
+            System.out.println("Unable to ADD module due to these issues:");
+            System.out.println(errorMessage);
+            throw new InvalidOverallInputException();
+        }
     }
 
     /**
@@ -106,6 +146,22 @@ public class Add extends Command {
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
+        }
+    }
+
+    /**
+     * Function to check if course input entered by user is correct format
+     * Course input must be below 10 characters and have both letters and numbers
+     * @param course input entered by user. Format: String
+     * @throws InvalidCourseException exception thrown when course input is invalid
+     */
+    public void checkCourse(String course) throws InvalidCourseException {
+        if (course.length() > 10) {
+            throw new InvalidCourseException();
+        } else if (course.matches("[a-zA-Z]+")) {
+            throw new InvalidCourseException();
+        } else if (course.matches("[0-9]+")) {
+            throw new InvalidCourseException();
         }
     }
 

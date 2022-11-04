@@ -21,20 +21,13 @@ public class Parser {
         }
 
         Command c = null;
+        String message = "";
         try {
             c = specificCase(splitText[0], content);
-        } catch (InvalidCommandWordException e) {
-            UI.invalidCommandWordMessage();
-        } catch (InvalidInputFormatException e) {
-            UI.invalidFormatMessage();
-        } catch (InvalidInputContentException e) {
-            UI.invalidContentMessage();
-        } catch (InvalidMcException e) {
-            UI.invalidMcMessage();
-        } catch (InvalidGradeException e) {
-            UI.invalidGradeMessage();
-        } catch (InvalidSemesterException e) {
-            UI.invalidYearMessage();
+        } catch (Exception e){
+            message += e.getMessage();
+        } finally {
+            System.out.println(message);
         }
 
         return c;
@@ -59,7 +52,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         switch (commandWord) {
         case "add":
             return new Add(input);
