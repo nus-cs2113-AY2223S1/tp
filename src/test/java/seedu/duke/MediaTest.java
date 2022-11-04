@@ -31,7 +31,7 @@ class MediaTest {
         assertEquals(0,test.rating);
         assertEquals("",test.genre);
         assertEquals(null,test.dateWatched);
-        assertEquals("",test.createFileString());
+        assertEquals("",test.createFileString() );
     }
 
     @Test

@@ -88,8 +88,13 @@ public class Storage {
             fileScanner.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("error accessing file");
-        } 
+            System.out.println("Error accessing file.");
+        } catch (Exception e) {
+            System.out.println("Sorry, your saved file was corrupted. You may continue using myReviews with a new "
+                    + "list.");
+            f.delete();
+            f.mkdirs();
+        }
     }
 
 
