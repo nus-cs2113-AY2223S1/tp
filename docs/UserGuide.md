@@ -4,7 +4,7 @@
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * [Main Mode](#main-mode)
+    * [Build Management Mode](#build-management-mode)
         * [Adding a build](#adding-a-build-add)
         * [Editing a build](#editing-a-build-edit)
         * [Deleting a build](#deleting-a-build-delete)
@@ -14,7 +14,7 @@
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
         * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
-    * [Edit Mode](#edit-mode)
+    * [Build Editing Mode](#build-editing-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
         * [Viewing a component](#viewing-a-component-view)
@@ -77,7 +77,7 @@ ____________________________________________________________
 
 Upon starting the Program, the user will be situated in the main mode.
 
-### Main Mode
+### Build Management Mode
 
 Main mode handles the management of the user's builds. 
 
@@ -102,7 +102,7 @@ ____________________________________________________________
 
 #### Editing a build: `edit`
 
-Enters edit mode for the specified build. The user only needs to specify the name of the
+Enters [edit mode](#edit-mode) for the specified build. The user only needs to specify the name of the
 build.
 
 Format: `edit/NAME`
@@ -252,7 +252,7 @@ Exporting builds...
 ____________________________________________________________
 ```
 
-### Edit Mode
+### Build Editing Mode
 
 Edit mode handles the management of the computer components of a build.
 
