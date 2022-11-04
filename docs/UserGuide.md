@@ -94,7 +94,7 @@ Format:
   1. `help`
   2. `change default currency` , `change password`, `change username`, `delete account`, `exit`
   
-#You have to be logged into an account to do that
+#You have to be logged into an account to do that and in the help centre as marked by command on line 1
 
 Example of usage: 
 
