@@ -18,6 +18,7 @@ Code Contributions: [RepoSense Report](https://nus-cs2113-ay2223s1.github.io/tp-
 * Implemented the commands and functions to add, view, delete and edit expenses
 * Implemented the commands and functions to add, view, delete and edit recurring payments
 * Refactored codebase for v1.0 and v2.0
+* Managed the build and release v1.0, v2.0 and v2.1
 
 ### Summary of Documentation Contributions
 
@@ -26,4 +27,6 @@ Documentation Contributions: [RepoSense Report](https://nus-cs2113-ay2223s1.gith
 * Implemented the PlantUML rendering server to assist with the creation of the developer guide
     * The PlantUML rendering server can render diagrams on-the-fly as the webpage is loaded. 
     This allows my team to make changes to the diagram and see the changes immediately on the webpage without the need to constantly re-export the diagram and commit the new image after a modification.
-* Assisted with the creation of the user guide
+* Added class and sequence diagrams to illustrate how the different components interact with each other.
+* Added sequence diagrams to illustrate how expenses and recurring payments are created, retrieved, updated and deleted.
+* Added user documentation to explain how to manage expenses and recurring payments.
