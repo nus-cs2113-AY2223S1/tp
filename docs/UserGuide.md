@@ -25,7 +25,7 @@
 - [7. Command Summary](#7-command-summary)
   * [7.1. Command Syntax](#71-command-syntax)
   * [7.2. Information for Parameters](#72-information-for-parameters)
-- [8. FAQ](#faq)
+- [8. FAQ](#8-faq)
 
 ## 1. Introduction
 
