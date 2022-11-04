@@ -101,7 +101,8 @@ public class CarparkTest {
     @Test
     void carparkSetAvailableLotsTest() throws InvalidFormatException {
         Carpark carpark = Carpark.parseCarpark(DEFAULT_CARPARK_STRING);
-        Assertions.assertThrows(InvalidFormatException.class, () -> carpark.setAvailableLots("-3"));
+        carpark.setAvailableLots("-3");
+        Assertions.assertEquals(0, carpark.getAvailableLots());
     }
 
     @Test

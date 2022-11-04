@@ -196,18 +196,23 @@ public class Carpark implements Comparable<Carpark> {
             throw new InvalidFormatException("Invalid number format!");
         }
 
-        validateAvailableLots(parsedValue, availableLots);
+        if (!validateAvailableLots(parsedValue, availableLots)) {
+            parsedValue = 0;
+        }
         this.availableLots = parsedValue;
         lastUpdated = LocalDateTime.now();
     }
 
-    private void validateAvailableLots(int value, String compareString) throws InvalidFormatException {
+    private boolean validateAvailableLots(int value, String compareString) {
         if (!Integer.toString(value).equals(compareString)) {
-            throw new InvalidFormatException("Invalid number format! Available lots cannot be a float.");
+            //is a float
+            return false;
         }
         if (value < 0) {
-            throw new InvalidFormatException("Invalid number format! Number cannot be negative!");
+            //is negative
+            return false;
         }
+        return true;
     }
 
     @JsonProperty("Agency")
@@ -294,12 +299,13 @@ public class Carpark implements Comparable<Carpark> {
         updateAvailableLotsTotal();
     }
 
-    private void validateNonNegative(String[] lots) throws InvalidFormatException {
-        for (String lot : lots) {
-            if (Integer.parseInt(lot) < 0) {
-                throw new InvalidFormatException("No negative numbers allowed!");
+    private String[] validateNonNegative(String[] lots) throws InvalidFormatException {
+        for (int i = 0; i < lots.length; ++i) {
+            if (Integer.parseInt(lots[i]) < 0) {
+                lots[i] = "0";
             }
         }
+        return lots;
     }
 
     private static void validateLotNumbers(int carLots, int motorCycleLots, int heavyVehicleLots, String[] lots)

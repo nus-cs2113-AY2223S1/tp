@@ -14,8 +14,8 @@ public class HelpCommandTest {
         String input = "help";
         Command command = new Parser().parseCommand(input, null, null, null);
         String result = command.execute().showToUser;
-        Assertions.assertEquals("Here are the list of available commands to use! Refer to the user guide at " +
-                        "https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.\n"
+        Assertions.assertEquals("Here are the list of available commands to use! Refer to the user guide at "
+                + "https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.\n"
                 + "`help` or `h` \t: To display all possible commands.\n"
                 + "`exit` or `e` \t: To quit parKING.\n"
                 + "`list` or `l` \t: List the carparks and its details.\n"
@@ -23,9 +23,8 @@ public class HelpCommandTest {
                 + "`auth default` or `a default` \t: to authenticate using the default key provided by parKING.\n"
                 + "`auth status` or `a status` \t: to get the authentication status.\n"
                 + "`update` or `u` \t: To fetch the latest data from LTA.\n"
-                + "`filter KEYWORD` or `fil KEYWORD` \t: Find carparks based on its string.\n"
-                + "`filter -address KEYWORD` or `fil -add KEYWORD` \t: Find carparks based on its address.\n"
-                + "`filter -id KEYWORD` or `fil -id KEYWORD` \t: Find carparks based on its Carpark Id.\n"
+                + "`filter QUERY` or `fil QUERY` or `fil -address QUERY` \t: Find carparks based on its address.\n"
+                + "`filter -id QUERY` or `fil -id QUERY` \t: Find carparks based on its Carpark Id.\n"
                 + "`find CARPARK_ID` or `fin CARPARK_ID` \t: Display information about the specific queried carpark.\n"
                 + "`favourite list` or `fav list` \t: to get the list of favourited carparks.\n"
                 + "`favourite CARPARK_ID` or `fav CARPARK_ID` \t: favourite carpark by its ID.\n"
