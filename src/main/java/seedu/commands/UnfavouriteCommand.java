@@ -24,7 +24,7 @@ public class UnfavouriteCommand extends Command {
      * @param argument argument for the UnfavouriteCommand
      * @param favourite favourite class
      */
-    public shUnfavouriteCommand(String argument, Favourite favourite, CarparkList carparkList) {
+    public UnfavouriteCommand(String argument, Favourite favourite, CarparkList carparkList) {
         this.argument = argument;
         this.favourite = favourite;
         this.carparkList = carparkList;
