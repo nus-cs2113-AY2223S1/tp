@@ -97,7 +97,7 @@ class EmployeeListTest {
         AddTaskCommand addTaskCommand = new AddTaskCommand(3002, 1002, "water");
         addTaskCommand.execute();
         int numOfTask = TaskList.getTasks().size();
-        EmployeeList.viewEmployeeTasks(1002);
+        EmployeeList.viewEmployeeTasks(1003);
         int numOfTaskAfterView = TaskList.getTasks().size();
         assertEquals(numOfTaskAfterView - numOfTask, 0);
     }
