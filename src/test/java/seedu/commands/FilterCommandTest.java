@@ -26,11 +26,10 @@ public class FilterCommandTest {
     }
 
     @Test
-    void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
+    void testNoCarparkFound() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Sentence searchQuery = new Sentence("malaysia");
         String result = new FilterCommand(carparkList, searchQuery).execute().showToUser;
         Assertions.assertEquals("No carpark was found.", result);
     }
-
 }
