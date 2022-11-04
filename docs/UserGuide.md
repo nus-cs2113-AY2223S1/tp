@@ -231,9 +231,24 @@ List only selected details of all the clients, depending on TAG. The commands fo
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
 
-<u>Format</u>: `check -client ic/CLIENT_INDEX`
+<u>Format</u>: `check -client i/CLIENT_INDEX`
 
-<u>Example</u>: `check -client ic/5`
+<u>Example</u>: `check -client i/5`
+
+<u>Expected Output</u>:
+```
+Showing check results for this client:
+  Client: Doja Cat
+  Contact Number: 93437878
+  Email: doja88@example.com
+  Budget: SGD2000/month
+
+Here is the property this client is renting:
+  Landlord: Bob Tan Bee Bee
+  Address: 25 Lower Kent Ridge Rd, S119081
+  Renting Price: SGD1000/month
+  Unit Type: LP Bungalow
+```
 
 ---
 
