@@ -32,10 +32,11 @@
 
 ## Introduction
 
+Welcome to Computer Component Chooser!
 ComputerComponentChooser(CCC) is a Command Line Interface(CLI) 
-program that simplifies the tracking of computer builds and 
-help users ensure that the parts they pick are 
-compatible with one another.
+program targeting PC enthusiasts and commercial PC builders who want to:
+- simplify the [tracking of computer builds](#features) 
+- ensure that the parts they pick are [compatible](#checking-compatibility-check) with one another.
 
 ## Quick Start
 
@@ -46,6 +47,31 @@ compatible with one another.
 4. Open a command window in that folder
 5. Run the command `java -jar tp.jar` to start the app
 6. Refer to the [Features](#features) below to try out some commands!
+
+Upon successfully starting the program, you will be greeted with the following:
+```
+Hello from
+  _____                     __         
+ / ___/__  __ _  ___  __ __/ /____ ____
+/ /__/ _ \/  ' \/ _ \/ // / __/ -_) __/
+\___/\___/_/_/_/ .__/\_,_/\__/\__/_/   
+              /_/                      
+  _____                                   __ 
+ / ___/__  __ _  ___  ___  ___  ___ ___  / /_
+/ /__/ _ \/  ' \/ _ \/ _ \/ _ \/ -_) _ \/ __/
+\___/\___/_/_/_/ .__/\___/_//_/\__/_//_/\__/ 
+              /_/                            
+  _______                        
+ / ___/ /  ___  ___  ___ ___ ____
+/ /__/ _ \/ _ \/ _ \(_-</ -_) __/
+\___/_//_/\___/\___/___/\__/_/   
+
+____________________________________________________________
+Hello! ComputerComponentChooser at your service!
+What can I do for you today?
+____________________________________________________________
+
+```
 
 ## Features 
 
@@ -62,7 +88,8 @@ build.
 
 Format: `add/NAME`
 
-Example of usage: User enters `add/test build` to add a build named 'test build' to the list of builds.
+Example of usage: User enters `add/test build` to add a build named 'test build' to the list of builds, a build 
+named 'test build' is added to the list of builds managed by the program.
 
 Expected outcome: The program will add a build named 'test build' to the list of builds.
 ```
