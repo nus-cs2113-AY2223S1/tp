@@ -5,7 +5,7 @@ This project is part of the requirement of an NUS module CS2113 where students a
 their own Command Line Interface based Java project. 
 
 parKING is a lightweight CLI application that provides carpark lot availability to drivers in Singapore.
-With an access to a computer with Java 11 installed, you can view and add carparks to your favourite list
+With access to a computer with Java 11 installed, you can view and add carparks to your favourite list
 for easy access.
 
 ## Installation Guide
