@@ -166,38 +166,4 @@ public class UI {
         System.out.println(message);
     }
 
-    /**
-     * Message to be displayed when an exception is encountered due to invalid input format
-     */
-    public static void invalidFormatMessage() {
-        System.out.println("INPUT FORMAT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-
-    /**
-     * Message to be displayed when an exception is encountered due to invalid content in input
-     */
-    public static void invalidContentMessage() {
-        System.out.println("INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-    public static void invalidYearMessage() {
-        System.out.println("The year or semester or format of semester entered is invalid");
-    }
-    /**
-     * Message to be displayed when an exception is encountered due to an invalid command word
-     */
-    public static void invalidCommandWordMessage() {
-        System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-
-    public static void invalidMcMessage() {
-        System.out.println("The number of MCs is invalid (0 < mcs <= 20). Please try again!");
-    }
-
-    public static void invalidGradeMessage() {
-        System.out.println("Invalid grade. Please try again!");
-    }
-
 }
