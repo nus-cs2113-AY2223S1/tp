@@ -3,6 +3,7 @@ package seedu.commands;
 import static seedu.common.CommonData.AUTH_FORMAT;
 import static seedu.common.CommonData.EXIT_FORMAT;
 import static seedu.common.CommonData.FAVOURITE_FORMAT;
+import static seedu.common.CommonData.FILTER_ADDRESS_FORMAT;
 import static seedu.common.CommonData.FILTER_FORMAT;
 import static seedu.common.CommonData.FILTER_ID_FORMAT;
 import static seedu.common.CommonData.FIND_FORMAT;
@@ -29,6 +30,7 @@ public class HelpCommand extends Command {
         message += AUTH_FORMAT + "\n";
         message += UPDATE_FORMAT + "\n";
         message += FILTER_FORMAT + "\n";
+        message += FILTER_ADDRESS_FORMAT + "\n";
         message += FILTER_ID_FORMAT + "\n";
         message += FIND_FORMAT + "\n";
         message += FAVOURITE_FORMAT + "\n";

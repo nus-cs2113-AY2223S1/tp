@@ -32,10 +32,13 @@ public class CommonData {
             + "\t: unfavourite carpark by its ID.";
     public static final String FIND_FORMAT = "`find CARPARK_ID` or `fin CARPARK_ID` "
             + "\t: Display information about the specific queried carpark.";
-    public static final String FILTER_FORMAT = "`filter QUERY` or `fil QUERY` or `fil -address QUERY` "
-            + "\t: Find carparks based on its address.";
+    public static final String FILTER_FORMAT = "`filter QUERY` or `fil QUERY`"
+            + "\t: Filter carparks based on Carpark information.";
+
+    public static final String FILTER_ADDRESS_FORMAT = "`filter -address QUERY` or `fil -add QUERY` "
+            + "\t: Filter carparks based on its Carpark address.";
     public static final String FILTER_ID_FORMAT = "`filter -id QUERY` or `fil -id QUERY` "
-            + "\t: Find carparks based on its Carpark Id.";
+            + "\t: Filter carparks based on its Carpark Id.";
     public static final String UPDATE_FORMAT = "`update` or `u` \t: To fetch the latest data from LTA.";
     public static final String LIST_FORMAT = "`list` or `l` \t: List the carparks and its details.";
     public static final String EXIT_FORMAT = "`exit` or `e` \t: To quit parKING.";
