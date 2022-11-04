@@ -6,8 +6,6 @@ easySEP is a CLI application created to assist NUS Computer Engineering (CEG) un
 In particular, it is a useful utility for exploring potential module mappings for various partner universities, 
 creating and maintaining lists for them and also favouriting selected ones for easier reference. As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
-## Summary of contributions
-
 ### Code Contributed
 
 This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=nshian&breakdown=true) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
@@ -15,26 +13,20 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=nshian&br
 ### Enhancements Implemented
 
 #### Ui
-The Ui class is the cornerstone of the program to facilitate interaction with the user.
-1. Created methods for scanning and collecting user input.
-2. Print error messages to the user upon receipt of invalid input commands.
-3. Display acknowledgement messages for successfully completed commands.
-4. Print required information based on user commands.
+The Ui class is the cornerstone of the program to facilitate interaction with the user. It is used for scanning and collecting user input, printing error messages to the user upon receipt of invalid input commands.
+Additionally, it displays acknowledgement messages for successfully completed commands and prints the required information.
    
 * **Some notable PRs**: [#20](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/20), [#39](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/39), [#71](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/71),
    [#72](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/72), [#96](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/96).
 
 #### Timetable
-The timetabling feature is useful for users to create various timetables for different partner universities.
-1. Factored feature into Lesson, Timetable and TimetableManager classes for higher cohesion and lower coupling.
-2. Verify that information for lessons e.g. time are valid.
-3. Verify that lessons being added into the timetable do not clash.
+The timetabling feature is useful for users to create various timetables for different partner universities. It is factored into Lesson, Timetable and TimetableManager classes for higher cohesion and lower coupling. 
+It is also used to verify that information for lessons e.g. time are valid and that lessons being added into the timetable do not clash.
 
 * **Some notable PRs**: [#80](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/80), [#81](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/81), [#82](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/82)
 
 #### Favourite Command
 The favourite command is useful for users to favourite their lists of bookmarked module mappings for easier reference.
-1. Enables bookmarking of selected lists of module mappings for easier reference.
 * **Related PR**: [#73](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/73)
 
 #### Unit Testing & Assertions
@@ -57,31 +49,14 @@ Updated class diagrams to follow standard notation.
 * **Some notable PRs**: [#83](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/83), [#97](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/97), [#188](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/188).
 
 ### Contributions to Team-Based Tasks
-* Set up About Us page.
-* Modified GitHub workflow to remove unnecessary checks.
-* Most active in reviewing and approving pull requests (40 PRs caa 3 Nov 2022).
-* Conducted own testing to identify undetected bugs.
-* Maintained issue tracker by tagging and labelling various pull requests for effective reference.
+I helped to set up the About Us page and modified GitHub workflows to remove unnecessary checks.
+I was also the most active in reviewing and approving pull requests (44 PRs caa 4 Nov 2022).
+In my own time, I also conducted testing to identify undetected bugs ([#56](https://github.com/AY2223S1-CS2113-W13-2/tp/issues/56)).
+I maintained the issue tracker by tagging and labelling various pull requests for effective reference.
 
 ### Contributions beyond the project team
-
-#### Forum Contributions
-Clarified doubts about GitHub workflows that may be applicable to others in the CS2113 GitHub forum.
-
-[Forum Post #34](https://github.com/nus-cs2113-AY2223S1/forum/issues/34)
-
-#### Review/mentoring contributions
-Gave suggestions to other students taking the modules for their individual/team projects: 
-[#35](https://github.com/nus-cs2113-AY2223S1/ip/pull/35), [#43](https://github.com/nus-cs2113-AY2223S1/ip/pull/43), [#50](https://github.com/nus-cs2113-AY2223S1/ip/pull/50), [#11](https://github.com/nus-cs2113-AY2223S1/tp/pull/11/files).
-
-#### Other Contributions
-
-I reported a total of [14 program bugs](https://github.com/nshian/ped/issues) for another team during the module's PED.
-
-Some notable reports:
-
-* [Functionality bug: Incorrect handling of DESCRIPTION parameter](https://github.com/nshian/ped/issues/14)
-* [Functionality bug: Incorrect handling of NAME parameter](https://github.com/nshian/ped/issues/10)
-* [Functionality bug: No error-handling for empty list of expenses](https://github.com/nshian/ped/issues/1)
-* [Functionality bug: Program unable to exit](https://github.com/nshian/ped/issues/4)
-* [Functionality bug: Lack error checking for negative index](https://github.com/nshian/ped/issues/7)
+* Forum Contributions: Clarified doubts about GitHub workflows that may be applicable to others in the CS2113 GitHub forum ([Forum Post #34](https://github.com/nus-cs2113-AY2223S1/forum/issues/34))
+* Review/mentoring contributions: Gave suggestions to other students taking the modules for their individual/team projects: 
+[iP #35](https://github.com/nus-cs2113-AY2223S1/ip/pull/35), [iP #43](https://github.com/nus-cs2113-AY2223S1/ip/pull/43), [iP #50](https://github.com/nus-cs2113-AY2223S1/ip/pull/50), 
+[tP #11](https://github.com/nus-cs2113-AY2223S1/tp/pull/11/files).
+* Other Contributions: I reported a total of [14 program bugs](https://github.com/nshian/ped/issues) for another team during the module's PED.
