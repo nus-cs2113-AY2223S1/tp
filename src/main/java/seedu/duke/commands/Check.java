@@ -33,6 +33,7 @@ public class Check extends Command {
             throw new InvalidInputContentException();
         }
     }
+    public Check() {}
 
     @Override
     public void execute(ModuleList moduleList) {
@@ -54,20 +55,27 @@ public class Check extends Command {
     }
 
     /**
-     * Function to find the current semester the user is on depending on the grade of the modules.
-     * @return the semesters which have modules completed.
+     * Function to find the current semester based on the latest graded semester
+     * @return latest graded semester
      */
     public int findCurrentSemester() {
-        List<String> semesters = new ArrayList<>();
+        int latestGradedSemester = 1;
         for (Module mod: modules) {
-            String semesterTaken = mod.getSemesterTaken();
-            if (!mod.getGrade().matches("-") && !semesters.contains(semesterTaken)) {
-                semesters.add(mod.getSemesterTaken());
+            if(!(mod.getGrade().equals("-")) && (convertSemToNum(mod.getSemesterTaken()) >= latestGradedSemester)) {
+                latestGradedSemester = convertSemToNum(mod.getSemesterTaken());
             }
         }
-        System.out.println("semesters.size()" + semesters.size());
-        return semesters.size();
+        return latestGradedSemester;
     }
+
+    /**
+     * Function to find the current semester based on the latest graded semester
+     * @return latest graded semester
+     */
+    public String findCurrentSemesterInString() {
+        return convertNumToSem(findCurrentSemester());
+    }
+
 
     /**
      * Function to check if the user is eligible for NOC
@@ -133,7 +141,7 @@ public class Check extends Command {
      * @param semester the semester of a module  Format: String
      * @return the semester in the form of an integer
      */
-    private static int convertSem(String semester) {
+    private static int convertSemToNum(String semester) {
         switch (semester) {
         case "Y1S1":
             return 1;
@@ -153,6 +161,34 @@ public class Check extends Command {
             return 8;
         default:
             return 0;
+        }
+    }
+
+    /**
+     * Function to convert semester as a Number back to String
+     * @param semesterNumber the semester of a module  Format: int
+     * @return the semester in the form of a String
+     */
+    private static String convertNumToSem(int semesterNumber) {
+        switch (semesterNumber) {
+            case 1:
+                return "Y1S1";
+            case 2:
+                return "Y1S2";
+            case 3:
+                return "Y2S1";
+            case 4:
+                return "Y2S2";
+            case 5:
+                return "Y3S1";
+            case 6:
+                return "Y3S2";
+            case 7:
+                return "Y4S1";
+            case 8:
+                return "Y4S2";
+            default:
+                return "Y1S1";
         }
     }
 }
