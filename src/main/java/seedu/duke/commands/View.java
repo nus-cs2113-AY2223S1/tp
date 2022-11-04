@@ -13,13 +13,18 @@ public class View extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-
     public View(String input) throws InvalidInputFormatException, InvalidInputContentException {
-        checkFormat(input);
-        int[] indexes = positions(input);
-        checkContent(input, indexes);
-        setSem(input, indexes);
+        input = input.trim();
+        if (input.equals("all")) {
+            this.semester = "all";
+        } else {
+            checkFormat(input);
+            int[] indexes = positions(input);
+            checkContent(input, indexes);
+            setSem(input, indexes);
+        }
     }
+
     /**
      * function to find the semester from input for which the modules need to be viewed
      * @param input input entered by user. Format: String
@@ -32,6 +37,7 @@ public class View extends Command {
             this.semester = input.substring(indexes[0], indexes[1]).toUpperCase();
         }
     }
+
     /**
      * Function to check if the format of input is correct or not
      * @param input input entered by user. Format: String
@@ -48,13 +54,13 @@ public class View extends Command {
             throw new InvalidInputFormatException();
         }
     }
+
     /**
      * Function to check if content entered by user is empty or not
      * @param input input entered by user. Format: String
      * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
      * @throws InvalidInputContentException exception thrown if content of input is empty
      */
-
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
         boolean isSame;
         isSame = InvalidInputContentException.emptyContent(idx[0], idx[1], input);
@@ -66,6 +72,7 @@ public class View extends Command {
             throw new InvalidInputContentException();
         }
     }
+
     /**
      * function to return the positions of the details in input
      * @param input the input given by user. Format: String

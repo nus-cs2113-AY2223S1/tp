@@ -4,6 +4,9 @@
 
 PlanIt is a Command Line Interface (CLI) based desktop application which will help School of Computing students to plan their modules and credits every semester. They can also check if they are eligible for NOC or SEP using this application.
 
+Note that it is user's own responsibility to check and ensure that the module code that they entered is valid and fulfills any pre-requisites needed.
+
+
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -19,6 +22,7 @@ Some example commands you can try:
 - mcs : View total Modular credits for a particular semester 
 - find : Finds any module information
 - check : Check eligibility for SEP/NOC
+- help: returns the command summary
 - exit:  Exits the app
 
 ## Features 
@@ -128,6 +132,20 @@ Output:
 There is no module allocated in Y1S1!!
 ----------------------------------------
 ```
+
+Input: `view all`
+
+Output: 
+```
+----------------------------------------
+These are your module(s) for Y1S1
+1. CS1010 Y1S1 A 4
+These are your module(s) for Y2S1
+1. CS2040 Y2S1 A 4
+2. CS2113 Y2S1 A 4
+----------------------------------------
+```
+
 
 ### Feature #4 : View modular credits taken in a semester - mcs
 
@@ -248,7 +266,9 @@ Thank you for using PlanIt!
 * Add module `add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE`
 * Deletes module `delete m/MODULE_CODE`
 * View modules `view s/YEAR_NUMBER_SEMESTER_NUMBER`
+* View all modules `view all`
 * Calculate MCs `mcs s/YEAR_NUMBER_SEMESTER_NUMBER`
 * Finds module information `find <KEYWORD>`
 * Checks for program eligibility `check <PROGRAM>`
+* Help `help`
 * Exits the App `exit`
