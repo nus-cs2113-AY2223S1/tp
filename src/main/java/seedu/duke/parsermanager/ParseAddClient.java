@@ -68,7 +68,6 @@ public class ParseAddClient extends ParseAdd {
         }
     }
 
-
     public ArrayList<String> processCommandAddClientDetails(String rawCommandDetail)
             throws MissingAddClientFlagException, IncorrectAddClientFlagOrderException {
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, ADD_CLIENT_FLAGS);
@@ -78,13 +77,12 @@ public class ParseAddClient extends ParseAdd {
     }
 
     private void checkForMissingClientFlags(int[] flagIndexPositions) throws MissingAddClientFlagException {
-        for (int flagIndex = 0; flagIndex < flagIndexPositions.length; flagIndex++) {
-            boolean isEmailIndex = (flagIndex == CLIENT_EMAIL_INDEX);
-            // Skips empty check for email as email is optional
-            boolean hasClientFlag = checkForFlagPresence(flagIndex);
-            if (!isEmailIndex && !hasClientFlag) {
-                throw new MissingAddClientFlagException();
-            }
+        boolean hasNameFlag = checkForFlagPresence(flagIndexPositions[CLIENT_NAME_INDEX]);
+        boolean hasContactNumberFlag = checkForFlagPresence(flagIndexPositions[CLIENT_CONTACT_NUMBER_INDEX]);
+        boolean hasBudgetFlag = checkForFlagPresence(flagIndexPositions[CLIENT_BUDGET_INDEX]);
+        boolean hasAllClientFlags = hasNameFlag && hasContactNumberFlag && hasBudgetFlag;
+        if (!hasAllClientFlags) {
+            throw new MissingAddClientFlagException();
         }
     }
 
