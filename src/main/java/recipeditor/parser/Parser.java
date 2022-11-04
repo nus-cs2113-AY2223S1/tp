@@ -200,14 +200,16 @@ public class Parser {
 
     private static Command parseFindCommand(String[] parsed) {
 
-        if (parsed.length >= 2) {
-            String[] inputArray = Arrays.copyOfRange(parsed, 1, parsed.length);
+        if (parsed.length >= 3) {
+            FlagType[] flags = FlagParser.getFlags(parsed);
+            String[] inputArray = Arrays.copyOfRange(parsed, 2, parsed.length);
             String input = convertStringArrayToString(inputArray);
-            return new FindCommand(input);
+            return new FindCommand(flags, input);
         } else {
             return new InvalidCommand(FindCommand.CORRECT_FORMAT);
         }
     }
+
 
     public static Command parseHelpCommand(String[] parsed) {
 

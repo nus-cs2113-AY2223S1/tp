@@ -1,9 +1,5 @@
 package recipeditor.parser;
 
-import recipeditor.recipe.Recipe;
-
-import java.util.ArrayList;
-
 public interface FlagParser {
 
     /**
@@ -57,6 +53,9 @@ public interface FlagParser {
             }
         }
         if (commandFlagCount == 1 && recipeFlagCount == 1) {
+            return flags;
+        }
+        if (recipeFlagCount == 1) {
             return flags;
         }
         return null;
