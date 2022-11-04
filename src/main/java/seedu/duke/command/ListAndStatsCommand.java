@@ -147,8 +147,6 @@ public abstract class ListAndStatsCommand extends Command {
             timeTransactions = transactions.getTransactionsByDayRange(LocalDate.now(), number);
         }
 
-        // Sorts time-filtered transactions array list based on ascending order of date
-        Collections.sort(timeTransactions);
         return timeTransactions;
     }
 }

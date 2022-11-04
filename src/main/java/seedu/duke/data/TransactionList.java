@@ -10,6 +10,7 @@ import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
@@ -113,18 +114,27 @@ public class TransactionList {
     public String deleteTransaction(int index) {
         Transaction transaction = transactions.get(index);
         transactions.remove(index);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return transaction.toString();
     }
 
     public String editExpense(String description, int amount, String category, LocalDate date, int index) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(index - 1, expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense.toString();
     }
 
     public String editIncome(String description, int amount, String category, LocalDate date, int index) {
         Income income = new Income(description, amount, category, date);
         transactions.add(index - 1, income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income.toString();
     }
 
@@ -142,6 +152,9 @@ public class TransactionList {
     public Expense addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense;
     }
 
@@ -157,6 +170,9 @@ public class TransactionList {
     public Income addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income;
     }
 
@@ -175,6 +191,9 @@ public class TransactionList {
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
 
@@ -191,6 +210,9 @@ public class TransactionList {
     public void addExpenseDuringStorage(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
     //@@author chydarren
