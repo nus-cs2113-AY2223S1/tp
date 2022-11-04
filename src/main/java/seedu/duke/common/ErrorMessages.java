@@ -31,8 +31,6 @@ public enum ErrorMessages {
     ERROR_TRANSACTION_INVALID_CATEGORY("Invalid category, please enter <help> for the command guide."),
     ERROR_TRANSACTION_INVALID_DATE("Invalid date, please enter <help> for the command guide."),
     ERROR_TRANSACTION_INVALID_TYPE("Type of transaction given is invalid, please enter <help> for the command guide."),
-    ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing,"
-            + " please enter <help> for the command guide."),
     ERROR_STATS_COMMAND_INVALID_TYPE("Type of statistics given is invalid, please enter <help> for the command guide."),
     ERROR_STATS_INVALID_NUMBER("Invalid number! (Note: Stats number must between 1 - 100) "
             + "Please enter <help> for the command guide."),

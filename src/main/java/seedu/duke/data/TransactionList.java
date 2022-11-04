@@ -164,11 +164,31 @@ public class TransactionList {
 
     //@@author chinhan99
 
+    /**
+     * Adds a transaction of class type Income into the transactions list during storage.
+     * This method functions the same as addIncome , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
+
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
     }
 
+
+    /**
+     * Adds a transaction of class type Expense into the transactions list during storage.
+     * This method functions the same as addExpense , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
 
     public void addExpenseDuringStorage(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
@@ -239,16 +259,16 @@ public class TransactionList {
     /**
      * Finds specific transaction(s) based on any keywords inputted by the user.
      *
-     * @param keywords Any partial or full keyword(s) that matches the details of the transaction.
+     * @param keyword A keyword that matches the partial or full description of the transaction.
      * @return A string containing the formatted transaction list.
      */
-    public String findTransactions(String keywords) {
+    public String findTransactions(String keyword) {
         String transactionsList = "";
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions with their description matching the searching keywords
-            if (transaction.getDescription().toLowerCase().contains(keywords.toLowerCase())
-                    && keywords != "") {
+            if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
+                    && keyword != "") {
                 transactionsList += transaction + LINE_SEPARATOR.toString();
             }
         }
@@ -434,7 +454,7 @@ public class TransactionList {
         String timeInsightsList = "";
 
         if (period != null && number != UNDEFINED_PARAMETER) {
-            timeInsightsList += "The past " + number + " " + period + ":" + LINE_SEPARATOR + LINE_SEPARATOR
+            timeInsightsList += "The last " + number + " " + period + ":" + LINE_SEPARATOR + LINE_SEPARATOR
                     + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         } else if (month == UNDEFINED_PARAMETER) {
             timeInsightsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER

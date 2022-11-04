@@ -53,8 +53,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_FIND_KEYWORD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
-
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
@@ -65,7 +65,6 @@ import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MIN_PARAMETER_LENGTH;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
-
 
 /**
  * Parses the parameter portion of the user input and set the parameters into the Command object.
@@ -330,6 +329,9 @@ public class ParameterParser {
             break;
         case COMMAND_TAG_GLOBAL_ENTRY_NUMBER:
             command.setEntryNumber(parseEntryTag(parameter));
+            break;
+        case COMMAND_TAG_FIND_KEYWORD:
+            command.setKeyword(parameter);
             break;
         case COMMAND_TAG_HELP_OPTION:
             command.setIsDetailedOption(parseHelpOptionTag(parameter));

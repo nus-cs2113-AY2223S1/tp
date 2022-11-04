@@ -34,22 +34,22 @@ Command Word: LIST
 List all or some transactions based on selection.
 If tag filters are used, the transactions retrieved from the records must match all the filter tags
 that have been specified in order to be recognized as a valid record.
-Usages: 
+Usages:
 	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
 	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
-	(3) Listing on last N weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
 
 Command Word: FIND
-Find a specific or multiple transactions based on any keywords that have been specified.
-Usage: find KEYWORDS
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
 
 Command Word: STATS
 View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
-Usages: 
+Usages:
 	(1) Categorical savings: stats s/categorical_savings
 	(2) Monthly expenditure: stats s/monthly_expenditure
 	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
-	(4) Insights on last N weeks or months: stats s/time_insights p/PERIOD n/NUMBER
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
 
 Command Word: EDIT
 Edit a transaction entry from the list of transactions.
@@ -96,43 +96,43 @@ Command Word: LIST
 List all or some transactions based on selection.
 If tag filters are used, the transactions retrieved from the records must match all the filter tags
 that have been specified in order to be recognized as a valid record.
-Usages: 
+Usages:
 	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
 	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
-	(3) Listing on last N weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
 Parameters information:
 - TYPE: The type of transaction. It should either be "expense" or "income".
 - CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
 - DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
-- MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
 		<!> - MONTH parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
-- PERIOD: The period which the transaction falls on. It should either be weeks or months.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
 		<!> - PERIOD parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number ranging from 1 to 100.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
 		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: FIND
-Find a specific or multiple transactions based on any keywords that have been specified.
-Usage: find KEYWORDS
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
 Parameters information:
-- KEYWORDS: A string that represents a single or a group of words used to find matching transactions. Spacing is allowed.
+- KEYWORD: A case-insensitive word that matches the partial or the full description of a transaction entry. It is any word without any spacing.
 
 Command Word: STATS
 View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
-Usages: 
+Usages:
 	(1) Categorical savings: stats s/categorical_savings
 	(2) Monthly expenditure: stats s/monthly_expenditure
 	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
-	(4) Insights on last N weeks or months: stats s/time_insights p/PERIOD n/NUMBER
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
 Parameters information:
 - STATS_TYPE: The type of statistics. It can be "categorical_savings", "monthly_expenditure", or "time_insights".
-- MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
 		<!> - MONTH parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
-- PERIOD: The period which the transaction falls on. It should either be weeks or months.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
 		<!> - PERIOD parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number ranging from 1 to 100.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
 		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: EDIT
@@ -436,7 +436,7 @@ Month tag must be accompanied by a year tag, please enter <help> for the command
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 3 weeks:
+The last 3 weeks:
 
 -----Categorical Savings-----
 
@@ -447,7 +447,7 @@ Savings: $0
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 5 days:
+The last 5 days:
 
 -----Categorical Savings-----
 
@@ -458,7 +458,7 @@ Savings: $0
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 4 months:
+The last 4 months:
 
 -----Categorical Savings-----
 [transport] $-10001
@@ -480,7 +480,7 @@ ____________________________________________________________
 Period and number tags must be provided together, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Keyword(s) for your search expression missing, please enter <help> for the command guide.
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:

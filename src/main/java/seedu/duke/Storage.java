@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandTag;
 import seedu.duke.common.DateFormats;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
@@ -31,9 +32,24 @@ public class Storage {
     private static final String FILE_PATH = "data/duke.txt";
     private static final String DELIMITER = " \\| ";
     private static final int NUMBER_OF_STORED_PARAMETERS = 5;
-    private static final int TENS = 10;
-    private static final int HUNDREDS = 100;
-    private static final int THOUSANDS = 1000;
+    private static final int YEAR_TENTH = 10;
+    private static final int YEAR_HUNDREDTH = 100;
+    private static final int YEAR_THOUSANDTH = 1000;
+    private static final int MONTH_TENTH = 10;
+    private static final int DAY_TENTH = 10;
+    private static final String APPENDED_ZERO_TO_MONTH_BELOW_TEN = "0";
+    private static final String APPENDED_ZERO_TO_DAY_BELOW_TEN = "0";
+    private static final String APPENDED_ZERO_TO_YEAR_BELOW_THOUSAND = "0";
+    private static final String APPENDED_ZEROES_TO_YEAR_BELOW_HUNDRED = "00";
+    private static final String APPENDED_ZEROES_TO_YEAR_BELOW_TEN = "000";
+    private static final String TYPE_TAG = CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
+
+    // A spacing has to be added in front of the tags so that the string can be properly parsed
+    private static final String CATEGORY_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
+    private static final String AMOUNT_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
+    private static final String DATE_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DATE;
+    private static final String DESCRIPTION_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+
 
     private TransactionList storedTransactions;
 
@@ -140,8 +156,10 @@ public class Storage {
 
             String description = splits[4];
 
-            String parametersInput = "t/" + type + " c/" + category + " a/" + amountString + " d/" + dateString
-                    + " i/" + description;
+            String parametersInput = TYPE_TAG + type + CATEGORY_TAG_WITH_SPACE + category
+                    + AMOUNT_TAG_WITH_SPACE + amountString + DATE_TAG_WITH_SPACE + dateString
+                    + DESCRIPTION_TAG_WITH_SPACE + description;
+
             command = getCommand("add", parametersInput);
 
             ParameterParser.parse(command, parametersInput);
@@ -163,6 +181,7 @@ public class Storage {
             // If the date format is incorrect, which is due to corrupted date information
             throw new StorageFileCorruptedTransactionException();
         } catch (MoolahException e) {
+            // If any other exceptions are caught from the parser, throw corrupted transaction exception
             throw new StorageFileCorruptedTransactionException();
         }
     }
@@ -198,7 +217,9 @@ public class Storage {
 
 
     /**
-     * Synthesizes the date into dateString , which would be in the correct format to process.
+     * Synthesizes the date variables into dateString, which would be in the correct format for parsing.
+     * When extracting date variables like month from date, zeros in front of the variable would be removed by default.
+     * E.g. A month was stored as 9. A zero has to be added, so month would be equal to 09, and correct for parsing.
      *
      * @param date which would be processed into a string.
      * @return dateString, in the correct format to be parsed.
@@ -209,18 +230,19 @@ public class Storage {
         String dateOfMonth = String.valueOf(date.getDayOfMonth());
         String month = String.valueOf(date.getMonthValue());
         String year = String.valueOf(date.getYear());
-        if (date.getMonthValue() < TENS) {
-            month = "0" + month;
+        if (date.getMonthValue() < MONTH_TENTH) {
+            // If month value is less than 10, a zero has to be added to the front of the variable for parsing reasons
+            month = APPENDED_ZERO_TO_MONTH_BELOW_TEN + month;
         }
-        if (date.getDayOfMonth() < TENS) {
-            dateOfMonth = "0" + dateOfMonth;
+        if (date.getDayOfMonth() < DAY_TENTH) {
+            dateOfMonth = APPENDED_ZERO_TO_DAY_BELOW_TEN + dateOfMonth;
         }
-        if (date.getYear() < TENS) {
-            year = "000" + year;
-        } else if (date.getYear() < HUNDREDS) {
-            year = "00" + year;
-        } else if (date.getYear() < THOUSANDS) {
-            year = "0" + year;
+        if (date.getYear() < YEAR_TENTH) {
+            year = APPENDED_ZEROES_TO_YEAR_BELOW_TEN + year;
+        } else if (date.getYear() < YEAR_HUNDREDTH) {
+            year = APPENDED_ZEROES_TO_YEAR_BELOW_HUNDRED + year;
+        } else if (date.getYear() < YEAR_THOUSANDTH) {
+            year = APPENDED_ZERO_TO_YEAR_BELOW_THOUSAND + year;
         }
 
         String dateString = dateOfMonth + month + year;
@@ -240,6 +262,7 @@ public class Storage {
         fileWriter.write(monthlyBudget + System.lineSeparator());
         for (Transaction transaction : transactions) {
 
+            // Delimiter constant cannot be used here as it is synthesized into a string
             transactionEntry = transaction.getType() + " | " + transaction.getCategory() + " | "
                     + transaction.getAmount() + " | " + transaction.getDate() + " | "
                     + transaction.getDescription();
