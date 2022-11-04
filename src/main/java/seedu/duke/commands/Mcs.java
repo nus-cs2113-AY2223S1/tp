@@ -3,6 +3,10 @@ package seedu.duke.commands;
 import seedu.duke.ModuleList;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidOverallInputException;
+import seedu.duke.exceptions.InvalidSemesterException;
+
+import static seedu.duke.exceptions.InvalidSemesterException.*;
 
 public class Mcs extends Command {
     private String semester;
@@ -13,11 +17,12 @@ public class Mcs extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Mcs(String input) throws InvalidInputFormatException, InvalidInputContentException {
+    public Mcs(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
         setSem(input, indexes);
+        checkOverallExceptionForMcs(this.semester);
     }
 
     /**
@@ -76,6 +81,31 @@ public class Mcs extends Command {
         idx[0] = input.indexOf("s/") + 2;
         idx[1] = input.indexOf(" ", idx[0]);
         return idx;
+    }
+
+    private void checkOverallExceptionForMcs(String semester) throws InvalidOverallInputException {
+        String errorMessage = "";
+
+        try{
+            checkYear(semester);
+        } catch (Exception e){
+            errorMessage += e.getMessage();
+        }
+
+        if(!errorMessage.equals("")){
+            System.out.println("Unable to view MCS due to these issues:");
+            System.out.println(errorMessage);
+            throw new InvalidOverallInputException();
+        }
+    }
+
+    public void checkYear(String semester) throws InvalidSemesterException {
+        if(invalidFormat(semester)) {
+            throw new InvalidSemesterException();
+        }
+        if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
+            throw new InvalidSemesterException();
+        }
     }
 
     @Override
