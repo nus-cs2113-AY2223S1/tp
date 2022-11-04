@@ -1,34 +1,43 @@
 # Developer Guide
 
-1. Acknowledgments
-2. Design
-* Architecture
-* Model Component
-* API Component
-* Storage Component
-* UI Component
-* Logic Component
+## Contents
 
-3. Implementation
-4. Project Scope
-5User Stories
-6. Non-Functional Requirements
-7. Glossary
-8. Instructions for Manual Testing
+- [1 Acknowledgments](#1-acknowledgements) 
+- [2 Design](#2-design)
+  - [2.1 Architecture Level](#21-architecture-level)
+    - [2.1.1 Main Components of the Architecture](#211-main-components-of-the-architecture)
+  - [2.2 Model Component](#22-model-component)
+  - [2.3 API Component](#23-api-component)
+  - [2.4 Storage Component](#24-storage-component)
+    - [2.4.1 FileWriter](#241-filewriter)
+    - [2.4.3 FileLoader](#242-fileloader)
+  - [2.5 UI Component](#25-ui-component)
+  - [2.6 Logic Component](#26-logic-component)
+- [3 Implementation](#3-implementation)
+  - [3.1 Favourite / Unfavourite Feature](#31-favourite--unfavourite-feature)
+    - [3.1.1 Design Considerations](#311-design-considerations)
+  - [3.2 Common Files](#32-common-files)
+- [4 Project Scope](#4-product-scope)
+  - [4.1 Target user profile](#41-target-user-profile)
+  - [4.2 Value Proposition](#42-value-proposition)
+- [5 User Stories](#5-user-stories)
+- [6 Non-Functional Requirements](#6-non-functional-requirements)
+- [7 Glossary](#7-glossary)
+- [8 Instructions for Manual Testing](#8-instructions-for-manual-testing)
 
 
-## Acknowledgements
+## 1 Acknowledgements
 Our project uses external libraries and services from:
 1. Land Transport Authority DataMall API Service ([link](https://datamall.lta.gov.sg/content/datamall/en.html)).
 2. Jackson JSON Parser ([link](https://fasterxml.github.io/jackson-core/javadoc/2.8/com/fasterxml/jackson/core/JsonParser.html))
 
-## Design 
+## 2 Design 
 
-### Architecture Level
+### 2.1 Architecture Level
 The Architecture Diagram below explains the high level design of the app.
 
 Given below is a quick overview of the main components and how they interact with one another.
-#### Main Components of the architecture
+#### 2.1.1 Main Components of the Architecture
 Our program flow is managed by the Parking class.
 
 ![Architecture Class Diagram](images/ArchClassDiagram.png)
@@ -43,7 +52,7 @@ Below are the main subcomponents that Parking and the command subclass delegate 
 * `Parser`: Takes in the user input string to determine what is the command the user has instructed the program to do.
 
 
-### Model Component
+### 2.2 Model Component
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
 The model component consists of a `CarparkList` (and `CarparkFilteredList`) class that contains
@@ -63,7 +72,7 @@ one object with the HashMap `allAvailableLots` containing a breakdown of lots by
 Note: The `Carpark` class contain many getters, setters and annotations to be used with the `jackson` module. 
 See [`FileLoader`](#FileLoader) for more information.
 
-### API Component
+### 2.3 API Component
 ![API Class Diagram](images/ApiClassDiagram.png)
 
 The model component consists of a `Api` class that supports API call to LTA DataMall Services, under the
@@ -110,30 +119,30 @@ The following sequence diagram shows how the API key is loaded.
 ![Api Loading Sequnce Diagram](images/LoadApiSequenceDiagram.png)
 
 
-### Storage Component
+### 2.4 Storage Component
 
 ![Sequence Diagram](images/LoadFileSequenceDiagram.png)
-##### FileWriter
+##### 2.4.1 FileWriter
 
-##### FileLoader
+##### 2.4.2 FileLoader
 
-### UI Component
+### 2.5 UI Component
 
 The user-facing parts of the program are implemented with the Ui class.
 
 It implements the following main functions:
 
-- print() - Prints a string to System.out.
-- getLine() - Asks user for input and returns input.
-- getCommand() - Asks user for a command input and returns input.
-- showLogo() - Prints ASCII art of a car and parKING logo.
-- printResult() - Shows the result of a command execution to the user. Includes additional formatting of the results of 
+- `print()` - Prints a string to System.out.
+- `getLine()` - Asks user for input and returns input.
+- `getCommand()` - Asks user for a command input and returns input.
+- `showLogo()` - Prints ASCII art of a car and parKING logo.
+- `printResult()` - Shows the result of a command execution to the user. Includes additional formatting of the results of 
 different commands.
-- printError() - Print exception message.
-- changeScanner() - Changes the scanner for the Ui object. To be used for JUnit testing.
-- getSeparatorString() - Returns a separator string.
+- `printError()` - Print exception message.
+- `changeScanner()` - Changes the scanner for the Ui object. To be used for JUnit testing.
+- `getSeparatorString()` - Returns a separator string.
 
-### Logic Component
+### 2.6 Logic Component
 How the parsing works:
 
 * When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
@@ -155,13 +164,10 @@ and return the respective `CommandResult` result of the Command.
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
 
-
-
-
-## Implementation
+## 3 Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-### Favourite / Unfavourite feature
+### 3.1 Favourite / Unfavourite feature
 
 ![Favourite Class Diagram](images/FavouriteClassDiagram.png)
 
@@ -235,7 +241,7 @@ The following sequence diagrams shows how a favourite / unfavourite command work
 
 ![Favourite Sequence Diagram](images/FavouriteSequenceDiagram.png)
 
-#### Design considerations
+#### 3.1.1 Design considerations
 
 **Aspect: Format of input after `favourite` or `unfavourite` command**
 - **Alternative 1 (current choice):** Carpark ID
@@ -245,32 +251,32 @@ The following sequence diagrams shows how a favourite / unfavourite command work
     - Pros: Less time needed to favourite after a search result, do not need to key in entire carpark ID again
     - Cons: Need to search before favouriting, even if user already knows the exact carpark ID
 
-### Common Files
+### 3.2 Common Files
 
-## Product scope
-### Target user profile
+## 4 Product scope
+### 4.1 Target user profile
 
 {Describe the target user profile}
 
-### Value proposition
+### 4.2 Value proposition
 
 {Describe the value proposition: what problem does it solve?}
 
-## User Stories
+## 5 User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+## 6 Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## Glossary
+## 7 Glossary
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+## 8 Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
