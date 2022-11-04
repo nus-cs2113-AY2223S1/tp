@@ -64,6 +64,8 @@ Sem [1] >>
 > - Words in `UPPERCASE` information to be supplied by the user.
     e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected.
+> - Named parameters such as `/module`, `/type` and `/code` in `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]` can appear in any order.
+> - If a named parameter is provided multiple times, e.g. `search /title cs /title ma`, only one of the values will be used. It is not guaranteed which of the duplicates will be used. 
 > - The commands are case-insensitive. E.g. `help` is the same as `HELP`.
 
 ### Get help: `help`
