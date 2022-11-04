@@ -15,18 +15,37 @@ public class VisitList {
         assert id != null : "id should not be null";
         assert dateOfVisit != null : "date of visit should not be null";
         assert timeOfVisit != null : "time of visit should not be null";
-        Visit visit = new Visit(id,dateOfVisit,timeOfVisit,reason);
-        visitList.add(visit);
-        ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
+        if (checkDuplicateVisit(id,dateOfVisit,timeOfVisit)) {
+            System.out.println(UI.DUPLICATE_VISIT_MESSAGE);
+        } else {
+            Visit visit = new Visit(id,dateOfVisit,timeOfVisit,reason);
+            visitList.add(visit);
+            ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
+        }
     }
 
     public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit) {
         assert id != null : "id should not be null";
         assert dateOfVisit != null : "date of visit should not be null";
         assert timeOfVisit != null : "time of visit should not be null";
-        Visit visit = new Visit(id,dateOfVisit,timeOfVisit);
-        visitList.add(visit);
-        ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
+        if (checkDuplicateVisit(id,dateOfVisit,timeOfVisit)) {
+            System.out.println(UI.DUPLICATE_VISIT_MESSAGE);
+        } else {
+            Visit visit = new Visit(id,dateOfVisit,timeOfVisit);
+            visitList.add(visit);
+            ui.printMessageAndObject(visit.toString(),UI.ADD_VISIT,visitList.indexOf(visit), UI.VISIT);
+        }
+    }
+
+    public boolean checkDuplicateVisit(String id, String dateOfVisit, String timeOfVisit) {
+        for (int i = 0; i < getTotalVisits(); i++) {
+            if (visitList.get(i).getId().equals(id)
+                    && visitList.get(i).getDateOfVisit().equals(dateOfVisit)
+                    && visitList.get(i).getTimeOfVisit().equals(timeOfVisit)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void loadVisit(String id, String dateOfVisit, String timeOfVisit, String reason) {
@@ -48,6 +67,8 @@ public class VisitList {
     public void deleteReason(UI ui, int index) {
         if (index < 1 || index > getTotalVisits()) {
             System.out.println("There is no such visit in the system with index " + index + "!");
+        } else if (visitList.get(index - 1).getReason().equals("")) {
+            System.out.println("Visit #" + index + " already has no reason stated!");
         } else {
             visitList.get(index - 1).setReason("");
             ui.printMessageAndObject(visitList.get(index - 1).toString(),UI.DELETE_VISIT_REASON, index - 1,
@@ -71,7 +92,7 @@ public class VisitList {
         System.out.println("Here are the list of visits in the system:");
         for (int i = 0; i < getTotalVisits(); i++) {
             ui.printLine();
-            System.out.println("VisitIndex #" + (i + 1) + ")");
+            System.out.println("\tVisit #" + (i + 1));
             System.out.println(visitList.get(i));
         }
         ui.printLine();
@@ -90,7 +111,7 @@ public class VisitList {
                 }
                 noOfPatientVisits++;
                 ui.printLine();
-                System.out.println("VisitIndex #" + (i + 1) + ")");
+                System.out.println("\tVisit #" + (i + 1));
                 System.out.println(visitList.get(i));
             }
         }
@@ -108,7 +129,7 @@ public class VisitList {
         if (index < 1 || index > getTotalVisits()) {
             System.out.println("There is no such visit in the system with index " + index + "!");
         } else {
-            System.out.println("Here is the visit with VisitIndex " + index + ":");
+            System.out.println("Here is Visit #" + index);
             ui.printLine();
             System.out.println(visitList.get(index - 1));
         }

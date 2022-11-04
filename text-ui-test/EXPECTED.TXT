@@ -1,4 +1,3 @@
-Loading existing data...
 Hello welcome to
 ıllıllı OneDoc ıllıllı
 Please choose one of the following options:
