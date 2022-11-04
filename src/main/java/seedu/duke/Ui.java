@@ -234,7 +234,7 @@ public class Ui {
 
     public void displayOneClientName(Client client, int i) {
         System.out.print(i + FULL_STOP);
-        System.out.println(client.getClientName());
+        System.out.println(SPACE + client.getClientName());
         System.out.println(LINE_BREAK);
     }
 
