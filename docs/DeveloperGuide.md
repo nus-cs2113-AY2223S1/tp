@@ -16,49 +16,49 @@
       - [3.2.1 Module Loader](#321-module-loader)
       - [3.2.2 Timetable](#322-timetable)
     - [3.3 Parser Component](#33-parser-component)
-      - [How the feature is implemented](#331-how-the-feature-is-implemented)
-      - [Why it is implemented this way](#332-why-it-is-implemented-this-way)
-      - [Alternatives considered](#333-alternatives-considered)
+      - [3.3.1 How the feature is implemented](#331-how-the-feature-is-implemented)
+      - [3.3.2 Why it is implemented this way](#332-why-it-is-implemented-this-way)
+      - [3.3.3 Alternatives considered](#333-alternatives-considered)
     - [3.4 Command Component](#34-command-component)
       - [3.4.1 AddModuleCommand](#341-addmodulecommand)
-        - [How the feature is implemented](#3411-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3412-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3413-alternatives-considered)
-      - [3.4.2 DeleteModuleCommand](#342-deletemodulecommand)
-        - [How the feature is implemented](#3421-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3422-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3423-alternatives-considered)
+        - [3.4.1.1 How the feature is implemented](#3411-how-the-feature-is-implemented)
+        - [3.4.1.2 Why it is implemented this way](#3412-why-it-is-implemented-this-way)
+        - [3.4.1.3 Alternatives considered](#3413-alternatives-considered)
+      - [3.4.2 RemoveModuleCommand](#342-removemodulecommand)
+        - [3.4.2.1 How the feature is implemented](#3421-how-the-feature-is-implemented)
+        - [3.4.2.2 Why it is implemented this way](#3422-why-it-is-implemented-this-way)
+        - [3.4.2.3 Alternatives considered](#3423-alternatives-considered)
       - [3.4.3 HelpCommand](#343-helpcommand)
-        - [How the feature is implemented](#3431-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3432-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3433-alternatives-considered)
+        - [3.4.3.1 How the feature is implemented](#3431-how-the-feature-is-implemented)
+        - [3.4.3.2 Why it is implemented this way](#3432-why-it-is-implemented-this-way)
+        - [3.4.3.3 Alternatives considered](#3433-alternatives-considered)
       - [3.4.4 SearchModuleCommand](#344-searchmodulecommand)
-        - [How the feature is implemented](#3441-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3442-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3443-alternatives-considered)
-      - [3.4.5 SelectCommand](#345-selectslotcommand)
+        - [3.4.4.1 How the feature is implemented](#3441-how-the-feature-is-implemented)
+        - [3.4.4.2 Why it is implemented this way](#3442-why-it-is-implemented-this-way)
+        - [3.4.4.3 Alternatives considered](#3443-alternatives-considered)
+      - [3.4.5 SelectSlotCommand](#345-selectslotcommand)
       - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
       - [3.4.7 InfoCommand](#347-infocommand)
-        - [How the feature is implemented](#3471-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3472-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3473-alternatives-considered)
+        - [3.4.7.1 How the feature is implemented](#3471-how-the-feature-is-implemented)
+        - [3.4.7.2 Why it is implemented this way](#3472-why-it-is-implemented-this-way)
+        - [3.4.7.3 Alternatives considered](#3473-alternatives-considered)
       - [3.4.8 TimetableCommand](#348-timetablecommand)
-        - [How the feature is implemented](#3481-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3482-why-it-is-implemented-this-way)
+        - [3.4.8.1 How the feature is implemented](#3481-how-the-feature-is-implemented)
+        - [3.4.8.2 Why it is implemented this way](#3482-why-it-is-implemented-this-way)
       - [3.4.9 ByeCommand](#349-byecommand)
       - [3.4.10 ListCommand](#3410-listcommand)
       - [3.4.11 ExportCommand](#3411-exportcommand)
       - [3.4.12 ImportCommand](#3412-importcommand)
     - [3.5 Utils Component](#35-utils-component)
       - [3.5.1 UI Component](#351-ui-component)
-        - [Why it is implemented this way](#3511-why-it-is-implemented-this-way)
-        - [Alternative Considered](#3512-alternative-considered)
+        - [3.5.1.1 Why it is implemented this way](#3511-why-it-is-implemented-this-way)
+        - [3.5.1.2 Alternative Considered](#3512-alternative-considered)
       - [3.5.2 Link Component](#352-link-component)
-        - [Why is it implemented this way](#3511-why-it-is-implemented-this-way)
-        - [Alternative Considered](#3512-alternative-considered)
+        - [3.5.2.1 Why is it implemented this way](#3521-why-is-it-implemented-this-way)
+        - [3.5.2.2 Alternative Considered](#3522-alternative-considered)
       - [3.5.3 Storage Component](#353-storage-component)
-        - [Why it is implemented this way](#3531-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3532-alternatives-considered)
+        - [3.5.3.1 Why it is implemented this way](#3531-why-it-is-implemented-this-way)
+        - [3.5.3.2 Alternatives considered](#3532-alternatives-considered)
   - [4. Implementation](#4-implementation)
     - [Storage feature](#storage-feature)
     - [Target user profile](#target-user-profile)
@@ -230,7 +230,7 @@ more information about that command.
 | Command Word | Command Subclass                                      | Intended Outcome                                                   |
 |--------------|-------------------------------------------------------|--------------------------------------------------------------------|
 | `add`        | [`AddModuleCommand`](#341-addmodulecommand)           | Adds the user input module into their timetable.                   |
-| `remove`     | [`RemoveModuleCommand`](#342-deletemodulecommand)     | Removes the user input module from their timetable.                |
+| `remove`     | [`RemoveModuleCommand`](#342-RemoveModuleCommand)     | Removes the user input module from their timetable.                |
 | `list`       | [`ListCommand`](#3410-listcommand)                    | Display all the module and slot selected by user                   |
 | `bye`        | [`ByeCommand`](#349-byecommand)                       | Exits the program.                                                 |
 | `export`     | [`ExportCommand`](#3411-exportcommand)                | Creates a portable NUSMod link to create their timetable on NUSMod |
@@ -272,14 +272,14 @@ The following sequence diagram shows how the undo operation works:
 Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
 and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
-#### 3.4.2 DeleteModuleCommand
+#### 3.4.2 RemoveModuleCommand
 
-The <code>DeleteModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
+The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
 
 ##### 3.4.2.1 How the feature is implemented
-The `DeleteModuleCommand` class extends the `Command` class.
-Similar to `AddModuleCommand` class, the constructor `DeleteModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+The `RemoveModuleCommand` class extends the `Command` class.
+Similar to `AddModuleCommand` class, the constructor `RemoveModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
 instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
 to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
 It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
@@ -294,7 +294,7 @@ method extended from super class `Object` has been overridden to return `true` f
 
 ##### 3.4.2.3 Alternatives considered
 Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
-and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
+and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
 
