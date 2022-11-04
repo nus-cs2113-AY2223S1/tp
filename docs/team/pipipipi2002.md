@@ -43,12 +43,13 @@ how the api is loaded and how the data fetching process is implemented.
 - Contributed to the design considerations for the update command and the limitations of LTA's API.
 
 ### Contributions to team-based tasks
+- Setup the Notion Page for easy task allocation.
 
 ### Review/mentoring contributions: Links to PRs reviewed, instances of helping team members in other ways.
 - Helping other members to use the Jansi library to enhance the user experience.
 
 ### Contributions beyond the project team:
-- 
+- Reported more bugs than necessary in the PE dry run.
 
 ### Tools
 
