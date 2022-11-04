@@ -19,20 +19,22 @@ towards their fitness journeys.
 ## Features
 
 TracknFit offers 3 main components: **Biometrics, Exercises, and Food**  
-For each component, you can **add, remove and view** records.  
+For each component, you can **add, remove and view** records.
+
 - Records are displayed in order of date by default
 
 TracknFit can also summarise your caloric balance for each day.  
 Please follow these guidelines when entering commands into the terminal:
+
 - Words in curly brackets are parameters to be supplied, separated by backslashes `/`.  
-e.g. in `set biometrics /{age} /{gender} /{height} /{activity level}`, age, gender, height and activity level 
-are parameters separated by `/` to be provided when using the `set biometrics` command.
-  - **Parameters must be entered in the same order as described.**
+  e.g. in `set biometrics /{age} /{gender} /{height} /{activity level}`, age, gender, height and activity level
+  are parameters separated by `/` to be provided when using the `set biometrics` command.
+    - **Parameters must be entered in the same order as described.**
 
 - Parameters in square brackets `[]` are optional.  
-e.g. in `add strength /{name} /{weight} /{sets} /{reps} [/{date}]`, the `add strength` command can be used with or
-without a date parameter
-  - **If no date is entered for a new record, the current local date on your computer will be used**
+  e.g. in `add strength /{name} /{weight} /{sets} /{reps} [/{date}]`, the `add strength` command can be used with or
+  without a date parameter
+    - **If no date is entered for a new record, the current local date on your computer will be used**
 - All dates should be entered in the format `DD-MM-YYYY`. For example, `31-12-2020`.
 
 Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit
@@ -40,6 +42,7 @@ Records are automatically saved when exiting TracknFit, and loaded when starting
 ### General
 
 #### Display help message: `help`
+
 Display the help message  
 Format: `help`
 
@@ -76,7 +79,7 @@ Date       | Weight | Fat Percentage | Description                              
 
 ```
 
-### View Calories : `view calories`
+#### View Calories : `view calories`
 
 Allows the user to check his/her total calorie consumption/burn and net surplus/deficit by date
 
@@ -96,7 +99,7 @@ Date       | Calories Consumed | Calories Burnt | Net Calories | Status         
 --------------------------------------------------------------------------------
 ```
 
-### Find Calories : `find calories`
+#### Find Calories : `find calories`
 
 Allows the user to check his/her total calorie consumption/burn and net surplus/deficit on that date
 
@@ -118,26 +121,21 @@ Date       | Calories Consumed | Calories Burnt | Net Calories | Status         
 
 ### Biometrics
 
-<details>
-<summary>Setting Biometrics</summary>
-
 #### Setting Biometrics: `set biometrics`
+
 Sets user biometrics in TracknFit  
-Format: `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}`
+Format: `set biometrics /{age} /{gender} /{height} /{activity level}`
 
 * age, height, weight and fat percentage should be integer values
 * age must be less than 120
 * gender can only be female, male or others
 * height should be in units of cm and cannot exceed 300cm
-* weight should be in units of kg and cannot exceed 400kg
-* fat percentage should be between 1% and 99%
 * activity level should be between 1 and 5
 
 Example of usage: `set biometrics /15 /male /146 /98 /55 /2`
-</details>
-
 
 #### Adding weight and fat record: `add weight`
+
 Adds a record of weight and fat to TracknFit
 Format: `add weight /{weight} /{fat percentage}`
 
@@ -206,7 +204,7 @@ This strength exercise is added to the exercise list successfully
 -------------------------------------------------------------------------------
 ```
 
-### Viewing strength exercise: `view strength`
+#### Viewing strength exercise: `view strength`
 
 View user's strength exercises record in TracknFit
 
@@ -229,7 +227,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-### Finding strength exercise: `find strength`
+#### Finding strength exercise: `find strength`
 
 View user's progress for strength exercise overtime
 
@@ -252,7 +250,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-### Adding cardio exercise: `add cardio`
+#### Adding cardio exercise: `add cardio`
 
 Add cardio exercise into the exercise list
 
@@ -279,7 +277,7 @@ Status: [ ]
 -------------------------------------------------------------------------------
 ```
 
-### Viewing cardio exercise: `view cardio`
+#### Viewing cardio exercise: `view cardio`
 
 View user's cardio exercises record in TracknFit
 
@@ -301,7 +299,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-### Finding cardio exercise: `find cardio`
+#### Finding cardio exercise: `find cardio`
 
 View user's progress for cardio exercise overtime
 
@@ -324,7 +322,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-### Viewing exercise: `view exercise`
+#### Viewing exercise: `view exercise`
 
 View all exercises in the exercise list
 
@@ -351,7 +349,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 ```
 
-### Marking exercise as done or undone: `mark`
+#### Marking exercise as done or undone: `mark`
 
 Mark undone exercise displayed by `view exercise` as done.  
 Mark completed exercise displayed by `view exercise /done` as undone
@@ -366,13 +364,13 @@ Format:
 - Metabolic equivalent (met) a double with 1 d.p, must be positive and smaller than 50.
 - met can be used to measure the intensity of the activity and is used to calculate calories burnt for the exercise. Use
   the reference below as a guide to estimate the intensity of the exercise.
-  - e.g.
-    - Walking: 3.0
-    - Light calisthenics (e.g. push ups, jumping jacks): 4.0
-    - WeightLifting: 6.0
-    - circuit training: 8.0
-    - Running(7min/km): 8.0
-    - Running(5min/km): 12.0
+    - e.g.
+        - Walking: 3.0
+        - Light calisthenics (e.g. push ups, jumping jacks): 4.0
+        - WeightLifting: 6.0
+        - circuit training: 8.0
+        - Running(7min/km): 8.0
+        - Running(5min/km): 12.0
 
 Example of usage: `mark undone /1`
 
@@ -398,7 +396,7 @@ calories:62
 
 ### Food
 
-### Adding Food Consumptions: `add food`
+#### Adding Food Consumptions: `add food`
 
 Add user's food consumption in TracknFit
 
@@ -445,7 +443,7 @@ Recorded on: 24-10-2022
 -------------------------------------------------------------------------------
 ```
 
-### Viewing Food Consumptions: `view food`
+#### Viewing Food Consumptions: `view food`
 
 View user's food consumption over time in TracknFit
 
@@ -475,7 +473,7 @@ Index | Description                                         | Calories | Date   
 
 ```
 
-### Remove Food Consumptions: `remove food`
+#### Remove Food Consumptions: `remove food`
 
 Remove a specified record from food list in TracknFit
 
@@ -499,7 +497,7 @@ Recorded on: 24-10-2022
 
 ```
 
-### Find Food Consumptions Based On Description: `find food`
+#### Find Food Consumptions Based On Description: `find food`
 
 Find specific food records from user's food consumption over time using keyword in TracknFit
 
@@ -523,7 +521,7 @@ Index | Description  | Calories | Date       |
 -------------------------------------------------------------------------------
 ```
 
-### Find Food Consumptions Based On Date: `find date_f`
+#### Find Food Consumptions Based On Date: `find date_f`
 
 Find specific food records from user's food consumption over time using keyword in TracknFit
 
@@ -555,7 +553,6 @@ Index | Description                                         | Calories | Date   
 
 ```
 
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -574,22 +571,22 @@ Index | Description                                         | Calories | Date   
 * Delete a food record `remove food /{index}`
 * Find food records using a keyword `find food /{description}`
 
-  - Viewing help: `help`
-  - Setting your biometrics within the app: `set biometrics`
-  - Add a record of weight and fat percentage: `add weight`
-  - View records of weight and fat percentage: `view weight`
-  - Adding food consumption: `add food`
-  - Viewing food consumptions: `view food`
-  - Remove food: `remove food`
-  - Find food consumptions: `find food`
-  - Adding a strength exercise: `add strength`
-  - Viewing strength exercise: `view strength`
-  - Finding strength exercise: `find strength`
-  - Adding a cardio exercise: `add cardio`
-  - Viewing cardio exercise: `view cardio`
-  - Finding cardio exercise: `find cardio`
-  - Viewing exercise: `view exercise`
-  - Marking exercise as done or undone: `mark`
-  - Viewing BMI: `view BMI`
-  - Viewing maintenance calories: `view maintenance`
-  - Viewing daily calorie consumption, burn and net intake: `view calories`
+    - Viewing help: `help`
+    - Setting your biometrics within the app: `set biometrics`
+    - Add a record of weight and fat percentage: `add weight`
+    - View records of weight and fat percentage: `view weight`
+    - Adding food consumption: `add food`
+    - Viewing food consumptions: `view food`
+    - Remove food: `remove food`
+    - Find food consumptions: `find food`
+    - Adding a strength exercise: `add strength`
+    - Viewing strength exercise: `view strength`
+    - Finding strength exercise: `find strength`
+    - Adding a cardio exercise: `add cardio`
+    - Viewing cardio exercise: `view cardio`
+    - Finding cardio exercise: `find cardio`
+    - Viewing exercise: `view exercise`
+    - Marking exercise as done or undone: `mark`
+    - Viewing BMI: `view BMI`
+    - Viewing maintenance calories: `view maintenance`
+    - Viewing daily calorie consumption, burn and net intake: `view calories`
