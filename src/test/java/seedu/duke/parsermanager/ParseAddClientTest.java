@@ -58,20 +58,19 @@ class ParseAddClientTest {
         ParseAddClient parseAddClient = new ParseAddClient(VALID_TEST_CASE, clientList);
 
         Command command = parseAddClient.parseCommand();
-        PropertyList propertyList= new PropertyList();
+        PropertyList propertyList = new PropertyList();
         PairingList pairingList = new PairingList();
         Storage storage = new Storage(clientList, propertyList, pairingList);
         command.execute(new Ui(), storage, propertyList, clientList, pairingList);
 
         int addedClientIndex = clientList.getCurrentListSize() - OFFSET_UNIT_VALUE;
         String storedClientName = clientList.getClientList().get(addedClientIndex).getClientName();
-        String storedClientContactNumber = clientList.getClientList().get(addedClientIndex).getClientContactNumber();
-        String storedClientEmail = clientList.getClientList().get(addedClientIndex).getClientEmail();
-        String storedClientBudget = clientList.getClientList().get(addedClientIndex).getClientBudgetPerMonth();
-
         assertEquals(storedClientName, CLIENT_NAME);
+        String storedClientContactNumber = clientList.getClientList().get(addedClientIndex).getClientContactNumber();
         assertEquals(storedClientContactNumber, CLIENT_CONTACT_NUMBER);
+        String storedClientEmail = clientList.getClientList().get(addedClientIndex).getClientEmail();
         assertEquals(storedClientEmail, CLIENT_EMAIL);
+        String storedClientBudget = clientList.getClientList().get(addedClientIndex).getClientBudgetPerMonth();
         assertEquals(storedClientBudget, CLIENT_BUDGET_PER_MONTH);
     }
 
