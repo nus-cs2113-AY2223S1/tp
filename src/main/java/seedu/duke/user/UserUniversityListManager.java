@@ -3,11 +3,7 @@ package seedu.duke.user;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.ui.Ui;
-import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.parser.UserStorageParser;
-import seedu.duke.userstorage.UserStorage;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -33,23 +29,6 @@ public class UserUniversityListManager {
     public UserUniversityListManager() {
         this.myManager = new HashMap<String, UserUniversityList>();
         this.ttManager = new TimetableManager();
-    }
-
-    public UserUniversityListManager(String fileContent) throws IOException {
-        try {
-            myManager = UserStorageParser.convertFileContentIntoUniversityList(fileContent);
-            this.ttManager = UserStorageParser.getSavedTimetables();
-            UserStorageParser.getTimetables(this);
-            checkTimetables();
-            checkUniversityLists();
-        } catch (InvalidUserStorageFileException e) {
-            Ui.printExceptionMessage(e);
-            System.out.println("Creating new University List Manager");
-            myManager = new HashMap<String, UserUniversityList>();
-            UserStorage.saveFile("", true);
-            System.out.println("Creating new Timetable Manager");
-            ttManager = new TimetableManager();
-        }
     }
 
     private void checkTimetables() {

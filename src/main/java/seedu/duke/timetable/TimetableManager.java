@@ -1,12 +1,9 @@
 package seedu.duke.timetable;
 
 import seedu.duke.exceptions.InvalidUniversityException;
-import seedu.duke.exceptions.InvalidUserStorageFileException;
 import seedu.duke.exceptions.LessonNotFoundException;
 import seedu.duke.exceptions.TimetableNotFoundException;
-import seedu.duke.parser.UserStorageParser;
 import seedu.duke.ui.Ui;
-import seedu.duke.user.UserUniversityList;
 
 import java.util.HashMap;
 import java.util.Map;
