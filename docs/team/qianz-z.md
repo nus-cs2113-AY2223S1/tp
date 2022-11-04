@@ -70,3 +70,47 @@ The following sections summarise what I have contributed to the project.
     is more convenient and easier.
 - Pull requests: [#73](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/73)
 
+
+
+#### **Code Contributed**: [Reposense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=qianz-z&tabRepo=AY2223S1-CS2113-T18-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+
+
+#### **Project Management**:
+- Created Github organization for the team
+- Helped to set up Github team repository
+- Created labels with relevant description, and milestones with due date
+- Created issues and user stories for `v1.0`, `v2.0`
+- Updated and resolved PE-D issues to team for `v2.1`
+  ([#107](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/107),
+  [#104](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/104),
+  [#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90))
+- Helped to find bugs and assign new issues to address bugs
+  ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149))
+
+
+#### **Enhancements To Existing Features**:
+
+#### **Built the skeleton code for Command classes**
+To start off the project, we needed a base structure to build on for parsing and execution of commands.
+I set up the abstract `Command` class and the initial few `XYZCommand` classes for v1.0 to provide the
+structure for the rest of the team to build on.
+([#1](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/1))
+
+#### **Storing Recipe Data in individual Recipe text files and updating AllRecipe text file**
+For every recipe, it will be accompanied by an individual recipe text file that contains all the details of
+recipe. This helps to make the editing, deletion and finding of recipes easier.
+([#73](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/73))
+
+
+#### **Documentation**:
+- User Guide:
+  - Created the skeleton of the User Guide
+  - Added introduction, about page, and quick start description. ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
+  - Added description of command, format, code example and important notes to all commands.([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
+  - Update Data Management section and Command Summary ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
+  - Added shortcuts back to content page after every major section for easier navigation (([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132)))
+- Developer Guide:
+  - Added documentation and class diagram for the [_`Storage` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#storage-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
+  - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
+  - Standardised styling for PlantUML diagrams
+  - Standardised the styling on Github Pages for Product Website.
