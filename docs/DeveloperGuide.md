@@ -164,9 +164,7 @@ It consists of the following classes:
 - `SemesterData`: Semester data contains all the module information pertaining to a single semester.
 - `Timetable`: Creates a timetable for the user with their selected modules and in their planning semester.
 
-<p align="center">
-<img alt="Model Classes" src="images/model.png" width="50%" />
-</p>
+![Model Classes](images/model.png)
 
 #### 3.2.1 Module Loader
 
