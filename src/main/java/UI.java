@@ -218,10 +218,10 @@ public class UI {
 
     // Patient commands
     public static final String PATIENT_ADD = "\n* To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]"
-            + "\n\tn - The name should be one or two words"
+            + "\n\tn - The name should be one or two space-separated words"
             + "\n\tg - The gender should be one letter, M or F"
             + "\n\td - The date of birth should be formatted as DD-MM-YYYY"
-            + "\n\ti - The id can be a sequence of numbers or letters";
+            + "\n\ti - The id can be a sequence of numbers or letters without any spaces";
     public static final String PATIENT_EDIT = "\n* To edit a patient's information: "
             + "edit i/[ID] (n/[name] or g/[M/F] or d/[DOB])"
             + "\n\tn/g/d - Please edit only one aspect of a patient at a time";
@@ -256,9 +256,10 @@ public class UI {
     // Prescription commands
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "
             + "n/[name] d/[dosage] t/[time interval]"
-            + "\n\tn - The prescription name should be one or two words"
-            + "\n\td - The dosage should be a number followed by an amount"
-            + "\n\tt - The time instruction should be instructions on how to take, with any number of words";
+            + "\n\tn - The prescription name can be multiple words, including -"
+            + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
+            + "\n\tt - The time instruction explains how to take the dosage,"
+            + "with any number of words";
     public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit x/[index] "
             + "(n/[name] or d/[dosage] or t/[time interval])"
             + "\n\tn/d/t - Please edit only one aspect of a prescription at a time";
@@ -275,9 +276,7 @@ public class UI {
             + "active: activate x/[index]";
 
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
-            + "inactive: deactivate x/[index]"
-            + "\n\tx - The index should be relative to all the visits of a patient";
-
+            + "inactive: deactivate x/[index]";
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
