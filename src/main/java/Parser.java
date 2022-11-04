@@ -309,7 +309,8 @@ public class Parser {
                         + "\n\tx - The index should be a displayed number next to the prescription"
                         + "\n\tn - The prescription name can be multiple words, including -"
                         + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
-                        + "\n\tt - The time instruction should be instructions on how to take, with any number of words");
+                        + "\n\tt - The time instruction explains how to take the dosage, "
+                        + "with any number of words");
             case VIEW_PATIENT_PRES_COMMAND:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_VIEW_PATIENT
@@ -458,7 +459,7 @@ public class Parser {
     private static Matcher viewVisitPatientMatcher(String input) {
         Pattern viewVisitPatientPattern = Pattern.compile(
                 "^" + VIEW_PATIENT_COMMAND + "\\s*i/"
-                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                        + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewVisitPatientPattern.matcher(input);
     }
 
@@ -487,14 +488,14 @@ public class Parser {
     private static Matcher viewPrescriptionPatientMatcher(String input) {
         Pattern viewPrescriptionPatientPattern = Pattern.compile(
                 "^" + VIEW_PATIENT_PRES_COMMAND + "\\s*i/"
-                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                        + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionPatientPattern.matcher(input);
     }
 
     private static Matcher viewPrescriptionActiveMatcher(String input) {
         Pattern viewPrescriptionActivePattern = Pattern.compile(
                 "^" + VIEW_ACT_PATIENT_PRES_COMMAND + "\\s*i/"
-                        + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                        + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionActivePattern.matcher(input);
     }
 
@@ -625,5 +626,5 @@ public class Parser {
     private static final String OPTIONAL_REASON_REGEX =
             "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*";
     private static final String REASON_REGEX = "\\s*((?:\\w+\\s*)*\\w+)\\s*";
-    private static final String INDEX_REGEX = "\\s*(\\d+)\\s";
+    private static final String INDEX_REGEX = "\\s*(\\d+)\\s*";
 }

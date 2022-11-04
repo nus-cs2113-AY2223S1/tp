@@ -258,7 +258,8 @@ public class UI {
             + "n/[name] d/[dosage] t/[time interval]"
             + "\n\tn - The prescription name can be multiple words, including -"
             + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
-            + "\n\tt - The time instruction should be instructions on how to take, with any number of words";
+            + "\n\tt - The time instruction explains how to take the dosage,"
+            + "with any number of words";
     public static final String PRESCRIPTION_EDIT = "\n* To edit a prescription: edit x/[index] "
             + "(n/[name] or d/[dosage] or t/[time interval])"
             + "\n\tn/d/t - Please edit only one aspect of a prescription at a time";
@@ -275,9 +276,7 @@ public class UI {
             + "active: activate x/[index]";
 
     public static final String PRESCRIPTION_CHANGE_INACTIVE = "\n* To change a prescription record to be "
-            + "inactive: deactivate x/[index]"
-            + "\n\tx - The index should be relative to all the visits of a patient";
-
+            + "inactive: deactivate x/[index]";
     public static final String RETURN_TO_MAIN = "\n* To return to main menu: main";
 
     public static final String EXIT_PROGRAM = "\n* To quit OneDoc: bye";
