@@ -65,7 +65,7 @@ There are 7 different classes, which each inherit from the Command class, and wo
 display function in Ui
 * The Ui function then displays the necessary information.
 * Finally, it states the number of items present, and the Command object is no longer used.
-![ListClassDiagram](diagrams/ListClassDiagramIncludePairs.png)
+![ListClassDiagram](diagrams/ListClassDiagramIncludePairsFinal.png)
 Note: The C symbols are a result of the PlantUml layout.
 
 ---  
