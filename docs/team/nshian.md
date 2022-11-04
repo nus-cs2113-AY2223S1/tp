@@ -50,7 +50,7 @@ Updated class diagrams to follow standard notation.
 
 ### Contributions to Team-Based Tasks
 I helped to set up the About Us page and modified GitHub workflows to remove unnecessary checks.
-I was also the most active in reviewing and approving pull requests (43 PRs caa 4 Nov 2022).
+I was also the most active in reviewing and approving pull requests (44 PRs caa 4 Nov 2022).
 In my own time, I also conducted testing to identify undetected bugs ([#56](https://github.com/AY2223S1-CS2113-W13-2/tp/issues/56)).
 I maintained the issue tracker by tagging and labelling various pull requests for effective reference.
 
