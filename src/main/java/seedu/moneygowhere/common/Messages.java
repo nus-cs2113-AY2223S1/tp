@@ -461,6 +461,10 @@ public class Messages {
             + CONSOLE_COMMAND_VIEW_TARGET_SYNTAX;
     public static final String COMMAND_VIEW_TARGET_EMPTY_LIST = ""
             + "Your list of targets is empty. ";
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -480,6 +484,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -520,6 +528,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -572,6 +584,10 @@ public class Messages {
             + CONSOLE_COMMAND_VIEW_INCOME_SYNTAX;
     public static final String COMMAND_VIEW_INCOME_EMPTY_LIST = ""
             + "Your list of incomes is empty. ";
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -591,6 +607,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -627,6 +647,11 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+
 
     //endregion
 
