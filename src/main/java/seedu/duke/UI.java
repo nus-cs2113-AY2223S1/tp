@@ -110,6 +110,13 @@ public class UI {
     }
 
     /**
+     * Message to be printed when modules from a semester have been successfully cleared from plan
+     */
+    public static void semesterClearedMessage(String semester) {
+        System.out.println("Successfully cleared all modules for " + semester + ".");
+    }
+
+    /**
      * Message to be printed when there is no modules found in plan
      */
     public static void noModulesFoundMessage() {

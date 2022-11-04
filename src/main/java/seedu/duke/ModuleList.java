@@ -149,8 +149,6 @@ public class ModuleList {
         if(modules.isEmpty()) {
             UI.noModulesFoundMessage();
         }
-
-        System.out.println("\n" + "Cumulative Average Point (CAP) : " + df.format(calculateCap()));
     }
 
     /**
@@ -168,13 +166,17 @@ public class ModuleList {
             for (Module mod : modules) {
                 if (!mod.getSemesterTaken().matches(semester)) {
                     isFound = true;
+                    System.out.println("isFound");
                     updatedModules.add(mod);
                 }
             }
             modules = updatedModules;
+
         }
         if (!isFound) {
             UI.notFoundClearMessage(semester);
+        } else if (!semester.equals("all")) {
+            UI.semesterClearedMessage(semester);
         }
     }
 
