@@ -111,7 +111,18 @@ Landed Property Labels
   <LP BGL> for LP Bungalow
 --------------------------------------------------------------------------------
 ```
-Lastly, for valid `PRICE`, a positive number excluding any letters/symbols/spaces must be provided.
+Lastly, for valid `PRICE`, a positive integer must be provided.
+
+Example: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+
+Expected Output:
+```
+Adding a property with the following information:
+  Landlord: Ash Ketchun
+  Address: 25A Pallet Town, S121111
+  Renting Price: SGD1600/month
+  Unit Type: LP Bungalow
+```
 
 ---
 
@@ -187,6 +198,17 @@ For valid `EMAIL`, it must adhere to the RFC 5322 Official Email Standard.
 
 For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces must be provided.
 
+Example: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+
+Expected Output:
+```
+Adding a client with the following information:
+  Client: Gary Oaks
+  Contact Number: 90876543
+  Email: garyoaks@example.com
+  Budget: SGD1550/month
+
+```
 ---
 
 ### Delete Client: `delete -client`
