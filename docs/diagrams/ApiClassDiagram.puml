@@ -15,23 +15,38 @@ Class Ui #FFFFFF
 }
 
 package API <<Rectangle>> {
+Class "<<interface>>\nApiInterface" as ApiInterface {
+    syncFetchData()
+}
 Class Api {
     -<u>FETCH_TRIES: int
     -client: HttpClient
     -request: HttpRequest
-    -responseFuture: CompletableFuture<HttpResponse<String>>
+    -responseFutureList: ArrayList<CompletableFuture<HttpResponse<String>>>
     -apiKey: String
     +Api(String, String)
+    +getRequest(): HttpRequest
     +getApiKey(): String
-    +getAuthStatus(): String
+    +getApiAuthStatusString(): String
+    +getAuthStatus(): AuthenticationStatus
+    +setAuthStatus(AuthenticationStatus)
     +loadApiKey(String, String, boolean)
     +loadDefaultApiKey()
     +isApiValid(String): boolean
-    +asyncExecuteRequest()
-    +asyncGetResponse(): String
-    +fetchData()
     +syncFetchData()
+    +generateHttpRequestCarpark(int)
+    +asyncExecuteRequest(int, int)
+    +fetchData(int): String
+    +processData(String): String
+    +countData(String): int
+    +isValidResponse(int): boolean
+    -asyncGetResponse(int): String
     }
+
+Class ApiStub {
+    +ApiStub(String, String)
+    +syncFetchData()
+}
 
 Class "<<enumeration>>\nAuthenticationStatus" as AuthenticationStatus
     {
@@ -42,9 +57,11 @@ Class "<<enumeration>>\nAuthenticationStatus" as AuthenticationStatus
     }
     hide empty methods
 }
-
+Api -[dashed]-|> ApiInterface
+ApiStub -[dashed]-|> ApiInterface
 Api -[dashed]-> AuthenticationStatus
 Api *-->"1" Storage
 Api *-->"1" Ui
+ApiStub *-->"1" Storage
 
 @enduml
