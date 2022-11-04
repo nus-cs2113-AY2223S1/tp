@@ -394,42 +394,51 @@ prevent entries retaining within pairingList after it has been deleted from clie
 There are 3 main steps whenever a list command needs to be executed
 * When the user enters any command, it first needs be understood. That is handled by the ParseManager class.
    Next, when the first word entered by the user is determined to be `list`, ParseManager itself then determines
-   the type of list command entered, including the tags. ParseListClient, ParseListProperty and ParseListEverything
-   are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty also determine
-   if tags have been entered, and if those tags are valid.
+   the type of list command entered, including the tags. ParseListClient, ParseListProperty, ParseListPair and
+ParseListEverything are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty
+also determine if tags have been entered, and if those tags are valid. ParseListPair also checks whether -short 
+has been added or not.
   ```
-        case COMMAND_LIST:
-            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
-            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
-            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
-            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
-            if (isListProperty) {
-                return new ParseListProperty(listCommandTypeAndFlags.get(1));
-            } else if (isListClient) {
-                return new ParseListClient(listCommandTypeAndFlags.get(1));
-            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
-                return new ParseListEverything();
-            } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
-            }
+      private Parser parseListCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+        ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_FLAG);
+        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_FLAG);
+        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_FLAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_FLAG);
+        if (isListProperty) {
+            return new ParseListProperty(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListClient) {
+            return new ParseListClient(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListEverything && listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX).isEmpty()) {
+            return new ParseListEverything();
+        } else if (isListPairs) {
+            return new ParseListPair(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else {
+            throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
+        }
+    }
   ```
 This block of code is part of ParseManager. It determines the type of list operation(-client, 
 -property or -everything) and returns the corresponding object.  
 Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
 throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
 
-* There are five different classes which handle each of the features described above. Each class inherits from the
-   abstract Command class, and reads information present in either the PropertyList or ClientList objects respectively.
+* There are seven different classes which handle each of the features described above. Each class inherits from the
+   abstract Command class, and reads information present in either the PropertyList object, ClientList object or both.
 
-The execute function retrieves the propertyList holding all the current properties. It then loops 
-through every property present. For every property, it passes it to the corresponding display function
-in Ui.
+* The execute function works in slightly different ways -  
+To list with tags(`ListClientsWithTags` and `ListPropertiesWithTags`), it calls the corresponding function. 
+That function then loops through all the information about clients and properties, and sends a Client or Property 
+object to the Ui class for printing
+* For all other cases, the execute function itself runs the loop, which reads every single client, property or pair,
+and sends individual objects to the Ui class for display.
 
 * Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
    The loop for printing every single client or property is present in the Command itself.
-  ![CommandListClientsClass](diagrams/CommandListClientsClass.png)
+  ![CommandListClientsClass](diagrams/CommandListClientsClassUpdated.png)
 The above is an example for CommandListClients. It reads from ClientList. Then, it displays each line
-using the displayOneClient function in Ui.  
+using the displayOneClient function in Ui. Note that the C tags for class are a result of the PlantUml 
+display.  
 The sequence diagram of the operation is as follows - 
 ![ListSequence](diagrams/ListSequenceUpdated.png)
 ___
@@ -454,22 +463,24 @@ ___
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                         | So that I can ...                                                    |
-|---------|----------|---------------------------------------|----------------------------------------------------------------------|
-| v1.0    | user     | add properties                        | keep track of properties                                             |
-| v1.0    | user     | add clients                           | keep track of clients                                                |
-| v1.0    | user     | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
-| v1.0    | user     | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
-| v1.0    | user     | view a list of properties             | find out what and how many properties I manage                       |
-| v1.0    | user     | view a list of clients                | find out what and how many clients I manage                          |
-| v1.0    | user     | check the details of a property       | view the property's information                                      |
-| v1.0    | user     | pair a client to a property           | record down which client is renting which property                   |
-| v1.0    | user     | unpair a client to a property         | update my rental records when a client is no longer renting property |
-| v1.0    | user     | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | user     | quit the app                          | free up memory for other applications                                |
-| v2.0    | user     | check the details of a client         | view the client's information                                        |
-| v2.0    | user     | search clients using their details    | easily find specific clients                                         |
-| v2.0    | user     | search properties using their details | easily find specific properties                                      |
+| Version | As a ... | I want to ...                                           | So that I can ...                                                    |
+|---------|----------|---------------------------------------------------------|----------------------------------------------------------------------|
+| v1.0    | user     | add properties                                          | keep track of properties                                             |
+| v1.0    | user     | add clients                                             | keep track of clients                                                |
+| v1.0    | user     | delete properties                                       | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | user     | delete clients                                          | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | user     | view a list of properties                               | find out what and how many properties I manage                       |
+| v1.0    | user     | view a list of clients                                  | find out what and how many clients I manage                          |
+| v1.0    | user     | check the details of a property                         | view the property's information                                      |
+| v1.0    | user     | pair a client to a property                             | record down which client is renting which property                   |
+| v1.0    | user     | unpair a client to a property                           | update my rental records when a client is no longer renting property |
+| v1.0    | user     | save my data                                            | used the data created from a previous use of the app                 |
+| v1.0    | user     | quit the app                                            | free up memory for other applications                                |
+| v2.0    | user     | check the details of a client                           | view the client's information                                        |
+| v2.0    | user     | search clients using their details                      | easily find specific clients                                         |
+| v2.0    | user     | search properties using their details                   | easily find specific properties                                      |
+| v2.0    | user     | list only specific details about clients and properties | Display the information I need without cluttering the screen         |
+| v2.1    | user     | view a list of pairings completed                       | Keep track of all pairings I have already made                       |
 
 ---
 
