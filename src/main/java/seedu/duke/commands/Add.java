@@ -18,7 +18,7 @@ public class Add extends Command {
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputExeption {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -31,7 +31,7 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputExeption {
+    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
@@ -46,7 +46,7 @@ public class Add extends Command {
     }
 
     private void checkOverallExceptionForAdd(String course, String semester,
-                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputExeption {
+                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
         String errorMessage = "";
 
         try{
@@ -82,7 +82,7 @@ public class Add extends Command {
         if(!errorMessage.equals("")){
             System.out.println("Unable to ADD module due to these issues:");
             System.out.println(errorMessage);
-            throw new InvalidOverallInputExeption();
+            throw new InvalidOverallInputException();
         }
     }
 
