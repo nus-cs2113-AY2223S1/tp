@@ -14,6 +14,8 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 // @@author jorellesee
 public class FindUserCommand extends Command {
     private final String[] parts;
+    private static final String KEYWORD_DELIMITER = "k";
+
     private final UserList userList;
 
     /**
@@ -36,7 +38,7 @@ public class FindUserCommand extends Command {
         String arg = "";
         for (String part : parts) {
             String delimiter = CommandParser.getArgsDelimiter(part);
-            if (delimiter.equals("k")) {
+            if (delimiter.equals(KEYWORD_DELIMITER)) {
                 arg = CommandParser.getArgValue(part);
             } else {
                 throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
