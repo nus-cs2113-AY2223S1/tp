@@ -227,13 +227,6 @@ public class ModuleList {
     }
 
     /**
-     * Returns total ungraded (S/U/-) Mcs taken in whole plan
-     */
-    public Integer totalUngradedMcs() {
-        return totalMcs() - totalGradedMcs();
-    }
-
-    /**
      * Returns total Mcs taken in whole plan
      */
     public Integer totalMcs() {
@@ -242,6 +235,40 @@ public class ModuleList {
             totalMcs += mod.getMcs();
         }
         return totalMcs;
+    }
+
+    /**
+     * Returns total S/U Mcs taken in whole plan
+     */
+    public Integer totalSuMcs() {
+        Integer totalSuMcs = 0;
+        for (Module mod : modules) {
+            if(mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
+                totalSuMcs += mod.getMcs();
+            }
+        }
+        return totalSuMcs;
+    }
+
+    /**
+     * Returns total S/U Mcs taken in whole plan
+     */
+    public Integer totalUngradedMcs() {
+        Integer totalUngradedMcs = 0;
+        for (Module mod : modules) {
+            if(mod.getGrade().equals("-")) {
+                totalUngradedMcs += mod.getMcs();
+            }
+        }
+        return totalUngradedMcs;
+    }
+
+    /**
+     * Returns total MCs need to graduate
+     */
+    public Integer McsForGraduation() {
+        Integer McsNeededForGraduation = 160;
+        return  McsNeededForGraduation - totalMcs() - totalUngradedMcs();
     }
 
     /**
