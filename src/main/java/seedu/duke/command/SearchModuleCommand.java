@@ -93,9 +93,9 @@ public class SearchModuleCommand extends Command {
             throw new YamomException(ERROR_WRONG_FORMAT);
         }
         List<String> extraParams = params.keySet()
-            .stream()
-            .filter(k -> !List.of("code", "title", "level", "sem").contains(k))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(k -> !List.of("code", "title", "level", "sem").contains(k))
+                .collect(Collectors.toList());
         for (String p : extraParams) {
             throw new YamomException(ERROR_UNEXPECTED_PARAMETER + p);
         }
@@ -169,59 +169,96 @@ public class SearchModuleCommand extends Command {
                                                   Integer toSearchSemester, String toSearchModuleTitle) {
         assert toSearchModuleCode != null || toSearchModuleTitle != null : "At least either the module code or title "
                 + "must be provided to search for!";
+
+        List<Module> searchResult = initialiseSearchResult(toSearchModuleCode, toSearchModuleTitle);
+
+        // if search field is both module code and module title, then searchResult will be updated to only
+        // showing modules that contains both user's input module code and title
+        if (toSearchModuleCode != null && toSearchModuleTitle != null) {
+            searchResult = filterByCodeAndTitle(searchResult, toSearchModuleCode, toSearchModuleTitle);
+
+        }
+
+        // filter the searchResult if toSearchLevel is not empty and level does not match
+        if (toSearchLevel != null) {
+            searchResult = filterByLevel(searchResult, toSearchLevel);
+        }
+
+        // filter the searchResult if toSearchSemester is not empty and semester does not match
+        if (toSearchSemester != null) {
+            searchResult = filterBySemester(searchResult, toSearchSemester);
+        }
+
+        return searchResult;
+    }
+
+    /**
+     * Initialise the search result by adding modules that contains the module code or module title.
+     *
+     * @param toSearchModuleCode  module code to search for
+     * @param toSearchModuleTitle module title to search for
+     * @return list of modules that match the search query
+     */
+    public static List<Module> initialiseSearchResult(String toSearchModuleCode, String toSearchModuleTitle) {
         List<Module> moduleList = Module.getAll();
         List<Module> searchResult = new ArrayList<>();
 
-        // add all the mods with similar toSearchModuleCode and toSearchModuleTitle to searchResult
         for (Module m : moduleList) {
             if (toSearchModuleCode != null && m.moduleCode.contains(toSearchModuleCode.toUpperCase())) {
                 searchResult.add(m);
             }
 
+            // add only if it is not already in the list
             if (toSearchModuleTitle != null && m.title.toLowerCase().contains(toSearchModuleTitle.toLowerCase())) {
-                // add only if it is not already in the list
                 if (!searchResult.contains(m)) {
                     searchResult.add(m);
                 }
             }
         }
-
-        // if search field is both module code and module title, then searchResult will be updated to only
-        // showing modules that contains both user's input module code and title
-        if (toSearchModuleCode != null && toSearchModuleTitle != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();
-            for (Module m : searchResult) {
-                if (m.moduleCode.contains(toSearchModuleCode.toUpperCase()) && m.title.toLowerCase()
-                        .contains(toSearchModuleTitle.toLowerCase())) {
-                    updatedSearchResult.add(m);
-                }
-            }
-            searchResult = updatedSearchResult;
-        }
-
-        // filter the searchResult if toSearchLevel is not empty and level does not match
-        if (toSearchLevel != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();
-            for (Module module : searchResult) {
-                if (module.getLevel() == toSearchLevel) {
-                    updatedSearchResult.add(module);
-                }
-            }
-            searchResult = updatedSearchResult;
-        }
-
-        // filter the searchResult if toSearchSemester is not empty and semester does not match
-        if (toSearchSemester != null) {
-            List<Module> updatedSearchResult = new ArrayList<>();
-            for (Module module : searchResult) {
-                if (module.isOfferedInSemester(toSearchSemester)) {
-                    updatedSearchResult.add(module);
-                }
-            }
-            searchResult = updatedSearchResult;
-        }
-
         return searchResult;
+    }
+
+    /**
+     * Filter the search result by module code and module title. This will remove duplicates in the initial search
+     * result as well as return a list of modules that contains both the module code and module title.
+     *
+     * @param searchResult        list of modules to filter
+     * @param toSearchModuleCode  module code to search for
+     * @param toSearchModuleTitle module title to search for
+     * @return list of modules that match the search query
+     */
+    public static List<Module> filterByCodeAndTitle(List<Module> searchResult, String toSearchModuleCode,
+                                                    String toSearchModuleTitle) {
+        List<Module> updatedSearchResult = new ArrayList<>();
+        for (Module m : searchResult) {
+            if (m.moduleCode.contains(toSearchModuleCode.toUpperCase()) && m.title.toLowerCase()
+                    .contains(toSearchModuleTitle.toLowerCase())) {
+                updatedSearchResult.add(m);
+            }
+        }
+        return updatedSearchResult;
+    }
+
+    // filter the searchResult if toSearchLevel is not empty and level does not match
+    public static List<Module> filterByLevel(List<Module> searchResult, Integer toSearchLevel) {
+        List<Module> updatedSearchResult = new ArrayList<>();
+        for (Module module : searchResult) {
+            if (module.getLevel() == toSearchLevel) {
+                updatedSearchResult.add(module);
+            }
+        }
+        return updatedSearchResult;
+    }
+
+    // filter the searchResult if toSearchSemester is not empty and semester does not match
+    public static List<Module> filterBySemester(List<Module> searchResult, Integer toSearchSemester) {
+        List<Module> updatedSearchResult = new ArrayList<>();
+        for (Module module : searchResult) {
+            if (module.isOfferedInSemester(toSearchSemester)) {
+                updatedSearchResult.add(module);
+            }
+        }
+        return updatedSearchResult;
     }
 
     @Override

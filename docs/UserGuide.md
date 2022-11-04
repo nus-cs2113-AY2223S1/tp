@@ -64,6 +64,8 @@ Sem [1] >>
 > - Words in `UPPERCASE` information to be supplied by the user.
     e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected.
+> - Named parameters such as `/module`, `/type` and `/code` in `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]` can appear in any order.
+> - If a named parameter is provided multiple times, e.g. `search /title cs /title ma`, only one of the values will be used. It is not guaranteed which of the duplicates will be used. 
 > - The commands are case-insensitive. E.g. `help` is the same as `HELP`.
 
 ### Get help: `help`
@@ -357,7 +359,9 @@ Prints out the current user timetable.
 
 Format: `timetable < /fancy | /simple >`
 
-Note: Fancy mode features sleek unicode characters and coloured output. Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
+> Note: Fancy mode features sleek unicode characters and coloured output. Some terminals (mainly Windows terminals) do not support fancy mode. If you run `timetable /fancy` on terminals that do not support it, the output may not be readable. If neither of the options `/fancy` or `/simple` are specified, then YAMOM will attempt to decide the best view for you.
+
+> Note: If you have too many lessons overlapping in terms of timing, the width of your timetable may overflow the window size and thus the timetable will be difficult to view. In that case, increase your window width or use the `select` command to resolve some of the timing collisions.
 
 Example of usage:
 
@@ -762,12 +766,12 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | Remove a module                  | `remove [ MODULE_CODE ]`                                                                         | `remove CS2102`                                                       |
 | Exit application                 | `bye`                                                                                          | `bye`                                                                 |
 | Read more details about a module | `info [ MODULE_CODE ]`                                                                           | `info CS2103`                                                         |
-| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
+| Find module by keyword           | <code>search [ /code PARTIAL_MODULE_CODE &#124; /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER ></code> | `search /code cs /level 2 /sem 1`                                     |
 | Seek help                        | `help`                                                                                         | `help`                                                                |
 | Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                                 | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
 | Export modules to NUSMods URL    | `export`                                                                                       | `export`                                                              |
 | Change semester                  | `semester [ SEMESTER ]`                                                                          | `semester 2`                                                          |
-| View timetable                   | `timetable < /fancy | /simple >`                                                      | `timetable`                                                    |
+| View timetable                   | <code>timetable < /fancy &#124; /simple ></code>                                                      | `timetable`                                                    |
 | List selected modules            | `list`                                                                                         | `list`                                                                |
 | Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                            | `select /module CS1010 /type tutorial /code 1`                        |
 
