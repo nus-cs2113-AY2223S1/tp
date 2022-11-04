@@ -22,17 +22,27 @@ end box
 
 [-> Api : syncFetchData()
 activate Api
+ref over Api : Execute HTTP Requests
+loop 5 times with i as index
+Api -> Api : fetchData(i)
+activate Api
+ref over Api : Fetch Data
+Api --> Api : result
+deactivate Api
 
-ref over Api : asyncExecuteRequest
-ref over Api : FetchData
+Api -> Api : processData(result)
+activate Api
 
-Api -> ui : println(message)
+Api --> Api : processedData
+deactivate Api
+
+end
+Api -> ui : println(dataCount)
 activate ui
 ui --> Api
 deactivate ui
-destroy ui
 
-Api -> FileReader : writeDataToFile(result)
+Api -> FileReader : writeDataToFile(processedData)
 activate FileReader
 FileReader --> Api
 deactivate FileReader

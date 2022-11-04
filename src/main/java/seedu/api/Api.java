@@ -177,7 +177,7 @@ public class Api implements ApiInterface {
         Ui.println(totalDataCount + " Parking Lot data received from LTA!");
 
         storage.writeDataToFile(result);
-    } // todo: stub
+    }
 
     /**
      * Process the data from the API to adhere to concatenating format.
