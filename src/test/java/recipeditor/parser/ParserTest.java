@@ -2,6 +2,7 @@ package recipeditor.parser;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import recipeditor.command.Command;
 import recipeditor.command.CommandResult;
@@ -21,6 +22,25 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 class ParserTest {
+
+    @Test
+    void parseList_mixOfDifferentCases_returnListOfRecipeTitles() {
+        Parser parse = new Parser();
+        assertTrue(parse.parseCommand("/LiST") instanceof ListCommand);
+    }
+
+    @Test
+    void parseView_mixOfDifferentCases_returnViewOfSpecificRecipe() {
+        Parser parse = new Parser();
+        assertTrue(parse.parseCommand("/VIEw 1") instanceof ViewCommand);
+    }
+
+    @Test
+    void parseExit_mixOfDifferentCases_exitProgram() {
+        Parser parse = new Parser();
+        assertTrue(parse.parseCommand("/Exit") instanceof ExitCommand);
+    }
+
     @Test
     void parseEmptyArg_emptyArg_invalidCommand() {
         String input = "";
