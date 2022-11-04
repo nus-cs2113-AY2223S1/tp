@@ -420,10 +420,24 @@ Saving of data occurs in 3 instances of operation:
 When client, property and pairing is added, text will be appended to the text file as shown below:
 
 - `Client`: Appends `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET` to `client.txt`.
+
+An example of the client text file is as shown below:
+
+![Client text file screenshot](./Storage%20File%20Screenshot/client.jpg)
+
+
 - `Property`: Appends `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE` to `property.txt`.
+
+An example of the property text file is as shown below:
+
+![Property text file screenshot](./Storage%20File%20Screenshot/property.jpg)
+
 - `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
 PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
 
+An example of the pairing text file is as shown below:
+
+![Pairing text file screenshot](./Storage%20File%20Screenshot/pair.jpg)
 ---
 ### Updating data
 
