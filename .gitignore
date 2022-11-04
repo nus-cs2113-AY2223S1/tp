@@ -20,3 +20,4 @@ src/main/java/seedu/duke/data/
 bin/
 
 /text-ui-test/ACTUAL.txt
+data/stored.txt

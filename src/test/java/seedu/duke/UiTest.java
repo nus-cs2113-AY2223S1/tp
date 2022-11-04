@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 class UiTest {
     final Ui ui = new Ui();
-    final String expectedGreeting =  "Welcome to your Movie Reviews bot,\n"
+    final String expectedGreeting =  "Welcome to your myReviews, your personal Movie Reviews bot!\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
     final String expectedPrint = "hello\n"
             .replaceAll("\\n", System.getProperty("line.separator"));

@@ -35,10 +35,10 @@ public class Duke {
         Scanner userInputScanner = new Scanner(System.in);         
         while (ui.isExit == false) {
             parser.processUserInput(ui.getInput(userInputScanner));
+            storage.updateFile(reviewList);
         }
         
         userInputScanner.close();
-        storage.updateFile(reviewList);
         ui.printExitGreeting();
     }
 
