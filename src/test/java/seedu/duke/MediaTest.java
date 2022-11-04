@@ -46,7 +46,6 @@ class MediaTest {
         } catch (ParseException e) {
             ex = e;
         }
-
         assertNotNull(ex);
         assertEquals(ParseException.class, ex.getClass());
     }

@@ -13,7 +13,7 @@ public class Ui {
      * Prints greeting to user when starting program.
      */
     public void greetUser() {
-        System.out.println("Welcome to your Movie Reviews bot,");
+        System.out.println("Welcome to your myReviews, your personal Movie Reviews bot!");
         logger.log(Level.INFO, "Greeted User");
     }
 

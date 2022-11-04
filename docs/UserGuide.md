@@ -53,6 +53,10 @@ The following features are supported by Duke.
 9. User can list all favourite reviews.
 10. User input is automatically saved and loaded every session.
 
+> Notes for saved list:
+> - Your saved review list will be saved in a file called `stored.txt`.
+> - Removing parameters from this file might result in a corrupted file, and your list will be deleted should there be
+> missing parameters when the app is launched.
 ## Commands
 ### Adding a movie or TV show: `add`
 Adds a new movie or TV show review to your list.
