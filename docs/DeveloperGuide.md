@@ -242,6 +242,10 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
 The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
 
 ## Implementation
+### Loading Data from File
+
+![Implementation-SD-Load-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/LokQiJun/tp/branch-webpage/docs/diagrams/ImplementationSDLoadData.puml)
+
 ### Printing an Expense
 
 ![Implementation-SD-Print-Expense](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationSDPrintExpense.puml)
@@ -376,6 +380,10 @@ The `Delete-Target` command removes an existing target from the program.
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
 ![Implementation-Edit-Target](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/ImplementationEditTarget.puml)
+
+### Loading Data from External File
+
+![Implementation-SD-Load-External-Data](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/LokQiJun/tp/branch-webpage/docs/diagrams/ImplementationSDLoadExternalData.puml)
 
 ## Product Scope
 ### Target User Profile
