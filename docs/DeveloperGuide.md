@@ -3,6 +3,7 @@
 ## Table of contents
 
 ### 1. [Design & Implementation](#1-design--implementation)
+
 1.1 [Database](#11-database)\
 1.2 [User Storage](#12-user-storage)\
 1.3 [Timetable](#13-timetable)\
@@ -11,15 +12,18 @@
 1.6 [Commands](#16-commands)\
 1.7 [User Module Mapping](#17-usermodulemappinglist)\
 1.8 [User University List Manager](#18-useruniversitylistmanager)
+
 ### 2. [Product Scope](#2-product-scope)
+
 2.1 [Target User Profile](#21-target-user-profile)\
 2.2 [Value Proposition](#22-value-proposition)\
 2.3 [Problem Addressed](#23-problem-addressed)
+
 ### 3. [Non-functional Requirements](#3-non-functional-requirements)
+
 ### 4. [Glossary](#4-glossary)
+
 ### 5. [Manual Testing](#5-instructions-for-manual-testing)
-
-
 
 ## 1. Design & implementation
 
@@ -151,7 +155,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 #### 1.6.4 Add Command
 
-An add command can be used to add a lesson to the timetable or add a module mapping to the user university list.
+An add command can be used to add a lesson to the timetable, add a module mapping to the user university list, or add a note for an existing module mapping in the user university list.
 
 The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of an add command.
 
@@ -224,7 +228,7 @@ The following class diagram illustrates the relationship between UserModuleMappi
 #### 1.8.1 UserUniversityList
 
 The UserUniversityList class stores 2 important things the `universityName` and a list of UserModuleMapping under `myModules`
-Each list is identified using the universityName. Users can only create 1 list for each partner university and this is managed by the 
+Each list is identified using the universityName. Users can only create 1 list for each partner university and this is managed by the
 UserUniversityListManager in 1.8.2. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
 to help users manage multiple lists and note down their favourites
 
@@ -233,7 +237,7 @@ to help users manage multiple lists and note down their favourites
 The UserUniversityListManager manages a hashmap of lists, with the `universityName` as the key. This prevents duplicates and unnecessary space
 wastage. HashMap is also an efficient data structure to obtain the UserUniversityList as the value in constant time. The UserUniversityListManager
 has the notable functions `addModule` and `deleteModule` which allows users to add and delete module in a specific list. It also has the `addFavourite`
-and `deleteFavourite` function which helps the users to organise their lists. 
+and `deleteFavourite` function which helps the users to organise their lists.
 
 The following class diagram illustrates the relationship between UserUniversityListManager and UserUniversityList as well as other relevant classes.
 
@@ -242,9 +246,6 @@ The following class diagram illustrates the relationship between UserUniversityL
 The following sequence diagram helps explain the key steps behind the main functions in UserUniversityListManager.
 
 ![UserUniversityListManager Sequence](./images/UserUniversityListManager_Sequence.png)
-
-
-
 
 ## 2 Product Scope
 
@@ -288,7 +289,6 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 | v2.0    | user                  | various search functions for my lists                                    | search for information faster                                             |
 | v2.0    | user                  | be able to add class timings and create a timetable for SEP              | keep track of my timetable                                                |
 | v2.1    | new user              | use a program that does not fail unexpectedly                            | do not have to deal with handling crashes                                 |
-
 
 ## 3. Non-Functional Requirements
 

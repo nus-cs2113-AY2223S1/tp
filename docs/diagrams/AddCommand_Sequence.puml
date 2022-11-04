@@ -26,6 +26,21 @@ activate CommandParser
 CommandParser -> CommandParser : parseUserCommand(userInput)
 activate CommandParser
 
+alt user command with comments
+    CommandParser -> CommandParser : parseUserCommandWithComments(userInput)
+    activate CommandParser
+
+    CommandParser --> CommandParser : userInputTokenized : String[]
+    deactivate CommandParser
+
+else
+    CommandParser -> CommandParser : parseUserCommandWithoutComments(userInput)
+    activate CommandParser
+
+    CommandParser --> CommandParser : userInputTokenized : String[]
+    deactivate CommandParser 
+end
+
 CommandParser --> CommandParser : userInputTokenized : String[]
 deactivate CommandParser
 
@@ -41,6 +56,12 @@ alt add command
     deactivate CommandParser
 
     CommandParser -> CommandParser : isValidCommandOnTimetable(userInputTokenized)
+    activate CommandParser
+
+    CommandParser --> CommandParser : :boolean
+    deactivate CommandParser
+
+    CommandParser -> CommandParser : isValidAddCommentOnModules(userInputTokenized)
     activate CommandParser
 
     CommandParser --> CommandParser : :boolean
@@ -70,8 +91,14 @@ alt add command
         deactivate CommandParser
 
         create AddCommand
-        CommandParser -> AddCommand : AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd)
+        CommandParser -> AddCommand : AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd, comment)
         activate AddCommand
+
+        AddCommand -> AddCommand : isValidComment(comment)
+        activate AddCommand
+
+        AddCommand --> AddCommand : boolean
+        deactivate AddCommand
 
         AddCommand --> CommandParser : newAddCommand :AddCommand
         deactivate AddCommand
