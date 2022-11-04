@@ -69,6 +69,7 @@ Title, genre, and site must not include "/" delimiter in input so that command c
 - `<title>`, `<genre>` and `<location>` must be strings.
 - `<rating>` must be an integer value from 0 to 100.
 - `<dateWatched>` must have passed and be given in the following format: dd-MM-YYYY.
+- All arguments are compulsory
 
 Usage: 
 
@@ -117,6 +118,7 @@ Removes a movie or television review from your list. References the output from 
 - `<type>` must be either 'movie' or 'tv', for movies and tv shows respectively in the review list.
 - `<index>` refers to the index number shown by category in the displayed review list.
 - `<index>` must be a positive integer within the range of indices in the review list.
+- All arguments are compulsory for successful execution of command.
 
 Usage:
 
@@ -151,6 +153,7 @@ Sorts your review list according to a given field.
 - Sorting the review list by 'rating' or 'date' returns the reviews in descending order i.e. from the highest rating to 
 the lowest rating and from the most recent to the least recent
 - Sorting by 'title' or 'genre' returns the reviews in case-sensitive ascending order i.e. from 'A' to 'z'
+- All arguments are compulsory for successful execution of command.
 
 Usage:
 
@@ -183,6 +186,7 @@ Searches your review list to find movies whose **titles** contain the given keyw
 
 - `<keyword>` must be a string.
 - The search is case-sensitive e.g. `Inception` will not match `inception`
+- All arguments are compulsory for successful execution of command.
 
 Usage: `find inc`
 
@@ -204,6 +208,7 @@ Lets you mark items you find particularly notable or want to watch again for eas
 - `<type>` must be either 'movie' or 'tv', for movies and tv shows respectively in the review list.
 - `<index>` refers to the index number shown by category in the displayed review list.
 - `<index>` must be a positive integer within the range of indices in the review list.
+- All arguments are compulsory for successful execution of command.
 
 Usage: 
 
