@@ -93,7 +93,7 @@ public class Mcs extends Command {
         }
 
         if(!errorMessage.equals("")){
-            System.out.println("Unable to view MCS due to these issues:");
+            System.out.println("Unable to view MCS due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
         }
