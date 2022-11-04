@@ -199,9 +199,18 @@ Number of entries in the list: 1
 
 Adds a new client into client list, along with Singapore contact number and basic email format validations. Also, duplicate client entries of the same **name**, **contact number** or **email** will not be accepted.
 
-<u>Full Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
+<u>Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
 
-<u>Full Example</u>: `add -client n/Doja Cat c/93437878 e/doja88@example.com b/2000`
+<u>Example</u>: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+
+<u>Expected Output</u>:
+```
+Adding a client with the following information:
+  Client: Gary Oaks
+  Contact Number: 90876543
+  Email: garyoaks@example.com
+  Budget: SGD1550/month
+```
 
 Note: Email is optional so excluding `e/EMAIL` or having `e/BLANK` is acceptable.
 
@@ -217,19 +226,8 @@ For valid `CONTACT_NUMBER`, a Singapore contact number (no extension) must be pr
 
 For valid `EMAIL`, it must adhere to the RFC 5322 Official Email Standard.
 
-For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces must be provided.
+For valid `BUDGET_MONTH`, a positive integer must be provided.
 
-Example: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
-
-Expected Output:
-```
-Adding a client with the following information:
-  Client: Gary Oaks
-  Contact Number: 90876543
-  Email: garyoaks@example.com
-  Budget: SGD1550/month
-
-```
 ---
 
 ### Delete Client: `delete -client`
