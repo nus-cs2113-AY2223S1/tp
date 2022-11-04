@@ -155,7 +155,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 #### 1.6.4 Add Command
 
-An add command can be used to add a lesson to the timetable or add a module mapping to the user university list.
+An add command can be used to add a lesson to the timetable, add a module mapping to the user university list, or add a note for an existing module mapping in the user university list.
 
 The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of an add command.
 

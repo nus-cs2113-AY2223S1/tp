@@ -86,7 +86,7 @@ ____________________________________________________________________________
 
 ### Add Command: `/add`
 
-We have incorporated 2 types of add commands.
+We have incorporated 3 types of add commands.
 
 #### 1. Add Command for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`
 
@@ -109,7 +109,32 @@ NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western Univers
 ____________________________________________________________________________
 ```
 
-#### 2. Add command for Lesson: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`
+#### 2. Update Add Command Note for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
+
+Adds/Updates a (previous) note for the input Partner University module code in the input university list.
+
+> <span style="color: #FFA500;">**IMPORTANT**</span>: Can only add a note after previously adding the Partner University module code in the input university list.
+
+Example input:
+
+```
+/add u/Western_University m/CS4487 note/{Hello world!}
+```
+
+Expected output:
+
+```
+Module updated successfully
+
+____________________________________________________________________________
+Success! You updated:
+NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western University CS4487 Algorithms for Image Analysis | Equivalent NUS Credits: 4 MCs
+Note: Hello World!
+____________________________________________________________________________
+
+```
+
+#### 3. Add command for Lesson: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`
 
 Adds a lesson for the specified module code to the timetable for the specified university with given start time and end time on the specified day of the week.
 
