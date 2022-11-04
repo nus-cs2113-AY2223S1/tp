@@ -129,28 +129,28 @@ public class FindFunctionTest {
     public void queryClient_emptyDescription_expectThrow() {
         CommandFindClientParser commandFindClientParser = new CommandFindClientParser(EMPTY_TAG);
         assertThrows(FindEmptyDescriptionException.class,
-                () -> commandFindClientParser.checkCommandValidity(EMPTY_TAG));
+            () -> commandFindClientParser.checkCommandValidity(EMPTY_TAG));
     }
 
     @Test
     public void queryClient_incorrectNumberOfTag_expectThrow() {
         CommandFindClientParser commandFindClientParser = new CommandFindClientParser(INCORRECT_TAG);
         assertThrows(FindIncorrectNumOfTagException.class,
-                () -> commandFindClientParser.checkCommandValidity(INCORRECT_TAG));
+            () -> commandFindClientParser.checkCommandValidity(INCORRECT_TAG));
     }
 
     @Test
     public void queryProperty_emptyDescription_expectThrow() {
         CommandFindPropertyParser commandFindPropertyParser = new CommandFindPropertyParser(EMPTY_TAG);
         assertThrows(FindEmptyDescriptionException.class,
-                () -> commandFindPropertyParser.checkCommandValidity(EMPTY_TAG));
+            () -> commandFindPropertyParser.checkCommandValidity(EMPTY_TAG));
     }
 
     @Test
     public void queryProperty_incorrectNumberOfTag_expectThrow() {
         CommandFindPropertyParser commandFindPropertyParser = new CommandFindPropertyParser(INCORRECT_TAG);
         assertThrows(FindIncorrectNumOfTagException.class,
-                () -> commandFindPropertyParser.checkCommandValidity(INCORRECT_TAG));
+            () -> commandFindPropertyParser.checkCommandValidity(INCORRECT_TAG));
     }
 
     @Test
