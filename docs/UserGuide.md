@@ -222,13 +222,13 @@ Flight added!
 **Function**: This command allows the deletion of a flight detail from the flight list logbook, provided that
 the flight exists in the logbook.
 
-**Usage**: `flight delete fn/FLIGHT_NUMBER`
+**Usage**: `flight delete FLIGHT_NUMBER`
 
 Example:
 
 **Input**:
 
-`flight delete fn/sq832`
+`flight delete sq832`
 
 **Output**:
 
