@@ -267,10 +267,12 @@ public class TransactionList {
         String transactionsList = "";
 
         // Loops each transaction from the time transactions list
+        int count = 1;
         for (Transaction transaction : timeTransactions) {
             // Applies generic filter against each time transaction entry
             if (isMatchListFilters(transaction, type, category, date)) {
-                transactionsList += transaction.toString() + LINE_SEPARATOR;
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction.toString() + LINE_SEPARATOR;
+                count ++;
             }
         }
         return transactionsList;
@@ -284,12 +286,14 @@ public class TransactionList {
      */
     public String findTransactions(String keyword) {
         String transactionsList = "";
+        int count = 1;
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions with their description matching the searching keywords
             if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
                     && keyword != "") {
-                transactionsList += transaction + LINE_SEPARATOR.toString();
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR.toString();
+                count ++;
             }
         }
         return transactionsList;
