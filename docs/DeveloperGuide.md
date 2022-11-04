@@ -1,7 +1,6 @@
 # Developer Guide
 
 ## Table of Contents
-* [Acknowledgements](#acknowledgements)
 * [Design & Implementation](#design--implementation)
   * [Main Mode](#main-mode)
     * [Build Manager](#build-manager) 
@@ -19,11 +18,6 @@
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
-
-
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
 
@@ -99,7 +93,7 @@ are the component names. The values of the inner map are the components themselv
 The user can add, delete, and view the components in the build. The user can also
 perform aggregate operations on the build such as viewing the total price of the build and viewing the total wattage of the build.
 There are also check compatibility functions that check if the build's components are compatible with each other in different ways. Such as:
-- Check if the power supply is compatible with the build's total power consumption
+- Checking if the power supply is compatible with the build's total power consumption
 - Checking if the build's motherboard is compatible with the build's CPU and Cooler
 - Checking if the form factor of the build's case is compatible with the build's motherboard
 - Checking if the build's storage is compatible with the case expansion slots
@@ -196,7 +190,7 @@ all builds to a CSV file.
 ## Product scope
 ### Target user profile
 
-This product is targeted towards PC building enthusiasts and professional System builds who have a need and want to 
+This product is targeted towards PC building enthusiasts and commercial custom PC builders who have a need and want to 
 keep track of their PC builds. It is optimized for users to work with a Command Line Interface (CLI).
 
 ### Value proposition
@@ -206,6 +200,8 @@ their total power consumption and the total cost of their builds. Compatibility 
 that the build is able to function properly..
 
 ## User Stories
+The following user stories will be implemented in the version stated in the table and will be available as a feature
+from that version onwards.
 
 | Version | As a ... | I want to ...              | So that I can ...                                           |
 |---------|----------|----------------------------|-------------------------------------------------------------|

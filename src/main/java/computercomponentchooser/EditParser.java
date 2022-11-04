@@ -16,6 +16,7 @@ import computercomponentchooser.exceptions.NegativeNumberException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.exceptions.UnlistedComponentException;
+import computercomponentchooser.exceptions.UnlistedComponentTypeException;
 import computercomponentchooser.export.ExportText;
 
 import static computercomponentchooser.ComputerComponentChooser.storage;
@@ -56,7 +57,7 @@ public class EditParser {
      * @param mode The desired position of the input to be retrieved.
      * @return The desired text at the desired position.
      */
-    public static String getParameter(String line, int mode) {
+    public static String getParameter(String line, int mode) throws ArrayIndexOutOfBoundsException {
         assert mode >= 0;
         String[] lineSplit = line.split("/");
         return lineSplit[mode];
@@ -125,7 +126,7 @@ public class EditParser {
             Ui.printEditLine();
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             Ui.printEditLine();
-            System.out.println("Please input a valid command");
+            System.out.println("Please enter a command with the correct number of parameters");
             Ui.printEditLine();
         }
     }
@@ -137,7 +138,7 @@ public class EditParser {
      * @param line The user input.
      * @throws BlankStringException If the user input is blank.
      */
-    public void parseAdd(Build editBuild, String line) throws BlankStringException {
+    public void parseAdd(Build editBuild, String line) throws BlankStringException, ArrayIndexOutOfBoundsException {
         String type = getParameter(line, TYPE_PARAMETER);
         String name = getParameter(line, NAME_PARAMETER);
         String price = getParameter(line, PRICE_PARAMETER);
@@ -178,7 +179,7 @@ public class EditParser {
                 parseAddOther(editBuild, type, name, price, power);
                 break;
             default:
-                break;
+                throw new UnlistedComponentTypeException();
             }
             try {
                 storage.saveComponent(editBuild);
@@ -192,7 +193,7 @@ public class EditParser {
             Ui.printEditLine();
             System.out.println("Please input the numbers correctly.");
             Ui.printEditLine();
-        } catch (NegativeNumberException e) {
+        } catch (NegativeNumberException | UnlistedComponentTypeException e) {
             Ui.printEditLine();
             System.out.println(e.getMessage());
             Ui.printEditLine();

@@ -61,7 +61,7 @@ public class Parser {
      * @param line The user input.
      * @return A boolean value indicating whether the user input is edit.
      */
-    public boolean checkEdit(String line) {
+    public boolean checkEdit(String line) throws ArrayIndexOutOfBoundsException {
         String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase();
         if (edit.equals("edit")) {
             String name = getParameter(line, NAME_PARAMETER);
@@ -129,7 +129,7 @@ public class Parser {
             Ui.printLine();
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printLine();
-            System.out.println("Please enter commands with the correct number of parameters");
+            System.out.println("Please enter a command with the correct number of parameters");
             Ui.printLine();
         }
     }
