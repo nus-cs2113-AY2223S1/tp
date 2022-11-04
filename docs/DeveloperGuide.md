@@ -47,9 +47,9 @@ List of Commands
 The following sequence diagrams to showcase the list of commands,
 parser() method will not be reflected in order to improve readability.
 
-1. [Add a passenger feature](#Add-a-passenger-feature)
-2. [Delete a passenger feature](#Delete-a-passenger-feature)
-3. [List passengers feature](#List-passengers-feature)
+1. [Add a passenger feature](#add-a-passenger-feature)
+2. [Delete a passenger feature](#delete-a-passenger-feature)
+3. [List passengers feature](#list-passengers-feature)
 4. [Add a flight feature](#Add-a-flight-feature)
 5. [Delete a flight feature](#Delete-a-flight-feature)
 6. [List flights feature](#List-flights-feature)
@@ -285,12 +285,37 @@ When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is i
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. User should work on Windows, Linux or OS-X as long as `Java-11` or above has been installed.
+2. Should be able to hold up to a hundred flights in a day without any noticeable decrease in processing speed.
+3. typing...
 
 ## Glossary
 
-* *glossary item* - Definition
+* *AOM* - An Airport Operations Manager responsible for scheduling and directing airport operations.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Exit
+
+1. Launch
+    
+    To launch SkyControl, please follow the instruction on our [Quick Start Guide](#).
+2. Exit
+
+    Enter the command `quit` to close the program.
+
+<br>
+
+
+
+| Command                | Format                                                                                                    | Example                                                              |
+|:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
+| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `       | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`           |
+| `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
+| `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
+| `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
+| `passenger list`       | `passenger list`                                                                                          | `passenger list`                                                     |
+| `flight list`          | `flight list`                                                                                             | `flight list`                                                        |
+| `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                               | `modify SQ832 fn/SQ654`                                              |
+| `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                 | `modify SQ654 gn/08`                                                 |
+
