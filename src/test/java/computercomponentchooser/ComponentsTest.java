@@ -10,6 +10,7 @@ import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Other;
+import computercomponentchooser.components.Component;
 import computercomponentchooser.exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -176,5 +177,92 @@ public class ComponentsTest {
         assertNotEquals("0", drive1.getPower());
         assertNotEquals("0", monitor1.getPower());
         assertNotEquals("0", other1.getPower());
+    }
+
+    @Test
+    public void testToString() {
+
+        assertNotNull(cpu1.toString());
+        assertNotNull(gpu1.toString());
+        assertNotNull(mobo1.toString());
+        assertNotNull(cooler1.toString());
+        assertNotNull(case1.toString());
+        assertNotNull(powersupply1.toString());
+        assertNotNull(memory1.toString());
+        assertNotNull(drive1.toString());
+        assertNotNull(monitor1.toString());
+        assertNotNull(other1.toString());
+    }
+
+    @Test
+    public void testToCSV() {
+
+        assertNotNull(cpu1.toCsv());
+        assertNotNull(gpu1.toCsv());
+        assertNotNull(mobo1.toCsv());
+        assertNotNull(cooler1.toCsv());
+        assertNotNull(case1.toCsv());
+        assertNotNull(powersupply1.toCsv());
+        assertNotNull(memory1.toCsv());
+        assertNotNull(drive1.toCsv());
+        assertNotNull(monitor1.toCsv());
+        assertNotNull(other1.toCsv());
+    }
+
+    @Test
+    public void testSaveAsString() {
+
+
+        assertNotNull(cpu1.saveAsString());
+        assertNotNull(gpu1.saveAsString());
+        assertNotNull(mobo1.saveAsString());
+        assertNotNull(cooler1.saveAsString());
+        assertNotNull(case1.saveAsString());
+        assertNotNull(powersupply1.saveAsString());
+        assertNotNull(memory1.saveAsString());
+        assertNotNull(drive1.saveAsString());
+        assertNotNull(monitor1.saveAsString());
+        assertNotNull(other1.saveAsString());
+    }
+
+    @Test
+    public void testGetDetails() {
+
+
+        assertNotNull(cpu1.getDetails());
+        assertNotNull(gpu1.getDetails());
+        assertNotNull(mobo1.getDetails());
+        assertNotNull(cooler1.getDetails());
+        assertNotNull(case1.getDetails());
+        assertNotNull(powersupply1.getDetails());
+        assertNotNull(memory1.getDetails());
+        assertNotNull(drive1.getDetails());
+        assertNotNull(monitor1.getDetails());
+        assertNotNull(other1.getDetails());
+    }
+
+    @Test
+    public void testGetType() {
+        assertEquals("cpu", cpu1.getType());
+        assertEquals("gpu", gpu1.getType());
+        assertEquals("motherboard", mobo1.getType());
+        assertEquals("cooler", cooler1.getType());
+        assertEquals("case", case1.getType());
+        assertEquals("powersupply", powersupply1.getType());
+        assertEquals("memory", memory1.getType());
+        assertEquals("drive", drive1.getType());
+        assertEquals("monitor", monitor1.getType());
+        assertEquals("other", other1.getType());
+
+        assertNotNull(cpu1.getType());
+        assertNotNull(gpu1.getType());
+        assertNotNull(mobo1.getType());
+        assertNotNull(cooler1.getType());
+        assertNotNull(case1.getType());
+        assertNotNull(powersupply1.getType());
+        assertNotNull(memory1.getType());
+        assertNotNull(drive1.getType());
+        assertNotNull(monitor1.getType());
+        assertNotNull(other1.getType());
     }
 }
