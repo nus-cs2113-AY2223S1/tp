@@ -164,11 +164,13 @@ It consists of the following classes:
 - `SemesterData`: Semester data contains all the module information pertaining to a single semester.
 - `Timetable`: Creates a timetable for the user with their selected modules and in their planning semester.
 
-![Model Classes](images/model.png)
+<p align="center">
+<img alt="Model Classes" src="images/model.png" width="50%" />
+</p>
 
 #### 3.2.1 Module Loader
 
-Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored at `src/main/resources/moduleFull.zip`. The data file is a ZIP file containing a JSON file. Zipping is used to minimize the application size. In exchange, the data file needs to be unzipped to read the module data, but this only happens once at the start of the application. JSON parsing in the `ModuleLoader` class is done using the Jackson Databind library.
+Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored at `src/main/resources/moduleFull.zip`. The data file is a ZIP file containing a JSON file. Zipping is used to minimize the application size. In exchange, the data file needs to be unzipped to read the module data, but this only happens once at the start of the application. JSON parsing in the `ModuleLoader` class is done using the [Jackson Databind library](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind).
 
 #### 3.2.2 Timetable
 
