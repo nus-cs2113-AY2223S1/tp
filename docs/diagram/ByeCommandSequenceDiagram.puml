@@ -1,5 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include Style.puml
 
 hide footbox
 

@@ -1,8 +1,6 @@
 @startuml
-skinparam monochrome true
-skinparam shadowing false
+!include Style.puml
 'https://plantuml.com/sequence-diagram
-hide footbox
 
 Participant ":Duke" as Duke
 Participant ":CommandParser" as CommandParser
@@ -43,8 +41,6 @@ deactivate CommandParser
 
 Duke -> ListCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
 activate ListCommand
-
-
 
 ListCommand -> ListCommand:listTransactions()
 activate ListCommand

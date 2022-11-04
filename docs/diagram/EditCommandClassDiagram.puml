@@ -1,15 +1,14 @@
 @startuml
+!include Style.puml
 'https://plantuml.com/sequence-diagram
 
-hide circle
-skinparam classAttributeIconSize 0
-
-class AddCommand {
+class EditCommand {
 + COMMAND_WORD: String
     + COMMAND_DESCRIPTION: String
     + COMMAND_USAGE: String
     + COMMAND_PARAMETERS_INFO: String
 
+    - entryNumber: int
     - type: String
     - category: String
     - description: String
@@ -17,6 +16,7 @@ class AddCommand {
     - date: LocalDate
 
     +getMandatoryTags()
+    +getOptionalTags()
     +{abstract}execute()
 }
 
@@ -34,10 +34,9 @@ class "{abstract}\n Command"{
     - date: LocalDate
 
     +getMandatoryTags()
+    +getOptionalTags()
     +{abstract}execute()
 }
 
-
-
-AddCommand --|> "{abstract}\n Command"
+EditCommand -up-|> "{abstract}\n Command"
 @enduml

@@ -1,7 +1,6 @@
 @startuml
 !include Style.puml
 
-
 Participant ":Duke" as duke
 Participant ":Storage" as storage
 Participant "storedTransactions:\nTransactionList" as storedList
