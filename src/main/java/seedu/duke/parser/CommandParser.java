@@ -173,51 +173,6 @@ public class CommandParser {
         }
     }
 
-
-    /**
-    private static String parseComment(String[] parameters) throws InvalidCommentException {
-        // no comment
-        if (parameters.length <= COMMENT_INDEX) {
-            return "";
-        }
-        
-        String[] commentArray = Arrays.copyOfRange(parameters, COMMENT_INDEX, parameters.length);
-        String comment = String.join(" ", commentArray);
-
-        int commentStartIndex = comment.indexOf("{");
-        int commentEndIndex = comment.indexOf("}");
-
-        if (isValidComment(commentStartIndex, commentEndIndex) && !isEmptyComment(commentStartIndex, commentEndIndex)) {
-            return comment.substring(commentStartIndex + 1, commentEndIndex);
-        }
-
-        throw new InvalidCommentException("Error! The comment " + comment + " is invalid!");
-    }
-
-    private static boolean isValidComment(int commentStartIndex, int commentEndIndex) {
-        if (commentStartIndex == -1) {
-            return false;
-        }
-
-        if (commentEndIndex == -1) {
-            return false;
-        }
-
-        if (commentStartIndex >= commentEndIndex) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private static boolean isEmptyComment(int commentStartIndex, int commentEndIndex) {
-        if (commentStartIndex == commentEndIndex - 1) {
-            return true;
-        }
-        return false;
-    }
-    */
-
     /**
      * Checks whether a line of user input is empty.
      *
@@ -409,6 +364,10 @@ public class CommandParser {
         if (userInput.contains("note/{") && userInput.charAt(userInput.length() - 1) == '}') {
             return parseUserCommandWithComments(userInput);
         }
+        return parseUserCommandWithoutComments(userInput);
+    }
+
+    private static String[] parseUserCommandWithoutComments(String userInput) {
         String[] userInputTokenized = userInput.split(" +");
         for (int i = 0; i < userInputTokenized.length; i++) {
             userInputTokenized[i] = removeParameterUnderscores(userInputTokenized[i]);

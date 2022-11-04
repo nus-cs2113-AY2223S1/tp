@@ -26,6 +26,21 @@ activate CommandParser
 CommandParser -> CommandParser : parseUserCommand(userInput)
 activate CommandParser
 
+alt user command with comments
+    CommandParser -> CommandParser : parseUserCommandWithComments(userInput)
+    activate CommandParser
+
+    CommandParser --> CommandParser : userInputTokenized : String[]
+    deactivate CommandParser
+
+else
+    CommandParser -> CommandParser : parseUserCommandWithoutComments(userInput)
+    activate CommandParser
+
+    CommandParser --> CommandParser : userInputTokenized : String[]
+    deactivate CommandParser 
+end
+
 CommandParser --> CommandParser : userInputTokenized : String[]
 deactivate CommandParser
 

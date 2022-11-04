@@ -1,99 +1,75 @@
-# Project Portfolio Page (PPP)
+# joshuan98's Project Portfolio Page
 
-## Product Overview
+### Product Overview
 
-easySEP is a CLI application created to assist NUS Computer Engineering undergraduates intending to embark on a Student Exchange Programme in their planning for student exchange.
-In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones for easier reference. As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
+easySEP is a CLI application created to assist NUS Computer Engineering (CEG) undergraduates intending to embark on a Student Exchange Programme (SEP) in their planning for student exchange.
+In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones for easier reference.
+As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
-## Summary of Contributions
+### Code Contribution
 
-### Code Contributed
-
-This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
-
-### Enhancements Implemented
-
-#### Database Storage
-
-1. Cleaned up the data file that used as sample database.
-1. Read the data line-by-line and verify that the data is valid.
-1. Write the data into memory for use by other parts of the program.
-
-#### Database Parser
-
-1. Verify that each line of data is valid.
-1. Filter the relevant data to be used in the program.
-1. Parse the data into a easily usable form.
+- Code contributed: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true)
 
 #### Database
 
-1. Store the data and provide ease of retrieval by other parts of the program.
-1. Filters the data based on name and module code for both NUS and partner university for ease of searching data in the database.
+- New Feature: Added the ability to store module mapping information in memory.
+  - What it does: Reads in data from a `csv` file, verify its authenticity, and writes the data into memory for use by other parts of the program.
+  - Justification: This feature is the backdone to keep track of the approved CEG SEP moduble mappings.
+  - Highlights: Cleaned up the given data file, filter the relevant data from the `csv` for our application, parse the data into a usable form for other parts of the program, provide easy retrieval by filtering data based on name and module code for both NUS and partner university for ease of searching data in the database.
+- **Relevant PRs**: [#7](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/7), [#49](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/49)
 
-#### /list Command
+#### `/list` command
 
-1. Check validity of list command
-1. Create new list command
-1. Execute list command accordingly
+- New Feature: Added the ability for users to list information from the database.
+  - What it does: 4 sub-capabilities, displays the list of all modules in the database, displays the list of all universities in the database, filters module mappings based on NUS module code, filters module mappings based on partner university name.
+  - Justification: The user may not know what module mappings or universities are available to be added into their planning. This feature allows them to search and filter modules mappings that they are interested in.
+  - Highlights: Check the validity of the list command query, execute the list command according to the 4 discrete types, throws errors when invalid inputs are provided, informs user when there are no valid module mappings that match their query.
+- **Relevant PRs**: [#61](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/61)
 
-#### Testing
+### Testing
 
-1. Add JUnit tests for all database and list command components
-1. Ensure that valid inputs returns the correct outputs.
-1. Ensure that invalid inputs throws exceptions accordingly.
+- Added JUnit tests and assertions to make the code more defensive
+  - **Relevant PRs**: [#36](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/36), [#76](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/76), [#77](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/77),[#90](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/90)
+- Fixed bugs found during CS2113 Practical Examination Dry-Run
+  - **Relevant PRs**: [#181](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/181)
 
-### Contributions to the User Guide UG
+### Documentation
 
-1. Update UG for list command, providing brief description, usage format, example usage, and example output.
+- User Guide:
+  - Added documentation for list command
+  * **Relevant PRs**: [#88](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/88), [#114](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/114)
+- Developer Guide:
+  - Added documentation for database implementation, with relevant class and sequence diagrams for illustration
+  - Added documentation for list command implementation, with relevant class and sequence diagrams for illustration
+  * **Relevant PRs**: [#79](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/79), [#88](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/88), [#92](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/92), [#105](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/105)
 
-### Contributions to the Developer Guide DG
+### Contributions to Team-based Tasks
 
-1. Update DG for database implementation with a brief description.
-1. Construct class diagram for database implementation to illustrate relationships between the various database classes such as Database, DatabaseParser, and DatabaseStorage.
-1. Construct sequence diagram for database implementation to illustrate how data is read and stored in memory.
-1. Update DG for list command implementation with a brief description.
-1. Construct class diagram for list command implementation to illustrate relationships between Duke, CommandParser, Ui, List Command, and Database.
-1. Construct sequence diagram for list command implementation to illustrate how the user input leads to a list command being instantiated and executed.
+- Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
+- Populate GitHub issue tracker with user stories to tackle.
+- Maintain GitHub issue tracker by updating labels for issues.
+- Reviewed PRs from all team members, verifying that bugs were fixed, and no new bugs were introduced.
 
-### Contributions to Team-Based Tasks
+### Contributions Beyond The Project Team
 
-1. Set up GitHub team organisation and repository.
-1. Create GitHub labels for issues based on recommended labels from [CS2113 website](https://nus-cs2113-ay2223s1.github.io/website/admin/appendixE-gitHub.html#tp-issue-tracker-setup).
-1. Populate GitHub issue tracker with user stories to tackle.
-1. Maintain GitHub issue tracker by updating user stories with new descriptions as necessary
-1. Maintain GitHub issue tracker by updating labels for issues.
-1. Closed v2.0 milestone
+- Attempted to provide solutions to problems faced by others in CS2113 forum ([Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3), [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8), [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9))
+- Consistently reported bugs faced by other teams during tutorial exercises ([Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4), [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1))
+- Reported 24 bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
 
-### Review / mentoring contributions
+## Contributions to the User Guide (Extracts)
 
-1. Reviewed PRs from all team members.
-1. Verified that bugs were fixed.
-1. Verified that new bugs were not introduced.
-1. Conducted checkstyle tests to ensure that there were no formatting errors.
-1. Conducted JUnit tests for integration testing.
-
-### Contributions beyond the project team
-
-1. Attempted to provide solutions to problems faced by others in CS2113 forum
-
-- [Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3)
-- [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8)
-- [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9)
-
-2. Clarified doubts that may be applicable to others in CS2113 forum
-
-- [Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12)
-- [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24)
-
-3. Consistently reported bugs faced by other teams during tutorial exercises.
-
-- [Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4)
-- [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1)
-
-4. Reported bugs faced by other teams during the CS2113 Practical Examination Dry-Run
-
-- [Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues)
+- User Guide:
+  - [List Command](/docs/UserGuide.md/#list-command-list)
+  - [Command Summary](/docs/UserGuide.md/#command-summary)
 
 ## Contributions to the Developer Guide (Extracts)
 
-## Contributions to the User Guide (Extracts)
+- Developer Guide Diagrams:
+  - [Database Class Diagram](/docs/images/Database_Class.png)
+  - [Database Sequence Diagram](/docs/images/Database_Sequence.png)
+  - [List Class Diagram](/docs/images/ListCommand_Class.png)
+  - [List Sequence Diagram](/docs/images/ListCommand_Sequence.png)
+- [Product Scope](/docs/DeveloperGuide.md/#2-product-scope-1)
+- [User Stories](/docs/DeveloperGuide.md/#3-user-stories-1)
+- [Non-Functional Requirements](/docs//DeveloperGuide.md/#4-non-functional-requirements-1)
+- [Glossary](/docs/DeveloperGuide.md/#5-glossary-1)
