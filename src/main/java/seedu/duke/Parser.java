@@ -60,6 +60,8 @@ public class Parser {
             return new Delete(input);
         case "view":
             return new View(input);
+        case "clear":
+            return new Clear(input);
         case "mcs":
             return new Mcs(input);
         case "find":
