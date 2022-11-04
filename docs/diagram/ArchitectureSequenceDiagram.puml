@@ -38,6 +38,7 @@ activate command
 
     command -> ui:displayMessage()
     activate ui
+    ui -> User
     return
 return
 

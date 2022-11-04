@@ -162,11 +162,11 @@ The `Data` component is represented by a `data` package which consists of all th
 by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
 stored. 
 
-The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
-differences from budget is implemented within this class.
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget
+and generating budget reminders, tips and advices are implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
-operations related to the `transactionList` implemented within this class.
+operations related to the transaction list are implemented within this class.
 
 Within the transaction package, the following classes are stored: 
 1. Transaction 
@@ -184,7 +184,7 @@ The structure of the data component in Moolah Manager is illustrated in the clas
 From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
 such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
+The `Transaction` class is the abstract class of an `Income` or an `Expense`. A more detailed explanation on the 
 implementation on the transactions can be viewed under Section [Implementation for Transaction](#implementation-for-transaction).
 
 #### How the Data Component Interacts:
@@ -412,7 +412,7 @@ The `EditCommand` inherits properties from the abstract `Command` class. The inh
 shown below.
 
 <p align="center">
-    <img src="images/EditCommandClassDiagram.png">
+    <img src="images/EditCommandClassDiagram.png" width="50%">
     <br />
     <i>Figure 14: Sequence Diagram for Edit Command</i>
 </p>
@@ -515,7 +515,7 @@ The sequence diagram below shows the interactions of a successful execution of t
     <i>Figure 18: Sequence Diagram for Find Command</i>
 </p>
 
-1. The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
+1. The user executes `find k/KEYWORDS` command with an intent to view a filtered list of transactions 
 that match the searching keywords.
 
 2. The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
@@ -696,7 +696,8 @@ and it ensures that no integer overflow will occur as the `long` data type is us
 To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the
 valid range above.
 
-The interaction of the components on setting a budget can be seen in the sequence diagram under
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[How the Architecture Components Interact with Each Other](#How-the-Architecture-Components-Interact-with-Each-Other).
 
 _Written by: Chia Thin Hong_
 
@@ -705,15 +706,16 @@ _Written by: Chia Thin Hong_
 ### 7.1. Help Command 
 
 The help command displays the help message to the users to guide them on the usage and provide descriptions for each
-available command.
+available command and parameter.
 
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
-help messages to the users.
+The help command can be run as `help [q/COMMAND]` or `help o/detailed [q/COMMAND]`, where the latter will display a more detailed version of
+help messages to the users. If the user provide the optional `q/COMMAND` tag, the help command will only return the 
+help message of the chosen command.
 
 The structure of the application focusing on the help command is illustrated in the class diagram below:
 
 <p align="center">
-    <img src="images/HelpCommandClassDiagram.png">
+    <img src="images/HelpCommandClassDiagram.png" width = "95%">
     <br />
     <i>Figure 26: Class Diagram for Help Command</i>
 </p>
@@ -725,9 +727,9 @@ In the help command, when `execute()` is called, it will call either generateBas
 based on the help option chosen by the user.
 
 <p align="center">
-    <img src="images/HelpCommandSequenceDiagram.png">
+    <img src="images/HelpCommandSequenceDiagram.png" width="80%">
     <br />
-    <i>Figure 27: Class Diagram for Help Command</i>
+    <i>Figure 27: Sequence Diagram for Help Command</i>
 </p>
 
 _Written by: Chia Thin Hong_
