@@ -18,6 +18,8 @@ information quickly with minimal latency.
     * [Check Client: `check -client`](#check-client-check--client)
     * [Pair Client and Property: `pair`](#pair-client-and-property-pair)
     * [Unpair Client and Property: `unpair`](#unpair-client-and-property-unpair)
+    * [List Pairs: `list -pair`](#list-pairs-list--pair)
+    * [List Pairs Short: `list -pair -short`](#list-pairs-short-list--pair--short)
     * [List Everything `list -everything`](#list-everything-list--everything)
     * [Find Client and Property: `find`](#find-client-and-property-find)
     * [Help Command: `help`](#help-command-help)
@@ -136,18 +138,41 @@ Deletes the specified property from the property list and subsequently deletes a
 ---
 
 ### List Properties: `list -property`
-Lists all properties present in the list
+Lists all properties present in the list  
+<u>Example:</u>  
+`list -property`  
+Assuming that only 1 property is present in the list.  
+<u>Expected output:</u>  
+```
+1.	Landlord Name: Bob Tan Bee Bee
+	Property Address: 25 Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 property in this list
+```
+
 
 ---
 
 ### List Properties With Tags: `list -property TAG` 
 Lists only selected details of all the properties, depending on the TAG. The commands for these are -
-* `list -property a/` This is for address
-* `list -property n/` This is for name
-* `list -property p/` This is for price
-* `list -property t/` This is for unit type
-* `list -property -short` This is for the shorthand version(displays address, price and unit type)
-
+* `list -property a/` This is for addresses
+* `list -property n/` This is for names
+* `list -property p/` This is for prices
+* `list -property t/` This is for unit types
+* `list -property -short` This is for the shorthand version(displays addresses, prices and unit types)  
+<u>Example:</u>  
+`list -property p/`  
+Assuming there are two properties in the list.  
+<u>Expected output:</u>
+```
+1.	1000
+--------------------------------------------------------------------------------
+2.	2000
+--------------------------------------------------------------------------------
+There are 2 properties in this list
+```
 ---
 
 ### Check Property: `check -property`
@@ -221,17 +246,37 @@ Deletes the specified client from the client list and subsequently deletes any p
 ---
 
 ### List Clients: `list -client`
-Lists all the clients present in the list
+Lists all the clients present in the list  
+<u>Example:</u> `list -client`  
+Assuming that only 1 client is present in the list.  
+<u>Expected output:</u>
+```
+1.	Client Name: Doja Cat
+	Client Contact Number: 93437878
+	Client Email: doja88@example.com
+	Client Budget: 2000
+--------------------------------------------------------------------------------
+There is 1 client in this list
+```
 
 ---
 ### List Clients With Tags `list -client TAG` 
 List only selected details of all the clients, depending on TAG. The commands for these are-
-* `list -client c/` This is for contact number
-* `list -client b/` This is for budget
-* `list -client n/` This is for name
-* `list -client e/` This is for e-mail
-* `list -client -short` This is for the shorthand version(displays just name and budget)
-
+* `list -client c/` This is for contact numbers
+* `list -client b/` This is for budgets
+* `list -client n/` This is for names
+* `list -client e/` This is for e-mails
+* `list -client -short` This is for the shorthand version(displays just names and budgets)  
+<u>Example:</u> `list -client n/`  
+Assuming that 2 clients are present in the list  
+<u>Expected output:</u>  
+```
+1.	Doja Cat
+--------------------------------------------------------------------------------
+2.	Doja Cat The Second
+--------------------------------------------------------------------------------
+There are 2 clients in this list
+```
 ---
 
 ### Check Client: `check -client`
@@ -289,10 +334,67 @@ Unpairs the client from the specified property, to record that the client is no 
 Unpairing the following client and property: 
 	Kujou Jotaro and 25 Lower Kent Ridge Rd, S119081
 ```
+### List pairs `list -pair`  
+Lists, in no particular order all information about clients and properties that have been paired.
+The format for each such pair is -  
+<u>Example:</u> `list -pair`  
+<u>Expected output:</u>
+```
+Client:
+    Client Name: Doja Cat
+    Client Contact Number: 93437878
+    Client Email: doja88@example.com
+    Client Budget: 2000
+Property:
+    Landlord Name: Bob Tan Bee Bee
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Property Rental Price: 1000
+    Unit Type: LP Bungalow
+```
+### List pairs short `list -pair -short`
+Lists, in no particular order shortened information about clients and properties that have been paired.
+The format for each such pair is -  
+<u>Example</u> `list -pair -short`  
+<u>Expected output:</u>
+```
+Client:
+    Client Name: Doja Cat
+    Client Budget: 2000
+Property:
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Unit Type: LP Bungalow
+    Property Rental Price: 1000
+```
 ---
 
 ### List everything `list -everything`
-Lists all information about every client and every property in the list
+Lists all information about every client and every property in the list.
+Assume 1 client and 1 property is in the list and they are paired.  
+<u>Example</u> `list -everything`  
+<u>Expected output:</u>
+```
+1.	Landlord Name: Bob Tan Bee Bee
+	Property Address: 25 Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 property in this list
+
+--------------------------------------------------------------------------------
+Pairs:
+Client:
+    Client Name: Doja Cat
+    Client Contact Number: 93437878
+    Client Email: doja88@example.com
+    Client Budget: 2000
+Property:
+    Landlord Name: Bob Tan Bee Bee
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Property Rental Price: 1000
+    Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 pair in this list
+```
 
 ---
 ### Find Client and Property: `find`
@@ -387,6 +489,12 @@ where <QUERY_TEXT> refers to the text to search for in either client or property
 
 ---
 ### Exit: `quit`
+Leaves the application with a goodbye message  
+<u>Example:</u>  `quit`  
+<u>Expected output:</u>  
+```
+Goodbye :). See you soon!
+```
 
 ---
 ### Loading data
@@ -505,5 +613,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 * Pair: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
+* List Pairs: `list -pair`
+* List Pairs Short: `list -pair -short`
 
 * Help Command: `help`
