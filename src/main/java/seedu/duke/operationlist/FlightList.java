@@ -99,7 +99,7 @@ public class FlightList extends OperationList {
 
     private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
-        if (letters.length > FLIGHT_NUMBER_MAX_LENGTH || letters.length < FLIGHT_NUMBER_MIN_LENGTH ) {
+        if (letters.length > FLIGHT_NUMBER_MAX_LENGTH || letters.length < FLIGHT_NUMBER_MIN_LENGTH) {
             throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
         }
         for (int i = 0; i < FLIGHT_NUMBER_LETTER_LENGTH; i++) {
