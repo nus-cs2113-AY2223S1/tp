@@ -9,11 +9,18 @@ import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.START_INDEX;
 
-public abstract class PairUnpairParser extends Parser {
+/**
+ * Parent class for parsers of pair and unpair commands. Contains methods which are common to these parsers.
+ */
+public abstract class CommandPairUnpairParser extends Parser {
 
 
     protected boolean isFlagPresent(int flagIndexPosition) {
         return (flagIndexPosition != FLAG_ABSENT_RETURN_VALUE);
+    }
+
+    protected boolean isCorrectFlagOrder(int firstFlagIndex, int secondFlagIndex) {
+        return firstFlagIndex < secondFlagIndex;
     }
 
 
@@ -39,6 +46,13 @@ public abstract class PairUnpairParser extends Parser {
         return integerDetails;
     }
 
+    /**
+     * Checks for extra arguments in the user input, particularly between the subcommand and the first flag.
+     *
+     * @param commandDescription User input without command and subcommand.
+     * @param flagIndexPositions Array of indexes of the flags in the user input.
+     * @throws ExtraParametersException If there are extra commands between the subcommand and first flag
+     */
     protected void checkForExtraArguments(String commandDescription, int[] flagIndexPositions)
             throws ExtraParametersException {
 

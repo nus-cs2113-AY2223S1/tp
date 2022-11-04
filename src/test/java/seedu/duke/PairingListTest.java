@@ -8,7 +8,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class PairingListTest {
 
@@ -33,7 +32,7 @@ class PairingListTest {
             "25 Lower Kent Ridge Rd, Singapore 119081", "1000", "HDB 3 Room");
 
 
-    private PairingList pairingListInit() {
+    private PairingList initializePairingList() {
 
         PairingList pairingList = new PairingList();
 
@@ -53,7 +52,7 @@ class PairingListTest {
 
     @Test
     void deletePairing_clientPropertyObject_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
 
         pairingList.deletePairing(PRESENT_CLIENT, PRESENT_PROPERTY);
         assertFalse(pairingList.getClientPropertyPairs().containsKey(PRESENT_CLIENT));
@@ -62,7 +61,7 @@ class PairingListTest {
 
     @Test
     void deletePairing_propertyObject_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
 
         pairingList.deletePairing(PRESENT_PROPERTY);
         assertFalse(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
@@ -70,7 +69,7 @@ class PairingListTest {
 
     @Test
     void deletePairing_clientObject_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
 
         pairingList.deletePairing(PRESENT_CLIENT);
         assertFalse(pairingList.getClientPropertyPairs().containsValue(PRESENT_PROPERTY));
@@ -78,7 +77,7 @@ class PairingListTest {
 
     @Test
     void isClientPairedWithProperty_presentAndAbsentClientObjects_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
 
         assertTrue(pairingList.isClientPairedWithProperty(PRESENT_CLIENT));
         assertFalse(pairingList.isClientPairedWithProperty(ABSENT_CLIENT));
@@ -87,7 +86,7 @@ class PairingListTest {
 
     @Test
     void isAlreadyPaired_presentAndAbsentPropertyAndClients_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
 
         assertTrue(pairingList.isAlreadyPaired(PRESENT_CLIENT, PRESENT_PROPERTY));
         assertFalse(pairingList.isAlreadyPaired(PRESENT_CLIENT, ABSENT_PROPERTY));
@@ -95,21 +94,19 @@ class PairingListTest {
         // Absent clients will throw assertions errors.
         try {
             assertFalse(pairingList.isAlreadyPaired(ABSENT_CLIENT, PRESENT_PROPERTY));
-            fail();
         } catch (AssertionError e) {
             assertEquals(e.getMessage(), e.getMessage());
         }
 
         try {
             assertFalse(pairingList.isAlreadyPaired(ABSENT_CLIENT, ABSENT_PROPERTY));
-            fail();
         } catch (AssertionError e) {
             assertEquals(e.getMessage(), e.getMessage());
         }
     }
 
     @Test void hasPriceExceededBudget_differentBudgetClients_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
         assertTrue(pairingList.hasPriceExceededBudget(BUDGET_CHECKER_CLIENT_POOR, PRESENT_PROPERTY));
         assertFalse(pairingList.hasPriceExceededBudget(PRESENT_CLIENT, PRESENT_PROPERTY));
         assertFalse(pairingList.hasPriceExceededBudget(BUDGET_CHECKER_CLIENT_RICH, PRESENT_PROPERTY));
@@ -117,7 +114,7 @@ class PairingListTest {
 
     @Test
     void getPropertyTenants_propertyRentedByOnlyPresentClient_success() {
-        PairingList pairingList = pairingListInit();
+        PairingList pairingList = initializePairingList();
         ArrayList<Client> expectedTenantList = new ArrayList<>(List.of(PRESENT_CLIENT));
         ArrayList<Client> actualTenantList = pairingList.getPropertyTenants(PRESENT_PROPERTY);
         assertEquals(expectedTenantList, actualTenantList);
@@ -125,14 +122,14 @@ class PairingListTest {
 
     @Test
     void convertToPairingData_clientObject_success() {
-        String clientPairingData = pairingListInit().convertToPairingData(PRESENT_CLIENT);
+        String clientPairingData = initializePairingList().convertToPairingData(PRESENT_CLIENT);
 
         assertTrue(clientPairingData.matches("\\[.*\\|.*]"));
     }
 
     @Test
     void testConvertToPairingData_propertyObject_success() {
-        String propertyPairingData = pairingListInit().convertToPairingData(PRESENT_PROPERTY);
+        String propertyPairingData = initializePairingList().convertToPairingData(PRESENT_PROPERTY);
         assertTrue(propertyPairingData.matches("\\[.*\\|.*\\|.*\\|.*]"));
     }
 }

@@ -1,7 +1,9 @@
 package seedu.duke.command.pairunpair;
 
 //@@author ngdeqi
+import seedu.duke.Client;
 import seedu.duke.ClientList;
+import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
 import seedu.duke.exception.pairunpair.PairUnpairInvalidIndexException;
@@ -18,7 +20,9 @@ public abstract class CommandPairUnpair extends Command {
      */
     protected void checkForClientListIndexOutOfBounds(int clientIndex, ClientList clientList)
             throws PairUnpairInvalidIndexException {
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
+        try {
+            Client dummyClient = clientList.getClientList().get(clientIndex);
+        } catch (IndexOutOfBoundsException e) {
             throw new PairUnpairInvalidIndexException();
         }
     }
@@ -33,7 +37,10 @@ public abstract class CommandPairUnpair extends Command {
      */
     protected void checkForPropertyListIndexOutOfBounds(int propertyIndex, PropertyList propertyList) throws
             PairUnpairInvalidIndexException {
-        if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
+
+        try {
+            Property dummyProperty = propertyList.getPropertyList().get(propertyIndex);
+        } catch (IndexOutOfBoundsException e) {
             throw new PairUnpairInvalidIndexException();
         }
     }

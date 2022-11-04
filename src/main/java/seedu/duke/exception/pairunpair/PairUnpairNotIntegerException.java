@@ -7,8 +7,8 @@ import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER_INSTANCES;
 
 /**
- * Represents the exception where the user keys in non-positive integers for the client and property indexes for pair
- * and unpair commands.
+ * Represents the exception where the user keys in input that is not positive integers for the client and property
+ * indexes for pair and unpair commands.
  */
 public class PairUnpairNotIntegerException extends ParsePairUnpairException {
 

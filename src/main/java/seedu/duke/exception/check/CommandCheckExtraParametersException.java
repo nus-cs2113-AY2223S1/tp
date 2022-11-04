@@ -8,11 +8,11 @@ import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 /**
  * Representation of an exception where the user keys in extra arguments for a check command.
  */
-public class CheckExtraParametersException extends ParseCheckException {
+public class CommandCheckExtraParametersException extends ParseCheckException {
 
     private String extraArgument;
 
-    public CheckExtraParametersException(String extraArgument) {
+    public CommandCheckExtraParametersException(String extraArgument) {
         this.extraArgument = extraArgument;
     }
 

@@ -17,10 +17,10 @@ import static seedu.duke.CommandStructure.PAIR_FLAGS;
 /**
  * Parser for pair commands.
  */
-public class PairParser extends PairUnpairParser {
+public class CommandPairParser extends CommandPairUnpairParser {
     private final String commandDescription;
 
-    public PairParser(String pairCommandDescription) {
+    public CommandPairParser(String pairCommandDescription) {
         commandDescription = pairCommandDescription;
 
     }
@@ -29,10 +29,10 @@ public class PairParser extends PairUnpairParser {
     public Command parseCommand() throws ParsePairUnpairException {
 
         checkForEmptyDescription(commandDescription);
-        ArrayList<String> stringPairDetails = processCommandDetails(commandDescription);
-        ArrayList<Integer> integersPairDetails = convertPairUnpairCommandDetailsToInteger(stringPairDetails);
+        ArrayList<String> stringDetails = processCommandDetails(commandDescription);
+        ArrayList<Integer> integerDetails = convertPairUnpairCommandDetailsToInteger(stringDetails);
 
-        return new CommandPair(integersPairDetails);
+        return new CommandPair(integerDetails);
     }
 
 
@@ -76,18 +76,10 @@ public class PairParser extends PairUnpairParser {
 
     private void checkFlagsOrder(int[] flagIndexPositions) throws PairIncorrectFlagOrderException {
         for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
+            if (!isCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1])) {
+                throw new PairIncorrectFlagOrderException();
+            }
         }
     }
-
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition)
-            throws PairIncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new PairIncorrectFlagOrderException();
-        }
-    }
-
-
 
 }

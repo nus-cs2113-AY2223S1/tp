@@ -14,7 +14,7 @@ import static seedu.duke.Messages.MESSAGE_BUDGET_PROPERTY;
  */
 public class BudgetExceededException extends CommandPairException {
 
-    private static final String WHITE_SPACE = " | ";
+    private static final String SEPARATOR = " | ";
     private Client client;
     private Property property;
 
@@ -27,8 +27,8 @@ public class BudgetExceededException extends CommandPairException {
     public String toString() {
         return MESSAGE_BUDGET_EXCEEDED
                 + MESSAGE_BUDGET_CLIENT
-                + client.getClientName() + WHITE_SPACE + client.getClientBudgetPerMonth() + System.lineSeparator()
+                + client.getClientName() + SEPARATOR + client.getClientBudgetPerMonth() + System.lineSeparator()
                 + MESSAGE_BUDGET_PROPERTY
-                + property.getPropertyAddress() + WHITE_SPACE + property.getRentingPrice() + System.lineSeparator();
+                + property.getPropertyAddress() + SEPARATOR + property.getRentingPrice() + System.lineSeparator();
     }
 }

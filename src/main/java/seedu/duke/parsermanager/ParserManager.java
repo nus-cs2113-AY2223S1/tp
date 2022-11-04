@@ -2,15 +2,14 @@ package seedu.duke.parsermanager;
 
 //@@author wilsonngja
 import seedu.duke.ClientList;
-import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
-import seedu.duke.parsermanager.pairunpair.PairParser;
-import seedu.duke.parsermanager.pairunpair.UnpairParser;
+import seedu.duke.parsermanager.pairunpair.CommandPairParser;
+import seedu.duke.parsermanager.pairunpair.CommandUnpairParser;
 
 import java.util.ArrayList;
 
@@ -68,10 +67,10 @@ public class ParserManager {
             parser = parseDeleteCommand(commandDetail);
             break;
         case COMMAND_PAIR:
-            parser = new PairParser(commandDetail);
+            parser = new CommandPairParser(commandDetail);
             break;
         case COMMAND_UNPAIR:
-            parser = new UnpairParser(commandDetail);
+            parser = new CommandUnpairParser(commandDetail);
             break;
         case COMMAND_CHECK:
             parser = parseCheckCommand(commandDetail);
@@ -137,7 +136,7 @@ public class ParserManager {
             return new ParseCheckClient(commandDetail, clientList);
         } else if (isProperty) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
-            return new ParseCheckProperty(commandDescription);
+            return new CommandCheckPropertyParser(commandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
                     + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);

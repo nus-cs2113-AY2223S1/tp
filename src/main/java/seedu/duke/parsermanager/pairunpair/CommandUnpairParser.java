@@ -17,12 +17,10 @@ import static seedu.duke.CommandStructure.UNPAIR_FLAGS;
 /**
  * Parser for unpair commands.
  */
-
-public class UnpairParser extends PairUnpairParser {
+public class CommandUnpairParser extends CommandPairUnpairParser {
     private final String commandDescription;
 
-
-    public UnpairParser(String unpairCommandDescription) {
+    public CommandUnpairParser(String unpairCommandDescription) {
         this.commandDescription = unpairCommandDescription;
 
     }
@@ -31,10 +29,10 @@ public class UnpairParser extends PairUnpairParser {
     public Command parseCommand() throws ParsePairUnpairException {
 
         checkForEmptyDescription(commandDescription);
-        ArrayList<String> stringUnpairDetails = processCommandDetails(commandDescription);
-        ArrayList<Integer> integerUnpairDetails = convertPairUnpairCommandDetailsToInteger(stringUnpairDetails);
+        ArrayList<String> stringDetails = processCommandDetails(commandDescription);
+        ArrayList<Integer> integerDetails = convertPairUnpairCommandDetailsToInteger(stringDetails);
 
-        return new CommandUnpair(integerUnpairDetails);
+        return new CommandUnpair(integerDetails);
     }
 
 
@@ -79,16 +77,9 @@ public class UnpairParser extends PairUnpairParser {
 
     private void checkFlagsOrder(int[] flagIndexPositions) throws UnpairIncorrectFlagOrderException {
         for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
-        }
-    }
-
-
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition)
-            throws UnpairIncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new UnpairIncorrectFlagOrderException();
+            if (!isCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1])) {
+                throw new UnpairIncorrectFlagOrderException();
+            }
         }
     }
 

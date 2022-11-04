@@ -4,8 +4,8 @@ package seedu.duke.parsermanager;
 import seedu.duke.command.Command;
 import seedu.duke.command.check.CommandCheckProperty;
 import seedu.duke.exception.NotIntegerException;
-import seedu.duke.exception.check.CheckExtraParametersException;
-import seedu.duke.exception.check.CheckNotIntegerException;
+import seedu.duke.exception.check.CommandCheckExtraParametersException;
+import seedu.duke.exception.check.CommandCheckNotIntegerException;
 import seedu.duke.exception.check.ParseCheckException;
 import seedu.duke.exception.check.checkproperty.CheckPropertyMissingFlagException;
 
@@ -17,10 +17,10 @@ import static seedu.duke.CommandStructure.START_INDEX;
 /**
  * Parser for check property commands.
  */
-public class ParseCheckProperty extends Parser {
+public class CommandCheckPropertyParser extends Parser {
     private final String commandDescription;
 
-    public ParseCheckProperty(String checkCommandDescription) {
+    public CommandCheckPropertyParser(String checkCommandDescription) {
         this.commandDescription = checkCommandDescription;
     }
 
@@ -33,7 +33,7 @@ public class ParseCheckProperty extends Parser {
         try {
             integerCheckDetails = convertProcessedCommandDetailsToInteger(stringCheckDetails);
         } catch (NotIntegerException e) {
-            throw new CheckNotIntegerException();
+            throw new CommandCheckNotIntegerException();
         }
 
         return new CommandCheckProperty(integerCheckDetails);
@@ -41,7 +41,7 @@ public class ParseCheckProperty extends Parser {
 
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail) throws CheckPropertyMissingFlagException,
-            CheckExtraParametersException {
+            CommandCheckExtraParametersException {
 
         String[] flags = CHECK_PROPERTY_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
@@ -64,12 +64,12 @@ public class ParseCheckProperty extends Parser {
     }
 
     private void checkExtraArguments(String commandDescription, int[] flagIndexPositions)
-            throws CheckExtraParametersException {
+            throws CommandCheckExtraParametersException {
 
         int firstFlagIndex = flagIndexPositions[START_INDEX];
         if (firstFlagIndex != START_INDEX) {
             String extraArgument = commandDescription.substring(START_INDEX, firstFlagIndex);
-            throw new CheckExtraParametersException(extraArgument);
+            throw new CommandCheckExtraParametersException(extraArgument);
         }
 
     }

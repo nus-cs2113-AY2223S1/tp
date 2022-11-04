@@ -15,6 +15,9 @@ import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.CommandStructure.FIRST_INDEX;
+import static seedu.duke.CommandStructure.SECOND_INDEX;
+
 /**
  * Represents a pair-type command.
  */
@@ -30,8 +33,8 @@ public class CommandPair extends CommandPairUnpair {
      * @param commandPairDetails Parsed client and property indexes from the user's input.
      */
     public CommandPair(ArrayList<Integer> commandPairDetails) {
-        this.propertyIndex = commandPairDetails.get(0);
-        this.clientIndex = commandPairDetails.get(1);
+        this.propertyIndex = commandPairDetails.get(FIRST_INDEX);
+        this.clientIndex = commandPairDetails.get(SECOND_INDEX);
     }
 
     /**
