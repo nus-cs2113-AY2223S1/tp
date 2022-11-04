@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
 actor User
 Participant ":Ui" as Ui #AquaMarine
@@ -13,6 +12,8 @@ User -> Ui ++ #AquaMarine : "add/test build"
 Ui -> Ui ++ #AquaMarine : readLine()
 
 Ui -> Parser ++ #Orange : parse()
+
+Parser -> BuildManager ++ #Yellow : Initialize
 
 Parser -> Parser ++ #Orange : mainParseAdd()
 
@@ -30,8 +31,7 @@ return
 
 return
 
-deactivate Parser
-deactivate Ui
+return
 
-
+return
 @enduml

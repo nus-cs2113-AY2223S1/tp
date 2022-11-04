@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 skinparam classAttributeIconSize 0
+hide circle
 
 class Storage {
     -FILE_DIRECTORY: String

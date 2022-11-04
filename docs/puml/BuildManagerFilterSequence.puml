@@ -1,0 +1,46 @@
+@startuml
+
+actor User
+Participant ":Ui" as Ui #AquaMarine
+Participant ":Parser" as Parser #Orange
+Participant ":BuildManager" as BuildManager #Yellow
+
+User -> Ui ++ #AquaMarine : "list"
+
+Ui -> Ui ++ #AquaMarine : readLine()
+
+Ui -> Parser ++ #Orange : parse()
+
+Parser -> BuildManager ++ #Yellow : Initialize
+
+Parser -> Parser ++ #Orange : mainParseFilter()
+
+Parser -> BuildManager ++ #Yellow : filterBuilds()
+
+alt testing price
+    BuildManager -> BuildManager ++ #Yellow : filterPrice()
+    BuildManager -> BuildManager ++ #Yellow : printFilteredList()
+    return prints the filtered builds
+    return
+else testing power
+    BuildManager -> BuildManager ++ #Yellow : filterPower()
+    BuildManager -> BuildManager ++ #Yellow : printFilteredList()
+    return prints the filtered builds
+    return
+else testing compatibility
+    BuildManager -> BuildManager ++ #Yellow : filterCompatibility()
+    BuildManager -> BuildManager ++ #Yellow : printFilteredList()
+    return prints the filtered builds]
+    return
+end
+
+return
+
+return
+
+return
+
+return
+
+return
+@enduml
