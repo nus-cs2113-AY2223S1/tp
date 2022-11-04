@@ -1,7 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.commands.Check;
 import seedu.duke.design.ASCIIArtGenerator;
+import seedu.duke.exceptions.InvalidInputContentException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +12,7 @@ import java.util.Scanner;
 public class UI {
 
     public static String separationLine = "----------------------------------------";
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public static void printSeparationLine() {
         System.out.println(separationLine);
@@ -166,13 +170,11 @@ public class UI {
     }
 
     public static void NOCIneligibleMessage() {
-        System.out.println("Sorry, You are ineligible for NOC.");
-        System.out.println("----------------------------------------");
+        System.out.println("Sorry, You are ineligible for NOC." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
-        System.out.println(" - You have yet to complete 4 semesters of study");
-        System.out.println(" - You are currently in your final academic semester");
-        System.out.println(" - You have yet to obtain more than 70MC");
-        System.out.println("----------------------------------------");
+        System.out.println(" * You have yet to complete 4 semesters of study");
+        System.out.println(" * You are currently in your final academic semester");
+        System.out.println(" * You have yet to obtain more than 70MC");
 
     }
 
@@ -181,13 +183,27 @@ public class UI {
     }
 
     public static void SEPIneligibleMessage() {
-        System.out.println("Sorry, You are ineligible for SEP.");
-        System.out.println("----------------------------------------");
+        System.out.println("Sorry, You are ineligible for SEP." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
-        System.out.println(" - You have yet to complete 2 semesters of study");
-        System.out.println(" - You are currently in your final year");
-        System.out.println(" - Your CAP is below 3.0");
-        System.out.println("----------------------------------------");
+        System.out.println(" * You have yet to complete 2 semesters of study");
+        System.out.println(" * You are currently in your final year");
+        System.out.println(" * Your CAP is below 3.0");
+
+    }
+
+    public static void overview(ModuleList moduleList) throws InvalidInputContentException, InvalidInputContentException {
+
+        System.out.println("Here’s an overview of your Profile:" + "\n");
+        System.out.println("* Current Semester: " + new Check().findCurrentSemesterInString() + "\n");
+        System.out.println("* Total MCs completed : " + moduleList.totalMcs());
+        System.out.println("* Total Graded MCs : " + moduleList.totalGradedMcs());
+        System.out.println("* Total Ungraded (-) MCs : " + moduleList.totalUngradedMcs());
+        System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
+        System.out.println("* Cumulative Average Point (CAP) : " + df.format(moduleList.calculateCap()) + "\n");
+        System.out.println("* MCs Needed needed for graduation : " + moduleList.McsForGraduation() + "\n");
+        System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNOC() ? "Yes" : "No"));
+        System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSEP() ? "Yes" : "No"));
+
     }
 
     public static void helpMessage(String message) {
