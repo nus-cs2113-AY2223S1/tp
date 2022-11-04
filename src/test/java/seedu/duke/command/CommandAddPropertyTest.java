@@ -42,21 +42,19 @@ public class CommandAddPropertyTest {
     public PairingList pairingList = new PairingList();
     public Storage storage = new Storage(clientList, propertyList, pairingList);
 
+    public static final int OFFSET_UNIT_VALUE = 1;
+
     @Test
-    public void execute() {
+    public void execute_validPropertyDetails_matchingPropertyDetails() {
         int propertyListSizeByCounting = propertyList.getCurrentListSize();
         new CommandAddProperty(PROPERTY_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
 
         assertEquals(propertyList.getCurrentListSize(), ++propertyListSizeByCounting);
-        assertEquals(LANDLORD_NAME, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
-                .getLandlordName());
-        assertEquals(PROPERTY_ADDRESS, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
-                .getPropertyAddress());
-        assertEquals(PROPERTY_RENTING_PRICE, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
-                .getRentingPrice());
-        assertEquals(PROPERTY_UNIT_TYPE, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
-                .getUnitType());
-        assertEquals(PROPERTY_SUMMARY, propertyList.getPropertyList().get(propertyList.getCurrentListSize() - 1)
-                .toString());
+        int addedPropertyIndex = propertyList.getCurrentListSize() - OFFSET_UNIT_VALUE;
+        assertEquals(LANDLORD_NAME, propertyList.getPropertyList().get(addedPropertyIndex).getLandlordName());
+        assertEquals(PROPERTY_ADDRESS, propertyList.getPropertyList().get(addedPropertyIndex).getPropertyAddress());
+        assertEquals(PROPERTY_RENTING_PRICE, propertyList.getPropertyList().get(addedPropertyIndex).getRentingPrice());
+        assertEquals(PROPERTY_UNIT_TYPE, propertyList.getPropertyList().get(addedPropertyIndex).getUnitType());
+        assertEquals(PROPERTY_SUMMARY, propertyList.getPropertyList().get(addedPropertyIndex).toString());
     }
 }
