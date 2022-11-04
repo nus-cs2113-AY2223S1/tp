@@ -15,6 +15,7 @@ public class FindCommand extends Command {
 
     public static final String CORRECT_FORMAT = "The correct format should be " + "'" + COMMAND_SYNTAX + "'."
             + FLAG_SYNTAX;
+    public static final String INCORRECT_FLAG_MESSGE = "Incorrect flag!\n";
     public String findInput;
     private FlagType flag;
 
@@ -46,7 +47,7 @@ public class FindCommand extends Command {
                 foundRecipeList = RecipeList.findRecipeTitlesFromIngredientName(findInput);
                 break;
             default:
-                return new CommandResult("Incorrect flag!\n" + FindCommand.FLAG_SYNTAX);
+                return new CommandResult(INCORRECT_FLAG_MESSGE + FindCommand.FLAG_SYNTAX);
             }
             StringBuilder output = new StringBuilder();
             for (int i = 0; i < foundRecipeList.size(); i++) {
