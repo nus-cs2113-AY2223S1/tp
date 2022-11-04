@@ -272,7 +272,7 @@ public class TransactionList {
             // Applies generic filter against each time transaction entry
             if (isMatchListFilters(transaction, type, category, date)) {
                 transactionsList += Integer.toString(count) + COLON_SPACE + transaction.toString() + LINE_SEPARATOR;
-                count ++;
+                count++;
             }
         }
         return transactionsList;
@@ -293,7 +293,7 @@ public class TransactionList {
             if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
                     && keyword != "") {
                 transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR.toString();
-                count ++;
+                count++;
             }
         }
         return transactionsList;
