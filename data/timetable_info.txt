@@ -1,6 +1,0 @@
-Boston University%
-CS103;Introduction to Internet Technologies and Web Programming;3;nil;tuesday;09:00;12:00%
-MET CS 248;Discrete Mathematics;3;nil;monday;08:00;12:00%
-/Arizona State University%
-CSE412;Database Management;3;nil;wednesday;10:00;12:00%
-CSE450;Design and Analysis of Algorithms;3;nil;thursday;11:00;12:00%
