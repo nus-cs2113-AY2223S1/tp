@@ -182,6 +182,18 @@ public class ComponentsTest {
     @Test
     public void testToString() {
 
+        assertEquals("cpu1 [$123] [12 W] [1] [4.0 GHz]", cpu1.toString());
+        assertEquals("gpu1 [$456] [45 W] [4 GB] [5 MHz]", gpu1.toString());
+        assertEquals("mobo1 [$123] [12 W] [1] [Full ATX] [2 RAM slots] [2 GPU slots]", mobo1.toString());
+        assertEquals("cooler1 [$123] [12 W] [1] [1500 RPM] [40 dB]", cooler1.toString());
+        assertEquals("case1 [$123] [1 W] [Full ATX] [2]", case1.toString());
+        assertEquals("powersupply1 [$123] [850 W]", powersupply1.toString());
+        assertEquals("memory1 [$123] [12 W] [8 GB] [4 MHz]", memory1.toString());
+        assertEquals("drive1 [$123] [12 W] [200 GB] [SSD]", drive1.toString());
+        assertEquals("monitor1 [$123] [12 W] [144 Hz] [4 ms] [3440x1440 p]", monitor1.toString());
+        assertEquals("other1 [$123] [12 W]", other1.toString());
+
+
         assertNotNull(cpu1.toString());
         assertNotNull(gpu1.toString());
         assertNotNull(mobo1.toString());
@@ -196,6 +208,16 @@ public class ComponentsTest {
 
     @Test
     public void testToCSV() {
+        assertEquals("cpu1,123,12,1,4.0", cpu1.toCsv());
+        assertEquals("gpu1,456,45,4,5", gpu1.toCsv());
+        assertEquals("mobo1,123,12,1,Full ATX,2,2", mobo1.toCsv());
+        assertEquals("cooler1,123,12,1,1500,40", cooler1.toCsv());
+        assertEquals("case1,123,1,Full ATX,2", case1.toCsv());
+        assertEquals("powersupply1,123,850", powersupply1.toCsv());
+        assertEquals("memory1,123,12,8,4", memory1.toCsv());
+        assertEquals("drive1,123,12,200,SSD", drive1.toCsv());
+        assertEquals("monitor1,123,12,144,4,3440x1440", monitor1.toCsv());
+        assertEquals("other1,123,12", other1.toCsv());
 
         assertNotNull(cpu1.toCsv());
         assertNotNull(gpu1.toCsv());
@@ -211,7 +233,16 @@ public class ComponentsTest {
 
     @Test
     public void testSaveAsString() {
-
+        assertEquals("cpu/cpu1/123/12/1/4.0", cpu1.saveAsString());
+        assertEquals("gpu/gpu1/456/45/4/5", gpu1.saveAsString());
+        assertEquals("motherboard/mobo1/123/12/1/Full ATX/2/2", mobo1.saveAsString());
+        assertEquals("cooler/cooler1/123/12/1/1500/40", cooler1.saveAsString());
+        assertEquals("case/case1/123/1/Full ATX/2", case1.saveAsString());
+        assertEquals("powersupply/powersupply1/123/850", powersupply1.saveAsString());
+        assertEquals("memory/memory1/123/12/8/4", memory1.saveAsString());
+        assertEquals("drive/drive1/123/12/200/SSD", drive1.saveAsString());
+        assertEquals("monitor/monitor1/123/12/144/4/3440x1440", monitor1.saveAsString());
+        assertEquals("other/other1/123/12", other1.saveAsString());
 
         assertNotNull(cpu1.saveAsString());
         assertNotNull(gpu1.saveAsString());
@@ -227,7 +258,21 @@ public class ComponentsTest {
 
     @Test
     public void testGetDetails() {
-
+        assertEquals("Name: cpu1\nPrice: $123\nPower: 12 W\nSocket: 1\nClock: 4.0 GHz", cpu1.getDetails());
+        assertEquals("Name: gpu1\nPrice: $456\nPower: 45 W\nMemory: 4 GB\nClock: 5 MHz", gpu1.getDetails());
+        assertEquals("Name: mobo1\nPrice: $123\nPower: 12 W\nSocket: 1\nformFactor: Full ATX\n" +
+                "RAM Slots: 2\nGPU Slots: 2", mobo1.getDetails());
+        assertEquals("Name: cooler1\nPrice: $123\nPower: 12 W\nSocket: 1\nFan Speed: 1500 RPM\n" +
+                        "Noise Level: 40 dB", cooler1.getDetails());
+        assertEquals("Name: case1\nPrice: $123\nPower: 1 W\nForm Factor: Full ATX\nExpansion Slots: 2",
+                case1.getDetails());
+        assertEquals("Name: powersupply1\nPrice: $123\nPower: 850 W", powersupply1.getDetails());
+        assertEquals("Name: memory1\nPrice: $123\nPower: 12 W\nSize: 8 GB\nSpeed: 4 MHz", memory1.
+                getDetails());
+        assertEquals("Name: drive1\nPrice: $123\nPower: 12 W\nSize: 200 GB\nType: SSD", drive1.getDetails());
+        assertEquals("Name: monitor1\nPrice: $123\nPower: 12 W\nRefresh Rate: 144 Hz\nResponse Time: 4 ms\n" +
+                "Resolution: 3440x1440 p", monitor1.getDetails());
+        assertEquals("Name: other1\nPrice: $123\nPower: 12 W", other1.getDetails());
 
         assertNotNull(cpu1.getDetails());
         assertNotNull(gpu1.getDetails());
