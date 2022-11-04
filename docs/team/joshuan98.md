@@ -1,18 +1,16 @@
 # joshuan98's Project Portfolio Page
 
-## Product Overview
+### Product Overview
 
 easySEP is a CLI application created to assist NUS Computer Engineering (CEG) undergraduates intending to embark on a Student Exchange Programme (SEP) in their planning for student exchange.
 In particular, it is a useful utility for exploring potential module mappings for various partner universities, creating and maintaining lists for them and also favouriting selected ones for easier reference.
 As an added feature, users can also curate their timetables to prevent potential clashes in lessons.
 
-## Project Contribution
-
 ### Code Contribution
 
 - Code contributed: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=joshuan98&breakdown=true)
 
-### Database
+#### Database
 
 - New Feature: Added the ability to store module mapping information in memory.
   - What it does: Reads in data from a `csv` file, verify its authenticity, and writes the data into memory for use by other parts of the program.
@@ -20,7 +18,7 @@ As an added feature, users can also curate their timetables to prevent potential
   - Highlights: Cleaned up the given data file, filter the relevant data from the `csv` for our application, parse the data into a usable form for other parts of the program, provide easy retrieval by filtering data based on name and module code for both NUS and partner university for ease of searching data in the database.
 - **Relevant PRs**: [#7](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/7), [#49](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/49)
 
-### `/list` command
+#### `/list` command
 
 - New Feature: Added the ability for users to list information from the database.
   - What it does: 4 sub-capabilities, displays the list of all modules in the database, displays the list of all universities in the database, filters module mappings based on NUS module code, filters module mappings based on partner university name.
@@ -31,9 +29,9 @@ As an added feature, users can also curate their timetables to prevent potential
 ### Testing
 
 - Added JUnit tests and assertions to make the code more defensive
-  * **Relevant PRs**: [#36](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/36), [#76](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/76), [#77](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/77),[#90](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/90)
+  - **Relevant PRs**: [#36](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/36), [#76](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/76), [#77](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/77),[#90](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/90)
 - Fixed bugs found during CS2113 Practical Examination Dry-Run
-  * **Relevant PRs**: [#181](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/181)
+  - **Relevant PRs**: [#181](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/181)
 
 ### Documentation
 
