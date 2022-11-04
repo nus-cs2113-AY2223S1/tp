@@ -49,7 +49,6 @@ Note:
 * Words in UPPER_CASE are parameters to be specified by the user.
 * Index values are limited to integers between 1 and 2147483647 (both inclusive).
 
-
 ---
 
 ### Add Property: `add -property`
