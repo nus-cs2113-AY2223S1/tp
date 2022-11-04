@@ -11,10 +11,10 @@ import java.util.List;
 public class Check extends Command {
     public static int MC_MINIMUM_NOC = 70;
     public static int SEMESTER_MINIMUM_NOC = 4;
-    public static int SEMESTER_MAXIMUM_NOC = 8;
+    public static int SEMESTER_MAXIMUM_NOC = 7;
     public static double CAP_MINIMUM_SEP = 3.0;
     public static int SEMESTER_MINIMUM_SEP = 2;
-    public static int SEMESTER_MAXIMUM_SEP = 7;
+    public static int SEMESTER_MAXIMUM_SEP = 6;
     private ArrayList<Module> modules = ModuleList.modules;
     private String type;
 
@@ -65,6 +65,7 @@ public class Check extends Command {
                 semesters.add(mod.getSemesterTaken());
             }
         }
+        System.out.println("semesters.size()" + semesters.size());
         return semesters.size();
     }
 
