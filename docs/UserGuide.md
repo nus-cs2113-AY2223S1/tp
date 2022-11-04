@@ -3,28 +3,43 @@
 ## Table of Contents
 
 ### 1. [Introduction](#introduction)
+
 ### 2. [Quick Start](#quick-start)
+
 ### 3. [Features](#features)
-#### 3.1  [Add Command](#add-command-add)
+
+#### 3.1 [Add Command](#add-command-add)
+
 3.11 [Add Command for Module Mapping](#1-add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
 3.12 [Add Command for Lessons](#2-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
-#### 3.2  [Create Command](#create-command-create-uuniversity_name)
+
+#### 3.2 [Create Command](#create-command-create-uuniversity_name)
+
 #### 3.3 [Delete Command](#delete-command-delete)
+
 3.31 [Delete Command for Universities](#1-delete-command-for-universities-delete-uuniversity_name)\
 3.32 [Delete Command for Modules](#2-delete-command-for-modules-delete-uuniversity_name-mmodule_code)\
 3.33 [Delete Command for Lessons](#3-delete-command-for-lessons-delete-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
+
 #### 3.4 [Exit Command](#exit-command-exit)
+
 #### 3.5 [Favourite Command](#favourite-command-favourite)
+
 3.51 [Favourite Command to view favourite lists](#1-favourite-command-for-viewing-all-favourited-lists-favourite-view)\
 3.52 [Favourite Command to add list to favourites](#2-favourite-command-for-adding-a-list-to-favourites--favourite-adduniversity_name_in_underscores)\
 3.53 [Favourite Command to delete list from favourites](#3-favourite-command-for-deleting-a-list-from-favourites--favourite-deluniversity_name_in_underscores)
+
 #### 3.6 [Help Command](#help-command-help)
+
 #### 3.7 [List Command](#list-command-list)
+
 3.71 [List Command for all Universities](#1-list-command-for-all-universities-list-universities)\
 3.72 [List Command for all Modules](#2-list-command-for-all-modules--list-modules)\
 3.73 [List Command filtered by module](#3-list-command-filtered-by-module-list-mmodulecode)\
 3.74 [List Command filtered by university](#4-list-command-filtered-by-university-name-list-uuniversity_name_in_underscores)
-#### 3.8  [View Command](#view-command-view)
+
+#### 3.8 [View Command](#view-command-view)
+
 3.81 [View Command for University List](#1-view-command-for-all-user-university-lists-view-lists)\
 3.82 [View Command for input University](#2-view-command-for-users-input-university-view-uuniversity_name)\
 3.83 [View Command for Timetables](#3-view-command-for-all-timetables-created-by-user-view-timetables)\
@@ -47,10 +62,11 @@ In particular, it is a useful utility for exploring potential module mappings fo
 6. Maximise your command prompt window to full screen
 7. Run java -jar easySEP.jar
 
-Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`. 
+Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`.
 Where applicable, the abbreviation `PU` stands for Partner University.
 
-Expected output: 
+Expected output:
+
 ```
                         _____ ______ _____
                        / ____|  ____|  __ \
@@ -76,14 +92,16 @@ We have incorporated 2 types of add commands.
 
 Adds input Partner University module code to input university list.
 
-><span style="color: #FFA500;">**IMPORTANT**</span>: Can only add modules in database. Use  `/list u/{UNIVERSITY_NAME}` to see modules available
+> <span style="color: #FFA500;">**IMPORTANT**</span>: Can only add modules in database. Use `/list u/{UNIVERSITY_NAME}` to see modules available
 
 Example input:
+
 ```
 /add u/Western_University m/CS4487
 ```
 
 Expected output:
+
 ```
 ____________________________________________________________________________
 Success! You added:
@@ -95,14 +113,16 @@ ____________________________________________________________________________
 
 Adds a lesson for the specified module code to the timetable for the specified university with given start time and end time on the specified day of the week.
 
-><span style="color: #FFA500;">**IMPORTANT**</span>: {START_TIME} & {END_TIME} in {hh:mm} format
-> 
-Example input: 
+> <span style="color: #FFA500;">**IMPORTANT**</span>: {START_TIME} & {END_TIME} in {hh:mm} format
+>
+> Example input:
+
 ```
 /add u/Western_University m/CS3319 d/Thursday st/18:00 en/20:00
 ```
 
-Expected output: 
+Expected output:
+
 ```
 ____________________________________________________________________________
 Success! You have added a new lesson:
@@ -110,17 +130,18 @@ Western University Thursday 18:00hrs-20:00hrs: CS3319 Databases I
 ____________________________________________________________________________
 ```
 
-
 ### Create Command: `/create u/{UNIVERSITY_NAME}`
 
 Creates a university list and the corresponding timetable for user's specified university.
 
 Example Input:
+
 ```
 /create u/Aalto_University
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You have created a new list for Aalto University
@@ -129,7 +150,6 @@ ____________________________________________________________________________
 Success! You have created a new timetable for Aalto University
 ____________________________________________________________________________
 ```
-
 
 ### Delete Command: `/delete`
 
@@ -140,11 +160,13 @@ We have incorporated 3 types of delete commands.
 Deletes input university list.
 
 Example Input:
+
 ```
 /delete u/Western_University
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You deleted the list for Western University
@@ -159,11 +181,13 @@ ____________________________________________________________________________
 Deletes the specified module from the university.
 
 Example Input:
+
 ```
 /delete u/Western_University m/CS4487
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You deleted:
@@ -178,11 +202,13 @@ No current modules saved
 Deletes the specified lesson from the university's timetable.
 
 Example Input:
+
 ```
 /delete u/Western_University m/CS3319 d/Thursday st/18:00 en/20:00
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You have deleted the lesson:
@@ -190,28 +216,28 @@ Western University Thursday 18:00hrs-20:00hrs: CS3319 Databases I
 ____________________________________________________________________________
 ```
 
-
 ### Exit Command: `/exit`
 
 Exits easySEP
 
 Example Input:
+
 ```
 /exit
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
- ___               _  _             
-/  _>  ___  ___  _| || |_  _ _  ___ 
+ ___               _  _
+/  _>  ___  ___  _| || |_  _ _  ___
 | <_/\/ . \/ . \/ . || . \| | |/ ._>
 `____/\___/\___/\___||___/`_. |\___.
-                          <___'     
+                          <___'
 Hope to see you again soon!
 ____________________________________________________________________________
 ```
-
 
 ### Favourite Command: `/favourite`
 
@@ -222,11 +248,13 @@ We have incorporated a total of 3 functionalities involving favourite:
 Displays all lists that are marked as favourites with their associated module mappings.
 
 Example of usage:
+
 ```
 /favourite VIEW
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Your favourite lists are:
@@ -241,11 +269,13 @@ Adds a list of module mappings for a particular partner university into favourit
 must already be created beforehand in order to be added into favourites.
 
 Example of usage:
+
 ```
 /favourite add/Boston_University
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You added:
@@ -259,11 +289,13 @@ Deletes a list of module mappings for a particular partner university from favou
 must already be marked as favourite beforehand in order to be deleted from favourites.
 
 Example of usage:
+
 ```
 /favourite del/Boston_University
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Success! You deleted:
@@ -271,17 +303,18 @@ Boston University from your favourite lists
 ____________________________________________________________________________
 ```
 
-
 ### Help Command: `/help`
 
 Prints out all the commands and command format required for easySEP
 
 Example Input:
+
 ```
 /help
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
      COMMAND   FORMAT                                                PURPOSE
@@ -315,7 +348,6 @@ ____________________________________________________________________________
 ____________________________________________________________________________
 ```
 
-
 ### List Command: `/list`
 
 We have incorporated 4 types of list commands.
@@ -325,11 +357,13 @@ We have incorporated 4 types of list commands.
 Displays all universities with module mappings available in database.
 
 Example of usage:
+
 ```
 /list UNIVERSITIES
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 The universities available in the database are:
@@ -344,7 +378,7 @@ The universities available in the database are:
 9. Budapest University of Technology and Economics
 10. Carnegie Mellon University
 
-... 
+...
 
 172. Vilnius University
 173. Waseda University
@@ -362,14 +396,16 @@ Displays all existing university modules mappings that are approved in the follo
 
 `[Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS`
 
-><span style="color: #FFA500;">**WARNING**</span>: Expect many lines of output. To get fewer lines, use filters as shown in the next section
+> <span style="color: #FFA500;">**WARNING**</span>: Expect many lines of output. To get fewer lines, use filters as shown in the next section
 >
-Example of usage:
+> Example of usage:
+
 ```
 /list MODULES
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 The eligible module mappings are:
@@ -394,13 +430,14 @@ ____________________________________________________________________________
 
 List all module mappings for NUS MODULECODE in database.
 
-
 Example of usage:
+
 ```
 /list m/CS2113
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 The eligible module mappings are:
@@ -414,11 +451,13 @@ ____________________________________________________________________________
 List all module mappings offered by UNIVERSITY in database.
 
 Example of usage:
+
 ```
 /list u/Aalto_University
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 The eligible module mappings are:
@@ -431,7 +470,6 @@ The eligible module mappings are:
 ____________________________________________________________________________
 ```
 
-
 ### View Command: `/view`
 
 We have incorporated 4 types of view commands.
@@ -440,12 +478,14 @@ We have incorporated 4 types of view commands.
 
 Displays all university lists created by user and the corresponding modules for each university.
 
-Example Input: 
+Example Input:
+
 ```
 /view LISTS
 ```
 
-Expected Output: 
+Expected Output:
+
 ```
 Western University
 ____________________________________________________________________________
@@ -461,11 +501,13 @@ No current modules saved
 Displays all modules and timetable for the input university.
 
 Example Input:
+
 ```
 /view u/Western_University
 ```
 
 Expected Output:
+
 ```
 Western University
 ____________________________________________________________________________
@@ -485,16 +527,19 @@ Saturday:
 Sunday:
 ____________________________________________________________________________
 ```
+
 #### 3. View Command for all timetables created by user: `/view TIMETABLES`
 
 Displays all timetables for list of universities created by user.
 
 Example Input:
+
 ```
 /view TIMETABLES
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Timetable for Western University:
@@ -527,11 +572,13 @@ Displays up to 5 module mappings that user recently deleted, ordered from most r
 to least recently deleted.
 
 Example Input:
+
 ```
 /view DELETE_HISTORY
 ```
 
 Expected Output:
+
 ```
 ____________________________________________________________________________
 Your most recently deleted modules are:
@@ -540,13 +587,10 @@ Your most recently deleted modules are:
 ____________________________________________________________________________
 ```
 
-
-## FAQ
-
 ## Command Summary
 
 | Command   | Format                                                                                          | Purpose                                                                                                                                                                                                                                                     |
-|-----------|-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`                                                      | Adds input Partner University module code to input university list                                                                                                                                                                                          |
 | add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`    | Adds a lesson for the input module code to the timetable for the input university with input start time and end time on the input day of the week                                                                                                           |
 | create    | `/create u/{UNIVERSITY_NAME}`                                                                   | Creates an empty module list for the input university                                                                                                                                                                                                       |
