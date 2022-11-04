@@ -2,11 +2,11 @@
 'https://plantuml.com/sequence-diagram
 
 actor User
-Participant "Ui" as Ui #AquaMarine
-Participant "Parser" as Parser #Orange
-Participant "BuildManager" as BuildManager #Yellow
-Participant "Build" as Build #DarkSalmon
-Participant "Storage" as Storage #LightGreen
+Participant ":Ui" as Ui #AquaMarine
+Participant ":Parser" as Parser #Orange
+Participant ":BuildManager" as BuildManager #Yellow
+Participant ":Build" as Build #DarkSalmon
+Participant ":Storage" as Storage #LightGreen
 
 User -> Ui ++ #AquaMarine : "add/test build"
 
@@ -16,30 +16,22 @@ Ui -> Parser ++ #Orange : parse()
 
 Parser -> Parser ++ #Orange : mainParseAdd()
 
-alt name argument is valid
+Parser -> BuildManager ++ #Yellow : addBuild()
 
-    Parser -> BuildManager ++ #Yellow : addBuild()
+BuildManager -> Build ++ #DarkSalmon : getName()
+return
 
-    alt there is no build with name "test build"
+return
 
-        BuildManager -> Build ++ #DarkSalmon : getName()
-        return
+Parser -> Storage ++ #LightGreen : saveBuild()
+return
 
-        return
+return
 
-        Parser -> Storage ++ #LightGreen : saveBuild()
-        return
+return
 
-    else there is an existing build with name "test build"
+deactivate Parser
+deactivate Ui
 
-        Parser -> DuplicateBuildException ++ #Black
-        return print error message
-    end
-
-else name argument is an empty string or whitespaces
-
-    Parser -> BlankStringException ++ #Black
-    return print error message
-end
 
 @enduml
