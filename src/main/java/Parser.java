@@ -82,7 +82,7 @@ public class Parser {
             } else if (inputLower.startsWith(ADD_COMMAND)) {
                 errorIfNoMatchPatient(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(4).toUpperCase();
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, false);
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
@@ -130,7 +130,7 @@ public class Parser {
             } else if (inputLower.startsWith(ADD_COMMAND)) {
                 errorIfNoMatchVisit(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(1).toUpperCase();
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, true);
                 assert !patientId.contains(" ");
                 parseAddVisit(matcherAdd, patientId);
             } else if (inputLower.startsWith(EDIT_COMMAND)) {
@@ -141,12 +141,12 @@ public class Parser {
                 storage.saveVisitData(visitList);
             } else if (inputLower.startsWith(DELETE_REASON_COMMAND.toLowerCase())
                     || inputLower.startsWith("delete")) {
-                errorIfNoMatchVisit(matcherEdit, DELETE_REASON_COMMAND);
+                errorIfNoMatchVisit(matcherDelete, DELETE_REASON_COMMAND);
                 visitList.deleteReason(ui, Integer.parseInt(matcherDelete.group(1)));
             } else if (inputLower.startsWith(VIEW_PATIENT_COMMAND.toLowerCase())) {
                 errorIfNoMatchVisit(matcherViewPatient, VIEW_PATIENT_COMMAND);
                 String patientId = matcherViewPatient.group(1).toUpperCase();
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, true);
                 assert !patientId.contains(" ");
                 visitList.viewPatient(ui, patientId);
             } else if (inputLower.startsWith(VIEW_VISIT_COMMAND.toLowerCase())) {
@@ -192,7 +192,7 @@ public class Parser {
             } else if (inputLower.startsWith(ADD_COMMAND)) {
                 errorIfNoMatchPrescription(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(1).toUpperCase();
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, true);
                 assert !patientId.contains(" ");
                 prescriptionList.add(ui, patientId, matcherAdd.group(2),
                         matcherAdd.group(3), matcherAdd.group(4));
@@ -205,13 +205,13 @@ public class Parser {
                     || inputLower.startsWith(VIEW_PATIENT_COMMAND.toLowerCase())) {
                 errorIfNoMatchPrescription(matcherViewPatient, VIEW_PATIENT_PRES_COMMAND);
                 String patientId = matcherViewPatient.group(1);
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, true);
                 assert !patientId.contains(" ");
                 prescriptionList.viewPatientPrescription(ui, patientId);
             } else if (inputLower.startsWith(VIEW_ACT_PATIENT_PRES_COMMAND.toLowerCase())) {
                 errorIfNoMatchPrescription(matcherViewActive, VIEW_ACT_PATIENT_PRES_COMMAND);
                 String patientId = matcherViewActive.group(1);
-                errorIfPatientExists(patientId);
+                errorForPatientID(patientId, true);
                 assert !patientId.contains(" ");
                 prescriptionList.viewActivePatientPrescription(ui, patientId);
             } else if (inputLower.startsWith(ACTIVATE_COMMAND.toLowerCase())) {
@@ -348,9 +348,12 @@ public class Parser {
         }
     }
 
-    private void errorIfPatientExists(String patientId) throws OneDocException {
-        if (patientList.findPatient(patientId) == null) {
+    private void errorForPatientID(String patientId, boolean errorIfNotExist) throws OneDocException {
+        Patient patientIdFound = patientList.findPatient(patientId);
+        if (patientIdFound == null && errorIfNotExist) {
             throw new OneDocException("That patient ID doesn't exist!");
+        } else if (patientIdFound != null && !errorIfNotExist) {
+            throw new OneDocException("That patient ID already exists! Please choose a new one");
         }
     }
 
