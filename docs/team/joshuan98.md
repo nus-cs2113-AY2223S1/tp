@@ -31,7 +31,7 @@ Given below are my contributions to the project:
   - Attempted to provide solutions to problems faced by others in CS2113 forum ([Forum Post #3](https://github.com/nus-cs2113-AY2223S1/forum/issues/3), [Forum Post #8](https://github.com/nus-cs2113-AY2223S1/forum/issues/8), [Forum Post #9](https://github.com/nus-cs2113-AY2223S1/forum/issues/9))
   - Clarified doubts that may be applicable to others in CS2113 forum ([Forum Post #12](https://github.com/nus-cs2113-AY2223S1/forum/issues/12), [Forum Post #24](https://github.com/nus-cs2113-AY2223S1/forum/issues/24))
   - Consistently reported bugs faced by other teams during tutorial exercises ([Developer Guide Review #1](https://github.com/nus-cs2113-AY2223S1/tp/pull/4), [Developer Guide Review #2](https://github.com/nus-cs2113-AY2223S1/tp/pull/1))
-  - Reported bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
+  - Reported 24 bugs faced by other teams during the CS2113 Practical Examination Dry-Run ([Practical Examination Dry-Run](https://github.com/joshuan98/ped/issues))
 
 ## Contributions to the Developer Guide (Extracts)
 
