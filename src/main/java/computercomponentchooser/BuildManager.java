@@ -158,7 +158,7 @@ public class BuildManager {
      * Swaps lowestNumber and highestNumber automatically if lowestNumber is greater than highestNumber.
      *
      * @param lowestNumber The lowest number in the range.
-     * @param highestNumber The highest number in the range.
+     * @param highestNumber The highest number in the    range.
      * @param i The number of builds that meet the user specified requirements.
      * @return The number of builds that meet the user specified requirements.
      * @throws NumberFormatException If the user input is not a number.

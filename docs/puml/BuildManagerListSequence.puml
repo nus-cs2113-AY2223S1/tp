@@ -1,0 +1,25 @@
+@startuml
+
+actor User
+Participant ":Ui" as Ui #AquaMarine
+Participant ":Parser" as Parser #Orange
+Participant ":BuildManager" as BuildManager #Yellow
+
+User -> Ui ++ #AquaMarine : "list"
+
+Ui -> Ui ++ #AquaMarine : readLine()
+
+Ui -> Parser ++ #Orange : parse()
+
+Parser -> BuildManager ++ #Yellow : Initialize
+
+Parser -> Parser ++ #Orange : mainParseList()
+
+return prints the list of builds
+
+return
+
+return
+
+return
+@enduml

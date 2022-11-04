@@ -27,10 +27,8 @@
 
 This section describes the implementation of Main Mode features.
 
-Once the `main()` method of ComputerComponentChooser is called, objects for the `BuildManager`, `Parser`, 
-`editParser`, `Storage`, `Ui` are created.
-
-
+Once the `main()` method of ComputerComponentChooser is called, instances for the `BuildManager`, `Parser`, 
+`editParser`, `Storage`, `Ui` classes are initialized.
 
 #### BuildManager
 
@@ -62,7 +60,7 @@ method `mainParseAdd()` in the Parser Class.
 The 'mainParseAdd() will check if the provided name is valid or is blank or made up of white spaces. If the provided 
 name is valid, the method will create a build with the provided name and the method will call the method `addBuild()` 
 in the `BuildManager` class, passing `addBuild` the created build object with the provided name. If the provided name is 
-invalid, the `BlankStringException` exception will be thrown and an error message will be printed.
+empty or made up of whitespaces, the `BlankStringException` exception will be thrown and an error message will be printed.
 
 The `addBuild()` method will check if the provided name is already in the list of builds. If the provided name is not
 in the list of builds, the method will add the build into the list of builds. If the provided name is already in the 
@@ -76,6 +74,62 @@ into the data file.
 
 The following sequence diagram shows how the add build operation works:
 ![](/images/BuildManagerAddBuildSequence.png)
+
+##### Listing all builds
+
+This features allow users to list all builds. 
+
+When the user first inputs a command for the listing of all builds, the `Parser` class will parse the command and call
+the method `mainParseList()` in the Parser Class. 
+
+The `mainParseList()` method will then print the list of builds. If you have no builds, the method will print a message
+telling you "You have no builds".
+
+The following sequence diagram shows how the list operation works:
+![](/images/BuildManagerListBuildSequence.png)
+
+##### Finding a build
+
+This features allows users to find builds that contain a search term.
+
+When the user first inputs a command for the finding of a build, the `Parser` class will parse the command and call the
+method `mainParseFind()` in the Parser Class. 
+
+The `mainParseFind()` method will then call the method `findBuild()` in the `BuildManager` class, passing `findBuild()`
+the search term. The `findBuild()` method will then search the list of builds for builds that contain the search term.
+If there are builds that contain the search term, the method will print the list of builds that contain the search term.
+If there are no builds that contain the search term, the method will print a message telling you that "No builds that 
+meet specifications found."
+
+The following sequence diagram shows how the find operation works:
+![](/images/BuildManagerFindBuildSequence.png)
+
+##### Filtering builds based on user requirements
+
+This feature allows users to filter builds based on user requirements. 
+
+When the user first inputs a command for the filtering of builds, the `Parser` class will parse the command and call
+the method `mainParseFilter()` in the Parser Class.
+
+The `mainParseFilter()` method will then call the `filterBuilds()` method in the `BuildManager` class. Based on the user
+inputted type of filter, the `filterBuilds()` method will call the appropriate method to filter the
+builds.
+
+Case 1: If the user inputs the filter type `price`, the `filterBuilds()` method will call the `filterPrice()` method in
+the `BuildManager` class. The `filterPrice()` method will then filter the builds and get builds within the price range
+provided by the user. The `printFilteredList()` method will then print the list of builds within the price range.
+
+Case 2: If the user inputs the filter type `power`, the `filterBuilds()` method will call the `filterPower()` method in
+the `BuildManager` class. The `filterPower()` method will then filter the builds and get builds within the power range
+provided by the user. The `printFilteredList()` method will then print the list of builds within the power range.
+
+Case 3: If the user inputs the filter type `compatibility`, the `filterBuilds()` method will call the 
+`filterCompatibility()` method in the `BuildManager` class. The `filterCompatibility()` method will then filter the 
+builds and get builds that pass all the compatibility checks. The `printFilteredList()` method will then print the
+list of builds that pass all the compatibility checks.
+
+The following sequence diagram shows how the filter operation works:
+![](/images/BuildManagerFilterSequence.png)
 
 ### Edit Mode
 
