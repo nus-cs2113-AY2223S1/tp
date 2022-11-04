@@ -254,10 +254,6 @@ public class UserUniversityListManager {
         this.myManager = myManager;
     }
 
-    public UserDeletedModules getUserDeletedModules() {
-        return deletedModulesList;
-    }
-
     public boolean containsKey(String inputSchool) {
         return myManager.containsKey(inputSchool);
     }
