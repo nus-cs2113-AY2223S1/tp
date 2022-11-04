@@ -4,10 +4,11 @@
 - [Design](#design)
     1. [Architecture](#architecture)
     2. [Ui component](#ui-component)
-    3. [Logic component](#logic-component)
-    4. [Model component](#model-component)
-    5. [Storage component](#storage-component)
-    6. [Common classes](#common-classes)
+    3. [Parser component](#parser-component)
+    4. [Command component](#command-component)
+    5. [OperationList component](#operationlist-component)
+    6. [Storage component](#storage-component)
+    7. [Common classes](#common-classes)
 - [Implementation](#implementation)
 - [Product scope](#product-scope)
 - [Target user profile](#target-user-profile)
@@ -28,21 +29,143 @@
 
 ### Architecture
 
+![architecture_diagram](ug-diagrams/images/Architecture.jpg)
+
+The ***Architecture Diagram*** given above shows explains the high-level design of the application.
+
+Given below is a quick overview of the main components and how they work with each other.
+
+**Main components of the architecture**
+
+`SkyControl` is responsible for:
+
+- At application launch: Initialises the components in the correct sequence, and connects them up with each other.
+- At shut down: Shuts down the components and exits the application safely.
+
+The rest of the app consists of five components.
+
+- [Ui](#ui-component) : Handles user input and message output to the console
+- [Parser](#parser-component) : Reads the user's input and converts it to a functional command
+- [Command](#command-component) : Contains the various commands
+- [OperationList](#operationlist-component) : Contains the various operations to be executed based on the commands,
+  also holds the data of the App in memory
+- [Storage](#storage-component) : Reads data from, and writes data to the hard disk
+
+**How the architecture components interact with each other**
+
+The sequence diagram below shows how the components interact with each other for the scenario where the user issues
+a valid `flight add` command.
+
+![Architecture sequence diagram](ug-diagrams/images/Architecture%20Sequence%20Diagram.jpg)
+
+Each of the component is initialised in `SkyControl`, the `parse` , `execute` and `insertIntoFile` methods are
+called by the `run` method in `SkyControl` which continuously takes in user input and executes accordingly until the app
+is shut down.
+
 ### Ui component
 
-### Logic component
+Here is a partial class diagram of the `Ui` component.
 
-### Model component
+![Ui class diagram](ug-diagrams/images/UI%20Class%20Diagram.jpg)
+
+The `Ui` component consists of:
+
+- `Ui`: Manages access to the `Scanner` object that reads user input and also contains all the methods
+  for printing to the user.
+  It also contains methods which return strings to be printed to the user.
+
+### Parser component
+
+Below is a partial class diagram that shows an overview of the `Parser` component.
+
+![Parser-class-diagram](ug-diagrams/images/Parser%20Class%20Diagram.jpg)
+
+Certain boolean methods and variables in `Parser` class used to classify the user input are not included for simplicity.
+
+The `Parser` component consists of:
+
+- `Parser`: Handles the user input and determines which specific parser class's method to be used
+- `FlightParser`: Takes in the parsed user input from `Parser` and instantiates a new `AddFlightCommand`,
+  or `DeleteFlightCommand`, or `ListFlightCommand` to be executed.
+- `PassengerParser`: Takes in the parsed user input from `Parser` and instantiates a new `AddPassengerCommand`,
+  or `DeletePassengerCommand`, or `ListPassengerCommand` to be executed.
+- `ModificationParser`: Takes in the parsed user input from `Parser` and instantiates a new `ModifyFlightNumCommand`,
+  or `ModifyGateNumCommand`, or `DelayFlightCommand` to be executed.
+
+### Command component
+
+Here is a partial class diagram that shows an overview of the `Command` component.
+
+![Command-class-diagram](ug-diagrams/images/Command%20Class%20Diagram.jpg)
+
+Trivial methods such as getters are omitted from the diagram for simplicity. The overriden `execute()` method
+is also taken out to improve visibility of the association.
+
+The `Command` component consists of:
+
+- `Command`: An abstract class that standardises the format of a command with the abstract method `execute()`
+  , the other specific command classes override `execute()` to call the corresponding
+  operations such as adding or deleting.
+- `AddFlightCommand`: Handles the case when the command is to add a flight
+- `DeleteFlightCommand`: Handles the case when the command is to delete a flight
+- `ListFlightCommand`: Handles the case when the command is to list all the flights
+- `DelayFlightCommand`: Handles the case when the command is to delay a flight
+- `ModifyFlightNumCommand`: Handles the case when the command is to change the flight number
+- `ModifyGateNumCommand`: Handles the case when the command is to change the gate number
+- `AddPassengerCommand`: Handles the case when the command is to add a passenger
+- `DeletePassengerCommand`: Handles the case when the command is to delete a passenger
+- `ListPassengerCommand`: Handles the case when the command is to list all the passengers
+- `ExitCommand`: Handles the case when the command is to exit the application.
+
+### OperationList component
+
+Below is a partial class diagram that shows an overview of the `OperationList` component.
+
+![OperationList-class-diagram](ug-diagrams/images/OperationList%20Class%20Diagram.jpg)
+
+The various methods implemented to ensure the operations are done correctly are not included to
+maintain simplicity.
+
+The `OperationList` component consists of:
+
+- `OperationList`: An abstract class that contains the flight and passengers information.
+  It also contains abstract methods of the operations to be implemented
+  by the `FlightList` or `PassengerList` class.
+- `FlightList`: Implements the various operations such as adding, deleting and listing of flights
+  by inheriting the abstract methods provided in `OperationList`.
+  Contains various methods to check the validity of the operation called, throws an exception otherwise.
+- `PassengerList`: Implements the various operations such as adding `AddOperation()`, deleting `DeleteOperation()`
+  of passengers by inheriting the abstract methods provided in `OperationList`.
+  Contains various methods to check the validity of the operation called, throws an exception otherwise.
 
 ### Storage component
 
+Below is a partial class diagram that shows an overview of the `Storage` component.
+
+![Storage-class-diagram](ug-diagrams/images/Storage%20Class%20Diagram.jpg)
+
+The `Storage` component consists of:
+
+- `Storage`: Handles the file related operations such as creation of files and reading from files or saving to files.
+
+To add on, the `Storage` component is designed to only access the following folders:
+
+1.`data/`:For SkyControl.txt file.
+
+> The rationale behind standardizing a specific folder to read/save to, is to ensure that
+> all relevant files can be found in the same location, which makes it easier for users
+> to find the files they are looking for.
+
 ### Common classes
+
+The `seedu.duke.exceptions` package contains the `SkyControlException` class and `SyncException` class which are used
+by the various components to be thrown as exceptions and print specific error messages to the console.
 
 ## Implementation
 
 This section would focus on explaining the application flow and the specifics on how the features are implemented.
 
-List of Commands
+**List of Commands**
 
 The following sequence diagrams to showcase the list of commands,
 parser() method will not be reflected in order to improve readability.
@@ -270,18 +393,35 @@ When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is i
 
 ### Target user profile
 
-{Describe the target user profile}
+1. Required to keep track of flight schedule and passenger information
+2. Is comfortable with CLI
+3. Can type fast
+4. Prefer using CLI over other types (such as GUI)
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This application helps users(specifically an Airport Operations Planning & Airside Manager) to store and view
+flight information and passenger information. It includes features such as the ability to add, delete, modify
+a flight's details or a passenger's details.
+
+To sum it up, this application helps an Airport Operations Planning & Airside Manager(AOM) have an easier time keeping
+track of constant changes in flight scheduling and the relevant passenger details.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I can ...                                                         | So that I can ...                                         |
+|---------|----------|-------------------------------------------------------------------|-----------------------------------------------------------|
+| v1.0    | AOM      | add passenger details                                             | be able to manually add passenger details                 |
+| v1.0    | AOM      | remove passenger details                                          | be able to remove passenger details manually              |
+| v1.0    | AOM      | add flight details                                                | be able to manually add flight details                    |
+| v1.0    | AOM      | remove flight details                                             | be able to manually remove flight details                 |
+| v1.0    | AOM      | view the details of a passenger                                   | see the details of passengers and identify each passenger |
+| v1.0    | AOM      | view the flight schedule and their timings for each day           | see the details of each flight                            |
+| v2.0    | AOM      | include the flight details before inputting the passenger details | there is no confusion to flight availability              |
+| v2.0    | AOM      | change the flight number of different airlines                    | fix any modifications to the flight information easily    |
+| v2.0    | AOM      | change one or many passenger's boarding gate number               | fix any modifications to the passenger information easily |
+| v2.0    | AOM      | include a delay in departure/arrival time for flights             | accommodate for any delays in the flights                 |
+| v2.0    | AOM      | save the flight and passenger details that have been entered      | still access them after closing and reopening the program |
 
 ## Non-Functional Requirements
 
