@@ -47,7 +47,7 @@ module in Q4 2022**.
 2. Download the latest version of parKING from [here](https://github.com/AY2223S1-CS2113-T17-4/tp/releases/download/v2.0/parKING.jar).
 3. [__Recommended__] For continued usage of the application, do sign up for your personal API key through [LTA](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html).
 4. Use the command `java -jar parKING.jar` to start the program!
-5. Note that the programme will automatically create a directory called `Resources` to store local data files.
+5. Note that the program will automatically create a directory called `resources` to store local data files.
 6. Here are some simple commands to get you started. 
    1. To authenticate using your personal api key, use the command [`auth API_KEY`](#authenticate-user-api).
    2. To get a detailed information on a carpark using its ID, use the command [`find CARPARK_ID`](#find-number-of-lots-by-carpark-id).
