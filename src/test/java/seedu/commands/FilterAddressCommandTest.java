@@ -8,8 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
+import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
+import seedu.parser.Parser;
 import seedu.parser.search.Sentence;
 
 public class FilterAddressCommandTest {
@@ -26,6 +28,15 @@ public class FilterAddressCommandTest {
                 + "@|faint -->|@ @|yellow 522|@ available lots total\n", result);
     }
 
+    @Test
+    void testEmptyArgument() throws FileWriteException, NoFileFoundException, NoCarparkFoundException, InvalidCommandException {
+        CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
+        String input = "filter -add ";
+        Command command = new Parser().parseCommand(input, null, carparkList, null);
+        String result = command.execute().showToUser;
+        Assertions.assertEquals("Empty argument. Valid command(s): \n"
+                + "`filter -address QUERY` or `fil -add QUERY`\t: Filter carparks based on its Carpark address.", result);
+    }
     @Test
     void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
