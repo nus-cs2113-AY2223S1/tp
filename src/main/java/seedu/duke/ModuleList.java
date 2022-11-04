@@ -166,7 +166,6 @@ public class ModuleList {
             for (Module mod : modules) {
                 if (!mod.getSemesterTaken().matches(semester)) {
                     isFound = true;
-                    System.out.println("isFound");
                     updatedModules.add(mod);
                 }
             }
