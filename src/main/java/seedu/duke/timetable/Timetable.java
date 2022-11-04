@@ -79,9 +79,9 @@ public class Timetable {
     }
 
     /**
-     * Displays the list of modules that are selectable during set operation
+     * Displays the list of modules that are selectable during set operation.
      *
-     * @return The formatted list the user will see
+     * @return The formatted list the user will see.
      */
     public static String getShortenedList() {
         StringBuilder list = new StringBuilder();
@@ -94,7 +94,7 @@ public class Timetable {
     }
 
     /**
-     * Gets the number of different lesson types whose lessons are adjustable.
+     * Gets the number of different lesson types whose lessons are adjustable for a particular module.
      *
      * @param index The index of the target module
      * @return Number of lessons types with adjustable lessons
@@ -126,7 +126,8 @@ public class Timetable {
         return listOfChangeableModules.get(indexForModule).getNumberOfReplacements(targetLessonType);
     }
 
-    public static ArrayList<Lesson> getSettableLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
+    public static ArrayList<Lesson> getSettableLessonReplacement(int indexForModule, int indexForTarget,
+                                                                 String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
