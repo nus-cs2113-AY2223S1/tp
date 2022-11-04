@@ -262,12 +262,12 @@ and their relationships.
 ![Delete Client/Property Class Diagram](diagrams/DeleteClientPropertyCD.png)
 
 The following *sequence diagram* shows how the **delete client** operation works, showcasing the
-```ClientList#deleteClient()``` method.
+```CommandDeleteClient#execute()``` method.
 
 ![Delete Client Sequence Diagram](diagrams/DeleteClientSD.png)
 
 The following *sequence diagram* shows how the **delete property** operation works, showcasing the
-```PropertyList#deleteProperty()``` method.
+```CommandDeleteProperty#execute()``` method.
 
 ![Delete Property Sequence Diagram](diagrams/DeletePropertySD.png)
 
