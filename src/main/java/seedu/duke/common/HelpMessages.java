@@ -24,7 +24,7 @@ public enum HelpMessages {
     COMMAND_DESCRIPTION_BYE("Exit the application."),
     COMMAND_DESCRIPTION_DELETE("Delete a transaction entry from the list of transactions."),
     COMMAND_DESCRIPTION_EDIT("Edit a transaction entry from the list of transactions."),
-    COMMAND_DESCRIPTION_FIND("Find a specific or multiple transactions based on any keywords that have been "
+    COMMAND_DESCRIPTION_FIND("Find a specific or multiple transactions based on any keyword that have been "
             + "specified."),
     COMMAND_DESCRIPTION_HELP("Display basic or detailed help information explaining the commands available in the "
             + "application."),
@@ -42,19 +42,19 @@ public enum HelpMessages {
     COMMAND_USAGE_BYE("bye"),
     COMMAND_USAGE_DELETE("delete e/ENTRY"),
     COMMAND_USAGE_EDIT("edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]"),
-    COMMAND_USAGE_FIND("find KEYWORDS"),
+    COMMAND_USAGE_FIND("find k/KEYWORD"),
     COMMAND_USAGE_HELP("help [o/detailed] [q/COMMAND]"),
     COMMAND_USAGE_LIST(LINE_SEPARATOR
             + "\t(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]" + LINE_SEPARATOR
             + "\t(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR"
             + LINE_SEPARATOR
-            + "\t(3) Listing on last N weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER"),
+            + "\t(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER"),
     COMMAND_USAGE_PURGE("purge"),
     COMMAND_USAGE_STATS(LINE_SEPARATOR
             + "\t(1) Categorical savings: stats s/categorical_savings" + LINE_SEPARATOR
             + "\t(2) Monthly expenditure: stats s/monthly_expenditure" + LINE_SEPARATOR
             + "\t(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]" + LINE_SEPARATOR
-            + "\t(4) Insights on last N weeks or months: stats s/time_insights p/PERIOD n/NUMBER"),
+            + "\t(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER"),
 
     // The formatting information for the parameters used by the command
     COMMAND_PARAMETERS_AMOUNT("- AMOUNT: The amount for the transaction. It is a positive whole number ranging "
@@ -71,25 +71,25 @@ public enum HelpMessages {
     COMMAND_PARAMETERS_DETAILED("- detailed: A detailed version of the guide."),
     COMMAND_PARAMETERS_ENTRY("- ENTRY: A list entry value for the transaction. It is a positive whole number "
             + "ranging from 1 to 1000000."),
-    COMMAND_PARAMETERS_KEYWORDS("- KEYWORDS: A case-insensitive string that represents a single or a group of words "
-            + "used to find matching transactions. Spacing is allowed."),
-    COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is in numerical form, i.e. "
+    COMMAND_PARAMETERS_KEYWORD("- KEYWORD: A case-insensitive word that matches the partial or the full description "
+            + "of a transaction entry. It is any word without any spacing."),
+    COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is a positive whole number ranging "
             + "from 1 to 12, where 1 represents January." + LINE_SEPARATOR
             + "\t\t<!> - MONTH parameter must be used together with the YEAR parameter."),
     COMMAND_PARAMETERS_NUMBER("- NUMBER: The last N number of days, weeks or months. "
             + "It is a positive whole number ranging from 1 to 100." + LINE_SEPARATOR
             + "\t\t<!> - NUMBER parameter must be used together with the PERIOD parameter."),
     COMMAND_PARAMETERS_PERIOD("- PERIOD: The period which the transaction falls on. "
-            + "It should either be weeks or months." + LINE_SEPARATOR
+            + "It should either be days, weeks or months." + LINE_SEPARATOR
             + "\t\t<!> - PERIOD parameter must be used together with the NUMBER parameter."),
     COMMAND_PARAMETERS_STATS_TYPE("- STATS_TYPE: The type of statistics. It can be \"categorical_savings\", "
             + "\"monthly_expenditure\", or \"time_insights\"."),
 
     COMMAND_PARAMETERS_TYPE("- TYPE: The type of transaction. It should either be \"expense\" or \"income\"."),
-    COMMAND_PARAMETERS_YEAR("- YEAR: The year which the transaction falls on. It must be in yyyy format and "
-            + "only year 0 and onwards are accepted."),
+    COMMAND_PARAMETERS_YEAR("- YEAR: The year which the transaction falls on. It is a positive whole number ranging "
+            + "from 0 to 9999, where 0 represents Year 0."),
     COMMAND_HEADER_USAGE("Usage: "),
-    COMMAND_HEADER_USAGES("Usages: "),
+    COMMAND_HEADER_USAGES("Usages:"),
     COMMAND_HEADER_COMMAND_WORD("Command Word: "),
     COMMAND_HEADER_PARAMETERS("Parameters information:"),
     COMMAND_HEADER_EMPTY_PARAMETER("Parameters information: -NIL-"),
@@ -144,7 +144,7 @@ public enum HelpMessages {
 
     //@@author chydarren
     FIND_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_KEYWORDS),
+            + COMMAND_PARAMETERS_KEYWORD),
     FIND_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + FindCommand.COMMAND_WORD + LINE_SEPARATOR
             + COMMAND_DESCRIPTION_FIND + LINE_SEPARATOR
             + COMMAND_HEADER_USAGE + COMMAND_USAGE_FIND + LINE_SEPARATOR),

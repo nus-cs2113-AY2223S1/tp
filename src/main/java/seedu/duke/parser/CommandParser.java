@@ -52,10 +52,6 @@ public class CommandParser {
         // Parses the command word from user input
         command = getCommand(commandWordInput, parametersInput);
 
-        if (command instanceof FindCommand) {
-            return command;
-        }
-
         // Parses the parameters from user input to set up the parameters for the command
         assert command != null;
         ParameterParser.parse(command, parametersInput);
@@ -109,7 +105,7 @@ public class CommandParser {
             command = new ListCommand();
             break;
         case FindCommand.COMMAND_WORD:
-            command = new FindCommand(parameterInput);
+            command = new FindCommand();
             break;
         case StatsCommand.COMMAND_WORD:
             command = new StatsCommand();

@@ -25,10 +25,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
+import static seedu.duke.parser.ParameterParser.containNumeric;
 import static seedu.duke.parser.ParameterParser.parseBudgetTag;
 
 public class ParameterParserTest {
@@ -66,6 +68,18 @@ public class ParameterParserTest {
             InputTransactionInvalidAmountException.class,
             () -> ParameterParser.parse(addCommand, parametersInput)
         );
+    }
+
+    @Test
+    public void containNumeric_IfContainsNumeric_ReturnTrue() {
+        boolean testOutputContainsNumber = containNumeric("Food1");
+        assertTrue(testOutputContainsNumber);
+    }
+
+    @Test
+    public void containNumeric_IfDoesNotContainNumeric_ReturnFalse() {
+        boolean testOutputWithoutNumber = containNumeric("Food");
+        assertFalse(testOutputWithoutNumber);
     }
 
     //@@author wcwy
