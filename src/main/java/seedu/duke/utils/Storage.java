@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import org.apache.commons.lang3.SystemUtils;
 import seedu.duke.exceptions.YamomException;
 
 import java.io.File;
@@ -103,8 +104,9 @@ public class Storage {
 
         file.setWritable(true);
         Path path = Paths.get(FILE_PATH);
-
-        Files.setAttribute(path, "dos:hidden", false);
+        if (!SystemUtils.IS_OS_LINUX) {
+            Files.setAttribute(path, "dos:hidden", false);
+        }
         ui.addMessage(EXPORT_MESSAGE);
         FileWriter fw = new FileWriter(file);
         int currSem = state.getSemester();
@@ -122,6 +124,9 @@ public class Storage {
         fw.close();
         file.setReadOnly();
         //set hidden attribute
-        Files.setAttribute(path, "dos:hidden", true);
+        if (!SystemUtils.IS_OS_LINUX) {
+            Files.setAttribute(path, "dos:hidden", true);
+        }
+
     }
 }
