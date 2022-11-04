@@ -89,6 +89,30 @@ public class UI {
         System.out.println("Please add the module first before you want to delete.");
     }
 
+    /**
+     * Message to be printed if a semester which is trying to be deleted is not found in plan
+     * @param semester : the semester in which all modules are to be deleted
+     */
+    public static void notFoundClearMessage(String semester) {
+        System.out.println("No modules found in " + semester + "!");
+        System.out.println("Please add the modules to the semester first before you want to clear.");
+    }
+
+    /**
+     * Message to be printed when all modules have been successfully cleared from plan
+     */
+    public static void allClearedMessage() {
+        System.out.println("Successfully cleared all modules in your plan!");
+    }
+
+    /**
+     * Message to be printed when there is no modules found in plan
+     */
+    public static void noModulesFoundMessage() {
+        System.out.println("0 modules found in your plan!");
+    }
+
+
     public static void fileLoadingErrorMessage() {
         System.out.println("Could not find any previous usage.");
     }
