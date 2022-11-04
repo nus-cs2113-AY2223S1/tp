@@ -1,35 +1,36 @@
-# User Guide
+# Moolah Manager - User Guide
 
-- [Introduction](#introduction)
-- [About This Guide](#about-this-guide)
-  * [What is in Moolah Manager](#what-is-in-moolah-manager)
-  * [Command Format](#command-format)
-- [Getting Started](#getting-started)
-  * [Setting Up](#setting-up)
-  * [Viewing Help: `help`](#viewing-help-help)
-- [Managing Transactions](#managing-transactions)
-  * [Adding a Transaction: `add`](#adding-a-transaction-add)
-  * [Editing a Transaction: `edit`](#editing-a-transaction-edit)
-  * [Listing the Transactions: `list`](#listing-the-transactions-list)
-  * [Searching for Transactions: `find`](#searching-for-transactions-find)
-  * [Deleting a Transaction: `delete`](#deleting-a-transaction-delete)
-  * [Purging all Transactions: `purge`](#purging-all-transactions-purge)
-- [Budgeting and Financial Insights](#budgeting-and-financial-insights)
-  * [Viewing the Statistics: `stats`](#viewing-the-statistics-stats)
-  * [Managing the Budget: `budget`](#managing-the-budget-budget)
-- [General](#general)
-  * [Persistent Data](#persistent-data)
-  * [Exiting the Program: `exit`](#exiting-the-program-exit)
-- [Command Summary](#command-summary)
-- [FAQ](#faq)
+- [1. Introduction](#1-introduction)
+- [2. About This Guide](#2-about-this-guide)
+  * [2.1. What is in Moolah Manager](#21-what-is-in-moolah-manager)
+  * [2.2. Command Format](#22-command-format)
+- [3. Getting Started](#3-getting-started)
+  * [3.1. Setting Up](#31-setting-up)
+  * [3.2. Viewing Help](#32-viewing-help)
+- [4. Managing Transactions](#4-managing-transactions)
+  * [4.1. Adding a Transaction](#41-adding-a-transaction)
+  * [4.2. Editing a Transaction](#42-editing-a-transaction)
+  * [4.3. Listing the Transactions](#43-listing-the-transactions)
+  * [4.4. Searching for Transactions](#44-searching-for-transactions)
+  * [4.5. Deleting a Transaction](#45-deleting-a-transaction)
+  * [4.6. Purging all Transactions](#46-purging-all-transactions)
+- [5. Budgeting and Financial Insights](#5-budgeting-and-financial-insights)
+  * [5.1. Viewing the Categorical Savings](#51-viewing-the-categorical-savings)
+  * [5.2. Viewing the Monthly Expenditure](#52-viewing-the-monthly-expenditure)
+  * [5.3. Viewing the Financial Insights for Specific Time Periods](#53-viewing-the-financial-insights-for-specific-time-periods)
+  * [5.4. Managing the Budget](#54-managing-the-budget)
+- [6. General](#6-general)
+  * [6.1. Persistent Data](#61-persistent-data)
+  * [6.2. Exiting the Program`](#62-exiting-the-program)
+- [7. Command Summary](#7-command-summary)
+  * [7.1. Command Syntax](#71-command-syntax)
+  * [7.2. Information for Parameters](#72-information-for-parameters)
+- [8. FAQ](#faq)
 
+## 1. Introduction
 
-
-## Introduction
-
-Financial bookkeeping via traditional mobile applications has always been a hassle due to the repetitive clicks needed to
-manage monetary transactions. With Moolah Manager, you will be encouraged to take ownership of managing your finances via
-a time-saving and efficient command-line (CLI) interface.
+Financial bookkeeping via traditional mobile applications has always been a hassle due to the repetitive clicks needed to manage monetary transactions. 
+With Moolah Manager, you will be encouraged to take ownership of managing your finances via a time-saving and efficient command-line (CLI) interface.
 
 The main features of Moolah Manager include:
 
@@ -42,30 +43,39 @@ Moreover, if you are a fast-typist, the recording and querying of transactions c
 
 _Written by: Chua Han Yong Darren_
 
-## About This Guide
+## 2. About This Guide
 
-### What is in Moolah Manager
-Moolah Manager is a comprehensive app for Financial bookkeeping using an intuitive CLI platform, with many features
-you can use!
+### 2.1. What is in Moolah Manager
 
-In our managing records features, you can add, delete, edit monetary transaction entries to keep their records 
-up-to-date. Moolah Manager also features the ability to edit dates of transactions and add categories to better 
-classify the expenses.
+With an intuitive CLI platform, you can make full use of a plethora of features provided by Moolah Manager! 
+Moreover, Moolah Manager saves the monetary transactions list everytime it is updated, so that you don’t have to.
+If you are a first-time user, don't forget to check out the [Getting Started](#3-getting-started) section too.
+
+#### Managing Records of Monetary Transactions
+
+You can add, delete, and edit monetary transaction entries to keep their records up-to-date. 
+Moolah Manager also features the ability to modify dates of transactions and add categories to better classify the expenses.
+
+Related Commands: [`add`](#41-adding-a-transaction),[`edit`](#42-editing-a-transaction), [`list`](#43-listing-the-transactions), [`find`](#44-searching-for-transactions), [`delete`](#45-deleting-a-transaction), [`purge`](#46-purging-all-transactions)
+
+#### Gathering Financial Insights
 
 As for statistics, Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats. 
-This enables you to better understand your expenses, and savings across various time periods. In addition, Moolah 
-Manager also shows which category of expenses users spend more on so that they can better manage spending. 
+This enables you to better understand your expenses, and savings across various time periods. 
+In addition, Moolah Manager also shows which category of expenses users spend more on so that they can better manage spending. 
 
-Beyond just tracking expenses, Moolah Manager allows you to set your expense budgets to take charge of your spending 
-habits. You will be able to allocate budgets for different categories or for the week to better stick to your plans. 
+Related Commands: [`stats s/categorical_savings`](#51-viewing-the-categorical-savings), [`stats s/monthly_expenditure`](#52-viewing-the-monthly-expenditure), [`stats s/time_insights`](#53-viewing-the-financial-insights-for-specific-time-periods)
 
-Lastly, our additional features will ensure that you will be able to seek help with the commands with a list of usable 
-commands and guides for using the application for first time users. Moolah Manager will also save the application 
-expenses everytime it is updated, so that you don’t have to!
+#### General Budgeting and Moolah Reminders
+
+Beyond just tracking expenses, Moolah Manager analyzes your monthly spending habits and give you reminders on your savings.
+You will also be able to allocate a monthly budget to better stick to your plans. 
+
+Related Commands: [`budget`](#54-managing-the-budget)
 
 _Written by: Paul Low_
 
-### Command Format
+### 2.2. Command Format
 
 General illustrations about the text format used for the commands in this guide can be found below. 
 
@@ -76,16 +86,16 @@ General illustrations about the text format used for the commands in this guide 
    1. e.g. in `delete e/ENTRY`, `delete` is the command word, while `ENTRY` is a parameter expected after the tag `e/`.
 
 3. Parameters in square brackets are optional.
-   1. e.g. `help [o/detailed]` can be used as `help o/detailed` or `help.
+   1. e.g. `help [o/detailed]` can be used as `help o/detailed` or `help`.
    2. Note that the parameter `detailed` is written in lower case here, which means, only the exact wording is accepted.
 
-4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter, *except for `find` command*.
+4. Each parameter is separated by a space. Users are not allowed to use spaces in their parameter.
 
 _Written by: Chia Thin Hong_
 
-## Getting Started
+## 3. Getting Started
 
-### Setting Up
+### 3.1. Setting Up
 
 1. Ensure that you have Java 11 or above installed. If not, kindly install Java's [latest version](https://www.oracle.com/java/technologies/downloads/).
 2. Download the latest version of `Moolah Manager` from [here](https://github.com/AY2223S1-CS2113-W12-2/tp/releases).
@@ -97,122 +107,152 @@ _Written by: Chia Thin Hong_
     <i>Figure 1: How to Download Moolah Manager</i>
     </p>
 
-3. Copy the file to the directory that you wish to use as a home directory for Moolah Manager. The data saved during the
-   application will reside in the same directory.
+3. Copy the file to the folder that you wish to use as a home folder for Moolah Manager. The data saved during the application will reside in your `<home_folder>/data` folder.
 4. Launch a command prompt or terminal and run the command `java -jar duke.jar` to start the application.
-5. Moolah Manager will display a greeting message and a remaining budget for the current month.
+5. Moolah Manager will display a greeting message and a remaining budget for the current month. 
+6. If you encounter any issues when setting up and hereon, do check out the [FAQ](#8-faq) section.
 
 _Written by: Chua Han Yong Darren_
 
-### Viewing Help: `help`
+### 3.2. Viewing Help
 
-Display basic or detailed help message explaining the command available in the application. 
+Display basic or detailed help information explaining the commands available in the application. 
 
-Format: `help [o/detailed]`
+**Format:** `help [o/detailed] [q/COMMAND]`
 
-| Field      | Description                                    |
-|------------|------------------------------------------------|
-| `detailed` | To list the detailed version of help messages. |
+| Parameter  | Description                                                                                                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `detailed` | A detailed version of the guide.                                                                                                                  |
+| `COMMAND`  | A case-insensitive command word to search for. It should either be `help`, `add`, `edit`, `list`, `find`, `delete`, `purge`, `stats` or `budget`. |
 
 **Important Information:**
 
 - To view detailed help, the exact `o/detailed` must be added in the command.
 
-Example(s): 
+**Examples:**
 
- - `help`
+- `help`
+- `help o/detailed`
+- `help o/detailed q/bye`
 
- - `help o/detailed`
+**Expected Output:**
 
-Expected output: 
+Viewing Basic Help
+
 ```
 help
 ____________________________________________________________
 Gotcha! Here are the commands that you may use:
 Command Word: HELP
-To display a list of available commands with their respective expected parameters.
-Type "help o/detailed" for a detailed version of all parameters used.
-Usage: help [o/detailed]
+Display basic or detailed help information explaining the commands available in the application.
+Usage: help [o/detailed] [q/COMMAND]
 
 Command Word: BUDGET
-To set the amount of monthly budget.
+Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
 Usage: budget b/BUDGET
 
 Command Word: ADD
-To add a new transaction entry, which could be either an "income" or an "expense" into the transaction list.
+Add a new transaction entry, which could be either an "expense" or "income" into the transactions list.
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 ... (Similar output for other commands truncated)
+____________________________________________________________
+```
+
+Viewing Detailed Help for Bye Command 
+
+```
+help o/detailed q/bye
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+Parameters information: -NIL-
+
+____________________________________________________________
 ```
 
 _Written by: Chia Thin Hong_
 
-## Managing Transactions
+## 4.1. Managing Transactions
 
-### Adding a Transaction: `add`
+### 4.1. Adding a Transaction
 
-Adds a new transaction entry to the list of transactions.
+Add a new transaction entry, which could be either an expense or income into the transactions list.
 
 Format: `add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION`
 
-| Field         | Description                                                                                                                         |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                 |
-| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.  |
-| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                   | 
-| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                          |                                                                                                 
-| `DESCRIPTION` | Provides more information about the transaction. It is a one-word parameter defined by the user without any spacing.                | 
+| Parameter     | Description                                                                                            |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                    |
+| `CATEGORY`    | A category for the transaction. It can be any word without numeral, symbol or spacing.                 |
+| `AMOUNT`      | The amount of the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million). | 
+| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.             |                                                                                                 
+| `DESCRIPTION` | More information regarding the transaction. It is any word without any spacing.                        | 
 
 **Important Information:**
+
 - All tags must be present in this command.
 - All parameters must not be empty.
 
-Example(s):
+**Examples:**
 
-`add t/expense c/transport a/1 d/02102022 i/bus_fare` <br> 
-`add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss`
+- `add t/expense c/transport a/1 d/02102022 i/bus_fare` <br> 
+- `add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss`
 
-Expected output for addition of expense transaction: 
+**Expected Output:**
+
+Adding an Expense Transaction
+
 ```
 add t/expense c/transport a/1 d/02102022 i/bus_fare
 ____________________________________________________________
 I have added the following Expense transaction:
 [-][transport] $1 at Oct 02 2022 | Description: bus_fare
-Budget remained for Oct 2022: $999. Keep it up!
+Remaining budget for Oct 2022: $999. Keep it up!
 ____________________________________________________________
 ```
-Expected output for addition of income transaction:
+
+Adding an Income Transaction
+
 ```
 add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss
 ____________________________________________________________
 I have added the following Income transaction:
 [+][bonus] $10000000 at Oct 03 2022 | Description: thank_you_boss
-Budget remained for Oct 2022: $1000. Keep it up!
+Remaining budget for Oct 2022: $1000. Keep it up!
 ____________________________________________________________
 ```
+
 _Written by: Yong Chin Han_
 
-### Editing a Transaction: `edit`
+### 4.2. Editing a Transaction
 
 Edit a transaction entry from the list of transactions.
 
 **Format:** `edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`
 
-| Field         | Description                                                                                                                         |
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `ENTRY`       | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.                                    |
-| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                                                 |
-| `CATEGORY`    | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.  |
-| `AMOUNT`      | The amount of the transaction. It is a positive integer, e.g. 10.                                                                   | 
-| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                          |                                                                                                 
-| `DESCRIPTION` | Provides more information about the transaction. It is a one-word parameter defined by the user without any spacing.                | 
+| Parameter     | Description                                                                                            |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| `ENTRY`       | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.       |
+| `TYPE`        | The type of transaction. It should either be `expense` or `income`.                                    |
+| `CATEGORY`    | A category for the transaction. It can be any word without numeral, symbol or spacing.                 |
+| `AMOUNT`      | The amount of the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million). | 
+| `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.             |                                                                                                 
+| `DESCRIPTION` | More information regarding the transaction. It is any word without any spacing.                        |
 
+**Important Information:**
 
-**Example(s):**
+- There must be at least one optional tag present in this command.
+
+**Examples:**
 
 - `edit e/1 t/expense c/food`
 - `edit e/2 a/10 d/10032022 i/games`
 
-**Expected output:**
+**Expected Output:**
+
+Editing a Transaction 
 
 ```
 edit e/1 t/expense c/food
@@ -224,91 +264,133 @@ ____________________________________________________________
 
 _Written by: Brian Wong Yun Long_
 
-### Listing the Transactions: `list`
+### 4.3. Listing the Transactions
 
-
-Lists all or some transactions based on selection. If tag filters are used, the transactions retrieved from the records must
-match all the filter tags that have been specified in order to be recognized as a valid record.
+List all or some transactions based on selection. 
+If tag filters are used, the transactions retrieved from the records must match all the filter tags that have been specified in order to be recognized as a valid record.
 
 **Format:** `list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]`
 
-| Field      | Description                                                                                                                        |
-|------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `TYPE`     | The type of transaction. It should either be `expense` or `income`.                                                                |
-| `CATEGORY` | A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed. |
-| `DATE`     | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                         | 
-| `MONTH`    | The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January.                  |                                                                                                 
-| `YEAR`     | The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.                    | 
-| `PERIOD`   | The period which the transaction falls on. It should either be `weeks` or `months`                                                 |
-| `NUMBER`   | The last N number of weeks or months. It is a positive whole number that is from 1 to 100.                                         |
+| Parameter  | Description                                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TYPE`     | The type of transaction. It should either be `expense` or `income`.                                                                                                                              |
+| `CATEGORY` | A category for the transaction. It can be any word without numeral, symbol or spacing.                                                                                                           |
+| `DATE`     | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.                                                                                                       |
+| `MONTH`    | The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January. <br><!> MONTH parameter must be used together with the YEAR parameter. |
+| `YEAR`     | The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.                                                                        |
+| `PERIOD`   | The period which the transaction falls on. It should either be `days`, `weeks` or `months`. <br> <!> PERIOD parameter must be used together with the NUMBER parameter.                           |
+| `NUMBER`   | The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100. <br> <!> NUMBER parameter must be used together with the PERIOD parameter.                      |                                                                     
 
 **Important Information:**
 
-- In order to view transactions for a specific month via `m/MONTH` tag, it is mandatory to include a `y/YEAR` tag.
-- The `p/PERIOD` and `n/NUMBER` tags must be used as a pair for viewing transactions for the
-  last N number of weeks or months.
 - The `m/MONTH` and `y/YEAR` tags should not be used together with `p/PERIOD` and `n/NUMBER` tags.
 
-**Example(s):**
+**Examples:**
 
 - `list`
 - `list y/2022`
+- `list y/2022 m/11`
+- `list n/4 p/weeks`
+- `list d/20102022 n/1 p/months`
 - `list t/income c/transport d/27102022`
-- `list c/food m/1 y/2022`
-- `list t/expense c/leisure p/weeks n/5`
+- `list t/expense c/leisure n/7 p/days`
 
-**Expected output:**
+**Expected Output:**
+
+Listing All Transactions in November 2022 
 
 ```
-list c/food m/1 y/2022
+list y/2022 m/11
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $80 on Jan 13 2022 | Description: toilet_cake 
-[+][food] $20 on Jan 30 2022 | Description: banana_pudding
+[-][food] $80 on Nov 13 2022 | Description: toilet_cake 
+[+][education] $20 on Nov 30 2022 | Description: sold_my_pe_bugs
+____________________________________________________________
+```
+
+Listing All Transactions in the Last 4 Weeks
+
+> If today's date is 4 November 2022, the range will be 10 October to 30 October 2022.
+
+```
+list n/4 p/weeks
+____________________________________________________________
+Here are your transaction records:
+[-][beauty] $40 on Oct 11 2022 | Description: bought_a_facial_wash
+[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+[-][food] $120 on Oct 25 2022 | Description: enjoyed_my_steamboat
+____________________________________________________________
+```
+
+Listing All Transactions in the Last 1 Month with a Date as 20 October 2022
+
+> If today's date is 4 November 2022, the range will be 1 October to 31 October 2022. However, only records on 20 October 2022 will be shown as each entry must match all the filter tags specified.
+
+```
+list d/20102022 n/1 p/months
+____________________________________________________________
+Here are your transaction records:
+[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+____________________________________________________________
+```
+
+Listing All Transactions in the Last 7 Days (or Past 1 Week) for Expenses on Leisure
+
+> If today's date is 4 November 2022, the range will be 28 October to 3 November 2022.
+
+```
+list t/expense c/leisure n/7 p/days
+____________________________________________________________
+Here are your transaction records:
+[-][leisure] $40 on Nov 2 2022 | Description: went_for_salon_treatment
+[-][leisure] $120 on Nov 3 2022 | Description: spa_at_sentosa
 ____________________________________________________________
 ```
 
 _Written by: Chua Han Yong Darren_
 
-### Searching for Transactions: `find`
+### 4.4. Searching for Transactions
 
-Find a specific or multiple transactions based on any keywords that have been specified.
+Find a specific or multiple transactions based on any keyword that have been specified.
 
-**Format:** `find KEYWORDS`
+**Format:** `find k/KEYWORD`
 
-**Example(s):**
+| Parameter | Description                                                                                                                      |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------|
+| `KEYWORD` | A case-insensitive word that matches the partial or full description of a transaction entry. It is any word without any spacing. |
 
-- `find Jan 30`
-- `find banana_pudding`
+**Example:**
 
-**Expected output:**
+- `find worked_at`
+
+**Expected Output:**
 
 ```
-find Jan 30
+find worked_at
 ____________________________________________________________
 Here are the transaction records that match your search expression:
-[+][food] $20 at Jan 30 2022 | Description: banana_pudding
+[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
 ____________________________________________________________
 ```
 
 _Written by: Chua Han Yong Darren_
 
-### Deleting a Transaction: `delete`
+### 4.5. Deleting a Transaction
 
-Deletes a transaction entry from the list of transactions.
+Delete a transaction entry from the list of transactions.
 
 **Format:** `delete e/ENTRY`
 
-| Field   | Description                                                                                      |
-|---------|--------------------------------------------------------------------------------------------------|
-| `ENTRY` | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000. |
+| Parameter | Description                                                                                      |
+|-----------|--------------------------------------------------------------------------------------------------|
+| `ENTRY`   | A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000. |
 
-**Example(s):**
+**Examples:**
 
 - `delete e/1`
 - `delete e/2`
 
-**Expected output:**
+**Expected Output:**
 
 ```
 delete e/1
@@ -320,19 +402,13 @@ ____________________________________________________________
 
 _Written by: Brian Wong Yun Long_
 
-### Purging all Transactions: `purge`
+### 4.6. Purging all Transactions
 
-Deletes all transaction entries from the list of transactions.
-The User would have to input 'Y' after the prompt to confirm the operation, otherwise
-the operation will be aborted.
+Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
 
 **Format:** `purge`
 
-**Example(s):**
-
-- `purge`
-
-**Expected output:**
+**Expected Output:**
 
 ```
 purge
@@ -350,23 +426,16 @@ ____________________________________________________________
 
 _Written by: Brian Wong Yun Long_
 
-## Budgeting and Financial Insights
+## 5. Budgeting and Financial Insights
 
-### Viewing Moolah Statistics: `stats`
-View the general statistics of monetary transactions, from 3 main views: Categorical Savings, Monthly Expenditure and
-Time Insights. Various statistics listed include total income, total expense, total savings, total expenses, sum of expenses
-ordered by category or time and more.
+### 5.1. Viewing the Categorical Savings 
 
-
-#### Statistics for Categorical Savings
-View the total amount sum of all transactions in each category. 
+View the total savings of all transactions in each category.
 
 **Format:** `stats s/categorical_savings`
 
-**Example(s):**
-- `stats s/categorical_savings`
+**Expected Output:**
 
-**Expected output:**
 ```
 stats s/categorical_savings
 ____________________________________________________________
@@ -379,121 +448,126 @@ Here are your net categorical savings:
 ____________________________________________________________
 ```
 
-#### Statistics for Monthly Expenditure
+### 5.2. Viewing the Monthly Expenditure
+
 View the total income, expense and savings values of all transactions in each month.
 
 **Format:** `stats s/monthly_expenditure`
 
-**Example(s):**
-- `stats s/monthly_expenditure`
+**Expected Output:**
 
-**Expected output:**
 ```
 stats s/monthly_expenditure
 ____________________________________________________________
-Here are your requested monthly statistics:
-[Aug 2022]
-Income: $0
-Expense: $10
-Savings: $-10
-Spending Habit: Oops, you spent too much. Do manage your expenses within your constraints.
-
+Here is a summary of your monthly expenditure:
 [Sep 2022]
 Income: $2000
-Expense: $80
-Savings: $1920
-Spending Habit: Excellent! You saved quite a lot this month.
+Expense: $20
+Savings: $1980
+Budget: $10000
+Spending Habit: Wow, keep up the good work. You saved at least two-third of your income.
+In terms of monthly budget, you have kept yourself well within the budget!
 
 [Oct 2022]
-Income: $540
-Expense: $0
-Savings: $540
-Spending Habit: Excellent! You saved quite a lot this month.
+Income: $0
+Expense: $10001
+Savings: $-10001
+Budget: $10000
+Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
+In terms of monthly budget, you have spent more than your budget planned!
 
 ____________________________________________________________
 ```
-#### Statistics for Time Insights of specific time period
-View monthly expenditure, total income, expense and savings values of all transactions in the specified year or month.
-**Format:** `stats s/time_insights y/YEAR [m/MONTH]`
 
-**Example(s):**
+### 5.3. Viewing the Financial Insights for Specific Time Periods
+
+View monthly expenditure, total income, expense and savings values of all transactions in the specified time period.
+
+**Format:** `stats s/time_insights y/YEAR [m/MONTH] [p/PERIOD] [n/NUMBER]`
+
+| Field      | Description                                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `MONTH`    | The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January. <br><!> MONTH parameter must be used together with the YEAR parameter. |
+| `YEAR`     | The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.                                                                        |
+| `PERIOD`   | The period which the transaction falls on. It should either be `days`, `weeks` or `months`. <br> <!> PERIOD parameter must be used together with the NUMBER parameter.                           |
+| `NUMBER`   | The last N number of days, weeks or months. It is a positive whole number that is from 1 to 100. <br> <!> NUMBER parameter must be used together with the PERIOD parameter.                      |                                                                     
+
+**Important Information:**
+
+- The `m/MONTH` and `y/YEAR` tags should not be used together with `p/PERIOD` and `n/NUMBER` tags.
+
+**Examples:**
 
 - `stats s/time_insights y/2022`
 - `stats s/time_insights y/2022 m/10`
-
-**Expected output:**
-```
-stats s/time_insights y/2022
-____________________________________________________________
-Here are the categorical savings and monthly time insights for
-Year: 2022
-
------CATEGORIES-----
-[bonus] $540
-[transport] $-10
-[salary] $2000
-[food] $-80
-
------EXPENDITURE-----
-Income: $2540
-Expense: $90
-Savings: $2450
-____________________________________________________________
-```
-
-
-#### Statistics for Time Insights of past periods from current date
-View monthly expenditure, total income, expense and savings values of all transactions in the specified number of periods
-before current date.
-
-**Format:** `stats s/time_insights p/PERIOD n/NUMBER `
-
-**Example(s):**
-
 - `stats s/time_insights p/weeks n/3`
 - `stats s/time_insights p/months n/12`
 
-**Expected output:**
+**Expected Output:**
+
+Viewing the Financial Insights for 2022
+
+```
+stats s/time_insights y/2022
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+Year: 2022
+
+-----Categorical Savings-----
+[transport] $-10001
+[salary] $2000
+[food] $-20
+
+-----Expenditure Summary-----
+Income: $2000
+Expense: $10021
+Savings: $-8021
+____________________________________________________________
+```
+
+Viewing the Financial Insights for the Last 3 Weeks
+
+> If today's date is 4 November 2022, the range will be 10 October to 30 October 2022.
+
 ```
 stats s/time_insights p/weeks n/3
 ____________________________________________________________
-Here are the total savings and expenses for
-The past 3 weeks: 
+Here are the categorical savings and expenditure summary for
+The last 3 weeks:
 
------CATEGORIES-----
+-----Categorical Savings-----
 [bonus] $540
 
------EXPENDITURE-----
+-----Expenditure Summary-----
 Income: $540
 Expense: $0
 Savings: $540
 ____________________________________________________________
 ```
 
-                                                
-
 _Written by: Paul Low_
 
-### Managing the Budget: `budget`
-To set the amount of monthly budget, with a value from 1 to 10<sup>13</sup>.
+### 5.4. Managing the Budget
+
+Set the amount for monthly budget, with a value from 1 to 10<sup>13</sup> (Ten Trillion).
 
 Format: `budget b/BUDGET`
 
-| Field      | Description                                                                                                   |
-|------------|---------------------------------------------------------------------------------------------------------------|
-| `BUDGET`   | An estimate of expense for every month. It is a positive whole number that is from 1 to 10^13 (Ten Trillion). |
+| Field    | Description                                                                                                   |
+|----------|---------------------------------------------------------------------------------------------------------------|
+| `BUDGET` | An estimate of expense for every month. It is a positive whole number ranging from 1 to 10^13 (Ten Trillion). |
 
 **Important Information:**
 
 - The monthly budget is set to $1000 by default if the user has never run this command.
 
-Example(s):
+**Examples:**
 
-`budget b/1000`
+- `budget b/1000`
+- `budget b/52013149999`
 
-`budget b/52013149999`
+**Expected Output:** 
 
-Expected output: 
 ```
 budget b/52013149999
 ____________________________________________________________
@@ -502,12 +576,11 @@ Monthly budget set as: $52013149999
 ____________________________________________________________
 ```
 
-
 _Written by: Chia Thin Hong_
 
-## Others
+## 6. Others
 
-### Persistent Data
+### 6.1. Persistent Data
 
 Our program comes with a storage feature to ensure user data gets saved each time Moolah Manager is stopped and restarted.
 If you are accessing Moolah Manager via our JAR file release, the storage file, **duke.txt** would be newly created in a newly created **data** folder in your current directory.
@@ -515,20 +588,16 @@ If you are accessing Moolah Manager via our JAR file release, the storage file, 
 In duke.txt, the monthly budget value would be stored on the 1st line, with the different transaction entries on subsequent lines.
 We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program.  
 
-
 _Written by: Yong Chin Han_
 
-### Exiting the Program: `bye`
+### 6.2. Exiting the Application
 
-Exits the program.
+Exit the application.
 
-Format: `bye`
+**Format:** `bye`
 
-Example(s):
+**Expected Output:**
 
-`bye`
-
-Expected output:
 ```
 bye
 ____________________________________________________________
@@ -538,47 +607,56 @@ ____________________________________________________________
 
 _Written by: Brian Wong Yun Long_
 
-## Command Summary
+## 7. Command Summary
 
+### 7.1. Command Syntax
 
-| Command                                                                  | Command Syntax                                                               | Example                                                                                                                                                            |
-|--------------------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| help                                                                     | help                                                                         | help                                                                                                                                                               |
-| help (detailed)                                                          | help o/detailed                                                              | help o/detailed                                                                                                                                                    |
-| add                                                                      | add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION                          | add t/expense c/transport a/1 d/02102022 i/bus_fare <br> add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss                                               |
-| edit                                                                     | edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]       | edit e/1 t/expense c/food <br/> edit e/2 a/10 d/10202022 i/games                                                                                                   |
-| list                                                                     | list                                                                         | list                                                                                                                                                               |
-| list ( with filters )                                                    | list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER] | list c/food d/13092022 <br> list t/income d/30092022  <br/>     list p/months n/1<br/>  list t/income d/30092022 y/2022<br/>   list t/income d/30092022 y/2022 m/9 |
-| statistics for categorical savings                                       | stats s/categorical_savings                                                  | stats s/categorical_savings                                                                                                                                        |
-| statistics for monthly expenditure                                       | stats s/monthly_expenditure                                                  | stats s/monthly_expenditure                                                                                                                                        |
-| statistics for time insight of a specific year OR month of specific year | stats s/time_insights y/YEAR [m/MONTH]                                       | stats s/time_insights y/2022 <br/> stats s/time_insights y/2002 m/10                                                                                               |
-| statistics for time insight for the PAST periods from current date       | stats s/time_insights p/PERIOD n/NUMBER                                      | stats s/time_insights p/weeks n/3 <br/> stats s/time_insights p/months n/12                                                                                        |
-| budget                                                                   | budget b/BUDGET                                                              | budget b/9999999999999 <br/> budget b/1                                                                                                                            |
-| delete                                                                   | delete e/ENTRY                                                               | delete e/3                                                                                                                                                         |
-| purge                                                                    | purge                                                                        | purge                                                                                                                                                              |
-| find                                                                     | find KEYWORDS                                                                | find bus_fare <br> find transport <br> find Sep 13                                                                                                                 |
-| bye                                                                      | bye                                                                          | bye                                                                                                                                                                |
+**OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** below.
 
-Tags used ( **OPTIONAL** tags are enclosed with SQUARE BRACKETS "[" and "]" in the **command syntax in the table** above):
-* The `TYPE` should either be `expense` or `income`.
-* The `CATEGORY` is a one-word parameter flexibly defined by the user. [ No numeral, symbol or spacing is allowed ]
-* The `AMOUNT` is a positive whole number that is from 1 to 10000000. [ No alphabet, symbol or spacing is allowed ]
-* The `DATE` MUST be in ddMMyyyy format. [ E.g. 29102022 ] 
-* The `DESCRIPTION` is a one-word parameter defined by the user. [ Spacing is not allowed ]
-* The `ENTRY` is the entry value which is a positive whole number that is from 1 to 1000000. [ No alphabet, symbol or spacing is allowed ]
-* The `KEYWORDS` is any string used to find matching transactions. [ Spacing is allowed (Special Case) ]
-<!-- * The `KEYWORDS` are parameter value(s) within Search-fields that would be searched.  [ Available Search-fields: date, type, category , amount, description. Cross-search across different Search-fields NOT supported ] -->
-* The `BUDGET` is a positive whole number that is from 1 to 10<sup>13</sup> (Ten Trillion). [ No alphabet, symbol or spacing is allowed ]
-* The `YEAR` is the year in yyyy format. 
-* The `MONTH` is the month in numerical form. [ From 1 to 12 , where 1 represents January etc. ]
-* The `PERIOD` is the selection of either periods in `"weeks"` or `"months"`. [ Used with "n/NUMBER" ONLY ]
-* The `NUMBER` is a positive whole number that is from 1 to 100, representing the number of periods to view.  [ Used with "p/PERIODS" ONLY ]
+| Action                                                              | Command Syntax                                                           | Examples                                                                                                                 |
+|---------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Viewing Help                                                        | `help`                                                                   | `help`                                                                                                                   |
+| Viewing Help (Detailed)                                             | `help o/detailed [q/QUERY]`                                              | `help o/detailed`                                                                                                        |
+| Adding a Transaction                                                | `add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION`                    | `add t/expense c/transport a/1 d/02102022 i/bus_fare` <br> `add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss` |
+| Editing a Transaction                                               | `edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]` | `edit e/1 t/expense c/food <br/> edit e/2 a/10 d/10202022 i/games`                                                       |
+| Listing the Transactions                                            | `list  [t/TYPE] [c/CATEGORY] [d/DATE]`                                   | `list` <br/> `list c/food d/13092022`                                                                                    |
+| Listing the Transactions for a Specific Year or Month               | `list [t/TYPE] [c/CATEGORY] [d/DATE] y/YEAR [m/MONTH]`                   | `list t/income d/30092022 y/2022` <br/> `list t/income d/30092022 y/2022 m/9`                                            |
+| Listing the Transactions for the Last N Days, Weeks or Months       | `list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER`                  | `list p/days n/7` <br/> `list p/weeks n/4` <br/> `list p/months n/1`                                                     |
+| Searching for Transactions                                          | `find k/KEYWORD`                                                         | `find k/bus_fare` <br/> `find k/transport`                                                                               |
+| Viewing the Categorical Savings                                     | `stats s/categorical_savings`                                            | `stats s/categorical_savings`                                                                                            |
+| Viewing the Monthly Expenditure                                     | `stats s/monthly_expenditure`                                            | `stats s/monthly_expenditure`                                                                                            |
+| Viewing the Financial Insights for a Specific Year or Month         | `stats s/time_insights y/YEAR [m/MONTH]`                                 | `stats s/time_insights y/2022` <br/> `stats s/time_insights y/2002 m/10`                                                 |
+| Viewing the Financial Insights for the Last N Days, Weeks or Months | `stats s/time_insights p/PERIOD n/NUMBER`                                | `stats s/time_insights p/weeks n/3` <br/> `stats s/time_insights p/months n/12`                                          |
+| Managing the Budget                                                 | `budget b/BUDGET`                                                        | `budget b/9999999999999` <br/> `budget b/1`                                                                              |
+| Deleting a Transaction                                              | `delete e/ENTRY`                                                         | `delete e/3`                                                                                                             |
+| Purging all Transactions                                            | `purge`                                                                  | `purge`                                                                                                                  |
+| Exiting the Application                                             | `bye`                                                                    | `bye`                                                                                                                    |
 
+### 7.2. Information for Parameters 
 
+| Parameter     | Description                                                                                  | Restrictions                                                                                                                                     |
+|---------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `detailed`    | A detailed version of the guide.                                                             | -                                                                                                                                                |
+| `COMMAND`     | A case-insensitive command word to search for.                                               | `help`, `add`, `edit`, `list`, `find`, `delete`, `purge`, `stats` or `budget`.                                                                   |
+| `TYPE`        | The type of transaction.                                                                     | `expense` or `income`.                                                                                                                           |
+| `CATEGORY`    | A category for the transaction.                                                              | Any word without numeral, symbol or spacing.                                                                                                     |
+| `AMOUNT`      | The amount of the transaction.                                                               | A positive whole number ranging from 1 to 10000000 (Ten Million).                                                                                |
+| `DATE`        | The date when the transaction took place on.                                                 | ddMMyyyy format, e.g. 29102022.                                                                                                                  |
+| `DESCRIPTION` | More information regarding the transaction.                                                  | Any word without any spacing.                                                                                                                    |
+| `ENTRY`       | A list entry value for the transaction.                                                      | A positive whole number ranging from 1 to 1000000.                                                                                               |
+| `MONTH`       | The month which the transaction falls on.                                                    | A positive whole number ranging from 1 to 12, where 1 represents January. <br><!> MONTH parameter must be used together with the YEAR parameter. |
+| `YEAR`        | The year which the transaction falls on.                                                     | A positive whole number ranging from 0 to 9999, where 0 represents Year 0.                                                                       |
+| `PERIOD`      | The period which the transaction falls on.                                                   | `days`, `weeks` or `months`. <br> <!> PERIOD parameter must be used together with the NUMBER parameter.                                          |
+| `NUMBER`      | The last N number of days, weeks or months.                                                  | A positive whole number ranging from 1 to 100. <br> <!> NUMBER parameter must be used together with the PERIOD parameter.                        |         
+| `KEYWORD`     | A case-insensitive word that matches the partial or full description of a transaction entry. | Any word without any spacing.                                                                                                                    |
+| `BUDGET`      | An estimate of expense for every month.                                                      | A positive whole number ranging from 1 to 10^13 (Ten Trillion).                                                                                  |
 
 _Written by: Yong Chin Han_
 
 ## FAQ
+
+**Q**: Why does running the command `java -jar duke.jar` in the command prompt or terminal not open up the application?
+* **A**: It could be that you are not in the home directory of that application. Type `cd [PATH TO DIRECTORY CONTAINING .JAR FILE]`.
 
 **Q**: How do I view commands while the app is running? 
 * **A**: Type `help` command to view all the commands!
@@ -592,7 +670,7 @@ _Written by: Yong Chin Han_
  
 **Q**: What is the purpose of using the different statistics commands?
 * **A**: They provide you with great flexibility in viewing the current transactions from different perspectives. To analyze 
-all of the stored transactions, use `stats s/categorical_savings` or `stats s/monthly_expenditure`. Otherwise, use stats s/time_insights
-to analyze transactions for a specified time period.  
+all the stored transactions, use `stats s/categorical_savings` or `stats s/monthly_expenditure`. Otherwise, use `stats s/time_insights`
+to analyze transactions for a specified time period.
 
 _Written by: Paul Low_
