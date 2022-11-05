@@ -49,7 +49,7 @@ public class Editor extends JFrame implements ActionListener {
 
 
         textArea = new JTextArea();
-        textArea.setSize(new Dimension(400, 400));
+        textArea.setSize(new Dimension(200, 200));
         textArea.setFont(new Font("Arial", Font.PLAIN, 15));
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
