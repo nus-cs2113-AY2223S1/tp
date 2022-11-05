@@ -8,6 +8,8 @@ import java.util.Objects;
 
 public class Ingredient {
     private static final String ERROR_PARSING = "Error Parsing Ingredients";
+    private static final String DIVIDER = "/";
+    private static final int MAX_DIVIDES = 3;
     private String name;
     private double amount;
     private String unit;
@@ -53,7 +55,7 @@ public class Ingredient {
      * @throws ParseException the ingredient is of wrong format and cannot be parsed
      */
     public static Ingredient parsedIngredients(String input) throws ParseException {
-        String[] parsed = input.split("/", 3);
+        String[] parsed = input.split(DIVIDER, MAX_DIVIDES);
         try {
             double amount = Double.parseDouble(parsed[1]);
             return new Ingredient(parsed[0], amount, parsed[2]);
