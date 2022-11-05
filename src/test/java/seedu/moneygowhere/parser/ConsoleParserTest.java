@@ -3493,7 +3493,7 @@ class ConsoleParserTest {
     //region Defines JUnit test cases for command Merge-File
     //@@author LokQiJun
     @Test
-    void parseCommand_mfPath_ccmefPath() throws
+    void parseCommand_mfPath_ccmfPath() throws
             MoneyGoWhereException {
         String filePath = "C:/ValidPath/MoneyGoWhereData.xml";
 
