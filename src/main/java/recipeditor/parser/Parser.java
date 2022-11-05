@@ -164,7 +164,7 @@ public class Parser {
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
                 String path = Storage.titleToFilePath(title);
-                Storage.saveRecipe(targetRecipe, "", path);
+                Storage.overwriteRecipeFile(targetRecipe, "", path);
                 return new InvalidCommand("Recipe File is missing! Regenerate Recipe File! Please try again!");
             } catch (IndexOutOfBoundsException e) {
                 return new InvalidCommand("The index is out of bound! Please try again");

@@ -11,6 +11,7 @@ import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
+    public static final String NO_EDIT = "No edit was made";
     private static final String COMMAND_FUNCTION = "\nEdit an existing recipe by: \n"
             + "-add Add a new step or ingredient \n"
             + "-del Delete an existing step or ingredient \n"
@@ -73,7 +74,7 @@ public class EditCommand extends Command {
             return new CommandResult(editedRecipe.getTitle() + " edited.");
         } else if (flags == null) {
             // GUI Unsuccessful
-            return new CommandResult("No edit was made");
+            return new CommandResult(NO_EDIT);
         } else {
             // CLI
             EditModeCommand cmd;

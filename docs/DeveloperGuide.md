@@ -295,7 +295,7 @@ Target user of the application is avid cook who wants to organize their recipe l
 - **More `/` than the format**
     - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
 - **`.` in ingredient name**
-    - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
+    - Expected outcome: allowed
 - **Amount not a valid positive double**:
     - Expected outcome: `INGREDIENT amount should be a positive rational number!` and further instructions
 
@@ -308,55 +308,62 @@ Target user of the application is avid cook who wants to organize their recipe l
 - **Index increment is wrong**:
     - Expected outcome: `STEP index increment is incorrect! Index starts from 1`
 - **`.` in step description**:
-    - Expected outcome: allowed . TODO!
+    - Expected outcome: allowed because a step can have multiple sentences
 
 ### Storage: Tampering the data
 
 - Tamper the data to test if the program can recover gracefully
 
 #### During the running of the program
+
 - **Delete or tamper the `AllRecipes.txt` file**
-  - No effect as the program does not use `AllRecipes.txt` while running
-  - If the program is stopped not using `/exit`. The effect will be reflected in the next run
-  - However, after `/add`, `/edit`,`/exit`, a correct `AllRecipes.txt` will be generated
+    - No effect as the program does not use `AllRecipes.txt` while running
+    - If the program is stopped not using `/exit`. The effect will be reflected in the next run
+    - However, after `/add`, `/edit`,`/exit`, a correct `AllRecipes.txt` will be generated
 
 - **Delete recipe files then `/edit`**
+    - Deleting the data files can only be done if the files are newly created during the same run of the program.
+    - If the file is loaded by the program, you cannot delete because JDK is using them.<p align="center" width="100%">
+      <img width="80%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
     - Expected outcome:
-  ```
-  Please edit in the GUI editor!
-  Recipe File is missing! Regenerate Recipe File! Please try again!
-  >>>
-  ```
+      ```
+      Please edit in the GUI editor!
+      Recipe File is missing! Regenerate Recipe File! Please try again!
+      >>>
+      ```
 - **Tamper the recipe files**
-  - The change in recipe files will not be reflected in the Model
+    - The change in recipe files will not be reflected in the Model
 - **Tamper the recipe file then `/edit`**
-  - The change will be loaded into the Editor GUI
-  - The validity of the change will be parsed when exit the GUI and will be reflected in the Model
+    - The change will be loaded into the Editor GUI
+    - The validity of the change will be parsed when exit the GUI and will be reflected in the Model
 - **Tamper the recipe file then `/exit`**
-  - The program will regenerate all the recipe file based on the Model
+    - The program will regenerate all the recipe files and `AllRecipes.txt` based on the Model
 
 #### Before the running of the program
+
 - **Delete the `AllRecipes.txt`**
-  - The program cannot recognize any title start anew, despite having recipe files
+    - The program cannot recognize any title start anew, despite having recipe files
 - **Tamper the `AllRecipes.txt`**
-  - The program will match the recipe titles in `AllRecipes.txt` with the stored recipe files
-  - The program will parse the recipe files
-  - If valid, the program will load the recipe into the Model
-  - If the title does not match the stored recipe or the stored recipe cannot be parsed, the program will not recognize the recipe
+    - The program will match the recipe titles in `AllRecipes.txt` with the stored recipe files
+    - The program will parse the recipe files
+    - If valid, the program will load the recipe into the Model
+    - If the title does not match the stored recipe or the stored recipe cannot be parsed, the program will not
+      recognize the recipe
 
 - **Delete the recipe file**
-  - The program cannot find the recipe file from the title in `AllRecipes.txt`
-  - The program will not load
+    - The program cannot find the recipe file from the title in `AllRecipes.txt`
+    - The program will skip this
 - **Tamper the recipe file (parseable recipe)**
-  - The program will load the recipe with the tampered content
+    - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
-  - The program will not load the recipe 
+    - The program will skip this
 
 #### Other files
+
 - **Delete `Template.txt` then `/add`**
-  - Expected outcome: `Template file is missing! Regenerate Template File! Please try again`
+    - Expected outcome: `Template file is missing! Regenerate Template File! Please try again`
 - **Tamper `Template.txt` then `/add`**
-  - The tampered file will be loaded
-  - Everything will continue to work but without a proper template, it is hard for the user
+    - The tampered file will be loaded
+    - Everything will continue to work but without a proper template, it is hard for the user
 - **Delete `TemporaryFile.txt` then `/add`**
-  - No effect because it will be constantly overwritten based on content in the Editor when closed
+    - No effect because it will be constantly overwritten based on content in the Editor when closed

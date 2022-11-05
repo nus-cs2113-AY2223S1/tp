@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -146,7 +145,7 @@ public class Storage {
         }
     }
 
-    public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
+    public static void overwriteRecipeFile(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
         try {
             deleteFile(oldFile);
             rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
@@ -203,7 +202,6 @@ public class Storage {
         return getContent.toString();
     }
 
-    //FIXME: Don't need to copy temporary file over but generated from model
     public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
         FileWriter fileWrite;
         try {
