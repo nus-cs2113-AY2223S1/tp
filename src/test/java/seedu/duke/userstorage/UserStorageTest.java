@@ -6,6 +6,7 @@ import seedu.duke.command.DatabaseStorage;
 import seedu.duke.exceptions.InvalidModuleException;
 import seedu.duke.exceptions.InvalidUniversityException;
 import seedu.duke.exceptions.InvalidUserCommandException;
+import seedu.duke.exceptions.TimetableNotFoundException;
 import seedu.duke.parser.UserStorageParser;
 import seedu.duke.timetable.Lesson;
 import seedu.duke.timetable.Timetable;
@@ -17,6 +18,7 @@ import seedu.duke.user.UserUniversityListManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -189,5 +191,38 @@ public class UserStorageTest {
         UserStorageParser.storeInfoToUserStorageByUni("Western University", testManager);
         fileContent = getFileContents("data/Western University.txt");
         assertEquals("F%\n" + "CS4472;%\n" + "#CS4472;tuesday;10:00;12:00%\n", fileContent);
+        UserStorageParser.deleteUserStorageByUni("Boston University", false);
+        UserStorageParser.deleteUserStorageByUni("Western University", false);
     }
+
+    @Test
+    public void testDeleteOneFile() throws InvalidUserCommandException, TimetableNotFoundException {
+        testManager.createList("Boston University");
+        UserStorageParser.storeInfoToUserStorageByUni("Boston University", testManager);
+        testManager.createList("Western University");
+        UserStorageParser.storeInfoToUserStorageByUni("Western University", testManager);
+        assertEquals("data/Boston University.txt", UserStorage.getFilePaths().get("Boston University"));
+        assertEquals("data/Western University.txt", UserStorage.getFilePaths().get("Western University"));
+        testManager.deleteList("Boston University");
+        UserStorageParser.deleteUserStorageByUni("Boston University", false);
+        assertEquals(1, UserStorage.getFilePaths().size());
+        UserStorageParser.deleteUserStorageByUni("Western University", false);
+    }
+
+    @Test
+    public void testInvalidFileName() throws IOException {
+        DatabaseStorage.loadDatabase();
+        File dummyFile = new File("data/Dummy University.txt");
+        File bostonFile = new File("data/Boston University.txt");
+        File dir = new File("data/");
+        dummyFile.createNewFile();
+        bostonFile.createNewFile();
+        assertEquals(3, Objects.requireNonNull(dir.list()).length);
+        UserStorage.setFilePathsAtStartUp();
+        assertEquals(2, Objects.requireNonNull(dir.list()).length);
+        UserStorageParser.deleteUserStorageByUni("Boston University", false);
+        Database.clearDatabase();
+    }
+
+
 }
