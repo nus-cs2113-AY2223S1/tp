@@ -223,12 +223,13 @@ public class Duke {
                     addModuleToList(userUniversityListManager,addCommand);
                 }
                 timetableManager.addLesson(lesson, false);
+                UserStorageParser.storeInfoToUserStorageByUni(addCommand.getUniversityName(), userUniversityListManager);
             } else if (addCommand.hasComment()) {
                 addComment(userUniversityListManager, addCommand);
             } else {
                 addModuleToList(userUniversityListManager, addCommand);
+                UserStorageParser.storeInfoToUserStorageByUni(addCommand.getUniversityName(), userUniversityListManager);
             }
-            UserStorageParser.storeInfoToUserStorageByUni(addCommand.getUniversityName(), userUniversityListManager);
         } catch (ModuleNotFoundException | NoSuchElementException
                  | InvalidUniversityException | UniversityNotFoundException e) {
             Ui.printExceptionMessage(e);
@@ -248,6 +249,7 @@ public class Duke {
             String moduleCode = addCommand.getModuleCode();
             String comment = addCommand.getComment();
             userUniversityListManager.updateComment(universityName, moduleCode, comment);
+            UserStorageParser.storeInfoToUserStorageByUni(addCommand.getUniversityName(), userUniversityListManager);
         } else {
             System.out.println("Error: Invalid Comment");
         }
