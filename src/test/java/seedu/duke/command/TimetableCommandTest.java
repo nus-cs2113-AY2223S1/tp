@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TimetableCommandTest {
     @Test
     public void timetableCommandConstructor_incorrectViewTimetableInput_throwYamomException() {
-        String expectedErrorMessage = "Error! \tUnknown command. Maybe you meant \"view\".";
+        String expectedErrorMessage = "Error! \tUnknown command. Maybe you meant \"timetable < /fancy | /simple >\".";
         YamomException exception = assertThrows(YamomException.class, () -> new TimetableCommand("view timetable"));
         assertEquals(expectedErrorMessage, exception.getMessage());
         exception = assertThrows(YamomException.class, () -> new TimetableCommand("view fancy"));

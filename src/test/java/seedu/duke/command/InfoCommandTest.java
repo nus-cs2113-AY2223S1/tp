@@ -60,24 +60,6 @@ public class InfoCommandTest {
     }
 
     @Test
-    void getModuleCommand_invalidOrNotPresentModuleCodeX1010SC_exceptionThrown() {
-        Ui ui = new Ui();
-        State state = new State();
-
-        state.setSemester(1);
-
-        try {
-            String[] input = {"info", "X1010SC"};
-            InfoCommand getModuleCommand = new InfoCommand(input);
-            getModuleCommand.execute(state, ui, null);
-            fail();
-        } catch (YamomException e) {
-            assertEquals("Error! \tModule not found! Please enter a valid module code! Try searching "
-                    + "if you do not remember the exact module code.", e.getMessage());
-        }
-    }
-
-    @Test
     void infoCommand_emptyModuleCode_exceptionThrown() {
         Ui ui = new Ui();
         State state = new State();
@@ -90,34 +72,6 @@ public class InfoCommandTest {
         } catch (YamomException e) {
             assertEquals("Error! \tPlease enter a module code!", e.getMessage());
         }
-    }
-
-    @Test
-    void isModuleExist_moduleCodeCS2113Exist_expectTrue() {
-        String moduleCode = "CS2113";
-        List<Module> moduleList = Module.getAll();
-        boolean moduleExistsInModuleList = false;
-        for (Module module : moduleList) {
-            if (moduleCode.equals(module.moduleCode)) {
-                moduleExistsInModuleList = true;
-                break;
-            }
-        }
-        assertTrue(moduleExistsInModuleList);
-    }
-
-    @Test
-    void isModuleExist_moduleCodeCS2113FDoNotExist_expectFalse() {
-        String moduleCode = "CS2113F";
-        List<Module> moduleList = Module.getAll();
-        boolean moduleExistsInModuleList = false;
-        for (Module module : moduleList) {
-            if (moduleCode.equals(module.moduleCode)) {
-                moduleExistsInModuleList = true;
-                break;
-            }
-        }
-        assertFalse(moduleExistsInModuleList);
     }
 
     @Test

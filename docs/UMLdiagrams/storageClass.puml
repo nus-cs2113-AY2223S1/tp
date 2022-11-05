@@ -11,8 +11,8 @@ class Storage {
     <u>+ NO_PREVIOUS_STATE_ERROR_MESSAGE: String
     <u>+ SUBSYSTEM_NAME: String
 
-    + openPreviousState(State, Ui): void
+    + openPreviousState(State, Ui)
     - readPreviousState(): ArrayList<String>
-    + saveState(State, Ui): void
+    + saveState(State, Ui)
 }
 @enduml
