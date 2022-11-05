@@ -316,11 +316,19 @@ validation to ensure no such stray data are presented to the user.
 ## 4 Product scope
 ### 4.1 Target user profile
 
-{Describe the target user profile}
+The target user that we have in mind is a driver who needs to find a carpark slot and wants to find the carpark 
+information so he knows where he can park. We want to make the data from LTA easier to read for users who are able to 
+use CLI. This would be a more efficient way for Singaporean drivers to be able to obtain information regarding their 
+desired carpark and also for them to be able to filter our carparks based on their addresses. Most importantly, it is 
+does not require any internet connection to use.
+
+
 
 ### 4.2 Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+parKING is a desktop app that helps Singaporean drivers find and filter out carpark information easily, and is optimized
+for use via a Command Line Interface (CLI).
+
 
 ## 5 User Stories
 
