@@ -65,12 +65,13 @@ Sem [1] >>
 > - The first word of each command specifies the command type.
 > - Words in `UPPERCASE` information to be supplied by the user.
     e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
-> - Extraneous parameters will be rejected.
+> - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
 > - Parameters split by the pipe character `|` |  denotes either of the parameters can be used. Some commands support the usage of both parameters while some does not.
 > - Named parameters starting with forward slash `/` such as `/module`, `/type` and `/code` in `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]` can appear in any order.
->   - Note: The parameter keyword has to come immediately after the forward slash `/`. E.g. `search /title cs` is accepted while `search / title cs` will not be accepted.
+> - Parameters must be separated by a space. For example, `search /title programming/code cs` will not give the desired result. The correct input should be `search /title programming /code cs`.
+> - The parameter keyword has to come immediately after the forward slash `/`. E.g. `search /title cs` is accepted while `search / title cs` will not be accepted.
 > - If a named parameter is provided multiple times, e.g. `search /title cs /title ma`, only one of the values will be used. It is not guaranteed which of the duplicates will be used. 
 > - The commands and parameters are case-insensitive. E.g. `search /code cs1` is the same as `SEARCH /CODE CS1`.
 
@@ -676,7 +677,7 @@ Selects a timeslot to be added to the user timetable.
 
 Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`
 
-* The `CLASS_NO` will be a number.
+* The `CLASS_NO` will be an alphanumeric String. This needs need to be an exact match and is not case sensitive. For example, if the code is `03`, then `/code 3` will not be accepted. Similarly, for code `T01`, `/code T1`, `/code 01` and `/code 1` will not be accepted, while `/code T01` and `/code t01` are valid.
 * The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
   *  TUTORIAL                   e.g. *tut, tutorial*
   *  TUTORIAL_TYPE_2            e.g. *tut2, tutorial2*
