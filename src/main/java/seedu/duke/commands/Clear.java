@@ -32,7 +32,6 @@ public class Clear extends Command {
         checkOverallExceptionForClear(this.semester);
     }
 
-
     /**
      * function to find the semester from input for which the modules need to be viewed
      * @param input input entered by user. Format: String
@@ -57,6 +56,11 @@ public class Clear extends Command {
         checkFormatException(isRight);
     }
 
+    /**
+     * Function to check format of input
+     * @param isRight whether it is in correct format. Format: boolean
+     * @throws InvalidInputFormatException exception thrown if content of input has issues
+     */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
         if (!isRight) {
             throw new InvalidInputFormatException();
@@ -75,6 +79,11 @@ public class Clear extends Command {
         checkContentException(isSame);
     }
 
+    /**
+     * Function to check content of input
+     * @param isSame whether it is same or not. Format: boolean
+     * @throws InvalidInputContentException exception thrown if content has issues
+     */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
@@ -93,6 +102,11 @@ public class Clear extends Command {
         return idx;
     }
 
+    /**
+     * Method to check for any exception caught due to input (semester) format issues
+     * @param semester Semester taken. Format: String
+     * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
+     */
     private void checkOverallExceptionForClear(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 
@@ -110,8 +124,8 @@ public class Clear extends Command {
     }
 
     /**
-     * throws InvalidSemesterException only when invalidFormat for semester
-     * Ignores when requesting for "all" semester
+     * Function that checks the format of semester input
+     * @throws InvalidSemesterException throws InvalidSemesterException only when invalidFormat for semester
      */
     public void checkYear(String semester) throws InvalidSemesterException {
         if (!semester.equals("all")) {
