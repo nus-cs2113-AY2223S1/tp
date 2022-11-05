@@ -12,7 +12,7 @@ import java.nio.file.Files;
 /**
  * Exports the builds to a CSV file.
  */
-public class ExportCsv {
+public class ExportCsv implements Export {
 
     /**
      * The file directory that the files are stored in.

@@ -154,6 +154,8 @@ There are also check compatibility functions that check if the build's component
 - Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
 - Checking if the number of the build's RAM is compatible with the motherboard RAM slots
 
+
+
 ##### Add & delete component
 
 The user can add and delete components from the build. When the user adds a component, the component is added to the 2D linked hash map. 
