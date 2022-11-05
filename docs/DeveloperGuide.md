@@ -14,6 +14,7 @@ The `Storage` class handles the storing and retrieval of users' information. Whe
 started, the program checks for whether there is a file from which to extract the saved information.
 If there is not, a new file and folder will be created. The saved information is then loaded in to the reviewList
 which the user can maniuplate. Upon exit, all the user's information and attributes are saved into local storage on the txt file.
+
 ![img.png](imgs/StorageClass.png)
 
 ### Media Classes
@@ -150,13 +151,15 @@ printed for the user.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
-The target user profile is ideally individuals who are well-versed in the command line
-and are avid movie or TV show watchers. Therefore, this app is customised to their preferences.
+myReviews targets individuals who are avid movie or TV show watchers and are proficient in using the command line.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+For movie and TV show enthusiasts, using common movie review websites like RottenTomatoes involves navigating past a 
+lot of irrelevant pages to arrive at a review page. Users who want to submit personal reviews may also have to spend up 
+to a minute navigating these websites first. Furthermore, there is often no convenient way for users to view and compare 
+their personal reviews for any form of analysis. Hence, myReviews aims to provide a fast and bloat-free all-in-one 
+avenue where users can quickly store their personal reviews and view them at a glance.
 
 ## User Stories
 
@@ -192,7 +195,7 @@ and are avid movie or TV show watchers. Therefore, this app is customised to the
 
 ## Glossary
 
-* *glossary item* - Definition
+* *review* - The user's appraisal of a movie or TV show, reflected in a rating.
 
 ## Instructions for manual testing
 
