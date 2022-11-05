@@ -1,7 +1,7 @@
 @startuml
 !include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
 
-skinparam noteTextAlignment left
+skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface\n:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
 Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
@@ -13,7 +13,7 @@ Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runCommandMergeExternalFile(consoleCommandMergeExternalFile:ConsoleCommandMergeExternalFile)
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandMergeFile(\n\tconsoleCommandMergeFile:ConsoleCommandMergeFile\n)
 activate consoleInterface USER_INTERFACE_COLOR_1
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lloadFromExternalFile(\n\tfilePath:String,\n\tsavedExpenses:ArrayList<Expense>,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedIncomes:ArrayList<Income>,\n\tsavedTargets:ArrayList<Target>\n)
@@ -28,8 +28,7 @@ activate expenseManager DATA_COLOR_1
 expenseManager --[DATA_COLOR_1]> consoleInterface
 deactivate expenseManager
 
-
-consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : updateRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayments>)
+consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : updateRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayment>)
 activate recurringPaymentManager DATA_COLOR_3
 
 recurringPaymentManager --[DATA_COLOR_3]> consoleInterface

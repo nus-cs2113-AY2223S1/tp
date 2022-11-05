@@ -35,7 +35,7 @@ activate expenseManager DATA_COLOR_1
 expenseManager --[DATA_COLOR_1]> consoleInterface
 deactivate expenseManager
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : setRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayments>)
+consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : setRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayment>)
 activate recurringPaymentManager DATA_COLOR_3
 
 recurringPaymentManager --[DATA_COLOR_3]> consoleInterface
