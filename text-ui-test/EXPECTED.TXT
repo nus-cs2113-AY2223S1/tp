@@ -25,8 +25,8 @@ add weight /{weight} /{fat percentage}
 remove {food/exercise} /{food index/current exerciseList index}
 mark {done} /{exercise index} / {time} / {metabolic equivalent}
 mark {undone} /{exercise index}
-find {strength/cardio/food/date_e/date_f} /{description}
-find {calories} //{date}
+find {strength/cardio/food/date_f} /{description}
+find {calories} /{date}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 Biometrics:

@@ -80,6 +80,7 @@ public class Ui {
         getCaloriesColumnsSpacing(caloriesList, columnSpacingArray);
         generateCaloriesTableHeader(columnSpacingArray);
         printCaloriesList(caloriesList, columnSpacingArray);
+        printEmptyLine();
     }
 
     public void outputAllRecords(ArrayList<Record> recordArrayList,

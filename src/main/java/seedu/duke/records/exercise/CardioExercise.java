@@ -11,7 +11,6 @@ public class CardioExercise extends Exercise {
     }
 
 
-    @Override
     public double getDistance() {
         return distance;
     }

@@ -117,8 +117,8 @@ public class ViewCommand extends Command {
         int newCaloriesBurntEntry;
         int inputCaloriesBurntEntry = 0;
         int inputCaloriesConsumedEntry = 0;
-        int inputnetCaloriesEntry = 0;
-        CaloriesList caloriesList = new CaloriesList();
+        int inputNetCaloriesEntry = 0;
+        CaloriesList calList = new CaloriesList();
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
         calculator.setHealthyCalorieDeficit();
@@ -159,36 +159,24 @@ public class ViewCommand extends Command {
                 inputCaloriesBurntEntry = caloriesBurnt.get(datesBurnt.indexOf(d));
             }
             if (datesNetCalories.indexOf(d) != -1) {
-                inputnetCaloriesEntry = netCalories.get(datesNetCalories.indexOf(d));
+                inputNetCaloriesEntry = netCalories.get(datesNetCalories.indexOf(d));
             }
-            String message = null;
-            if (inputnetCaloriesEntry < 0) {
-                if (inputnetCaloriesEntry < calculator.getHealthyCalorieDeficit()) {
-                    message = "Your calorie deficit is too high! ";
-                } else {
-                    message = "Your calorie deficit is acceptable! ";
-                }
-            } else {
-                if (inputnetCaloriesEntry > calculator.getHealthyCalorieSurplus()) {
-                    message = "Your calorie surplus is too much! ";
-                } else {
-                    message = "Your calorie deficit is acceptable! ";
-                }
-            }
+            String message = calculator.calorieMessage(inputNetCaloriesEntry);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localdate = LocalDate.parse(d, formatter);
-            Calories caloriesinput = new Calories(inputCaloriesConsumedEntry,
-                    inputCaloriesBurntEntry, inputnetCaloriesEntry, localdate, message);
-            caloriesList.addCalories(caloriesinput);
+            Calories caloriesInput = new Calories(inputCaloriesConsumedEntry,
+                    inputCaloriesBurntEntry, inputNetCaloriesEntry, localdate, message);
+            calList.addCalories(caloriesInput);
         }
-        ArrayList<Calories> clist = caloriesList.getCaloriesList();
-        ui.outputCalories(clist);
+        ArrayList<Calories> caloriesList = calList.getCaloriesList();
+        ui.outputCalories(caloriesList);
     }
 
     private void viewMaintenanceCalories() {
 
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
+        calculator.setIdealMaintenanceCalories();
         ui.output(calculator.getActivityStatus());
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
     }

@@ -65,8 +65,15 @@ Adding strength exercise
 Marking exercise
 ![](UmlDiagrams/MarkExercise.png)
 
+Finding a record
+![Find.png](UmlDiagrams/Find.png)
+
+
 Viewing historical records
 ![View.png](UmlDiagrams/View.png)
+
+Viewing calories
+![ViewCalories.png](UmlDiagrams/ViewCalories.png)
 
 Viewing all historical records sorted by date
 ![ViewAll.png](UmlDiagrams/ViewAll.png)

@@ -38,8 +38,8 @@ public class HelpCommand extends Command {
                 + "remove {food/exercise} /{food index/current exerciseList index}" + System.lineSeparator()
                 + "mark {done} /{exercise index} / {time} / {metabolic equivalent}" + System.lineSeparator()
                 + "mark {undone} /{exercise index}" + System.lineSeparator()
-                + "find {strength/cardio/food/date_e/date_f} /{description}" + System.lineSeparator()
-                + "find {calories} //{date}");
+                + "find {strength/cardio/food/date_f} /{description}" + System.lineSeparator()
+                + "find {calories} /{date}");
     }
 
     @Override

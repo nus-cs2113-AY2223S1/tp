@@ -7,7 +7,6 @@ import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.exception.InvalidDateException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.Food;
@@ -15,34 +14,12 @@ import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class DateCommand extends Command {
-
-
-    public static void extractDate(String arguments) throws InvalidDateException {
-    }
-
-
-    public int getYear(LocalDate date) {
-        return date.getYear();
-    }
-
-    public Month getMonth(LocalDate date) {
-        return date.getMonth();
-    }
-
-    public int getDay(LocalDate date) {
-        return date.getDayOfMonth();
-    }
-
-    public static LocalDate today() {
-        return LocalDate.now();
-    }
 
     public static void sortDateForExercise(ArrayList<Exercise> list) {
         Collections.sort(list, new Comparator<Exercise>() {
@@ -68,10 +45,10 @@ public class DateCommand extends Command {
              *
              * @return sorted array list by date.
              */
-            public int compare(Calories e1, Calories e2) {
-                LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDate()),
+            public int compare(Calories c1, Calories c2) {
+                LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(c1.getDate()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDate()),
+                LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(c2.getDate()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 return o2Date.compareTo(o1Date);
             }

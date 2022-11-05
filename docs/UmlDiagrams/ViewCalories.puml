@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+
+activate viewCommand
+    viewCommand -> viewCommand: viewCalories(argumentList)
+
+    viewCommand -> foodList: getFoodList()
+    return foodArrayList: ArrayList<Food>
+    viewCommand -> exerciseList: getCompletedExerciseList()
+    return completedExerciseArrayList: ArrayList<Exercise>
+    viewCommand -> calculator **: new(gender: String, weight: int, height: int, age: int, activitylevel: int)
+    viewCommand -> calculator: calculateTotalCaloriesBurnt(completedExerciseArrayList: ArrayList<Exercise>,String date)
+    return inputCaloriesBurntEntry: int
+    viewCommand -> calculator: calculateTotalCaloriesConsumed(foodArrayList: ArrayList<Food>,String date)
+    return inputCaloriesConsumedEntry: int
+    viewCommand -> calculator: calculateNetCalories(completedExerciseArrayList: ArrayList<Exercise>,foodArrayList: ArrayList<Food>, String date)
+    return inputNetCaloriesEntry : int
+    viewCommand -> calculator: calorieMessage()
+    return message : String
+    viewCommand -> Calories **: new(inputCaloriesConsumedEntry: int, inputCaloriesBurntEntry: int, inputNetCaloriesEntry,: int, localdate: LocalDate, message: String)
+    return caloriesInput :Calories
+    viewCommand -> CaloriesList **: addCalories(inputCalories:Calories)
+    return
+    viewCommand -> ui: outputCalories(caloriesList)
+    ui -> ui: getCaloriesColumnsSpacing(caloriesList,columnSpacingArray)
+    return
+    ui -> ui: generateCaloriesTableHeader(columnSpacingArray)
+    return
+    ui -> ui: printCaloriesList(caloriesList, columnSpacingArray)
+    return
+    ui -> ui: printEmptyLine()
+    return
+return
+
+@enduml
