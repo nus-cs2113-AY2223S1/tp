@@ -34,8 +34,4 @@ public class ConsoleCommandConvertCurrency extends ConsoleCommand {
     public BigDecimal getRate() {
         return rate;
     }
-
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
-    }
 }
