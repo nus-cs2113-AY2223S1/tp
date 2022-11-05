@@ -20,22 +20,17 @@ public class UI {
 
     protected static final String LOGO =
             System.lineSeparator()
-            + "                        _            "
+            + "                        _"
             + System.lineSeparator()
-            + "                       | |           "
+            + "                       | |"
             + System.lineSeparator()
-            + "  ___  _ __   ___    __| | ___   ___ "
+            + "  ___  _ __   ___    __| | ___   ___"
             + System.lineSeparator()
             + " / _ \\| '_ \\ / _ \\  / _` |/ _ \\ / __|"
             + System.lineSeparator()
-            + "| (_) | | | |  __/ | (_| | (_) | (__ "
+            + "| (_) | | | |  __/ | (_| | (_) | (__"
             + System.lineSeparator()
-            + " \\___/|_| |_|\\___|  \\__,_|\\___/ \\___|"
-            + System.lineSeparator()
-            + "                                     "
-            + System.lineSeparator()
-            + "                                     "
-            + System.lineSeparator();
+            + " \\___/|_| |_|\\___|  \\__,_|\\___/ \\___|";
     private static final String WELCOME_MESSAGE = "Hello welcome to" + System.lineSeparator() + LOGO;
     private static final String MAIN_MENU = "Please choose one of the following options:" + System.lineSeparator()
             + "1 - Patients" + System.lineSeparator()

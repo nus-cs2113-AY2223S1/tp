@@ -1,0 +1,14 @@
+Hello welcome to
+
+                        _
+                       | |
+  ___  _ __   ___    __| | ___   ___
+ / _ \| '_ \ / _ \  / _` |/ _ \ / __|
+| (_) | | | |  __/ | (_| | (_) | (__
+ \___/|_| |_|\___|  \__,_|\___/ \___|
+Please choose one of the following options:
+1 - Patients
+2 - Visits
+3 - Prescription
+bye - Quit OneDoc
+Goodbye!
