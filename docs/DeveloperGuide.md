@@ -69,7 +69,7 @@ methods to display their information, using methods present in Ui. The class str
 ### Pairing Component
 API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
 
-* `PairingList` is responsible for recording which clients renting which property.
+* `PairingList` is responsible for recording which clients are renting which property.
 * `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.
 
 Here is how classes involved in the pairing/unpairing actions interact with each other:
@@ -88,8 +88,8 @@ Here is how classes involved in the pairing/unpairing actions interact with each
 Here is the underlying data structure of `PairingList`:
 
 ![Pairing List Data Class Diagram](diagrams/PairingListAPICD.png)
-* `PairingList` is essentially a "wrapper" to the underlying `java.util.HashMap` with key-value pairs where the `Client` 
-    is the key and `Property` is the value.
+* `PairingList` is essentially a "wrapper" to the underlying `java.util.HashMap`. The key-value pairs in the hashmap have 
+    `Client` as the key and `Property` as the value.
 * `PairingList` provides methods to add or delete these key-value pairs to represent the pairing and unpairing of real-life
     clients and properties.
 * The `Client` and `Property` references contained in `PairingList` must be references to valid `Client` and `Property` 
@@ -280,8 +280,8 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 When a client rents a property, the client and property form a pair.
 
-* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client` object
-  and the value is a `Property` object.
+* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client`
+  and the value is `Property`.
 * A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
   client is renting.
 * Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants (clients) only have
@@ -487,7 +487,7 @@ Aids property agents in tracking information related to the properties and clien
 app enables them to easily:
 - Record down information of properties (landlord, address, rental price, unit type).
 - Record down information of clients (name, contact number, budget), who are looking to rent properties.
-- Record down instances where a client decides to rent a property/ stop renting a property.
+- Record down instances where a client decides to rent a property/stop renting a property.
 - View client and property information quickly.
 
 ___
@@ -663,8 +663,6 @@ java -jar PropertyRentalManager.jar
     10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
     
 ### Storage
-
-## Instructions for manual testing
 
 
 ### Finding for Client/Property:
