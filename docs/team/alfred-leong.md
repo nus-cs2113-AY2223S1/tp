@@ -13,7 +13,7 @@ This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=alfred-le
 
 #### User Storage
 Initially, user information was stored in two text files, one for all saved modules and another for all timetables.
-In the most recent version, user information is stored in several text files, where each text file stores the relevant information for the respective partner university. When an invalid file format is detected, the corresponding text file will be deleted. Much effort was put into detecting invalid files and recovering valid files.
+In the most recent version, user information is stored in several text files, where each text file stores the relevant information for the respective partner university. Much effort was put into detecting invalid files and recovering valid files.
 
 * **Some notable PRs**: [#33](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/33), [#48](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/48), [#98](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/98), [#206](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/206)
 
@@ -28,8 +28,8 @@ To allow users to view the list of valid commands available in this program.
 * **Some notable PRs**: [#57](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/57), [#172](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/172)
 
 #### Unit Testing & Assertions
-Added JUnit tests and assertions to make code more defensive and facilitate effective and quick regression testing.
-* **Some notable PRs**: [#48](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/48), [#55](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/55), [#87](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/87), [#99](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/99), [#110](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/110)
+Added JUnit tests and assertions to make code more defensive. Achieved average of >90% line coverage for implemented methods.
+* **Some notable PRs**: [#55](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/55), [#87](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/87), [#99](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/99), [#110](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/110), [#229](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/229)
 
 #### PED Bugs
 Got rid of bugs found in the module's Practical Exam Dry Run (PED).
@@ -42,11 +42,10 @@ Also fixed bugs pointed out during PED, such as updating incorrect examples and 
 
 ### Contributions to the Developer Guide DG
 Added class and sequence diagrams for the implementation of User Storage and Delete History using PlantUML.
-Updated class diagrams to follow standard notation.
 * **Some notable PRs**: [#84](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/84), [#102](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/102), [#179](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/179), [#208](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/208)
 
 ### Contributions to Team-Based Tasks
-* Performed extensive testing to find and fix bugs for all features of the app: 
+* Performed extensive testing to find and fix bugs for all features of the app: [#54](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/54), [#221](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/221), [#224](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/224)
 * Maintained issue tracker by tagging and labelling various pull requests for effective reference
 * Exhibited strong project management and communication skills
 
