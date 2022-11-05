@@ -12,7 +12,7 @@ public class Duke {
 
     static String filePath = "data.txt";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         run();
     }
 
@@ -20,7 +20,7 @@ public class Duke {
      * First initialize storage, and read from storage for past inputs.
      * Followed by while loop to ask for user inputs and its corresponding execution actions.
      */
-    public static void run() {
+    public static void run() throws Exception {
         Storage storage = new Storage(filePath);
         try {
             modulelist = new ModuleList(storage.load());
@@ -39,6 +39,7 @@ public class Duke {
                 isExit = c.checkExit();
             }
             UI.printSeparationLine();
+            storage.save();
         }
         storage.save();
     }

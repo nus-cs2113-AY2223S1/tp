@@ -10,25 +10,31 @@ import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
 import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
 import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
-public class Mcs extends Command {
+public class Clear extends Command {
     private String semester;
 
     /**
-     * Constructor to initialize an object of Mcs class
-     * @param input the input message to be used to initialize the variables
+     * Constructor to initialize an object of Delete class
+     * @param input input entered by user. Format: String
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public Mcs(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
-        checkFormat(input);
-        int[] indexes = positions(input);
-        checkContent(input, indexes);
-        setSem(input, indexes);
-        checkOverallExceptionForMcs(this.semester);
+    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+        input = input.trim();
+        if (input.equals("all")) {
+            this.semester = "all";
+        } else {
+            checkFormat(input);
+            int[] indexes = positions(input);
+            checkContent(input, indexes);
+            setSem(input, indexes);
+        }
+        checkOverallExceptionForClear(this.semester);
     }
 
+
     /**
-     * function to find the semester from input for which the mcs need to be calculated
+     * function to find the semester from input for which the modules need to be viewed
      * @param input input entered by user. Format: String
      * @param indexes An array of indexes which specify the positions at which details are present in the input
      */
@@ -39,6 +45,7 @@ public class Mcs extends Command {
             this.semester = input.substring(indexes[0], indexes[1]).toUpperCase();
         }
     }
+
     /**
      * Function to check if the format of input is correct or not
      * @param input input entered by user. Format: String
@@ -55,13 +62,13 @@ public class Mcs extends Command {
             throw new InvalidInputFormatException();
         }
     }
+
     /**
      * Function to check if content entered by user is empty or not
      * @param input input entered by user. Format: String
      * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
      * @throws InvalidInputContentException exception thrown if content of input is empty
      */
-
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
         boolean isSame;
         isSame = InvalidInputContentException.emptyContent(idx[0], idx[1], input);
@@ -73,6 +80,7 @@ public class Mcs extends Command {
             throw new InvalidInputContentException();
         }
     }
+
     /**
      * function to return the positions of the details in input
      * @param input the input given by user. Format: String
@@ -85,7 +93,7 @@ public class Mcs extends Command {
         return idx;
     }
 
-    private void checkOverallExceptionForMcs(String semester) throws InvalidOverallInputException {
+    private void checkOverallExceptionForClear(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 
         try {
@@ -95,23 +103,29 @@ public class Mcs extends Command {
         }
 
         if (!errorMessage.equals("")) {
-            System.out.println("Unable to view MCS due to these issue(s):");
+            System.out.println("Unable to Clear modules in semester due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
         }
     }
 
+    /**
+     * throws InvalidSemesterException only when invalidFormat for semester
+     * Ignores when requesting for "all" semester
+     */
     public void checkYear(String semester) throws InvalidSemesterException {
-        if (invalidFormat(semester)) {
-            throw new InvalidSemesterException();
-        }
-        if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
-            throw new InvalidSemesterException();
+        if (!semester.equals("all")) {
+            if (invalidFormat(semester)) {
+                throw new InvalidSemesterException();
+            }
+            if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
+                throw new InvalidSemesterException();
+            }
         }
     }
 
     @Override
     public void execute(ModuleList modulelist) {
-        modulelist.mc(this.semester);
+        modulelist.clear(this.semester);
     }
 }

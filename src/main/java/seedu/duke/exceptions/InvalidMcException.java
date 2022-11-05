@@ -9,7 +9,7 @@ public class InvalidMcException extends Exception {
     }
 
     public String getMessage() {
-        String message = "* Invalid MC Input, must be 0 < mcs <= 20." + "\n"  ;
+        String message = "* Invalid MC Input, must be 0 < mcs <= 20." + "\n";
         return message;
     }
 }

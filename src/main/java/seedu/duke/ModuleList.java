@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +11,14 @@ public class ModuleList {
     public static ArrayList<Module> modules = new ArrayList<>();
     public static int viewCount;
     public static int mcsCount;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public ModuleList() {
 
+    }
+
+    public ModuleList(ArrayList<Module> modules) {
+        this.modules = modules;
     }
 
     /**
@@ -30,6 +36,8 @@ public class ModuleList {
     }
 
 
+
+
     /**
      * Function to add a module to the moduleList if it does not already exist
      * @param mod The module to be added to the list
@@ -42,7 +50,7 @@ public class ModuleList {
         } else {
             int before = modules.size();
             modules.add(mod);
-            if (isFromFile == false) {
+            if (!isFromFile) {
                 UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
             }
             int after = modules.size();
@@ -136,6 +144,44 @@ public class ModuleList {
                 }
             }
         }
+        if(modules.isEmpty()) {
+            UI.noModulesFoundMessage();
+        }
+    }
+
+    /**
+     * Function to clear modules in a particular or all semester
+     */
+    public void clear(String semester) {
+        boolean isFound = false;
+        if (semester.equals("all")) {
+            isFound = true;
+            clearAll();
+            UI.allClearedMessage();
+
+        } else {
+            ArrayList<Module> updatedModules = new ArrayList<>();
+            for (Module mod : modules) {
+                if (!mod.getSemesterTaken().matches(semester)) {
+                    isFound = true;
+                    updatedModules.add(mod);
+                }
+            }
+            modules = updatedModules;
+
+        }
+        if (!isFound) {
+            UI.notFoundClearMessage(semester);
+        } else if (!semester.equals("all")) {
+            UI.semesterClearedMessage(semester);
+        }
+    }
+
+    /**
+     *
+     */
+    public void clearAll() {
+        modules = new ArrayList<>();
     }
 
     /**
@@ -167,12 +213,112 @@ public class ModuleList {
     }
 
     /**
+     * Returns total graded Mcs taken in whole plan
+     */
+    public Integer totalGradedMcs() {
+        Integer totalGradedMc = 0;
+        for (Module mod : modules) {
+            if (!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))) {
+                totalGradedMc += mod.getMcs();
+            }
+        }
+        return totalGradedMc;
+    }
+
+    /**
+     * Returns total Mcs taken in whole plan
+     */
+    public Integer totalMcs() {
+        int totalMcs = 0;
+        for (Module mod : modules) {
+            totalMcs += mod.getMcs();
+        }
+        return totalMcs;
+    }
+
+    /**
+     * Returns total S/U Mcs taken in whole plan
+     */
+    public Integer totalSuMcs() {
+        int totalSuMcs = 0;
+        for (Module mod : modules) {
+            if (mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
+                totalSuMcs += mod.getMcs();
+            }
+        }
+        return totalSuMcs;
+    }
+
+    /**
+     * Returns total S/U Mcs taken in whole plan
+     */
+    public Integer totalUngradedMcs() {
+        Integer totalUngradedMcs = 0;
+        for (Module mod : modules) {
+            if (mod.getGrade().equals("-")) {
+                totalUngradedMcs += mod.getMcs();
+            }
+        }
+        return totalUngradedMcs;
+    }
+
+    /**
+     * Returns total MCs need to graduate
+     */
+    public Integer mcsForGraduation() {
+        Integer mcsNeededForGraduation = 160;
+        return  mcsNeededForGraduation - totalMcs() - totalUngradedMcs();
+    }
+
+    /**
+     * Calculates CAP
+     */
+    public double calculateCap() {
+        double numerator = 0.0;
+        for (Module mod: modules) {
+            numerator += gradePoint(mod.getGrade()) * mod.getMcs();
+        }
+        return numerator / totalGradedMcs();
+    }
+
+    /**
+     * Function to convert a grade into grade point
+     * @param grade The letter grade of a module. Format: String
+     * @return The equivalent gradePoint of the grade
+     */
+    public double gradePoint(String grade) {
+        switch (grade) {
+            case "A+":
+            case "A":
+                return 5.0;
+            case "A-":
+                return 4.5;
+            case "B+":
+                return 4.0;
+            case "B":
+                return 3.5;
+            case "B-":
+                return 3.0;
+            case "C+":
+                return 2.5;
+            case "C":
+                return 2.0;
+            case "D+":
+                return 1.5;
+            case "D":
+                return 1.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    /**
      * For checking whether the module contains the keyword in its fields and return a boolean result.
      * @param keyword the word to search for in existing modules
      * @param mod the existing module to be checked
      * @return true if mod contains the keyword specified in its field
      */
-    public boolean findMatch(String keyword, Module mod) {
+    public static boolean findMatch(String keyword, Module mod) {
         try {
             return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
                     mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
@@ -186,13 +332,18 @@ public class ModuleList {
      * @param keyword the word to search for in existing modules
      */
     public void find(String keyword) {
+        ArrayList<Module> matchingModules = findMatchingModules(keyword);
+        findMsg(matchingModules);
+    }
+
+    public static ArrayList<Module> findMatchingModules(String keyword) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         for (Module mod: modules) {
             if (findMatch(keyword, mod)) {
                 matchingModules.add(mod);
             }
         }
-        findMsg(matchingModules);
+        return matchingModules;
     }
 
     /**
@@ -206,6 +357,9 @@ public class ModuleList {
             UI.findMessage(matchingModules);
         }
     }
+
+
+
 
     // Returns total number of Modules in modules Array
     public int getCount() {
@@ -221,5 +375,6 @@ public class ModuleList {
     public int getMcsCount() {
         return mcsCount;
     }
+
 
 }

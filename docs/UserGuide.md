@@ -16,14 +16,17 @@ Note that it is user's own responsibility to check and ensure that the module co
 5. Type the commands in the command box and press Enter to execute it. E.g typing help and pressing Enter will open the help window.
 
 Some example commands you can try:
-- add : Adds a particular module to a Semester 
-- delete : Removes a particular module from a semester 
-- view : View all modules taken for a particular semester 
-- mcs : View total Modular credits for a particular semester 
-- find : Finds any module information
-- check : Check eligibility for SEP/NOC
-- help: returns the command summary
-- exit:  Exits the app
+* Add a Module : add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE
+* Delete a module : delete m/MODULE_CODE
+* View modules in a semester : view s/YEAR_NUMBER_SEMESTER_NUMBER
+* View all modules taken : view all
+* Clears modules in a semesters : clear s/YEAR_NUMBER_SEMESTER_NUMBER
+* Clears all modules taken : clear all
+* Calculate MCs taken : mcs s/YEAR_NUMBER_SEMESTER_NUMBER
+* Finds module information : find <KEYWORD>
+* Checks for SEP/NOC program eligibility : check <PROGRAM>
+* Overview of your Plan (MCs, CAP, Eligibility) : overview
+* Exits the App : exit
 
 ## Features 
 
@@ -46,6 +49,7 @@ Input : `add m/CS2111 s/Y2S1 mc/4 g/b+`
 Output:
 ```
 ----------------------------------------
+
 CS2111 has been added to Y2S1 as completed
 ----------------------------------------
 ```
@@ -55,6 +59,7 @@ Input : `add m/CS2112 s/Y2S1 mc/4 g/-`
 Output:
 ```
 ----------------------------------------
+
 CS2112 has been added to Y2S1 as incomplete!
 ----------------------------------------
 ```
@@ -64,6 +69,7 @@ Input : `add m/CS2113 s/Y2S1 mc/4 g/S`
 Output:
 ```
 ----------------------------------------
+
 CS2113 has been added to Y2S1 as completed
 ----------------------------------------
 ```
@@ -73,6 +79,7 @@ Input : `add m/CS2113 s/Y2S1 mc/4 g/S`
 Output:
 ```
 ----------------------------------------
+
 This CS2113 module is already in your plan.
 Choose another module to add or delete the one in the plan and add it again.
 ----------------------------------------
@@ -90,6 +97,7 @@ Input : `delete m/CS2113`
 Output:
 ```
 ----------------------------------------
+
 CS2113 has been deleted from your plan
 ----------------------------------------
 ```
@@ -99,7 +107,8 @@ Input: `delete m/cs1111`
 Output:
 ```
 ----------------------------------------
-The module CSS213 is not found in your plan!!
+
+The module CS1111 is not found in your plan!!
 Please add the module first before you want to delete.
 ----------------------------------------
 ```
@@ -117,6 +126,7 @@ Input : `view s/Y2S1`
 Output:
 ```
 ----------------------------------------
+
 These are your mods for Y2S1
 1. CS2112 Y2S1 - 4
 2. CS2111 Y2S1 B+ 4
@@ -129,15 +139,19 @@ Input: `view s/y1s1`
 Output:
 ```
 ----------------------------------------
+
 There is no module allocated in Y1S1!!
 ----------------------------------------
 ```
+
+###### Format of input: `view all`
 
 Input: `view all`
 
 Output: 
 ```
 ----------------------------------------
+
 These are your module(s) for Y1S1
 1. CS1010 Y1S1 A 4
 These are your module(s) for Y2S1
@@ -146,8 +160,35 @@ These are your module(s) for Y2S1
 ----------------------------------------
 ```
 
+### Feature #4 : Clears all modules in a semester - clear
 
-### Feature #4 : View modular credits taken in a semester - mcs
+This clears modules in a particular semester or all semesters.
+
+###### Format of input: `clear s/YEAR_NUMBER_SEMESTER_NUMBER`
+
+#### Example of Input and Output:
+Input : `clear s/Y2S1`
+
+Output:
+```
+----------------------------------------
+
+Successfully cleared all modules for Y2S1.
+----------------------------------------
+```
+###### Format of input: `clear all`
+
+Input: `clear all`
+
+Output:
+```
+----------------------------------------
+
+Successfully cleared all modules in your plan!
+----------------------------------------
+```
+
+### Feature #5 : View modular credits taken in a semester - mcs
 
 This allows the student to view their MCs taken for the semester
 
@@ -159,13 +200,16 @@ Input : `mcs s/Y2S2`
 Output:
 ```
 ----------------------------------------
+
 You have 4 mcs for Y2S1
 ----------------------------------------
 ```
 
-### Feature #5 : Find module information - find
+### Feature #6 : Find module information - find
 
-Find module information from added modules.
+This feature can be used to find module information 
+from added modules. They keyword can be from module code, semester, mcs, or grade. 
+Even partial keywords can be entered. 
 
 ###### Format of input: `find <KEYWORD>`
 
@@ -175,8 +219,9 @@ Input : `find cs2113`
 Output:
 ```
 ----------------------------------------
+
 These are your matching modules:
-1. CS2112 Y2S1 - 4
+1. CS2113 Y2S1 - 4
 ----------------------------------------
 ```
 
@@ -185,6 +230,7 @@ Input : `find a`
 Output:
 ```
 ----------------------------------------
+
 These are your matching modules:
 1. CS2113 Y2S1 A 4
 ----------------------------------------
@@ -195,6 +241,7 @@ Input : `find 4`
 Output:
 ```
 ----------------------------------------
+
 These are your matching modules:
 1. CS2114 Y2S1 - 4
 ----------------------------------------
@@ -205,12 +252,13 @@ Input : `find y2s2`
 Output:
 ```
 ----------------------------------------
+
 These are your matching modules:
 1. CS2002 Y2S2 B+ 4
 ----------------------------------------
 ```
 
-### Feature #6 : Checks eligibility for NOC/SEP - check
+### Feature #7 : Checks eligibility for NOC/SEP - check
 
 Checks whether the user is eligible for SEP or NOC
 
@@ -219,23 +267,82 @@ Checks whether the user is eligible for SEP or NOC
 #### Example of Input and Output:
 Input : `check NOC`
 
-Output:
+Output 1 - When eligible for NOC:
 ```
 ----------------------------------------
-You are ineligible for NOC!
+
+You are eligible for NOC!
+----------------------------------------
+```
+
+Output 2 - When ineligible for NOC:
+```
+----------------------------------------
+
+Sorry, You are ineligible for NOC.
+
+These may be possible reasons for ineligibility:
+ * You have yet to complete 4 semesters of study
+ * You are currently in your final academic semester
+ * You have yet to obtain more than 70MC
 ----------------------------------------
 ```
 
 Input : `check SEP`
 
-Output:
+Output 1 - When eligible for SEP:
 ```
 ----------------------------------------
+
 You are eligible for SEP!
 ----------------------------------------
 ```
 
-### Feature #7 : Exits the program - exit
+Output 2 - When ineligible for SEP:
+```
+----------------------------------------
+
+Sorry, You are ineligible for SEP.
+
+These may be possible reasons for ineligibility:
+ * You have yet to complete 2 semesters of study
+ * You are currently in your final year
+ * Your CAP is below 3.0
+----------------------------------------
+```
+
+### Feature #8 : Gets an overview of Student Profile - overview
+
+View MCs taken, CAP, Graduation fulfillment and eligibility for SEP and NOC.
+
+###### Format of input: `overview`
+
+#### Example of Input and Output:
+Input : `overview`
+
+Output :
+```
+----------------------------------------
+
+Here’s an overview of your Profile:
+
+* Current Semester: Y2S1
+
+* Total MCs completed : 8
+* Total Graded MCs : 4
+* Total Ungraded (-) MCs : 0
+* Total S/U MCs : 4
+
+* Cumulative Average Point (CAP) : 4.00
+
+* MCs Needed needed for graduation : 152
+
+* Eligibility for NOC : No
+* Eligibility for SEP : Yes
+----------------------------------------
+```
+
+### Feature #9 : Exits the program - exit
 
 Exits the program
 
@@ -255,7 +362,9 @@ Thank you for using PlanIt!
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: After you use our application, your data is stored in a file called "data.txt" which is in the 
+same directory as the application file. You can just transfer this file to another computer and save it in the
+same directory as your application. It will transfer all the information in the program running on the other computer.
 
 **Q**: What if I forget how to use PlanIt?
 
@@ -263,12 +372,14 @@ Thank you for using PlanIt!
 
 ## Command Summary
 
-* Add module `add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE`
-* Deletes module `delete m/MODULE_CODE`
-* View modules `view s/YEAR_NUMBER_SEMESTER_NUMBER`
-* View all modules `view all`
-* Calculate MCs `mcs s/YEAR_NUMBER_SEMESTER_NUMBER`
-* Finds module information `find <KEYWORD>`
-* Checks for program eligibility `check <PROGRAM>`
-* Help `help`
-* Exits the App `exit`
+* Add a Module : `add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE`
+* Delete a module : `delete m/MODULE_CODE`
+* View modules in a semester : `view s/YEAR_NUMBER_SEMESTER_NUMBER`
+* View all modules taken : `view all`
+* Clears modules in a semesters : `clear s/YEAR_NUMBER_SEMESTER_NUMBER`
+* Clears all modules taken : `clear all`
+* Calculate MCs taken : `mcs s/YEAR_NUMBER_SEMESTER_NUMBER`
+* Finds module information : `find <KEYWORD>`
+* Checks for SEP/NOC program eligibility : `check <PROGRAM>`
+* Overview of your Plan (MCs, CAP, Eligibility) : `overview`
+* Exits the App : `exit`

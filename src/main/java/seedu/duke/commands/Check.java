@@ -6,15 +6,14 @@ import seedu.duke.UI;
 import seedu.duke.exceptions.InvalidInputContentException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Check extends Command {
     public static int MC_MINIMUM_NOC = 70;
     public static int SEMESTER_MINIMUM_NOC = 4;
-    public static int SEMESTER_MAXIMUM_NOC = 8;
+    public static int SEMESTER_MAXIMUM_NOC = 7;
     public static double CAP_MINIMUM_SEP = 3.0;
     public static int SEMESTER_MINIMUM_SEP = 2;
-    public static int SEMESTER_MAXIMUM_SEP = 7;
+    public static int SEMESTER_MAXIMUM_SEP = 6;
     private ArrayList<Module> modules = ModuleList.modules;
     private String type;
 
@@ -33,40 +32,51 @@ public class Check extends Command {
             throw new InvalidInputContentException();
         }
     }
+    public Check() {
+
+    }
 
     @Override
     public void execute(ModuleList moduleList) {
         if (type.equals("NOC")) {
             //obtained >70 MCs, completed four semesters of study and not in last semester
             if (checkNOC()) {
-                UI.NOCEligibleMessage();
+                UI.nocEligibleMessage();
             } else {
-                UI.NOCIneligibleMessage();
+                UI.nocIneligibleMessage();
             }
         } else if (type.equals("SEP")) {
             //completed two semesters of study, cap above 3.0 and not in last year
             if (checkSEP()) {
-                UI.SEPEligibleMessage();
+                UI.sepEligibleMessage();
             } else {
-                UI.SEPIneligibleMessage();
+                UI.sepIneligibleMessage();
             }
         }
     }
 
     /**
-     * Function to find the current semester the user is on depending on the grade of the modules.
-     * @return the semesters which have modules completed.
+     * Function to find the current semester based on the latest graded semester
+     * @return latest graded semester
      */
     public int findCurrentSemester() {
-        List<String> semesters = new ArrayList<>();
+        int latestGradedSemester = 1;
         for (Module mod: modules) {
-            String semesterTaken = mod.getSemesterTaken();
-            if (!mod.getGrade().matches("-") && !semesters.contains(semesterTaken)) {
-                semesters.add(mod.getSemesterTaken());
+            if(!(mod.getGrade().equals("-")) && (convertSemToNum(mod.getSemesterTaken()) >= latestGradedSemester)) {
+                latestGradedSemester = convertSemToNum(mod.getSemesterTaken());
             }
         }
-        return semesters.size();
+        return latestGradedSemester;
     }
+
+    /**
+     * Function to find the current semester based on the latest graded semester
+     * @return latest graded semester
+     */
+    public String findCurrentSemesterInString() {
+        return convertNumToSem(findCurrentSemester());
+    }
+
 
     /**
      * Function to check if the user is eligible for NOC
@@ -82,7 +92,7 @@ public class Check extends Command {
      */
     public boolean checkNOCSem() {
         int currentSemester = findCurrentSemester();
-        return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC) ;
+        return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC);
     }
 
     /**
@@ -113,16 +123,9 @@ public class Check extends Command {
      * @return true if fulfilled, false otherwise
      */
     public boolean checkSEPCAP() {
-        double totalCAP = 0;
-        int currentSemester = findCurrentSemester();
-        for (Module mod: modules) {
-            int semesterTaken = convertSem(mod.getSemesterTaken());
-            if (currentSemester > semesterTaken) {
-                double CAP = convertCAP(mod.getGrade());
-                totalCAP += CAP;
-            }
-        }
-        return totalCAP >= CAP_MINIMUM_SEP;
+        ModuleList ml = new ModuleList(modules);
+        double cap = ml.calculateCap();
+        return cap >= CAP_MINIMUM_SEP;
     }
 
     /**
@@ -139,7 +142,7 @@ public class Check extends Command {
      * @param semester the semester of a module  Format: String
      * @return the semester in the form of an integer
      */
-    private static int convertSem(String semester) {
+    private static int convertSemToNum(String semester) {
         switch (semester) {
         case "Y1S1":
             return 1;
@@ -163,32 +166,30 @@ public class Check extends Command {
     }
 
     /**
-     * Function to convert a letter grade into CAP
-     * @param grade The letter grade of a module. Format: String
-     * @return The equivalent CAP of the module.
+     * Function to convert semester as a Number back to String
+     * @param semesterNumber the semester of a module  Format: int
+     * @return the semester in the form of a String
      */
-    private static double convertCAP(String grade) {
-        switch (grade) {
-        case "F":
-            return 0.0;
-        case "D":
-            return 1.0;
-        case "D+":
-            return 1.5;
-        case "C":
-            return 2.0;
-        case "C+":
-            return 2.5;
-        case "B-":
-            return 3.0;
-        case "B":
-            return 3.5;
-        case "B+":
-            return 4.0;
-        case "A-":
-            return 4.5;
-        default:
-            return 5.0;
+    private static String convertNumToSem(int semesterNumber) {
+        switch (semesterNumber) {
+            case 1:
+                return "Y1S1";
+            case 2:
+                return "Y1S2";
+            case 3:
+                return "Y2S1";
+            case 4:
+                return "Y2S2";
+            case 5:
+                return "Y3S1";
+            case 6:
+                return "Y3S2";
+            case 7:
+                return "Y4S1";
+            case 8:
+                return "Y4S2";
+            default:
+                return "Y1S1";
         }
     }
 }
