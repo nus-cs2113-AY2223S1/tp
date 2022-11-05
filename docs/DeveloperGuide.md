@@ -533,16 +533,22 @@ ___
 
 ## Appendix C: Non-Functional Requirements
 1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
-2. The system should respond to the user input within 2 seconds.
-3. The system adheres to stict user input formatting to prevent corruption of data.
-4. The system is programmed to recognise only English text. Any other language might not be recognised by the program.
-5. The system stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
-6. This system is contrained under a single user. Multiple users are not supported
+2. The application should respond to the user input within 2 seconds.
+3. The application adheres to stict user input formatting to prevent corruption of data.
+4. The application is programmed to recognise only English text. Any other language might not be recognised by the program.
+5. The application stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
+6. This application is contrained under a single user. Multiple users are not supported
 
 ---
 ## Appendix D: Glossary
 
 * *client* - Person who is seeking for property to rent
+* *unit type* - Type of housing in Singapore (HDB, Condominium, Bungalow, etc)
+* *pairing* - If a client and property is paired, it implies that the client will be renting that property.
+* *unpair* - If a client and property is unpaired, it implies that the client is no longer renting any property.
+* *ui* - User Interface which is responsible for any interactions (read input / print messages) between application and user.
+* *storage* - Made up of plain text files storing client/property records.
+
 
 ---
 ## Appendix E: Instructions for Manual Testing
