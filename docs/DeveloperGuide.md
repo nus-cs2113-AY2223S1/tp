@@ -109,12 +109,14 @@ specified index
 * `dosage` 
 * `isActive` - Whether is the prescription currently active or not
 
-How adding a new prescription into the list works:
+#### Adding a new prescription
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
-2. The new prescription is then added to the `ArrayList<Prescription>`
-3. Lastly, `UI` prints an acknowledge message of what the new prescription has.
+2. If the new prescription has no duplicates in the `prescriptionList`, then it is then added to the list. And
+`UI` prints an acknowledgement message of what the new prescription has.
+3. Else, `UI` prints a message that the prescription is already existing, and print the details of the existing 
+prescription.
 
 ![](images/PrescriptionListAdd.png)
 
