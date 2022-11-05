@@ -16,57 +16,56 @@
       - [3.2.1 Module Loader](#321-module-loader)
       - [3.2.2 Timetable](#322-timetable)
     - [3.3 Parser Component](#33-parser-component)
-      - [How the feature is implemented](#331-how-the-feature-is-implemented)
-      - [Why it is implemented this way](#332-why-it-is-implemented-this-way)
-      - [Alternatives considered](#333-alternatives-considered)
+      - [3.3.1 How the feature is implemented](#331-how-the-feature-is-implemented)
+      - [3.3.2 Why it is implemented this way](#332-why-it-is-implemented-this-way)
+      - [3.3.3 Alternatives considered](#333-alternatives-considered)
     - [3.4 Command Component](#34-command-component)
       - [3.4.1 AddModuleCommand](#341-addmodulecommand)
-        - [How the feature is implemented](#3411-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3412-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3413-alternatives-considered)
-      - [3.4.2 DeleteModuleCommand](#342-deletemodulecommand)
-        - [How the feature is implemented](#3421-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3422-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3423-alternatives-considered)
+        - [3.4.1.1 How the feature is implemented](#3411-how-the-feature-is-implemented)
+        - [3.4.1.2 Why it is implemented this way](#3412-why-it-is-implemented-this-way)
+        - [3.4.1.3 Alternatives considered](#3413-alternatives-considered)
+      - [3.4.2 RemoveModuleCommand](#342-removemodulecommand)
+        - [3.4.2.1 How the feature is implemented](#3421-how-the-feature-is-implemented)
+        - [3.4.2.2 Why it is implemented this way](#3422-why-it-is-implemented-this-way)
+        - [3.4.2.3 Alternatives considered](#3423-alternatives-considered)
       - [3.4.3 HelpCommand](#343-helpcommand)
-        - [How the feature is implemented](#3431-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3432-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3433-alternatives-considered)
+        - [3.4.3.1 How the feature is implemented](#3431-how-the-feature-is-implemented)
+        - [3.4.3.2 Why it is implemented this way](#3432-why-it-is-implemented-this-way)
+        - [3.4.3.3 Alternatives considered](#3433-alternatives-considered)
       - [3.4.4 SearchModuleCommand](#344-searchmodulecommand)
-        - [How the feature is implemented](#3441-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3442-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3443-alternatives-considered)
-      - [3.4.5 SelectCommand](#345-selectslotcommand)
+        - [3.4.4.1 How the feature is implemented](#3441-how-the-feature-is-implemented)
+        - [3.4.4.2 Why it is implemented this way](#3442-why-it-is-implemented-this-way)
+        - [3.4.4.3 Alternatives considered](#3443-alternatives-considered)
+      - [3.4.5 SelectSlotCommand](#345-selectslotcommand)
       - [3.4.6 SelectSemesterCommand](#346-selectsemestercommand)
       - [3.4.7 InfoCommand](#347-infocommand)
-        - [How the feature is implemented](#3471-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3472-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3473-alternatives-considered)
+        - [3.4.7.1 How the feature is implemented](#3471-how-the-feature-is-implemented)
+        - [3.4.7.2 Why it is implemented this way](#3472-why-it-is-implemented-this-way)
+        - [3.4.7.3 Alternatives considered](#3473-alternatives-considered)
       - [3.4.8 TimetableCommand](#348-timetablecommand)
-        - [How the feature is implemented](#3481-how-the-feature-is-implemented)
-        - [Why it is implemented this way](#3482-why-it-is-implemented-this-way)
+        - [3.4.8.1 How the feature is implemented](#3481-how-the-feature-is-implemented)
+        - [3.4.8.2 Why it is implemented this way](#3482-why-it-is-implemented-this-way)
       - [3.4.9 ByeCommand](#349-byecommand)
       - [3.4.10 ListCommand](#3410-listcommand)
       - [3.4.11 ExportCommand](#3411-exportcommand)
       - [3.4.12 ImportCommand](#3412-importcommand)
     - [3.5 Utils Component](#35-utils-component)
       - [3.5.1 UI Component](#351-ui-component)
-        - [Why it is implemented this way](#3511-why-it-is-implemented-this-way)
-        - [Alternative Considered](#3512-alternative-considered)
+        - [3.5.1.1 Why it is implemented this way](#3511-why-it-is-implemented-this-way)
+        - [3.5.1.2 Alternative Considered](#3512-alternative-considered)
       - [3.5.2 Link Component](#352-link-component)
-        - [Why is it implemented this way](#3511-why-it-is-implemented-this-way)
-        - [Alternative Considered](#3512-alternative-considered)
+        - [3.5.2.1 Why is it implemented this way](#3521-why-is-it-implemented-this-way)
+        - [3.5.2.2 Alternative Considered](#3522-alternative-considered)
       - [3.5.3 Storage Component](#353-storage-component)
-        - [Why it is implemented this way](#3531-why-it-is-implemented-this-way)
-        - [Alternatives considered](#3532-alternatives-considered)
-  - [4. Implementation](#4-implementation)
-    - [Storage feature](#storage-feature)
-    - [Target user profile](#target-user-profile)
-    - [Value proposition](#value-proposition)
-  - [5. Documentation](#5-documentation)
-  - [6. Testing](#6-testing)
-    - [6.1. Running tests](#61-running-tests)
-    - [6.2 Instructions for manual testing](#62-instructions-for-manual-testing)
+        - [3.5.3.1 How the feature is implemented](#3531-how-the-feature-is-implemented)
+        - [3.5.3.2 Why it is implemented this way](#3532-why-it-is-implemented-this-way)
+        - [3.5.3.3 Alternatives considered](#3533-alternatives-considered)
+  - [4. Documentation](#4-documentation)
+  - [5. Testing](#5-testing)
+    - [5.1. Running tests](#51-running-tests)
+    - [5.2 Instructions for manual testing](#52-instructions-for-manual-testing)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
   - [Appendix A: Product scope](#appendix-a-product-scope)
   - [Appendix B: User Stories](#appendix-b-user-stories)
   - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
@@ -74,18 +73,12 @@
   - [Appendix E: Acknowledgements](#appendix-e-acknowledgements)
     - [Third-party libraries](#third-party-libraries)
 
-[Appendix A: Product Scope](#appendix-a-product-scope) <br>
-[Appendix B: User Stores](#appendix-b-user-stories) <br>
-[Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements) <br>
-[Appendix D: Glossary](#appendix-d-glossary) <br>
-[Appendix E: Acknowledgements](#appendix-e-acknowledgements) <br>
-
 ## 1. Introduction
 
 ### 1.1. Welcome!
 
 Welcome, and thank you for choosing to help contribute to Yet Another Module Organiser/ Manager!
-Yet Another Module Organizer and Manager (YAMOM) is an all-in-one desktop app featuring
+Yet Another Module Organiser and Manager (YAMOM) is an all-in-one desktop app featuring
 a full course catalogue, module search and timetable builder for the National University of Singapore, optimized for use via a Command Line Interface.
 
 This document intends to onboard developers onto YAMOM. We hope to bring you in to fix bugs, or even adding
@@ -168,7 +161,7 @@ It consists of the following classes:
 
 #### 3.2.1 Module Loader
 
-Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored at `src/main/resources/moduleFull.zip`. The data file is a ZIP file containing a JSON file. Zipping is used to minimize the application size. In exchange, the data file needs to be unzipped to read the module data, but this only happens once at the start of the application. JSON parsing in the `ModuleLoader` class is done using the Jackson Databind library.
+Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored at `src/main/resources/moduleFull.zip`. The data file is a ZIP file containing a JSON file. Zipping is used to minimize the application size. In exchange, the data file needs to be unzipped to read the module data, but this only happens once at the start of the application. JSON parsing in the `ModuleLoader` class is done using the [Jackson Databind library](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind).
 
 #### 3.2.2 Timetable
 
@@ -177,7 +170,7 @@ The `Timetable` class handles the logic of formatting a timetable, given a set o
 The sequence of steps to generate a timetable can be summarised as follows:
 
 1. Calculate the earliest and latest class. This will determine the height of the timetable.
-2. Check if any classes have overlapping timeslots. If so, generate a list of identation levels for the classes.
+2. Check if any classes have overlapping timeslots. If so, generate a list of indentation levels for the classes.
 3. Create a buffer, a 2D array of Strings, to store our output.
 4. Write the day labels and time labels to the buffer.
 5. For each class, draw the bounding box into the buffer and write the class codes into the buffer.
@@ -185,7 +178,6 @@ The sequence of steps to generate a timetable can be summarised as follows:
 ### 3.3 Parser Component
 
 ![Parser Class](images/parserClass.png)  
-
 
 The <code>Parser</code> component can:
 
@@ -195,13 +187,11 @@ This component also consists of `DayParser` and `LessonTypeParser` to help parse
 day and lesson info into programme-understood values.
 
 #### 3.3.1 How the feature is implemented
-
 The main function of the `Parser` component is `parse` which returns the correct command type
 based on the first word of the user input. It also consists of various helper functions for the different
-`Commmand` classes to validate if the user input is correct.
+`Command` classes to validate if the user input is correct.
 
 #### 3.3.2 Why it is implemented this way
-
 The `Parser` component should not know what is a valid command for the specific command type but instead
 can assist in parsing the user input to do data validation. It only carries out basic data validation to 
 check if the user input does not belong to any command type. This also makes it easier to add new commands 
@@ -230,7 +220,7 @@ more information about that command.
 | Command Word | Command Subclass                                      | Intended Outcome                                                   |
 |--------------|-------------------------------------------------------|--------------------------------------------------------------------|
 | `add`        | [`AddModuleCommand`](#341-addmodulecommand)           | Adds the user input module into their timetable.                   |
-| `remove`     | [`RemoveModuleCommand`](#342-deletemodulecommand)     | Removes the user input module from their timetable.                |
+| `remove`     | [`RemoveModuleCommand`](#342-removemodulecommand)     | Removes the user input module from their timetable.                |
 | `list`       | [`ListCommand`](#3410-listcommand)                    | Display all the module and slot selected by user                   |
 | `bye`        | [`ByeCommand`](#349-byecommand)                       | Exits the program.                                                 |
 | `export`     | [`ExportCommand`](#3411-exportcommand)                | Creates a portable NUSMod link to create their timetable on NUSMod |
@@ -272,14 +262,14 @@ The following sequence diagram shows how the undo operation works:
 Initially, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
 and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
-#### 3.4.2 DeleteModuleCommand
+#### 3.4.2 RemoveModuleCommand
 
-The <code>DeleteModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
+The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
 
 ##### 3.4.2.1 How the feature is implemented
-The `DeleteModuleCommand` class extends the `Command` class.
-Similar to `AddModuleCommand` class, the constructor `DeleteModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
+The `RemoveModuleCommand` class extends the `Command` class.
+Similar to `AddModuleCommand` class, the constructor `RemoveModuleCommand()` parses the user `input` module code `.toUpperCase()` as the format to fetch an
 instance of `module` from its class. Boolean `successful` field is used to flag successfully added modules in comparison
 to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
 It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
@@ -294,7 +284,7 @@ method extended from super class `Object` has been overridden to return `true` f
 
 ##### 3.4.2.3 Alternatives considered
 Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight coupling
-and improving cohesion, it was moved back under the `DeleteModuleCommand` class.
+and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
 
@@ -376,6 +366,7 @@ not know the exact module code, which is not very user-friendly and takes up a l
 details for 1 module.
 
 #### 3.4.8 TimetableCommand
+
 ![TimetableCommand](images/TimetableCommandClass.png)
 
 The <code>TimetableCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
@@ -391,18 +382,22 @@ To make use of the existing [Timetable](#322-timetable) class that has a nice fo
 to create duplicate code to fulfil similar needs as the timetable is needed by other components.
 
 #### 3.4.9 ByeCommand
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links. 
 
 #### 3.4.12 ImportCommand
+
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
 
@@ -432,21 +427,21 @@ Each component to handle the presentation of information to the user
 ![Link Class](images/linkClass.png)
 
 The <code>Link</code> component can:
-- create a [NUSmod](https://nusmods.com/) link to be used in a browser
-- Parse a NUSmod link to import modules into YAMOM
+- create a [NUSMod](https://nusmods.com/) link to be used in a browser
+- Parse a NUSMod link to import modules into YAMOM
 
 NUSMods export links are of the form:  
 https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO  
 The two useful segments are the SEMESTER_NUMBER and the MODULE_INFO.  
 
 ##### 3.5.2.1 Why is it implemented this way
-To separate out the handling of NUSmod compatibility.
+To separate out the handling of NUSMod compatibility.
 
 ##### 3.5.2.2 Alternative Considered
 To implement the handling of export in Storage class and import in Command class
 
 - Increase coupling between components
-- Decrease reusability of NUSmod link processing
+- Decrease reusability of NUSMod link processing
 
 #### 3.5.3 Storage Component
 
@@ -458,60 +453,115 @@ The <code>Storage</code> component can:
 - save to the hard disk
 
 Different checks have been implemented to ensure that even
-if the data file is modified in any way, it would not crash the programme.
-Data for the saved state will be overwritten each run of the application to prevent
-persistent data corruption and not require the user to manually edit the data file.
+if the data file is modified in any way, it would not crash the programme. The parts
+that are valid will be parsed while the rest are ignored. The data file is set to be hidden
+and read-only to discourage users from modifying the file although this can not prevent
+them from changing the file. Data for the saved state will be overwritten each run of the 
+application to prevent persistent data corruption and not require the user to manually 
+edit the data file.
 
-##### 3.5.3.1 Why it is implemented this way
-
-To facilitate easy transfer of information from NUSMods to YAMOM. NUSMods is currently 
-the most popular website used by NUS students to keep track of their timetable. This encourages
-users to swap to using YAYMOM.
-
-##### 3.5.3.2 Alternatives considered
-
-Storing as <code>.json</code> file
-
-- would have to implement another function for export/import function
-
-## 4. Implementation
-
-This section describes how key features of YAMOM are implemented in the latest release V1.0
-
-### Storage feature
-
+##### 3.5.3.1 How the feature is implemented
 !["Opening saved state"](images/storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
-to load previous state
+to load previous state. The state is also saved after every command to prevent data loss if the programme suddenly crashes.
+##### 3.5.3.2 Why it is implemented this way
+To facilitate easy transfer of information from NUSMods to YAMOM. NUSMods is currently 
+the most popular website used by NUS students to keep track of their timetable. This encourages
+users to swap to using YAMOM.
 
-### Target user profile
+##### 3.5.3.3 Alternatives considered
 
-<!-- {Describe the target user profile} -->
+Storing as <code>.json</code> file
+- would have to implement another function for export/import function
 
-### Value proposition
+Using the java preference API, `java.util.prefs.Preferences` to save user preferences
+- will not pass the github automated checkers
 
-<!-- {Describe the value proposition: what problem does it solve?} -->
-
-## 5. Documentation
+## 4. Documentation
 
 The following section describes how documentation for the project should be written. Note: documentation is all
 written in [GitHub-Flavoured Markdown](https://github.github.com/gfm/).
 
-## 6. Testing
+## 5. Testing
 
 The following section describes the testing methodologies followed in this project to ensure high-quality, bug-free
 code as far as possible.
 
-The more critical classes each has a test class which tests the various 
-functions implemented in those respective classes. 
+The more critical classes each has a test class which tests the various functions implemented in those respective classes. 
 
-### 6.1. Running tests
+### 5.1. Running tests
+
+#### 5.1.1. Input/Output re-direction.
+
+This method is used to simulate user input and to test the output of the program. This method was introduced in our 
+individual project and was used to test out the Duke main class. Similarly, this method is used in YAMOM. As simple as 
+it may seem, this method is very useful in testing the program as it allows us to test the program without having to 
+waste time typing in the commands manually. A simple file comparison is done to check if the output is as expected.
+
+#### 5.1.2. Unit testing
+
+Unit testing is done to test the individual functions of the classes. This is done to ensure that the functions are
+properly working in isolation. This is done by using the assertEquals/ assertTrue/ assertThrows method to check if 
+the works as expected. A sample of the unit testing is shown below.
+
+The filterModuleSearch method is tested to ensure that the correct number of  modules are returned when the user 
+searches for a module with different keywords. The assertEquals method is used to check if the number of modules
+returned is as expected.
+
+```
+  @Test
+  void filterModuleSearch_fullValidInputFields_expectCorrectNumberOfFilteredModule() {
+      String toSearchModuleCode = "dtk1234";
+      String toSearchModuleTitle = "Design Thinking";
+      Integer toSearchLevel = 1;
+      Integer toSearchSemester = 1;
+
+      List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+              toSearchSemester, toSearchModuleTitle);
+      int numberOfFilteredModulesInSearchResult = searchResult.size();
+      int expectedNumberOfFilteredModules = 2;
+      assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
+  }
+```
+
+#### 5.1.3. Regression testing
+
+Regression testing is done to ensure that the program is still working as expected after a change has been made. This 
+is being done by running gradlew /test and checking if the tests are still passing. This is done to ensure that the 
+newly added features do not break the previously existing features.
+
+#### 5.1.4. Developer testing
+
+Developer testing is done by the developer themselves to ensure that the program is working as expected. This is 
+particularly done when the developer is implementing a new feature. This is done by running the program and
+testing the various commands to ensure that the program is working as expected before committing the changes and 
+subsequently making a pull request.
+
+#### 5.1.5. Integration testing
+
+#### 5.1.6. System testing
 
 
-
-### 6.2 Instructions for manual testing
+### 5.2 Instructions for manual testing
 
 <!-- {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing} -->
+
+## Target user profile
+
+<!-- {Describe the target user profile} -->
+
+The target user that we have in mind is a student who is currently in NUS and is using NUSMods to plan their timetable.
+However, we want to make it easier for users that are comfortable using CLI. This would be a more efficient way and
+also less time-consuming for the user to plan their timetable. Most importantly, it is lightweight and does not require
+any internet connection to use.
+
+## Value proposition
+
+<!-- {Describe the value proposition: what problem does it solve?} -->
+
+Yet Another Module Organizer and Manager (YAMOM) is an all-in-one desktop app featuring a full course catalogue, module
+search and timetable builder for the National University of Singapore, optimized for use via a Command Line Interface
+(CLI). If you can type fast, YAMOM can get your timetable done faster than traditional GUI apps.
 
 ## Appendix A: Product scope
 
