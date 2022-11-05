@@ -67,6 +67,10 @@ public class Appointment {
         }
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public void addTaskToAppointment(Task task) {
         this.tasks.add(task);
     }

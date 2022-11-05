@@ -33,6 +33,10 @@ public class Employee {
         }
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }
