@@ -10,6 +10,8 @@ import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
 import seedu.duke.parsermanager.pairunpair.CommandPairParser;
 import seedu.duke.parsermanager.pairunpair.CommandUnpairParser;
+import seedu.duke.parsermanager.add.CommandAddClientParser;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
 import seedu.duke.parsermanager.find.CommandFindClientParser;
 import seedu.duke.parsermanager.find.CommandFindPropertyParser;
 
@@ -103,9 +105,9 @@ public class ParserManager {
         boolean isAddClient = subAddCommandType.equals(CLIENT_FLAG);
 
         if (isAddProperty) {
-            return new ParseAddProperty(addCommandDescription, propertyList);
+            return new CommandAddPropertyParser(addCommandDescription, propertyList);
         } else if (isAddClient) {
-            return new ParseAddClient(addCommandDescription, clientList);
+            return new CommandAddClientParser(addCommandDescription, clientList);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }

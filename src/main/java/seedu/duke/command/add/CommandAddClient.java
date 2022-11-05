@@ -1,6 +1,6 @@
 //@@author OVReader
 
-package seedu.duke.command;
+package seedu.duke.command.add;
 
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
@@ -21,7 +21,14 @@ public class CommandAddClient extends CommandAdd {
     private final String clientEmail;
     private final String clientBudgetPerMonth;
 
-    private static final Logger logger = Logger.getLogger("CommandAddClient");
+    private static final int CLIENT_NAME_INDEX = 0;
+    private static final int CLIENT_CONTACT_NUMBER_INDEX = 1;
+    private static final int CLIENT_EMAIL_INDEX = 2;
+    private static final int CLIENT_BUDGET_INDEX = 3;
+
+    private static final String COMMAND_ADD_CLIENT_LOGGING_LABEL = "CommandAddClient";
+    private static final Logger logger = Logger.getLogger(COMMAND_ADD_CLIENT_LOGGING_LABEL);
+    private static final String ADD_CLIENT_LOGGING_MESSAGE = "Adding new client now";
 
     /**
      * Constructs constructor for Command Add Client which stores client's name, contact number, email and budget/month.
@@ -33,21 +40,20 @@ public class CommandAddClient extends CommandAdd {
             assert clientDetail != null;
         }
 
-        this.clientName           = clientDetails.get(0);
-        this.clientContactNumber  = clientDetails.get(1);
-        this.clientEmail          = clientDetails.get(2);
-        this.clientBudgetPerMonth = clientDetails.get(3);
+        clientName           = clientDetails.get(CLIENT_NAME_INDEX);
+        clientContactNumber  = clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX);
+        clientEmail          = clientDetails.get(CLIENT_EMAIL_INDEX);
+        clientBudgetPerMonth = clientDetails.get(CLIENT_BUDGET_INDEX);
     }
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        logger.log(Level.FINEST, "Adding new client now");
+        logger.log(Level.FINEST, ADD_CLIENT_LOGGING_MESSAGE);
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
 
         // Updates Storage
-        storage.addToClientFile(this.clientName, this.clientContactNumber,
-                this.clientEmail, this.clientBudgetPerMonth);
+        storage.addToClientFile(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
     }
 }

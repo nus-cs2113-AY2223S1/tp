@@ -1,15 +1,15 @@
 @startuml
 
 
-abstract class "{abstract}\nParseAdd" as ParseAdd
-class ParseAddProperty
-class ParseAddClient
+abstract class "{abstract}\nCommandAddParser" as CommandAddParser
+class CommandAddPropertyParser
+class CommandAddClientParser
 
-ParseAdd <|-- ParseAddProperty
-ParseAdd <|-- ParseAddClient
+CommandAddParser <|-- CommandAddPropertyParser
+CommandAddParser <|-- CommandAddClientParser
 
 skinparam classAttributeIconSize 0
-abstract class ParseAdd {
+abstract class CommandAddParser {
 
 --
 # getFlagIndexPositions(commandDetail: String, flags: String[]): int[]
@@ -18,11 +18,11 @@ abstract class ParseAdd {
 }
 
 skinparam classAttributeIconSize 0
-class ParseAddProperty {
+class CommandAddPropertyParser {
 - commandDescription: String
 - propertyList: PropertyList
 --
-+ ParseAddProperty(addCommandDescription: String)
++ CommandAddPropertyParser(addCommandDescription: String)
 + parseCommand(): Command
 - checkForEmptyAddPropertyDetails(commandDetail: String)
 + processCommandAddPropertyDetails(rawCommandDetail: String): ArrayList<String>
@@ -40,11 +40,11 @@ class ParseAddProperty {
 }
 
 skinparam classAttributeIconSize 0
-class ParseAddClient {
+class CommandAddClientParser {
 - commandDescription: String
 - clientList: ClientList
 --
-+ ParseAddClient(addCommandDescription: String)
++ CommandAddClientParser(addCommandDescription: String)
 + parseCommand(): Command
 - checkForEmptyAddClientDetails(commandDetail: String)
 - processCommandAddClientDetails(rawCommandDetail: String): ArrayList<String>

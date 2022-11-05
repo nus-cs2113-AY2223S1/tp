@@ -1,14 +1,16 @@
 //@@author OVReader
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.add;
+
+import seedu.duke.parsermanager.Parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Parses input for add-type command.
+ * Parser for add-type command.
  */
-public abstract class ParseAdd extends Parser {
+public abstract class CommandAddParser extends Parser {
     protected static final int MISSING_FLAG_VALUE = -1;
 
     protected boolean checkForFlagPresence(int flagIndexPosition) {

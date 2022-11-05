@@ -1,6 +1,8 @@
 //@@author OVReader
 
-package seedu.duke.exception;
+package seedu.duke.exception.parseaddexception.parseaddpropertyexception;
+
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.ParseAddPropertyException;
 
 import static seedu.duke.Messages.MESSAGE_INVALID_PRICE_FORMAT;
 
