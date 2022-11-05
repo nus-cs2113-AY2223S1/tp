@@ -84,7 +84,7 @@ Usage:
 Output:
 ```
 Got it. I've added the following item to the list:
-        [Movie] inception Rating: 90.0 Genre: thriller Date watched:10-01-2020
+        [Movie] inception  Rating: 90.0  Genre: thriller  Date watched: 10-01-2020
 
         Now you have 1 reviews in the list.
 ```
@@ -105,13 +105,14 @@ Output:
 ---Here are the reviews in your list---
 
 Movies:
-1. [Movie]  inception  Rating:90.0 Genre: thriller Date watched:10-01-2020
-2. [Movie]  the notebook  Rating:98.0 Genre: romance Date watched:01-02-2019
-3. [Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
+1. [Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
+2. [Movie]  avengers  Rating: 99.0  Genre: action  Date watched: 30-01-2020
+3. [Movie]  cars  Rating: 92.0  Genre: animated  Date watched: 20-01-2020
 
 TV Shows:
-1. [TV Show]  titanic  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
-
+1. [TV Show]  game of thrones  Rating: 97.0  Genre: fantasy  Date watched:  10-01-2020   Site: hbo
+2. [TV Show]  rick and morty  Rating: 98.0  Genre: animated  Date watched:  30-01-2020   Site: amazon
+3. [TV Show]  the office  Rating: 99.0  Genre: comedy  Date watched:  20-01-2020   Site: disney
 ```
 
 ### Deleting a review: `delete`
@@ -175,12 +176,12 @@ Your list has been sorted by rating
 ---Here are the reviews in your list---
 
 Movies:
-1. [Movie]  interstellar  Rating:50.0 Genre: action Date watched:29-01-2000
-2. [Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
-3. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+1. [Movie]  avengers  Rating: 99.0  Genre: action  Date watched: 30-01-2020
+2. [Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
 
 TV Shows:
-1. [TV Show]  friends  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
+1. [TV Show]  the office  Rating: 99.0  Genre: comedy  Date watched: 20-01-2020  Site: disney
+2. [TV Show]  rick and morty  Rating: 98.0  Genre: animated  Date watched: 30-01-2020  Site: amazon
 ```
 
 ### Finding reviews: 'find'
@@ -199,7 +200,7 @@ Output:
 ---Here are the reviews that match the keyword---
 
 Movies:
-1. [Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+1. [Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
 
 TV Shows:
 ```
@@ -223,7 +224,7 @@ Usage:
 Output:
 ```
 The following review has been starred:
-[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
+[Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
 ```
 
 ### Listing favourite reviews: 'favourite list'
@@ -233,17 +234,30 @@ Displays the items in your review list that have been marked as favourite.
 
 Output:
 ```
-Your favourites are:
-[Movie]  inception  Rating:99.0 Genre: thriller Date watched:10-01-2020
-[Movie]  titanic  Rating:98.0 Genre: romance Date watched:01-02-2019
-[TV Show]  titanic  Rating:98.0 Genre: romance  Date watched:01-02-2019 Site:  netflix
-[Movie]  hey  Rating:50.0 Genre: action Date watched:29-01-2000
+You have 5 favourites in total.
+---Here are the reviews in your list---
+
+Movies:
+1. [Movie]  avengers  Rating: 99.0  Genre: action  Date watched: 30-01-2020
+2. [Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
+
+TV Shows:
+1. [TV Show]  the office  Rating: 99.0  Genre: comedy  Date watched: 20-01-2020  Site: disney
+2. [TV Show]  rick and morty  Rating: 98.0  Genre: animated  Date watched: 30-01-2020  Site: amazon
+3. [TV Show]  game of thrones  Rating: 97.0  Genre: fantasy  Date watched: 10-01-2020  Site: hbo
 ```
 
 ### Exiting the program: 'bye'
 Saves your review list to an external file and exits the program.
 
 **Format and usage**: `bye`
+
+Output:
+```
+---------------
+See you again!
+---------------
+```
 
 ## Command Summary
 

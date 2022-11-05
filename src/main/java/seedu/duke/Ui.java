@@ -52,6 +52,6 @@ public class Ui {
      * Prints exit greeting to user.
      */
     public void printExitGreeting() {
-        System.out.println("\n---------------\nSee you again!");
+        System.out.println("\n---------------\nSee you again!\n---------------");
     }
 }
