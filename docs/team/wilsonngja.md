@@ -42,7 +42,7 @@ Given below are my contributions to the project.
    - Changing the PairingList to take in Object as a key instead of a String (Pull Request: [#69](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/69))
    - Improve the consistency such that when a Client has been removed, the pairing will not be loaded. (Pull Request: [#58](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/58))
    - Increase the branch coverage for Find Client and Property to 61% (Pull Request: [#193](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/193))
-- 
+
 - **Documentation:**
 
   - User Guide:
