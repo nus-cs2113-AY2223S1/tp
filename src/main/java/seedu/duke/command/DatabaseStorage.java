@@ -42,13 +42,12 @@ public class DatabaseStorage {
             fileDir.mkdir();
         }
         File file = new File(FILE_PATH);
-        if (!file.exists()) {
-            file.createNewFile();
-            Path target = Path.of(FILE_PATH);
-            URL source = new URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
-            try (InputStream in = source.openStream()) {
-                Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
-            }
+
+        file.createNewFile();
+        Path target = Path.of(FILE_PATH);
+        URL source = new URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
+        try (InputStream in = source.openStream()) {
+            Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 
