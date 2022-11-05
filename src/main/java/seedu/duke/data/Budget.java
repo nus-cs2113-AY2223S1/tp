@@ -21,6 +21,7 @@ import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_HIGH;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_LOW;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
 import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_LOW;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_SPENT;
 
 //@@author wcwy
 
@@ -205,6 +206,9 @@ public class Budget {
         // Only used if budget has not exceeded
         boolean hasLeftLessThanHalfOfBudget = budgetLeft * 2 < budget;
 
+        // Used to display different message if user has not spent any money for that month
+        boolean hasSpentAnyBudget = budgetLeft < budget;
+
         /*
            A budget is said to have highly exceeded when the budget is exceeded more than twice of itself.
            Otherwise, a budget is not highly exceeded.
@@ -224,9 +228,15 @@ public class Budget {
             message += INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
         }
 
-        if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget) {
+        if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget && hasSpentAnyBudget) {
             message += INFO_BUDGET_NOT_EXCEEDED_LOW;
         }
+
+        if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget && !hasSpentAnyBudget) {
+            message += INFO_BUDGET_NOT_SPENT;
+        }
+
+
         return message;
     }
 
