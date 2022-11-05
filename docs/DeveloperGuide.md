@@ -330,18 +330,31 @@ validation to ensure no such stray data are presented to the user.
 ## 4 Product scope
 ### 4.1 Target user profile
 
-{Describe the target user profile}
+The target user that we have in mind is a driver who needs to find a carpark slot and wants to find the carpark 
+information so he knows where he can park. We want to make the data from LTA easier to read for users who are able to 
+use CLI. This would be a more efficient way for Singaporean drivers to be able to obtain information regarding their 
+desired carpark and also for them to be able to filter our carparks based on their addresses. Most importantly, it is 
+does not require any internet connection to use.
+
+
 
 ### 4.2 Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+parKING is a desktop app that helps Singaporean drivers find and filter out carpark information easily, and is optimized
+for use via a Command Line Interface (CLI).
+
 
 ## 5 User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                                  | So that I can ...                                        |
+|---------|------|----------------------------------------------------------------|----------------------------------------------------------|
+| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
+| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
+| v2.0    |Driver| Have favourites for each carpark                               | I can monitor carparks important to me                   |
+| v2.0    |Driver| Import my favourite carparks                                   | Import saved settings/preferences                        |
+| v2.0    |Driver| Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
+| v2.1    |Driver| Have at my carpark information be colour coordinated           | I can look at carparks information with ease             |
+
 
 ## 6 Non-Functional Requirements
 
