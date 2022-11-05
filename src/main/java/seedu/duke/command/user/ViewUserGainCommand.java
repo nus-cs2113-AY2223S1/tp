@@ -17,6 +17,8 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 // @@author jorellesee
 public class ViewUserGainCommand extends Command {
     private final String[] parts;
+    private static final String USER_ID_DELIMITER = "u";
+
     private final UserList userList;
     private final TransactionList transactionList;
 
@@ -42,7 +44,7 @@ public class ViewUserGainCommand extends Command {
     private String getArgsViewUserProfitCmd() throws InvalidArgumentException {
         String arg;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("u")) {
+        if (delimiter.equals(USER_ID_DELIMITER)) {
             arg = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
@@ -73,7 +75,7 @@ public class ViewUserGainCommand extends Command {
         if (isValidUser(userName)) {
             double totalProfit =
                     transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.printResponse("The profit of " + userName + " is: $" + totalProfit);
+            Ui.printResponse("The amount of money earned of " + userName + " is: $" + totalProfit);
         }
         return false;
     }

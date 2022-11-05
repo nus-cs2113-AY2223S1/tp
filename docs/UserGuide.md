@@ -267,7 +267,7 @@ Example of usage: ```view-user-loss /u jingwei```
 Expected outcome:
 ```
 ____________________________________________________________
-The debt of jingwei is: $2.5
+The amount of money loss of jingwei is: $2.5
 ____________________________________________________________
 ```
 
@@ -281,7 +281,7 @@ Example of usage: ```view-user-gain /u bui```
 Expected outcome:
 ```
 ____________________________________________________________
-The profit of bui is: $2.5
+The amount of money earned of bui is: $2.5
 ____________________________________________________________
 ```
 

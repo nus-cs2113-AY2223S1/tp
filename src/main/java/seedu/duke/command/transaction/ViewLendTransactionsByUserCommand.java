@@ -17,6 +17,8 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PAR
 public class ViewLendTransactionsByUserCommand extends Command {
 
     private final String[] parts;
+    private static final String USER_ID_DELIMITER = "u";
+
     private final TransactionList transactionList;
     private final UserList userList;
 
@@ -41,7 +43,7 @@ public class ViewLendTransactionsByUserCommand extends Command {
     private String getArgs() throws InvalidArgumentException {
         String args;
         String delimiter = CommandParser.getArgsDelimiter(parts[0]);
-        if (delimiter.equals("u")) {
+        if (delimiter.equals(USER_ID_DELIMITER)) {
             args = CommandParser.getArgValue(parts[0]);
         } else {
             throw new InvalidArgumentException(MESSAGE_INVALID_PARTS);
