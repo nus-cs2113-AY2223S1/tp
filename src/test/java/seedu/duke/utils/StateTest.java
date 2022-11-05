@@ -105,7 +105,6 @@ public class StateTest {
         assertNotNull(selectedModule1.getModule());
         assertNotNull(selectedModule2.getModule());
 
-        //list.add(selectedModule1);
         list.add(selectedModule2);
         assertNotNull(list);
         State state = new State();
