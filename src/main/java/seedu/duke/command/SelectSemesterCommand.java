@@ -17,6 +17,8 @@ public class SelectSemesterCommand extends Command {
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
 
+    private static final String ERROR_MISSING_SEMESTER = "Please enter a semester number from 1 to 4 inclusive!";
+
     private int updatedSemester;
 
     private Logger logger;
@@ -25,6 +27,9 @@ public class SelectSemesterCommand extends Command {
 
     public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
+        if (Parser.isOneWordCommand(input)) {
+            throw new YamomException(ERROR_MISSING_SEMESTER);
+        }
         if (!Parser.isValidSpecialTerm(input) && !Parser.isValidSemester(input)) {
             throw new YamomException(ERROR_WRONG_FORMAT + System.lineSeparator() + "Not a valid semester.");
         }

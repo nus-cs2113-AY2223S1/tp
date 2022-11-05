@@ -56,7 +56,7 @@ Total 2 module(s) found
 CS2113    Software Engineering & Object-Oriented Programming
 CS2113T   Software Engineering & Object-Oriented Programming
 
-To get full details of the module, type 'info <module code>'
+To get full details of the module, enter 'info [ MODULE_CODE ]'
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "add cs2113" ...
