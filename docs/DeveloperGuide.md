@@ -16,11 +16,11 @@
 * [Appendix C: Non Functional Requirement (NFR)](#appendix-c-non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d-glossary)
 * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
-* 
+
 ___
 ## Acknowledgements
 * [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
-* 
+
 ___
 ## Setting Up and Getting Started
 1. Ensure that you have Java 11 or above installed.
