@@ -94,13 +94,13 @@ public class Clear extends Command {
     private void checkOverallExceptionForClear(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 
-        try{
+        try {
             checkYear(semester);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        if(!errorMessage.equals("")){
+        if (!errorMessage.equals("")) {
             System.out.println("Unable to Clear modules in semester due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
@@ -112,8 +112,8 @@ public class Clear extends Command {
      * Ignores when requesting for "all" semester
      */
     public void checkYear(String semester) throws InvalidSemesterException {
-        if(!semester.equals("all")) {
-            if(invalidFormat(semester)) {
+        if (!semester.equals("all")) {
+            if (invalidFormat(semester)) {
                 throw new InvalidSemesterException();
             }
             if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {

@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.commands.*;
-import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
 
@@ -267,9 +265,9 @@ public class ModuleList {
     /**
      * Returns total MCs need to graduate
      */
-    public Integer McsForGraduation() {
-        Integer McsNeededForGraduation = 160;
-        return  McsNeededForGraduation - totalMcs() - totalUngradedMcs();
+    public Integer mcsForGraduation() {
+        Integer mcsNeededForGraduation = 160;
+        return  mcsNeededForGraduation - totalMcs() - totalUngradedMcs();
     }
 
     /**
@@ -280,7 +278,7 @@ public class ModuleList {
         for (Module mod: modules) {
             numerator += gradePoint(mod.getGrade()) * mod.getMcs();
         }
-        return numerator/totalGradedMcs();
+        return numerator / totalGradedMcs();
     }
 
     /**
@@ -331,7 +329,7 @@ public class ModuleList {
      * @param mod the existing module to be checked
      * @return true if mod contains the keyword specified in its field
      */
-    public boolean findMatch(String keyword, Module mod) {
+    public static boolean findMatch(String keyword, Module mod) {
         try {
             return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
                     mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
@@ -345,13 +343,18 @@ public class ModuleList {
      * @param keyword the word to search for in existing modules
      */
     public void find(String keyword) {
+        ArrayList<Module> matchingModules = findMatchingModules(keyword);
+        findMsg(matchingModules);
+    }
+
+    public static ArrayList<Module> findMatchingModules(String keyword) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         for (Module mod: modules) {
             if (findMatch(keyword, mod)) {
                 matchingModules.add(mod);
             }
         }
-        findMsg(matchingModules);
+        return matchingModules;
     }
 
     /**

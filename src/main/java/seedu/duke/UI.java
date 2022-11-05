@@ -207,7 +207,7 @@ public class UI {
         System.out.println("* Total Ungraded (-) MCs : " + moduleList.totalUngradedMcs());
         System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
         System.out.println("* Cumulative Average Point (CAP) : " + df.format(moduleList.calculateCap()) + "\n");
-        System.out.println("* MCs Needed needed for graduation : " + moduleList.McsForGraduation() + "\n");
+        System.out.println("* MCs Needed needed for graduation : " + moduleList.mcsForGraduation() + "\n");
         System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNOC() ? "Yes" : "No"));
         System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSEP() ? "Yes" : "No"));
 
