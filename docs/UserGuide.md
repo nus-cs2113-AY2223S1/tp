@@ -44,6 +44,16 @@ for timetable organization. YAMOM is designed for users who are proficient in Co
 5. You will receive a greeting if the application runs successfully.
 6. YAMOM will always start planning for semester 1 when the application is run.
 7. Data will be automatically saved after each command and persisted between runs of YAMOM.
+8. What to do next?
+   - First, ensure you are planning for the right [semester](#change-semester-to-plan-semester).
+   - Do you have an NUSMods share link to [import](#import-a-timetable-import)?
+   - If not, do you know what modules you want to add to your timetable? If so proceed to [add](#add-a-module-add) them to your timetable.
+   - Otherwise, you might want to [search](#search-for-modules-search) for your desired modules and find more [info](#read-more-details-about-a-module-info) about them.
+   - After you have added your modules, [select](#select-a-timetable-slot-select) your desired lecture/tutorial/lab/etc. slots. Not sure which slot to select? Head back to [info](#read-more-details-about-a-module-info) for any details you need.
+   - Once done, [list](#list-out-all-selected-modules-list) your selected modules to verify your choice and view your [timetable](#view-user-timetable-timetable).
+   - Added a module wrongly? No worries, just [remove](#remove-a-module-remove) it.
+   - Need your timetable on mobile? Mobile devices are typically not CLI friendly, so you have no choice but to [export](#export-current-timetable-export) your data back to NUSMods.
+   - If stuck or confused, remember [help](#seek-help-help) will always be given to those who ask for it. 
 
 
 ```
@@ -65,12 +75,13 @@ Sem [1] >>
 > - The first word of each command specifies the command type.
 > - Words in `UPPERCASE` information to be supplied by the user.
     e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
-> - Extraneous parameters will be rejected.
+> - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
-> - Parameters split by the pipe character `|` |  denotes either of the parameters can be used. Some commands support the usage of both parameters while some does not.
+> - Parameters split by the pipe character `|` denotes either of the parameters can be used. Some commands support the usage of both parameters while some does not.
 > - Named parameters starting with forward slash `/` such as `/module`, `/type` and `/code` in `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]` can appear in any order.
->   - Note: The parameter keyword has to come immediately after the forward slash `/`. E.g. `search /title cs` is accepted while `search / title cs` will not be accepted.
+> - Parameters must be separated by a space. For example, `search /title programming/code cs` will not give the desired result. The correct input should be `search /title programming /code cs`.
+> - The parameter keyword has to come immediately after the forward slash `/`. E.g. `search /title cs` is accepted while `search / title cs` will not be accepted.
 > - If a named parameter is provided multiple times, e.g. `search /title cs /title ma`, only one of the values will be used. It is not guaranteed which of the duplicates will be used. 
 > - The commands and parameters are case-insensitive. E.g. `search /code cs1` is the same as `SEARCH /CODE CS1`.
 
@@ -676,7 +687,7 @@ Selects a timeslot to be added to the user timetable.
 
 Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`
 
-* The `CLASS_NO` will be a number.
+* The `CLASS_NO` will be an alphanumeric String. This needs to be an exact match and is not case-sensitive. For example, if the code is `03`, then `/code 3` will not be accepted. Similarly, for code `T01`, `/code T1`, `/code 01` and `/code 1` will not be accepted, while `/code T01` and `/code t01` are valid.
 * The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
   *  TUTORIAL                   e.g. *tut, tutorial*
   *  TUTORIAL_TYPE_2            e.g. *tut2, tutorial2*
@@ -905,6 +916,7 @@ Alternatively, you can export the timetable, copy the link generated, and import
 | View timetable                   | <code>timetable < /fancy &#124; /simple ></code>                                                                  | `timetable`                                                           |
 | List selected modules            | `list`                                                                                                            | `list`                                                                |
 | Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                                         | `select /module CS1010 /type tutorial /code 1`                        |
+
 
 ## Credits
 
