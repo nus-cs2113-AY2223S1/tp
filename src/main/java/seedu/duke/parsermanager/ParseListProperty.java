@@ -13,31 +13,37 @@ import static seedu.duke.Messages.MESSAGE_INCORRECT_PROPERTY_LIST_FLAG;
 
 public class ParseListProperty extends Parser {
 
-    private final String commandFlags;
+    private final String commandTags;
 
     public ParseListProperty(String listPropertyCommandDescription) {
-        this.commandFlags = listPropertyCommandDescription;
+        this.commandTags = listPropertyCommandDescription;
     }
 
     @Override
     public Command parseCommand() throws IncorrectListFlagsException {
-        if (commandFlags.isEmpty()) {
+        if (commandTags.isEmpty()) {
             return new CommandListProperties();
-        } else if (isValidTag(commandFlags)) {
-            return new CommandListPropertiesWithTags(commandFlags);
+        } else if (isValidTag(commandTags)) {
+            return new CommandListPropertiesWithTags(commandTags);
         } else {
             throw new IncorrectListFlagsException(MESSAGE_INCORRECT_PROPERTY_LIST_FLAG);
         }
     }
 
-    boolean isValidTag(String commandFlags) {
-        switch (commandFlags) {
-        case CommandStructure.NAME_FLAG:
-            //deliberate fall through till SHORT_FLAG
-        case CommandStructure.ADDRESS_FLAG:
-        case CommandStructure.PRICE_FLAG:
-        case CommandStructure.TYPE_FLAG:
-        case CommandStructure.SHORT_FLAG:
+    /**
+     * Checks if the tags entered by the user are valid according to the UG.
+     * @param commandTags Stores any tags entered by the user
+     * @return true if the tags are valid. False otherwise
+     */
+
+    boolean isValidTag(String commandTags) {
+        switch (commandTags) {
+        case CommandStructure.NAME_TAG:
+            //deliberate fall through till SHORT_TAG
+        case CommandStructure.ADDRESS_TAG:
+        case CommandStructure.PRICE_TAG:
+        case CommandStructure.TYPE_TAG:
+        case CommandStructure.SHORT_TAG:
             return true;
             //break not needed as we are returning
         default:
