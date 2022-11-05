@@ -72,35 +72,35 @@ public class CommandParser {
             ModuleNotFoundException, InvalidModuleException, UniversityNotFoundException, InvalidCommentException {
         String[] userInputTokenized = parseUserCommand(userInput);
         if (isEmptyUserInput(userInputTokenized)) {
-            throw new InvalidUserCommandException("Error! Missing command. "
+            throw new InvalidUserCommandException("Error: Missing command. "
                     + "Please follow the command format provided");
         }
         String userInputCommand = userInputTokenized[COMMAND_INDEX];
         switch (userInputCommand) {
         case "/exit":
             if (!isValidExitCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid exit command. "
+                throw new InvalidUserCommandException("Error: Invalid exit command. "
                         + "Please follow the command format provided");
             }
             ExitCommand newExitCommand = new ExitCommand(userInputTokenized, CommandType.EXIT);
             return newExitCommand;
         case "/help":
             if (!isValidHelpCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid help command. "
+                throw new InvalidUserCommandException("Error: Invalid help command. "
                         + "Please follow the command format provided");
             }
             HelpCommand newHelpCommand = new HelpCommand(userInputTokenized, CommandType.HELP);
             return newHelpCommand;
         case "/create":
             if (!isValidCreateCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid create command. "
+                throw new InvalidUserCommandException("Error: Invalid create command. "
                         + "Please follow the command format provided");
             }
             CreateCommand newCreateCommand = new CreateCommand(userInputTokenized, CommandType.CREATE);
             return newCreateCommand;
         case "/add":
             if (!isValidAddCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid add command. "
+                throw new InvalidUserCommandException("Error: Invalid add command. "
                         + "Please follow the command format provided");
             }
             String comment = "";
@@ -113,14 +113,14 @@ public class CommandParser {
             return newAddCommand;
         case "/view":
             if (!isValidViewCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid view command. "
+                throw new InvalidUserCommandException("Error: Invalid view command. "
                         + "Please follow the command format provided");
             }
             ViewCommand newViewCommand = new ViewCommand(userInputTokenized, CommandType.VIEW);
             return newViewCommand;
         case "/delete":
             if (!isValidDeleteCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid delete command. "
+                throw new InvalidUserCommandException("Error: Invalid delete command. "
                         + "Please follow the command format provided");
             }
             boolean isDeleteModule = (userInputTokenized.length == THREE_PARAMETERS_LENGTH
@@ -131,20 +131,20 @@ public class CommandParser {
             return newDeleteCommand;
         case "/list":
             if (!isValidListCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid list command. "
+                throw new InvalidUserCommandException("Error: Invalid list command. "
                         + "Please follow the command format provided");
             }
             ListCommand newListCommand = new ListCommand(userInputTokenized, CommandType.LIST);
             return newListCommand;
         case "/favourite":
             if (!isValidFavouriteCommand(userInputTokenized)) {
-                throw new InvalidUserCommandException("Error! Invalid favourite command. "
+                throw new InvalidUserCommandException("Error: Invalid favourite command. "
                         + "Please follow the command format provided");
             }
             FavouriteCommand newFavouriteCommand = new FavouriteCommand(userInputTokenized, CommandType.FAVOURITE);
             return newFavouriteCommand;
         default:
-            throw new InvalidUserCommandException("Error! Unidentified command. "
+            throw new InvalidUserCommandException("Error: Unidentified command. "
                     + "Please follow the command format provided");
         }
     }

@@ -1,4 +1,5 @@
 @startuml
+
 hide circle
 skinparam classAttributeIconSize 0
 
@@ -7,8 +8,6 @@ class DatabaseStorage {
     {static} - readFile(String filePath) : void
     {static} - readDatabaseLine(String line) : String[]
     {static} - updateDatabase(String[] lineData) : void
-    {static} - updateUniversityDatabase(String partnerUniversityName, String partnerUniversityCountry) : void
-    {static} - updateModuleMappingDatabase(String partnerUniversityName, String partnerUniversityCountry, String parterUniversityModuleCode, String partnerUnviersityModuleTitle String partnerUniversityModuleCredit, String nusModuleCode, String nusModuleTitle, String nusModuleCredit) : void
 }
 
 class FileNotFoundException {

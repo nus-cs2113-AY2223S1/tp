@@ -134,20 +134,22 @@ public class Duke {
                                 userUniversityListManager);
                 }
             }
-        } catch (NoSuchElementException | TimetableNotFoundException e) {
+        } catch (NoSuchElementException | TimetableNotFoundException | UniversityNotFoundException
+                 | InvalidCommentException e) {
             Ui.printExceptionMessage(e);
         }
     }
 
     private static void executeDeleteComment(UserUniversityListManager userUniversityListManager,
-                                             DeleteCommand deleteCommand) throws InvalidUserCommandException {
+                                             DeleteCommand deleteCommand) throws InvalidUserCommandException,
+            UniversityNotFoundException, InvalidCommentException {
         if (deleteCommand.getChecker().equals("")) {
             String universityName = deleteCommand.getUniversityName();
             String moduleCode = deleteCommand.getModuleCode();
             userUniversityListManager.deleteComment(universityName, moduleCode);
         } else {
-            System.out.println("Error: Invalid delete comment command. "
-                    + "Please do not enter extra characters after note/");
+            throw new InvalidCommentException("Error: Invalid delete comment command\n"
+                    + "Please do not enter extra characters after note/\n");
         }
     }
 
@@ -165,7 +167,7 @@ public class Duke {
             userUniversityListManager.createList(createCommand.getUniversityName());
             UserStorageParser.storeInfoToUserStorageByUni(createCommand.getUniversityName(), userUniversityListManager);
         } else {
-            throw new UniversityNotFoundException("Error! " + createCommand.getUniversityName() + " does not exist "
+            throw new UniversityNotFoundException("Error: " + createCommand.getUniversityName() + " does not exist "
                     + "in database!");
         }
     }
@@ -240,14 +242,19 @@ public class Duke {
      * @throws InvalidUserCommandException if user provides invalid university name
      */
     private static void addComment(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
-            throws InvalidUserCommandException {
+            throws InvalidUserCommandException, UniversityNotFoundException {
         if (addCommand.getValidatedComment()) {
             String universityName = addCommand.getUniversityName();
             String moduleCode = addCommand.getModuleCode();
             String comment = addCommand.getComment();
             userUniversityListManager.updateComment(universityName, moduleCode, comment);
         } else {
-            System.out.println("Error! Invalid Comment");
+            if (!userUniversityListManager.containsKey(addCommand.getUniversityName())) {
+                throw new UniversityNotFoundException("Error: No list containing such university\n"
+                        + "Please create university and add relevant module before adding a comment");
+            } else {
+                System.out.println("Error: Invalid Comment");
+            }
         }
     }
 

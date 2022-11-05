@@ -1,0 +1,17 @@
+@startuml
+
+node "easySEP" {
+    [UI]
+    [Logic]
+    [UserStorage]
+    [DatabaseStorage]
+}
+
+[User] -> [UI]
+[Logic] <--> [UI]
+[Logic] <--> [UserStorage]
+[Logic] <--> [DatabaseStorage]
+[UserStorage] <--> [Save File]
+[DatabaseStorage] <-- [Database File]
+
+@enduml

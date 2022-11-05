@@ -1,6 +1,15 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Database;
+import seedu.duke.exceptions.InvalidUniversityException;
+import seedu.duke.exceptions.InvalidUserStorageFileException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
+import seedu.duke.exceptions.InvalidTimingException;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidTimeFormatException;
+import seedu.duke.exceptions.InvalidLessonDayException;
+
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.timetable.Lesson;
@@ -12,15 +21,6 @@ import seedu.duke.user.UserModuleMappingList;
 import seedu.duke.user.UserUniversityList;
 import seedu.duke.user.UserUniversityListManager;
 import seedu.duke.userstorage.UserStorage;
-
-import seedu.duke.exceptions.InvalidUserStorageFileException;
-import seedu.duke.exceptions.InvalidModuleException;
-import seedu.duke.exceptions.InvalidUniversityException;
-import seedu.duke.exceptions.InvalidLessonDayException;
-import seedu.duke.exceptions.InvalidTimeFormatException;
-import seedu.duke.exceptions.InvalidTimingException;
-import seedu.duke.exceptions.ModuleNotFoundException;
-import seedu.duke.exceptions.UniversityNotFoundException;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -58,7 +58,7 @@ public class UserStorageParser {
      * Method to convert university information to a string to store into the text file
      * @param uniName Partner university name
      * @param userUniversityListManager Lists of partner universities that user is interested in
-     * @return
+     * @return String to be saved in text file
      */
     private static String convertUniIntoFileContent(String uniName,
                                                    UserUniversityListManager userUniversityListManager) {
@@ -127,7 +127,7 @@ public class UserStorageParser {
             assert modules.size() > 0 : "at least one module in this university";
             output += module.getPuCode() + ";";
             if (!module.getComment().equals("") && module.getComment() != null) {
-                output += module.getComment() + ";";
+                output += module.getComment();
             }
             output += "%\n";
         }
@@ -171,6 +171,11 @@ public class UserStorageParser {
         String fileContent = UserStorage.loadFile(entry.getKey());
         String uniName = entry.getKey();
         String[] splitFileContent = fileContent.split("#");
+        if (splitFileContent.length > 2) {
+            deleteUserStorageByUni(uniName, true);
+            System.out.println("Invalid file format\n" + getDeleteMessage(uniName));
+            return;
+        }
         String fileContentForUniList = splitFileContent[0];
         if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
                 fileContentForUniList)) {
@@ -233,6 +238,7 @@ public class UserStorageParser {
                 String moduleCode = module.split(";")[0];
                 if (moduleCode.equals(lessonModuleCode)) {
                     isFound = true;
+                    break;
                 }
             }
             if (!isFound) {
@@ -442,11 +448,7 @@ public class UserStorageParser {
      *                    'F' otherwise
      */
     private static void setFavourite(UserUniversityList newUni, String isFavourite) {
-        if (isFavourite.equals("T")) {
-            newUni.setFavourite(true);
-        } else {
-            newUni.setFavourite(false);
-        }
+        newUni.setFavourite(isFavourite.equals("T"));
     }
 
     /**.
@@ -462,7 +464,7 @@ public class UserStorageParser {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
             if (!isValidModulesFormat(details)) {
-                throw new InvalidUserStorageFileException("Invalid file format");
+                throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(puName));
             }
             String moduleCode = details[0];
             ModuleMapping moduleMapping;
@@ -501,6 +503,6 @@ public class UserStorageParser {
      * @return true if it is a valid format
      */
     private static boolean isValidModulesFormat(String[] details) {
-        return details.length == 1 || details.length == 2;
+        return (details.length == 1 || details.length == 2) && !details[0].equals("");
     }
 }
