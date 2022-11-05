@@ -4,7 +4,7 @@ package seedu.duke.exception.pairunpair.unpair;
 import static seedu.duke.Messages.MESSAGE_NO_EXISTING_PAIR;
 
 /**
- * Represents the exception for when the user tries to unpair a client-property pair that has not been paired.
+ * Represents the exception for when the user tries to unpair a client and property that has not been paired.
  */
 public class NoExistingPairException extends CommandUnpairException {
 

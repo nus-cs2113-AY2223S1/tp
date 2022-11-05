@@ -9,8 +9,8 @@ import seedu.duke.exception.storageexception.InvalidPairingPropertyException;
 import seedu.duke.exception.storageexception.PairFileNotFoundException;
 import seedu.duke.exception.storageexception.PropertyFileNotFoundException;
 import seedu.duke.exception.storageexception.StorageException;
-import seedu.duke.parsermanager.ParseAddClient;
-import seedu.duke.parsermanager.ParseAddProperty;
+import seedu.duke.parsermanager.add.CommandAddClientParser;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
 
 
 import java.io.File;
@@ -107,6 +107,15 @@ public class Storage {
     private static final int PROPERTY_ADDRESS_INDEX = 1;
     private static final int PROPERTY_RENTAL_PRICE_INDEX = 2;
     private static final int PROPERTY_TYPE_INDEX = 3;
+
+    private static final int CLIENT_PARAMETER_INDEX = 0;
+    private static final int PROPERTY_PARAMETER_INDEX = 1;
+
+    private static final int CORRECT_CLIENT_LENGTH = 4;
+    private static final int CORRECT_PROPERTY_LENGTH = 4;
+
+    private static final int INCREMENT_BY_ONE = 1;
+    private static final int ONE_ERROR = 1;
 
     private static final Logger LOGGER = Logger.getLogger("Storage");
 
@@ -519,10 +528,10 @@ public class Storage {
             String[] pairingParameters = scanner.nextLine().split("\\s\\:\\s");
             boolean hasSplitCorrectly = pairingParameters.length == CORRECT_NUM_OF_PAIRING_ENTITIES;
             if (hasSplitCorrectly) {
-                String[] clientParameters = pairingParameters[0].split("\\s\\|\\s");
-                String[] propertyParameters = pairingParameters[1].split("\\s\\|\\s");
-                boolean hasCorrectClientLength = clientParameters.length == 4;
-                boolean hasCorrectPropertyLength = clientParameters.length == 4;
+                String[] clientParameters = pairingParameters[CLIENT_PARAMETER_INDEX].split("\\s\\|\\s");
+                String[] propertyParameters = pairingParameters[PROPERTY_PARAMETER_INDEX].split("\\s\\|\\s");
+                boolean hasCorrectClientLength = clientParameters.length == CORRECT_CLIENT_LENGTH;
+                boolean hasCorrectPropertyLength = clientParameters.length == CORRECT_PROPERTY_LENGTH;
                 boolean hasCorrectFormat = hasCorrectClientLength && hasCorrectPropertyLength;
 
 
@@ -553,8 +562,8 @@ public class Storage {
      * Outputs error message if it's the first error and ignore if it's already printed.
      */
     public void skipClientEntries() {
-        errorClientEntriesCount += 1;
-        if (errorClientEntriesCount == 1) {
+        errorClientEntriesCount += INCREMENT_BY_ONE;
+        if (errorClientEntriesCount == ONE_ERROR) {
             UI.showToUser(INVALID_CLIENT_FORMATTING);
         }
     }
@@ -576,8 +585,8 @@ public class Storage {
             checkClientValidity(description);
             clientList.addClient(clientName, clientContact, clientEmail, clientBudget);
         } catch (DukeParseException e) {
-            errorClientFormatCount += 1;
-            if (errorClientFormatCount == 1) {
+            errorClientFormatCount += INCREMENT_BY_ONE;
+            if (errorClientFormatCount == ONE_ERROR) {
                 UI.showToUser(INVALID_CLIENT_ENTRIES);
             }
         }
@@ -590,7 +599,7 @@ public class Storage {
      * @throws DukeParseException The exception in parsing that shows an error in the client.
      */
     public void checkClientValidity(String description) throws DukeParseException {
-        ParseAddClient parser = new ParseAddClient(description, clientList);
+        CommandAddClientParser parser = new CommandAddClientParser(description, clientList);
         ArrayList<String> clientDetails = parser.processCommandAddClientDetails(description);
         parser.validateClientDetails(clientDetails);
     }
@@ -600,8 +609,8 @@ public class Storage {
      * already been previously printed.
      */
     public void skipPropertyEntries() {
-        errorPropertyEntriesCount += 1;
-        if (errorPropertyEntriesCount == 1) {
+        errorPropertyEntriesCount += INCREMENT_BY_ONE;
+        if (errorPropertyEntriesCount == ONE_ERROR) {
             UI.showToUser(INVALID_PROPERTY_FORMATTING);
         }
     }
@@ -611,8 +620,8 @@ public class Storage {
      * already been previously printed.
      */
     public void skipPairingEntries() {
-        errorPairingEntriesCount += 1;
-        if (errorPairingEntriesCount == 1) {
+        errorPairingEntriesCount += INCREMENT_BY_ONE;
+        if (errorPairingEntriesCount == ONE_ERROR) {
             UI.showToUser(INVALID_PAIRING_FORMATTING);
         }
     }
@@ -633,8 +642,8 @@ public class Storage {
             checkPropertyValidity(description);
             propertyList.addProperty(landlordName, address, price, unitType);
         } catch (DukeException e) {
-            errorPropertyFormatCount += 1;
-            if (errorPropertyFormatCount == 1) {
+            errorPropertyFormatCount += INCREMENT_BY_ONE;
+            if (errorPropertyFormatCount == ONE_ERROR) {
                 UI.showToUser(INVALID_PROPERTY_ENTRIES);
             }
         }
@@ -647,7 +656,7 @@ public class Storage {
      * @throws DukeParseException The exception in parsing that shows an error in the property.
      */
     public void checkPropertyValidity(String description) throws DukeParseException {
-        ParseAddProperty parser = new ParseAddProperty(description, propertyList);
+        CommandAddPropertyParser parser = new CommandAddPropertyParser(description, propertyList);
         ArrayList<String> propertyDetails = parser.processCommandAddPropertyDetails(description);
         parser.validatePropertyDetails(propertyDetails);
     }
@@ -715,10 +724,10 @@ public class Storage {
      *              and will not be added to the pairing list.
      */
     public Client getPairingClient(String[] clientParameters) throws InvalidPairingClientException {
-        String clientName = clientParameters[0].replace(OPEN_BRACKET, EMPTY_STRING);
-        String clientContactNumber = clientParameters[1];
-        String clientEmail = clientParameters[2];
-        String clientBudget = clientParameters[3].replace(CLOSE_BRACKET, EMPTY_STRING);
+        String clientName = clientParameters[CLIENT_NAME_INDEX].replace(OPEN_BRACKET, EMPTY_STRING);
+        String clientContactNumber = clientParameters[CLIENT_CONTACT_INDEX];
+        String clientEmail = clientParameters[CLIENT_EMAIL_INDEX];
+        String clientBudget = clientParameters[CLIENT_BUDGET_INDEX].replace(CLOSE_BRACKET, EMPTY_STRING);
 
         Client pairingClient = null;
 
@@ -757,10 +766,10 @@ public class Storage {
      *              list and will not be added to the pairing list.
      */
     public Property getPairingProperty(String[] propertyParameters) throws InvalidPairingPropertyException {
-        String landlordName = propertyParameters[0].replace(OPEN_BRACKET,EMPTY_STRING);
-        String propertyAddress = propertyParameters[1];
-        String rentalPrice = propertyParameters[2];
-        String unitType = propertyParameters[3].replace(CLOSE_BRACKET,EMPTY_STRING);
+        String landlordName = propertyParameters[LANDLORD_NAME_INDEX].replace(OPEN_BRACKET,EMPTY_STRING);
+        String propertyAddress = propertyParameters[PROPERTY_ADDRESS_INDEX];
+        String rentalPrice = propertyParameters[PROPERTY_RENTAL_PRICE_INDEX];
+        String unitType = propertyParameters[PROPERTY_TYPE_INDEX].replace(CLOSE_BRACKET,EMPTY_STRING);
 
         Property pairingProperty = null;
 

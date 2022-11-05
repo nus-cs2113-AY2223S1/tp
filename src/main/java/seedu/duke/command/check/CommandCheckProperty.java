@@ -13,6 +13,8 @@ import seedu.duke.exception.check.checkproperty.CheckPropertyInvalidIndexExcepti
 
 import java.util.ArrayList;
 
+import static seedu.duke.CommandStructure.START_INDEX;
+
 /**
  * Represents a check property command.
  */
@@ -26,7 +28,7 @@ public class CommandCheckProperty extends CommandCheck {
      * @param commandCheckPropertyDetails Parsed property index from the user's input.
      */
     public CommandCheckProperty(ArrayList<Integer> commandCheckPropertyDetails) {
-        this.propertyIndex = commandCheckPropertyDetails.get(0);
+        this.propertyIndex = commandCheckPropertyDetails.get(START_INDEX);
     }
 
     /**
@@ -39,7 +41,7 @@ public class CommandCheckProperty extends CommandCheck {
 
         Property property = propertyList.getPropertyList().get(propertyIndex);
         ArrayList<Client> tenants = pairingList.getPropertyTenants(property);
-        ui.showCheckProperty(property, tenants);
+        ui.showCheckPropertyMessage(property, tenants);
     }
 
     /**
@@ -52,11 +54,12 @@ public class CommandCheckProperty extends CommandCheck {
      */
     protected void checkForPropertyListIndexOutOfBounds(int propertyIndex, PropertyList propertyList) throws
             CheckPropertyInvalidIndexException {
-        if (propertyIndex < 0 || propertyIndex > propertyList.getCurrentListSize() - 1) {
+
+        try {
+            Property dummyProperty = propertyList.getPropertyList().get(propertyIndex);
+        } catch (IndexOutOfBoundsException e) {
             throw new CheckPropertyInvalidIndexException();
         }
     }
-
-
 
 }

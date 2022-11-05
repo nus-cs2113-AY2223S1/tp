@@ -106,6 +106,7 @@ public class Ui {
 
     public void showPropertyAddedConfirmationMessage(PropertyList propertyList) {
         int currentListSize = propertyList.getCurrentListSize();
+        printNewline();
         showToUser(MESSAGE_PROPERTY_ADDED);
         showToUser("  " + propertyList.getPropertyList().get(currentListSize - 1));
         printNewline();
@@ -113,6 +114,7 @@ public class Ui {
 
     public void showClientAddedConfirmationMessage(ClientList clientList) {
         int currentListSize = clientList.getCurrentListSize();
+        printNewline();
         showToUser(MESSAGE_CLIENT_ADDED);
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
         printNewline();
@@ -234,7 +236,7 @@ public class Ui {
 
     public void displayOneClientName(Client client, int i) {
         System.out.print(i + FULL_STOP);
-        System.out.println(client.getClientName());
+        System.out.println(SPACE + client.getClientName());
         System.out.println(LINE_BREAK);
     }
 
@@ -362,7 +364,7 @@ public class Ui {
     //@@author
 
     //@@author ngdeqi
-    public void showCheckProperty(Property property, ArrayList<Client> tenants) {
+    public void showCheckPropertyMessage(Property property, ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY);
         showToUser(property.toString() + System.lineSeparator());
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);

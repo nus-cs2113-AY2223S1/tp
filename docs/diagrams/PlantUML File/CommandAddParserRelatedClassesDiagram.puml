@@ -1,0 +1,62 @@
+@startuml
+
+
+abstract class "{abstract}\nCommandAddParser" as CommandAddParser
+class CommandAddPropertyParser
+class CommandAddClientParser
+
+CommandAddParser <|-- CommandAddPropertyParser
+CommandAddParser <|-- CommandAddClientParser
+
+skinparam classAttributeIconSize 0
+abstract class CommandAddParser {
+
+--
+# getFlagIndexPositions(commandDetail: String, flags: String[]): int[]
+# checkForFlagPresence(flagIndexPosition: int): boolean
+# checkForDetailFormat(regex: String, detail: String): boolean
+}
+
+skinparam classAttributeIconSize 0
+class CommandAddPropertyParser {
+- commandDescription: String
+- propertyList: PropertyList
+--
++ CommandAddPropertyParser(addCommandDescription: String)
++ parseCommand(): Command
+- checkForEmptyAddPropertyDetails(commandDetail: String)
++ processCommandAddPropertyDetails(rawCommandDetail: String): ArrayList<String>
+- checkForMissingPropertyFlags(flagIndexPositions: int[]): void
+- checkPropertyFlagsOrder(flagIndexPositions: int[]): void
+- extractPropertyDetails(rawPropertyDetail: String, addPropertyFlagIndexPositions: int[]): ArrayList<String>
++ validatePropertyDetails(propertyDetails: ArrayList<String>): void
+- checkForValidSingaporeAddress(address: String): void
+- checkForValidSingaporeLandedPropertyAddress(address: String): boolean
+- checkForValidSingaporeBuildingAddress(address: String): boolean
+- checkForPriceNumberFormat(budget: String): void
+- checkForValidUnitType(unitTypeLabel: String): String
+- checkForValidAddressFormatUnitTypeMatching(address: String, unitType: String): void
+- checkForDuplicateProperty(propertyList: PropertyList, propertyAddress: String): void
+}
+
+skinparam classAttributeIconSize 0
+class CommandAddClientParser {
+- commandDescription: String
+- clientList: ClientList
+--
++ CommandAddClientParser(addCommandDescription: String)
++ parseCommand(): Command
+- checkForEmptyAddClientDetails(commandDetail: String)
+- processCommandAddClientDetails(rawCommandDetail: String): ArrayList<String>
+- checkForMissingClientFlags(flagIndexPositions: int[]): void
+- checkClientFlagsOrder(flagIndexPositions: int[]): void
+- extractClientDetails(rawClientDetail: String, addClientFlagIndexPositions: int[]): ArrayList<String>
+- validateClientDetails(clientDetails: ArrayList<String>): void
+- checkForValidSingaporeContactNumber(clientContactNumber: String): void
+- checkForValidEmail(clientEmail: String): void
+- checkForBudgetNumberFormat(budget: String): void
+- checkForDuplicateClient(clientList: ClientList, clientDetails: ArrayList<String>): void
+}
+
+
+@enduml

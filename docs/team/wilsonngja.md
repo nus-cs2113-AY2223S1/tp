@@ -16,6 +16,14 @@ Given below are my contributions to the project.
   - Justification: This feature allows filtering of entities. For example, if the user wants to look for all the properties in the list that is a 3 Room Flat, he/she could query for "HDB 3-Room", and all the 3 room flats will be displayed.
   - Highlights: This feature requires the placement of tags (f/) to segment the query text. Since it only accepts a single tag, there is a need to identify incorrect number of tag or incorrect tag itself.<br/><br/>
 
+- **New Feature:** Added a help function for user to refer to list of available commands
+
+  - What it does: When the user enter the `help` command, all the commands will be printed out for user to refer to.
+  - Justification: This feature allows the user to look for the commands they are unsure of without the need to navigate to the webpage to look at the User Guide, providing more convenience.<br/><br/>
+
+
+
+
 - **Code Contribution:** [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=wilsonngja&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 

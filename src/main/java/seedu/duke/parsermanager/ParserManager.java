@@ -2,15 +2,19 @@ package seedu.duke.parsermanager;
 
 //@@author wilsonngja
 import seedu.duke.ClientList;
-import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
-import seedu.duke.parsermanager.pairunpair.PairParser;
-import seedu.duke.parsermanager.pairunpair.UnpairParser;
+import seedu.duke.parsermanager.pairunpair.CommandPairParser;
+import seedu.duke.parsermanager.pairunpair.CommandUnpairParser;
+import seedu.duke.parsermanager.add.CommandAddClientParser;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
+import seedu.duke.parsermanager.find.CommandFindClientParser;
+import seedu.duke.parsermanager.find.CommandFindPropertyParser;
+
 
 import java.util.ArrayList;
 
@@ -68,10 +72,10 @@ public class ParserManager {
             parser = parseDeleteCommand(commandDetail);
             break;
         case COMMAND_PAIR:
-            parser = new PairParser(commandDetail);
+            parser = new CommandPairParser(commandDetail);
             break;
         case COMMAND_UNPAIR:
-            parser = new UnpairParser(commandDetail);
+            parser = new CommandUnpairParser(commandDetail);
             break;
         case COMMAND_CHECK:
             parser = parseCheckCommand(commandDetail);
@@ -101,9 +105,9 @@ public class ParserManager {
         boolean isAddClient = subAddCommandType.equals(CLIENT_FLAG);
 
         if (isAddProperty) {
-            return new ParseAddProperty(addCommandDescription, propertyList);
+            return new CommandAddPropertyParser(addCommandDescription, propertyList);
         } else if (isAddClient) {
-            return new ParseAddClient(addCommandDescription, clientList);
+            return new CommandAddClientParser(addCommandDescription, clientList);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }
@@ -137,7 +141,7 @@ public class ParserManager {
             return new ParseCheckClient(commandDetail, clientList);
         } else if (isProperty) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
-            return new ParseCheckProperty(commandDescription);
+            return new CommandCheckPropertyParser(commandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT
                     + MESSAGE_CHECK_PROPERTY_WRONG_FORMAT);
@@ -174,9 +178,9 @@ public class ParserManager {
 
         String findCommandDescription = findCommandTypeAndFlag.get(COMMAND_DESCRIPTION_INDEX);
         if (isFindClient) {
-            return new ParseFindClient(findCommandDescription);
+            return new CommandFindClientParser(findCommandDescription);
         } else if (isFindProperty) {
-            return new ParseFindProperty(findCommandDescription);
+            return new CommandFindPropertyParser(findCommandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }

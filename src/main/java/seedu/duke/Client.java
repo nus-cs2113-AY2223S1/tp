@@ -4,11 +4,12 @@ package seedu.duke;
  * Represents a client.
  */
 public class Client {
-    public static final String CLIENT_LABEL = "  Client: ";
-    public static final String CONTACT_NUMBER_LABEL = "  Contact Number: ";
-    public static final String EMAIL_LABEL = "  Email: ";
-    public static final String BUDGET_SGD_LABEL = "  Budget: SGD";
-    public static final String PER_MONTH_LABEL = "/month";
+    private static final String CLIENT_LABEL = "  Client: ";
+    private static final String CONTACT_NUMBER_LABEL = "  Contact Number: ";
+    private static final String EMAIL_LABEL = "  Email: ";
+    private static final String BUDGET_SGD_LABEL = "  Budget: SGD";
+    private static final String PER_MONTH_LABEL = "/month";
+
     private String clientName;
     private String clientContactNumber;
     private String clientEmail;
