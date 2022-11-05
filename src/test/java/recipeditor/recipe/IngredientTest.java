@@ -1,9 +1,57 @@
 package recipeditor.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import recipeditor.exception.ParseException;
+import recipeditor.ui.Ui;
 
 public class IngredientTest {
 
+    @Test
+    public void parseIngredient_success() {
+        String ingredient = "new ig/100.0/g";
+        try {
+            Ingredient parsedIngredient =  Ingredient.parsedIngredients(ingredient);
+            assertEquals("new ig", parsedIngredient.getName());
+            assertEquals(100.0, parsedIngredient.getAmount());
+            assertEquals("g", parsedIngredient.getUnit());
+        } catch (Exception e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void parseIngredient_emptyFields() {
+        String ingredient = "new ig/100.0/";
+        try {
+            Ingredient.parsedIngredients(ingredient);
+            assert false;
+        } catch (ParseException e) {
+            assertEquals(new ParseException(Ingredient.INGREDIENT_FORMAT).getMessage(), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseIngredient_wrongFormat_missingDivider() {
+        String ingredient = "new ig";
+        try {
+            Ingredient.parsedIngredients(ingredient);
+            assert false;
+        } catch (ParseException e) {
+            assertEquals(new ParseException(Ingredient.INGREDIENT_FORMAT).getMessage(), e.getMessage());
+        }
+    }
+
+    @Test
+    public void parseIngredient_wrongFormat_missingField() {
+        String ingredient = "new ig//";
+        try {
+            Ingredient.parsedIngredients(ingredient);
+            assert false;
+        } catch (ParseException e) {
+            assertEquals(new ParseException(Ingredient.INGREDIENT_FORMAT).getMessage(), e.getMessage());
+        }
+    }
 }

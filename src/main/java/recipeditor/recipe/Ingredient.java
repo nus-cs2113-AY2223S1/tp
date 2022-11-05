@@ -3,11 +3,12 @@ package recipeditor.recipe;
 import recipeditor.exception.ParseException;
 import recipeditor.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
 public class Ingredient {
     private static final String ERROR_PARSING = "Error Parsing Ingredients";
+    public static final String INGREDIENT_FORMAT = "Ingredient must follow format:"
+            + '\n' + "<name>/<amount in number>/<unit>";
+    public static final String EMPTY_INGREDIENT_FILEDS =
+            "Ingredient name and unit cannot be empty!";
     private static final String DIVIDER = "/";
     private static final int MAX_DIVIDES = 3;
     private String name;
@@ -20,31 +21,16 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public Ingredient() {
-    }
-
     public double getAmount() {
         return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getUnit() {
         return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 
     /**
@@ -54,14 +40,18 @@ public class Ingredient {
      * @return parsed ingredient
      * @throws ParseException the ingredient is of wrong format and cannot be parsed
      */
-    public static Ingredient parsedIngredients(String input) throws ParseException {
+    public static Ingredient parsedIngredients(String input) throws ParseException{
         String[] parsed = input.split(DIVIDER, MAX_DIVIDES);
         try {
             double amount = Double.parseDouble(parsed[1]);
+            if(parsed[0].replaceAll(" ","").equals("") ||
+                    parsed[2].replaceAll(" ","").equals("")) {
+                Ui.showMessage(EMPTY_INGREDIENT_FILEDS);
+                throw new ParseException(INGREDIENT_FORMAT);
+            }
             return new Ingredient(parsed[0], amount, parsed[2]);
         } catch (Exception e) {
-            Ui.showMessage(ERROR_PARSING);
-            throw new ParseException();
+            throw new ParseException(INGREDIENT_FORMAT);
         }
     }
 }
