@@ -733,10 +733,10 @@ ____________________________________________________________
 | Remove a user                      | remove-user /u [USERNAME]                                                                                  |
 | View a user                        | view-user /u [USERNAME]                                                                                    |
 | View a user's items                | view-user-items /u [USERNAME]                                                                              |
-| View a user's borrow transactions  | view-borrow-tx-by-user /k [KEYWORD]                                                                        |
-| View a user's lend transactions    | view-lend-tx-by-user /u [KEYWORD]                                                                          |
-| View a user's gain                 | view-user-gain /k [KEYWORD]                                                                                |
-| View a user's loss                 | view-user-loss /k [KEYWORD]                                                                                |
+| View a user's borrow transactions  | view-borrow-tx-by-user /u [USERNAME]                                                                       |
+| View a user's lend transactions    | view-lend-tx-by-user /u [USERNAME]                                                                         |
+| View a user's gain                 | view-user-gain /u [USERNAME]                                                                               |
+| View a user's loss                 | view-user-loss /u [USERNAME]                                                                               |
 | List all users                     | list-users                                                                                                 |
 | Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
 | __*Item-related features*__        |                                                                                                            |
