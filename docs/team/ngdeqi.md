@@ -42,7 +42,7 @@ Here are my contributions to the project:
         * General management for UG [\#195](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/195) [\#190](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/190) [\#125](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/125)
     * Developer Guide:
         * Added component and implementation details of the `pair` and `unpair` features [\#102](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/102)
-        * Created `style.puml` for the team [#/122](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/122)
+        * Created `style.puml` for the team [#\122](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/122)
         * General management for DG [\#195](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/195) [\#102](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/102/files)
 
 * **Community**:
