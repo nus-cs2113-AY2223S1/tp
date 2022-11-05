@@ -275,8 +275,6 @@ Step 3: FindUserCommand will check for the delimiter "/k". If it is not present,
 
 Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by Ui.printResponse.
 
-The following sequence diagram models the operation: PENDING DIAGRAM
-
 ### 4.1.7. View User Loss
 
 >This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
@@ -297,7 +295,7 @@ Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The money
 
 Step 7: The total User debt is printed by `Ui.printResponse()`.
 
-The following sequence diagram models the operation: PENDING DIAGRAM
+The following sequence diagram models the operation: ![](images/ViewUserLossCommand.png)
 
 ### 4.1.8. View User Gain
 
@@ -311,7 +309,7 @@ Step 2: Duke will receive the ```ViewUserGainCommand``` and execute it.
 
 Step 3: ViewUserGainCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
 
-Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
+Step 4: The UserList is iterated through to find the User with the given username. If none exist, a UserNotFoundException is thrown.
 
 Step 5: `getLendTransactionsByUser(username)` is run. The TransactionList is iterated through to find Transactions in which said User is the Lender. If User is Lender, the Transaction is added to a new TransactionList, which is then returned.
 
@@ -319,7 +317,7 @@ Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The money
 
 Step 7: The total User gain is printed by `Ui.printResponse()`.
 
-The following sequence diagram models the operation: PENDING
+The sequence diagram for this operation is nearly identical to that of ViewUserLoss, except that Transactions in which the User is the Lender are used instead. 
 
 ### 4.2. Item-related Features
 
@@ -584,7 +582,7 @@ The following sequence diagram models the operation:
 
 #### 4.3.7. List Transaction By User
 
-> This feature allows the user to list all the Transactions in which a given User is a Borrower. 
+> This feature allows the user to list all the Transactions in which a given User is a Borrower/Lender. 
 > - `view-borrow-tx-by-user /u [username]` and `view-lend-tx-by-user /u [username]`: Lists down all the transactions in which a given user is a borrower/lender.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
@@ -634,6 +632,7 @@ Step 4: The ```executeCommand()``` of ExitCommand returns true, so Duke will rec
 - Has a passion to serve the student community
 - Student who wants to host a rental business for his/her hall
 - Student who wants to help others borrow or loan items
+- Someone who would like to track the gains and losses of each person in the community
 
 ### 5.2. Value proposition
 
