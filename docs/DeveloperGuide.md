@@ -88,18 +88,18 @@ component)
 
 **Methods in `PrescriptionList` class:**
 
-* **`add`** - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+* `add` - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
 `timeInterval`.
-* **`viewAll`** - This methods iterates through the list of all prescriptions and print the details of prescriptions from
+* `viewAll` - This methods iterates through the list of all prescriptions and print the details of prescriptions from
 all patients.
-* **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
+* `viewPatientPrescription` - This method iterates through the list of prescriptions and print the details of 
 prescriptions from the specified `patientId`.
-* **`viewActivePatientPrescription`** - This method iterates through the list of prescriptions and print the details of
+* `viewActivePatientPrescription` - This method iterates through the list of prescriptions and print the details of
 all active prescriptions with the specified `patientId`
-* **`edit`** - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
+* `edit` - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
 specified index
-* **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
-* **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
+* `activatePrescription` - This method allows user to set the prescription of specified index as active.
+* `deactivatePrescription` - This method allows user to set the prescription of specified index as inactive.
 
 **Members in `Prescription` class**
 
@@ -110,6 +110,7 @@ specified index
 * `isActive` - Whether is the prescription currently active or not
 
 #### Adding a new prescription
+Users are allowed to add new prescriptions. The action works as follows:
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
@@ -120,13 +121,16 @@ prescription.
 
 ![](images/PrescriptionListAdd.png)
 
-How activating/deactivating an existing prescription in the list works:
+#### Activating / Deactivating a prescription
+Users are allowed to activate or deactivate a prescription to track whether a prescription is currently being prescribed
+to patients or not. Both actions work in a similar manner. The action works as follows:
 
-1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
-the index in the array.
-2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
-3. Then, the `prescriptionEdited` is set active.
-4. Lastly, `UI` prints an acknowledge message of the most updated details of the prescription.
+1. When `activate(ui, prescriptionNumber)` initiates an action in the `PrescriptionList`, it converts the 
+`prescriptionNumber` into the index in the array.
+2. If the index is `null`, i.e invalid, the function is returned.
+3. Else, it gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
+4. Then, the `prescriptionEdited` is set active.
+5. Lastly, `UI` prints an acknowledgement message of the most updated details of the prescription.
 
 ![](images/PrescriptionListActivate.png)
 
