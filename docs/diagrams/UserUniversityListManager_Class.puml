@@ -20,6 +20,9 @@ class UserDeletedModules {
 class Ui {
 }
 
+class TimetableManager {
+}
+
 class UserUniversityList {
     - myModules:UserModuleMappingList
     - universityName:String
@@ -30,10 +33,13 @@ class UserUniversityList {
     + deleteModuleByPuCode(puCode:String)
     + deleteModule(index:int)
     + displayModules()
+    + updateComment(moduleCode:String, comment:String)
+    + deleteComment(moduleCode:String)
 }
 
 class UserUniversityListManager {
-    - myManager:HashMap<String, UserUniversityList>
+    - myManager:HashMap<String, UserUniversityList
+    - ttManager:TimetableManager
     - deletedModulesList:UserDeletedModules
     - logger:Logger
     + UserUniversityListManager()
@@ -48,12 +54,14 @@ class UserUniversityListManager {
     + deleteList(inputSchool:String)
     + addFavourite(input:String)
     + deleteFavourite(input:String)
+    + updateComment((universityName:String, moduleCode:String, comment:String)
 }
 
-UserUniversityListManager " 1 " o--> " *  " UserUniversityList
+UserUniversityListManager " 1 " o--> " *   " UserUniversityList
 UserUniversityListManager " 1  " o---> " 0..1 " UserDeletedModules
 UserUniversityList " 1 " o--> "0..1 " UserModuleMappingList
 UserUniversityListManager -> InvalidUserCommandException :<<throws>>
 UserUniversityList --> InvalidUserCommandException :<<throws>>
 UserUniversityListManager .> Ui
+UserUniversityListManager " 1 " o--> " 1 " TimetableManager
 @enduml
