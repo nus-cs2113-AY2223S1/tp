@@ -1,37 +1,42 @@
 package seedu.duke;
 
-import exceptions.DukeException;
 import exceptions.IllegalCharacterException;
 import exceptions.InvalidCommandException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+
 class ParserTest {
     ReviewList rv = new ReviewList();
     Parser ps = new Parser(rv);
 
+    @Test
     void addTestMovie() {
         String addString = "add /movieinception2/rating10/date 10-01-2020/genrethriller";
         ps.executeAdd(addString);
     }
 
     @Test
+    void newParserTest() {
+        Parser testParser = new Parser(rv);
+        assertEquals(rv, testParser.mediaList);
+    }
+
+    @Test
     void commandWordTest() {
         String testCommand = "Test command";
         String[] expected = new String[]{"Test", "command"};
-
         ps.getCommandWord(testCommand);
-
         assertArrayEquals(expected, ps.getCommandWord(testCommand));
     }
 
@@ -94,6 +99,14 @@ class ParserTest {
     }
 
     @Test
+    void isFutureDateTest() {
+        String date = "25-12-2024";
+        assertTrue(ps.isFutureDate(date));
+        date = "25-12-2021";
+        assertFalse(ps.isFutureDate(date));
+    }
+
+    @Test
     void deleteCommandTest() {
         ps.executeClear();
         addTestMovie();
@@ -105,5 +118,11 @@ class ParserTest {
         ps.executeDelete(splitString);
         currentList = ps.getReviewList();
         assertEquals(0, currentList.inputs.size());
+    }
+
+    @Test
+    void getReviewListTest() {
+        ReviewList testList = ps.getReviewList();
+        assertEquals(rv,testList);
     }
 }

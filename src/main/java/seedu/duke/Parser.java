@@ -48,7 +48,7 @@ public class Parser {
     static final String MOVIE_TYPE = "class seedu.duke.Movie";
     static final String TV_TYPE = "class seedu.duke.TvShow";
     private Commands executor;
-    private ReviewList mediaList;
+    public ReviewList mediaList;
 
     //@@author naz019
     private static Logger logger = Logger.getLogger("DukeLogger");
@@ -80,11 +80,11 @@ public class Parser {
         }
     }
 
-    //@@author indraneelrp
     /**.
      * Checks that user input is valid, parses the input and executes any valid commands given
      * @param userInput Raw input given by user
      */
+    //@@author indraneelrp
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
