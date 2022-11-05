@@ -525,8 +525,8 @@ public class ParameterParser {
      * @throws HelpUnknownOptionException If the help option parameter selected is not 'detailed'.
      */
     public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
-        boolean isValidHelpOption = parameter.equals("detailed");
         assert parameter != null : "The function argument passed must not be null!";
+        boolean isValidHelpOption = parameter.equalsIgnoreCase("detailed");
         if (isValidHelpOption) {
             return true;
         } else {
