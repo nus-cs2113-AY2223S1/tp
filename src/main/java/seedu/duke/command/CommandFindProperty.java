@@ -13,6 +13,8 @@ import static seedu.duke.Messages.MESSAGE_NO_PROPERTY_MATCHES;
 public class CommandFindProperty extends Command {
 
     private final String queryText;
+    private static final int INCREMENT_BY_ONE = 1;
+    private static final int NO_MATCHES = 0;
 
     public CommandFindProperty(String queryText) {
         this.queryText = queryText;
@@ -28,13 +30,13 @@ public class CommandFindProperty extends Command {
         for (int i = 0; i < propertyListSize; i += 1) {
             Property currentProperty = propertyList.getPropertyList().get(i);
             if (hasQueryText(queryText,currentProperty)) {
-                int index = i + 1;
+                int index = i + INCREMENT_BY_ONE;
                 ui.displayOneProperty(currentProperty, index);
-                numOfMatches += 1;
+                numOfMatches += INCREMENT_BY_ONE;
             }
         }
 
-        boolean hasNoMatches = numOfMatches == 0;
+        boolean hasNoMatches = numOfMatches == NO_MATCHES;
 
         // Display to user that there is no match
         if (hasNoMatches) {

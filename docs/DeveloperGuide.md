@@ -16,9 +16,11 @@
 * [Appendix C: Non Functional Requirement (NFR)](#appendix-c-non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d-glossary)
 * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
 ___
 ## Acknowledgements
 * [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
+
 ___
 ## Setting Up and Getting Started
 1. Ensure that you have Java 11 or above installed.
@@ -71,7 +73,7 @@ Note: The C symbols are a result of the PlantUml layout.
 ---  
 
 ### Pairing Component
-API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
+API: `pairingList.java`
 
 * `PairingList` is responsible for recording which clients are renting which property.
 * `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.

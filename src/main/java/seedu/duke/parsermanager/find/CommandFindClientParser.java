@@ -20,6 +20,9 @@ public class CommandFindClientParser extends Parser {
     private static final String EMPTY_TEXT = "";
     private static final String REGEX_CHECKER = "f/";
     private static final int SINGLE_TAG = 1;
+    private static final int MAXIMUM_SPLIT = 2;
+    private static final int INDEX_BEFORE_FIND_FLAG = 0;
+    private static final int INDEX_AFTER_FIND_FLAG = 1;
 
     public CommandFindClientParser(String commandDescription) {
         this.commandDescription = commandDescription;
@@ -38,7 +41,7 @@ public class CommandFindClientParser extends Parser {
 
     public void checkCommandValidity(String commandDescription) throws FindIncorrectNumOfTagException,
             FindEmptyDescriptionException, NoFindClientTagException {
-        String[] commandSplitByTag = commandDescription.trim().split(REGEX_CHECKER, 2);
+        String[] commandSplitByTag = commandDescription.trim().split(REGEX_CHECKER, MAXIMUM_SPLIT);
         boolean hasNoDescription = commandDescription.isEmpty();
 
 
@@ -46,14 +49,14 @@ public class CommandFindClientParser extends Parser {
             throw new NoFindClientTagException();
         }
 
-        boolean hasOtherTag = !commandSplitByTag[0].equals(EMPTY_TEXT);
+        boolean hasOtherTag = !commandSplitByTag[INDEX_BEFORE_FIND_FLAG].equals(EMPTY_TEXT);
         boolean hasFindTag = commandSplitByTag.length > SINGLE_TAG;
         boolean hasCorrectTag = hasFindTag && !hasOtherTag;
 
         if (!hasCorrectTag) {
             throw new FindIncorrectNumOfTagException();
         } else {
-            boolean hasNoQueryMessage = commandSplitByTag[1].trim().isEmpty();
+            boolean hasNoQueryMessage = commandSplitByTag[INDEX_AFTER_FIND_FLAG].trim().isEmpty();
             if (hasNoQueryMessage) {
                 throw new FindEmptyDescriptionException();
             }
