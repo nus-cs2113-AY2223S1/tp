@@ -31,7 +31,7 @@ public class StorageTest {
         storage.saveState(state, ui, true);
 
         //Read saved state from saved file
-        File actualFile = new File("data/duke.txt");
+        File actualFile = new File("data/.duke.txt");
         Scanner actualScanner = new Scanner(actualFile);
         StringBuilder actualString = new StringBuilder();
         while (actualScanner.hasNext()) {

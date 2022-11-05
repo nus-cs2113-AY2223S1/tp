@@ -108,6 +108,10 @@ public class Parser {
         return keywords.length == 1;
     }
 
+    public static boolean isMultiWordsCommand(String[] keywords) {
+        return keywords.length > 2;
+    }
+
     public static boolean isValidTwoWordCommand(String[] keywords) {
         return isTwoWordsCommand(keywords) && isModuleCode(keywords[1]);
     }
