@@ -6,7 +6,9 @@ import seedu.duke.exceptions.InvalidInputFormatException;
 import seedu.duke.exceptions.InvalidOverallInputException;
 import seedu.duke.exceptions.InvalidSemesterException;
 
-import static seedu.duke.exceptions.InvalidSemesterException.*;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
 public class Mcs extends Command {
     private String semester;
@@ -86,13 +88,13 @@ public class Mcs extends Command {
     private void checkOverallExceptionForMcs(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 
-        try{
+        try {
             checkYear(semester);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        if(!errorMessage.equals("")){
+        if (!errorMessage.equals("")) {
             System.out.println("Unable to view MCS due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
@@ -100,7 +102,7 @@ public class Mcs extends Command {
     }
 
     public void checkYear(String semester) throws InvalidSemesterException {
-        if(invalidFormat(semester)) {
+        if (invalidFormat(semester)) {
             throw new InvalidSemesterException();
         }
         if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {

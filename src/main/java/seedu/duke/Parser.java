@@ -2,8 +2,24 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.*;
-import seedu.duke.exceptions.*;
+import seedu.duke.commands.Add;
+import seedu.duke.commands.Check;
+import seedu.duke.commands.Clear;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.Delete;
+import seedu.duke.commands.Exit;
+import seedu.duke.commands.Find;
+import seedu.duke.commands.Help;
+import seedu.duke.commands.Mcs;
+import seedu.duke.commands.Overview;
+import seedu.duke.commands.View;
+import seedu.duke.exceptions.InvalidCommandWordException;
+import seedu.duke.exceptions.InvalidGradeException;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.InvalidOverallInputException;
+import seedu.duke.exceptions.InvalidSemesterException;
 
 public class Parser {
 

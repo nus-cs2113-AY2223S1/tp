@@ -6,7 +6,9 @@ import seedu.duke.exceptions.InvalidInputFormatException;
 import seedu.duke.exceptions.InvalidOverallInputException;
 import seedu.duke.exceptions.InvalidSemesterException;
 
-import static seedu.duke.exceptions.InvalidSemesterException.*;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
 public class Clear extends Command {
     private String semester;
