@@ -24,7 +24,7 @@ public class Parser {
         String message = "";
         try {
             c = specificCase(splitText[0], content);
-        } catch (Exception e){
+        } catch (Exception e) {
             message += e.getMessage();
         } finally {
             System.out.println(message);

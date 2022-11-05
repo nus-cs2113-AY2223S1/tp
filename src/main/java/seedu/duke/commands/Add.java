@@ -31,7 +31,7 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
+    private void addition(String input, int[] indexes) throws InvalidOverallInputException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
@@ -45,41 +45,41 @@ public class Add extends Command {
 
     }
 
-    private void checkOverallExceptionForAdd(String course, String semester,
-                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
+    public static void checkOverallExceptionForAdd(String course, String semester,
+                                                   String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
         String errorMessage = "";
 
-        try{
+        try {
             checkCourse(course);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkYear(semester);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkMcString(mcString);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkMc(mcInt);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkGrade(grade);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        if(!errorMessage.equals("")){
+        if (!errorMessage.equals("")) {
             System.out.println("Unable to ADD module due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
@@ -155,7 +155,7 @@ public class Add extends Command {
      * @param course input entered by user. Format: String
      * @throws InvalidCourseException exception thrown when course input is invalid
      */
-    public void checkCourse(String course) throws InvalidCourseException {
+    public static void checkCourse(String course) throws InvalidCourseException {
         if (course.length() > 10) {
             throw new InvalidCourseException();
         } else if (course.matches("[a-zA-Z]+")) {
@@ -165,7 +165,7 @@ public class Add extends Command {
         }
     }
 
-    public void checkMcString(String mcString) throws InvalidMcException {
+    public static void checkMcString(String mcString) throws InvalidMcException {
         if (mcString.length() > 2) {
             throw new InvalidMcException();
         }
@@ -175,8 +175,8 @@ public class Add extends Command {
 
     }
 
-    public void checkYear(String semester) throws InvalidSemesterException {
-        if(invalidFormat(semester)) {
+    public static void checkYear(String semester) throws InvalidSemesterException {
+        if (invalidFormat(semester)) {
             throw new InvalidSemesterException();
         }
         if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
@@ -184,13 +184,13 @@ public class Add extends Command {
         }
     }
 
-    public void checkMc(int mcs) throws InvalidMcException {
+    public static void checkMc(int mcs) throws InvalidMcException {
         if (invalidMc(mcs)) {
             throw new InvalidMcException();
         }
     }
 
-    public void checkGrade(String grade) throws InvalidGradeException {
+    public static void checkGrade(String grade) throws InvalidGradeException {
         if (!checkGradeFormat(grade)) {
             throw new InvalidGradeException();
         }
