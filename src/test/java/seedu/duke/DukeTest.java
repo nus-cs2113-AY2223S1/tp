@@ -2,9 +2,12 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.Check;
 import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -195,4 +198,121 @@ class DukeTest {
 
     }
 
+    @Test
+    void testCheckNOC() throws InvalidInputContentException {
+        System.out.println("Running JUnit Test for Check NOC");
+
+        // check NOC - Test whether the user is eligible for NOC based on the modules the user has added
+
+        ModuleList modulelist = new ModuleList();
+        Check check = new Check("NOC");
+
+        // Check initial NOC eligibility
+        boolean initialCheckNOCSem = check.checkNOCSem();
+        assertEquals(false, initialCheckNOCSem);
+        boolean initialCheckNOCMc = check.checkNOCMc();
+        assertEquals(false, initialCheckNOCMc);
+        boolean initialCheckNOC = check.checkNOC();
+        assertEquals(false, initialCheckNOC);
+
+        ArrayList<String> inputArray = new ArrayList<>();
+        inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1012 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1013 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1014 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1015 s/y1s1 mc/4 g/A+");
+
+        inputArray.add("add m/cs1021 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1022 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1023 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1024 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1025 s/y1s2 mc/4 g/A+");
+
+        inputArray.add("add m/cs2011 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2012 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2013 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2014 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2015 s/y2s1 mc/4 g/A+");
+
+        inputArray.add("add m/cs2021 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2022 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2023 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2024 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2025 s/y2s2 mc/4 g/A+");
+
+        // Adds all the modules in inputArray
+        for (String input : inputArray) {
+            Command c = Parser.parse(input);
+            c.execute(modulelist);
+        }
+
+        // check final NOC eligibility
+        boolean finalCheckNOCSem = check.checkNOCSem();
+        assertEquals(true, finalCheckNOCSem);
+        boolean finalCheckNOCMc = check.checkNOCMc();
+        assertEquals(true, finalCheckNOCMc);
+        boolean finalCheckNOC = check.checkNOC();
+        assertEquals(true, finalCheckNOC);
+
+        ModuleList.modules.clear();
+    }
+
+    @Test
+    void testCheckSEP() throws InvalidInputContentException {
+        System.out.println("Running JUnit Test for Check SEP");
+
+        // check SEP - Test whether the user is eligible for SEP based on the modules the user has added
+
+        ModuleList modulelist = new ModuleList();
+        Check check = new Check("SEP");
+
+        // Check initial NOC eligibility
+        boolean initialCheckSEPSem = check.checkSEPSem();
+        assertEquals(false, initialCheckSEPSem);
+        boolean initialCheckSEPCAP = check.checkSEPCAP();
+        assertEquals(false, initialCheckSEPCAP);
+        boolean initialCheckSEP = check.checkSEP();
+        assertEquals(false, initialCheckSEP);
+
+        ArrayList<String> inputArray = new ArrayList<>();
+        inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1012 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1013 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1014 s/y1s1 mc/4 g/A+");
+        inputArray.add("add m/cs1015 s/y1s1 mc/4 g/A+");
+
+        inputArray.add("add m/cs1021 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1022 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1023 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1024 s/y1s2 mc/4 g/A+");
+        inputArray.add("add m/cs1025 s/y1s2 mc/4 g/A+");
+
+        inputArray.add("add m/cs2011 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2012 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2013 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2014 s/y2s1 mc/4 g/A+");
+        inputArray.add("add m/cs2015 s/y2s1 mc/4 g/A+");
+
+        inputArray.add("add m/cs2021 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2022 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2023 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2024 s/y2s2 mc/4 g/A+");
+        inputArray.add("add m/cs2025 s/y2s2 mc/4 g/A+");
+
+        // Adds all the modules in inputArray
+        for (String input : inputArray) {
+            Command c = Parser.parse(input);
+            c.execute(modulelist);
+        }
+
+        // check final NOC eligibility
+        boolean finalCheckSEPSem = check.checkSEPSem();
+        assertEquals(true, finalCheckSEPSem);
+        boolean finalCheckSEPCAP = check.checkSEPCAP();
+        assertEquals(true, finalCheckSEPCAP);
+        boolean finalCheckSEP = check.checkSEP();
+        assertEquals(true, finalCheckSEP);
+
+        ModuleList.modules.clear();
+    }
 }

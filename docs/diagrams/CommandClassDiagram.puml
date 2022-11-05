@@ -1,0 +1,106 @@
+@startuml General Class Diagram
+'https://plantuml.com/class-diagram
+hide circle
+
+class Command
+class Add
+class Delete
+class Exit
+class Mcs
+class View
+class ModuleList
+class Module
+
+
+class Command {
+Command()
+execute(): void
+checkExit(): boolean
+}
+
+class Module {
+course: String
+semesterTaken: String
+grade: String
+mcs: int
+Module(course: String, semesterTaken: String, grade: String, mcs: int)
+toString(): String
+}
+
+class Add {
+mod: Module
+addition(): void
+extractingContent(): String
+positions(): int
+}
+
+class Delete {
+modCode: String
+Delete(input: String)
+setModCode(): String
+positions(): int[]
+execute(): void
+}
+
+class Exit {
+checkExit(): boolean
+}
+
+class Mcs {
+Mcs(input: String)
+setSem(): void
+positions(): int[]
+execute(): void
+}
+
+class View {
+View(input: String)
+setSem(): void
+execute(): void
+}
+
+class Check {
+type: String
+Check(input: String)
+execute(): void
+findCurrentSemester: int
+checkNOC: boolean
+checkNOCSem: boolean
+checkNOCMc: boolean
+checkSEP: boolean
+checkSEPCAP: boolean
+checkSEPSem: boolean
+convertSem: int
+convertCAP: double
+}
+
+class Help {
+message: String
+Help()
+execute: void
+}
+
+class ModuleList {
+modules: ArrayList
+viewCount: int
+mcsCount: int
+add(Module): void
+delete(): void
+view(): void
+mc(): void
+}
+
+Command <|-- Add : execute
+Command <|-- Delete : execute
+Command <|-u- Exit : execute
+Command <|-- Mcs : execute
+Command <|-u- View : execute
+Command <|-l- Check: execute
+Command <|-u- Help: execute
+Module <-- Add
+Command -> ModuleList
+ModuleList -> "0..*" Module : add
+
+
+
+@enduml
