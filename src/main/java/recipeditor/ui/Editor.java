@@ -25,6 +25,10 @@ import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+/**
+ * Handle the behavior of GUI.
+ */
 public class Editor extends JFrame implements ActionListener {
 
     private static final Logger logger = Logger.getLogger(Editor.class.getName());
@@ -37,38 +41,39 @@ public class Editor extends JFrame implements ActionListener {
     private EditorState state = EditorState.USING;
 
     public Editor() {
-        frame = new JFrame("Editor");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, e.getMessage());
         }
 
+        frame = new JFrame("Editor");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-
+        frame.setSize(600, 600);
+        frame.setResizable(false);
+        frame.setVisible(true);
+        frame.toFront();
+        frame.setAlwaysOnTop(true);
 
         textArea = new JTextArea();
-        textArea.setSize(new Dimension(200, 200));
         textArea.setFont(new Font("Arial", Font.PLAIN, 15));
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         buttonSave = new JButton("Save and Exit");
         buttonExit = new JButton("Exit Only");
+
+
         menu = new JMenuBar();
-        frame.add(scrollPane);
-        frame.setSize(600, 600);
         frame.setJMenuBar(menu);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.toFront();
-        frame.setAlwaysOnTop(true);
+
 
 
         frame.add(buttonSave);
         frame.add(buttonExit);
         menu.add(buttonSave);
         menu.add(buttonExit);
+        frame.add(scrollPane);
 
 
         buttonSave.addActionListener(this);
@@ -88,7 +93,12 @@ public class Editor extends JFrame implements ActionListener {
         });
         frame.setVisible(true);
 
+
     }
+    /**
+     * Change behavior of actionPerformed of ActionListener.
+     * @param e the event to be processed
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -111,6 +121,12 @@ public class Editor extends JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Enter the editor.
+     * @param path load the content to the text area
+     * @return true if the file is properly saved.
+     * @throws FileNotFoundException handle by GUI Flow
+     */
     public boolean enterEditor(String path) throws FileNotFoundException {
         Ui.showMessage("Please edit in the GUI editor!");
         try {
@@ -133,11 +149,9 @@ public class Editor extends JFrame implements ActionListener {
                 Ui.showMessage("Break from sleep");
             }
         }
+
     }
 
-    /**
-     * Load file from the path to the editor.
-     */
     private void loadFileToTextArea(String path) throws FileNotFoundException {
         File textFile = new File(path);
         Scanner scan = new Scanner(textFile);

@@ -1,0 +1,58 @@
+@startuml
+skinparam Style strictuml
+actor user
+database Storage
+user -> Main : Add Recipe
+Main -> Parser: parseCommand()
+create Parser
+create GuiWorkFlow
+
+alt Add Command
+Parser -> GuiWorkFlow: <<create>>
+
+create Editor
+GuiWorkFlow -> Editor: <<create>>
+
+Editor -> Editor : enterEditor()
+Editor --> GuiWorkFlow:
+Storage -> Editor: loadFileContent("Template.txt")
+
+loop until exit editor
+user -> Editor: Make changes to the template
+Editor -> Storage: save "Temporary.txt"
+end
+
+Editor --> GuiWorkFlow:
+destroy Editor
+
+create TextFileParser
+GuiWorkFlow -> TextFileParser: <<create>>
+TextFileParser -> GuiWorkFlow: parseTextToRecipe
+TextFileParser --> GuiWorkFlow
+destroy TextFileParser
+
+alt recipe not in storage
+    GuiWorkFlow -> Parser: newly added recipe is valid
+else
+    GuiWorkFlow -> Parser: DuplicateRecipeTitleException()
+end
+
+GuiWorkFlow --> Parser:
+
+create AddCommand
+Parser -> AddCommand: new AddCommand (validity, recipe)
+AddCommand --> Parser:
+Parser -> Main : AddCommand
+destroy GuiWorkFlow
+end
+Main -> AddCommand: execute()
+alt valid
+    AddCommand -> RecipeList: addRecipe()
+    RecipeList -> Storage: rewriteRecipeListToStorage()
+    AddCommand -> Main: Success Message
+else invalid
+    AddCommand -> Main: Fail Message
+end
+destroy AddCommand
+
+@enduml

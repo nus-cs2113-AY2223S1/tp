@@ -1,11 +1,13 @@
 package recipeditor.recipe;
 
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.storage.Storage;
 
 
 import java.util.ArrayList;
 
 public class RecipeList {
+    private static final String NUMBER_OF_RECIPE_PRINT = "There are %d recipes in the recipe list";
     private static ArrayList<String> recipeTitles = new ArrayList<>();
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -45,9 +47,6 @@ public class RecipeList {
     }
 
     public static void deleteRecipeFromTitle(String recipeTitle) {
-        if (getRecipeIndexFromTitle(recipeTitle) < 0) {
-            throw new NullPointerException();
-        }
         recipes.remove(getRecipeFromTitle(recipeTitle));
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
@@ -75,7 +74,7 @@ public class RecipeList {
         return getRecipe(index).getTitle();
     }
 
-    public static int getRecipeIndexFromTitle(String recipeTitle) {
+    public static int getRecipeIndexFromTitle(String recipeTitle) throws RecipeNotFoundException {
         int i = 0;
         for (Recipe r : recipes) {
             if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
@@ -83,7 +82,7 @@ public class RecipeList {
             }
             i++;
         }
-        return -1;
+        throw new RecipeNotFoundException(recipeTitle);
     }
 
     public static ArrayList<String> findRecipeTitles(String findInput) {
@@ -141,4 +140,7 @@ public class RecipeList {
         return false;
     }
 
+    public static String printNumberOfRecipes() {
+        return String.format(NUMBER_OF_RECIPE_PRINT, RecipeList.getRecipeTitlesSize());
+    }
 }

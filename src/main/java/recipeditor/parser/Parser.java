@@ -11,6 +11,10 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
 
+import recipeditor.exception.ExcessFlagsException;
+import recipeditor.exception.InvalidFlagException;
+import recipeditor.exception.MissingFlagsException;
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
@@ -21,10 +25,15 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main parser class to parse command.
+ */
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
-    private static final String recipeTitle = null;
-    private static final String NOT_PRESENT_IN_LIST_MESSAGE = " is not present in the list";
+    private static final String INDEX_OUT_OF_BOUND_MESSAGE =
+            "Index is not present in the list, or wrong command format.";
+    private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
+    private static final String FILE_NOT_FOUND_MESSAGE = "File not found when deleting the recipe file";
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
@@ -76,59 +85,71 @@ public class Parser {
     private static Command parseDeleteCommand(String[] parsed) {
         String recipeTitleToDelete = "";
         try {
-            if (parsed.length >= COMMAND_INPUT_LENGTH) {
-                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
+            FlagType[] flags = FlagParser.getFlags(parsed);
+            switch (flags[1]) {
+            case INDEX:
+                int recipeIndexToDelete = Integer.parseInt(parsed[2]) - 1;
+                assert recipeIndexToDelete > -1;
+                return new DeleteCommand(recipeIndexToDelete);
+            case TITLE:
+                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 2, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
                 if (actualRecipeTitle != null) {
                     logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
-                } else {
-                    int recipeIndexToDelete = Integer.parseInt(parsed[1]) - 1;
-                    assert recipeIndexToDelete > -1;
-                    return new DeleteCommand(recipeIndexToDelete);
                 }
+                break;
+            case NULL:
+                throw new MissingFlagsException();
+            default:
+                throw new InvalidFlagException();
             }
-            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(InvalidCommand.INDEX_NOT_PRESENT_IN_LIST);
-            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + NOT_PRESENT_IN_LIST_MESSAGE);
-            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
+            Ui.showMessage(recipeTitleToDelete + INVALID_INDEX_MESSAGE);
         } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, "File not found when deleting the recipe file");
-            return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
+            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
+        } catch (Exception e) {
+            Ui.showMessage(e.getMessage());
         }
+        return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
     }
 
     private static Command parseViewCommand(String[] parsed) {
-        String recipeTitleToDelete = "";
+        String recipeTitleToView = "";
         try {
-            if (parsed.length == COMMAND_INDEX_LENGTH) {
-                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
-                recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
+            FlagType[] flags = FlagParser.getFlags(parsed);
+            switch (flags[1]) {
+            case INDEX:
+                int index = Integer.parseInt(parsed[2]) - 1; // to account for 0-based indexing in recipelist
+                assert index > -1;
+                return new ViewCommand(index);
+            case TITLE:
+                String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, 2, parsed.length);
+                recipeTitleToView = convertStringArrayToString(recipeTitleToViewArray);
                 // check if recipe title is inside the list
-                String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
+                String actualRecipeTitle = actualRecipeTitle(recipeTitleToView);
                 if (actualRecipeTitle != null) {
                     logger.log(Level.INFO, "View command initialised");
                     return new ViewCommand(actualRecipeTitle);
-                } else {
-                    int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
-                    assert index > -1;
-                    return new ViewCommand(index);
                 }
+                break;
+            case NULL:
+                throw new MissingFlagsException();
+            default:
+                throw new InvalidFlagException();
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(InvalidCommand.INDEX_NOT_PRESENT_IN_LIST);
-            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + NOT_PRESENT_IN_LIST_MESSAGE);
-            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+            Ui.showMessage(parsed[2] + INVALID_INDEX_MESSAGE);
         } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, "File not found when deleting the recipe file");
-            return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
+        } catch (Exception e) {
+            Ui.showMessage(e.getMessage());
         }
         return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }
@@ -168,9 +189,15 @@ public class Parser {
                 editedRecipe.addIngredients(originalRecipe.getIngredients());
                 editedRecipe.addSteps(originalRecipe.getSteps());
 
-                FlagType[] flags = FlagParser.getCommandAndRecipeFlags(parsed);
+                FlagType[] flags = FlagParser.getFlags(parsed);
                 if (flags == null) {
-                    return new InvalidCommand();
+                    return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                }
+                if (flags[0] == FlagType.NULL) {
+                    throw new MissingFlagsException("command");
+                }
+                if (flags[1] == FlagType.NULL) {
+                    throw new MissingFlagsException("recipe");
                 }
                 logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
@@ -180,7 +207,7 @@ public class Parser {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             } catch (Exception e) {
-                return new InvalidCommand(e.getMessage());
+                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);

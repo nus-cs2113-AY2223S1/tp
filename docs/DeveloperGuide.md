@@ -156,7 +156,7 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ### Edit Component
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Recipe Module Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Edit Module Diagram"/>
 </p>
 
 The edit component consists of three parts:
@@ -169,6 +169,38 @@ The edit component consists of three parts:
     - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and
       CLI,
       handles saving the edited recipe
+
+#### Parser
+The FlagParser contains several functions to extract flags from the user input in the FlagType format. It is used to
+instantiate the necessary EditModeCommand.
+GuiWorkFlow bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
+
+#### EditModeCommand
+An abstract class instantiated by EditCommand in CLI mode. It takes in the old recipe and, once executed, 
+returns a new recipe which will be saved to Storage.
+
+#### EditCommand
+Handles the branching of commands, once executed it will save the new recipe to Storage or returns an error.
+
+The following illustrates the work sequence to edit a recipe.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
+</p>
+The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+whether the GUI or CLI should be called through the number of arguments passed by the user.
+
+#### GUI Edit
+- GUI window is called by GuiWorkFlow
+- After the GUI edit has finished, EditCommand is instantiated and the new recipe is saved to Storage through the
+RecipeList class
+
+#### CLI Edit
+- EditCommand is instantiated with the corresponding flags parsed from the arguments provided by the user
+- Depending on the flags passed, it instantiates the abstract class EditModeCommand using different constructors
+  (Add, Delete, Swap, Change)
+- Once it has been executed, it returns the new edited recipe, which will be saved to Storage through the RecipeList
+class
 
 ### GUI Component
 
@@ -298,7 +330,7 @@ quickly.
 - **More `/` than the format**
     - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
 - **`.` in ingredient name**
-    - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
+    - Expected outcome: allowed
 - **Amount not a valid positive double**:
     - Expected outcome: `INGREDIENT amount should be a positive rational number!` and further instructions
 
@@ -311,48 +343,55 @@ quickly.
 - **Index increment is wrong**:
     - Expected outcome: `STEP index increment is incorrect! Index starts from 1`
 - **`.` in step description**:
-    - Expected outcome: allowed . TODO!
+    - Expected outcome: allowed because a step can have multiple sentences
 
 ### Storage: Tampering the data
 
 - Tamper the data to test if the program can recover gracefully
 
 #### During the running of the program
+
 - **Delete or tamper the `AllRecipes.txt` file**
-  - No effect as the program does not use `AllRecipes.txt` while running
-  - If the program is stopped not using `/exit`. The effect will be reflected in the next run
-  - However, after `/add`, `/edit`,`/exit`, a correct `AllRecipes.txt` will be generated
+    - No effect as the program does not use `AllRecipes.txt` while running
+    - If the program is stopped not using `/exit`. The effect will be reflected in the next run
+    - However, after `/add`, `/edit`,`/exit`, a correct `AllRecipes.txt` will be generated
 
 - **Delete recipe files then `/edit`**
+    - Deleting the data files can only be done if the files are newly created during the same run of the program.
+    - If the file is loaded by the program, you cannot delete because JDK is using them.<p align="center" width="100%">
+      <img width="80%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
     - Expected outcome:
-  ```
-  Please edit in the GUI editor!
-  Recipe File is missing! Regenerate Recipe File! Please try again!
-  >>>
-  ```
+      ```
+      Please edit in the GUI editor!
+      Recipe File is missing! Regenerate Recipe File! Please try again!
+      >>>
+      ```
 - **Tamper the recipe files**
-  - The change in recipe files will not be reflected in the Model
+    - The change in recipe files will not be reflected in the Model
 - **Tamper the recipe file then `/edit`**
-  - The change will be loaded into the Editor GUI
-  - The validity of the change will be parsed when exit the GUI and will be reflected in the Model
+    - The change will be loaded into the Editor GUI
+    - The validity of the change will be parsed when exit the GUI and will be reflected in the Model
 - **Tamper the recipe file then `/exit`**
-  - The program will regenerate all the recipe file based on the Model
+    - The program will regenerate all the recipe files and `AllRecipes.txt` based on the Model
 
 #### Before the running of the program
+
 - **Delete the `AllRecipes.txt`**
-  - The program cannot recognize any title start anew, despite having recipe files
+    - The program cannot recognize any title start anew, despite having recipe files
 - **Tamper the `AllRecipes.txt`**
-  - The program will match the recipe titles in `AllRecipes.txt` with the stored recipe files
-  - The program will parse the recipe files
-  - If valid, the program will load the recipe into the Model
-  - If the title does not match the stored recipe or the stored recipe cannot be parsed, the program will not recognize the recipe
+    - The program will match the recipe titles in `AllRecipes.txt` with the stored recipe files
+    - The program will parse the recipe files
+    - If valid, the program will load the recipe into the Model
+    - If the title does not match the stored recipe or the stored recipe cannot be parsed, the program will not
+      recognize the recipe
 
 - **Delete the recipe file**
-  - The program cannot find the recipe file from the title in `AllRecipes.txt`
-  - The program will not load
+    - The program cannot find the recipe file from the title in `AllRecipes.txt`
+    - The program will skip this
 - **Tamper the recipe file (parseable recipe)**
-  - The program will load the recipe with the tampered content
+    - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
+<<<<<<< HEAD
   - The program will not load the recipe 
 
 ## Non-Functional Requirements
@@ -368,3 +407,16 @@ quickly.
 
 - org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
 - org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
+=======
+    - The program will skip this
+
+#### Other files
+
+- **Delete `Template.txt` then `/add`**
+    - Expected outcome: `Template file is missing! Regenerate Template File! Please try again`
+- **Tamper `Template.txt` then `/add`**
+    - The tampered file will be loaded
+    - Everything will continue to work but without a proper template, it is hard for the user
+- **Delete `TemporaryFile.txt` then `/add`**
+    - No effect because it will be constantly overwritten based on content in the Editor when closed
+>>>>>>> aee7e29689b0b76d3dcf391b0330ce27b1810296

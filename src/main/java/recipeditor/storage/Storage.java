@@ -18,7 +18,7 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
 public class Storage {
-
+    public static final String LOG_FILE = "./RecipeData/App/Log.txt";
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
@@ -56,6 +56,7 @@ public class Storage {
      * @param filePath path of the file folder
      */
     public static void createFile(String filePath) {
+
         try {
             File file = new File(filePath);
             if (!file.getParentFile().exists()) {

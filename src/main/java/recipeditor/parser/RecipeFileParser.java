@@ -21,7 +21,7 @@ public class RecipeFileParser {
     private static final String INGREDIENT_ERROR_FORMAT = "INGREDIENT format is incorrect!\nFORMAT: "
             + "index. "
             + "ingredient_name / "
-            + "amount_in_positive_rational / unit\nNOTE: ingredient_name and unit SHOULD NOT have /  or .";
+            + "amount_in_positive_rational / unit\nNOTE: ingredient_name and unit SHOULD NOT have / ";
     private static final String INGREDIENT_ERROR_INDEX = "INGREDIENT index must be a positive integer!";
 
     private static final String INGREDIENT_ERROR_AMOUNT = "INGREDIENT amount should be a positive rational number! "
@@ -29,7 +29,8 @@ public class RecipeFileParser {
 
     private static final String INGREDIENT_ERROR_INDEX_INCREMENT = "INGREDIENT index increment is incorrect! "
         + "Index starts from 1";
-    private static final String STEP_ERROR_FORMAT = "STEP format is incorrect!\nFORMAT: index. step_description";
+    private static final String STEP_ERROR_FORMAT = "STEP format is incorrect!\nFORMAT: index. step_description\n"
+            + "STEP index must be a positive integer!";
     private static final String STEP_ERROR_INDEX = "STEP index must be a positive integer!";
     private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
             + "from 1";
@@ -56,6 +57,12 @@ public class RecipeFileParser {
     public RecipeFileParser(){
     }
 
+    /**
+     * Parse the text content.
+     * @param text with newlines
+     * @return parsed Recipe
+     * @throws ParseFileException will be handele by GUIWorkflow
+     */
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
         parsedLine = text.split("\n");
         // Go down line by line
@@ -77,7 +84,7 @@ public class RecipeFileParser {
         } else {
             switch (stage) {
             default:
-                throw new ParseFileException(UNIMPORTANT_TEXT);
+                break;
             case TITLE:
                 caseTitle();
                 break;
@@ -200,7 +207,7 @@ public class RecipeFileParser {
         String[] parsedDot = parsedSlashed[0].split("\\.");
 
 
-        if (parsedSlashed.length != 3 || parsedDot.length != 2) {
+        if (parsedSlashed.length != 3) {
             throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
         }
 
@@ -212,7 +219,7 @@ public class RecipeFileParser {
             throw new ParseFileException(INGREDIENT_ERROR_INDEX_INCREMENT);
         }
 
-        String name = parsedDot[1];
+        String name = parsedSlashed[0].replace(String.format("%d.",lineIndex),"");
         Double amount = ingredientParsedAmount(parsedSlashed[1]);
         String unit = parsedSlashed[2];
         return new Ingredient(name, amount, unit);
@@ -220,9 +227,7 @@ public class RecipeFileParser {
 
     private String parsedStep(String line, int index) throws ParseFileException {
         String[] parsed = line.split("\\.");
-        if (parsed.length != 2) {
-            throw new ParseFileException(STEP_ERROR_FORMAT);
-        }
+
         int lineIndex = stepParseIndex(parsed[0]);
 
         if (isNotPositive(lineIndex)) {
@@ -231,7 +236,8 @@ public class RecipeFileParser {
         if (lineIndex != index) {
             throw new ParseFileException(STEP_ERROR_INDEX_INCREMENT);
         }
-        return parsed[1].trim();
+
+        return line.replace(String.format("%d.", lineIndex),"").trim();
     }
 
 
@@ -269,7 +275,7 @@ public class RecipeFileParser {
         try {
             return Integer.parseInt(parsed);
         } catch (Exception e) {
-            throw new ParseFileException(STEP_ERROR_INDEX);
+            throw new ParseFileException(STEP_ERROR_FORMAT);
         }
     }
 
