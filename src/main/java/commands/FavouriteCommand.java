@@ -15,6 +15,15 @@ public class FavouriteCommand extends Commands {
         this.userInput = userInput;
     }
 
+    /**
+     * This method marks or unmarks a review of a given type at a given index as favourite. Alternatively, this method
+     * displays the list of favourites if the user includes the 'list' keyword.
+     *
+     * @return Returns a string confirming whether the marking/unmarking of a given review as favourite is successful,
+     *         or returns a string displaying the list of favourite reviews.
+     * @throws DukeException If an invalid media type is given by the user.
+     * @throws NumberFormatException If an invalid index is given by the user.
+     */
     @Override
     public String execute() {
         String output = "";
@@ -79,7 +88,6 @@ public class FavouriteCommand extends Commands {
             } else {
                 output = "You have " + count + " favourites in total.\n";
             }
-
 
             Commands listHelper = new ListCommand(favouritesList);
             output += listHelper.execute();

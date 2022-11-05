@@ -17,7 +17,7 @@ public class ListCommand extends Commands {
 
     //@@author matthewphua
     /**
-     * Outputs list containing all reviews seperated by categories.
+     * Outputs list containing all reviews separated by categories.
      * @return Output string with reviews.
      */
     @Override

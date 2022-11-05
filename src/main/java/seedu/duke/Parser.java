@@ -173,6 +173,11 @@ public class Parser {
     }
 
     //@@author naz019
+    /**
+     * Executes the sort command by creating a SortCommand object.
+     *
+     * @param words The user input which has been split into separate words.
+     */
     public void executeSort(String[] words) {
         try {
             Commands executor = new SortCommand(mediaList, words);
@@ -184,6 +189,12 @@ public class Parser {
         }
     }
 
+    /**
+     * If a user input of valid length is given, this method executes the favourite command by creating a
+     * FavouriteCommand object.
+     *
+     * @param words The user input which has been split into separate words.
+     */
     public void executeFavourite(String[] words) {
         try {
             if (words.length > 3 || words.length < 2) {
@@ -312,6 +323,12 @@ public class Parser {
 
 
     //@@author naz019
+    /**
+     * Checks if provided date is in the future by comparing provided date to system date.
+     *
+     * @param dateWatchedString The date provided by the user.
+     * @return Returns true if provided date is in the future, else returns false.
+     */
     public boolean isFutureDate(String dateWatchedString) {
         Date date = null;
         try {
@@ -319,7 +336,7 @@ public class Parser {
             dateFormat.setLenient(false);
             date = dateFormat.parse(dateWatchedString);
         } catch (ParseException e) {
-            System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+            Ui.print("Invalid date format. Use the following format: DD-MM-YYYY.");
         }
 
         Date currentDate = new Date();
@@ -341,11 +358,8 @@ public class Parser {
         int month = Integer.parseInt(dateFields[1].trim());
         int year = Integer.parseInt(dateFields[2].trim());
 
-        if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1 || year > 2022 || (day > 29 && month == 2)) {
-            return false;
-        }
-
-        return true;
+        return day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1 && year <= 2022
+                && (day <= 29 || month != 2);
     }
 
     //@@author redders7
