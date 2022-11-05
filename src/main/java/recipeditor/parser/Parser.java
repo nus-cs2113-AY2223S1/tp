@@ -65,6 +65,7 @@ public class Parser {
     private static Command parseAddCommand() {
         try {
             GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+            logger.log(Level.INFO, "Add command initialised");
             return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
         } catch (FileNotFoundException e) {
             Storage.generateTemplateFile();
@@ -81,6 +82,7 @@ public class Parser {
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
                 if (actualRecipeTitle != null) {
+                    logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
                 } else {
                     int recipeIndexToDelete = Integer.parseInt(parsed[1]) - 1;
@@ -101,27 +103,6 @@ public class Parser {
         }
     }
 
-    private static String convertStringArrayToString(String[] stringArray) {
-        StringBuilder content = new StringBuilder();
-        for (String string : stringArray) {
-            content.append(string + " ");
-        }
-        content.deleteCharAt(content.length() - 1);
-        return content.toString();
-    }
-
-    // To account for case insensitivity of user
-    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
-        String actualRecipeTitle = null;
-        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
-            if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
-                actualRecipeTitle = recipeTitle;
-                break;
-            }
-        }
-        return actualRecipeTitle;
-    }
-
     private static Command parseViewCommand(String[] parsed) {
         String recipeTitleToDelete = "";
         try {
@@ -131,6 +112,7 @@ public class Parser {
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
                 if (actualRecipeTitle != null) {
+                    logger.log(Level.INFO, "View command initialised");
                     return new ViewCommand(actualRecipeTitle);
                 } else {
                     int index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
@@ -162,6 +144,7 @@ public class Parser {
                 String path = Storage.titleToFilePath(title);
 
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
+                logger.log(Level.INFO, "Edit command initialised in GUI");
                 return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), title);
             } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
@@ -189,6 +172,7 @@ public class Parser {
                 if (flags == null) {
                     return new InvalidCommand();
                 }
+                logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
                 return new InvalidCommand();
@@ -208,6 +192,7 @@ public class Parser {
             FlagType flag = FlagParser.getRecipeFlag(parsed);
             String[] inputArray = Arrays.copyOfRange(parsed, INDEX_AFTER_COMMAND, parsed.length);
             String input = convertStringArrayToString(inputArray);
+            logger.log(Level.INFO, "Find command initialised");
             return new FindCommand(flag, input);
         } else {
             return new InvalidCommand(FindCommand.CORRECT_FORMAT);
@@ -218,8 +203,30 @@ public class Parser {
     public static Command parseHelpCommand(String[] parsed) {
 
         if (parsed.length == COMMAND_INPUT_LENGTH) {
+            logger.log(Level.INFO, "Help command initialised");
             return new HelpCommand(parsed[1]);
         }
         return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
+    }
+
+    private static String convertStringArrayToString(String[] stringArray) {
+        StringBuilder content = new StringBuilder();
+        for (String string : stringArray) {
+            content.append(string + " ");
+        }
+        content.deleteCharAt(content.length() - 1);
+        return content.toString();
+    }
+
+    // To account for case insensitivity of user
+    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
+        String actualRecipeTitle = null;
+        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
+            if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
+                actualRecipeTitle = recipeTitle;
+                break;
+            }
+        }
+        return actualRecipeTitle;
     }
 }

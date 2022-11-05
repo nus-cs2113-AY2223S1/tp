@@ -3,7 +3,6 @@ package recipeditor.command;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.Ui;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";

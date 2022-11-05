@@ -170,6 +170,7 @@ public class Storage {
      */
     public static void saveRecipe(Recipe recipe, String oldFilePath, String recipeFileDestinationPath) {
         try {
+            assert recipe != null : "Recipe should not be null";
             deleteFile(oldFilePath);
             rewriteRecipeListToFile();
             FileWriter fw = new FileWriter(recipeFileDestinationPath);
@@ -236,6 +237,7 @@ public class Storage {
      * @return String that contains all the content in the file
      */
     public static String loadFileContent(String filePath) throws FileNotFoundException {
+        assert filePath != null : "File path should not be null";
         File file = new File(filePath);
         StringBuilder getContent = new StringBuilder();
         Scanner scan = new Scanner(file);
