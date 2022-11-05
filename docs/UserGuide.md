@@ -78,20 +78,25 @@ ____________________________________________________________
 
 ## Features 
 
-Upon starting the Program, the user will be situated in the main mode.
+Our program has two modes, the [Build Management Mode](#build-management-mode) and the
+[Build Editing Mode](#build-editing-mode). 
+
+Upon starting the Program, you will be situated in the [Build Management Mode](#build-management-mode).
 
 ### Build Management Mode
 
-Main mode handles the management of the user's builds. 
+Main mode handles the management of your builds. 
 
 #### Adding a build: `add`
 
-Adds a build to the list of builds currently managed by the program. The user only needs to specify the name of the
+Adds a build to the list of builds currently managed by the program. You only need to specify the name of the
 build.
+
+Note: If you wish to edit your build after adding it, you can do so by following this command [Editing a build](#editing-a-build-edit).
 
 Format: `add/NAME`
 
-Example of usage: User enters `add/test build` to add a build named 'test build' to the list of builds, a build 
+Example of usage: Enter `add/test build` to add a build named 'test build' to the list of builds, a build 
 named 'test build' is added to the list of builds managed by the program.
 
 Expected outcome: The program will add a build named 'test build' to the list of builds.
@@ -105,14 +110,16 @@ ____________________________________________________________
 
 #### Editing a build: `edit`
 
-Enters [Build Editing Mode](#build-editing-mode) for the specified build. The user only needs to specify the name of the
+Enters [Build Editing Mode](#build-editing-mode) for the specified build. You only need to specify the name of the
 build.
 
 Format: `edit/NAME`
 
-Example of usage: User enters `edit/test build` to edit the build named 'test build'.
+Note: If you wish to go back to the main mode, you can do so by following this command [Exit edit mode](#exiting-edit-mode-back).
 
-Expected outcome: The user is now in edit mode for the build named 'test build'.
+Example of usage: Enter `edit/test build` to edit the build named 'test build'.
+
+Expected outcome: You are now in edit mode for the build named 'test build'.
 
 ```
 ____________________________________________________________
@@ -124,12 +131,12 @@ You are now editing test build
 
 #### Deleting a build: `delete`
 
-Deletes a build in the list of builds current managed by the program. The user only needs to specify the name of the
+Deletes a build in the list of builds current managed by the program. You only need to specify the name of the
 build.
 
 Format: `delete/NAME`
 
-Example of usage: User enters `delete/test build` to delete a build named 'test build' stored in the list of builds.
+Example of usage: Enter `delete/test build` to delete a build named 'test build' stored in the list of builds.
 
 Expected outcome: The program will delete the build named 'test build' from the list of builds.
 ```
@@ -143,12 +150,12 @@ ____________________________________________________________
 
 #### Viewing a build: `view`
 
-Views a build in the list of builds current managed by the program. The user only needs to specify the name of the
+Views a build in the list of builds current managed by the program. You only need to specify the name of the
 build.
 
 Format: `view/NAME`
 
-Example of usage: User enters `view/test build` to view a build named 'test build' stored in the list of builds.
+Example of usage: Enter `view/test build` to view a build named 'test build' stored in the list of builds.
 
 Expected outcome: The program will display the components of the build named 'test build' from the list of builds.
 ```
@@ -171,7 +178,7 @@ Lists all builds in the list of builds currently managed by the program.
 
 Format: `list`
 
-Example of usage: User enters `list` to list all builds stored in the list of builds.
+Example of usage: Enter `list` to list all builds stored in the list of builds.
 
 Expected outcome: The program will display all builds stored in the list of builds.
 ```
@@ -189,7 +196,7 @@ List all builds that contain the keyword in their name.
 
 Format: `find/KEYWORD`
     
-Example of usage: User enters `find/test` to find all builds that contain the keyword 'test'.
+Example of usage: Enter `find/test` to find all builds that contain the keyword 'test'.
 
 Expected outcome: The program will display all builds that contain the keyword 'test'.
 ``` 
@@ -204,7 +211,7 @@ ____________________________________________________________
 #### Filtering build(s): `filter`
 
 List all builds that fit the specified requirements.
-Filter can filter builds that are compatible or has total cost/power within a specified range.
+`Filter` can filter builds that are compatible or has total cost/power within a specified range.
 Range is optional for filtering compatibility.
 
 Acceptable Formats:
@@ -245,7 +252,7 @@ Exports all builds to a text file.
 
 Format: `export`
 
-Example of usage: User enters `export` to export all builds.
+Example of usage: Enter `export` to export all builds.
 
 Expected outcome: The program will export all builds to a text file.
 ```
@@ -262,7 +269,7 @@ Exports all builds to a CSV file.
 
 Format: `exportCSV`
 
-Example of usage: User enters `exportCSV` to export all builds.
+Example of usage: Enter `exportCSV` to export all builds.
 
 Expected outcome: The program will export all builds to a CSV file.
 ```
@@ -288,11 +295,16 @@ ____________________________________________________________
 ```
 ### Build Editing Mode
 
-Edit mode handles the management of the computer components of a build.
+Edit mode handles the management of the computer components of a build. If you want to go back to the main mode,
+you can do so by following this command [Exit edit mode](#exiting-edit-mode-back).
 
 #### Adding a component: `add`
 
 Adds a component to the list of components of a build.
+
+Note: 
+- If you want to see the components that have been added in the Edit Mode, you can do so by following this command [Listing all components](#listing-all-components-list).
+- If you want to see the information of the component you have added, you can do so by following this command [Viewing a component](#viewing-a-component-view).
 
 Acceptable Formats: 
 1. `add/case/Name/Price/Power/FormFactor/ExpansionSlots`
@@ -309,7 +321,6 @@ Acceptable Formats:
 Note: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-summary).
 
 Example of usage: 
-
 Enter `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
 of 3.8 GHz.
@@ -329,7 +340,7 @@ Deletes a component from the list of components of a build.
 
 Format: `delete/TYPE/NAME`
 
-Example of usage: User enters `delete/cpu/intel 10990x` to delete a cpu named 'intel 10990x' from the list of 
+Example of usage: Enter `delete/cpu/intel 10990x` to delete a cpu named 'intel 10990x' from the list of 
 components.
 
 Expected outcome: The program will delete a cpu named 'intel 10990x' from the list of components.
@@ -347,7 +358,7 @@ Views a component from the list of components of a build.
 
 Format: `view/TYPE/NAME`
 
-Example of usage: User enters `view/cpu/intel 10990x` to view a cpu named 'intel 10990x' from the list of
+Example of usage: Enter `view/cpu/intel 10990x` to view a cpu named 'intel 10990x' from the list of
 components.
 
 Expected outcome: The program will display the details of a cpu named 'intel 10990x' from the list of components.
@@ -369,7 +380,7 @@ Lists all components from the list of components of a build.
 
 Format: `list`
 
-Example of usage: User enters `list` to list all components from the list of components.
+Example of usage: Enter `list` to list all components from the list of components.
 
 Expected outcome: The program will display all components from the list of components.
 ```
@@ -385,7 +396,7 @@ Checks if a build is compatible.
 
 Format: `check`
 
-Example of usage: User enters `check` to check if the build is compatible.
+Example of usage: Enter `check` to check if the build is compatible.
 
 Expected outcome: The program will display a list of compatibilities based on the components of a build.
 ```
@@ -408,7 +419,7 @@ Displays information about a build.
 
 Format: `info`
 
-Example of usage: User enters `info` to display information about a build.
+Example of usage: Enter `info` to display information about a build.
 
 Expected outcome: The program will display information about a build.
 ```
@@ -429,7 +440,7 @@ Exports a build to a text file.
 
 Format: `export`
 
-Example of usage: User enters `export` to export a build.
+Example of usage: Enter `export` to export a build.
 
 Expected outcome: The program will export a build to a text file.
 ```
@@ -446,7 +457,7 @@ Exits edit mode.
 
 Format: `back`
 
-Example of usage: User enters `back` to exit edit mode.
+Example of usage: Enter `back` to exit edit mode.
 
 Expected outcome: The program will exit edit mode.
 ```
@@ -462,16 +473,16 @@ ____________________________________________________________
 
 ### Storage
 
-The program stores all builds in a text file and components of each build in separate text files. The text file is 
-stored in the data folder. 
+The program stores all builds in a `text` file and components of each build in separate `text` files. The text files are 
+stored in the `data` folder. 
 
-Loading and saving is done automatically and the user does not need to worry about manually saving or loading data.
+Loading and saving are done automatically, so you do not need to worry about saving or loading data manually.
 
 ### Export
 
 The program exports all builds to text and CSV files. The text and CSV files are stored in the data folder.
 
-It makes it easier for the user to view the builds and components in a more readable format outside the program.
+It makes it easier for you to view the builds and components in a more readable format outside the program.
 
 ## FAQ
 
