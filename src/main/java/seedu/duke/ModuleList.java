@@ -4,6 +4,7 @@ import seedu.duke.commands.*;
 import seedu.duke.exceptions.InvalidCommandWordException;
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidOverallInputException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,10 +16,17 @@ public class ModuleList {
     public static int mcsCount;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     */
     public ModuleList() {
 
     }
 
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     * @param modules array of modules. Format : ArrayList<Module>
+     */
     public ModuleList(ArrayList<Module> modules) {
         this.modules = modules;
     }
@@ -36,9 +44,6 @@ public class ModuleList {
             add(module, true);
         }
     }
-
-
-
 
     /**
      * Function to add a module to the moduleList if it does not already exist
