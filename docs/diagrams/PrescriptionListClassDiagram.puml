@@ -1,4 +1,7 @@
 @startuml
+hide circle
+skinparam classAttributeIconSize 0
+
 class PrescriptionList {
 + void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String)
 + void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String, isActive:boolean)
@@ -20,6 +23,6 @@ class Prescription {
 
 class UI {}
 
-PrescriptionList *-down-> "*" Prescription : "contains" >
+PrescriptionList "1" *-down-> "*" Prescription
 PrescriptionList .right.> UI
 @enduml

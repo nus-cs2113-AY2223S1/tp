@@ -1,11 +1,13 @@
 @startuml
+hide footbox
+
 box
 participant ":PrescriptionList" as A
 participant ":ArrayList<Prescription>" as C
 participant "prescriptionEdited\n:Prescription" as B
 end box
 
-participant ":UI" as D
+participant "ui:UI" as D
 
 -> A : activate(ui, 1)
 activate A

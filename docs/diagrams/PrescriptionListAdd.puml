@@ -1,18 +1,23 @@
 @startuml
+hide footbox
+
 box
 participant ":PrescriptionList" as A
 participant ":Prescription" as B
 participant ":ArrayList<Prescription>" as C
 end box
 
-participant ":UI" as D
+participant "ui:UI" as D
 
 [-> A : add(ui, "A01", "Panadol", \n"1 pill", "4 times a day")
 activate A
 
-A -> B : new Prescription("A01", "Panadol", \n"1 pill", "4 times a day")
+
+create B
+A -> B : new Prescription("A01", "Panadol", "1 pill", "4 times a day")
 activate B
-return prescription:Prescription
+B --> A : prescription:Prescription
+deactivate B
 
 A -> C : add(prescription)
 activate C
