@@ -58,7 +58,7 @@ public class UserStorageParser {
      * Method to convert university information to a string to store into the text file
      * @param uniName Partner university name
      * @param userUniversityListManager Lists of partner universities that user is interested in
-     * @return
+     * @return String to be saved in text file
      */
     private static String convertUniIntoFileContent(String uniName,
                                                    UserUniversityListManager userUniversityListManager) {
@@ -151,7 +151,7 @@ public class UserStorageParser {
             }
             UserStorage.setFilePaths(newFilePaths);
             return userUniversityListManager;
-        } catch (IOException | InvalidUserStorageFileException e) {
+        } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
         return new UserUniversityListManager();
@@ -167,14 +167,14 @@ public class UserStorageParser {
      */
     private static void extractInfoFromTextFile(HashMap<String, String> newFilePaths, HashMap<String, String> filePaths,
                                                  UserUniversityListManager userUniversityListManager, 
-                                                 Map.Entry<String, String> entry) throws IOException,
-                                                InvalidUserStorageFileException {
+                                                 Map.Entry<String, String> entry) throws IOException {
         String fileContent = UserStorage.loadFile(entry.getKey());
         String uniName = entry.getKey();
         String[] splitFileContent = fileContent.split("#");
         if (splitFileContent.length > 2) {
             deleteUserStorageByUni(uniName, true);
-            throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(uniName));
+            System.out.println("Invalid file format\n" + getDeleteMessage(uniName));
+            return;
         }
         String fileContentForUniList = splitFileContent[0];
         if (extractUniListInfoFromTextFile(newFilePaths, filePaths, userUniversityListManager, uniName,
@@ -238,6 +238,7 @@ public class UserStorageParser {
                 String moduleCode = module.split(";")[0];
                 if (moduleCode.equals(lessonModuleCode)) {
                     isFound = true;
+                    break;
                 }
             }
             if (!isFound) {
@@ -447,11 +448,7 @@ public class UserStorageParser {
      *                    'F' otherwise
      */
     private static void setFavourite(UserUniversityList newUni, String isFavourite) {
-        if (isFavourite.equals("T")) {
-            newUni.setFavourite(true);
-        } else {
-            newUni.setFavourite(false);
-        }
+        newUni.setFavourite(isFavourite.equals("T"));
     }
 
     /**.
