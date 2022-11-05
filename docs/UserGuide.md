@@ -1,43 +1,44 @@
 # User Guide
 
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+    + [Main Menu](#main-menu)
+        - [Going to main menu: `main`](#going-to-main-menu-main)
+        - [Choosing an option: `index`](#choosing-an-option-index)
+    + [1. Patient](#1-patient)
+        - [Adding a new patient: `add`](#adding-a-new-patient-add)
+        - [Viewing all patients: `viewAll`](#viewing-all-patients-viewall)
+        - [Retrieving a patient's records: `retrieve`](#retrieving-a-patients-records-retrieve)
+        - [Modifying the details of a patient: `edit`](#modifying-the-details-of-a-patient-edit)
+        - [Viewing the commands in Patient menu: `help`](#viewing-the-commands-in-the-patient-menu-help)
+    + [2.Visit](#2-visit)
+        - [Adding a visit: `add`](#adding-a-visit-add)
+        - [Adding/editing a reason for existing visit: `edit`](#addingediting-a-reason-for-existing-visit-edit)
+        - [Deleting a reason for existing visit: `deleteReason`](#deleting-a-reason-for-existing-visit-deletereason)
+        - [Viewing all visits: `viewAll`](#viewing-all-visits-viewall)
+        - [Viewing a patient's visits: `viewPatient`](#viewing-a-patients-visits-viewpatient)
+        - [Viewing a specific visit: `viewVisit`](#viewing-a-specific-visit-viewvisit)
+        - [Viewing the commands in the Visit menu: `help`](#viewing-the-commands-in-the-visit-menu-help)
+    + [3. Prescription](#3-prescription)
+        - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
+        - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
+        - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
+        - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
+        - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
+        - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
+        - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
+        - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
+    + [Exit Program: `bye`](#exit-program-bye)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 ## Introduction
 
 OneDoc is a desktop application for doctors to manage patients’ profile, visit records, prescriptions records and
 medicine information via Command Line Interface.
-
-- [User Guide](#user-guide)
-    * [Introduction](#introduction)
-    * [Quick Start](#quick-start)
-    * [Features](#features)
-        + [Main Menu](#main-menu)
-            - [Going to main menu: `main`](#going-to-main-menu-main)
-            - [Choosing an option: `index`](#choosing-an-option-index)
-        + [1. Patient](#1-patient)
-            - [Adding a new patient: `add`](#adding-a-new-patient-add)
-            - [Viewing all patients: `viewAll`](#viewing-all-patients-viewall)
-            - [Retrieving a patient's records: `retrieve`](#retrieving-a-patients-records-retrieve)
-            - [Modifying the details of a patient: `edit`](#modifying-the-details-of-a-patient-edit)
-            - [Viewing the commands in Patient menu: `help`](#viewing-the-commands-in-the-patient-menu-help)
-        + [2.Visit](#2-visit)
-            - [Adding a visit: `add`](#adding-a-visit-add)
-            - [Adding/editing a reason for existing visit: `edit`](#addingediting-a-reason-for-existing-visit-edit)
-            - [Deleting a reason for existing visit: `deleteReason`](#deleting-a-reason-for-existing-visit-deletereason)
-            - [Viewing all visits: `viewAll`](#viewing-all-visits-viewall)
-            - [Viewing a patient's visits: `viewPatient`](#viewing-a-patients-visits-viewpatient)
-            - [Viewing a specific visit: `viewVisit`](#viewing-a-specific-visit-viewvisit)
-            - [Viewing the commands in the Visit menu: `help`](#viewing-the-commands-in-the-visit-menu-help)
-        + [3. Prescription](#3-prescription)
-            - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
-            - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
-            - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
-            - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
-            - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
-            - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
-            - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
-            - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
-        + [Exit Program: `bye`](#exit-program-bye)
-    * [FAQ](#faq)
-    * [Command Summary](#command-summary)
 
 ## Quick Start
 
@@ -120,21 +121,21 @@ Format: `viewAll`
 Expected Output:
 
 ```
-Here are the list of patients in the system
+Here are the list of patients in the system:
 	____________________________________________________________
-    Patient #1
+        Patient #1
 	Name: John Doe
 	Gender: Male
 	Date of Birth: 09-09-1978
 	ID: T2
 	____________________________________________________________
-    Patient #2
+        Patient #2
 	Name: Jane Doe
 	Gender: Female
 	Date of Birth: 09-09-1978
 	ID: T1
 	____________________________________________________________
-    Patient #3
+        Patient #3
 	Name: John
 	Gender: Male
 	Date of Birth: 12-12-2001
@@ -186,7 +187,8 @@ Example of usage:
 Expected Output:
 
 ```
-Alright, I've modified the details of the patient! Here are the new details of the patient:
+Alright, I've modified the details of the patient! 
+Here are the new details of the patient:
     ____________________________________________________________
     Patient #3
     Name: John

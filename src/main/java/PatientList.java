@@ -14,7 +14,7 @@ public class PatientList {
         assert id != null : "id of patient should not be null!";
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
-        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient),UI.PATIENT);
+        ui.printMessageAndObject(patient.toString(), UI.PATIENT_ADDED, patients.indexOf(patient), UI.PATIENT);
     }
 
     public void loadPatient(String name, String birthDate, String gender, String id) {
@@ -22,18 +22,11 @@ public class PatientList {
         patients.add(patient);
     }
 
-    public void printIndexOfPatient(Patient patient) {
-        System.out.println("\tPatient #" + (patients.indexOf(patient) + 1));
-    }
-
     public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
             if (patient.getId().equalsIgnoreCase(id)) {
-                System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
-                ui.printLine();
-                printIndexOfPatient(patient);
-                System.out.println(patient);
-                ui.printLine();
+                ui.printMessageAndObject(patient.toString(),
+                        UI.PATIENT_RETRIEVED, patients.indexOf(patient), UI.PATIENT);
                 return;
             }
         }
@@ -54,11 +47,10 @@ public class PatientList {
     public void modifyPatientDetails(UI ui, String id, String name, String birthDate, String gender) {
         Patient patientToBeModified = findPatient(id);
         if (patientToBeModified == null) {
-            ui.printLine();
             System.out.println("Sorry! No patient exists in the system with the supplied ID!");
             ui.printLine();
+            return;
         }
-        ui.printLine();
         if (!name.isEmpty()) {
             patientToBeModified.setName(name);
         }
@@ -68,7 +60,6 @@ public class PatientList {
         if (!gender.isEmpty()) {
             patientToBeModified.setGender(gender);
         }
-        System.out.println();
         ui.printMessageAndObject(patientToBeModified.toString(),UI.PATIENT_EDITED,
                 patients.indexOf(patientToBeModified), UI.PATIENT);
     }
@@ -99,19 +90,13 @@ public class PatientList {
             System.out.println("There are no patients in the system right now!");
             return;
         }
-        System.out.println("Here are the list of patients in the system");
+        System.out.println("Here are the list of patients in the system:");
         for (int i = 0; i < getTotalNumberofPatients(); i++) {
-            ui.printLine();
-            System.out.println("\tPatient #" + (i + 1));
-            System.out.println(getPatient(i));
+            ui.printObject(getPatient(i).toString(), i, UI.PATIENT);
         }
 
         ui.printLine();
 
-    }
-
-    public boolean isUniqueId(String patientID) {
-        return findPatient(patientID.toUpperCase()) == null;
     }
 
     public ArrayList<Patient> getPatients() {

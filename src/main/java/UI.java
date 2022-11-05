@@ -16,6 +16,7 @@ public class UI {
     public static final String INVALID_PATIENT_DATA_MESSAGE =
             "Invalid lines detected while reading patient.txt! They will be discarded.";
     public static final String FILE_CREATION_ERROR_MESSAGE = "Error! Data files could not be created";
+    public static final String PATIENT_RETRIEVED = "The patient with the supplied ID was found! Here are the details of the patient: ";
     private static Scanner scanner;
 
     protected static final String LOGO =
@@ -174,10 +175,14 @@ public class UI {
 
     public void printMessageAndObject(String object, String message, int index, String type) {
         System.out.println(message);
+        printObject(object, index, type);
+        printLine();
+    }
+
+    public void printObject(String object, int index, String type) {
         printLine();
         System.out.println("\t" + type + " #" + (index + 1));
         System.out.println(object);
-        printLine();
     }
 
     public static void printErrorMessage(String errorMessage) {
