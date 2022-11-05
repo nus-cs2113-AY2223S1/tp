@@ -24,6 +24,11 @@ import java.util.logging.Logger;
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String recipeTitle = null;
+    private static final String NOT_PRESENT_IN_LIST_MESSAGE = " is not present in the list";
+    private static final int COMMAND_INPUT_LENGTH = 2;
+    private static final int COMMAND_INDEX_LENGTH = 2;
+    private static final int INDEX_AFTER_COMMAND = 2;
+    private static final int COMMAND_FLAG_INPUT_LENGTH = 3;
 
     /**
      * Parse the input command and returns respective executable command.
@@ -57,21 +62,20 @@ public class Parser {
         }
     }
 
-
     private static Command parseAddCommand() {
         try {
             GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
             return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
         } catch (FileNotFoundException e) {
             Storage.generateTemplateFile();
-            return new InvalidCommand("Template file is missing! Regenerate Template File! Please try again");
+            return new InvalidCommand(InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE);
         }
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
         String recipeTitleToDelete = "";
         try {
-            if (parsed.length >= 2) {
+            if (parsed.length >= COMMAND_INPUT_LENGTH) {
                 String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
@@ -86,10 +90,10 @@ public class Parser {
             }
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage("Index is not present in the list");
+            Ui.showMessage(InvalidCommand.INDEX_NOT_PRESENT_IN_LIST);
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + " is not present in the list");
+            Ui.showMessage(recipeTitleToDelete + NOT_PRESENT_IN_LIST_MESSAGE);
             return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "File not found when deleting the recipe file");
@@ -121,7 +125,7 @@ public class Parser {
     private static Command parseViewCommand(String[] parsed) {
         String recipeTitleToDelete = "";
         try {
-            if (parsed.length >= 2) {
+            if (parsed.length == COMMAND_INDEX_LENGTH) {
                 String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 1, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
@@ -135,21 +139,21 @@ public class Parser {
                 }
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage("Index is not present in the list");
+            Ui.showMessage(InvalidCommand.INDEX_NOT_PRESENT_IN_LIST);
             return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + " is not present in the list");
+            Ui.showMessage(recipeTitleToDelete + NOT_PRESENT_IN_LIST_MESSAGE);
             return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
         } catch (FileNotFoundException e) {
             logger.log(Level.WARNING, "File not found when deleting the recipe file");
             return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
         }
-        return new InvalidCommand("Try: " + ViewCommand.COMMAND_SYNTAX);
+        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }
 
     private static Command parseEditCommand(String[] parsed) {
         int index = -1;
-        if (parsed.length == 2) {
+        if (parsed.length == COMMAND_INDEX_LENGTH) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
                 assert index > -1;
@@ -164,14 +168,16 @@ public class Parser {
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
                 String path = Storage.titleToFilePath(title);
-                Storage.overwriteRecipeFile(targetRecipe, "", path);
-                return new InvalidCommand("Recipe File is missing! Regenerate Recipe File! Please try again!");
+
+                Storage.saveRecipe(targetRecipe, "", path);
+                return new InvalidCommand(InvalidCommand.RECIPE_FILE_MISSING_MESSAGE);
+
             } catch (IndexOutOfBoundsException e) {
-                return new InvalidCommand("The index is out of bound! Please try again");
+                return new InvalidCommand(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (NumberFormatException e) {
-                return new InvalidCommand("The index format in not a positive integer within list!");
+                return new InvalidCommand(InvalidCommand.INDEX_NOT_POSITIVE_INTEGER);
             }
-        } else if (parsed.length > 2) {
+        } else if (parsed.length >= COMMAND_FLAG_INPUT_LENGTH) {
             try {
                 index = Integer.parseInt(parsed[1]) - 1;
                 assert index > -1;
@@ -181,7 +187,7 @@ public class Parser {
                 editedRecipe.addIngredients(originalRecipe.getIngredients());
                 editedRecipe.addSteps(originalRecipe.getSteps());
 
-                FlagType[] flags = FlagParser.getFlags(parsed);
+                FlagType[] flags = FlagParser.getCommandAndRecipeFlags(parsed);
                 if (flags == null) {
                     return new InvalidCommand();
                 }
@@ -189,7 +195,7 @@ public class Parser {
             } catch (NumberFormatException n) {
                 return new InvalidCommand();
             } catch (IndexOutOfBoundsException e) {
-                Ui.showMessage("Recipe index specified is out of range!");
+                Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             } catch (Exception e) {
                 return new InvalidCommand(e.getMessage());
@@ -200,23 +206,22 @@ public class Parser {
 
     private static Command parseFindCommand(String[] parsed) {
 
-        if (parsed.length >= 2) {
-            String[] inputArray = Arrays.copyOfRange(parsed, 1, parsed.length);
+        if (parsed.length >= COMMAND_FLAG_INPUT_LENGTH) {
+            FlagType flag = FlagParser.getRecipeFlag(parsed);
+            String[] inputArray = Arrays.copyOfRange(parsed, INDEX_AFTER_COMMAND, parsed.length);
             String input = convertStringArrayToString(inputArray);
-            return new FindCommand(input);
+            return new FindCommand(flag, input);
         } else {
             return new InvalidCommand(FindCommand.CORRECT_FORMAT);
         }
     }
 
+
     public static Command parseHelpCommand(String[] parsed) {
 
-        if (parsed.length > 2) {
-            return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
-        } else if (parsed.length == 1) {
-            return new HelpCommand("help");
-            // no argument input, show help message for /help
+        if (parsed.length == COMMAND_INPUT_LENGTH) {
+            return new HelpCommand(parsed[1]);
         }
-        return new HelpCommand(parsed[1]);
+        return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
     }
 }
