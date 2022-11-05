@@ -541,7 +541,12 @@ public class TransactionList {
         timeInsightsValues.add(Integer.toString(timeExpense));
         timeInsightsValues.add(Integer.toString(timeSavings));
 
-        timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
+        if (timeExpense == NO_AMOUNT_VALUE && timeIncome == NO_AMOUNT_VALUE) {
+            timeInsightsValues.add("There is no spending habit available.");
+        } else {
+            timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
+        }
+
         return timeInsightsValues;
     }
 
