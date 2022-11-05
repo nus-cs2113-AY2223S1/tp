@@ -5,6 +5,7 @@ import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
+import task.Task;
 
 import javax.sound.sampled.Line;
 import java.util.ArrayList;
@@ -39,12 +40,14 @@ public class TaskList {
         // To find the appointment that the task is allocated to
         Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
+            Task.id--;
             throw new DukeException();
         }
 
         // To find the employee that the task is allocated to
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
+            Task.id--;
             throw new DukeException();
         }
 

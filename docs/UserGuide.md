@@ -15,18 +15,18 @@ Command Line Interface (CLI) and is able to display information quickly with min
 2. pet view
 3. service add d/haircut
 4. employee add n/chris
-5. appointment add s/haircut p/Eliza d/30/02/2022
+5. appointment add s/haircut p/2001 d/2022-12-29
 6. appointment view
-7. task add i/1 e/1 d/prepare hot water
-8. task add i/1 e/1 d/wash hair
+7. task add i/3001 e/1001 d/prepare hot water
+8. task add i/3001 e/1001 d/wash hair
 9. task view
-10. task finish i/1
-11. task finish i/2
+10. task finish i/4001
+11. task finish i/4002
 12. task view
 13. appointment view
 14. pet view
-15. appointment remove i/1
-16. pet remove i/1
+15. appointment remove i/3001
+16. pet remove i/2001
 17. bye
 
 
@@ -35,22 +35,31 @@ Note:
 
 * Parameters appear in the form of a/PARAMETER
 * Words in UPPER_CASE are parameters to be specified by the user.
+* Indexes are absolute index that will not change even after some items are deleted.
+Index list
+* 1XXX: employee
+* 2XXX: pet 
+* 3XXX: appointment
+* 4XXX: task
+* 5XXX: service
 
 ### Appointment Management
 
 #### Add an appointment: `appointment add`
 Adds a new appointment given service, pet, and date involved.
 
-Format: `appointment add s/SERVICE p/PET d/DATE`
-* The `SERVICE` and `PET` must already exist in service list and pet list.
-* Service list can be found by `service view`
-* Pet list can be found by `pet view`
+Format: `appointment add s/SERVICE_ID p/PET_ID d/DATE`
+* The service and pet that `SERVICE_ID` and `PET_ID` refer to must already exist in service list and pet list.
+* `SERVICE_ID` can be found by `service view`
+* `PET_ID` can be found by `pet view`
+* `Date` should be in the format of `YYYY-MM-DD`
+* `Date` has to be later than current date
 
 Example of usage:
 
-`appointment add s/bath p/Muse d/01/02/2022`
+`appointment add s/5001 p/2001 d/2022-12-01`
 
-`appointment add s/haircut p/Donald d/30/02/2022`
+`appointment add s/5002 p/2002 d/2022-12-02`
 
 #### Remove an appointment: `appointment remove`
 Remove a particular appointment by INDEX. All tasks belong to this appointment will also be deleted.
@@ -61,7 +70,7 @@ Format: `appointment remove i/APPOINTMENT_ID`
 
 Example of usage: 
 
-`appointment remove i/1`
+`appointment remove i/3001`
 
 #### View all appointments: `appointment view`
 View list of all appointments.
@@ -84,7 +93,7 @@ Format: `task add i/APPOINTMENT_ID e/EMPLOYEE_ID d/DESCRIPTION`
 
 Example of usage:
 
-`task add i/1 e/2 d/prepare hot water`
+`task add i/3001 e/1001 d/prepare hot water`
 
 #### Remove a task: `task remove`
 Remove a particular task by TASK_ID
@@ -94,7 +103,7 @@ Format: `task remove i/TASK_ID`
 * The `TASK_ID` can be found by `task view`
 
 Example of usage:
-`task remove i/1`
+`task remove i/4001`
 
 #### View all tasks: `task view`
 View list of all tasks
@@ -110,7 +119,7 @@ Format: `task reassign i/TASK_ID e/EMPLOYEE_ID`
 * and The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
-`task reassign i/1 e/1`
+`task reassign i/4001 e/1001`
 
 
 #### Finish a task: `task finish`
@@ -127,7 +136,7 @@ Format: `task finish i/TASK_ID`
 * The `TASK_ID` can be found by `task view`
 
 Example of usage:
-`task finish i/1`
+`task finish i/4001`
 
 ### Employee Management
 
@@ -148,7 +157,7 @@ Format: `employee remove i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
-`employee remove i/1`
+`employee remove i/1001`
 
 
 #### View all employee: `employee view`
@@ -163,7 +172,7 @@ Format: `employee task i/EMPLOYEE_ID`
 * The `EMPLOYEE_ID` can be found by `employee view`
 
 Example of usage:
-`employee task i/1`
+`employee task i/1001`
 
 ---
 ### Pet Management
@@ -171,8 +180,8 @@ Example of usage:
 Add a pet to the list of pets in the clinic. 
 Base on the value of health, 1 out of 10 different status of pets will be generated and assigned to pet. 
 
-`HEALTH = 0`: happy / boring / sleepy / energetic / fantastic
-`HEALTH = 1`: exhausted / painful / injured / bleeding / dying
+* `HEALTH = 1`: happy / boring / sleepy / energetic / fantastic
+* `HEALTH = 0`: exhausted / painful / injured / bleeding / dying
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
@@ -191,7 +200,7 @@ Format: `pet remove i/PET_ID`
 * The `PET_ID` can be found by `pet view`
 
 Example of usage:
-`pet remove i/1`
+`pet remove i/2001`
 
 #### View all pets: `pet view`
 View all pets registered
@@ -218,7 +227,7 @@ Format: `service remove i/SERVICE_ID`
 * The `SERVICE_ID` can be found by `service view`
 
 Example of usage:
-`service remove i/1`
+`service remove i/5001`
 
 #### View all services: `service view`
 View all services provided in the clinic
@@ -228,9 +237,9 @@ Format: `service view`
 ### Exit: `bye`
 
 ---
-## command.command Summary
+## Command Summary
 
-* Add appointment `appointment add s/SERVICE p/PET d/DATE`
+* Add appointment `appointment add s/SERVICE_ID p/PET_ID d/DATE`
 * Remove appointment `appointment remove i/APPOINTMENT_ID`
 * View appointments `appointment view`
 

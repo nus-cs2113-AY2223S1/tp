@@ -43,11 +43,15 @@ public class ServiceParser {
 
     public Command prepareAddService(String input) {
         try {
-            int startOfD = input.indexOf(" d/");
+            int startOfD = input.indexOf(parser.descriptionFlag);
             if (startOfD == -1 || !input.substring(0, startOfD).isEmpty()) {
                 throw new DukeException();
             }
             String description = input.substring(startOfD + lengthOfSignature);
+            if (description.isEmpty()) {
+                throw new DukeException();
+            }
+
             return new AddServiceCommand(description);
         } catch (DukeException e) {
             System.out.println("Sorry, format of parameters entered for adding a service is invalid");

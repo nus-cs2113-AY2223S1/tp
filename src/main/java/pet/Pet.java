@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Pet {
 
-    public static int id = 0;
+    public static int id = 2000;
     public final int petId;
     public String name;
     public String species;
@@ -20,14 +20,15 @@ public class Pet {
     public Pet(String name, String species, boolean isHealthy) {
         this.name = name;
         this.species = species;
-        this.petId = id++;
+        this.petId = ++id;
         this.isHealthy = isHealthy;
         initPetStatus();
     }
 
     public String toString() {
-        return String.format("I am a cute %s, my name is %s, and I am currently %s",
-                species, name, status);
+        String health = isHealthy ? "healthy" : "unhealthy";
+        return String.format("I am a cute %s, my name is %s, and I am currently %s and %s",
+                species, name, health, status);
     }
 
     private void initPetStatus() {
