@@ -11,6 +11,7 @@ import java.util.Objects;
 import static appointment.AppointmentList.findAppointment;
 
 public class TaskList {
+
     static ArrayList<Task> tasks = new ArrayList<>();
 
     //view every single task in the clinic
@@ -26,23 +27,29 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Function adds a new Task to the overall TaskList and to the associated Appointment and Employee's Task list
+     * @param task
+     * @throws DukeException
+     */
     public static void addTask(Task task) throws DukeException {
 
-        // appointment aggregate task
+        // Find the appointment that the Task is associated with
         Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
             Task.idCounter--;
             throw new DukeException();
         }
 
-        // employee aggregate task
+        // Find the employee that the Task is associated with
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
             Task.idCounter--;
             throw new DukeException();
         }
 
-        // only after passing the check, add this task
+        // After successfully finding the associated Appointment and Employee
+        // Then, add Task to overall TaskList and to the respective Appointment and Employee
         tasks.add(task);
         appointment.addTaskToAppointment(task);
         appointment.updateAppointmentStatus();
@@ -56,6 +63,12 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
+    /**
+     * Function reassigns a task from one employee to another
+     * @param taskId
+     * @param employeeId
+     * @throws DukeException
+     */
     // assign task to be done by another person
     public static void reassignTask(int taskId, int employeeId) throws DukeException {
         if (TaskList.findTask(taskId) == null) {
@@ -65,19 +78,27 @@ public class TaskList {
             throw new DukeException();
         }
         Task taskToReassign = TaskList.findTask(taskId);
+
         // Remove from original Employee's task list
         if (taskToReassign != null) {
-            EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
-            // Add to new Employee's task list
-            EmployeeList.findEmployee(employeeId).addTaskToEmployee(taskToReassign);
+            // Find and remove task from original employee
+            Employee originalEmployee = EmployeeList.findEmployee(taskToReassign.getEmployeeId());
+            originalEmployee.removeTaskFromEmployee(taskId);
+            // Find and add task to the new employee's task list
+            Employee newEmployee = EmployeeList.findEmployee(employeeId);
+            newEmployee.addTaskToEmployee(taskToReassign);
             System.out.print("Got it. Task " + taskId + " has been reassigned from ");
             System.out.print(EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName());
             System.out.println(" to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
-            // Change employeeId in taskToReassign
+            // Change employeeId in the reassigned task
             taskToReassign.setEmployeeId(employeeId);
         }
     }
 
+    /**
+     * Function finds and removes a Task from the overall TaskList and from the associated appointment and employee
+     * @param taskId
+     */
     public static void removeTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
@@ -96,6 +117,11 @@ public class TaskList {
         System.out.println("Sorry, no corresponding task found.");
     }
 
+    /**
+     * Helper function to find a task from the overall TaskList by task ID
+     * @param taskId
+     * @return
+     */
     public static Task findTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
@@ -105,6 +131,11 @@ public class TaskList {
         return null;
     }
 
+
+    /**
+     * Finds and marks a task as completed
+     * @param taskId
+     */
     public static void finishTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {

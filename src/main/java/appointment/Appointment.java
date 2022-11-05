@@ -56,7 +56,9 @@ public class Appointment {
         return null;
     }
 
-    // view tasks for a find appointment
+    /**
+     * View the tasks associated with this instance of Appointment
+     */
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
         for (Task task: tasks) {
@@ -106,6 +108,11 @@ public class Appointment {
         return appointmentDate;
     }
 
+
+    /**
+     * Find and remove a particular task from this instance of appointment, by task ID
+     * @param taskId
+     */
     public void removeTaskFromAppointment(int taskId) {
         for (Task task: tasks) {
             if (task.getTaskId() == taskId) {
