@@ -14,7 +14,7 @@ class ViewCommandTest {
         Recipe addedRecipe = new Recipe("Example Title for View Command");
         RecipeList.addRecipe(addedRecipe);
         RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/view 1";
+        String input = "/view -id 1";
         String expected = "TITLE:\n" + "Example Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
                 + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
         Command commandExecuted = Parser.parseCommand(input);

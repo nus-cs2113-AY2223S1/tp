@@ -24,7 +24,7 @@ public class ExitCommand extends Command {
      */
     public CommandResult execute() {
         // AllRecipe
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
 
         //Delete all recipes in the folder
         File directory = new File(Storage.RECIPES_FOLDER_PATH);
