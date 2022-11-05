@@ -125,6 +125,24 @@ prescription.
 
 ![](images/PrescriptionListAdd.png)
 
+#### Viewing prescriptions
+
+There are 3 viewing methods that users can view a list of prescriptions in different filter. The filters are:
+* No filters: `viewAll`
+* Patient prescription filter: `viewPatientPrescription`
+* Patient active prescription filter: `viewActivePatientPrescription`
+
+Here is an example of how viewing with a patient prescription filter works:
+1. When the function `viewPatientPrescription(ui, patientId)` is called, it first checks whether the list is empty and
+has no prescription associated with the given `patientId`. If either case is satisfied, `ui` prints a no
+matching prescription message and returns.
+2. If not, then `prescriptionList` is iterated. Whenever a `prescription`'s `patientId` matches the given `patientId`, 
+`ui` prints the `prescription` details.
+
+![](images/PrescriptionListViewPatientPrescription.png)
+
+The other 2 filters work similarly with slightly different conditions checked.
+
 #### Editing a prescription
 Users are allowed to edit the medicine name, dosage and time interval of the prescription. However, it is only allowed
 if the updated prescription does not repeat other existing prescriptions. The action works as follow:

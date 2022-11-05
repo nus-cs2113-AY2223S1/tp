@@ -1,0 +1,45 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+box
+participant ":PrescriptionList" as A
+participant "prescriptionList\n:ArrayList<Prescription>" as B
+participant "prescription\n:Prescription" as C
+end box
+
+participant "ui:UI" as D
+
+[-> A : viewPatientPrescription(ui, patientId)
+activate A
+
+opt isEmpty() or not hasPatientPrescription(patientId)
+A -> D : printNoMatchingPrescriptionMessage()
+activate D
+return
+[<-- A
+end
+
+A -> D : printViewAllPrescriptionsMessage()
+activate D
+return
+
+loop until i == prescriptionList.size()
+    A -> B : get(i)
+    activate B
+    return prescription:Prescription
+
+    A -> C : isMatchedPatient(patientId)
+    activate C
+    return isMatched:boolean
+
+    opt isMatched == true
+        A -> D : printPrescriptionWithIndex(i+1, prescription.toString())
+        activate D
+        return
+    end
+end
+
+return
+
+@enduml
