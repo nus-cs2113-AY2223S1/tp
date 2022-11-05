@@ -84,7 +84,7 @@ ____________________________________________________________________________
 
 ### Add Command: `/add`
 
-We have incorporated 4 types of add commands.
+We have incorporated 3 types of add commands.
 
 #### 1. Add Command for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`
 
