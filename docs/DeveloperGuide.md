@@ -383,20 +383,28 @@ to create duplicate code to fulfil similar needs as the timetable is needed by o
 
 #### 3.4.9 ByeCommand
 
+![ByeCommand](images/ByeCommandClass.png)
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
+![ListCommand](images/ListCommandCLass.png)  
 
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
 
+![ExportCommand](images/ExportCommandClass.png)  
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links. 
 
 #### 3.4.12 ImportCommand
+
+![ImportCommand](images/importCommandClass.png)  
 
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
@@ -475,7 +483,7 @@ Storing as <code>.json</code> file
 - would have to implement another function for export/import function
 
 Using the java preference API, `java.util.prefs.Preferences` to save user preferences
-- will not pass the github automated checkers
+- will not pass the GitHub automated checkers since it access and stores data in the registry.
 
 ## 4. Documentation
 

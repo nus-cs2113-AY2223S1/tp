@@ -1,5 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/class-diagram
 hide circle
 skinparam classAttributeIconSize 0
 
