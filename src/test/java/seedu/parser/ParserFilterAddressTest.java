@@ -48,7 +48,7 @@ public class ParserFilterAddressTest {
         Command command = new Parser().parseCommand(input, null, carparkList, null);
         String result = command.execute().showToUser;
         Assertions.assertEquals("Empty argument. Valid command(s): \n"
-                + "`filter -address QUERY` or `fil -add QUERY` \t: Filter carparks based on its Carpark address."
-                , result);
+                + "`filter -address QUERY` or `fil -add QUERY` \t: Filter carparks based on its Carpark address.",
+                result);
     }
 }
