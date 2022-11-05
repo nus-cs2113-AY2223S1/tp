@@ -594,14 +594,26 @@ java -jar PropertyRentalManager.jar
        Expected: Terminal shows invalid budget message.
 
 
-6. Unsuccessful addition of client (Empty Client Detail)
+6. Unsuccessful addition of client (Duplication)
+    1. Prerequisites:
+        * Successful add a client.
+        * Ensure that second client entry has either the same name, contact number. email or any combinations.
+    2. Test cases:
+       
+       `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+        
+       `add -client n/Gary Oaks c/60876543 e/garyoaks@example.com b/1550`  
+       Expected: Terminal shows duplicating client error message along with the details of existing client.
+
+
+7. Unsuccessful addition of client (Empty Client Detail)
     1. Prerequisites:
         * Ensure that no client detail is provided.
     2. Test case: `add -client`  
        Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
 
 
-7. Unsuccessful addition of client (Missing Client Detail)
+8. Unsuccessful addition of client (Missing Client Detail)
     1. Prerequisites:
         * Ensure that all client flags (except `e/`) are included in the right order.
         * Ensure that at least one of the client details (except email) after any client flags is blank.
@@ -609,14 +621,14 @@ java -jar PropertyRentalManager.jar
        Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
 
 
-8. Unsuccessful addition of client (Missing Client Flag)
+9. Unsuccessful addition of client (Missing Client Flag)
     1. Prerequisites:
         * Ensure that at least one of the client flags (except `e/`) is missing.
     2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com 1550`  
        Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
 
 
-9. Unsuccessful addition of client (Wrong Ordering of Client Flags)
+10. Unsuccessful addition of client (Wrong Ordering of Client Flags)
     1. Prerequisites:
        * Ensure that all client flags (except `e/`) are present.
        * Ensure that client flags are not in the right order.
@@ -678,14 +690,26 @@ java -jar PropertyRentalManager.jar
        Expected: Terminal shows address format and unit type mismatch message along with required formats and examples.
 
 
-7. Unsuccessful addition of property (Empty Property Detail)
+7. Unsuccessful addition of property (Duplication)
+    1. Prerequisites:
+        * Successful add a property.
+        * Ensure that second property entry's address is identical to the first. Its address can have differing letter cases.
+    2. Test cases:
+       
+       `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+        
+       `add -property n/Joe a/25A pAlLeT ToWn, S121111 p/1600 t/LP BGL`   
+       Expected: Terminal shows duplicating property error message along with details of existing property.
+
+
+8. Unsuccessful addition of property (Empty Property Detail)
     1. Prerequisites:
         * Ensure that no property detail is provided.
     2. Test case: `add -property`  
        Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
 
 
-8. Unsuccessful addition of property (Missing Property Detail)
+9. Unsuccessful addition of property (Missing Property Detail)
     1. Prerequisites:
         * Ensure that all property flags are included in the right order.
         * Ensure that at least one of the property details after any property flags is blank.
@@ -693,14 +717,14 @@ java -jar PropertyRentalManager.jar
        Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
 
 
-9. Unsuccessful addition of property (Missing Property Flag)
+10. Unsuccessful addition of property (Missing Property Flag)
     1. Prerequisites:
         * Ensure that at least one of the property flags is missing.
-   2. Test case: `add -property Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+    2. Test case: `add -property Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
        Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
 
 
-10. Unsuccessful addition of property (Wrong Ordering of Property Flags)
+11. Unsuccessful addition of property (Wrong Ordering of Property Flags)
     1. Prerequisites:
         * Ensure that all property flags are present.
         * Ensure that property flags are not in the right order.
