@@ -1,9 +1,11 @@
 package recipeditor.parser;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import recipeditor.Recipeditor;
 import recipeditor.command.Command;
 import recipeditor.command.CommandResult;
 import recipeditor.command.DeleteCommand;
@@ -14,14 +16,32 @@ import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+import recipeditor.exception.InvalidFlagException;
+import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
+import javax.swing.text.View;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 class ParserTest {
+
+    @BeforeAll
+    public static void setUp() {
+        Recipe recipe = new Recipe("test title", "test_description");
+        recipe.addIngredient(new Ingredient("ingredient", 100.0, "g"));
+        recipe.addStep("step 1");
+        recipe.addStep("finshing step ~");
+        RecipeList.addRecipe(recipe);
+        RecipeList.addRecipeTitle(recipe.getTitle());
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        RecipeList.deleteRecipeFromTitle("test title");
+    }
 
     @Test
     void parseList_mixOfDifferentCases_returnListOfRecipeTitles() {
@@ -81,12 +101,8 @@ class ParserTest {
 
     @Test
     void completeEditCommand_correctEditCommandFormat_correspondingEditCommand() {
-        Recipe addedRecipe = new Recipe();
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
         String input = "/edit 1 -add -i tomato/2/whole";
         assertEquals(EditCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("");
     }
 
     @Test
@@ -108,16 +124,12 @@ class ParserTest {
 
     @Test
     void completeFindRecipeTitleCommand_correctFindCommandFormat_FindRecipeTitleThatContainsFindInput() {
-        Recipe addedRecipe = new Recipe("Example Title for Find Command");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
         String input = "/find -t title";
-        String expected = System.lineSeparator() + "1. Example Title for Find Command";
+        String expected = System.lineSeparator() + "1. test title";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title for Find Command");
     }
 
     @Test
@@ -133,19 +145,15 @@ class ParserTest {
 
     @Test
     void completeListCommand_correctListCommandFormat_listRecipeTitles() {
-        Recipe addedRecipe = new Recipe("Example Title");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
         String input = "/list";
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         System.setOut(new PrintStream(outContent));
         Ui.showMessage(commandExecutedResult.getMessage());
-        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. Example Title";
+        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. test title";
         assertEquals(expected.trim(), outContent.toString().trim());
         assertEquals(ListCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title");
     }
 
     @Test
@@ -159,16 +167,126 @@ class ParserTest {
 
     @Test
     void completeViewCommand_correctViewCommandFormat_showSpecificRecipe() {
-        Recipe addedRecipe = new Recipe("Example Title for View Command");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
         String input = "/view -id 1";
-        String expected = "TITLE:\n" + "Example Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
-                + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
+        String expected = RecipeList.getRecipe(0).getRecipeAttributesFormatted();
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title for View Command");
     }
+
+    @Test
+    void deleteCommand_byIndex_success() {
+        String input = "/delete -id 1";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = '\n' + RecipeList.getRecipe(0).getTitle()
+                + " is deleted from the recipe list." + '\n';
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        setUp();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(DeleteCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void deleteCommand_byIndex_indexOutOfBound() {
+        String input = "/delete -id 0";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void DeleteCommand_byIndex_invalidIndex() {
+        String input = "/delete -id index";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void DeleteCommand_byTitle_success() {
+        String input = "/delete -t test title";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = '\n' + RecipeList.getRecipe(0).getTitle()
+                + " is deleted from the recipe list." + '\n';
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        setUp();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(DeleteCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void DeleteCommand_byTitle_missingTitle() {
+        String input = "/delete -t ";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void DeleteCommand_invalidFlag() {
+        String input = "/delete -d ";
+        Command deleteCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
+        String commandExecutedResult = deleteCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void ViewCommand_byIndex_indexOutOfBound() {
+        String input = "/view -id 0";
+        Command viewCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String commandExecutedResult = viewCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void ViewCommand_byIndex_invalidIndex() {
+        String input = "/view -id index";
+        Command viewCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String commandExecutedResult = viewCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void ViewCommand_byTitle_success() {
+        String input = "/view -t test title";
+        Command viewCommand = Parser.parseCommand(input);
+        String expected = RecipeList.getRecipe(0).getRecipeAttributesFormatted();
+        String commandExecutedResult = viewCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void ViewCommand_byTitle_missingTitle() {
+        String input = "/view -t ";
+        Command viewCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String commandExecutedResult = viewCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void ViewCommand_invalidFlag() {
+        String input = "/view -d ";
+        Command viewCommand = Parser.parseCommand(input);
+        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String commandExecutedResult = viewCommand.execute().getMessage();
+        assertEquals(expected, commandExecutedResult);
+        assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
 }
