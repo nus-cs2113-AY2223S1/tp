@@ -4,11 +4,13 @@ hide footbox
 
 
 participant ":OneDoc" as A
+
 participant ":Storage" as D
+participant ":File" as F
 participant ":PatientList" as C
 
 participant ":ArrayList" as E
-participant ":File" as F
+
 
 activate A
 
@@ -49,15 +51,19 @@ end
 D -> D: loadPatients(patientsList: PatientList)
 activate D
 loop fileScanner.hasNext()
+opt input is valid
 D -> C: loadPatient(inputs: String[])
 activate C
 C -> E: add(patient: Patient)
 activate E
 return
+end
 return
 
 end
-
+D -> D: savePatientData(patientsList: PatientList)
+activate D
+return
 return
 
 

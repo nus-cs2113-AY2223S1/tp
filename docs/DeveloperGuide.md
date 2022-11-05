@@ -4,31 +4,33 @@
 
 Parser class and its functions are largely adapted from Ria's IP and help from regex101 (https://regex101.com/).
 
-Storage class and its functions are largely adapted from Dhanish's IP on Duke.
+Storage class and its functions are largely adapted from [Dhanish's IP](https://github.com/dhanish265/ip) on Duke.
 
 ## Design & implementation
 
-
 ### PatientList Component
 
-The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
-a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
+The `PatientList` Component,
+* stores the list of patients
+* can add new patients to the list
+* can modify the details of patients
+* allows users to view all patients
+* allows users to find a particular patient given ID
 
-At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, data is read from the
-relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
-ArrayList in PatientList. This finishes the initial set-up.
+![](images/PatientComponentClassDiagram.png)
+
+The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
+a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly, using a 
+UI object to print output where necessary.
+
+At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, invalid data is ignored
+while valid data is read from the relevant text files to create Patients that existed prior to the last closure of the program. The patients are then added to the
+ArrayList in PatientList. A final call to savePatientData rewrites the data files such that only valid data remain in them. This finishes the initial set-up.
 
 ![](images/PatientListInitialization.png)
 
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
-
-The `PatientList` Component,
- * stores the list of patients
- * can add new patients to the list
- * can modify the details of patients
- * allows users to view all patients
- * allows users to find a particular patient given ID
 
 **Important methods in PatientList class:**
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
@@ -55,7 +57,7 @@ The `VisitList` Component,
 * can view a specific visit
 * depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
 
-**Important Methods in `VisitList` class:**
+**Important methods in `VisitList` class:**
 * `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, `timeOfVisit` 
 and `reason`. `reason` is optional, and it can be left blank, and be modified later on via the `editReason` method.
 * `editReason` - This method allows user to edit reason for an existing visit, by specifying `index` of visit and `reason` for visit. `reason` must not be left blank here, 
@@ -65,9 +67,10 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-**How Adding a new Visit into the VisitList Works**
+**How adding a new `Visit` into the `VisitList` works**
 
 ![](images/VisitListAdd.png)
+
 1. `VisitList` is first called to add a new visit with the required details. This calls the constructor class of `Visit` class to create an instance of `Visit`
 2. The new visit is then added to the `ArrayList<Visit>`
 3. Lastly, the 'UI' class is called, to print a confirmation message that the visit has been added, and prints out the details of this new visit.
@@ -88,9 +91,9 @@ component)
 
 **Methods in `PrescriptionList` class:**
 
-* **`add`** - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+* **`add`** - This method allows user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
 `timeInterval`.
-* **`viewAll`** - This methods iterates through the list of all prescriptions and print the details of prescriptions from
+* **`viewAll`** - This method iterates through the list of all prescriptions and print the details of prescriptions from
 all patients.
 * **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
 prescriptions from the specified `patientId`.
@@ -109,24 +112,59 @@ specified index
 * `dosage` 
 * `isActive` - Whether is the prescription currently active or not
 
-How adding a new prescription into the list works:
+How adding a new `Prescription` into the `PrescriptionList` works
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
 2. The new prescription is then added to the `ArrayList<Prescription>`
-3. Lastly, `UI` prints an acknowledge message of what the new prescription has.
+3. Lastly, `UI` prints an acknowledgement message of what the new prescription has.
 
 ![](images/PrescriptionListAdd.png)
 
-How activating/deactivating an existing prescription in the list works:
+How activating/deactivating an existing prescription in the list works
 
 1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
 the index in the array.
 2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
 3. Then, the `prescriptionEdited` is set active.
-4. Lastly, `UI` prints an acknowledge message of the most updated details of the prescription.
+4. Lastly, `UI` prints an acknowledgement message of the most updated details of the prescription.
 
 ![](images/PrescriptionListActivate.png)
+
+### Storage Component
+
+The `Storage` component,
+* initialises the files required for data transcription
+* reads the relevant data files (if previously existent) and loads them into the program during the start of the program
+* saves data into files whenever changes are made (through operations such as add and edit)
+
+![](images/StorageComponentClassDiagram.png)
+
+The class diagram summarises the functions of the `Storage` component at a glance. 
+The `Storage` class has dependencies on the `Scanner` (used to read files) and `FileWriter` (used to write to files) classes.
+It also has a composition relationship with 3 `File` objects, that are used to store data.
+
+**Important methods in the `Storage` class:**
+
+* `loadData` - This method initializes the data file objects that are to be read from, and calls the relevant methods to
+load pre-existing data. Subsequently, it makes a call to relevant methods to rewrite the text files such that only valid
+data remain in them.
+* `loadPatients`, `loadVisits`, `loadPrescriptions` - each of these methods read data from corresponding text files and 
+check if they are valid. If so, initialise a relevant `Patient`, `Visit`, or `Prescription` and adds them to the relevant lists.
+* `savePatientData`, `saveVisitData`, `savePrescriptionData` - each of these methods take in the list of `Patient`s, `Visit`s, 
+or `Prescription`s, processes them one by one and calls the relevant helper method to log its data into the appropriate data 
+file in a pre-specified format.
+
+In particular, we can observe exactly how, for instance, `savePatientData` works.
+
+![](images/SavingPatientDataSequenceDiagram.png)
+1. The method, once called, creates a new `FileWriter` object used to write data.
+2. It calls `logPatients`, passing in the list of `Patient`s and the `FileWriter` object created.
+3. This method, process the list of `Patient`s one by one, calling another method called `logPatientIntoDataFile`, 
+passing the `Patient` and `FileWriter` objects.
+4. The most recently called method writes the data of this `Patient` attribute by attribute in a pre-specified format.
+5. After all iterations, control is returned to the class that called the `savePatientData` method.
+
 
 ## Product scope
 ### Target user profile
