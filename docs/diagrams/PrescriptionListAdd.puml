@@ -1,5 +1,6 @@
 @startuml
 hide footbox
+skinparam sequenceReferenceBackgroundColor #White
 
 box
 participant ":PrescriptionList" as A
@@ -27,26 +28,18 @@ opt hasDuplicate == false
     activate C
     return
 
-    A -> B : toString()
-    activate B
-    return prescriptionString:String
-
-    A -> C : indexOf(prescription)
-    activate C
-    return index:int
+    ref over A, B, C
+        get prescriptionString and index of prescription
+    end
 
     A -> D : printMessageAndObject(prescriptionString, \nUI.ADD_PRESCRIPTION, index, UI.PRESCRIPTION)
     activate D
     return
 
 else else
-    A -> B : toString()
-    activate B
-    return prescriptionString:String
-
-    A -> C : indexOf(prescription)
-    activate C
-    return index:int
+    ref over A, B, C
+            get prescriptionString and index of prescription
+        end
 
     A -> D : printMessageAndObject(prescriptionString, \nUI.DUPLICATE_PRESCRIPTION_MESSAGE, index, UI.PRESCRIPTION)
     activate D
