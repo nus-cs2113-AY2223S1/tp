@@ -11,25 +11,17 @@ class Ingredient
 package Ui {
 class Ui
 class AddMode
+class Editor
 }
 
-class Ui {
-'    - {static} DIVIDER = "-------"
-'    - {static} START = "Program starting!"
-'    - {static} COMMAND = "Parseable command at the moment: add, delete, list, view, exit"
-'    - {static} EXIT = "Program exiting"
-'    - {static} PROMPT = ">>>"
-}
-
-class AddMode {
-'    Recipe addedRecipe
-'    boolean isValid
-}
+class Storage
 
 Ui ..> CommandResult
 
 AddMode --> Recipe
 AddMode --> Ingredient
+RecipeList *-right-> Recipe
 Recipe *-right-> Ingredient
+Editor .down-> Storage
 
 @enduml

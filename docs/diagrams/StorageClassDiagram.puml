@@ -10,11 +10,20 @@ class Recipe
 class Ingredient
 }
 
+package Parser {
+class RecipeFileParser
+class TitleFileParser
+}
+
+class ParseFileException
+
 Storage -up-> Ui
 Storage -down-> Recipe
 Storage -down-> Ingredient
 Storage -down-> RecipeList
+Storage ..> RecipeFileParser
+Storage ..> TitleFileParser
+Storage -left-> ParseFileException
 
 Recipe *-right-> Ingredient
-Storage ..> Recipe
 @enduml
