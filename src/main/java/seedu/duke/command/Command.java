@@ -18,6 +18,4 @@ public abstract class Command {
     public abstract void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList,
                                  FoodList foodList, RecordList recordList);
 
-    public abstract void setData(Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
-                                 RecordList recordList);
 }
