@@ -50,6 +50,10 @@ public class PrescriptionList {
         return prescriptionsList.isEmpty();
     }
 
+    /**
+     * Show the list of all prescriptions from all patients.
+     * @param ui is the user interface.
+     */
     public void viewAll(UI ui) {
         if (isEmpty()) {
             ui.printNoPrescriptionMessage();
@@ -62,6 +66,11 @@ public class PrescriptionList {
         }
     }
 
+    /**
+     * Show the list of both active and inactive prescriptions of a patient with a specific patientId.
+     * @param ui is the user interface instance.
+     * @param patientId is the ID of the patient.
+     */
     public void viewPatientPrescription(UI ui, String patientId) {
         if (isEmpty() || !hasPatientPrescription(patientId)) {
             ui.printNoMatchingPrescriptionMessage();
@@ -76,6 +85,11 @@ public class PrescriptionList {
         }
     }
 
+    /**
+     * Show the list of active prescriptions of a patient with a specific patientId.
+     * @param ui is the user interface instance.
+     * @param patientId is the ID of the patient.
+     */
     public void viewActivePatientPrescription(UI ui, String patientId) {
         if (isEmpty() || !hasActivePatientPrescription(patientId)) {
             ui.printNoMatchingActivePrescriptionMessage();
