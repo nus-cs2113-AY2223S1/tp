@@ -42,7 +42,7 @@ public class CommandAddClient extends CommandAdd {
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        logger.log(Level.INFO, "Adding new client now");
+        logger.log(Level.FINEST, "Adding new client now");
         clientList.addClient(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth);
         ui.showClientAddedConfirmationMessage(clientList);
 

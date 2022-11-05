@@ -12,7 +12,7 @@ import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
  */
 public class CheckPropertyMissingFlagException extends ParseCheckException {
 
-    private static int FIRST_FLAG_INDEX = 0;
+    private static final int FIRST_FLAG_INDEX = 0;
     private String missingFlag = CHECK_PROPERTY_FLAGS[FIRST_FLAG_INDEX];
 
     public CheckPropertyMissingFlagException() {

@@ -55,14 +55,18 @@ The list feature has the following commands in it -
     * `p/` This is for price
     * `t/` This is for unit type
     * `-short` This is for the shorthand version(displays address, price and unit type)
+* `list -pair` This lists all clients and properties that have been paired, in no particular order.
+* `list -pair -short` This lists the -short version of all clients and properties that have been paired, in 
+no particular order
 
-There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
-the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
-these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
-CommandListEverything read and display using loops inside the overridden execute() method itself. The Commands which 
-display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
-methods to display their information, using methods present in Ui. The class structure is as follows - 
-![ListClassDiagram](diagrams/ListClassDiagram.png)
+There are 7 different classes, which each inherit from the Command class, and work in similar ways - 
+* They are executed when an object is created in the corresponding Parse class.
+* On execution, they read information about a single client or property and send it to the corresponding 
+display function in Ui
+* The Ui function then displays the necessary information.
+* Finally, it states the number of items present, and the Command object is no longer used.
+![ListClassDiagram](diagrams/ListClassDiagramIncludePairsFinal.png)
+Note: The C symbols are a result of the PlantUml layout.
 
 ---  
 
@@ -432,42 +436,51 @@ prevent entries retaining within pairingList after it has been deleted from clie
 There are 3 main steps whenever a list command needs to be executed
 * When the user enters any command, it first needs be understood. That is handled by the ParseManager class.
    Next, when the first word entered by the user is determined to be `list`, ParseManager itself then determines
-   the type of list command entered, including the tags. ParseListClient, ParseListProperty and ParseListEverything
-   are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty also determine
-   if tags have been entered, and if those tags are valid.
+   the type of list command entered, including the tags. ParseListClient, ParseListProperty, ParseListPair and
+ParseListEverything are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty
+also determine if tags have been entered, and if those tags are valid. ParseListPair also checks whether -short 
+has been added or not.
   ```
-        case COMMAND_LIST:
-            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
-            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
-            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
-            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
-            if (isListProperty) {
-                return new ParseListProperty(listCommandTypeAndFlags.get(1));
-            } else if (isListClient) {
-                return new ParseListClient(listCommandTypeAndFlags.get(1));
-            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
-                return new ParseListEverything();
-            } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
-            }
+      private Parser parseListCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+        ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_FLAG);
+        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_FLAG);
+        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_FLAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_FLAG);
+        if (isListProperty) {
+            return new ParseListProperty(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListClient) {
+            return new ParseListClient(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListEverything && listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX).isEmpty()) {
+            return new ParseListEverything();
+        } else if (isListPairs) {
+            return new ParseListPair(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else {
+            throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
+        }
+    }
   ```
 This block of code is part of ParseManager. It determines the type of list operation(-client, 
--property or -everything) and returns the corresponding object.  
+-property, -pair, or -everything) and returns the corresponding object.  
 Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
 throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
 
-* There are five different classes which handle each of the features described above. Each class inherits from the
-   abstract Command class, and reads information present in either the PropertyList or ClientList objects respectively.
+* There are seven different classes which handle each of the features described above. Each class inherits from the
+   abstract Command class, and reads information present in either the PropertyList object, ClientList object or both.
 
-The execute function retrieves the propertyList holding all the current properties. It then loops 
-through every property present. For every property, it passes it to the corresponding display function
-in Ui.
+* The execute function works in slightly different ways -  
+To list with tags(`ListClientsWithTags` and `ListPropertiesWithTags`), it calls the corresponding function. 
+That function then loops through all the information about clients and properties, and sends a Client or Property 
+object to the Ui class for printing
+* For all other cases, the execute function itself runs the loop, which reads every single client, property or pair,
+and sends individual objects to the Ui class for display.
 
 * Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
    The loop for printing every single client or property is present in the Command itself.
-  ![CommandListClientsClass](diagrams/CommandListClientsClass.png)
+  ![CommandListClientsClass](diagrams/CommandListClientsClassUpdated.png)
 The above is an example for CommandListClients. It reads from ClientList. Then, it displays each line
-using the displayOneClient function in Ui.  
+using the displayOneClient function in Ui. Note that the C tags for class are a result of the PlantUml 
+display.  
 The sequence diagram of the operation is as follows - 
 ![ListSequence](diagrams/ListSequenceUpdated.png)
 ___
@@ -495,22 +508,24 @@ ___
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                         | So that I can ...                                                    |
-|---------|----------|---------------------------------------|----------------------------------------------------------------------|
-| v1.0    | user     | add properties                        | keep track of properties                                             |
-| v1.0    | user     | add clients                           | keep track of clients                                                |
-| v1.0    | user     | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
-| v1.0    | user     | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
-| v1.0    | user     | view a list of properties             | find out what and how many properties I manage                       |
-| v1.0    | user     | view a list of clients                | find out what and how many clients I manage                          |
-| v1.0    | user     | check the details of a property       | view the property's information                                      |
-| v1.0    | user     | pair a client to a property           | record down which client is renting which property                   |
-| v1.0    | user     | unpair a client to a property         | update my rental records when a client is no longer renting property |
-| v1.0    | user     | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | user     | quit the app                          | free up memory for other applications                                |
-| v2.0    | user     | check the details of a client         | view the client's information                                        |
-| v2.0    | user     | search clients using their details    | easily find specific clients                                         |
-| v2.0    | user     | search properties using their details | easily find specific properties                                      |
+| Version | As a ... | I want to ...                                           | So that I can ...                                                    |
+|---------|----------|---------------------------------------------------------|----------------------------------------------------------------------|
+| v1.0    | user     | add properties                                          | keep track of properties                                             |
+| v1.0    | user     | add clients                                             | keep track of clients                                                |
+| v1.0    | user     | delete properties                                       | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | user     | delete clients                                          | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | user     | view a list of properties                               | find out what and how many properties I manage                       |
+| v1.0    | user     | view a list of clients                                  | find out what and how many clients I manage                          |
+| v1.0    | user     | check the details of a property                         | view the property's information                                      |
+| v1.0    | user     | pair a client to a property                             | record down which client is renting which property                   |
+| v1.0    | user     | unpair a client to a property                           | update my rental records when a client is no longer renting property |
+| v1.0    | user     | save my data                                            | used the data created from a previous use of the app                 |
+| v1.0    | user     | quit the app                                            | free up memory for other applications                                |
+| v2.0    | user     | check the details of a client                           | view the client's information                                        |
+| v2.0    | user     | search clients using their details                      | easily find specific clients                                         |
+| v2.0    | user     | search properties using their details                   | easily find specific properties                                      |
+| v2.0    | user     | list only specific details about clients and properties | Display the information I need without cluttering the screen         |
+| v2.1    | user     | view a list of pairings completed                       | Keep track of all pairings I have already made                       |
 
 ---
 
@@ -543,6 +558,125 @@ java -jar PropertyRentalManager.jar
 ### Delete
 
 ### List
+1. List clients with or without tags
+   1. Test case `list -client`  
+      Expected: All clients all listed with all their details. The format of details of each client is given below -  
+      ```
+      1. Client Name: Doja Cat
+         Client Contact Number: 93437878
+         Client Email: doja88@example.com
+         Client Budget: 2000
+      ```
+      It also lists the number of clients present at the time, after listing them all. The format for that is as follows - 
+      ```There are 2 clients in this list```
+   2. Test case: list -client TAG. We will use `list -client n/` to demonstrate  
+    Expected: Lists only the names of the clients. The format for each client is as follows -  
+      ```1.Doja Cat```  
+    It also lists the number of clients present in the list at the end
+   3. Test case: `list -client -short`  
+    Expected: Lists only the name and budget of all the clients present. The format is as follows -  
+    ```
+    1. Client Name: Doja Cat
+       Client Budget: 2000
+    ```
+    It also lists the number of clients present in the list in the end.  
+    All of these display the following when no clients are present in the list -  
+    ```There are 0 clients in this list```
+2. List properties with or without tags
+    1. Test case: `list -property`  
+       Expected: Lists all the properties with all their details  
+       The format for each property listed is as follows -  
+       ```
+       1. Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       ```
+       This also lists the number of properties present in the list at the end. The format for 
+       that is as follows -  
+       ```There is 1 property in this list```  
+   2. Test case: list -property TAG - `We will use list -property a/` to demonstrate  
+      Expected: Lists the address of every property present in the list. The format is - 
+        `1.	25 Lower Kent Ridge Rd, S119081`
+    It also lists the total number of properties present in the list
+   3. Test case: `list -property -short`  
+    Expected: Lists the address, unit type, and Rental Price of each property in the list. The format
+    is as follows - 
+      ```
+      1. Property Address: 25 Lower Kent Ridge Rd, S119081
+         Unit Type: LP Bungalow
+         Property Rental Price: 1000
+      ```
+      All of these display the following when no properties are present in the list -  
+    `There are 0 properties in this list`
+3. List pairs
+    1. Test case `list -pair`  
+     Expected: Lists all the pairs present in the list, in no particular order. It shows all the information
+     about the clients and properties present in each pair.
+       ```
+       Client:
+           Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       Property:
+           Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       ```
+       It also lists the number of pairs present in the list. The format is as follows -  
+       ```There is 1 pair in this list```
+   2. Test case `list -pair -short`
+    Expected: Lists the short details of both clients and properties described earlier, for every 
+    pair in the list. The format is as follows -  
+       ```
+       Client:
+          Client Name: Doja Cat
+          Client Budget: 2000
+       Property:
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Unit Type: LP Bungalow
+          Property Rental Price: 1000
+       ```
+      It also lists the total number of pairs present in the list.
+4. List everything
+    1. Test case `list -everything`  
+    Expected behaviour: Lists all information including and all details present in the list about clients, properties, and pairs.  
+    In this case, a single client and property are present in the list, and they are paired. This is the expected output -  
+       ```
+       Clients:
+       1.  Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       --------------------------------------------------------------------------------
+       There is 1 client in this list
+
+       --------------------------------------------------------------------------------
+       Properties:
+       1.  Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 property in this list
+
+       --------------------------------------------------------------------------------
+       Pairs:
+       Client:
+          Client Name: Doja Cat
+          Client Contact Number: 93437878
+          Client Email: doja88@example.com
+          Client Budget: 2000
+       Property:
+          Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 pair in this list
+       ```
 
 ### Pair
 1. Successful Pairing
