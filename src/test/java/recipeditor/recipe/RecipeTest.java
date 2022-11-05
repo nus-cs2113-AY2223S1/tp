@@ -14,13 +14,13 @@ public class RecipeTest {
         String input = "test / 1.0 / unit";
         Ingredient ingredient = Ingredient.parsedIngredients(input);
         recipe.addIngredient(ingredient);
-        assertEquals(recipe.getIngredientAttributesFormatted(), "1.test / 1.0 /unit\n");
+        assertEquals(recipe.getIngredients().size(), 1);
     }
 
     @Test
     void addStep_correctArgs_correctParsing() throws ParseException {
         String input = "step";
         recipe.addStep(input);
-        assertEquals(recipe.getStepAttributesFormatted(), "1. step\n");
+        assertEquals(recipe.getSteps().size(), 1);
     }
 }
