@@ -3,7 +3,7 @@ package seedu.parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import commands.Command;
+import seedu.commands.Command;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
@@ -34,6 +34,5 @@ public class ParserExitTest {
         Assertions.assertEquals("There were unrecognized arguments after the `exit` command. "
                 + "Please try the `exit` command again by itself.", result);
     }
-
 }
 

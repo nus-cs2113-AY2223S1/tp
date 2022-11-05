@@ -1,18 +1,21 @@
 package seedu.parser;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import commands.Command;
+import seedu.commands.Command;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+/**
+ * to test for list
+ */
 public class ParserListText {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
     private final Path validPathAndFile = Paths.get(testFileDirectory, "ltaResponse.json");

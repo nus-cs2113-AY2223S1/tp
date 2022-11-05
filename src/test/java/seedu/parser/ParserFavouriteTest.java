@@ -1,18 +1,18 @@
 package seedu.parser;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import commands.Command;
+import seedu.commands.Command;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.Favourite;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class ParserFavouriteTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
@@ -67,7 +67,8 @@ public class ParserFavouriteTest {
                 + "@|faint -->|@ @|yellow 1882|@ available lots total\n"
                 + "===========================================\n"
                 + "CarparkID @|yellow,bold 2|@ at Marina Square\n"
-                + "@|faint -->|@ @|yellow 1003|@ available lots total", result);    }
+                + "@|faint -->|@ @|yellow 1003|@ available lots total", result);
+    }
 
     @Test
     void testFavouriteEmpty() throws FileWriteException, NoCarparkFoundException, InvalidCommandException,

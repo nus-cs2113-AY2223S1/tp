@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import commands.ListCommand;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoFileFoundException;
