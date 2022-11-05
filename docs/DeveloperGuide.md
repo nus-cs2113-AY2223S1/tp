@@ -53,6 +53,7 @@ _Written by: Brian Wong Yun Long_
 ## 2. Acknowledgements
 
 The format of this developer guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+The class diagrams are styled using the Cyborg Outline theme by Brett Schwarz.
 
 Some parts of the source code in this application were reused and adapted from the team's individual projects during the CS2113 IP phase. 
 
@@ -503,11 +504,11 @@ _Written by: Paul Low_
 
 ### 5.6. Find Command
 
-The `FindCommand` class provides the functionality of finding a specific or few transaction(s) 
-from the list of transactions recorded in Moolah Manager, based on  multiple searching keywords that 
-match the details of the transaction(s).
+The `FindCommand` class provides the search functionality for finding a specific or few transactions from the list of transactions in Moolah Manager. 
+Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
+compared with the description of each transaction object.
 
-The sequence diagram below shows the interactions of a successful execution of the `FindCommand`.
+The sequence diagram below shows the interactions of a successful execution of the `FindCommand`, using an example of `find k/bus_fare`.
 
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
@@ -515,25 +516,17 @@ The sequence diagram below shows the interactions of a successful execution of t
     <i>Figure 18: Sequence Diagram for Find Command</i>
 </p>
 
-1. The user executes `find k/KEYWORDS` command with an intent to view a filtered list of transactions 
-that match the searching keywords.
+Referring to Figure 18, the following is a summarized steps of the interactions that `FindCommand` performs, with some higher level details in `CommandParser` and `ParameterParser`
+omitted for simplicity.
 
-2. The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
-accompanied by a string of keywords to search for.
-
-3. Moolah Manager (`Duke`) calls `FindCommand#execute()` method which first checks whether the string of 
-keywords is empty via the `FindCommand#checkFindFormat()` method. If `keywords` is empty, a 
-`FindTransactionMissingKeywordsException` object will be thrown with an error message.
-
-4. Since there exists a string of keywords in a successful execution, the `TransactionList#findTransactions()` 
-method will be called to loop through all `Transaction` objects from `ArrayList<Transaction>`, checking if they match 
-(i.e. contain) any searching keywords given.
-
-5. `Transaction` objects that contain the searching keywords will be appended into a formatted string and 
-returned by the `TransactionList#findTransactions()` method.
-
-6. If `FindCommand` checks that `transactionsList` string is not empty, it will call `Ui#showTransactionsList()` 
-method to display the transactions. Otherwise, `Ui#showInfoMessage()` will be called.
+1. The user executes `find k/KEYWORD` command with an intent to view a filtered list of transactions that match the search keyword, e.g. `bus_fare`.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `FindCommand`, and thereafter, the initialization of the `keyword` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that only a single search keyword without spaces has been entered.
+4. Once all checks have passed, `FindCommand` class will `execute()` whereby it will call `FindTransactions()` twice (once within itself, and the other on the `TransactionList` class)
+to generate the list of filtered transactions. The purpose of `TransactionList#findTransactions()` is to loop through all `Transaction` objects from `ArrayList<Transaction> transactions`, checking if their 
+description match the keyword given. Note that it is checked on a case-insensitive basis.
+5. Matching `Transaction` objects will be appended into a formatted string and returned to the `FindCommand` class.
+6. If `FindCommand` class checks that `transactionsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showTransactionsList()` method is called to display the transactions. 
 
 _Written by: Chua Han Yong Darren_
 
@@ -673,7 +666,18 @@ _Written by: Chua Han Yong Darren_
 
 ### 6.3. Stats Command 
 
-{Describe the implementation for the Stats Command}
+The `StatsCommand` class provides the functionalities for users to get an overview of their financial insights based on the statistics for the transactions. These 
+statistics are generated using the list of transactions that is stored in Moolah Manager application.
+
+The following are the available commands:
+- `stats s/categorical_savings` - Displays the total savings of all transactions in each category.
+- `stats s/monthly_expenditure` - Displays the total income, expense and savings of all transactions in each month.
+- `stats s/time_insights y/YEAR [m/MONTH]` - Displays the categorical savings and monthly expenditure for a specific month or year.
+- `stats s/time_insights p/PERIOD n/NUMBER` - Displays the categorical savings and monthly expenditure for the last N days, weeks or months.
+
+The sequence diagram below shows the interactions of a successful execution of the `StatsCommand`, using an example of `stats s/categorical_savings`.
+
+
 
 _Written by: Chua Han Yong Darren_
 
