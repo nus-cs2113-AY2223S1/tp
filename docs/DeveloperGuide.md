@@ -108,11 +108,15 @@ The following sequence diagram shows how the API key is loaded.
 
 ### 2.5 UI Component
 
-The user-facing parts of the program are implemented with the Ui class.
+The user-facing parts of the program are implemented with the `Ui` class.
 
 It implements the following main functions:
 
-- `print()` - Prints a string to System.out.
+- `println()` - Prints either a String or an Ansi followed by a newline using System.out.println().
+- `print()` - Prints either a String or an Ansi using System.out.println().
+- `printGreen()` - Prints a String in green colour.
+- `printRed()` - Prints a String in red colour.
+- `printRenderedString()` - Prints a String to render.
 - `getLine()` - Asks user for input and returns input.
 - `getCommand()` - Asks user for a command input and returns input.
 - `showLogo()` - Prints ASCII art of a car and parKING logo.
@@ -152,70 +156,80 @@ This section describes some noteworthy details on how certain features are imple
 ![Favourite Class Diagram](images/FavouriteClassDiagram.png)
 
 
-The Favourite class uses the FileReader and FileStorage classes to read and write carpark IDs to a .txt file so that
-user favourited carparks can be saved locally and retrieved even after the user exits the application.
+The `Favourite` class uses the `FileReader` and `FileStorage` classes to read and write carpark IDs to a `favourite.txt`
+file so that user favourited carparks can be saved locally and retrieved even after the user exits the application.
+
+It contains the following attributes:
+
+- `favouriteList` - An ArrayList of favourited carpark IDs.
+- `fileStorage` - A FileStorage object that helps to write to `favourite.txt`.
+- `directory` - A String that contains the directory of `favourite.txt`.
+- `file` - A String that contains the name of the file, in this case 'favourite.txt'.
 
 It implements the following operations:
 
-- updateFavouriteList() - Reads in data from favourite.txt file and saves it to this object.
-- writeFavouriteList() - Writes all favourite carpark IDs to favourite.txt file.
-- showList() - Returns the carpark IDs of all favourited carparks in a string.
+- `updateFavouriteList()` - Reads in data from favourite.txt file and saves it to this object.
+- `ensureValidity()` - Checks if all carpark IDs inside an ArrayList are valid carparks in a CarparkList.
+- `writeFavouriteList()` - Writes all favourite carpark IDs to favourite.txt file.
+- `getFavouriteList()` - Static method that returns an ArrayList of favourited carpark IDs.
+- `getFavouriteListString()` - Returns a string of all favourited carpark IDs and their lot availability.
 
+The favourite feature is implemented using the `FavouriteCommand` class.
 
-The favourite feature is implemented using the FavouriteCommand Class.
-
-It uses the Favourite class to update the favouriteList and to write to the favouriteList.
-
-It implements the following operations:
-
-- setFavourite() - Inserts a carpark into the favourite list.
-
-
-The unfavourite feature is implemented using the unfavouriteCommand Class.
-
-It uses the Favourite class to update the favouriteList and to remove favourited carparks from  the favouriteList.
+It uses the `Favourite` class to update and write to `favouriteList`.
 
 It implements the following operations:
 
-- setUnfavourite() - Removes a carpark from the favourite list.
+- `execute()` - Main method to execute different favourite methods based on user input.
+- `setFavourite()` - Inserts a carpark into the favourite list.
 
-Given below is an example of how the Favourite class is used to perform favourite / unfavourite operations:
+The unfavourite feature is implemented using the `UnfavouriteCommand` class.
 
-Step 1. On startup, the Favourite is initialised with a directory and file path to the file that contains data, and a
-favouriteList attribute.
-The Favourite class calls `updateFavouriteList()` shortly after to populate its ArrayList with the carpark IDs in the
-file.
+It uses the `Favourite` class to update and remove favourited carparks from `favouriteList`.
+
+It implements the following operations:
+
+- `execute()` - Main method to execute different unfavourite methods based on user input.
+- `setUnfavourite()` - Removes a carpark from the favourite list.
+
+Given below is an example of how the various classes are used to perform favourite / unfavourite operations:
+
+Step 1. On startup, `Favourite` is initialised. The main programs calls `loadFavourite()` which calls
+`updateFavouriteList()` and `writeFavouriteList()` shortly after to populate and validate its ArrayList with the 
+carpark IDs in the file.
 
 Step 2. The user executes `favourite 1` to favourite the carpark with carpark ID `1`. The command is passed to the
-Parser class which returns a Command with value `FAVOURITE`.
-The main program first checks if the second argument in the command is equal to `list`. If so, the main program calls
-`showList()` and passes it output to the Ui class for printing.
-Else, the main program checks if there exists a carpark with carpark ID `1` by calling `findCarpark()` from the
-CarparkList class, which throws `NoCarparkFoundException` if no carpark was found.
-`setFavourite()` is then called to add the valid carpark ID into `favouriteList`, which searches `favouriteList` for
-any identical carpark IDs and throws `DuplicateCarparkException` if found, to prevent addition of duplicates.
-`1` is then added into `favouriteList` and `setFavourite()` calls `writeFavouriteList()` which overwrites data from
-`favouriteList` to the favourites file.
+Parser class which returns a Command with value `FAVOURITE` to the main program.
+The main program then calls `executeCommand()` which calls `execute()` from the `FavouriteCommand` class.
+It first checks if the second argument in the command is equal to `list`. Since this is false, `execute()` checks if 
+there exists a carpark with carpark ID `1` by calling `isCarparkValid()` from the `CarparkList` class. If the carpark 
+ID is valid, information about the carpark is retrieved from the `findCarpark()` method and `setFavourite()` is then 
+called to add the valid carpark ID into `favouriteList`, which searches `favouriteList` for any identical carpark IDs 
+and throws `DuplicateCarparkException` if found, to prevent addition of duplicates. `1` is then added into 
+`favouriteList` and `setFavourite()` calls `writeFavouriteList()` which overwrites data from `favouriteList` to 
+`favourite.txt`.
 
 > Note: If any exception is thrown, `1` will not be added into `favouriteList`, and `writeFavouriteList()` will not be
 > called, hence preserving the validity of the carpark IDs.
 
-Step 3. The user executes `favourite 2` to favourite the carpark with carpark ID `2`. Same as Step 2.
+Step 3. The user executes `favourite 2 3 4` to favourite the carparks with carpark ID `2`, `3` and `4`. Execution is 
+similar to Step 2, except now `execute()` will repeat the execution for each additonal carpark ID provided, skipping 
+over the invalid carpark IDs.
 
 Step 4. The user realises he/she made a mistake and wants to unfavourite the carpark with carpark ID `2`, and executes
-`unfavourite 2`.
-The command is passed to the Parser class which returns a Command with value `UNFAVOURITE`. The main program calls
-`setUnfavourite()`,
-which first checks if `favouriteList` contains an entry that matches `2`, and throws `NoCarparkFoundException` if none
-is found.
-Next, `2` is removed from `favouriteList` and `setUnfavourite()` calls `writeFavouriteList()` which overwrites data from
-`favouriteList` to the favourites file.
+`unfavourite 2`. The command is passed to the Parser class which returns a Command with value `UNFAVOURITE`.
+The main program calls `executeCommand()` which calls `execute()` from the `UnfavouriteCommand` class. `execute()` 
+checks if there exists a carpark with carpark ID `2` by calling `isCarparkValid()` from the`CarparkList` class. If the 
+carpark ID is valid, `setUnfavourite()` is called, which first checks if `favouriteList` contains an entry that matches 
+`2`, and throws `NoCarparkFoundException` if none is found. Next, `2` is removed from `favouriteList` and 
+`setUnfavourite()` calls `writeFavouriteList()` which overwrites data from `favouriteList` to the favourites file.
 
 Step 5. The user wants to view all favourited carparks and executes `favourite list`. The command is passed to the
-Parser class which returns a Command with value `FAVOURITE`.
-The main program calls `showList()` this time as the second argument in the command is `list`. The `showList()` method
-uses StringBuilder to format all the contents of `favouriteList` into a user-friendly string, and returns it for
-printing.
+Parser class which returns a Command with value `FAVOURITE`. The main program calls `executeCommand()` which calls 
+`execute()` from the `FavouriteCommand` class. After checking if the second argument is equal to `list`, 
+`updateFavouriteList()` and `writeFavouriteList()` are called to get and validate the most updated favourited carpark 
+IDs before `getFavouriteListString()` is called. The carpark IDs and lot availability of all favourited carparks are 
+then passed back to the main program in a `CommandResult` class.
 
 The following sequence diagrams shows how a favourite / unfavourite command works:
 
