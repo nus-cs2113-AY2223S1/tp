@@ -36,14 +36,14 @@ return :CommandPair
 activate CommandPair COMMAND_COLOR
 note over CommandPair, PropertyList: Omitted for brevity: Command input is validated against data from propertyList and clientList.\nIf the provided indexes are out of the list bounds, exceptions are thrown.
 
-CommandPair -[CLIENT_LIST_COLOR]> ClientList : getClientList().get(clientIndex:int)
+CommandPair -[CLIENT_LIST_COLOR]> ClientList : getClientList()
 activate ClientList CLIENT_LIST_COLOR
-ClientList --> CommandPair : :Client
+ClientList --> CommandPair : clientList:ArrayList<Client>
 deactivate ClientList
 
-CommandPair -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList().get(propertyIndex:int)
+CommandPair -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList()
 activate PropertyList PROPERTY_LIST_COLOR
-PropertyList --> CommandPair : :Property
+PropertyList --> CommandPair : propertyList:ArrayList<Property>
 deactivate PropertyList
 
 note over CommandPair, PairingList: Omitted for brevity: Command input is validated against data from pairingList.\nIf there is an existing pair or exceeded budget, exceptions are thrown.
