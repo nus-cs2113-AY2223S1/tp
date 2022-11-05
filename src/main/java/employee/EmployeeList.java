@@ -50,6 +50,8 @@ public class EmployeeList {
 
     // view task for a particular employee
     public static void viewEmployeeTasks(int employeeId) {
-        EmployeeList.findEmployee(employeeId).viewTasks();
+        Employee associatedEmployee = EmployeeList.findEmployee(employeeId);
+        assert associatedEmployee != null;
+        associatedEmployee.viewTasks();
     }
 }
