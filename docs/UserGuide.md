@@ -188,7 +188,7 @@ Format: ```view-user /u [USERNAME]```
 Note:
 1. Username must be present in the user list
 
-Example of usage: ```view-user /u jingwei```
+Example of usage: ```view-user /u bui```
 
 Expected outcome:
 ```
@@ -285,7 +285,7 @@ The amount of money earned of bui is: $2.5
 ____________________________________________________________
 ```
 
-#### 3.2.9. ```view-borrow-tx-by-user``` - Find user's gain
+#### 3.2.9. ```view-borrow-tx-by-user``` - View borrower's transactions
 >View transactions in which given user is a borrower
 
 Format: ```view-borrow-tx-by-user /u [USERNAME]```
@@ -313,8 +313,8 @@ Here are 2 transaction(s) you want to view:
 ____________________________________________________________
 ```
 
-#### 3.2.10. ```view-lend-tx-by-user``` - Find user's gain
->View transactions in which given user is a borrower
+#### 3.2.10. ```view-lend-tx-by-user``` - View lender's transactions
+>View transactions in which given user is a lender
 
 Format: ```view-lend-tx-by-user /u [USERNAME]```
 
@@ -465,12 +465,12 @@ Format: ```sort-items /mode [MODE_OF_SORTING] /min [MIN_PRICE] /max [MAX_PRICE] 
 Note:
 
 1. Mode of sorting must either be ```lh``` (low to high) or ``` hl``` (high to low) (default: ```lh```)
-2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please remove the whole part (for example: remove ```/min [MIN_PRICE]```)
+2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please exclude the whole part (for example: exclude ```/min [MIN_PRICE]```)
 3. Minimum and Maximum price must be no less than 0 and no more than 10000
 4. Minimum price must be less than maximum price
-5. Category number must be an integer, (default: 0, which means all categories)
+5. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
 
-Example of usage: ```sort-items /mode lh /min 1 /max 5```
+Example of usage: ```sort-items /mode lh /min 1 /max 5 /cat 3```
 
 Expected outcome:
 ```
@@ -707,7 +707,6 @@ Done! Here is the updated transaction:
    MoneyTransacted: $10.0 
 ____________________________________________________________
 ```
-**...To be updated(View-borrow-tx, view-lend-tx)**
 
 ### 3.5. Exit Program
 
