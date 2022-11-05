@@ -39,6 +39,7 @@ public class FindCommand extends Command {
     public static final String CALORIES = "calories";
     public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
     public static final int EMPTY_LIST = 0;
+    public static final String MATCHING_EXERCISE_IN_DATE_CAPTION = "Here are the exercises in your list matching this date:";
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
@@ -126,8 +127,9 @@ public class FindCommand extends Command {
     private void findDateExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindDateCommand(argumentList);
         ArrayList<Exercise> filteredDateList = getFilteredDateList(argumentList);
-        ui.output("", "Here are the exercises in your list matching this date:");
-        ui.outputExerciseList(filteredDateList);
+        String caption = System.lineSeparator() + MATCHING_EXERCISE_IN_DATE_CAPTION;
+        ExerciseTable filterTable = new ExerciseTable(filteredDateList, caption);
+        ui.printTable(filterTable.getExerciseTable());
     }
 
     private void findDateFood(String[] argumentList, int slashesCount) throws IllegalValueException {
