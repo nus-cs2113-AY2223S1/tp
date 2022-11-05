@@ -25,21 +25,25 @@
   * [5.7. Delete Command](#57-delete-command)
   * [5.8. Purge Command](#58-purge-command)
 - [6. Implementation for Budgeting and Financial Insights](#6-implementation-for-budgeting-and-financial-insights)
-  * [6.1. Stats Command](#61-stats-command)
-  * [6.2. Budget Command](#62-budget-command)
+  * [6.1. Overview for Budgeting And Insights](#61-overview)
+  * [6.2. Proposed Implementation](#62-proposed-implementation)
+  * [6.3. Stats Command](#63-stats-command)
+  * [6.4. Budget Command](#64-budget-command)
 - [7. Implementation for Miscellaneous Operations](#7-implementation-for-miscellaneous-operations)
-  * [7.1. Storage Operations](#71-storage-operations)
-  * [7.2. Logging Operations](#72-logging-operations)
-- [Appendix A: Product scope](#appendix-a--product-scope)
+  * [7.1. Help Command](#71-help-command)
+  * [7.2. Bye Command](#72-bye-command)
+  * [7.3. Storage Operations](#73-storage-operations)
+  * [7.4. Logging Operations](#74-logging-operations)
+- [Appendix A: Product scope](#appendix-a-product-scope)
   * [A.1. Target user profile](#a1-target-user-profile)
   * [A.2. Value proposition](#a2-value-proposition)
-- [Appendix B: User Stories](#appendix-b--user-stories)
-- [Appendix C: Non-Functional Requirements](#appendix-c--non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d--glossary)
-- [Appendix E:  Instructions for Manual Testing](#appendix-e---instructions-for-manual-testing)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E:  Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
   * [E.1. Launch and Shutdown](#e1-launch-and-shutdown)
   * [E.2. Storage](#e2-storage)
-
+    
 ## 1. Preface
 
 Moolah Manager is a desktop application for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
@@ -190,7 +194,7 @@ From the class diagram, it can be seen that the transactionList contain the meth
 such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
 The `Transaction` class is the abstract class of an `Income` or an `Expense`. A more detailed explanation on the 
-implementation on the transactions can be viewed under Section [Implementation for Transaction](#implementation-for-transaction).
+implementation on the transactions can be viewed under Section [Implementation for Transaction](#5-implementation-for-managing-transactions).
 
 #### How the Data Component Interacts:
 
@@ -759,7 +763,7 @@ To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUN
 valid range above.
 
 The interaction of the components on setting a budget can be seen in the sequence diagram under 
-[How the Architecture Components Interact with Each Other](#How-the-Architecture-Components-Interact-with-Each-Other).
+[How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other).
 
 _Written by: Chia Thin Hong_
 
