@@ -2,3 +2,4 @@ Welcome to your myReviews, your personal Movie Reviews bot!
 
 ---------------
 See you again!
+---------------
