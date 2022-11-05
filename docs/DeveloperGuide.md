@@ -162,23 +162,23 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 &nbsp;&nbsp; <img src="images/printTimetable_3_1.png" width="280" />
 
-&nbsp;&nbsp;&nbsp;&nbsp; I.Merge all the overlapping intervals. e.g. ```[0800,1000] , [0900,1100] , [1100,1200]``` will be merged as ```[0800,1100] , [1100,1200]```
-&nbsp;&nbsp;&nbsp;&nbsp; II.Re-popularize and sort ```rawTimetable``` - to make sure starting and ending slots of lessons are not affected by the merging algorithm
-&nbsp;&nbsp;&nbsp;&nbsp; III. Popularize ```clashSlotList``` for each day - to store the merged overlapping intervals in step I.
-&nbsp;&nbsp;&nbsp;&nbsp; IV. Remove un-clashed lesson slots. In the above example, ```[1100,1200]``` is not a clashed interval, which is removed in this step.
-&nbsp;&nbsp;&nbsp;&nbsp; V. Return ```clashSlotList```, now an ```ArrayList``` of clashed intervals.
-</p></details>
+&nbsp;&nbsp;&nbsp;&nbsp; I.Merge all the overlapping intervals. e.g. ```[0800,1000] , [0900,1100] , [1100,1200]``` will be merged as ```[0800,1100] , [1100,1200]``` <br>
+&nbsp;&nbsp;&nbsp;&nbsp; II.Re-popularize and sort ```rawTimetable``` - to make sure starting and ending slots of lessons are not affected by the merging algorithm <br>
+&nbsp;&nbsp;&nbsp;&nbsp; III. Popularize ```clashSlotList``` for each day - to store the merged overlapping intervals in step I. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; IV. Remove un-clashed lesson slots. In the above example, ```[1100,1200]``` is not a clashed interval, which is removed in this step. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; V. Return ```clashSlotList```, now an ```ArrayList``` of clashed intervals. <br>
+</p></details> <br>
 
 
-&nbsp;&nbsp; (b) Write ```X``` for the clashed intervals
-&nbsp;&nbsp; (c) Write the clashed module code in ```clashModCodeList```
+&nbsp;&nbsp; (b) Write ```X``` for the clashed intervals <br>
+&nbsp;&nbsp; (c) Write the clashed module code in  <br>```clashModCodeList```
 
 - If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
 - If there is ```XXXX``` - activity will stop due to this unexpcted behavior.
 - If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```:
-&nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written.
-&nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```.
-&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the lower boarder with the lesson type together. Otherwise, write normal lower boarder and lesson type in ```timeTable```.
+&nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the lower boarder with the lesson type together. Otherwise, write normal lower boarder and lesson type in ```timeTable```. <br>
 
 - ```timeTable``` is converted into strings for output.
 - Module codes which clashes from ```clashedModCodeList``` is appended at the end of the output string
