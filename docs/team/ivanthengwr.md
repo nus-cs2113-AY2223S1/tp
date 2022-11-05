@@ -25,7 +25,9 @@ Here are my contributions to the project:
   + Highlights: This feature helps to aid new features like searching for a particular passenger's detail.  
 
 + ### Project management:
-  + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub
+  + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub  
+
+<div style="page-break-after: always;"></div>
 
 + ### Enhancement to existing features:
   + Updated order of input workflow between `add flight` and `add passenger` command. Order of priority changed to
