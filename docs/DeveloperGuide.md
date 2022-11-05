@@ -216,7 +216,11 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 
 ### Storage Component
 
-The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.
+The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
+\
+`LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and parsing data into the xml file.\
+`LocalStorageNullErrorHandler` overwrites some of the default error handler of the xml parser to allow for more customisation of error handling.\
+`LocalStorage` contains functions that saves and loads data.
 
 ### API Component
 
