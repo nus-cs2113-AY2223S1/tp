@@ -204,17 +204,35 @@ List all builds that fit the specified requirements.
 Filter can filter builds that are compatible or has total cost/power within a specified range.
 Range is optional for filtering compatibility.
 
-Format: `filter/TYPE/RANGESTART/RANGEEND`
+Acceptable Formats:
+1. `filter/price/RANGESTART/RANGEEND`
+2. `filter/power/RANGESTART/RANGEEND`
+3. `filter/compatibility`
+- `RANGESTART` must be integer or float number
+- `RANGEEND` must be integer or float number
 
-Example of usage: User enters `filter/compatibility` to find all builds that are compatible.
+Examples of usage: 
+1. Enter `filter/compatibility` to find all builds that are compatible.
+2. Enter `filter/price/3000/4000` to find all builds that have a total cost between $3000 and $4000.
 
-Expected outcome: The program will display "No builds that meet specifications found." as there no components in 
+Expected outcomes: 
+1. The program will display "No builds that meet specifications found." as there no components in 
 test build yet.
+2. The program will display all builds that have a total cost between $3000 and $4000.
 ```
 ____________________________________________________________
 filter/compatibility
 ____________________________________________________________
 No builds that meet specifications found.
+____________________________________________________________
+```
+```
+____________________________________________________________
+filter/price/3000/4000
+____________________________________________________________
+Filtered Builds:
+1. build1
+2. build2
 ____________________________________________________________
 ```
 
