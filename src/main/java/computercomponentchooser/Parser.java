@@ -5,6 +5,7 @@ import computercomponentchooser.exceptions.DuplicateBuildException;
 import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.exceptions.NegativeNumberException;
+import computercomponentchooser.exceptions.InvalidBuildException;
 import computercomponentchooser.export.ExportCsv;
 import computercomponentchooser.export.ExportText;
 
@@ -119,7 +120,7 @@ public class Parser {
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
-                 | NegativeNumberException | BlankStringException e) {
+                 | NegativeNumberException | BlankStringException | InvalidBuildException e) {
             Ui.printLine();
             System.out.println(e.getMessage());
             Ui.printLine();
@@ -189,12 +190,15 @@ public class Parser {
      * @throws DuplicateBuildException If the build name already exists.
      * @throws BlankStringException If the build name is blank.
      */
-    private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException {
+    private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException,
+            InvalidBuildException {
         Build newBuild;
         String name;
         name = getParameter(line, NAME_PARAMETER);
         if (name.isBlank()) {
             throw new BlankStringException();
+        } if (name.equalsIgnoreCase("AllSavedBuilds")) {
+            throw new InvalidBuildException();
         }
         newBuild = new Build(name);
         buildManager.addBuild(newBuild);
