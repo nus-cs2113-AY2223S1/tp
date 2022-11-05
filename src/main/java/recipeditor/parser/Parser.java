@@ -204,9 +204,6 @@ public class Parser {
                 editedRecipe.addSteps(originalRecipe.getSteps());
 
                 FlagType[] flags = FlagParser.getCommandAndRecipeFlags(parsed);
-                if (flags == null) {
-                    return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
-                FlagType[] flags = FlagParser.getFlags(parsed);
                 if (flags[0] == FlagType.NULL) {
                     throw new MissingFlagsException("command");
                 }
