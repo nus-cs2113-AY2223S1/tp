@@ -162,48 +162,47 @@ Alternatively, you may use `list` command to find the clash and deconflict with 
 **Example of Usage:**
 input: `print`
 
-```            :            :            :            :            :             
-            : MON        : TUE        : WED        : THU        : FRI         
-============:============:============:============:============:=============
-   0800     :            :            :            :            :XXXXXXXXXXXX 
-   0830     :            :            :            :            :XXXXXXXXXXXX 
-   0900     :            :            :            :            :XXXXXXXXXXXX 
-   0930     :            :            :            :            :XXXXXXXXXXXX 
-   1000     :------------:            :            :            :XXXXXXXXXXXX 
-   1030     :CS1231      :            :            :            :XXXXXXXXXXXX 
-   1100     : TUT        :            :            :            :             
-   1130     :            :            :            :            :             
-   1200     :------------:            :------------:            :------------ 
-   1230     :            :            :CS1231      :            :CS1231       
-   1300     :            :            : SEC        :            :-SEC-------- 
-   1330     :            :            :            :            :             
-   1400     :            :            :------------:            :             
-   1430     :            :            :            :            :             
-   1500     :            :            :            :            :             
-   1530     :            :            :            :            :             
-   1600     :            :            :            :            :             
-   1630     :            :            :            :            :             
-   1700     :            :            :            :            :             
-   1730     :            :            :            :            :             
-   1800     :            :            :            :            :             
-   1830     :            :            :            :            :             
-   1900     :            :            :            :            :             
-   1930     :            :            :            :            :             
-   2000     :            :            :            :            :             
-   2030     :            :            :            :            :             
-   2100     :            :            :            :            :             
-   2130     :            :            :            :            :             
-   2200     :            :            :            :            :             
+```              :              :              :              :              :               
+              : MON          : TUE          : WED          : THU          : FRI           
+==============:==============:==============:==============:==============:===============
+   0800       :              :              :XXXXXXXXXXXXXX:              :               
+   0830       :              :              :XXXXXXXXXXXXXX:              :               
+   0900       :              :              :XXXXXXXXXXXXXX:              :               
+   0930       :              :              :XXXXXXXXXXXXXX:              :               
+   1000       :              :              :XXXXXXXXXXXXXX:              :               
+   1030       :              :              :              :              :               
+   1100       :              :              :              :              :               
+   1130       :              :              :              :              :               
+   1200       :              :              :              :--------------:               
+   1230       :              :              :              :CS1231        :               
+   1300       :              :              :              : SEC          :               
+   1330       :              :              :              :              :               
+   1400       :              :              :              :--------------:               
+   1430       :              :              :              :              :               
+   1500       :              :              :              :              :               
+   1530       :              :              :              :              :               
+   1600       :              :              :              :              :-------------- 
+   1630       :              :              :              :              :CS2113         
+   1700       :              :              :--------------:              : LEC           
+   1730       :              :              :CS2113 TUT    :              :               
+   1800       :              :              :--------------:              :-------------- 
+   1830       :              :              :              :              :               
+   1900       :              :              :              :              :               
+   1930       :              :              :              :              :               
+   2000       :              :              :              :              :               
+   2030       :              :              :              :              :               
+   2100       :              :              :              :              :               
+   2130       :              :              :              :              :               
+   2200       :              :              :              :              :               
 
 These are the clashed modules : 
+CS1231
 ES2631
-ACC1701X
 
  * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot.
  * Slots with XXXXXX indicates that there is a clash between two or more lessons.
  * Modules, if any, that start before 8am or ends after 10pm timings are excluded.
  * Timings are approximated to 30 minutes block with valid assumption that NUS mods are typically designed in such blocks.
-
 ```
 ---
 ###  <span style="color:orange ">Quitting the program: `quit`</span>
