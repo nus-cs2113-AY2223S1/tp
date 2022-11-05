@@ -18,7 +18,24 @@ public class UI {
     public static final String FILE_CREATION_ERROR_MESSAGE = "Error! Data files could not be created";
     private static Scanner scanner;
 
-    protected static final String LOGO = "ıllıllı OneDoc ıllıllı";
+    protected static final String LOGO =
+            System.lineSeparator()
+            + "                        _            "
+            + System.lineSeparator()
+            + "                       | |           "
+            + System.lineSeparator()
+            + "  ___  _ __   ___    __| | ___   ___ "
+            + System.lineSeparator()
+            + " / _ \\| '_ \\ / _ \\  / _` |/ _ \\ / __|"
+            + System.lineSeparator()
+            + "| (_) | | | |  __/ | (_| | (_) | (__ "
+            + System.lineSeparator()
+            + " \\___/|_| |_|\\___|  \\__,_|\\___/ \\___|"
+            + System.lineSeparator()
+            + "                                     "
+            + System.lineSeparator()
+            + "                                     "
+            + System.lineSeparator();
     private static final String WELCOME_MESSAGE = "Hello welcome to" + System.lineSeparator() + LOGO;
     private static final String MAIN_MENU = "Please choose one of the following options:" + System.lineSeparator()
             + "1 - Patients" + System.lineSeparator()
