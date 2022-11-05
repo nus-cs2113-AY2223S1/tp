@@ -3,14 +3,17 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class PrescriptionList {
-+ void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String)
-+ void add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String, isActive:boolean)
-+ void viewAll(ui:UI)
-+ void viewPatientPrescription(ui:UI, patientId:String)
-+ void viewActivePatientPrescription(ui:UI, patientId:String)
-+ void edit(ui:UI, prescriptionNumber:int, medicine:String, dosage:String, timeInterval:String)
-+ void activatePrescription(ui:UI, prescriptionNumber:String)
-+ void deactivatePrescription(ui:UI, prescriptionNumber:String)
++ isEmpty() : boolean
++ add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String) : void
++ add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String, isActive:boolean) : void
++ viewAll(ui:UI) : void
++ viewPatientPrescription(ui:UI, patientId:String) : void
++ viewActivePatientPrescription(ui:UI, patientId:String) : void
++ edit(ui:UI, prescriptionNumber:int, medicine:String, dosage:String, timeInterval:String) : void
++ activatePrescription(ui:UI, prescriptionNumber:String) : void
++ deactivatePrescription(ui:UI, prescriptionNumber:String): void
+- hasPatientPrescription(patientId:String) : boolean
+- hasActivePatientPrescription(patientId) : boolean
 }
 
 class Prescription {
@@ -21,8 +24,16 @@ class Prescription {
 - isActive : Boolean
 }
 
-class UI {}
+class UI {
++ printMessageAndObject(object:String, message:String, index:int, type:type) : void
++ printNoPrescriptionMessage() : void
++ printViewAllPrescriptionsMessage() : void
++ printPrescriptionWithIndex(index:int, prescription:Prescription) : void
++ printNoMatchingActivePrescriptionMessage() : void
++ printViewAllActivePrescriptionsMessage() : void
++ printIndexOutOfRangeErrorMessage() : void
+}
 
 PrescriptionList "1" *-down-> "*" Prescription
-PrescriptionList .right.> UI
+PrescriptionList .down.> UI
 @enduml
