@@ -6,7 +6,7 @@ public class ReviewList {
     public ArrayList<Media> inputs;
 
     public ReviewList() {
-        this.inputs = new ArrayList<Media>();
+        inputs = new ArrayList<Media>();
     }
 
     public ReviewList(ArrayList<Media> inputs) {
@@ -18,7 +18,7 @@ public class ReviewList {
      * @param media Object to be added.
      */
     public void add(Media media) {
-        this.inputs.add(media);
+        inputs.add(media);
     }
 
     /**
@@ -26,7 +26,7 @@ public class ReviewList {
      * @param index index to remove review in list.
      */
     public void remove(int index) {
-        this.inputs.remove(index);
+        inputs.remove(index);
     }
 
     /**

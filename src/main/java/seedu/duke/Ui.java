@@ -48,7 +48,6 @@ public class Ui {
     }
 
     //@@author indraneelrp
-
     /**
      * Prints exit greeting to user.
      */

@@ -30,7 +30,7 @@ public class TvShow extends Media {
      * Formats the movie review to display as output
      */
     public String toString() {
-        return "[TV Show] " + super.toString() + " Date watched: " + this.dateWatched + "  Site:" + this.site;
+        return "[TV Show] " + super.toString() + " Date watched: " + dateWatched + "  Site:" + site;
     }
 
     /**
@@ -42,12 +42,12 @@ public class TvShow extends Media {
     @Override
     public String createFileString() {
         String favourite = "N";
-        if (this.isFavourite) {
+        if (this.isFavourite()) {
             favourite = "Y";
         }
         
-        String returnString = "T|" + favourite + "|" + super.title + "|" + super.rating 
-            + "|" + super.genre + "|" + super.dateString + "|" + this.site;
+        String returnString = "T|" + favourite + "|" + super.getTitle() + "|" + super.getRating()
+            + "|" + super.getGenre() + "|" + super.getDateString() + "|" + site;
         
         return returnString;
     }

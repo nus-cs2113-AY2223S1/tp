@@ -17,20 +17,20 @@ class MediaTest {
     @Test
     void newMediaTest() {
         Media inception = new Media("Inception", 4.5, "Sci-fi","10-01-2021");
-        assertEquals("Inception",inception.title);
-        assertEquals(4.5,inception.rating);
-        assertEquals("Sci-fi",inception.genre);
-        assertEquals("10-01-2021",inception.dateString);
+        assertEquals("Inception",inception.getTitle());
+        assertEquals(4.5,inception.getRating());
+        assertEquals("Sci-fi",inception.getGenre());
+        assertEquals("10-01-2021",inception.getDateString());
         assertEquals("Inception Rating: 4.5  Genre:Sci-fi",inception.toString());
     }
 
     @Test
     void newEmptyMediaTest() {
         Media test = new Media();
-        assertEquals("",test.title);
-        assertEquals(0,test.rating);
-        assertEquals("",test.genre);
-        assertEquals(null,test.dateWatched);
+        assertEquals("",test.getTitle());
+        assertEquals(0,test.getRating());
+        assertEquals("",test.getGenre());
+        assertEquals(null,test.getDateWatched());
         assertEquals("",test.createFileString());
     }
 

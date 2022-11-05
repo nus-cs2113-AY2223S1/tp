@@ -54,7 +54,7 @@ public class Parser {
     private static Logger logger = Logger.getLogger("DukeLogger");
 
     public Parser(ReviewList reviewList) {
-        this.mediaList = reviewList;
+        mediaList = reviewList;
     }
 
     //@@author redders7
@@ -292,7 +292,7 @@ public class Parser {
     public boolean isDuplicate(String title, int spacingType) {
         for (int i = 0; i < mediaList.inputs.size(); i++) {
             Media comparisonItem = mediaList.inputs.get(i);
-            if (title.equals(comparisonItem.title) 
+            if (title.equals(comparisonItem.getTitle())
                 && comparisonItem.getClass().toString().equals(getMediaTypeString(spacingType))) {
                 return true;
             }

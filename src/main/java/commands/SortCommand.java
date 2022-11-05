@@ -39,9 +39,10 @@ public class SortCommand extends Commands {
             break;
         }
 
-        output += "Your list has been sorted by " + userInput[1] + '\n';
+        output += "Your list has been sorted by " + userInput[1] + ".\n";
         Commands listExecutor = new ListCommand(this.reviewList);
-        output += listExecutor.execute();
+        String updatedList = listExecutor.execute();
+        output += updatedList;
 
         return output;
     }
