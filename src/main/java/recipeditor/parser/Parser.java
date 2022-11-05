@@ -27,10 +27,10 @@ import java.util.logging.Logger;
 
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
-//    private static final String NOT_PRESENT_IN_LIST_MESSAGE = " is not present in the list";
-    private static final String INDEX_OUT_OF_BOUND_MESSAGE = "Index is not present in the list, or wrong command format.";
+    private static final String INDEX_OUT_OF_BOUND_MESSAGE =
+            "Index is not present in the list, or wrong command format.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
-    private static final String FILE_NOT_FOUND_MESSAGE= "File not found when deleting the recipe file";
+    private static final String FILE_NOT_FOUND_MESSAGE = "File not found when deleting the recipe file";
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;

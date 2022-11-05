@@ -32,7 +32,7 @@ class ParserTest {
     @Test
     void parseView_mixOfDifferentCases_returnViewOfSpecificRecipe() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("/VIEw 1") instanceof ViewCommand);
+        assertTrue(parse.parseCommand("/VIEw -id 1") instanceof ViewCommand);
     }
 
     @Test
