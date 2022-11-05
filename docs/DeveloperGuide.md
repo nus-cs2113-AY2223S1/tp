@@ -25,21 +25,25 @@
   * [5.7. Delete Command](#57-delete-command)
   * [5.8. Purge Command](#58-purge-command)
 - [6. Implementation for Budgeting and Financial Insights](#6-implementation-for-budgeting-and-financial-insights)
-  * [6.1. Stats Command](#61-stats-command)
-  * [6.2. Budget Command](#62-budget-command)
+  * [6.1. Overview for Budgeting And Insights](#61-overview)
+  * [6.2. Proposed Implementation](#62-proposed-implementation)
+  * [6.3. Stats Command](#63-stats-command)
+  * [6.4. Budget Command](#64-budget-command)
 - [7. Implementation for Miscellaneous Operations](#7-implementation-for-miscellaneous-operations)
-  * [7.1. Storage Operations](#71-storage-operations)
-  * [7.2. Logging Operations](#72-logging-operations)
-- [Appendix A: Product scope](#appendix-a--product-scope)
+  * [7.1. Help Command](#71-help-command)
+  * [7.2. Bye Command](#72-bye-command)
+  * [7.3. Storage Operations](#73-storage-operations)
+  * [7.4. Logging Operations](#74-logging-operations)
+- [Appendix A: Product scope](#appendix-a-product-scope)
   * [A.1. Target user profile](#a1-target-user-profile)
   * [A.2. Value proposition](#a2-value-proposition)
-- [Appendix B: User Stories](#appendix-b--user-stories)
-- [Appendix C: Non-Functional Requirements](#appendix-c--non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d--glossary)
-- [Appendix E:  Instructions for Manual Testing](#appendix-e---instructions-for-manual-testing)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E:  Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
   * [E.1. Launch and Shutdown](#e1-launch-and-shutdown)
   * [E.2. Storage](#e2-storage)
-
+    
 ## 1. Preface
 
 Moolah Manager is a desktop application for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
@@ -114,7 +118,7 @@ The rest of the application consists of six components:
 The sequence diagram below shows how the components interact on command `budget b/1000`.
 
 <p align="center">
-    <img src="images/ArchitectureSequenceDiagram.png">
+    <img src="images/ArchitectureSequenceDiagram.png" width = "90%">
     <br />
     <i>Figure 2: Architecture Interaction</i>
 </p>
@@ -190,7 +194,7 @@ From the class diagram, it can be seen that the transactionList contain the meth
 such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
 The `Transaction` class is the abstract class of an `Income` or an `Expense`. A more detailed explanation on the 
-implementation on the transactions can be viewed under Section [Implementation for Transaction](#implementation-for-transaction).
+implementation on the transactions can be viewed under Section [Implementation for Transaction](#5-implementation-for-managing-transactions).
 
 #### How the Data Component Interacts:
 
@@ -201,7 +205,7 @@ Based on the whether the initialization is successful, the corresponding constru
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
 
 <p align="center">
-    <img src="images/TransactionListSequenceDiagram.png">
+    <img src="images/TransactionListSequenceDiagram.png" width = "80%">
     <br />
     <i>Figure 5: Sequence Diagram for Creation of Transaction List</i>
 </p>
@@ -242,7 +246,7 @@ parsers are used to generate a command object with its accurate parameters accor
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 
 <p align="center">
-    <img src="images/ParsersClassDiagram.png">
+    <img src="images/ParsersClassDiagram.png" width="80%">
     <br />
     <i>Figure 7: Class Diagram for Parser Component</i>
 </p>
@@ -686,8 +690,19 @@ Figure 23 below is a class diagram that illustrates the inheritance for the `Sta
     <i>Figure 23: Class Diagram for Stats Command</i>
 </p>
 
+The `budget` is a static variable stored inside the `Budget` class. The budget variable is checked during the following 
+phase of the applications, with relevant reminder, tips and advices displayed:
 
-_Written by: Chua Han Yong Darren_
+| Application Phase                           | Display                       | Purpose                                                                   |
+|---------------------------------------------|-------------------------------|---------------------------------------------------------------------------|
+| Program starts                              | Budget Reminder               | To remind user on the budget remained for the current month.              |
+| Adding, editing or deleting of transactions | Budget Tip                    | To alert user on the effect of the new transaction on the month's budget. |
+| Monthly expenditure or insight              | Spending habit, budget advice | To advise user on the proportion of user's spending and budget.           |
+
+The spending habit and budget advices displayed on monthly expenditure or specific month insight are generated
+dynamically based on the proportion of user's spending. This allows the application to  provide suitable advices to the user.
+
+_Written by: Chua Han Yong Darren (List and Stats), Chia Thin Hong (Budget)_
 
 ### 6.3. Stats Command 
 
@@ -759,7 +774,7 @@ To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUN
 valid range above.
 
 The interaction of the components on setting a budget can be seen in the sequence diagram under 
-[How the Architecture Components Interact with Each Other](#How-the-Architecture-Components-Interact-with-Each-Other).
+[How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other).
 
 _Written by: Chia Thin Hong_
 
@@ -949,7 +964,7 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
 ### E.1. Launch and Shutdown
 
 - Initial Launch
-  1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.0/duke.jar) and copy it into a separate directory.
+  1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.1/duke.jar) and copy it into a separate directory.
   2. Ensure that Java 11 has been installed and configured on your operating system.
   3. Launch a command prompt or terminal and run the command `java -jar duke.jar`. 
   4. **Expected Outcomes:** 

@@ -126,7 +126,6 @@ Usages:
 	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
 	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
 Parameters information:
-- STATS_TYPE: The type of statistics. It can be "categorical_savings", "monthly_expenditure", or "time_insights".
 - MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
 		<!> - MONTH parameter must be used together with the YEAR parameter.
 - YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.

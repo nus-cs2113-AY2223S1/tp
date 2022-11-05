@@ -83,8 +83,6 @@ public enum HelpMessages {
     COMMAND_PARAMETERS_PERIOD("- PERIOD: The period which the transaction falls on. "
             + "It should either be days, weeks or months." + LINE_SEPARATOR
             + "\t\t<!> - PERIOD parameter must be used together with the NUMBER parameter."),
-    COMMAND_PARAMETERS_STATS_TYPE("- STATS_TYPE: The type of statistics. It can be \"categorical_savings\", "
-            + "\"monthly_expenditure\", or \"time_insights\"."),
 
     COMMAND_PARAMETERS_TYPE("- TYPE: The type of transaction. It should either be \"expense\" or \"income\"."),
     COMMAND_PARAMETERS_YEAR("- YEAR: The year which the transaction falls on. It is a positive whole number ranging "
@@ -182,7 +180,6 @@ public enum HelpMessages {
 
     //@@author paullowse
     STATS_COMMAND_PARAMETERS_INFO(COMMAND_HEADER_PARAMETERS.toString() + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_STATS_TYPE + LINE_SEPARATOR
             + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
             + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR
             + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
