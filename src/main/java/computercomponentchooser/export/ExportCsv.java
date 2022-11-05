@@ -12,7 +12,7 @@ import java.nio.file.Files;
 /**
  * Exports the builds to a CSV file.
  */
-public class ExportCsv {
+public class ExportCsv implements Export {
 
     /**
      * The file directory that the files are stored in.
@@ -22,7 +22,7 @@ public class ExportCsv {
     /**
      * The file name of the CSV file that contains the builds.
      */
-    private static String EXPORT_TEXT_FILE_PATH = "data/exportAllBuildsCSV.csv";
+    private static String EXPORT_CSV_FILE_PATH = "data/exportAllBuildsCSV.csv";
 
     private final BuildManager buildManager;
 
@@ -46,11 +46,11 @@ public class ExportCsv {
         if (!Files.exists(fileDirectory)) {
             Files.createDirectory(fileDirectory);
         }
-        Path file = Paths.get(EXPORT_TEXT_FILE_PATH);
+        Path file = Paths.get(EXPORT_CSV_FILE_PATH);
         if (!Files.exists(file)) {
             Files.createFile(file);
         }
-        FileWriter fileWriter = new FileWriter(EXPORT_TEXT_FILE_PATH);
+        FileWriter fileWriter = new FileWriter(EXPORT_CSV_FILE_PATH);
         fileWriter.write("Build Name, Component Name, Price, Power\n");
         for (Build build : buildManager.getBuilds().values()) {
             fileWriter.write(build.toCsv());

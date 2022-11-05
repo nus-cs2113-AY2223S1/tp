@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+activate ":Build"
+":Build" -> ":LinkedHashMap2D": Initialize
+
+activate ":LinkedHashMap2D"
+
+-> ":Build": getTotalPower()
+
+":Build" -> ":Build": Initialize totalPower:int = 0
+
+":Build" -> ":LinkedHashMap2D": getAllComponents()
+":LinkedHashMap2D" -> ":Build": return allComponents:ArrayList<Component>
+
+loop for each component in allComponents
+
+ opt if component type is not powersupply
+    ":Build" -> ":Build": totalPower += component.getPower()
+
+    end
+
+end
+<- ":Build": totalPower:int
+
+deactivate ":Build"
+deactivate ":LinkedHashMap2D"
+
+@enduml

@@ -14,6 +14,7 @@
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
         * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
+        * [Bye](#bye)
     * [Build Editing Mode](#build-editing-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
@@ -29,6 +30,8 @@
 * [Command Summary](#command-summary)
     * [Main Mode Summary](#main-mode-summary)
     * [Edit Mode Summary](#edit-mode-summary)
+* [Glossary](#glossary)
+    * [PC Component Parameters Glossary](#pc-component-parameters-summary)
 
 ## Introduction
 
@@ -102,7 +105,7 @@ ____________________________________________________________
 
 #### Editing a build: `edit`
 
-Enters [edit mode](#edit-mode) for the specified build. The user only needs to specify the name of the
+Enters [Build Editing Mode](#build-editing-mode) for the specified build. The user only needs to specify the name of the
 build.
 
 Format: `edit/NAME`
@@ -204,17 +207,35 @@ List all builds that fit the specified requirements.
 Filter can filter builds that are compatible or has total cost/power within a specified range.
 Range is optional for filtering compatibility.
 
-Format: `filter/TYPE/RANGESTART/RANGEEND`
+Acceptable Formats:
+1. `filter/price/RANGESTART/RANGEEND`
+2. `filter/power/RANGESTART/RANGEEND`
+3. `filter/compatibility`
+- `RANGESTART` must be integer or float number
+- `RANGEEND` must be integer or float number
 
-Example of usage: User enters `filter/compatibility` to find all builds that are compatible.
+Examples of usage: 
+1. Enter `filter/compatibility` to find all builds that are compatible.
+2. Enter `filter/price/3000/4000` to find all builds that have a total cost between $3000 and $4000.
 
-Expected outcome: The program will display "No builds that meet specifications found." as there no components in 
+Expected outcomes: 
+1. The program will display "No builds that meet specifications found." as there no components in 
 test build yet.
+2. The program will display all builds that have a total cost between $3000 and $4000.
 ```
 ____________________________________________________________
 filter/compatibility
 ____________________________________________________________
 No builds that meet specifications found.
+____________________________________________________________
+```
+```
+____________________________________________________________
+filter/price/3000/4000
+____________________________________________________________
+Filtered Builds:
+1. build1
+2. build2
 ____________________________________________________________
 ```
 
@@ -251,7 +272,20 @@ ____________________________________________________________
 Exporting builds...
 ____________________________________________________________
 ```
+#### Bye: `bye`
 
+Exits the program.
+
+Format: `bye`
+
+Example of usage: Enter `bye` to exit the program.
+
+Expected outcome: The program will exit.
+```
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+```
 ### Build Editing Mode
 
 Edit mode handles the management of the computer components of a build.
@@ -260,12 +294,25 @@ Edit mode handles the management of the computer components of a build.
 
 Adds a component to the list of components of a build.
 
-Format: `add/TYPE/NAME/PRICE/POWER/PARAM/PARAM/...`
+Acceptable Formats: 
+1. `add/case/Name/Price/Power/FormFactor/ExpansionSlots`
+2. `add/cooler/Name/Price/Power/Socket/FanSpeed/NoiseLevel`
+3. `add/cpu/Name/Price/Power/Socket/ClockSpeed`
+4. `add/gpu/Name/Price/Power/Memory/ClockSpeed`
+5. `add/drive/Name/Price/Power/StorageSize/StorageType`
+6. `add/motherboard/Name/Price/Power/Socket/FormFactor/MemorySlots/GPUSlots`
+7. `add/memory/Name/Price/Power/MemorySize/MemorySpeed`
+8. `add/powersupply/Name/Price/Power`
+9. `add/monitor/Name/Price/Power/RefreshRate/ResponseTime/Resolution`
+10. `add/other/Name/Price/Power`
 
-Example of usage: User enters `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
+Note: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-summary).
+
+Example of usage: 
+
+Enter `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
-of 3.8 GHz. Other possible types include: 
-`case, cooler, drive, gpu, motherboard, psu, memory, storage, monitor and other`
+of 3.8 GHz.
 
 Expected outcome: The program will add a cpu named 'intel 10990x' to the list of components.
 ```
@@ -461,4 +508,28 @@ to the data folder of the new program on your new computer to carry over your da
 | Info   | `info`                                                                                      |
 | Export | `export`                                                                                    |
 | Back   | `back`                                                                                      |
+
+## Glossary
+### PC Component Parameters Glossary
+| Parameter      | Examples                                                        |
+|----------------|-----------------------------------------------------------------|
+| Name           | Name of the component <br/> E.g. `Intel 10990x`                 |
+| Price          | Price of the component <br/> E.g. `1000`                        |
+| Power          | Power consumption of the component <br/> E.g. `80`              |
+| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
+| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                             |
+| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
+| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
+| MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
+| FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
+| MemorySize     | Memory size in GB <br/> E.g. `16`                               |
+| StorageSize    | Storage size in GB <br/> E.g. `1000`                            |
+| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                           |
+ | FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
+| NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
+| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
+| ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
+| Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
+
+
 

@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+package export {
+
+interface Export
+class ExportText implements Export
+class ExportCSV implements Export
+
+class ExportText {
+    -{static} String:FILE_DIRECTORY
+    -{static} String:EXPORT_TEXT_FILE_PATH
+    exportAllBuildsText(BuildManager)
+    exportBuildText(Build)
+    }
+
+class ExportCsv {
+    -{static} String:FILE_DIRECTORY
+    -{static} String:EXPORT_CSV_FILE_PATH
+    exportAllBuildsCsv(BuildManager)
+    }
+}
+
+
+@enduml

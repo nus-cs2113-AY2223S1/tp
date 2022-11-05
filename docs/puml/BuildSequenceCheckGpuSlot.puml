@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+activate ":Build"
+":Build" -> ":LinkedHashMap2D": Initialize
+
+activate ":LinkedHashMap2D"
+
+-> ":Build": checkGpuSlot()
+
+":Build" -> ":Build": Initialize slot:int = 0
+
+":Build" -> ":LinkedHashMap2D": getAllComponents()
+":LinkedHashMap2D" -> ":Build": return allComponents:ArrayList<Component>
+
+loop for each component in allComponents
+
+ opt if component type is gpu
+    ":Build" -> ":Build": slot += 1
+
+    end
+
+end
+
+alt if slot <= motherboard gpu slots
+    <- ":Build": return true
+
+else
+    <- ":Build": return false
+
+end
+
+deactivate ":Build"
+deactivate ":LinkedHashMap2D"
+
+@enduml
