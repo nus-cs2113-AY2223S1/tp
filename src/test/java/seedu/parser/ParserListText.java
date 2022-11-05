@@ -40,15 +40,6 @@ public class ParserListText {
     }
 
     @Test
-    void testListInvalid() throws FileWriteException, NoFileFoundException {
-        CarparkList carparkList = new CarparkList(invalidPathAndFile, invalidBackupPathAndFile);
-        String input = "list";
-        Assertions.assertThrows(NoFileFoundException.class, () -> {
-            new Parser().parseCommand(input, null, carparkList, null).execute();
-        }, "A critical error has occured. Please contact the developer!");
-    }
-
-    @Test
     void testExitCaps() throws FileWriteException, NoCarparkFoundException, InvalidCommandException,
             NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
