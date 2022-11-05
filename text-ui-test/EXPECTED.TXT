@@ -572,10 +572,10 @@ Here are your transaction records:
 
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please enter <help> for the command guide.
+The index of the transaction does not exist, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please enter <help> for the command guide.
+The index of the transaction does not exist, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
