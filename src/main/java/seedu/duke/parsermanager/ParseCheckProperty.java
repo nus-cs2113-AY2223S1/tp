@@ -11,7 +11,7 @@ import seedu.duke.exception.check.checkproperty.CheckPropertyMissingFlagExceptio
 
 import java.util.ArrayList;
 
-import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.INDEX_FLAGS;
 import static seedu.duke.CommandStructure.START_INDEX;
 
 /**
@@ -43,7 +43,7 @@ public class ParseCheckProperty extends Parser {
     private ArrayList<String> processCommandDetails(String rawCommandDetail) throws CheckPropertyMissingFlagException,
             CheckExtraParametersException {
 
-        String[] flags = CHECK_PROPERTY_FLAGS;
+        String[] flags = INDEX_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForMissingFlags(flagIndexPositions);
         checkExtraArguments(commandDescription, flagIndexPositions);

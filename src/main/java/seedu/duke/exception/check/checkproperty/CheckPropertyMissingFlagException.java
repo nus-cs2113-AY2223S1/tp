@@ -3,7 +3,7 @@ package seedu.duke.exception.check.checkproperty;
 //@@author ngdeqi
 import seedu.duke.exception.check.ParseCheckException;
 
-import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.INDEX_FLAGS;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_MISSING_FLAG;
 
@@ -17,7 +17,7 @@ public class CheckPropertyMissingFlagException extends ParseCheckException {
 
 
     public CheckPropertyMissingFlagException() {
-        this.missingFlag = CHECK_PROPERTY_FLAGS[FIRST_FLAG_INDEX];
+        this.missingFlag = INDEX_FLAGS[FIRST_FLAG_INDEX];
     }
 
     @Override

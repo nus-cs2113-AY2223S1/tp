@@ -57,9 +57,19 @@ Note:
 ### Add Property: `add -property`
 Adds a new property into property list, along with Singapore address and unit-type validations. Also, duplicate property entries of the same **address** will not be accepted.
 
-<u>Full Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
+<u>Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 
-<u>Full Example</u>: `add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 p/1000 t/HDB 3` 
+
+<u>Example</u>: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+
+<u>Expected Output</u>:
+```
+Adding a property with the following information:
+  Landlord: Ash Ketchun
+  Address: 25A Pallet Town, S121111
+  Renting Price: SGD1600/month
+  Unit Type: LP Bungalow
+```
 
 The descriptions of `add -property` PARAMETERS are as follows:
 - `NAME`: Name of property owner (Landlord)
@@ -72,20 +82,24 @@ As there are validations involved, some PARAMETERS must adhere to specific forma
 For valid `ADDRESS`, a valid Singapore address must be provided with the following format and details:
 ```
 --------------------------------------------------------------------------------
-LANDED PROPERTY:
-  Format:  [Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]
-  Example: 60 Aria Street, Singapore 602580
+  Format:
+        [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
 --------------------------------------------------------------------------------
-BUILDINGS (e.g. HDBs, apartments, condominiums):
-  Format (Without Building Name):
-  [Block Number]<space>[Street Name]<space>#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]
-  Example: 101 Marlow Street #12-05, Singapore 059020
-  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020
+  Example:
+        60 Aria Street, S602580
+        101 Marlow Street #12-05, S059020
+        101 Marlow Street #12-05 Clife Parkview, S059020
 --------------------------------------------------------------------------------
-Note: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional
-Any deviation from format will lead to invalid address.
+  Note:
+        1. Format requires single space between [DETAILS] (space sensitive).
+        2. [DETAIL] must be provided; [detail] is optional.
+        3. For landed property, treat [Block Number] as its unit number.
+        4. Any deviation from format will lead to invalid address.
+--------------------------------------------------------------------------------
 ```
-For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (System Pre-Defined) must be provided with the following format:
+For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (App Pre-Defined) must be provided with the following format:
 ```
 Format: t/<label>
 --------------------------------------------------------------------------------
@@ -115,25 +129,41 @@ Landed Property Labels
 ```
 Lastly, for valid `PRICE`, a positive integer must be provided.
 
-Example: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+There is also another validation which checks for mismatch between address format and unit type of property. Certain unit types will require specific address format. Please refer to the description below:
+```
+  1. Unit type with <LP> must not have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+  2. Unit type without <LP> must have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
+Note: HDB Terrace House (special case) is not restricted by any format.
+```
 
-Expected Output:
-```
-Adding a property with the following information:
-  Landlord: Ash Ketchun
-  Address: 25A Pallet Town, S121111
-  Renting Price: SGD1600/month
-  Unit Type: LP Bungalow
-```
+**DISCLAIMER**:
+
+Currently, there are some illogical inputs allowed by the application as shown below. Although validation can be done to prevent such cases, such validations will hinder normal operation and thus not implemented.
+1. Properties with the same street name but of different address format (with / without unit level and number) are allowed to be added.
+2. Properties with different street name but of the same postal code are also allowed to be added. 
 
 ---
 
 ### Delete Property: `delete -property`
 Deletes the specified property from the property list and subsequently deletes any pairings involving that property.
 
-<u>Format:</u> `delete -property ip/PROPERTY_INDEX`
+<u>Format</u>: `delete -property i/PROPERTY_INDEX`
 
-<u>Example:</u> `delete -property ip/2`
+<u>Example</u>: `delete -property i/2`
+
+<u>Expected Output</u>:
+```
+Deleting property with the following information:
+Landlord: Bob Tan Bee Bee
+Address: 25 Lower Kent Ridge Rd, S119081
+Renting Price: SGD1000/month
+Unit Type: LP Bungalow
+```
 
 ---
 
@@ -203,9 +233,18 @@ Number of entries in the list: 1
 
 Adds a new client into client list, along with Singapore contact number and basic email format validations. Also, duplicate client entries of the same **name**, **contact number** or **email** will not be accepted.
 
-<u>Full Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
+<u>Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
 
-<u>Full Example</u>: `add -client n/Doja Cat c/93437878 e/doja88@example.com b/2000`
+<u>Example</u>: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+
+<u>Expected Output</u>:
+```
+Adding a client with the following information:
+  Client: Gary Oaks
+  Contact Number: 90876543
+  Email: garyoaks@example.com
+  Budget: SGD1550/month
+```
 
 Note: Email is optional so excluding `e/EMAIL` or having `e/BLANK` is acceptable.
 
@@ -221,27 +260,25 @@ For valid `CONTACT_NUMBER`, a Singapore contact number (no extension) must be pr
 
 For valid `EMAIL`, it must adhere to the RFC 5322 Official Email Standard.
 
-For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces must be provided.
+For valid `BUDGET_MONTH`, a positive integer must be provided.
 
-Example: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
-
-Expected Output:
-```
-Adding a client with the following information:
-  Client: Gary Oaks
-  Contact Number: 90876543
-  Email: garyoaks@example.com
-  Budget: SGD1550/month
-
-```
 ---
 
 ### Delete Client: `delete -client`
 Deletes the specified client from the client list and subsequently deletes any pairings involving that client.
 
-<u>Format:</u> `delete -client ic/CLIENT_INDEX`
+<u>Format</u>: `delete -client i/CLIENT_INDEX`
 
-<u>Example:</u> `delete -client ic/3`
+<u>Example</u>: `delete -client i/3`
+
+<u>Expected Output</u>:
+```
+Deleting client with the following information:
+Client: Doja Cat
+Contact Number: 93437878
+Email: doja88@example.com
+Budget: SGD2000/month
+```
 
 ---
 

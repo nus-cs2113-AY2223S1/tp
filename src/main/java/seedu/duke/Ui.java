@@ -106,6 +106,7 @@ public class Ui {
 
     public void showPropertyAddedConfirmationMessage(PropertyList propertyList) {
         int currentListSize = propertyList.getCurrentListSize();
+        printNewline();
         showToUser(MESSAGE_PROPERTY_ADDED);
         showToUser("  " + propertyList.getPropertyList().get(currentListSize - 1));
         printNewline();
@@ -113,6 +114,7 @@ public class Ui {
 
     public void showClientAddedConfirmationMessage(ClientList clientList) {
         int currentListSize = clientList.getCurrentListSize();
+        printNewline();
         showToUser(MESSAGE_CLIENT_ADDED);
         showToUser("  " + clientList.getClientList().get(currentListSize - 1));
         printNewline();
