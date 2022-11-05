@@ -107,16 +107,12 @@ class ParseAddClientTest {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient;
 
-        // Case i. Contact Number with no number
         parseAddClient = new ParseAddClient(NON_NUMERICAL_CONTACT_NUMBER, clientList);
         assertThrows(InvalidContactNumberException.class, parseAddClient::parseCommand);
-        // Case ii. Contact Number less than 8 digits
         parseAddClient = new ParseAddClient(LESS_THAN_EIGHT_DIGIT_CONTACT_NUMBER, clientList);
         assertThrows(InvalidContactNumberException.class, parseAddClient::parseCommand);
-        // Case iii. Contact Number more than 8 digits
         parseAddClient = new ParseAddClient(MORE_THAN_EIGHT_DIGIT_CONTACT_NUMBER, clientList);
         assertThrows(InvalidContactNumberException.class, parseAddClient::parseCommand);
-        // Case iv. Not Singapore Contact Number
         parseAddClient = new ParseAddClient(NOT_SINGAPORE_CONTACT_NUMBER, clientList);
         assertThrows(InvalidContactNumberException.class, parseAddClient::parseCommand);
     }
@@ -126,10 +122,8 @@ class ParseAddClientTest {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient;
 
-        // Case i. No @ in Email
         parseAddClient = new ParseAddClient(EMAIL_NO_AT_SYMBOL, clientList);
         assertThrows(InvalidEmailException.class, parseAddClient::parseCommand);
-        // Case ii. Empty between @ and .com in Email
         parseAddClient = new ParseAddClient(EMAIL_EMPTY_BETWEEN_AT_SYMBOL_AND_DOT_COM, clientList);
         assertThrows(InvalidEmailException.class, parseAddClient::parseCommand);
     }
@@ -139,13 +133,10 @@ class ParseAddClientTest {
         ClientList clientList = new ClientList();
         ParseAddClient parseAddClient;
         // Budget must be positive integer
-        // Case i. 0 Budget
         parseAddClient = new ParseAddClient(ZERO_BUDGET, clientList);
         assertThrows(InvalidBudgetFormatException.class, parseAddClient::parseCommand);
-        // Case ii. Negative Budget
         parseAddClient = new ParseAddClient(NEGATIVE_BUDGET, clientList);
         assertThrows(InvalidBudgetFormatException.class, parseAddClient::parseCommand);
-        // Case iii. Floating value
         parseAddClient = new ParseAddClient(FLOATING_POINT_BUDGET, clientList);
         assertThrows(InvalidBudgetFormatException.class, parseAddClient::parseCommand);
     }

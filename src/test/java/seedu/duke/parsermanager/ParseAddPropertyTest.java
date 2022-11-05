@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParseAddPropertyTest {
-    // Valid Add Property Test Cases with varying Address Formats
     private static final String VALID_LANDED_PROPERTY_INPUT = "n/Bob a/60 Aria Street, S602580 p/1000 t/LP BGL";
     private static final String VALID_LANDED_PROPERTY_WITH_STREET_NUMBER_INPUT = "n/Bob a/60 Aria Street 321, "
             + "S602580 p/1000 t/LP BGL";
