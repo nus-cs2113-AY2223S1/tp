@@ -17,6 +17,7 @@ import seedu.duke.user.UserUniversityListManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -53,6 +54,14 @@ public class UserStorageTest {
         }
         s.close();
         return fileContent;
+    }
+
+    private static void createNewFile(String filePath, String textToAdd) throws IOException {
+        File f = new File(filePath);
+        f.createNewFile();
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
     }
 
     @Test
@@ -224,5 +233,39 @@ public class UserStorageTest {
         Database.clearDatabase();
     }
 
+    @Test
+    public void testInvalidFavourites() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "S%\n" + "MET CS 248;%\n"
+                + "#MET CS 248;monday;10:00;12:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        Database.clearDatabase();
+    }
 
+    @Test
+    public void testInvalidModuleCode() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "D1000;%\n"
+                + "#\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testInvalidLessonModuleCode() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "S%\n" + "MET CS 248;%\n"
+                + "#D1000;monday;10:00;12:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        Database.clearDatabase();
+    }
 }
