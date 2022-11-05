@@ -20,6 +20,10 @@ opt consoleCommand instanceof ConsoleCommandSortExpense
     activate expenseManager DATA_COLOR_1
 
     expenseManager -[DATA_COLOR_1]> expenseManager : getComparator()
+    activate expenseManager DATA_COLOR_1
+
+    expenseManager --[DATA_COLOR_1]> expenseManager :
+    deactivate expenseManager DATA_COLOR_1
 
     expenseManager --[DATA_COLOR_1]> expenseManager :
     deactivate expenseManager

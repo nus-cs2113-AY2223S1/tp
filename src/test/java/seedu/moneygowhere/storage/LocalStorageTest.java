@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
 import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
@@ -37,7 +36,6 @@ class LocalStorageTest {
                 null, currency, null);
         Target testTarget = new Target(name, dateTime, null, amount, amount);
         Income testIncome = new Income(name, dateTime, null, amount);
-
 
         ArrayList<Expense> testExpenses = new ArrayList<>();
         ArrayList<RecurringPayment> testRecurringPayments = new ArrayList<>();
@@ -69,7 +67,6 @@ class LocalStorageTest {
 
         saveToFile(testExpenses, sortCommandSetting, testRecurringPayments, testTargets, testIncomes);
 
-
         ArrayList<Expense> loadExpenses = new ArrayList<>();
         ConsoleCommandSortExpense loadSortCommandSetting = new ConsoleCommandSortExpense(
                 ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
@@ -78,6 +75,7 @@ class LocalStorageTest {
         ArrayList<RecurringPayment> loadRecurringPayments = new ArrayList<>();
         ArrayList<Target> loadTargets = new ArrayList<>();
         ArrayList<Income> loadIncomes = new ArrayList<>();
+
         loadFromFile(loadExpenses, loadSortCommandSetting, loadRecurringPayments, loadTargets, loadIncomes);
 
         boolean isSameLength = testExpenses.size() == loadExpenses.size()
