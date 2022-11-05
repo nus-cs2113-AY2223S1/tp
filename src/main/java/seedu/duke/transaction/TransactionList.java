@@ -170,11 +170,11 @@ public class TransactionList {
      * @return Total sum
      */
     public double getTotalMoneyTransacted() {
-        double totalProfit = 0;
+        double totalMoneyTransacted = 0;
         for (Transaction transaction : transactionList) {
-            totalProfit += transaction.getMoneyTransacted();
+            totalMoneyTransacted += transaction.getMoneyTransacted();
         }
-        return totalProfit;
+        return totalMoneyTransacted;
     }
 
     // @@author bdthanh

@@ -22,7 +22,7 @@ activate ":ItemList"
 ":ItemList" -> ":ItemList" : new ItemList()
 activate ":ItemList"
     loop until all items checked
-        opt (item.getName()).toLowerCase().contains(keyword.toLowerCase())
+        opt (item name contains keyword)
             ":ItemList" -> ":ItemList" : addItem()
         end
     end

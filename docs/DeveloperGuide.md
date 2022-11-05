@@ -273,9 +273,7 @@ Step 2: Duke will receive the ```FindUserCommand``` and execute it.
 
 Step 3: FindUserCommand will check for the delimiter "/k". If it is not present, an exception is thrown. Else the command is executed.
 
-Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by Ui.printResponse.
-
-The following sequence diagram models the operation: **PENDING DIAGRAM**
+Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by `Ui.printResponse()`.
 
 ### 4.1.7. View User Loss
 
@@ -297,7 +295,7 @@ Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The money
 
 Step 7: The total User debt is printed by `Ui.printResponse()`.
 
-The following sequence diagram models the operation: **PENDING DIAGRAM**
+The following sequence diagram models the operation: ![](images/ViewUserLossCommand.png)
 
 ### 4.1.8. View User Gain
 
@@ -311,7 +309,7 @@ Step 2: Duke will receive the ```ViewUserGainCommand``` and execute it.
 
 Step 3: ViewUserGainCommand will check for the delimiter "/u". If it is not present, an exception is thrown. Else the command is executed.
 
-Step 4: The UserList is iterated through to find the User with the given [username]. If none exist, a UserNotFoundException is thrown.
+Step 4: The UserList is iterated through to find the User with the given username. If none exist, a UserNotFoundException is thrown.
 
 Step 5: `getLendTransactionsByUser(username)` is run. The TransactionList is iterated through to find Transactions in which said User is the Lender. If User is Lender, the Transaction is added to a new TransactionList, which is then returned.
 
@@ -319,7 +317,26 @@ Step 6: `getTotalMoneyTransacted()` is run on the new TransactionList. The money
 
 Step 7: The total User gain is printed by `Ui.printResponse()`.
 
-The following sequence diagram models the operation: **PENDING**
+The sequence diagram for this operation is nearly identical to that of ViewUserLoss, except that Transactions in which the User is the Lender are used instead.
+
+#### 4.1.9 . List Transaction By Borrower/Lender
+> These features allow the user to list all the Transactions in which a given User is a Borrower/Lender.
+
+Given below is an example usage scenario and how the command mechanism behaves at each step.
+
+Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the `createCommand()` method, and either throws an exception, or forwards the input to `ViewTransactionsByUserCommand` class to be processed.
+
+Step 2: `ViewBorrowTransactionsByUserCommand::executeCommand` or `ViewLendTransactionsByUserCommand::executeCommand` checks if the delimiters ('u') are present in the user input with the `getArgs()` method. If argument not present, an exception will be thrown.
+
+Step 3: If argument is present, it then checks if the User specified exists/ is valid with `ViewBorrowTransactionsByUserCommand::isValidUser` or `ViewLendTransactionsByUserCommand::isValidUser`. A UserNotFoundException is thrown otherwise.
+
+Step 4: If User is found, it then delegates to `TransactionList::getBorrowTransactionsByUser` or `TransactionList::getLendTransactionsByUser`which finds the transactions in which a given User is Borrower and returns a TransactionList containing all of them.
+
+Step 5: The returned TransactionList printed to the User via `Ui.printResponse()`
+
+The following sequence diagram models the operation:
+
+![ViewBorrowTxByuUser](images/ViewBorrowTxByUser.png)
 
 ### 4.2. Item-related Features
 
@@ -581,28 +598,6 @@ Step 6: Lastly, information about the updated transaction is printed to the user
 The following sequence diagram models the operation:
 ![updateTransactionSequence](images/UpdateTransactionSequence.png)
 
-
-#### 4.3.7. List Transaction By Borrower/Lender
-
-> `view-borrow-tx-by-user /u [username]` and `view-lend-tx-by-user /u [username]`: Lists down all the transactions in which a given user is a borrower/lender.
-
-Given below is an example usage scenario and how the command mechanism behaves at each step.
-
-Step 1: The user types in the command in the command line. The CommandParser class checks if the command is valid through the `createCommand()` method, and either throws an exception, or forwards the input to `ViewTransactionsByUserCommand` class to be processed.
-
-Step 2: `ViewBorrowTransactionsByUserCommand::executeCommand` or `ViewLendTransactionsByUserCommand::executeCommand` checks if the delimiters ('u') are present in the user input with the `getArgs()` method. If argument not present, an exception will be thrown.
-
-Step 3: If argument is present, it then checks if the User specified exists/ is valid with `ViewBorrowTransactionsByUserCommand::isValidUser` or `ViewLendTransactionsByUserCommand::isValidUser`. A UserNotFoundException is thrown otherwise.
-
-Step 4: If User is found, it then delegates to `TransactionList::getBorrowTransactionsByUser` or `TransactionList::getLendTransactionsByUser`which finds the transactions in which a given User is Borrower and returns a TransactionList containing all of them.
-
-Step 5: The returned TransactionList printed to the User via `Ui.printResponse()`
-
-The following sequence diagram models the operation: 
-
-**...Update the diagram**
-
-![ViewBorrowTxByuUser](images/ViewBorrowTxByUser.png)
 ### 4.4. Help Command
 
 >This feature allows users to see all the commands and command format required by Upcycle
@@ -636,6 +631,7 @@ Step 4: The ```executeCommand()``` of ExitCommand returns true, so Duke will rec
 - Has a passion to serve the student community
 - Student who wants to host a rental business for his/her hall
 - Student who wants to help others borrow or loan items
+- Someone who would like to track the gains and losses of each person in the community
 
 ### 5.2. Value proposition
 
