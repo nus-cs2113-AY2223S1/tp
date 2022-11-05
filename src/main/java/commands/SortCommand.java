@@ -13,6 +13,11 @@ public class SortCommand extends Commands {
         this.userInput = userInput;
     }
 
+    /**
+     * This method sorts the review list according to a given field.
+     *
+     * @return Returns the sorted review list if successful, else returns an error message.
+     */
     @Override
     public String execute() {
         String output = "";
@@ -35,8 +40,10 @@ public class SortCommand extends Commands {
             break;
 
         default:
-            int throwDummyException = Integer.parseInt("dummy");
-            break;
+            output = "Invalid sort field given. Choose any of the following sorting fields: 'rating', 'title', 'genre' "
+                    + "or 'date'.";
+
+            return output;
         }
 
         output += "Your list has been sorted by " + userInput[1] + ".\n";
