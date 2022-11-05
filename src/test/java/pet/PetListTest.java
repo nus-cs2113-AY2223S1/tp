@@ -1,9 +1,12 @@
 package pet;
 
+import command.Command;
 import command.petcommand.AddPetCommand;
 import command.petcommand.InitPetStatusCommand;
 import command.petcommand.RemovePetCommand;
 import org.junit.jupiter.api.Test;
+import parser.Parser;
+import parser.PetParser;
 
 import java.util.Arrays;
 
@@ -21,8 +24,30 @@ class PetListTest {
     }
 
     @Test
+    void addAPetWithInvalidHealthStatusTest() {
+        Parser parser = new Parser();
+        PetParser petParser = new PetParser(parser, 3);
+        int numOfPet = PetList.pets.size();
+        Command addPetCommand = petParser.prepareAddPet("n/Taro s/cat h/1");
+        addPetCommand.execute();
+        int numOfPetAfterAdd = PetList.pets.size();
+        assertEquals(numOfPetAfterAdd - numOfPet, 0);
+    }
+
+    @Test
+    void addAPetWithNoNameTest() {
+        Parser parser = new Parser();
+        PetParser petParser = new PetParser(parser, 3);
+        int numOfPet = PetList.pets.size();
+        Command addPetCommand = petParser.prepareAddPet("n/ s/cat h/1");
+        addPetCommand.execute();
+        int numOfPetAfterAdd = PetList.pets.size();
+        assertEquals(numOfPetAfterAdd - numOfPet, 0);
+    }
+
+    @Test
     void removeAPetTest() {
-        AddPetCommand addPetCommand = new AddPetCommand("Yuhuan", "cat", true);
+        AddPetCommand addPetCommand = new AddPetCommand("Taro", "cat", true);
         addPetCommand.execute();
         int currNumOfPet = PetList.pets.size();
         RemovePetCommand removePetCommand = new RemovePetCommand(Pet.idCounter);
@@ -32,18 +57,34 @@ class PetListTest {
     }
 
     @Test
-    void initPetStatusTest() {
-        boolean find;
-        Pet newPet = new Pet("cyk", "parrot", false);
-        PetList.pets.add(newPet);
-        InitPetStatusCommand initPetStatusCommand = new InitPetStatusCommand(1);
-        initPetStatusCommand.execute();
-        PetStatus[] petHealhtyStatuses = PetHealthyStatus.values();
-        PetStatus[] petUnhealthyStatuses = PetUnhealthyStatus.values();
-        PetStatus status = PetList.pets.get(0).status;
-        find = Arrays.asList(petHealhtyStatuses).contains(status)
-                || Arrays.asList(petUnhealthyStatuses).contains(status);
-        assertEquals(find, true);
-
+    void findByNameTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("fiona", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        String petName = currPet.name;
+        Pet petfound1 = PetList.findPet(petName);
+        assertEquals(currPet, petfound1);
     }
+
+    @Test
+    void findByIdTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("fiona", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        int id = currPet.petId;
+        Pet petFound = PetList.findPetById(id);
+        assertEquals(currPet, petFound);
+    }
+
+    @Test
+    void getPetNameByIdTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("feliks", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        int id = currPet.petId;
+        String name = PetList.getPetNameById(id);
+        assertEquals("feliks", name);
+    }
+
+
 }

@@ -12,7 +12,7 @@ public class Pet {
     // private int id;
     public Boolean isHealthy;
     public PetStatus status;
-    private Integer wellness;
+    public Integer wellness;
 
     public static final int NUM_OF_STATUS = 5;
 
@@ -31,12 +31,13 @@ public class Pet {
                 species, name, health, status);
     }
 
-    private void initPetStatus() {
+    public void initPetStatus() {
         Random random = new Random();
         int randomNumber = random.nextInt(NUM_OF_STATUS) + 1;
         this.wellness = randomNumber;
         if (this.isHealthy) {
-            setPetStatus(this.wellness + 5);
+            this.wellness += 5;
+            setPetStatus(this.wellness);
         } else {
             setPetStatus(this.wellness);
         }
@@ -46,6 +47,7 @@ public class Pet {
         this.wellness += 5;
         if (this.wellness >= 10) {
             this.wellness = 10;
+            this.isHealthy = true;
         }
         setPetStatus(this.wellness);
     }
