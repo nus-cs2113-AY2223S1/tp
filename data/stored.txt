@@ -1,1 +1,6 @@
-
+M|N| inception |95.0| thriller|10-01-2020
+M|N| avengers |99.0| action|30-01-2020
+M|N| cars |92.0| animated|20-01-2020
+T|N| game of thrones |97.0| fantasy |10-01-2020| hbo
+T|N| rick and morty |98.0| animated |30-01-2020| amazon
+T|N| the office |99.0| comedy |20-01-2020| disney
