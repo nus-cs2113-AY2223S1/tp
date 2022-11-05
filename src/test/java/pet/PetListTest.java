@@ -67,6 +67,26 @@ class PetListTest {
     }
 
     @Test
+    void findPetByInvalidNameTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("kate", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        String petName = currPet.name;
+        Pet petfound1 = PetList.findPet("petName");
+        assertEquals(null, petfound1);
+    }
+
+    @Test
+    void findByInvalidIdTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("kate", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        int id = currPet.petId;
+        Pet petFound = PetList.findPetById(-1);
+        assertEquals(null, petFound);
+    }
+
+    @Test
     void findByIdTest() {
         AddPetCommand addPetCommand = new AddPetCommand("fiona", "cat", true);
         addPetCommand.execute();
@@ -84,6 +104,15 @@ class PetListTest {
         int id = currPet.petId;
         String name = PetList.getPetNameById(id);
         assertEquals("feliks", name);
+    }
+
+    @Test
+    void getPetNmeByInvalidIdTest() {
+        AddPetCommand addPetCommand = new AddPetCommand("william", "cat", true);
+        addPetCommand.execute();
+        Pet currPet = PetList.pets.get(PetList.pets.size() - 1);
+        String name = PetList.getPetNameById(-1);
+        assertEquals("Invalid Id", name);
     }
 
 
