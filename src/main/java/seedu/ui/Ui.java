@@ -97,19 +97,6 @@ public class Ui {
         AnsiConsole.systemUninstall();
     }
 
-    /**
-     * Checks whether the system support ANSI encoding.
-     *
-     * @return true if it supports ANSI.
-     */
-    public static boolean isSupportAnsi() {
-        String systemOS = System.getProperty("os.name").toLowerCase();
-        if (systemOS.contains("mac")) {
-            return true;
-        }
-        return false;
-    }
-
     //@@author eehongchan
     /**
      * Asks for input and returns user input.
