@@ -336,7 +336,8 @@ public class Parser {
             dateFormat.setLenient(false);
             date = dateFormat.parse(dateWatchedString);
         } catch (ParseException e) {
-           return true; //just return true and b/c future date and invalid date are both invalid inputs.
+            //just return true and b/c future date and invalid date are both invalid inputs.
+            return true;
         }
 
         Date currentDate = new Date();
