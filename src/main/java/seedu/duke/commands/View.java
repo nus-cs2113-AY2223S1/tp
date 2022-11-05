@@ -57,6 +57,11 @@ public class View extends Command {
         checkFormatException(isRight);
     }
 
+    /**
+     * Function to check format of input
+     * @param isRight whether it is in correct format. Format: boolean
+     * @throws InvalidInputFormatException exception thrown if content of input has issues
+     */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
         if (!isRight) {
             throw new InvalidInputFormatException();
@@ -75,6 +80,11 @@ public class View extends Command {
         checkContentException(isSame);
     }
 
+    /**
+     * Function to check content of input
+     * @param isSame whether it is same or not. Format: boolean
+     * @throws InvalidInputContentException exception thrown if content has issues
+     */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
@@ -93,6 +103,11 @@ public class View extends Command {
         return idx;
     }
 
+    /**
+     * Method to check for any exception caught due to input (semester) format issues
+     * @param semester Semester taken. Format: String
+     * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
+     */
     private void checkOverallExceptionForView(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 

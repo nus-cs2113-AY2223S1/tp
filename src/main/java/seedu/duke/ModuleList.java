@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidOverallInputException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,10 +14,17 @@ public class ModuleList {
     public static int mcsCount;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     */
     public ModuleList() {
 
     }
 
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     * @param modules array of modules. Format : ArrayList<Module>
+     */
     public ModuleList(ArrayList<Module> modules) {
         this.modules = modules;
     }
@@ -34,9 +42,6 @@ public class ModuleList {
             add(module, true);
         }
     }
-
-
-
 
     /**
      * Function to add a module to the moduleList if it does not already exist
@@ -128,6 +133,7 @@ public class ModuleList {
 
     /**
      * Function to find lists of all modules taken in every semester.
+     * If there is no modules in moduleList, will print no modules found message
      */
     public void viewAll() {
         for (int i = 1; i <= 6; i++) {
@@ -151,6 +157,8 @@ public class ModuleList {
 
     /**
      * Function to clear modules in a particular or all semester
+     * Prints modules have been clear message if there is modules in semester
+     * Prints no modules found message if there is no modules in module list
      */
     public void clear(String semester) {
         boolean isFound = false;
@@ -162,8 +170,9 @@ public class ModuleList {
         } else {
             ArrayList<Module> updatedModules = new ArrayList<>();
             for (Module mod : modules) {
-                if (!mod.getSemesterTaken().matches(semester)) {
+                if (mod.getSemesterTaken().equals(semester)) {
                     isFound = true;
+                } else {
                     updatedModules.add(mod);
                 }
             }
@@ -178,7 +187,7 @@ public class ModuleList {
     }
 
     /**
-     *
+     * Function to generate an empty module list
      */
     public void clearAll() {
         modules = new ArrayList<>();
@@ -213,7 +222,8 @@ public class ModuleList {
     }
 
     /**
-     * Returns total graded Mcs taken in whole plan
+     * Function to find total Graded Mcs (Not S/U/-) in plan
+     * @return totalGradedMc Returns total graded Mcs taken in whole plan
      */
     public Integer totalGradedMcs() {
         Integer totalGradedMc = 0;
@@ -226,7 +236,8 @@ public class ModuleList {
     }
 
     /**
-     * Returns total Mcs taken in whole plan
+     * Function to find total Mcs taken in plan
+     * @return totalMcs Returns total Mcs taken in whole plan
      */
     public Integer totalMcs() {
         int totalMcs = 0;
@@ -237,7 +248,8 @@ public class ModuleList {
     }
 
     /**
-     * Returns total S/U Mcs taken in whole plan
+     * Function to find total S/U Module Mcs in plan
+     * @return totalSuMcs Returns total S/U Module Mcs taken in whole plan
      */
     public Integer totalSuMcs() {
         int totalSuMcs = 0;
@@ -250,7 +262,8 @@ public class ModuleList {
     }
 
     /**
-     * Returns total S/U Mcs taken in whole plan
+     * Function to find total ungraded Mcs (-) in plan
+     * @return totalUngradedMcs Returns total ungraded Mcs taken in whole plan
      */
     public Integer totalUngradedMcs() {
         Integer totalUngradedMcs = 0;
@@ -263,7 +276,8 @@ public class ModuleList {
     }
 
     /**
-     * Returns total MCs need to graduate
+     * Function to help compute total MCs needed to graduate
+     * @return 160 minus the total MCs taken and minus ungraded Mcs (-)
      */
     public Integer mcsForGraduation() {
         Integer mcsNeededForGraduation = 160;
@@ -271,7 +285,8 @@ public class ModuleList {
     }
 
     /**
-     * Calculates CAP
+     * Function to Calculates CAP
+     * @return CAP based on modules in plan
      */
     public double calculateCap() {
         double numerator = 0.0;
@@ -336,6 +351,11 @@ public class ModuleList {
         findMsg(matchingModules);
     }
 
+    /**
+     * Function that helps to fina matching modules based on keyword given
+     * @param keyword the word to search for in existing modules
+     * @return returns the array list with matching modules
+     */
     public static ArrayList<Module> findMatchingModules(String keyword) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         for (Module mod: modules) {
@@ -358,20 +378,26 @@ public class ModuleList {
         }
     }
 
-
-
-
-    // Returns total number of Modules in modules Array
+    /**
+     * Function to help count number of modules in array list
+     * @return Returns total number of Modules in modules Array
+     */
     public int getCount() {
         return modules.size();
     }
 
-    // Returns total number of Modules for the recent View command executed
+    /**
+     * Function to help get view count
+     * @return Returns total number of Modules for the recent View command executed
+     */
     public int getViewCount() {
         return viewCount;
     }
 
-    // Returns total number of MCs for the recent mcs command executed
+    /**
+     * Function to help get MC Count
+     * @return Returns total number of MCs for the recent mcs command executed
+     */
     public int getMcsCount() {
         return mcsCount;
     }
