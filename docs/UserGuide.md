@@ -14,6 +14,7 @@
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
         * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
+        * [Bye](#bye)
     * [Build Editing Mode](#build-editing-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
@@ -271,7 +272,20 @@ ____________________________________________________________
 Exporting builds...
 ____________________________________________________________
 ```
+#### Bye: `bye`
 
+Exits the program.
+
+Format: `bye`
+
+Example of usage: Enter `bye` to exit the program.
+
+Expected outcome: The program will exit.
+```
+____________________________________________________________
+Bye. Hope to see you again soon!
+____________________________________________________________
+```
 ### Build Editing Mode
 
 Edit mode handles the management of the computer components of a build.
