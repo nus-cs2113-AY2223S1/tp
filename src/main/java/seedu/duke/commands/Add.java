@@ -2,12 +2,20 @@ package seedu.duke.commands;
 
 import seedu.duke.Module;
 import seedu.duke.ModuleList;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidCourseException;
+import seedu.duke.exceptions.InvalidGradeException;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.InvalidOverallInputException;
+import seedu.duke.exceptions.InvalidSemesterException;
 
 import static seedu.duke.exceptions.InvalidGradeException.checkGradeFormat;
 import static seedu.duke.exceptions.InvalidGradeException.checkValidGrade;
 import static seedu.duke.exceptions.InvalidMcException.invalidMc;
-import static seedu.duke.exceptions.InvalidSemesterException.*;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
 public class Add extends Command {
     private Module mod;
@@ -17,8 +25,9 @@ public class Add extends Command {
      * @param input the input message to be used to initialize the variables
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
+     * @throws InvalidOverallInputException exception to be thrown if any issues with the input
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -31,19 +40,69 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException {
+    private void addition(String input, int[] indexes) throws InvalidOverallInputException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
-        checkYear(semester);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
-        checkMcString(mcString);
-        int mc = Integer.parseInt(mcString);
-        checkMc(mc);
+        int mcInt = Integer.parseInt(mcString);
         String grade = extractingContent(input, indexes[6], indexes[7]);
-        checkGrade(grade);
 
-        this.mod = new Module(course, semester, grade, mc);
+        checkOverallExceptionForAdd(course, semester, mcString, mcInt, grade);
+
+        this.mod = new Module(course, semester, grade, mcInt);
+
+    }
+
+    /**
+     * Method to check for any exception caught due to input (Course, semester, MC, Grade) issues
+     * @param course Course taken. Format: String
+     * @param semester Semester taken. Format: String
+     * @param mcString MC in string format. Format: String
+     * @param mcInt MC in Integer format. Format: Integer
+     * @param grade Grade received for the module. Format: String
+     * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
+     */
+    private void checkOverallExceptionForAdd(String course, String semester,
+                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
+
+        String errorMessage = "";
+
+        try {
+            checkCourse(course);
+        } catch (Exception e) {
+            errorMessage += e.getMessage();
+        }
+
+        try {
+            checkYear(semester);
+        } catch (Exception e) {
+            errorMessage += e.getMessage();
+        }
+
+        try {
+            checkMcString(mcString);
+        } catch (Exception e) {
+            errorMessage += e.getMessage();
+        }
+
+        try {
+            checkMc(mcInt);
+        } catch (Exception e) {
+            errorMessage += e.getMessage();
+        }
+
+        try {
+            checkGrade(grade);
+        } catch (Exception e) {
+            errorMessage += e.getMessage();
+        }
+
+        if (!errorMessage.equals("")) {
+            System.out.println("Unable to ADD module due to these issue(s):");
+            System.out.println(errorMessage);
+            throw new InvalidOverallInputException();
+        }
     }
 
     /**
@@ -79,6 +138,11 @@ public class Add extends Command {
         checkFormatException(isRight);
     }
 
+    /**
+     * Function to check format of input
+     * @param isRight whether it is in correct format. Format: boolean
+     * @throws InvalidInputFormatException exception thrown if content of input has issues
+     */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
         if (!isRight) {
             throw new InvalidInputFormatException();
@@ -103,18 +167,53 @@ public class Add extends Command {
         checkContentException(isSame);
     }
 
+    /**
+     * Function to check content of input
+     * @param isSame whether it is same or not. Format: boolean
+     * @throws InvalidInputContentException exception thrown if content has issues
+     */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
         }
     }
 
+    /**
+     * Function to check if course input entered by user is correct format
+     * Course input must be below 10 characters and have both letters and numbers
+     * @param course input entered by user. Format: String
+     * @throws InvalidCourseException exception thrown when course input is invalid
+     */
+    public static void checkCourse(String course) throws InvalidCourseException {
+        if (course.length() > 10) {
+            throw new InvalidCourseException();
+        } else if (course.matches("[a-zA-Z]+")) {
+            throw new InvalidCourseException();
+        } else if (course.matches("[0-9]+")) {
+            throw new InvalidCourseException();
+        }
+    }
+
+    /**
+     * Function to check if mc String input is in correct format
+     * @param mcString MC in string format. Format: String
+     * @throws InvalidMcException exception thrown when mc String input is in incorrect format
+     */
     public void checkMcString(String mcString) throws InvalidMcException {
+        if (mcString.length() > 2) {
+            throw new InvalidMcException();
+        }
         if (!mcString.matches("[0-9]+")) {
             throw new InvalidMcException();
         }
     }
 
+
+    /**
+     * Function to check if semester input is in correct format
+     * @param semester semester in string format. Format: String
+     * @throws InvalidSemesterException exception thrown when semester input is in incorrect format
+     */
     public void checkYear(String semester) throws InvalidSemesterException {
         if(invalidFormat(semester)) {
             throw new InvalidSemesterException();
@@ -124,12 +223,22 @@ public class Add extends Command {
         }
     }
 
+    /**
+     * Function to check if mc input is in correct format
+     * @param mcs mcs in Integer format. Format: Integer
+     * @throws InvalidMcException exception thrown when mc input is in incorrect format
+     */
     public void checkMc(int mcs) throws InvalidMcException {
         if (invalidMc(mcs)) {
             throw new InvalidMcException();
         }
     }
 
+    /**
+     * Function to check if grade input is in correct format
+     * @param grade grade in string format. Format: String
+     * @throws InvalidGradeException exception thrown when grade input is in incorrect format
+     */
     public void checkGrade(String grade) throws InvalidGradeException {
         if (!checkGradeFormat(grade)) {
             throw new InvalidGradeException();

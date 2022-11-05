@@ -2,7 +2,9 @@ package seedu.duke;
 
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidOverallInputException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,9 +12,21 @@ public class ModuleList {
     public static ArrayList<Module> modules = new ArrayList<>();
     public static int viewCount;
     public static int mcsCount;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     */
     public ModuleList() {
 
+    }
+
+    /**
+     * Contructor of ModuleList class to initialize an object of class moduleList
+     * @param modules array of modules. Format : ArrayList<Module>
+     */
+    public ModuleList(ArrayList<Module> modules) {
+        this.modules = modules;
     }
 
     /**
@@ -29,7 +43,6 @@ public class ModuleList {
         }
     }
 
-
     /**
      * Function to add a module to the moduleList if it does not already exist
      * @param mod The module to be added to the list
@@ -42,7 +55,7 @@ public class ModuleList {
         } else {
             int before = modules.size();
             modules.add(mod);
-            if (isFromFile == false) {
+            if (!isFromFile) {
                 UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
             }
             int after = modules.size();
@@ -103,15 +116,81 @@ public class ModuleList {
      * @param semester The semester for which the modules need to be printed
      */
     public void view(String semester) {
-        ArrayList<Module> matchingModules = new ArrayList<>();
-        viewCount = 0;
-        for (Module mod : modules) {
-            if (mod.getSemesterTaken().matches(semester)) {
-                matchingModules.add(mod);
-                viewCount++;  // increments the count for this particular semester (For JUnit Purpose)
+        if (semester.equals("all")) {
+            viewAll();
+        } else {
+            ArrayList<Module> matchingModules = new ArrayList<>();
+            viewCount = 0;
+            for (Module mod : modules) {
+                if (mod.getSemesterTaken().matches(semester)) {
+                    matchingModules.add(mod);
+                    viewCount++;  // increments the count for this particular semester (For JUnit Purpose)
+                }
+            }
+            printResponse(semester, matchingModules);
+        }
+    }
+
+    /**
+     * Function to find lists of all modules taken in every semester.
+     * If there is no modules in moduleList, will print no modules found message
+     */
+    public void viewAll() {
+        for (int i = 1; i <= 6; i++) {
+            for (int j = 1; j <= 2; j++) {
+                ArrayList<Module> matchingModules = new ArrayList<>();
+                String sem = "Y" + i + "S" + j;
+                for (Module mod : modules) {
+                    if (mod.getSemesterTaken().matches(sem)) {
+                        matchingModules.add(mod);
+                    }
+                }
+                if (!matchingModules.isEmpty()) {
+                    printResponse(sem, matchingModules);
+                }
             }
         }
-        printResponse(semester, matchingModules);
+        if(modules.isEmpty()) {
+            UI.noModulesFoundMessage();
+        }
+    }
+
+    /**
+     * Function to clear modules in a particular or all semester
+     * Prints modules have been clear message if there is modules in semester
+     * Prints no modules found message if there is no modules in module list
+     */
+    public void clear(String semester) {
+        boolean isFound = false;
+        if (semester.equals("all")) {
+            isFound = true;
+            clearAll();
+            UI.allClearedMessage();
+
+        } else {
+            ArrayList<Module> updatedModules = new ArrayList<>();
+            for (Module mod : modules) {
+                if (mod.getSemesterTaken().equals(semester)) {
+                    isFound = true;
+                } else {
+                    updatedModules.add(mod);
+                }
+            }
+            modules = updatedModules;
+
+        }
+        if (!isFound) {
+            UI.notFoundClearMessage(semester);
+        } else if (!semester.equals("all")) {
+            UI.semesterClearedMessage(semester);
+        }
+    }
+
+    /**
+     * Function to generate an empty module list
+     */
+    public void clearAll() {
+        modules = new ArrayList<>();
     }
 
     /**
@@ -143,12 +222,118 @@ public class ModuleList {
     }
 
     /**
+     * Function to find total Graded Mcs (Not S/U/-) in plan
+     * @return totalGradedMc Returns total graded Mcs taken in whole plan
+     */
+    public Integer totalGradedMcs() {
+        Integer totalGradedMc = 0;
+        for (Module mod : modules) {
+            if (!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))) {
+                totalGradedMc += mod.getMcs();
+            }
+        }
+        return totalGradedMc;
+    }
+
+    /**
+     * Function to find total Mcs taken in plan
+     * @return totalMcs Returns total Mcs taken in whole plan
+     */
+    public Integer totalMcs() {
+        int totalMcs = 0;
+        for (Module mod : modules) {
+            totalMcs += mod.getMcs();
+        }
+        return totalMcs;
+    }
+
+    /**
+     * Function to find total S/U Module Mcs in plan
+     * @return totalSuMcs Returns total S/U Module Mcs taken in whole plan
+     */
+    public Integer totalSuMcs() {
+        int totalSuMcs = 0;
+        for (Module mod : modules) {
+            if (mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
+                totalSuMcs += mod.getMcs();
+            }
+        }
+        return totalSuMcs;
+    }
+
+    /**
+     * Function to find total ungraded Mcs (-) in plan
+     * @return totalUngradedMcs Returns total ungraded Mcs taken in whole plan
+     */
+    public Integer totalUngradedMcs() {
+        Integer totalUngradedMcs = 0;
+        for (Module mod : modules) {
+            if (mod.getGrade().equals("-")) {
+                totalUngradedMcs += mod.getMcs();
+            }
+        }
+        return totalUngradedMcs;
+    }
+
+    /**
+     * Function to help compute total MCs needed to graduate
+     * @return 160 minus the total MCs taken and minus ungraded Mcs (-)
+     */
+    public Integer mcsForGraduation() {
+        Integer mcsNeededForGraduation = 160;
+        return  mcsNeededForGraduation - totalMcs() - totalUngradedMcs();
+    }
+
+    /**
+     * Function to Calculates CAP
+     * @return CAP based on modules in plan
+     */
+    public double calculateCap() {
+        double numerator = 0.0;
+        for (Module mod: modules) {
+            numerator += gradePoint(mod.getGrade()) * mod.getMcs();
+        }
+        return numerator / totalGradedMcs();
+    }
+
+    /**
+     * Function to convert a grade into grade point
+     * @param grade The letter grade of a module. Format: String
+     * @return The equivalent gradePoint of the grade
+     */
+    public double gradePoint(String grade) {
+        switch (grade) {
+            case "A+":
+            case "A":
+                return 5.0;
+            case "A-":
+                return 4.5;
+            case "B+":
+                return 4.0;
+            case "B":
+                return 3.5;
+            case "B-":
+                return 3.0;
+            case "C+":
+                return 2.5;
+            case "C":
+                return 2.0;
+            case "D+":
+                return 1.5;
+            case "D":
+                return 1.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    /**
      * For checking whether the module contains the keyword in its fields and return a boolean result.
      * @param keyword the word to search for in existing modules
      * @param mod the existing module to be checked
      * @return true if mod contains the keyword specified in its field
      */
-    public boolean findMatch(String keyword, Module mod) {
+    public static boolean findMatch(String keyword, Module mod) {
         try {
             return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
                     mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
@@ -162,13 +347,23 @@ public class ModuleList {
      * @param keyword the word to search for in existing modules
      */
     public void find(String keyword) {
+        ArrayList<Module> matchingModules = findMatchingModules(keyword);
+        findMsg(matchingModules);
+    }
+
+    /**
+     * Function that helps to fina matching modules based on keyword given
+     * @param keyword the word to search for in existing modules
+     * @return returns the array list with matching modules
+     */
+    public static ArrayList<Module> findMatchingModules(String keyword) {
         ArrayList<Module> matchingModules = new ArrayList<>();
         for (Module mod: modules) {
             if (findMatch(keyword, mod)) {
                 matchingModules.add(mod);
             }
         }
-        findMsg(matchingModules);
+        return matchingModules;
     }
 
     /**
@@ -183,19 +378,29 @@ public class ModuleList {
         }
     }
 
-    // Returns total number of Modules in modules Array
+    /**
+     * Function to help count number of modules in array list
+     * @return Returns total number of Modules in modules Array
+     */
     public int getCount() {
         return modules.size();
     }
 
-    // Returns total number of Modules for the recent View command executed
+    /**
+     * Function to help get view count
+     * @return Returns total number of Modules for the recent View command executed
+     */
     public int getViewCount() {
         return viewCount;
     }
 
-    // Returns total number of MCs for the recent mcs command executed
+    /**
+     * Function to help get MC Count
+     * @return Returns total number of MCs for the recent mcs command executed
+     */
     public int getMcsCount() {
         return mcsCount;
     }
+
 
 }

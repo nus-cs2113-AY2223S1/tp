@@ -1,5 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.commands.Check;
+import seedu.duke.design.ASCIIArtGenerator;
+import seedu.duke.exceptions.InvalidInputContentException;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +12,7 @@ import java.util.Scanner;
 public class UI {
 
     public static String separationLine = "----------------------------------------";
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public static void printSeparationLine() {
         System.out.println(separationLine);
@@ -30,10 +36,12 @@ public class UI {
     /**
      * Message to be printed in the beginning;
      */
-    public static void helloMessage() {
+    public static void helloMessage() throws Exception {
+        printSeparationLine();
+        ASCIIArtGenerator.printTextArt("PlanIT!", ASCIIArtGenerator.ART_SIZE_MEDIUM);
         printSeparationLine();
         System.out.println("Welcome to PlanIT!");
-        System.out.println("Start planning out your 4 years in NUS with us!");
+        System.out.println("Start planning out your 4 years in NUS with us :)");
         printSeparationLine();
         System.out.println("To get started, type 'help' to see the list of available commands.");
         printSeparationLine();
@@ -85,6 +93,37 @@ public class UI {
         System.out.println("Please add the module first before you want to delete.");
     }
 
+    /**
+     * Message to be printed if a semester which is trying to be deleted is not found in plan
+     * @param semester : the semester in which all modules are to be deleted
+     */
+    public static void notFoundClearMessage(String semester) {
+        System.out.println("No modules found in " + semester + "!");
+        System.out.println("Please add the modules to the semester first before you want to clear.");
+    }
+
+    /**
+     * Message to be printed when all modules have been successfully cleared from plan
+     */
+    public static void allClearedMessage() {
+        System.out.println("Successfully cleared all modules in your plan!");
+    }
+
+    /**
+     * Message to be printed when modules from a semester have been successfully cleared from plan
+     */
+    public static void semesterClearedMessage(String semester) {
+        System.out.println("Successfully cleared all modules for " + semester + ".");
+    }
+
+    /**
+     * Message to be printed when there is no modules found in plan
+     */
+    public static void noModulesFoundMessage() {
+        System.out.println("0 modules found in your plan!");
+    }
+
+
     public static void fileLoadingErrorMessage() {
         System.out.println("Could not find any previous usage.");
     }
@@ -133,71 +172,49 @@ public class UI {
         System.out.println("There are no existing modules that match your keyword inputted.");
     }
 
-    public static void NOCEligibleMessage() {
+    public static void nocEligibleMessage() {
         System.out.println("You are eligible for NOC!");
     }
 
-    public static void NOCIneligibleMessage() {
-        System.out.println("Sorry, You are ineligible for NOC.");
-        System.out.println("----------------------------------------");
+    public static void nocIneligibleMessage() {
+        System.out.println("Sorry, You are ineligible for NOC." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
-        System.out.println(" - You have yet to complete 4 semesters of study");
-        System.out.println(" - You are currently in your final academic semester");
-        System.out.println(" - You have yet to obtain more than 70MC");
-        System.out.println("----------------------------------------");
+        System.out.println(" * You have yet to complete 4 semesters of study");
+        System.out.println(" * You are currently in your final academic semester");
+        System.out.println(" * You have yet to obtain more than 70MC");
 
     }
 
-    public static void SEPEligibleMessage() {
+    public static void sepEligibleMessage() {
         System.out.println("You are eligible for SEP!");
     }
 
-    public static void SEPIneligibleMessage() {
-        System.out.println("Sorry, You are ineligible for SEP.");
-        System.out.println("----------------------------------------");
+    public static void sepIneligibleMessage() {
+        System.out.println("Sorry, You are ineligible for SEP." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
-        System.out.println(" - You have yet to complete 2 semesters of study");
-        System.out.println(" - You are currently in your final year");
-        System.out.println(" - Your CAP is below 3.0");
-        System.out.println("----------------------------------------");
+        System.out.println(" * You have yet to complete 2 semesters of study");
+        System.out.println(" * You are currently in your final year");
+        System.out.println(" * Your CAP is below 3.0");
+
+    }
+
+    public static void overview(ModuleList moduleList) throws InvalidInputContentException, InvalidInputContentException {
+
+        System.out.println("Here’s an overview of your Profile:" + "\n");
+        System.out.println("* Current Semester: " + new Check().findCurrentSemesterInString() + "\n");
+        System.out.println("* Total MCs completed : " + moduleList.totalMcs());
+        System.out.println("* Total Graded MCs : " + moduleList.totalGradedMcs());
+        System.out.println("* Total Ungraded (-) MCs : " + moduleList.totalUngradedMcs());
+        System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
+        System.out.println("* Cumulative Average Point (CAP) : " + df.format(moduleList.calculateCap()) + "\n");
+        System.out.println("* MCs Needed needed for graduation : " + moduleList.mcsForGraduation() + "\n");
+        System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNOC() ? "Yes" : "No"));
+        System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSEP() ? "Yes" : "No"));
+
     }
 
     public static void helpMessage(String message) {
         System.out.println(message);
-    }
-
-    /**
-     * Message to be displayed when an exception is encountered due to invalid input format
-     */
-    public static void invalidFormatMessage() {
-        System.out.println("INPUT FORMAT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-
-    /**
-     * Message to be displayed when an exception is encountered due to invalid content in input
-     */
-    public static void invalidContentMessage() {
-        System.out.println("INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-    public static void invalidYearMessage() {
-        System.out.println("The year or semester or format of semester entered is invalid");
-    }
-    /**
-     * Message to be displayed when an exception is encountered due to an invalid command word
-     */
-    public static void invalidCommandWordMessage() {
-        System.out.println("NO COMMAND WORD SPECIFIED!! PLEASE KEY IN THE CORRECT INPUT!!");
-        System.out.println("input 'help' if you are unsure about the requirements");
-    }
-
-    public static void invalidMcMessage() {
-        System.out.println("The number of MCs is invalid (0 < mcs <= 20). Please try again!");
-    }
-
-    public static void invalidGradeMessage() {
-        System.out.println("Invalid grade. Please try again!");
     }
 
 }

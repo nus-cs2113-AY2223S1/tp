@@ -2,8 +2,24 @@
 package seedu.duke;
 
 
-import seedu.duke.commands.*;
-import seedu.duke.exceptions.*;
+import seedu.duke.commands.Add;
+import seedu.duke.commands.Check;
+import seedu.duke.commands.Clear;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.Delete;
+import seedu.duke.commands.Exit;
+import seedu.duke.commands.Find;
+import seedu.duke.commands.Help;
+import seedu.duke.commands.Mcs;
+import seedu.duke.commands.Overview;
+import seedu.duke.commands.View;
+import seedu.duke.exceptions.InvalidCommandWordException;
+import seedu.duke.exceptions.InvalidGradeException;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.InvalidOverallInputException;
+import seedu.duke.exceptions.InvalidSemesterException;
 
 public class Parser {
 
@@ -21,20 +37,13 @@ public class Parser {
         }
 
         Command c = null;
+        String message = "";
         try {
             c = specificCase(splitText[0], content);
-        } catch (InvalidCommandWordException e) {
-            UI.invalidCommandWordMessage();
-        } catch (InvalidInputFormatException e) {
-            UI.invalidFormatMessage();
-        } catch (InvalidInputContentException e) {
-            UI.invalidContentMessage();
-        } catch (InvalidMcException e) {
-            UI.invalidMcMessage();
-        } catch (InvalidGradeException e) {
-            UI.invalidGradeMessage();
-        } catch (InvalidSemesterException e) {
-            UI.invalidYearMessage();
+        } catch (Exception e) {
+            message += e.getMessage();
+        } finally {
+            System.out.print(message);
         }
 
         return c;
@@ -59,7 +68,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
         switch (commandWord) {
         case "add":
             return new Add(input);
@@ -67,6 +76,8 @@ public class Parser {
             return new Delete(input);
         case "view":
             return new View(input);
+        case "clear":
+            return new Clear(input);
         case "mcs":
             return new Mcs(input);
         case "find":
@@ -75,6 +86,8 @@ public class Parser {
             return new Check(input);
         case "help":
             return new Help();
+        case "overview":
+            return new Overview();
         case "exit":
             return new Exit();
         default:

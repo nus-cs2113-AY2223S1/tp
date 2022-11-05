@@ -10,16 +10,16 @@ import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
 import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
 import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
-public class View extends Command {
+public class Clear extends Command {
     private String semester;
 
     /**
-     * Constructor to initialize an object of View class
+     * Constructor to initialize an object of Delete class
      * @param input input entered by user. Format: String
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
-    public View(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         input = input.trim();
         if (input.equals("all")) {
             this.semester = "all";
@@ -29,8 +29,7 @@ public class View extends Command {
             checkContent(input, indexes);
             setSem(input, indexes);
         }
-        checkOverallExceptionForView(this.semester);
-
+        checkOverallExceptionForClear(this.semester);
     }
 
     /**
@@ -108,7 +107,7 @@ public class View extends Command {
      * @param semester Semester taken. Format: String
      * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
-    private void checkOverallExceptionForView(String semester) throws InvalidOverallInputException {
+    private void checkOverallExceptionForClear(String semester) throws InvalidOverallInputException {
         String errorMessage = "";
 
         try {
@@ -118,15 +117,15 @@ public class View extends Command {
         }
 
         if (!errorMessage.equals("")) {
-            System.out.println("Unable to view MCS due to these issue(s):");
+            System.out.println("Unable to Clear modules in semester due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
         }
     }
 
     /**
-     * throws InvalidSemesterException only when invalidFormat for semester
-     * Ignores when requesting for "all" semester
+     * Function that checks the format of semester input
+     * @throws InvalidSemesterException throws InvalidSemesterException only when invalidFormat for semester
      */
     public void checkYear(String semester) throws InvalidSemesterException {
         if (!semester.equals("all")) {
@@ -141,6 +140,6 @@ public class View extends Command {
 
     @Override
     public void execute(ModuleList modulelist) {
-        modulelist.view(this.semester);
+        modulelist.clear(this.semester);
     }
 }

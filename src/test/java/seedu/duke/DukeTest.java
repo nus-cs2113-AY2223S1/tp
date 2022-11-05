@@ -1,11 +1,10 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.Add;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.Check;
-import seedu.duke.exceptions.InvalidCommandWordException;
-import seedu.duke.exceptions.InvalidInputContentException;
-import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.*;
 
 import java.util.ArrayList;
 
@@ -58,7 +57,129 @@ class DukeTest {
     }
 
     @Test
-    void testAdd() {
+    void testInvalidSemester() {
+        System.out.println("Running JUnit tests for exceptions in case of invalid semester");
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S2Y1"));//Semester is given before the Year
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S1")); //Only semester is given
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3")); //Only year is given
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y*SJ")); //Special characters and letters are given for year and semester
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y9S2"));//Year greater than 6 is given
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3S7"));//Semester greater than 2 is given
+    }
+
+    @Test
+    void testInvalidMc() {
+        System.out.println("Running JUnit tests for exceptions in case of invalid mc");
+        assertThrows(InvalidMcException.class, () -> Add.checkMc(-6)); //Negative mc is given
+        assertThrows(InvalidMcException.class, () -> Add.checkMc(21)); //MC greater than 20 is given
+        assertThrows(InvalidMcException.class, () -> Add.checkMcString("999999999999999999999999999999999999999999999999999999999999999999999999")); // Huge numeric mc is given
+        assertThrows(InvalidMcException.class, () -> Add.checkMcString("adr*")); // letters and special character for mc is given
+    }
+
+
+
+    @Test
+    void testInvalidGrade() {
+        System.out.println("Running JUnit tests for exceptions in case of invalid grade");
+        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("9987")); //Numeric grade is given
+        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("D-")); // One of the grades that are not possible is given
+    }
+
+    @Test
+    void testFind() throws InvalidInputContentException {
+        System.out.println("Running JUnit Test for Find");
+
+        //add the modules
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
+        String input3 = "add m/cs2107 s/y2s1 mc/4 g/A";
+        ModuleList modulelist = new ModuleList();
+        Command c = Parser.parse(input1);
+        c.execute(modulelist);
+        c = Parser.parse(input2);
+        c.execute(modulelist);
+        c = Parser.parse(input3);
+        c.execute(modulelist);
+
+        assertEquals(1,ModuleList.findMatchingModules("CS2105").size()); // find keyword in module code
+        assertEquals(3,ModuleList.findMatchingModules("21").size()); // find partial keyword in module code
+        assertEquals(1,ModuleList.findMatchingModules("F").size()); // find keyword in grade
+        assertEquals(2,ModuleList.findMatchingModules("Y1").size()); // find keyword in semester
+        assertEquals(3,ModuleList.findMatchingModules("4").size()); // find keyword in MC
+        assertEquals(0,ModuleList.findMatchingModules("B+").size()); // find keyword that does not exist
+
+        //Delete the modules
+
+        String inputDelete1 = "delete m/CS2105";
+        String inputDelete2 = "delete m/CS2106";
+        String inputDelete3 = "delete m/CS2107";
+        c = Parser.parse(inputDelete1);
+        c.execute(modulelist);
+        c = Parser.parse(inputDelete2);
+        c.execute(modulelist);
+        c = Parser.parse(inputDelete3);
+        c.execute(modulelist);
+    }
+
+    @Test
+    void testClearforSemester() throws InvalidInputContentException {
+        System.out.println("Running JUnit Test for Clear for an individual semester");
+
+        //add the modules
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
+        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
+        ModuleList modulelist = new ModuleList();
+        Command c = Parser.parse(input1);
+        c.execute(modulelist);
+        c = Parser.parse(input2);
+        c.execute(modulelist);
+        c = Parser.parse(input3);
+        c.execute(modulelist);
+        int initialCount = modulelist.getCount();
+
+        //give command to clear y1s1
+        String inputToClear = "clear s/y1s1";
+        c = Parser.parse(inputToClear);
+        c.execute(modulelist);
+        int finalCount = modulelist.getCount();
+        assertEquals(initialCount - 2, finalCount);
+
+        //Delete CS2106 as well
+
+        String inputDelete = "delete m/CS2106";
+        c = Parser.parse(inputDelete);
+        c.execute(modulelist);
+    }
+
+    @Test
+    void testClearforAll() throws InvalidInputContentException {
+        System.out.println("Running JUnit Test for Clear for all");
+
+        //add the modules
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
+        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
+        ModuleList modulelist = new ModuleList();
+        Command c = Parser.parse(input1);
+        c.execute(modulelist);
+        c = Parser.parse(input2);
+        c.execute(modulelist);
+        c = Parser.parse(input3);
+        c.execute(modulelist);
+        int initialCount = modulelist.getCount();
+
+        //give command to clear y1s1
+        String inputToClear = "clear all";
+        c = Parser.parse(inputToClear);
+        c.execute(modulelist);
+        int finalCount = modulelist.getCount();
+        assertEquals(initialCount - 3, finalCount);
+
+    }
+
+    @Test
+    void testAdd() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Add");
 
         // Add - Checks whether a module is being added
@@ -85,7 +206,7 @@ class DukeTest {
     }
 
     @Test
-    void testRepetitionAdd() {
+    void testRepetitionAdd() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Adding repetitive mods");
         String input1 = "add m/cs2113 s/y1s1 mc/4 g/A+";
         String input2 = "add m/cs2113 s/y2s1 mc/4 g/b";
@@ -109,7 +230,7 @@ class DukeTest {
     }
 
     @Test
-    void testDelete() {
+    void testDelete() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Delete");
 
         // Delete - Checks whether a module is being being deleted after being added
@@ -135,7 +256,7 @@ class DukeTest {
     }
 
     @Test
-    void testView() {
+    void testView() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for view");
 
         // View - Checks whether we are able to view the modules taken for semester after adding something
@@ -166,7 +287,7 @@ class DukeTest {
     }
 
     @Test
-    void testMcs() {
+    void testMcs() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for mcs");
 
         // mcs - Test whether we are able to view mcs taken for semester after adding something

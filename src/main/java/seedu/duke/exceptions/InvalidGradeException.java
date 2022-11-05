@@ -13,4 +13,9 @@ public class InvalidGradeException extends Exception {
         }
         return false;
     }
+    public String getMessage() {
+        String message = "* Invalid grade input." + "\n";
+        return message;
+    }
+
 }

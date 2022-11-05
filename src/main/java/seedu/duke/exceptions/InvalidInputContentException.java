@@ -19,4 +19,10 @@ public class InvalidInputContentException extends Exception {
         }
     }
 
+    public String getMessage() {
+        String message = "INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!"
+                + "\n"  + "input 'help' if you are unsure about the requirements" + "\n";
+        return message;
+    }
+
 }
