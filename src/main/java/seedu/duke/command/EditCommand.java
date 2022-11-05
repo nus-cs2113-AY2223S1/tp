@@ -115,18 +115,21 @@ public class EditCommand extends Command {
 
     //@@author brian-vb
     /**
-     * Executes the "edit" command.
+     * Executes the "edit" command. Checks and parses the necessary parameters before deleting transaction.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
      * @param storage      An instance of the Storage class.
+     * @throws GlobalInvalidIndexException If the index inputted is invalid.
+     * @throws EditCommandEmptyTagsException If the tags are empty.
+     * @throws EditCommandUnchangedException If the tags result in an unchanged transaction.
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
 
         try {
             editLogger.setLevel(Level.SEVERE);
-            editLogger.log(Level.INFO, "Edit Command checks whether the index is valid "
+            editLogger.log(Level.INFO, "Edit Command undergoes multiple checks on various parameters "
                     + "before executing the command.");
 
             int index = entryNumber;
@@ -135,57 +138,73 @@ public class EditCommand extends Command {
             int newAmount = amount;
             LocalDate newDate = date;
             String newCategory = category;
-            Transaction entry = transactions.getEntry(index - 1);
 
             boolean check = isIndexValid(transactions, index);
             boolean secondCheck = isTagsNonEmpty(newType, newDescription, newAmount, newCategory, newDate);
-            boolean thirdCheck = isParametersChanged(entry, newType, newDescription, newAmount, newCategory, newDate);
+
             assert index > 0;
 
-            if (check && secondCheck && thirdCheck) {
-                newType = updateType(entry, newType);
+            editLogger.log(Level.INFO, "If the index is invalid, the command will not execute and throw "
+                    + "an exception later.");
+            if (check) {
+                Transaction entry = transactions.getEntry(index - 1);
+                boolean thirdCheck = isParametersChanged(entry, newType, newDescription, newAmount,
+                        newCategory, newDate);
 
-                if (newType.equals("expense")) {
-                    newDate = updateDate(entry, newDate);
-                    newDescription = updateDescription(entry, newDescription);
-                    newCategory = updateCategory(entry, newCategory);
-                    newAmount = updateAmount(entry, newAmount);
+                editLogger.log(Level.INFO, "If tags are empty or the tags will result in an unedited "
+                        + "transaction, the command will stop executing and throw an exception later.");
 
-                    String message = transactions.editExpense(newDescription, newAmount, newCategory, newDate, index);
+                if (secondCheck && thirdCheck) {
+                    newType = updateType(entry, newType);
 
-                    long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
-                    String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
-                            DateFormats.retrieveFormattedMonthAndYear(newDate));
+                    if (newType.equals("expense")) {
+                        newDate = updateDate(entry, newDate);
+                        newDescription = updateDescription(entry, newDescription);
+                        newCategory = updateCategory(entry, newCategory);
+                        newAmount = updateAmount(entry, newAmount);
 
-                    Ui.showTransactionAction(INFO_EDIT_EXPENSE.toString(), message, budgetInfo);
-                    editLogger.log(Level.INFO, "The requested transaction has been edited "
-                            + "and the UI should display the confirmation message respectively.");
+                        String message = transactions.editExpense(newDescription, newAmount, newCategory,
+                                newDate, index - 1);
+
+                        long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
+                        String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                                DateFormats.retrieveFormattedMonthAndYear(newDate));
+
+                        Ui.showTransactionAction(INFO_EDIT_EXPENSE.toString(), message, budgetInfo);
+                        editLogger.log(Level.INFO, "The requested transaction has been edited "
+                                + "and the UI should display the confirmation message respectively.");
+                    } else {
+                        newDate = updateDate(entry, newDate);
+                        newDescription = updateDescription(entry, newDescription);
+                        newCategory = updateCategory(entry, newCategory);
+                        newAmount = updateAmount(entry, newAmount);
+
+                        String message = transactions.editIncome(newDescription, newAmount, newCategory,
+                                newDate, index - 1);
+
+                        long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
+                        String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
+                                DateFormats.retrieveFormattedMonthAndYear(newDate));
+
+                        Ui.showTransactionAction(INFO_EDIT_INCOME.toString(), message, budgetInfo);
+                        editLogger.log(Level.INFO, "The requested transaction has been edited "
+                                + "and the UI should display the confirmation message respectively.");
+                    }
                 } else {
-                    newDate = updateDate(entry, newDate);
-                    newDescription = updateDescription(entry, newDescription);
-                    newCategory = updateCategory(entry, newCategory);
-                    newAmount = updateAmount(entry, newAmount);
-
-                    String message = transactions.editIncome(newDescription, newAmount, newCategory, newDate, index);
-
-                    long addedMonthExpenseSum = transactions.calculateMonthlyTotalExpense(newDate);
-                    String budgetInfo = Budget.generateBudgetRemainingMessage(addedMonthExpenseSum, true,
-                            DateFormats.retrieveFormattedMonthAndYear(newDate));
-
-                    Ui.showTransactionAction(INFO_EDIT_INCOME.toString(), message, budgetInfo);
-                    editLogger.log(Level.INFO, "The requested transaction has been edited "
-                            + "and the UI should display the confirmation message respectively.");
+                    if (!secondCheck) {
+                        editLogger.log(Level.WARNING, "EditCommandEmptyTagsException is thrown when the Tags "
+                                + "are empty.");
+                        throw new EditCommandEmptyTagsException();
+                    } else {
+                        editLogger.log(Level.WARNING, "EditCommandUnchangedException is thrown when the changed "
+                                + "Tags result in an unchanged transaction.");
+                        throw new EditCommandUnchangedException();
+                    }
                 }
             } else {
-                if (check) {
-                    editLogger.log(Level.WARNING, "InvalidIndexException thrown when the index "
-                            + "is invalid.");
-                    throw new GlobalInvalidIndexException();
-                } else if (secondCheck) {
-                    throw new EditCommandEmptyTagsException();
-                } else {
-                    throw new EditCommandUnchangedException();
-                }
+                editLogger.log(Level.WARNING, "InvalidIndexException is thrown when the index "
+                        + "is invalid.");
+                throw new GlobalInvalidIndexException();
             }
             storage.writeToFile(transactions.getTransactions());
         } catch (IOException e) {
@@ -227,30 +246,88 @@ public class EditCommand extends Command {
         return false;
     }
 
+    /**
+     * Performs a check to see if the tags are not empty.
+     *
+     * @param newType The type of transaction
+     * @param newDescription The description of the transaction
+     * @param newAmount The amount of the transaction
+     * @param newCategory The category of the transaction
+     * @param newDate The date of the transaction
+     * @return A boolean value that indicates whether the program continues execution.
+     */
     public boolean isTagsNonEmpty(String newType, String newDescription, int newAmount, String newCategory,
                                   LocalDate newDate) {
         return (newType != null) || (newDescription != null) || (newAmount != 0) || (newCategory != null)
                 || (newDate != null);
     }
 
+    /**
+     * Performs a check to see if the index is a valid one.
+     *
+     * @param transactions The list of transactions
+     * @param index The input index
+     * @return A boolean value that indicates whether the program continues execution.
+     */
     public boolean isIndexValid(TransactionList transactions, int index) {
         int numberOfTransactions = transactions.size();
         return (index <= numberOfTransactions) && (index > 0);
     }
 
+    /**
+     * Performs a check to see if the parameters will change the transaction in the entry.
+     *
+     * @param entry The transaction that is to be edited
+     * @param newType The type of transaction
+     * @param newDescription The description of the transaction
+     * @param newAmount The amount of the transaction
+     * @param newCategory The category of the transaction
+     * @param newDate The date of the transaction
+     * @return A boolean value that indicates whether the program continues execution.
+     */
     public boolean isParametersChanged(Transaction entry, String newType, String newDescription, int newAmount,
                                        String newCategory, LocalDate newDate) {
-        return (entry.getType() != newType) || (entry.getDescription() != newDescription)
-                || (entry.getAmount() != newAmount) || (entry.getCategory() != newCategory)
-                || (entry.getDate() != newDate);
+        final String oldType = entry.getType();
+        newType = updateType(entry, newType);
+
+        final String oldDescription = entry.getDescription();
+        newDescription = updateDescription(entry, newDescription);
+
+        final int oldAmount = entry.getAmount();
+        newAmount = updateAmount(entry, newAmount);
+
+        final String oldCategory = entry.getCategory();
+        newCategory = updateCategory(entry, newCategory);
+
+        final LocalDate oldDate = entry.getDate();
+        newDate = updateDate(entry, newDate);
+
+        return (!oldType.equals(newType))  || (!oldDescription.equals(newDescription))
+                || (oldAmount != newAmount) || (!oldCategory.equals(newCategory))
+                || (oldDate != newDate);
     }
 
+    /**
+     * Updates the type of the transaction locally.
+     *
+     * @param entry The specific entry to be edited
+     * @param type The type of transaction
+     * @return A string which contains the updated type.
+     */
     public String updateType(Transaction entry, String type) {
         if (type == null) {
             type = entry.getType();
         }
         return type;
     }
+
+    /**
+     * Updates the type of the transaction locally.
+     *
+     * @param entry The specific entry to be edited
+     * @param date The date of transaction
+     * @return A string which contains the updated date.
+     */
 
     public LocalDate updateDate(Transaction entry, LocalDate date) {
         if (date == null) {
@@ -259,6 +336,14 @@ public class EditCommand extends Command {
         return date;
     }
 
+    /**
+     * Updates the type of the transaction locally.
+     *
+     * @param entry The specific entry to be edited
+     * @param description The description of transaction
+     * @return A string which contains the updated description.
+     */
+
     public String updateDescription(Transaction entry, String description) {
         if (description == null) {
             description = entry.getDescription();
@@ -266,12 +351,28 @@ public class EditCommand extends Command {
         return description;
     }
 
+    /**
+     * Updates the type of the transaction locally.
+     *
+     * @param entry The specific entry to be edited
+     * @param category The category of transaction
+     * @return A string which contains the updated category.
+     */
+
     public String updateCategory(Transaction entry, String category) {
         if (category == null) {
             category = entry.getCategory();
         }
         return category;
     }
+
+    /**
+     * Updates the type of the transaction locally.
+     *
+     * @param entry The specific entry to be edited
+     * @param amount The amount of transaction
+     * @return A string which contains the updated type.
+     */
 
     public int updateAmount(Transaction entry, int amount) {
         if (amount == 0) {
