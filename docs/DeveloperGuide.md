@@ -159,7 +159,7 @@ Command Add Parser Related Classes Diagram
 
 As shown above, both `CommandAddClientParser` and `CommandAddPropertyParser` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Many of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
