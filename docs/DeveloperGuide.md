@@ -47,6 +47,8 @@ Upon starting easySEP, the DatabaseStorage will load each line from `data.csv`, 
 
 Relevant exceptions are thrown when there are unexpected scenarios. For instance, if `data.csv` cannot be found at the given file path, a FileNotFoundException is thrown.
 
+The DatabaseStorage will read the information from `data.csv`, using the DatabaseParser to make sense of the information, and then store it in the Database class. The Database class will then be used by other parts of the program to reference information. This is done to achieve the Separations of Concerns principle since the code related to loading the data, parsing the data, and referencing the data is all separated from each other.
+
 The following diagram illustrates the relationships between the three main database classes - DatabaseStorage, DatabaseParser, and Database.
 
 ![Database Class Diagram](./images/Database_Class.png)
