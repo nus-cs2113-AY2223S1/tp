@@ -1,5 +1,6 @@
 package recipeditor.command;
 
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
@@ -22,7 +23,7 @@ public class ViewCommand extends Command {
      * @param index the index of task view
      */
     public ViewCommand(int index) {
-        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+        this();
         this.index = index;
     }
 
@@ -31,7 +32,8 @@ public class ViewCommand extends Command {
      *
      * @param title the title of task view
      */
-    public ViewCommand(String title) {
+    public ViewCommand(String title) throws RecipeNotFoundException {
+        this();
         this.index = RecipeList.getRecipeIndexFromTitle(title);
     }
 

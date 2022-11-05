@@ -1,25 +1,32 @@
 package recipeditor.command;
 
+import recipeditor.parser.FlagType;
 import recipeditor.recipe.RecipeList;
 
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
     public static final String COMMAND_TYPE = "/find";
-    private static final String COMMAND_SYNTAX = "/find <ingredient/title>";
+    private static final String COMMAND_SYNTAX = "/find -<flag> <recipe title/ingredient name>";
     private static final String COMMAND_FUNCTION = "For the given ingredient or title,"
             + " find recipes which contains it.";
 
-    public static final String CORRECT_FORMAT = "The input should be '/find (recipeTitle or ingredientName).'";
+    public static final String FLAG_SYNTAX = "\nFlags:" + "\n-t: Recipe Title" + "\n-i: Ingredient name";
+
+    public static final String CORRECT_FORMAT = "The correct format should be " + "'" + COMMAND_SYNTAX + "'."
+            + FLAG_SYNTAX;
+    public static final String INCORRECT_FLAG_MESSGE = "Incorrect flag!\n";
     public String findInput;
+    private FlagType flag;
 
 
     public FindCommand() {
         super(COMMAND_SYNTAX, COMMAND_FUNCTION);
     }
 
-    public FindCommand(String findInput) {
+    public FindCommand(FlagType flag, String findInput) {
         this();
+        this.flag = flag;
         this.findInput = findInput;
     }
 
@@ -30,11 +37,25 @@ public class FindCommand extends Command {
      * @return CommandResult list of found results
      */
     public CommandResult execute() {
-        ArrayList<String> foundRecipeList = RecipeList.findRecipeTitles(findInput);
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < foundRecipeList.size(); i++) {
-            output.append(String.format("%n%d. %s", i + 1, foundRecipeList.get(i)));
+        try {
+            ArrayList<String> foundRecipeList = null;
+            switch (flag) {
+            case TITLE:
+                foundRecipeList = RecipeList.findRecipeTitlesFromRecipeTitle(findInput);
+                break;
+            case INGREDIENT:
+                foundRecipeList = RecipeList.findRecipeTitlesFromIngredientName(findInput);
+                break;
+            default:
+                return new CommandResult(INCORRECT_FLAG_MESSGE + FindCommand.FLAG_SYNTAX);
+            }
+            StringBuilder output = new StringBuilder();
+            for (int i = 0; i < foundRecipeList.size(); i++) {
+                output.append(String.format("%n%d. %s", i + 1, foundRecipeList.get(i)));
+            }
+            return new CommandResult(output.toString());
+        } catch (NullPointerException e) {
+            return new CommandResult(FindCommand.CORRECT_FORMAT);
         }
-        return new CommandResult(output.toString());
     }
 }

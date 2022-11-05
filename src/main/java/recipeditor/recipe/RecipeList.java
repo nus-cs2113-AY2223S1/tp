@@ -1,5 +1,6 @@
 package recipeditor.recipe;
 
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.storage.Storage;
 
 
@@ -46,9 +47,6 @@ public class RecipeList {
     }
 
     public static void deleteRecipeFromTitle(String recipeTitle) {
-        if (getRecipeIndexFromTitle(recipeTitle) < 0) {
-            throw new NullPointerException();
-        }
         recipes.remove(getRecipeFromTitle(recipeTitle));
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
@@ -76,7 +74,7 @@ public class RecipeList {
         return getRecipe(index).getTitle();
     }
 
-    public static int getRecipeIndexFromTitle(String recipeTitle) {
+    public static int getRecipeIndexFromTitle(String recipeTitle) throws RecipeNotFoundException {
         int i = 0;
         for (Recipe r : recipes) {
             if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
@@ -84,7 +82,7 @@ public class RecipeList {
             }
             i++;
         }
-        return -1;
+        throw new RecipeNotFoundException(recipeTitle);
     }
 
     public static ArrayList<String> findRecipeTitles(String findInput) {
@@ -107,10 +105,13 @@ public class RecipeList {
     public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
+            boolean isRecipeIncluded = false;
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
             for (Ingredient i : recipeIngredients) {
-                if (i.getName().toLowerCase().contains(findInput.toLowerCase())) {
+                if (isRecipeIncluded == false
+                        && i.getName().toLowerCase().contains(findInput.toLowerCase())) {
                     foundRecipeTitlesList.add(r.getTitle());
+                    isRecipeIncluded = true;
                 }
             }
         }

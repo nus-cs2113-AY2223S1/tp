@@ -9,6 +9,8 @@ import recipeditor.recipe.Recipe;
 
 public class Add extends EditModeCommand {
 
+    private static final int ARGS_START = 4;
+
     public Add(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
         super(ingredientFlag, parsedCommand, recipe);
     }
@@ -17,13 +19,13 @@ public class Add extends EditModeCommand {
      * Add a step or ingredient to the recipe to edit.
      *
      * @return the edited recipe
-     * @throws ParseException ingredient does not follow correct format to be parsed
+     * @throws ParseException       ingredient does not follow correct format to be parsed
      * @throws InvalidFlagException edit command contains invalid flags
      */
     @Override
     public Recipe execute() throws ParseException, InvalidFlagException {
         StringBuilder content = new StringBuilder();
-        for (int i = 4; i < parsedCommand.length; i++) {
+        for (int i = ARGS_START; i < parsedCommand.length; i++) {
             content.append(parsedCommand[i]).append(" ");
         }
 

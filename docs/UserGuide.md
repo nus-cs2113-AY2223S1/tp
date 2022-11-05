@@ -159,14 +159,13 @@ Example:
 The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
 and take note of the format before entering the command.
 
+Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
+
 **Recipe flags**: Specify the part of recipe that will be changed
 - `-t`: *Title*
 - `-d`: *Description*
 - `-i`: *Ingredient*
 - `-s`: *Step*
-- 
-
-Format: `/edit RECIPE_INDEX COMMAND_FLAG PARAMETERS`
 
 **Command flags**: Specify the type of function to be used**
 - `-add`: *Adds a new ingredient or step*
@@ -226,7 +225,7 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG PARAMETERS`
   Stir fry: ingredient edited.
   ```
 
-ℹ The flag order does not matter, but exactly 1 (one) command flag and 1 (one) recipe flag are allowed in 
+ℹ The flag order (recipe and command flag) does not matter, but exactly 1 (one) command flag and 1 (one) recipe flag are allowed in 
 an edit command.
 
 ℹ Not including the index, adding the wrong flags or using inappropriate parameters will throw an error.
@@ -238,18 +237,18 @@ an edit command.
 Delete existing recipe with given recipe title or recipe index from the list. This helps you to organise your recipe list such that those recipes that
 'outdated' or no longer used by you can be removed.
 
-Format: `/delete [RECIPE_TITLE OR RECIPE_INDEX]`
+Format: `/delete -t [RECIPE_TITLE] OR /edit -id [RECIPE_INDEX]`
 
 ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
 
 Example: 
 ```
-/delete carbonara
+/delete -t carbonara
 
 Carbonara is deleted from the recipe list.
 ```
 ```
-/delete 1
+/delete -id 1
 
 Carbonara is deleted from the recipe list.
 ```
@@ -279,11 +278,15 @@ View the full details of the specified recipe according to the index shown in th
 ingredients used and steps involved. To record the ingredients used, user can note down the ingredient name,
 amount and the respective units. As for the steps involved, user will specify the steps in the order of execution.
 
-Format: `/view INDEX`
+<<<<<<< HEAD
+Format: `/view -t [RECIPE_TITLE] OR /view -id [RECIPE_INDEX]`
+=======
+Format: `/view RECIPE_INDEX`
+>>>>>>> acfb77a6c96510ab810b3b238d0f24887d577e21
 
 Example: 
 ```
-/view 1
+/view -id 1
 Recipe Title: 
 Carbonara
 
@@ -316,11 +319,18 @@ and every ingredient names for all recipes, and list out the recipe title that c
 
 ℹ The _RECIPE_TITLE_ is not case-sensitive. Therefore, inputting _recipe_title_ and _RECIPE_TITLE_ yields the same result.
 
-Format: `/find USER_INPUT_STRING`
+Format: `/find -RECIPE_FLAG [RECIPE_TITLE or INGREDIENT_NAME]`
 
 Example: 
 ```
-/find egg
+/find -t egg
+
+1. Egg Fried Rice
+2. Egg Tofu
+3. Maggi with Egg
+```
+```
+/find -i egg
 
 1. Carbonara
 2. Fried Rice

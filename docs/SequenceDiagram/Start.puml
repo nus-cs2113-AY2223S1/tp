@@ -1,0 +1,7 @@
+@startuml
+
+
+skinparam Style strictuml
+Main -> Storage: createDataFile()
+Main -> Storage: loadRecipesFromDataFile
+@enduml

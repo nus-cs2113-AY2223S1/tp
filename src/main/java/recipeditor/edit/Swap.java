@@ -31,7 +31,7 @@ public class Swap extends EditModeCommand {
                         + "\" and \"" + recipe.getIngredient(index2).getName() + "\"");
                 recipe.swapIngredients(index1, index2);
                 return recipe;
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new IndexOutOfBoundsException("Index out of bound of number of ingredients.");
             }
         case STEP:
@@ -40,7 +40,7 @@ public class Swap extends EditModeCommand {
                         + "\" and \"" + recipe.getStep(index2) + "\"");
                 recipe.swapSteps(index1, index2);
                 return recipe;
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new IndexOutOfBoundsException("Index out of bound of number of steps.");
             }
         default:
