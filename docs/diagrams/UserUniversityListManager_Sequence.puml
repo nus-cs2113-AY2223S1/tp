@@ -1,150 +1,150 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+-> ":UserUniversityListManager" : createList(input)
+activate ":UserUniversityListManager"
 
--> UserUniversityListManager : createList(input)
-activate UserUniversityListManager
-
-UserUniversityListManager -> UserUniversityListManager : containsKey((input)
-activate UserUniversityListManager
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey((input)
+activate ":UserUniversityListManager"
 return : boolean
 
 alt school already exists
 
 else new school list
-    UserUniversityListManager -> UserUniversityList **: new
-    activate UserUniversityList
-    return UserUniversityList
-    UserUniversityListManager -> UserUniversityListManager : put(input, newList)
-    activate UserUniversityListManager
+    ":UserUniversityListManager" -> ":UserUniversityList" **: new
+    activate ":UserUniversityList"
+    return ":UserUniversityList"
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : put(input, newList)
+    activate ":UserUniversityListManager"
 
-    UserUniversityListManager -> Ui : printPuListCreatedAcknowledgement(input)
-    activate Ui
+    ":UserUniversityListManager" -> ":Ui" : printPuListCreatedAcknowledgement(input)
+    activate ":Ui"
     return
 
     return
 
 end
 return
-deactivate UserUniversityListManager
+deactivate ":UserUniversityListManager"
 
--> UserUniversityListManager : deleteList(input)
-activate UserUniversityListManager
+-> ":UserUniversityListManager" : deleteList(input)
+activate ":UserUniversityListManager"
 
-UserUniversityListManager -> UserUniversityListManager : containsKey((input)
-activate UserUniversityListManager
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey((input)
+activate ":UserUniversityListManager"
 return : boolean
 
 alt inputSchool exists
-    UserUniversityListManager -> UserUniversityListManager : remove(inputSchool)
-    activate UserUniversityListManager
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : remove(inputSchool)
+    activate ":UserUniversityListManager"
 
-    UserUniversityListManager -> Ui : printPuListDeletedAcknowledgement(inputSchool)
+    ":UserUniversityListManager" -> ":Ui" : printPuListDeletedAcknowledgement(inputSchool)
+    activate ":Ui"
     return
 else inputSchool does not exist
 end
 
 return
-deactivate UserUniversityListManager
+deactivate ":UserUniversityListManager"
 
--> UserUniversityListManager : addModule(inputSchool, inputModule)
-activate UserUniversityListManager
-UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)
-activate UserUniversityListManager
+-> ":UserUniversityListManager" : addModule(inputSchool, inputModule)
+activate ":UserUniversityListManager"
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey(inputSchool)
+activate ":UserUniversityListManager"
 return : boolean
 
 alt inputSchool exists
-    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
-    activate UserUniversityListManager
-    return : UserUniversityList
-    UserUniversityListManager -> UserUniversityList : addModule(inputModule)
-    activate UserUniversityList
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
+    activate ":UserUniversityListManager"
+    return : ":UserUniversityList"
+    ":UserUniversityListManager" -> ":UserUniversityList" : addModule(inputModule)
+    activate ":UserUniversityList"
 
-    UserUniversityList -> UserModuleMappingList : addModule(input)
-    activate UserModuleMappingList
-    UserModuleMappingList -> UserModuleMappingList : findModuleByCode(input)
-    activate UserModuleMappingList
+    ":UserUniversityList" -> ":UserUniversityList" : addModule(input)
+    activate ":UserUniversityList"
+    ":UserUniversityList" -> ":UserUniversityList" : findModuleByCode(input)
+    activate ":UserUniversityList"
     return : boolean
     alt module already exists
     else new module
-        UserModuleMappingList -> UserModuleMappingList : add(input)
-        activate UserModuleMappingList
+        ":UserUniversityList" -> ":UserUniversityList" : add(input)
+        activate ":UserUniversityList"
 
-        UserModuleMappingList -> Ui : printModuleAddedAcknowledgement(input)
-        activate Ui
-        UserModuleMappingList <-- Ui
-        deactivate Ui
+        ":UserUniversityList" -> ":Ui" : printModuleAddedAcknowledgement(input)
+        activate ":Ui"
+        ":UserUniversityList" <-- ":Ui"
+        deactivate ":Ui"
         return
     end
-    UserUniversityList <-- UserModuleMappingList
-    deactivate UserModuleMappingList
-    UserUniversityListManager <-- UserUniversityList
-    deactivate UserUniversityList
+    ":UserUniversityList" <-- ":UserUniversityList"
+    deactivate ":UserUniversityList"
+    ":UserUniversityListManager" <-- ":UserUniversityList"
+    deactivate ":UserUniversityList"
 
 else inputSchool does not exist
 
 end
 return
-deactivate UserUniversityListManager
+deactivate ":UserUniversityListManager"
 
--> UserUniversityListManager : deleteModule(inputSchool, puCode)
-activate UserUniversityListManager
-UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)
-activate UserUniversityListManager
+-> ":UserUniversityListManager" : deleteModule(inputSchool, puCode)
+activate ":UserUniversityListManager"
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey(inputSchool)
+activate ":UserUniversityListManager"
 return : boolean
 alt inputSchool exists
-    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
-    activate UserUniversityListManager
-    return : UserUniversityList
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
+    activate ":UserUniversityListManager"
+    return : ":UserUniversityList"
 
-    UserUniversityListManager -> UserUniversityList : getMyModules()
-    activate UserUniversityList
+    ":UserUniversityListManager" -> ":UserUniversityList" : getMyModules()
+    activate ":UserUniversityList"
 
 
-    UserUniversityList -> UserModuleMappingList : getModuleByPuCode(puCode)
-    activate UserModuleMappingList
-    return : UserModuleMapping
+    ":UserUniversityList" -> ":UserUniversityList" : getModuleByPuCode(puCode)
+    activate ":UserUniversityList"
+    return : ":UserModuleMapping"
 
-    return deletedModule : UserModuleMapping
+    return deletedModule : ":UserModuleMapping"
 
-    UserUniversityListManager -> UserDeletedModules : addToDeletedModule(deletedModule)
-    activate UserDeletedModules
-    UserDeletedModules -> UserDeletedModules : size()
-    activate UserDeletedModules
+    ":UserUniversityListManager" -> ":UserDeletedModules" : addToDeletedModule(deletedModule)
+    activate ":UserDeletedModules"
+    ":UserDeletedModules" -> ":UserDeletedModules" : size()
+    activate ":UserDeletedModules"
     return : int
         alt size == 5
-        UserDeletedModules -> UserDeletedModules : removeLast()
-        activate UserDeletedModules
+        ":UserDeletedModules" -> ":UserDeletedModules" : removeLast()
+        activate ":UserDeletedModules"
         return
         else size < 5
-        UserDeletedModules -> UserDeletedModules : addFirst(deletedModule)
-        activate UserDeletedModules
+        ":UserDeletedModules" -> ":UserDeletedModules" : addFirst(deletedModule)
+        activate ":UserDeletedModules"
         return
     end
     return
 
-    UserUniversityListManager -> UserUniversityListManager : getUserUniversityList(inputSchool)
-    activate UserUniversityListManager
-    return : UserUniversityList
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
+    activate ":UserUniversityListManager"
+    return : ":UserUniversityList"
 
-        UserUniversityListManager -> UserUniversityList : deleteModuleByPuCode(puCode)
-        activate UserUniversityList
+        ":UserUniversityListManager" -> ":UserUniversityList" : deleteModuleByPuCode(puCode)
+        activate ":UserUniversityList"
 
-        UserUniversityList -> UserModuleMappingList : deleteModuleByPuCode(puCode)
-        activate UserModuleMappingList
+        ":UserUniversityList" -> ":UserUniversityList" : deleteModuleByPuCode(puCode)
+        activate ":UserUniversityList"
         loop for every module
-        UserModuleMappingList -> UserModuleMappingList : get(index)
-        activate UserModuleMappingList
-        return UserModuleMapping
-        UserModuleMappingList -> UserModuleMapping : getPuCode()
-        activate UserModuleMapping
+        ":UserUniversityList" -> ":UserUniversityList" : get(index)
+        activate ":UserUniversityList"
+        return ":UserModuleMapping"
+        ":UserUniversityList" -> ":UserModuleMapping" : getPuCode()
+        activate ":UserModuleMapping"
         return puCode : String
-        UserModuleMappingList -> UserModuleMappingList : equals(puCode)
-        activate UserModuleMappingList
+        ":UserUniversityList" -> ":UserUniversityList" : equals(puCode)
+        activate ":UserUniversityList"
         return : boolean
         opt module code matches
-        UserModuleMappingList -> UserModuleMappingList : deleteModule(index)
-        activate UserModuleMappingList
+        ":UserUniversityList" -> ":UserUniversityList" : deleteModule(index)
+        activate ":UserUniversityList"
         return
         end
 
@@ -158,6 +158,6 @@ alt inputSchool exists
 else inputSchool does not exist
 end
 return
-deactivate UserUniversityListManager
+deactivate ":UserUniversityListManager"
 
 @enduml

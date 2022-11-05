@@ -1,49 +1,49 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
--> UserModuleMappingList : addModule(input)
-activate UserModuleMappingList
-UserModuleMappingList -> UserModuleMappingList : findModuleByCode(input)
-activate UserModuleMappingList
+-> ":UserModuleMappingList" : addModule(input)
+activate ":UserModuleMappingList"
+":UserModuleMappingList" -> ":UserModuleMappingList" : findModuleByCode(input)
+activate ":UserModuleMappingList"
 loop for every module in list
-UserModuleMappingList -> UserModuleMapping : getNusCode()
-activate UserModuleMapping
+":UserModuleMappingList" -> ":UserModuleMapping" : getNusCode()
+activate ":UserModuleMapping"
 return nusCode : String
-UserModuleMappingList -> UserModuleMapping : getPuCode()
-activate UserModuleMapping
+":UserModuleMappingList" -> ":UserModuleMapping" : getPuCode()
+activate ":UserModuleMapping"
 return puCode : String
-UserModuleMappingList -> UserModuleMappingList : equals()
-activate UserModuleMappingList
+":UserModuleMappingList" -> ":UserModuleMappingList" : equals()
+activate ":UserModuleMappingList"
 return : boolean
 end
 return : boolean
 
 alt module already exists
 else is new module
-UserModuleMappingList -> UserModuleMappingList : addModule(input)
-activate UserModuleMappingList
+":UserModuleMappingList" -> ":UserModuleMappingList" : addModule(input)
+activate ":UserModuleMappingList"
 return
-UserModuleMappingList -> Ui : printModulesInUserList(modules)
-activate Ui
+":UserModuleMappingList" -> ":Ui" : printModulesInUserList(modules)
+activate ":Ui"
 return
 end
 return
 
--> UserModuleMappingList : deleteModuleByPuCode(input)
-activate UserModuleMappingList
+-> ":UserModuleMappingList" : deleteModuleByPuCode(input)
+activate ":UserModuleMappingList"
 loop for every module
-    UserModuleMappingList -> UserModuleMappingList : get(index)
-    activate UserModuleMappingList
-    return UserModuleMapping
-    UserModuleMappingList -> UserModuleMapping : getPuCode()
-    activate UserModuleMapping
+    ":UserModuleMappingList" -> ":UserModuleMappingList" : get(index)
+    activate ":UserModuleMappingList"
+    return ":UserModuleMapping"
+    ":UserModuleMappingList" -> ":UserModuleMapping" : getPuCode()
+    activate ":UserModuleMapping"
     return puCode : String
-    UserModuleMappingList -> UserModuleMappingList : equals(puCode)
-    activate UserModuleMappingList
+    ":UserModuleMappingList" -> ":UserModuleMappingList" : equals(puCode)
+    activate ":UserModuleMappingList"
     return : boolean
     opt module code matches
-    UserModuleMappingList -> UserModuleMappingList : deleteModule(index)
-    activate UserModuleMappingList
+    ":UserModuleMappingList" -> ":UserModuleMappingList" : deleteModule(index)
+    activate ":UserModuleMappingList"
     return
     end
 end
