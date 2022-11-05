@@ -14,15 +14,13 @@ import seedu.duke.module.lessons.Lesson;
 import seedu.duke.timetable.Timetable;
 
 public class AttendingManager {
-    public static ArrayList<String> attendingDataList = new ArrayList<>();
-    static String currentSemester;
-    static String dataDirectoryPath;
+    private static ArrayList<String> attendingDataList = new ArrayList<>();
+    private static String dataDirectoryPath;
 
     /*
      * Creates AttendingData.txt if doesnt exist
      */
     public static void initAttendingDataFile() {
-        currentSemester = DataManager.getCurrentSem();
         dataDirectoryPath = DataManager.getDirPath();
 
         try {

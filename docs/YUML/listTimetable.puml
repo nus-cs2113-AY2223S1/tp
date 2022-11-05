@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+participant ":Parser" as Parser LOGIC_COLOR
+participant ":Timetable" as Timetable LOGIC_COLOR
+participant "module:Module" as Module LOGIC_COLOR
+
+[-> Parser : parseCommand(:String, :String)
+activate Parser
+Parser -> Timetable : listModules()
+
+activate Timetable
+    alt size of module list is zero
+        participant Module
+        Timetable --> Parser : noModuleResponse:String
+    else one or more modules exist
+        loop size of module list
+            Timetable -> Module : getModuleDetails()
+            activate Module
+            Module --> Timetable : moduleDetails:String
+            deactivate Module
+        end
+    Timetable --> Parser : noModuleResponse:String
+    end
+
+deactivate Timetable
+return response:String
+@enduml

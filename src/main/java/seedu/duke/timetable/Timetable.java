@@ -9,7 +9,7 @@ import java.util.List;
 public class Timetable {
     public static List<Module> listOfModules = new ArrayList<Module>();
     public static TimetableDict timetableDict = new TimetableDict();
-    public static List<Module> listOfChangeableModules = new ArrayList<Module>();
+    private static List<Module> listOfChangeableModules = new ArrayList<Module>();
 
     public static String allocateModules() {
         return timetableDict.allocateModules();

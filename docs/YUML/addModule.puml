@@ -11,7 +11,7 @@ box API MODEL_COLOR_T1
 participant ":NUSmods API" as Api MODEL_COLOR
 end box
 
-[-> CommandAddModule : addModule(sem:String)
+[-> CommandAddModule : addModule(:String)
 activate CommandAddModule
 
 CommandAddModule -> Nusmods : addModuleInfo(:String, :String[])
@@ -29,7 +29,7 @@ deactivate Api
 Nusmods --> CommandAddModule : :List<Lesson>
 deactivate Nusmods
 
-CommandAddModule -> Timetable : :addNewModule(:String, :String, :String, :List<Lesson>)
+CommandAddModule -> Timetable : addNewModule(:String, :String, :String, :List<Lesson>)
 activate Timetable
 Timetable --> CommandAddModule
 deactivate Timetable
