@@ -6,19 +6,21 @@ import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
 
+import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import static appointment.AppointmentList.findAppointment;
 
 public class TaskList {
+
+    static String LINE_DIVIDER = "_______________________________________";
     static ArrayList<Task> tasks = new ArrayList<>();
 
-    //view every single task in the clinic
     public static void viewTasks() {
         System.out.println("Here are all the tasks for the clinic:");
         for (Task task : tasks) {
-            System.out.println("_______________________________________");
+            System.out.println(LINE_DIVIDER);
             task.printTask();
         }
     }
@@ -27,21 +29,28 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Function to add a new Task to the overall task list and the respective associated appointment & employee
+     * @param task
+     * @throws DukeException
+     */
     public static void addTask(Task task) throws DukeException {
 
-        // appointment aggregate task
+        // To find the appointment that the task is allocated to
         Appointment appointment = findAppointment(task.getAppointmentId());
         if (appointment == null) {
             throw new DukeException();
         }
 
-        // employee aggregate task
+        // To find the employee that the task is allocated to
         Employee employee = EmployeeList.findEmployee(task.getEmployeeId());
         if (employee == null) {
             throw new DukeException();
         }
 
-        // only after passing the check, add this task
+        // After both the appointment and employee are found, the task is added to the overall task list
+        // and also added under the associated appointment and employee
+        // Appointment and Employee thus aggregates Task
         tasks.add(task);
         appointment.addTaskToAppointment(task);
         appointment.updateAppointmentStatus();
@@ -54,7 +63,12 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " task in the list.");
     }
 
-    // assign task to be done by another person
+    /**
+     * Function to reassign an existing Task to another Employee
+     * @param taskId
+     * @param employeeId
+     * @throws DukeException
+     */
     public static void reassignTask(int taskId, int employeeId) throws DukeException {
         if (TaskList.findTask(taskId) == null) {
             throw new DukeException();
@@ -63,6 +77,7 @@ public class TaskList {
             throw new DukeException();
         }
         Task taskToReassign = TaskList.findTask(taskId);
+
         // Remove from original Employee's task list
         if (taskToReassign != null) {
             EmployeeList.findEmployee(taskToReassign.getEmployeeId()).removeTaskFromEmployee(taskId);
@@ -76,6 +91,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Function to delete a Task from the overall task list and the respective associated appointment and employee
+     * @param taskId
+     */
     public static void removeTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
@@ -94,6 +113,11 @@ public class TaskList {
         System.out.println("Sorry, no corresponding task found.");
     }
 
+    /**
+     * Helper function to find a particular task from the list of tasks by its ID
+     * @param taskId
+     * @return
+     */
     public static Task findTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
@@ -103,6 +127,10 @@ public class TaskList {
         return null;
     }
 
+    /**
+     * Function to mark a task as completed
+     * @param taskId
+     */
     public static void finishTask(int taskId) {
         for (Task task : tasks) {
             if (task.getTaskId() == taskId) {
@@ -113,11 +141,6 @@ public class TaskList {
             }
         }
         System.out.println("Sorry, no corresponding task found.");
-//        Appointment appointment = findAppointment(findTask(taskId).appointmentId);
-//        if (appointment == null) {
-//            throw new DukeException();
-//        }
-//        appointment.updateAppointmentStatus();
     }
 
 }

@@ -8,6 +8,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Appointment {
+
+    static String LINE_DIVIDER = "_______________________________________";
+
     public static int id = 0;
     public final int appointmentId;
     public String petName;
@@ -32,11 +35,13 @@ public class Appointment {
         System.out.println("Date: " + appointmentDate);
     }
 
-    // view tasks for a find appointment
+    /**
+     * Function lists the tasks associated with the instance of appointment
+     */
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
         for (Task task: tasks) {
-            System.out.println("________________________");
+            System.out.println(LINE_DIVIDER);
             task.printTask();
         }
     }
@@ -79,6 +84,11 @@ public class Appointment {
         return appointmentDate;
     }
 
+
+    /**
+     * Function finds a particular task associated with the instance of appointment and removes it
+     * @param taskId
+     */
     public void removeTaskFromAppointment(int taskId) {
         for (Task task: tasks) {
             if (task.getTaskId() == taskId) {
