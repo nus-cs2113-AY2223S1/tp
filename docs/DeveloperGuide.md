@@ -102,24 +102,28 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 </p></details>
 
-<span style="color:red">
+
 
 ##### 4.4.1 Populate lesson data from timetable
 
 <img src="images/printTimetable_1.png" width="480" />
 
 
- <details><summary>Activity of 4.4.1</summary><p style='text-align: justify;'>
+ <details><summary>Activity of 4.4.1</summary><p style='text-align: justify;' markdown="1">
+
+ <span style="color:red">
 
 - Three ArrayLists are populated from ```timetable``` module.
 - ```rawTimetable``` stores the ```lesson``` object for each day;
 - ```emptySlotList``` stores pairs of ```integer``` of starting and ending slots for each day;
 - ```clashModCodeList``` stores a list of clashed module code of ```string```, if any.
 
+</span>
+
 </p></details>
 
 
-<details><summary>Activity of Declare / Initialize 2D Arrays</summary><p style='text-align: justify;'>
+<details><summary>Activity of Declare / Initialize 2D Arrays</summary><p style='text-align: justify;' markdown="1">
 
 - A 2D array,```timeTable``` of ```string``` type is declared and initialized with empty strings first. This array is for storing the output strings of the actual timetable for print later on.
 
