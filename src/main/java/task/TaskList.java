@@ -83,13 +83,15 @@ public class TaskList {
         if (taskToReassign != null) {
             // Find and remove task from original employee
             Employee originalEmployee = EmployeeList.findEmployee(taskToReassign.getEmployeeId());
+            assert originalEmployee != null;
             originalEmployee.removeTaskFromEmployee(taskId);
             // Find and add task to the new employee's task list
             Employee newEmployee = EmployeeList.findEmployee(employeeId);
+            assert newEmployee != null;
             newEmployee.addTaskToEmployee(taskToReassign);
             System.out.print("Got it. Task " + taskId + " has been reassigned from ");
-            System.out.print(EmployeeList.findEmployee(taskToReassign.getEmployeeId()).getEmployeeName());
-            System.out.println(" to " + EmployeeList.findEmployee(employeeId).getEmployeeName() + "!");
+            System.out.print(originalEmployee.getEmployeeName());
+            System.out.println(" to " + newEmployee.getEmployeeName() + "!");
             // Change employeeId in the reassigned task
             taskToReassign.setEmployeeId(employeeId);
         }
@@ -105,9 +107,13 @@ public class TaskList {
                 // remove from overall task list
                 tasks.remove(task);
                 // remove from appointment
-                findAppointment(task.getAppointmentId()).removeTaskFromAppointment(taskId);
+                Appointment associatedAppointment = findAppointment(task.getAppointmentId());
+                assert associatedAppointment != null;
+                associatedAppointment.removeTaskFromAppointment(taskId);
                 // remove from employee
-                EmployeeList.findEmployee(task.getEmployeeId()).removeTaskFromEmployee(taskId);
+                Employee associatedEmployee = EmployeeList.findEmployee(task.getEmployeeId());
+                assert associatedEmployee != null;
+                associatedEmployee.removeTaskFromEmployee(taskId);
                 System.out.print("Got it. I've removed this task: ");
                 task.printTask();
                 System.out.println("Now you have " + tasks.size() + " task in the list.");
