@@ -7,8 +7,8 @@ import seedu.duke.Exceptions;
 import seedu.duke.timetable.Timetable;
 
 public class DataManager {
-    protected static String currSemester;
-    protected static String dataDirectoryPath;
+    private static String currSemester;
+    private static String dataDirectoryPath;
 
     public static String getCurrentSem() {
         return currSemester;

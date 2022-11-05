@@ -349,7 +349,7 @@ public class TimetableDict {
             int numOfClasses = numOfClassesPerType.get(lessonTypeIndex);
 
             //if lessonType is already attended
-            if (module.checkLessonTypeAttended(currLessonType)) { 
+            if (module.isLessonTypeAttended(currLessonType)) {
                 List<Lesson> attendingClass = module.getClassFromAttendingMap(currLessonType);
                 //assign to all permutations
                 for (int permutationIndex = 0; permutationIndex < numOfPermutations; permutationIndex++) {
@@ -390,7 +390,7 @@ public class TimetableDict {
             LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap) {
         List<Integer> numOfClassesPerType = new ArrayList<Integer>();
         for (String lessonType : module.getAttendingLessonTypes()) {
-            boolean isAlreadyAttended = module.checkLessonTypeAttended(lessonType);
+            boolean isAlreadyAttended = module.isLessonTypeAttended(lessonType);
             if (isAlreadyAttended) {
                 numOfClassesPerType.add(1);
             } else {
