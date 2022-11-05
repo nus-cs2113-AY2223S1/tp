@@ -4,7 +4,7 @@ skinparam sequenceReferenceBackgroundColor #White
 
 box
 participant ":PrescriptionList" as A
-participant ":Prescription" as B
+participant "prescription\n:Prescription" as B
 participant "prescriptionList\n:ArrayList<Prescription>" as C
 end box
 
@@ -14,7 +14,7 @@ participant "ui:UI" as D
 activate A
 
 create B
-A -> B : new Prescription(ui, patientId, medicine, dosage, timeInterval)
+A -> B : new Prescription(ui, patientId, \nmedicine, dosage, timeInterval)
 activate B
 B --> A : prescription:Prescription
 deactivate B
@@ -28,22 +28,16 @@ alt hasDuplicate == false
     activate C
     return
 
-    ref over A, B, C
-        get prescriptionString and index of prescription
+    ref over A, B, C, D
+         print a prescription added message along with
+         the prescriptionString and index of prescription
     end
-
-    A -> D : printMessageAndObject(prescriptionString, \nUI.ADD_PRESCRIPTION, index, UI.PRESCRIPTION)
-    activate D
-    return
 
 else else
-    ref over A, B, C
-        get prescriptionString and index of prescription
+    ref over A, B, C, D
+        print a prescription duplicated message along with
+        the prescriptionString and index of the duplicated prescription
     end
-
-    A -> D : printMessageAndObject(prescriptionString, \nUI.DUPLICATE_PRESCRIPTION_MESSAGE, index, UI.PRESCRIPTION)
-    activate D
-    return
 end
 
 return

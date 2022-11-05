@@ -1,5 +1,6 @@
 @startuml
 hide footbox
+skinparam sequenceReferenceBackgroundColor #White
 
 box
 participant ":PrescriptionList" as A
@@ -28,13 +29,10 @@ A -> B : setActive()
 activate B
 return
 
-A -> B : toString()
-activate B
-return prescriptionString:String
-
-A -> D : printMessageAndObject(prescriptionString, \nUI.ACTIVATE_PRESCRIPTION, index, UI.PRESCRIPTION)
-activate D
-return
+ref over A, D
+    print a prescription activated message along with
+    the prescriptionString and index of prescriptionEdited
+end
 
 return
 @enduml

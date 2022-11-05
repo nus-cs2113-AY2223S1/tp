@@ -103,6 +103,7 @@ all active prescriptions with the specified `patientId`
 specified index
 * `activatePrescription` - This method allows user to set the prescription of specified index as active.
 * `deactivatePrescription` - This method allows user to set the prescription of specified index as inactive.
+* `loadPrescription` - This method assists the `Storage` component to load prescriptions from the .txt storage.
 
 **Members in `Prescription` class**
 
@@ -117,12 +118,24 @@ Users are allowed to add new prescriptions. The action works as follows:
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
-2. If the new prescription has no duplicates in the `prescriptionList`, then it is then added to the list. And
-`UI` prints an acknowledgement message of what the new prescription has.
-3. Else, `UI` prints a message that the prescription is already existing, and print the details of the existing 
+2. If the new prescription has no duplicates in the `prescriptionList`, then it is added to the list. And
+`ui` prints an acknowledgement message of what the new prescription has.
+3. Else, `ui` prints a message that the prescription is already existing, and print the details of the existing 
 prescription.
 
 ![](images/PrescriptionListAdd.png)
+
+#### Editing a prescription
+Users are allowed to edit the medicine name, dosage and time interval of the prescription. However, it is only allowed
+if the updated prescription does not repeat other existing prescriptions. The action works as follow:
+
+1. When the `edit` function is called, it returns if the `prescriptionNumber` is invalid.
+2. If `prescriptionNumber` is valid, `prescriptionEdited` is retrieved from the `ArrayList<>`, and `newPrescription` 
+object is created to represent the updated prescription.
+3. If `newPrescription` has a duplicate in the list, it returns with a prescription duplicated message from `ui`.
+4. If not, then `prescriptionEdited` is updated with a confirmation message from `ui`.
+
+![](images/PrescriptionListEdit.png)
 
 #### Activating / Deactivating a prescription
 Users are allowed to activate or deactivate a prescription to track whether a prescription is currently being prescribed

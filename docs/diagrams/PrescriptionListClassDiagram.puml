@@ -3,7 +3,6 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class PrescriptionList {
-+ isEmpty() : boolean
 + add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String) : void
 + add(ui:UI, patientId:String, medicine:String, dosage:String, timeInterval:String, isActive:boolean) : void
 + viewAll(ui:UI) : void
@@ -12,6 +11,7 @@ class PrescriptionList {
 + edit(ui:UI, prescriptionNumber:int, medicine:String, dosage:String, timeInterval:String) : void
 + activatePrescription(ui:UI, prescriptionNumber:String) : void
 + deactivatePrescription(ui:UI, prescriptionNumber:String): void
++ loadPrescription(patientId:String, medicine:String, dosage:String, timeInterval:String, active:boolean) : void
 - hasPatientPrescription(patientId:String) : boolean
 - hasActivePatientPrescription(patientId) : boolean
 }
