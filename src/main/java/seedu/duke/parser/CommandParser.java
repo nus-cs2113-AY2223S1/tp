@@ -34,7 +34,9 @@ public class CommandParser {
     private static final String END_TIME_PREFIX = "en/";
     private static final String ADD_FAVOURITE_PREFIX = "add/";
     private static final String DELETE_FAVOURITE_PREFIX = "del/";
-    private static final String COMMENT_PREFIX = "note/";
+    private static final String COMMENT_PREFIX = "note/{";
+
+    private static final String COMMENT_DELETE_PREFIX = "note/";
     private static final String VIEW_FAVOURITE_PREFIX = "VIEW";
     private static final String UNIVERSITIES_OPTION = "UNIVERSITIES";
     private static final String USER_LISTS_OPTION = "LISTS";
@@ -351,7 +353,7 @@ public class CommandParser {
         return parameters.length == FOUR_PARAMETERS_LENGTH
                 && parameters[UNIVERSITY_INDEX].startsWith(UNIVERSITY_PREFIX)
                 && parameters[MODULE_INDEX].startsWith(MODULE_PREFIX)
-                && parameters[COMMENT_INDEX].startsWith(COMMENT_PREFIX);
+                && parameters[COMMENT_INDEX].startsWith(COMMENT_DELETE_PREFIX);
     }
 
     /**
@@ -402,7 +404,6 @@ public class CommandParser {
     }
 
     private static int getParametersBeforeComment(String parameter) {
-        System.out.println(parameter);
         int start = 0;
         String temp = "";
         for (int i = 0; i < parameter.length() - 6; ++i) {

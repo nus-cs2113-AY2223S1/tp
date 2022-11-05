@@ -27,6 +27,7 @@ public class UserModuleMappingList {
 
     /**
      * Method to find current modules user stored by code.
+     * Method to find current modules user stored by code.
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
