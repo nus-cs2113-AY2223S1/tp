@@ -6,7 +6,6 @@ import seedu.duke.UI;
 import seedu.duke.exceptions.InvalidInputContentException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Check extends Command {
     public static int MC_MINIMUM_NOC = 70;
@@ -33,23 +32,25 @@ public class Check extends Command {
             throw new InvalidInputContentException();
         }
     }
-    public Check() {}
+    public Check() {
+
+    }
 
     @Override
     public void execute(ModuleList moduleList) {
         if (type.equals("NOC")) {
             //obtained >70 MCs, completed four semesters of study and not in last semester
             if (checkNOC()) {
-                UI.NOCEligibleMessage();
+                UI.nocEligibleMessage();
             } else {
-                UI.NOCIneligibleMessage();
+                UI.nocIneligibleMessage();
             }
         } else if (type.equals("SEP")) {
             //completed two semesters of study, cap above 3.0 and not in last year
             if (checkSEP()) {
-                UI.SEPEligibleMessage();
+                UI.sepEligibleMessage();
             } else {
-                UI.SEPIneligibleMessage();
+                UI.sepIneligibleMessage();
             }
         }
     }
@@ -91,7 +92,7 @@ public class Check extends Command {
      */
     public boolean checkNOCSem() {
         int currentSemester = findCurrentSemester();
-        return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC) ;
+        return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC);
     }
 
     /**
@@ -123,8 +124,8 @@ public class Check extends Command {
      */
     public boolean checkSEPCAP() {
         ModuleList ml = new ModuleList(modules);
-        double CAP = ml.calculateCap();
-        return CAP >= CAP_MINIMUM_SEP;
+        double cap = ml.calculateCap();
+        return cap >= CAP_MINIMUM_SEP;
     }
 
     /**

@@ -172,11 +172,11 @@ public class UI {
         System.out.println("There are no existing modules that match your keyword inputted.");
     }
 
-    public static void NOCEligibleMessage() {
+    public static void nocEligibleMessage() {
         System.out.println("You are eligible for NOC!");
     }
 
-    public static void NOCIneligibleMessage() {
+    public static void nocIneligibleMessage() {
         System.out.println("Sorry, You are ineligible for NOC." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
         System.out.println(" * You have yet to complete 4 semesters of study");
@@ -185,11 +185,11 @@ public class UI {
 
     }
 
-    public static void SEPEligibleMessage() {
+    public static void sepEligibleMessage() {
         System.out.println("You are eligible for SEP!");
     }
 
-    public static void SEPIneligibleMessage() {
+    public static void sepIneligibleMessage() {
         System.out.println("Sorry, You are ineligible for SEP." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
         System.out.println(" * You have yet to complete 2 semesters of study");
@@ -207,7 +207,7 @@ public class UI {
         System.out.println("* Total Ungraded (-) MCs : " + moduleList.totalUngradedMcs());
         System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
         System.out.println("* Cumulative Average Point (CAP) : " + df.format(moduleList.calculateCap()) + "\n");
-        System.out.println("* MCs Needed needed for graduation : " + moduleList.McsForGraduation() + "\n");
+        System.out.println("* MCs Needed needed for graduation : " + moduleList.mcsForGraduation() + "\n");
         System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNOC() ? "Yes" : "No"));
         System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSEP() ? "Yes" : "No"));
 

@@ -1,3 +1,0 @@
-m/CS2105 s/Y2S1 mc/4 g/A
-m/CS2106 s/Y2S1 mc/4 g/A
-m/CS2107 s/Y1S1 mc/4 g/A

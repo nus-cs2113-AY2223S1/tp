@@ -40,9 +40,9 @@ public class InvalidInputFormatException extends Exception {
         input = input.substring(i);
         return !input.contains(type);
     }
-    public String getMessage(){
+    public String getMessage() {
         String message = "INPUT FORMAT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!"
-                + "\n"  + "input 'help' if you are unsure about the requirements" + "\n"  ;
+                + "\n"  + "input 'help' if you are unsure about the requirements" + "\n";
         return message;
     }
 }
