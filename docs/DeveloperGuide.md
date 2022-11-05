@@ -27,6 +27,8 @@
 
 ### 6. [Glossary](#6-glossary-1)
 
+### 7. [Instructions for Manual Testing](#7-instructions-for-manual-testing-1)
+
 ## 1. General Overview
 
 Below is an architecture diagram that provides a brief overview of how the program works.
@@ -328,3 +330,26 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 - PU: partner university
 - u/ - university
 - m/ - modules
+
+## 7. Instructions for Manual Testing
+
+1. Download the `.jar` file from [this link](https://github.com/AY2223S1-CS2113-W13-2/tp/releases).
+1. Open the folder that that the `.jar` file is in and run the program using `java -jar easySEP.jar`.
+1. View all commands and the correct command format using `/help`. Below are a few examples to consider.
+1. The list of valid universities and module mappings can be found using `/list UNIVERSITIES` and `/list MODULES` respectively.
+1. The commands `/list m/CS2113` and `/list u/Aalto_University` can be used to list all module mappings for `CS2113` and `Aalto University` in the database.
+1. Create a new university list using `/create u/Aalto_University`.
+1. Add a new module using `/add u/Aalto_University m/C3130`.
+1. Add a new lesson using `/add u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
+1. Add a new comment using `/add u/Aalto_University m/C3130 note/{this is a note}`.
+1. Favourite a university list using `/favourite add/Aalto_University`.
+1. Use `/favourite VIEW` to see the list of favourite university lists.
+1. Un-favourite a university list using `/favourite del/Aalto_University`.
+1. View all university lists using `/view LISTS` and all timetables using `/view TIMETABLES`.
+1. For a specific university list, use `/view u/Aalto_University` to see modules added.
+1. Delete a comment using `/delete u/Aalto_University m/C3130 note/`.
+1. Delete a lesson using `/delete u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
+1. Delete a module using `/delete u/Aalto_University m/C3130`.
+1. Delete university list using `/delete u/Aalto_University`.
+1. Input `/view DELETE_HISTORY` to view recently deleted modules.
+1. Use `/exit` to end the program.
