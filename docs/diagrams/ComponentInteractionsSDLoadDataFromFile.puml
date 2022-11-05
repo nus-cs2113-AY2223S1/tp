@@ -25,6 +25,12 @@ activate Data DATA_COLOR_1
 Data --[DATA_COLOR_1]> UserInterface
 deactivate Data
 
+UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lupdateSortExpenses(\n\tsortCommandSetting:ConsoleCommandSortExpense\n)
+activate Data DATA_COLOR_1
+
+Data --[DATA_COLOR_1]> UserInterface
+deactivate Data
+
 UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetRecurringPayments(\n\tsavedRecurringPayments:ArrayList<RecurringPayment>\n)
 activate Data DATA_COLOR_1
 
