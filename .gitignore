@@ -16,7 +16,11 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 logger.log
-/Sem1DataDirectory
-/Sem2DataDirectory
+/Sem1DataDirectory/
+/Sem2DataDirectory/
+/Sem1Data/
+/Sem2Data/
+/Sem1TestData/
+/Sem2TestData/
 /text-ui-test/logger.log
 logger.log.lck

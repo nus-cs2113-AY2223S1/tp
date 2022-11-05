@@ -391,4 +391,16 @@ public class Module {
         }
         return attendingLessonTypes;
     }
+
+    public boolean hasAvailableLessonsToSwap() {
+        if (lessonMap.size() == 0) {
+            return false;
+        }
+        for (LinkedHashMap<String, ArrayList<Lesson>> singleClass : lessonMap.values()) {
+            if (singleClass.size() > 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -12,17 +12,17 @@ public class CommandSetLesson {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public static String setLesson() {
-        if (Timetable.getListLength() == 0) {
+        if (Timetable.getNumberOfSettableLessons() == 0) {
             return "No modules available for lessons to be set.";
         }
 
         String indexToSet = UI.getModuleIndexFromUser(Timetable.getShortenedList());
-        if (isInvalidInput(indexToSet, Timetable.getListLength())) {
+        if (isInvalidInput(indexToSet, Timetable.getNumberOfSettableLessons())) {
             return "Invalid module index!";
         }
 
         assert Integer.parseInt(indexToSet) > 0 : "index must be greater than 1 to be in range";
-        assert Integer.parseInt(indexToSet) <= Timetable.getListLength() : "index must be in range";
+        assert Integer.parseInt(indexToSet) <= Timetable.getNumberOfSettableLessons() : "index must be in range";
         lgr.fine("module index accepted");
 
         return runSetProcedure(Integer.parseInt(indexToSet) - 1);
@@ -31,8 +31,8 @@ public class CommandSetLesson {
     private static String runSetProcedure(int indexForModule) {
 
         //gets
-        String indexForLesson = UI.getLessonIndexFromUser(Timetable.getLessonTypes(indexForModule));
-        int lessonTypeListLength = Timetable.getLessonTypeLength(indexForModule); //no of types for this mod
+        String indexForLesson = UI.getLessonIndexFromUser(Timetable.getSettableLessonTypes(indexForModule));
+        int lessonTypeListLength = Timetable.getSettableLessonTypeLength(indexForModule); //no of types for this mod
 
         if (isInvalidInput(indexForLesson, lessonTypeListLength)) {
             return "Invalid Lesson Index!";
@@ -42,7 +42,7 @@ public class CommandSetLesson {
         assert Integer.parseInt(indexForLesson) <= lessonTypeListLength : "index must be in range";
         lgr.fine("lesson type index accepted");
 
-        String targetLessonType = Timetable.getLessonTypeFromIndex(indexForModule,
+        String targetLessonType = Timetable.getSettableLessonTypeFromIndex(indexForModule,
                 Integer.parseInt(indexForLesson) - 1);
 
         try {
@@ -57,15 +57,15 @@ public class CommandSetLesson {
     }
 
     private static void replaceAttendingLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
-        Timetable.replaceLesson(newLessons, indexForModule, moduleType);
+        Timetable.replaceSettableLesson(newLessons, indexForModule, moduleType);
     }
 
     private static ArrayList<Lesson> getPreferredLesson(int indexForModule, int i, String targetLessonType)
             throws Exceptions.InvalidTimeslotException {
 
-        int numberOfReplacements = Timetable.getNumberOfPossibleReplacements(indexForModule, targetLessonType);
+        int numberOfReplacements = Timetable.getSettableNumberOfPossibleReplacements(indexForModule, targetLessonType);
         String replacementIndex = UI.getTimeslotIndexFromUser(
-                Timetable.listAllPossibleLessonReplacements(indexForModule, targetLessonType));
+                Timetable.listAllSettableLessonReplacements(indexForModule, targetLessonType));
 
         if (isInvalidInput(replacementIndex, numberOfReplacements)) {
             throw new Exceptions.InvalidTimeslotException();
@@ -75,7 +75,8 @@ public class CommandSetLesson {
         assert Integer.parseInt(replacementIndex) <= numberOfReplacements : "index must be in range";
         lgr.fine("preferred lesson index accepted");
 
-        return Timetable.getLessonReplacement(indexForModule, Integer.parseInt(replacementIndex), targetLessonType);
+        return Timetable.getSettableLessonReplacement(indexForModule,
+                Integer.parseInt(replacementIndex), targetLessonType);
     }
 
     private static boolean isInvalidInput(String index, int length) {
