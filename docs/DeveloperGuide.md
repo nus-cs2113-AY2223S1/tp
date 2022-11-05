@@ -32,7 +32,7 @@ ArrayList in PatientList. A final call to savePatientData rewrites the data file
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
 
-**Important methods in PatientList class:**
+#### Important methods in PatientList class
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 `Patient` is created and added to the list of `Patient`s in PatientList.
 * `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
@@ -57,7 +57,7 @@ The `VisitList` Component,
 * can view a specific visit
 * depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
 
-**Important methods in `VisitList` class:**
+#### Important methods in `VisitList` class
 * `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, `timeOfVisit` 
 and `reason`. `reason` is optional, and it can be left blank, and be modified later on via the `editReason` method.
 * `editReason` - This method allows user to edit reason for an existing visit, by specifying `index` of visit and `reason` for visit. `reason` must not be left blank here, 
@@ -67,7 +67,7 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-**How adding a new `Visit` into the `VisitList` works**
+#### How adding a new `Visit` into the `VisitList` works
 
 ![](images/VisitListAdd.png)
 
@@ -89,7 +89,7 @@ The `PrescriptionList` component,
 * depends on `UI` class (because the `PrescriptionList` component needs to interact with user through the `UI` 
 component)
 
-**Methods in `PrescriptionList` class:**
+#### Important Methods in `PrescriptionList` class
 
 * `add` - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
 `timeInterval`.
@@ -105,7 +105,7 @@ specified index
 * `deactivatePrescription` - This method allows user to set the prescription of specified index as inactive.
 * `loadPrescription` - This method assists the `Storage` component to load prescriptions from the .txt storage.
 
-**Members in `Prescription` class**
+#### Members in `Prescription` class
 
 * `medicine` - Stores the medicine name
 * `timeInterval` - The time Interval the medicine is taken between
