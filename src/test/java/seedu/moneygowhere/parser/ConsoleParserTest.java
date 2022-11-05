@@ -3,26 +3,31 @@ package seedu.moneygowhere.parser;
 import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -1587,6 +1592,439 @@ class ConsoleParserTest {
                 + "\"";
 
         assertThrows(ConsoleParserCommandEditExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Sort-Expense
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseAlphabeticalDescending() throws
+            MoneyGoWhereException {
+        String type = "Alphabetical";
+        String order = "Descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseDateAscending() throws
+            MoneyGoWhereException {
+        String type = "Date";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseAmountDescending() throws
+            MoneyGoWhereException {
+        String type = "Amount";
+        String order = "Descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseCurrencyAscending() throws
+            MoneyGoWhereException {
+        String type = "Currency";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_se_ccseInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrderInvalidType_ccseInvalidException() {
+        String type = "curr";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrderInvalidType2_ccseInvalidException() {
+        String type = "amt";
+        String order = "descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeInvalidOrder_ccseInvalidException() {
+        String type = "Currency";
+        String order = "ascend";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeInvalidOrder2_ccseInvalidException() {
+        String type = "Currency";
+        String order = "descend";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seType_ccseInvalidException() {
+        String type = "Currency";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrder_ccseInvalidException() {
+        String order = "ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Convert-Currency
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccIndexCurrency_ccccIndexCurrency() throws
+            MoneyGoWhereException {
+        int expenseIndex = 0;
+        String currency = "USD";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        ConsoleCommandConvertCurrency consoleCommandConvertCurrency =
+                (ConsoleCommandConvertCurrency) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandConvertCurrency
+                .getExpenseIndex()
+                == expenseIndex;
+
+        boolean isCurrencyEqual = consoleCommandConvertCurrency
+                .getCurrency()
+                .equalsIgnoreCase(currency);
+
+        boolean isRateEqual = consoleCommandConvertCurrency
+                .getRate()
+                == null;
+
+        assertTrue(
+                isExpenseIndexEqual
+                        && isCurrencyEqual
+                        && isRateEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccAllArguments_ccccAllArguments() throws
+            MoneyGoWhereException {
+        int expenseIndex = 0;
+        String currency = "AUD";
+        BigDecimal rate = new BigDecimal("2.0");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+                + " "
+                + rate;
+
+        ConsoleCommandConvertCurrency consoleCommandConvertCurrency =
+                (ConsoleCommandConvertCurrency) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandConvertCurrency
+                .getExpenseIndex()
+                == expenseIndex;
+
+        boolean isCurrencyEqual = consoleCommandConvertCurrency
+                .getCurrency()
+                .equalsIgnoreCase(currency);
+
+        boolean isRateEqual = consoleCommandConvertCurrency
+                .getRate()
+                .equals(rate);
+
+        assertTrue(
+                isExpenseIndexEqual
+                        && isCurrencyEqual
+                        && isRateEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_cc_ccccInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccCurrencyInvalidIndex_ccccInvalidException() {
+        int expenseIndex = -1;
+        String currency = "EUR";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccCurrencyInvalidIndex2_ccccInvalidException() {
+        BigInteger expenseIndex = new BigInteger("21474836478");
+        String currency = "EUR";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccIndexCurrencyInvalidRate_ccccInvalidException() {
+        int expenseIndex = 0;
+        String currency = "EUR";
+        BigDecimal rate = new BigDecimal("-1");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+                + " "
+                + rate;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
                 ConsoleParser.parse(input));
     }
     //endregion
