@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+
+participant ":CommandSetModule" as CommandSetModule LOGIC_COLOR
+participant "<color:red><<class>></color>\nUi" as Ui LOGIC_COLOR
+participant "<color:red><<class>></color>\nTimetable" as Timetable LOGIC_COLOR
+
+[-> CommandSetModule ++ : setLesson()
+CommandSetModule -> Timetable++ : getShortenedList()
+Timetable --> CommandSetModule-- : moduleList : String
+
+CommandSetModule -> Ui++ : getModuleIndexFromUser(moduleList : String)
+
+Ui --> CommandSetModule-- : indexForModule : int
+alt indexForModule is invalid
+
+    [<-- CommandSetModule : invalid module message
+
+else indexForModule is valid
+
+    CommandSetModule -> CommandSetModule++ : runSetProcedure(indexForModule : int)
+    CommandSetModule -> Timetable++ : getSettableLessonTypes(indexForModule : int)
+    Timetable --> CommandSetModule : lessonList : String
+    deactivate Timetable
+    CommandSetModule -> Ui++ : getLessonIndexFromUser(lessonList : String)
+    Ui --> CommandSetModule : indexForLesson
+    deactivate Ui
+    alt indexForLesson is valid
+        CommandSetModule -> Timetable++ : getSettableLessonTypeFromIndex(indexForModule : int, indexForLesson : int)
+        Timetable --> CommandSetModule : targetLessonType : String
+        deactivate Timetable
+        CommandSetModule -> CommandSetModule++ : getPrefferedLesson(indexForModule : int, indexForLesson : int, targetLessonType : String)
+        CommandSetModule -> Timetable++ : listAllSettableLessonReplacement(indexForModule : int, targetLessonType : String)
+        Timetable --> CommandSetModule-- : listOfTimeSlots : String
+        CommandSetModule -> Ui++ : getTimeslotIndexFromUser(listOfTimeSlots : String)
+        Ui --> CommandSetModule-- : replacementIndex
+        CommandSetModule --> CommandSetModule-- : newLessons : ArrayList<Lesson>
+        CommandSetModule -> CommandSetModule++ : replaceAttendingLesson(newLessons : ArrayList<Lesson>, indexForModule : int, targetLessonType : String)
+        CommandSetModule -> Timetable++ :replaceSettableLesson(newLessons : ArrayList<Lesson>, indexForModule : int, targetLessonType : String)
+        Timetable --> CommandSetModule--
+        CommandSetModule --> CommandSetModule--
+        CommandSetModule --> CommandSetModule--
+        [<-- CommandSetModule : successful set message
+    else indexForLesson is invalid
+        [<-- CommandSetModule-- : invalid lesson index message
+    end
+end
+
+@enduml

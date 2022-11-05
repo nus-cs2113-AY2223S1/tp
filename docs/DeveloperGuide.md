@@ -43,8 +43,7 @@ The ***Architecture Diagram*** given above presents the high-level design of the
 4. `Commands`: Exists as a package which includes all command functions (explained below under each individual features).
 5. `Timetable`: Contains all the data in the current session. (Data can only be accessed and manipulated by commands)
 6. `Storage`: Manages the saving and loading of the current session data.
-7. `Nusmods`: Handles all communication to the NUSMods API and extracts useful information that is used for the rest of
-   the program.
+
 
 <p style='text-align: justify;'>The software design follows as closely to the Single Responsibility Principle (SRP) as possible. Each major component explained above have unique roles which is not overlapped by another component. For example, printing of all responses go through the UI class, which handles all interactions with user, including the display of program responses.</p>
 
@@ -91,6 +90,25 @@ The ***Sequence Diagram*** above is a simplified depiction of how new modules ar
 
 #### 4.2. Setting lessons for individual modules
 
+<img src="images/setModule.png" width="580"/>
+
+Above is the simplified sequence diagram of the set command. This feature allows users to choose the lessons they want
+and fixes it to its corresponding module. It involves interaction with the Ui class, which serves to display visual
+information and receive user input. Interaction with the Timetable class serves to handle the logic involved to
+associate each lesson with its module. Note that only modules that are settable can be accessed through this function,
+this means that:
+
+- Modules with no lessons cannot be accessed
+- For modules with lessons, lesson types, such as tutorial and lecture, that possess less than 1 unique class number
+cannot be accessed. (See below for example)
+
+```
+CS2113
+Lesson types: lecture, tutorial
+Lecture : only has one lesson with class number "1" (Hence, lecture is not accessible)
+Tutorial : 5 lessons with class numbers "1", "2", "3", "4" and "5" (Hence, tutorial can be accessed)
+```
+
 ---
 
 #### 4.3. Auto-allocating lessons
@@ -117,7 +135,24 @@ Above is the sequence diagram for the listing of modules in the timetable. A few
 
 ---
 
-#### 4.6. Getting info on modules
+#### 4.6. Getting info on modules ####
+<img src = "images/infoModule.png" width=580/>
+
+Above is the simplified sequence diagram for the command to get basic information about a single module. By using the
+module code the user inputs, it will return an array of information about the module, namely:
+
+- Module Code, example:  `CS2113`
+- Module Name, example: `Software Engineering & Object-Oriented Programming`
+- Module Description, example: `This module introduces the necessary skills for systematic and rigorous development of 
+software systems. It covers requirements, design, implementation, quality assurance, and project management aspects of 
+small-to-medium size multi-person software projects. The module uses the Object Oriented Programming paradigm. Students 
+of this module will receive hands-on practice of tools commonly used in the industry, such as test automation tools, 
+build automation tools, and code revisioning tools will be covered.`
+
+As this command makes a HTTP request to the NUSMods API, different inputs will trigger different responses from the API.
+In order to check for the validity of each input, the response code of each HTTP response is tracked and only a response
+with a code of 200 is accepted.
+
 
 ---
 
