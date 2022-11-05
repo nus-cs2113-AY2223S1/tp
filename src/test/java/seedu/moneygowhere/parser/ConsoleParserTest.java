@@ -8,7 +8,7 @@ import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
@@ -21,7 +21,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInv
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
@@ -3503,11 +3503,11 @@ class ConsoleParserTest {
                 + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
                 + " "
                 + filePath;
-        System.out.print(input);
-        ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile =
-                (ConsoleCommandMergeExternalFile) ConsoleParser.parse(input);
 
-        boolean isFilePathEqual = consoleCommandMergeExternalFile.getFilePath().equals(filePath);
+        ConsoleCommandMergeFile consoleCommandMergeFile =
+                (ConsoleCommandMergeFile) ConsoleParser.parse(input);
+
+        boolean isFilePathEqual = consoleCommandMergeFile.getFilePath().equals(filePath);
 
         assertTrue(isFilePathEqual);
     }
@@ -3524,7 +3524,7 @@ class ConsoleParserTest {
                 + " "
                 + filePath;
 
-        assertThrows(ConsoleParserCommandMergeExternalFileInvalidException.class, () ->
+        assertThrows(ConsoleParserCommandMergeFileInvalidException.class, () ->
                 ConsoleParser.parse(input)
         );
     }
