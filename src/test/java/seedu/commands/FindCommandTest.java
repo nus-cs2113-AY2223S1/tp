@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import commands.FindCommand;
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
@@ -26,7 +27,7 @@ public class FindCommandTest {
     }
 
     @Test
-    void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
+    void testNoCarparkFound() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Assertions.assertThrows(NoCarparkFoundException.class, () -> {
             new FindCommand("ZZ", carparkList).execute();
