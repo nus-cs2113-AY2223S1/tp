@@ -27,6 +27,7 @@ public class UserModuleMappingList {
 
     /**
      * Method to find current modules user stored by code.
+     * Method to find current modules user stored by code.
      * @param input input code of module
      * @return true if module is found, false otherwise
      */
@@ -56,7 +57,6 @@ public class UserModuleMappingList {
             System.out.println("Error no such modules to update");
             System.out.println("Please add module to list before adding a note");
         } else {
-            System.out.println("Module updated successfully\n");
             Ui.printModuleUpdatedAcknowledgement(mod);
         }
     }

@@ -144,10 +144,10 @@ public class Duke {
         if (deleteCommand.getChecker().equals("")) {
             String universityName = deleteCommand.getUniversityName();
             String moduleCode = deleteCommand.getModuleCode();
-            System.out.println(moduleCode);
             userUniversityListManager.deleteComment(universityName, moduleCode);
         } else {
-            System.out.println("Error: Please do not enter extra characters after note/");
+            System.out.println("Error: Invalid delete comment command. "
+                    + "Please do not enter extra characters after note/");
         }
     }
 

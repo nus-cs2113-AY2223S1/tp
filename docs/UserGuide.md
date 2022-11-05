@@ -56,11 +56,9 @@ In particular, it is a useful utility for exploring potential module mappings fo
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `easySEP` from [here](https://github.com/AY2223S1-CS2113-W13-2/tp/releases).
-3. Create a folder named `data` in the folder where you saved the .jar file
-4. Download `data.csv` from [here](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/v2.0/data/data.csv) into the `data` folder
-5. Open your command prompt to the folder where you saved the .jar file
-6. Maximise your command prompt window to full screen
-7. Run java -jar easySEP.jar
+3. Open your command prompt to the folder where you saved the .jar file
+4. Maximise your command prompt window to full screen
+5. Run `java -jar easySEP.jar`
 
 Note: The word `databases` in this guide refers to the static copy of module mappings contained in `data.csv`.
 Where applicable, the abbreviation `PU` stands for Partner University.
@@ -92,7 +90,8 @@ We have incorporated 3 types of add commands.
 
 Adds input Partner University module code to input university list.
 
-> <span style="color: #FFA500;">**IMPORTANT**</span>: Can only add modules in database. Use `/list u/{UNIVERSITY_NAME}` to see modules available
+> <span style="color: #FFA500;">**IMPORTANT**</span>
+> - Can only add modules in database. Use `/list u/{UNIVERSITY_NAME}` to see modules available
 
 Example input:
 
@@ -113,7 +112,9 @@ ____________________________________________________________________________
 
 Adds/Updates a (previous) note for the input Partner University module code in the input university list.
 
-> <span style="color: #FFA500;">**IMPORTANT**</span>: Can only add a note after previously adding the Partner University module code in the input university list.
+> <span style="color: #FFA500;">**IMPORTANT**</span>: 
+>  - Can only add a note after previously adding the Partner University module code in the input university list.
+>  - Only the latest comment will be stored. 
 
 Example input:
 
@@ -138,9 +139,10 @@ ____________________________________________________________________________
 
 Adds a lesson for the specified module code to the timetable for the specified university with given start time and end time on the specified day of the week.
 
-> <span style="color: #FFA500;">**IMPORTANT**</span>: {START_TIME} & {END_TIME} in {hh:mm} format
->
-> Example input:
+> <span style="color: #FFA500;">**IMPORTANT**</span>
+> - {START_TIME} & {END_TIME} in {hh:mm} format
+> 
+Example input:
 
 ```
 /add u/Western_University m/CS3319 d/Thursday st/18:00 en/20:00
@@ -154,6 +156,7 @@ Success! You have added a new lesson:
 Western University Thursday 18:00hrs-20:00hrs: CS3319 Databases I
 ____________________________________________________________________________
 ```
+
 
 ### Create Command: `/create u/{UNIVERSITY_NAME}`
 
@@ -178,7 +181,7 @@ ____________________________________________________________________________
 
 ### Delete Command: `/delete`
 
-We have incorporated 3 types of delete commands.
+We have incorporated 4 types of delete commands.
 
 #### 1. Delete Command for Universities: `/delete u/{UNIVERSITY_NAME}`
 
@@ -239,6 +242,23 @@ ____________________________________________________________________________
 Success! You have deleted the lesson:
 Western University Thursday 18:00hrs-20:00hrs: CS3319 Databases I
 ____________________________________________________________________________
+```
+
+#### 4. Delete Command for Comments: `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/`
+
+Deletes comment from the specified university & module code. 
+Note that the university & module code & a non-empty comment must exist for a successful deletion.
+
+Example Input: 
+
+```
+/delete u/Western_University m/DS3000 note/
+```
+
+Expected Output:
+
+```
+Successfully deleted comment
 ```
 
 ### Exit Command: `/exit`
@@ -421,9 +441,11 @@ Displays all existing university modules mappings that are approved in the follo
 
 `[Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] | [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS`
 
-> <span style="color: #FFA500;">**WARNING**</span>: Expect many lines of output. To get fewer lines, use filters as shown in the next section
+> <span style="color: #FFA500;">**WARNING**</span>: 
+> - Expect many lines of output. To get fewer lines, use filters as shown in the next section
 >
-> Example of usage:
+
+Example of usage:
 
 ```
 /list MODULES

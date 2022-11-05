@@ -36,6 +36,8 @@ class UserModuleMappingList {
     + getModuleByPuCode(input:String)
     + deleteModule(index:int)
     + updateModule(puCode:String, nusCode:String, updates:String)
+    + updateComment(moduleCode:String, comment:String)
+    + deleteComment(moduleCode:String)
     + findModuleByTitle(keyword:String)
 }
 
