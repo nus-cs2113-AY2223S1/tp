@@ -365,7 +365,7 @@ public class Parser {
 
     private Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
-                "^add\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
+                "^" + ADD_COMMAND + "\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
                         + "d/" + DATE_REGEX + "i/" + ID_REGEX + "$",
                 Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
@@ -373,13 +373,13 @@ public class Parser {
 
     private  Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
-                "^retrieve\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                "^" + RETRIEVE_PATIENT_COMMAND + "\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
+                "^" + EDIT_COMMAND + "\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
                 Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
