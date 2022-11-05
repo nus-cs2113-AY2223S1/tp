@@ -11,6 +11,11 @@ import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
+    private static final String INCORRECT_SYNTAX_MESSAGE = "/edit syntax is incorrect. "
+            + "Please check again using the '/help edit' command";
+    private static final String EDIT_SUCCESS = " successfully edited.";
+    private static final String EDIT_FAILED = "Edit failed";
+    private static final String NO_EDIT = "No edit was made";
     private static final String COMMAND_FUNCTION = "\nEdit an existing recipe by: \n"
             + "-add Add a new step or ingredient \n"
             + "-del Delete an existing step or ingredient \n"
@@ -70,10 +75,10 @@ public class EditCommand extends Command {
         if (editSuccess) {
             // GUI Successful
             RecipeList.editRecipe(index, editedRecipe, oldTitle);
-            return new CommandResult(editedRecipe.getTitle() + " edited.");
+            return new CommandResult(editedRecipe.getTitle() + EDIT_SUCCESS);
         } else if (flags == null) {
             // GUI Unsuccessful
-            return new CommandResult("No edit was made");
+            return new CommandResult(NO_EDIT);
         } else {
             // CLI
             EditModeCommand cmd;
@@ -91,18 +96,17 @@ public class EditCommand extends Command {
                 cmd = new Change(flags[1], parsed, editedRecipe);
                 break;
             default:
-                return new CommandResult("Edit failed");
+                return new CommandResult(EDIT_FAILED);
             }
             try {
                 this.editedRecipe = cmd.execute();
                 RecipeList.editRecipe(index, editedRecipe, oldTitle);
                 return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + ": "
-                        + flags[1].toString().toLowerCase() + " edited.");
+                        + flags[1].toString().toLowerCase() + EDIT_SUCCESS);
             } catch (IndexOutOfBoundsException e) {
-                return new CommandResult("Index specified is out of range!");
+                return new CommandResult(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (Exception e) {
-                return new CommandResult("/edit syntax is incorrect. "
-                        + "Please check again using the '/help edit' command");
+                return new CommandResult(INCORRECT_SYNTAX_MESSAGE);
             }
         }
     }

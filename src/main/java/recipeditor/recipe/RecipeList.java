@@ -104,10 +104,13 @@ public class RecipeList {
     public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
+            boolean isRecipeIncluded = false;
             ArrayList<Ingredient> recipeIngredients = r.getIngredients();
             for (Ingredient i : recipeIngredients) {
-                if (i.getName().toLowerCase().contains(findInput.toLowerCase())) {
+                if (isRecipeIncluded == false
+                        && i.getName().toLowerCase().contains(findInput.toLowerCase())) {
                     foundRecipeTitlesList.add(r.getTitle());
+                    isRecipeIncluded = true;
                 }
             }
         }
