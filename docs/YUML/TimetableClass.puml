@@ -1,0 +1,41 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Timetable {
+{static} + listOfModules:List<Module>
+{static} + timetableDict:TimetableDict
+{static} - listOfChangeableModules:List<Module>
+}
+
+Timetable --> "*" Module
+
+class Module {
+- moduleName:String
+- moduleCode:String
+- lessonList:List<Lesson>
+- lessonMap:LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>
+- attendingMap:LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>
+- attendingList:List<Lesson>
+- classifiedLessons:LinkedHashMap<String, ArrayList<Lesson>>
+}
+
+Timetable --> "1" TimetableDict
+
+class TimetableDict {
++ timetable:LinkedHashMap<String, LinkedHashMap<String, Lesson>>
+}
+
+Module --> "*" Lesson
+TimetableDict --> "*" Lesson
+
+class Lesson {
+- day:String
+- startTime:String
+- endTime:String
+- lessonType:String
+- classNumber:String
+- moduleCode:String
+- weeks:String
+}
+
+@enduml
