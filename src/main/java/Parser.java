@@ -228,18 +228,17 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_EDIT
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_EDIT
                         + "\n\tn - The name should be one or two space-separated words"
                         + "\n\tg - The gender should be one letter, M or F"
-                        + "\n\td - The date of birth should be formatted as DD-MM-YYYY");
+                        + "\n\td - The date of birth should be formatted as DD-MM-YYYY"
+                        + HELP_MESSAGE);
             case RETRIEVE_PATIENT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_RETRIEVE
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_RETRIEVE
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
@@ -256,23 +255,21 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_EDIT);
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_EDIT + HELP_MESSAGE);
             case DELETE_REASON_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_DELETE_REASON
-                        + "\n\tx - The index should be a displayed number next to the visit");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_DELETE_REASON
+                        + "\n\tx - The index should be a displayed number next to the visit"
+                        + HELP_MESSAGE);
             case VIEW_PATIENT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_VIEW_PATIENT
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_VIEW_PATIENT
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case VIEW_VISIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_VIEW
-                        + "\n\tx - The index should be a displayed number next to the visit");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_VIEW
+                        + "\n\tx - The index should be a displayed number next to the visit"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
@@ -291,32 +288,31 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_EDIT
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_EDIT
                         + "\n\tx - The index should be a displayed number next to the prescription"
                         + "\n\tn - The prescription name can be multiple words, including -"
                         + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
                         + "\n\tt - The time instruction explains how to take the dosage, "
-                        + "with any number of words");
+                        + "with any number of words"
+                        + HELP_MESSAGE);
             case VIEW_PATIENT_PRES_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_VIEW_PATIENT
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_VIEW_PATIENT
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case VIEW_ACT_PATIENT_PRES_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_VIEW_ACTIVE
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_VIEW_ACTIVE
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case ACTIVATE_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_CHANGE_ACTIVE
-                        + "\n\tx - The index should be a displayed number next to the prescription");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_CHANGE_ACTIVE
+                        + "\n\tx - The index should be a displayed number next to the prescription"
+                        + HELP_MESSAGE);
             case DEACTIVATE_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\n\tx - The index should be a displayed number next to the prescription");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_CHANGE_INACTIVE
+                        + "\n\tx - The index should be a displayed number next to the prescription"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
@@ -369,7 +365,7 @@ public class Parser {
 
     private Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
-                "^add\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
+                "^" + ADD_COMMAND + "\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
                         + "d/" + DATE_REGEX + "i/" + ID_REGEX + "$",
                 Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
@@ -377,13 +373,13 @@ public class Parser {
 
     private  Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
-                "^retrieve\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                "^" + RETRIEVE_PATIENT_COMMAND + "\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
+                "^" + EDIT_COMMAND + "\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
                 Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
@@ -617,4 +613,7 @@ public class Parser {
             "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*";
     private static final String REASON_REGEX = "\\s*((?:\\w+\\s*)*\\w+)\\s*";
     private static final String INDEX_REGEX = "\\s*(\\d+)\\s*";
+
+    private static final String ERROR_MESSAGE = "Your input is incorrect! Please format it as such:";
+    private static final String HELP_MESSAGE = "\nIf you want to see the whole list of commands, type help!";
 }

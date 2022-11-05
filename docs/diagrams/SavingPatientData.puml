@@ -1,0 +1,32 @@
+@startuml
+hide footbox
+
+participant Storage as A
+participant FileWriter as B
+
+ -> A : savePatientData(patientList: PatientList)
+activate A
+
+A -> B: new(patientFile: File)
+activate B
+return
+A -> A: logPatients(patientList: PatientList, fileWriter: FileWriter)
+activate A
+loop for all patients in patientList
+A -> A: logPatientIntoDataFile(fileWriter: FileWriter, patient: Patient)
+activate A
+loop for all data of patient
+A -> B: write(data: String)
+activate B
+return
+end
+return
+return
+end
+return
+
+
+
+
+
+@enduml

@@ -1,21 +1,14 @@
-import java.util.ArrayList;
-
 public class Patient {
     private String name;
     private String birthDate;
     private String gender;
     private final String id;
-    public VisitList visits;
-    public PrescriptionList activePrescriptions;
-
 
     public Patient(String name, String birthDate, String gender, String id) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
-        this.visits = new VisitList();
-        this.activePrescriptions = new PrescriptionList();
     }
 
     public String getName() {
