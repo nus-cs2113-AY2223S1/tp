@@ -73,18 +73,18 @@ Note: The C symbols are a result of the PlantUml layout.
 ### Pairing Component
 API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
 
-* `PairingList` is responsible for recording which clients renting which property.
+* `PairingList` is responsible for recording which clients are renting which property.
 * `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.
 
 Here is how classes involved in the pairing/unpairing actions interact with each other:
 
 ![Pairing List Class Diagram](diagrams/PairingListCD.png)
-1. `PairParser` and `UnpairParser` inherit from a general `PairUnpairParser`, which contains parsing methods that are 
-    common to its subclasses.
-2. `PairParser` and `UnpairParser` are responsible for checking input format. After (successful) checking, they create 
-    `CommandPair` and `CommandUnpair` objects respectively.
+1. `CommandPairParser` and `CommandUnpairParser` inherit from a general `CommandPairUnpairParser`, which contains 
+    parsing methods that are common to its subclasses.
+2. `CommandPairParser` and `CommandUnpairParser` are responsible for checking input format. After (successful) checking, 
+    they create `CommandPair` and `CommandUnpair` objects respectively.
 3. `CommandPair` and `CommandUnpair` contain references to `ClientList` and `PropertyList` because the command classes
-    need to validate user input against the data `ClientList` and `PropertyList`.
+    need to validate user input against the data in `ClientList` and `PropertyList`.
 4. After input is validated, `PairingList` is updated with the new pairings. `Storage` records these changes and `Ui` 
     prints the confirmation message for the user action.
 
@@ -92,11 +92,12 @@ Here is how classes involved in the pairing/unpairing actions interact with each
 Here is the underlying data structure of `PairingList`:
 
 ![Pairing List Data Class Diagram](diagrams/PairingListAPICD.png)
-* `PairingList` is essentially a "wrapper" to the underlying `HashMap` with key-value pairs where the `Client` is the key and `Property` is the value.
+* `PairingList` is essentially a "wrapper" to the underlying `java.util.HashMap`. The key-value pairs in the hashmap have 
+    `Client` as the key and `Property` as the value.
 * `PairingList` provides methods to add or delete these key-value pairs to represent the pairing and unpairing of real-life
     clients and properties.
-* The `Client` and `Property` references must be present in `ClientList` and `PropertyList` as well, since `PairingList` is an
-    implementation of an adjacency list. 
+* The `Client` and `Property` references contained in `PairingList` must be references to valid `Client` and `Property` 
+    objects in `ClientList` and `PropertyList` as well, since `PairingList` is an implementation of an adjacency list. 
 
 ---
 ### Storage Component
@@ -283,11 +284,11 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 When a client rents a property, the client and property form a pair.
 
-* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client` object
-  and the value is a `Property` object.
+* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client`
+  and the value is `Property`.
 * A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
   client is renting.
-* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants(clients) only have
+* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants (clients) only have
   one place of residence at any time.
 
 #### Pair Feature
@@ -306,16 +307,18 @@ where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are in
 and `PropertyList`, if their arrays were 1-indexed.
 
 How the pair command works:
-1. The user input is first parsed by `Parser` (specifically, `PairParser`).
-2. `PairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+1. The user input is first parsed by `Parser` (specifically, `CommandPairParser`).
+2. `CommandPairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integer inputs.
 3. After a successful check, a `CommandPair` object is created.
 4. When `CommandPair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
-    `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+    `ClientList`. These checks throw exceptions when the user inputs contains indexes which are not within the internal arrays of 
+    `PropertyList` or `ClientList`.
 5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
    `PropertyList` and `ClientList`.
 6. A third layer of checks throws exceptions if the `Client` and `Property` objects already match an existing pair, the
     `Client` is already paired with some other `Property`, or when the user pairs a client whose budget is lower than the property's rental price.
 7. The `Client` and `Property` objects are inserted as a pair into the hashmap of `PairingList`.
+8. The change is saved in `Storage` and a confirmation message is shown to the user.
  
 #### Unpair Feature
 
@@ -329,15 +332,17 @@ and `PropertyList`, if their private arrays were 1-indexed.
 (The sequence diagram for unpair is not provided as the mechanism is similar to that of [Pair](#pair-feature))
 
 How the unpair command works :
-1. The user input for an unpair command is first parsed by `Parser` (specifically, `UnpairParser`).
-2. `UnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+1. The user input is first parsed by `Parser` (specifically, `CommandUnpairParser`).
+2. `CommandUnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integer inputs.
 3. After a successful check, a `CommandUnpair` object is created.
 4. When `CommandUnpair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
-   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within the internal arrays of
+    `PropertyList` or `ClientList`.
 5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
    `PropertyList` and `ClientList`.
-6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
+6. A third layer of checks throws an exception if the `Client` and `Property` objects are not in an existing pair.
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
+8. The change is saved in `Storage` and a confirmation message is shown to the user.
 
 ---
 ### Find Feature
@@ -483,17 +488,19 @@ ___
 ## Appendix A: Product Scope
 
 ### Target user profile
-* Property agent who are managing single owner rental units
+Property agents who: 
+* are managing single owner rental units
 * has a need to keep track of information of properties that are being put out for rental.
 * has a need to keep track of information of clients' (prospective tenants) information.
 * is a fast typist
 * favors a command-line interface over a Graphic User Interface.
 
 ### Value proposition
-Aids property agent in tracking information related to the properties and clients (prospective tenants) they manage:
+Aids property agents in tracking information related to the properties and clients (prospective tenants) they manage. The 
+app enables them to easily:
 - Record down information of properties (landlord, address, rental price, unit type).
 - Record down information of clients (name, contact number, budget), who are looking to rent properties.
-- Record down instances where a client decides to rent a property/ stop renting a property.
+- Record down instances where a client decides to rent a property/stop renting a property.
 - View client and property information quickly.
 
 ___
@@ -696,7 +703,7 @@ java -jar PropertyRentalManager.jar
 3. Failed Pairing (client already paired to another property)
    1. Prerequisites:
        * Have at least 1 client and 2 properties added to the app.
-       * Ensure that the client's budgets is higher than or equal to the rental prices of both properties.
+       * Ensure that the client's budgets are higher than or equal to the rental prices of both properties.
        * Have paired the client and a property e.g `pair ip/1 ic/1`
    2. Test case: `pair ip/2 ic/1` (pair a different property to the same client)
    
@@ -720,7 +727,7 @@ java -jar PropertyRentalManager.jar
       * Have paired the client and property e.g. `pair ip/1 ic/1`
    2. Test case: `unpair ip/1 ic/1` (unpair using the same indexes as the pair command)
       
-       Expected: Pairing is deleted. Terminal shows successful unpairing message showing the client's name and the 
+       Expected: Pairing is deleted. Terminal shows successful unpairing message with the client's name and the 
        property address.
 
 
@@ -730,7 +737,7 @@ java -jar PropertyRentalManager.jar
       * Have **NOT** paired the client and property.
    2. Test case: `unpair ip/1 ic/1`
        
-       Expected: Terminal shows unsuccessful pairing message.
+       Expected: Terminal shows unsuccessful unpairing message.
 
 
 ### Check
@@ -791,8 +798,6 @@ java -jar PropertyRentalManager.jar
     
 ### Storage
 
-## Instructions for manual testing
-
 
 ### Finding for Client/Property:
 1. Querying for Client/Property stored in the Client/Property List:
@@ -819,6 +824,5 @@ java -jar PropertyRentalManager.jar
     9. Test case: `find -property`
         - Expected: An error stating that the tag is missing will be shown.
     10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
-    
-### Quit
+
 

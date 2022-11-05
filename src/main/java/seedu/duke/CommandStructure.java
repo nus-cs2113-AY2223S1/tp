@@ -39,6 +39,9 @@ public class CommandStructure {
     public static final String[] CHECK_PROPERTY_FLAGS = {"i/"};
     public static final String[] CHECK_CLIENT_FLAGS = {"i/"};
 
+    public static final int FIRST_INDEX = 0;
+    public static final int SECOND_INDEX = 1;
+
     //@@author OVReader
     // Unit-Type Command Labels
     // HDB Labels

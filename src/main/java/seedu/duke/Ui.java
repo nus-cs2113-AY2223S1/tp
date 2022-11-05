@@ -364,7 +364,7 @@ public class Ui {
     //@@author
 
     //@@author ngdeqi
-    public void showCheckProperty(Property property, ArrayList<Client> tenants) {
+    public void showCheckPropertyMessage(Property property, ArrayList<Client> tenants) {
         showToUser(MESSAGE_CHECK_PROPERTY);
         showToUser(property.toString() + System.lineSeparator());
         showToUser(MESSAGE_CHECK_PROPERTY_RESULT);

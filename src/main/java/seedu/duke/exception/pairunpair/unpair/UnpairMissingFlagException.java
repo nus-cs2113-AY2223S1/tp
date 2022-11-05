@@ -11,7 +11,6 @@ import static seedu.duke.Messages.MESSAGE_UNPAIR_WRONG_FORMAT;
  */
 public class UnpairMissingFlagException extends ParseUnpairException {
 
-    private static final String WHITESPACE = " ";
     private ArrayList<String> missingFlags;
 
     public UnpairMissingFlagException(ArrayList<String> missingFlags) {
@@ -20,13 +19,7 @@ public class UnpairMissingFlagException extends ParseUnpairException {
 
     @Override
     public String toString() {
-
-        StringBuilder missingFlagStringBuilder = new StringBuilder();
-        for (String missingFlag : missingFlags) {
-            missingFlagStringBuilder.append(missingFlag).append(WHITESPACE);
-        }
-
-        String missingFlagsAsString = missingFlagStringBuilder.toString();
+        String missingFlagsAsString = super.formatMissingFlagsToString(missingFlags);
 
         return MESSAGE_MISSING_FLAG
                 + missingFlagsAsString + System.lineSeparator()

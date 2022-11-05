@@ -51,6 +51,7 @@ Note:
 * Parameters appear in the form of a/PARAMETER.
 * `-property` and `-client` indicates whether the command is for property or client.
 * Words in UPPER_CASE are parameters to be specified by the user.
+* Index values are limited to integers between 1 and 2147483647 (both inclusive).
 
 ---
 
