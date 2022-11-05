@@ -2,35 +2,33 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-Participant "Ui" as Ui
-Participant "Parser" as parser
-Participant "Storage" as Storage
-Participant "DuplicateBuildException" as DuplicateBuildException
-Participant "BlankStringException" as BlankStringException
+Participant "Ui" as Ui #Aqua
+Participant "Parser" as parser #AquaMarine
+Participant "Storage" as Storage #Yellow
 
-activate Ui
+activate Ui #Aqua
 Ui -> Ui: readline()
-activate Ui
+activate Ui #Aqua
 Ui -> parser: parse()
-activate parser
+activate parser #AquaMarine
 parser -> parser : mainParseAdd()
-activate parser
+activate parser #AquaMarine
 
 alt the build does not exist
     parser -> Storage: saveBuild(BuildManager)
-    activate Storage
+    activate Storage #Yellow
     opt file directory does not exist
         Storage -> Storage: createFileDirectory()
-        activate Storage
+        activate Storage #Yellow
         return
     end
     opt file does not exist
         Storage -> Storage: createFile()
-        activate Storage
+        activate Storage #Yellow
         return
     end
     Storage -> Storage: write()
-    activate Storage
+    activate Storage #Yellow
     ref over Storage: write all the existing builds to file
     return
     return
