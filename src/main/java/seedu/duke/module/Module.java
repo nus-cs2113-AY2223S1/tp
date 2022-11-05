@@ -368,7 +368,7 @@ public class Module {
         return moduleCode + " : " + moduleName;
     }
 
-    public boolean checkLessonTypeAttended(String lessonType) {
+    public boolean isLessonTypeAttended(String lessonType) {
         boolean isLessonTypeAttended = false;
         for (Lesson attendingLesson : attendingList) {
             String lessonDay = attendingLesson.getDay();

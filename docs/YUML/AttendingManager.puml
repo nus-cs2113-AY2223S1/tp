@@ -1,0 +1,16 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class AttendingManager {
+{static} - attendingDataList:ArrayList<String>
+{static} - dataDirectoryPath:String
+{static} + initAttendingDataFile()
+{static} + saveAttendingData()
+{static} + saveAttendingIntoDataList()
+{static} + loadNewAttendingOnStartUp()
+{static} + deleteDataFile(dataDirectoryPath:String)
+{static} - addAttending(lesson:Lesson, moduleCode:String)
+{static} - addLessonsIntoMap(newLessons:LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>, newLesson:Lesson)
+}
+
+@enduml

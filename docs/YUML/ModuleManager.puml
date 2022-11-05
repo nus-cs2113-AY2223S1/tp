@@ -1,0 +1,14 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class ModuleManager {
+{static} - currSemester:String
+{static} - dataDirectoryPath:String
+{static} + initModuleDataFile()
+{static} + saveModules()
+{static} + loadModules()
+{static} + deleteDataFile(dataDirectoryPath:String)
+{static} - checkForErrors(response:String)
+}
+
+@enduml

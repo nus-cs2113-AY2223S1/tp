@@ -1,4 +1,4 @@
-package seedu.duke.data;
+package seedu.duke.storage;
 
 import seedu.duke.Exceptions;
 import seedu.duke.commands.CommandAddModule;
@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ModuleManager {
-    static String dataDirectoryPath;
-    static String currSemester;
+    private static String dataDirectoryPath;
+    private static String currSemester;
 
     public static void initModuleDataFile() {
         currSemester = DataManager.getCurrentSem();
