@@ -1,11 +1,17 @@
 package recipeditor.parser;
 
 import recipeditor.exception.ExcessFlagsException;
-import recipeditor.recipe.Recipe;
 
-import java.util.ArrayList;
-
-import static recipeditor.parser.FlagType.*;
+import static recipeditor.parser.FlagType.NULL;
+import static recipeditor.parser.FlagType.INDEX;
+import static recipeditor.parser.FlagType.ADD;
+import static recipeditor.parser.FlagType.DELETE;
+import static recipeditor.parser.FlagType.SWAP;
+import static recipeditor.parser.FlagType.CHANGE;
+import static recipeditor.parser.FlagType.INGREDIENT;
+import static recipeditor.parser.FlagType.STEP;
+import static recipeditor.parser.FlagType.TITLE;
+import static recipeditor.parser.FlagType.DESCRIPTION;
 
 public class FlagParser {
 
@@ -17,7 +23,8 @@ public class FlagParser {
      */
     public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException {
         FlagType[] flags = {NULL, NULL};
-        int recipeFlagCount = 0, commandFlagCount = 0;
+        int recipeFlagCount = 0;
+        int commandFlagCount = 0;
         for (String s : parsedCommand) {
             if (s.contains("-")) {
                 switch (s) {

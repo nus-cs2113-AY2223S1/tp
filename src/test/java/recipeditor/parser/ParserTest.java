@@ -47,7 +47,7 @@ class ParserTest {
 
     @Test
     void completeDeleteCommand_correctDeleteCommandFormat_correspondingDeleteCommand() {
-        String input = "/delete 3";
+        String input = "/delete -id 3";
         assertEquals(DeleteCommand.class, Parser.parseCommand(input).getClass());
     }
 
@@ -142,7 +142,7 @@ class ParserTest {
         Recipe addedRecipe = new Recipe("Example Title for View Command");
         RecipeList.addRecipe(addedRecipe);
         RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/view 1";
+        String input = "/view -id 1";
         String expected = "TITLE:\n" + "Example Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
                 + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
         Command commandExecuted = Parser.parseCommand(input);
