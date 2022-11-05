@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Comparator;
 import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.logging.Logger;
 
@@ -21,14 +23,14 @@ public class CommandPrintTimetable {
 
     private static final String[] DAYS_IN_WEEK = {"MON", "TUE", "WED", "THU", "FRI"};
     private static final Integer FIRST_HOUR = 8; // timetable start at 0800
-    private static final Integer COLUMN_WIDTH = 13;
+    private static final Integer COLUMN_WIDTH = 15;
     private static final Integer LEFT_PADDING = 3;
     private static final Integer TOP_PADDING = 1;
     private static final Integer COLUMN_PADDING = 1;
     private static final Integer ROW_DIFFERENCE = 3; // difference between api data and timetable here
     private static final Integer DAY_PER_WEEK = 5; // only considering Mon to Fri
-    private static final Integer TIMETABLE_WIDTH = 78;
-    private static final Integer TIMETABLE_TIME_WIDTH = 13;
+    private static final Integer TIMETABLE_WIDTH = 90;
+    private static final Integer TIMETABLE_TIME_WIDTH = 15;
     private static final Integer TIMETABLE_HEIGHT = 32;
     private static final Integer END_SLOT_DIFFERENCE = 1;
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -265,7 +267,8 @@ public class CommandPrintTimetable {
             StringBuilder upperBoarder = new StringBuilder();
             StringBuilder lowerBoarder = new StringBuilder();
 
-            buildLowBoarder(modStartSlot, modEndSlot, currentModType, lowerBoarder);
+            //buildLowBoarder(modStartSlot, modEndSlot, currentModType, lowerBoarder);
+            lowerBoarder.append(UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1));
             upperBoarder.append(UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1));
 
             Integer columnIndex = getDayColumnIndex(day);
@@ -275,20 +278,28 @@ public class CommandPrintTimetable {
 
             if (!nextSlotWritten) {
                 // if no clash is indicated in timetable, write the timetable
-                writeLesson(modStartSlot, currentModCode, currentModType, columnIndex);
+                writeLesson(modStartSlot,modEndSlot, currentModCode, currentModType, columnIndex);
                 writeBoarder(modStartSlot, modEndSlot, upperBoarder, lowerBoarder, columnIndex);
             }
         }
     }
 
-    private static void writeLesson(int start, String code, String type, Integer col) {
+    private static void writeLesson(Integer start, Integer end, String code, String type, Integer col) {
         try {
+            assert end > start : "End slot index is smaller than start index!";
+            Integer lessonHeight = end - start;
             Integer codeRowIndex = start + ROW_DIFFERENCE + 1;
-            write(code, codeRowIndex, col);
             String lessonType = type.substring(0, 3).toUpperCase();
-            // type is printed with first three letters
-            Integer typeRowIndex = start + ROW_DIFFERENCE + 2;
-            write(lessonType, typeRowIndex, col + 1);
+            if (lessonHeight > 2) { // lesson box is large enough
+                write(code, codeRowIndex, col);
+                // type is printed with first three letters
+                Integer typeRowIndex = start + ROW_DIFFERENCE + 2;
+                write(lessonType, typeRowIndex, col + 1);
+            } else {
+                String tightCode = code + " " + lessonType;
+                write(tightCode, codeRowIndex, col);
+            }
+
         } catch (ArrayIndexOutOfBoundsException e) {
             UI.printResponse("index out of bounds when writing lesson");
         }
@@ -320,16 +331,6 @@ public class CommandPrintTimetable {
     }
 
 
-    private static void buildLowBoarder(int startSlot, int endSlot, String modType, StringBuilder lowBoarder) {
-        assert endSlot > startSlot : "End slot index is smaller than start index!";
-        if (endSlot - startSlot < 3) {
-            // lower boarder joins lesson type, height not enough
-            buildNarrowLowBoarder(modType, lowBoarder);
-        } else {
-            String stringToWrite = UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1);
-            lowBoarder.append(stringToWrite);
-        }
-    }
 
 
     private static void buildNarrowLowBoarder(String currentModType, StringBuilder lowerBoarder) {
@@ -411,17 +412,20 @@ public class CommandPrintTimetable {
 
         ArrayList<ArrayList<Integer[]>> newEmptySlotList = new ArrayList<>(emptySlotList);
 
-        Stack<Integer[]> stack = new Stack<>();
-        stack.push(newEmptySlotList.get(day).get(0));
+        Deque<Integer[]> deque = new LinkedList<>();
+        deque.push(newEmptySlotList.get(day).get(0));
 
-        sortSlotList(day, stack, newEmptySlotList);
+        Stack<Integer[]> refStack = new Stack<>();
+        refStack.push(newEmptySlotList.get(day).get(0));
+
+        sortSlotList(day, deque, refStack, newEmptySlotList);
 
         populateRawTimetable(listOfModules);
         sortDailySlots(day, emptySlotList);
 
-        ArrayList<Integer[]> clashSlotList = createClashList(stack);
+        ArrayList<Integer[]> clashSlotList = createClashList(deque);
 
-        removeUnclashSlot(day, clashSlotList);
+        removeUnclashSlot(day, clashSlotList, refStack);
         populateClashMod(day, clashSlotList);
 
         return clashSlotList;
@@ -465,50 +469,65 @@ public class CommandPrintTimetable {
     }
 
 
-    private static ArrayList<Integer[]> createClashList(Stack<Integer[]> stack) {
+    private static ArrayList<Integer[]> createClashList(Deque<Integer[]> deque) {
         ArrayList<Integer[]> clashSlotList = new ArrayList<>();
-        while (!stack.isEmpty()) {
-            clashSlotList.add(stack.pop());
+        while (!deque.isEmpty()) {
+            clashSlotList.add(deque.pop());
         }
         return clashSlotList;
     }
 
-    private static void removeUnclashSlot(Integer day, ArrayList<Integer[]> clashSlotList) {
+    private static void removeUnclashSlot(Integer day, ArrayList<Integer[]> clashList, Stack<Integer[]> refStack) {
         ArrayList<Integer> removeIndex = new ArrayList<>();
-        for (Integer[] originalSlot : emptySlotList.get(day)) {
-            calculateSlot(clashSlotList, removeIndex, originalSlot);
+        for (Integer[] untouchedSlot : refStack) {
+            for (Integer[] oldClashSlot : clashList) {
+                boolean isFirstSame = untouchedSlot[0].equals(oldClashSlot[0]);
+                boolean isSecondSame = untouchedSlot[1].equals(oldClashSlot[1]);
+                if (isFirstSame && isSecondSame) {
+                    removeIndex.add(clashList.indexOf(oldClashSlot));
+                }
+            }
         }
 
         Collections.sort(removeIndex, Collections.reverseOrder());
         for (int i : removeIndex) {
-            clashSlotList.remove(i);
+            clashList.remove(i);
         }
+
+
 
     }
 
-    private static void calculateSlot(ArrayList<Integer[]> list, ArrayList<Integer> toDel, Integer[] oldSlot) {
-        for (Integer[] newSlot : list) {
-            boolean isInside = Objects.equals(oldSlot[0], newSlot[0]) && Objects.equals(oldSlot[1], newSlot[1]);
-            if (isInside) {
-                toDel.add(list.indexOf(newSlot));
-            }
-        }
-    }
 
 
-    private static void sortSlotList(Integer day, Stack<Integer[]> stack,ArrayList<ArrayList<Integer[]>> newEsl) {
-        Integer[] top = stack.peek();
+
+
+
+
+    private static void sortSlotList(Integer day, Deque<Integer[]> deque,
+                                     Stack<Integer[]> stack, ArrayList<ArrayList<Integer[]>> newEsl) {
+
         for (int i = 1; i < newEsl.get(day).size(); i++) {
+            Integer[] top = deque.getLast();
             if (top[1] < newEsl.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
+                deque.push(newEsl.get(day).get(i));
                 stack.push(newEsl.get(day).get(i));
             } else if (top[1].equals(newEsl.get(day).get(i)[0])) {
-                continue;
+                deque.push(newEsl.get(day).get(i));
+                stack.push(newEsl.get(day).get(i));
             } else if (top[1] < newEsl.get(day).get(i)[1]) {
                 top[1] = newEsl.get(day).get(i)[1];
+                deque.pop();
+                deque.push(top);
                 stack.pop();
-                stack.push(top);
+            } else {
+                stack.pop();
             }
         }
+
+
+
+
 
     }
 

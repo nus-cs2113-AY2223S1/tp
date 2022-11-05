@@ -25,13 +25,9 @@ stop
 else (no)
 fork
 :Write string of
-upper boarder 
+upper boarder
+and lower boarder 
 for lesson
-in <i>timeTable</i>;
-
-fork again
-:Write string of
-lesson's module code
 in <i>timeTable</i>;
 
 fork again
@@ -40,19 +36,19 @@ same or shorter
 than 1 hour?) then (yes)
 
 :Sqeeze the
-lower boarder
+module code
 with lesson type;
 :Write String of 
-lower boarder + 
+module code + 
 lesson type
-in <i>timeTable</i>;;
+in <i>timeTable</i>;
 else (no)
 :Write string of
-lesson type
-in <i>timeTable</i>;;
+module code
+in <i>timeTable</i>;
 :Write string of
-lower boarder
-in <i>timeTable</i>;;
+lesson type
+in <i>timeTable</i>;
 endif
 end fork
 

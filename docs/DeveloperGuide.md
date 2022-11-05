@@ -11,8 +11,8 @@
     - [4.3. Auto-allocating lessons](#43-auto-allocating-lessons)
     - [4.4. Printing the timetable](#44-printing-the-timetable)
         - [4.4.1. Populate lesson data from timetable](#441-populate-lesson-data-from-timetable)
-        - [4.4.2 Write day and time headers for timetable](#442-write-day-and-time-headers-for-timetable)
-        - [4.4.3 Write day and time headers for timetable](#443-write-day-and-time-headers-for-timetable)
+        - [4.4.2. Write day and time headers for timetable](#442-write-day-and-time-headers-for-timetable)
+        - [4.4.3. Write day and time headers for timetable](#443-write-day-and-time-headers-for-timetable)
     - [4.5. Listing current modules](#45-listing-current-modules)
     - [4.6. Getting info on modules](#46-getting-info-on-modules)
     - [4.7. Deleting modules from timetable](#47-deleting-modules-from-timetable)
@@ -155,7 +155,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 
 ##### 4.4.3 Write day and time headers for timetable
-<img src="images/printTimetable_3.png" width="380" />
+<img src="images/printTimetable_3.png" width="280" />
 <details><summary>Activity of 4.4.3</summary><p style='text-align: justify;' markdown="1">
 
 - ```emptySlotList```, with pairs of ```integers``` of starting and ending slots for different days in a week, is sorted by the starting slot. This is to prepare for the checking and finding overlapping lesson intervals later.
@@ -181,7 +181,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 - If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```: <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
-&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the lower boarder with the lesson type together. Otherwise, write normal lower boarder and lesson type in ```timeTable```. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
 
 - ```timeTable``` is converted into strings for output.
 - Module codes which clashes from ```clashedModCodeList``` is appended at the end of the output string
