@@ -146,8 +146,8 @@ public class Duke {
             String moduleCode = deleteCommand.getModuleCode();
             userUniversityListManager.deleteComment(universityName, moduleCode);
         } else {
-            System.out.println("Error: Invalid delete comment command. " +
-                    "Please do not enter extra characters after note/");
+            System.out.println("Error: Invalid delete comment command. "
+                    + "Please do not enter extra characters after note/");
         }
     }
 
