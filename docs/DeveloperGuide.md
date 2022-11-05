@@ -362,6 +362,7 @@ For properties, it will identify if the query text matches:
 For example, if a query text is "Ken" and the address is "Kent Ridge", it will be identified as a match since the word is contained within part of the address.
 
 Upon identifying a match, the program will print out the message to the console providing the full details, inclusive of their respective index number. This is to help facilitate other commands such as pairing or checking.
+
 ---
 
 ### Storage Feature
@@ -504,10 +505,8 @@ ___
 ## Appendix C: Non-Functional Requirements
 1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
 2. The system should respond to the user input within 2 seconds.
-3. The system adheres to stict user input formatting to prevent corruption of data.
-4. The system is programmed to recognise only English text. Any other language might not be recognised by the program.
-5. The system stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
-6. This system is contrained under a single user. Multiple users are not supported
+3. This program should support loading and storing operation on any mainstream operating system.
+4. The program does not require users to have prior programming experience to use.
 
 ---
 ## Appendix D: Glossary
