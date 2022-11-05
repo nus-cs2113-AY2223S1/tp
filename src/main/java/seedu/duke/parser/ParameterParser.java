@@ -200,7 +200,7 @@ public class ParameterParser {
     public static void checkDuplicateTagsNotExist(String[] splits) throws GlobalDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
-            assert split.length() >= MINIMUM_TAG_LENGTH;
+            assert split.length() >= MINIMUM_TAG_LENGTH : "The function argument splits has more length than expected";
             String tag = split.substring(0, SPLIT_POSITION);
 
             // The duplicated tag can be found in the hash map
@@ -526,6 +526,7 @@ public class ParameterParser {
      */
     public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
         boolean isValidHelpOption = parameter.equals("detailed");
+        assert parameter != null : "The function argument passed must not be null!";
         if (isValidHelpOption) {
             return true;
         } else {
@@ -543,6 +544,7 @@ public class ParameterParser {
      * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
      */
     public static String parseHelpQueryTag(String parameter) throws HelpUnknownCommandWordException {
+        assert parameter != null : "Function argument passed must not be a null";
         // An invalid command word queried by the user will result in an exception
         try {
             CommandParser.getCommand(parameter, "");

@@ -110,9 +110,11 @@ public class Budget {
             Thus, this function is safe from integer overflow UNLESS the values in common.Constants.java is altered.
          */
 
-        assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
-        assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > Long.valueOf(MAX_AMOUNT_VALUE));
-        assert (MIN_BUDGET_VALUE > 0);
+        assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0)
+                : "Maximum amount and transaction set in Constants.java must not have negative value!";
+        assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > Long.valueOf(MAX_AMOUNT_VALUE))
+                : "Maximum transaction count value set in Constants.java must be higher than 1!";
+        assert (MIN_BUDGET_VALUE > 0) : "Minimum budget set in Constants.java cannot be negative value!";
 
         return budget - totalMonthlyExpense;
     }
@@ -141,6 +143,7 @@ public class Budget {
      * @return A budget remaining or exceeding message.
      */
     private static String getBudgetLeftMessage(long budgetLeft, boolean hasExceededBudget, String monthAndYear) {
+        assert monthAndYear != null : "The function argument monthAndYear must not be null!";
         if (hasExceededBudget) {
             assert budgetLeft < 0;
             // The absolute value of budget left will be the amount of budget exceeded
