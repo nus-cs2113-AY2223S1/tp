@@ -14,6 +14,8 @@ import static seedu.duke.Messages.MESSAGE_NO_CLIENT_MATCHES;
 
 public class CommandFindClient extends Command {
     private final String queryText;
+    private static final int INCREMENT_BY_ONE = 1;
+    private static final int NO_MATCHES = 0;
 
     public CommandFindClient(String queryText) {
         this.queryText = queryText;
@@ -30,13 +32,13 @@ public class CommandFindClient extends Command {
             Client currentClient = clientList.getClientList().get(i);
 
             if (hasQueryText(queryText, currentClient)) {
-                int clientIndex = i + 1;
+                int clientIndex = i + INCREMENT_BY_ONE;
                 ui.displayOneClient(currentClient, clientIndex);
-                numOfMatches += 1;
+                numOfMatches += INCREMENT_BY_ONE;
             }
         }
 
-        boolean hasNoMatches = numOfMatches == 0;
+        boolean hasNoMatches = numOfMatches == NO_MATCHES;
 
         // Display to user that there is no match
         if (hasNoMatches) {
