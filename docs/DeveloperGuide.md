@@ -152,7 +152,7 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ### Edit Component
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Recipe Module Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Edit Module Diagram"/>
 </p>
 
 The edit component consists of three parts:
@@ -165,6 +165,38 @@ The edit component consists of three parts:
     - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and
       CLI,
       handles saving the edited recipe
+
+#### Parser
+The FlagParser contains several functions to extract flags from the user input in the FlagType format. It is used to
+instantiate the necessary EditModeCommand.
+GuiWorkFlow bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
+
+#### EditModeCommand
+An abstract class instantiated by EditCommand in CLI mode. It takes in the old recipe and, once executed, 
+returns a new recipe which will be saved to Storage.
+
+#### EditCommand
+Handles the branching of commands, once executed it will save the new recipe to Storage or returns an error.
+
+The following illustrates the work sequence to edit a recipe.
+
+<p align="center" width="100%">
+  <img width="80%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
+</p>
+The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+whether the GUI or CLI should be called through the number of arguments passed by the user.
+
+#### GUI Edit
+- GUI window is called by GuiWorkFlow
+- After the GUI edit has finished, EditCommand is instantiated and the new recipe is saved to Storage through the
+RecipeList class
+
+#### CLI Edit
+- EditCommand is instantiated with the corresponding flags parsed from the arguments provided by the user
+- Depending on the flags passed, it instantiates the abstract class EditModeCommand using different constructors
+  (Add, Delete, Swap, Change)
+- Once it has been executed, it returns the new edited recipe, which will be saved to Storage through the RecipeList
+class
 
 ### GUI Component
 

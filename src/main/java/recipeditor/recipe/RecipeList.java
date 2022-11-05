@@ -139,7 +139,6 @@ public class RecipeList {
         }
         return false;
     }
-
     public static String printNumberOfRecipes() {
         return String.format(NUMBER_OF_RECIPE_PRINT, RecipeList.getRecipeTitlesSize());
     }
