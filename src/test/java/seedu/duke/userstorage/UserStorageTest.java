@@ -229,7 +229,7 @@ public class UserStorageTest {
         DatabaseStorage.loadDatabase();
         File dummyFile = new File(directory + "Dummy University.txt");
         File bostonFile = new File(directory + "Boston University.txt");
-        File dir = new File("data "+ File.separator);
+        File dir = new File(directory);
         dummyFile.createNewFile();
         bostonFile.createNewFile();
         assertEquals(3, Objects.requireNonNull(dir.list()).length);
