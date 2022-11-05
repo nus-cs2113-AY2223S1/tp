@@ -11,11 +11,11 @@ import java.util.Scanner;
 
 class UiTest {
     final Ui ui = new Ui();
-    final String expectedGreeting =  "Welcome to your myReviews, your personal Movie Reviews bot!\n"
+    static final String EXPECTED_GREETING =  "Welcome to your myReviews, your personal Movie Reviews bot!\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
-    final String expectedPrint = "hello\n"
+    static final String EXPECTED_PRINT = "hello\n"
             .replaceAll("\\n", System.getProperty("line.separator"));
-    final String userInput = "test";
+    static final String USER_INPUT = "test";
 
     @Test
     void greetUserTest() {
@@ -23,7 +23,7 @@ class UiTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ui.greetUser();
-        assertEquals(expectedGreeting, outContent.toString());
+        assertEquals(EXPECTED_GREETING, outContent.toString());
     }
 
     @Test
@@ -31,16 +31,16 @@ class UiTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         ui.print("hello");
-        assertEquals(expectedPrint, outContent.toString());
+        assertEquals(EXPECTED_PRINT, outContent.toString());
     }
 
     @Test
     void testGetInput() {
-        byte[] inString = userInput.getBytes();
+        byte[] inString = USER_INPUT.getBytes();
         ByteArrayInputStream input = new ByteArrayInputStream(inString);
         System.setIn(input);
         Scanner scan = new Scanner(System.in);
-        assertEquals(userInput, ui.getInput(scan));
+        assertEquals(USER_INPUT, ui.getInput(scan));
     }
 
     @Test
