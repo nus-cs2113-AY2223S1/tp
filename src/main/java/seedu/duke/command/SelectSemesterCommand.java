@@ -16,6 +16,8 @@ public class SelectSemesterCommand extends Command {
             "Select another semester to plan and organize timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    private static final String PLANNING_FOR = "You are now planning for ";
+    private static final String INVALID_SEMESTER_SELECTED = "A valid semester was not selected";
 
     private int updatedSemester;
 
@@ -55,13 +57,11 @@ public class SelectSemesterCommand extends Command {
     public String getExecutionMessage() {
 
         String outputMessage;
-        final String PLANNING_FOR = "You are now planning for ";
-        final String INVALID_SEMESTER_SELECTED = "A valid semester was not selected";
 
         if (updatedSemester == 1) {
             outputMessage = PLANNING_FOR + "semester 1";
         } else if (updatedSemester == 2) {
-            outputMessage = PLANNING_FOR+ "semester 2";
+            outputMessage = PLANNING_FOR + "semester 2";
         } else if (updatedSemester == 3) {
             outputMessage = PLANNING_FOR + "special term I";
         } else if (updatedSemester == 4) {
