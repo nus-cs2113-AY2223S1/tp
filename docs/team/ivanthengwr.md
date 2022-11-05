@@ -59,6 +59,6 @@ Here are my contributions to the project:
 
 + ### Community:
   + PRs reviewed (with non-trivial review comments): [#12](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/12),
-  [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21), [27](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/27),
+  [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21), [#27](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/27),
   [#35](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/35)
   + Helped coordinated the update of RepoSense ownership distribution [#40](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/40)
