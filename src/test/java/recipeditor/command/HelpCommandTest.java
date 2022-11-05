@@ -1,8 +1,8 @@
 package recipeditor.command;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import recipeditor.parser.Parser;
 
 public class HelpCommandTest {
@@ -12,8 +12,8 @@ public class HelpCommandTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: /help <command>\n"
-                + "Description: Show help message for the given command.";
+        String expected = "Try /help <command type>\n"
+                + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 
@@ -90,7 +90,7 @@ public class HelpCommandTest {
         String input = "/help find";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: /find <ingredient/title>\n"
+        String expected = "Syntax: /find -<flag> <recipe title/ingredient name>\n"
                 + "Description: For the given ingredient or title, find recipes which contains it.";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
