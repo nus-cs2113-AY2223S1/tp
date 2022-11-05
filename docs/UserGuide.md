@@ -18,11 +18,19 @@ information quickly with minimal latency.
     * [Check Client: `check -client`](#check-client-check--client)
     * [Pair Client and Property: `pair`](#pair-client-and-property-pair)
     * [Unpair Client and Property: `unpair`](#unpair-client-and-property-unpair)
+    * [List Pairs: `list -pair`](#list-pairs-list--pair)
+    * [List Pairs Short: `list -pair -short`](#list-pairs-short-list--pair--short)
     * [List Everything `list -everything`](#list-everything-list--everything)
+    * [Find Client and Property: `find`](#find-client-and-property-find)
+    * [Help Command: `help`](#help-command-help)
     * [Exit: `quit`](#exit-quit)
     * [Saving data](#saving-data)
     * [Loading data](#loading-data)
 * [Command Summary](#command-summary)
+
+
+
+
 ---
 
 ## Quick Start
@@ -47,15 +55,26 @@ Note:
 * Parameters appear in the form of a/PARAMETER.
 * `-property` and `-client` indicates whether the command is for property or client.
 * Words in UPPER_CASE are parameters to be specified by the user.
+* Index values are limited to integers between 1 and 2147483647 (both inclusive).
 
 ---
 
 ### Add Property: `add -property`
 Adds a new property into property list, along with Singapore address and unit-type validations. Also, duplicate property entries of the same **address** will not be accepted.
 
-<u>Full Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
+<u>Format</u>: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 
-<u>Full Example</u>: `add -property n/Bob Tan Bee Bee a/25 Lower Kent Ridge Rd, Singapore 119081 p/1000 t/HDB 3` 
+
+<u>Example</u>: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`
+
+<u>Expected Output</u>:
+```
+Adding a property with the following information:
+  Landlord: Ash Ketchun
+  Address: 25A Pallet Town, S121111
+  Renting Price: SGD1600/month
+  Unit Type: LP Bungalow
+```
 
 The descriptions of `add -property` PARAMETERS are as follows:
 - `NAME`: Name of property owner (Landlord)
@@ -68,20 +87,24 @@ As there are validations involved, some PARAMETERS must adhere to specific forma
 For valid `ADDRESS`, a valid Singapore address must be provided with the following format and details:
 ```
 --------------------------------------------------------------------------------
-LANDED PROPERTY:
-  Format:  [Unit Number]<space>[Street Name],<space>Singapore<space>[Postal Code]
-  Example: 60 Aria Street, Singapore 602580
+  Format:
+        [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+        [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
 --------------------------------------------------------------------------------
-BUILDINGS (e.g. HDBs, apartments, condominiums):
-  Format (Without Building Name):
-  [Block Number]<space>[Street Name]<space>#[Unit Level]-[Unit Number]{<space>[Building Name]},<space>Singapore<space>[Postal Code]
-  Example: 101 Marlow Street #12-05, Singapore 059020
-  Example (With Building Name): 101 Marlow Street #12-05 Clife Parkview, Singapore 059020
+  Example:
+        60 Aria Street, S602580
+        101 Marlow Street #12-05, S059020
+        101 Marlow Street #12-05 Clife Parkview, S059020
 --------------------------------------------------------------------------------
-Note: Format is <space> sensitive; [Detail] must be provided; {Detail} is optional
-Any deviation from format will lead to invalid address.
+  Note:
+        1. Format requires single space between [DETAILS] (space sensitive).
+        2. [DETAIL] must be provided; [detail] is optional.
+        3. For landed property, treat [Block Number] as its unit number.
+        4. Any deviation from format will lead to invalid address.
+--------------------------------------------------------------------------------
 ```
-For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (System Pre-Defined) must be provided with the following format:
+For valid `TYPE`, one of the 15 valid Singapore-based unit type labels (App Pre-Defined) must be provided with the following format:
 ```
 Format: t/<label>
 --------------------------------------------------------------------------------
@@ -109,40 +132,90 @@ Landed Property Labels
   <LP BGL> for LP Bungalow
 --------------------------------------------------------------------------------
 ```
-Lastly, for valid `PRICE`, a positive number excluding any letters/symbols/spaces must be provided.
+Lastly, for valid `PRICE`, a positive integer must be provided.
+
+There is also another validation which checks for mismatch between address format and unit type of property. Certain unit types will require specific address format. Please refer to the description below:
+```
+  1. Unit type with <LP> must not have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME], S[POSTAL CODE]
+  2. Unit type without <LP> must have #[unit level]-[unit number] in address.
+     Format:
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number], S[POSTAL CODE]
+       [BLOCK NUMBER] [STREET NAME] #[unit level]-[unit number] [building name], S[POSTAL CODE]
+Note: HDB Terrace House (special case) is not restricted by any format.
+```
+
+**DISCLAIMER**:
+
+Currently, there are some illogical inputs allowed by the application as shown below. Although validation can be done to prevent such cases, such validations will hinder normal operation and thus not implemented.
+1. Properties with the same street name but of different address format (with / without unit level and number) are allowed to be added.
+2. Properties with different street name but of the same postal code are also allowed to be added. 
 
 ---
 
 ### Delete Property: `delete -property`
 Deletes the specified property from the property list and subsequently deletes any pairings involving that property.
 
-<u>Format:</u> `delete -property ip/PROPERTY_INDEX`
+<u>Format</u>: `delete -property i/PROPERTY_INDEX`
 
-<u>Example:</u> `delete -property ip/2`
+<u>Example</u>: `delete -property i/2`
+
+<u>Expected Output</u>:
+```
+Deleting property with the following information:
+Landlord: Bob Tan Bee Bee
+Address: 25 Lower Kent Ridge Rd, S119081
+Renting Price: SGD1000/month
+Unit Type: LP Bungalow
+```
 
 ---
 
 ### List Properties: `list -property`
-Lists all properties present in the list
+Lists all properties present in the list  
+<u>Example:</u>  
+`list -property`  
+Assuming that only 1 property is present in the list.  
+<u>Expected output:</u>  
+```
+1.	Landlord Name: Bob Tan Bee Bee
+	Property Address: 25 Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 property in this list
+```
+
 
 ---
 
 ### List Properties With Tags: `list -property TAG` 
 Lists only selected details of all the properties, depending on the TAG. The commands for these are -
-* `list -property a/` This is for address
-* `list -property n/` This is for name
-* `list -property p/` This is for price
-* `list -property t/` This is for unit type
-* `list -property -short` This is for the shorthand version(displays address, price and unit type)
-
+* `list -property a/` This is for addresses
+* `list -property n/` This is for names
+* `list -property p/` This is for prices
+* `list -property t/` This is for unit types
+* `list -property -short` This is for the shorthand version(displays addresses, prices and unit types)  
+<u>Example:</u>  
+`list -property p/`  
+Assuming there are two properties in the list.  
+<u>Expected output:</u>
+```
+1.	1000
+--------------------------------------------------------------------------------
+2.	2000
+--------------------------------------------------------------------------------
+There are 2 properties in this list
+```
 ---
 
 ### Check Property: `check -property`
 Displays the information of the specified property, along with the clients the property is being rented by, if any.
 
-<u>Format</u>: `check -property ip/PROPERTY_INDEX`
+<u>Format</u>: `check -property i/PROPERTY_INDEX`
 
-<u>Example</u>: `check -property ip/2`
+<u>Example</u>: `check -property i/2`
 
 <u>Expected Output</u>:
 ```
@@ -165,9 +238,18 @@ Number of entries in the list: 1
 
 Adds a new client into client list, along with Singapore contact number and basic email format validations. Also, duplicate client entries of the same **name**, **contact number** or **email** will not be accepted.
 
-<u>Full Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
+<u>Format</u>: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
 
-<u>Full Example</u>: `add -client n/Doja Cat c/93437878 e/doja88@example.com b/2000`
+<u>Example</u>: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+
+<u>Expected Output</u>:
+```
+Adding a client with the following information:
+  Client: Gary Oaks
+  Contact Number: 90876543
+  Email: garyoaks@example.com
+  Budget: SGD1550/month
+```
 
 Note: Email is optional so excluding `e/EMAIL` or having `e/BLANK` is acceptable.
 
@@ -183,39 +265,83 @@ For valid `CONTACT_NUMBER`, a Singapore contact number (no extension) must be pr
 
 For valid `EMAIL`, it must adhere to the RFC 5322 Official Email Standard.
 
-For valid `BUDGET_MONTH`, a positive number excluding any letters/symbols/spaces must be provided.
+For valid `BUDGET_MONTH`, a positive integer must be provided.
 
 ---
 
 ### Delete Client: `delete -client`
 Deletes the specified client from the client list and subsequently deletes any pairings involving that client.
 
-<u>Format:</u> `delete -client ic/CLIENT_INDEX`
+<u>Format</u>: `delete -client i/CLIENT_INDEX`
 
-<u>Example:</u> `delete -client ic/3`
+<u>Example</u>: `delete -client i/3`
+
+<u>Expected Output</u>:
+```
+Deleting client with the following information:
+Client: Doja Cat
+Contact Number: 93437878
+Email: doja88@example.com
+Budget: SGD2000/month
+```
 
 ---
 
 ### List Clients: `list -client`
-Lists all the clients present in the list
+Lists all the clients present in the list  
+<u>Example:</u> `list -client`  
+Assuming that only 1 client is present in the list.  
+<u>Expected output:</u>
+```
+1.	Client Name: Doja Cat
+	Client Contact Number: 93437878
+	Client Email: doja88@example.com
+	Client Budget: 2000
+--------------------------------------------------------------------------------
+There is 1 client in this list
+```
 
 ---
 ### List Clients With Tags `list -client TAG` 
 List only selected details of all the clients, depending on TAG. The commands for these are-
-* `list -client c/` This is for contact number
-* `list -client b/` This is for budget
-* `list -client n/` This is for name
-* `list -client e/` This is for e-mail
-* `list -client -short` This is for the shorthand version(displays just name and budget)
-
+* `list -client c/` This is for contact numbers
+* `list -client b/` This is for budgets
+* `list -client n/` This is for names
+* `list -client e/` This is for e-mails
+* `list -client -short` This is for the shorthand version(displays just names and budgets)  
+<u>Example:</u> `list -client n/`  
+Assuming that 2 clients are present in the list  
+<u>Expected output:</u>  
+```
+1.	Doja Cat
+--------------------------------------------------------------------------------
+2.	Doja Cat The Second
+--------------------------------------------------------------------------------
+There are 2 clients in this list
+```
 ---
 
 ### Check Client: `check -client`
 Displays the information of the specified client, along with the property the client is renting, if any.
 
-<u>Format</u>: `check -client ic/CLIENT_INDEX`
+<u>Format</u>: `check -client i/CLIENT_INDEX`
 
-<u>Example</u>: `check -client ic/5`
+<u>Example</u>: `check -client i/5`
+
+<u>Expected Output</u>:
+```
+Showing check results for this client:
+  Client: Doja Cat
+  Contact Number: 93437878
+  Email: doja88@example.com
+  Budget: SGD2000/month
+
+Here is the property this client is renting:
+  Landlord: Bob Tan Bee Bee
+  Address: 25 Lower Kent Ridge Rd, S119081
+  Renting Price: SGD1000/month
+  Unit Type: LP Bungalow
+```
 
 ---
 
@@ -250,10 +376,67 @@ Unpairs the client from the specified property, to record that the client is no 
 Unpairing the following client and property: 
 	Kujou Jotaro and 25 Lower Kent Ridge Rd, S119081
 ```
+### List pairs `list -pair`  
+Lists, in no particular order all information about clients and properties that have been paired.
+The format for each such pair is -  
+<u>Example:</u> `list -pair`  
+<u>Expected output:</u>
+```
+Client:
+    Client Name: Doja Cat
+    Client Contact Number: 93437878
+    Client Email: doja88@example.com
+    Client Budget: 2000
+Property:
+    Landlord Name: Bob Tan Bee Bee
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Property Rental Price: 1000
+    Unit Type: LP Bungalow
+```
+### List pairs short `list -pair -short`
+Lists, in no particular order shortened information about clients and properties that have been paired.
+The format for each such pair is -  
+<u>Example</u> `list -pair -short`  
+<u>Expected output:</u>
+```
+Client:
+    Client Name: Doja Cat
+    Client Budget: 2000
+Property:
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Unit Type: LP Bungalow
+    Property Rental Price: 1000
+```
 ---
 
 ### List everything `list -everything`
-Lists all information about every client and every property in the list
+Lists all information about every client and every property in the list.
+Assume 1 client and 1 property is in the list and they are paired.  
+<u>Example</u> `list -everything`  
+<u>Expected output:</u>
+```
+1.	Landlord Name: Bob Tan Bee Bee
+	Property Address: 25 Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 property in this list
+
+--------------------------------------------------------------------------------
+Pairs:
+Client:
+    Client Name: Doja Cat
+    Client Contact Number: 93437878
+    Client Email: doja88@example.com
+    Client Budget: 2000
+Property:
+    Landlord Name: Bob Tan Bee Bee
+    Property Address: 25 Lower Kent Ridge Rd, S119081
+    Property Rental Price: 1000
+    Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+There is 1 pair in this list
+```
 
 ---
 ### Find Client and Property: `find`
@@ -277,8 +460,82 @@ will be counted as a match.
 The 1st command above search through the property list for any matches with `Bob the Builder` while the 2nd command 
 search through the client list for any matches with `Amos`.
 
+Expected Output:
+```
+1.	Landlord Name: Bob The Builder
+	Property Address: 25A Lower Kent Ridge Rd, S119081
+	Property Rental Price: 1000
+	Unit Type: LP Bungalow
+--------------------------------------------------------------------------------
+
+
+1.	Client Name: Amos
+	Client Contact Number: 91283543
+	Client Email: abc@examplemail.com
+	Client Budget: 1500
+--------------------------------------------------------------------------------
+```
+### Help Command: `help`
+By entering the `help` command, users can see a condense version of the list of commands available while using the application. To invoke the help command, type `help` without any additional text.
+
+The list of commands will be as show below:
+```
+The list of available commands are stated below:
+
+--------------------------------------------------------------------------------
+LIST COMMAND
+--------------------------------------------------------------------------------
+list -client
+list -property
+list -everything
+list -client <TAG>
+list -property <TAG>
+where <TAG> is replaced by the tag you would like to look into. 
+For example: list -client n/
+--------------------------------------------------------------------------------
+ADD COMMAND
+--------------------------------------------------------------------------------
+add -client n/<CLIENT_NAME> c/<CONTACT_NUMBER> e/<EMAIL> b/<BUDGET>
+add -property n/<LANDLORD_NAME> a/<ADDRESS> p/<RENTAL_PRICE> t/<UNIT_TYPE>
+where the tags (represented by brackets)  are replaced as accordingly
+Note that email address is optional
+--------------------------------------------------------------------------------
+DELETE COMMAND
+--------------------------------------------------------------------------------
+delete -client i/<INDEX>
+delete -property i/<INDEX>
+where <INDEX> represents the index of entity to be deleted.
+--------------------------------------------------------------------------------
+PAIR/UNPAIR COMMAND
+--------------------------------------------------------------------------------
+pair ip/<INDEX> ic/<INDEX>
+unpair ip/<INDEX> ic/<INDEX>
+where <INDEX> represents the index of property and client to pair together with.
+--------------------------------------------------------------------------------
+CHECK COMMAND
+--------------------------------------------------------------------------------
+check -client i/<INDEX>
+check -property i/<INDEX>
+where <INDEX> refers to the index of the client or property to check for.
+--------------------------------------------------------------------------------
+FIND COMMAND
+--------------------------------------------------------------------------------
+find -client f/<QUERY_TEXT>
+find -property f/<QUERY_TEXT>
+where <QUERY_TEXT> refers to the text to search for in either client or property.
+--------------------------------------------------------------------------------
+```
+
+
+
 ---
 ### Exit: `quit`
+Leaves the application with a goodbye message  
+<u>Example:</u>  `quit`  
+<u>Expected output:</u>  
+```
+Goodbye :). See you soon!
+```
 
 ---
 ### Loading data
@@ -312,10 +569,24 @@ Saving of data occurs in 3 instances of operation:
 When client, property and pairing is added, text will be appended to the text file as shown below:
 
 - `Client`: Appends `CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET` to `client.txt`.
+
+An example of the client text file is as shown below:
+
+![Client text file screenshot](./Storage%20File%20Screenshot/client.jpg)
+
+
 - `Property`: Appends `LANDLORD_NAME | PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE` to `property.txt`.
+
+An example of the property text file is as shown below:
+
+![Property text file screenshot](./Storage%20File%20Screenshot/property.jpg)
+
 - `Pair`: Appends `[CLIENT_NAME | CLIENT_CONTACT_NUMBER | CLIENT_EMAIL | CLIENT_BUDGET] : [LANDLORD_NAME | 
 PROPERTY_ADDRESS | PROPERTY_RENTAL_RATE | PROPERTY_UNIT_TYPE]` to `pair.txt`.
 
+An example of the pairing text file is as shown below:
+
+![Pairing text file screenshot](./Storage%20File%20Screenshot/pair.jpg)
 ---
 ### Updating data
 
@@ -353,6 +624,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 ---
 ## Command Summary
 
+
 * Add Property: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
 * Delete Property: `delete -property ip/PROPERTY_INDEX`
 * List Properties: `list -property`
@@ -361,7 +633,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 * List Property Budgets: `list -property b/`
 * List Property Unit Type: `list -property t/`
 * List Property Short: `list -property -short`
-* Check Property: `check -property ip/PROPERTY_INDEX`
+* Check Property: `check -property i/PROPERTY_INDEX`
 * Find Property: `find -property f/QUERY_TEXT`
 
 
@@ -382,3 +654,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 * Pair: `pair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
 * Unpair: `unpair ip/PROPERTY_INDEX ic/CLIENT_INDEX`
+* List Pairs: `list -pair`
+* List Pairs Short: `list -pair -short`
+
+* Help Command: `help`

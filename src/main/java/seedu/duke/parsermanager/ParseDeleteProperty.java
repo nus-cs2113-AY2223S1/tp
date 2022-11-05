@@ -1,3 +1,5 @@
+//@@author FeliciaBeatrice
+
 package seedu.duke.parsermanager;
 
 import seedu.duke.PropertyList;
@@ -12,7 +14,7 @@ import seedu.duke.exception.NotIntegerException;
 
 import java.util.ArrayList;
 
-import static seedu.duke.CommandStructure.DELETE_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.INDEX_FLAGS;
 import static seedu.duke.Messages.EXCEPTION;
 import static seedu.duke.Messages.MESSAGE_DELETE_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
@@ -61,7 +63,7 @@ public class ParseDeleteProperty extends Parser {
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
             throws MissingFlagException, IncorrectFlagOrderException, ExtraFlagsException {
 
-        String[] flags = DELETE_PROPERTY_FLAGS;
+        String[] flags = INDEX_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);

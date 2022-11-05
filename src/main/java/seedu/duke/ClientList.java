@@ -1,3 +1,5 @@
+//@@author OVReader
+
 package seedu.duke;
 
 import java.util.ArrayList;
@@ -6,12 +8,13 @@ import java.util.ArrayList;
  * Stores the list of clients.
  */
 public class ClientList {
-    private static int currentListSize;
     private static ArrayList<Client> clientList;
+    private static int currentListSize;
+    private static final int INITIAL_LIST_SIZE = 0;
 
     public ClientList() {
         clientList = new ArrayList<>();
-        currentListSize = 0;
+        currentListSize = INITIAL_LIST_SIZE;
     }
 
     public int getCurrentListSize() {
@@ -35,7 +38,9 @@ public class ClientList {
         clientList.add(new Client(clientName, clientContactNumber, clientEmail, clientBudgetPerMonth));
         currentListSize++;
     }
+    //@@author
 
+    //@@author FeliciaBeatrice
     /**
      * Deletes a client from the client list and updates client list size.
      *
@@ -48,4 +53,5 @@ public class ClientList {
         currentListSize--;
         return deletedClient;
     }
+    //@@author
 }

@@ -18,15 +18,13 @@ public class Duke {
     private PairingList pairingList;
 
 
-    public Duke() throws FileNotFoundException {
+    public Duke() {
         this.ui = new Ui();
         this.propertyList = new PropertyList();
         this.clientList = new ClientList();
         this.pairingList = new PairingList();
 
         this.storage = new Storage(clientList, propertyList, pairingList);
-
-
     }
 
 
@@ -34,7 +32,7 @@ public class Duke {
 
         Command command;
         Parser parser;
-        ParserManager parserManager = new ParserManager(clientList, propertyList, pairingList);
+        ParserManager parserManager = new ParserManager(clientList, propertyList);
         boolean isCommandQuit = false;
 
         ui.showWelcomeMessage();
@@ -61,7 +59,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws DukeException, FileNotFoundException {
+    public static void main(String[] args) {
         new Duke().run();
     }
 }

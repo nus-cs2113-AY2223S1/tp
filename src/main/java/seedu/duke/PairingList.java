@@ -38,13 +38,13 @@ public class PairingList {
      * Constructs the PairingList object.
      */
     public PairingList() {
-        loggerInit();
+        initialiseLogger();
     }
 
     /**
      * Initialises the logger. Level set to Level.SEVERE to prevent terminal from getting flooded by logs.
      */
-    public void loggerInit() {
+    public void initialiseLogger() {
         LOGGER.setLevel(Level.SEVERE);
     }
 
@@ -88,7 +88,7 @@ public class PairingList {
     public void deletePairing(Property property) {
         assert clientPropertyPairs.containsValue(property) : ASSERTION_DELETE_PAIRING_PROPERTY_NOT_PAIRED;
 
-        // Iterate through the hash map to delete all the entries containing the properties
+        // Iterate through the hash map to delete all the entries containing the property
         clientPropertyPairs.entrySet().removeIf(e -> e.getValue().equals(property));
 
         assert !clientPropertyPairs.containsValue(property) : ASSERTION_DELETE_PAIRING_UNSUCCESSFUL;
@@ -143,10 +143,9 @@ public class PairingList {
      *
      * @param client Client to be paired with the property.
      * @param property Property to be paired with the client.
-     * @return True is rental price exceeds client's budget; false if rental price is equal to or lower than clien's
+     * @return True if rental price exceeds client's budget; false if rental price is equal to or lower than client's
      *         budget.
      */
-
     public boolean hasPriceExceededBudget(Client client, Property property) {
         int clientBudget = Integer.parseInt(client.getClientBudgetPerMonth());
         int rentalPrice = Integer.parseInt(property.getRentingPrice());
@@ -163,9 +162,9 @@ public class PairingList {
     public ArrayList<Client> getPropertyTenants(Property property) {
         ArrayList<Client> tenants = new ArrayList<>();
 
-        for (Client clientPairingData : clientPropertyPairs.keySet()) {
-            if (clientPropertyPairs.get(clientPairingData).equals(property)) {
-                tenants.add(clientPairingData);
+        for (Client client : clientPropertyPairs.keySet()) {
+            if (clientPropertyPairs.get(client).equals(property)) {
+                tenants.add(client);
             }
         }
         return tenants;
@@ -173,7 +172,7 @@ public class PairingList {
 
 
     /**
-     * Converts client pairing data to a suitable string format.
+     * Converts client pairing data to a suitable string format for storage.
      *
      * @param client Client whose data is to be converted.
      * @return Client pairing data in a suitable string format.
@@ -188,7 +187,7 @@ public class PairingList {
 
 
     /**
-     * Converts property pairing data to a suitable string format.
+     * Converts property pairing data to a suitable string format for storage.
      *
      * @param property Property whose data is to be converted.
      * @return Property pairing data in a suitable string format.
