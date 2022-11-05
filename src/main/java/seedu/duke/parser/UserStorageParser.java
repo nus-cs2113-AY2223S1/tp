@@ -1,7 +1,15 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Database;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidUniversityException;
+import seedu.duke.exceptions.InvalidUserStorageFileException;
+import seedu.duke.exceptions.ModuleNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
+import seedu.duke.exceptions.InvalidTimingException;
+import seedu.duke.exceptions.InvalidModuleException;
+import seedu.duke.exceptions.InvalidTimeFormatException;
+import seedu.duke.exceptions.InvalidLessonDayException;
+
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleMapping;
 import seedu.duke.timetable.Lesson;
