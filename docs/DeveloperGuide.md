@@ -265,7 +265,25 @@ In addition to the getters and setters for each of the class fields, the classes
 ### Export
 
 In our application export is a utility class. The user can export all builds or a specific build to a text file. The user can also export
-all builds to a CSV file.  
+all builds to a CSV file.
+
+![](/images/Export.png)
+
+As shown in the sequence diagram above, export is an interface that has two classes that implements it. The `ExportText`
+class and the `ExportCsv` class:
+
++ `ExportText` class: This class has a `exportBuild()` method that takes in a `Build` object and export the information
+and components of the build to a text file that is named after the build name prefixed with `build_`. The `exportAllBuildsText()`
+method takes in a `BuildManager` object and export the information and components list of all the builds in the `BuildManager` 
+object to a text file that is named `exportAllBuildsText.txt`.
+
++ `ExportCsv` class: This class has a `exportAllBuildsCsv()` method that takes in a `BuildManager` object and export 
+all the components of all the builds in the `BuildManager` object to a CSV file that is named `exportAllBuildsCsv.csv`.
+The CSV file is formatted in a way that the first column is the name of the build that the components belong to and the second,
+third and fourth columns are the name, price and power consumption of the components respectively. The subsequent columns are unique
+to each component type.
+
+__Note__: The exported CSV file will be empty if the existing builds do not have components.
 
 
 ## Product scope
