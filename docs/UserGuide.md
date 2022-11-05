@@ -88,7 +88,7 @@ Delete a target: Delete-Target -e TARGET-INDEX
 Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
 
 ---- STORAGE-RELATED-COMMANDS ----
-Merging a fileSYNTAX: Merge-File -p PATH-STRING
+Merging a file: Merge-File -p PATH-STRING
 ```
 
 ## Managing your expenses
