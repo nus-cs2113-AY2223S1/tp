@@ -124,9 +124,10 @@ Date       | Calories Consumed | Calories Burnt | Net Calories | Status         
 #### Setting Biometrics: `set biometrics`
 
 Sets user biometrics in TracknFit  
+
 Format: `set biometrics /{age} /{gender} /{height} /{activity level}`
 
-* age, height, weight and fat percentage should be integer values
+* age, height and activity level should be integer values
 * age must be less than 120
 * gender can only be female, male or others
 * height should be in units of cm and cannot exceed 300cm
@@ -136,9 +137,11 @@ Example of usage: `set biometrics /15 /male /146 /98 /55 /2`
 
 #### Adding weight and fat record: `add weight`
 
-Adds a record of weight and fat to TracknFit
+Adds a record of weight and fat to TracknFit  
+
 Format: `add weight /{weight} /{fat percentage}`
 
+* weight and fat percentage should be integer values
 * weight should be in units of kg and cannot exceed 400kg
 * fat percentage should be between 1% and 99%
 
@@ -147,6 +150,7 @@ Example of usage: `add weight /133 /42`
 #### View BMI : `view bmi`
 
 Allows the user to check their BMI  
+
 Format : view bmi
 
 Example of usage: `view bmi`
@@ -158,7 +162,7 @@ Your current BMI is : 25.2
 You are currently in the overweight range
 ```
 
-#### View Maintenance Calories : `view Maintenance`
+#### View Maintenance Calories : `view maintenance`
 
 Allows the user to check his/her maintenance calories based on her biometrics
 
@@ -185,7 +189,7 @@ Format: `add strength /{exercise name} /{weight} /{sets} /{reps} [/{date}]`
 - weight must be positive int and less or equal to 1000.
 - sets must be integer ranges from 1 to 100 inclusive
 - reps must be integer ranges from 1 to 100 inclusive.
-- date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not after year 2023.
+- date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not more than a month after.
 - the current date will be set if date is omitted.
 
 Example of usage: `add strength /squat /100 /5 /5 /28-10-2022`
@@ -259,7 +263,7 @@ Format: `add cardio /{description} /{distance} /{repetitions} [/{date}]`
 - exercise name must be within 50 characters
 - distance must be positive int and less or equal to 100.
 - repetitions must be positive int and less or equal to 50
-- date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not after year 2023.
+- date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not more than a month after.
 - the current date will be set if date is omitted.
 
 Example of usage: `add cardio /sprints /1.2 /1 /28-10-2022`
@@ -347,6 +351,34 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
+```
+
+
+#### Remove exercise: `remove exercise`
+
+Remove a specified record from exercise list in TracknFit
+
+Format: `remove exercise /{index}`
+
+Example of usage:
+`remove exercise /2`
+
+Expected outcome:
+The record of the corresponding index in the exercise list will be deleted.
+
+```
+-------------------------------------------------------------------------------
+remove exercise /2
+-------------------------------------------------------------------------------
+This exercise has been deleted from the exercise list successfully!
+Strength Exercise: squats
+Weight: 100kg
+Sets: 5
+Repetitions: 5
+Date: 05-11-2022
+Status: [ ]
+-------------------------------------------------------------------------------
+
 ```
 
 #### Marking exercise as done or undone: `mark`
@@ -586,6 +618,7 @@ Index | Description                                         | Calories | Date   
     - Viewing cardio exercise: `view cardio`
     - Finding cardio exercise: `find cardio`
     - Viewing exercise: `view exercise`
+    - Remove exercise: `remove exercise`
     - Marking exercise as done or undone: `mark`
     - Viewing BMI: `view BMI`
     - Viewing maintenance calories: `view maintenance`

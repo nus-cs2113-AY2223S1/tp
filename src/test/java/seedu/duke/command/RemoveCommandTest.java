@@ -3,10 +3,13 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.ExerciseList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +34,20 @@ class RemoveCommandTest {
         commandList.add("add food /chicken rice /250");
         commandList.add("add food /ice cream /300");
 
+
+        for (String input : commandList) {
+            Command c = Parser.parse(input);
+            c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+            c.execute();
+        }
+    }
+
+    private void addExercise(ExerciseList exerciseList) throws IllegalValueException {
+        ArrayList<String> commandList = new ArrayList<>();
+        commandList.add("add strength /bench /30 /10 /40");
+        commandList.add("add cardio /sprints /3.5 /5");
+        commandList.add("add strength /squat /100 /5 /5");
+
         for (String input : commandList) {
             Command c = Parser.parse(input);
             c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
@@ -41,17 +58,46 @@ class RemoveCommandTest {
     @Test
     void execute_RemoveWithNoParameter_exceptionThrown() {
         String command = "remove food";
-        assertInvalidRemoveCommand(command, "Invalid number input");
+        assertInvalidRemoveFoodCommand(command, "Invalid number input");
     }
 
 
     @Test
     void execute_RemoveWithNonIntegerIndex_exceptionThrown() {
         String command = "remove food /0x";
-        assertInvalidRemoveCommand(command, "Index should be numerical");
+        assertInvalidRemoveFoodCommand(command, "Index should be an integer");
     }
 
-    private void assertInvalidRemoveCommand(String input, String expectedMessage) {
+
+    @Test
+    void execute_RemoveNonIntegerIndex_exceptionThrown() {
+        ExerciseList exerciseList = new ExerciseList();
+        try {
+            addExercise(exerciseList);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+        ArrayList<String> testInputList = new ArrayList<>();
+        testInputList.add("remove exercise /1.5");
+        testInputList.add("remove exercise /johnny");
+        for (String input : testInputList) {
+            assertInvalidRemoveExerciseCommand(input, "Index should be an integer", exerciseList);
+        }
+    }
+
+    private void assertInvalidRemoveExerciseCommand(String input, String expectedMessage, ExerciseList exerciseList) {
+        Command command = Parser.parse(input);
+        command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+        try {
+            command.execute();
+            fail();
+        } catch (Exception e) {
+            assertEquals(expectedMessage, e.getMessage());
+        }
+    }
+
+
+    private void assertInvalidRemoveFoodCommand(String input, String expectedMessage) {
         Command command = Parser.parse(input);
         try {
             command.execute();

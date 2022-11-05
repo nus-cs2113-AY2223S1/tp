@@ -18,6 +18,11 @@ public class Calculator {
     private int activityLevel;
     private double multiplier;
     private double bmi;
+    private double healthyweight = 18.5;
+    private double overweight = 24.9;
+    private double obese = 29.9;
+    private double maxbmi = 105.3;
+
 
 
     public Calculator(String gender, int weight, int height, int age, int activityLevel) {
@@ -32,30 +37,30 @@ public class Calculator {
 
 
     public String getBmiStatus() {
-        String bmiStatus = "You are currently unclassified as your BMI is not set yet!";
-        double healthyweight = 18.5;
-        double overweight = 24.9;
-        double obese = 29.9;
-        double extremelyobese = 50.0;
-        if (this.bmi < healthyweight) {
+        String bmiStatus;
+        if (bmi == 0.0) {
+            bmiStatus = "Re-check your height and weight inputs.";
+        } else if (bmi < healthyweight) {
             bmiStatus = "You are currently in the underweight range";
-        } else if (this.bmi <= overweight) {
+        } else if (bmi <= overweight) {
             bmiStatus = "You are currently in the healthy range";
-        } else if (this.bmi <= obese) {
+        } else if (bmi <= obese) {
             bmiStatus = "You are currently in the overweight range";
-        } else if (this.bmi <= extremelyobese) {
+        } else if (bmi <= maxbmi) {
             bmiStatus = "You are currently in the obese range. Start your workout journey! ";
+        } else {
+            bmiStatus = "Re-check your height and weight inputs. Your BMI is astonishingly high.";
         }
         return bmiStatus;
     }
 
     public double getBmi() {
-        return this.bmi;
+        return bmi;
     }
 
     public void setBmi(int weight, int height) {
-        this.bmi = Double.valueOf(Double.valueOf(weight)
-                / (Double.valueOf(height) / 100 * Double.valueOf(height) / 100));
+        bmi = Math.round(Double.valueOf(Double.valueOf(weight)
+                / (Double.valueOf(height) / 100 * Double.valueOf(height) / 100)) * 100.0) / 100.0;
     }
 
     public String getActivityStatus() {
@@ -83,7 +88,7 @@ public class Calculator {
     }
 
 
-    public int getIdealMaintenanceCalories() {
+    public void setIdealMaintenanceCalories() {
         switch (this.activityLevel) {
         case (1):
             multiplier = 1.2;
@@ -103,76 +108,42 @@ public class Calculator {
         default:
             multiplier = 0;
         }
-
         if (gender.equals("male")) {
-            maintenanceCalories = (int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age)) * multiplier);
+            maintenanceCalories = (int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age))
+                    * multiplier);// hard-coded formula which has to use magic numbers
         } else if (gender.equals("female")) {
             maintenanceCalories = (int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier);
         }
+    }
+
+    public int getIdealMaintenanceCalories() {
         return maintenanceCalories;
     }
 
     public void setHealthyCalorieSurplus() {
-        switch (this.activityLevel) {
-        case (1):
-            multiplier = 1.2;
-            break;
-        case (2):
-            multiplier = 1.375;
-            break;
-        case (3):
-            multiplier = 1.55;
-            break;
-        case (4):
-            multiplier = 1.725;
-            break;
-        case (5):
-            multiplier = 1.9;
-            break;
-        default:
-            multiplier = 0;
-        }
-        if (gender.equals("male")) {
-            healthyCalorieSurplus = (int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age)) * multiplier * 0.1);
-        } else if (gender.equals("female")) {
-            healthyCalorieSurplus = (int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier * 0.1);
-        }
+        healthyCalorieSurplus = (int) (maintenanceCalories * 0.1);
     }
-
-    public int getHealthyCalorieSurplus() {
-        return healthyCalorieSurplus;
-    }
-
-    public int getHealthyCalorieDeficit() {
-        return healthyCalorieDeficit;
-    }
-
 
     public void setHealthyCalorieDeficit() {
-        switch (this.activityLevel) {
-        case (1):
-            multiplier = 1.2;
-            break;
-        case (2):
-            multiplier = 1.375;
-            break;
-        case (3):
-            multiplier = 1.55;
-            break;
-        case (4):
-            multiplier = 1.725;
-            break;
-        case (5):
-            multiplier = 1.9;
-            break;
-        default:
-            multiplier = 0;
+        healthyCalorieDeficit = -(int) (maintenanceCalories * 0.2);
+    }
+
+    public String calorieMessage(int netCalories) {
+        String message;
+        if (netCalories < 0) {
+            if (netCalories < healthyCalorieDeficit) {
+                message = "Your calorie deficit is too high! ";
+            } else {
+                message = "Your calorie deficit is acceptable! ";
+            }
+        } else {
+            if (netCalories > healthyCalorieSurplus) {
+                message = "Your calorie surplus is too much! ";
+            } else {
+                message = "Your calorie surplus is acceptable! ";
+            }
         }
-        if (gender.equals("male")) {
-            healthyCalorieDeficit = -(int) ((66 + (13.8 * weight) + (5.00 * height) - (6.8 * age)) * multiplier * 0.2);
-        } else if (gender.equals("female")) {
-            healthyCalorieDeficit = -(int) ((655 + (9.56 * weight) + (1.85 * height) - (4.7 * age)) * multiplier * 0.2);
-        }
+        return message;
     }
 
 

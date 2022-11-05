@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+
+
+
+class ViewCommand{
+-arguments: String
++execute(): void
++viewCalories(argumentList: String[]): void
++viewMaintenanceCalories(): void
++viewBmi(): void
+}
+
+class FindCommand{
+-arguments: String
++execute(): void
++findCalories(argumentList: String[], slashesCount: int): void
+}
+
+abstract class Command {
+{abstract} +execute(): void
+}
+class Ui {
++output(output: String ...): void
+}
+class Calculator {
+
+-int age
+-String gender
+-int height
+-int weight
+-int activityLevel
+
++setBmi(height: int, weight: int): void
++getBmi(): double
++getBmiStatus(): String
++getActivityStatus(): String
++setIdealMaintenanceCalories(): void
++getIdealMaintenanceCalories(): int
++setHealthyCalorieSurplus(): void
++setHealthyCalorieDeficit(): void
++calorieMessage(netCalories: int): String
++calculateTotalCaloriesConsumed(foodArrayList: ArrayList<Food>,date: String)
++calculateTotalCaloriesBurnt(completedExerciseArrayList: ArrayList<Exercise>,date: String)
++calculateNetCalories(foodArrayList: ArrayList<Food>,completedExerciseArrayList: ArrayList<Exercise>,date: String)
++calculateExerciseCalories(biometrics: Biometrics, time: double, metabolicEquivalent: double)
+}
+
+class Calories{
+-int caloriesConsumed
+-int caloriesBurnt
+-int netCalories
+-string message
+-LocalDate date
++getCaloriesConsumed(): int
++getCaloriesBurnt(): int
++getNetCalories(): int
+}
+class CaloriesList {
++addCalories(caloriesInput:
+Calories): void
+}
+
+FindCommand --|> Command
+ViewCommand --|> Command
+ViewCommand --> "1"Calculator
+FindCommand --> "1"Calculator
+Duke --> ViewCommand
+Duke --> FindCommand
+FindCommand ..> Ui
+ViewCommand ..> Ui
+Calculator --> "1"CaloriesList
+CaloriesList *-> "*"Calories : ArrayList of >
+
+
+@enduml

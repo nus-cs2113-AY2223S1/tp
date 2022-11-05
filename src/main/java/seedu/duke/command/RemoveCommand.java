@@ -44,7 +44,7 @@ public class RemoveCommand extends Command {
                 handleInvalidRemoveType();
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Index should be numerical");
+            throw new IllegalValueException("Index should be an integer");
         }
     }
 
@@ -53,17 +53,16 @@ public class RemoveCommand extends Command {
         ui.output("Weight and fat record removed successfully");
     }
 
-    //@@junhaoliu2468
     private void removeExercise(String[] argumentList) {
         try {
             int index = Integer.parseInt(argumentList[1]);
-            if (index > exerciseList.getCurrentExerciseList().size() || index < 1) {
+            if (index > exerciseList.getCurrentExerciseListSize() || index < 1) {
                 throw new IllegalValueException("Invalid index input");
             }
-            String exerciseName = exerciseList.getCurrentExercise(index - 1).getExerciseName();
+            ui.output("This exercise has been deleted from the exercise list successfully!");
+            ui.output(exerciseList.getCurrentExercise(index - 1).toString());
             exerciseList.removeCurrentExercise(index - 1);
-            ui.output(exerciseName + " has been removed successfully!");
-        } catch (IllegalValueException | NumberFormatException e) {
+        } catch (IllegalValueException e) {
             ui.output(e.getMessage());
         }
     }

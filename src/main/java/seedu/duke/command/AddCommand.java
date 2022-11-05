@@ -23,9 +23,14 @@ import java.util.logging.Logger;
 
 public class AddCommand extends Command {
     public static final String INVALID_LOADING_STRENGTH_MESSAGE = "Unable to load strength exercise";
+    public static final String INVALID_LOADING_CARDIO_MESSAGE = "Unable to load cardio exercise";
+
     public static final int MINIMUM_ADD_STRENGTH_SLASHES = 4;
     public static final int MAXIMUM_ADD_STRENGTH_SLASHES = 5;
+    public static final int MINIMUM_ADD_CARDIO_SLASHES = 3;
+    public static final int MAXIMUM_ADD_CARDIO_SLASHES = 4;
     public static final int STRENGTH_LOADING_INPUT_COUNT = 8;
+    public static final int CARDIO_LOADING_INPUT_COUNT = 7;
     private final boolean isMarkDone;
     private Ui ui;
     private String arguments;
@@ -116,18 +121,16 @@ public class AddCommand extends Command {
 
     private void addCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         if (toDisplay) {
-            Validator.validateCommandInput(slashesCount, 3, 4, INVALID_CARDIO_INPUT_MESSAGE,
+            Validator.validateCommandInput(slashesCount, MINIMUM_ADD_CARDIO_SLASHES,
+                    MAXIMUM_ADD_CARDIO_SLASHES, INVALID_CARDIO_INPUT_MESSAGE,
                     arguments.charAt(arguments.length() - 1));
         }
-        if (!toDisplay && argumentList.length != 7) {
-            LOGGER.warning("Invalid arguments for loading cardio exercise");
-            throw new IllegalValueException("Unable to load cardio exercise");
-        }
+        Validator.validateLoadingForExercise(CARDIO_LOADING_INPUT_COUNT,
+                INVALID_LOADING_CARDIO_MESSAGE, toDisplay, argumentList.length);
         String description = Validator.getDescriptionWithValidation(argumentList[1]);
         try {
-            double distance = getDistanceWithValidation(Double.parseDouble(argumentList[2]));
+            double distance = Validator.getDistanceWithValidation(argumentList[2]);
             int repetition = Validator.getRepetitionWithValidation(argumentList[3]);
-
             LocalDate date;
             if (argumentList.length == 5) {
                 date = Parser.parseDate(argumentList[4], 1);
@@ -148,18 +151,8 @@ public class AddCommand extends Command {
                 ui.output(" This cardio exercise is added to the exercise list successfully");
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Distance and repetition must be numbers");
+            throw new IllegalValueException("Distance must be in numbers and repetitions must be integers");
         }
-    }
-
-
-    private static double getDistanceWithValidation(double distance) throws IllegalValueException {
-        if (distance > 100) {
-            throw new IllegalValueException("Distance should not be more than 100km!");
-        } else if (distance < 0) {
-            throw new IllegalValueException("Distance cannot be negative!");
-        }
-        return distance;
     }
 
 

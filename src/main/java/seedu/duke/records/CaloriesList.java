@@ -12,8 +12,8 @@ public class CaloriesList {
         this.caloriesList = new ArrayList<>();
     }
 
-    public void addCalories(Calories caloriesinput) {
-        caloriesList.add(caloriesinput);
+    public void addCalories(Calories caloriesInput) {
+        caloriesList.add(caloriesInput);
     }
 
     public ArrayList<Calories> getCaloriesList() {
