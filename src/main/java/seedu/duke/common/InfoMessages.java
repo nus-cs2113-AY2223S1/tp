@@ -9,6 +9,7 @@ public enum InfoMessages {
     FULL_STOP("."),
     FULL_STOP_SPACE(". "),
     COLON_SPACE(": "),
+    NEGATIVE_DOLLAR_SIGN("-$"),
     DOLLAR_SIGN("$"),
     INFO_INCOME("Income"),
     INFO_EXPENSE("Expense"),
@@ -29,6 +30,9 @@ public enum InfoMessages {
     INFO_LIST_EMPTY("There are no transaction records found."),
     INFO_LIST_FILTERED("Here are the transaction records that match your search expression:"),
     INFO_LIST_FILTERED_EMPTY("There are no transaction records that match your search expression."),
+    INFO_LIST_WITHOUT_INDEXES("Indexes are not shown as your transactions have been consolidated for specific time"
+            + " periods." + LINE_SEPARATOR + "If you need to know an entry's index, use the Find command to "
+            + "search by description."),
     INFO_STATS_EMPTY("There are no statistics available yet for the given statistics type."),
     INFO_STATS_CATEGORY("Here are your net categorical savings:"),
     INFO_STATS_MONTHLY("Here is a summary of your monthly expenditure:"),

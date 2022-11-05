@@ -318,8 +318,8 @@ ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
 1: [-][food] $20 on Sep 13 2022 | Description: NIL
-2: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
-3: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -340,7 +340,7 @@ Parameter behind tag(s) is found to be empty, please enter <help> for the comman
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-1: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 
 ____________________________________________________________
 ____________________________________________________________
@@ -368,9 +368,9 @@ These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for t
 ____________________________________________________________
 ____________________________________________________________
 Here are your net categorical savings:
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 ____________________________________________________________
 ____________________________________________________________
@@ -392,7 +392,7 @@ In terms of monthly budget, you have kept yourself well within the budget!
 [Oct 2022]
 Income: $0
 Expense: $10001
-Savings: $-10001
+Savings: -$10001
 Budget: $10000
 Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
 In terms of monthly budget, you have spent more than your budget planned!
@@ -404,9 +404,9 @@ Here are the categorical savings and expenditure summary for
 Year: 2022
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 -----Expenditure Summary-----
 Income: $2000
@@ -418,7 +418,7 @@ Here are the categorical savings and expenditure summary for
 Year: 2022, Month: 10
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 
 -----Expenditure Summary-----
 Income: $0
@@ -461,9 +461,9 @@ Here are the categorical savings and expenditure summary for
 The last 4 months:
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 -----Expenditure Summary-----
 Income: $2000
@@ -484,8 +484,8 @@ Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:
-1: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
-2: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
