@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import static seedu.duke.CommandStructure.ADD_CLIENT_FLAGS;
 
 /**
- * Parses input for add client command.
+ * Parser for add client command.
  */
-public class ParseAddClient extends ParseAdd {
+public class CommandAddClientParser extends CommandAddParser {
     private final String commandDescription;
     private final ClientList clientList;
 
@@ -46,14 +46,20 @@ public class ParseAddClient extends ParseAdd {
             + "7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2"
             + "[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01"
             + "-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
-    // Accepts only positive whole number for budget.
+    // Accepts only positive integer for budget.
     private static final String VALID_BUDGET_REGEX = "^[1-9]\\d*$";
 
-    public ParseAddClient(String addCommandDescription, ClientList clientList) {
+    public CommandAddClientParser(String addCommandDescription, ClientList clientList) {
         this.commandDescription = addCommandDescription;
         this.clientList = clientList;
     }
 
+    /**
+     * Parses input for add client command.
+     *
+     * @return CommandAddClient object that is responsible for the execution of add client command.
+     * @exception ParseAddClientException Represents any exception during the parsing of add client command description.
+     */
     public Command parseCommand() throws ParseAddClientException {
         checkForEmptyAddClientDetails(commandDescription);
         ArrayList<String> clientDetails = processCommandAddClientDetails(commandDescription);
@@ -136,16 +142,13 @@ public class ParseAddClient extends ParseAdd {
         return extractedClientDetails;
     }
 
-
     public void validateClientDetails(ArrayList<String> clientDetails) throws EmptyAddClientDetailException,
             InvalidContactNumberException, InvalidEmailException, InvalidBudgetFormatException,
             DuplicateClientException {
-        // Checks for Missing Client Name, Contact Number, Budget Per Month (SGD)
         checkForEmptyAddClientDetails(clientDetails.get(CLIENT_NAME_INDEX));
         checkForEmptyAddClientDetails(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         checkForEmptyAddClientDetails(clientDetails.get(CLIENT_BUDGET_INDEX));
 
-        // Checks for Contact Number, Email (if any) and Budget Format
         checkForValidSingaporeContactNumber(clientDetails.get(CLIENT_CONTACT_NUMBER_INDEX));
         boolean hasEmail = !clientDetails.get(CLIENT_EMAIL_INDEX).isEmpty();
         if (hasEmail) {

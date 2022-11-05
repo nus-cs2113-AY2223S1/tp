@@ -4,11 +4,12 @@ package seedu.duke;
  * Represents a property.
  */
 public class Property {
-    public static final String LANDLORD_LABEL = "  Landlord: ";
-    public static final String ADDRESS_LABEL = "  Address: ";
-    public static final String PRICE_SGD_LABEL = "  Renting Price: SGD";
-    public static final String PER_MONTH_LABEL = "/month";
-    public static final String UNIT_TYPE_LABEL = "  Unit Type: ";
+    private static final String LANDLORD_LABEL = "  Landlord: ";
+    private static final String ADDRESS_LABEL = "  Address: ";
+    private static final String PRICE_SGD_LABEL = "  Renting Price: SGD";
+    private static final String PER_MONTH_LABEL = "/month";
+    private static final String UNIT_TYPE_LABEL = "  Unit Type: ";
+
     private String landlordName;
     private String propertyAddress;
     private String rentingPrice;

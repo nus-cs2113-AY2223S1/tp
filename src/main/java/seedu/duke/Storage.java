@@ -9,8 +9,8 @@ import seedu.duke.exception.storageexception.InvalidPairingPropertyException;
 import seedu.duke.exception.storageexception.PairFileNotFoundException;
 import seedu.duke.exception.storageexception.PropertyFileNotFoundException;
 import seedu.duke.exception.storageexception.StorageException;
-import seedu.duke.parsermanager.ParseAddClient;
-import seedu.duke.parsermanager.ParseAddProperty;
+import seedu.duke.parsermanager.CommandAddClientParser;
+import seedu.duke.parsermanager.CommandAddPropertyParser;
 
 
 import java.io.File;
@@ -590,7 +590,7 @@ public class Storage {
      * @throws DukeParseException The exception in parsing that shows an error in the client.
      */
     public void checkClientValidity(String description) throws DukeParseException {
-        ParseAddClient parser = new ParseAddClient(description, clientList);
+        CommandAddClientParser parser = new CommandAddClientParser(description, clientList);
         ArrayList<String> clientDetails = parser.processCommandAddClientDetails(description);
         parser.validateClientDetails(clientDetails);
     }
@@ -647,7 +647,7 @@ public class Storage {
      * @throws DukeParseException The exception in parsing that shows an error in the property.
      */
     public void checkPropertyValidity(String description) throws DukeParseException {
-        ParseAddProperty parser = new ParseAddProperty(description, propertyList);
+        CommandAddPropertyParser parser = new CommandAddPropertyParser(description, propertyList);
         ArrayList<String> propertyDetails = parser.processCommandAddPropertyDetails(description);
         parser.validatePropertyDetails(propertyDetails);
     }

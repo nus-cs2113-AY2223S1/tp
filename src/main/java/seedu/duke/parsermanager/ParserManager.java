@@ -2,7 +2,6 @@ package seedu.duke.parsermanager;
 
 //@@author wilsonngja
 import seedu.duke.ClientList;
-import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
@@ -101,9 +100,9 @@ public class ParserManager {
         boolean isAddClient = subAddCommandType.equals(CLIENT_FLAG);
 
         if (isAddProperty) {
-            return new ParseAddProperty(addCommandDescription, propertyList);
+            return new CommandAddPropertyParser(addCommandDescription, propertyList);
         } else if (isAddClient) {
-            return new ParseAddClient(addCommandDescription, clientList);
+            return new CommandAddClientParser(addCommandDescription, clientList);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }

@@ -55,9 +55,9 @@ import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_SEMI_DETACHED;
 import static seedu.duke.CommandStructure.ACTUAL_UNIT_TYPE_BUNGALOW;
 
 /**
- * Parses input for add property command.
+ * Parser for add property command.
  */
-public class ParseAddProperty extends ParseAdd {
+public class CommandAddPropertyParser extends CommandAddParser {
     private final String commandDescription;
     private final PropertyList propertyList;
 
@@ -69,7 +69,7 @@ public class ParseAddProperty extends ParseAdd {
     private static final int FLAG_JUMPER_VALUE = 2;
     private static final int UNIT_VALUE = 1;
 
-    public static final String EXISTING_PROPERTY = "Existing Property:\n  ";
+    private static final String EXISTING_PROPERTY = "Existing Property:\n  ";
 
 
     // Add Property Address Validation Regex
@@ -104,7 +104,7 @@ public class ParseAddProperty extends ParseAdd {
             = BUILDING_BLOCK_NUMBER_REGEX + STREET_NAME_REGEX + STREET_NUMBER_REGEX
             + BUILDING_UNIT_FLOOR_AND_NUMBER_REGEX + BUILDING_NAME_REGEX + POSTAL_CODE_REGEX;
 
-    // Accepts only positive whole number for price.
+    // Accepts only positive integer for price.
     private static final String VALID_PRICE_REGEX = "^[1-9]\\d*$";
 
     private static HashMap<String, String> unitTypeHashmap;
@@ -116,7 +116,7 @@ public class ParseAddProperty extends ParseAdd {
     private static final String CONDOMINIUM = "Condominium";
     private static final String PENTHOUSE = "Penthouse";
 
-    public ParseAddProperty(String addCommandDescription, PropertyList propertyList) {
+    public CommandAddPropertyParser(String addCommandDescription, PropertyList propertyList) {
         this.commandDescription = addCommandDescription;
         this.propertyList = propertyList;
 
@@ -139,6 +139,13 @@ public class ParseAddProperty extends ParseAdd {
         unitTypeHashmap = unitTypeHashMap;
     }
 
+    /**
+     * Parses input for add property command.
+     *
+     * @return CommandAddProperty object that is responsible for the execution of add property command.
+     * @exception ParseAddPropertyException Represents any exception during the parsing of add property command
+     *                                      description.
+     */
     public Command parseCommand() throws ParseAddPropertyException {
         checkForEmptyAddPropertyDetails(commandDescription);
         ArrayList<String> propertyDetails = processCommandAddPropertyDetails(commandDescription);
@@ -152,7 +159,6 @@ public class ParseAddProperty extends ParseAdd {
             throw new EmptyAddPropertyDetailException();
         }
     }
-
 
     public ArrayList<String> processCommandAddPropertyDetails(String rawCommandDetail)
             throws MissingAddPropertyFlagException, IncorrectAddPropertyFlagOrderException {
@@ -256,7 +262,7 @@ public class ParseAddProperty extends ParseAdd {
         }
     }
 
-    private String checkForValidUnitType(String unitTypeLabel) throws  InvalidUnitTypeLabelException {
+    private String checkForValidUnitType(String unitTypeLabel) throws InvalidUnitTypeLabelException {
         String actualUnitType = unitTypeHashmap.get(unitTypeLabel);
         boolean hasValidUnitType = (actualUnitType != null);
         if (!hasValidUnitType) {

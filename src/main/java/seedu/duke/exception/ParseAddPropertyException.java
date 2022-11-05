@@ -3,7 +3,7 @@
 package seedu.duke.exception;
 
 /**
- * Represents exception in ParseAddProperty class.
+ * Represents exception in CommandAddPropertyParser class.
  */
 public class ParseAddPropertyException extends DukeParseException {
 }
