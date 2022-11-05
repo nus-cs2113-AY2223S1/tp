@@ -308,6 +308,100 @@ Possible Error:
     --------------------------------------------------------------------------------
     ```
 
+### Change semester to plan: `info`
+
+Show all the details of a module.
+
+Format: `info [ MODULE_CODE ]`
+
+* The `MODULE_CODE` is not case-sensitive, but has to be an exact match.
+
+Example of usage:
+
+`info CS1010`
+
+`info cs2113`
+
+Sample Output:
+
+```
+Sem [1] >> info CS2113
+--------------------------------------------------------------------------------
+Processing "info cs2113" ...
+
+Code         : CS2113
+Name         : Software Engineering & Object-Oriented Programming
+Description  : This module introduces the necessary skills for systematic and
+               rigorous development of software systems. It covers requirements,
+               design, implementation, quality assurance, and project management
+               aspects of small-to-medium size multi-person software projects.
+               The module uses the Object Oriented Programming paradigm.
+               Students of this module will receive hands-on practice of tools
+               commonly used in the industry, such as test automation tools,
+               build automation tools, and code revisioning tools will be
+               covered.
+Credits      : 4
+Department   : Computer Science
+Faculty      : Computing
+Workload     : [2, 1, 0, 3, 4]
+Semesters    : [1, 2]
+Prerequisite : CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+Preclusion   : CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+Corequisite  : CS2101 Effective Communication for Computing Professionals is
+               co-requisite for CS2113T. Students exempted from CS2101 will take
+               CS2113 which does not have CS2101 as co-req. Otherwise, CS2113
+               and CS2113T are identical.
+Schedule     : 
+                                                                               
+          : Mon      : Tues     : Wed      : Thur                : Fri         
+===============================================================================
+   1100   :          :          :          :                     +----------+  
+   1130   :          :          :          :                     |CS2113    |  
+   1200   :          :          +----------+                     +-TUT[4]---+  
+   1230   :          :          |CS2113    |                     :             
+   1300   :          :          +-TUT[1]---+                     :             
+   1330   :          :          |CS2113    |                     :             
+   1400   :          :          +-TUT[2]---+                     :             
+   1430   :          :          :          :                     :             
+   1500   :          :          :          :                     :             
+   1530   :          :          :          :                     :             
+   1600   :          :          :          :                     +----------+  
+   1630   :          :          :          :                     |CS2113    |  
+   1700   :          :          :          +----------+----------+ LEC[1]   |  
+   1730   :          :          :          |CS2113    |CS2113    |          |  
+   1800   :          :          :          +-TUT[3]---+-TUT[5]---+----------+  
+   1830   :          :          :          :                     :             
+   1900   :          :          :          :                     :             
+                                                                               
+
+--------------------------------------------------------------------------------
+```
+
+Possible Error:
+
+1. Module code does not have a match:
+    * YAMOM will throw an error message and prompt for the right module code.
+   
+    ```
+    Sem [1] >> info XX
+    --------------------------------------------------------------------------------
+    Processing "info XX" ...
+
+    Error! 	Module not found! Please enter a valid module code! Try searching if you do not remember the exact module code.
+    --------------------------------------------------------------------------------
+    ```
+2. The module code is not given:
+    * YAMOM will prompt to enter a module code.
+
+    ```   
+    Sem [1] >> info
+    --------------------------------------------------------------------------------
+    Processing "info" ...
+
+    Error! 	Please enter a module code!
+    --------------------------------------------------------------------------------
+    ```
+
 ### Change semester to plan: `semester`
 
 Select semester to plan for and organise.

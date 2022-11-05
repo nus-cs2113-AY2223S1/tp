@@ -491,9 +491,18 @@ to load previous state
 
 <!-- {Describe the target user profile} -->
 
+The target user that we have in mind is a student who is currently in NUS and is using NUSMods to plan their timetable. 
+However, we want to make it easier for users that are comfortable using CLI. This would be a more efficient way and
+also less time-consuming for the user to plan their timetable. Most importantly, it is lightweight and does not require 
+any internet connection to use.
+
 ### Value proposition
 
 <!-- {Describe the value proposition: what problem does it solve?} -->
+
+Yet Another Module Organizer and Manager (YAMOM) is an all-in-one desktop app featuring a full course catalogue, module
+search and timetable builder for the National University of Singapore, optimized for use via a Command Line Interface 
+(CLI). If you can type fast, YAMOM can get your timetable done faster than traditional GUI apps.
 
 ## 5. Documentation
 
@@ -505,11 +514,59 @@ written in [GitHub-Flavoured Markdown](https://github.github.com/gfm/).
 The following section describes the testing methodologies followed in this project to ensure high-quality, bug-free
 code as far as possible.
 
-The more critical classes each has a test class which tests the various 
-functions implemented in those respective classes. 
+The more critical classes each has a test class which tests the various functions implemented in those respective classes. 
 
 ### 6.1. Running tests
 
+#### 6.1.1. Input/Output re-direction.
+
+This method is used to simulate user input and to test the output of the program. This method was introduced in our 
+individual project and was used to test out the Duke main class. Similarly, this method is used in YAMOM. As simple as 
+it may seem, this method is very useful in testing the program as it allows us to test the program without having to 
+waste time typing in the commands manually. A simple file comparison is done to check if the output is as expected.
+
+#### 6.1.2. Unit testing
+
+Unit testing is done to test the individual functions of the classes. This is done to ensure that the functions are
+properly working in isolation. This is done by using the assertEquals/ assertTrue/ assertThrows method to check if 
+the works as expected. A sample of the unit testing is shown below.
+
+The filterModuleSearch method is tested to ensure that the correct number of  modules are returned when the user 
+searches for a module with different keywords. The assertEquals method is used to check if the number of modules
+returned is as expected.
+
+```
+  @Test
+  void filterModuleSearch_fullValidInputFields_expectCorrectNumberOfFilteredModule() {
+      String toSearchModuleCode = "dtk1234";
+      String toSearchModuleTitle = "Design Thinking";
+      Integer toSearchLevel = 1;
+      Integer toSearchSemester = 1;
+
+      List<Module> searchResult = SearchModuleCommand.filterModuleSearch(toSearchModuleCode, toSearchLevel,
+              toSearchSemester, toSearchModuleTitle);
+      int numberOfFilteredModulesInSearchResult = searchResult.size();
+      int expectedNumberOfFilteredModules = 2;
+      assertEquals(expectedNumberOfFilteredModules, numberOfFilteredModulesInSearchResult);
+  }
+```
+
+#### 6.1.3. Regression testing
+
+Regression testing is done to ensure that the program is still working as expected after a change has been made. This 
+is being done by running gradlew /test and checking if the tests are still passing. This is done to ensure that the 
+newly added features do not break the previously existing features.
+
+#### 6.1.4. Developer testing
+
+Developer testing is done by the developer themselves to ensure that the program is working as expected. This is 
+particularly done when the developer is implementing a new feature. This is done by running the program and
+testing the various commands to ensure that the program is working as expected before committing the changes and 
+subsequently making a pull request.
+
+#### 6.1.5. Integration testing
+
+#### 6.1.6. System testing
 
 
 ### 6.2 Instructions for manual testing
