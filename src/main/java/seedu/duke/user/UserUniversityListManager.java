@@ -56,7 +56,7 @@ public class UserUniversityListManager {
             throws InvalidUserCommandException, UniversityNotFoundException {
         if (!containsKey(universityName)) {
             throw new UniversityNotFoundException("Error: No list containing such university\n"
-            + "Please create university and add relevant module before adding a comment\n");
+            + "Please create university and add relevant module before adding a comment");
         } else {
             if (checkEmpty(comment)) {
                 System.out.println("Error: Invalid Comment");
