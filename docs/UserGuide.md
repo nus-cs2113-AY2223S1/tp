@@ -480,26 +480,28 @@ A duplicate entry is defined as an entry that has the same value for all variabl
 
 A list of all valid commands.
 
-* Add expense: `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
-* View expense: `View-Expense`
-* Delete expense: `Delete-Expense -e 1`
-* Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
-* Sort expense: `Sort-Expense -t alphabetical -o ascending"`
-* Convert currency: `Convert-Currency -e 1 -x USD`
-* Add recurring payment: `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
-* View recurring payment: `View-RecurringPayment`
-* Delete recurring payment: `Delete-RecurringPayment -r 1`
-* Edit recurring payment: `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
-* Pay recurring payment: `Pay-RecurringPayment -r 1`
-* Add income: `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`
-* View income: `View-Income -e 1`
-* Delete income: `Delete-Income -e 1`
-* Edit income: `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`
-* Add target: `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`
-* View target: `View-Target -e 1`
-* Delete target: `Delete-Target -e 1`
-* Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
-* Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
-* Help: `help`
-* Exit: `bye`
+| Command                  | Example                                                                                                                                    |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Add expense              | `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`       |
+| View expense             | `View-Expense`                                                                                                                             |
+| Delete expense           | `Delete-Expense -e 1`                                                                                                                      |
+| Edit expense             | `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD` |
+| Sort expense             | `Sort-Expense -t alphabetical -o ascending"`                                                                                               | 
+| Convert currency         | `Convert-Currency -e 1 -x USD`                                                                                                             |  
+| Add recurring payment    | `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`                                                                                     |                                                      
+| View recurring payment   | `View-RecurringPayment`                                                                                                                    |                                                      
+| Delete recurring payment | `Delete-RecurringPayment -r 1`                                                                                                             |                                                    
+| Edit recurring payment   | `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`             |        
+| Pay recurring payment    | `Pay-RecurringPayment -r 1`                                                                                                                |                                                   
+| Add income               | `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`                                                            |                                       
+| View income              | `View-Income -e 1`                                                                                                                         |                                      
+| Delete income            | `Delete-Income -e 1`                                                                                                                       |                                     
+| Edit income              | `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`                                                   |                                    
+| Add target               | `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`                                          |                                   
+| View target              | `View-Target -e 1`                                                                                                                         |                                  
+| Delete target            | `Delete-Target -e 1`                                                                                                                       |                                 
+| Edit target              | `Edit-Target -e 1 -n "October Target" -a 100.00`                                                                                           |                                
+| Merge file               | `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`                                                                                    |                               
+| Help                     | `help`                                                                                                                                     |                              
+| Exit                     | `bye`                                                                                                                                      |                             
 
