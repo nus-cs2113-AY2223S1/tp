@@ -136,7 +136,7 @@ public class Timetable {
                     (newStartTime.compareTo(currentStartTime) <= 0 && newEndTime.compareTo(currentStartTime) <= 0)
                     || newStartTime.compareTo(currentEndTime) >= 0 && newEndTime.compareTo(currentEndTime) >= 0;
             if (!hasNoClash) {
-                throw new TimetableClashException("Error! There is a timetable clash!");
+                throw new TimetableClashException("Error: There is a timetable clash!");
             }
         }
         return true;

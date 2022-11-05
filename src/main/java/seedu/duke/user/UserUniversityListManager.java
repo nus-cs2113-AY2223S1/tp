@@ -56,7 +56,7 @@ public class UserUniversityListManager {
             throws InvalidUserCommandException, UniversityNotFoundException {
         if (!containsKey(universityName)) {
             throw new UniversityNotFoundException("Error: No list containing such university\n"
-            + "Please create university and add relevant module before adding a comment\n");
+            + "Please create university and add relevant module before adding a comment");
         } else {
             if (checkEmpty(comment)) {
                 System.out.println("Error: Invalid Comment");
@@ -222,7 +222,7 @@ public class UserUniversityListManager {
     public UserUniversityList getList(String input) throws InvalidUserCommandException {
         assert input.length() > 0 : "Input school cannot be empty";
         if (!myManager.containsKey(input)) {
-            throw new InvalidUserCommandException("Error! No university list named " + input + " is found.");
+            throw new InvalidUserCommandException("Error: No university list named " + input + " is found.");
         }
         return myManager.get(input);
     }
