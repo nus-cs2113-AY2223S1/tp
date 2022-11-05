@@ -1,11 +1,11 @@
 # User Guide
 
-## Introduction
+## <span style="color:orange ">Introduction</span>
 
 Timetabler is a **desktop app** that allows **NUS students** taking official NUS modules to **view their classes** and **plan their timetable efficiently** in AY22/23. The desktop app is optimmized for use via a Command Line Interface (CLI).
 
 
-## Quick Start
+## <span style="color:orange ">Quick Start</span>
 
 1. Ensure that you have Java `11` or above installed.
 2. Down the latest version of `tp` from [here](https://github.com/AY2223S1-CS2113-T17-3/tp/releases/).
@@ -15,7 +15,7 @@ Timetabler is a **desktop app** that allows **NUS students** taking official NUS
 6. You will be prompted to enter the `semester` (1 or 2) you are planning for when the program first starts.
 
 
-## Features
+##  <span style="color:orange ">Features</span>
 
 
 * [Add module](#adding-a-module-add) `add`
@@ -28,7 +28,7 @@ Timetabler is a **desktop app** that allows **NUS students** taking official NUS
 * [Quit program](#quitting-the-program-quit) `quit`
 
 
-### Adding a module: `add`
+###  <span style="color:orange ">Adding a module: `add`</span>
 Command used to initiate the process of adding a new module.
 
 * You will be prompted to enter the module code after this command.
@@ -45,7 +45,7 @@ input: `cs2040c`
 Successfully added new module: CS2040C : Data Structures and Algorithms
 ```
 ---
-### Listing modules: `list`
+###  <span style="color:orange ">Listing modules: `list`</span>
 Command used to list out all modules added to user's timetable.
 
 * Modules with duplicate lesson types means that students are expected to go for at least that number of classes of that lesson type.
@@ -65,7 +65,7 @@ Here are your modules:
      [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time
 ```
 ---
-### Finding information on a module: `info`
+###  <span style="color:orange ">Finding information on a module: `info`</span>
 Command used to see information on a module.
 
 * Only module name, module code and description will be shown.
@@ -84,7 +84,7 @@ Module Name: Programming Methodology
 Module Description: This module introduces the fundamental concepts of problem solving by computing and programming using an imperative programming language. It is the first and foremost introductory course to computing.  Topics covered include computational thinking and computational problem solving, designing and specifying an algorithm, basic problem formulation and problem solving approaches, program development, coding, testing and debugging, fundamental programming constructs (variables, types, expressions, assignments, functions, control structures, etc.), fundamental data structures (arrays, strings, composite data types), basic sorting, and recursion.
 ```
 ---
-### Setting a module's lessons: `set`
+###  <span style="color:orange ">Setting a module's lessons: `set`</span>
 Command used to initiate the process of setting lesson for a module.
 
 * Only lessons of modules which are already added can be set.
@@ -115,7 +115,7 @@ input: `1`
 Successfully set your lesson!
 ```
 ---
-### Deleting a module: `delete`
+###  <span style="color:orange ">Deleting a module: `delete`</span>
 Command used to initiate the process of deleting a new module.
 
 * You will be prompted to choose the module to delete after this command.
@@ -137,7 +137,7 @@ input: `1`
 Successfully deleted module!
 ```
 ---
-### Auto-allocating all modules: `allocate`
+###  <span style="color:orange ">Auto-allocating all modules: `allocate`</span>
 Command used to initiate the process of automatically allocating modules.
 
 * Modules are allocated in the order they were added / listed as per the command `list`.
@@ -151,31 +151,62 @@ input: `allocate`
 All your mods have been successfully allocated!
 ```
 ---
-### Printing the timetable: `print`
-Command used to initiate the process of deleting a new module.
+###  <span style="color:orange ">Printing the timetable: `print`</span>
+Command used to produce a timetable for a straightforward view.
 
 * Legend and other things to take note of will be printed below the timetable.
 * Only lessons which are correctly set will be reflected in the timetable.
-* Clashes are indicated with `XXXXXX` in place of the module code. Use `list` command to find the clash and deconflict with `set` feature.
+* Clashes are indicated with `XXXXXX` in place of the module code. At the end of the timetable, clashed modules will be listed out, if any.
+Alternatively, you may use `list` command to find the clash and deconflict with `set` feature.
 
 **Example of Usage:**
 input: `print`
 
-```
-    | 0800 | 0830 | 0900 | 0930 | 1000 | 1030 | 1100 | 1130 | 1200 | 1230 | 1300 | 1330 | 1400 | 1430 | 1500 | 1530 | 1600 | 1630 | 1700 | 1730 | 1800 | 1830 | 1900 | 1930 |
-MON |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|
-TUE |______|______|______|______|CS2040|CS2040|CS2040|CS2040|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|
-WED |______|______|______|______|CS2040|CS2040|CS2040|CS2040|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|
-THU |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|XXXXXX|XXXXXX|______|______|______|______|
-FRI |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|CS2113|CS2113|CS2113|CS2113|______|______|______|______|
+```            :            :            :            :            :             
+            : MON        : TUE        : WED        : THU        : FRI         
+============:============:============:============:============:=============
+   0800     :            :            :            :            :XXXXXXXXXXXX 
+   0830     :            :            :            :            :XXXXXXXXXXXX 
+   0900     :            :            :            :            :XXXXXXXXXXXX 
+   0930     :            :            :            :            :XXXXXXXXXXXX 
+   1000     :------------:            :            :            :XXXXXXXXXXXX 
+   1030     :CS1231      :            :            :            :XXXXXXXXXXXX 
+   1100     : TUT        :            :            :            :             
+   1130     :            :            :            :            :             
+   1200     :------------:            :------------:            :------------ 
+   1230     :            :            :CS1231      :            :CS1231       
+   1300     :            :            : SEC        :            :-SEC-------- 
+   1330     :            :            :            :            :             
+   1400     :            :            :------------:            :             
+   1430     :            :            :            :            :             
+   1500     :            :            :            :            :             
+   1530     :            :            :            :            :             
+   1600     :            :            :            :            :             
+   1630     :            :            :            :            :             
+   1700     :            :            :            :            :             
+   1730     :            :            :            :            :             
+   1800     :            :            :            :            :             
+   1830     :            :            :            :            :             
+   1900     :            :            :            :            :             
+   1930     :            :            :            :            :             
+   2000     :            :            :            :            :             
+   2030     :            :            :            :            :             
+   2100     :            :            :            :            :             
+   2130     :            :            :            :            :             
+   2200     :            :            :            :            :             
+
+These are the clashed modules : 
+ES2631
+ACC1701X
 
  * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot.
  * Slots with XXXXXX indicates that there is a clash between two or more lessons.
- * Modules, if any, that start or end beyond the 8am to 8pm timings are excluded.
+ * Modules, if any, that start before 8am or ends after 10pm timings are excluded.
  * Timings are approximated to 30 minutes block with valid assumption that NUS mods are typically designed in such blocks.
+
 ```
 ---
-### Quitting the program: `quit`
+###  <span style="color:orange ">Quitting the program: `quit`</span>
 
 Command used to exit the program and stop its execution.
 
@@ -193,7 +224,7 @@ input: `quit`
                                            |___/                 
 ```
 
-## FAQ
+##  <span style="color:orange ">FAQ</span>
 
 **Q**: How do I transfer my data to another computer?
 

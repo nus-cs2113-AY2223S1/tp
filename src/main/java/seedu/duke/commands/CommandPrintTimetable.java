@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Comparator;
 import java.util.Stack;
+import java.util.Collections;
 import java.util.logging.Logger;
+
+import static seedu.duke.timetable.Timetable.listOfModules;
 
 //@@author HT-T
 
@@ -345,6 +348,10 @@ public class CommandPrintTimetable {
             // if clash exists, pre-write timetable with "X"
             ArrayList<Integer[]> clashSlotList = getDailyClashSlot(day);
 
+
+
+
+
             for (Integer[] slot : clashSlotList) {
                 Integer clashStartIndex = slot[0];
                 Integer clashEndIndex = slot[1];
@@ -402,10 +409,16 @@ public class CommandPrintTimetable {
             sortDailySlots(day, emptySlotList);
         }
 
-        Stack<Integer[]> stack = new Stack<>();
-        stack.push(emptySlotList.get(day).get(0));
+        ArrayList<ArrayList<Integer[]>> newEmptySlotList = new ArrayList<>(emptySlotList);
 
-        sortSlotList(day, stack);
+        Stack<Integer[]> stack = new Stack<>();
+        stack.push(newEmptySlotList.get(day).get(0));
+
+        sortSlotList(day, stack, newEmptySlotList);
+
+        populateRawTimetable(listOfModules);
+        sortDailySlots(day, emptySlotList);
+
         ArrayList<Integer[]> clashSlotList = createClashList(stack);
 
         removeUnclashSlot(day, clashSlotList);
@@ -423,8 +436,6 @@ public class CommandPrintTimetable {
             addClashLesson(todayRawTimetable, clashInterval);
         }
 
-        //// if String is inside, no need to add
-        //clashModCodeList.add( -String- );
     }
 
     private static void addClashLesson(ArrayList<Object[]> todayRawTimetable, Integer[] clashInterval) {
@@ -463,24 +474,37 @@ public class CommandPrintTimetable {
     }
 
     private static void removeUnclashSlot(Integer day, ArrayList<Integer[]> clashSlotList) {
+        ArrayList<Integer> removeIndex = new ArrayList<>();
         for (Integer[] originalSlot : emptySlotList.get(day)) {
-            if (!clashSlotList.contains(originalSlot)) { // slot not found
-                clashSlotList.remove(originalSlot);
+            calculateSlot(clashSlotList, removeIndex, originalSlot);
+        }
+
+        Collections.sort(removeIndex, Collections.reverseOrder());
+        for (int i : removeIndex) {
+            clashSlotList.remove(i);
+        }
+
+    }
+
+    private static void calculateSlot(ArrayList<Integer[]> list, ArrayList<Integer> toDel, Integer[] oldSlot) {
+        for (Integer[] newSlot : list) {
+            boolean isInside = Objects.equals(oldSlot[0], newSlot[0]) && Objects.equals(oldSlot[1], newSlot[1]);
+            if (isInside) {
+                toDel.add(list.indexOf(newSlot));
             }
         }
     }
 
 
-    private static void sortSlotList(Integer day, Stack<Integer[]> stack) {
+    private static void sortSlotList(Integer day, Stack<Integer[]> stack,ArrayList<ArrayList<Integer[]>> newEsl) {
         Integer[] top = stack.peek();
-        for (int i = 1; i < emptySlotList.get(day).size(); i++) {
-            if (top[1] < emptySlotList.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
-                stack.pop();
-                stack.push(emptySlotList.get(day).get(i));
-            } else if (top[1].equals(emptySlotList.get(day).get(i)[0])) {
+        for (int i = 1; i < newEsl.get(day).size(); i++) {
+            if (top[1] < newEsl.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
+                stack.push(newEsl.get(day).get(i));
+            } else if (top[1].equals(newEsl.get(day).get(i)[0])) {
                 continue;
-            } else if (top[1] < emptySlotList.get(day).get(i)[1]) {
-                top[1] = emptySlotList.get(day).get(i)[1];
+            } else if (top[1] < newEsl.get(day).get(i)[1]) {
+                top[1] = newEsl.get(day).get(i)[1];
                 stack.pop();
                 stack.push(top);
             }
@@ -514,7 +538,7 @@ public class CommandPrintTimetable {
             return timetable.toString(); // nothing is to be printed
         } else {
             timetable.append(System.lineSeparator()
-                    + " These are the clashed modules : " + System.lineSeparator());
+                    + "These are the clashed modules : " + System.lineSeparator());
             for (String modCode : clashModCodeList) {
                 timetable.append(modCode + System.lineSeparator());
             }
