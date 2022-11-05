@@ -1,43 +1,44 @@
 @startuml
+hide footbox
 
--> TimetableManager : addLesson()
-activate TimetableManager
-TimetableManager -> Lesson : getName()
-activate Lesson
-Lesson -> Module : getUniversity()
-activate Module
-Module -> University : getName()
-activate University
-Module <-- University : name
-deactivate University
-Lesson <-- Module
-deactivate Module
-TimetableManager <-- Lesson : universityName
-deactivate Lesson
-TimetableManager -> Timetable : addLesson()
-activate Timetable
-Timetable -> Timetable ++ : isValidDay()
+-> ":TimetableManager" : addLesson()
+activate ":TimetableManager"
+":TimetableManager" -> ":Lesson" : getName()
+activate ":Lesson"
+":Lesson" -> ":Module" : getUniversity()
+activate ":Module"
+":Module" -> ":University" : getName()
+activate ":University"
+":Module" <-- ":University" : name
+deactivate ":University"
+":Lesson" <-- ":Module"
+deactivate ":Module"
+":TimetableManager" <-- ":Lesson" : universityName
+deactivate ":Lesson"
+":TimetableManager" -> ":Timetable" : addLesson()
+activate ":Timetable"
+":Timetable" -> ":Timetable" ++ : isValidDay()
 return :boolean
-Timetable -> Timetable ++ : isValidStartTime()
+":Timetable" -> ":Timetable" ++ : isValidStartTime()
 return :boolean
-Timetable -> Timetable ++ : isValidEndTime()
+":Timetable" -> ":Timetable" ++ : isValidEndTime()
 return :boolean
-Timetable -> Timetable ++ : isValidTiming()
+":Timetable" -> ":Timetable" ++ : isValidTiming()
 return :boolean
-Timetable -> Timetable ++ : hasNoTimetableClash()
+":Timetable" -> ":Timetable" ++ : hasNoTimetableClash()
 return :boolean
 opt not loading from user saved files
-    Timetable -> Ui : printLessonAddedAcknowledgement()
-    activate Ui
-    Timetable <-- Ui
-    deactivate Ui
+    ":Timetable" -> ":Ui" : printLessonAddedAcknowledgement()
+    activate ":Ui"
+    ":Timetable" <-- ":Ui"
+    deactivate ":Ui"
 end
-Timetable -> Collections : sort()
-activate Collections
-Timetable <-- Collections
-deactivate Collections
-TimetableManager <-- Timetable
-deactivate Timetable
-<-- TimetableManager
-deactivate TimetableManager
+":Timetable" -> ":Collections" : sort()
+activate ":Collections"
+":Timetable" <-- ":Collections"
+deactivate ":Collections"
+":TimetableManager" <-- ":Timetable"
+deactivate ":Timetable"
+<-- ":TimetableManager"
+deactivate ":TimetableManager"
 @enduml

@@ -1,17 +1,18 @@
 @startuml
+hide footbox
 
--> TimetableManager : printTimetable()
-activate TimetableManager
-TimetableManager -> Timetable : getTimetable()
-activate Timetable
-TimetableManager <-- Timetable : timetable
-deactivate Timetable
+-> ":TimetableManager" : printTimetable()
+activate ":TimetableManager"
+":TimetableManager" -> ":Timetable" : getTimetable()
+activate ":Timetable"
+":TimetableManager" <-- ":Timetable" : timetable
+deactivate ":Timetable"
 opt timetable exists
-    TimetableManager -> Ui : printTimetable()
-    activate Ui
-    TimetableManager <-- Ui
-    deactivate Ui
+    ":TimetableManager" -> ":Ui" : printTimetable()
+    activate ":Ui"
+    ":TimetableManager" <-- ":Ui"
+    deactivate ":Ui"
 end
-<-- TimetableManager
-deactivate TimetableManager
+<-- ":TimetableManager"
+deactivate ":TimetableManager"
 @enduml

@@ -1,29 +1,30 @@
 @startuml
+hide footbox
 
--> TimetableManager : deleteLesson()
-activate TimetableManager
-TimetableManager -> Lesson : getName()
-activate Lesson
-Lesson -> Module : getUniversity()
-activate Module
-Module -> University : getName()
-activate University
-Module <-- University : name
-deactivate University
-Lesson <-- Module
-deactivate Module
-TimetableManager <-- Lesson : universityName
-deactivate Lesson
-TimetableManager -> Timetable : deleteLesson()
-activate Timetable
+-> ":TimetableManager" : deleteLesson()
+activate ":TimetableManager"
+":TimetableManager" -> ":Lesson" : getName()
+activate ":Lesson"
+":Lesson" -> ":Module" : getUniversity()
+activate ":Module"
+":Module" -> ":University" : getName()
+activate ":University"
+":Module" <-- ":University" : name
+deactivate ":University"
+":Lesson" <-- ":Module"
+deactivate ":Module"
+":TimetableManager" <-- ":Lesson" : universityName
+deactivate ":Lesson"
+":TimetableManager" -> ":Timetable" : deleteLesson()
+activate ":Timetable"
 opt lesson exists
-    Timetable -> Ui : printLessonDeletedAcknowledgement()
-    activate Ui
-    Timetable <-- Ui
-    deactivate Ui
+    ":Timetable" -> ":Ui" : printLessonDeletedAcknowledgement()
+    activate ":Ui"
+    ":Timetable" <-- ":Ui"
+    deactivate ":Ui"
 end
-TimetableManager <-- Timetable
-deactivate Timetable
-<-- TimetableManager
-deactivate TimetableManager
+":TimetableManager" <-- ":Timetable"
+deactivate ":Timetable"
+<-- ":TimetableManager"
+deactivate ":TimetableManager"
 @enduml
