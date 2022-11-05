@@ -40,12 +40,12 @@ public class Ingredient {
      * @return parsed ingredient
      * @throws ParseException the ingredient is of wrong format and cannot be parsed
      */
-    public static Ingredient parsedIngredients(String input) throws ParseException{
+    public static Ingredient parsedIngredients(String input) throws ParseException {
         String[] parsed = input.split(DIVIDER, MAX_DIVIDES);
         try {
             double amount = Double.parseDouble(parsed[1]);
-            if(parsed[0].replaceAll(" ","").equals("") ||
-                    parsed[2].replaceAll(" ","").equals("")) {
+            if (parsed[0].replaceAll(" ", "").equals("")
+                    || parsed[2].replaceAll(" ", "").equals("")) {
                 Ui.showMessage(EMPTY_INGREDIENT_FILEDS);
                 throw new ParseException(INGREDIENT_FORMAT);
             }
