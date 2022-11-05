@@ -395,7 +395,7 @@ Carpark not found in favourite list!
 > For advanced users:
 >  - Unfavourite multiple carparks at once by entering more than one carpark ID after `unfavourite`.
 >  - Example of usage:
-     >    - `unfavourite 3 4 5`
+>    - `unfavourite 3 4 5`
 
 ### List lot availability of favourite carparks
 
