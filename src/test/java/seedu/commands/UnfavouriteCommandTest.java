@@ -11,6 +11,7 @@ import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
 import seedu.files.Favourite;
+import seedu.files.FileStorage;
 
 
 public class UnfavouriteCommandTest {
@@ -22,11 +23,14 @@ public class UnfavouriteCommandTest {
 
     @Test
     void testUnfavouriteCommand() throws FileWriteException, NoFileFoundException {
+        FileStorage fileStorage = new FileStorage(testFileDirectory, validFavouriteFile);
+        fileStorage.writeDataToFile("1\n2\n");
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Favourite favourite = new Favourite(testFileDirectory, validFavouriteFile);
+        favourite.updateFavouriteList(carparkList);
         String argument = "1";
         String result = new UnfavouriteCommand(argument, favourite, carparkList).execute().showToUser;
-        Assertions.assertEquals("Removed Carpark 1 from favourites!\n", result);
+        Assertions.assertEquals("Removed Carpark 1 from favourites!", result);
     }
 
     @Test
