@@ -8,8 +8,8 @@ import seedu.duke.exception.parsefindexception.FindEmptyDescriptionException;
 import seedu.duke.exception.parsefindexception.FindIncorrectNumOfTagException;
 import seedu.duke.exception.parsefindexception.NoFindClientTagException;
 import seedu.duke.exception.parsefindexception.NoFindPropertyTagException;
-import seedu.duke.parsermanager.ParseFindClient;
-import seedu.duke.parsermanager.ParseFindProperty;
+import seedu.duke.parsermanager.find.CommandFindClientParser;
+import seedu.duke.parsermanager.find.CommandFindPropertyParser;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -127,39 +127,42 @@ public class FindFunctionTest {
 
     @Test
     public void queryClient_emptyDescription_expectThrow() {
-        ParseFindClient parseFindClient = new ParseFindClient(EMPTY_TAG);
-        assertThrows(FindEmptyDescriptionException.class, () -> parseFindClient.checkCommandValidity(EMPTY_TAG));
+        CommandFindClientParser commandFindClientParser = new CommandFindClientParser(EMPTY_TAG);
+        assertThrows(FindEmptyDescriptionException.class,
+            () -> commandFindClientParser.checkCommandValidity(EMPTY_TAG));
     }
 
     @Test
     public void queryClient_incorrectNumberOfTag_expectThrow() {
-        ParseFindClient parseFindClient = new ParseFindClient(INCORRECT_TAG);
-        assertThrows(FindIncorrectNumOfTagException.class, () -> parseFindClient.checkCommandValidity(INCORRECT_TAG));
+        CommandFindClientParser commandFindClientParser = new CommandFindClientParser(INCORRECT_TAG);
+        assertThrows(FindIncorrectNumOfTagException.class,
+            () -> commandFindClientParser.checkCommandValidity(INCORRECT_TAG));
     }
 
     @Test
     public void queryProperty_emptyDescription_expectThrow() {
-        ParseFindProperty parseFindProperty = new ParseFindProperty(EMPTY_TAG);
-        assertThrows(FindEmptyDescriptionException.class, () -> parseFindProperty.checkCommandValidity(EMPTY_TAG));
+        CommandFindPropertyParser commandFindPropertyParser = new CommandFindPropertyParser(EMPTY_TAG);
+        assertThrows(FindEmptyDescriptionException.class,
+            () -> commandFindPropertyParser.checkCommandValidity(EMPTY_TAG));
     }
 
     @Test
     public void queryProperty_incorrectNumberOfTag_expectThrow() {
-        ParseFindProperty parseFindProperty = new ParseFindProperty(INCORRECT_TAG);
+        CommandFindPropertyParser commandFindPropertyParser = new CommandFindPropertyParser(INCORRECT_TAG);
         assertThrows(FindIncorrectNumOfTagException.class,
-            () -> parseFindProperty.checkCommandValidity(INCORRECT_TAG));
+            () -> commandFindPropertyParser.checkCommandValidity(INCORRECT_TAG));
     }
 
     @Test
     public void queryClient_noTagIncluded_expectThrow() {
-        ParseFindClient parseFindClient = new ParseFindClient(NO_TAG);
-        assertThrows(NoFindClientTagException.class, () -> parseFindClient.checkCommandValidity(NO_TAG));
+        CommandFindClientParser commandFindClientParser = new CommandFindClientParser(NO_TAG);
+        assertThrows(NoFindClientTagException.class, () -> commandFindClientParser.checkCommandValidity(NO_TAG));
     }
 
     @Test
     public void queryProperty_noTagIncluded_expectThrow() {
-        ParseFindProperty parseFindProperty = new ParseFindProperty(NO_TAG);
-        assertThrows(NoFindPropertyTagException.class, () -> parseFindProperty.checkCommandValidity(NO_TAG));
+        CommandFindPropertyParser commandFindPropertyParser = new CommandFindPropertyParser(NO_TAG);
+        assertThrows(NoFindPropertyTagException.class, () -> commandFindPropertyParser.checkCommandValidity(NO_TAG));
     }
 
     // This function is stored and assumed the entries are in the right order
