@@ -19,6 +19,7 @@ package Data {
     Class IncomeManager DATA_COLOR_2
     Class RecurringPaymentManager DATA_COLOR_3
     Class TargetManager DATA_COLOR_4
+    Class CurrencyManager DATA_COLOR_5
 }
 
 package Apis {
@@ -29,16 +30,16 @@ package Logger {
     Class LocalLogger LOGGER_COLOR_1
 }
 
-ExpenseManager -down[hidden]-> RecurringPaymentManager
-IncomeManager -down[hidden]-> TargetManager
-
-RecurringPaymentManager -down[hidden]-> RecurringPaymentManager
+ExpenseManager -right[hidden]-> RecurringPaymentManager
+ExpenseManager -down[hidden]-> IncomeManager
+IncomeManager -right[hidden]-> TargetManager
 
 ConsoleInterface -up-> "1" ConsoleParser
 ConsoleInterface -down-> "1" ExpenseManager
 ConsoleInterface -down-> "1" IncomeManager
 ConsoleInterface -down-> "1" RecurringPaymentManager
 ConsoleInterface -down-> "1" TargetManager
+ConsoleInterface -down-> "1" CurrencyManager
 ConsoleInterface -down-> "1" CurrencyApiManager
 ConsoleInterface -up-> "1" LocalLogger
 @enduml
