@@ -183,11 +183,11 @@ public class Messages {
 
     //@@author FeliciaBeatrice
     public static final String MESSAGE_DELETE_CLIENT_WRONG_FORMAT = "OOPS!!! Please use this format to delete client:\n"
-            + "delete -client ic/CLIENT_INDEX\n";
+            + "delete -client i/CLIENT_INDEX\n";
 
     public static final String MESSAGE_DELETE_PROPERTY_WRONG_FORMAT = "OOPS!!! Please use this format to delete "
             + "property\n"
-            + "delete -property ip/PROPERTY_INDEX\n";
+            + "delete -property i/PROPERTY_INDEX\n";
     //@@author
 
     //@@author ngdeqi

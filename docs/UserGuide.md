@@ -152,9 +152,18 @@ Currently, there are some illogical inputs allowed by the application as shown b
 ### Delete Property: `delete -property`
 Deletes the specified property from the property list and subsequently deletes any pairings involving that property.
 
-<u>Format:</u> `delete -property ip/PROPERTY_INDEX`
+<u>Format</u>: `delete -property i/PROPERTY_INDEX`
 
-<u>Example:</u> `delete -property ip/2`
+<u>Example</u>: `delete -property i/2`
+
+<u>Expected Output</u>:
+```
+Deleting property with the following information:
+Landlord: Bob Tan Bee Bee
+Address: 25 Lower Kent Ridge Rd, S119081
+Renting Price: SGD1000/month
+Unit Type: LP Bungalow
+```
 
 ---
 
@@ -258,9 +267,18 @@ For valid `BUDGET_MONTH`, a positive integer must be provided.
 ### Delete Client: `delete -client`
 Deletes the specified client from the client list and subsequently deletes any pairings involving that client.
 
-<u>Format:</u> `delete -client ic/CLIENT_INDEX`
+<u>Format</u>: `delete -client i/CLIENT_INDEX`
 
-<u>Example:</u> `delete -client ic/3`
+<u>Example</u>: `delete -client i/3`
+
+<u>Expected Output</u>:
+```
+Deleting client with the following information:
+Client: Doja Cat
+Contact Number: 93437878
+Email: doja88@example.com
+Budget: SGD2000/month
+```
 
 ---
 
