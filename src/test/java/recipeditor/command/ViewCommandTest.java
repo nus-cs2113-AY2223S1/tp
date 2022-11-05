@@ -14,7 +14,7 @@ import recipeditor.recipe.RecipeList;
 
 import javax.swing.text.View;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ViewCommandTest {
 
