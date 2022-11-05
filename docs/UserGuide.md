@@ -78,7 +78,7 @@ Sem [1] >>
 > - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
-> - Parameters split by the pipe character `|` |  denotes either of the parameters can be used. Some commands support the usage of both parameters while some does not.
+> - Parameters split by the pipe character `|` denotes either of the parameters can be used. Some commands support the usage of both parameters while some does not.
 > - Named parameters starting with forward slash `/` such as `/module`, `/type` and `/code` in `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]` can appear in any order.
 > - Parameters must be separated by a space. For example, `search /title programming/code cs` will not give the desired result. The correct input should be `search /title programming /code cs`.
 > - The parameter keyword has to come immediately after the forward slash `/`. E.g. `search /title cs` is accepted while `search / title cs` will not be accepted.
