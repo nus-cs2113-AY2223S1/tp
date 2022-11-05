@@ -8,23 +8,23 @@ import seedu.moneygowhere.exceptions.MoneyGoWhereException;
  * Defines exception to be thrown when the command View-RecurringPayment is invalid.
  */
 @SuppressWarnings("unused")
-public class ConsoleParserCommandMergeExternalFileInvalidException extends MoneyGoWhereException {
-    public ConsoleParserCommandMergeExternalFileInvalidException() {
+public class ConsoleParserCommandMergeFileInvalidException extends MoneyGoWhereException {
+    public ConsoleParserCommandMergeFileInvalidException() {
     }
 
-    public ConsoleParserCommandMergeExternalFileInvalidException(String message) {
+    public ConsoleParserCommandMergeFileInvalidException(String message) {
         super(message);
     }
 
-    public ConsoleParserCommandMergeExternalFileInvalidException(String message, Throwable cause) {
+    public ConsoleParserCommandMergeFileInvalidException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ConsoleParserCommandMergeExternalFileInvalidException(Throwable cause) {
+    public ConsoleParserCommandMergeFileInvalidException(Throwable cause) {
         super(cause);
     }
 
-    public ConsoleParserCommandMergeExternalFileInvalidException(
+    public ConsoleParserCommandMergeFileInvalidException(
             String message,
             Throwable cause,
             boolean enableSuppression,

@@ -1396,7 +1396,7 @@ public class ConsoleParserConfigurations {
      *
      * @return {@link Options} object initialized with the required arguments.
      */
-    public static Options getCommandMergeExternalFileOptions() {
+    public static Options getCommandMergeFileOptions() {
         Option optionMergeFilePath = new Option(
                 COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH,
                 COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG,

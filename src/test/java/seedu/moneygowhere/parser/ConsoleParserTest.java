@@ -1,7 +1,6 @@
 package seedu.moneygowhere.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.moneygowhere.commands.ConsoleCommand;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
 import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
@@ -15,7 +14,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
 import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewIncome;
@@ -36,14 +35,13 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInval
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 
-import javax.naming.Name;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -4538,8 +4536,7 @@ class ConsoleParserTest {
                 + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION
                 + " \""
                 + description
-                + "\""
-                ;
+                + "\"";
 
         ConsoleCommandAddTarget consoleCommandAddTarget =
                 (ConsoleCommandAddTarget) ConsoleParser.parse(input);
@@ -5484,11 +5481,11 @@ class ConsoleParserTest {
                 + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
                 + " "
                 + filePath;
-        System.out.print(input);
-        ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile =
-                (ConsoleCommandMergeExternalFile) ConsoleParser.parse(input);
 
-        boolean isFilePathEqual = consoleCommandMergeExternalFile.getFilePath().equals(filePath);
+        ConsoleCommandMergeFile consoleCommandMergeFile =
+                (ConsoleCommandMergeFile) ConsoleParser.parse(input);
+
+        boolean isFilePathEqual = consoleCommandMergeFile.getFilePath().equals(filePath);
 
         assertTrue(isFilePathEqual);
     }
@@ -5505,7 +5502,7 @@ class ConsoleParserTest {
                 + " "
                 + filePath;
 
-        assertThrows(ConsoleParserCommandMergeExternalFileInvalidException.class, () ->
+        assertThrows(ConsoleParserCommandMergeFileInvalidException.class, () ->
                 ConsoleParser.parse(input)
         );
     }
