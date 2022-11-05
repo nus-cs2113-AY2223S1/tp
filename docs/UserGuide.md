@@ -457,13 +457,13 @@ search through the client list for any matches with `Amos`.
 
 Expected Output:
 ```
-find -property f/Bob The Builder
 1.	Landlord Name: Bob The Builder
 	Property Address: 25A Lower Kent Ridge Rd, S119081
 	Property Rental Price: 1000
 	Unit Type: LP Bungalow
 --------------------------------------------------------------------------------
-find -client f/Amos
+
+
 1.	Client Name: Amos
 	Client Contact Number: 91283543
 	Client Email: abc@examplemail.com
@@ -475,7 +475,6 @@ By entering the `help` command, users can see a condense version of the list of 
 
 The list of commands will be as show below:
 ```
-help
 The list of available commands are stated below:
 
 --------------------------------------------------------------------------------

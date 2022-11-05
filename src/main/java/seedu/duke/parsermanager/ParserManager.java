@@ -8,8 +8,11 @@ import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
+
 import seedu.duke.parsermanager.add.CommandAddClientParser;
 import seedu.duke.parsermanager.add.CommandAddPropertyParser;
+import seedu.duke.parsermanager.find.CommandFindClientParser;
+import seedu.duke.parsermanager.find.CommandFindPropertyParser;
 import seedu.duke.parsermanager.pairunpair.PairParser;
 import seedu.duke.parsermanager.pairunpair.UnpairParser;
 
@@ -175,9 +178,9 @@ public class ParserManager {
 
         String findCommandDescription = findCommandTypeAndFlag.get(COMMAND_DESCRIPTION_INDEX);
         if (isFindClient) {
-            return new ParseFindClient(findCommandDescription);
+            return new CommandFindClientParser(findCommandDescription);
         } else if (isFindProperty) {
-            return new ParseFindProperty(findCommandDescription);
+            return new CommandFindPropertyParser(findCommandDescription);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }
