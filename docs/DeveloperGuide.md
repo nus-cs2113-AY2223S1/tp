@@ -78,7 +78,7 @@ Step 3. The user then wishes to reassign task id = 1 to another employee and exe
 
 > The following sequence diagram shows how the task allocation/reallocation operation works:
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/TaskAllocationSequence.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/TaskAllocationSequence.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png)
 
 Step 4. The user then executes the command `employee task i/2` to view the tasks of employee 2, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewEmployeeTasks()`. Due to the reassignment done in step 3, the task id = 1 now belongs to Employee id = 2, and task 1 will not show up in Employee id = 1’s tasks.
 

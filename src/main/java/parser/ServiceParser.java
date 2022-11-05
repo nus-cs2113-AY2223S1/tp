@@ -18,12 +18,11 @@ public class ServiceParser {
 
     public Command parseService(String input) {
         try {
-            if (!input.contains(" ")) {
-                if (input.equals("view")) {
-                    return new ViewServiceCommand();
-                } else {
-                    throw new DukeException();
-                }
+            if (!input.contains(" ") && !input.equals("view")) {
+                throw new DukeException();
+            }
+            if (!input.contains(" ") && input.equals("view")) {
+                return new ViewServiceCommand();
             }
             String type = input.substring(0,input.indexOf(" "));
             String statement = input.substring(input.indexOf(" "));

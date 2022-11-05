@@ -1,7 +1,5 @@
 package employee;
 
-import exception.DukeException;
-
 import java.util.ArrayList;
 
 public class EmployeeList {
@@ -11,8 +9,8 @@ public class EmployeeList {
         System.out.println("Here are the employees in your employee list:");
         int index = 1;
         for (Employee employee : employees) {
-            System.out.print(index + ". " + "ID: " + employee.getEmployeeId());
-            System.out.println(" " + "name: " + employee.getEmployeeName());
+            System.out.print(index + ". " + "ID:" + employee.getEmployeeId() + "\t");
+            System.out.println(" " + "name:" + employee.getEmployeeName() + "\t");
             index += 1;
         }
     }

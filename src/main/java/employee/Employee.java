@@ -1,18 +1,19 @@
 package employee;
 
 import task.Task;
+import ui.Ui;
 
 import java.util.ArrayList;
 
 public class Employee {
-    public static int id = 1000;
+    public static int idCounter = 1000;
     private final int employeeId;
     private String employeeName;
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
     public Employee(String employeeName) {
-        this.employeeId = ++id;
+        this.employeeId = ++idCounter;
         this.employeeName = employeeName;
     }
 
@@ -27,7 +28,7 @@ public class Employee {
     public void viewTasks() {
         System.out.println("Employee " + employeeName + "'s Task List:");
         for (Task task: tasks) {
-            System.out.println("________________________");
+            Ui.showLine();
             task.printTask();
         }
     }

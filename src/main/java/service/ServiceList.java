@@ -1,5 +1,7 @@
 package service;
 
+import exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,23 +18,28 @@ public class ServiceList {
         }
     }
 
-    public static void addService(Service service) {
+    public static void addService(Service service) throws DukeException {
+        if (findService(service.getServiceDescription()) != null) {
+            throw new DukeException();
+        }
+
         services.add(service);
         System.out.println("Got it. I've added this service:");
         System.out.println(service.getServiceDescription());
         System.out.println("Now you have " + services.size() + " services in the service list.");
     }
 
-    public static void removeService(int serviceId) {
+    public static void removeService(int serviceId) throws DukeException {
         for (Service service : services) {
             if (service.getServiceId() == serviceId) {
                 System.out.println("Noted. I've removed this service:");
                 System.out.println(service.getServiceDescription());
                 System.out.println("Now you have " + (services.size() - 1) + " services in the service list.");
                 services.remove(service);
-                break;
+                return;
             }
         }
+        throw new DukeException();
     }
 
     public static Service findService(String serviceDescription) {
