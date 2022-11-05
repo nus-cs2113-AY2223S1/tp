@@ -60,7 +60,7 @@ public class Database {
      */
     private static boolean isNewUniversity(University newUniversity) {
         for (University university : universities) {
-            if (university.getName().equals(newUniversity.getName())) {
+            if (isSameUniversity(university, newUniversity)) {
                 return false;
             }
         }
