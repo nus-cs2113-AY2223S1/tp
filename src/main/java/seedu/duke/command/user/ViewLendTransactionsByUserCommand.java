@@ -1,4 +1,4 @@
-package seedu.duke.command.transaction;
+package seedu.duke.command.user;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.InsufficientArgumentsException;
@@ -14,23 +14,21 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUM
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 
 // @@author jorellesee
-public class ViewBorrowTransactionsByUserCommand extends Command {
-
+public class ViewLendTransactionsByUserCommand extends Command {
     private final String[] parts;
     private static final String USER_ID_DELIMITER = "u";
-
     private final TransactionList transactionList;
     private final UserList userList;
 
     /**
-     * Constructor for ViewBorrowTransactionsByUser.
+     * Constructor for ViewLendTransactionsByUserCommand.
      *
      * @param parts The parts from user input
      * @param userList The list of users to work with
      * @param transactionList The list of transactions to work with
      * @throws InsufficientArgumentsException If the number of args is incorrect
      */
-    public ViewBorrowTransactionsByUserCommand(String[] parts, TransactionList transactionList,
+    public ViewLendTransactionsByUserCommand(String[] parts, TransactionList transactionList,
             UserList userList) throws InsufficientArgumentsException {
         this.parts = parts;
         this.transactionList = transactionList;
@@ -61,11 +59,11 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
     }
 
     /**
-     * Executes ViewBorrowTransactionsByUserCommand.
+     * Executes ViewLendTransactionsByUserCommand.
      *
      * @return false
+     * @throws InsufficientArgumentsException If insufficient arguments are given
      * @throws UserNotFoundException If the user cannot be found
-     * @throws InsufficientArgumentsException If any argument is invalid
      * @throws InvalidArgumentException If there is a part that cannot be parsed
      * @throws InvalidTransactionException If given transaction is invalid
      */
@@ -73,9 +71,10 @@ public class ViewBorrowTransactionsByUserCommand extends Command {
             InvalidArgumentException, InvalidTransactionException {
         String arg = getArgs();
         if (isValidUser(arg)) {
-            TransactionList returnList = transactionList.getBorrowTransactionsByUser(arg);
+            TransactionList returnList = transactionList.getLendTransactionsByUser(arg);
             Ui.printResponse(returnList.toString());
         }
         return false;
     }
 }
+

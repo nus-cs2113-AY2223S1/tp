@@ -733,10 +733,10 @@ ____________________________________________________________
 | Remove a user                      | remove-user /u [USERNAME]                                                                                  |
 | View a user                        | view-user /u [USERNAME]                                                                                    |
 | View a user's items                | view-user-items /u [USERNAME]                                                                              |
-| View a user's borrow transactions  | view-user-borrow /k [KEYWORD]                                                                              |
-| View a user's lend transactions    | view-user-lend /u [KEYWORD]                                                                                |
-| View a user's gain                 | view-user-gain /k [KEYWORD]                                                                                |
-| View a user's loss                 | view-user-loss /k [KEYWORD]                                                                                |
+| View a user's borrow transactions  | view-borrow-tx-by-user /u [USERNAME]                                                                       |
+| View a user's lend transactions    | view-lend-tx-by-user /u [USERNAME]                                                                         |
+| View a user's gain                 | view-user-gain /u [USERNAME]                                                                               |
+| View a user's loss                 | view-user-loss /u [USERNAME]                                                                               |
 | List all users                     | list-users                                                                                                 |
 | Find users by keyword              | find-user /k [KEYWORD]                                                                                     |
 | __*Item-related features*__        |                                                                                                            |
@@ -754,6 +754,7 @@ ____________________________________________________________
 | Remove a transaction               | remove-tx /t [TRANSACTION_ID]                                                                              |
 | View a transaction                 | view-tx /t [TRANSACTION_ID]                                                                                |
 | Update a transaction               | update-tx /t [TRANSACTION_ID] /d [NEW_DURATION]                                                            |
+| Find transactions by status        | find-tx /s finished OR find-tx /s unfinished                                                               |
 | __*Others*__                       |                                                                                                            |
 | Get help                           | help                                                                                                       |
 | Exit program                       | bye                                                                                                        |
