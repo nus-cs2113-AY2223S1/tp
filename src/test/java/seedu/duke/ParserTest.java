@@ -9,7 +9,11 @@ import java.io.PrintStream;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class ParserTest {
@@ -118,7 +122,7 @@ class ParserTest {
 
     @Test
     void getReviewListTest() {
-        ReviewList testList= ps.getReviewList();
+        ReviewList testList = ps.getReviewList();
         assertEquals(rv,testList);
     }
 }
