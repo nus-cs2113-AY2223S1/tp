@@ -121,9 +121,9 @@ public class TransactionList {
     }
 
     public String editExpense(String description, int amount, String category, LocalDate date, int index) {
-        transactions.remove(index - 1);
+        transactions.remove(index);
         Expense expense = new Expense(description, amount, category, date);
-        transactions.add(index - 1, expense);
+        transactions.add(index, expense);
 
         // Sorts the list after deletion
         Collections.sort(transactions);
@@ -131,9 +131,9 @@ public class TransactionList {
     }
 
     public String editIncome(String description, int amount, String category, LocalDate date, int index) {
-        transactions.remove(index - 1);
+        transactions.remove(index);
         Income income = new Income(description, amount, category, date);
-        transactions.add(index - 1, income);
+        transactions.add(index, income);
 
         // Sorts the list after deletion
         Collections.sort(transactions);
