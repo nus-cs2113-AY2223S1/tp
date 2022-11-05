@@ -167,7 +167,7 @@ public class Duke {
             userUniversityListManager.createList(createCommand.getUniversityName());
             UserStorageParser.storeInfoToUserStorageByUni(createCommand.getUniversityName(), userUniversityListManager);
         } else {
-            throw new UniversityNotFoundException("Error! " + createCommand.getUniversityName() + " does not exist "
+            throw new UniversityNotFoundException("Error: " + createCommand.getUniversityName() + " does not exist "
                     + "in database!");
         }
     }
@@ -249,7 +249,7 @@ public class Duke {
             String comment = addCommand.getComment();
             userUniversityListManager.updateComment(universityName, moduleCode, comment);
         } else {
-            System.out.println("Error! Invalid Comment");
+            System.out.println("Error: Invalid Comment");
         }
     }
 

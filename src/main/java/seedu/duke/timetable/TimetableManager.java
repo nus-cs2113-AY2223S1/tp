@@ -70,7 +70,7 @@ public class TimetableManager {
     public void addLesson(Lesson newLesson, boolean isLoadFromFile) throws InvalidUniversityException {
         String universityName = newLesson.getUniversity().getName();
         if (!timetableManager.containsKey(universityName)) {
-            throw new InvalidUniversityException("Error! " + universityName + " is not in your list");
+            throw new InvalidUniversityException("Error: " + universityName + " is not in your list");
         }
         timetableManager.get(universityName).addLesson(newLesson, isLoadFromFile);
     }
