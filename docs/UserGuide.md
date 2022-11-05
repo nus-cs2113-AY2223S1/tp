@@ -693,5 +693,3 @@ new directory on your new computer along with the OneDoc JAR file, and the JAR f
 | Change prescription status to inactive          | Format: deactivate x/[index] (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                    |
 | View all commands of prescription menu          | Format: `help` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                                  |
 | Exiting the program                             | Format: bye                                                                                                                                                                                                       |
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
