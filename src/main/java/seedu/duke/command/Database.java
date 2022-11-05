@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import seedu.duke.exceptions.ModuleNotFoundException;
 import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.module.ModuleMapping;
+import seedu.duke.module.Module;
 import seedu.duke.university.University;
 
 public class Database {
@@ -42,7 +43,12 @@ public class Database {
      * @param newModuleMapping New module mapping to be added
      */
     public static void addModuleMapping(ModuleMapping newModuleMapping) {
-        moduleMappings.add(newModuleMapping);
+        if (isNewModuleMapping(newModuleMapping)) {
+            logger.log(Level.FINE, "New module mapping found, adding to list");
+
+            moduleMappings.add(newModuleMapping);
+        }
+
     }
 
     /**
@@ -53,15 +59,44 @@ public class Database {
      * @return True if the university has not been added before, false otherwise
      */
     private static boolean isNewUniversity(University newUniversity) {
-        assert newUniversity.getName().length() > 0 : "New university name cannot be empty";
-        assert newUniversity.getCountry().length() > 0 : "New university country cannot be empty";
-
         for (University university : universities) {
             if (university.getName().equals(newUniversity.getName())) {
                 return false;
             }
         }
         return true;
+    }
+
+    private static boolean isNewModuleMapping(ModuleMapping newModuleMapping) {
+        for (ModuleMapping moduleMapping : moduleMappings) {
+            if (isSameModule(moduleMapping.getNusModule(), newModuleMapping.getNusModule()) && isSameModule(
+                    moduleMapping.getPartnerUniversityModule(), newModuleMapping.getPartnerUniversityModule())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isSameModule(Module currentModule, Module newModule) {
+        boolean isSameCode = currentModule.getCode().equals(newModule.getCode());
+        boolean isSameTitle = currentModule.getTitle().equals(newModule.getTitle());
+        boolean isSameCredit = currentModule.getCredit().equals(newModule.getCredit());
+
+        if (isSameCode && isSameTitle && isSameCredit
+                && isSameUniversity(currentModule.getUniversity(), newModule.getUniversity())) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isSameUniversity(University currentUniversity, University newUniversity) {
+        boolean isSameName = currentUniversity.getName().equals(newUniversity.getName());
+        boolean isSameCountry = currentUniversity.getCountry().equals(newUniversity.getCountry());
+
+        if (isSameName && isSameCountry) {
+            return true;
+        }
+        return false;
     }
 
     /**
