@@ -26,7 +26,7 @@ public class FindCommandTest {
     }
 
     @Test
-    void testNoCarparkFound() throws FileWriteException, NoFileFoundException, NoCarparkFoundException {
+    void testNoCarparkFound() throws FileWriteException, NoFileFoundException {
         CarparkList carparkList = new CarparkList(validPathAndFile, validBackupPathAndFile);
         Assertions.assertThrows(NoCarparkFoundException.class, () -> {
             new FindCommand("ZZ", carparkList).execute();
