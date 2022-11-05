@@ -1,6 +1,8 @@
 //@@author OVReader
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.add;
+
+import seedu.duke.parsermanager.Parser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

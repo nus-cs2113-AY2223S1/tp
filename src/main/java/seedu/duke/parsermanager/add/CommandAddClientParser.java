@@ -1,22 +1,22 @@
 //@@author OVReader
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.add;
 
 import seedu.duke.Client;
 import seedu.duke.ClientList;
 import seedu.duke.Ui;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandAddClient;
+import seedu.duke.command.add.CommandAddClient;
 
-import seedu.duke.exception.DuplicateClientException;
-import seedu.duke.exception.EmptyAddClientDetailException;
-import seedu.duke.exception.IncorrectAddClientFlagOrderException;
-import seedu.duke.exception.InvalidBudgetFormatException;
-import seedu.duke.exception.InvalidContactNumberException;
-import seedu.duke.exception.InvalidEmailException;
-import seedu.duke.exception.MissingAddClientFlagException;
-import seedu.duke.exception.ParseAddClientException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.DuplicateClientException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.EmptyAddClientDetailException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.IncorrectAddClientFlagOrderException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.InvalidBudgetFormatException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.InvalidContactNumberException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.InvalidEmailException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.MissingAddClientFlagException;
+import seedu.duke.exception.parseaddexception.parseaddclientexception.ParseAddClientException;
 
 import java.util.ArrayList;
 

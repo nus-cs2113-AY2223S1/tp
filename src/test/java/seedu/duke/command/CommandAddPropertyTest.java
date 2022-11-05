@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.add.CommandAddProperty;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandAddPropertyTest {

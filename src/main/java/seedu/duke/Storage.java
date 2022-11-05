@@ -9,8 +9,8 @@ import seedu.duke.exception.storageexception.InvalidPairingPropertyException;
 import seedu.duke.exception.storageexception.PairFileNotFoundException;
 import seedu.duke.exception.storageexception.PropertyFileNotFoundException;
 import seedu.duke.exception.storageexception.StorageException;
-import seedu.duke.parsermanager.CommandAddClientParser;
-import seedu.duke.parsermanager.CommandAddPropertyParser;
+import seedu.duke.parsermanager.add.CommandAddClientParser;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
 
 
 import java.io.File;

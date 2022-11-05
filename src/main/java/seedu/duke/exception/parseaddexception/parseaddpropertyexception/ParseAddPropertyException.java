@@ -1,6 +1,8 @@
 //@@author OVReader
 
-package seedu.duke.exception;
+package seedu.duke.exception.parseaddexception.parseaddpropertyexception;
+
+import seedu.duke.exception.DukeParseException;
 
 /**
  * Represents exception in CommandAddPropertyParser class.

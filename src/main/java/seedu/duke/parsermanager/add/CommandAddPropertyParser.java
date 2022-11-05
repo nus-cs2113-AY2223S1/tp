@@ -1,23 +1,23 @@
 //@@author OVReader
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.add;
 
 import seedu.duke.Property;
 import seedu.duke.PropertyList;
 import seedu.duke.Ui;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.CommandAddProperty;
+import seedu.duke.command.add.CommandAddProperty;
 
-import seedu.duke.exception.DuplicatePropertyException;
-import seedu.duke.exception.EmptyAddPropertyDetailException;
-import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
-import seedu.duke.exception.AddressFormatUnitTypeMismatchException;
-import seedu.duke.exception.InvalidPriceFormatException;
-import seedu.duke.exception.InvalidSingaporeAddressException;
-import seedu.duke.exception.InvalidUnitTypeLabelException;
-import seedu.duke.exception.MissingAddPropertyFlagException;
-import seedu.duke.exception.ParseAddPropertyException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.DuplicatePropertyException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.EmptyAddPropertyDetailException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.IncorrectAddPropertyFlagOrderException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.AddressFormatUnitTypeMismatchException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidPriceFormatException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidSingaporeAddressException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidUnitTypeLabelException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.MissingAddPropertyFlagException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.ParseAddPropertyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

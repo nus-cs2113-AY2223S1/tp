@@ -1,6 +1,6 @@
 //@@author OVReader
 
-package seedu.duke.command;
+package seedu.duke.command.add;
 
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;

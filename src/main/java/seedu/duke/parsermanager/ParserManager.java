@@ -8,6 +8,8 @@ import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
 import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 import seedu.duke.exception.UndefinedSubCommandTypeException;
+import seedu.duke.parsermanager.add.CommandAddClientParser;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
 import seedu.duke.parsermanager.pairunpair.PairParser;
 import seedu.duke.parsermanager.pairunpair.UnpairParser;
 

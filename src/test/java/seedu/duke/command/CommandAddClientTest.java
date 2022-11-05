@@ -9,6 +9,7 @@ import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.command.add.CommandAddClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
