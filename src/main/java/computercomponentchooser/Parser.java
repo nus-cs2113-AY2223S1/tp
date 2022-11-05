@@ -51,7 +51,7 @@ public class Parser {
      * @return A boolean value indicating whether the user input is bye.
      */
     static boolean checkBye(String line) {
-        String checkLine = line.toLowerCase();
+        String checkLine = line.toLowerCase().trim();
         return checkLine.equals("bye");
     }
 
@@ -62,7 +62,7 @@ public class Parser {
      * @return A boolean value indicating whether the user input is edit.
      */
     public boolean checkEdit(String line) throws ArrayIndexOutOfBoundsException {
-        String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+        String edit = getParameter(line, COMMAND_PARAMETER).toLowerCase().trim();
         if (edit.equals("edit")) {
             String name = getParameter(line, NAME_PARAMETER);
             if (!ComputerComponentChooser.buildManager.doesBuildExist(name)) {
@@ -81,7 +81,7 @@ public class Parser {
      * @param line The user input.
      */
     public void parse(String line) {
-        String command = getParameter(line, COMMAND_PARAMETER);
+        String command = getParameter(line, COMMAND_PARAMETER).trim();
         try {
             switch (command) {
             case "bye":
