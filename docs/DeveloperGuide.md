@@ -368,7 +368,7 @@ The `AddCommand` inherits properties from the abstract `Command` class. The inhe
 shown below.
 
 <p align="center">
-    <img src="images/AddCommandClassDiagram.png">
+    <img src="images/AddCommandClassDiagram.png" width = "50%">
     <br />
     <i>Figure 11: Class Diagram for Add Command</i>
 </p>
@@ -423,7 +423,7 @@ shown below.
 <p align="center">
     <img src="images/EditCommandClassDiagram.png" width="50%">
     <br />
-    <i>Figure 14: Sequence Diagram for Edit Command</i>
+    <i>Figure 14: Class Diagram for Edit Command</i>
 </p>
 
 The full command for `edit` is `edit [e/ENTRY] [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`.
@@ -552,7 +552,7 @@ The `DeleteCommand` inherits properties from the abstract `Command` class. The i
 shown below.
 
 <p align="center">
-    <img src="images/DeleteCommandSequenceDiagram.png">
+    <img src="images/DeleteCommandClassDiagram.png" width = "50%">
     <br />
     <i>Figure 19: Class Diagram for Delete Command</i>
 </p>
@@ -614,7 +614,7 @@ The `PurgeCommand` inherits properties from the abstract `Command` class. The in
 shown below.
 
 <p align="center">
-    <img src="images/PurgeCommandClassDiagram.png">
+    <img src="images/PurgeCommandClassDiagram.png" width = "50%">
     <br />
     <i>Figure 21: Class Diagram for Purge Command</i>
 </p>
@@ -794,7 +794,7 @@ The structure of the application focusing on the help command is illustrated in 
 <p align="center">
     <img src="images/HelpCommandClassDiagram.png" width = "95%">
     <br />
-    <i>Figure 26: Class Diagram for Help Command</i>
+    <i>Figure 27: Class Diagram for Help Command</i>
 </p>
 
 For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
@@ -806,7 +806,7 @@ based on the help option chosen by the user.
 <p align="center">
     <img src="images/HelpCommandSequenceDiagram.png" width="80%">
     <br />
-    <i>Figure 27: Sequence Diagram for Help Command</i>
+    <i>Figure 28: Sequence Diagram for Help Command</i>
 </p>
 
 _Written by: Chia Thin Hong_
@@ -817,9 +817,9 @@ The `ByeCommand` inherits properties from the abstract `Command'` class. The inh
 shown below.
 
 <p align="center">
-    <img src="images/ByeCommandSequenceDiagram.png">
+    <img src="images/ByeCommandClassDiagram.png" width = "50%">
     <br />
-    <i>Figure 28: Class Diagram for Bye Command</i>
+    <i>Figure 29: Class Diagram for Bye Command</i>
 </p>
 
 
@@ -856,7 +856,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/ByeCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.8: Sequence Diagram for Delete Command</i>
+    <i>Figure 30: Sequence Diagram for Bye Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
