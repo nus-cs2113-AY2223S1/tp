@@ -12,15 +12,24 @@ import java.util.logging.Logger;
 
 public class Media {
     private final Logger logger = Logger.getLogger("DukeLogger");
-    public String title;
-    public double rating;
-    public String genre;
-    public Date dateWatched;
-    public String dateString;
-    public boolean isFavourite = false;
+
+    private String title;
+    private double rating;
+    private String genre;
+    private Date dateWatched;
+    private String dateString;
+    private boolean isFavourite = false;
 
     public Date getDateWatched() {
         return dateWatched;
+    }
+
+    public void setDateWatched(Date dateWatched) {
+        this.dateWatched = dateWatched;
+    }
+
+    public String getDateString() {
+        return dateString;
     }
 
     public String getGenre() {
@@ -74,15 +83,15 @@ public class Media {
                 throw new FutureDateException();
             }
 
-            this.dateWatched = date;
+            setDateWatched(date);
 
             String pattern = "dd-MM-yyyy";
             DateFormat df = new SimpleDateFormat(pattern);
-            dateString = df.format(dateWatched);
+            dateString = df.format(getDateWatched());
         } catch (ParseException e) {
             System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
         } catch (FutureDateException e) {
-            ;
+            logger.log(Level.INFO,"User attempted to add date from the future.");
         }
     }
 
@@ -90,7 +99,7 @@ public class Media {
         title = "";
         rating = 0;
         genre = "";
-        dateWatched = null;
+        setDateWatched(null);
     }
 
     /**.

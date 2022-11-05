@@ -1,10 +1,5 @@
 package seedu.duke;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +25,7 @@ public class Movie extends Media {
      * Formats the movie review to display as output.
      */
     public String toString() {
-        return "[Movie] " + super.toString() + "  Date watched: " + super.dateString;
+        return "[Movie] " + super.toString() + "  Date watched: " + super.getDateString();
     }
 
     /**
@@ -42,9 +37,10 @@ public class Movie extends Media {
     @Override
     public String createFileString() {
         String favourite = "N";
-        if (this.isFavourite) {
+        if (this.isFavourite()) {
             favourite = "Y";
         }
-        return "M|" + favourite + "|" + super.title + "|" + super.rating + "|" + super.genre + "|" + super.dateString;
+        return "M|" + favourite + "|" + super.getTitle() + "|" + super.getRating() + "|" + super.getGenre() + "|"
+                + super.getDateString();
     }
 }

@@ -7,8 +7,6 @@ import seedu.duke.ReviewList;
 import seedu.duke.TvShow;
 import seedu.duke.Ui;
 
-import java.util.logging.Level;
-
 public class FavouriteCommand extends Commands {
     String[] userInput;
 
