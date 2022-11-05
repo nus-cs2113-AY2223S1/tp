@@ -1,5 +1,0 @@
-Compatible PC
-b
-build2
-build1
-error build
