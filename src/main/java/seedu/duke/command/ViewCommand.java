@@ -289,6 +289,10 @@ public class ViewCommand extends Command {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
         String caption = getExerciseListCaption(exerciseArrayList.size(), argumentList, EXERCISE_LIST_CAPTION);
+        ExerciseTable exerciseTable = new ExerciseTable(exerciseArrayList, caption);
+        ArrayList<String> table = exerciseTable.getExerciseTable();
+        ui.printTable(table);
+
     }
 
     private String getExerciseListCaption(int size, String[] argumentList, String caption) {

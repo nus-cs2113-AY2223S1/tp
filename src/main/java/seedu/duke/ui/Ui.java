@@ -43,6 +43,7 @@ public class Ui {
         for (String row : table) {
             output(row);
         }
+        printEmptyLine();
     }
 
     public void printInSameLine(String... output) {

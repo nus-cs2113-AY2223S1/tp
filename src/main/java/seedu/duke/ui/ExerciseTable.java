@@ -50,7 +50,7 @@ public class ExerciseTable extends Table {
                     columnSpacingArray[DESCRIPTION_INDEX]);
             String weight = getWeightForTable(exercise, columnSpacingArray[WEIGHT_INDEX]);
             String sets = addRightPadding(Integer.toString(exercise.getSet()),
-                    columnSpacingArray[SET_INDEX]) + COLUMN_SEPARATOR;
+                    columnSpacingArray[SET_INDEX]);
             String repetitions = addRightPadding(Integer.toString(exercise.getRepetition()),
                     columnSpacingArray[REPETITION_INDEX]);
             String distance = getDistanceForTable(exercise, columnSpacingArray[DISTANCE_INDEX]);
@@ -60,8 +60,6 @@ public class ExerciseTable extends Table {
             String row = index + exerciseName + weight + sets + repetitions + distance
                     + calories + date + status;
             exerciseTable.add(row);
-            exerciseTable.add(ROW_SEPARATOR.repeat(row.length()));
-
         }
     }
 
@@ -98,6 +96,7 @@ public class ExerciseTable extends Table {
             headingRow.append(addRightPadding(headings[i], columnSpacingArray[i]));
         }
         headingRow.append(headings[STATUS_INDEX]);
+        exerciseTable.add(ROW_SEPARATOR.repeat(headingRow.length()));
         exerciseTable.add(headingRow.toString());
         exerciseTable.add(ROW_SEPARATOR.repeat(headingRow.length()));
 
@@ -136,7 +135,7 @@ public class ExerciseTable extends Table {
     }
 
     private void setFinalIndexColumnSpacing() {
-        columnSpacingArray[INDEX_POSITION] = Math.max(Integer.parseInt(headings[0]),
+        columnSpacingArray[INDEX_POSITION] = Math.max(columnSpacingArray[INDEX_POSITION],
                 String.valueOf(exerciseArrayList.size()).length());
     }
 
