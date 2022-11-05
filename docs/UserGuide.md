@@ -29,6 +29,8 @@
 * [Command Summary](#command-summary)
     * [Main Mode Summary](#main-mode-summary)
     * [Edit Mode Summary](#edit-mode-summary)
+* [Glossary](#glossary)
+    * [PC Component Parameters Glossary](#pc-component-parameters-summary)
 
 ## Introduction
 
@@ -102,7 +104,7 @@ ____________________________________________________________
 
 #### Editing a build: `edit`
 
-Enters [edit mode](#edit-mode) for the specified build. The user only needs to specify the name of the
+Enters [Build Editing Mode](#build-editing-mode) for the specified build. The user only needs to specify the name of the
 build.
 
 Format: `edit/NAME`
@@ -278,12 +280,25 @@ Edit mode handles the management of the computer components of a build.
 
 Adds a component to the list of components of a build.
 
-Format: `add/TYPE/NAME/PRICE/POWER/PARAM/PARAM/...`
+Acceptable Formats: 
+1. `add/case/Name/Price/Power/FormFactor/ExpansionSlots`
+2. `add/cooler/Name/Price/Power/Socket/FanSpeed/NoiseLevel`
+3. `add/cpu/Name/Price/Power/Socket/ClockSpeed`
+4. `add/gpu/Name/Price/Power/Memory/ClockSpeed`
+5. `add/drive/Name/Price/Power/StorageSize/StorageType`
+6. `add/motherboard/Name/Price/Power/Socket/FormFactor/MemorySlots/GPUSlots`
+7. `add/memory/Name/Price/Power/MemorySize/MemorySpeed`
+8. `add/powersupply/Name/Price/Power`
+9. `add/monitor/Name/Price/Power/RefreshRate/ResponseTime/Resolution`
+10. `add/other/Name/Price/Power`
 
-Example of usage: User enters `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
+Note: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-summary).
+
+Example of usage: 
+
+Enter `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
-of 3.8 GHz. Other possible types include: 
-`case, cooler, drive, gpu, motherboard, psu, memory, storage, monitor and other`
+of 3.8 GHz.
 
 Expected outcome: The program will add a cpu named 'intel 10990x' to the list of components.
 ```
@@ -479,4 +494,28 @@ to the data folder of the new program on your new computer to carry over your da
 | Info   | `info`                                                                                      |
 | Export | `export`                                                                                    |
 | Back   | `back`                                                                                      |
+
+## Glossary
+### PC Component Parameters Glossary
+| Parameter      | Examples                                                        |
+|----------------|-----------------------------------------------------------------|
+| Name           | Name of the component <br/> E.g. `Intel 10990x`                 |
+| Price          | Price of the component <br/> E.g. `1000`                        |
+| Power          | Power consumption of the component <br/> E.g. `80`              |
+| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
+| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                             |
+| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
+| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
+| MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
+| FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
+| MemorySize     | Memory size in GB <br/> E.g. `16`                               |
+| StorageSize    | Storage size in GB <br/> E.g. `1000`                            |
+| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                           |
+ | FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
+| NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
+| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
+| ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
+| Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
+
+
 
