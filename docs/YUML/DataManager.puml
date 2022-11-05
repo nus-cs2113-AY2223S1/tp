@@ -1,0 +1,15 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class DataManager {
+{static} - currSemester:String
+{static} - dataDirectoryPath:String
+{static} + getCurrSem():String
+{static} + getDirPath():String
+{static} + initDataFile(semester:String, dir:String)
+{static} + loadTimetableFromDataFile()
+{static} + makeSave()
+{static} + resetDataFiles()
+}
+
+@enduml

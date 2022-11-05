@@ -368,7 +368,7 @@ public class Module {
         return moduleCode + " : " + moduleName;
     }
 
-    public boolean checkLessonTypeAttended(String lessonType) {
+    public boolean isLessonTypeAttended(String lessonType) {
         boolean isLessonTypeAttended = false;
         for (Lesson attendingLesson : attendingList) {
             String lessonDay = attendingLesson.getDay();
@@ -390,5 +390,17 @@ public class Module {
             attendingLessonTypes.add(lessonType);
         }
         return attendingLessonTypes;
+    }
+
+    public boolean hasAvailableLessonsToSwap() {
+        if (lessonMap.size() == 0) {
+            return false;
+        }
+        for (LinkedHashMap<String, ArrayList<Lesson>> singleClass : lessonMap.values()) {
+            if (singleClass.size() > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 }

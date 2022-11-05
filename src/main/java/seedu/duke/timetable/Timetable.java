@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Timetable {
-    public static List<Module> listOfModules = new ArrayList<>();
+    public static List<Module> listOfModules = new ArrayList<Module>();
     public static TimetableDict timetableDict = new TimetableDict();
+    private static List<Module> listOfChangeableModules = new ArrayList<Module>();
 
     public static String allocateModules() {
         return timetableDict.allocateModules();
@@ -17,6 +18,9 @@ public class Timetable {
     public static void addNewModule(String code, String name, List<Lesson> lessons) {
         Module newModule = new Module(code, name, lessons);
         listOfModules.add(newModule);
+        if (newModule.hasAvailableLessonsToSwap()) {
+            listOfChangeableModules.add(newModule);
+        }
     }
 
     public static void addNewModuleFromFile(String code, String name, List<Lesson> lessons) {
@@ -60,6 +64,7 @@ public class Timetable {
         Module module = listOfModules.get(index - 1);
         timetableDict.deleteModule(module);
         listOfModules.remove(index - 1);
+        listOfChangeableModules.remove(module);
     }    // the nth module in list has index n-1
     //@@author HT-T
 
@@ -67,10 +72,23 @@ public class Timetable {
         return listOfModules.size();
     }
 
+    public static List<Module> getListOfChangeableModules() {
+        return listOfChangeableModules;
+    }
+
+    public static int getNumberOfSettableLessons() {
+        return listOfChangeableModules.size();
+    }
+
+    /**
+     * Displays the list of modules that are selectable during set operation.
+     *
+     * @return The formatted list the user will see.
+     */
     public static String getShortenedList() {
         StringBuilder list = new StringBuilder();
         int index = 1;
-        for (Module module : listOfModules) {
+        for (Module module : listOfChangeableModules) {
             list.append(index).append(". ").append(module.toString()).append("\n");
             index += 1;
         }
@@ -78,48 +96,49 @@ public class Timetable {
     }
 
     /**
-     * Gets the number of different lesson types whose lessons are adjustable.
+     * Gets the number of different lesson types whose lessons are adjustable for a particular module.
      *
      * @param index The index of the target module
      * @return Number of lessons types with adjustable lessons
      */
-    public static int getLessonTypeLength(int index) {
-        return listOfModules.get(index).getNumLessonTypes();
+    public static int getSettableLessonTypeLength(int index) {
+        return listOfChangeableModules.get(index).getNumLessonTypes();
     }
 
-    public static String getLessonTypes(int index) {
-        return listOfModules.get(index).getLessonTypes();
+    public static String getSettableLessonTypes(int index) {
+        return listOfChangeableModules.get(index).getLessonTypes();
     }
 
-    public static String getLessonTypeFromIndex(int indexForModule, int lessonIndex) {
+    public static String getSettableLessonTypeFromIndex(int indexForModule, int lessonIndex) {
         assert indexForModule >= 0 : "index should be within range";
         assert lessonIndex >= 0 : "index should be within range";
 
-        return listOfModules.get(indexForModule).getTypeOfLessonFromIndex(lessonIndex);
+        return listOfChangeableModules.get(indexForModule).getTypeOfLessonFromIndex(lessonIndex);
     }
 
-    public static String listAllPossibleLessonReplacements(int indexForModule, String targetLessonType) {
+    public static String listAllSettableLessonReplacements(int indexForModule, String targetLessonType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        return listOfModules.get(indexForModule).getListOfLessonReplacements(targetLessonType);
+        return listOfChangeableModules.get(indexForModule).getListOfLessonReplacements(targetLessonType);
     }
 
-    public static int getNumberOfPossibleReplacements(int indexForModule, String targetLessonType) {
+    public static int getSettableNumberOfPossibleReplacements(int indexForModule, String targetLessonType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        return listOfModules.get(indexForModule).getNumberOfReplacements(targetLessonType);
+        return listOfChangeableModules.get(indexForModule).getNumberOfReplacements(targetLessonType);
     }
 
-    public static ArrayList<Lesson> getLessonReplacement(int indexForModule, int indexForTarget, String targetType) {
+    public static ArrayList<Lesson> getSettableLessonReplacement(int indexForModule, int indexForTarget,
+                                                                 String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
         return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
-    public static void replaceLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
+    public static void replaceSettableLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        listOfModules.get(indexForModule).replaceAttending(timetableDict, newLessons, moduleType);
+        listOfChangeableModules.get(indexForModule).replaceAttending(timetableDict, newLessons, moduleType);
     }
 
     public static void clearData() {
