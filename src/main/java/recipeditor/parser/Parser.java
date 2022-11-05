@@ -25,6 +25,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main parser class to parse command.
+ */
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =

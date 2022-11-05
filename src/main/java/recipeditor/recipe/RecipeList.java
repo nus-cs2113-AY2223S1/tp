@@ -7,6 +7,7 @@ import recipeditor.storage.Storage;
 import java.util.ArrayList;
 
 public class RecipeList {
+    private static final String NUMBER_OF_RECIPE_PRINT = "There are %d recipes in the recipe list";
     private static ArrayList<String> recipeTitles = new ArrayList<>();
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -137,5 +138,9 @@ public class RecipeList {
             }
         }
         return false;
+    }
+
+    public static String printNumberOfRecipes() {
+        return String.format(NUMBER_OF_RECIPE_PRINT, RecipeList.getRecipeTitlesSize());
     }
 }

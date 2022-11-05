@@ -3,12 +3,14 @@ package recipeditor.command;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.Ui;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
     private static final String COMMAND_SYNTAX = "/add";
     private static final String COMMAND_FUNCTION = "Edit a new recipe and add it to recipeditor.";
+
+    private static final String NOTHING = "Nothing was added";
+
     private Recipe addedRecipe;
     private boolean isValid;
 
@@ -37,13 +39,12 @@ public class AddCommand extends Command {
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
             StringBuilder response = new StringBuilder();
-            response.append("\"" + addedRecipe.getTitle() + "\" added to the recipe list.\n");
-            response.append(String.format("There are %d recipes in the recipe list",
-                    RecipeList.getRecipeTitlesSize()));
+            response.append(String.format("\"%s\" added to the recipe list.\n",addedRecipe.getTitle()));
+            response.append(RecipeList.printNumberOfRecipes());
 
             return new CommandResult(response.toString());
         } else {
-            return new CommandResult("Nothing was added");
+            return new CommandResult(NOTHING);
         }
     }
 }

@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +18,7 @@ import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
 public class Storage {
-
+    public static final String LOG_FILE = "./RecipeData/App/Log.txt";
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
@@ -47,6 +46,7 @@ public class Storage {
     }
 
     public static void createFile(String filePath) {
+
         try {
             File file = new File(filePath);
             if (!file.getParentFile().exists()) {
@@ -134,17 +134,7 @@ public class Storage {
         }
     }
 
-    //FIXED: Don't append just overwrite
-    public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
-        try {
-            FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
-            fw.write(addedRecipe.getTitle() + "\n");
-            fw.close();
-            logger.log(Level.INFO, addedRecipe.getTitle() + " added to the list.");
-        } catch (IOException ioException) {
-            Ui.showMessage("Error in loading recipes to data file");
-        }
-    }
+
 
     public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
         try {
@@ -203,7 +193,6 @@ public class Storage {
         return getContent.toString();
     }
 
-    //FIXME: Don't need to copy temporary file over but generated from model
     public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
         FileWriter fileWrite;
         try {
