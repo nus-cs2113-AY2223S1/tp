@@ -14,7 +14,8 @@ public class TitleFileParser {
 
     /**
      * Parse AllRecipes.txt and check if the title are valid and have the associated recipe files.
-     * @param lines
+     *
+     * @param lines content of the AllRecipes.txt
      */
     public static void parseTitleFileToRecipeTitles(String[] lines) {
         for (int i = 0; i < lines.length; i++) {

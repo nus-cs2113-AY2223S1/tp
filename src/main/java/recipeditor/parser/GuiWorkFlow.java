@@ -12,17 +12,17 @@ import java.io.FileNotFoundException;
 
 public class GuiWorkFlow {
     private static final String ABORT_QUESTION = "Do you want to FIX the recipe? (Y/N)";
+    private final Mode mode;
     boolean saveToTemp;
     private boolean validity = false;
     private Recipe recipe = new Recipe();
-    private final Mode mode;
     private boolean exitLoop;
 
-    /***
+    /**
      * A class that handle the GUI call and the intermediate interaction between the GUI and CLI.
      * Ask the user whether they want to make changes when the format of the text in Editor is wrong.
-     * @param path
-     * @throws FileNotFoundException
+     * @param path load the content of the file
+     * @throws FileNotFoundException Handled by the parser
      */
     public GuiWorkFlow(String path) throws FileNotFoundException {
         mode = getMode(path);

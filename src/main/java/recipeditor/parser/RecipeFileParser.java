@@ -58,10 +58,10 @@ public class RecipeFileParser {
     }
 
     /**
-     * Parse the text content
+     * Parse the text content.
      * @param text with newlines
      * @return parsed Recipe
-     * @throws ParseFileException
+     * @throws ParseFileException will be handele by GUIWorkflow
      */
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
         parsedLine = text.split("\n");

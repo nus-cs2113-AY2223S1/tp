@@ -2,12 +2,13 @@ package recipeditor.parser;
 
 import org.apache.commons.lang3.StringUtils;
 
-
-/***
+/**
  * Utility class with useful method for parsing.
  */
 public class ParserUtils {
-    /** Check for alphanumeric. */
+    /**
+     * Check for alphanumeric.
+     */
     public static boolean isTitleNotAlphanumeric(String title) {
         String[] parsed = title.split(" ");
         for (String word : parsed) {
@@ -17,8 +18,12 @@ public class ParserUtils {
         }
         return false;
     }
-    /** Check if exceed char limit. */
+
+    /**
+     * Check if exceed char limit.
+     */
     public static boolean doesTitleExceedLimit(String title) {
         return title.length() > 255;
     }
 }
+

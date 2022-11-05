@@ -95,10 +95,11 @@ public class Editor extends JFrame implements ActionListener {
 
 
     }
-    /***
+    /**
      * Change behavior of actionPerformed of ActionListener.
      * @param e the event to be processed
      */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonSave) {
@@ -120,11 +121,11 @@ public class Editor extends JFrame implements ActionListener {
         }
     }
 
-    /***
+    /**
      * Enter the editor.
-     * @param path
+     * @param path load the content to the text area
      * @return true if the file is properly saved.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException handle by GUI Flow
      */
     public boolean enterEditor(String path) throws FileNotFoundException {
         Ui.showMessage("Please edit in the GUI editor!");
