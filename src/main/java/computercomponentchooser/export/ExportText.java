@@ -12,7 +12,7 @@ import java.nio.file.Files;
 /**
  * Exports the builds to a text file.
  */
-public class ExportText {
+public class ExportText implements Export {
 
     /**
      * The file directory that the files are stored in.
