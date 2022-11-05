@@ -67,6 +67,13 @@ public class Database {
         return true;
     }
 
+    /**
+     * Checks if the new module mapping has not been added to the current list of
+     * module mappings before.
+     * 
+     * @param newModuleMapping New module mapping to be added
+     * @return True if the module mapping has not been added before, false otherwise
+     */
     private static boolean isNewModuleMapping(ModuleMapping newModuleMapping) {
         for (ModuleMapping moduleMapping : moduleMappings) {
             if (isSameModule(moduleMapping.getNusModule(), newModuleMapping.getNusModule()) && isSameModule(
@@ -77,6 +84,13 @@ public class Database {
         return true;
     }
 
+    /**
+     * Checks if the two modules are equal to each other.
+     * 
+     * @param currentModule Module that already exists in database
+     * @param newModule     New module to check against
+     * @return True if the two modules are equal, false otherwise
+     */
     private static boolean isSameModule(Module currentModule, Module newModule) {
         boolean isSameCode = currentModule.getCode().equals(newModule.getCode());
         boolean isSameTitle = currentModule.getTitle().equals(newModule.getTitle());
@@ -89,6 +103,13 @@ public class Database {
         return false;
     }
 
+    /**
+     * Checks if the two universities are equal to each other.
+     * 
+     * @param currentUniversity University that already exists in database
+     * @param newUniversity     New university to check against
+     * @return True if the two universities are equal, false otherwise
+     */
     private static boolean isSameUniversity(University currentUniversity, University newUniversity) {
         boolean isSameName = currentUniversity.getName().equals(newUniversity.getName());
         boolean isSameCountry = currentUniversity.getCountry().equals(newUniversity.getCountry());
