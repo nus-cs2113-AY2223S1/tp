@@ -127,7 +127,7 @@ public class UserStorageParser {
             assert modules.size() > 0 : "at least one module in this university";
             output += module.getPuCode() + ";";
             if (!module.getComment().equals("") && module.getComment() != null) {
-                output += module.getComment() + ";";
+                output += module.getComment();
             }
             output += "%\n";
         }
@@ -467,7 +467,7 @@ public class UserStorageParser {
             assert items.length > 1 : "This university has at least one module saved";
             String[] details = splitModuleInformationInFileContent(items[i]);
             if (!isValidModulesFormat(details)) {
-                throw new InvalidUserStorageFileException("Invalid file format" + getDeleteMessage(puName));
+                throw new InvalidUserStorageFileException("Invalid file format\n" + getDeleteMessage(puName));
             }
             String moduleCode = details[0];
             ModuleMapping moduleMapping;
@@ -506,6 +506,6 @@ public class UserStorageParser {
      * @return true if it is a valid format
      */
     private static boolean isValidModulesFormat(String[] details) {
-        return details.length == 2;
+        return (details.length == 1 || details.length == 2) && !details[0].equals("");
     }
 }
