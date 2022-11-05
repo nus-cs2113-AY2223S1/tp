@@ -17,6 +17,7 @@ public class EditCommand extends Command {
     private static final String EDIT_SUCCESS = " successfully edited.";
     private static final String EDIT_FAILED = "Edit failed";
     private static final String NO_EDIT = "No edit was made";
+
     private static final String COMMAND_FUNCTION = "\nEdit an existing recipe by: \n"
             + "-add Add a new step or ingredient \n"
             + "-del Delete an existing step or ingredient \n"
