@@ -41,8 +41,8 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ### Architecture
 
-<p align="center" width="100%">
-  <img width="80%" src="images/Architecture.png" alt="Storage Class Diagram"/>
+<p align="center" width="50%">
+  <img width="40%" src="images/Architecture.png" alt="Storage Class Diagram"/>
 </p>
 
 `Recipeditor` calls to various class a perform all the tasks assigned by the user.

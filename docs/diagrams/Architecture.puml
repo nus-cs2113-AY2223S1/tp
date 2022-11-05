@@ -1,0 +1,48 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+hide class fields
+hide class methods
+hide circle
+
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+skinparam Class {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+Package " "<<Rectangle>>{
+    Class Command LOGIC_COLOR
+    Class Storage STORAGE_COLOR
+    Class Parser LOGIC_COLOR_T2
+    Class Recipe MODEL_COLOR
+    Class Main #grey
+    Class Exception MODEL_COLOR_T2
+    Class UI UI_COLOR
+}
+
+Class "<$user>" as User MODEL_COLOR_T1
+Class "<$documents>" as File UI_COLOR_T1
+
+Main -up-> UI
+Main -down-> Parser
+Parser -right-> Command
+Command -right-> Storage
+Command -down-> Recipe
+Recipe -right> Storage
+Storage -left-> Recipe
+
+Storage .right.>File
+User ..> UI
+@enduml
