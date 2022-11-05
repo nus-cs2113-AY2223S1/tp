@@ -1576,12 +1576,21 @@ public class ConsoleParser {
             String targetIndexStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
             );
-            String name = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
-            );
+
             String dateTimeStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG
             );
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = null;
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
             String description = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION_LONG
             );
@@ -1593,16 +1602,6 @@ public class ConsoleParser {
             );
 
             int targetIndex = Integer.parseInt(targetIndexStr);
-
-            LocalDateTime dateTime;
-            if (dateTimeStr == null) {
-                dateTime = null;
-            } else {
-                dateTime = LocalDateTime.parse(
-                        dateTimeStr,
-                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
-                );
-            }
 
             BigDecimal amount;
             if (amountStr == null) {
@@ -1617,6 +1616,10 @@ public class ConsoleParser {
             } else {
                 currentAmount = new BigDecimal(currentAmountStr);
             }
+
+            String name = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
+            );
 
             return new ConsoleCommandEditTarget(
                     targetIndex,
