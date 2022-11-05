@@ -84,7 +84,7 @@ public class Ui {
                 + SPACING + "add       " + "/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{input} "
                 + "Adds input comment to the corresponding module code & university\n"
                 + SPACING + "          " + "                                                    \n"
-                + SPACING + "create    " + "/create u/UNIVERSITY_NAME_IN_UNDERSCORES              "
+                + SPACING + "create    " + "/create u/UNIVERSITY_NAME                             "
                 + "Creates an empty module list for the input university\n"
                 + SPACING + "          " + "                                                    \n"
                 + SPACING + "delete    " + "/delete u/{UNIVERSITY_NAME}                           "

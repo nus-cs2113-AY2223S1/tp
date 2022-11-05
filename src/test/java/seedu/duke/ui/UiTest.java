@@ -66,7 +66,7 @@ public class UiTest {
                 + "     " + "add       " + "/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{input} "
                 + "Adds input comment to the corresponding module code & university\n"
                 + "     " + "          " + "                                                    \n"
-                + "     " + "create    " + "/create u/UNIVERSITY_NAME_IN_UNDERSCORES              "
+                + "     " + "create    " + "/create u/UNIVERSITY_NAME                             "
                 + "Creates an empty module list for the input university\n"
                 + "     " + "          " + "                                                    \n"
                 + "     " + "delete    " + "/delete u/{UNIVERSITY_NAME}                           "
