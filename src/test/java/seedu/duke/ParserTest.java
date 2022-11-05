@@ -20,6 +20,20 @@ class ParserTest {
     ReviewList rv = new ReviewList();
     Parser ps = new Parser(rv);
 
+    static final String DELETE_ERROR = "Incomplete or wrongly formatted command, try again.\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
+    static final String DELETE_INDEX_ERROR = "Unable to find item for specified type and index\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
+    static final String ADD_INCOMPLETE_ARGUMENT_ERROR = "Ensure that input format and number of arguments is correct.\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
+    static final String ADD_EMPTY_ARGUMENT_ERROR = "Fields cannot be left empty!\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
+    static final String SORT_INCORRECT_ARGUMENT = ("Invalid sort field given. Choose any of the following sorting "
+            + "fields: 'rating', 'title', 'genre' or 'date'.\n")
+            .replaceAll("\\n", System.getProperty("line.separator"));
+    static final String ADD_DUPLICATE = "List already contains item.\n"
+            .replaceAll("\\n", System.getProperty("line.separator"));
+
     @Test
     void addTestMovie() {
         String addString = "add /movieinception2/rating10/date 10-01-2020/genrethriller";
@@ -107,6 +121,15 @@ class ParserTest {
     }
 
     @Test
+    void isFutureDateInvalidDateTest() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String futureDate = "10-10e-2060";
+        //should just return true because any future or invalid date is an invalid format
+        assertTrue(ps.isFutureDate(futureDate));
+    }
+
+    @Test
     void deleteCommandTest() {
         ps.executeClear();
         addTestMovie();
@@ -124,5 +147,138 @@ class ParserTest {
     void getReviewListTest() {
         ReviewList testList = ps.getReviewList();
         assertEquals(rv,testList);
+    }
+
+    @Test
+    void deleteIncorrectType() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String deleteString = "delete test 1";
+        String[] splitString = deleteString.split(" ");
+        ps.executeDelete(splitString);
+        assertEquals(DELETE_ERROR, outContent.toString());
+    }
+
+    @Test
+    void deleteNonNumberIndex() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String deleteString = "delete movie e";
+        String[] splitString = deleteString.split(" ");
+        ps.executeDelete(splitString);
+        assertEquals(DELETE_ERROR, outContent.toString());
+    }
+
+    @Test
+    void deleteOutOfRangeIndex() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String deleteString = "delete movie 0";
+        String[] splitString = deleteString.split(" ");
+        ps.executeDelete(splitString);
+        assertEquals(DELETE_INDEX_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addTvShow() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /tv game of thrones /rating 5 /date 02-02-2022 /genre fantasy /site hbo";
+        ps.executeAdd(addString);
+        ReviewList currentList = ps.getReviewList();
+        assertEquals(1, currentList.inputs.size());
+    }
+
+    @Test
+    void addDuplicate() {
+        String addString = "add /tv game of thrones /rating 10 /date 02-02-2022 /genre fantasy /site hbo";
+        ps.executeAdd(addString);
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        ps.executeAdd(addString);
+        ReviewList currentList = ps.getReviewList();
+        assertEquals(1, currentList.inputs.size());
+        assertEquals(ADD_DUPLICATE, outContent.toString());
+    }
+
+    @Test
+    void addTvShowNotEnoughArguments() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /tvShow inception /rating 10 /date 10-01-2020 /genre thriller";
+        ps.executeAdd(addString);
+        assertEquals(ADD_INCOMPLETE_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addNonNumberForRating() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /tv game of thrones /rating e /date 02-02-2022 /genre fantasy /site hbo";
+        ps.executeAdd(addString);
+        assertEquals(ADD_INCOMPLETE_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addOverMaxForRating() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /tvShow inception /rating 200 /date 10-01-2020 /genre thriller";
+        ps.executeAdd(addString);
+        assertEquals(ADD_INCOMPLETE_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addTvShowSlashIncludedInUserInput() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /tv game of thro/nes /rating 5 /date 02-02-2022 /genre fantasy /site hbo";
+        ps.executeAdd(addString);
+        assertEquals(ADD_INCOMPLETE_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addMovieSlashIncludedInUserInput() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /movie incept/ion /rating 90 /date 10-01-2020 /genre thriller";
+        ps.executeAdd(addString);
+        assertEquals(ADD_INCOMPLETE_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void addMovieEmptyArgument() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String addString = "add /movie /rating 90 /date 10-01-2020 /genre thriller";
+        ps.executeAdd(addString);
+        assertEquals(ADD_EMPTY_ARGUMENT_ERROR, outContent.toString());
+    }
+
+    @Test
+    void executeListTest() {
+        //need to ensure an error is not thrown unexpectedly, format correctness is checked in ListCommandTest/Ui Test
+        addTestMovie();
+        ps.executeList();
+    }
+
+    @Test
+    void executeSortTest() {
+        //just need to ensure an unexpected error is not thrown, correctness is checked in SortCommandTest/Ui Test
+        addTestMovie();
+        String sortString = "sort title";
+        String[] splitString = sortString.split(" ");
+        ps.executeSort(splitString);
+    }
+
+    @Test
+    void executeSortTestIncorrectArgument() {
+        addTestMovie();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        String sortString = "sort test";
+        String[] splitString = sortString.split(" ");
+        ps.executeSort(splitString);
+        assertEquals(SORT_INCORRECT_ARGUMENT, outContent.toString());
     }
 }

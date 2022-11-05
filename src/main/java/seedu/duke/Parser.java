@@ -75,7 +75,7 @@ public class Parser {
     }
 
     public void checkEmptyCommand(String parsedInput) throws InvalidCommandException {
-        if (parsedInput.isEmpty()) {
+        if (parsedInput.isBlank()) {
             throw new InvalidCommandException();
         }
     }
@@ -336,7 +336,8 @@ public class Parser {
             dateFormat.setLenient(false);
             date = dateFormat.parse(dateWatchedString);
         } catch (ParseException e) {
-            Ui.print("Invalid date format. Use the following format: DD-MM-YYYY.");
+            //just return true and b/c future date and invalid date are both invalid inputs.
+            return true;
         }
 
         Date currentDate = new Date();
