@@ -44,6 +44,7 @@
   * [Viewing a Target: `View-Target`](#viewing-a-target-view-target)
   * [Deleting a Target: `Delete-Target`](#deleting-a-target-delete-target)
   * [Editing a Target: `Edit-Target`](#editing-a-target-edit-target)
+  * [Merging a data file: `Merge-File`](#merging-a-data-file-merge-file)
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -383,7 +384,9 @@ The `Edit-Target` command changes the attributes of an existing target in the pr
 
 ![Implementation-Edit-Target](images/ImplementationEditTarget.png)
 
-### Loading Data from External File
+### Merging a data file: `Merge-File`
+
+The `Merge-File` command merges an external data file with the current data file.
 
 ![Implementation-SD-Load-External-Data](images/ImplementationSDLoadExternalData.png)
 
