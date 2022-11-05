@@ -179,7 +179,6 @@ The sequence of steps to generate a timetable can be summarised as follows:
 
 ![Parser Class](images/parserClass.png)  
 
-
 The <code>Parser</code> component can:
 
 - return the correct command type based on user input.
@@ -188,13 +187,11 @@ This component also consists of `DayParser` and `LessonTypeParser` to help parse
 day and lesson info into programme-understood values.
 
 #### 3.3.1 How the feature is implemented
-
 The main function of the `Parser` component is `parse` which returns the correct command type
 based on the first word of the user input. It also consists of various helper functions for the different
 `Command` classes to validate if the user input is correct.
 
 #### 3.3.2 Why it is implemented this way
-
 The `Parser` component should not know what is a valid command for the specific command type but instead
 can assist in parsing the user input to do data validation. It only carries out basic data validation to 
 check if the user input does not belong to any command type. This also makes it easier to add new commands 
@@ -369,6 +366,7 @@ not know the exact module code, which is not very user-friendly and takes up a l
 details for 1 module.
 
 #### 3.4.8 TimetableCommand
+
 ![TimetableCommand](images/TimetableCommandClass.png)
 
 The <code>TimetableCommand</code> class extends from the <code>Command</code> class and displays the timetable of the current state's semester
@@ -384,18 +382,22 @@ To make use of the existing [Timetable](#322-timetable) class that has a nice fo
 to create duplicate code to fulfil similar needs as the timetable is needed by other components.
 
 #### 3.4.9 ByeCommand
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links. 
 
 #### 3.4.12 ImportCommand
+
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
 
@@ -457,13 +459,12 @@ and read-only to discourage users from modifying the file although this can not 
 them from changing the file. Data for the saved state will be overwritten each run of the 
 application to prevent persistent data corruption and not require the user to manually 
 edit the data file.
-##### 3.5.3.1 How the feature is implemented
 
+##### 3.5.3.1 How the feature is implemented
 !["Opening saved state"](images/storageOpenPreviousState.png)  
 When the application starts up, the storage openPreviousState function will be called
 to load previous state. The state is also saved after every command to prevent data loss if the programme suddenly crashes.
 ##### 3.5.3.2 Why it is implemented this way
-
 To facilitate easy transfer of information from NUSMods to YAMOM. NUSMods is currently 
 the most popular website used by NUS students to keep track of their timetable. This encourages
 users to swap to using YAMOM.
@@ -471,8 +472,10 @@ users to swap to using YAMOM.
 ##### 3.5.3.3 Alternatives considered
 
 Storing as <code>.json</code> file
-
 - would have to implement another function for export/import function
+
+Using the java preference API, `java.util.prefs.Preferences` to save user preferences
+- will not pass the github automated checkers
 
 ## 4. Documentation
 
