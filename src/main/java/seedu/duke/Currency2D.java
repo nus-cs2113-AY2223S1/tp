@@ -87,10 +87,10 @@ public class Currency2D {
 
     public static void removeCurrency(CurrencyStructure currency) throws FinanceException {
 
-        CurrencyStructure currencyListCurrency = CurrencyList.findCurrencyByAbbrName(currency.getAbbrName());
-        int index = currencyList.indexOf(currencyListCurrency);
+        //CurrencyStructure currencyListCurrency = CurrencyList.findCurrencyByAbbrName(currency.getAbbrName());
+        int index = currencyList.indexOf(currency);
 
-        currencyList.remove(currencyListCurrency);
+        currencyList.remove(currency);
         personalCurrencyList.remove(currency);
 
         currencies[index] = "";

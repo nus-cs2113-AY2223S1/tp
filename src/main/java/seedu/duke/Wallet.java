@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.duke.account.Deposit;
+import seedu.duke.exception.FinanceException;
 
 public class Wallet {
     final static CurrencyStructure INITIAL_CURRENCY = new CurrencyStructure("usd", "us dollar", "$", 1);
@@ -12,9 +13,9 @@ public class Wallet {
     protected String passWord;
     protected CurrencyStructure defaultCurrency;
     protected double totalBalance;
-    protected List<Deposit> deposits;
+    protected static List<Deposit> deposits;
 
-    public Wallet(String userName, String passWord) {
+    public Wallet(String userName, String passWord) throws FinanceException {
         this.userName = userName;
         this.passWord = passWord;
         totalBalance = 0;
@@ -47,7 +48,7 @@ public class Wallet {
         return totalBalance;
     }
 
-    public List<Deposit> getDeposits() {
+    public static List<Deposit> getDeposits() {
         return deposits;
     }
 
@@ -67,15 +68,15 @@ public class Wallet {
         this.totalBalance = totalBalance;
     }
 
-    public void saveMoney(CurrencyStructure currency, double amount) {
+    public void saveMoney(CurrencyStructure currency, double amount) throws FinanceException {
         changeMoney(currency, amount);
     }
 
-    public void withdrawMoney(CurrencyStructure currency, double amount) {
+    public void withdrawMoney(CurrencyStructure currency, double amount) throws FinanceException {
         changeMoney(currency, -amount);
     }
 
-    public void exchangeMoney(CurrencyStructure oldCurrency, CurrencyStructure newCurrency, double oldAmount){
+    public void exchangeMoney(CurrencyStructure oldCurrency, CurrencyStructure newCurrency, double oldAmount) throws FinanceException {
         double oldRate = oldCurrency.getRate();
         double newRate = newCurrency.getRate();
         double newAmount = oldAmount * (newRate / oldRate); 
@@ -83,17 +84,17 @@ public class Wallet {
         saveMoney(newCurrency, newAmount);
     }
 
-    public void convertAllMoney(CurrencyStructure currency) {
+    public void convertAllMoney(CurrencyStructure currency) throws FinanceException {
         int depositLength = deposits.size();
         for (int i=0;i<depositLength;i++) {
             Deposit deposit = deposits.get(i);
             CurrencyStructure oldCurrency = deposit.getCurrency();
-            double oldamount = deposit.getBalance();
-            exchangeMoney(oldCurrency, currency, oldamount);
+            double oldAmount = deposit.getBalance();
+            exchangeMoney(oldCurrency, currency, oldAmount);
         }
     }
 
-    private boolean changeMoney(CurrencyStructure currency, double amount) {
+    private boolean changeMoney(CurrencyStructure currency, double amount) throws FinanceException {
         boolean hasDeposit = false;
         for (Deposit deposit : deposits) {
             CurrencyStructure currencyCompared = deposit.getCurrency();

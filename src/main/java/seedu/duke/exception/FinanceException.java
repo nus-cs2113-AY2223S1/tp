@@ -14,14 +14,16 @@ public class FinanceException extends Throwable {
         WALLET_FILE_NOT_FOUND_EXCEPTION,
         WALLET_FILE_OCCUPIED_EXCEPTION,
         WALLET_FILE_DELETION_EXCEPTION,
-        SET_DEFAULT_CURRENCY_EXCEPTION,
         SAVE_MONEY_EXCEPTION,
         WITHDRAW_MONEY_EXCEPTION,
         AMOUNT_PARSE_EXCEPTION,
         AMOUNT_NEGATIVE_EXCEPTION,
         CURRENCY_NOT_FOUND,
         NOT_PERSONAL_CURRENCY,
-        CURRENCY_ARRAY_FULL
+        CURRENCY_ARRAY_FULL,
+        SET_DEFAULT_CURRENCY_EXCEPTION,
+        INVALID_USERNAME, EXIT_LOGIN_TERMINAL, ACCOUNT_OVERDRAW,
+        SAME_USER_TRANSFER
     }
 
     private final ExceptionCollection exceptionType;
@@ -61,14 +63,11 @@ public class FinanceException extends Throwable {
         case WALLET_FILE_DELETION_EXCEPTION:
             errorMessage = "Deletion operation failed.";
             break;
-        case SET_DEFAULT_CURRENCY_EXCEPTION:
-            errorMessage = "Setting default currency failed. Example: setDefault sgd";
-            break;
         case SAVE_MONEY_EXCEPTION:
             errorMessage = "Saving money failed. Example: save sgd 100";
             break;
         case WITHDRAW_MONEY_EXCEPTION:
-            errorMessage = "Saving money failed. Example: withdraw sgd 100";
+            errorMessage = "Withdrawing money failed. Example: withdraw sgd 100";
             break;
         case AMOUNT_PARSE_EXCEPTION:
             errorMessage = "Money amount parse failure. Please enter a valid number.";
@@ -84,6 +83,18 @@ public class FinanceException extends Throwable {
             break;
         case CURRENCY_ARRAY_FULL:
             errorMessage = "You have no more space to add new currencies";
+            break;
+        case ACCOUNT_OVERDRAW:
+            errorMessage = "The amount you have entered will lead the account to overdraw\nCancelling withdrawal";
+            break;
+        case INVALID_USERNAME:
+            errorMessage = "The username you have entered is invalid, please enter another username";
+            break;
+        case EXIT_LOGIN_TERMINAL:
+            errorMessage = "You have exited the login sequence";
+            break;
+        case SAME_USER_TRANSFER:
+            errorMessage = "You can't transfer money to yourself";
             break;
         default:
             errorMessage = "Unknown exception happens.";
