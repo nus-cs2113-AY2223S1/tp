@@ -1,34 +1,36 @@
 @startuml
 
-activate DatabaseStorage
+hide footbox
 
--> DatabaseStorage : loadDatabase()
+activate ": DatabaseStorage"
 
-DatabaseStorage -> DatabaseStorage : readFile(DATABASE_FILE_PATH)
-activate DatabaseStorage
+-> ": DatabaseStorage" : loadDatabase()
+
+": DatabaseStorage" -> ": DatabaseStorage" : readFile(DATABASE_FILE_PATH)
+activate ": DatabaseStorage"
 
 loop hasNextLine
-    DatabaseStorage -> DatabaseStorage : readDatabaseLine(line)
-    activate DatabaseStorage
+    ": DatabaseStorage" -> ": DatabaseStorage" : readDatabaseLine(line)
+    activate ": DatabaseStorage"
 
-    DatabaseStorage -> DatabaseParser : parseDatabaseLine(line)
-    activate DatabaseParser
-    DatabaseParser --> DatabaseStorage : lineData : String[]
-    deactivate DatabaseParser
+    ": DatabaseStorage" -> ": DatabaseParser" : parseDatabaseLine(line)
+    activate ": DatabaseParser"
+    ": DatabaseParser" --> ": DatabaseStorage" : lineData : String[]
+    deactivate ": DatabaseParser"
 
-    DatabaseStorage -> Database : addUniversity(newUniversity)
-    activate Database
-    deactivate Database
+    ": DatabaseStorage" -> ": Database" : addUniversity(newUniversity)
+    activate ": Database"
+    deactivate ": Database"
 
-    DatabaseStorage -> Database : addModuleMapping(newModuleMapping)
-    activate Database
-    deactivate Database
+    ": DatabaseStorage" -> ": Database" : addModuleMapping(newModuleMapping)
+    activate ": Database"
+    deactivate ": Database"
 
-    deactivate DatabaseStorage
+    deactivate ": DatabaseStorage"
 end
 
-deactivate DatabaseStorage
+deactivate ": DatabaseStorage"
 
-deactivate DatabaseStorage
+deactivate ": DatabaseStorage"
 
 @enduml
