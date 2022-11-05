@@ -35,7 +35,7 @@ public class ExitCommand extends Command {
         //Overwrite the files
         for (Recipe r : RecipeList.getRecipes()) {
             String recipeFileSourcePath = Storage.titleToFilePath(r.getTitle());
-            Storage.overwriteRecipeFile(r, "", recipeFileSourcePath);
+            Storage.saveRecipe(r, "", recipeFileSourcePath);
         }
         return new CommandResult(EXIT_MESSAGE);
     }

@@ -59,7 +59,7 @@ public class RecipeList {
         recipeTitles.set(index, newRecipe.getTitle());
         String oldFile = Storage.titleToFilePath(oldTitle);
         String recipeFileSourcePath = Storage.titleToFilePath(newRecipe.getTitle());
-        Storage.overwriteRecipeFile(newRecipe, oldFile, recipeFileSourcePath);
+        Storage.saveRecipe(newRecipe, oldFile, recipeFileSourcePath);
     }
 
     public static Recipe getRecipeFromTitle(String recipeTitle) {

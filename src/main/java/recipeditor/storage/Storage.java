@@ -133,19 +133,9 @@ public class Storage {
         }
     }
 
-    //FIXED: Don't append just overwrite
-    public static void appendRecipeToAllRecipeFile(Recipe addedRecipe) {
-        try {
-            FileWriter fw = new FileWriter(Storage.ALL_RECIPES_FILE_PATH, true);
-            fw.write(addedRecipe.getTitle() + "\n");
-            fw.close();
-            logger.log(Level.INFO, addedRecipe.getTitle() + " added to the list.");
-        } catch (IOException ioException) {
-            Ui.showMessage("Error in loading recipes to data file");
-        }
-    }
 
-    public static void overwriteRecipeFile(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
+
+    public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
         try {
             deleteFile(oldFile);
             rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);

@@ -21,6 +21,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main parser class to parse command.
+ */
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String recipeTitle = null;
@@ -164,7 +167,7 @@ public class Parser {
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
                 String path = Storage.titleToFilePath(title);
-                Storage.overwriteRecipeFile(targetRecipe, "", path);
+                Storage.saveRecipe(targetRecipe, "", path);
                 return new InvalidCommand("Recipe File is missing! Regenerate Recipe File! Please try again!");
             } catch (IndexOutOfBoundsException e) {
                 return new InvalidCommand("The index is out of bound! Please try again");

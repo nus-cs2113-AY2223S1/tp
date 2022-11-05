@@ -18,6 +18,12 @@ public class GuiWorkFlow {
     private final Mode mode;
     private boolean exitLoop;
 
+    /***
+     * A class that handle the GUI call and the intermediate interaction between the GUI and CLI.
+     * Ask the user whether they want to make changes when the format of the text in Editor is wrong.
+     * @param path
+     * @throws FileNotFoundException
+     */
     public GuiWorkFlow(String path) throws FileNotFoundException {
         mode = getMode(path);
         saveToTemp = new Editor().enterEditor(path);

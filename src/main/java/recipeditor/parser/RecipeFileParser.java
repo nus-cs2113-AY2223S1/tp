@@ -57,6 +57,12 @@ public class RecipeFileParser {
     public RecipeFileParser(){
     }
 
+    /**
+     * Parse the text content
+     * @param text with newlines
+     * @return parsed Recipe
+     * @throws ParseFileException
+     */
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
         parsedLine = text.split("\n");
         // Go down line by line

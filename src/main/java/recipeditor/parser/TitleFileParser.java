@@ -12,6 +12,10 @@ public class TitleFileParser {
     private static final String TITLE_INVALID = "Recipe Title is not valid!";
     private static final Logger logger = Logger.getLogger(TitleFileParser.class.getName());
 
+    /**
+     * Parse AllRecipes.txt and check if the title are valid and have the associated recipe files.
+     * @param lines
+     */
     public static void parseTitleFileToRecipeTitles(String[] lines) {
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i].trim();

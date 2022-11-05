@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             RecipeList.addRecipeTitle(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
-            Storage.overwriteRecipeFile(addedRecipe, "", recipeFileSourcePath);
+            Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
             StringBuilder response = new StringBuilder();
             response.append(String.format("\"%s\" added to the recipe list.\n",addedRecipe.getTitle()));
             response.append(RecipeList.printNumberOfRecipes());
