@@ -68,7 +68,7 @@ opt consoleCommand instanceof ConsoleCommandViewExpense
         viewExpenseByExpenseIndex(),
         viewExpenseByExpenseName(),
         viewExpenseByExpenseCategory(),
-        viewExpense()
+        and viewExpense()
         will call convertExpenseToConsoleString()
         and printInformationalMessage() to print
         the expense to the console. For simplicity,
