@@ -34,8 +34,8 @@ Here are my contributions to the project:
   `add flight` command first were the manager has to add in an existing flight number before he/she is able to add in the
   passengers details of the same flight number. Rational is that the flight has to exist first before the passengers can
   be assigned to it, which is for syncing purposes. (Pull request [#46](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/46))
-  + Optimise `passenger add` command to omit `BOARDING TIME` and automate it be always set as an earlier time than before `DEPARTURE TIME`.
-  This would prevent bugs from occuring. i.e. the manage keys in a `BOARDING TIME` that is later than the `DEPARTURE TIME`.
+  + Optimise `passenger add` command to omit `BOARDING TIME` and automate it to always set as an earlier time than before `DEPARTURE TIME`.
+  This would prevent bugs from occurring. i.e. the manager may mistakenly input a `BOARDING TIME` that is later than the `DEPARTURE TIME`.
     (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87))
   + Improved `modify` command to auto update the `BOARDING TIME` for all passengers who had their flights delayed (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87)) 
   + Wrote additional test and more catch exceptions to make code more defensive.
