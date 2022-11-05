@@ -62,7 +62,7 @@ public class Ui {
 
     /**
      * Prints messages in the same line on the console according to the input,
-     * separated with space
+     * separated with space.
      */
     public static void showMessageInline(String... messages) {
         for (String m : messages) {
@@ -73,7 +73,7 @@ public class Ui {
 
     /**
      * Prints messages on the console according to the input,
-     * each on a new line
+     * each on a new line.
      */
     public static void showMessage(String... messages) {
         for (String m : messages) {

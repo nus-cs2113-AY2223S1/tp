@@ -1,5 +1,8 @@
 package recipeditor.parser;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,12 +17,10 @@ import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-import recipeditor.ui.Ui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 class ParserTest {
 
@@ -73,10 +74,10 @@ class ParserTest {
 
     @Test
     void incorrectEditCommand_wrongParameter_correctFormatForEditCommand() {
-        String input = "/edit 1 -i";
+        String input = "/edit 100";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(EditCommand.COMMAND_SYNTAX, commandExecutedResult.getMessage());
+        assertEquals(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE, commandExecutedResult.getMessage());
     }
 
     @Test
@@ -107,20 +108,6 @@ class ParserTest {
     }
 
     @Test
-    void completeFindRecipeTitleCommand_correctFindCommandFormat_FindRecipeTitleThatContainsFindInput() {
-        Recipe addedRecipe = new Recipe("Example Title for Find Command");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/find -t title";
-        String expected = System.lineSeparator() + "1. Example Title for Find Command";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(expected, commandExecutedResult.getMessage());
-        assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title for Find Command");
-    }
-
-    @Test
     void incompleteHelpCommand_incorrectHelpCommandFormat_correctFormatForHelpCommand() {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
@@ -131,22 +118,7 @@ class ParserTest {
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }
 
-    @Test
-    void completeListCommand_correctListCommandFormat_listRecipeTitles() {
-        Recipe addedRecipe = new Recipe("Example Title");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/list";
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        System.setOut(new PrintStream(outContent));
-        Ui.showMessage(commandExecutedResult.getMessage());
-        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. Example Title";
-        assertEquals(expected.trim(), outContent.toString().trim());
-        assertEquals(ListCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title");
-    }
+
 
     @Test
     void incompleteViewCommand_incorrectViewCommandFormat_correctFormatForViewCommand() {
@@ -155,20 +127,5 @@ class ParserTest {
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(ViewCommand.COMMAND_SYNTAX, commandExecutedResult.getMessage());
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
-    }
-
-    @Test
-    void completeViewCommand_correctViewCommandFormat_showSpecificRecipe() {
-        Recipe addedRecipe = new Recipe("Example Title for View Command");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        String input = "/view 1";
-        String expected = "TITLE:\n" + "Example Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
-                + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(expected, commandExecutedResult.getMessage());
-        assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title for View Command");
     }
 }

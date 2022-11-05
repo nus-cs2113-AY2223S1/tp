@@ -117,7 +117,7 @@ public class Storage {
     }
 
     /**
-     * Loading the recipe into RecipeList recipe array from individual recipe file
+     * Loading the recipe into RecipeList recipe array from individual recipe file.
      */
     public static void loadRecipesToRecipeList() {
         try {
@@ -182,7 +182,7 @@ public class Storage {
     }
 
     /**
-     * Checks whether the file exists given the file path in parameter
+     * Checks whether the file exists given the file path in parameter.
      *
      * @param filePath file path of the file to check
      * @return Boolean of whether the file exists
