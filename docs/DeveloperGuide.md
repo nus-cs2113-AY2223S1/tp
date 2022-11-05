@@ -324,10 +324,15 @@ validation to ensure no such stray data are presented to the user.
 
 ## 5 User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                                  | So that I can ...                                        |
+|---------|------|----------------------------------------------------------------|----------------------------------------------------------|
+| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
+| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
+| v2.0    |Driver| Have favourites for each carpark                               | I can monitor carparks important to me                   |
+| v2.0    |Driver| Import my favourite carparks                                   | Import saved settings/preferences                        |
+| v2.0    |Driver| Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
+| v2.1    |Driver| Have at my carpark information be colour coordinated           | I can look at carparks information with ease             |
+
 
 ## 6 Non-Functional Requirements
 
