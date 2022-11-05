@@ -246,6 +246,8 @@ public class UserStorageTest {
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
     }
 
@@ -258,18 +260,106 @@ public class UserStorageTest {
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
     }
 
     @Test
     public void testInvalidLessonModuleCode() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "S%\n" + "MET CS 248;%\n"
+        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#D1000;monday;10:00;12:00%\n");
         File dir = new File("data/");
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testInvalidLessonDay() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+                + "#MET CS 248;dummyday;10:00;12:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testInvalidStartTime() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+                + "#MET CS 248;monday;1000;12:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testInvalidEndTime() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+                + "#MET CS 248;monday;10:00;08:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testExtraHashtags() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+                + "#MET CS 248;monday;10:00;12:00%\n" + "#test");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testMissingModuleCodeInSavedModules() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + "CS103;%\n"
+                + "#MET CS 248;monday;10:00;12:00%\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
+        Database.clearDatabase();
+    }
+
+    @Test
+    public void testMissingModuleCode() throws IOException {
+        DatabaseStorage.loadDatabase();
+        createNewFile("data/Boston University.txt", "F%\n" + ";%\n"
+                + "#\n");
+        File dir = new File("data/");
+        UserStorage.setFilePathsAtStartUp();
+        UserStorageParser.getSavedLists();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, testManager.getMyManager().size());
+        assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
     }
 }
