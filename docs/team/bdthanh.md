@@ -13,18 +13,20 @@ and transactions via a Command Line Interface.
     + List of PRs can be seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/pulls?q=is%3Aclose+is%3Apr+author%3Abdthanh+)
 
 + **Features and lasses implementations:**
-    + User-related features: 
+    + User-related features (Wrote final version base on first version of Winston): 
         + Add a user `add-user`
         + Remove a user `remove-user`
     + Item-related features:
-        + Add an item `add-item`
+        + Add an item `add-item` 
         + Remove an item `remove-item`
-    + Transaction-related features: 
+        + List all categories `list-categories`
+    + Transaction-related features (Wrote final version base on first version of Winston): 
         + Add a transaction `add-tx`
         + Remove a transaction `remove-tx`
     + Exit command `bye`
     + Transaction: Wrote base class for transaction (`Transaction` and `TransactionList`) 
     + Storage: Wrote storage-related classes to store users, items and transactions to files.
+    + Duke (main class): Integrated main activity and storage
     + DateParser: Wrote DateParser class to parse and format the date of transaction.
     + Testing: Wrote transaction-related and storage-related tests.
     + CommandParser: Enhanced this class based on the original class by Winston.
@@ -40,7 +42,7 @@ and transactions via a Command Line Interface.
     + Wrote the transaction component section `3.5. Transaction component`
     + Wrote the storage component section `3.7. Storage component`
     + Contributed to the Implementation subsection:
-      + Wrote add a user (4.1.1)
+      + Wrote add a user (4.1.1) 
       + Wrote remove a user (4.1.2)
       + Wrote add a item (4.2.1)
       + Wrote remove a item (4.2.2)
@@ -51,7 +53,7 @@ and transactions via a Command Line Interface.
     + Made Sequence diagrams in section 3.1, 4.1.1, 4.1.2, 4.2.1, 4.2.2, 4.3.1 and 4.3.2
     + Wrote the non-functional requirements `7. Non-functional Requirements`
 + **Team tasks contributions:**
-    + Maintained the issues tracker on Github.
+    + Maintained the issues tracker on GitHub.
     + Ensure that weekly and milestone tasks/features are completed in time.
 + **Community contributions:**
     + Reported 21 bugs/flaws in peers' tp. Issues can be checked [here](https://github.com/bdthanh/ped/issues)
