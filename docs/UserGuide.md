@@ -44,6 +44,16 @@ for timetable organization. YAMOM is designed for users who are proficient in Co
 5. You will receive a greeting if the application runs successfully.
 6. YAMOM will always start planning for semester 1 when the application is run.
 7. Data will be automatically saved after each command and persisted between runs of YAMOM.
+8. What to do next?
+   - First, ensure you are planning for the right [semester](#change-semester-to-plan-semester).
+   - Do you have an NUSMods share link to [import](#import-a-timetable-import)?
+   - If not, do you know what modules you want to add to your timetable? If so proceed to [add](#add-a-module-add) them to your timetable.
+   - Otherwise, you might want to [search](#search-for-modules-search) for your desired modules and find more [info](#read-more-details-about-a-module-info) about them.
+   - After you have added your modules, [select](#select-a-timetable-slot-select) your desired lecture/tutorial/lab/etc slots. Not sure which slot to select? Head back to [info](#read-more-details-about-a-module-info) for any details you need.
+   - Once done, [list](#list-out-all-selected-modules-list) your selected modules to verify your choice and view your [timetable](#view-user-timetable-timetable).
+   - Added a module wrongly? No worries, just [remove](#remove-a-module-remove) it.
+   - Need your timetable on mobile? Mobile devices are typically not CLI friendly so you have no choice but to [export](#export-current-timetable-export) your data back to NUSMods.
+   - If stuck or confused, remember [help](#seek-help-help) will always be given to those who ask for it. 
 
 
 ```
