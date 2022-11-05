@@ -106,7 +106,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 1. There is no rake symbol in PlantUML Language Reference Guide. Considering the recommendation from [this CS2103 forum](https://github.com/nus-cs2103-AY1920S2/forum/issues/105), ```[rake ⋔]``` is used in place of the rake symbol in textbook.
 
-2. The following detailed explanations will be color-coded for better navigation in this long section.
+2. The following detailed explanations will include collapsible tabs for better navigation in this long section.
 
 3. Original variable names in `CommandPrintTimetable` are italicized if they appear in the activity diagrams.
 
@@ -123,14 +123,10 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
  <details><summary>Activity of 4.4.1</summary><p style='text-align: justify;' markdown="1">
 
- <span style="color:red">
-
 - Three ArrayLists are populated from ```timetable``` module.
 - ```rawTimetable``` stores the ```lesson``` object for each day;
 - ```emptySlotList``` stores pairs of ```integer``` of starting and ending slots for each day;
 - ```clashModCodeList``` stores a list of clashed module code of ```string```, if any.
-
-</span>
 
 </p></details>
 
@@ -139,14 +135,12 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 - A 2D array,```timeTable``` of ```string``` type is declared and initialized with empty strings first. This array is for storing the output strings of the actual timetable for print later on.
 
-</p></details> </span>
+</p></details>
 
-
-<span style="color:orange">
 
 ##### 4.4.2 Write day and time headers for timetable
 <img src="images/printTimetable_2.png" width="480" />
-<details><summary>Activity of 4.4.2</summary><p style='text-align: justify;'>
+<details><summary>Activity of 4.4.2</summary><p style='text-align: justify;' markdown="1">
 
 - Time headers in 24 hours, from 0800 to 2200, is written into ```timeTable```.
 - Monday to Friday headers are written into ```timeTable``` as well.
@@ -154,18 +148,15 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 - Row divider ```=``` serves as the horizontal separation line between days of a week and the actual lessons below.
 
 
-</p></details> </span>
+</p></details>
 
-<span style="color:blue">
 
 ##### 4.4.3 Write day and time headers for timetable
 <img src="images/printTimetable_3.png" width="380" />
-<details><summary>Activity of 4.4.3</summary><p style='text-align: justify;'>
+<details><summary>Activity of 4.4.3</summary><p style='text-align: justify;' markdown="1">
 
 - ```emptySlotList```, with pairs of ```integers``` of starting and ending slots for different days in a week, is sorted by the starting slot. This is to prepare for the checking and finding overlapping lesson intervals later.
 - If there are clashes:
-
-<span style="color:#3498DB">
 
  <details><summary>&nbsp;&nbsp; (a) Get all clash intervals of the day </summary><p>
 
@@ -176,7 +167,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 &nbsp;&nbsp;&nbsp;&nbsp; III. Popularize ```clashSlotList``` for each day - to store the merged overlapping intervals in step I.
 &nbsp;&nbsp;&nbsp;&nbsp; IV. Remove un-clashed lesson slots. In the above example, ```[1100,1200]``` is not a clashed interval, which is removed in this step.
 &nbsp;&nbsp;&nbsp;&nbsp; V. Return ```clashSlotList```, now an ```ArrayList``` of clashed intervals.
-</p></details> </span>
+</p></details>
 
 
 &nbsp;&nbsp; (b) Write ```X``` for the clashed intervals
@@ -195,8 +186,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 - Finally, the whole output string is returned and printed on the terminal.
 
 
-
-</p></details> </span>
+</p></details> 
 
 
 ---
