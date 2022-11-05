@@ -108,7 +108,7 @@ Output:
 ```
 ----------------------------------------
 
-The module CSS213 is not found in your plan!!
+The module CS1111 is not found in your plan!!
 Please add the module first before you want to delete.
 ----------------------------------------
 ```
@@ -207,7 +207,9 @@ You have 4 mcs for Y2S1
 
 ### Feature #6 : Find module information - find
 
-Find module information from added modules.
+This feature can be used to find module information 
+from added modules. They keyword can be from module code, semester, mcs, or grade. 
+Even partial keywords can be entered. 
 
 ###### Format of input: `find <KEYWORD>`
 
@@ -219,7 +221,7 @@ Output:
 ----------------------------------------
 
 These are your matching modules:
-1. CS2112 Y2S1 - 4
+1. CS2113 Y2S1 - 4
 ----------------------------------------
 ```
 
@@ -360,7 +362,9 @@ Thank you for using PlanIt!
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: After you use our application, your data is stored in a file called "data.txt" which is in the 
+same directory as the application file. You can just transfer this file to another computer and save it in the
+same directory as your application. It will transfer all the information in the program running on the other computer.
 
 **Q**: What if I forget how to use PlanIt?
 
