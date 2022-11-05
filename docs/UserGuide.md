@@ -795,11 +795,15 @@ Format: `import [ NUSMOD_LINK ]`
   * `LAB`  representing LABORATORY
   * `PROJ` representing MINI_PROJECT
   * `SEM`  representing SEMINAR_STYLE_MODULE_CLASS  
-  note: other lesson types are currently not supported.
+  note: other lesson types are currently not supported. Preliminary checks based on the first 4 characters have been implemented to ensure that 
+  * `LESSON_TYPE_SHORT_FORM` is of the above-mentioned form. E.g. `TUTA` will be accepted as representing TUTORIAL.
 * `LESSON_NUMBER` can vary and is not of a certain form. Take note `01` is not the same as `1`. 
 * If `SEMESTER_NUMBER` is incorrect, the whole link will not be parsed.
 * If `MODULE_CODE` is incorrect, that module will not be added.
+* If there are duplicated `MODULE_CODE`, only the first module information will be parsed.
 * If `LESSONS_INFO` is incorrect, that lesson will not be added.
+* If there are duplicated `LESSON_TYPE` within the lesson information, only the last lesson 
+information of that `LESSON_TYPE` will be saved although all will be parsed.
 * The other parts of the link that is valid will still be parsed and a success message will be displayed.
 
 Example of usage:
@@ -887,20 +891,20 @@ Alternatively, you can export the timetable, copy the link generated, and import
 
 ## Command summary
 
-| Action                           | Format                                                                                                 | Example                                                               |
-|----------------------------------|--------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| Add a module                     | `add [ MODULE_CODE ]`                                                                                  | `add CS2101`                                                          |
-| Remove a module                  | `remove [ MODULE_CODE ]`                                                                               | `remove CS2102`                                                       |
-| Exit application                 | `bye`                                                                                                  | `bye`                                                                 |
-| Read more details about a module | `info [ MODULE_CODE ]`                                                                                 | `info CS2103`                                                         |
-| Find module by keyword           | `search [ /code PARTIAL_MODULE_CODE &#124; /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >` | `search /code cs /level 2 /sem 1`                                     |
-| Seek help                        | `help`                                                                                                 | `help`                                                                |
-| Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                              | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
-| Export modules to NUSMods URL    | `export`                                                                                               | `export`                                                              |
-| Change semester                  | `semester [ SEMESTER ]`                                                                                | `semester 2`                                                          |
-| View timetable                   | `timetable < /fancy &#124; /simple >`                                                                  | `timetable`                                                           |
-| List selected modules            | `list`                                                                                                 | `list`                                                                |
-| Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                              | `select /module CS1010 /type tutorial /code 1`                        |
+| Action                           | Format                                                                                                            | Example                                                               |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| Add a module                     | `add [ MODULE_CODE ]`                                                                                             | `add CS2101`                                                          |
+| Remove a module                  | `remove [ MODULE_CODE ]`                                                                                          | `remove CS2102`                                                       |
+| Exit application                 | `bye`                                                                                                             | `bye`                                                                 |
+| Read more details about a module | `info [ MODULE_CODE ]`                                                                                            | `info CS2103`                                                         |
+| Find module by keyword           | <code>search [ /code PARTIAL_MODULE_CODE &#124; /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER ></code> | `search /code cs /level 2 /sem 1`                                     |
+| Seek help                        | `help`                                                                                                            | `help`                                                                |
+| Import modules from NUSMods URL  | `import [ NUSMODS_LINK ]`                                                                                         | `import https://nusmods.com/timetable/sem-1/share?CS2113=LEC:1,TUT:4` |
+| Export modules to NUSMods URL    | `export`                                                                                                          | `export`                                                              |
+| Change semester                  | `semester [ SEMESTER ]`                                                                                           | `semester 2`                                                          |
+| View timetable                   | <code>timetable < /fancy &#124; /simple ></code>                                                                  | `timetable`                                                           |
+| List selected modules            | `list`                                                                                                            | `list`                                                                |
+| Add module timetable slot        | `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`                                         | `select /module CS1010 /type tutorial /code 1`                        |
 
 ## Credits
 

@@ -78,7 +78,7 @@ public class Storage {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (Link.isValidLink(line)) {
+            if (Link.isValidLink(line) && !Link.isEmptyLink(line)) {
                 links.add(line);
             }
         }

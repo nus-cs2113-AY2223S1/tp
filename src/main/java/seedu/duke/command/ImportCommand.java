@@ -21,9 +21,11 @@ public class ImportCommand extends Command {
     public ImportCommand(String[] input) throws YamomException {
         super(input);
 
-        if (!Parser.isTwoWordsCommand(input)) {
+        if (Parser.isOneWordCommand(input)) {
             throw new YamomException("No NUSMod link given.");
-        } else if (!Link.isValidLink(input[1]) && !Link.isEmptyLink(input[1])) {
+        } else if (Parser.isMultiWordsCommand(input)) {
+            throw new YamomException("Too many parameters supplied.");
+        } else if (!Link.isValidLink(input[1])) {
             throw new YamomException("The link you supplied is not valid.");
         } else if (Link.isEmptyLink(input[1])) {
             throw new YamomException("You are trying to import an empty timetable.");

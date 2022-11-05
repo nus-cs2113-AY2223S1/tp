@@ -71,6 +71,7 @@ public class LinkTest {
 
     @Test
     public void isValidLink_validLink_true() {
+        assertTrue(Link.isValidLink("https://nusmods.com/timetable/sem-1/share?"));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/sem-1/share?CS2113="));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-i/share?CS2113="));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-ii/share?CS2113="));
@@ -78,6 +79,7 @@ public class LinkTest {
 
     @Test
     public void isValidLink_notValidLink_false() {
+        assertFalse(Link.isValidLink("https://nusmods.com/timetable/sem-1share?"));
         assertFalse(Link.isValidLink("https://nusmods.com/timetable/sem-a/share?CS2113="));
         assertFalse(Link.isValidLink("https://nusmods.com/timetable/st-iii/share?CS2113="));
     }
