@@ -3,11 +3,13 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class ByeCommand {
+class RemoveModuleCommand {
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
-    <u>- MESSAGE_EXIT: String
+    <u>- ERROR_WRONG_FORMAT: String
+    - module: Module
+    - successful: boolean
 }
 
 @enduml

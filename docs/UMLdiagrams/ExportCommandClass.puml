@@ -3,7 +3,7 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class ListCommand {
+class ExportCommand {
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String

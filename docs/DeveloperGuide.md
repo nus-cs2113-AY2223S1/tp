@@ -205,7 +205,7 @@ Finally, it will also lead to tight coupling and decreased cohesion.
 
 ### 3.4 Command Component
 
-![Command Abstract Class](images/commandClass.png)
+![Command Abstract Class](images/Command.png)
 
 The <code>Command</code> component can:
 - execute based on the command type.  
@@ -264,6 +264,8 @@ and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
 #### 3.4.2 RemoveModuleCommand
 
+![RemoveModuleCommand](images/RemoveModuleCommandClass.png)
+
 The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
 
@@ -288,6 +290,8 @@ and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
 
+![HelpCommand](images/HelpCommandClass.png)
+
 The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
 
 ##### 3.4.3.1 How the feature is implemented
@@ -308,6 +312,7 @@ the number of commands available will involve refactoring at multiple parts of t
 
 
 #### 3.4.4 SearchModuleCommand
+
 ![SearchModuleCommand](images/SearchModuleCommand.png)
 
 ##### 3.4.4.1 How the feature is implemented
@@ -328,10 +333,14 @@ multiple times and the search process will be too long.
 
 #### 3.4.5 SelectSlotCommand
 
+![SelectSlotCommand](images/SelectSlotCommandClass.png)
+
 The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the different
 lesson types.
 
 #### 3.4.6 SelectSemesterCommand
+
+![SelectSemesterCommand](images/SelectSemesterCommandClass.png)
 
 The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that the
 user wish to plan for.
@@ -342,7 +351,7 @@ user wish to plan for.
 The <code>InfoCommand</code> class extends from the <code>Command</code> class and gets all the details of the module 
 that the user wants.
 
-![GetModuleCommand](images/GetModuleCommand.png)
+![InfoCommand](images/InfoCommandClass.png)
 
 <!-- TODO: update diagram -->
 
