@@ -36,8 +36,8 @@ Usage :
       list
       remove [ MODULE_CODE ]
       search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] < /level MODULE_LEVEL > < /sem SEMESTER >
-             * the search term can either be module code or a keyword in module title.
-             * MODULE_LEVEL and SEMESTER should be a single digit number.
+             * the search term can either be module code or a keyword in module title, or both.
+             * MODULE_LEVEL and SEMESTER should be a single digit number specified in the User Guide.
       select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
       semester [ SEMESTER ]
       timetable < /fancy | /simple >
@@ -56,7 +56,7 @@ Total 2 module(s) found
 CS2113    Software Engineering & Object-Oriented Programming
 CS2113T   Software Engineering & Object-Oriented Programming
 
-To get full details of the module, type 'info <module code>'
+To get full details of the module, enter 'info [ MODULE_CODE ]'
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "add cs2113" ...

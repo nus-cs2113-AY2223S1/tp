@@ -159,7 +159,7 @@ public class Parser {
     public static boolean isValidSemester(String[] keywords) {
         try {
             int semesterInput = Integer.parseInt(keywords[1]);
-            return semesterInput > 0 && semesterInput <= 4;
+            return semesterInput > 0 && semesterInput <= 4 && isTwoWordsCommand(keywords);
         } catch (NumberFormatException e) {
             return false;
         }
@@ -177,6 +177,9 @@ public class Parser {
      * @return If the user entered a valid special term.
      */
     public static boolean isValidSpecialTerm(String[] keywords) {
+        if (keywords.length > 4) {
+            return false;
+        }
         StringBuilder semester = new StringBuilder();
         for (int i = 1; i < keywords.length; i++) {
             semester.append(keywords[i]);

@@ -19,6 +19,8 @@ public class SelectSemesterCommand extends Command {
     private static final String PLANNING_FOR = "You are now planning for ";
     private static final String INVALID_SEMESTER_SELECTED = "A valid semester was not selected";
 
+    private static final String ERROR_MISSING_SEMESTER = "Please enter a semester number from 1 to 4 inclusive!";
+
     private int updatedSemester;
 
     private Logger logger;
@@ -27,6 +29,9 @@ public class SelectSemesterCommand extends Command {
 
     public SelectSemesterCommand(String[] input) throws YamomException {
         super(input);
+        if (Parser.isOneWordCommand(input)) {
+            throw new YamomException(ERROR_MISSING_SEMESTER);
+        }
         if (!Parser.isValidSpecialTerm(input) && !Parser.isValidSemester(input)) {
             throw new YamomException(ERROR_WRONG_FORMAT + System.lineSeparator() + "Not a valid semester.");
         }
