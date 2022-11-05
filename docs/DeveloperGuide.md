@@ -125,7 +125,7 @@ The sequence diagrams referenced by the component interaction diagram can be see
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
 * `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
-In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
+In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
 `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
