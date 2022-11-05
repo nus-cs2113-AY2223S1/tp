@@ -1,5 +1,9 @@
 # Moolah Manager - User Guide
 
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
+
 - [1. Introduction](#1-introduction)
 - [2. About This Guide](#2-about-this-guide)
   * [2.1. What is in Moolah Manager](#21-what-is-in-moolah-manager)
