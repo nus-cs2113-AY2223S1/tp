@@ -1132,6 +1132,7 @@ public class ConsoleInterface {
         runLocalStorageSaveToFile();
     }
 
+    //@@author LokQiJun
     private void runLocalStorageLoadFromFile() {
         ArrayList<Expense> savedExpenses = new ArrayList<>();
         ConsoleCommandSortExpense sortCommandSetting = new ConsoleCommandSortExpense(
@@ -1155,6 +1156,7 @@ public class ConsoleInterface {
         incomeManager.setIncomes(savedIncomes);
     }
 
+    //@@author LokQiJun
     private void runLocalStorageSaveToFile() {
         ArrayList<Expense> currentExpenses = expenseManager.getExpenses();
         ConsoleCommandSortExpense sortCommandSetting = expenseManager.getSortCommandSetting();
