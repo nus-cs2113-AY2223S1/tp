@@ -65,7 +65,7 @@ Saving of user information into text file occurs when user inputs an add/delete/
 
 Based on the user's saved university lists, user storage will save each university list's information in a separate text file.
 Each text file is named after the partner university (ie. `Boston University.txt`) and will contain the user's favourites, saved modules, timetable information.
-An example of a text file will look like [this](../data/Example University.txt).
+An example of a text file will look like [this](../docs/Example University.txt).
 
 Here is how the information is stored:
 

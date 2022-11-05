@@ -1,0 +1,4 @@
+T%
+CS103;this is a comment%
+MET CS 248;%
+#CS103;monday;10:00;12:00%
