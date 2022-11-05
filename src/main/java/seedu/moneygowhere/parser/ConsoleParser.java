@@ -1256,15 +1256,19 @@ public class ConsoleParser {
     ) {
         BigDecimal amount = consoleCommandAddTarget.getAmount();
 
-        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
 
-        consoleCommandAddTarget.setAmount(truncatedAmount);
+            consoleCommandAddTarget.setAmount(truncatedAmount);
+        }
 
         BigDecimal currentAmount = consoleCommandAddTarget.getCurrentAmount();
 
-        BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
+        if (currentAmount != null) {
+            BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
 
-        consoleCommandAddTarget.setCurrentAmount(truncatedCurrentAmount);
+            consoleCommandAddTarget.setCurrentAmount(truncatedCurrentAmount);
+        }
 
         return consoleCommandAddTarget;
     }
@@ -1795,9 +1799,11 @@ public class ConsoleParser {
     ) {
         BigDecimal amount = consoleCommandAddIncome.getAmount();
 
-        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
 
-        consoleCommandAddIncome.setAmount(truncatedAmount);
+            consoleCommandAddIncome.setAmount(truncatedAmount);
+        }
 
         return consoleCommandAddIncome;
     }

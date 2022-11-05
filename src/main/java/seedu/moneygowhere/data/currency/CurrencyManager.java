@@ -92,12 +92,14 @@ public class CurrencyManager {
 
     public void changeCurrency(Expense expense, String currency, BigDecimal rate) throws CurrencyInvalidException {
         BigDecimal newAmount = exchangeCurrency(expense, currency, rate);
-        BigDecimal newAmountRounded = newAmount.setScale(
-                Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
-                RoundingMode.HALF_UP
-        );
-        BigDecimal newAmountStrippedTrailingZeros = newAmountRounded.stripTrailingZeros();
-        expense.setAmount(newAmountStrippedTrailingZeros);
+        if (newAmount != null) {
+            BigDecimal newAmountRounded = newAmount.setScale(
+                    Configurations.CURRENCY_MANAGER_CONVERSION_NUMBER_OF_DECIMAL_PLACES,
+                    RoundingMode.HALF_UP
+            );
+            BigDecimal newAmountStrippedTrailingZeros = newAmountRounded.stripTrailingZeros();
+            expense.setAmount(newAmountStrippedTrailingZeros);
+        }
         expense.setCurrency(currency);
     }
 }
