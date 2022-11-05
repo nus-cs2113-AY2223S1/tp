@@ -241,7 +241,8 @@ public class ViewCommand extends Command {
     private void viewStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
-        String caption = getExerciseListCaption(strengthExerciseArrayList.size(), argumentList, STRENGTH_EXERCISES_CAPTION);
+        String caption = getExerciseListCaption(strengthExerciseArrayList.size(),
+                argumentList, STRENGTH_EXERCISES_CAPTION);
         ExerciseTable exerciseTable = new ExerciseTable(strengthExerciseArrayList, caption);
         ui.printTable(exerciseTable.getExerciseTable());
     }
@@ -312,8 +313,7 @@ public class ViewCommand extends Command {
     }
 
     private void validateViewDone(String[] argumentList, String message) throws IllegalValueException {
-        if (argumentList.length == ARRAY_LENGTH_FOR_VIEW_DONE &&
-                !argumentList[INDEX_FOR_DONE].equals(DONE)) {
+        if (argumentList.length == ARRAY_LENGTH_FOR_VIEW_DONE && !argumentList[INDEX_FOR_DONE].equals(DONE)) {
             throw new IllegalValueException(message);
         }
     }

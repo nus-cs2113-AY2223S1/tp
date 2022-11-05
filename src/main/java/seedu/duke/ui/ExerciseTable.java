@@ -21,9 +21,7 @@ public class ExerciseTable extends Table {
     public static final String COLUMN_SEPARATOR = " | ";
     public static final String ROW_SEPARATOR = "-";
     private final ArrayList<Exercise> exerciseArrayList;
-    private final String[] headings = new String[]{"Index", "Exercise", "Weight",
-            "Sets", "Reps", "Dist", "Calories", "Date", "Status"};
-    private int rowLength;
+    private final String[] headings = new String[9];
     private int[] columnSpacingArray = new int[9];
     private ArrayList<String> exerciseTable;
 
@@ -31,12 +29,26 @@ public class ExerciseTable extends Table {
         super(caption);
         this.exerciseArrayList = exerciseArrayList;
         exerciseTable = new ArrayList<>();
+        addHeadings();
+    }
+
+    private void addHeadings() {
+
+        headings[INDEX_POSITION] = "Index";
+        headings[DESCRIPTION_INDEX] = "Exercise";
+        headings[WEIGHT_INDEX] = "Weight";
+        headings[SET_INDEX] = "Sets";
+        headings[REPETITION_INDEX] = "Reps";
+        headings[DISTANCE_INDEX] = "Dist";
+        headings[CALORIES_INDEX] = "Calories";
+        headings[DATE_INDEX] = "Date";
+        headings[STATUS_INDEX] = "Status";
     }
 
     public ArrayList<String> getExerciseTable() {
         setExerciseColumnsSpacing();
         addCaption();
-        addHeading();
+        addHeadingRow();
         fillTable();
         return exerciseTable;
     }
@@ -90,7 +102,7 @@ public class ExerciseTable extends Table {
         exerciseTable.add(caption);
     }
 
-    private void addHeading() {
+    private void addHeadingRow() {
         StringBuilder headingRow = new StringBuilder();
         for (int i = 0; i < headings.length - 1; i++) {
             headingRow.append(addRightPadding(headings[i], columnSpacingArray[i]));

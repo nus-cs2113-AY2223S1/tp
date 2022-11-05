@@ -22,13 +22,14 @@ public class MarkCommand extends Command {
     public static final int INDEX_OF_EXERCISE_INDEX = 1;
     public static final int REQUIRED_MARK_UNDONE_SLASHES = 1;
     public static final int REQUIRED_MARK_DONE_SLASHES = 3;
-    public static final String LOGGING_EXECUTITION = "execute";
+    public static final String LOGGING_EXECUTION = "execute";
     public static final String DONE = "done";
     public static final String UNDONE = "undone";
     public static final String MARK_UNDONE_INVALID_PARAMETER_TYPE_MESSAGE = "Index must be integer";
     public static final String MARK_UNDONE_SUCCESS_MESSAGE = " is marked as undone successfully";
     public static final String ASSERT_UNDONE_FAILURE_MESSAGE = "exercise should be undone";
-    public static final String MARK_DONE_INVALID_PARAMETERS_TYPE_MESSAGE = "Index must be integer, time and met must be in 1 decimal place";
+    public static final String MARK_DONE_INVALID_PARAMETERS_TYPE_MESSAGE = "Index must be integer,"
+            + " time and met must be in 1 decimal place";
     public static final String ASSERT_DONE_FAILURE_MESSAGE = "exercise should be done";
     public static final String MARK_DONE_SUCCESS_MESSAGE = " is marked as done successfully";
     public static final String CALORIES_STRING = "calories:";
@@ -47,11 +48,11 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
-        LOGGER.entering(getClass().getName(), LOGGING_EXECUTITION);
+        LOGGER.entering(getClass().getName(), LOGGING_EXECUTION);
         String[] argumentList = Parser.getArgumentList(arguments);
         int slashesCount = Parser.getArgumentsCount(arguments);
         markExercise(argumentList, slashesCount);
-        LOGGER.exiting(getClass().getName(), LOGGING_EXECUTITION);
+        LOGGER.exiting(getClass().getName(), LOGGING_EXECUTION);
     }
 
     private void markExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
@@ -79,8 +80,8 @@ public class MarkCommand extends Command {
                     exerciseList.getCurrentExerciseListSize());
             Exercise exercise = exerciseList.getCurrentExercise(exerciseIndex);
             double time = Validator.getTimeWithValidation(argumentList[TIME_INDEX]);
-            double metabolicEquivalent = Validator.
-                    getMetabolicEquivalentWithValidation(argumentList[METABOLIC_EQUIVALENT_INDEX]);
+            double metabolicEquivalent = Validator
+                    .getMetabolicEquivalentWithValidation(argumentList[METABOLIC_EQUIVALENT_INDEX]);
             int calories = Calculator.calculateExerciseCalories(biometrics, time, metabolicEquivalent);
             exerciseList.markDone(exerciseIndex, time, calories);
             assert exercise.getDone() : ASSERT_DONE_FAILURE_MESSAGE;

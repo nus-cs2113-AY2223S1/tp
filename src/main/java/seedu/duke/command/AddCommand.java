@@ -38,7 +38,8 @@ public class AddCommand extends Command {
     public static final int LOAD_STRENGTH_EXERCISE_DATE_INDEX = 6;
     public static final int MAXIMUM_ADD_STRENGTH_ARGUMENT_LENGTH = 6;
     public static final int LOAD_STRENGTH_EXERCISE_CALORIES_INDEX = 7;
-    public static final String ADD_STRENGTH_SUCCESS_MESSAGE = " This strength exercise is added to the exercise list successfully";
+    public static final String ADD_STRENGTH_SUCCESS_MESSAGE = " This strength exercise is added "
+            + "to the exercise list successfully";
     public static final String ADD_STRENGTH_ERROR_MESSAGE = "Weight, set and repetition must be integer";
     public static final String ASSERT_ADD_STRENGTH_FAILURE_MESSAGE = "Exercise not added properly";
     public static final String FOOD = "food";
@@ -130,12 +131,12 @@ public class AddCommand extends Command {
     }
 
     private static Exercise createStrengthExercise(String[] argumentList) throws IllegalValueException {
-        String description = Validator.
-                getDescriptionWithValidation(argumentList[STRENGTH_EXERCISE_DESCRIPTION_INDEX]);
+        String description = Validator
+                .getDescriptionWithValidation(argumentList[STRENGTH_EXERCISE_DESCRIPTION_INDEX]);
         int weight = Validator.getWeightWithValidation(argumentList[STRENGTH_EXERCISE_WEIGHT_INDEX]);
         int set = Validator.getSetWithValidation(argumentList[STRENGTH_EXERCISE_SET_INDEX]);
-        int repetition = Validator.
-                getRepetitionWithValidation(argumentList[STRENGTH_EXERCISE_REPETITION_INDEX]);
+        int repetition = Validator
+                .getRepetitionWithValidation(argumentList[STRENGTH_EXERCISE_REPETITION_INDEX]);
 
         LocalDate date;
         date = getLocalDate(argumentList, MAXIMUM_ADD_STRENGTH_ARGUMENT_LENGTH,
@@ -143,10 +144,10 @@ public class AddCommand extends Command {
         return new StrengthExercise(description, weight, set, repetition, date);
     }
 
-    private static LocalDate getLocalDate(String[] argumentList, int maximum_length, int dateIndex)
+    private static LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
             throws IllegalValueException {
         LocalDate date;
-        if (argumentList.length == maximum_length) {
+        if (argumentList.length == maximumLength) {
             date = Parser.parseDate(argumentList[dateIndex], MONTHS_TO_ADD);
         } else {
             date = LocalDate.now();
@@ -154,7 +155,8 @@ public class AddCommand extends Command {
         return date;
     }
 
-    private void validateAddStrengthExerciseCommand(String[] argumentList, int slashesCount) throws IllegalValueException {
+    private void validateAddStrengthExerciseCommand(String[] argumentList, int slashesCount)
+            throws IllegalValueException {
         if (toDisplay) {
             Validator.validateCommandInput(slashesCount, MINIMUM_ADD_STRENGTH_SLASHES,
                     MAXIMUM_ADD_STRENGTH_SLASHES, INVALID_STRENGTH_INPUT_MESSAGE,

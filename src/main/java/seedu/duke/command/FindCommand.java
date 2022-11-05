@@ -42,7 +42,6 @@ public class FindCommand extends Command {
     public static final String CALORIES = "calories";
     public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
     public static final int EMPTY_LIST = 0;
-    public static final String MATCHING_EXERCISE_IN_DATE_CAPTION = "Here are the exercises in your list matching this date:";
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;

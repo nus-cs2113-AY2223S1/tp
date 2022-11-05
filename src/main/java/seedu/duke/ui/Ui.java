@@ -250,7 +250,8 @@ public class Ui {
                 String distance = getDistanceForPrint(exercise, columnSpacingArray[9]) + " | ";
                 String calories = getCaloriesForPrint(exercise, columnSpacingArray[10]) + " | ";
                 String status = exercise.getTaskStatus();
-                printInSameLine(date, extraPadding, exerciseName, weight, sets, repetitions, distance, calories, status);
+                printInSameLine(date, extraPadding, exerciseName, weight, sets,
+                        repetitions, distance, calories, status);
             }
         }
     }
