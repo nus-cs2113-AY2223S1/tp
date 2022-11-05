@@ -2,6 +2,7 @@ package seedu.duke.user;
 
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.TimetableNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 import seedu.duke.ui.Ui;
 
 import java.util.HashMap;
@@ -52,10 +53,10 @@ public class UserUniversityListManager {
     }
 
     public void updateComment(String universityName, String moduleCode, String comment)
-            throws InvalidUserCommandException {
+            throws InvalidUserCommandException, UniversityNotFoundException {
         if (!containsKey(universityName)) {
-            System.out.println("Error: No list containing such university");
-            System.out.println("Please create university and add relevant module before adding a comment");
+            throw new UniversityNotFoundException("Error: No list containing such university\n"
+            + "Please create university and add relevant module before adding a comment\n");
         } else {
             if (checkEmpty(comment)) {
                 System.out.println("Error: Invalid Comment");
@@ -72,9 +73,10 @@ public class UserUniversityListManager {
         return comment.contains("_") || comment.contains("%") || comment.contains("/") || comment.contains(";");
     }
 
-    public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException {
+    public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException,
+            UniversityNotFoundException {
         if (!containsKey(universityName)) {
-            System.out.println("Error: No list containing such university");
+            throw new UniversityNotFoundException("Error: No list containing such university\n");
         } else {
             getList(universityName).deleteComment(moduleCode);
         }

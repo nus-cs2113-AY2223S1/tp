@@ -36,6 +36,7 @@ public class UserStorage {
         String filePath;
         if (filePaths.get(uniName) == null) {
             filePath = directory + uniName + ".txt";
+            filePaths.put(uniName, filePath);
         } else {
             filePath = filePaths.get(uniName);
         }
