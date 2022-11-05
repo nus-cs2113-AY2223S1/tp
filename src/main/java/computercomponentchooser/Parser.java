@@ -192,15 +192,15 @@ public class Parser {
      */
     private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException,
             InvalidBuildException {
-        Build newBuild;
         String name;
         name = getParameter(line, NAME_PARAMETER);
         if (name.isBlank()) {
             throw new BlankStringException();
-        } if (name.equalsIgnoreCase("AllSavedBuilds")) {
+        }
+        if (name.equalsIgnoreCase("AllSavedBuilds")) {
             throw new InvalidBuildException();
         }
-        newBuild = new Build(name);
+        Build newBuild = new Build(name);
         buildManager.addBuild(newBuild);
         Ui.printLine();
         System.out.println("You have added " + name);
