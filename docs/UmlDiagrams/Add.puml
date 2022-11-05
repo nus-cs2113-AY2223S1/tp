@@ -21,6 +21,7 @@ else cardio
 
 else weight
     ref over addCommand: addWeightAndFat
+
 else invalid addType
 
 end

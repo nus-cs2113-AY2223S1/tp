@@ -25,12 +25,9 @@ class Biometrics {
 -int age
 -String gender
 -int height
--int weight
--int fat
-+setWeight(weight: int): void
-+setFat(fat: int): void
+-int activityLevel
 +setBiometrics(age: int, gender: String,
-height: int, weight: int, fat: int): void
+height: int, activityLevel: int): void
 +toString(): String
 +saveBiometrics(): String
 }

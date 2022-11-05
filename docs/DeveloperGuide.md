@@ -17,7 +17,7 @@ Biometrics component:
 The Biometrics component stores information about the user's biometrics and holds a reference
 to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
 WeightAndFatList is separated from Biometrics for better abstraction and cohesion.  
-[Proposed] Weight and fat records will be associated with a date, and the WeightAndFatList class
+Weight and fat records will be associated with a date, and the WeightAndFatList class
 stores records in descending order of date for viewing purposes.
 ![Biometrics.png](UmlDiagrams/Biometrics.png)
 
