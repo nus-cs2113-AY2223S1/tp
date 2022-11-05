@@ -38,13 +38,17 @@ public class Delete extends Command {
      * @param input input entered by user. Format: String
      * @throws InvalidInputFormatException Exception thrown if format of input for delete command is incorrect
      */
-
     public void checkFormat(String input) throws InvalidInputFormatException {
         boolean isRight;
         isRight = InvalidInputFormatException.checkMod(input);
         checkFormatException(isRight);
     }
 
+    /**
+     * Function to check format of input
+     * @param isRight whether it is in correct format. Format: boolean
+     * @throws InvalidInputFormatException exception thrown if content of input has issues
+     */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
         if (!isRight) {
             throw new InvalidInputFormatException();

@@ -32,28 +32,14 @@ public class Check extends Command {
             throw new InvalidInputContentException();
         }
     }
+
+    /**
+     * Constructor to initialize object of Check Command class
+     */
     public Check() {
-
     }
 
-    @Override
-    public void execute(ModuleList moduleList) {
-        if (type.equals("NOC")) {
-            //obtained >70 MCs, completed four semesters of study and not in last semester
-            if (checkNOC()) {
-                UI.nocEligibleMessage();
-            } else {
-                UI.nocIneligibleMessage();
-            }
-        } else if (type.equals("SEP")) {
-            //completed two semesters of study, cap above 3.0 and not in last year
-            if (checkSEP()) {
-                UI.sepEligibleMessage();
-            } else {
-                UI.sepIneligibleMessage();
-            }
-        }
-    }
+
 
     /**
      * Function to find the current semester based on the latest graded semester
