@@ -37,7 +37,7 @@ public class PurgeCommand extends Command {
     //@@author brian-vb
 
     /**
-     * Executes the operations related to the command.
+     * Executes the "purge" command. Checks and parses the necessary parameters before deleting transaction.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -45,7 +45,6 @@ public class PurgeCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        // Shows confirmation prompt before deleting all transactions
         purgeLogger.setLevel(Level.SEVERE);
         purgeLogger.log(Level.INFO, "Purge Command checks if there are no transactions"
                 + " to be purged. If so, the command is aborted.");
@@ -84,10 +83,7 @@ public class PurgeCommand extends Command {
 
     public static boolean isEmpty(TransactionList transactions) {
         int size = transactions.size();
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     //@@author wcwy

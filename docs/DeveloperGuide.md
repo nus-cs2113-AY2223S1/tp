@@ -482,7 +482,7 @@ _Written by: Brian Wong Yun Long_
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
-Adding tags such as type, category and date will list all transactions to that category
+Adding tags such as year, month, day, type, category will list all transactions that apply to that tag.
 
 The structure of the application focusing on the list command is illustrated in the class diagram below:
 
