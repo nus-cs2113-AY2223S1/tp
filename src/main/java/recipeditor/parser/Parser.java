@@ -81,12 +81,12 @@ public class Parser {
                 int recipeIndexToDelete = Integer.parseInt(parsed[2]) - 1;
                 assert recipeIndexToDelete > -1;
                 return new DeleteCommand(recipeIndexToDelete);
-            case DESCRIPTION:
+            case TITLE:
                 String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 2, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
-                if (recipeTitleToDelete != null) {
+                if (actualRecipeTitle != null) {
                     return new DeleteCommand(actualRecipeTitle);
                 }
                 break;
@@ -137,13 +137,13 @@ public class Parser {
                 int index = Integer.parseInt(parsed[2]) - 1; // to account for 0-based indexing in recipelist
                 assert index > -1;
                 return new ViewCommand(index);
-            case DESCRIPTION:
+            case TITLE:
                 String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, 2, parsed.length);
                 recipeTitleToView = convertStringArrayToString(recipeTitleToViewArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToView);
-                if (recipeTitleToView != null) {
-                    return new ViewCommand(recipeTitleToView);
+                if (actualRecipeTitle != null) {
+                    return new ViewCommand(actualRecipeTitle);
                 }
                 break;
             case NULL:
