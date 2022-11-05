@@ -280,7 +280,7 @@ and `module`
 (specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired
 module.
 
-The following sequence diagram shows how the undo operation works:
+The following sequence diagram shows how the operation works:
 
 ![AddModuleCommandSequenceDiagram](images/AddModuleCommandSequenceDiagram.png)
 
