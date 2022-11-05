@@ -21,14 +21,17 @@ It is written in Java and has about 3 kLoC currently.
   * User Guide:
     * Added documentation for `Patient` related features
   * Developer Guide:
-    * Added documentation for `Patient` component as well as the following related sequence diagram.
+    * Added documentation for `Patient` component as well as the related class and sequence diagram in this section.
+    * Added documentation for `Storage` component, creating the related class and sequence diagram in this section.
+    * Created the sequence diagram used to illustrate what happens when the `patientParser` method is called, under the 
+    `Parser` component section.
 
-![](images/PatientListInitialization.png)
 
 * __Enhancements__: 
   * Added some useful helper functions, such as `printErrorMessage` and `printLine`.
   * Fixed some major bugs: see [#27](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/27)
   * Fixed formatting issues.
+  * Restructured some parts of the Developer Guide.
 
 
 * __Testing__: Added relevant JUnit test cases to ensure `Patient` functions are working constantly after every PR.
