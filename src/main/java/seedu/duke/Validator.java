@@ -2,6 +2,9 @@ package seedu.duke;
 
 import seedu.duke.exception.IllegalValueException;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
 public class Validator {
@@ -20,12 +23,18 @@ public class Validator {
     public static final int ZERO = 0;
     public static final String INVALID_TIME_MESSAGE = "Invalid value for time";
     public static final String INVALID_MET_MESSAGE = "Invalid met value";
+    public static final String INVALID_DATE = "Date is in the wrong format. Please follow the dd-MM-yyyy format";
+
     public static final int MAXIMUM_MET = 50;
     public static final String INVALID_DOUBLE = "Double must be 1 decimal place";
     public static final String DOUBLE_SEPARATOR = "\\.";
     public static final int DOUBLE_ARRAY_LENGTH = 2;
     public static final int ONE_DECIMAL_PLACE_LENGTH = 1;
     public static final String OUT_OF_BOUND = "Index out of bound";
+    public static final int MAXIMUM_DISTANCE = 100;
+    public static final int MINIMUM_DISTANCE = 0;
+    public static final String INVALID_VALUE_FOR_DISTANCE = "Invalid value for distance";
+
 
     public static void validateCommandInput(int slashesCount, int minimum,
                                             int maximum, String message, char lastCharacter)
@@ -81,14 +90,35 @@ public class Validator {
         return repetition;
     }
 
+    public static double getDistanceWithValidation(String dist) throws IllegalValueException {
+        double distance = Math.round(Double.parseDouble(dist) * 1000.0) / 1000.0;
+        validateDouble(distance, MAXIMUM_DISTANCE, MINIMUM_DISTANCE, INVALID_VALUE_FOR_DISTANCE);
+        return distance;
+    }
+
     public static int getIndexWithValidation(String indexString, int arraySize) throws IllegalValueException {
         int index = Integer.parseInt(indexString);
         validateData(index, arraySize, OUT_OF_BOUND);
         return index - 1;
     }
 
+    public static LocalDate getDateWithValidation(String date) throws IllegalValueException {
+        validateDate(date,INVALID_DATE);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localdate = LocalDate.parse(date,formatter);
+        return localdate;
+    }
+
     private static void validateData(int data, int maximumValue, String message) throws IllegalValueException {
         if (data <= 0 || data > maximumValue) {
+            throw new IllegalValueException(message);
+        }
+    }
+
+    private static void validateDate(String date, String message) throws IllegalValueException {
+        try {
+            LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (DateTimeException e) {
             throw new IllegalValueException(message);
         }
     }

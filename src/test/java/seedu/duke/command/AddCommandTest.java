@@ -84,4 +84,55 @@ class AddCommandTest {
         }
     }
 
+    @Test
+    void execute_negativeDistance_throwsException() {
+        String command = "add cardio ";
+        String exerciseName = "sprints";
+        int distance = -5;
+        int repetitions = 2;
+        String fullCommand = String.format("%s /%s /%d /%d",
+                command, exerciseName, distance, repetitions);
+        Command c = Parser.parse(fullCommand);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+        try {
+            c.execute();
+        } catch (IllegalValueException e) {
+            assertEquals("Invalid value for distance", e.getMessage());
+        }
+    }
+
+    @Test
+    void execute_invalidFormatRepetitions_throwsException() {
+        String command = "add cardio ";
+        String exerciseName = "sprints";
+        double distance = 3.5;
+        double repetitions = 2.5;
+        String fullCommand = String.format("%s /%s /%f /%f",
+                command, exerciseName, distance, repetitions);
+        Command c = Parser.parse(fullCommand);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+        try {
+            c.execute();
+        } catch (IllegalValueException e) {
+            assertEquals("Distance must be in numbers and repetitions must be integers", e.getMessage());
+        }
+    }
+
+    @Test
+    void execute_invalidRepetitions_throwsException() {
+        String command = "add cardio ";
+        String exerciseName = "sprints";
+        double distance = 3.5;
+        int repetitions = -5;
+        String fullCommand = String.format("%s /%s /%f /%d",
+                command, exerciseName, distance, repetitions);
+        Command c = Parser.parse(fullCommand);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+        try {
+            c.execute();
+        } catch (IllegalValueException e) {
+            assertEquals("Invalid value for repetitions", e.getMessage());
+        }
+    }
+
 }
