@@ -200,9 +200,9 @@ public class ConsoleParser {
         }
 
         try {
-            int expenseIndex = Integer.parseInt(incomeIndexStr);
+            int incomeIndex = Integer.parseInt(incomeIndexStr);
 
-            return expenseIndex < 0;
+            return incomeIndex < 0;
         } catch (NumberFormatException exception) {
             return true;
         }
@@ -214,9 +214,9 @@ public class ConsoleParser {
         }
 
         try {
-            int expenseIndex = Integer.parseInt(targetIndexStr);
+            int targetIndex = Integer.parseInt(targetIndexStr);
 
-            return expenseIndex < 0;
+            return targetIndex < 0;
         } catch (NumberFormatException exception) {
             return true;
         }
@@ -1413,7 +1413,7 @@ public class ConsoleParser {
     private static void validateCommandDeleteTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
+                ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
         );
 
         if (targetIndexStr == null) {
@@ -1605,12 +1605,16 @@ public class ConsoleParser {
             }
 
             BigDecimal amount;
-            BigDecimal currentAmount;
-            if (amountStr == null || currentAmountStr == null) {
+            if (amountStr == null) {
                 amount = null;
-                currentAmount = null;
             } else {
                 amount = new BigDecimal(amountStr);
+            }
+
+            BigDecimal currentAmount;
+            if (currentAmountStr == null) {
+                currentAmount = null;
+            } else {
                 currentAmount = new BigDecimal(currentAmountStr);
             }
 
