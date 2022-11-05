@@ -20,10 +20,38 @@ loop hasNextLine
 
     ": DatabaseStorage" -> ": Database" : addUniversity(newUniversity)
     activate ": Database"
+
+    ": Database" -> ": Database" : isNewUniversity(newUniversity)
+    activate ": Database"
+
+    opt new university
+
+        ": Database" -> ": Database" : appendUniversities(newUniversity)
+        activate ": Database"
+        deactivate ": Database"
+
+    end
+
+    deactivate ": Database"
+
     deactivate ": Database"
 
     ": DatabaseStorage" -> ": Database" : addModuleMapping(newModuleMapping)
     activate ": Database"
+
+    ": Database" -> ": Database" : isNewModuleMapping(newModuleMapping)
+    activate ": Database"
+
+    opt new module mapping
+
+        ": Database" -> ": Database" : appendModuleMappings(newModuleMapping)
+        activate ": Database"
+        deactivate ": Database"
+
+    end
+
+    deactivate ": Database"
+
     deactivate ": Database"
 
     deactivate ": DatabaseStorage"
