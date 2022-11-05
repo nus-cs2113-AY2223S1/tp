@@ -59,11 +59,11 @@ public enum InfoMessages {
     INFO_BUDGET_EXCEEDED_REMINDER("REMINDER: You have already exceeded the budget set for current month!"),
     INFO_BUDGET_NOT_EXCEEDED_REMINDER("REMINDER: Continue to stay within your budget for this month! Good fortune!"),
     INFO_SAVING_TIPS_AND_BUDGET_ADVICE_SEPARATOR("In terms of monthly budget, "),
-    INFO_BUDGET_EXCEEDED_ADVICE_HIGH("you have exceeded more than twice of your budget!"),
-    INFO_BUDGET_EXCEEDED_ADVICE_LOW("you have spent more than your budget planned!"),
-    INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH("you are left with less than half of your budget for the month!"),
-    INFO_BUDGET_NOT_EXCEEDED_LOW("you have kept yourself well within the budget!"),
-    INFO_BUDGET_NOT_SPENT("you still have the full budget for the month!");
+    INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_HIGH("you have exceeded more than twice of your budget!"),
+    INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_LOW("you have spent more than your budget planned!"),
+    INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_HIGH("you are left with less than half of your budget for the month!"),
+    INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_LOW("you have kept yourself well within the budget!"),
+    INFO_BUDGET_NOT_SPENT_ADVICE("you still have the full budget for the month!");
 
     //@@author chydarren
     public final String message;

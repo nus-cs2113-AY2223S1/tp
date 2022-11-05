@@ -17,11 +17,11 @@ import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.FULL_STOP_SPACE;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 import static seedu.duke.common.InfoMessages.INFO_SAVING_TIPS_AND_BUDGET_ADVICE_SEPARATOR;
-import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_HIGH;
-import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_LOW;
-import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
-import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_LOW;
-import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_SPENT;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_HIGH;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_LOW;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_HIGH;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_LOW;
+import static seedu.duke.common.InfoMessages.INFO_BUDGET_NOT_SPENT_ADVICE;
 
 //@@author wcwy
 
@@ -220,23 +220,23 @@ public class Budget {
            Otherwise, a budget is lowly spent and within budget.
          */
         if (hasExceededBudget && hasExceededBudgetMoreThanTwice) {
-            message += INFO_BUDGET_EXCEEDED_ADVICE_HIGH;
+            message += INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_HIGH;
         }
 
         if (hasExceededBudget && !hasExceededBudgetMoreThanTwice) {
-            message += INFO_BUDGET_EXCEEDED_ADVICE_LOW;
+            message += INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_LOW;
         }
 
         if (!hasExceededBudget && hasLeftLessThanHalfOfBudget) {
-            message += INFO_BUDGET_NOT_EXCEEDED_ADVICE_HIGH;
+            message += INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_HIGH;
         }
 
         if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget && hasSpentAnyBudget) {
-            message += INFO_BUDGET_NOT_EXCEEDED_LOW;
+            message += INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_LOW;
         }
 
         if (!hasExceededBudget && !hasLeftLessThanHalfOfBudget && !hasSpentAnyBudget) {
-            message += INFO_BUDGET_NOT_SPENT;
+            message += INFO_BUDGET_NOT_SPENT_ADVICE;
         }
 
         return message;

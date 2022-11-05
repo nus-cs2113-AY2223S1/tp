@@ -334,7 +334,7 @@ public class ParameterParser {
             command.setKeyword(parameter);
             break;
         case COMMAND_TAG_HELP_OPTION:
-            command.setIsDetailedOption(parseHelpOptionTag(parameter));
+            command.isDetailed(parseHelpOptionTag(parameter));
             break;
         case COMMAND_TAG_STATS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));

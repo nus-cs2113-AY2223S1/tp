@@ -49,7 +49,7 @@ public class HelpCommand extends Command {
      * @param isDetailed A boolean indicating if the user chooses to display the help message in detail.
      */
     @Override
-    public void setIsDetailedOption(boolean isDetailed) {
+    public void isDetailed(boolean isDetailed) {
         this.isDetailed = isDetailed;
     }
 
