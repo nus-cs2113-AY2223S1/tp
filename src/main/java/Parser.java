@@ -62,15 +62,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = patientAddMatcher(input);
@@ -100,7 +97,6 @@ public class Parser {
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
-
         return SubMenuState.IN_SUB_MENU;
     }
 
@@ -108,15 +104,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addVisitMatcher(input);
@@ -169,15 +162,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addPrescriptionMatcher(input);
