@@ -50,7 +50,7 @@ public class ModuleList {
         } else {
             int before = modules.size();
             modules.add(mod);
-            if (isFromFile == false) {
+            if (!isFromFile) {
                 UI.addMessage(mod.getCourse(), mod.getSemesterTaken(), mod.getGrade());
             }
             int after = modules.size();
@@ -218,7 +218,7 @@ public class ModuleList {
     public Integer totalGradedMcs() {
         Integer totalGradedMc = 0;
         for (Module mod : modules) {
-            if(!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))){
+            if (!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))) {
                 totalGradedMc += mod.getMcs();
             }
         }
@@ -229,7 +229,7 @@ public class ModuleList {
      * Returns total Mcs taken in whole plan
      */
     public Integer totalMcs() {
-        Integer totalMcs = 0;
+        int totalMcs = 0;
         for (Module mod : modules) {
             totalMcs += mod.getMcs();
         }
@@ -240,9 +240,9 @@ public class ModuleList {
      * Returns total S/U Mcs taken in whole plan
      */
     public Integer totalSuMcs() {
-        Integer totalSuMcs = 0;
+        int totalSuMcs = 0;
         for (Module mod : modules) {
-            if(mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
+            if (mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
                 totalSuMcs += mod.getMcs();
             }
         }
@@ -255,7 +255,7 @@ public class ModuleList {
     public Integer totalUngradedMcs() {
         Integer totalUngradedMcs = 0;
         for (Module mod : modules) {
-            if(mod.getGrade().equals("-")) {
+            if (mod.getGrade().equals("-")) {
                 totalUngradedMcs += mod.getMcs();
             }
         }
@@ -289,7 +289,6 @@ public class ModuleList {
     public double gradePoint(String grade) {
         switch (grade) {
             case "A+":
-                return 5.0;
             case "A":
                 return 5.0;
             case "A-":
@@ -308,16 +307,6 @@ public class ModuleList {
                 return 1.5;
             case "D":
                 return 1.0;
-            case "F":
-                return 0.0;
-            case "F*":
-                return 0.0;
-            case "S":
-                return 0.0;
-            case "U":
-                return 0.0;
-            case "-":
-                return 0.0;
             default:
                 return 0.0;
         }

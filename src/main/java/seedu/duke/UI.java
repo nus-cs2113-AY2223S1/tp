@@ -172,11 +172,11 @@ public class UI {
         System.out.println("There are no existing modules that match your keyword inputted.");
     }
 
-    public static void NOCEligibleMessage() {
+    public static void nocEligibleMessage() {
         System.out.println("You are eligible for NOC!");
     }
 
-    public static void NOCIneligibleMessage() {
+    public static void nocIneligibleMessage() {
         System.out.println("Sorry, You are ineligible for NOC." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
         System.out.println(" * You have yet to complete 4 semesters of study");
@@ -185,11 +185,11 @@ public class UI {
 
     }
 
-    public static void SEPEligibleMessage() {
+    public static void sepEligibleMessage() {
         System.out.println("You are eligible for SEP!");
     }
 
-    public static void SEPIneligibleMessage() {
+    public static void sepIneligibleMessage() {
         System.out.println("Sorry, You are ineligible for SEP." + "\n");
         System.out.println("These may be possible reasons for ineligibility:");
         System.out.println(" * You have yet to complete 2 semesters of study");

@@ -42,11 +42,11 @@ public class ASCIIArtGenerator {
         ASCIIArtGenerator artGen = new ASCIIArtGenerator();
 
         System.out.println();
-        artGen.printTextArt("Hello", ASCIIArtGenerator.ART_SIZE_MEDIUM);
+        printTextArt("Hello", ASCIIArtGenerator.ART_SIZE_MEDIUM);
         System.out.println();
 
         System.out.println();
-        artGen.printTextArt("Love is life!", ASCIIArtGenerator.ART_SIZE_SMALL, ASCIIArtFont.ART_FONT_MONO,"@");
+        printTextArt("Love is life!", ASCIIArtGenerator.ART_SIZE_SMALL, ASCIIArtFont.ART_FONT_MONO,"@");
         System.out.println();
 
     }
