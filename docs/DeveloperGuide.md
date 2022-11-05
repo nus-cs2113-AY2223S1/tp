@@ -304,7 +304,6 @@ from that version onwards.
 
 | Version | As a ... | I want to ...              | So that I can ...                                           |
 |---------|----------|----------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions     | refer to them when I forget how to use the application      |
  | v1.0    | user     | add a new build            | refer to when I want to track my build                      |
 | v1.0    | user     | list all builds            | get a list of all builds in one place                       |
 | v1.0    | user     | delete a build             | remove builds that I do not need anymore                    |

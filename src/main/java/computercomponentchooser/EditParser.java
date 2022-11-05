@@ -70,7 +70,7 @@ public class EditParser {
      * @return A boolean value indicating whether the user input is bye.
      */
     public static boolean checkBack(String line) {
-        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+        String back = getParameter(line, COMMAND_PARAMETER).toLowerCase().trim();
         if (back.equals("back")) {
             Ui.printEditLine();
             System.out.println("Back to main mode.");
@@ -85,7 +85,7 @@ public class EditParser {
      * @param line The user input.
      */
     public void parse(String line) {
-        String command = getParameter(line, COMMAND_PARAMETER).toLowerCase();
+        String command = getParameter(line, COMMAND_PARAMETER).toLowerCase().trim();
         Build editBuild = buildManager.getBuild(buildName);
 
         try {
