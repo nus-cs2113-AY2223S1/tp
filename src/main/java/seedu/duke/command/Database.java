@@ -33,8 +33,12 @@ public class Database {
         if (isNewUniversity(newUniversity)) {
             logger.log(Level.FINE, "New university found, adding to list");
 
-            universities.add(newUniversity);
+            appendUniversities(newUniversity);
         }
+    }
+
+    private static void appendUniversities(University newUniversity) {
+        universities.add(newUniversity);
     }
 
     /**
@@ -46,9 +50,13 @@ public class Database {
         if (isNewModuleMapping(newModuleMapping)) {
             logger.log(Level.FINE, "New module mapping found, adding to list");
 
-            moduleMappings.add(newModuleMapping);
+            appendModuleMappings(newModuleMapping);
         }
 
+    }
+
+    private static void appendModuleMappings(ModuleMapping newModuleMapping) {
+        moduleMappings.add(newModuleMapping);
     }
 
     /**
