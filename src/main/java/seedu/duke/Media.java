@@ -72,6 +72,13 @@ public class Media {
         logger.log(Level.INFO,"Added new Media to list");
     }
 
+    /**
+     * Converts the given date from a String into a Date object.
+     *
+     * @param dateWatchedString The date given by the user.
+     * @throws ParseException If the user provides a date in a format other than dd-MM-yyyy.
+     * @throws FutureDateException If the user provides a date in the future.
+     */
     public void convertDate(String dateWatchedString) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
@@ -89,7 +96,7 @@ public class Media {
             DateFormat df = new SimpleDateFormat(pattern);
             dateString = df.format(getDateWatched());
         } catch (ParseException e) {
-            System.out.println("Invalid date format. Use the following format: DD-MM-YYYY.");
+            Ui.print("Invalid date format. Use the following format: DD-MM-YYYY.");
         } catch (FutureDateException e) {
             logger.log(Level.INFO,"User attempted to add date from the future.");
         }

@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -21,7 +20,7 @@ public class Storage {
     }
 
     /**
-     * Retreives the file storing user's tasks from the previous run
+     * Retrieves the file storing user's tasks from the previous run
      * of the program. If no such file is found, makes the appropriate file.
      * 
      * @return File representing the saved information.
@@ -45,7 +44,7 @@ public class Storage {
             return file;
 
         } catch (Exception e) {
-            System.out.println("File i/o error.");
+            Ui.print("File i/o error.");
             return null;
         }
     }
@@ -88,9 +87,9 @@ public class Storage {
             fileScanner.close();
 
         } catch (FileNotFoundException e) {
-            System.out.println("Error accessing file.");
+            Ui.print("Error accessing file.");
         } catch (Exception e) {
-            System.out.println("Sorry, your saved file was corrupted. You may continue using myReviews with a new "
+            Ui.print("Sorry, your saved file was corrupted. You may continue using myReviews with a new "
                     + "list.");
             f.delete();
             f.mkdirs();
@@ -119,7 +118,7 @@ public class Storage {
 
             fw.close();
         } catch (Exception e) {
-            System.out.println("File i/o error");
+            Ui.print("File i/o error");
         }
     }
 
