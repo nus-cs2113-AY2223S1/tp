@@ -129,7 +129,7 @@ This section describes the implementation details of the features within Propert
 
 ---
 ### Add Feature
-The add feature simply adds an entity to its corresponding list. For Property Rental Manager, there are two variations to the add feature, namely `add -client` and `add -property`.
+The add feature adds an entity to its corresponding list. For Property Rental Manager, there are two variations to the add feature, namely `add -client` and `add -property`.
 
 - `add -client`: Add a new client to the client list.
 - `add -property`: Add a new property to the property list.
@@ -142,24 +142,24 @@ The implementation of add feature can be simplified into two major sections. The
 
 The first section is facilitated by the following classes:
 
-- `ParseAdd`: Contains common methods used by `ParseAddClient` and `ParseAddProperty`.
-- `ParseAddClient`: Extracts and validates client information from `commandDescription`(User Input).
-- `ParseAddProperty`: Extracts and validates property information from `commandDescription`(User Input).
+- `CommandAddParser`: Contains common methods used by `CommandAddClientParser` and `CommandAddPropertyParser`.
+- `CommandAddClientParser`: Extracts and validates client information from `commandDescription`(User Input).
+- `CommandAddPropertyParser`: Extracts and validates property information from `commandDescription`(User Input).
 
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.png)
+![](diagrams/CommandAddParserRelatedClassesDiagram.png)
 
 </p>
 
 <p align="center">
-Parse Add Related Classes Diagram
+Command Add Parser Related Classes Diagram
 </p>
 
-As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
+As shown above, both `CommandAddClientParser` and `CommandAddPropertyParser` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Many of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
@@ -177,7 +177,7 @@ Also, most of the sub-methods are used to perform validations on the extracted d
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
-Note: Since the target user is a property manager working in Singapore, some validations are tailored to Singapore context.
+**Note**: Since the target user is a property manager working in Singapore, some validations are tailored to Singapore context.
 
 <br/>
 
@@ -210,10 +210,10 @@ As shown above, both `CommandAddClient` and `CommandAddProperty` classes have a 
 Given below is an example scenario on how add client/property behaves at each step.
 
 
-- **Step 1**: The user executes ```add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH``` or ```add -property n/NAME a/ADDRESS p/PRICE t/TYPE```. Depending on `add -client` or `add -property` specified, a `Parser` object of type `ParseAddClient` or `ParseAddProperty` is created.
+- **Step 1**: The user executes ```add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH``` or ```add -property n/NAME a/ADDRESS p/PRICE t/TYPE```. Depending on `add -client` or `add -property` specified, a `Parser` object of type `CommandAddClientParser` or `CommandAddPropertyParser` is created.
 
 
-- **Step 2**: The `Parser` object will then call method `ParseAddClient#parseCommand()` or `ParseAddProperty#parseCommand()` which will check for any incorrect formatting before the extraction and validation of client/property details.
+- **Step 2**: The `Parser` object will then call method `CommandAddClientParser#parseCommand()` or `CommandAddPropertyParser#parseCommand()` which will check for any incorrect formatting before the extraction and validation of client/property details.
 
 
 - **Step 3**: If there is no error, a `Command` object of type `CommandAddClient` or `CommandAddProperty` is created.

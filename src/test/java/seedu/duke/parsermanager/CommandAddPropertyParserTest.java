@@ -9,20 +9,21 @@ import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.command.Command;
-import seedu.duke.exception.AddressFormatUnitTypeMismatchException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.AddressFormatUnitTypeMismatchException;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.DuplicatePropertyException;
-import seedu.duke.exception.EmptyAddPropertyDetailException;
-import seedu.duke.exception.IncorrectAddPropertyFlagOrderException;
-import seedu.duke.exception.InvalidPriceFormatException;
-import seedu.duke.exception.InvalidSingaporeAddressException;
-import seedu.duke.exception.InvalidUnitTypeLabelException;
-import seedu.duke.exception.MissingAddPropertyFlagException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.DuplicatePropertyException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.EmptyAddPropertyDetailException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.IncorrectAddPropertyFlagOrderException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidPriceFormatException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidSingaporeAddressException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.InvalidUnitTypeLabelException;
+import seedu.duke.exception.parseaddexception.parseaddpropertyexception.MissingAddPropertyFlagException;
+import seedu.duke.parsermanager.add.CommandAddPropertyParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ParseAddPropertyTest {
+class CommandAddPropertyParserTest {
     private static final String VALID_LANDED_PROPERTY_INPUT = "n/Bob a/60 Aria Street, S602580 p/1000 t/LP BGL";
     private static final String VALID_LANDED_PROPERTY_WITH_STREET_NUMBER_INPUT = "n/Bob a/60 Aria Street 321, "
             + "S602580 p/1000 t/LP BGL";
@@ -31,13 +32,13 @@ class ParseAddPropertyTest {
     private static final String VALID_BUILDING_PROPERTY_WITH_STREET_NAME_AND_BUILDING_NAME_INPUT = "n/Bob a/101C "
             + "Marlow Street 121 #12-05 Clife Parkview, S059020 p/1000 t/HDB 3";
 
-    public static final String LANDED_ADDRESS = "60 Aria Street, S602580";
+    private static final String LANDED_ADDRESS = "60 Aria Street, S602580";
     private static final String LANDED_ADDRESS_WITH_STREET_NUMBER = "60 Aria Street 321, S602580";
     private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER = "101C Marlow Street 121 #12-05, S059020";
     private static final String BUILDING_ADDRESS_WITH_STREET_NUMBER_AND_BUILDING_NAME = "101C Marlow Street 121 #12-05 "
             + "Clife Parkview, S059020";
 
-    public static final String LP_UNIT_TYPE = "LP Bungalow";
+    private static final String LP_UNIT_TYPE = "LP Bungalow";
     private static final String BUILDING_UNIT_TYPE = "HDB 3-Room";
 
 
@@ -60,10 +61,10 @@ class ParseAddPropertyTest {
             + "t/LP TH";
 
     // Property Details for Duplicate Properties Testing
-    public static final String LANDLORD_NAME = "Bob";
-    public static final String RENTING_PRICE = "1000";
+    private static final String LANDLORD_NAME = "Bob";
+    private static final String RENTING_PRICE = "1000";
 
-    public static final int OFFSET_UNIT_VALUE = 1;
+    private static final int OFFSET_UNIT_VALUE = 1;
 
 
     @Test
@@ -83,9 +84,9 @@ class ParseAddPropertyTest {
     private static void parseCommand_validAddPropertyInput_matchingPropertyDetails(String validInput,
             String address, String unitType) throws DukeException {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(validInput, propertyList);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(validInput, propertyList);
 
-        Command command = parseAddProperty.parseCommand();
+        Command command = commandAddPropertyParser.parseCommand();
         ClientList clientList = new ClientList();
         PairingList pairingList = new PairingList();
         Storage storage = new Storage(clientList, propertyList, pairingList);
@@ -105,75 +106,82 @@ class ParseAddPropertyTest {
     @Test
     public void checkForEmptyAddPropertyDetails_emptyPropertyDetail_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(EMPTY_PROPERTY_INPUT, propertyList);
-        assertThrows(EmptyAddPropertyDetailException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(EMPTY_PROPERTY_INPUT,
+                propertyList);
+        assertThrows(EmptyAddPropertyDetailException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForMissingPropertyFlag_missingPropertyFlag_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(MISSING_PROPERTY_FLAG, propertyList);
-        assertThrows(MissingAddPropertyFlagException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(MISSING_PROPERTY_FLAG,
+                propertyList);
+        assertThrows(MissingAddPropertyFlagException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkPropertyFlagsOrder_incorrectPropertyFlagOrder_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(INCORRECT_PROPERTY_FLAG_ORDER, propertyList);
-        assertThrows(IncorrectAddPropertyFlagOrderException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(INCORRECT_PROPERTY_FLAG_ORDER,
+                propertyList);
+        assertThrows(IncorrectAddPropertyFlagOrderException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForMissingPropertyDetails_missingPropertyAddress_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(MISSING_PROPERTY_ADDRESS, propertyList);
-        assertThrows(EmptyAddPropertyDetailException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(MISSING_PROPERTY_ADDRESS,
+                propertyList);
+        assertThrows(EmptyAddPropertyDetailException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForValidSingaporeAddress_invalidPropertyAddress_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(INVALID_PROPERTY_ADDRESS, propertyList);
-        assertThrows(InvalidSingaporeAddressException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(INVALID_PROPERTY_ADDRESS,
+                propertyList);
+        assertThrows(InvalidSingaporeAddressException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForPriceNumberFormat_invalidPrice_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty;
+        CommandAddPropertyParser commandAddPropertyParser;
 
         // Price must be positive integer
-        parseAddProperty = new ParseAddProperty(ZERO_PRICE, propertyList);
-        assertThrows(InvalidPriceFormatException.class, parseAddProperty::parseCommand);
-        parseAddProperty = new ParseAddProperty(NEGATIVE_PRICE, propertyList);
-        assertThrows(InvalidPriceFormatException.class, parseAddProperty::parseCommand);
-        parseAddProperty = new ParseAddProperty(FLOATING_POINT_PRICE, propertyList);
-        assertThrows(InvalidPriceFormatException.class, parseAddProperty::parseCommand);
+        commandAddPropertyParser = new CommandAddPropertyParser(ZERO_PRICE, propertyList);
+        assertThrows(InvalidPriceFormatException.class, commandAddPropertyParser::parseCommand);
+        commandAddPropertyParser = new CommandAddPropertyParser(NEGATIVE_PRICE, propertyList);
+        assertThrows(InvalidPriceFormatException.class, commandAddPropertyParser::parseCommand);
+        commandAddPropertyParser = new CommandAddPropertyParser(FLOATING_POINT_PRICE, propertyList);
+        assertThrows(InvalidPriceFormatException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForValidUnitType_invalidUnitTypeLabel_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty = new ParseAddProperty(INVALID_UNIT_TYPE_LABEL, propertyList);
-        assertThrows(InvalidUnitTypeLabelException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(INVALID_UNIT_TYPE_LABEL,
+                propertyList);
+        assertThrows(InvalidUnitTypeLabelException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForValidAddressFormatUnitTypeMatching_invalidAddressFormatUnitTypeMatching_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
-        ParseAddProperty parseAddProperty;
+        CommandAddPropertyParser commandAddPropertyParser;
 
-        parseAddProperty = new ParseAddProperty(LANDED_ADDRESS_NON_LANDED_UNIT_TYPE, propertyList);
-        assertThrows(AddressFormatUnitTypeMismatchException.class, parseAddProperty::parseCommand);
-        parseAddProperty = new ParseAddProperty(NON_LANDED_ADDRESS_LANDED_UNIT_TYPE, propertyList);
-        assertThrows(AddressFormatUnitTypeMismatchException.class, parseAddProperty::parseCommand);
+        commandAddPropertyParser = new CommandAddPropertyParser(LANDED_ADDRESS_NON_LANDED_UNIT_TYPE, propertyList);
+        assertThrows(AddressFormatUnitTypeMismatchException.class, commandAddPropertyParser::parseCommand);
+        commandAddPropertyParser = new CommandAddPropertyParser(NON_LANDED_ADDRESS_LANDED_UNIT_TYPE, propertyList);
+        assertThrows(AddressFormatUnitTypeMismatchException.class, commandAddPropertyParser::parseCommand);
     }
 
     @Test
     public void checkForDuplicateAddress_identicalPropertiesAdded_exceptionThrown() {
         PropertyList propertyList = new PropertyList();
         propertyList.addProperty(LANDLORD_NAME, LANDED_ADDRESS, RENTING_PRICE, LP_UNIT_TYPE);
-        ParseAddProperty parseAddProperty = new ParseAddProperty(VALID_LANDED_PROPERTY_INPUT, propertyList);
-        assertThrows(DuplicatePropertyException.class, parseAddProperty::parseCommand);
+        CommandAddPropertyParser commandAddPropertyParser = new CommandAddPropertyParser(VALID_LANDED_PROPERTY_INPUT,
+                propertyList);
+        assertThrows(DuplicatePropertyException.class, commandAddPropertyParser::parseCommand);
     }
 }

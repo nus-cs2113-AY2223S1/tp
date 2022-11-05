@@ -1,6 +1,6 @@
 //@@author OVReader
 
-package seedu.duke.command;
+package seedu.duke.command.add;
 
 import seedu.duke.ClientList;
 import seedu.duke.PairingList;
@@ -22,7 +22,14 @@ public class CommandAddProperty extends CommandAdd {
     private final String rentingPrice;
     private final String unitType;
 
-    private static final Logger logger = Logger.getLogger("CommandAddProperty");
+    private static final int LANDLORD_INDEX = 0;
+    private static final int PROPERTY_ADDRESS_INDEX = 1;
+    private static final int PROPERTY_PRICE_INDEX = 2;
+    private static final int PROPERTY_UNIT_TYPE_INDEX = 3;
+
+    private static final String COMMAND_ADD_PROPERTY_LOGGING_LABEL = "CommandAddProperty";
+    private static final Logger logger = Logger.getLogger(COMMAND_ADD_PROPERTY_LOGGING_LABEL);
+    private static final String ADD_PROPERTY_LOGGING_MESSAGE = "Adding new property now";
 
     /**
      * Constructs constructor for Command Add Property which stores property's Landlord's Name, Address, RentPrice/month
@@ -35,21 +42,20 @@ public class CommandAddProperty extends CommandAdd {
             assert propertyDetail != null;
         }
 
-        this.landlordName    = propertyDetails.get(0);
-        this.propertyAddress = propertyDetails.get(1);
-        this.rentingPrice    = propertyDetails.get(2);
-        this.unitType        = propertyDetails.get(3);
+        landlordName    = propertyDetails.get(LANDLORD_INDEX);
+        propertyAddress = propertyDetails.get(PROPERTY_ADDRESS_INDEX);
+        rentingPrice    = propertyDetails.get(PROPERTY_PRICE_INDEX);
+        unitType        = propertyDetails.get(PROPERTY_UNIT_TYPE_INDEX);
     }
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        logger.log(Level.FINEST, "Adding new property now");
+        logger.log(Level.FINEST, ADD_PROPERTY_LOGGING_MESSAGE);
         propertyList.addProperty(landlordName, propertyAddress, rentingPrice, unitType);
         ui.showPropertyAddedConfirmationMessage(propertyList);
 
         // Updates Storage
-        storage.addToPropertyFile(this.landlordName,this.propertyAddress,
-                this.rentingPrice, this.unitType);
+        storage.addToPropertyFile(landlordName, propertyAddress, rentingPrice, unitType);
     }
 }
