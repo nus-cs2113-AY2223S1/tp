@@ -1,3 +1,5 @@
+# Ng De Qi - Project Portfolio Page
+
 ### Project: Property Rental Manager
 
 Property Rental Manager (PRM) is a desktop application that helps property agents manage, filter and monitor single
@@ -20,7 +22,7 @@ Here are my contributions to the project:
 
 
 
-* **Code contributed**: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=ngdeqi&tabRepo=AY2223S1-CS2113-F11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=ngdeqi&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=ngdeqi&tabRepo=AY2223S1-CS2113-F11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
     * Set up issues for the team
@@ -40,7 +42,7 @@ Here are my contributions to the project:
         * General management for UG [\#195](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/195) [\#190](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/190) [\#125](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/125)
     * Developer Guide:
         * Added component and implementation details of the `pair` and `unpair` features [\#102](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/102)
-        * Created `style.puml` for the team [#/122](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/122)
+        * Created `style.puml` for the team [#\122](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/122)
         * General management for DG [\#195](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/195) [\#102](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/102/files)
 
 * **Community**:
