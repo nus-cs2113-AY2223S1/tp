@@ -9,14 +9,15 @@ and transactions via a Command Line Interface.
 
 ### Summary of Contributions
 + **Code contributed:**
-    + Codes written can be seen 
-    + List of PRs can be seen 
+    + Codes written can be seen [here](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=chiewyx&tabRepo=AY2223S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+    + List of PRs can be seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/pulls?q=is%3Apr+author%3A%40me+is%3Aclosed)
 
 + **Features and classes implementations:**
     + User-related features:
         + View a user's items `view-user-items`
     + Item-related features:
         + Sort items `sort-items`
+          + Sort and filter items based on price and category
     + User: Wrote base class for User (`User` and `UserList`).
     + Enhanced `view-user` made by Jing Wei by including `view-user-items` and `view-user-debt`.
     + Testing: Wrote user-related tests.
@@ -24,7 +25,7 @@ and transactions via a Command Line Interface.
 + **User Guide contributions:**
     + Wrote guide for sort items command (`sort-items`) and view user items command (`view-user-items`)
 + **Developer Guide contributions:**
-    + Wrote `5. Product Scope`.
+    + Wrote `5. Product Scope and 9. Instructions for manual testing`.
     + Wrote the User component section `3.5. User component`.
     + Contributed to the Implementation subsection:
         + Wrote view user's items (4.1.5).
