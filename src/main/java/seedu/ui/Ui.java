@@ -97,7 +97,6 @@ public class Ui {
         AnsiConsole.systemUninstall();
     }
 
-
     /**
      * Checks whether the system support ANSI encoding.
      *
