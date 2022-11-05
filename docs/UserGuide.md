@@ -7,7 +7,7 @@ PlanIt is a Command Line Interface (CLI) based desktop application which will he
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest JAR file from {Add link here later}
+2. Download the latest JAR file from https://github.com/AY2223S1-CS2113-T17-2/tp/releases/tag/v2.0-Released.
 3. Copy the file to the folder you want to use as the home folder for your program.
 4. Double-click the file to start the app.
 5. Type the commands in the command box and press Enter to execute it. E.g typing help and pressing Enter will open the help window.
@@ -131,7 +131,7 @@ There is no module allocated in Y1S1!!
 
 ### Feature #4 : View modular credits taken in a semester - mcs
 
-This allows the student to view their MCs taken for the semester
+This allows the student to view their MCs taken for the semester.
 
 ###### Format of input: `mcs s/YEAR_NUMBER_SEMESTER_NUMBER`
 
@@ -194,7 +194,8 @@ These are your matching modules:
 
 ### Feature #6 : Checks eligibility for NOC/SEP - check
 
-Checks whether the user is eligible for SEP or NOC
+Checks whether the user is eligible for SEP or NOC.
+The specific eligibility for these programs can be found in the glossary.
 
 ###### Format of input: `check <PROGRAM>`
 
@@ -217,7 +218,32 @@ You are eligible for SEP!
 ----------------------------------------
 ```
 
-### Feature #7 : Exits the program - exit
+### Feature #7 : Opens the help manual - help
+
+Helps users get their feet into PlanIT.
+Opens a list of all the commands of the program.
+
+###### Format of input: `help`
+
+#### Example of Input and Output:
+Input : `help`
+
+Output:
+```
+----------------------------------------
+## Command Summary
+
+* Add a Module : add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE 
+* Delete a module : delete m/MODULE_CODE 
+* View modules : view s/YEAR_NUMBER_SEMESTER_NUMBER 
+* Calculate MCs taken : mcs s/YEAR_NUMBER_SEMESTER_NUMBER 
+* Finds module information : find <KEYWORD> 
+* Checks for SEP/NOC program eligibility : check <PROGRAM> 
+* Exits the App : exit 
+----------------------------------------
+```
+
+### Feature #8 : Exits the program - exit
 
 Exits the program
 
