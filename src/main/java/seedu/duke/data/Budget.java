@@ -239,9 +239,6 @@ public class Budget {
             message += INFO_BUDGET_NOT_SPENT;
         }
 
-
         return message;
     }
-
-
 }

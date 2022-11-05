@@ -8,6 +8,9 @@ import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.HelpUnknownCommandWordException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
 import static seedu.duke.common.HelpMessages.HELP_COMMAND_BASIC_HELP;
@@ -21,6 +24,8 @@ import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 public class HelpCommand extends Command {
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "HELP";
+
+    private static final Logger helpLogger = Logger.getLogger(HelpCommand.class.getName());
 
     private boolean isDetailed;
     private boolean hasSpecificCommand;
@@ -49,7 +54,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Sets string the command word queried by user for the help message.
+     * Sets a string storing the command word queried by user for the help message.
      *
      * @param queryCommand A command word queried by the user.
      */
@@ -74,7 +79,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes the operations related to the command.
+     * Executes the 'help' command. Help messages will be generated and displayed according to user choice.
      *
      * @param ui           An instance of the Ui class.
      * @param transactions An instance of the TransactionList class.
@@ -84,18 +89,22 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws HelpUnknownCommandWordException {
         String helpMessage = "";
+        helpLogger.setLevel(Level.SEVERE);
 
         // When the user provided a query tag
         if (hasSpecificCommand) {
             helpMessage = generateSpecificHelp();
+            helpLogger.log(Level.INFO, "A specific help message has been retrieved for command: " + queryCommand);
         }
 
         // When the user does not provide a query tag
         if (!hasSpecificCommand && isDetailed) {
             helpMessage = generateDetailedHelp();
+            helpLogger.log(Level.INFO, "Detailed help messages has been retrieved for all commands");
         }
         if (!hasSpecificCommand && !isDetailed) {
             helpMessage = generateBasicHelp();
+            helpLogger.log(Level.INFO, "Basic help messages has been retrieved for all commands");
         }
 
         Ui.showHelp(helpMessage);
@@ -195,6 +204,9 @@ public class HelpCommand extends Command {
             detailedHelpMessage = ByeCommand.getDetailedHelpMessage();
             break;
         default:
+            helpLogger.setLevel(Level.SEVERE);
+            helpLogger.log(Level.WARNING, "GenerateSpecificHelp() is called on non-supported command word: "
+                    + queryCommand);
             throw new HelpUnknownCommandWordException();
         }
 
