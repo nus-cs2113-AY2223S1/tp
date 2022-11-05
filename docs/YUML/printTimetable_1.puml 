@@ -1,0 +1,11 @@
+@startuml
+start
+fork
+:Populate <i>rawTimetable</i>;
+fork again
+:Populate <i>emptySlotList</i>;
+fork again
+:Initialize <i>clashModCodeList</i>;
+endfork
+stop
+@enduml 

@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandDeleteModule" as CommandDeleteModule LOGIC_COLOR
+participant ":Timetable" as Timetable LOGIC_COLOR
+participant ":UI" as UI LOGIC_COLOR
+end box
+
+
+[-> CommandDeleteModule : deleteModule()
+activate CommandDeleteModule
+
+CommandDeleteModule -> Timetable : getListLength()
+activate Timetable
+Timetable --> CommandDeleteModule : Integer:listLength
+deactivate Timetable
+
+CommandDeleteModule -> UI : nextLine()
+activate UI
+UI ---> CommandDeleteModule : Integer: indexToSet
+deactivate UI
+
+CommandDeleteModule -> Timetable : :deleteModule(:Integer)
+activate Timetable
+Timetable --> CommandDeleteModule
+deactivate Timetable
+
+[<--CommandDeleteModule : responseToUser:String
+deactivate CommandDeleteModule
+@enduml

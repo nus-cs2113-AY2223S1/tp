@@ -1,0 +1,10 @@
+@startuml
+start
+:Populate Lessons' data from Timetable [rake ⋔];
+:Declare 2D array for timetable printing;
+:Initialize 2D array with empty character 
+for timetable printing;
+:Write day and time headers for timetable [rake ⋔];
+:Write lessons and clashes for timetable [rake ⋔];
+stop
+@enduml 
