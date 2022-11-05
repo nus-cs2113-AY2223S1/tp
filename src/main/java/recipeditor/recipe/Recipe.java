@@ -66,15 +66,6 @@ public class Recipe {
         return this.ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String ingredientName) {
-        for (Ingredient i : ingredients) {
-            if (i.getName().equals(ingredientName)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
     public void deleteIngredient(int index) throws IndexOutOfBoundsException {
         this.ingredients.remove(index);
     }
