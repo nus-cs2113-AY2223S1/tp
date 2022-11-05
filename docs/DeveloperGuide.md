@@ -72,7 +72,7 @@ Knowing the overall architecture of the application, we cover the specifics belo
 ### 3.1. Duke
 Duke is the main class where Upcycle will run. Upon running it, Duke checks if there is any data corruption in the data files first, then if there is an error in the data files, 
 it calls Ui to print the error and ask if the user wants to force reset his/her data. If yes, all data will be deleted, if no, the user has to edit it until there is no error. 
-Otherwise, they cannot use the app. If there is no error in the data files, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
+If there is no error in the data files, Duke calls the Ui class to greet the user, as well as the Storage class to load any existing data into the system. 
 Afterward, it repeatedly takes in user commands until the exit command is inputted by the user. Any user input is read by the Ui, returned to Duke, and sent to the CommandParser class to be 
 parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the 
 data is stored in Storage. If not, an appropriate error is displayed instead.
