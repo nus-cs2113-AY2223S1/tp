@@ -231,11 +231,11 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY
             + " "
-            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG.toUpperCase()
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC.toUpperCase()
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME
             + " "
-            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG.toUpperCase()
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
