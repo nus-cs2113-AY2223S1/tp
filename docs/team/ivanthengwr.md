@@ -42,7 +42,7 @@ Here are my contributions to the project:
   (Pull requests [#17](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/17),
   [#28](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/28), [#42](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/42))
   + Optimise overall code integration to make it more OOP. (Pull requests [#14](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/14/files),
-  [#91](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/91/files))
+  [#94](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/94))
   + Solved bugs for a few features within SkyControl (Pull request [#61](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/61),
   [#16](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/16))  
 
