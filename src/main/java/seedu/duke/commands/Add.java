@@ -206,7 +206,6 @@ public class Add extends Command {
         if (!mcString.matches("[0-9]+")) {
             throw new InvalidMcException();
         }
-
     }
 
 
