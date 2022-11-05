@@ -1,10 +1,6 @@
-# MoneyGoWhere: Developer Guide (Pre-Release)
+# MoneyGoWhere: Developer Guide
 
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
-
-`IMPORTANT:` In this pre-release version, the diagrams in this guide are rendered on-the-fly as the webpage is loaded.
-**If your internet connection is unstable, the diagrams may appear as broken links.**
-You may need to refresh the webpage several times if the diagrams are not loaded in time.
 
 ## Contents
 * [Introduction](#introduction)
