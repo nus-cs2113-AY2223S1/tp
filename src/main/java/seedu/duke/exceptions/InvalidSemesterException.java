@@ -38,7 +38,7 @@ public class InvalidSemesterException extends Exception {
     }
 
     public String getMessage() {
-        String message = "* Invalid Semester/Year input." + "\n" ;
+        String message = "* Invalid Semester/Year input." + "\n";
         return message;
     }
 }

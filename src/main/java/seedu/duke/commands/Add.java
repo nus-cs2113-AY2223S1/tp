@@ -2,12 +2,20 @@ package seedu.duke.commands;
 
 import seedu.duke.Module;
 import seedu.duke.ModuleList;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidCourseException;
+import seedu.duke.exceptions.InvalidGradeException;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.InvalidOverallInputException;
+import seedu.duke.exceptions.InvalidSemesterException;
 
 import static seedu.duke.exceptions.InvalidGradeException.checkGradeFormat;
 import static seedu.duke.exceptions.InvalidGradeException.checkValidGrade;
 import static seedu.duke.exceptions.InvalidMcException.invalidMc;
-import static seedu.duke.exceptions.InvalidSemesterException.*;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidFormat;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidSemesterNumber;
+import static seedu.duke.exceptions.InvalidSemesterException.invalidYearNumber;
 
 public class Add extends Command {
     private Module mod;
@@ -32,7 +40,7 @@ public class Add extends Command {
      * @param input the input entered by the user
      * @param indexes an array containing the positions from which the details need to be extracted
      */
-    private void addition(String input, int[] indexes) throws InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
+    private void addition(String input, int[] indexes) throws InvalidOverallInputException {
         input = input.toUpperCase();
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
@@ -57,39 +65,40 @@ public class Add extends Command {
      */
     private void checkOverallExceptionForAdd(String course, String semester,
                                        String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
+
         String errorMessage = "";
 
-        try{
+        try {
             checkCourse(course);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkYear(semester);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkMcString(mcString);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkMc(mcInt);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        try{
+        try {
             checkGrade(grade);
-        } catch (Exception e){
+        } catch (Exception e) {
             errorMessage += e.getMessage();
         }
 
-        if(!errorMessage.equals("")){
+        if (!errorMessage.equals("")) {
             System.out.println("Unable to ADD module due to these issue(s):");
             System.out.println(errorMessage);
             throw new InvalidOverallInputException();
@@ -175,7 +184,7 @@ public class Add extends Command {
      * @param course input entered by user. Format: String
      * @throws InvalidCourseException exception thrown when course input is invalid
      */
-    public void checkCourse(String course) throws InvalidCourseException {
+    public static void checkCourse(String course) throws InvalidCourseException {
         if (course.length() > 10) {
             throw new InvalidCourseException();
         } else if (course.matches("[a-zA-Z]+")) {
@@ -199,6 +208,7 @@ public class Add extends Command {
         }
 
     }
+
 
     /**
      * Function to check if semester input is in correct format
