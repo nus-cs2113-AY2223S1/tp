@@ -10,6 +10,9 @@
     - [4.2. Setting lessons for individual modules](#42-setting-lessons-for-individual-modules)
     - [4.3. Auto-allocating lessons](#43-auto-allocating-lessons)
     - [4.4. Printing the timetable](#44-printing-the-timetable)
+        - [4.4.1. Populate lesson data from timetable](#441-populate-lesson-data-from-timetable)
+        - [4.4.2 Write day and time headers for timetable](#442-write-day-and-time-headers-for-timetable)
+        - [4.4.3 Write day and time headers for timetable](#443-write-day-and-time-headers-for-timetable)
     - [4.5. Listing current modules](#45-listing-current-modules)
     - [4.6. Getting info on modules](#46-getting-info-on-modules)
     - [4.7. Deleting modules from timetable](#47-deleting-modules-from-timetable)
@@ -167,15 +170,15 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 &nbsp;&nbsp;&nbsp;&nbsp; III. Popularize ```clashSlotList``` for each day - to store the merged overlapping intervals in step I. <br>
 &nbsp;&nbsp;&nbsp;&nbsp; IV. Remove un-clashed lesson slots. In the above example, ```[1100,1200]``` is not a clashed interval, which is removed in this step. <br>
 &nbsp;&nbsp;&nbsp;&nbsp; V. Return ```clashSlotList```, now an ```ArrayList``` of clashed intervals. <br>
-</p></details> <br>
+</p></details> 
 
 
 &nbsp;&nbsp; (b) Write ```X``` for the clashed intervals <br>
-&nbsp;&nbsp; (c) Write the clashed module code in  <br>```clashModCodeList```
+&nbsp;&nbsp; (c) Write the clashed module code in  ```clashModCodeList``` <br>
 
 - If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
 - If there is ```XXXX``` - activity will stop due to this unexpcted behavior.
-- If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```:
+- If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```: <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the lower boarder with the lesson type together. Otherwise, write normal lower boarder and lesson type in ```timeTable```. <br>
