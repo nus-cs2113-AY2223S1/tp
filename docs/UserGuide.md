@@ -10,7 +10,7 @@ Note that it is user's own responsibility to check and ensure that the module co
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest JAR file from {Add link here later}
+2. Download the latest JAR file from https://github.com/AY2223S1-CS2113-T17-2/tp/releases/tag/v2.0-Released.
 3. Copy the file to the folder you want to use as the home folder for your program.
 4. Double-click the file to start the app.
 5. Type the commands in the command box and press Enter to execute it. E.g typing help and pressing Enter will open the help window.
@@ -190,7 +190,7 @@ Successfully cleared all modules in your plan!
 
 ### Feature #5 : View modular credits taken in a semester - mcs
 
-This allows the student to view their MCs taken for the semester
+This allows the student to view their MCs taken for the semester.
 
 ###### Format of input: `mcs s/YEAR_NUMBER_SEMESTER_NUMBER`
 
@@ -260,7 +260,8 @@ These are your matching modules:
 
 ### Feature #7 : Checks eligibility for NOC/SEP - check
 
-Checks whether the user is eligible for SEP or NOC
+Checks whether the user is eligible for SEP or NOC.
+The specific eligibility for these programs can be found in the glossary.
 
 ###### Format of input: `check <PROGRAM>`
 
@@ -298,20 +299,32 @@ You are eligible for SEP!
 ----------------------------------------
 ```
 
-Output 2 - When ineligible for SEP:
+### Feature #8 : Opens the help manual - help
+
+Helps users get their feet into PlanIT.
+Opens a list of all the commands of the program.
+
+###### Format of input: `help`
+
+#### Example of Input and Output:
+Input : `help`
+
+Output:
 ```
 ----------------------------------------
+## Command Summary
 
-Sorry, You are ineligible for SEP.
-
-These may be possible reasons for ineligibility:
- * You have yet to complete 2 semesters of study
- * You are currently in your final year
- * Your CAP is below 3.0
+* Add a Module : add m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER mc/NUMBER_OF_MCS g/GRADE 
+* Delete a module : delete m/MODULE_CODE 
+* View modules : view s/YEAR_NUMBER_SEMESTER_NUMBER 
+* Calculate MCs taken : mcs s/YEAR_NUMBER_SEMESTER_NUMBER 
+* Finds module information : find <KEYWORD> 
+* Checks for SEP/NOC program eligibility : check <PROGRAM> 
+* Exits the App : exit 
 ----------------------------------------
 ```
 
-### Feature #8 : Gets an overview of Student Profile - overview
+### Feature #9 : Gets an overview of Student Profile - overview
 
 View MCs taken, CAP, Graduation fulfillment and eligibility for SEP and NOC.
 
@@ -342,7 +355,7 @@ Here’s an overview of your Profile:
 ----------------------------------------
 ```
 
-### Feature #9 : Exits the program - exit
+### Feature #10 : Exits the program - exit
 
 Exits the program
 
