@@ -11,20 +11,20 @@ Class FavouriteCommand {
     -favourite : Favourite
     -argument : String
     +<u>COMMAND_WORD : String
+    +<u>COMMAND_WORD_SHORT : String
     +FavouriteCommand(String, Favourite)
-    +setFavourite(String)
-    +<u>findThisCarpark(String) : Carpark
     +execute() : CommandResult
+    +setFavourite(String)
 }
 
 Class UnfavouriteCommand {
     -favourite : Favourite
     -argument : String
     +<u>COMMAND_WORD : String
+    +<u>COMMAND_WORD_SHORT : String
     +UnfavouriteCommand(String, Favourite)
-    +setUnFavourite(String)
-    +<u>findThisCarpark(String) : Carpark
     +execute() : CommandResult
+    +setUnFavourite(String)
 }
 
 Command <|-- FavouriteCommand
@@ -40,8 +40,10 @@ Class Favourite {
     -file: String
     +Favourite(directory: String, file: String)
     +updateFavouriteList()
+    +ensureValidity() : Boolean
     +writeFavouriteList()
-    +showList() : String
+    +<u>getFavouriteList() : ArrayList<String>
+    +getFavouriteListString() : String
 }
 
 Class FileStorage {

@@ -4,8 +4,9 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam ParticipantBackgroundColor MODEL_COLOR
 
-create ":Ui"
 create ":CarparkList"
+create ":FavouriteCommand"
+create ":UnfavouriteCommand"
 create ":Favourite" order 10
 activate ":Parking"
 ":Parking" -> ":Favourite": Favourite()
@@ -16,38 +17,78 @@ create ":FileStorage" order 20
 activate ":FileStorage"
 return
 return
+
+":Parking" -> ":Favourite": updateFavouriteList()
+activate ":Favourite"
+":Favourite" -> ":Favourite": ensureValidity()
+activate ":Favourite"
+return result
+return
+
+":Parking" -> ":Favourite": writeFavouriteList()
+activate ":Favourite"
+":Favourite" -> ":FileStorage": writeDataToFile()
+activate ":FileStorage"
+return
+return
 deactivate ":Favourite"
 
 alt "favourite list"
-    ":Parking" -> ":Favourite": showList()
+    ":Parking" -> ":FavouriteCommand": execute()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":Favourite": updateFavouriteList()
     activate ":Favourite"
-    return String of carpark IDs
-    ":Parking" -> ":Ui": print()
-    activate ":Ui"
+    ":Favourite" -> ":Favourite": ensureValidity()
+    activate ":Favourite"
+    return result
     return
+
+    ":FavouriteCommand" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return CommandResult
+    deactivate ":Favourite"
+    deactivate ":FavouriteCommand"
+
 else "favourite CARPARK_ID"
-    ":Parking" -> ":CarparkList": findCarpark()
+    ":Parking" -> ":FavouriteCommand": execute()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":CarparkList": isCarparkValid()
     activate ":CarparkList"
-    return
-    ":Parking" -> ":Favourite": setFavourite()
-    activate ":Favourite"
-    ":Favourite" -> ":Favourite": writeFavouriteList()
+    return result
+    ":FavouriteCommand" -> ":CarparkList": findCarpark()
+    activate ":CarparkList"
+    return Carpark
+    ":FavouriteCommand" -> ":FavouriteCommand": setFavourite()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":Favourite": writeFavouriteList()
     activate ":Favourite"
     ":Favourite" -> ":FileStorage": writeDataToFile()
     activate ":FileStorage"
     return
     return
     return
+    return CommandResult
+
 else "unfavourite CARPARK_ID"
-    ":Parking" -> ":Favourite": setUnfavourite()
-    activate ":Favourite"
-    ":Favourite" -> ":Favourite": writeFavouriteList()
+    ":Parking" -> ":UnfavouriteCommand": execute()
+    activate ":UnfavouriteCommand"
+    ":UnfavouriteCommand" -> ":CarparkList": isCarparkValid()
+    activate ":CarparkList"
+    return result
+    ":UnfavouriteCommand" -> ":UnfavouriteCommand": setUnfavourite()
+    activate ":UnfavouriteCommand"
+    ":UnfavouriteCommand" -> ":Favourite": writeFavouriteList()
     activate ":Favourite"
     ":Favourite" -> ":FileStorage": writeDataToFile()
     activate ":FileStorage"
     return
     return
     return
+    return CommandResult
 end
 
 deactivate ":Parking"
