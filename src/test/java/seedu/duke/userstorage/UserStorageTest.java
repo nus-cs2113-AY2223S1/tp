@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserStorageTest {
     UserUniversityListManager testManager = new UserUniversityListManager();
-
+    private static final String directory = "data" + File.separator;
     UserModuleMapping testModule1 = new UserModuleMapping("MET CS 248", "Discrete Mathematics",
             "CS1231", "Discrete Structures", "4", "3", "Boston University",
             "USA");
@@ -214,8 +214,10 @@ public class UserStorageTest {
         UserStorageParser.storeInfoToUserStorageByUni("Boston University", testManager);
         testManager.createList("Western University");
         UserStorageParser.storeInfoToUserStorageByUni("Western University", testManager);
-        assertEquals("data/Boston University.txt", UserStorage.getFilePaths().get("Boston University"));
-        assertEquals("data/Western University.txt", UserStorage.getFilePaths().get("Western University"));
+        assertEquals(directory + "Boston University.txt",
+                UserStorage.getFilePaths().get("Boston University"));
+        assertEquals(directory + "Western University.txt",
+                UserStorage.getFilePaths().get("Western University"));
         testManager.deleteList("Boston University");
         UserStorageParser.deleteUserStorageByUni("Boston University", false);
         assertEquals(1, UserStorage.getFilePaths().size());
@@ -225,9 +227,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidFileName() throws IOException {
         DatabaseStorage.loadDatabase();
-        File dummyFile = new File("data/Dummy University.txt");
-        File bostonFile = new File("data/Boston University.txt");
-        File dir = new File("data/");
+        File dummyFile = new File(directory + "Dummy University.txt");
+        File bostonFile = new File(directory + "Boston University.txt");
+        File dir = new File("data "+ File.separator);
         dummyFile.createNewFile();
         bostonFile.createNewFile();
         assertEquals(3, Objects.requireNonNull(dir.list()).length);
@@ -240,9 +242,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidFavourites() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "S%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "S%\n" + "MET CS 248;%\n"
                 + "#MET CS 248;monday;10:00;12:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -254,9 +256,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidModuleCode() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "D1000;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "D1000;%\n"
                 + "#\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -268,9 +270,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidLessonModuleCode() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#D1000;monday;10:00;12:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -282,9 +284,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidLessonDay() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#MET CS 248;dummyday;10:00;12:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -296,9 +298,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidStartTime() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#MET CS 248;monday;1000;12:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -310,9 +312,9 @@ public class UserStorageTest {
     @Test
     public void testInvalidEndTime() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#MET CS 248;monday;10:00;08:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -324,9 +326,9 @@ public class UserStorageTest {
     @Test
     public void testExtraHashtags() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "MET CS 248;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "MET CS 248;%\n"
                 + "#MET CS 248;monday;10:00;12:00%\n" + "#test");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -338,9 +340,9 @@ public class UserStorageTest {
     @Test
     public void testMissingModuleCodeInSavedModules() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + "CS103;%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + "CS103;%\n"
                 + "#MET CS 248;monday;10:00;12:00%\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
@@ -352,9 +354,9 @@ public class UserStorageTest {
     @Test
     public void testMissingModuleCode() throws IOException {
         DatabaseStorage.loadDatabase();
-        createNewFile("data/Boston University.txt", "F%\n" + ";%\n"
+        createNewFile(directory + "Boston University.txt", "F%\n" + ";%\n"
                 + "#\n");
-        File dir = new File("data/");
+        File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
         assertEquals(1, Objects.requireNonNull(dir.list()).length);
