@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.Parser;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;

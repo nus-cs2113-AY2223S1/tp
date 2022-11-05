@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.Parser;
-import seedu.duke.Ui;
 import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.Calories;
@@ -16,6 +15,8 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -30,6 +31,14 @@ public class FindCommand extends Command {
     public static final String CARDIO_EXERCISE_NOT_FOUND = "No matching cardio exercise found";
     public static final String INVALID_FIND_STRENGTH_COMMAND = "Invalid find strength command";
     public static final int REQUIRED_COUNT = 1;
+    public static final String STRENGTH = "strength";
+    public static final String CARDIO = "cardio";
+    public static final String FOOD = "food";
+    public static final String DATE_E = "date_e";
+    public static final String DATE_F = "date_f";
+    public static final String CALORIES = "calories";
+    public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
+    public static final int EMPTY_LIST = 0;
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
@@ -46,26 +55,27 @@ public class FindCommand extends Command {
         String[] argumentList = Parser.getArgumentList(arguments);
         String findType = Parser.getClassType(argumentList);
         switch (findType) {
-        case "strength":
+        case STRENGTH:
             findStrength(argumentList, slashesCount);
             break;
-        case "cardio":
+        case CARDIO:
             findCardio(argumentList, slashesCount);
             break;
-        case "food":
+        case FOOD:
             findFood(argumentList, slashesCount);
             break;
-        case "date_e":
+        case DATE_E:
             findDateExercise(argumentList, slashesCount);
             break;
-        case "date_f":
+        case DATE_F:
             findDateFood(argumentList, slashesCount);
             break;
-        case "calories":
+        case CALORIES:
             findCalories(argumentList);
             break;
         default:
             handleInvalidFindType();
+            break;
         }
     }
 
@@ -162,11 +172,12 @@ public class FindCommand extends Command {
 
     private void outputFilteredExerciseList(ArrayList<Exercise> filteredExerciseList,
                                             String failureFeedback, String successFeedback) {
-        if (filteredExerciseList.size() == 0) {
+        if (filteredExerciseList.size() == EMPTY_LIST) {
             ui.output(failureFeedback);
         } else {
-            ui.output("", successFeedback);
-            ui.outputExerciseList(filteredExerciseList);
+            String caption = System.lineSeparator() + successFeedback;
+            ExerciseTable filterTable = new ExerciseTable(filteredExerciseList, caption);
+            ui.printTable(filterTable.getExerciseTable());
         }
     }
 
@@ -260,7 +271,7 @@ public class FindCommand extends Command {
 
 
     private void handleInvalidFindType() throws IllegalValueException {
-        throw new IllegalValueException("Invalid find command");
+        throw new IllegalValueException(INVALID_FIND_COMMAND_MESSAGE);
     }
 
     @Override

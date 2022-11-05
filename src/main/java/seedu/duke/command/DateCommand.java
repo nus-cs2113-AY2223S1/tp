@@ -1,7 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Parser;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.records.Calories;
 import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;

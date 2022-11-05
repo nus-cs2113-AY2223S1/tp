@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
 
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.SetCommand;
 import seedu.duke.exception.IllegalValueException;
@@ -20,6 +20,12 @@ import java.util.Scanner;
  */
 public class LoadData {
 
+    public static final int EXERCISE_ARRAY_LENGTH = 2;
+    public static final String DONE = "1";
+    public static final int MARK_STATUS = 1;
+    public static final String MARK_STATUS_SEPARATOR = "\\|";
+    public static final int ARGUMENTS_INDEX = 0;
+
     /**
      * Loads tasks from save file into taskList.
      *
@@ -37,12 +43,12 @@ public class LoadData {
                     setCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
                     setCommand.execute();
                 } else {
-                    String[] saveDataArray = line.split("\\|");
+                    String[] saveDataArray = line.split(MARK_STATUS_SEPARATOR);
                     boolean isMarkDone = false;
-                    if (saveDataArray.length == 2) {
-                        isMarkDone = saveDataArray[1].trim().equals("1");
+                    if (saveDataArray.length == EXERCISE_ARRAY_LENGTH) {
+                        isMarkDone = saveDataArray[MARK_STATUS].trim().equals(DONE);
                     }
-                    AddCommand addCommand = new AddCommand(saveDataArray[0]
+                    AddCommand addCommand = new AddCommand(saveDataArray[ARGUMENTS_INDEX]
                             .trim(), false, isMarkDone);
                     addCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
                     addCommand.execute();

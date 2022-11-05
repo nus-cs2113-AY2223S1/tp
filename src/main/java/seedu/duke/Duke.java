@@ -11,6 +11,7 @@ import seedu.duke.exception.IllegalValueException;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 import java.util.logging.Logger;
