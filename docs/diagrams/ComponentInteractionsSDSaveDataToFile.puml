@@ -28,7 +28,7 @@ deactivate Data
 UserInterface -[USER_INTERFACE_COLOR_1]> Data : getRecurringPayments()
 activate Data DATA_COLOR_1
 
-Data --[DATA_COLOR_1]> UserInterface : currentRecurringPayments:ArrayList<RecurringPayments>
+Data --[DATA_COLOR_1]> UserInterface : currentRecurringPayments:ArrayList<RecurringPayment>
 deactivate Data
 
 UserInterface -[USER_INTERFACE_COLOR_1]> Data : getIncomes()
@@ -43,7 +43,7 @@ activate Data DATA_COLOR_1
 Data --[DATA_COLOR_1]> UserInterface : currentTargets:ArrayList<Target>
 deactivate Data
 
-UserInterface -[USER_INTERFACE_COLOR_1]> Storage : \lsaveToFile(\n\tcurrentExpenses,\n\tsortCommandSetting,\n\tcurrentRecurringPayments,\n\tcurrentIncomes,\n\tcurrentTargets\n)
+UserInterface -[USER_INTERFACE_COLOR_1]> Storage : \lsaveToFile(\n\tcurrentExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tcurrentRecurringPayments:ArrayList<RecurringPayment>,\n\tcurrentIncomes:ArrayList<Income>,\n\tcurrentTargets:ArrayList<Target>\n)
 activate Storage STORAGE_COLOR_1
 
 Storage --[STORAGE_COLOR_1]> UserInterface
