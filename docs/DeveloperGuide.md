@@ -1,5 +1,9 @@
 # Moolah Manager - Developer Guide
 
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
+
 - [1. Preface](#1-preface)
 - [2. Acknowledgements](#2-acknowledgements)
 - [3. Setting Up the Project](#3-setting-up-the-project)
@@ -508,6 +512,14 @@ The `FindCommand` class provides the search functionality for finding a specific
 Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
 compared with the description of each transaction object.
 
+Figure 17 below is a class diagram for the `Find` command class.
+
+<p align="center">
+    <img src="images/FindCommandClassDiagram.png" width="40%">
+    <br />
+    <i>Figure 17: Class Diagram for Find Command</i>
+</p>
+
 The sequence diagram below shows the interactions of a successful execution of the `FindCommand`, using an example of `find k/bus_fare`.
 
 <p align="center">
@@ -526,7 +538,7 @@ omitted for simplicity.
 to generate the list of filtered transactions. The purpose of `TransactionList#findTransactions()` is to loop through all `Transaction` objects from `ArrayList<Transaction> transactions`, checking if their 
 description match the keyword given. Note that it is checked on a case-insensitive basis.
 5. Matching `Transaction` objects will be appended into a formatted string and returned to the `FindCommand` class.
-6. If `FindCommand` class checks that `transactionsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showTransactionsList()` method is called to display the transactions. 
+6. If `FindCommand` class checks that `transactionsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the transactions. 
 
 _Written by: Chua Han Yong Darren_
 
@@ -654,13 +666,26 @@ _Written by: Brian Wong Yun Long_
 
 ### 6.1. Overview 
 
-{To describe briefly what is offered in Budgeting and Financial Insights}
+Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats to show categorical savings or overall expenditure. 
+As such, we have developed streamlined methods to filter the transactions by time period prior to passing into the `Stats` command class for generating insights.
+Beyond gathering of these insights, users can also allocate a monthly budget to help them manage their spending.
 
 _Written by: Chua Han Yong Darren_
 
 ### 6.2. Proposed Implementation
 
-{To illustrate how the List and Stats command inherit the ListAndStats command class}
+The `List` and `Stats` command classes inherit their methods from the `ListAndStats` command class when setting global tags (year, month, number, period) and performing checks on their usage.
+Likewise, retrieval of filtered transactions by time periods is also done in `ListAndStats` command class, streamlining the workflow for both the `List` and `Stats` commands.
+This way, the `Stats` command class focuses on generating the different types of statistics rather than having to deal with an overhead of needing to consolidate the transaction entries of different time periods.
+
+Figure 23 below is a class diagram that illustrates the inheritance for the `Stats` command class.
+
+<p align="center">
+    <img src="images/StatsCommandClassDiagram.png" width="80%">
+    <br />
+    <i>Figure 23: Class Diagram for Stats Command</i>
+</p>
+
 
 _Written by: Chua Han Yong Darren_
 
@@ -677,7 +702,40 @@ The following are the available commands:
 
 The sequence diagram below shows the interactions of a successful execution of the `StatsCommand`, using an example of `stats s/categorical_savings`.
 
+<p align="center">
+    <img src="images/StatsCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 24: Sequence Diagram for Stats Command</i>
+</p>
 
+Referring to Figure 24, the following is a summarized steps of the interactions that `StatsCommand` performs when a user is requesting for the categorical
+savings. Higher level details in `CommandParser` and `ParameterParser` have been omitted for simplicity. Additionally, segments of interaction for getting monthly
+expenditure and time insights have been put into isolated sequence diagrams to break down the information.
+
+1. The user executes `stats s/categorical_savings` command with an intent to view his or her categorical savings.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `StatsCommand`. The initialization of the `statsType` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that all the tags and parameters in the input have been filled up in correspondence to their respective requirements.
+4. Once all checks have passed, `StatsCommand` class will `execute()` whereby it will verify the related tags for date intervals (year, month, period, number) first to ensure that they are not entered
+together with the `s/categorical_savings` tag. This verification is performed in `ListAndStats` command class and is not shown in the sequence diagram for the brevity of this section. 
+5. Moving on, `listStatsByStatsType()` will be called and when it confirms that the requested statistics type is `categorical_savings`, it will call `statsTypeCategoricalSavingsOrMonthlyExpenditure()`
+method to produce the list of categorical savings. Here, `TransactionList#listCategoricalSavings()` will use a hashmap to store different categories from the `TransactionList` 
+and append the amount for each category accordingly until all transactions are exhausted.
+6. A formatted string of output collected from looping through the hashmap will be returned to the `StatsCommand` class.
+7. If `StatsCommand` class checks that `genericStatsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the categorical savings.
+
+Amongst the omitted frames in Figure 24, below two are the sequence diagrams for getting monthly expenditure and time insights.
+
+<p align="center">
+    <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 25: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
+</p>
+
+<p align="center">
+    <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 26: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
+</p>
 
 _Written by: Chua Han Yong Darren_
 

@@ -1,29 +1,20 @@
 @startuml
 !include Style.puml
-
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+abstract class "Command"{
+    + execute() : void {abstract}
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+abstract class "FindCommand"{
+    + keyword : String
+    + getMandatoryTags() : String[]
+    + execute() : void
+    + findTransactions() : void
 }
+
+
+
+FindCommand -up-|> "Command"
+
+
 
 @enduml

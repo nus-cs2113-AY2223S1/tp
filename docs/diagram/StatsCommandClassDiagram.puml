@@ -1,0 +1,42 @@
+@startuml
+!include Style.puml
+abstract class "Command"{
+    + execute() : void {abstract}
+}
+
+abstract class "ListAndStatsCommand"{
+    + month : int
+    + year : int
+    + period : String
+    + number : int
+    + containMonthYear(): int {static}
+    + containPeriodNumber() : int {static}
+    + checkContainDateIntervalsTags() : boolean {static}
+    + getTimeTransactions() : ArrayList<Transaction>
+}
+
+class StatsCommand {
+    - statsType : String
+    + execute() : void
+    + getMandatoryTags() : String[]
+    + getOptionalTags() : String[]
+    + listStatsByStatsType() : void
+    + statsTypeCategoricalSavingsOrMonthlyExpenditure() : void
+    + statsTypeTimeInsights() : void
+    + printTimeInsightsStatistics() : void {static}
+}
+
+class ListCommand {
+}
+
+note left: Not shown in detail as not\n relevant for getting statistics
+
+ListAndStatsCommand -up-|> "Command"
+StatsCommand -up-|> "ListAndStatsCommand"
+ListCommand -up-|> "ListAndStatsCommand"
+
+
+
+
+
+@enduml
