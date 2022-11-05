@@ -417,7 +417,14 @@ public class ConsoleInterface {
                 + Messages.CONSOLE_COMMAND_DELETE_TARGET_FORMAT
                 + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_TARGET
-                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT;
+                + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT
+                + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- STORAGE-RELATED-COMMANDS ----" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_MERGE_FILE
+                + Messages.CONSOLE_COMMAND_MERGE_FILE_FORMAT;
 
         printInformationalMessage(helpStr);
     }

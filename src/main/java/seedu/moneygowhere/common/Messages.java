@@ -153,6 +153,7 @@ public class Messages {
     public static final String CONSOLE_COMMAND_HELP_VIEW_TARGET = "View your targets: ";
     public static final String CONSOLE_COMMAND_HELP_DELETE_TARGET = "Delete a target: ";
     public static final String CONSOLE_COMMAND_HELP_EDIT_TARGET = "Edit a target: ";
+    public static final String CONSOLE_COMMAND_HELP_MERGE_FILE = "Merging a file: ";
 
     //endregion
 
@@ -859,14 +860,17 @@ public class Messages {
 
     //@@author LokQiJun
     //region Defines messages for console command Merge-File
-    public static final String CONSOLE_COMMAND_MERGE_FILE_SYNTAX = ""
-            + "SYNTAX: "
+    public static final String CONSOLE_COMMAND_MERGE_FILE_FORMAT = ""
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE
             + " -"
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
             + " "
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG.toUpperCase()
             + "";
+    public static final String CONSOLE_COMMAND_MERGE_FILE_SYNTAX = ""
+            + "SYNTAX: "
+            + CONSOLE_COMMAND_MERGE_FILE_FORMAT;
+
     public static final String CONSOLE_ERROR_COMMAND_MERGE_FILE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_MERGE_FILE_SYNTAX;

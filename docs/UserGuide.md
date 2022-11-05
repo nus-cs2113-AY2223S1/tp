@@ -86,6 +86,9 @@ Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHm
 View your targets: View-Target [-e TARGET-INDEX]
 Delete a target: Delete-Target -e TARGET-INDEX
 Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
+
+---- STORAGE-RELATED-COMMANDS ----
+Merging a fileSYNTAX: Merge-File -p PATH-STRING
 ```
 
 ## Managing your expenses
@@ -390,7 +393,8 @@ Examples of usage:
 
 ## Handling your data
 ### Merging a data file: `Merge-File`
-Merges save file from an external source given path to the .xml save file
+Merges save file from an external source given path to the .xml save file.
+If there is a duplicate entry, duplicate entry from external file will be ignored.
 
 Syntax: `Merge-File -p PATH_STRING` 
 
@@ -465,6 +469,12 @@ The recurring payment was added as an expense successfully.
 **A**:
 As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
 You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
+
+**Q**: What is a duplicate entry as mentioned in merging an external file?
+
+**A**:
+A duplicate entry is defined as an entry that has the same value for all variable as another existing entry.
+
 
 ## Command Summary
 
