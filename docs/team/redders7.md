@@ -38,7 +38,6 @@ InvalidCommandException should an invalid command be issued. Based on the comman
 splits the input to extract the relevant fields required for the specific command.
   * Highlights: This is a key feature as it converts raw user input to executable commands. The key challenge was 
 handling invalid inputs and dealing with edge cases where specific user inputs could cause the entire application to crash.
-  * Credits: [Shao Yong's iP](https://redders7.github.io/ip/)
 
 
 **Code contributed**: [RepoSense](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=redders7&tabRepo=AY2223S1-CS2113-T18-1b%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
