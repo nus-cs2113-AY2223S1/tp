@@ -2,27 +2,48 @@ package seedu.moneygowhere.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.moneygowhere.commands.ConsoleCommandAddExpense;
+import seedu.moneygowhere.commands.ConsoleCommandAddIncome;
 import seedu.moneygowhere.commands.ConsoleCommandAddRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandAddTarget;
+import seedu.moneygowhere.commands.ConsoleCommandConvertCurrency;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteExpense;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteIncome;
 import seedu.moneygowhere.commands.ConsoleCommandDeleteRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandDeleteTarget;
 import seedu.moneygowhere.commands.ConsoleCommandEditExpense;
+import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
+import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
+import seedu.moneygowhere.commands.ConsoleCommandViewIncome;
 import seedu.moneygowhere.commands.ConsoleCommandViewRecurringPayment;
+import seedu.moneygowhere.commands.ConsoleCommandViewTarget;
 import seedu.moneygowhere.common.Configurations;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandAddTargetInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandConvertCurrencyInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandDeleteTargetInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPaymentInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -1591,6 +1612,486 @@ class ConsoleParserTest {
     }
     //endregion
 
+    //region Defines JUnit test cases for command Sort-Expense
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseAlphabeticalDescending() throws
+            MoneyGoWhereException {
+        String type = "Alphabetical";
+        String order = "Descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseDateAscending() throws
+            MoneyGoWhereException {
+        String type = "Date";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseAmountDescending() throws
+            MoneyGoWhereException {
+        String type = "Amount";
+        String order = "Descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeOrder_ccseCurrencyAscending() throws
+            MoneyGoWhereException {
+        String type = "Currency";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        ConsoleCommandSortExpense consoleCommandSortExpense =
+                (ConsoleCommandSortExpense) ConsoleParser.parse(input);
+
+        boolean isSortTypeEqual = consoleCommandSortExpense
+                .getType()
+                .equalsIgnoreCase(type);
+
+        boolean isSortOrderEqual = consoleCommandSortExpense
+                .getOrder()
+                .equalsIgnoreCase(order);
+
+        assertTrue(
+                isSortTypeEqual
+                        && isSortOrderEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_se_ccseInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrderInvalidType1_ccseInvalidException() {
+        String type = "curr";
+        String order = "Ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrderInvalidType2_ccseInvalidException() {
+        String type = "amt";
+        String order = "descending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeInvalidOrder1_ccseInvalidException() {
+        String type = "Currency";
+        String order = "ascend";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seTypeInvalidOrder2_ccseInvalidException() {
+        String type = "Currency";
+        String order = "descend";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seType_ccseInvalidException() {
+        String type = "Currency";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE
+                + " "
+                + type;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_seOrder_ccseInvalidException() {
+        String order = "ascending";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER
+                + " "
+                + order;
+
+        assertThrows(ConsoleParserCommandSortExpenseInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Convert-Currency
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccIndexCurrency_ccccIndexCurrency() throws
+            MoneyGoWhereException {
+        int expenseIndex = 0;
+        String currency = "USD";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        ConsoleCommandConvertCurrency consoleCommandConvertCurrency =
+                (ConsoleCommandConvertCurrency) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandConvertCurrency
+                .getExpenseIndex()
+                == expenseIndex;
+
+        boolean isCurrencyEqual = consoleCommandConvertCurrency
+                .getCurrency()
+                .equalsIgnoreCase(currency);
+
+        boolean isRateEqual = consoleCommandConvertCurrency
+                .getRate()
+                == null;
+
+        assertTrue(
+                isExpenseIndexEqual
+                        && isCurrencyEqual
+                        && isRateEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccAllArguments_ccccAllArguments() throws
+            MoneyGoWhereException {
+        int expenseIndex = 0;
+        String currency = "AUD";
+        BigDecimal rate = new BigDecimal("2.0");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+                + " "
+                + rate;
+
+        ConsoleCommandConvertCurrency consoleCommandConvertCurrency =
+                (ConsoleCommandConvertCurrency) ConsoleParser.parse(input);
+
+        boolean isExpenseIndexEqual = consoleCommandConvertCurrency
+                .getExpenseIndex()
+                == expenseIndex;
+
+        boolean isCurrencyEqual = consoleCommandConvertCurrency
+                .getCurrency()
+                .equalsIgnoreCase(currency);
+
+        boolean isRateEqual = consoleCommandConvertCurrency
+                .getRate()
+                .equals(rate);
+
+        assertTrue(
+                isExpenseIndexEqual
+                        && isCurrencyEqual
+                        && isRateEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_cc_ccccInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccCurrencyInvalidIndex1_ccccInvalidException() {
+        int expenseIndex = -1;
+        String currency = "EUR";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccCurrencyInvalidIndex2_ccccInvalidException() {
+        BigInteger expenseIndex = new BigInteger("21474836478");
+        String currency = "EUR";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccCurrencyInvalidIndex3_ccccInvalidException() {
+        String expenseIndex = "InvalidIndex";
+        String currency = "EUR";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccIndexCurrencyInvalidRate_ccccInvalidException() {
+        int expenseIndex = 0;
+        String currency = "EUR";
+        BigDecimal rate = new BigDecimal("-1");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+                + " "
+                + rate;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ccIndexCurrencyInvalidRate2_ccccInvalidException() {
+        int expenseIndex = 0;
+        String currency = "EUR";
+        String rate = "InvalidAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_EXPENSE_INDEX
+                + " "
+                + expenseIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_CURRENCY
+                + " "
+                + currency
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_CONVERT_CURRENCY_ARG_RATE
+                + " "
+                + rate;
+
+        assertThrows(ConsoleParserCommandConvertCurrencyInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
     //region Defines JUnit test cases for command Add-RecurringPayment
     //@@author xzynos
     @Test
@@ -3052,6 +3553,1921 @@ class ConsoleParserTest {
     }
     //endregion
 
+    //region Defines JUnit test cases for command Add-Income
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameAmount_ccaiNameAmount() throws
+            MoneyGoWhereException {
+        String name = "Income1";
+        BigDecimal amount = new BigDecimal("10000");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        ConsoleCommandAddIncome consoleCommandAddIncome =
+                (ConsoleCommandAddIncome) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddIncome
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddIncome
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddIncome
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isDateTimeEqual = true;
+
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameAmountDateTime_ccaiNameAmountDateTime() throws
+            MoneyGoWhereException {
+        String name = "Income1";
+        BigDecimal amount = new BigDecimal("10000");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\"";
+
+        ConsoleCommandAddIncome consoleCommandAddIncome =
+                (ConsoleCommandAddIncome) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddIncome
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddIncome
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddIncome
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandAddIncome
+                .getDateTime()
+                .equals(dateTime);
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiAllArguments_ccaiAllArguments() throws
+            MoneyGoWhereException {
+        String name = "Income1";
+        BigDecimal amount = new BigDecimal("10000");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+        String description = "This is my income.";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\""
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandAddIncome consoleCommandAddIncome =
+                (ConsoleCommandAddIncome) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddIncome
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddIncome
+                .getDescription()
+                .equals(description);
+        boolean isAmountEqual = consoleCommandAddIncome
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandAddIncome
+                .getDateTime()
+                .equals(dateTime);
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ai_ccaiInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME;
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiName_ccaiInvalidException() {
+        String name = "Income2";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name;
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiAmount_ccaiInvalidException() {
+        String amount = "99.99";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameInvalidAmount1_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameInvalidAmount2_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "InvalidAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameAmountInvalidDateTime1_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "1000.0";
+        String dateTime = "InvalidDateTime";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_aiNameAmountInvalidDateTime2_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "1000.0";
+        String dateTime = "28-02-2022 2359";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandAddIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command View-Income
+    //@@author jeyvia
+    @Test
+    void parseCommand_vi_ccvi() throws
+            MoneyGoWhereException {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME;
+
+        ConsoleCommandViewIncome consoleCommandViewIncome = (ConsoleCommandViewIncome) ConsoleParser.parse(input);
+
+        boolean isIncomeIndexEqual = consoleCommandViewIncome
+                .getIncomeIndex()
+                == -1;
+
+        assertTrue(isIncomeIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_viIndex_ccviIndex() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        ConsoleCommandViewIncome consoleCommandViewIncome = (ConsoleCommandViewIncome) ConsoleParser.parse(input);
+
+        boolean isIncomeIndexEqual = consoleCommandViewIncome
+                .getIncomeIndex()
+                == incomeIndex;
+
+        assertTrue(isIncomeIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_viInvalidIndex1_ccviInvalidException() {
+        String incomeIndex = "InvalidIncomeIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandViewIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_viInvalidIndex2_ccviInvalidException() {
+        String incomeIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandViewIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_viInvalidIndex3_ccviInvalidException() {
+        String incomeIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandViewIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Delete-Income
+    //@@author jeyvia
+    @Test
+    void parseCommand_diIndex_ccdiIndex() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        ConsoleCommandDeleteIncome consoleCommandDeleteIncome =
+                (ConsoleCommandDeleteIncome) ConsoleParser.parse(input);
+
+        boolean isIncomeIndexEqual = consoleCommandDeleteIncome
+                .getIncomeIndex()
+                == incomeIndex;
+
+        assertTrue(isIncomeIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_di_ccdiInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME;
+
+        assertThrows(ConsoleParserCommandDeleteIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_diInvalidIndex1_ccdiInvalidException() {
+        String incomeIndex = "InvalidIncomeIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandDeleteIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_diInvalidIndex2_ccdiInvalidException() {
+        String incomeIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandDeleteIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_diInvalidIndex3_ccdiInvalidException() {
+        String incomeIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandDeleteIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Edit-Income
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiIndexName_cceiIndexName() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+        String name = "Income3";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME
+                + " "
+                + name;
+
+        ConsoleCommandEditIncome consoleCommandEditIncome = (ConsoleCommandEditIncome) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditIncome
+                .getIncomeIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditIncome
+                .getName()
+                .equals(name);
+        boolean isAmountEqual = consoleCommandEditIncome
+                .getAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditIncome
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditIncome
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiIndexAmount_cceiIndexAmount() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+        BigDecimal amount = new BigDecimal("800.90");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+                + amount;
+
+        ConsoleCommandEditIncome consoleCommandEditIncome = (ConsoleCommandEditIncome) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditIncome
+                .getIncomeIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditIncome
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditIncome
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandEditIncome
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditIncome
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiIndexDateTime_cceiIndexDateTime() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\"";
+
+        ConsoleCommandEditIncome consoleCommandEditIncome = (ConsoleCommandEditIncome) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditIncome
+                .getIncomeIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditIncome
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditIncome
+                .getAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditIncome
+                .getDateTime()
+                .equals(dateTime);
+        boolean isDescriptionEqual = consoleCommandEditIncome
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiIndexDescription_cceiIndexDescription() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+        String description = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandEditIncome consoleCommandEditIncome = (ConsoleCommandEditIncome) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditIncome
+                .getIncomeIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditIncome
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditIncome
+                .getAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditIncome
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditIncome
+                .getDescription()
+                .equals(description);
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiAllArguments_cceiAllArguments() throws
+            MoneyGoWhereException {
+        int incomeIndex = 0;
+        String name = "Income3";
+        BigDecimal amount = new BigDecimal("800.90");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+        String description = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\""
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandEditIncome consoleCommandEditIncome = (ConsoleCommandEditIncome) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditIncome
+                .getIncomeIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditIncome
+                .getName()
+                .equals(name);
+        boolean isAmountEqual = consoleCommandEditIncome
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandEditIncome
+                .getDateTime()
+                .equals(dateTime);
+        boolean isDescriptionEqual = consoleCommandEditIncome
+                .getDescription()
+                .equals(description);
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_ei_cceiInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidIndex1_cceiInvalidException() {
+        String incomeIndex = "InvalidIncomeIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidIndex2_cceiInvalidException() {
+        String incomeIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidIndex3_cceiInvalidException() {
+        String incomeIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidAmount1_cceiInvalidException() {
+        String incomeIndex = "0";
+        String amount = "InvalidAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidAmount2_cceiInvalidException() {
+        String incomeIndex = "0";
+        String amount = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_eiInvalidDateTime1_cceiInvalidException() {
+        String incomeIndex = "0";
+        String dateTime = "InvalidDateTime";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_eiInvalidDateTime2_cceiInvalidException() {
+        String incomeIndex = "0";
+        String dateTime = "28-02-2022 2359";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX
+                + " "
+                + incomeIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditIncomeInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Add-Target
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountCurrentAmount_ccatNameAmountCurrentAmount() throws
+            MoneyGoWhereException {
+        String name = "Target1";
+        BigDecimal amount = new BigDecimal("10000");
+        BigDecimal currentAmount = new BigDecimal("1000");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        ConsoleCommandAddTarget consoleCommandAddTarget =
+                (ConsoleCommandAddTarget) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddTarget
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddTarget
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddTarget
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCurrentAmountEqual = consoleCommandAddTarget
+                .getCurrentAmount()
+                .equals(currentAmount.stripTrailingZeros());
+        boolean isDateTimeEqual = true;
+
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountCurrentAmountDateTime_ccatNameAmountCurrentAmountDateTime() throws
+            MoneyGoWhereException {
+        String name = "Target1";
+        BigDecimal amount = new BigDecimal("10000");
+        BigDecimal currentAmount = new BigDecimal("1000");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\"";
+
+        ConsoleCommandAddTarget consoleCommandAddTarget =
+                (ConsoleCommandAddTarget) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddTarget
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddTarget
+                .getDescription()
+                == null;
+        boolean isAmountEqual = consoleCommandAddTarget
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCurrentAmountEqual = consoleCommandAddTarget
+                .getCurrentAmount()
+                .equals(currentAmount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandAddTarget
+                .getDateTime()
+                .equals(dateTime);
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atAllArguments_ccatAllArguments() throws
+            MoneyGoWhereException {
+        String name = "Target1";
+        BigDecimal amount = new BigDecimal("10000");
+        BigDecimal currentAmount = new BigDecimal("1000");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+        String description = "This is my target.";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\""
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandAddTarget consoleCommandAddTarget =
+                (ConsoleCommandAddTarget) ConsoleParser.parse(input);
+
+        boolean isNameEqual = consoleCommandAddTarget
+                .getName()
+                .equals(name);
+        boolean isDescriptionEqual = consoleCommandAddTarget
+                .getDescription()
+                .equals(description);
+        boolean isAmountEqual = consoleCommandAddTarget
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCurrentAmountEqual = consoleCommandAddTarget
+                .getCurrentAmount()
+                .equals(currentAmount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandAddTarget
+                .getDateTime()
+                .equals(dateTime);
+
+        assertTrue(
+                isNameEqual
+                        && isDescriptionEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_at_ccatInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atName_ccatInvalidException() {
+        String name = "Target2";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atAmount_ccatInvalidException() {
+        String amount = "10000";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atCurrentAmount_ccatInvalidException() {
+        String currentAmount = "99.99";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameCurrentAmountInvalidAmount1_ccatInvalidException() {
+        String name = "Target2";
+        String amount = "InvalidAmount";
+        String currentAmount = "10";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameCurrentAmountInvalidAmount2_ccatInvalidException() {
+        String name = "Income2";
+        String amount = "-1";
+        String currentAmount = "10";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountInvalidCurrentAmount1_ccatInvalidException() {
+        String name = "Target2";
+        String amount = "10000";
+        String currentAmount = "InvalidCurrentAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountInvalidCurrentAmount2_ccatInvalidException() {
+        String name = "Income2";
+        String amount = "10000";
+        String currentAmount = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountCurrentAmountInvalidDateTime1_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "1000.0";
+        String currentAmount = "10";
+        String dateTime = "InvalidDateTime";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_atNameAmountCurrentAmountInvalidDateTime2_ccaiInvalidException() {
+        String name = "Income2";
+        String amount = "1000.0";
+        String currentAmount = "10";
+        String dateTime = "28-02-2022 2359";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandAddTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command View-Target
+    @Test
+    void parseCommand_vt_ccvt() throws
+            MoneyGoWhereException {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET;
+
+        ConsoleCommandViewTarget consoleCommandViewTarget = (ConsoleCommandViewTarget) ConsoleParser.parse(input);
+
+        boolean isTargetIndexEqual = consoleCommandViewTarget
+                .getTargetIndex()
+                == -1;
+
+        assertTrue(isTargetIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_vtIndex_ccvtIndex() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        ConsoleCommandViewTarget consoleCommandViewTarget = (ConsoleCommandViewTarget) ConsoleParser.parse(input);
+
+        boolean isTargetIndexEqual = consoleCommandViewTarget
+                .getTargetIndex()
+                == targetIndex;
+
+        assertTrue(isTargetIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_vtInvalidIndex1_ccvtInvalidException() {
+        String targetIndex = "InvalidTargetIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandViewTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_vtInvalidIndex2_ccvtInvalidException() {
+        String targetIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandViewTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_vtInvalidIndex3_ccvtInvalidException() {
+        String targetIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandViewTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Delete-Target
+    //@@author jeyvia
+    @Test
+    void parseCommand_dtIndex_ccdtIndex() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        ConsoleCommandDeleteTarget consoleCommandDeleteTarget =
+                (ConsoleCommandDeleteTarget) ConsoleParser.parse(input);
+
+        boolean isTargetIndexEqual = consoleCommandDeleteTarget
+                .getTargetIndex()
+                == targetIndex;
+
+        assertTrue(isTargetIndexEqual);
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_dt_ccdtInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET;
+
+        assertThrows(ConsoleParserCommandDeleteTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_dtInvalidIndex1_ccdtInvalidException() {
+        String targetIndex = "InvalidTargetIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandDeleteTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_dtInvalidIndex2_ccdtInvalidException() {
+        String targetIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandDeleteTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_dtInvalidIndex3_ccdtInvalidException() {
+        String targetIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandDeleteTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Edit-Target
+    //@@author jeyvia
+    @Test
+    void parseCommand_etIndexName_ccetIndexName() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        String name = "Target3";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME
+                + " "
+                + name;
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                .equals(name);
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                == null;
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etIndexAmount_ccetIndexAmount() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        BigDecimal amount = new BigDecimal("1000");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT
+                + " "
+                + amount;
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etIndexCurrentAmount_ccetIndexAmount() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        BigDecimal currentAmount = new BigDecimal("100");
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                == null;
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                .equals(currentAmount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etIndexDateTime_ccetIndexDateTime() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\"";
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                == null;
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                .equals(dateTime);
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                == null;
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etIndexDescription_ccetIndexDescription() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        String description = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                == null;
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                == null;
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                == null;
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                == null;
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                .equals(description);
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etAllArguments_ccetAllArguments() throws
+            MoneyGoWhereException {
+        int targetIndex = 0;
+        String name = "Target3";
+        BigDecimal amount = new BigDecimal("10000");
+        BigDecimal currentAmount = new BigDecimal("800.90");
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+        String description = "Test Desc";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME
+                + " "
+                + name
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT
+                + " "
+                + amount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\""
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION
+                + " \""
+                + description
+                + "\"";
+
+        ConsoleCommandEditTarget consoleCommandEditTarget = (ConsoleCommandEditTarget) ConsoleParser.parse(input);
+
+        boolean isIndexEqual = consoleCommandEditTarget
+                .getTargetIndex()
+                == 0;
+        boolean isNameEqual = consoleCommandEditTarget
+                .getName()
+                .equals(name);
+        boolean isAmountEqual = consoleCommandEditTarget
+                .getAmount()
+                .equals(amount.stripTrailingZeros());
+        boolean isCurrentAmountEqual = consoleCommandEditTarget
+                .getCurrentAmount()
+                .equals(currentAmount.stripTrailingZeros());
+        boolean isDateTimeEqual = consoleCommandEditTarget
+                .getDateTime()
+                .equals(dateTime);
+        boolean isDescriptionEqual = consoleCommandEditTarget
+                .getDescription()
+                .equals(description);
+
+        assertTrue(
+                isIndexEqual
+                        && isNameEqual
+                        && isAmountEqual
+                        && isCurrentAmountEqual
+                        && isDateTimeEqual
+                        && isDescriptionEqual
+        );
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_et_ccetInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidIndex1_ccetInvalidException() {
+        String targetIndex = "InvalidIncomeIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidIndex2_ccetInvalidException() {
+        String targetIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidIndex3_ccetInvalidException() {
+        String targetIndex = "2147483648";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidAmount1_ccetInvalidException() {
+        String targetIndex = "0";
+        String amount = "InvalidAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidAmount2_ccetInvalidException() {
+        String targetIndex = "0";
+        String amount = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT
+                + " "
+                + amount;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidCurrentAmount1_ccetInvalidException() {
+        String targetIndex = "0";
+        String currentAmount = "InvalidCurrentAmount";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidCurrentAmount2_ccetInvalidException() {
+        String targetIndex = "0";
+        String currentAmount = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT
+                + " "
+                + currentAmount;
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    //@@author jeyvia
+    @Test
+    void parseCommand_etInvalidDateTime1_cceiInvalidException() {
+        String targetIndex = "0";
+        String dateTime = "InvalidDateTime";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+
+    @Test
+    void parseCommand_etInvalidDateTime2_ccetInvalidException() {
+        String targetIndex = "0";
+        String dateTime = "28-02-2022 2359";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX
+                + " "
+                + targetIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandEditTargetInvalidException.class, () ->
+                ConsoleParser.parse(input));
+    }
+    //endregion
+
     //region Defines JUnit test cases for command Merge-File
     //@@author LokQiJun
     @Test
@@ -3065,11 +5481,11 @@ class ConsoleParserTest {
                 + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
                 + " "
                 + filePath;
-        System.out.print(input);
-        ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile =
-                (ConsoleCommandMergeExternalFile) ConsoleParser.parse(input);
 
-        boolean isFilePathEqual = consoleCommandMergeExternalFile.getFilePath().equals(filePath);
+        ConsoleCommandMergeFile consoleCommandMergeFile =
+                (ConsoleCommandMergeFile) ConsoleParser.parse(input);
+
+        boolean isFilePathEqual = consoleCommandMergeFile.getFilePath().equals(filePath);
 
         assertTrue(isFilePathEqual);
     }
@@ -3086,7 +5502,7 @@ class ConsoleParserTest {
                 + " "
                 + filePath;
 
-        assertThrows(ConsoleParserCommandMergeExternalFileInvalidException.class, () ->
+        assertThrows(ConsoleParserCommandMergeFileInvalidException.class, () ->
                 ConsoleParser.parse(input)
         );
     }

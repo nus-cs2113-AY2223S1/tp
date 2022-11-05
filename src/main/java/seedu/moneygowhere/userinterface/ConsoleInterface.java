@@ -17,7 +17,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandHelp;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
 import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
@@ -54,7 +54,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInval
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandPayRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
@@ -1117,8 +1117,8 @@ public class ConsoleInterface {
     }
 
     //@@author LokQiJun
-    private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
-        String filePath = consoleCommandMergeExternalFile.getFilePath();
+    private void runCommandMergeFile(ConsoleCommandMergeFile consoleCommandMergeFile) {
+        String filePath = consoleCommandMergeFile.getFilePath();
         ArrayList<Expense> savedExpenses = new ArrayList<>();
         ArrayList<RecurringPayment> savedRecurringPayments = new ArrayList<>();
         ArrayList<Target> savedTargets = new ArrayList<>();
@@ -1132,6 +1132,7 @@ public class ConsoleInterface {
         runLocalStorageSaveToFile();
     }
 
+    //@@author LokQiJun
     private void runLocalStorageLoadFromFile() {
         ArrayList<Expense> savedExpenses = new ArrayList<>();
         ConsoleCommandSortExpense sortCommandSetting = new ConsoleCommandSortExpense(
@@ -1155,6 +1156,7 @@ public class ConsoleInterface {
         incomeManager.setIncomes(savedIncomes);
     }
 
+    //@@author LokQiJun
     private void runLocalStorageSaveToFile() {
         ArrayList<Expense> currentExpenses = expenseManager.getExpenses();
         ConsoleCommandSortExpense sortCommandSetting = expenseManager.getSortCommandSetting();
@@ -1202,7 +1204,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandDeleteRecurringPaymentInvalidException
                  | ConsoleParserCommandEditRecurringPaymentInvalidException
                  | ConsoleParserCommandPayRecurringPaymentInvalidException
-                 | ConsoleParserCommandMergeExternalFileInvalidException exception) {
+                 | ConsoleParserCommandMergeFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
 
@@ -1268,8 +1270,8 @@ public class ConsoleInterface {
                 runCommandEditRecurringPayment((ConsoleCommandEditRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandPayRecurringPayment) {
                 runCommandPayRecurringPayment((ConsoleCommandPayRecurringPayment) consoleCommand);
-            } else if (consoleCommand instanceof ConsoleCommandMergeExternalFile) {
-                runCommandMergeExternalFile((ConsoleCommandMergeExternalFile) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandMergeFile) {
+                runCommandMergeFile((ConsoleCommandMergeFile) consoleCommand);
             }
 
             printBlankLine();

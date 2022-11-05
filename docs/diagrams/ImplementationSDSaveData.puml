@@ -32,7 +32,7 @@ deactivate expenseManager
 consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayments()
 activate recurringPaymentManager DATA_COLOR_3
 
-recurringPaymentManager --[DATA_COLOR_3]> consoleInterface : currentRecurringPayments:ArrayList<RecurringPayments>
+recurringPaymentManager --[DATA_COLOR_3]> consoleInterface : currentRecurringPayments:ArrayList<RecurringPayment>
 deactivate recurringPaymentManager
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : getIncomes()

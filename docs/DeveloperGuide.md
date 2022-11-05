@@ -125,7 +125,7 @@ The sequence diagrams referenced by the component interaction diagram can be see
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
 * `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
-In the example above, `ConsoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
+In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
 `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
@@ -181,7 +181,7 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 ![Component-UserInterface](images/ComponentUserInterface.png)
 
 `ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
-For example, entering the command string `Add-Expense -n Lunch -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
+For example, entering the command string `Add-Expense -n Expense -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
 
 ### Parser Component
@@ -202,7 +202,7 @@ The Commands component consists of various console command classes which inherit
 ![Component-Commands](images/ComponentCommands.png)
 
 The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
-For example, supplying the command string `Add-Expense -n Lunch -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
+For example, supplying the command string `Add-Expense -n Expense -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
 
 ### Data Component
@@ -212,30 +212,36 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 ![Component-Data](images/ComponentData.png)
 
 `Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
-`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
+`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
+`CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
 
 ### Storage Component
 
-The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.
+The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
+\
+`LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and writing data to a xml file.\
+`LocalStorageNullErrorHandler` overwrites several default error handlers in the xml parser to allow for custom error handling.\
+`LocalStorage` defines functions that loads and saves data.
 
 ### API Component
 
-The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
-
-![Component-API](images/ComponentApi.png)
-
+The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.\
+\
 The `CurrencyApiManager` class calls functions in `CurrencyApi`.\
-The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a hashmap of exchange rates.\
+The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a HashMap of exchange rates.\
 \
 When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of currencies and their corresponding conversion rates:
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson()` to fetch data from the API in the form of a JSON file. 
-  * The data contains the currency code and its corresponding exchange rate with respect to the Singapore Dollar.
-  The data is written into a text file called `exchangeRates.txt`.
-* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a hashmap of exchange rates.
+  * The data contains the currency codes and its corresponding exchange rates with respect to the Singapore Dollar.
+  * The data is written into a text file called `exchangeRates.txt`.
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a HashMap of exchange rates.
 
 ### Logger Component
 
-The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
+The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.\
+\
+`LocalLoggerFormatter` formats the log record before it is written to a log file.
+`LocalLogger` defines functions to log different types of messages to a log file.
 
 ## Implementation
 ### Loading Data from File
