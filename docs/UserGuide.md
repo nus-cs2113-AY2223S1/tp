@@ -103,13 +103,13 @@ Expected Output:
 
 ```
 Ok! I've added a patient! The patient's details are as follows:
-	____________________________________________________________
-	Patient #1
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    ____________________________________________________________
+    Patient #1
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Viewing all patients: `viewAll`
@@ -122,25 +122,25 @@ Expected Output:
 
 ```
 Here are the list of patients in the system:
-	____________________________________________________________
-        Patient #1
-	Name: John Doe
-	Gender: Male
-	Date of Birth: 09-09-1978
-	ID: T2
-	____________________________________________________________
-        Patient #2
-	Name: Jane Doe
-	Gender: Female
-	Date of Birth: 09-09-1978
-	ID: T1
-	____________________________________________________________
-        Patient #3
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    ____________________________________________________________
+    Patient #1
+    Name: John Doe
+    Gender: Male
+    Date of Birth: 09-09-1978
+    ID: T2
+    ____________________________________________________________
+    Patient #2
+    Name: Jane Doe
+    Gender: Female
+    Date of Birth: 09-09-1978
+    ID: T1
+    ____________________________________________________________
+    Patient #3
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Retrieving a patient's records: `retrieve`
@@ -159,13 +159,13 @@ Example Output:
 
 ```
 The patient with the supplied ID was found! Here are the details of the patient: 
-	____________________________________________________________
-	Patient #3
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    ____________________________________________________________
+    Patient #3
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Modifying the details of a patient: `edit`
@@ -247,12 +247,12 @@ Expected Output:
 
 ```
 You have added a visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: flu
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: flu
+    ____________________________________________________________
 ```
 
 #### Adding/editing a reason for existing visit: `edit`
@@ -272,12 +272,12 @@ Expected Output:
 
 ```
 You have edited reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: fever
-	____________________________________________________________
+        ____________________________________________________________
+        ID: S123
+        Date: 30-02-2020
+        Time: 15:00
+        Reason: fever
+    ____________________________________________________________
 ```
 
 #### Deleting a reason for existing visit: `deleteReason`
@@ -296,12 +296,12 @@ Expected Output:
 
 ```
 You have deleted the reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing all visits: `viewall`
@@ -318,25 +318,25 @@ Expected Output:
 
 ```
 Here are the list of visits in the system:
-	____________________________________________________________
+    ____________________________________________________________
     VisitIndex #1)
-	ID: T1
-	Date: 08-11-2022
-	Time: 08:00
-	Reason: checkup
-	____________________________________________________________
+    ID: T1
+    Date: 08-11-2022
+    Time: 08:00
+    Reason: checkup
+    ____________________________________________________________
     VisitIndex #2)
-	ID: T2
-	Date: 08-15-2022
-	Time: 09:00
-	Reason: new medication
-	____________________________________________________________
+    ID: T2
+    Date: 08-15-2022
+    Time: 09:00
+    Reason: new medication
+    ____________________________________________________________
     VisitIndex #3)
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 
 ```
 
@@ -356,13 +356,13 @@ Expected Output:
 
 ```
 Here are the list of visits for Patient with ID: S123
-	____________________________________________________________
+    ____________________________________________________________
     VisitIndex #3)
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing a specific visit: `viewVisit`
@@ -381,12 +381,12 @@ Expected Output:
 
 ```
 Here is the visit with VisitIndex 3:
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing the commands in the Visit menu: `help`
@@ -425,8 +425,8 @@ Format: `add i/patientID n/medicine_name d/medicine_dosage t/time_interval`
 
 * The `patientID` should be the ID of a patient that is already in the patient list
 * The `patientID` is case-insensitive
-* The `medicine_name` should be either one or two words
-* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `medicine_name` can be multiple words, including "-"
+* The `medicine_dosage` should be formatted as a number followed by a unit (in one word)
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
 * The prescription can only be added if it does not exist in the list.
 
@@ -455,8 +455,8 @@ Modifies one part of a prescription’s record
 Format: `edit x/index n/medicine_name` or `edit x/index d/medicine_dosage` or `edit x/index t/time_interval`
 
 * The `index` must be an integer within the range from 1 to the total number of prescriptions in the list
-* The `medicine_name` should be either one or two words
-* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `medicine_name` can be multiple words, including "-"
+* The `medicine_dosage` should be formatted as a number followed by a unit (in one word)
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
 * The prescription can only be edited if the updated version does not exist in the list.
 
@@ -633,9 +633,9 @@ Expected Output:
 ```
 List of commands:
 * To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]
-    n - The prescription name should be one or two words
-    d - The dosage should be a number followed by an amount
-    t - The time instruction should be instructions on how to take, with any number of words
+    n - The prescription name can be multiple words, including -
+    d - The dosage should be a number followed by an amount, i.e. 10 mg
+    t - The time instruction explains how to take the dosage,with any number of words
 * To edit a prescription: edit x/[index] (n/[name] or d/[dosage] or t/[time interval])
     n/d/t - Please edit only one aspect of a prescription at a time
 * To list all prescriptions: viewall
@@ -643,7 +643,6 @@ List of commands:
 * To list all active prescriptions of one patient: viewActPatientPres i/[ID]
 * To change a prescription record to be active: activate x/[index]
 * To change a prescription record to be inactive: deactivate x/[index]
-    x - The index should be relative to all the visits of a patient
 * To return to main menu: main
 * To quit OneDoc: bye
     ____________________________________________________________
