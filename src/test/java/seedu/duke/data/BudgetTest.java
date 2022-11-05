@@ -67,24 +67,24 @@ public class BudgetTest {
     public void generateBudgetAdvice_budgetExceededNotMoreThanTwice_expectLowExceededAdvice() {
         // Ensure that the budget is not updated by other test cases
         Budget.setBudget(1000);
-        assertEquals(Budget.generateBudgetAdvice(1001, true)
-                , messageHeader + INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_LOW);
+        assertEquals(Budget.generateBudgetAdvice(1001, true),
+            messageHeader + INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_LOW);
     }
 
     @Test
     public void generateBudgetAdvice_budgetExceededMoreThanTwice_expectHighExceededAdvice() {
         // Ensure that the budget is not updated by other test cases
         Budget.setBudget(1000);
-        assertEquals(Budget.generateBudgetAdvice(2001, true)
-                , messageHeader + INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_HIGH);
+        assertEquals(Budget.generateBudgetAdvice(2001, true),
+            messageHeader + INFO_BUDGET_EXCEEDED_ADVICE_SPENDING_HIGH);
     }
 
     @Test
     public void generateBudgetAdvice_budgetRemainedLessThanHalf_expectRemainedButHighSpendingAdvice() {
         // Ensure that the budget is not updated by other test cases
         Budget.setBudget(1000);
-        assertEquals(Budget.generateBudgetAdvice(499, false)
-                , messageHeader + INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_HIGH);
+        assertEquals(Budget.generateBudgetAdvice(499, false),
+                messageHeader + INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_HIGH);
     }
 
     @Test
@@ -92,8 +92,8 @@ public class BudgetTest {
         // Ensure that the budget is not updated by other test cases
         Budget.setBudget(1000);
         // 500 is exactly half of 1000 but not less than half
-        assertEquals(Budget.generateBudgetAdvice(500, false)
-                , messageHeader + INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_LOW);
+        assertEquals(Budget.generateBudgetAdvice(500, false),
+                messageHeader + INFO_BUDGET_NOT_EXCEEDED_ADVICE_SPENDING_LOW);
     }
 
     @Test
@@ -101,7 +101,7 @@ public class BudgetTest {
         // Ensure that the budget is not updated by other test cases
         Budget.setBudget(1000);
         // 500 is exactly half of 1000 but not less than half
-        assertEquals(Budget.generateBudgetAdvice(1000, false)
-                , messageHeader + INFO_BUDGET_NOT_SPENT_ADVICE);
+        assertEquals(Budget.generateBudgetAdvice(1000, false),
+                messageHeader + INFO_BUDGET_NOT_SPENT_ADVICE);
     }
 }

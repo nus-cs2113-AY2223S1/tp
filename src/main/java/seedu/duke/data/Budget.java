@@ -204,13 +204,13 @@ public class Budget {
         String message = INFO_SAVING_TIPS_AND_BUDGET_ADVICE_SEPARATOR.toString();
 
         // Only used if budget has exceeded
-        boolean hasExceededBudgetMoreThanTwice = abs(budgetLeft) > budget * 2;
+        final boolean hasExceededBudgetMoreThanTwice = abs(budgetLeft) > budget * 2;
 
         // Only used if budget has not exceeded
-        boolean hasLeftLessThanHalfOfBudget = budgetLeft * 2 < budget;
+        final boolean hasLeftLessThanHalfOfBudget = budgetLeft * 2 < budget;
 
         // Used to display different message if user has not spent any money for that month
-        boolean hasSpentAnyBudget = budgetLeft < budget;
+        final boolean hasSpentAnyBudget = budgetLeft < budget;
 
         /*
            A budget is said to have highly exceeded when the budget is exceeded more than twice of itself.

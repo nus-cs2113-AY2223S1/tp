@@ -11,6 +11,7 @@ public class HelpCommandTest {
     TransactionList transactions = new TransactionList();
     Ui ui = new Ui();
     Storage storage = new Storage();
+
     @Test
     public void execute_getBasicHelpForAddCommand_expectedNoErrorCaught() {
         HelpCommand helpCommand = new HelpCommand();
@@ -20,13 +21,12 @@ public class HelpCommandTest {
         );
     }
 
-
     @Test
     public void execute_getBasicHelpForAllCommands_expectedNoErrorCaught() {
         HelpCommand helpCommand = new HelpCommand();
         helpCommand.isDetailed(true);
         assertDoesNotThrow(
-                () -> helpCommand.execute(transactions, ui, storage)
+            () -> helpCommand.execute(transactions, ui, storage)
         );
     }
 
@@ -36,7 +36,7 @@ public class HelpCommandTest {
         helpCommand.isDetailed(false);
         helpCommand.setQueryCommand("Add");
         assertDoesNotThrow(
-                () -> helpCommand.execute(transactions, ui, storage)
+            () -> helpCommand.execute(transactions, ui, storage)
         );
     }
 }
