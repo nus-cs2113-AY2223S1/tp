@@ -140,7 +140,7 @@ The following sequence diagram shows how the filter operation works:
 A build is a collection of components that are used to create a PC. A build can be saved and loaded from the storage. 
 The user can also export the build to a text file via the export functionality. 
 
-In our application build is a class object which contains a 2D linked hash map of components. LinkedHashMap2D is a class
+In our application `Build` is a class object which contains a 2D linked hash map of components. `LinkedHashMap2D` is a class
 representing a 2D linked hash map data structure. The keys of the outer map are the component types and the keys of the inner
 are the component names. The values of the inner map are the components themselves.
 
@@ -154,15 +154,40 @@ There are also check compatibility functions that check if the build's component
 - Checking if the number of the build's GPUs is compatible with the motherboard GPU slots
 - Checking if the number of the build's RAM is compatible with the motherboard RAM slots
 
-
+Some common scenarios where the build class is used are illustrated below.
 
 ##### Add & delete component
 
-The user can add and delete components from the build. When the user adds a component, the component is added to the 2D linked hash map. 
-When the user deletes a component, the component is removed from the 2D linked hash map. This is done by calling the `addComponent()` and `deleteComponent()` methods of the Build class.
-Which in turn calls the `addElement()` and `removeElement()` methods of the LinkedHashMap2D class.
+The user can add and delete components from the build. When the user adds a component, the component is added to the 
+2D linked hash map. When the user deletes a component, the component is removed from the 2D linked hash map. This is 
+done by calling the `addComponent()` and `deleteComponent()` methods of the `Build` class. Which in turn calls the 
+`addElement()` and `removeElement()` methods of the LinkedHashMap2D class.
 
 ![](/images/BuildSequence.png)
+
+##### Get total power consumption of components
+
+The user can view the total power consumption of the components in the build. This is done by calling the 
+`getTotalPower()` method of the `Build` class. As shown in the sequence diagram below, when the method is called, it
+then calls the `getAllComponent` method of the `Build` class. This method returns a list of all the components in the build.
+The `getTotalPower()` method then loops through the list of components and adds up the power consumption of each component 
+if is not of type `powersupply`. The reason being that the power supply is not included in the total power consumption of the build.
+The total power consumption is then returned.
+
+![](/images/BuildSequenceGetTotalPower.png)
+
+#### Get GPU slot compatibility
+
+The user can check if the number of GPUs in the build is compatible with the number of GPU slots in the motherboard. 
+This is done by calling the `getGPUSlotCompatibility()` method of the `Build` class. As shown in the sequence diagram below,
+when the method is called, it first initializes an `int` variable `totalPower` of value `0`. Then it calls the `getAllComponent` 
+method of the `Build` class. This method returns a list of all the components in the build. The `getGPUSlotCompatibility()` 
+method then loops through the list of components and checks if the component is of type `gpu`. If it is, the method increments the
+`totalPower` variable by 1. After the loop, the method checks if the `int` variable is less than or equal to the number of GPU slots
+in the motherboard. If it is, the method returns true. If it is not, the method returns false. Here true and false represent the
+compatibility of the number of GPUs in the build with the number of GPU slots in the motherboard.
+
+![](/images/BuildSequenceCheckGpuSlot.png)
 
 ### Storage
 
@@ -240,7 +265,7 @@ In addition to the getters and setters for each of the class fields, the classes
 ### Export
 
 In our application export is a utility class. The user can export all builds or a specific build to a text file. The user can also export
-all builds to a CSV file. 
+all builds to a CSV file.  
 
 
 ## Product scope
