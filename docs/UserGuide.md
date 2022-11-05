@@ -322,7 +322,7 @@ Update Successful.
 ### Favourite carparks by carpark ID
 
 **Saves the carpark to a list of favourited carparks for easy subsequent access.**
-> Format: `favourite CARPARK_ID` or `fav`
+> Format: `favourite CARPARK_ID` or `fav CARPARK_ID`
 
 - The command requires user to input a valid and existing carpark ID that is not already favourited.
 
@@ -358,6 +358,11 @@ Carpark already in list.
 No carpark was found.
 ```
 
+> For advanced users:
+>  - Favourite multiple carparks at once by entering more than one carpark ID after `favourite`.
+>  - Example of usage:
+>    - `favourite 1 2 J8`
+
 ### Unfavourite carparks by carpark ID
 
 **Removes the carpark from a list of favourited carparks.**
@@ -386,6 +391,11 @@ Removed Carpark 1 from favourites!
 ```
 Carpark not found in favourite list!
 ```
+
+> For advanced users:
+>  - Unfavourite multiple carparks at once by entering more than one carpark ID after `unfavourite`.
+>  - Example of usage:
+     >    - `unfavourite 3 4 5`
 
 ### List lot availability of favourite carparks
 
@@ -462,8 +472,17 @@ If no files exist at the time of running the program, the necessary files and di
 
 #### How files are saved and loaded
 
+- This file contains the carpark IDs of all favourite carparks.
+- When the user first starts the application, contents from this file will be read and stored.
+- Contents are loaded and validated before every `favourite` and `unfavourite` command.
+- Contents are written to this file after every `favourite` and `unfavourite` command.
+
 #### Supported editing behaviour
 
+- Each row contains the carpark ID of a carpark that is favourited.
+- Users can edit the contents of this file while the application is running, but changes to the file will only be 
+reflected after a `favourite` or `unfavourite` command.
+- If users enter an invalid carpark ID, it will be removed from this file after a `favourite` or `unfavourite` command.
 
 ### `secret.txt` Access token file
 
