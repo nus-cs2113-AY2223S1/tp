@@ -16,7 +16,7 @@ public class FindCommandTest {
         Recipe addedRecipe = new Recipe("Example title", "Example description");
         RecipeList.addRecipe(addedRecipe);
         RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
         String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
         Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
         String input = "/find -t title";
@@ -56,7 +56,7 @@ public class FindCommandTest {
         assertEquals(expected, commandExecutedResult.getMessage());
         RecipeList.deleteRecipeFromTitle("Example title");
         Storage.deleteRecipeFile("Example title");
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
     }
 
 }
