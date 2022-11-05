@@ -351,3 +351,12 @@ Target user of the application is avid cook who wants to organize their recipe l
   - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
   - The program will not load the recipe 
+
+#### Other files
+- **Delete `Template.txt` then `/add`**
+  - Expected outcome: `Template file is missing! Regenerate Template File! Please try again`
+- **Tamper `Template.txt` then `/add`**
+  - The tampered file will be loaded
+  - Everything will continue to work but without a proper template, it is hard for the user
+- **Delete `TemporaryFile.txt` then `/add`**
+  - No effect because it will be constantly overwritten based on content in the Editor when closed

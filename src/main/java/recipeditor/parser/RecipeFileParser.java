@@ -77,7 +77,8 @@ public class RecipeFileParser {
         } else {
             switch (stage) {
             default:
-                throw new ParseFileException(UNIMPORTANT_TEXT);
+                break;
+//                throw new ParseFileException(UNIMPORTANT_TEXT);
             case TITLE:
                 caseTitle();
                 break;

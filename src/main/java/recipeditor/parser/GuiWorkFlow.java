@@ -18,8 +18,6 @@ public class GuiWorkFlow {
     private final Mode mode;
     private boolean exitLoop;
 
-    //TODO: Make this neater, Add and Edit Mode, Generate Template file
-
     public GuiWorkFlow(String path) throws FileNotFoundException {
         mode = getMode(path);
         saveToTemp = new Editor().enterEditor(path);

@@ -37,38 +37,39 @@ public class Editor extends JFrame implements ActionListener {
     private EditorState state = EditorState.USING;
 
     public Editor() {
-        frame = new JFrame("Editor");
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             Logger.getLogger(Editor.class.getName()).log(Level.SEVERE, e.getMessage());
         }
 
+        frame = new JFrame("Editor");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-
+        frame.setSize(600, 600);
+        frame.setResizable(false);
+        frame.setVisible(true);
+        frame.toFront();
+        frame.setAlwaysOnTop(true);
 
         textArea = new JTextArea();
-        textArea.setSize(new Dimension(200, 200));
         textArea.setFont(new Font("Arial", Font.PLAIN, 15));
         scrollPane = new JScrollPane(textArea, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         buttonSave = new JButton("Save and Exit");
         buttonExit = new JButton("Exit Only");
+        
+        
         menu = new JMenuBar();
-        frame.add(scrollPane);
-        frame.setSize(600, 600);
         frame.setJMenuBar(menu);
-        frame.setResizable(false);
-        frame.setVisible(true);
-        frame.toFront();
-        frame.setAlwaysOnTop(true);
+
 
 
         frame.add(buttonSave);
         frame.add(buttonExit);
         menu.add(buttonSave);
         menu.add(buttonExit);
+        frame.add(scrollPane);
 
 
         buttonSave.addActionListener(this);
@@ -133,6 +134,7 @@ public class Editor extends JFrame implements ActionListener {
                 Ui.showMessage("Break from sleep");
             }
         }
+
     }
 
     /**
