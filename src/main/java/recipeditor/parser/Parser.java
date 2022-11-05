@@ -183,7 +183,7 @@ public class Parser {
 
                 FlagType[] flags = FlagParser.getFlags(parsed);
                 if (flags == null) {
-                    return new InvalidCommand();
+                    return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
                 }
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
@@ -192,7 +192,7 @@ public class Parser {
                 Ui.showMessage("Recipe index specified is out of range!");
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             } catch (Exception e) {
-                return new InvalidCommand(e.getMessage());
+                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
