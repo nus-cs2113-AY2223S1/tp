@@ -43,7 +43,7 @@ public class Parser {
         } catch (Exception e) {
             message += e.getMessage();
         } finally {
-            System.out.println(message);
+            System.out.print(message);
         }
 
         return c;
