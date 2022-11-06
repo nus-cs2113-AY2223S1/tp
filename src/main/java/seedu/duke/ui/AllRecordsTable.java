@@ -12,17 +12,14 @@ public class AllRecordsTable extends TableFrame {
     private ArrayList<String> allRecordsTable;
 
     private String caption;
-    private final int [] relevant_indices = {
-            DATE_INDEX, WEIGHT_INDEX, FAT_INDEX,
-            FOOD_DESCRIPTION_INDEX, FOOD_CALORIES_INDEX,
-            EXERCISE_DESCRIPTION_INDEX, EXERCISE_WEIGHT_INDEX, EXERCISE_SET_INDEX,
-            EXERCISE_REPETITION_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_CALORIES_INDEX,
-            STATUS_INDEX};
+    private final int[] relevantIndices = {DATE_INDEX, WEIGHT_INDEX, FAT_INDEX, FOOD_DESCRIPTION_INDEX,
+                FOOD_CALORIES_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_WEIGHT_INDEX, EXERCISE_SET_INDEX,
+                EXERCISE_REPETITION_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_CALORIES_INDEX, STATUS_INDEX};
 
 
     private final String[] mainheadings = {"Weight & Fat", "Food", "Exercises"};
 
-    private final int MAXIMUM_WEIGHT_AND_FAT_SPACING = 12;
+    public final int MAXIMUM_WEIGHT_COLUMN_SPACING = 12;
 
     private int[] maincolumnSpacingArray = {0, 0, 0};
 
@@ -40,7 +37,7 @@ public class AllRecordsTable extends TableFrame {
         setColumnsSpacingForAll();
         addCaption();
         String mainHeading = addMainHeadingRow(allRecordsTable);
-        addHeadingRow(allRecordsTable, relevant_indices);
+        addHeadingRow(allRecordsTable, relevantIndices);
         fillAllRecordsTable(this.recordArrayList, allRecordsTable, mainHeading);
         return allRecordsTable;
     }
@@ -60,21 +57,21 @@ public class AllRecordsTable extends TableFrame {
 
             if (recordArrayList.get(i) instanceof Food) {
                 String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[DATE_INDEX]);
-                String extra_padding = addRightPadding("", mainHeading.substring(
+                String extraPadding = addRightPadding("", mainHeading.substring(
                         0, mainHeading.indexOf("| Food")).length() - date.length() - 1);
                 Food food = (Food) recordArrayList.get(i);
                 String foodName = addRightPadding(food.getFoodDescription(),
                         columnSpacingArray[FOOD_DESCRIPTION_INDEX]);
                 String calories = addRightPadding(Integer.toString(food.getCalories()),
                         columnSpacingArray[FOOD_CALORIES_INDEX]);
-                String row = date + extra_padding + foodName + calories;
+                String row = date + extraPadding + foodName + calories;
                 tableFrame.add(row);
             }
 
 
             if (recordArrayList.get(i) instanceof Exercise) {
                 String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[DATE_INDEX]);
-                String extra_padding = addRightPadding("", mainHeading.substring(
+                String extraPadding = addRightPadding("", mainHeading.substring(
                         0, mainHeading.indexOf("| Exercises")).length() - date.length() - 1);
                 Exercise exercise = (Exercise) recordArrayList.get(i);
                 String exerciseName = addRightPadding(exercise.getExerciseName(),
@@ -89,7 +86,7 @@ public class AllRecordsTable extends TableFrame {
                 String calories = ExerciseTable.getCaloriesForTable(exercise,
                         columnSpacingArray[EXERCISE_CALORIES_INDEX]);
                 String status = exercise.getTaskStatus();
-                String row = date + extra_padding + exerciseName + weight + sets + repetitions + distance
+                String row = date + extraPadding + exerciseName + weight + sets + repetitions + distance
                         + calories + status;
                 tableFrame.add(row);
             }
@@ -102,7 +99,7 @@ public class AllRecordsTable extends TableFrame {
         StringBuilder headingRow = new StringBuilder();
         headingRow.append(addRightPadding("", maincolumnSpacingArray[0]));
         for (int i = 1; i < mainheadings.length; i++) {
-            headingRow.append(addRightPadding(mainheadings[i-1], maincolumnSpacingArray[i]));
+            headingRow.append(addRightPadding(mainheadings[i - 1], maincolumnSpacingArray[i]));
         }
         headingRow.append(mainheadings[2]);
         tableFrame.add(ROW_SEPARATOR.repeat(headingRow.length()));
@@ -112,9 +109,9 @@ public class AllRecordsTable extends TableFrame {
 
     public void setMainHeaderSpacing() {
         maincolumnSpacingArray[0] = MAXIMUM_DATE_COLUMN_SPACING;
-        maincolumnSpacingArray[1] = MAXIMUM_WEIGHT_AND_FAT_SPACING;
-        maincolumnSpacingArray[2] = columnSpacingArray[FOOD_DESCRIPTION_INDEX] +
-                columnSpacingArray[FOOD_CALORIES_INDEX] + 3;
+        maincolumnSpacingArray[1] = MAXIMUM_WEIGHT_COLUMN_SPACING;
+        maincolumnSpacingArray[2] = columnSpacingArray[FOOD_DESCRIPTION_INDEX]
+                + columnSpacingArray[FOOD_CALORIES_INDEX] + 3;
     }
 
     private void addCaption() {

@@ -9,7 +9,7 @@ import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 
-public class TableFrame{
+public class TableFrame {
     public static final int INDEX_POSITION = 0;
     public static final int WEIGHT_INDEX = 1;
     public static final int FAT_INDEX = 2;
@@ -68,10 +68,10 @@ public class TableFrame{
 
     }
 
-    public void addHeadingRow(ArrayList<String> tableFrame, int[] relevant_indices) {
+    public void addHeadingRow(ArrayList<String> tableFrame, int[] relevantIndices) {
         setColumnsSpacingForAll();
         StringBuilder headingRow = new StringBuilder();
-        for (int i : relevant_indices) {
+        for (int i : relevantIndices) {
             headingRow.append(addRightPadding(headings[i], columnSpacingArray[i]));
         }
         tableFrame.add(ROW_SEPARATOR.repeat(headingRow.length()));

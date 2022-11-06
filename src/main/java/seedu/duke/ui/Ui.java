@@ -1,17 +1,14 @@
 package seedu.duke.ui;
 
 import seedu.duke.records.Calories;
-import seedu.duke.records.Record;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.StrengthExercise;
-import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.ui.TableFrame.*;
 
 public class Ui {
 

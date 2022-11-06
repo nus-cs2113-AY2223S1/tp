@@ -65,16 +65,15 @@ public class FindCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
-        int slashesCount = Parser.getArgumentsCount(arguments);
-        String[] argumentList = Parser.getArgumentList(arguments);
-        String findType = Parser.getClassType(argumentList);
-
         weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
         foodArrayList = foodList.getFoodList();
         exerciseArrayList = getFilteredCardioExerciseList(arguments);
         recordArrayList = recordList.getRecordList(weightAndFatList,
                 foodArrayList, exerciseArrayList);
 
+        int slashesCount = Parser.getArgumentsCount(arguments);
+        String[] argumentList = Parser.getArgumentList(arguments);
+        String findType = Parser.getClassType(argumentList);
         switch (findType) {
         case STRENGTH:
             findStrength(argumentList, slashesCount);

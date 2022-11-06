@@ -12,7 +12,7 @@ public class FoodTable extends TableFrame {
     private ArrayList<String> foodTable;
 
     private String caption;
-    private final int [] relevant_indices = {INDEX_POSITION, FOOD_DESCRIPTION_INDEX, FOOD_CALORIES_INDEX, DATE_INDEX};
+    private final int[] relevantIndices = {INDEX_POSITION, FOOD_DESCRIPTION_INDEX, FOOD_CALORIES_INDEX, DATE_INDEX};
 
     public FoodTable(ArrayList<Food> foodArrayList,
                      ArrayList<WeightAndFat> weightAndFatArrayList,
@@ -27,7 +27,7 @@ public class FoodTable extends TableFrame {
     public ArrayList<String> getFoodTable() {
         setColumnsSpacingForAll();
         addCaption();
-        addHeadingRow(foodTable, relevant_indices);
+        addHeadingRow(foodTable, relevantIndices);
         fillFoodTable(this.foodArrayList, foodTable);
         return foodTable;
     }

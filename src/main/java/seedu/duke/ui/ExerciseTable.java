@@ -166,10 +166,4 @@ public class ExerciseTable extends TableFrame {
         }
     }
 
-
-//    protected static String addRightPadding(String string, int numberOfSpace) {
-//        return String.format("%-" + numberOfSpace + "s", string) + COLUMN_SEPARATOR;
-//    }
-
-
 }
