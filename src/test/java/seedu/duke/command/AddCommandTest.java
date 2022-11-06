@@ -8,6 +8,7 @@ import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 
@@ -22,6 +23,18 @@ class AddCommandTest {
     RecordList recordList = new RecordList();
     Ui ui = new Ui();
     Storage storage = new Storage();
+
+    @Test
+    void execute_validFood_successfullyAddToList() throws IllegalValueException {
+        String input = "add food /nasi lemak /400 /01-04-2015";
+        Command c = Parser.parse(input);
+        c.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+        c.execute();
+        Food food = foodList.getFoodList().get(0);
+        assertEquals(food.getFoodDescription(), "nasi lemak");
+        assertEquals(food.getCalories(), 400);
+        assertEquals(food.getDateString(), "01-04-2015");
+    }
 
     @Test
     public void addCommand_invalidFoodDescription_throwsException() {
