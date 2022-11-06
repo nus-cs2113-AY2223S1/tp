@@ -114,7 +114,9 @@ public class AppointmentList {
     }
 
     public static void viewAppointmentTasks(int appointmentId) {
-        AppointmentList.findAppointment(appointmentId).viewTasks();
+        Appointment associatedAppointment = AppointmentList.findAppointment(appointmentId);
+        assert associatedAppointment != null;
+        associatedAppointment.viewTasks();
     }
 
 }
