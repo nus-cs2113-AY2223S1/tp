@@ -17,9 +17,9 @@ public class CommandCheckClient extends CommandCheck {
     private int clientIndex;
 
     /**
-     * Constructs an instance of CommandCheckProperty.
+     * Constructs an instance of CommandCheckClient.
      *
-     * @param commandCheckClientDetails Parsed property index from the user's input.
+     * @param commandCheckClientDetails Parsed client index from the user's input.
      */
     public CommandCheckClient(ArrayList<Integer> commandCheckClientDetails) {
         this.clientIndex = commandCheckClientDetails.get(0);
