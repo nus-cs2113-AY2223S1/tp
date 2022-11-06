@@ -130,7 +130,7 @@ public class Timetable {
                                                                  String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
+        return listOfChangeableModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
     public static void replaceSettableLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {

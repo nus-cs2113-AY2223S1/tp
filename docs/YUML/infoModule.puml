@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+box LOGIC LOGIC_COLOR_T1
+participant "<color: red><<class>></color>\nCommandInfoModule" as CommandInfoModule LOGIC_COLOR
+participant "<color: red><<class>></color>\nUi" as Ui LOGIC_COLOR
+
+[-> CommandInfoModule++ : findModule()
+CommandInfoModule -> Ui++ : getModuleCodeFromUser()
+Ui --> CommandInfoModule-- : moduleCode : String
+create participant ":Nusmods" as Nusmods LOGIC_COLOR
+CommandInfoModule -> Nusmods++ : Nusmods()
+Nusmods --> CommandInfoModule
+CommandInfoModule -> Nusmods : getModuleInfo(moduleCode : String)
+Nusmods -> Nusmods++ : getResponse()
+end box
+box API MODEL_COLOR_T1
+participant "NusMods API" as API MODEL_COLOR
+loop until response code is 200
+    Nusmods -> API++ : send(request : HttpRequest)
+    API --> Nusmods-- : response : HttpResponse
+end
+end box
+box LOGIC LOGIC_COLOR_T1
+Nusmods --> Nusmods-- : info : String[]
+Nusmods --> CommandInfoModule-- : info : String[]
+[<-- CommandInfoModule-- : info : String[]
+end box
+@enduml
