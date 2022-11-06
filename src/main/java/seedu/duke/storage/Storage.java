@@ -4,8 +4,7 @@ package seedu.duke.storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
-import seedu.duke.exception.DukeException;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 
@@ -35,15 +34,17 @@ public class Storage {
         Files.createFile(dataFile);
     }
 
+    public boolean dataFileExists() {
+        return Files.exists(dataFile);
+    }
+
     /**
      * Loads data from save file.
      *
      * @throws FileNotFoundException if save file does not exist
-     * @throws IllegalValueException if any data fails to load
      */
     public void loadData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
-                         RecordList recordList)
-            throws FileNotFoundException, IllegalValueException {
+                         RecordList recordList) throws FileNotFoundException {
         DataLoader.loadData(dataFile, ui, this, biometrics, exerciseList, foodList, recordList);
     }
 
@@ -51,7 +52,6 @@ public class Storage {
      * Saves data to save file.
      *
      * @throws IOException   if save file does not exist
-     * @throws DukeException if any data fails to save
      */
     public void saveData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList)
             throws IOException, IllegalValueException {

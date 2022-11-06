@@ -1,7 +1,7 @@
 package seedu.duke.logic.command;
 
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
@@ -43,8 +43,11 @@ public class LoadCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         try {
-            ui.output("Remembering existing data......");
+            if (storage.dataFileExists()) {
+                ui.output("Remembering existing data......");
+            }
             storage.loadData(ui, biometrics, exerciseList, foodList, recordList);
+            ui.output("Done");
         } catch (FileNotFoundException e) {
             try {
                 storage.createDataFile();

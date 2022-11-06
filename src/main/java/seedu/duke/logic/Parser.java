@@ -1,6 +1,5 @@
 package seedu.duke.logic;
 
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.logic.command.AddCommand;
 import seedu.duke.logic.command.Command;
 import seedu.duke.logic.command.ExitCommand;
@@ -12,12 +11,16 @@ import seedu.duke.logic.command.MarkCommand;
 import seedu.duke.logic.command.RemoveCommand;
 import seedu.duke.logic.command.SetCommand;
 import seedu.duke.logic.command.ViewCommand;
+import seedu.duke.logic.exception.IllegalValueException;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.time.MonthDay;
+
 import java.util.logging.Logger;
 
 ;
@@ -25,6 +28,9 @@ import java.util.logging.Logger;
 public class Parser {
 
     private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String DATE_SEPARATOR = "-";
+    public static final String INVALID_DATE_FORMAT_MESSAGE = "Date is in the wrong format or invalid."
+            + " Please follow the dd-MM-yyyy format";
 
     public static Command parse(String input) {
         input = input.trim();
@@ -88,14 +94,40 @@ public class Parser {
 
     public static LocalDate parseDate(String input, int monthsToAdd) throws IllegalValueException {
         try {
+            String[] dateArray = getDateArray(input);
+            validateDateArrayLength(dateArray);
+            validateDay(dateArray);
             LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("d-M-yyyy"));
-            if (date.isAfter(LocalDate.now().plusMonths(monthsToAdd))) {
-                throw new IllegalValueException("Date is too far in the future");
-            }
+            validateDateRange(monthsToAdd, date);
             return date;
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date is in the wrong format or invalid."
-                    + " Please follow the dd-MM-yyyy format");
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new IllegalValueException(INVALID_DATE_FORMAT_MESSAGE);
         }
+    }
+
+    //@@maanyos
+    private static void validateDateRange(int monthsToAdd, LocalDate date) throws IllegalValueException {
+        if (date.isAfter(LocalDate.now().plusMonths(monthsToAdd))) {
+            throw new IllegalValueException("Date is too far in the future");
+        }
+    }
+
+    private static void validateDay(String[] dateArray) throws NumberFormatException, IllegalValueException,
+            DateTimeException {
+        MonthDay monthDay = MonthDay.of(Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[0]));
+        Year year = Year.of(Integer.parseInt(dateArray[2]));
+        if (!year.isValidMonthDay(monthDay)) {
+            throw new IllegalValueException(INVALID_DATE_FORMAT_MESSAGE);
+        }
+    }
+
+    private static void validateDateArrayLength(String[] dateArray) throws IllegalValueException {
+        if (dateArray.length != 3) {
+            throw new IllegalValueException(INVALID_DATE_FORMAT_MESSAGE);
+        }
+    }
+
+    private static String[] getDateArray(String input) {
+        return input.split(DATE_SEPARATOR);
     }
 }

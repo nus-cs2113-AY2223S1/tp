@@ -1,9 +1,8 @@
 package seedu.duke.storage;
 
-
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.logic.command.AddCommand;
 import seedu.duke.logic.command.SetCommand;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
@@ -36,8 +35,7 @@ public class DataLoader {
      * @param dataFile Path of save file
      */
     public static void loadData(Path dataFile, Ui ui, Storage storage, Biometrics biometrics, ExerciseList exerciseList,
-                                FoodList foodList, RecordList recordList) throws IllegalValueException,
-            FileNotFoundException {
+                                FoodList foodList, RecordList recordList) throws FileNotFoundException {
         Scanner input = new Scanner(new File(dataFile.toUri()));
         while (input.hasNext()) {
             String line = input.nextLine();
@@ -63,6 +61,5 @@ public class DataLoader {
             }
         }
         input.close();
-        ui.output("Done");
     }
 }

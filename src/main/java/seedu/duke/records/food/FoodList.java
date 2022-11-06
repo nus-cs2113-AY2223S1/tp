@@ -1,6 +1,6 @@
 package seedu.duke.records.food;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package seedu.duke.logic;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

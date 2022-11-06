@@ -1,7 +1,7 @@
 package seedu.duke.logic.command;
 
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
@@ -32,7 +32,7 @@ public class SetCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         int slashesCount = Parser.getArgumentsCount(arguments);
-        if(slashesCount > 4) {
+        if (slashesCount > 4) {
             throw new IllegalValueException(INVALID_BIOMETRICS_INPUT_MESSAGE);
         }
         String[] argumentList = Parser.getArgumentList(arguments);

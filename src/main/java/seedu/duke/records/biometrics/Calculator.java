@@ -1,6 +1,6 @@
 package seedu.duke.records.biometrics;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.food.Food;
 
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Calculator {
+    public static final String EMPTY_WEIGHT_MESSAGE = "Weight cannot be 0. Pls update biometrics";
+    public static final double CALORIES_MULTIPLIER = 0.0175;
     private int height;
     private int weight;
     private int maintenanceCalories;
@@ -22,7 +24,6 @@ public class Calculator {
     private double overweight = 24.9;
     private double obese = 29.9;
     private double maxbmi = 105.3;
-
 
 
     public Calculator(String gender, int weight, int height, int age, int activityLevel) {
@@ -162,9 +163,9 @@ public class Calculator {
     public static int calculateExerciseCalories(Biometrics biometrics, double time,
                                                 double metabolicEquivalent) throws IllegalValueException {
         if (biometrics.getWeight() == 0) {
-            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
+            throw new IllegalValueException(EMPTY_WEIGHT_MESSAGE);
         }
-        return (int) Math.round(0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
+        return (int) Math.round(CALORIES_MULTIPLIER * biometrics.getWeight() * metabolicEquivalent * time);
     }
 
     public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date) {
