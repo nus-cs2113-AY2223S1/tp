@@ -4,8 +4,8 @@
 skinparam SequenceReferenceBackgroundColor #white
 
 Participant "parserManager:\nParserManager" as ParserManager PARSER_COLOR_T4
-Participant "parser:PairParser" as Parser PARSER_COLOR
-Participant ":CommandPair" as CommandPair COMMAND_COLOR
+Participant "parser:CommandPairParser" as Parser PARSER_COLOR
+Participant "command:CommandPair" as CommandPair COMMAND_COLOR
 Participant "clientList:ClientList" as ClientList CLIENT_LIST_COLOR
 Participant "propertyList:PropertyList" as PropertyList PROPERTY_LIST_COLOR
 Participant "pairingList:PairingList" as PairingList PAIRING_LIST_COLOR
@@ -17,17 +17,17 @@ Participant "ui:Ui" as Ui #lightgrey
 activate ParserManager PARSER_COLOR_T4
 
 create Parser
-ParserManager-[DUKE_COLOR]> Parser : PairParser(commandDetail:String)
+ParserManager-[DUKE_COLOR]> Parser : CommandPairParser(commandDetail:String)
 activate Parser PARSER_COLOR
-return :PairParser
-return parser:PairParser
+return :CommandPairParser
+return parser:CommandPairParser
 
 -[DUKE_COLOR]> Parser : parseCommand()
 activate Parser PARSER_COLOR
 note over Parser: Omitted for brevity: Raw inputs are processed\n by a series of self-invocations in this section.
 
 create CommandPair
-Parser -[COMMAND_COLOR]> CommandPair : CommandPair(pairDetailsInt: ArrayList<Integer>)
+Parser -[COMMAND_COLOR]> CommandPair : CommandPair(integerDetails: ArrayList<Integer>)
 activate CommandPair COMMAND_COLOR
 return :CommandPair
 return :CommandPair
@@ -36,14 +36,14 @@ return :CommandPair
 activate CommandPair COMMAND_COLOR
 note over CommandPair, PropertyList: Omitted for brevity: Command input is validated against data from propertyList and clientList.\nIf the provided indexes are out of the list bounds, exceptions are thrown.
 
-CommandPair -[CLIENT_LIST_COLOR]> ClientList : getClientList().get(clientIndex:int)
+CommandPair -[CLIENT_LIST_COLOR]> ClientList : getClientList()
 activate ClientList CLIENT_LIST_COLOR
-ClientList --> CommandPair : :Client
+ClientList --> CommandPair : clientList:ArrayList<Client>
 deactivate ClientList
 
-CommandPair -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList().get(propertyIndex:int)
+CommandPair -[PROPERTY_LIST_COLOR]> PropertyList : getPropertyList()
 activate PropertyList PROPERTY_LIST_COLOR
-PropertyList --> CommandPair : :Property
+PropertyList --> CommandPair : propertyList:ArrayList<Property>
 deactivate PropertyList
 
 note over CommandPair, PairingList: Omitted for brevity: Command input is validated against data from pairingList.\nIf there is an existing pair or exceeded budget, exceptions are thrown.

@@ -9,6 +9,7 @@ import seedu.duke.PairingList;
 import seedu.duke.PropertyList;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.command.add.CommandAddClient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,36 +55,32 @@ public class CommandAddClientTest {
     public PairingList pairingList = new PairingList();
     public Storage storage = new Storage(clientList, propertyList, pairingList);
 
+    public static final int OFFSET_UNIT_VALUE = 1;
+
     @Test
-    public void execute() {
+    public void execute_validClientDetails_matchingClientDetails() {
         int clientListSizeByCounting = clientList.getCurrentListSize();
 
         //Testing Case 1 (With Email)
         new CommandAddClient(CLIENT_ONE_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
         assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
-        assertEquals(CLIENT_ONE_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientName());
-        assertEquals(CLIENT_ONE_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
+        int addedClientIndex = clientList.getCurrentListSize() - OFFSET_UNIT_VALUE;
+        assertEquals(CLIENT_ONE_NAME, clientList.getClientList().get(addedClientIndex).getClientName());
+        assertEquals(CLIENT_ONE_CONTACT_NUMBER, clientList.getClientList().get(addedClientIndex)
                 .getClientContactNumber());
-        assertEquals(CLIENT_ONE_EMAIL, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientEmail());
-        assertEquals(CLIENT_ONE_BUDGET, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientBudgetPerMonth());
-        assertEquals(CLIENT_ONE_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .toString());
+        assertEquals(CLIENT_ONE_EMAIL, clientList.getClientList().get(addedClientIndex).getClientEmail());
+        assertEquals(CLIENT_ONE_BUDGET, clientList.getClientList().get(addedClientIndex).getClientBudgetPerMonth());
+        assertEquals(CLIENT_ONE_SUMMARY, clientList.getClientList().get(addedClientIndex).toString());
 
         //Testing Case 2 (Without Email)
         new CommandAddClient(CLIENT_TWO_DETAILS).execute(ui, storage, propertyList, clientList, pairingList);
         assertEquals(clientList.getCurrentListSize(), ++clientListSizeByCounting);
-        assertEquals(CLIENT_TWO_NAME, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientName());
-        assertEquals(CLIENT_TWO_CONTACT_NUMBER, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
+        addedClientIndex = clientList.getCurrentListSize() - OFFSET_UNIT_VALUE;
+        assertEquals(CLIENT_TWO_NAME, clientList.getClientList().get(addedClientIndex).getClientName());
+        assertEquals(CLIENT_TWO_CONTACT_NUMBER, clientList.getClientList().get(addedClientIndex)
                 .getClientContactNumber());
-        assertEquals(CLIENT_TWO_EMAIL, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientEmail());
-        assertEquals(CLIENT_TWO_BUDGET, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .getClientBudgetPerMonth());
-        assertEquals(CLIENT_TWO_SUMMARY, clientList.getClientList().get(clientList.getCurrentListSize() - 1)
-                .toString());
+        assertEquals(CLIENT_TWO_EMAIL, clientList.getClientList().get(addedClientIndex).getClientEmail());
+        assertEquals(CLIENT_TWO_BUDGET, clientList.getClientList().get(addedClientIndex).getClientBudgetPerMonth());
+        assertEquals(CLIENT_TWO_SUMMARY, clientList.getClientList().get(addedClientIndex).toString());
     }
 }

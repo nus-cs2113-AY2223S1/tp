@@ -3,9 +3,9 @@
 
 package "pair and unpair parser classes" {
     Class "{abstract}\nParser" as Parser PARSER_COLOR_T4
-    Class "{abstract}\nPairUnpairParser" as PairUnpairParser PARSER_COLOR_T2
-    Class PairParser PARSER_COLOR_T1
-    Class UnpairParser PARSER_COLOR_T1
+    Class "{abstract}\nCommandPairUnpairParser" as CommandPairUnpairParser PARSER_COLOR_T2
+    Class CommandPairParser PARSER_COLOR_T1
+    Class CommandUnpairParser PARSER_COLOR_T1
 }
 
 Class PairingList PAIRING_LIST_COLOR
@@ -27,12 +27,12 @@ CommandPair -up-|> CommandPairUnpair
 CommandUnpair -up-|> CommandPairUnpair
 
 
-PairUnpairParser -up-|> Parser
-PairParser -left-|> PairUnpairParser
-UnpairParser -right-|> PairUnpairParser
+CommandPairUnpairParser -up-|> Parser
+CommandPairParser -left-|> CommandPairUnpairParser
+CommandUnpairParser -right-|> CommandPairUnpairParser
 
-PairParser .down.> CommandPair : creates >
-UnpairParser .down.> CommandUnpair : creates >
+CommandPairParser .down.> CommandPair : creates >
+CommandUnpairParser .down.> CommandUnpair : creates >
 
 CommandPair ..> ClientList
 CommandPair ..> PropertyList

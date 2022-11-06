@@ -183,11 +183,11 @@ public class Messages {
 
     //@@author FeliciaBeatrice
     public static final String MESSAGE_DELETE_CLIENT_WRONG_FORMAT = "OOPS!!! Please use this format to delete client:\n"
-            + "delete -client ic/CLIENT_INDEX\n";
+            + "delete -client i/CLIENT_INDEX\n";
 
     public static final String MESSAGE_DELETE_PROPERTY_WRONG_FORMAT = "OOPS!!! Please use this format to delete "
             + "property\n"
-            + "delete -property ip/PROPERTY_INDEX\n";
+            + "delete -property i/PROPERTY_INDEX\n";
     //@@author
 
     //@@author ngdeqi
@@ -270,19 +270,19 @@ public class Messages {
 
     public static final String MESSAGE_INCORRECT_PROPERTY_LIST_FLAG = "Please type the following "
             + "after list -property to display - "
-            + "\na/ for property address"
-            + "\nt/ for property type"
-            + "\nn/ for property owner name"
-            + "\np/ for property price"
-            + "\n-short to display address, type and price";
+            + "\na/ for property addresses"
+            + "\nt/ for property types"
+            + "\nn/ for property owner names"
+            + "\np/ for property prices"
+            + "\n-short to display addresses, types and prices";
 
     public static final String MESSAGE_INCORRECT_CLIENT_LIST_FLAG = "Please type the following "
             + "after list -client to display - "
-            + "\nn/ for client name"
-            + "\nc/ for client contact number"
-            + "\ne/ for client email"
-            + "\nb/ for client budget"
-            + "\n-short to display name and budget";
+            + "\nn/ for client names"
+            + "\nc/ for client contact numbers"
+            + "\ne/ for client emails"
+            + "\nb/ for client budgets"
+            + "\n-short to display names and budgets";
 
     public static final String MESSAGE_INCORRECT_PAIR_LIST_FLAG = "Please type - "
             + "\nlist -pair to list all pairs with all their information"

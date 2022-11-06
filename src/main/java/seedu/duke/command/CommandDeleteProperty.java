@@ -28,7 +28,6 @@ public class CommandDeleteProperty extends CommandDelete {
         ui.showPairedClientsDeletedConfirmationMessage(deletedProperty, pairingList);
         pairingList.deletePairing(deletedProperty);
 
-        //Update Storage
         storage.updateProperty();
         storage.updatePair();
 

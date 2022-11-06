@@ -1,3 +1,5 @@
+//@@author OVReader
+
 package seedu.duke;
 
 import java.util.ArrayList;
@@ -6,12 +8,13 @@ import java.util.ArrayList;
  * Stores the list of properties.
  */
 public class PropertyList {
-    private static int currentListSize;
     private static ArrayList<Property> propertyList;
+    private static int currentListSize;
+    private static final int INITIAL_LIST_SIZE = 0;
 
     public PropertyList() {
         propertyList = new ArrayList<>();
-        currentListSize = 0;
+        currentListSize = INITIAL_LIST_SIZE;
     }
 
     public int getCurrentListSize() {
@@ -34,6 +37,7 @@ public class PropertyList {
         propertyList.add(new Property(landlordName, propertyAddress, rentingPrice, unitType));
         currentListSize++;
     }
+    //@@author
 
     //@@author FeliciaBeatrice
     /**

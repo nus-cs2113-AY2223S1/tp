@@ -16,9 +16,11 @@
 * [Appendix C: Non Functional Requirement (NFR)](#appendix-c-non-functional-requirements)
 * [Appendix D: Glossary](#appendix-d-glossary)
 * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
 ___
 ## Acknowledgements
 * [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) 
+
 ___
 ## Setting Up and Getting Started
 1. Ensure that you have Java 11 or above installed.
@@ -55,32 +57,36 @@ The list feature has the following commands in it -
     * `p/` This is for price
     * `t/` This is for unit type
     * `-short` This is for the shorthand version(displays address, price and unit type)
+* `list -pair` This lists all clients and properties that have been paired, in no particular order.
+* `list -pair -short` This lists the -short version of all clients and properties that have been paired, in 
+no particular order
 
-There are 5 different classes, that each inherit from the abstract Command class. The commands read information from 
-the PropertyList and ClientList classes respectively, and display using the Ui class, making use of the objects of 
-these classes. The Commands which display all the information - i.e. CommandListClients, CommandListProperties, and
-CommandListEverything read and display using loops inside the overridden execute() method itself. The Commands which 
-display selected information - i.e. CommandListClientsWithTags and CommandListPropertiesWithTags use their private 
-methods to display their information, using methods present in Ui. The class structure is as follows - 
-![ListClassDiagram](diagrams/ListClassDiagram.png)
+There are 7 different classes, which each inherit from the Command class, and work in similar ways - 
+* They are executed when an object is created in the corresponding Parse class.
+* On execution, they read information about a single client or property and send it to the corresponding 
+display function in Ui
+* The Ui function then displays the necessary information.
+* Finally, it states the number of items present, and the Command object is no longer used.
+![ListClassDiagram](diagrams/ListClassDiagramIncludePairsFinal.png)
+Note: The C symbols are a result of the PlantUml layout.
 
 ---  
 
 ### Pairing Component
-API: [`pairingList.java`](../src/main/java/seedu/duke/PairingList.java)
+API: `pairingList.java`
 
-* `PairingList` is responsible for recording which clients renting which property.
+* `PairingList` is responsible for recording which clients are renting which property.
 * `PairingList` does not inherit from other classes. It stores references to `Client` and `Property` objects.
 
 Here is how classes involved in the pairing/unpairing actions interact with each other:
 
 ![Pairing List Class Diagram](diagrams/PairingListCD.png)
-1. `PairParser` and `UnpairParser` inherit from a general `PairUnpairParser`, which contains parsing methods that are 
-    common to its subclasses.
-2. `PairParser` and `UnpairParser` are responsible for checking input format. After (successful) checking, they create 
-    `CommandPair` and `CommandUnpair` objects respectively.
+1. `CommandPairParser` and `CommandUnpairParser` inherit from a general `CommandPairUnpairParser`, which contains 
+    parsing methods that are common to its subclasses.
+2. `CommandPairParser` and `CommandUnpairParser` are responsible for checking input format. After (successful) checking, 
+    they create `CommandPair` and `CommandUnpair` objects respectively.
 3. `CommandPair` and `CommandUnpair` contain references to `ClientList` and `PropertyList` because the command classes
-    need to validate user input against the data `ClientList` and `PropertyList`.
+    need to validate user input against the data in `ClientList` and `PropertyList`.
 4. After input is validated, `PairingList` is updated with the new pairings. `Storage` records these changes and `Ui` 
     prints the confirmation message for the user action.
 
@@ -88,11 +94,12 @@ Here is how classes involved in the pairing/unpairing actions interact with each
 Here is the underlying data structure of `PairingList`:
 
 ![Pairing List Data Class Diagram](diagrams/PairingListAPICD.png)
-* `PairingList` is essentially a "wrapper" to the underlying `HashMap` with key-value pairs where the `Client` is the key and `Property` is the value.
+* `PairingList` is essentially a "wrapper" to the underlying `java.util.HashMap`. The key-value pairs in the hashmap have 
+    `Client` as the key and `Property` as the value.
 * `PairingList` provides methods to add or delete these key-value pairs to represent the pairing and unpairing of real-life
     clients and properties.
-* The `Client` and `Property` references must be present in `ClientList` and `PropertyList` as well, since `PairingList` is an
-    implementation of an adjacency list. 
+* The `Client` and `Property` references contained in `PairingList` must be references to valid `Client` and `Property` 
+    objects in `ClientList` and `PropertyList` as well, since `PairingList` is an implementation of an adjacency list. 
 
 ---
 ### Storage Component
@@ -125,7 +132,7 @@ This section describes the implementation details of the features within Propert
 
 ---
 ### Add Feature
-The add feature simply adds an entity to its corresponding list. For Property Rental Manager, there are two variations to the add feature, namely `add -client` and `add -property`.
+The add feature adds an entity to its corresponding list. For Property Rental Manager, there are two variations to the add feature, namely `add -client` and `add -property`.
 
 - `add -client`: Add a new client to the client list.
 - `add -property`: Add a new property to the property list.
@@ -138,24 +145,24 @@ The implementation of add feature can be simplified into two major sections. The
 
 The first section is facilitated by the following classes:
 
-- `ParseAdd`: Contains common methods used by `ParseAddClient` and `ParseAddProperty`.
-- `ParseAddClient`: Extracts and validates client information from `commandDescription`(User Input).
-- `ParseAddProperty`: Extracts and validates property information from `commandDescription`(User Input).
+- `CommandAddParser`: Contains common methods used by `CommandAddClientParser` and `CommandAddPropertyParser`.
+- `CommandAddClientParser`: Extracts and validates client information from `commandDescription`(User Input).
+- `CommandAddPropertyParser`: Extracts and validates property information from `commandDescription`(User Input).
 
 The following is a simple class diagram of the three classes:
 <p align="center">
 
-![](diagrams/ParseAddRelatedClassesDiagram.png)
+![](diagrams/CommandAddParserRelatedClassesDiagram.png)
 
 </p>
 
 <p align="center">
-Parse Add Related Classes Diagram
+Command Add Parser Related Classes Diagram
 </p>
 
-As shown above, both `ParseAddClient` and `ParseAddProperty` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
+As shown above, both `CommandAddClientParser` and `CommandAddPropertyParser` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
-Also, most of the sub-methods are used to perform validations on the extracted details. Most of them are implemented via regex pattern checker.
+Also, most of the sub-methods are used to perform validations on the extracted details. Many of them are implemented via regex pattern checker.
 
 - Client:
     - `checkForValidSingaporeContactNumber(String)`
@@ -173,7 +180,7 @@ Also, most of the sub-methods are used to perform validations on the extracted d
 - Common:
     - `checkForEmptyDetails(String)`: Checks for any missing essential details, non-essential detail such as optional email can be empty.
 
-Note: Since the target user is a property manager working in Singapore, some validations are tailored to Singapore context.
+**Note**: Since the target user is a property manager working in Singapore, some validations are tailored to Singapore context.
 
 <br/>
 
@@ -206,10 +213,10 @@ As shown above, both `CommandAddClient` and `CommandAddProperty` classes have a 
 Given below is an example scenario on how add client/property behaves at each step.
 
 
-- **Step 1**: The user executes ```add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH``` or ```add -property n/NAME a/ADDRESS p/PRICE t/TYPE```. Depending on `add -client` or `add -property` specified, a `Parser` object of type `ParseAddClient` or `ParseAddProperty` is created.
+- **Step 1**: The user executes ```add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH``` or ```add -property n/NAME a/ADDRESS p/PRICE t/TYPE```. Depending on `add -client` or `add -property` specified, a `Parser` object of type `CommandAddClientParser` or `CommandAddPropertyParser` is created.
 
 
-- **Step 2**: The `Parser` object will then call method `ParseAddClient#parseCommand()` or `ParseAddProperty#parseCommand()` which will check for any incorrect formatting before the extraction and validation of client/property details.
+- **Step 2**: The `Parser` object will then call method `CommandAddClientParser#parseCommand()` or `CommandAddPropertyParser#parseCommand()` which will check for any incorrect formatting before the extraction and validation of client/property details.
 
 
 - **Step 3**: If there is no error, a `Command` object of type `CommandAddClient` or `CommandAddProperty` is created.
@@ -279,11 +286,11 @@ The following *sequence diagram* shows how the **delete property** operation wor
 
 When a client rents a property, the client and property form a pair.
 
-* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client` object
-  and the value is a `Property` object.
+* `PairingList` uses a hash map to represent these client-property pairs, where the key is a `Client`
+  and the value is `Property`.
 * A hash map is chosen due to its constant time lookup performance, making it efficient at querying the property that a
   client is renting.
-* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants(clients) only have
+* Also, the `java.util.HashMap` prevents duplicate keys, which dovetails nicely with the fact that real-life tenants (clients) only have
   one place of residence at any time.
 
 #### Pair Feature
@@ -302,16 +309,18 @@ where `PROPERTY_INDEX` and `CLIENT_INDEX` must be positive integers which are in
 and `PropertyList`, if their arrays were 1-indexed.
 
 How the pair command works:
-1. The user input is first parsed by `Parser` (specifically, `PairParser`).
-2. `PairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+1. The user input is first parsed by `Parser` (specifically, `CommandPairParser`).
+2. `CommandPairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integer inputs.
 3. After a successful check, a `CommandPair` object is created.
 4. When `CommandPair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
-    `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+    `ClientList`. These checks throw exceptions when the user inputs contains indexes which are not within the internal arrays of 
+    `PropertyList` or `ClientList`.
 5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
    `PropertyList` and `ClientList`.
 6. A third layer of checks throws exceptions if the `Client` and `Property` objects already match an existing pair, the
     `Client` is already paired with some other `Property`, or when the user pairs a client whose budget is lower than the property's rental price.
 7. The `Client` and `Property` objects are inserted as a pair into the hashmap of `PairingList`.
+8. The change is saved in `Storage` and a confirmation message is shown to the user.
  
 #### Unpair Feature
 
@@ -325,15 +334,17 @@ and `PropertyList`, if their private arrays were 1-indexed.
 (The sequence diagram for unpair is not provided as the mechanism is similar to that of [Pair](#pair-feature))
 
 How the unpair command works :
-1. The user input for an unpair command is first parsed by `Parser` (specifically, `UnpairParser`).
-2. `UnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integers.
+1. The user input is first parsed by `Parser` (specifically, `CommandUnpairParser`).
+2. `CommandUnpairParser` checks the user input for formatting mistakes such as missing flags, wrong flag order and non-integer inputs.
 3. After a successful check, a `CommandUnpair` object is created.
 4. When `CommandUnpair` is executed, there are more checks to validate the parsed input against data from `PropertyList` and
-   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within `PropertyList` or `ClientList`.
+   `ClientList`. These checks throw exceptions when the user inputs list indexes which are not within the internal arrays of
+    `PropertyList` or `ClientList`.
 5. After passing all these checks, the program fetches the desired `Property` and `Client` objects from
    `PropertyList` and `ClientList`.
-6. A third layer of checks throws exceptions if the `Client` and `Property` objects are not in an existing pair.
+6. A third layer of checks throws an exception if the `Client` and `Property` objects are not in an existing pair.
 7. The `Client`-`Property` pair is deleted from the hashmap of `PairingList`.
+8. The change is saved in `Storage` and a confirmation message is shown to the user.
 
 ---
 ### Find Feature
@@ -366,6 +377,7 @@ For properties, it will identify if the query text matches:
 For example, if a query text is "Ken" and the address is "Kent Ridge", it will be identified as a match since the word is contained within part of the address.
 
 Upon identifying a match, the program will print out the message to the console providing the full details, inclusive of their respective index number. This is to help facilitate other commands such as pairing or checking.
+
 ---
 
 ### Storage Feature
@@ -427,42 +439,51 @@ prevent entries retaining within pairingList after it has been deleted from clie
 There are 3 main steps whenever a list command needs to be executed
 * When the user enters any command, it first needs be understood. That is handled by the ParseManager class.
    Next, when the first word entered by the user is determined to be `list`, ParseManager itself then determines
-   the type of list command entered, including the tags. ParseListClient, ParseListProperty and ParseListEverything
-   are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty also determine
-   if tags have been entered, and if those tags are valid.
+   the type of list command entered, including the tags. ParseListClient, ParseListProperty, ParseListPair and
+ParseListEverything are checkers to ensure that a valid command has been entered. ParseListClient and ParseListProperty
+also determine if tags have been entered, and if those tags are valid. ParseListPair also checks whether -short 
+has been added or not.
   ```
-        case COMMAND_LIST:
-            ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
-            boolean isListProperty = listCommandTypeAndFlags.get(0).trim().equals(PROPERTY_FLAG);
-            boolean isListClient = listCommandTypeAndFlags.get(0).equals(CLIENT_FLAG);
-            boolean isListEverything = listCommandTypeAndFlags.get(0).equals(EVERYTHING_FLAG);
-            if (isListProperty) {
-                return new ParseListProperty(listCommandTypeAndFlags.get(1));
-            } else if (isListClient) {
-                return new ParseListClient(listCommandTypeAndFlags.get(1));
-            } else if (isListEverything && listCommandTypeAndFlags.get(1).isEmpty()) {
-                return new ParseListEverything();
-            } else {
-                throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
-            }
+      private Parser parseListCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+        ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
+        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_FLAG);
+        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_FLAG);
+        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_FLAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_FLAG);
+        if (isListProperty) {
+            return new ParseListProperty(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListClient) {
+            return new ParseListClient(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else if (isListEverything && listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX).isEmpty()) {
+            return new ParseListEverything();
+        } else if (isListPairs) {
+            return new ParseListPair(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
+        } else {
+            throw new UndefinedSubCommandTypeException(MESSAGE_INCORRECT_LIST_DETAILS);
+        }
+    }
   ```
 This block of code is part of ParseManager. It determines the type of list operation(-client, 
--property or -everything) and returns the corresponding object.  
+-property, -pair, or -everything) and returns the corresponding object.  
 Both ParseListClient and ParseListObject then determine if tags are present, and if they are valid, 
 throwing exceptions if any errors are encountered. They then return the corresponding Command type necessary.
 
-* There are five different classes which handle each of the features described above. Each class inherits from the
-   abstract Command class, and reads information present in either the PropertyList or ClientList objects respectively.
+* There are seven different classes which handle each of the features described above. Each class inherits from the
+   abstract Command class, and reads information present in either the PropertyList object, ClientList object or both.
 
-The execute function retrieves the propertyList holding all the current properties. It then loops 
-through every property present. For every property, it passes it to the corresponding display function
-in Ui.
+* The execute function works in slightly different ways -  
+To list with tags(`ListClientsWithTags` and `ListPropertiesWithTags`), it calls the corresponding function. 
+That function then loops through all the information about clients and properties, and sends a Client or Property 
+object to the Ui class for printing
+* For all other cases, the execute function itself runs the loop, which reads every single client, property or pair,
+and sends individual objects to the Ui class for display.
 
 * Each of these commands then uses a method present in the Ui class, to print an individual client, or property.
    The loop for printing every single client or property is present in the Command itself.
-  ![CommandListClientsClass](diagrams/CommandListClientsClass.png)
+  ![CommandListClientsClass](diagrams/CommandListClientsClassUpdated.png)
 The above is an example for CommandListClients. It reads from ClientList. Then, it displays each line
-using the displayOneClient function in Ui.  
+using the displayOneClient function in Ui. Note that the C tags for class are a result of the PlantUml 
+display.  
 The sequence diagram of the operation is as follows - 
 ![ListSequence](diagrams/ListSequenceUpdated.png)
 ___
@@ -470,17 +491,19 @@ ___
 ## Appendix A: Product Scope
 
 ### Target user profile
-* Property agent who are managing single owner rental units
+Property agents who: 
+* are managing single owner rental units
 * has a need to keep track of information of properties that are being put out for rental.
 * has a need to keep track of information of clients' (prospective tenants) information.
 * is a fast typist
 * favors a command-line interface over a Graphic User Interface.
 
 ### Value proposition
-Aids property agent in tracking information related to the properties and clients (prospective tenants) they manage:
+Aids property agents in tracking information related to the properties and clients (prospective tenants) they manage. The 
+app enables them to easily:
 - Record down information of properties (landlord, address, rental price, unit type).
 - Record down information of clients (name, contact number, budget), who are looking to rent properties.
-- Record down instances where a client decides to rent a property/ stop renting a property.
+- Record down instances where a client decides to rent a property/stop renting a property.
 - View client and property information quickly.
 
 ___
@@ -488,37 +511,43 @@ ___
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                         | So that I can ...                                                    |
-|---------|----------|---------------------------------------|----------------------------------------------------------------------|
-| v1.0    | user     | add properties                        | keep track of properties                                             |
-| v1.0    | user     | add clients                           | keep track of clients                                                |
-| v1.0    | user     | delete properties                     | prevent properties I am no longer tracking from cluttering my data   |
-| v1.0    | user     | delete clients                        | prevent clients I am no longer tracking from cluttering my data      |
-| v1.0    | user     | view a list of properties             | find out what and how many properties I manage                       |
-| v1.0    | user     | view a list of clients                | find out what and how many clients I manage                          |
-| v1.0    | user     | check the details of a property       | view the property's information                                      |
-| v1.0    | user     | pair a client to a property           | record down which client is renting which property                   |
-| v1.0    | user     | unpair a client to a property         | update my rental records when a client is no longer renting property |
-| v1.0    | user     | save my data                          | used the data created from a previous use of the app                 |
-| v1.0    | user     | quit the app                          | free up memory for other applications                                |
-| v2.0    | user     | check the details of a client         | view the client's information                                        |
-| v2.0    | user     | search clients using their details    | easily find specific clients                                         |
-| v2.0    | user     | search properties using their details | easily find specific properties                                      |
+| Version | As a ... | I want to ...                                           | So that I can ...                                                    |
+|---------|----------|---------------------------------------------------------|----------------------------------------------------------------------|
+| v1.0    | user     | add properties                                          | keep track of properties                                             |
+| v1.0    | user     | add clients                                             | keep track of clients                                                |
+| v1.0    | user     | delete properties                                       | prevent properties I am no longer tracking from cluttering my data   |
+| v1.0    | user     | delete clients                                          | prevent clients I am no longer tracking from cluttering my data      |
+| v1.0    | user     | view a list of properties                               | find out what and how many properties I manage                       |
+| v1.0    | user     | view a list of clients                                  | find out what and how many clients I manage                          |
+| v1.0    | user     | check the details of a property                         | view the property's information                                      |
+| v1.0    | user     | pair a client to a property                             | record down which client is renting which property                   |
+| v1.0    | user     | unpair a client to a property                           | update my rental records when a client is no longer renting property |
+| v1.0    | user     | save my data                                            | used the data created from a previous use of the app                 |
+| v1.0    | user     | quit the app                                            | free up memory for other applications                                |
+| v2.0    | user     | check the details of a client                           | view the client's information                                        |
+| v2.0    | user     | search clients using their details                      | easily find specific clients                                         |
+| v2.0    | user     | search properties using their details                   | easily find specific properties                                      |
+| v2.0    | user     | list only specific details about clients and properties | Display the information I need without cluttering the screen         |
+| v2.1    | user     | view a list of pairings completed                       | Keep track of all pairings I have already made                       |
 
 ---
 
 ## Appendix C: Non-Functional Requirements
 1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
 2. The system should respond to the user input within 2 seconds.
-3. The system adheres to stict user input formatting to prevent corruption of data.
-4. The system is programmed to recognise only English text. Any other language might not be recognised by the program.
-5. The system stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
-6. This system is contrained under a single user. Multiple users are not supported
+3. This program should support loading and storing operation on any mainstream operating system.
+4. The program does not require users to have prior programming experience to use.
 
 ---
 ## Appendix D: Glossary
 
 * *client* - Person who is seeking for property to rent
+* *unit type* - Type of housing in Singapore (HDB, Condominium, Bungalow, etc)
+* *pairing* - If a client and property is paired, it implies that the client will be renting that property.
+* *unpair* - If a client and property is unpaired, it implies that the client is no longer renting any property.
+* *ui* - User Interface which is responsible for any interactions (read input / print messages) between application and user.
+* *storage* - Made up of plain text files storing client/property records.
+
 
 ---
 ## Appendix E: Instructions for Manual Testing
@@ -532,10 +561,306 @@ java -jar PropertyRentalManager.jar
 3. Expected: The app's welcome message is printed onto the terminal. 
     
 ### Add
+**Add client**
+1. Successful addition of client (With Email)
+   1. Prerequisites:
+      * Ensure that a valid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+      * Ensure that email provided adhere to RFC 5322 Official Email Standard.
+      * Ensure that positive integer is provided for budget.
+   2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`  
+      Expected: New client is added. Terminal shows successful add client message along with client details (name, contact number, email, budget per month).
+
+
+2. Successful addition of client (Without Email)
+    1. Prerequisites:
+        * Ensure that a valid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+        * Ensure that no email is provided.
+        * Ensure that positive integer is provided for budget.
+    2. Test case: `add -client n/Gary Oaks c/90876543 b/1550`  
+       Expected: New client is added. Terminal shows successful add client message along with client details (name, contact number, budget per month).
+
+
+3. Unsuccessful addition of client (Invalid Contact Number)
+    1. Prerequisites:
+        * Ensure that an invalid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+    2. Test case: `add -client n/Gary Oaks c/10876543 e/garyoaks@example.com b/1550`  
+       Expected: Terminal shows invalid Singapore contact number message.
+
+       
+4. Unsuccessful addition of client (Invalid Email)
+    1. Prerequisites:
+        * Ensure that an invalid email is provided. An easy way to replicate an invalid email is to exclude the `@` symbol.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaksexample.com b/1550`  
+       Expected: Terminal shows invalid email message.
+
+
+5. Unsuccessful addition of client (Invalid Budget)
+    1. Prerequisites:
+        * Ensure that a non-positive integer input is provided for budget.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/0`  
+       Expected: Terminal shows invalid budget message.
+
+
+6. Unsuccessful addition of client (Duplication)
+    1. Prerequisites:
+        * Successful add a client.
+        * Ensure that second client entry has either the same name, contact number. email or any combinations.
+    2. Test cases:
+       
+       `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+        
+       `add -client n/Gary Oaks c/60876543 e/garyoaks@example.com b/1550`  
+       Expected: Terminal shows duplicating client error message along with the details of existing client.
+
+
+7. Unsuccessful addition of client (Empty Client Detail)
+    1. Prerequisites:
+        * Ensure that no client detail is provided.
+    2. Test case: `add -client`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+8. Unsuccessful addition of client (Missing Client Detail)
+    1. Prerequisites:
+        * Ensure that all client flags (except `e/`) are included in the right order.
+        * Ensure that at least one of the client details (except email) after any client flags is blank.
+    2. Test case: `add -client n/ c/90876543 e/garyoaks@example.com b/`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+9. Unsuccessful addition of client (Missing Client Flag)
+    1. Prerequisites:
+        * Ensure that at least one of the client flags (except `e/`) is missing.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com 1550`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+10. Unsuccessful addition of client (Wrong Ordering of Client Flags)
+    1. Prerequisites:
+       * Ensure that all client flags (except `e/`) are present.
+       * Ensure that client flags are not in the right order.
+    2. Test case: `add -client b/Gary Oaks c/90876543 e/garyoaks@example.com n/1550`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+**Add property**
+1. Successful addition of property (Landed Property)
+    1. Prerequisites:
+        * Ensure that a valid Singapore landed property address (app-specified format) is provided. Landed property address will not have unit level.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that unit type label provided contains `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: New property is added. Terminal shows successful add property message along with property details (landlord name, address, renting price, unit type).
+
+
+2. Successful addition of property (Non-Landed Property)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that unit type label provided do not contain `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/1600 t/HDB 3`  
+       Expected: New property is added. Terminal shows successful add property message along with property details (landlord name, address, renting price, unit type).
+
+
+3. Unsuccessful addition of property (Invalid address format)
+    1. Prerequisites:
+        * Ensure that an invalid Singapore address (different from required format) is provided. 
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that a valid unit type label is provided.
+    2. Test case: `add -property n/Ash Ketchun a/idk whats my address p/1600 t/LP BGL`  
+       Expected: Terminal shows invalid address message. Message consists of required address formats and examples to aid user.
+
+
+4. Unsuccessful addition of property (Invalid Rental Price)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that non-positive integer is provided for rental price.
+        * Ensure that unit type label provided do not contain `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/00 t/HDB 3`  
+       Expected: Terminal shows invalid rental price message.
+
+
+5. Unsuccessful addition of property (Invalid Unit Type)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that none of the 15 app-defined unit type labels is provided. However, unit type must not be empty.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/1600 t/hi`  
+       Expected: Terminal shows invalid unit type message along with the list of unit type labels pre-defined by the app.
+
+
+6. Unsuccessful addition of property (Mismatch Address Format and Unit Type)
+    1. Prerequisites:
+        * Ensure that positive integer is provided for rental price.
+        * To simulate mismatch, ensure address format and unit type of property do not belong to the same category (landed property or not).
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street, S059020 p/1600 t/HDB 3`  
+       Expected: Terminal shows address format and unit type mismatch message along with required formats and examples.
+
+
+7. Unsuccessful addition of property (Duplication)
+    1. Prerequisites:
+        * Successful add a property.
+        * Ensure that second property entry's address is identical to the first. Its address can have differing letter cases.
+    2. Test cases:
+       
+       `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+        
+       `add -property n/Joe a/25A pAlLeT ToWn, S121111 p/1600 t/LP BGL`   
+       Expected: Terminal shows duplicating property error message along with details of existing property.
+
+
+8. Unsuccessful addition of property (Empty Property Detail)
+    1. Prerequisites:
+        * Ensure that no property detail is provided.
+    2. Test case: `add -property`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+9. Unsuccessful addition of property (Missing Property Detail)
+    1. Prerequisites:
+        * Ensure that all property flags are included in the right order.
+        * Ensure that at least one of the property details after any property flags is blank.
+    2. Test case: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/ t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+10. Unsuccessful addition of property (Missing Property Flag)
+    1. Prerequisites:
+        * Ensure that at least one of the property flags is missing.
+    2. Test case: `add -property Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+11. Unsuccessful addition of property (Wrong Ordering of Property Flags)
+    1. Prerequisites:
+        * Ensure that all property flags are present.
+        * Ensure that property flags are not in the right order.
+    2. Test case: `add -property a/Ash Ketchun n/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
 
 ### Delete
 
 ### List
+1. List clients with or without tags
+   1. Test case `list -client`  
+      Expected: All clients all listed with all their details. The format of details of each client is given below -  
+      ```
+      1. Client Name: Doja Cat
+         Client Contact Number: 93437878
+         Client Email: doja88@example.com
+         Client Budget: 2000
+      ```
+      It also lists the number of clients present at the time, after listing them all. The format for that is as follows - 
+      ```There are 2 clients in this list```
+   2. Test case: list -client TAG. We will use `list -client n/` to demonstrate  
+    Expected: Lists only the names of the clients. The format for each client is as follows -  
+      ```1.Doja Cat```  
+    It also lists the number of clients present in the list at the end
+   3. Test case: `list -client -short`  
+    Expected: Lists only the name and budget of all the clients present. The format is as follows -  
+    ```
+    1. Client Name: Doja Cat
+       Client Budget: 2000
+    ```
+    It also lists the number of clients present in the list in the end.  
+    All of these display the following when no clients are present in the list -  
+    ```There are 0 clients in this list```
+2. List properties with or without tags
+    1. Test case: `list -property`  
+       Expected: Lists all the properties with all their details  
+       The format for each property listed is as follows -  
+       ```
+       1. Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       ```
+       This also lists the number of properties present in the list at the end. The format for 
+       that is as follows -  
+       ```There is 1 property in this list```  
+   2. Test case: list -property TAG - `We will use list -property a/` to demonstrate  
+      Expected: Lists the address of every property present in the list. The format is - 
+        `1.	25 Lower Kent Ridge Rd, S119081`
+    It also lists the total number of properties present in the list
+   3. Test case: `list -property -short`  
+    Expected: Lists the address, unit type, and Rental Price of each property in the list. The format
+    is as follows - 
+      ```
+      1. Property Address: 25 Lower Kent Ridge Rd, S119081
+         Unit Type: LP Bungalow
+         Property Rental Price: 1000
+      ```
+      All of these display the following when no properties are present in the list -  
+    `There are 0 properties in this list`
+3. List pairs
+    1. Test case `list -pair`  
+     Expected: Lists all the pairs present in the list, in no particular order. It shows all the information
+     about the clients and properties present in each pair.
+       ```
+       Client:
+           Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       Property:
+           Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       ```
+       It also lists the number of pairs present in the list. The format is as follows -  
+       ```There is 1 pair in this list```
+   2. Test case `list -pair -short`
+    Expected: Lists the short details of both clients and properties described earlier, for every 
+    pair in the list. The format is as follows -  
+       ```
+       Client:
+          Client Name: Doja Cat
+          Client Budget: 2000
+       Property:
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Unit Type: LP Bungalow
+          Property Rental Price: 1000
+       ```
+      It also lists the total number of pairs present in the list.
+4. List everything
+    1. Test case `list -everything`  
+    Expected behaviour: Lists all information including and all details present in the list about clients, properties, and pairs.  
+    In this case, a single client and property are present in the list, and they are paired. This is the expected output -  
+       ```
+       Clients:
+       1.  Client Name: Doja Cat
+           Client Contact Number: 93437878
+           Client Email: doja88@example.com
+           Client Budget: 2000
+       --------------------------------------------------------------------------------
+       There is 1 client in this list
+
+       --------------------------------------------------------------------------------
+       Properties:
+       1.  Landlord Name: Bob Tan Bee Bee
+           Property Address: 25 Lower Kent Ridge Rd, S119081
+           Property Rental Price: 1000
+           Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 property in this list
+
+       --------------------------------------------------------------------------------
+       Pairs:
+       Client:
+          Client Name: Doja Cat
+          Client Contact Number: 93437878
+          Client Email: doja88@example.com
+          Client Budget: 2000
+       Property:
+          Landlord Name: Bob Tan Bee Bee
+          Property Address: 25 Lower Kent Ridge Rd, S119081
+          Property Rental Price: 1000
+          Unit Type: LP Bungalow
+       --------------------------------------------------------------------------------
+       There is 1 pair in this list
+       ```
 
 ### Pair
 1. Successful Pairing
@@ -562,7 +887,7 @@ java -jar PropertyRentalManager.jar
 3. Failed Pairing (client already paired to another property)
    1. Prerequisites:
        * Have at least 1 client and 2 properties added to the app.
-       * Ensure that the client's budgets is higher than or equal to the rental prices of both properties.
+       * Ensure that the client's budgets are higher than or equal to the rental prices of both properties.
        * Have paired the client and a property e.g `pair ip/1 ic/1`
    2. Test case: `pair ip/2 ic/1` (pair a different property to the same client)
    
@@ -586,7 +911,7 @@ java -jar PropertyRentalManager.jar
       * Have paired the client and property e.g. `pair ip/1 ic/1`
    2. Test case: `unpair ip/1 ic/1` (unpair using the same indexes as the pair command)
       
-       Expected: Pairing is deleted. Terminal shows successful unpairing message showing the client's name and the 
+       Expected: Pairing is deleted. Terminal shows successful unpairing message with the client's name and the 
        property address.
 
 
@@ -596,7 +921,7 @@ java -jar PropertyRentalManager.jar
       * Have **NOT** paired the client and property.
    2. Test case: `unpair ip/1 ic/1`
        
-       Expected: Terminal shows unsuccessful pairing message.
+       Expected: Terminal shows unsuccessful unpairing message.
 
 
 ### Check
@@ -657,8 +982,6 @@ java -jar PropertyRentalManager.jar
     
 ### Storage
 
-## Instructions for manual testing
-
 
 ### Finding for Client/Property:
 1. Querying for Client/Property stored in the Client/Property List:
@@ -685,6 +1008,5 @@ java -jar PropertyRentalManager.jar
     9. Test case: `find -property`
         - Expected: An error stating that the tag is missing will be shown.
     10. Any other tags displayed after the `f/` tag will not be flagged as an error since it's possible that names contains a forward slash (/).
-    
-### Quit
+
 

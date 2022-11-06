@@ -13,6 +13,9 @@ import seedu.duke.exception.pairunpair.unpair.NoExistingPairException;
 
 import java.util.ArrayList;
 
+import static seedu.duke.CommandStructure.FIRST_INDEX;
+import static seedu.duke.CommandStructure.SECOND_INDEX;
+
 /**
  * Represents an unpair-type command.
  */
@@ -27,8 +30,8 @@ public class CommandUnpair extends CommandPairUnpair {
      * @param commandUnpairDetails Parsed client and property indexes from the user's input.
      */
     public CommandUnpair(ArrayList<Integer> commandUnpairDetails) {
-        this.propertyIndex = commandUnpairDetails.get(0);
-        this.clientIndex = commandUnpairDetails.get(1);
+        this.propertyIndex = commandUnpairDetails.get(FIRST_INDEX);
+        this.clientIndex = commandUnpairDetails.get(SECOND_INDEX);
     }
 
     /**

@@ -26,6 +26,7 @@ public class ParseCheckClient extends Parser {
 
 
     private static final int CORRECT_FLAG_POSITION = 8;
+    private static final int NO_FLAG_FOUND = -1;
 
 
     public ParseCheckClient(String checkCommandDescription, ClientList clientList) {
@@ -37,11 +38,11 @@ public class ParseCheckClient extends Parser {
     public Command parseCommand() throws InvalidIndexException, MissingFlagException,
             IncorrectFlagOrderException, NotIntegerException, ExtraFlagsException {
         try {
-            ArrayList<String> checkDetailsString = processCommandDetails(commandDescription);
-            ArrayList<Integer> checkDetailsInt = convertProcessedCommandDetailsToInteger(checkDetailsString);
+            ArrayList<String> stringCheckDetails = processCommandDetails(commandDescription);
+            ArrayList<Integer> integerCheckDetails = convertProcessedCommandDetailsToInteger(stringCheckDetails);
 
-            validateCheckClientDetails(checkDetailsInt);
-            return new CommandCheckClient(checkDetailsInt);
+            validateCheckClientDetails(integerCheckDetails);
+            return new CommandCheckClient(integerCheckDetails);
         } catch (InvalidIndexException e) {
             throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
         } catch (MissingFlagException e) {
@@ -72,8 +73,8 @@ public class ParseCheckClient extends Parser {
         }
     }
 
-    private void validateCheckClientDetails(ArrayList<Integer> checkClientDetails) throws InvalidIndexException {
-        int clientIndex = checkClientDetails.get(0);
+    private void validateCheckClientDetails(ArrayList<Integer> clientDetails) throws InvalidIndexException {
+        int clientIndex = clientDetails.get(0);
         checkForClientListIndexOutOfBounds(clientIndex);
     }
 
@@ -98,7 +99,7 @@ public class ParseCheckClient extends Parser {
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != -1);
+        return (flagIndexPosition != NO_FLAG_FOUND);
     }
 
     private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {

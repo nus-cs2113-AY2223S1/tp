@@ -14,6 +14,7 @@ public abstract class Parser {
     protected static final int FLAG_ABSENT_RETURN_VALUE = -1;
 
     public abstract Command parseCommand() throws DukeException;
+
     /**
      *  Will be removed after everyone has created local checkForEmptyDetails method
      *  (e.g. checkForDeleteClientDetails, checkForPairDetails, etc)
@@ -41,6 +42,7 @@ public abstract class Parser {
         return flagIndexPositions;
     }
 
+    //@@author ngdeqi
     protected ArrayList<String> extractCommandDetails(String rawCommandDetail, String[] flags,
                                                     int[] flagIndexPositions) {
         ArrayList<String> extractedCommandDetails = new ArrayList<>();
@@ -61,6 +63,7 @@ public abstract class Parser {
         }
         return extractedCommandDetails;
     }
+    //@@author
 
     protected String extractDetail(String rawDetail, int beginIndex) {
         return rawDetail.substring(beginIndex).trim();
@@ -70,6 +73,7 @@ public abstract class Parser {
         return rawDetail.substring(beginIndex, endIndex).trim();
     }
 
+    //@@author ngdeqi
     protected ArrayList<Integer> convertProcessedCommandDetailsToInteger(ArrayList<String> processedCommandDetails)
             throws NotIntegerException {
         ArrayList<Integer> integerDetails = new ArrayList<>();
