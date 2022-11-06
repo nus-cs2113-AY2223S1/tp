@@ -22,8 +22,8 @@ class DeleteTest {
     public static final String RENTING_PRICE = "1500";
     public static final String UNIT_TYPE = "LP Bungalow";
 
-    public static final int CLIENT_INDEX_TO_DELETE = 1;
-    public static final int PROPERTY_INDEX_TO_DELETE = 1;
+    public static final int CLIENT_INDEX_TO_DELETE = 0;
+    public static final int PROPERTY_INDEX_TO_DELETE = 0;
 
     public static final String DELETE_CLIENT_COMMAND_DETAILS = "i/2";
     public static final String DELETE_PROPERTY_COMMAND_DETAILS = "i/2";
