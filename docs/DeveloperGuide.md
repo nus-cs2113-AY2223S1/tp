@@ -2,17 +2,44 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}  
 Zhou Zhou's Individual Project: https://github.com/maanyos/ip \
-Nay Chi's Individual Project: https://github.com/NayChi-7/ip
+Nay Chi's Individual Project: https://github.com/NayChi-7/ip \
+Addressbook-level3:https://github.com/se-edu/addressbook-level3
 
 ## Design & implementation
 
 ### Architecture
 
 ![](UmlDiagrams/ArchitectureDiagram.png)
+
 The Architecture Diagram given above explains the high-leve design of the App.
+
+Given below is an overview of main components and how they interact with each other.
+
+`Main:`
+
+* At Launching: Initialise the components in the correct sequence and connects them with each other.
+* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+`Ui:`
+
+* Reading inputs from user and printing feedbacks to the user
+
+`Logic:`
+
+* The command executor
+
+`Records:`
+
+* Holds the data of the App in memory
+
+`Storage:`
+
+* Reads data and writes data to the hard disk.
+
+`Exception:`
+
+* Stores the exception classes for the app.
 
 ### Class Diagrams
 
