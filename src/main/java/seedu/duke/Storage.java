@@ -10,6 +10,7 @@ import java.io.FileWriter;
 /**
  * Represents the storage of information relating to the tasklist.
  */
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class Storage {
     private String filepath;
     private String folderpath;
