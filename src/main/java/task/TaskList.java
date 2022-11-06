@@ -1,6 +1,7 @@
 package task;
 
 import appointment.Appointment;
+import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
 import exception.DukeException;
@@ -116,8 +117,8 @@ public class TaskList {
                 associatedEmployee.removeTaskFromEmployee(taskId);
                 System.out.print("Got it. I've removed this task: ");
                 task.printTask();
-                System.out.println("Now you have " + tasks.size() + " task in the list.");
-                break;
+                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                return;
             }
         }
         System.out.println("Sorry, no corresponding task found.");
@@ -148,6 +149,9 @@ public class TaskList {
                 task.setDone();
                 System.out.print("Got it. I've finished this task: ");
                 System.out.println(task.getTaskDescription());
+
+                Appointment appointment = AppointmentList.findAppointment(task.appointmentId);
+                appointment.updateAppointmentStatus();
                 return;
             }
         }
