@@ -329,13 +329,13 @@ public class Parser {
         }
     }
 
-    private void checkDayAndMonth(int day,int month) throws OneDocException{ 
+    private void checkDayAndMonth(int day,int month) throws OneDocException {
         try {
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
                 throw new OneDocException("Invalid date entered, make sure the date is in the correct format:\n"
                         + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
         }
     }
@@ -409,7 +409,7 @@ public class Parser {
         }
     }
 
-    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException{
+    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
         String reason = matcher.group(4);
         checkDate(matcher.group(2));
         checkTime(matcher.group(3));
