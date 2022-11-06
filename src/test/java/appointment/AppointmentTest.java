@@ -1,17 +1,13 @@
 package appointment;
 
-import command.appointmentcommand.AddAppointmentCommand;
 import command.petcommand.AddPetCommand;
 import command.servicecommand.AddServiceCommand;
 import command.taskcommand.AddTaskCommand;
 import employee.Employee;
 import exception.DukeException;
 import org.junit.jupiter.api.Test;
-import pet.Pet;
 import task.*;
-import employee.Employee;
 
-import java.text.ParseException;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

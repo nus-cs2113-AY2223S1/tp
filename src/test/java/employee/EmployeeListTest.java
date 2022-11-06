@@ -96,6 +96,7 @@ class EmployeeListTest {
         }
     }
 
+    /*
     @Test
     void viewEmployeeTasks() {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Feed");
@@ -113,4 +114,5 @@ class EmployeeListTest {
         int numOfTaskAfterView = TaskList.getTasks().size();
         assertEquals(numOfTaskAfterView - numOfTask, 0);
     }
+     */
 }
