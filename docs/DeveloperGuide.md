@@ -708,6 +708,9 @@ search and timetable builder for the National University of Singapore, optimized
 
 ## Appendix A: Product scope
 
+YAMOM is meant to be for personal use. As of now we aim to support single users running the application locally on their
+personal devices.
+
 ## Appendix B: User Stories
 
 | Version | As a ... | I want to ...                                      | So that I can ...                               |
