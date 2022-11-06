@@ -194,7 +194,7 @@ public class Add extends Command {
      * @param mcString MC in string format. Format: String
      * @throws InvalidMcException exception thrown when mc String input is in incorrect format
      */
-    public void checkMcString(String mcString) throws InvalidMcException {
+    public static void checkMcString(String mcString) throws InvalidMcException {
         if (mcString.length() > 2) {
             throw new InvalidMcException();
         }
@@ -209,7 +209,7 @@ public class Add extends Command {
      * @param semester semester in string format. Format: String
      * @throws InvalidSemesterException exception thrown when semester input is in incorrect format
      */
-    public void checkYear(String semester) throws InvalidSemesterException {
+    public static void checkYear(String semester) throws InvalidSemesterException {
         if(invalidFormat(semester)) {
             throw new InvalidSemesterException();
         }
@@ -223,7 +223,7 @@ public class Add extends Command {
      * @param mcs mcs in Integer format. Format: Integer
      * @throws InvalidMcException exception thrown when mc input is in incorrect format
      */
-    public void checkMc(int mcs) throws InvalidMcException {
+    public static void checkMc(int mcs) throws InvalidMcException {
         if (invalidMc(mcs)) {
             throw new InvalidMcException();
         }
@@ -234,7 +234,7 @@ public class Add extends Command {
      * @param grade grade in string format. Format: String
      * @throws InvalidGradeException exception thrown when grade input is in incorrect format
      */
-    public void checkGrade(String grade) throws InvalidGradeException {
+    public static void checkGrade(String grade) throws InvalidGradeException {
         if (!checkGradeFormat(grade)) {
             throw new InvalidGradeException();
         }

@@ -68,6 +68,12 @@ public class Delete extends Command {
         checkContentException(isSame);
     }
 
+    /**
+     * throws an exception if found
+     * @param isSame true if exception is to be thrown. False if not. Format: boolean
+     * @throws InvalidInputContentException exception to be thrown if parameter is true.
+     */
+
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();

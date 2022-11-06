@@ -4,12 +4,16 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Add;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.Check;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.InvalidCommandWordException;
+import seedu.duke.exceptions.InvalidGradeException;
+import seedu.duke.exceptions.InvalidInputContentException;
+import seedu.duke.exceptions.InvalidInputFormatException;
+import seedu.duke.exceptions.InvalidMcException;
+import seedu.duke.exceptions.InvalidSemesterException;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class DukeTest {
@@ -330,11 +334,11 @@ class DukeTest {
 
         // Check initial NOC eligibility
         boolean initialCheckNOCSem = check.checkNOCSem();
-        assertEquals(false, initialCheckNOCSem);
+        assertFalse(initialCheckNOCSem);
         boolean initialCheckNOCMc = check.checkNOCMc();
-        assertEquals(false, initialCheckNOCMc);
+        assertFalse(initialCheckNOCMc);
         boolean initialCheckNOC = check.checkNOC();
-        assertEquals(false, initialCheckNOC);
+        assertFalse(initialCheckNOC);
 
         ArrayList<String> inputArray = new ArrayList<>();
         inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
@@ -369,11 +373,11 @@ class DukeTest {
 
         // check final NOC eligibility
         boolean finalCheckNOCSem = check.checkNOCSem();
-        assertEquals(true, finalCheckNOCSem);
+        assertTrue(finalCheckNOCSem);
         boolean finalCheckNOCMc = check.checkNOCMc();
-        assertEquals(true, finalCheckNOCMc);
+        assertTrue(finalCheckNOCMc);
         boolean finalCheckNOC = check.checkNOC();
-        assertEquals(true, finalCheckNOC);
+        assertTrue(finalCheckNOC);
 
         ModuleList.modules.clear();
     }
@@ -389,11 +393,11 @@ class DukeTest {
 
         // Check initial NOC eligibility
         boolean initialCheckSEPSem = check.checkSEPSem();
-        assertEquals(false, initialCheckSEPSem);
+        assertFalse(initialCheckSEPSem);
         boolean initialCheckSEPCAP = check.checkSEPCAP();
-        assertEquals(false, initialCheckSEPCAP);
+        assertFalse(initialCheckSEPCAP);
         boolean initialCheckSEP = check.checkSEP();
-        assertEquals(false, initialCheckSEP);
+        assertFalse(initialCheckSEP);
 
         ArrayList<String> inputArray = new ArrayList<>();
         inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
@@ -428,11 +432,11 @@ class DukeTest {
 
         // check final NOC eligibility
         boolean finalCheckSEPSem = check.checkSEPSem();
-        assertEquals(true, finalCheckSEPSem);
+        assertTrue(finalCheckSEPSem);
         boolean finalCheckSEPCAP = check.checkSEPCAP();
-        assertEquals(true, finalCheckSEPCAP);
+        assertTrue(finalCheckSEPCAP);
         boolean finalCheckSEP = check.checkSEP();
-        assertEquals(true, finalCheckSEP);
+        assertTrue(finalCheckSEP);
 
         ModuleList.modules.clear();
     }

@@ -26,7 +26,7 @@ public class ModuleList {
      * @param modules array of modules. Format : ArrayList<Module>
      */
     public ModuleList(ArrayList<Module> modules) {
-        this.modules = modules;
+        ModuleList.modules = modules;
     }
 
     /**
@@ -226,7 +226,7 @@ public class ModuleList {
      * @return totalGradedMc Returns total graded Mcs taken in whole plan
      */
     public Integer totalGradedMcs() {
-        Integer totalGradedMc = 0;
+        int totalGradedMc = 0;
         for (Module mod : modules) {
             if (!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))) {
                 totalGradedMc += mod.getMcs();
@@ -266,7 +266,7 @@ public class ModuleList {
      * @return totalUngradedMcs Returns total ungraded Mcs taken in whole plan
      */
     public Integer totalUngradedMcs() {
-        Integer totalUngradedMcs = 0;
+        int totalUngradedMcs = 0;
         for (Module mod : modules) {
             if (mod.getGrade().equals("-")) {
                 totalUngradedMcs += mod.getMcs();

@@ -182,4 +182,65 @@ Students might also have doubts of their eligibility for the exchange programs. 
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+To manually test our product, try to give commands which will give an expected output from user standpoint. 
+
+### Basic workflow of testing
+
+Follow a simple workflow
+like the example given below.
+
+1. Add any 5 modules using the add command. Ensure that atleast 3 modules belong to different semesters and have different grades and mcs.
+2. View all the modules in any semester using the view command.
+3. View all the modules using view all command.
+4. Calculate the mcs taken in a semester using the mcs command.
+5. Check for NOC and SEP eligibility using check command.
+6. Check an overview of the entire plan using overview command.
+7. Find module information using find command. Try to search for keywords and partial keywords that are specific to module code, semester, grade, and mcs. Try all variations to see if it works. 
+8. Delete any one module using delete command. 
+9. Try to view all the modules again using view all command to ensure that the deleted module is actually deleted. 
+10. Clear all the modules in a specific semester using the clear command. 
+11. Try to view all the modules again using view all command to ensure that the modules of the entire semester are actually cleared. 
+12. Finally, clear all the remaining modules using clear all command. 
+13. Try to view all the modules again using view all command to ensure that all the modules are actually cleared. 
+14. In the end, exit the application using the exit command.
+
+You can try the help command as well in the middle to see if it works or not.
+
+### A few things to keep note of while manual testing:
+- Ensure that the appropriate messages are displayed if the module list is empty for any command.
+- Ensure that the appropriate messages are displayed if an action is being carried out on a module that does not exist.
+- Ensure that the display of PlanIt in the beginning is correct.
+- Ensure that the opening and closing messages are correct.
+- Ensure that the message displayed in case of an exception is clear.
+
+### Exceptions to test for:
+
+The following are the exceptions to check for while manual testing.
+
+1. Testing for valid year and semester.
+- Ensure year is always given before semester.
+- Ensure only year is not given.
+- Ensure only semester is not given.
+- Ensure special characters, negative numbers, and letters are not accepted for year and semester.
+- Ensure only year from 1 to 4 (both inclusive) are accepted
+- Ensure only semester 1 and 2 are accepted.
+- ensure long numbers are not accepted.
+
+2. Testing for valid mc.
+- Ensure special characters, negative numbers, and letters are not accepted for mc.
+- Ensure that mc which does not lie between 0 and 20 (both inclusive) is not accepted.
+- Ensure that a long number is not accepted for mc.
+
+3. Testing for valid grade.
+- Ensure that number grade is not accepted.
+- Ensure that a long string is not accepted for grade.
+- Ensure that only a grade belonging to the following options is accepted: {"A", "A+","A-","B","B+","B-", "C", "C+","D", "D+", "F", "F*", "S", "U", "-"}
+
+4. Testing for invalid command word
+- Ensure that only a command word that is valid is accepted.
+
+5.Testing for invalid content in input
+- Ensure that any field left empty is invalid in terms of input content.
+- Ensure that giving null input or empty string input in CLI is also treated as invalid content.
+6. Testing for invalid input format
+- Ensure that any parameter repeated in the input is treated as wrong input format.

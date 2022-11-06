@@ -48,14 +48,21 @@ public class Parser {
 
         return c;
     }
+
+    /**
+     * function to parse all input from file
+     * @param input input from the file. Format: String
+     * @return returns an instance of class Module after parsing input from file.  Format: Module
+     * @throws InvalidInputFormatException exception thrown if input format is wrong
+     * @throws InvalidInputContentException exception thrown if input content is wrong
+     */
     public static Module parseFileInput(String input) throws InvalidInputFormatException, InvalidInputContentException {
         String[] splitText = input.split(" ");
         String course = splitText[0].substring(2);
         String semesterTaken = splitText[1].substring(2);
         int mcs = Integer.parseInt(splitText[2].substring(3));
         String grade = splitText[3].substring(2);
-        Module module = new Module(course,semesterTaken,grade,mcs);
-        return module;
+        return new Module(course,semesterTaken,grade,mcs);
     }
 
     /**
