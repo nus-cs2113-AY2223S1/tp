@@ -36,11 +36,7 @@ public class AddCommand extends Command {
     }
 
     private boolean isValidComment(String comment) {
-        if (!comment.startsWith("note/{")) {
-            return false;
-        } else if (!comment.endsWith("}")) {
-            return false;
-        } else if (comment.length() <= 7) {
+        if (!comment.startsWith("note/{") || !comment.endsWith("}")) {
             return false;
         }
         return true;

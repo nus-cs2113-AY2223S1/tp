@@ -1,5 +1,7 @@
 @startuml
 
+hide footbox
+
 activate Duke
 
 Duke -> UserStorageParser : getSavedLists()

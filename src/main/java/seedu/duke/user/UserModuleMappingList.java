@@ -44,22 +44,43 @@ public class UserModuleMappingList {
 
     public void updateComment(String moduleCode, String comment) {
         boolean isFound = false;
-        UserModuleMapping mod = null;
         for (UserModuleMapping module : modules) {
             if (module.getPuCode().equals(moduleCode)) {
                 isFound = true;
-                module.setComment(comment);
-                mod = module;
-                //success
+                validateAndUpdateComment(module, comment);
             }
         }
         if (!isFound) {
             System.out.println("Error no such modules to update");
             System.out.println("Please add module to list before adding a note");
-        } else {
-            Ui.printModuleUpdatedAcknowledgement(mod);
         }
     }
+
+    public void validateAndUpdateComment(UserModuleMapping module, String comment) {
+        if (checkEmpty(comment) || isNotValidComment(comment)) {
+            System.out.println("Error: Invalid Comment");
+        } else {
+            module.setComment(comment);
+            Ui.printModuleUpdatedAcknowledgement(module);
+        }
+    }
+
+    private boolean isNotValidComment(String comment) {
+        return comment.contains("_") || comment.contains("%") || comment.contains("/") || comment.contains(";");
+    }
+
+    private boolean checkEmpty(String comment) {
+        if (comment.length() == 0) {
+            return true;
+        }
+        for (int i = 0; i < comment.length(); ++i) {
+            if (comment.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public void deleteComment(String moduleCode) {
         boolean isFound = false;

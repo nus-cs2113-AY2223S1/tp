@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
+
 -> UserUniversityListManager : deleteModule(inputSchool, puCode)
 activate UserUniversityListManager
 UserUniversityListManager -> UserUniversityListManager : containsKey(inputSchool)

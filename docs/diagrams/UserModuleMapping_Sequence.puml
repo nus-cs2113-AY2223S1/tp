@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
+
 -> ":UserModuleMappingList" : addModule(input)
 activate ":UserModuleMappingList"
 ":UserModuleMappingList" -> ":UserModuleMappingList" : findModuleByCode(input)

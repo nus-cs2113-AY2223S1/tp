@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+hide footbox
+
 -> ":UserUniversityListManager" : createList(input)
 activate ":UserUniversityListManager"
 
@@ -83,79 +85,6 @@ alt inputSchool exists
 
 else inputSchool does not exist
 
-end
-return
-deactivate ":UserUniversityListManager"
-
--> ":UserUniversityListManager" : deleteModule(inputSchool, puCode)
-activate ":UserUniversityListManager"
-":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey(inputSchool)
-activate ":UserUniversityListManager"
-return : boolean
-alt inputSchool exists
-    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
-    activate ":UserUniversityListManager"
-    return : ":UserUniversityList"
-
-    ":UserUniversityListManager" -> ":UserUniversityList" : getMyModules()
-    activate ":UserUniversityList"
-
-
-    ":UserUniversityList" -> ":UserUniversityList" : getModuleByPuCode(puCode)
-    activate ":UserUniversityList"
-    return : ":UserModuleMapping"
-
-    return deletedModule : ":UserModuleMapping"
-
-    ":UserUniversityListManager" -> ":UserDeletedModules" : addToDeletedModule(deletedModule)
-    activate ":UserDeletedModules"
-    ":UserDeletedModules" -> ":UserDeletedModules" : size()
-    activate ":UserDeletedModules"
-    return : int
-        alt size == 5
-        ":UserDeletedModules" -> ":UserDeletedModules" : removeLast()
-        activate ":UserDeletedModules"
-        return
-        else size < 5
-        ":UserDeletedModules" -> ":UserDeletedModules" : addFirst(deletedModule)
-        activate ":UserDeletedModules"
-        return
-    end
-    return
-
-    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
-    activate ":UserUniversityListManager"
-    return : ":UserUniversityList"
-
-        ":UserUniversityListManager" -> ":UserUniversityList" : deleteModuleByPuCode(puCode)
-        activate ":UserUniversityList"
-
-        ":UserUniversityList" -> ":UserUniversityList" : deleteModuleByPuCode(puCode)
-        activate ":UserUniversityList"
-        loop for every module
-        ":UserUniversityList" -> ":UserUniversityList" : get(index)
-        activate ":UserUniversityList"
-        return ":UserModuleMapping"
-        ":UserUniversityList" -> ":UserModuleMapping" : getPuCode()
-        activate ":UserModuleMapping"
-        return puCode : String
-        ":UserUniversityList" -> ":UserUniversityList" : equals(puCode)
-        activate ":UserUniversityList"
-        return : boolean
-        opt module code matches
-        ":UserUniversityList" -> ":UserUniversityList" : deleteModule(index)
-        activate ":UserUniversityList"
-        return
-        end
-
-    end
-
-    return
-
-    return
-
-
-else inputSchool does not exist
 end
 return
 deactivate ":UserUniversityListManager"
