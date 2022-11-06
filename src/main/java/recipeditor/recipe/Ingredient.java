@@ -44,8 +44,7 @@ public class Ingredient {
         String[] parsed = input.split(DIVIDER, MAX_DIVIDES);
         try {
             double amount = Double.parseDouble(parsed[1]);
-            if (parsed[0].replaceAll(" ", "").equals("")
-                    || parsed[2].replaceAll(" ", "").equals("")) {
+            if (parsed[0].isBlank() || parsed[2].isBlank()) {
                 Ui.showMessage(EMPTY_INGREDIENT_FILEDS);
                 throw new ParseException(INGREDIENT_FORMAT);
             }
@@ -54,4 +53,5 @@ public class Ingredient {
             throw new ParseException(INGREDIENT_FORMAT);
         }
     }
+
 }
