@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam noteTextAlignment left
 
@@ -20,13 +20,13 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpenses()
 activate expenseManager DATA_COLOR_1
 
-expenseManager --[DATA_COLOR_1]> consoleInterface : currentExpenses:ArrayList<Expense>
+expenseManager --[DATA_COLOR_1]> consoleInterface : \lcurrentExpenses\n:ArrayList<Expense>
 deactivate expenseManager
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getSortCommandSetting()
 activate expenseManager DATA_COLOR_1
 
-expenseManager --[DATA_COLOR_1]> consoleInterface : sortCommandSetting:ConsoleCommandSortExpense
+expenseManager --[DATA_COLOR_1]> consoleInterface : \lsortCommandSetting\n:ConsoleCommandSortExpense
 deactivate expenseManager
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : getRecurringPayments()
