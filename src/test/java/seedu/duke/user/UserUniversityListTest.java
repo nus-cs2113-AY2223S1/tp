@@ -3,6 +3,7 @@ package seedu.duke.user;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.InvalidUserCommandException;
 import seedu.duke.exceptions.TimetableNotFoundException;
+import seedu.duke.exceptions.UniversityNotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -208,5 +209,35 @@ public class UserUniversityListTest {
         testManager.addModule("UCLA", mod2);
         System.out.println("Test case 19 : ");
         testManager.displayUniversity("UCLA");
+    }
+
+    @Test
+    void updateComment_Ucla_correctUpdates() throws UniversityNotFoundException, InvalidUserCommandException {
+        testManager.createList("UCLA");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
+        testManager.addModule("UCLA", mod);
+        testManager.updateComment("UCLA", "CS101", "testing 1");
+        assertEquals("testing 1", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModuleByPuCode("CS101").getComment());
+        testManager.deleteComment("UCLA", "CS101");
+        assertEquals("", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModuleByPuCode("CS101").getComment());
+    }
+
+    @Test
+    void updateComment_UclaWrongUpdates_throwExceptions() throws InvalidUserCommandException, UniversityNotFoundException {
+        assertThrows(UniversityNotFoundException.class,
+                ()->testManager.updateComment("UCLA", "CS101", "testing 1"));
+        testManager.createList("UCLA");
+        UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
+                "Programming Methodology", "4", "4", "UCLA", "USA");
+        testManager.addModule("UCLA", mod);
+        testManager.updateComment("UCLA", "CS101", " % ");
+        testManager.updateComment("UCLA", "CS101", "  ");
+        testManager.updateComment("UCLA", "CS101", " / ");
+        testManager.updateComment("UCLA", "CS101", " _ ");
+        assertEquals("", testManager.getMyManager().get("UCLA").getMyModules()
+                .getModuleByPuCode("CS101").getComment());
     }
 }

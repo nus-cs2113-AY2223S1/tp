@@ -260,7 +260,6 @@ public class Duke {
 
     private static void addModuleToList(UserUniversityListManager userUniversityListManager, AddCommand addCommand)
             throws ModuleNotFoundException, InvalidUserCommandException, UniversityNotFoundException {
-        int i = 0;
         String moduleCode = addCommand.getModuleCode();
         String universityName = addCommand.getUniversityName();
         ModuleMapping moduleMapping = Database.findPuMapping(moduleCode, universityName);
