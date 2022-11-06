@@ -337,7 +337,7 @@ public class Parser {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd", Locale.US)
                     .withResolverStyle(ResolverStyle.STRICT);
-                dateFormatter.parse(date);
+            dateFormatter.parse(date);
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
                 throw new OneDocException(UI.INVALID_DATE);
             }
