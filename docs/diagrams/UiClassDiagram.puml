@@ -20,8 +20,8 @@ Ui ..> CommandResult
 
 AddMode --> Recipe
 AddMode --> Ingredient
-RecipeList *-right-> Recipe
-Recipe *-right-> Ingredient
+RecipeList "1" *-right-> "*" Recipe
+Recipe "1" *-right-> "*" Ingredient
 Editor .down-> Storage
 
 @enduml

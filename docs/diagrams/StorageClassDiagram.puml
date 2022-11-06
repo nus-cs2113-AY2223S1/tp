@@ -25,5 +25,6 @@ Storage ..> RecipeFileParser
 Storage ..> TitleFileParser
 Storage -left-> ParseFileException
 
-Recipe *-right-> Ingredient
+Recipe "1" *-right-> "*" Ingredient
+RecipeList "1" *-right-> "*"  Recipe
 @enduml
