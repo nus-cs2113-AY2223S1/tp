@@ -28,8 +28,8 @@ public class TaskList {
     }
 
     /**
-     * Function adds a new Task to the overall TaskList and to the associated Appointment and Employee's Task list
-     * @param task
+     * Function adds a new Task to the overall TaskList and to the associated Appointment and Employee's Task list.
+     * @param task Constructed by AddTaskCommand and passed in to be added to the overall list.
      * @throws DukeException
      */
     public static void addTask(Task task) throws DukeException {
@@ -64,9 +64,9 @@ public class TaskList {
     }
 
     /**
-     * Function reassigns a task from one employee to another
-     * @param taskId
-     * @param employeeId
+     * Function reassigns a task from one employee to another.
+     * @param taskId Id of the task to be reassigned.
+     * @param employeeId Id of the employee the task is to be reassigned to.
      * @throws DukeException
      */
     // assign task to be done by another person
@@ -98,8 +98,8 @@ public class TaskList {
     }
 
     /**
-     * Function finds and removes a Task from the overall TaskList and from the associated appointment and employee
-     * @param taskId
+     * Function finds and removes a Task from the overall TaskList and from the associated appointment and employee.
+     * @param taskId Id of the task to be removed.
      */
     public static void removeTask(int taskId) {
         for (Task task : tasks) {
@@ -124,8 +124,8 @@ public class TaskList {
     }
 
     /**
-     * Helper function to find a task from the overall TaskList by task ID
-     * @param taskId
+     * Helper function to find a task from the overall TaskList by task ID.
+     * @param taskId Id of the task to be found.
      * @return
      */
     public static Task findTask(int taskId) {
@@ -139,8 +139,8 @@ public class TaskList {
 
 
     /**
-     * Finds and marks a task as completed
-     * @param taskId
+     * Finds and marks a task as completed.
+     * @param taskId Id of the task to be marked as completed.
      */
     public static void finishTask(int taskId) {
         for (Task task : tasks) {
