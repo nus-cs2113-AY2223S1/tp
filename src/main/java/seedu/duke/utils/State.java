@@ -12,7 +12,7 @@ public class State {
     private final List<List<SelectedModule>> selectedModulesList;
 
     /**
-     * State class stores the attributes of the 'model' of the application
+     * State class stores the attributes of the 'model' of the application.
      * */
     
     public State() {
