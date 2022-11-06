@@ -17,6 +17,7 @@ Given below are my contributions to the project.
       3. Removes the need to check for mismatch address and unit type of property (e.g. Unit type is HDB flats but address does not have unit level/number).
     - Challenges: Extensive research was conducted on all possible Singapore address format as well as existing types of housing (unit type of property) approved by the Singapore government for rental. It was challenging to convert the large amount of research information into working algorithms in the application. This is especially true when considering all possible variations of Singapore address format. 
 
+<div style="page-break-after: always;"></div>
 
 -  **New feature**: Added the ability to add new client (Person who wants to rent property)
     - What it does: Adds a new client to client list along with Singapore contact number and basic email validation.
