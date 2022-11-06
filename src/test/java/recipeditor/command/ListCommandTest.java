@@ -15,7 +15,7 @@ import java.io.PrintStream;
 public class ListCommandTest {
     @Test
     void completeListCommand_correctListCommandFormat_listRecipeTitles() {
-        Recipe addedRecipe = new Recipe("Example Title");
+        Recipe addedRecipe = new Recipe("Test Title");
         RecipeList.addRecipe(addedRecipe);
         RecipeList.addRecipeTitle(addedRecipe.getTitle());
         String input = "/list";
@@ -24,10 +24,10 @@ public class ListCommandTest {
         CommandResult commandExecutedResult = commandExecuted.execute();
         System.setOut(new PrintStream(outContent));
         Ui.showMessage(commandExecutedResult.getMessage());
-        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. Example Title";
+        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. Test Title";
         assertEquals(expected.trim(), outContent.toString().trim());
         assertEquals(ListCommand.class, Parser.parseCommand(input).getClass());
-        RecipeList.deleteRecipeFromTitle("Example Title");
+        RecipeList.deleteRecipeFromTitle("Test Title");
     }
 
 }

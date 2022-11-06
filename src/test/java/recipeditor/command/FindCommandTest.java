@@ -18,14 +18,14 @@ public class FindCommandTest {
 
     @BeforeAll
     static void setUp() {
-        recipe = new Recipe("Example title", "Example description");
+        recipe = new Recipe("Test title for Find Command", "Test description");
         RecipeList.addRecipe(recipe);
         RecipeList.addRecipeTitle(recipe.getTitle());
         Storage.rewriteRecipeListToFile();
         String recipeFileSourcePath = Storage.titleToFilePath(recipe.getTitle());
         Storage.saveRecipe(recipe, "", recipeFileSourcePath);
 
-        Ingredient newIngredient = new Ingredient("new ingredient", 1, "whole");
+        Ingredient newIngredient = new Ingredient("test ingredient", 1, "whole");
         recipe.addIngredient(newIngredient);
     }
 
@@ -67,8 +67,8 @@ public class FindCommandTest {
 
     @AfterAll
     static void end() {
-        RecipeList.deleteRecipeFromTitle("Example title");
-        Storage.deleteRecipeFile("Example title");
+        RecipeList.deleteRecipeFromTitle("Test title for Find Command");
+        Storage.deleteRecipeFile("ETest title for Find Command");
         Storage.rewriteRecipeListToFile();
     }
 }
