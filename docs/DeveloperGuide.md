@@ -2,44 +2,39 @@
 
 ## Table of contents
 
-### 1. [General Overview](#1-general-overview-1)
+* ### [General Overview](#general-overview)
 
-### 2. [Design & Implementation](#2-design--implementation-1)
+* ### [Design & Implementation](#design--implementation)
+  * [Database](#database)
+  * [User Storage](#user-storage)
+  * [Timetable](#timetable)
+  * [Delete History](#delete-history)
+  * [Ui](#ui)
+  * [Commands](#commands)
+  * [User Module Mapping](#user-module-mappings)
+  * [User University List Manager](#user-university-list-manager)
 
-2.1 [Database](#21-database)\
-2.2 [User Storage](#22-user-storage)\
-2.3 [Timetable](#23-timetable)\
-2.4 [Delete History](#24-delete-history)\
-2.5 [Ui](#25-ui)\
-2.6 [Commands](#26-commands)\
-2.7 [User Module Mapping](#27-usermodulemappinglist)\
-2.8 [User University List Manager](#28-useruniversitylistmanager)
-
-### 3. [Product Scope](#3-product-scope-1)
-
-3.1 [Target User Profile](#31-target-user-profile)\
-3.2 [Value Proposition](#32-value-proposition)\
-3.3 [Problem Addressed](#33-problem-addressed)
-
-### 4. [User Stories](#4-user-stories-1)
-
-### 5. [Non-functional Requirements](#5-non-functional-requirements-1)
-
-### 6. [Glossary](#6-glossary-1)
-
-### 7. [Instructions for Manual Testing](#7-instructions-for-manual-testing-1)
-
-## 1. General Overview
+* ### [Appendix: Requirements](#appendix:-requirements)
+  * [Appendix A: Product Scope](#appendix-a:-product-scope)
+    * [Target User Profile](#target-user-profile)
+    * [Value Proposition](#value-proposition)
+    * [Problem Addressed](#problem-addressed)
+  * [Appendix B: User Stories](#appendix-b-user-stories)
+  * [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+  * [Appendix D: Glossary](#appendix-d-glossary)
+  * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+___
+## General Overview
 
 Below is an architecture diagram that provides a brief overview of how the program works.
 
-![Architecture Diagram](/docs/images/ArchitectureDiagram.png)
+![Architecture Diagram](./images/ArchitectureDiagram.png)
 
 The program will first make use of the save file and database file to populate its internal memory. This is stored in the program's user storage and database storage respectively. When the user then interacts with the program's UI, the program logic will take over and make use of the information from database storage to update the user storage. The user storage then updates the save file accordingly. This process will continue until the user makes no further inputs and exits the program.
+___
+## Design & Implementation
 
-## 2. Design & implementation
-
-### 2.1 Database
+### Database
 
 The database reads in SEP module data from `data.csv` and stores the useful data into an ArrayList of module mappings and universities.
 
@@ -57,7 +52,7 @@ The following diagram illustrates the flow of the program, from the initial load
 
 ![Database Sequence Diagram](./images/Database_Sequence.png)
 
-### 2.2 User Storage
+### User Storage
 
 User storage refers to saving and loading the necessary user information into text files. It mainly involves two classes, UserStorage and UserStorageParser.
 UserStorage handles extracting and storing information from the various text files while UserStorageParser handles the exchange of information between String and UserUniversityListManager formats.
@@ -102,7 +97,7 @@ The following diagram illustrates the flow of the program, from initialisation t
 
 ![User Storage Sequence Diagram](./images/UserStorage_Sequence.png)
 
-### 2.3 Timetable
+### Timetable
 
 Upon starting easySEP, a TimetableManager is created in preparation for users to begin adding Timetables. The TimetableManager is used to create new Timetables, manage existing Timetables and delete old Timetables.
 These Timetables are stored in a HashMap and indexed by university name to facilitate easy reference.
@@ -123,7 +118,7 @@ In chronological order, the following diagrams illustrate the flow of the progra
 ![Timetable Delete Lesson Sequence Diagram](./images/Timetable_deleteLesson_Sequence.png)
 ![Timetable Print Timetable Sequence Diagram](./images/Timetable_printTimetable_Sequence.png)
 
-### 2.4 Delete History
+### Delete History
 
 To help users recall the modules that they had recently deleted, the Delete History feature allows them to view up to 5 most
 recently deleted module mappings. This can help them to add the module mappings back to the lists without having to search for the specific
@@ -142,7 +137,7 @@ The following diagram illustrates the flow of the program, when a user deletes a
 
 ![User Deleted Modules Sequence Diagram](./images/UserDeletedModules_Sequence.png)
 
-### 2.5 Ui
+### Ui
 
 The Ui class is the cornerstone of the Duke program to facilitate interaction with the user. It is used to scan and collect user input, print error messages to the user upon invalid input commands,
 and display the appropriate acknowledgements or required information based on the user's command.
@@ -151,7 +146,7 @@ The following diagram illustrates the methods within the Ui class that can be in
 
 ![Ui Class Diagram](./images/Ui_Class.png)
 
-### 2.6 Commands
+### Commands
 
 To interact with easySEP, users have to input commands specified with parameters to perform operations which will be passed to the CommandParser to generate a corresponding Command according to their input.
 The Command will then be executed to perform the operation on the other classes managing the timetables and databases. Error checking is handled to throw InvalidUserCommandException if the user's input does not match
@@ -160,7 +155,7 @@ the specified Command format. To deal with parsing parameters, spaces in Univers
 The following class diagram illustrates the relationship between Command class and its subclasses as well as other classes related to Commands.
 ![Command Class Diagram](./images/Command_Class.png)
 
-#### 2.6.1 Create Command
+#### Create Command
 
 A Create command can be used to create a university list and its corresponding timetable.
 
@@ -168,7 +163,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![Create Command Sequence Diagram](./images/CreateCommand_Sequence.png)
 
-#### 2.6.2 Exit Command
+#### Exit Command
 
 An Exit command can be used to exit the application.
 
@@ -176,7 +171,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![Exit Command Sequence Diagram](./images/ExitCommand_Sequence.png)
 
-#### 2.6.3 Help Command
+#### Help Command
 
 A Help command can be used to exit the application.
 
@@ -184,7 +179,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![Help Command Sequence Diagram](./images/HelpCommand_Sequence.png)
 
-#### 2.6.4 Add Command
+#### Add Command
 
 An add command can be used to add a lesson to the timetable, add a module mapping to the user university list, or add a note for an existing module mapping in the user university list.
 
@@ -192,7 +187,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![Add Command Sequence Diagram](./images/AddCommand_Sequence.png)
 
-#### 2.6.5 Delete Command
+#### Delete Command
 
 A delete command can be used to delete a lesson from the timetable, delete a module mapping from the user university list or delete an entire user created university list.
 
@@ -200,7 +195,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![Delete Command Sequence Diagram](./images/DeleteCommand_Sequence.png)
 
-#### 2.6.6 View Command
+#### View Command
 
 A view command can be used to view all user created university lists, view user's delete history, view user's selected university list or view all the user's created university lists' timetables.
 
@@ -208,7 +203,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 ![View Command Sequence Diagram](./images/ViewCommand_Sequence.png)
 
-#### 2.6.7 List Command
+#### List Command
 
 A list command can be used to display all the module mappings in the database, all the universities in the database, or allow users to filter by NUS module code or partner university name.
 
@@ -222,7 +217,7 @@ The following sequence diagram illustrates the flow of the program to read in th
 
 ![List Command Sequence Diagram](./images/ListCommand_Sequence.png)
 
-#### 2.6.8 Favourite Command
+#### Favourite Command
 
 A favourite command can be used by the user to favourite or un-favourite lists of module mappings that they have curated. It can also be used to display all of the user's favourite lists and the module mappings they contain.
 
@@ -236,15 +231,15 @@ The following sequence diagram illustrates the flow of the program to read in th
 
 ![Favourite Command Sequence Diagram](./images/FavouriteCommand_Sequence.png)
 
-### 2.7 UserModuleMappingList
+### User Module Mappings
 
-#### 2.7.1 UserModuleMapping
+#### UserModuleMapping
 
 The UserModuleMapping class aims to bridge 2 modules (one from NUS and one from a Partner University). It is initialized by a constructor
 requiring the module code, title, and university name for both NUS and partner university. This aims to simulate a real life example of users
 mapping an NUS module to a foreign university's.
 
-#### 2.7.2 UserModuleMappingList
+#### UserModuleMappingList
 
 The UserModuleMappingList class consists of stores a list of UserModuleMapping in an ArrayList. Users are able to add new modules using the `addModule`
 function, search for matching modules using `findModuleByCode` and delete modules using `deleteModule`. Additionally, users are also able to search
@@ -254,16 +249,16 @@ The following class diagram illustrates the relationship between UserModuleMappi
 
 ![UserModuleMappingList Diagram](./images/UserModuleMapping_Class.png)
 
-### 2.8 UserUniversityListManager
+### User University List Manager
 
-#### 2.8.1 UserUniversityList
+#### UserUniversityList
 
 The UserUniversityList class stores 2 important things the `universityName` and a list of UserModuleMapping under `myModules`
 Each list is identified using the universityName. Users can only create 1 list for each partner university and this is managed by the
 UserUniversityListManager in 1.8.2. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
 to help users manage multiple lists and note down their favourites
 
-#### 2.8.2 UserUniversityListManager
+#### UserUniversityListManager
 
 The UserUniversityListManager manages a hashmap of lists, with the `universityName` as the key. This prevents duplicates and unnecessary space
 wastage. HashMap is also an efficient data structure to obtain the UserUniversityList as the value in constant time. The UserUniversityListManager
@@ -277,14 +272,16 @@ The following class diagram illustrates the relationship between UserUniversityL
 The following sequence diagram helps explain the key steps behind the main functions in UserUniversityListManager.
 
 ![UserUniversityListManager Sequence](./images/UserUniversityListManager_Sequence.png)
+___
+## Appendix: Requirements
 
-## 3. Product Scope
+### Appendix A: Product Scope
 
-### 3.1 Target User Profile
+#### Target User Profile
 
 NUS SoC undergraduates intending to embark on a Student Exchange Programme
 
-### 3.2 Value Proposition
+#### Value Proposition
 
 - SoC students are able to efficiently query their local database of past mappings for EE, CG, and CS-coded modules at one go and store their shortlisted modules locally, allowing for ease of reference and follow-up at a later time. This will improve on the shortcomings of EduRec.
 - Users can view potential partner universities for SEP and the modules offered.
@@ -293,14 +290,14 @@ NUS SoC undergraduates intending to embark on a Student Exchange Programme
 - Users can save their current university lists after exiting the app and load it again next time.
 - Users can favorite their top university picks.
 
-### 3.3 Problem Addressed
+#### Problem Addressed
 
 The module mapping support provided by the EduRec website is not helpful, allowing students to only search for past mappings either by Faculty or by University. This makes the module mapping process very time-consuming, with the slow response of the EduRec website adding fuel to the fire. Moreover, the website does not allow for the searching of modules to map to begin with, much less so for searching multiple modules at one go (which is exactly what most users would be looking for). EduRec does not give students the option of saving shortlisted modules either.
 
-## 4. User Stories
+### Appendix B: User Stories
 
 | Version | As a ...              | I want to ...                                                            | So that I can ...                                                         |
-| ------- | --------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+|---------|-----------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | v1.0    | interested user       | use a program that provides feedback to my actions                       | feel my commands being acknowledged                                       |
 | v1.0    | interested user       | have my commands understood by the program                               | use the easySEP to plan my SEP modules                                    |
 | v1.0    | user                  | save my shortlisted modules and their associated partner universities    | continue my module mapping search at a later time                         |
@@ -321,37 +318,40 @@ The module mapping support provided by the EduRec website is not helpful, allowi
 | v2.0    | user                  | be able to add class timings and create a timetable for SEP              | keep track of my timetable                                                |
 | v2.1    | new user              | use a program that does not fail unexpectedly                            | do not have to deal with handling crashes                                 |
 
-## 5. Non-Functional Requirements
+### Appendix C: Non-Functional Requirements
 
 1. Java 11 or above installed
 2. Program built to support only single user
 
-## 6. Glossary
+### Appendix D: Glossary
 
 - HU: home university
 - PU: partner university
 - u/ - university
 - m/ - modules
+- d/ - day of lesson
+- st/ - start time of lesson
+- en/ - end time of lesson
 
-## 7. Instructions for Manual Testing
+### Appendix E: Instructions for Manual Testing
 
 1. Download the `.jar` file from [this link](https://github.com/AY2223S1-CS2113-W13-2/tp/releases).
-1. Open the folder that that the `.jar` file is in and run the program using `java -jar easySEP.jar`.
-1. View all commands and the correct command format using `/help`. Below are a few examples to consider.
-1. The list of valid universities and module mappings can be found using `/list UNIVERSITIES` and `/list MODULES` respectively.
-1. The commands `/list m/CS2113` and `/list u/Aalto_University` can be used to list all module mappings for `CS2113` and `Aalto University` in the database.
-1. Create a new university list using `/create u/Aalto_University`.
-1. Add a new module using `/add u/Aalto_University m/C3130`.
-1. Add a new lesson using `/add u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
-1. Add a new comment using `/add u/Aalto_University m/C3130 note/{this is a note}`.
-1. Favourite a university list using `/favourite add/Aalto_University`.
-1. Use `/favourite VIEW` to see the list of favourite university lists.
-1. Un-favourite a university list using `/favourite del/Aalto_University`.
-1. View all university lists using `/view LISTS` and all timetables using `/view TIMETABLES`.
-1. For a specific university list, use `/view u/Aalto_University` to see modules added.
-1. Delete a comment using `/delete u/Aalto_University m/C3130 note/`.
-1. Delete a lesson using `/delete u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
-1. Delete a module using `/delete u/Aalto_University m/C3130`.
-1. Delete university list using `/delete u/Aalto_University`.
-1. Input `/view DELETE_HISTORY` to view recently deleted modules.
-1. Use `/exit` to end the program.
+2. Open the folder that the `.jar` file is in and run the program using `java -jar easySEP.jar`.
+3. View all commands and the correct command format using `/help`. Below are a few examples to consider.
+4. The list of valid universities and module mappings can be found using `/list UNIVERSITIES` and `/list MODULES` respectively.
+5. The commands `/list m/CS2113` and `/list u/Aalto_University` can be used to list all module mappings for `CS2113` and `Aalto University` in the database.
+6. Create a new university list using `/create u/Aalto_University`.
+7. Add a new module using `/add u/Aalto_University m/C3130`.
+8. Add a new lesson using `/add u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
+9. Add a new comment using `/add u/Aalto_University m/C3130 note/{this is a note}`.
+10. Favourite a university list using `/favourite add/Aalto_University`.
+11. Use `/favourite VIEW` to see the list of favourite university lists.
+12. Un-favourite a university list using `/favourite del/Aalto_University`.
+13. View all university lists using `/view LISTS` and all timetables using `/view TIMETABLES`.
+14. For a specific university list, use `/view u/Aalto_University` to see modules added.
+15. Delete a comment using `/delete u/Aalto_University m/C3130 note/`.
+16. Delete a lesson using `/delete u/Aalto_University m/C3130 d/Monday st/08:00 en/10:00`.
+17. Delete a module using `/delete u/Aalto_University m/C3130`.
+18. Delete university list using `/delete u/Aalto_University`.
+19. Input `/view DELETE_HISTORY` to view recently deleted modules.
+20. Use `/exit` to end the program.
