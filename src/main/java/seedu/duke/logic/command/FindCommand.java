@@ -34,6 +34,9 @@ public class FindCommand extends Command {
     public static final String STRENGTH_EXERCISE_FOUND = "Here are the matching strength exercises in your list:";
     public static final String CARDIO_EXERCISE_FOUND = "Here are the matching cardio exercises in your list:";
     public static final String CARDIO_EXERCISE_NOT_FOUND = "No matching cardio exercise found";
+    public static final String FOOD_NOT_FOUND = "No matching food found";
+
+    public static final String FOOD_FOUND = "Here are the matching food in your food list:";
     public static final String INVALID_FIND_STRENGTH_COMMAND = "Invalid find strength command";
     public static final String INVALID_FIND_CARDIO_COMMAND = "Invalid find cardio command";
     public static final String INVALID_FIND_FOOD_COMMAND = "Invalid find food command";
@@ -163,11 +166,15 @@ public class FindCommand extends Command {
                 arguments.charAt(arguments.length() - 1));
         handleInvalidFindFoodCommand(argumentList);
         ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
-        FoodTable tableFrame = new FoodTable(
-                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList,
-                "Here are the matching food in your food list:");
-        ArrayList<String> table = tableFrame.getFoodTable();
-        ui.printTable(table);
+
+        if (filteredFoodList.size() == EMPTY_LIST) {
+            ui.output(FOOD_NOT_FOUND);
+        } else {
+            FoodTable tableFrame = new FoodTable(
+                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND);
+            ArrayList<String> table = tableFrame.getFoodTable();
+            ui.printTable(table);
+        }
     }
 
 
