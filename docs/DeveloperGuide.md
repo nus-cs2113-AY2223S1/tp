@@ -117,7 +117,9 @@ Step 3. The user executes `appointment status i/2 s/COMPLETED` command to update
 
 Step 4. The user executes `appointment history` command to view the list of expired appointment. This will display the list of appointments that has already been completed by the clinic. Then, the user ends with application with `bye` command, the current state of `AppointmentList` and `AppointmentHistory` will be stored in a file through `Storage` .
 
-> The following activity diagram summarizes what happens when a user executes a new command:
+The following sequence diagram summarizes what happens when a user executes a new command:
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
 
 ### Design considerations:
 
@@ -196,6 +198,8 @@ Step 3. The user executes `pet remove 2/index` command to remove the second pet 
 Step 4. The user executes `view pet` to display all pets in the pet manage system.
 
 The following sequence diagram shows how the status operation works:
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png)
+
 
 ### [Proposed] Service management feature
 
