@@ -23,13 +23,16 @@ public class RemoveModuleCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "Remove a module from YAMOM timetable.";
 
     private static final String ERROR_WRONG_FORMAT = "Wrong format, should be: " + COMMAND_USAGE;
+    public static final String MODULE_NOT_FOUND = "Module not found in database! Please enter a valid module code!";
 
     public RemoveModuleCommand(String[] input) throws YamomException {
         super(input);
         Parser.moduleRelatedCommandError(input, ERROR_WRONG_FORMAT);
-
-        String moduleCode = input[1];
+        String moduleCode = input[1].toUpperCase();
         this.module = Module.get(moduleCode.toUpperCase());
+        if (this.module == null) {
+            throw new YamomException(MODULE_NOT_FOUND);
+        }
         this.successful = false;
     }
 

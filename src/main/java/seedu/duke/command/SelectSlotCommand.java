@@ -14,6 +14,10 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+/**
+ * Select slots to be stored in state for SelectedModule.
+ */
+
 public class SelectSlotCommand extends Command {
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_USAGE = "select [ /module MODULE_CODE ] "
@@ -21,12 +25,6 @@ public class SelectSlotCommand extends Command {
     public static final String COMMAND_DESCRIPTION = "Select a module lesson slot.";
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
-
-    public static final String MISSING_PARAMS_KEY_OR_VALUE = "You might have missed out the Module Code, Lesson Type or"
-            + " Class No.";
-
-    public static final String SELECTION_DATA_VALIDATION_FAILED = "You might have entered the wrong module, "
-            + "lesson type or class no.";
     public static final String ERROR_MODULE_DOES_NOT_EXIST = "Module does not exist!";
     public static final String ERROR_MODULE_NOT_SELECTED = 
             "You need to add the module to your timetable first. Use the add command.";
