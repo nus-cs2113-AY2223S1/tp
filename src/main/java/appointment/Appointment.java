@@ -33,7 +33,7 @@ public class Appointment {
     public void printAppointmentDetails() {
         System.out.println("Appointment ID: " + appointmentId);
         System.out.println("Service: " + service);
-        System.out.println("Date: " + appointmentDate);
+        System.out.println("Date: " + getAppointmentDateStr());
     }
 
     // check appointment date format
