@@ -8,9 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import seedu.duke.command.ByeCommand;
 
-//@author CheahHaoYi-reused
-//Reused from CheahHaoYi/ip Ui class with slight modification
-
 /**
  * The User Interface class that deals with interaction with user.
  * To read input from the terminal and to display responses to the user.
@@ -164,4 +161,4 @@ public class Ui {
         }
     }
 }
-//@author
+

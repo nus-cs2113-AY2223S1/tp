@@ -38,7 +38,7 @@ public class SelectedModule {
     }
 
     /**
-     * Selects a slot. TODO validate arguments
+     * Selects a slot.
      * @param lessonType Lesson type
      * @param classNo Class number
      */
