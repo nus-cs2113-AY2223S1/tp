@@ -83,11 +83,16 @@ InvalidUserStorageFileException is thrown when there are unexpected scenarios. S
 - Module code exists in timetable portion but missing in saved modules portion
 - Invalid day or time for lessons
 
-During these situations, the corresponding text file for the university will be deleted, and an error messgae will inform the user of the invalid file format and deletion.
+During these situations, the corresponding text file for the university will be deleted, and an error message will inform the user of the invalid file format and deletion.
 
 During the duration of the program, whenever the user decides to alter the data corresponding to UserUniversityListManager
 (ie. add / delete universities or modules, or create new university list), UserStorageParser class will update the affected university's text file accordingly.
 This is achieved by converting UserUniversityListManager into a `String`, before saving it in the text file.
+
+Initially, user storage was designed to store all information into a single text file, including module codes, module titles and module credits.
+After the implementation of [timetable](#timetable), information was stored into two text files, one for saved modules and the other for timetable information.
+However, to recover as much information as possible in the event of file corruption, the current iteration stores every university's information in separate text files, and minimal information is stored.
+For future versions, more can be done to detect corrupted information and recover uncorrupted information.
 
 The following diagram illustrates the relationships between the two main user storage classes - UserStorage and UserStorageParser.
 
