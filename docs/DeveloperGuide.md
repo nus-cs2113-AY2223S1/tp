@@ -90,11 +90,15 @@ You should see the following greeting message if the project setup is successful
 Your MoneyGoWhere? Let me help you track it.
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Design
 ### Software Architecture
 The software architecture diagram below describes the program's design and the interaction between components.
 
 ![Software-Architecture](images/SoftwareArchitecture.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Core Components
 
@@ -110,6 +114,8 @@ The software architecture diagram below describes the program's design and the i
 | Storage       | Provide functions to save and load data.                                 |
 | API           | Provide functions to interact with external APIs.                        |
 | Logger        | Provide functions to log user actions and the program's behaviour.       |
+
+<div style="page-break-after: always;"></div>
 
 ### Component Interactions
 The sequence diagram below describes the interaction between the various core components when a command is entered.
@@ -131,6 +137,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
 * After the operations are performed, command handler functions calls `UserInterface#runLocalStorageSaveToFile()` functions to save data to local storage.
+
+<div style="page-break-after: always;"></div>
 
 #### Component Interaction Reference Diagrams
 
@@ -158,12 +166,16 @@ In the example above, `UserInterface` calls `UserInterface#convertExpenseToConso
 * `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
 * `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
 
+<div style="page-break-after: always;"></div>
+
 ### Common Component
 
 The Common component consists of the classes `Messages` and `Configurations`.\
 \
 `Messages` defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.\
 `Configurations` defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
+
+<div style="page-break-after: always;"></div>
 
 ### Exceptions Component
 
@@ -175,6 +187,8 @@ The exceptions are thrown and handled by the program depending on the conditions
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
 Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
 
+<div style="page-break-after: always;"></div>
+
 ### UserInterface Component
 
 The UserInterface component consists of the class `ConsoleInterface` which runs the command line interface that the user interacts with.
@@ -184,6 +198,8 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 `ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
 For example, entering the command string `Add-Expense -n Expense -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
+
+<div style="page-break-after: always;"></div>
 
 ### Parser Component
 
@@ -196,6 +212,8 @@ When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 * `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
 * The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
 
+<div style="page-break-after: always;"></div>
+
 ### Commands Component
 
 The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
@@ -205,6 +223,8 @@ The Commands component consists of various console command classes which inherit
 The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
 For example, supplying the command string `Add-Expense -n Expense -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
+
+<div style="page-break-after: always;"></div>
 
 ### Data Component
 
@@ -216,6 +236,8 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
 `CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage Component
 
 The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
@@ -223,6 +245,8 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 `LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and writing data to a xml file.\
 `LocalStorageNullErrorHandler` overwrites several default error handlers in the xml parser to allow for custom error handling.\
 `LocalStorage` defines functions that loads and saves data.
+
+<div style="page-break-after: always;"></div>
 
 ### API Component
 
@@ -237,12 +261,16 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
   * The data is written into a text file called `exchangeRates.txt`.
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a HashMap of exchange rates.
 
+<div style="page-break-after: always;"></div>
+
 ### Logger Component
 
 The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.\
 \
 `LocalLoggerFormatter` formats the log record before it is written to a log file.
 `LocalLogger` defines functions to log different types of messages to a log file.
+
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 ### Loading Data from File
@@ -390,6 +418,8 @@ The `Merge-File` command merges an external data file with the current data file
 
 ![Implementation-SD-Load-External-Data](images/ImplementationSDLoadExternalData.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Product Scope
 ### Target User Profile
 
@@ -404,6 +434,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 * Runs on mainstream desktop operating system
 * Works over remote command shells such as `ssh`, allowing easy access over the internet
 * Stores data using the Extensible Markup Language, simplifying the transfer and backup of data using tools such as `scp` or `rsync`
+
+<div style="page-break-after: always;"></div>
 
 ## User Stories
 
@@ -438,6 +470,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 |               v2.0               |   user   | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
 |               v2.0               |   user   | merge several data files together                 | consolidate my expenses easily                    |
 
+<div style="page-break-after: always;"></div>
+
 ## Non-Functional Requirements
 
 1. The program should provide the same user experience regardless of the platform it is running on.
@@ -452,6 +486,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 | Secure Shell (ssh)                       | Protocol that enables secure access to a remote system      |
 | Secure Copy (scp)                        | Protocol enables secure data transfer with a remote system  |
 | Remote Sync (rsync)                      | Tool that synchronises a file between a client and a server |
+
+<div style="page-break-after: always;"></div>
 
 ## Manual Testing
 
