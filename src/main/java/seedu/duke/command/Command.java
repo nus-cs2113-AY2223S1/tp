@@ -3,7 +3,6 @@ package seedu.duke.command;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.OperationList;
-import seedu.duke.parsers.Parser;
 import seedu.duke.ui.Ui;
 
 public abstract class Command {
@@ -35,6 +34,14 @@ public abstract class Command {
         return gateNumber;
     }
 
+    //@@author ivanthengwr
+    /**
+     * Executes the main functionity of the bot based on the type of command given.
+     *
+     * @param operations is the type of operation that would be carried out.
+     * @param lineInput Input of the user.
+     * @throws SkyControlException an error if the execution faced an issue specific to the task within the function.
+     */
     public abstract void execute(OperationList operations, String lineInput) throws SkyControlException;
 
     public boolean isExit() {

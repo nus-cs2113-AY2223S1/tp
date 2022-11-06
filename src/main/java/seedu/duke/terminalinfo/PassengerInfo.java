@@ -87,6 +87,12 @@ public class PassengerInfo {
     }
 
     //@@author ivanthengwr
+    /**
+     * Gets the boarding time that is derived from the departure time of flight info.
+     *
+     * @param reformatDepartureTime takes in a formatted departureTime and
+     * @return boardingTime that is formatted to suit the lineInput
+     */
     public String getFormattedBoardingTime(String reformatDepartureTime) {
         LocalTime flightDepartureTime = LocalTime.parse(reformatDepartureTime);
         LocalTime formatBoardingTime = flightDepartureTime
@@ -95,12 +101,24 @@ public class PassengerInfo {
         return boardingTime;
     }
 
+    /**
+     * Reformats BoardingTime after the check as been done so that it can be the correct format as lineInput.
+     *
+     * @param boardingTime takes in the raw data of boarding time to be reformatted.
+     * @return reformatBoardingTime so that it can be placed as the correct format as lineInput.
+     */
     private String reformatBoardingTime(LocalTime boardingTime) {
         String reformatBoardingTime = boardingTime.toString();
         reformatBoardingTime = reformatBoardingTime.replace(":", "");
         return reformatBoardingTime;
     }
 
+    /**
+     * Reformats departure time so that it can be checked.
+     *
+     * @param departureTime takes in the raw data of departure time to be reformatted.
+     * @return formatDepartureTime in string form so that it can be checked.
+     */
     public String reformatDepartureTime(String departureTime) {
         StringBuilder formatDepartureTime = new StringBuilder(departureTime);
         formatDepartureTime.insert(MID_INDEX,":");

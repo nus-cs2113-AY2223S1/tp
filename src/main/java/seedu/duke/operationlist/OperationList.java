@@ -1,21 +1,18 @@
 package seedu.duke.operationlist;
 
-import jdk.dynalink.Operation;
 import seedu.duke.exceptions.SkyControlException;
 import seedu.duke.exceptions.SyncException;
-import seedu.duke.parsers.Parser;
 import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.terminalinfo.PassengerInfo;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public abstract class OperationList extends Parser {
+public abstract class OperationList {
     public static final int EMPTY_FLIGHT_LIST = 0;
     protected static ArrayList<FlightInfo> flights = new ArrayList<>();
     protected static ArrayList<PassengerInfo> passengers = new ArrayList<>();
     protected static Ui ui = new Ui();
-    protected static PassengerList passengerList = new PassengerList();
     protected static boolean isFlightNumberSync = false;
     protected static boolean isEmptyFlightList = false;
     protected static String flightNumber;
@@ -39,7 +36,7 @@ public abstract class OperationList extends Parser {
     public static String getPassengerDepartureTime(OperationList flights,
                                                    String passengerDetail) throws SkyControlException {
         String departureTime = null;
-        String flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
+        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
         ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
         for (FlightInfo flight : flightsInFlightList) {
             if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
@@ -52,7 +49,7 @@ public abstract class OperationList extends Parser {
     public static String getPassengerGateNumber(OperationList flights,
                                                 String passengerDetail) throws SkyControlException {
         String gateNumber = null;
-        String flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
+        String flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
         ArrayList<FlightInfo> flightsInFlightList = flights.getFlights();
         for (FlightInfo flight : flightsInFlightList) {
             if (flightNumber.equalsIgnoreCase(flight.getFlightNumber())) {
@@ -62,6 +59,12 @@ public abstract class OperationList extends Parser {
         return gateNumber;
     }
 
+    /**
+     * Execute a check to see if the relevant flight number exist in the flight list.
+     *
+     * @param flightsThatExist boolean variable that sees if a flight exist or not
+     * @throws SyncException an error if the flight number does not exist in the flight list.
+     */
     private void executeCheck(ArrayList<FlightInfo> flightsThatExist) throws SyncException {
         if (isEmptyFlightList) {
             throw new SyncException(ui.getFlightNumberSyncError());
@@ -81,7 +84,7 @@ public abstract class OperationList extends Parser {
 
     private void getFlightSyncDetails(String passengerDetail,
                                       ArrayList<FlightInfo> flightsThatExist) throws SkyControlException {
-        flightNumber = passengerList.getFlightNumberForSync(passengerDetail);
+        flightNumber = PassengerList.getFlightNumberForSync(passengerDetail);
         isEmptyFlightList = flightsThatExist.size() == EMPTY_FLIGHT_LIST;
 
     }
@@ -94,10 +97,23 @@ public abstract class OperationList extends Parser {
         isFlightNumberSync = false;
     }
 
+    /**
+     * Add is a type of operation, i.e. a passenger or a flight to their respective list.
+     *
+     * @param detail which is the input of the user that regards to the operation that is being carried out.
+     *               i.e. if add Operation, the following details would be input after the operation.
+     * @throws SkyControlException an error if the detail of the operation is left blank of not according to the format.
+     */
     public abstract void addOperation(String detail) throws SkyControlException;
 
+    /**
+     * Delete is a type of operation that will delete a flight or passenger from its respective lists.
+     */
     public abstract void deleteOperation(String detail) throws SkyControlException;
 
+    /**
+     * List is a type of operation that will list out all flights/passengers details.
+     */
     public abstract void listOperation();
 
     public abstract void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException;

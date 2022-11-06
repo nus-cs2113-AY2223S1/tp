@@ -84,7 +84,11 @@ You did not input an operation.
 The system is unable to read your command, please try again.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Flight number should start with 2 letters and trail with 1-4 numbers.
+Stop! The flight number input format is wrong.
+Please try again with the following format:
+'SQ12' - For international flights
+'SQ123' - For regional flights
+'SQ1234' - For domestic flights
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Flight added!

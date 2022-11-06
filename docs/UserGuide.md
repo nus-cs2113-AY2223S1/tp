@@ -51,8 +51,7 @@ through a CLI which is faster than a Graphical User Interface (GUI).
                __/ |
               |___/
 ````
-
-6. After SkyControl has been booted up successfully, enter a command below the welcome display
+After SkyControl has been booted up successfully, enter a command below the welcome display
    and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.
 
 **Input Command**
@@ -410,7 +409,12 @@ However, this can be a future implementation outside the CS2113 curriculum.
   
 **Q**: Do I have to manually update the Boarding time for every passenger if I were to set a delay on a flight?  
   
-**A**: Thankful, you do not need too, SkyControl would automatically update the Boarding time for every
-passenger if a delay in departure time is present.
+**A**: Thankfully, you do not need too, SkyControl would automatically update the Boarding time for every
+passenger if a delay in departure time is present.  
+  
+**Q**: Do I have to manually delete all the passengers of the same flight number that have been deleted in flightList?
+  
+**A**: Thankfully, you do not need to manually delete all passengers with the flight number that has been deleted,
+SkyControl would automatically delete all relevant passengers that had their flight number deleted from flight list.
 
 <br>
