@@ -46,7 +46,10 @@ class DeleteTest {
         ClientList clientList = initializeClientList();
         Client deletedClient = clientList.deleteClient(CLIENT_INDEX_TO_DELETE);
         Client expectedClient = new Client(CLIENT_NAME, CLIENT_CONTACT_NUMBER, CLIENT_EMAIL, CLIENT_BUDGET);
-        assertEquals(expectedClient, deletedClient);
+        assertEquals(expectedClient.getClientName(), deletedClient.getClientName());
+        assertEquals(expectedClient.getClientContactNumber(), deletedClient.getClientContactNumber());
+        assertEquals(expectedClient.getClientEmail(), deletedClient.getClientEmail());
+        assertEquals(expectedClient.getClientBudgetPerMonth(), deletedClient.getClientBudgetPerMonth());
         assertFalse(clientList.getClientList().contains(deletedClient));
     }
 
@@ -55,7 +58,10 @@ class DeleteTest {
         PropertyList propertyList = initializePropertyList();
         Property deletedProperty = propertyList.deleteProperty(PROPERTY_INDEX_TO_DELETE);
         Property expectedProperty = new Property(LANDLORD_NAME, PROPERTY_ADDRESS, RENTING_PRICE, UNIT_TYPE);
-        assertEquals(expectedProperty, deletedProperty);
+        assertEquals(expectedProperty.getLandlordName(), deletedProperty.getLandlordName());
+        assertEquals(expectedProperty.getPropertyAddress(), deletedProperty.getPropertyAddress());
+        assertEquals(expectedProperty.getRentingPrice(), deletedProperty.getRentingPrice());
+        assertEquals(expectedProperty.getUnitType(), deletedProperty.getUnitType());
         assertFalse(propertyList.getPropertyList().contains(deletedProperty));
     }
 
