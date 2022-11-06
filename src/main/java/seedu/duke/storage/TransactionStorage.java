@@ -124,7 +124,7 @@ public class TransactionStorage extends Storage {
         transactionList.checkValidArgsForStorage(splitTransactionLine);
         itemList.checkNameOwnerOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
                 splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
-        itemList.checkValidPrice(splitTransactionLine[MONEY_INDEX]);
+        transactionList.checkValidMoneyTransacted(splitTransactionLine[MONEY_INDEX]);
         Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
         transactionList.checkOldTransactionsOverlapWithNew(transaction);
         transactionList.checkLenderAndBorrowerUnfinishedTx(transaction, userList, itemList);

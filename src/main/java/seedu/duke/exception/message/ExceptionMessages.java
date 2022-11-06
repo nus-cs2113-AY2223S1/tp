@@ -32,6 +32,9 @@ public class ExceptionMessages {
     public static final String MESSAGE_PRICE_FORMAT_INVALID = "Price is a float, check your format";
     public static final String MESSAGE_PRICE_OUT_OF_RANGE =
             "Price must be in range from 0 to 10000";
+
+    public static final String MESSAGE_MONEY_TRANSACTED_OUT_OF_RANGE =
+            "Price must be in range from 0 to 15000000";
     public static final String MESSAGE_PRICE_TOO_MANY_DECIMALS =
             "Price must have at most 2 decimals, $0.01 is the smallest unit of price!";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";

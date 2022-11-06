@@ -849,7 +849,7 @@ ____________________________________________________________
 > 
 > Each line represents one transaction with the format:
 > 
-> `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [TOTALMONEY] | [TRANSACTIONID]`
+> `[ITEMID] | [BORROWER] | [DURATION] | [CREATED_DATE] | [LENDER] | [ITEMNAME] | [MONEY_TRANSACTED] | [TRANSACTIONID]`
 > 
 > If you edit this files, please take note: 
 > 
@@ -857,6 +857,7 @@ ____________________________________________________________
 > - Duration range is from 0 to 1461
 > - Created date range is from 2016-01-01 to today
 > - No transaction ID occurs twice
+> - Money transacted valid range is from 0 to 15000000
 > - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.
 >
 > You are allowed to change the username when all transactions related to them are finished and that username is unique.

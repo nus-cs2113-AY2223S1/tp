@@ -3,6 +3,7 @@ package seedu.duke.transaction;
 import seedu.duke.exception.DateFormatInvalidException;
 import seedu.duke.exception.DuplicateException;
 import seedu.duke.exception.DurationInvalidException;
+import seedu.duke.exception.InvalidPriceException;
 import seedu.duke.exception.InvalidTransactionException;
 import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.exception.TransactionNotFoundException;
@@ -10,6 +11,7 @@ import seedu.duke.exception.UserNotFoundException;
 import seedu.duke.item.ItemList;
 import seedu.duke.user.UserList;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -22,7 +24,10 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DUPLICATE_T
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DURATION_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_TRANSACTION_OVERLAP;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UPDATE_TRANSACTION_OVERLAP;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_MONEY_TRANSACTED_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NUMBER_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_TOO_MANY_DECIMALS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_TX_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_UNFINISHED_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_UNFINISHED_USER_NOT_FOUND;
@@ -339,6 +344,24 @@ public class TransactionList {
             throws DateFormatInvalidException, DurationInvalidException {
         checkValidDuration(args[DURATION_INDEX]);
         checkValidCreatedDate(args[CREATED_DATE_INDEX]);
+    }
+
+    /**
+     * Checks if moneyTransacted of transaction from storage is valid or not (max 2 dp).
+     *
+     * @param moneyTransacted The price from storage
+     * @throws InvalidPriceException If moneyTransacted is invalid
+     */
+    public void checkValidMoneyTransacted(String moneyTransacted) throws InvalidPriceException {
+        try {
+            if (Double.parseDouble(moneyTransacted) < 0 || Double.parseDouble(moneyTransacted) > 15000000) {
+                throw new InvalidPriceException(MESSAGE_MONEY_TRANSACTED_OUT_OF_RANGE);
+            } else if (BigDecimal.valueOf(Double.parseDouble(moneyTransacted)).scale() > 2) {
+                throw new InvalidPriceException(MESSAGE_PRICE_TOO_MANY_DECIMALS);
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MESSAGE_PRICE_FORMAT_INVALID);
+        }
     }
 
     /**
