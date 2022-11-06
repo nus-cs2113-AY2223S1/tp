@@ -58,10 +58,10 @@ This section allows users to understand all the features that we offer, includin
 >4. Argument value cannot contain ```/``` or ```|```.
 >5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
 >6. Note that price inputs can only have at most 2 decimal places:
-    1. 0.5 -> $0.50 (GOOD)
-    2. 1 -> $1.00 (GOOD)
-    3. 1.01 -> $1.01 (GOOD)
-    4. 0.9666 -> error (BAD)
+>       1. 0.5 → $0.50 (GOOD)
+>       2. 1 → $1.00 (GOOD)
+>       3. 1.01 → $1.01 (GOOD)
+>       4. 0.9666 → error (BAD)
 
 
 ### 3.1. Getting help
