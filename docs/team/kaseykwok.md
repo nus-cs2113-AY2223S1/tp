@@ -32,9 +32,11 @@ and Prescription menu)
     * Added documentation for the `help` and `exit` command.
     * Did cosmetic tweaks to structure the user guide and the table of content.
   * Developer Guide
-    * Added class details for the `Prescription` component, including a class diagram. 
-    * Added implementation details for `add` and `activate` command in Prescription menu, with their respective sequence 
-    diagrams
+    * Added design and implementation details for the architecture and the main component, including architecture, 
+    object and sequence diagrams.
+    * Added details for the `Prescription` component, including a class diagram. 
+    * Added implementation details for 4 main commands in Prescription menu, with their respective sequence diagrams.
+    * Added instruction for manual testing's launch and shutdown, navigation and prescription menu tests.
 * **Community**:
   * PRs reviewed (within team): [#34](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/34),
   [#35](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/35),
@@ -45,5 +47,11 @@ and Prescription menu)
   [#75](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/75),
   [#136](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/136),
   [#137](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/137),
-  [#142](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/142)
+  [#142](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/142),
+  [#202](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/202),
+  [#203](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/203),
+  [#206](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/206),
+  [#211](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/211),
+  [#235](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/235),
+  [#242](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/242)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2113-AY2223S1/forum/issues/20))
