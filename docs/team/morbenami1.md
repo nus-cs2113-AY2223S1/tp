@@ -22,3 +22,6 @@ and keep track of their patients, patient visits and prescriptions all in one pl
   * found code duplicate and combined function to remove it
   * fixed formatting issues
   * came up with the project idea - concept, name and important features
+* **Community**:
+  * PRs reviewed (within team): 
+    * https://github.com/AY2223S1-CS2113-F11-4/tp/pull/79
