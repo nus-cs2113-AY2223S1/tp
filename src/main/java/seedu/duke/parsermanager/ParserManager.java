@@ -138,7 +138,8 @@ public class ParserManager {
         boolean isClient = subCheckCommandType.equals(CLIENT_FLAG);
 
         if (isClient) {
-            return new ParseCheckClient(commandDetail, clientList);
+            String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
+            return new ParseCheckClient(commandDescription, clientList);
         } else if (isProperty) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
             return new CommandCheckPropertyParser(commandDescription);

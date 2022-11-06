@@ -5,28 +5,22 @@ package seedu.duke.parsermanager;
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
 import seedu.duke.command.check.CommandCheckClient;
-import seedu.duke.exception.ExtraFlagsException;
-import seedu.duke.exception.IncorrectFlagOrderException;
-import seedu.duke.exception.InvalidIndexException;
-import seedu.duke.exception.MissingFlagException;
 import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.check.CommandCheckExtraParametersException;
+import seedu.duke.exception.check.CommandCheckNotIntegerException;
+import seedu.duke.exception.check.ParseCheckException;
+import seedu.duke.exception.check.checkclient.CheckClientInvalidIndexException;
+import seedu.duke.exception.check.checkclient.CheckClientMissingFlagException;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_CLIENT_FLAGS;
-import static seedu.duke.Messages.EXCEPTION;
-import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
-import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
+import static seedu.duke.CommandStructure.START_INDEX;
 
 public class ParseCheckClient extends Parser {
     private final String commandDescription;
 
     private final ClientList clientList;
-
-
-    private static final int CORRECT_FLAG_POSITION = 8;
-    private static final int NO_FLAG_FOUND = -1;
 
 
     public ParseCheckClient(String checkCommandDescription, ClientList clientList) {
@@ -35,77 +29,57 @@ public class ParseCheckClient extends Parser {
     }
 
     @Override
-    public Command parseCommand() throws InvalidIndexException, MissingFlagException,
-            IncorrectFlagOrderException, NotIntegerException, ExtraFlagsException {
+    public Command parseCommand() throws ParseCheckException {
         try {
             ArrayList<String> stringCheckDetails = processCommandDetails(commandDescription);
             ArrayList<Integer> integerCheckDetails = convertProcessedCommandDetailsToInteger(stringCheckDetails);
 
             validateCheckClientDetails(integerCheckDetails);
             return new CommandCheckClient(integerCheckDetails);
-        } catch (InvalidIndexException e) {
-            throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
-        } catch (MissingFlagException e) {
-            throw new MissingFlagException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT);
-        } catch (IncorrectFlagOrderException e) {
-            throw new IncorrectFlagOrderException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT);
         } catch (NotIntegerException e) {
-            throw new NotIntegerException(MESSAGE_NOT_INTEGER);
-        } catch (ExtraFlagsException e) {
-            throw new ExtraFlagsException(MESSAGE_CHECK_CLIENT_WRONG_FORMAT);
+            throw new CommandCheckNotIntegerException();
         }
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException, ExtraFlagsException {
+            throws ParseCheckException {
 
         String[] flags = CHECK_CLIENT_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
-        checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);
-        checkFlagsOrder(flagIndexPositions);
+        checkExtraArguments(commandDescription, flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
-    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraFlagsException {
-        if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
-            throw new ExtraFlagsException(EXCEPTION);
+    private void checkExtraArguments(String commandDescription, int[] flagIndexPositions)
+            throws CommandCheckExtraParametersException {
+        int firstFlagIndex = flagIndexPositions[START_INDEX];
+        if (firstFlagIndex != START_INDEX) {
+            String extraArgument = commandDescription.substring(START_INDEX, firstFlagIndex);
+            throw new CommandCheckExtraParametersException(extraArgument);
         }
     }
 
-    private void validateCheckClientDetails(ArrayList<Integer> clientDetails) throws InvalidIndexException {
+    private void validateCheckClientDetails(ArrayList<Integer> clientDetails) throws CheckClientInvalidIndexException {
         int clientIndex = clientDetails.get(0);
         checkForClientListIndexOutOfBounds(clientIndex);
     }
 
-    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
+    private void checkForMissingFlags(int[] flagIndexPositions) throws CheckClientMissingFlagException {
         for (int flagIndex : flagIndexPositions) {
             if (!isFlagPresent(flagIndex)) {
-                throw  new MissingFlagException(EXCEPTION);
+                throw new CheckClientMissingFlagException();
             }
         }
     }
 
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
-        }
-    }
-
-    private void checkForClientListIndexOutOfBounds(int clientIndex) throws InvalidIndexException {
+    private void checkForClientListIndexOutOfBounds(int clientIndex) throws CheckClientInvalidIndexException {
         if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
-            throw new InvalidIndexException(EXCEPTION);
+            throw new CheckClientInvalidIndexException();
         }
     }
 
     private boolean isFlagPresent(int flagIndexPosition) {
-        return (flagIndexPosition != NO_FLAG_FOUND);
-    }
-
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
-        }
+        return (flagIndexPosition != FLAG_ABSENT_RETURN_VALUE);
     }
 }
