@@ -2,7 +2,6 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.NotIntegerException;
 
 import java.util.ArrayList;
