@@ -57,11 +57,7 @@ This section allows users to understand all the features that we offer, includin
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 >4. Argument value cannot contain ```/``` or ```|```.
 >5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
->6. Note that price inputs can only have at most 2 decimal places:
->       1. 0.5 → $0.50 (GOOD)
->       2. 1 → $1.00 (GOOD)
->       3. 1.01 → $1.01 (GOOD)
->       4. 0.9666 → error (BAD)
+>6. Note that price inputs can only have at most 2 decimal places
 
 
 ### 3.1. Getting help
@@ -123,6 +119,7 @@ ADDITIONAL-DETAILS:
 Please take note to add a space before and after delimiters! e.g ' /c '
 Please note that except for 'find-item' and 'find-user', all other commands are case-sensitive!
 Refrain from using '|' and '/' as arguments!
+Please note that price inputs can only have at most 2 decimals!
 ____________________________________________________________
 ```
 
@@ -305,14 +302,14 @@ Here are 2 transaction(s) you want to view:
    ItemName: weight ItemID: fc3f71ae
    Lender: bui
    Borrower: jingwei
-   Duration: 5
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022
    MoneyTransacted: $2.50 
 2. [Finished] TxID: 6a99ef95
    ItemName: book ItemID: 8362c71a
    Lender: bui
    Borrower: jingwei
-   Duration: 5
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022
    MoneyTransacted: $2.50 
 ____________________________________________________________
@@ -333,14 +330,14 @@ Here are 2 transaction(s) you want to view:
    ItemName: weight ItemID: fc3f71ae
    Lender: bui
    Borrower: jingwei
-   Duration: 5
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022
    MoneyTransacted: $2.50 
 2. [Finished] TxID: 6a99ef95
    ItemName: book ItemID: 8362c71a
    Lender: bui
    Borrower: jingwei
-   Duration: 5
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022
    MoneyTransacted: $2.50 
 ____________________________________________________________
@@ -356,6 +353,10 @@ Note:
 2. To choose category, please use ```list-categories``` to list them out and use the index
 3. Price must be a float, and in range from 0 to 10000
 4. Note that price must have at most 2 decimal places
+    1. 0.5 → $0.50 (GOOD)
+    2. 1 → $1.00 (GOOD)
+    3. 1.01 → $1.01 (GOOD)
+    4. 0.9666 → error (BAD)
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -449,6 +450,10 @@ Note:
 3. Price is in price per day, and in range from 0 to 10000
 4. You may or may not use floating point numbers for price
 5. Note that price must have at most 2 decimal places
+    1. 0.5 → $0.50 (GOOD)
+    2. 1 → $1.00 (GOOD)
+    3. 1.01 → $1.01 (GOOD)
+    4. 0.9666 → error (BAD)
 
 Example of usage: ```update-item /i ea608c61 /p 4```
 
@@ -476,7 +481,11 @@ Note:
 3. Minimum and Maximum price must be no less than 0 and no more than 10000
 4. Minimum price must be less than maximum price
 5. Note that price can only have at most 2 decimal places
-6. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
+    1. 0.5 → $0.50 (GOOD)
+    2. 1 → $1.00 (GOOD)
+    3. 1.01 → $1.01 (GOOD)
+    4. 0.9666 → error (BAD)
+7. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5 /cat 3```
 
@@ -579,7 +588,7 @@ OK! I will add the following transaction:
    ItemName: speaker ItemID: 3ff10798
    Lender: thanh 
    Borrower: bui 
-   Duration: 5 
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022 
    MoneyTransacted: $10.00
 Total transaction(s) in database: 3
@@ -604,7 +613,7 @@ OK! I will remove the following item:
    ItemName: speaker ItemID: 3ff10798 
    Lender: thanh 
    Borrower: bui 
-   Duration: 5 
+   Duration: 5 Days
    ReturnedDate: Tue, Oct 25 2022 
    MoneyTransacted: $10.00
 Total transactions(s) in database: 2
@@ -626,14 +635,14 @@ Here are 2 transaction(s) you want to view:
    ItemName: scale ItemID: f15dff20 
    Lender: thanh 
    Borrower: jorelle 
-   Duration: 5 
+   Duration: 5 Days
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
    MoneyTransacted: $5.00
 2. [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Lender: thanh 
    Borrower: winston 
-   Duration: 100 
+   Duration: 100 Days
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
    MoneyTransacted: $900.0 
 ____________________________________________________________
@@ -657,7 +666,7 @@ Here is the transaction you requested to view:
    ItemName: laptop ItemID: bd4961ed 
    Lender: thanh 
    Borrower: winston 
-   Duration: 100 
+   Duration: 100 Days
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
    MoneyTransacted: $900.00
 ____________________________________________________________
@@ -678,14 +687,14 @@ Here are the uncompleted transactions:
    ItemName: scale ItemID: f15dff20
    Lender: thanh  
    Borrower: jorelle 
-   Duration: 5 
+   Duration: 5 Days
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
    MoneyTransacted: $5.00
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Lender: thanh 
    Borrower: winston 
-   Duration: 100 
+   Duration: 100 Days
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
    MoneyTransacted: $900.00
 ____________________________________________________________
@@ -710,7 +719,7 @@ Done! Here is the updated transaction:
    ItemName: scale ItemID: f15dff20 
    Lender: thanh 
    Borrower: jorelle 
-   Duration: 10 
+   Duration: 10 Days
    ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
    MoneyTransacted: $10.00
 ____________________________________________________________
@@ -773,7 +782,7 @@ ____________________________________________________________
 
 ## 5. Frequently Asked Questions
 
-How do I transfer my data to another computer?
+1. How do I transfer my data to another computer?
 
 >On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the `data` folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
@@ -781,7 +790,7 @@ If Duke crashes, is my data saved?
 
 >Yes, Duke will automatically save your data to files after each operation. Therefore, data will be saved no matter how you exit the program, even with ```Ctrl-C```.
 
-What will happen if I illegally modify data in the files?
+2. What will happen if I illegally modify data in the files?
 
 > Duke will detect if the data is modified or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
 > to use the app until Duke detect your data is fixed. If you cannot fix it, then you can choose to delete entire ```data``` folder. However, this also means that your previous data cannot be recovered.
@@ -791,7 +800,7 @@ What will happen if I illegally modify data in the files?
 > - Duke is designed not to be able to run with corrupted data file, not Duke crashes
 > - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours afterwards and loss of data.
 
-How can I manually edit data files correctly?
+3. How can I manually edit data files correctly?
 
 >**User file**
 > 
@@ -831,3 +840,8 @@ How can I manually edit data files correctly?
 > - Created date range is from 2016-01-01 to today
 > - No transaction ID occurs twice
 > - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.
+
+4. Why am I able to enter duplicates of the same item?
+> Upcycle allows for duplicate items to be listed as transactions are made through each item's unique ID instead of the item's name. 
+
+
