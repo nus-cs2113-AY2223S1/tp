@@ -204,21 +204,23 @@ The edit component consists of three parts:
 - Parser
     - Parses the user input, instantiates the EditCommand class
 - EditModeCommand
-    - Handles the edit functions (Add, Swap, Change, Delete, Invalid)
+    - Handles the edit functions that falls under `EditModeCommand` 
+  (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
 - EditCommand
-    - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and
+    - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
       CLI,
       handles saving the edited recipe
 
 #### Parser
 
-The FlagParser contains several functions to extract flags from the user input in the FlagType format. It is used to
+The `FlagParser` contains several functions to extract flags from the user input in the FlagType format. It is used to
 instantiate the necessary EditModeCommand.
-GuiWorkFlow bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
+
+`GuiWorkFlow` bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
 
 #### EditModeCommand
 
-An abstract class instantiated by EditCommand in CLI mode. It takes in the old recipe and, once executed,
+An abstract class instantiated by `EditCommand` in CLI mode. It takes in the old recipe and, once executed,
 returns a new recipe which will be saved to Storage.
 
 #### EditCommand
@@ -304,11 +306,94 @@ Before exiting, the program will
 This is to prevent manual tampering of the data that might affect the data in the next run
 
 ### Parsing of Commands
-The following sequence diagram shows the usage of relavent classes and methods when trying to parse
-an arbitrary intput into an executable `command` by software.
+The following sequence diagram shows the usage of relevant classes and methods when trying to parse
+an arbitrary input into an executable `command` by software.
 <p align="center" width="100%">
-  <img width="80%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
 </p>
+
+Step 1:
+A user input will be parsed into `parser` and checked for the command word by `parseCommand`.
+
+Step 2.1:
+If command word is `/add`, `parseAddCommand()` will be called by `Parser`. If the input is a valid `AddCommand`,
+an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned. 
+
+Step 2.2:
+If `templateFileMissingException` occurs,`Parser` will call `generateFile()` in `Storage` to create
+the template file. An `InvalidCommand`containing this exception will be returned.
+
+Step 3.1:
+If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a valid `EditCommand`
+to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned. 
+
+Step 3.1.1:
+If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException` 
+or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will 
+be returned.
+
+Step 3.2:
+If the command input is a valid `EditCommand` to edit in CLI, an instance of `EditCommand` to interpret user
+input into changes made to `recipe` is returned.
+
+Step 3.2.2:
+If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
+or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
+be returned.
+
+Step 4:
+If the command word is `/list`, an instance of `ListCommand` will be returned to `Parser`.
+
+Step 5:
+If the command word is `/exit`, an instance of `ExitCommand` will be returned to `Parser`.
+
+Step 6.1:
+If the command word is `/view`, `Parser` will call `parseViewCommand()` from itself. If the command views
+`recipe` by index, a `ViewCommand` that instructs showing `recipe` at the given index will be returned
+to `Parser`.
+
+Step 6.2:
+If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given 
+title will be returned to `Parser`.
+
+Step 6.3:
+If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing 
+information on the respective `Exception` or `Error` will be returned to `Parser`.
+
+Step 7.1:
+If the command word is `/delete`, `Parser` will call `parseDeleteCommand()` from itself. If the command deletes
+`recipe` by index, a `DeleteCommand` that instructs deleting `recipe` at the given index will be returned
+to `Parser`.
+
+Step 7.2:
+If the command deletes `recipe` by title, a `DeleteCommand` that instructs deleting `recipe` of the given
+title will be returned to `Parser`.
+
+Step 7.3:
+If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
+information on the respective `Exception` or `Error` will be returned to `Parser`.
+
+Step 8.1:
+If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid 
+`FindCommand`, an instance containing the respective `flag` and other input information will be returned to 
+`Parser`.
+
+Step 8.2:
+If the input is shorter than the expected length of a `FindCommand` input, an instance of `InvalidCommand` containing
+information on the correct format for `FindCommand` input will be returned to `Parser`.
+
+Step 9.1:
+If the command word is `/help`, `Parser` will call `parseHelpCommand()` from itself. If the input is a valid
+`HelpCommand`, an instance containing input information will be returned to `Parser`.
+
+Step 9.2:
+If the input is not of the same length as the expected length of a `HelpCommand` input, an instance of `InvalidCommand` 
+containing information on the correct format for `HelpCommand` input will be returned to `Parser`.
+
+Step 10:
+If the command word is none of the above, an instance of `InvalidCommand` will be returned to `Parser`.
 
 ### Add Recipe
 
@@ -453,13 +538,130 @@ quickly.
 
 ## Instructions for manual testing
 
-1. Go to our latest release [Releases](https://github.com/AY2223S1-CS2113-T18-2/tp/releases)
-2. Download the "ManualTestData.rar" and unzip it
-3. Inside,there are
+{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
-    - Recipes folder: with 3 sample recipes
-    - `AllRecipes.txt` with 3 sample recipe titles
+### Parsing  from Text to Recipe using Add or Edit GUI
 
+- For the ease of testing, use `/add` command and edit directly on the template
+- When the parser throw an error, and you were asked `Do you want to FIX the recipe? (Y/N)`, type `y`
+
+#### General errors
+
+- **Whitespace at the start of the line**
+    - Expected: Will be trimmed (except for [Description](#description-errors))
+- **Blank whitespace**
+    - Different types
+        - Blank space at the start
+        - Blank space between the '# HEADING' and the content
+        - Blank space between the ingredients and step
+    - Expected outcome: allowed and will not affect parsing (except for [Description](#description-errors))
+- **Missing, duplicate Heading**
+    - Expected: `Incorrect number of HEADINGS! Please follow the template!`
+- **Heading in different order**
+    - Expected: able to parse
+- **Duplicate Title in `/add`**
+    - Expected outcome: `This Recipe Title already existed!`
+
+#### Title errors
+
+- **Multi-line title**: Title contains multiple lines
+    - Expected outcome: `TITLE should be a single line and less than 255 characters`
+- **Title that is not alphanumeric**: To prevent characters that are an invalid file name
+    - Expected outcome:
+- **Title with >255 characters**: Cannot be saved as a file in the Operating System
+    - Here is a 255 characters
+      string: `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`
+    - Expected outcome: `TITLE is too long! TITLE should be less than 255 characters!`
+
+#### Description errors
+
+- Description will record down all type of characters under the DESCRIPTION Heading as a string because we want to give
+  the user freedom
+- **Blank lines and whitespace at the start of a line**
+    - Expected outcome: will be recorded
+    - Save the Recipe and use `/view` command to check the description content
+
+#### Ingredients errors
+
+- **Characters in front of the index**
+    - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
+- **Negative index**
+    - Expected outcome: `INGREDIENT index must be a positive integer!`
+- **Index increment is wrong**:
+    - Expected outcome: `INGREDIENT index increment is incorrect! Index starts from 1`
+- **More `/` than the format**
+    - Expected outcome: `INGREDIENT format is incorrect!` and further instructions
+- **`.` in ingredient name**
+    - Expected outcome: allowed
+- **Amount not a valid positive double**:
+    - Expected outcome: `INGREDIENT amount should be a positive rational number!` and further instructions
+
+#### Steps errors
+
+- **Characters in front of the index**
+    - Expected outcome: `STEP format is incorrect!` and further instructions
+- **Negative index**
+    - Expected outcome: `STEP index must be a positive integer!`
+- **Index increment is wrong**:
+    - Expected outcome: `STEP index increment is incorrect! Index starts from 1`
+- **`.` in step description**:
+    - Expected outcome: allowed because a step can have multiple sentences
+
+### Storage: Tampering the data
+
+- Tamper the data to test if the program can recover gracefully
+
+#### During the running of the program
+
+- **Delete or tamper the `AllRecipes.txt` file**
+    - No effect as the program does not use `AllRecipes.txt` while running
+    - If the program is stopped not using `/exit`. The effect will be reflected in the next run
+    - However, after `/add`, `/edit`,`/exit`, a correct `AllRecipes.txt` will be generated
+
+- **Delete recipe files then `/edit`**
+    - Deleting the data files can only be done if the files are newly created during the same run of the program.
+    - If the file is loaded by the program, you cannot delete because JDK is using them.<p align="center" width="100%">
+      <img width="80%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
+    - Expected outcome:
+      ```
+      Please edit in the GUI editor!
+      Recipe File is missing! Regenerate Recipe File! Please try again!
+      >>>
+      ```
+- **Tamper the recipe files**
+    - The change in recipe files will not be reflected in the Model
+- **Tamper the recipe file then `/edit`**
+    - The change will be loaded into the Editor GUI
+    - The validity of the change will be parsed when exit the GUI and will be reflected in the Model
+- **Tamper the recipe file then `/exit`**
+    - The program will regenerate all the recipe files and `AllRecipes.txt` based on the Model
+
+#### Before the running of the program
+
+- **Delete the `AllRecipes.txt`**
+    - The program cannot recognize any title start anew, despite having recipe files
+- **Tamper the `AllRecipes.txt`**
+    - The program will match the recipe titles in `AllRecipes.txt` with the stored recipe files
+    - The program will parse the recipe files
+    - If valid, the program will load the recipe into the Model
+    - If the title does not match the stored recipe or the stored recipe cannot be parsed, the program will not
+      recognize the recipe
+
+- **Delete the recipe file**
+    - The program cannot find the recipe file from the title in `AllRecipes.txt`
+    - The program will skip this
+- **Tamper the recipe file (parseable recipe)**
+    - The program will load the recipe with the tampered content
+- **Tamper the recipe file (unparseable recipe)**
+  - The program will not load the recipe 
+  - Recipes folder: with 3 sample recipes
+  - `AllRecipes.txt` with 3 sample recipe titles
+  
+## Non-Functional Requirements
+
+1. Should work on any OS as long as it has Java 11 or above installed on their PC.
+2. Should be able to hold up to 1000 recipes without a slowdown of performance.
+3. Any user that is comfortable with typing of speeds >55 words per minute would be able to accomplish these tasks faster than if they used a mouse to navigate.
 4. Run the program for the first time, so that the program generates the `RecipeData` folder and `/exit` the program
 5. Copy the folder and file in 3. to `RecipeData`, overwriting existing files
 6. This gives you 3 sample recipes so you don't have to manually add recipes all the time
