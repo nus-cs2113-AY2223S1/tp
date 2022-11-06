@@ -1,12 +1,15 @@
 package seedu.duke.ui;
 
+import seedu.duke.records.Record;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.StrengthExercise;
+import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 
-public class ExerciseTable extends Table {
+public class ExerciseTable extends TableFrame {
     public static final int INDEX_POSITION = 0;
     public static final int DESCRIPTION_INDEX = 1;
     public static final int WEIGHT_INDEX = 2;
@@ -22,12 +25,18 @@ public class ExerciseTable extends Table {
     public static final String ROW_SEPARATOR = "-";
     private final ArrayList<Exercise> exerciseArrayList;
     private final String[] headings = new String[9];
+    private final String caption;
     private int[] columnSpacingArray = new int[9];
     private ArrayList<String> exerciseTable;
 
-    public ExerciseTable(ArrayList<Exercise> exerciseArrayList, String caption) {
-        super(caption);
+    public ExerciseTable(ArrayList<Food> foodArrayList,
+                         ArrayList<WeightAndFat> weightAndFatArrayList,
+                         ArrayList<Exercise> exerciseArrayList,
+                         ArrayList<Record> recordArrayList,
+                         String caption) {
+        super(foodArrayList, weightAndFatArrayList, exerciseArrayList, recordArrayList);
         this.exerciseArrayList = exerciseArrayList;
+        this.caption = caption;
         exerciseTable = new ArrayList<>();
         addHeadings();
     }
@@ -75,7 +84,7 @@ public class ExerciseTable extends Table {
         }
     }
 
-    private String getCaloriesForTable(Exercise exercise, int numberOfSpace) {
+    public static String getCaloriesForTable(Exercise exercise, int numberOfSpace) {
         if (!exercise.getDone()) {
             return addRightPadding(UNAVAILABLE_SYMBOL, numberOfSpace);
         }
@@ -83,7 +92,7 @@ public class ExerciseTable extends Table {
                 numberOfSpace);
     }
 
-    private String getDistanceForTable(Exercise exercise, Integer numberOfSpace) {
+    public static String getDistanceForTable(Exercise exercise, Integer numberOfSpace) {
         if (exercise instanceof StrengthExercise) {
             return addRightPadding(UNAVAILABLE_SYMBOL, numberOfSpace);
         }
@@ -91,7 +100,7 @@ public class ExerciseTable extends Table {
     }
 
 
-    private String getWeightForTable(Exercise exercise, Integer numberOfSpace) {
+    public static String getWeightForTable(Exercise exercise, Integer numberOfSpace) {
         if (exercise instanceof CardioExercise) {
             return addRightPadding(UNAVAILABLE_SYMBOL, numberOfSpace);
         }
@@ -157,10 +166,10 @@ public class ExerciseTable extends Table {
         }
     }
 
-    @Override
-    protected String addRightPadding(String string, int numberOfSpace) {
-        return String.format("%-" + numberOfSpace + "s", string) + COLUMN_SEPARATOR;
-    }
+
+//    protected static String addRightPadding(String string, int numberOfSpace) {
+//        return String.format("%-" + numberOfSpace + "s", string) + COLUMN_SEPARATOR;
+//    }
 
 
 }

@@ -5,9 +5,11 @@ import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
+import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.Calculator;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
@@ -15,7 +17,9 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.AllRecordsTable;
 import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
@@ -23,6 +27,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
 
 public class FindCommand extends Command {
     public static final String STRENGTH_EXERCISE_NOT_FOUND = "No matching strength exercise found";
@@ -44,8 +49,15 @@ public class FindCommand extends Command {
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
+
+    private RecordList recordList;
     private Ui ui;
     private Biometrics biometrics;
+
+    private ArrayList<WeightAndFat> weightAndFatList;
+    private ArrayList<Food> foodArrayList;
+    private ArrayList<Exercise> exerciseArrayList;
+    private ArrayList<Record> recordArrayList;
 
     public FindCommand(String arguments) {
         this.arguments = arguments;
@@ -56,6 +68,13 @@ public class FindCommand extends Command {
         int slashesCount = Parser.getArgumentsCount(arguments);
         String[] argumentList = Parser.getArgumentList(arguments);
         String findType = Parser.getClassType(argumentList);
+
+        weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
+        foodArrayList = foodList.getFoodList();
+        exerciseArrayList = getFilteredCardioExerciseList(arguments);
+        recordArrayList = recordList.getRecordList(weightAndFatList,
+                foodArrayList, exerciseArrayList);
+
         switch (findType) {
         case STRENGTH:
             findStrength(argumentList, slashesCount);
@@ -134,7 +153,8 @@ public class FindCommand extends Command {
             ui.output(failureFeedback);
         } else {
             String caption = System.lineSeparator() + successFeedback;
-            ExerciseTable filterTable = new ExerciseTable(filteredExerciseList, caption);
+            ExerciseTable filterTable = new ExerciseTable(foodArrayList, weightAndFatList,
+                    filteredExerciseList, recordArrayList, caption);
             ui.printTable(filterTable.getExerciseTable());
         }
     }
@@ -144,8 +164,11 @@ public class FindCommand extends Command {
                 arguments.charAt(arguments.length() - 1));
         handleInvalidFindFoodCommand(argumentList);
         ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
-        ui.output("Here are the matching food in your food list:");
-        ui.outputFoodList(filteredFoodList);
+        FoodTable tableFrame = new FoodTable(
+                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList,
+                "Here are the matching food in your food list:");
+        ArrayList<String> table = tableFrame.getFoodTable();
+        ui.printTable(table);
     }
 
 
@@ -221,5 +244,6 @@ public class FindCommand extends Command {
         this.biometrics = biometrics;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
+        this.recordList = recordList;
     }
 }
