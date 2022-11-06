@@ -167,6 +167,11 @@ It consists of the following classes:
 
 ![Model Classes](images/model.png)
 
+An object diagram of an instance of `SelectedModule`, the abstracted unit that will be mainly dealt with in the model is
+shown below.
+
+![Model Classes](images/SelectedModuleObjectDiagram.png)
+
 #### 3.2.1 Module Loader
 
 Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored
@@ -266,19 +271,11 @@ instance of `module` from its class. Boolean `successful` field is used to flag 
 to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
 It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
 passed on to the overridden `getExecutionMessage()` which displays the result of data validation that
-new `selectedModule`
-added are unique.
+new `selectedModule` added are unique.
 
 ##### 3.4.1.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired
-module.
+As we do not want users to add duplicate modules, we need to check if the module (to add) already exists in the `selectedModuleList`.
 
 The following sequence diagram shows how the operation works:
 
@@ -310,14 +307,8 @@ instance is only removed from the `selectedModuleList` if it exists.
 
 ##### 3.4.2.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired
-module.
+As it does not make sense to remove a module that does not exist in the `selectedModuleList`, the `RemoveModuleCommand`
+have to check if the module (to remove) exists in the `selectedModuleList` before removing it.
 
 ##### 3.4.2.3 Alternatives considered
 
@@ -573,12 +564,16 @@ classes.
 
 #### 5.1.1. Input/Output re-direction.
 
+To run the IO re-direction tests, type `./text-ui-test/runtest.sh` (Linux/Mac) or `./text-ui-test/runtest.bat` (Windows) in your terminal. 
+
 This method is used to simulate user input and to test the output of the program. This method was introduced in our
 individual project and was used to test out the Duke main class. Similarly, this method is used in YAMOM. As simple as
 it may seem, this method is very useful in testing the program as it allows us to test the program without having to
 waste time typing in the commands manually. A simple file comparison is done to check if the output is as expected.
 
 #### 5.1.2. Unit testing
+
+JUnit tests can be run using `./gradlew test`.
 
 Unit testing is done to test the individual functions of the classes. This is done to ensure that the functions are
 properly working in isolation. This is done by using the assertEquals/ assertTrue/ assertThrows method to check if
@@ -607,7 +602,7 @@ returned is as expected.
 #### 5.1.3. Regression testing
 
 Regression testing is done to ensure that the program is still working as expected after a change has been made. This
-is being done by running gradlew /test and checking if the tests are still passing. This is done to ensure that the
+is being done by running `./gradlew test` and checking if the tests are still passing. This is done to ensure that the
 newly added features do not break the previously existing features.
 
 #### 5.1.4. Developer testing

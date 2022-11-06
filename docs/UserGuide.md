@@ -76,7 +76,7 @@ Sem [1] >>
 > Notes about the command format:
 > - The first word of each command specifies the command type.
 > - Words in `UPPERCASE` information to be supplied by the user.
-    e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
+    e.g. in `add [ MODULE_CODE ]`, `MODULE_CODE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
@@ -164,8 +164,8 @@ Processing "bye" ...
 These are your export links:
 https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
 https://nusmods.com/timetable/sem-2/share?
-https://nusmods.com/timetable/sem-3/share?
-https://nusmods.com/timetable/sem-4/share?
+https://nusmods.com/timetable/st-i/share?
+https://nusmods.com/timetable/st-ii/share?
 Bye bye, See you again
 --------------------------------------------------------------------------------
 ```
@@ -206,6 +206,8 @@ Possible Error:
    ```
    Sem [1] >> add cs203
    --------------------------------------------------------------------------------
+   Processing "add cs203" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Module is invalid! Please enter a valid module code.
    Each module of study has a unique module code consisting of a two-
@@ -220,6 +222,8 @@ Possible Error:
    ```
    Sem [1] >> add CS1231 CS2101
    --------------------------------------------------------------------------------
+   Processing "add CS1231 CS2101" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Unknown command, try again.
    --------------------------------------------------------------------------------
@@ -605,7 +609,7 @@ Possible Error:
     --------------------------------------------------------------------------------
     Processing "timetable show" ...
     
-    Error! 	Unknown command. Maybe you meant "view".
+    Error! 	Unknown command. Maybe you meant "timetable < /fancy | /simple >".
     --------------------------------------------------------------------------------
     ```
 
@@ -666,6 +670,8 @@ Assuming empty list of modules:
 ```
 Sem [1] >> list
 --------------------------------------------------------------------------------
+Processing "list" ...
+
 You currently have no selected module(s)!
 --------------------------------------------------------------------------------
 ```
