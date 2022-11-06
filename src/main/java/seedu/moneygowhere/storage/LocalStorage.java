@@ -96,7 +96,7 @@ public class LocalStorage {
      * and add them to the arraylist that stores the corresponding objects. Sort the current arraylist afterwards based
      * on saved configuration.
      */
-    public static void loadFromFile(
+    public static ConsoleCommandSortExpense loadFromFile(
             ArrayList<Expense> savedExpenses,
             ConsoleCommandSortExpense sortCommandSetting,
             ArrayList<RecurringPayment> savedRecurringPayments,
@@ -163,6 +163,7 @@ public class LocalStorage {
                 }
             }
             System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+            return sortCommandSetting;
         } catch (FileNotFoundException e) {
             initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
@@ -186,6 +187,7 @@ public class LocalStorage {
                         + (itr + 1));
             }
         }
+        return null;
     }
 
     /**
