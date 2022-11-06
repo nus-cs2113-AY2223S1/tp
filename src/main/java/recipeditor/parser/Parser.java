@@ -29,9 +29,10 @@ import java.util.logging.Logger;
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
-            "Index is not present in the list, or wrong command format.";
+            "Index is not present in the list.";
+    private static final String WRONG_COMMAND_FORMAT_MESSAGE =
+            "Wrong command format.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
-    private static final String FILE_NOT_FOUND_MESSAGE = "File not found when deleting the recipe file";
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
@@ -72,6 +73,8 @@ public class Parser {
     private static Command parseAddCommand() {
         try {
             GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+
+            logger.log(Level.INFO, "Add command initialised");
             return new AddCommand(returnValues.getValid(), returnValues.getRecipe());
         } catch (FileNotFoundException e) {
             Storage.generateTemplateFile();
@@ -94,6 +97,7 @@ public class Parser {
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
                 if (actualRecipeTitle != null) {
+                    logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
                 }
                 break;
@@ -103,36 +107,15 @@ public class Parser {
                 throw new InvalidFlagException();
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
+            Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
             Ui.showMessage(recipeTitleToDelete + INVALID_INDEX_MESSAGE);
-        } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
+        } catch (AssertionError e) {
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
         return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
-    }
-
-    private static String convertStringArrayToString(String[] stringArray) {
-        StringBuilder content = new StringBuilder();
-        for (String string : stringArray) {
-            content.append(string + " ");
-        }
-        content.deleteCharAt(content.length() - 1);
-        return content.toString();
-    }
-
-    // To account for case insensitivity of user
-    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
-        String actualRecipeTitle = null;
-        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
-            if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
-                actualRecipeTitle = recipeTitle;
-                break;
-            }
-        }
-        return actualRecipeTitle;
     }
 
     private static Command parseViewCommand(String[] parsed) {
@@ -150,6 +133,7 @@ public class Parser {
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToView);
                 if (actualRecipeTitle != null) {
+                    logger.log(Level.INFO, "View command initialised");
                     return new ViewCommand(actualRecipeTitle);
                 }
                 break;
@@ -159,13 +143,13 @@ public class Parser {
                 throw new InvalidFlagException();
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
+            Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
             Ui.showMessage(parsed[2] + INVALID_INDEX_MESSAGE);
-        } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
+        } catch (AssertionError e) {
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
         return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }
@@ -181,6 +165,7 @@ public class Parser {
                 String path = Storage.titleToFilePath(title);
 
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
+                logger.log(Level.INFO, "Edit command initialised in GUI");
                 return new EditCommand(returnValues.getValid(), index, returnValues.getRecipe(), title);
             } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
@@ -214,6 +199,7 @@ public class Parser {
                 if (flags[1] == FlagType.NULL) {
                     throw new MissingFlagsException("recipe");
                 }
+                logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
                 return new InvalidCommand();
@@ -233,6 +219,7 @@ public class Parser {
             FlagType flag = FlagParser.getRecipeFlag(parsed);
             String[] inputArray = Arrays.copyOfRange(parsed, INDEX_AFTER_COMMAND, parsed.length);
             String input = convertStringArrayToString(inputArray);
+            logger.log(Level.INFO, "Find command initialised");
             return new FindCommand(flag, input);
         } else {
             return new InvalidCommand(FindCommand.CORRECT_FORMAT);
@@ -243,8 +230,30 @@ public class Parser {
     public static Command parseHelpCommand(String[] parsed) {
 
         if (parsed.length == COMMAND_INPUT_LENGTH) {
+            logger.log(Level.INFO, "Help command initialised");
             return new HelpCommand(parsed[1]);
         }
         return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
+    }
+
+    private static String convertStringArrayToString(String[] stringArray) {
+        StringBuilder content = new StringBuilder();
+        for (String string : stringArray) {
+            content.append(string + " ");
+        }
+        content.deleteCharAt(content.length() - 1);
+        return content.toString();
+    }
+
+    // To account for case insensitivity of user
+    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
+        String actualRecipeTitle = null;
+        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
+            if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {
+                actualRecipeTitle = recipeTitle;
+                break;
+            }
+        }
+        return actualRecipeTitle;
     }
 }

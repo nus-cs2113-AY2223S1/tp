@@ -1,0 +1,27 @@
+@startuml
+hide class fields
+hide class methods
+
+package Recipe {
+class RecipeList
+class Recipe
+class Ingredient
+}
+
+package Ui {
+class Ui
+class AddMode
+class Editor
+}
+
+class Storage
+
+Ui ..> CommandResult
+
+AddMode --> Recipe
+AddMode --> Ingredient
+RecipeList "1" *-right-> "*" Recipe
+Recipe "1" *-right-> "*" Ingredient
+Editor .down-> Storage
+
+@enduml

@@ -36,6 +36,11 @@ public class Storage {
 
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
 
+    /**
+     * Creates a new folder according to the folder path given in parameter.
+     *
+     * @param folderPath path of the new folder
+     */
     public static void createFolder(String folderPath) {
         try {
             Files.createDirectories(Paths.get(folderPath));
@@ -45,6 +50,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new file according to the file path given in parameter.
+     *
+     * @param filePath path of the file folder
+     */
     public static void createFile(String filePath) {
 
         try {
@@ -76,6 +86,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes the individual recipe file according to the recipe title.
+     *
+     * @param recipeTitleToDelete recipe title of file to be deleted
+     */
     public static void deleteRecipeFile(String recipeTitleToDelete) {
         String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitleToDelete.stripTrailing();
         try {
@@ -88,7 +103,9 @@ public class Storage {
         }
     }
 
-    // Loading the recipe titles into RecipeList recipeTitle array from AllRecipeFile
+    /**
+     * Loading the recipe titles into RecipeList recipeTitle array from AllRecipeFile.
+     */
     public static void loadRecipesToRecipeTitlesList() {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
@@ -100,7 +117,9 @@ public class Storage {
         }
     }
 
-    // Loading the recipe into RecipeList recipe array from individual recipe file
+    /**
+     * Loading the recipe into RecipeList recipe array from individual recipe file.
+     */
     public static void loadRecipesToRecipeList() {
         try {
             for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
@@ -118,16 +137,25 @@ public class Storage {
         }
     }
 
+    /**
+     * Find file path of the given recipe title.
+     *
+     * @param title recipe title of file to change to file path
+     */
     public static String titleToFilePath(String title) {
         return RECIPES_FOLDER_PATH + "/" + title + "/";
     }
 
-    public static void rewriteRecipeListToFile(String filePath) {
+    /**
+     * Rewrites AllRecipe file with the titles in the recipe list.
+     */
+    public static void rewriteRecipeListToFile() {
         try {
-            FileWriter fw = new FileWriter(filePath, false);
+            FileWriter fw = new FileWriter(ALL_RECIPES_FILE_PATH, false);
             for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
                 fw.write(recipeTitle + "\n");
             }
+            logger.log(Level.INFO, "writing to all recipe title file");
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");
@@ -135,10 +163,20 @@ public class Storage {
     }
 
 
-    public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
+    /**
+     * Deletes the old file where the previous recipe is in and updates the AllRecipe file.
+     * Then, save the recipe passed in the parameter in the given destination path.
+     *
+     * @param recipe Recipe to be saved in the new file
+     * @param oldFilePath the file path where the previous recipe is in
+     * @param recipeFileDestinationPath the new file path where the saved recipe is in
+     */
+    public static void saveRecipe(Recipe recipe, String oldFilePath, String recipeFileDestinationPath) {
+
         try {
-            deleteFile(oldFile);
-            rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+            assert recipe != null : "Recipe should not be null";
+            deleteFile(oldFilePath);
+            rewriteRecipeListToFile();
             FileWriter fw = new FileWriter(recipeFileDestinationPath);
             fw.write(recipe.getRecipeSaveableFormatted() + "\n");
             fw.close();
@@ -148,11 +186,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks whether the file exists given the file path in parameter.
+     *
+     * @param filePath file path of the file to check
+     * @return Boolean of whether the file exists
+     */
     public static boolean checkIfFileExists(String filePath) {
         File f = new File(filePath);
         return f.exists();
     }
 
+    /**
+     * Deletes a file given file path in parameter.
+     *
+     * @param filePath file path of the file to delete
+     */
     public static void deleteFile(String filePath) {
         if (checkIfFileExists(filePath)) {
             File f = new File(filePath);
@@ -169,6 +218,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Generates the template recipe file for the GUI.
+     */
     public static void generateTemplateFile() {
         FileWriter fileWrite;
         try {
@@ -182,8 +234,15 @@ public class Storage {
         }
     }
 
-    public static String loadFileContent(String path) throws FileNotFoundException {
-        File file = new File(path);
+    /**
+     * Loads the file content in the file given in the parameter.
+     *
+     * @param filePath file path of load the content
+     * @return String that contains all the content in the file
+     */
+    public static String loadFileContent(String filePath) throws FileNotFoundException {
+        assert filePath != null : "File path should not be null";
+        File file = new File(filePath);
         StringBuilder getContent = new StringBuilder();
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
@@ -205,4 +264,5 @@ public class Storage {
             Storage.saveRecipe(r, "", recipeFileSourcePath);
         }
     }
+
 }

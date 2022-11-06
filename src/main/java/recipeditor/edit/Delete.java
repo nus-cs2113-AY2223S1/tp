@@ -1,7 +1,6 @@
 package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
-import recipeditor.parser.FlagParser;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Recipe;
 import recipeditor.ui.Ui;
@@ -21,7 +20,6 @@ public class Delete extends EditModeCommand {
      */
     @Override
     public Recipe execute() throws InvalidFlagException, IndexOutOfBoundsException {
-        Recipe oldRecipe = recipe;
         int index = Integer.parseInt(parsedCommand[4]) - 1;
         switch (ingredientFlag) {
         case INGREDIENT:

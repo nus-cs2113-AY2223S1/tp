@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @return CommandResult a message of exiting software
      */
     public CommandResult execute() {
+        Storage.rewriteRecipeListToFile();
 
         return new CommandResult(EXIT_MESSAGE);
     }

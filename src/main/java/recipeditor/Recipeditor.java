@@ -14,7 +14,6 @@ import java.io.File;
 
 
 public class Recipeditor {
-    public static final String DATA_FILE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
         run(args);
@@ -26,11 +25,6 @@ public class Recipeditor {
         exit();
     }
 
-    /**
-     * Greetings and Load recipe titles to the RecipeList.
-     *
-     * @param args arguments
-     */
     private static void start(String[] args) {
         Storage.createAppFolder();
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
@@ -39,9 +33,6 @@ public class Recipeditor {
         Ui.showGreeting();
     }
 
-    /**
-     * Exit and do clean up.
-     */
     private static void exit() {
         Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.deleteAllRecipe();
@@ -50,9 +41,6 @@ public class Recipeditor {
         System.exit(0);
     }
 
-    /**
-     * Main Command Loop Input -> Command -> Command Result -> Show & Save.
-     */
     private static void runCommandLoopUntilExitCommand() {
 
         Command command;

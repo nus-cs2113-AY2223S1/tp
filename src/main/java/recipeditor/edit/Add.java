@@ -2,7 +2,6 @@ package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
-import recipeditor.parser.FlagParser;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
@@ -41,7 +40,7 @@ public class Add extends EditModeCommand {
                 message = String.format("Ingredient: %s is added", content);
                 return recipe;
             } catch (ParseException e) {
-                throw new ParseException();
+                throw e;
             }
         default:
             throw new InvalidFlagException();

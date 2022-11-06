@@ -7,6 +7,7 @@ import recipeditor.parser.Parser;
 
 public class HelpCommandTest {
 
+
     @Test
     void incorrectHelpCommand_invalidInput_syntaxForHelpCommand() {
         String input = "/help";
