@@ -50,7 +50,7 @@ and transactions via a Command Line Interface.
       + Wrote remove a transaction (4.3.2)
       + Wrote list all categories (4.2.7)
     + Made Class diagrams in section 3.5 and 3.7 
-    + Made Sequence diagrams in section 4.1.1, 4.1.2, 4.2.1, 4.2.2, 4.3.1 and 4.3.2
+    + Made Sequence diagrams in section 3.1, 4.1.1, 4.1.2, 4.2.1, 4.2.2, 4.3.1 and 4.3.2
     + Wrote the non-functional requirements `7. Non-functional Requirements`
 + **Team-based tasks contributions:**
     + Maintained the issues tracker on GitHub.

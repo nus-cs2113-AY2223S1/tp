@@ -78,6 +78,9 @@ Afterward, it repeatedly takes in user commands until the exit command is inputt
 parsed. If the command is valid, it is sent to the Command class to be processed and sent back to Duke to be executed. Valid responses are sent to the Ui to be displayed to the user, and the 
 data is stored in Storage. If not, an appropriate error is displayed instead.
 
+The following diagram demonstrates how Duke runs without data corruption in the files:
+![DukeSequence](images/DukeSequence.png)
+
 ### 3.2. Command component
 
 From the above, it is quite clear that the Command component is important as it governs execution of behaviors depending on user input.
