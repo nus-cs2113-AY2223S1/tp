@@ -1,4 +1,4 @@
-package seedu.files.parsing;
+package seedu.files.wrapper;
 
 import java.util.List;
 
@@ -12,9 +12,6 @@ import seedu.data.Carpark;
 public class LtaJsonWrapper {
     private String metadata;
     private List<Carpark> value;
-    public String getMetadata() {
-        return metadata;
-    }
 
     @JsonProperty("odata.metadata")
     public void setMetadata(String metadata) {

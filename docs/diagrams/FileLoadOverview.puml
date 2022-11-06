@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from files
+
+box Parking LOGIC_COLOR_T1
+participant ":Parking" as Parking LOGIC_COLOR
+end box
+
+box Ui LOGIC_COLOR_T1
+participant "ui:UI" as Ui LOGIC_COLOR
+end box
+
+box FileReader LOGIC_COLOR_T1
+participant "<<class>>\n:FileReader" as FileReader LOGIC_COLOR
+participant "<<class>>\n:FileStorage" as FileStorage LOGIC_COLOR
+end box
+
+box CarparkList LOGIC_COLOR_T1
+participant "carparkList:CarparkList" as CarparkList LOGIC_COLOR
+participant "newCarparkList:CarparkList" as newCarparkList LOGIC_COLOR
+end box
+
+
+[-> Parking : loadJson()
+activate Parking
+
+Parking -> Ui : showLoadingDataMessage()
+activate Ui
+Ui --> Parking : Message printed to console
+deactivate Ui
+
+Parking -> FileReader : loadCarparkListFromTxt(filepath, directorypath)
+activate FileReader
+ref over FileReader, CarparkList : Load CarparkList from text file
+Parking <-- FileReader : carparkList
+deactivate FileReader
+
+Parking -> newCarparkList : loadCarparkListFromJson(path, backupPath)
+activate newCarparkList
+ref over newCarparkList : Load CarparkList from JSON file
+Parking <-- newCarparkList : newCarparkList
+deactivate newCarparkList
+
+Parking -> CarparkList : update(newCarparkList)
+activate CarparkList
+Parking <-- CarparkList : carparkList updated instance
+deactivate CarparkList
+
+Parking -> FileStorage : saveCarparkList(carparkList)
+activate FileStorage
+ref over FileStorage, CarparkList : Load CarparkList from text file
+Parking <-- FileStorage
+deactivate FileStorage
+
+Parking -> Ui : showLoadingDataSuccess()
+activate Ui
+return Message printed to console
+<-- Parking
+deactivate Parking
+
+
+
+
+
+
+
+
+@enduml

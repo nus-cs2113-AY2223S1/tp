@@ -80,6 +80,7 @@ public class FileStorage {
 
         Path backupPath = CommonFiles.LTA_BACKUP_FILE_PATH;
         try {
+            assert url != null;
             InputStream source = url.openStream();
             Files.copy(source, backupPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {

@@ -33,6 +33,7 @@
 Our project uses external libraries and services from:
 1. Land Transport Authority DataMall API Service ([link](https://datamall.lta.gov.sg/content/datamall/en.html)).
 2. Jackson JSON Parser ([link](https://fasterxml.github.io/jackson-core/javadoc/2.8/com/fasterxml/jackson/core/JsonParser.html))
+3. Jansi ([link](https://github.com/fusesource/jansi))
 
 ## 2 Design 
 
@@ -59,16 +60,17 @@ Below are the main subcomponents that Parking and the command subclass delegate 
 ![Model Class Diagram](images/ModelClassDiagram.png)
 
 The model component consists of a `CarparkList` (and `CarparkFilteredList`) class that contains
-instances of `Carpark`, under the package `seedu.data`. 
+instances of `Carpark`, as well as the `Favourite` class, under the package `seedu.data`
 
 This component: 
+* Stores the necessary information to maintain a list of "favourited" carparks in the `Favourite` class.
 * Stores all carpark data (all `Carpark` objects), contained in a `CarparkList` object.
 * Stores filtered carpark data to be used in other components (in `CarparkFilteredList`).
 * Contains methods for selecting a `Carpark` object based on a unique code (for the `find` command) as well
 as filtering by a substring or set of substrings (`search` command).
 * Is independent of other components except the API component, which is used to generate it.
 * Group objects with the same code by enum `LotType` (Car, Motorcycle, Heavy Vehicle) and places them in a HashMap 
-for easy access. For example: Three `carpark` objects may have the same unique carpark code as they are the same 
+for easy access. For example: Three `Carpark` objects may have the same unique carpark code as they are the same 
 carpark, but contain available lot information for different types of lot. These three objects will be grouped under 
 one object with the HashMap `allAvailableLots` containing a breakdown of lots by type.
 
@@ -88,20 +90,22 @@ This component:
 if requested again).
 
 
-
-
 The API component is also able to:
 - Loads in key from a local file storage (in txt format).
 - Authenticate user API key. If no user key inputted, default key will be loaded.
 - Get API authentication status.
 
 The following sequence diagram shows how the API key is loaded.
-![Api Loading Sequnce Diagram](images/LoadApiSequenceDiagram.png)
-
+![Api Loading Sequence Diagram](images/LoadApiSequenceDiagram.png)
 
 ### 2.4 Storage Component
+![Storage Class Diagram](images/StorageClassDiagram.png)
 
-![Sequence Diagram](images/LoadFileSequenceDiagram.png)
+The storage component consists of a `FileReader` and `FileWriter` class in the `seedu.files` package.
+`FileReader` is an abstract class and only contains static methods, while `FileWriter` can be instantiated and is used 
+in the `API` and `Model` components.
+A `LtaJsonWrapper` class is also present, for use with the Jackson JSON parser.
+
 ##### 2.4.1 FileWriter
 
 ##### 2.4.2 FileLoader
@@ -326,6 +330,9 @@ it can be that our program is at fault.
 
 Due to such bug discoveries, we made our carparkList parser much more robust and does our own data
 validation to ensure no such stray data are presented to the user.
+
+### 3.4 Updating CarparkList with JSON from API 
+![Sequence Diagram](images/FileLoadOverview.png)
 
 ## 4 Product scope
 ### 4.1 Target user profile

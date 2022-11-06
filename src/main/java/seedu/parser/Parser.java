@@ -22,7 +22,7 @@ import seedu.data.CarparkList;
 import seedu.exception.DashedArgumentsNotInFrontException;
 import seedu.exception.UnneededArgumentsException;
 import seedu.files.Favourite;
-import seedu.parser.search.Arguments;
+import seedu.parser.search.Argument;
 import seedu.parser.search.Sentence;
 
 /**
@@ -60,10 +60,10 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord").trim();
-        final Arguments argsList;
+        final Argument argsList;
         final String arguments;
         try {
-            argsList = new Arguments(matcher.group("arguments").trim());
+            argsList = new Argument(matcher.group("arguments").trim());
             arguments = argsList.getArguments().toString();
         } catch (DashedArgumentsNotInFrontException e) {
             return new InvalidCommand(e.getMessage());
@@ -213,7 +213,7 @@ public class Parser {
         }
     }
 
-    private Command prepareFilter(Arguments argsList, String arguments) {
+    private Command prepareFilter(Argument argsList, String arguments) {
         String dashedCommand;
         Sentence actualArgument = argsList.getArguments();
 
