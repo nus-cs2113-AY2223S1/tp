@@ -1,0 +1,19 @@
+@startuml
+object "__:OneDoc__" as A {
+    mainMenuState = MainMenuState.INVALID
+}
+
+object "__:UI__" as B
+object "__:Parser__" as C
+object "__:XyzList__" as D
+object "__:Storage__" as G
+
+A --> B
+A -left-> C
+A --> D
+A --> G
+
+C -> B
+C -> D
+C -> G
+@enduml

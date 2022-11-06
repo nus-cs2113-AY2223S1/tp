@@ -8,6 +8,46 @@ Storage class and its functions are largely adapted from [Dhanish's IP](https://
 
 ## Design & implementation
 
+### Architecture
+
+![](images/ArchitectureDiagram.png)
+
+The architecture diagram above shows the high-level design of the application.
+
+Below is a quick overview of the main components and how each component interacts with one another.
+
+#### Main components of the architecture
+
+**`OneDoc`** is the main class of the application. It is responsible for
+* At app launch: Initializes the components in the correct sequence, connect them up with each other, load the storage
+data and start the main loop.
+
+The rest of the app consists of six components, with three of them having a similar nature.
+* **`UI`**: The user interface of the app.
+* **`Parser`**: Parses the user commands and initiates different action to the list.
+* **`XyzList`**: The lists for manipulating patients, visits and prescriptions. (Xyz is a placeholder for `Patient`, 
+`Visit` or `Prescription`) 
+* **`Storage`**: Reads data from and writes data to the hard disk.
+
+The object diagram below shows how are the instances of the components are connected on initialization.
+
+![](images/OneDocInitialObjectDiagram.png)
+
+#### Interaction between the architecture components 
+
+The following two sequence diagrams shows how the main flow of the app is navigating between main menu and the three sub
+menus. `OneDoc` component mainly interacts with `UI` and `Parser` components.
+
+![](images/OneDocSequenceDiagram.png) ![](images/OneDocSubMenuRefSequenceDiagram.png)
+
+The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
+command `activate x/1` in the Prescription Sub Menu. 
+
+![](images/ArchitectureSequenceDiagram.png)
+
+Each of the main components defines its API in a class with the same name as the component. 
+The sections below give more details of each component.
+
 ### PatientList Component
 
 The `PatientList` Component,
@@ -240,10 +280,7 @@ of information.
 | v2.0    | doctor/user | view list of all active prescriptions for all of patients   | see which prescription the patient is currently taking                              |
 | v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
 | v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
-
-
-
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| v2.0    | user        | find a to-do item by name                                   | locate a to-do without having to go through the entire list                         |
 
 ## Non-Functional Requirements
 

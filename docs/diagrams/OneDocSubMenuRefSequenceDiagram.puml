@@ -1,0 +1,52 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+participant ":OneDoc" as A
+participant ":UI" as B
+participant ":Parser" as C
+
+activate A
+
+group sd Sub Menu Run
+    A --> A : subMenuRun()
+
+    activate A
+
+    loop true
+        ref over A, B
+            Print sub menu and get user input
+        end
+
+        alt mainMenuState == MainMenuState.PATIENT
+            A -> C : patientParser(input)
+            activate C
+            return subMenuState:SubMenuState
+        else mainMenuState == MainMenuState.VISIT
+             A -> C : visittParser(input)
+             activate C
+             return subMenuState:SubMenuState
+        else mainMenuState == MainMenuState.PRESCRIPTION
+            A -> C : prescriptionParser(input)
+            activate C
+            return subMenuState:SubMenuState
+        end
+
+        alt subMenuState == SubMenuState.BACK_TO_MAIN
+            A --> A : Break loop
+        else subMenuState == SubMenuState.BACK_TO_MAIN
+            ref over A
+                Set mainMenuState to MainMenuState.EXIT
+            end
+            A --> A : Break loop
+        else subMenuState == SubMenuState.HELP
+            ref over A,B
+                Print sub menu
+            end
+        end
+    end
+    return
+end
+
+deactivate A
+@enduml
