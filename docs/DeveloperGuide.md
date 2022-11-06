@@ -274,7 +274,8 @@ When the program starts, it will
         - Title does not exceed 255 characters
         - Title has an corresponding recipe file in `./RecipeData/Recipes`
     - Load the recipe file in `./RecipeData/Recipes` into ArrayList `RecipeList.recipes`
-      - The recipe file content is parsed by the `RecipeFileParser` class. Check [Parse Text to Recipe](#parse-text-to-recipe)
+        - The recipe file content is parsed by the `RecipeFileParser` class.
+          Check [Parse Text to Recipe](#parse-text-to-recipe)
 
 #### Exit
 
@@ -293,6 +294,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### Parsing of Commands
 
 ### Add Recipe
+
 <p align="center" width="100%">
   <img width="100%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
 </p>
@@ -300,21 +302,88 @@ This is to prevent manual tampering of the data that might affect the data in th
 - When the `Parser` parsed the AddCommand, an instance of `GuiWorkFlow` will be created
 - The internal working of `GuiWorkFlow` is elaborated in [GUI WorkFlow](#gui-workflow)
 - `Parser` will call `getValid()` and `getRecipe()` from the `GuiWorkFlow`
-  - After the user interact with the GUI, if the text the user provides is a valid recipe, the Add command will be valid
+    - After the user interact with the GUI, if the text the user provides is a valid recipe, the Add command will be
+      valid
 - If the recipe is valid
-  - The recipe title is added to `AllRecipes.txt` file
-  - A recipe file will be saved to the FileDirectory
-  - A `CommandResult` instance is returned with a successful message
+    - The recipe title is added to `AllRecipes.txt` file
+    - A recipe file will be saved to the FileDirectory
+    - A `CommandResult` instance is returned with a successful message
 
 ### GUI WorkFlow
+
 <p align="center" width="100%">
   <img width="100%" src="images/SequenceDiagram/GUISequence.png" alt="Recipe Module Diagram"/>
 </p>
 
+1. GUI is only triggered by Add and Edit command
+
+   - Add command will pass the path of the `Template.txt` file
+   - Edit command will pass the path of the recipe the user wants to edit
+
+2. From the path, `GuiWorkFlow` class can detect whether it is `Mode.ADD` or `Mode.EDIT`
+
+   - `Mode.ADD` throws an exception when the recipe title already exist in the `RecipeList.recipes`
+   - `Mode.EDIT` overwrite the recipe title that already exist `RecipeList.recipes`
+
+3. There are an initial entry to `Editor` and a loop for subsequent entry to `Editor` if the user choose to fix the
+   content of the recipe
+4. When exiting the `Editor`, the user can choose to SAVE or EXIT
+
+   - SAVE will return `saveToTemp = True` and save the content in the `Editor` to `Temporary.txt`
+   - EXIT will return `saveToTemp = False`
+   - if `saveToTemp = False`, program flow will exit the loop
+   - if `saveToTemp = False`, program flow will exit the loop
+
+5. The loop is a PARSE and RE-ENTRY
+
+- it wil parse the `Temporary.txt` file. Check [Parse Text to Recipe](#parse-text-to-recipe)
+- if parsing is valid and there is no duplicate recipe
+    - exit the loop and set `isValid = True`
+- else if parsing is invalid or there is a duplicate recipe
+    - Ask the user if they want to fix the file
+        - if yes (fix the invalid recipe)
+            - re-enter `Editor` and the workflow is similar as point 4. above
+        - if no (recipe remains invalid)
+            - exit the loop and set `isValid = False`
 
 ### Parse Text to Recipe
-- The parsing of is solely handled by `RecipeFileParser` with little interaction with other classes. Hence there will be no diagram.
-- 
+
+- The parsing of is solely handled by `RecipeFileParser` with little interaction with other classes. Hence there will be
+  no diagram.
+- The parser has variables and counter to keep track of the parsing process
+  - `lineType`:`TITLE`, `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
+  - `stage`: `TITLE_START`, `TITLE`, `TITLE_END`,  `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
+  - `stageCounter = {0,0,0,0}`: count the occurrence of {TITLE, DESCRIPTION, INGREDIENT, STEP}
+  - `ingredientIndex`: keep track of the increment of INGREDIENT index
+  - `stepIndex`: keep track of the correct increment of STEP index
+
+- Go through the text line by line 
+- Detect whether the line is a Heading (denoted by `#`) and assign the `lineType` for that line
+   - if `lineType` is a heading, assign `stage` appropriately, and increment `stageCounter` 
+   - else, the `lineType` is `NORMAL`
+- Parsing of line with `NORMAL` type is dependent on the `stage`
+  - If the line is blank, it does not affect the parsing
+- For `TITLE`:
+  - Perform validity check as the recipe title is a text file
+    - Alphanumerical
+    - less than 255 character
+- For `DESCRIPTION`:
+  - Allow all characters, including blank lines 
+  - Blank lines will be recorded to give the user some freedom in describing the recipe
+- For `INGREDIENT`:
+  - Check for the appropriate format `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
+    - Positive integer index
+    - Positive double amount
+  - Check for the correct index increment based on `ingredientIndex`
+- For `STEP`
+  - Check for the appropriate format `INDEX. STEP_DESCRIPTION`
+    - Positive integer index
+  - Check for the correct index increment based on `stepIndex`
+
+- Check if the correct number of Heading occurrence is correct
+- Because of the `stage`, Headings are **parseable** in different order (but highly discouraged)
+- Check if the recipe is empty
+  - Because the blank lines are disregarded
 
 ### Edit an Existing Recipe
 
@@ -324,7 +393,6 @@ This is to prevent manual tampering of the data that might affect the data in th
 - Instead of loading `Template.txt`, the recipe file with the title name corresponding to the index will be loaded
 
 #### CLI
-
 
 ### Find Recipe
 
@@ -338,7 +406,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 
 ### Target user profile
 
-Avid cook who wants to organize their recipe list for ease of reference and search.
+Avid cook who wants to organize their recipe list for ease of reference and search. The user is also a fast typer who can quickly type out all the part of the recipe
 
 ### Value proposition
 
@@ -362,9 +430,8 @@ quickly.
 | v2.0    | user     | show detailed recipe that I specified         | view detailed recipe (name, description, ingredients and steps) of the one that I am interested             |
 | v2.0    | new user | view the list of available commands           | use the appropriate command according to my needs                                                           |
 
-
 ## Non-functional Requirement
-
+- Work on all popular Operating System: Windows, Mac, Linux
 ## Glossary
 
 ## Instructions for manual testing

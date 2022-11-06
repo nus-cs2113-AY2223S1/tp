@@ -278,11 +278,8 @@ View the full details of the specified recipe according to the index shown in th
 ingredients used and steps involved. To record the ingredients used, user can note down the ingredient name,
 amount and the respective units. As for the steps involved, user will specify the steps in the order of execution.
 
-<<<<<<< HEAD
 Format: `/view -t [RECIPE_TITLE] OR /view -id [RECIPE_INDEX]`
-=======
-Format: `/view RECIPE_INDEX`
->>>>>>> acfb77a6c96510ab810b3b238d0f24887d577e21
+
 
 Example: 
 ```
