@@ -52,5 +52,5 @@ public class IngredientTest {
         } catch (ParseException e) {
             assertEquals(new ParseException(Ingredient.INGREDIENT_FORMAT).getMessage(), e.getMessage());
         }
-
+    }
 }
