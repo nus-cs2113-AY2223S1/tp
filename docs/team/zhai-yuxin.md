@@ -1,3 +1,5 @@
+## Zhai Yuxin - Project Portfolio Page
+
 ### Overview
 
 PlanIt is a Command Line Interface (CLI) based application to help School of Computing students to plan their modules and credits every semester. 
@@ -8,23 +10,29 @@ They can also check if they are eligible for NOC or SEP using this application.
 Code contributed: [code dashboard](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=zhai-yuxin&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 Enhancement implemented:
-- Add, exit and help feature from scratch
-- Part of view, check, delete, find features
-- Improvements to the code logic flow under parser, modulelist, ui and exceptions
-- Code improvements to the rest of the comments
-- Addition of exceptions, tests, java documentations
-- Resolving bugs
+- Initial implementation of 'help' and 'view all' features ([#47](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/47), [#141](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/141))
+- Part of add, view, check, delete, find features ([#48](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/48), [#51](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/51))
+- Addition of exceptions (invalidCommandWord, invalidFormat and invalidContent), tests, java documentations ([#10](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/10),
+[#13](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/13), [#14](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/14), [#15](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/15), 
+[#16](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/16))
+- Improvements to the code and logic flow under parser, modulelist, ui, commands and exceptions ([#10](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/10), 
+[#113](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/113))
+- Resolving bugs ([#119](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/119), [#121](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/121), [#122](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/122), 
+[#132](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/132), [#168](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/168), [#170](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/170), 
+[#171](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/171))
 
 Contributions to UG: 
-- Introduction
-- Updates to features and their examples
+- Introduction ([#171](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/171))
+- Updates to features and their examples ([#57](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/57), [#171](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/171))
 
 Contributions to DG: 
-- Text for add feature
-- All sequence diagrams
+- Text for add feature ([#26](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/26))
+- Update and partial texts for the rest of the features ([#51](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/51), [#178](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/178))
+- All sequence diagrams ([#26](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/26), [#27](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/27), [#177](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/177))
 
 Contributions to team-based tasks: 
-- Initial code skeletal as a group effort
+- Initial code skeletal as a group effort ([#5](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/5))
+- Adding in basic assertions ([#17](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/17))
 - Starting and managing most of the issues in GitHub
 
 Review/Mentoring contributions: 
