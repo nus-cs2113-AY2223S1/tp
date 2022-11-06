@@ -42,6 +42,7 @@ user input into commands and return the command result.
 * Drew the class diagram of the Favourite/Unfavourite feature (Section 3.1) to explain how the `Favourite`, 
 `FavouriteCommand`, `UnfavouriteCommand`, `Command`, and `FileStorage` classes work together to implement the favourite 
 and unfavourite features.
+* Drew the class diagram for the Common Component (Section 2.7)
 
 
 ### Contributions to team-based tasks
