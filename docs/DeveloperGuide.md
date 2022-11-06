@@ -467,7 +467,7 @@ track of constant changes in flight scheduling and the relevant passenger detail
 ### Non-existent flight
 - Add passenger with a flight number that has not been tracked in the flight list
     1. Prerequisites: The flight number of testing should not be present in the flight list
-   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/1 sn/17d` where fn/sq832 should not be added in the flight list yet.  
+   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` where fn/sq832 should not be added in the flight list yet.  
    Expected: SkyControl would print an error informing the manager that he needs to flight add an existing flight number into
    the list first before being able to add a passenger of the existing flight number into the logbook.  
 
@@ -475,7 +475,7 @@ track of constant changes in flight scheduling and the relevant passenger detail
 
 - Automated boarding time of 45minutes earlier than departure time placement
    1. Prerequisites: User should intend to add a passenger into the passenger logbook, and flight number must exist.
-   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/1 sn/17d` then `passenger list`  
+   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` then `passenger list`  
    Expected: SkyControl should set the boarding time automatically to 45 minutes before the departure time that the manager has input.  
 
 ### Syncing boarding time with delayed departure time  
@@ -491,7 +491,7 @@ track of constant changes in flight scheduling and the relevant passenger detail
 
 | Command                | Format                                                                                                    | Example                                                              |
 |:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
-| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`                        | `passenger add n/Ivan Theng fn/sq832 bg/1 sn/17d`                    |
+| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`                        | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d`                   |
 | `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
 | `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
 | `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
