@@ -121,19 +121,20 @@ public class Storage {
      * Loading the recipe into RecipeList recipe array from individual recipe file.
      */
     public static void loadRecipesToRecipeList() {
-        try {
-            for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
+
+        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
+            try {
                 logger.log(Level.INFO, recipeTitle);
                 String recipeFilePath = titleToFilePath(recipeTitle);
                 String content = Storage.loadFileContent(recipeFilePath);
                 Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
                 RecipeList.addRecipe(addedRecipe);
                 logger.log(Level.INFO, recipeTitle + " is added to recipeList");
+            } catch (FileNotFoundException e) {
+                logger.log(Level.INFO,"Error in parsing recipe file content.");
+            } catch (ParseFileException e) {
+                logger.log(Level.INFO,"Error in parsing recipe file content.");
             }
-        } catch (FileNotFoundException e) {
-            Ui.showMessage("RecipesToRecipeList Fail");
-        } catch (ParseFileException e) {
-            Ui.showMessage("Error in parsing recipe file content.");
         }
     }
 
