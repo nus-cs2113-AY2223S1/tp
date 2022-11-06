@@ -54,7 +54,7 @@ The aim of this guide is to help readers understand how the different components
 
 ## 3. Design
 
-This sector describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
+This section describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
 The overall architecture loosely follows the following diagram:
 ![Architecture](images/architecture.png)
@@ -159,7 +159,7 @@ If Duke detects a change that potentially cause errors in the files, it will pri
 
 ## 4. Implementation
 
-This sector describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
+This section describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
 > **Note:**
 > 
 > ```executeCommand()``` method of every command return a boolean. Only ```ExitCommand``` returns ```true``` since it informs Duke that this is the last command to exit.
