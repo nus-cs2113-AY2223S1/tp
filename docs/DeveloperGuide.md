@@ -298,7 +298,7 @@ Step 7: The total User debt is printed by `Ui.printResponse()`.
 
 The following sequence diagram models the operation: ![](images/ViewUserLossCommand.png)
 
-### 4.1.8. View User Gain
+#### 4.1.8. View User Gain
 
 >This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
 
