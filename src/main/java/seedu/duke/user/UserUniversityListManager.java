@@ -47,6 +47,7 @@ public class UserUniversityListManager {
             + "Please create university and add relevant module before adding a comment");
         } else {
             getList(universityName).updateComment(moduleCode, comment);
+            logger.log(Level.FINER, "updating comment for " + universityName + moduleCode);
         }
     }
 
@@ -57,6 +58,7 @@ public class UserUniversityListManager {
             throw new UniversityNotFoundException("Error: No list containing such university\n");
         } else {
             getList(universityName).deleteComment(moduleCode);
+            logger.log(Level.FINER, "deleting comment for " + universityName + moduleCode);
         }
     }
 
