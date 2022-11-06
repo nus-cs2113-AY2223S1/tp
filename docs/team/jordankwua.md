@@ -24,6 +24,7 @@ be viewed.
 all the information he/she wants to store in the program every time the program is shut down. This makes it more
 convenient for the manager to use as he/she does not always have to leave their devices on.
   + Highlights: This feature combines both flight and passenger information into one single file for easy access.
+It was tedious to make it such that the storage combined both flight and passenger information into one single data file.
 
 - ### Enhancements to existing features:
   + Added more exceptions to make the code for flight information more defensive (Pull Requests [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21),
@@ -43,5 +44,6 @@ and various UML diagrams under these components (Pull Request [#97](https://gith
   + Set up the GitHub team and repository
 - ### Team contributions
 - Reviewed code of other teammates (Pull Requests [#89](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/89))
+- Work together with teammates to update RepoSense ownership distribution [#40](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/40)
 - ### External contributions
 - Helped spot bugs for team `CS2113T-W11-2` during PE Dry Run
