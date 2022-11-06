@@ -150,16 +150,16 @@ public class FlightList extends OperationList {
     private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
         if (letters.length > FLIGHT_NUMBER_MAX_LENGTH || letters.length < FLIGHT_NUMBER_MIN_LENGTH) {
-            throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
+            throw new SkyControlException(ui.getFlightNumberError());
         }
         for (int i = 0; i < FLIGHT_NUMBER_LETTER_LENGTH; i++) {
             if (!Character.isLetter(substring.charAt(i))) {
-                throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
+                throw new SkyControlException(ui.getFlightNumberError());
             }
         }
         for (int i = FLIGHT_NUMBER_LETTER_LENGTH; i < letters.length; i++) {
             if (!Character.isDigit(substring.charAt(i))) {
-                throw new SkyControlException(ui.getWrongFlightFormatErrorMessage());
+                throw new SkyControlException(ui.getFlightNumberError());
             }
         }
     }

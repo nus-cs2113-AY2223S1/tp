@@ -3,7 +3,6 @@ package seedu.duke.ui;
 import seedu.duke.terminalinfo.FlightInfo;
 import seedu.duke.terminalinfo.PassengerInfo;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -260,11 +259,6 @@ public class Ui {
 
     public String getLoggerStartUpMessage() {
         return "Going to start processing";
-    }
-
-    //@@author JordanKwua
-    public String getWrongFlightFormatErrorMessage() {
-        return "Flight number should start with 2 letters and trail with 1-4 numbers.";
     }
 
     //@@author shengiv
