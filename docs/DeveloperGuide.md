@@ -266,19 +266,12 @@ instance of `module` from its class. Boolean `successful` field is used to flag 
 to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
 It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
 passed on to the overridden `getExecutionMessage()` which displays the result of data validation that
-new `selectedModule`
-added are unique.
+new `selectedModule` added are unique.
 
 ##### 3.4.1.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired
-module.
+The `AddModuleCommand` only allows for modules to be added if they are not already in the `selectedModuleList`. Hence,
+there is a need to check if the `module` already exists in the `selectedModuleList` in order to prevent duplicate modules. 
 
 The following sequence diagram shows how the operation works:
 
@@ -308,14 +301,8 @@ instance is only removed from the `selectedModuleList` if it exists.
 
 ##### 3.4.2.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired
-module.
+The `RemoveModuleCommand` only allows for modules to be removed if they are already in the `selectedModuleList`. Hence, 
+there is a need to check if the `module` exists in the `selectedModuleList` in order to prevent removing modules that do not exist.
 
 ##### 3.4.2.3 Alternatives considered
 
