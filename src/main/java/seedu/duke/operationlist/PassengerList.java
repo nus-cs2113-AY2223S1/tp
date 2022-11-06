@@ -416,7 +416,7 @@ public class PassengerList extends OperationList {
      *
      * @param passengerDetail Obtains the passengerDetail from the main user input
      * @return flightNumber which is the flight number that is obtained from the passengerDetail.
-     * @throws SkyControlException
+     * @throws SkyControlException an error if the flight number does not follow the correct format.
      */
     static String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
         flightNumber = getSubstringBetweenDelimiters(passengerDetail,
