@@ -7,7 +7,7 @@
 ## Introduction
 
 YAMOM is a lightweight, simplified Module Organizer and Manager application that provides simple and intuitive interface
-for timetable organization. YAMOM is designed for users who are proficient in Command Line Interface (CLI). Module data in YAMOM is correct as of 1 Oct 2022. 
+for timetable organization. YAMOM is designed for users who are proficient in Command Line Interface (CLI). Module data in YAMOM is for AY22/23 and is correct as of 1 Oct 2022. 
 
 ## Table of Contents
 
