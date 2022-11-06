@@ -1154,7 +1154,7 @@ public class ConsoleInterface {
         ArrayList<RecurringPayment> savedRecurringPayments = new ArrayList<>();
         ArrayList<Target> savedTargets = new ArrayList<>();
         ArrayList<Income> savedIncomes = new ArrayList<>();
-        LocalStorage.loadFromFile(
+        sortCommandSetting = LocalStorage.loadFromFile(
                 savedExpenses,
                 sortCommandSetting,
                 savedRecurringPayments,
@@ -1162,10 +1162,12 @@ public class ConsoleInterface {
                 savedIncomes);
 
         expenseManager.setExpenses(savedExpenses);
-        expenseManager.updateSortExpenses(sortCommandSetting);
         recurringPaymentManager.setRecurringPayments(savedRecurringPayments);
         targetManager.setTargets(savedTargets);
         incomeManager.setIncomes(savedIncomes);
+        if (sortCommandSetting != null) {
+            expenseManager.updateSortExpenses(sortCommandSetting);
+        }
     }
 
     //@@author LokQiJun
