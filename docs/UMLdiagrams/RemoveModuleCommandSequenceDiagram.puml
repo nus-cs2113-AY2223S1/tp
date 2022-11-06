@@ -1,0 +1,52 @@
+@startuml
+box Main
+Participant ":Duke" as Duke
+end box
+box RemoveModuleCommand
+Participant ":RemoveModuleCommand" as RemoveModuleCommand
+end box
+box Ui
+Participant ":Ui" as Ui
+end box
+box State
+Participant ":State" as State
+end box
+box SelectedModule
+Participant ":SelectedModule" as SelectedModule
+end box
+
+Duke -> RemoveModuleCommand : execute()
+activate RemoveModuleCommand
+RemoveModuleCommand -> State : getSemester()
+activate State
+State --> RemoveModuleCommand
+deactivate State
+
+create SelectedModule
+RemoveModuleCommand -> SelectedModule : selectedModule
+activate SelectedModule
+SelectedModule --> RemoveModuleCommand
+deactivate SelectedModule
+
+
+RemoveModuleCommand -> State :getSelectedModuleList()
+activate State
+State --> RemoveModuleCommand
+deactivate State
+
+opt if selectedModule is in selected module list
+RemoveModuleCommand -> State :removeSelectedModule(selectedModule)
+end
+
+RemoveModuleCommand -> Ui: addMessage()
+activate Ui
+RemoveModuleCommand -> Ui: displayUi()
+Ui --> RemoveModuleCommand
+deactivate Ui
+RemoveModuleCommand --> Duke
+
+deactivate RemoveModuleCommand
+
+destroy RemoveModuleCommand
+
+@enduml
