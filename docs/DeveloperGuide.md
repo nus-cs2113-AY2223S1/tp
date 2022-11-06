@@ -13,13 +13,13 @@
     - [2.4.3 FileLoader](#242-fileloader)
   - [2.5 UI Component](#25-ui-component)
   - [2.6 Logic Component](#26-logic-component)
+  - [2.7 Common Component](#27-common-component)
 - [3 Implementation](#3-implementation)
   - [3.1 Favourite / Unfavourite Feature](#31-favourite--unfavourite-feature)
     - [3.1.1 Design Considerations](#311-design-considerations)
-  - [3.2 Common Files](#32-common-files)
-  - [3.3 Update Data from LTA API Feature](#33-update-data-from-lta-api-feature)
-    - [3.3.1 Design Consideration](#331-design-considerations)
-    - [3.3.2 Limitations of the LTA API](#332-limitations-of-the-lta-api)
+  - [3.2 Update Data from LTA API Feature](#32-update-data-from-lta-api-feature)
+    - [3.2.1 Design Consideration](#321-design-considerations)
+    - [3.2.2 Limitations of the LTA API](#322-limitations-of-the-lta-api)
 - [4 Project Scope](#4-product-scope)
   - [4.1 Target user profile](#41-target-user-profile)
   - [4.2 Value Proposition](#42-value-proposition)
@@ -27,7 +27,6 @@
 - [6 Non-Functional Requirements](#6-non-functional-requirements)
 - [7 Glossary](#7-glossary)
 - [8 Instructions for Manual Testing](#8-instructions-for-manual-testing)
-
 
 ## 1 Acknowledgements
 Our project uses external libraries and services from:
@@ -106,9 +105,16 @@ The storage component consists of a `FileReader` and `FileWriter` class in the `
 in the `API` and `Model` components.
 A `LtaJsonWrapper` class is also present, for use with the Jackson JSON parser.
 
-##### 2.4.1 FileWriter
+This component: 
+- Reads and parses JSON files into a usable format for the program (`CarparkList` and 
+`Carpark` classes)
+- Read and parse a .txt file with save data into a usable format for the program (`CarparkList` and
+  `Carpark` classes)
+- Write to a .txt containing save information for carparks that may have been edited by the user
+- Regenerate files when an invalid format is detected, and ignore invalid values
 
-##### 2.4.2 FileLoader
+For more information on the process of loading files from JSON, please see the section 
+[Updating CarparkList with JSON from API](#33-updating-carparklist-with-json-from-api).
 
 ### 2.5 UI Component
 
@@ -151,6 +157,19 @@ and return the intended result. `Execute` returns a `CommandResult`, which is an
 and return the respective `CommandResult` result of the Command.
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
+
+### 2.7 Common Component
+ 
+The Common component contain two auxiliary classes that just contain information that may be shared between or accessed by 
+multiple other components. Both `CommonData` and `CommonFiles` are abstract and cannot be instantiated, and all fields
+within are static and final.
+
+`CommonFiles` contains information regarding files - file and directory paths.
+
+`CommonData` contains assorted information that is packed together for easy access. These fields are ones that may be 
+likely to need to be modified. Some examples are strings showing the correct format for using commands, used between 
+command classes whenever an invalid input is entered, and the strings containing URLs for the API.
+
 
 ## 3 Implementation
 This section describes some noteworthy details on how certain features are implemented.
@@ -249,9 +268,9 @@ The following sequence diagrams shows how a favourite / unfavourite command work
     - Pros: Less time needed to favourite after a search result, do not need to key in entire carpark ID again
     - Cons: Need to search before favouriting, even if user already knows the exact carpark ID
 
-### 3.2 Common Files
 
-### 3.3 Update Data from LTA API Feature
+
+### 3.2 Update Data from LTA API Feature
 
 Before going deep into how the data is fetched from the LTA API, we will run through how the API component of data fetching works.
 
@@ -283,7 +302,7 @@ These are the reference sequence diagram to complement the above diagram.
 ![Execute Http Requests](images/asyncExecuteRequestApiSequenceDiagram.png)
 ![Fetch Data](images/fetchDataApiSequenceDiagram.png)
 
-### 3.3.1 Design Considerations
+### 3.2.1 Design Considerations
 
 **Asynchronous request**
 
@@ -307,7 +326,7 @@ Although we focus more on the asynchronous part, the program right now also supp
 for future development such as updating a specific value instead of the whole data. By calling the 
 `asyncExecuteRequest` and `fetchData` function we can simulate synchronous HTTP request.
 
-### 3.3.2 Limitations of the LTA API
+### 3.2.2 Limitations of the LTA API
 
 **Inconsistent dataset received**
 
@@ -319,7 +338,7 @@ in the response.
 
 **Dataset does not adhere to the documentation**
 
-Coming to the end of our development where we are placing more emphasis on unit testing, we found out
+Coming to the end of our development where we place more emphasis on unit testing, we found out
 that LTA may give us invalid data. For example, in the documentation, only 3 types 
 of carpark lot type exists: C (Car), H (Heavy Vehicles) and Y (Motorcycle). However, upon further inspection
 we found out that there is a fourth type, M.
@@ -328,11 +347,71 @@ Another problem we found out is that LTA does not do its own data validation. Th
 carparks having negative number of available lots. This is a big problem as from the user's perspective
 it can be that our program is at fault. 
 
-Due to such bug discoveries, we made our carparkList parser much more robust and does our own data
-validation to ensure no such stray data are presented to the user.
+Due to such bug discoveries, we made our carparkList parser much more robust and it now does data
+validation internally to ensure no such data is presented to the user.
 
-### 3.4 Updating CarparkList with JSON from API 
+### 3.3 Updating CarparkList with JSON from API 
+The following is an overview of the sequence of what is called at initialization and with the use of the `update` command:
+
 ![Sequence Diagram](images/FileLoadOverview.png)
+
+The sequence can be summarized as follows:
+1. Read and parse a .txt file containing save information into `carparkList` as a `CarparkList` object
+2. Read and parse a JSON file containing new availability information into `newCarparkList`, also a `CarparkList` object
+3. Update `carparkList` with new availability information from `newCarparkList`
+4. Write the save string generated from `carparkList` into a .txt file
+
+More detailed information including exception handling will be in the sections below:
+
+#### 3.3.1 Loading CarparkList from text file
+![Sequence diagram](images/LoadFileSequenceTxt.png)
+
+The program will attempt to read from a .txt file. This .txt file contains a save string
+of the CarparkList as last modified by the program. Additionally, the user can customise this by changing some fields
+(for example, renaming a carpark to "Near my house" for convenient viewing later), while will be loaded and stored by the program.
+
+The sequence of events is as follows: 
+1. The program attempts to read a save string from the given filepath (of the carparkList.txt file).
+2. If the text file exists and is of a valid format, the text string is returned to the method, which is then parsed
+into a valid CarparkList object, and then returned to the program.
+3. If the text file doesn't exist or has an invalid format, the text string is not written, and the Load JSON method is called instead
+to generate from a backup.
+
+##### 3.3.1.1 Design Considerations
+**Choice of "last resort" backup loading**
+
+The reason for reading from the backup JSON as a last resort is so that no loss of information is found: the LTA API on occasion
+will only return 500 or a variable number of carparks. If the last resort is to parse the fresh JSON from the LTA API into 
+program, if the new CarparkList only has 500 objects, some objects in the `Favourites` list may become invalid, and more than that, 
+a large portion of carpark information will not be available at all.
+
+As such, we elected to use the backup JSON as a base as a verifiable comprehensive sampling of carparks, so no information
+will be invalid and users can still filter and search for these carparks that might be unable if the freshly fetched API was used.
+To allow users to work around this, we have a "Last Updated" field in the detail view to allow users to see if the carpark
+has been just updated or was not updated by the API call.
+
+**Invalid format behaviour**
+Invalid formatting may result when users tamper with the file by adding or removing delimiters (`||`), or entering data that will result
+in an improperly formatted CarparkList object. For example, changing the carparkId field for a carpark such that
+two carparks clash will result in the `find` command not working properly as the HashMap will not be able to take
+duplicate values.
+
+It was decided for the same reason above that rather than just ignoring single rows and using new ones, any invalid formatting at all
+will cause the entire text string to be ignored (and overwritten later). This is because a user causing a single row to be invalid may cause
+that row to be skipped, and if the `Favourites` list includes that particular row, it may cause a mismatch in expected information
+between the user and the program.
+
+#### 3.3.2 Loading CarparkList from JSON file
+![Sequence diagram](images/LoadFileSequenceJson.png)
+The sequence of events from loading from a JSON file is as follows: 
+
+The sequence of events is as follows:
+1. The program attempts to read a JSON from the given filepath for `LtaResponse.json`.
+2. If the text file exists and is of a valid format, the text string is returned to the method, which is then parsed
+   into a valid CarparkList object, and then returned to the program.
+3. If the text file doesn't exist or has an invalid format, the text string is not written, and the Load JSON method is called instead
+   to generate from a backup.
+
 
 ## 4 Product scope
 ### 4.1 Target user profile
@@ -340,8 +419,8 @@ validation to ensure no such stray data are presented to the user.
 The target user that we have in mind is a driver who needs to find a carpark slot and wants to find the carpark 
 information so he knows where he can park. We want to make the data from LTA easier to read for users who are able to 
 use CLI. This would be a more efficient way for Singaporean drivers to be able to obtain information regarding their 
-desired carpark and also for them to be able to filter our carparks based on their addresses. Most importantly, it is 
-does not require any internet connection to use.
+desired carpark and also for them to be able to filter our carparks based on their addresses. Most importantly, it
+does not require any internet connection to use if users want to search carpark information (based on what was last updated).
 
 
 
@@ -357,10 +436,11 @@ for use via a Command Line Interface (CLI).
 |---------|------|----------------------------------------------------------------|----------------------------------------------------------|
 | v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
 | v1.0    |User with no internet| Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
-| v2.0    |Driver| Have favourites for each carpark                               | I can monitor carparks important to me                   |
+| v2.0    |Driver| Be able to save favourites                                     | I can monitor carparks important to me                   |
 | v2.0    |Driver| Import my favourite carparks                                   | Import saved settings/preferences                        |
 | v2.0    |Driver| Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
-| v2.1    |Driver| Have at my carpark information be colour coordinated           | I can look at carparks information with ease             |
+| v2.1    |Driver| Search for carparks I want based on carpark ID                 | I can search for carparks with a specific code           |
+| v2.1    |Driver| Have my carpark information be colour coordinated              | I can look at carpark information with ease              |
 
 
 ## 6 Non-Functional Requirements

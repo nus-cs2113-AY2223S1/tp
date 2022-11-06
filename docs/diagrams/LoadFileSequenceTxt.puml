@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from files
+
+
+participant "<<class>>\n:FileReader" as FileReader LOGIC_COLOR
+
+participant "carparkList:CarparkList" as CarparkList LOGIC_COLOR
+
+
+
+
+
+
+
+ [-> FileReader : loadCarparkListFromTxt(filepath, directorypath)
+activate FileReader
+
+FileReader -> FileReader : readStringFromTxt(filepath, directorypath)
+activate FileReader
+
+alt .txt file exists AND is formatted properly
+    FileReader --> FileReader : textString
+    create CarparkList
+    FileReader -> CarparkList : CarparkList(textString)
+    activate CarparkList
+    CarparkList --> FileReader
+    deactivate CarparkList
+    FileReader -->[ : carparkList
+
+else .txt file does not exist OR is not formatted properly
+    FileReader --> FileReader : exception thrown
+    deactivate FileReader
+    create CarparkList
+    FileReader -> CarparkList : CarparkList(backupJsonDirectory, backupJsonDirectory)
+    activate CarparkList
+    ref over FileReader, CarparkList : load from json file
+    CarparkList --> FileReader
+    deactivate CarparkList
+    FileReader -->[ : carparkList
+
+
+        deactivate FileReader
+end
+
+
+
+
+
+
+
+
+
+
+@enduml

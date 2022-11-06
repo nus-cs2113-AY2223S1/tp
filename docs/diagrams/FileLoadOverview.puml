@@ -54,7 +54,7 @@ deactivate CarparkList
 
 Parking -> FileStorage : saveCarparkList(carparkList)
 activate FileStorage
-ref over FileStorage, CarparkList : Load CarparkList from text file
+ref over FileStorage, CarparkList : Write carparkList save string to text file
 Parking <-- FileStorage
 deactivate FileStorage
 
