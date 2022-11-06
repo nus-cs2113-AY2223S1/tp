@@ -453,7 +453,7 @@ Step 4: This list of items will then be displayed to the user via `Ui.printRespo
 The following sequence diagram shows how the sort items operation works:
 ![sortItemSequence](images/SortItemsSequence.png)
 
-### 4.2.7. List categories
+#### 4.2.7. List categories
 
 >This feature allows users to view categories that can be assigned to items and their index after executing the command ```list-categories```.
 
@@ -467,7 +467,7 @@ Step 3: Since there is no parameter to check for list categories command, it wil
 
 Step 4: The ```executeCommand()``` of ExitCommand returns false, so Duke will recognize this command is ```isLastCommand``` and exit the ```while``` loop and stop the program.
 
-### 4.2.8. Find Items by Keyword
+#### 4.2.8. Find Items by Keyword
 
 >This feature allows users to find items through the command ```find-item```.
 
@@ -638,21 +638,21 @@ Step 4: The ```executeCommand()``` of ExitCommand returns true, so Duke will rec
 ### 5.2. Value proposition
 
 Upcycle is a Database Management System that aims to promote frugality and sustainability by providing service for students
-staying in a particular community/hall to loan or borrow items they wish to share with their community.
+staying in a particular community/hall to lend or borrow items they wish to share with their community.
 
 ## 6. User Stories
 
 | Version | As a ... | I want to ...                     | So that I can ...                                             |
 |---------|----------|-----------------------------------|---------------------------------------------------------------|
 | v1.0    | new user | see usage instructions            | refer to them when I forget how to use the application        |
-| v1.0    | manager  | add a user                        | he/she may borrow and loan items                              |
-| v1.0    | manager  | view a specific user              | know what items he/she is borrowing and loaning               |
-| v1.0    | manager  | view all users                    | see who are available for loaning and borrowing               |
+| v1.0    | manager  | add a user                        | he/she may borrow and lend items                              |
+| v1.0    | manager  | view a specific user              | know what items he/she is borrowing and lending               |
+| v1.0    | manager  | view all users                    | see who are available for lending and borrowing               |
 | v1.0    | manager  | delete a user                     | remove the user if he violates community guidelines           |
-| v1.0    | manager  | add an item                       | make the item available for loan                              |
-| v1.0    | manager  | delete an item                    | remove the item when a user decides not to loan it            |
+| v1.0    | manager  | add an item                       | make the item available for lend                              |
+| v1.0    | manager  | delete an item                    | remove the item when a user decides not to lend it            |
 | v1.0    | manager  | view a specific item              | know what the details of the item like itemID and price       |
-| v1.0    | manager  | view all items                    | see what items are available/unavailable for loan             |
+| v1.0    | manager  | view all items                    | see what items are available/unavailable for lend             |
 | v1.0    | manager  | create a transaction              | keep a record of that transaction                             |
 | v1.0    | manager  | view a specific transaction       | keep track of the status of the transaction                   |
 | v1.0    | manager  | delete a transaction              | remove transaction when users change their mind               |
@@ -660,8 +660,8 @@ staying in a particular community/hall to loan or borrow items they wish to shar
 | v2.0    | manager  | find a user by keyword            | locate a user without going through the list                  |
 | v2.0    | manager  | view transactions by status       | view the transactions that are finished or not finished       |
 | v2.0    | manager  | sort items                        | view items based on its price and categories                  |
-| v2.0    | manager  | update price                      | change the price a user decides to loan his item for          |
-| v2.0    | manager  | update transaction                | change the number of days a user decides to loan his item for |
+| v2.0    | manager  | update price                      | change the price a user decides to lend his item for          |
+| v2.0    | manager  | update transaction                | change the number of days a user decides to lend his item for |
 | v2.0    | manager  | store my database                 | maintain the database without losing my data                  |
 | v2.0    | manager  | view a user's items               | view the items that belong to a user                          |
 | v2.1    | manager  | view a user's borrow transactions | view the transactions in which a user is a borrower           |
@@ -705,7 +705,7 @@ Here are the negative test cases you can test:
       - Wrong user prefix: `destroy-user`
    - Invalid `add-user` commands:
       - Missing all command arguments: `add-user`
-      - Missing some command arguments: `add-user /n bui /a 20 /c`
+      - Missing some command arguments (e.g. contact number not added): `add-user /n bui /a 20 /c` 
       - Invalid age: `add-user /n bui /a twenty /c 91234567`
       - Invalid contact (length must be 8): `add-user /n yixiang /a 20 /c 1234567`
       - Invalid contact (only contains digits 0-9): `add-user /n yixiang /a 20 /c -1234567`
