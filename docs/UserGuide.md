@@ -1,43 +1,44 @@
 # User Guide
 
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+    + [Main Menu](#main-menu)
+        - [Going to main menu: `main`](#going-to-main-menu-main)
+        - [Choosing an option: `index`](#choosing-an-option-index)
+    + [1. Patient](#1-patient)
+        - [Adding a new patient: `add`](#adding-a-new-patient-add)
+        - [Viewing all patients: `viewAll`](#viewing-all-patients-viewall)
+        - [Retrieving a patient's records: `retrieve`](#retrieving-a-patients-records-retrieve)
+        - [Modifying the details of a patient: `edit`](#modifying-the-details-of-a-patient-edit)
+        - [Viewing the commands in Patient menu: `help`](#viewing-the-commands-in-the-patient-menu-help)
+    + [2.Visit](#2-visit)
+        - [Adding a visit: `add`](#adding-a-visit-add)
+        - [Adding/editing a reason for existing visit: `edit`](#addingediting-a-reason-for-existing-visit-edit)
+        - [Deleting a reason for existing visit: `deleteReason`](#deleting-a-reason-for-existing-visit-deletereason)
+        - [Viewing all visits: `viewAll`](#viewing-all-visits-viewall)
+        - [Viewing a patient's visits: `viewPatient`](#viewing-a-patients-visits-viewpatient)
+        - [Viewing a specific visit: `viewVisit`](#viewing-a-specific-visit-viewvisit)
+        - [Viewing the commands in the Visit menu: `help`](#viewing-the-commands-in-the-visit-menu-help)
+    + [3. Prescription](#3-prescription)
+        - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
+        - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
+        - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
+        - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
+        - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
+        - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
+        - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
+        - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
+    + [Exit Program: `bye`](#exit-program-bye)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 ## Introduction
 
 OneDoc is a desktop application for doctors to manage patients’ profile, visit records, prescriptions records and
 medicine information via Command Line Interface.
-
-- [User Guide](#user-guide)
-    * [Introduction](#introduction)
-    * [Quick Start](#quick-start)
-    * [Features](#features)
-        + [Main Menu](#main-menu)
-            - [Going to main menu: `main`](#going-to-main-menu-main)
-            - [Choosing an option: `index`](#choosing-an-option-index)
-        + [1. Patient](#1-patient)
-            - [Adding a new patient: `add`](#adding-a-new-patient-add)
-            - [Viewing all patients: `viewAll`](#viewing-all-patients-viewall)
-            - [Retrieving a patient's records: `retrieve`](#retrieving-a-patients-records-retrieve)
-            - [Modifying the details of a patient: `edit`](#modifying-the-details-of-a-patient-edit)
-            - [Viewing the commands in Patient menu: `help`](#viewing-the-commands-in-the-patient-menu-help)
-        + [2.Visit](#2-visit)
-            - [Adding a visit: `add`](#adding-a-visit-add)
-            - [Adding/editing a reason for existing visit: `edit`](#addingediting-a-reason-for-existing-visit-edit)
-            - [Deleting a reason for existing visit: `deleteReason`](#deleting-a-reason-for-existing-visit-deletereason)
-            - [Viewing all visits: `viewAll`](#viewing-all-visits-viewall)
-            - [Viewing a patient's visits: `viewPatient`](#viewing-a-patients-visits-viewpatient)
-            - [Viewing a specific visit: `viewVisit`](#viewing-a-specific-visit-viewvisit)
-            - [Viewing the commands in the Visit menu: `help`](#viewing-the-commands-in-the-visit-menu-help)
-        + [3. Prescription](#3-prescription)
-            - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
-            - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
-            - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
-            - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
-            - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
-            - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
-            - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
-            - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
-        + [Exit Program: `bye`](#exit-program-bye)
-    * [FAQ](#faq)
-    * [Command Summary](#command-summary)
 
 ## Quick Start
 
@@ -102,13 +103,13 @@ Expected Output:
 
 ```
 Ok! I've added a patient! The patient's details are as follows:
-	____________________________________________________________
-	Patient #1
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    ____________________________________________________________
+    Patient #1
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Viewing all patients: `viewAll`
@@ -120,26 +121,26 @@ Format: `viewAll`
 Expected Output:
 
 ```
-Here are the list of patients in the system
-	____________________________________________________________
+Here are the list of patients in the system:
+    ____________________________________________________________
     Patient #1
-	Name: John Doe
-	Gender: Male
-	Date of Birth: 09-09-1978
-	ID: T2
-	____________________________________________________________
+    Name: John Doe
+    Gender: Male
+    Date of Birth: 09-09-1978
+    ID: T2
+    ____________________________________________________________
     Patient #2
-	Name: Jane Doe
-	Gender: Female
-	Date of Birth: 09-09-1978
-	ID: T1
-	____________________________________________________________
+    Name: Jane Doe
+    Gender: Female
+    Date of Birth: 09-09-1978
+    ID: T1
+    ____________________________________________________________
     Patient #3
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Retrieving a patient's records: `retrieve`
@@ -158,13 +159,13 @@ Example Output:
 
 ```
 The patient with the supplied ID was found! Here are the details of the patient: 
-	____________________________________________________________
-	Patient #3
-	Name: John
-	Gender: Male
-	Date of Birth: 12-12-2001
-	ID: T0707075F
-	____________________________________________________________
+    ____________________________________________________________
+    Patient #3
+    Name: John
+    Gender: Male
+    Date of Birth: 12-12-2001
+    ID: T0707075F
+    ____________________________________________________________
 ```
 
 #### Modifying the details of a patient: `edit`
@@ -186,7 +187,8 @@ Example of usage:
 Expected Output:
 
 ```
-Alright, I've modified the details of the patient! Here are the new details of the patient:
+Alright, I've modified the details of the patient! 
+Here are the new details of the patient:
     ____________________________________________________________
     Patient #3
     Name: John
@@ -245,12 +247,12 @@ Expected Output:
 
 ```
 You have added a visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: flu
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: flu
+    ____________________________________________________________
 ```
 
 #### Adding/editing a reason for existing visit: `edit`
@@ -270,12 +272,12 @@ Expected Output:
 
 ```
 You have edited reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: fever
-	____________________________________________________________
+        ____________________________________________________________
+        ID: S123
+        Date: 30-02-2020
+        Time: 15:00
+        Reason: fever
+    ____________________________________________________________
 ```
 
 #### Deleting a reason for existing visit: `deleteReason`
@@ -294,12 +296,12 @@ Expected Output:
 
 ```
 You have deleted the reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing all visits: `viewall`
@@ -316,25 +318,25 @@ Expected Output:
 
 ```
 Here are the list of visits in the system:
-	____________________________________________________________
+    ____________________________________________________________
     VisitIndex #1)
-	ID: T1
-	Date: 08-11-2022
-	Time: 08:00
-	Reason: checkup
-	____________________________________________________________
+    ID: T1
+    Date: 08-11-2022
+    Time: 08:00
+    Reason: checkup
+    ____________________________________________________________
     VisitIndex #2)
-	ID: T2
-	Date: 08-15-2022
-	Time: 09:00
-	Reason: new medication
-	____________________________________________________________
+    ID: T2
+    Date: 08-15-2022
+    Time: 09:00
+    Reason: new medication
+    ____________________________________________________________
     VisitIndex #3)
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 
 ```
 
@@ -354,13 +356,13 @@ Expected Output:
 
 ```
 Here are the list of visits for Patient with ID: S123
-	____________________________________________________________
+    ____________________________________________________________
     VisitIndex #3)
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing a specific visit: `viewVisit`
@@ -379,12 +381,12 @@ Expected Output:
 
 ```
 Here is the visit with VisitIndex 3:
-	____________________________________________________________
-	ID: S123
-	Date: 30-02-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    ID: S123
+    Date: 30-02-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing the commands in the Visit menu: `help`
@@ -423,8 +425,8 @@ Format: `add i/patientID n/medicine_name d/medicine_dosage t/time_interval`
 
 * The `patientID` should be the ID of a patient that is already in the patient list
 * The `patientID` is case-insensitive
-* The `medicine_name` should be either one or two words
-* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `medicine_name` can be multiple words, including "-"
+* The `medicine_dosage` should be formatted as a number followed by a unit (in one word)
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
 * The prescription can only be added if it does not exist in the list.
 
@@ -453,8 +455,8 @@ Modifies one part of a prescription’s record
 Format: `edit x/index n/medicine_name` or `edit x/index d/medicine_dosage` or `edit x/index t/time_interval`
 
 * The `index` must be an integer within the range from 1 to the total number of prescriptions in the list
-* The `medicine_name` should be either one or two words
-* The `medicine_dosage` should be formatted as a number followed by a unit
+* The `medicine_name` can be multiple words, including "-"
+* The `medicine_dosage` should be formatted as a number followed by a unit (in one word)
 * The `time_interval` can be in any alphabets, numbers and spaces but not other characters
 * The prescription can only be edited if the updated version does not exist in the list.
 
@@ -631,9 +633,9 @@ Expected Output:
 ```
 List of commands:
 * To add a prescription: add i/ID n/[name] d/[dosage] t/[time interval]
-    n - The prescription name should be one or two words
-    d - The dosage should be a number followed by an amount
-    t - The time instruction should be instructions on how to take, with any number of words
+    n - The prescription name can be multiple words, including -
+    d - The dosage should be a number followed by an amount, i.e. 10 mg
+    t - The time instruction explains how to take the dosage,with any number of words
 * To edit a prescription: edit x/[index] (n/[name] or d/[dosage] or t/[time interval])
     n/d/t - Please edit only one aspect of a prescription at a time
 * To list all prescriptions: viewall
@@ -641,7 +643,6 @@ List of commands:
 * To list all active prescriptions of one patient: viewActPatientPres i/[ID]
 * To change a prescription record to be active: activate x/[index]
 * To change a prescription record to be inactive: deactivate x/[index]
-    x - The index should be relative to all the visits of a patient
 * To return to main menu: main
 * To quit OneDoc: bye
     ____________________________________________________________
@@ -669,29 +670,27 @@ new directory on your new computer along with the OneDoc JAR file, and the JAR f
 
 ## Command Summary
 
-| Action                                          | Format, Examples                                                                                                                                                                                                  |
-|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Go to the main menu and choose accordingly      | Format: ‘main’, then the user  will to choose between three options:<br/>Patient(1), Visit(2), and Prescription(3)                                                                                                |
-| Add patient                                     | Format: add i/ID d/date_of_visit t/time_of_visit [r/reason] (in Patient i.e. input ‘1’ in the main menu) <br/>Example: add i/S7093944G n/John Smith d/30/2/2022 t/16:00:00 r/Having Flu                           |
-| View all patients                               | Format: viewAll (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                                      |
-| Retrieve information about a patient            | Format: retrieve i/ID  (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                               |  
-| Modifying a patient’s record                    | Format: edit i/ID [n/name] [g/M/F] [d/date_of_birth] (in Patient i.e. input ‘1’ in the main menu)                                                                                                                 |
-| View all commands of patient menu               | Format: `help` (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                                       |
-| Add a patient visit                             | Format: add i/ID d/date_of_visit t/time_of_visit [r/reason] (in Visit i.e. input ‘2’ in the main menu)<br/>Example: add i/S7093944G n/John Smith d/30/2/2022 t/16:00:00 r/Having Flu                              |  
-| Add/Edit a reason for a patient visit           | Format: reason x/index [r/reason] (in Visit i.e. input ‘2’ in the main menu)<br/>Example: reason x/4 r/Having Flu and Fever                                                                                       |
-| Delete a Reason for patient visit               | Format: deleteReason x/index (in Visit i.e. input ‘2’ in the main menu)<br/>Example: reason x/4                                                                                                                   |  
-| View a list of all patients visits              | Format: viewAll (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                                        |
-| View a list of all visits for one patient       | Format: viewPatient i/ID (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                               |  
-| Viewing information for patient’ specific visit | Format: viewVisit x/index (in Visit i.e. input ‘2’ in the main menu)<br/>Example: viewVisit x/5                                                                                                                   |
-| View all commands of visit menu                 | Format: `help` (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                                         |
-| Add a new prescription record                   | Format: add i/ID n/medicine_name d/medicine_dosage t/time_interval(in Prescription i.e. input ‘3’ in the main menu)<br/>Example: add i/S7093944G n/Problaxan d/10 mg t/take 15 minutes after every meal, 3x a day |  
-| Modifying a patient’s prescription              | Format: edit x/[index] ([n/medicine_name] or [d/medicine_dosage] or [t/time_interval]) (in Prescription i.e. input ‘3’ in the main menu)<br/>Example: edit i/4 d/20 mg                                            |
-| View a list of existing prescriptions           | Format: viewAll (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                                 |  
-| View all patient’s prescription                 | Format: viewPatientPres i/ID (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                    |
-| View all patient’s active prescription          | Format: viewActPatientPres i/ID (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                 |  
-| Change prescription status to active            | Format: activate x/[index] (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                      |
-| Change prescription status to inactive          | Format: deactivate x/[index] (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                    |
-| View all commands of prescription menu          | Format: `help` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                                  |
-| Exiting the program                             | Format: bye                                                                                                                                                                                                       |
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| Action                                          | Format, Examples                                                                                                                                                                                                             |
+|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Go to the main menu and choose accordingly      | __Format:__ `main`, then the user  will to choose between three options:<br/>Patient(1), Visit(2), and Prescription(3)                                                                                                       |
+| Add patient                                     | __Format:__ `add i/ID d/date_of_visit t/time_of_visit [r/reason] (in Patient i.e. input ‘1’ in the main menu)` <br/>__Example:__ `add i/S7093944G n/John Smith d/30/2/2022 t/16:00:00 r/Having Flu`                          |
+| View all patients                               | __Format:__ `viewAll` (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                                           |
+| Retrieve information about a patient            | __Format:__ `retrieve i/ID`  (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                                    |  
+| Modifying a patient’s record                    | __Format:__ `edit i/ID [n/name] [g/M/F] [d/date_of_birth]` (in Patient i.e. input ‘1’ in the main menu)                                                                                                                      |
+| View all commands of patient menu               | __Format:__ `help` (in Patient i.e. input ‘1’ in the main menu)                                                                                                                                                              |
+| Add a patient visit                             | __Format:__ `add i/ID d/date_of_visit t/time_of_visit [r/reason]` (in Visit i.e. input ‘2’ in the main menu)<br/>__Example:__ `add i/S7093944G n/John Smith d/30/2/2022 t/16:00:00 r/Having Flu`                             |  
+| Add/Edit a reason for a patient visit           | __Format:__ `reason x/index [r/reason]' (in Visit i.e. input ‘2’ in the main menu)`<br/>__Example:__ `reason x/4 r/Having Flu and Fever`                                                                                       |
+| Delete a Reason for patient visit               | __Format:__ `deleteReason x/index` (in Visit i.e. input ‘2’ in the main menu)<br/>__Example:__ `reason x/4`                                                                                                                  |  
+| View a list of all patients visits              | __Format:__ `viewAll` (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                                             |
+| View a list of all visits for one patient       | __Format:__ `viewPatient i/ID` (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                                    |  
+| Viewing information for patient’ specific visit | __Format:__ `viewVisit x/index` (in Visit i.e. input ‘2’ in the main menu)<br/>__Example:__ `viewVisit x/5`                                                                                                                  |
+| View all commands of visit menu                 | __Format:__ `help` (in Visit i.e. input ‘2’ in the main menu)                                                                                                                                                                |
+| Add a new prescription record                   | __Format:__ `add i/ID n/medicine_name d/medicine_dosage t/time_interval`(in Prescription i.e. input ‘3’ in the main menu)<br/>__Example:__ `add i/S7093944G n/Problaxan d/10 mg t/take 15 minutes after every meal, 3x a day` |  
+| Modifying a patient’s prescription              | __Format:__ `edit x/[index] ([n/medicine_name] or [d/medicine_dosage] or [t/time_interval])` (in Prescription i.e. input ‘3’ in the main menu)<br/>__Example:__ `edit i/4 d/20 mg`                                           |
+| View a list of existing prescriptions           | __Format:__ `viewAll` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                                      |  
+| View all patient’s prescription                 | __Format:__ `viewPatientPres i/ID` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                         |
+| View all patient’s active prescription          | __Format:__ `viewActPatientPres` i/ID (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                      |  
+| Change prescription status to active            | __Format:__ `activate x/[index]` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                           |
+| Change prescription status to inactive          | __Format:__ `deactivate x/[index]` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                         |
+| View all commands of prescription menu          | __Format:__ `help` (in Prescription i.e. input ‘3’ in the main menu)                                                                                                                                                         |
+| Exiting the program                             | __Format:__ `bye`                                                                                                                                                                                                            |

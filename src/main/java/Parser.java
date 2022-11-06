@@ -1,3 +1,7 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,15 +66,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = patientAddMatcher(input);
@@ -83,6 +84,7 @@ public class Parser {
                 errorIfNoMatchPatient(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(4).toUpperCase();
                 errorForPatientID(patientId, false);
+                checkBirthDate(matcherAdd.group(3));
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
@@ -96,11 +98,10 @@ public class Parser {
                 errorIfNoMatchPatient(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
-
         return SubMenuState.IN_SUB_MENU;
     }
 
@@ -108,15 +109,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addVisitMatcher(input);
@@ -156,7 +154,7 @@ public class Parser {
                 errorIfNoMatchVisit(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
@@ -169,15 +167,12 @@ public class Parser {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
         }
-
         if (shouldBackToMain(input)) {
             return SubMenuState.BACK_TO_MAIN;
         }
-
         if (shouldShowSubMenu(input)) {
             return SubMenuState.HELP;
         }
-
         try {
             String inputLower = input.toLowerCase().replace(" ", "");
             Matcher matcherAdd = addPrescriptionMatcher(input);
@@ -226,7 +221,7 @@ public class Parser {
                 errorIfNoMatchPrescription(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
@@ -238,18 +233,17 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_EDIT
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_EDIT
                         + "\n\tn - The name should be one or two space-separated words"
                         + "\n\tg - The gender should be one letter, M or F"
-                        + "\n\td - The date of birth should be formatted as DD-MM-YYYY");
+                        + "\n\td - The date of birth should be formatted as DD-MM-YYYY"
+                        + HELP_MESSAGE);
             case RETRIEVE_PATIENT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PATIENT_RETRIEVE
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PATIENT_RETRIEVE
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PATIENT_ADD
@@ -266,23 +260,21 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_EDIT);
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_EDIT + HELP_MESSAGE);
             case DELETE_REASON_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_DELETE_REASON
-                        + "\n\tx - The index should be a displayed number next to the visit");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_DELETE_REASON
+                        + "\n\tx - The index should be a displayed number next to the visit"
+                        + HELP_MESSAGE);
             case VIEW_PATIENT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_VIEW_PATIENT
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_VIEW_PATIENT
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case VIEW_VISIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.VISIT_VIEW
-                        + "\n\tx - The index should be a displayed number next to the visit");
+                throw new OneDocException(ERROR_MESSAGE + UI.VISIT_VIEW
+                        + "\n\tx - The index should be a displayed number next to the visit"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.VISIT_ADD
@@ -301,32 +293,31 @@ public class Parser {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_ADD);
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_ADD + HELP_MESSAGE);
             case EDIT_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_EDIT
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_EDIT
                         + "\n\tx - The index should be a displayed number next to the prescription"
                         + "\n\tn - The prescription name can be multiple words, including -"
                         + "\n\td - The dosage should be a number followed by an amount, i.e. 10 mg"
                         + "\n\tt - The time instruction explains how to take the dosage, "
-                        + "with any number of words");
+                        + "with any number of words"
+                        + HELP_MESSAGE);
             case VIEW_PATIENT_PRES_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_VIEW_PATIENT
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_VIEW_PATIENT
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case VIEW_ACT_PATIENT_PRES_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_VIEW_ACTIVE
-                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_VIEW_ACTIVE
+                        + "\n\ti - The id can be a sequence of numbers or letters without any spaces"
+                        + HELP_MESSAGE);
             case ACTIVATE_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_CHANGE_ACTIVE
-                        + "\n\tx - The index should be a displayed number next to the prescription");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_CHANGE_ACTIVE
+                        + "\n\tx - The index should be a displayed number next to the prescription"
+                        + HELP_MESSAGE);
             case DEACTIVATE_COMMAND:
-                throw new OneDocException("Your input is incorrect! Please format it as such:"
-                        + UI.PRESCRIPTION_CHANGE_INACTIVE
-                        + "\n\tx - The index should be a displayed number next to the prescription");
+                throw new OneDocException(ERROR_MESSAGE + UI.PRESCRIPTION_CHANGE_INACTIVE
+                        + "\n\tx - The index should be a displayed number next to the prescription"
+                        + HELP_MESSAGE);
             default:
                 throw new OneDocException("Your input is incorrect! Please format it as such:"
                         + UI.PRESCRIPTION_ADD
@@ -339,6 +330,65 @@ public class Parser {
                         + UI.RETURN_TO_MAIN
                         + UI.EXIT_PROGRAM);
             }
+        }
+    }
+
+    private void checkDate(int day, int month, String date) throws OneDocException {
+        try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu", Locale.US)
+                    .withResolverStyle(ResolverStyle.STRICT);
+            dateFormatter.parse(date);
+            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
+                throw new OneDocException(UI.INVALID_DATE);
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException(UI.INVALID_DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new OneDocException(UI.DATE_DOESNT_EXIST);
+        }
+    }
+
+    private void checkDateForVisit(String date) throws OneDocException {
+        try {
+            String[] dateSplit = date.split("-");
+            checkDate(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),date);
+            int year = Integer.parseInt(dateSplit[2]);
+            if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
+                throw new OneDocException(UI.INVALID_YEAR);
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException(UI.INVALID_DATE_FORMAT);
+        }
+    }
+
+    private void checkBirthDate(String date) throws OneDocException {
+        try {
+            String[] dateSplit = date.split("-");
+            int day = Integer.parseInt(dateSplit[0]);
+            int month = Integer.parseInt(dateSplit[1]);
+            int year = Integer.parseInt(dateSplit[2]);
+            checkDate(day,month,date);
+            if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
+                    && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE) {
+                throw new OneDocException(UI.INVALID_DOB);
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException(UI.INVALID_DATE);
+        }
+    }
+
+
+    private void checkTime(String time) throws OneDocException {
+        try {
+            String[] timeSplit = time.split(":");
+            int hour = Integer.parseInt(timeSplit[0]);
+            int minute = Integer.parseInt(timeSplit[1]);
+            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE
+                    || minute > MAX_MINUTE_RANGE) {
+                throw new OneDocException(UI.INVALID_TIME);
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException(UI.INVALID_TIME);
         }
     }
 
@@ -365,8 +415,10 @@ public class Parser {
         }
     }
 
-    private void parseAddVisit(Matcher matcher, String patientId) {
+    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
         String reason = matcher.group(4);
+        checkDateForVisit(matcher.group(2));
+        checkTime(matcher.group(3));
         if (reason == null || reason.isEmpty()) {
             visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
             storage.saveVisitData(visitList);
@@ -379,7 +431,7 @@ public class Parser {
 
     private Matcher patientAddMatcher(String input) {
         Pattern patientAddPattern = Pattern.compile(
-                "^add\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
+                "^" + ADD_COMMAND + "\\s*n/" + PATIENT_NAME_REGEX + "g/" + GENDER_REGEX
                         + "d/" + DATE_REGEX + "i/" + ID_REGEX + "$",
                 Pattern.CASE_INSENSITIVE);
         return patientAddPattern.matcher(input);
@@ -387,13 +439,13 @@ public class Parser {
 
     private  Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
-                "^retrieve\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
+                "^" + RETRIEVE_PATIENT_COMMAND + "\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
     private static Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
-                "^edit\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
+                "^" + EDIT_COMMAND + "\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
                 Pattern.CASE_INSENSITIVE);
         return patientEditPattern.matcher(input);
     }
@@ -414,6 +466,7 @@ public class Parser {
         case "d":
             Pattern matchDob = Pattern.compile("^" + DATE_REGEX + "$", Pattern.CASE_INSENSITIVE);
             if (matchDob.matcher(input).find()) {
+                checkBirthDate(input);
                 patientList.modifyPatientDetails(ui, id, "", input, "");
                 storage.savePatientData(patientList);
             } else {
@@ -627,4 +680,17 @@ public class Parser {
             "(?:r/\\s*((?:\\w+\\s*)*\\w+))*\\s*";
     private static final String REASON_REGEX = "\\s*((?:\\w+\\s*)*\\w+)\\s*";
     private static final String INDEX_REGEX = "\\s*(\\d+)\\s*";
+
+    private static final String ERROR_MESSAGE = "Your input is incorrect! Please format it as such:";
+    private static final String HELP_MESSAGE = "\nIf you want to see the whole list of commands, type help!";
+    private static final int MIN_DOB_YEAR_RANGE = 1922;
+    private static final int MIN_YEAR_RANGE = 2000;
+    private static final int MAX_YEAR_RANGE = 2050;
+    private static final int MIN_DAY_RANGE = 1;
+    private static final int MAX_DAY_RANGE = 31;
+    private static final int MIN_MONTH_RANGE = 1;
+    private static final int MAX_MONTH_RANGE = 12;
+    private static final int MIN_TIME_RANGE = 0;
+    private static final int MAX_HOUR_RANGE = 23;
+    private static final int MAX_MINUTE_RANGE = 59;
 }

@@ -1,0 +1,61 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+box
+participant ":PrescriptionList" as A
+participant "prescriptionEdited\n:Prescription" as E
+participant "prescriptionList\n:ArrayList<Prescription>" as C
+participant "newPrescription\n:Prescription" as B
+end box
+
+participant "ui:UI" as D
+
+[-> A : edit(ui, prescriptionNumber, \nmedicine, dosage, timeInterval)
+activate A
+
+opt prescriptionNumber is invalid
+[<-- A
+end
+
+A -> C : get(prescriptionNumber - 1)
+activate C
+return prescriptionEdited:Prescription
+
+ref over A, E
+get patientId and not updated parameters
+of the prescriptionEdited
+end
+
+create B
+A -> B : new Prescription(ui, patientId, \nnewMedicine, newDosage, newTimeInterval)
+activate B
+B --> A : newPrescription:Prescription
+deactivate B
+
+A -> C : contains(newPrescription)
+activate C
+return hasDuplicate:boolean
+
+opt hasDuplicate == true
+    ref over A, E, C, D
+        print a prescription duplicated message along with
+        the prescriptionString and index of newPrescription
+    end
+
+    [<-- A
+end
+
+ref over A, E
+edit medicine, dosage, and timeInterval
+if they are not empty Strings.
+end
+
+ref over A, E, C, D
+    print a prescription edited message along with
+    the prescriptionString and index of prescriptionEdited
+end
+return
+
+
+@enduml

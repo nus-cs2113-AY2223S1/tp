@@ -14,7 +14,7 @@ public class PatientList {
         assert id != null : "id of patient should not be null!";
         Patient patient = new Patient(name, birthDate, gender, id);
         patients.add(patient);
-        ui.printMessageAndObject(patient.toString(),UI.PATIENT_ADDED,patients.indexOf(patient),UI.PATIENT);
+        ui.printMessageAndObject(patient.toString(), UI.PATIENT_ADDED, patients.indexOf(patient), UI.PATIENT);
     }
 
     public void loadPatient(String name, String birthDate, String gender, String id) {
@@ -22,23 +22,15 @@ public class PatientList {
         patients.add(patient);
     }
 
-    public void printIndexOfPatient(Patient patient) {
-        System.out.println("\tPatient #" + (patients.indexOf(patient) + 1));
-    }
-
     public void retrievePatient(UI ui, String id) {
         for (Patient patient : patients) {
             if (patient.getId().equalsIgnoreCase(id)) {
-                System.out.println("The patient with the supplied ID was found! Here are the details of the patient: ");
-                ui.printLine();
-                printIndexOfPatient(patient);
-                System.out.println(patient);
-                ui.printLine();
+                ui.printMessageAndObject(patient.toString(),
+                        UI.PATIENT_RETRIEVED, patients.indexOf(patient), UI.PATIENT);
                 return;
             }
         }
-        ui.printLine();
-        System.out.println("Sorry, no patient exists with the supplied ID!");
+        ui.printNoPatientFound();
     }
 
     public Patient findPatient(String id) {
@@ -51,17 +43,12 @@ public class PatientList {
         return null;
     }
 
-    // TODO one potential improvement is to make this three different methods
-    //  modifyPatientName(String id, String name), modifyPatientDOB(String id, String birthDate)
-    //  and modifyPatientGender(String id, String gender)
     public void modifyPatientDetails(UI ui, String id, String name, String birthDate, String gender) {
         Patient patientToBeModified = findPatient(id);
         if (patientToBeModified == null) {
-            ui.printLine();
-            System.out.println("Sorry! No patient exists in the system with the supplied ID!");
-            ui.printLine();
+            ui.printNoPatientFound();
+            return;
         }
-        ui.printLine();
         if (!name.isEmpty()) {
             patientToBeModified.setName(name);
         }
@@ -71,7 +58,6 @@ public class PatientList {
         if (!gender.isEmpty()) {
             patientToBeModified.setGender(gender);
         }
-        System.out.println();
         ui.printMessageAndObject(patientToBeModified.toString(),UI.PATIENT_EDITED,
                 patients.indexOf(patientToBeModified), UI.PATIENT);
     }
@@ -84,7 +70,7 @@ public class PatientList {
         return patients.size();
     }
 
-    private Patient getPatient(int patientNumber) {
+    public Patient getPatient(int patientNumber) {
         return patients.get(patientNumber);
     }
 
@@ -99,22 +85,10 @@ public class PatientList {
 
     public void listPatients(UI ui) {
         if (isEmpty()) {
-            System.out.println("There are no patients in the system right now!");
+            ui.printNoPatientsMessage();
             return;
         }
-        System.out.println("Here are the list of patients in the system");
-        for (int i = 0; i < getTotalNumberofPatients(); i++) {
-            ui.printLine();
-            System.out.println("\tPatient #" + (i + 1));
-            System.out.println(getPatient(i));
-        }
-
-        ui.printLine();
-
-    }
-
-    public boolean isUniqueId(String patientID) {
-        return findPatient(patientID.toUpperCase()) == null;
+        ui.printPatientList(this);
     }
 
     public ArrayList<Patient> getPatients() {

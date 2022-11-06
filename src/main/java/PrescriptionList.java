@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * PrscriptionList is a class that handles the array operations for Prescription objects.
+ * PrescriptionList is a class that handles the array operations for Prescription objects.
  */
 public class PrescriptionList {
     private final ArrayList<Prescription> prescriptionsList;
@@ -50,6 +50,10 @@ public class PrescriptionList {
         return prescriptionsList.isEmpty();
     }
 
+    /**
+     * Show the list of all prescriptions from all patients.
+     * @param ui is the user interface.
+     */
     public void viewAll(UI ui) {
         if (isEmpty()) {
             ui.printNoPrescriptionMessage();
@@ -62,6 +66,11 @@ public class PrescriptionList {
         }
     }
 
+    /**
+     * Show the list of both active and inactive prescriptions of a patient with a specific patientId.
+     * @param ui is the user interface instance.
+     * @param patientId is the ID of the patient.
+     */
     public void viewPatientPrescription(UI ui, String patientId) {
         if (isEmpty() || !hasPatientPrescription(patientId)) {
             ui.printNoMatchingPrescriptionMessage();
@@ -70,12 +79,17 @@ public class PrescriptionList {
 
         ui.printViewAllPrescriptionsMessage();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            if (prescriptionsList.get(i).isMatchedPatient(patientId.toUpperCase())) {
+            if (prescriptionsList.get(i).isMatchedPatient(patientId)) {
                 ui.printPrescriptionWithIndex(i + 1, prescriptionsList.get(i).toString());
             }
         }
     }
 
+    /**
+     * Show the list of active prescriptions of a patient with a specific patientId.
+     * @param ui is the user interface instance.
+     * @param patientId is the ID of the patient.
+     */
     public void viewActivePatientPrescription(UI ui, String patientId) {
         if (isEmpty() || !hasActivePatientPrescription(patientId)) {
             ui.printNoMatchingActivePrescriptionMessage();
@@ -84,7 +98,7 @@ public class PrescriptionList {
 
         ui.printViewAllActivePrescriptionsMessage();
         for (int i = 0; i < prescriptionsList.size(); i++) {
-            if (prescriptionsList.get(i).isMatchedPatientActive(patientId.toUpperCase())) {
+            if (prescriptionsList.get(i).isMatchedPatientActive(patientId)) {
                 ui.printPrescriptionWithIndex(i + 1, prescriptionsList.get(i).toString());
             }
         }
@@ -92,7 +106,7 @@ public class PrescriptionList {
 
     /**
      * Edit an existing prescription's detail.
-     * The prescription will be edited only if it has a valid prescription number and it is unique.
+     * The prescription will be edited only if it has a valid prescription number, and it is unique.
      * @param ui is the user interface of OneDoc
      * @param prescriptionNumber is the prescription index shown to user in viewings, ranging from 1 to the size of list
      * @param medicine is a String of medicine name
@@ -144,7 +158,7 @@ public class PrescriptionList {
 
     private boolean hasPatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
-            if (prescription.isMatchedPatient(patientId.toUpperCase())) {
+            if (prescription.isMatchedPatient(patientId)) {
                 return true;
             }
         }
@@ -154,7 +168,7 @@ public class PrescriptionList {
 
     private boolean hasActivePatientPrescription(String patientId) {
         for (Prescription prescription : prescriptionsList) {
-            if (prescription.isMatchedPatientActive(patientId.toUpperCase())) {
+            if (prescription.isMatchedPatientActive(patientId)) {
                 return true;
             }
         }

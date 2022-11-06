@@ -16,9 +16,27 @@ public class UI {
     public static final String INVALID_PATIENT_DATA_MESSAGE =
             "Invalid lines detected while reading patient.txt! They will be discarded.";
     public static final String FILE_CREATION_ERROR_MESSAGE = "Error! Data files could not be created";
+    public static final String PATIENT_RETRIEVED =
+            "The patient with the supplied ID was found! Here are the details of the patient: ";
+    public static final String INCORRECT_FORMAT = "Incorrect format: ";
+    public static final String HASHTAG = " #";
+    public static final String TAB = "\t";
+    public static final String NO_PATIENTS_IN_THE_SYSTEM = "There are no patients in the system right now!";
     private static Scanner scanner;
 
-    protected static final String LOGO = "ıllıllı OneDoc ıllıllı";
+    protected static final String LOGO =
+            System.lineSeparator()
+            + "                        _"
+            + System.lineSeparator()
+            + "                       | |"
+            + System.lineSeparator()
+            + "  ___  _ __   ___    __| | ___   ___"
+            + System.lineSeparator()
+            + " / _ \\| '_ \\ / _ \\  / _` |/ _ \\ / __|"
+            + System.lineSeparator()
+            + "| (_) | | | |  __/ | (_| | (_) | (__"
+            + System.lineSeparator()
+            + " \\___/|_| |_|\\___|  \\__,_|\\___/ \\___|";
     private static final String WELCOME_MESSAGE = "Hello welcome to" + System.lineSeparator() + LOGO;
     private static final String MAIN_MENU = "Please choose one of the following options:" + System.lineSeparator()
             + "1 - Patients" + System.lineSeparator()
@@ -152,6 +170,24 @@ public class UI {
         }
     }
 
+    public void printNoPatientsMessage() {
+        System.out.println(NO_PATIENTS_IN_THE_SYSTEM);
+    }
+
+
+    public void printPatientList(PatientList patientList) {
+        System.out.println("Here are the list of patients in the system:");
+        for (int i = 0; i < patientList.getTotalNumberofPatients(); i++) {
+            printObject(patientList.getPatient(i).toString(), i, UI.PATIENT);
+        }
+        printLine();
+    }
+
+    public void printNoPatientFound() {
+        System.out.println("Sorry! No patient exists in the system with the supplied ID!");
+        printLine();
+    }
+
     private void printPatientStartMessage() {
         System.out.println(PATIENT_START_MESSAGE);
     }
@@ -162,17 +198,28 @@ public class UI {
 
     public void printMessageAndObject(String object, String message, int index, String type) {
         System.out.println(message);
+        printObject(object, index, type);
         printLine();
-        System.out.println("\t" + type + " #" + (index + 1));
+    }
+
+    public void printObject(String object, int index, String type) {
+        printLine();
+        System.out.println(TAB + type + HASHTAG + (index + 1));
         System.out.println(object);
-        printLine();
     }
 
     public static void printErrorMessage(String errorMessage) {
         printLine();
-        System.out.println("\t" + errorMessage);
+        System.out.println(TAB + errorMessage);
         printLine();
     }
+
+    public static void printInvalidFormatMessage(String errorMessage) {
+        printLine();
+        System.out.println(INCORRECT_FORMAT + errorMessage);
+        printLine();
+    }
+
 
     private void printVisitStartMessage() {
         System.out.println(VISIT_START_MESSAGE);
@@ -209,7 +256,7 @@ public class UI {
     }
 
     public static void printLine() {
-        System.out.print("\t");
+        System.out.print(TAB);
         for (int i = 0; i < 60; i++) {
             System.out.print("_");
         }
@@ -283,6 +330,17 @@ public class UI {
     public static final String PRESCRIPTION = "Prescription";
     public static final String VISIT = "Visit";
     public static final String PATIENT = "Patient";
+    public static final String INVALID_YEAR = "Invalid year entered in the date, year should be in the range 2012-2032";
+    public static final String INVALID_DOB = "Invalid date for birth date, make sure the date range is between 1922 to"
+            + " today";
+    public static final String INVALID_TIME = "Invalid time entered, make sure the hours are in range 0-23 and the "
+            + "minutes are in range 0-59 in the format HH:MM";
+    public static final String INVALID_DATE = "Invalid date entered, make sure the date is in the correct format:\n"
+            + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12";
+    public static final String DATE_DOESNT_EXIST = "Invalid date entered - make sure the date exists and is in the "
+            + "correct format";
+    public static final String INVALID_DATE_FORMAT = "Invalid Date entered - please enter digits (0-9) in the"
+            + " format DD-MM-YYYY";
 
     /**
      * Print message that there are no prescription from the patient.

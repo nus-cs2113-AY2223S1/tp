@@ -2,35 +2,38 @@
 
 ## Acknowledgements
 
-Parser class and its functions are largely adapted from Ria's IP and help from regex101 (https://regex101.com/).
+Parser class and its functions are adapted with inspiration from [Ria's IP](https://github.com/riavora/ip) and help
+from [regex101](https://regex101.com/).
 
-Storage class and its functions are largely adapted from Dhanish's IP on Duke.
+Storage class and its functions are largely adapted from [Dhanish's IP](https://github.com/dhanish265/ip) on Duke.
 
 ## Design & implementation
 
-
 ### PatientList Component
 
-The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
-a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly.
+The `PatientList` Component,
+* stores the list of patients
+* can add new patients to the list
+* can modify the details of patients
+* allows users to view all patients
+* allows users to find a particular patient given ID
 
-At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, data is read from the
-relevant text files to create Patients that existed prior to the last closure of the program, and then adds these patients to the
-ArrayList in PatientList. This finishes the initial set-up.
+![](images/PatientComponentClassDiagram.png)
+
+The Patient and PatientList classes are used in conjunction to manage patients, and the list of patients. Each patient has a name,
+a unique ID, a date of birth and gender. The PatientList class holds an ArrayList of Patients and manipulates them accordingly, using a 
+UI object to print output where necessary.
+
+At the start of the program, a new PatientList object is instantiated. Through methods in the Storage class, invalid data is ignored
+while valid data is read from the relevant text files to create Patients that existed prior to the last closure of the program. The patients are then added to the
+ArrayList in PatientList. A final call to savePatientData rewrites the data files such that only valid data remain in them. This finishes the initial set-up.
 
 ![](images/PatientListInitialization.png)
 
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
 
-The `PatientList` Component,
- * stores the list of patients
- * can add new patients to the list
- * can modify the details of patients
- * allows users to view all patients
- * allows users to find a particular patient given ID
-
-**Important methods in PatientList class:**
+#### Important methods in PatientList class
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 `Patient` is created and added to the list of `Patient`s in PatientList.
 * `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
@@ -55,7 +58,7 @@ The `VisitList` Component,
 * can view a specific visit
 * depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
 
-**Important Methods in `VisitList` class:**
+#### Important methods in `VisitList` class
 * `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, `timeOfVisit` 
 and `reason`. `reason` is optional, and it can be left blank, and be modified later on via the `editReason` method.
 * `editReason` - This method allows user to edit reason for an existing visit, by specifying `index` of visit and `reason` for visit. `reason` must not be left blank here, 
@@ -65,9 +68,10 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-**How Adding a new Visit into the VisitList Works**
+#### How adding a new `Visit` into the `VisitList` works
 
 ![](images/VisitListAdd.png)
+
 1. `VisitList` is first called to add a new visit with the required details. This calls the constructor class of `Visit` class to create an instance of `Visit`
 2. The new visit is then added to the `ArrayList<Visit>`
 3. Lastly, the 'UI' class is called, to print a confirmation message that the visit has been added, and prints out the details of this new visit.
@@ -86,22 +90,23 @@ The `PrescriptionList` component,
 * depends on `UI` class (because the `PrescriptionList` component needs to interact with user through the `UI` 
 component)
 
-**Methods in `PrescriptionList` class:**
+#### Important Methods in `PrescriptionList` class
 
-* **`add`** - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+* `add` - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
 `timeInterval`.
-* **`viewAll`** - This methods iterates through the list of all prescriptions and print the details of prescriptions from
+* `viewAll` - This method iterates through the list of all prescriptions and print the details of prescriptions from
 all patients.
-* **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
+* `viewPatientPrescription` - This method iterates through the list of prescriptions and print the details of 
 prescriptions from the specified `patientId`.
-* **`viewActivePatientPrescription`** - This method iterates through the list of prescriptions and print the details of
+* `viewActivePatientPrescription` - This method iterates through the list of prescriptions and print the details of
 all active prescriptions with the specified `patientId`
-* **`edit`** - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
+* `edit` - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
 specified index
-* **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
-* **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
+* `activatePrescription` - This method allows user to set the prescription of specified index as active.
+* `deactivatePrescription` - This method allows user to set the prescription of specified index as inactive.
+* `loadPrescription` - This method assists the `Storage` component to load prescriptions from the .txt storage.
 
-**Members in `Prescription` class**
+#### Members in `Prescription` class
 
 * `medicine` - Stores the medicine name
 * `timeInterval` - The time Interval the medicine is taken between
@@ -109,24 +114,151 @@ specified index
 * `dosage` 
 * `isActive` - Whether is the prescription currently active or not
 
-How adding a new prescription into the list works:
+#### Adding a new prescription
+Users are allowed to add new prescriptions. The action works as follows:
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
-2. The new prescription is then added to the `ArrayList<Prescription>`
-3. Lastly, `UI` prints an acknowledge message of what the new prescription has.
+2. If the new prescription has no duplicates in the `prescriptionList`, then it is added to the list. And
+`ui` prints an acknowledgement message of what the new prescription has.
+3. Else, `ui` prints a message that the prescription is already existing, and print the details of the existing 
+prescription.
 
 ![](images/PrescriptionListAdd.png)
 
-How activating/deactivating an existing prescription in the list works:
+#### Viewing prescriptions
 
-1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
-the index in the array.
-2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
-3. Then, the `prescriptionEdited` is set active.
-4. Lastly, `UI` prints an acknowledge message of the most updated details of the prescription.
+There are 3 viewing methods that users can view a list of prescriptions in different filter. The filters are:
+* No filters: `viewAll`
+* Patient prescription filter: `viewPatientPrescription`
+* Patient active prescription filter: `viewActivePatientPrescription`
+
+Here is an example of how viewing with a patient prescription filter works:
+1. When the function `viewPatientPrescription(ui, patientId)` is called, it first checks whether the list is empty and
+has no prescription associated with the given `patientId`. If either case is satisfied, `ui` prints a no
+matching prescription message and returns.
+2. If not, then `prescriptionList` is iterated. Whenever a `prescription`'s `patientId` matches the given `patientId`, 
+`ui` prints the `prescription` details.
+
+![](images/PrescriptionListViewPatientPrescription.png)
+
+The other 2 filters work similarly with slightly different conditions checked.
+
+#### Editing a prescription
+Users are allowed to edit the medicine name, dosage and time interval of the prescription. However, it is only allowed
+if the updated prescription does not repeat other existing prescriptions. The action works as follow:
+
+1. When the `edit` function is called, it returns if the `prescriptionNumber` is invalid.
+2. If `prescriptionNumber` is valid, `prescriptionEdited` is retrieved from the `ArrayList<>`, and `newPrescription` 
+object is created to represent the updated prescription.
+3. If `newPrescription` has a duplicate in the list, it returns with a prescription duplicated message from `ui`.
+4. If not, then `prescriptionEdited` is updated with a confirmation message from `ui`.
+
+![](images/PrescriptionListEdit.png)
+
+#### Activating / Deactivating a prescription
+Users are allowed to activate or deactivate a prescription to track whether a prescription is currently being prescribed
+to patients or not. Both actions work in a similar manner. The action works as follows:
+
+1. When `activate(ui, prescriptionNumber)` initiates an action in the `PrescriptionList`, it converts the 
+`prescriptionNumber` into the index in the array.
+2. If the index is `null`, i.e invalid, the function is returned.
+3. Else, it gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
+4. Then, the `prescriptionEdited` is set active.
+5. Lastly, `UI` prints an acknowledgement message of the most updated details of the prescription.
 
 ![](images/PrescriptionListActivate.png)
+
+### Storage Component
+
+The `Storage` component,
+* initialises the files required for data transcription
+* reads the relevant data files (if previously existent) and loads them into the program during the start of the program
+* saves data into files whenever changes are made (through operations such as add and edit)
+
+![](images/StorageComponentClassDiagram.png)
+
+The class diagram summarises the functions of the `Storage` component at a glance. 
+The `Storage` class has dependencies on the `Scanner` (used to read files) and `FileWriter` (used to write to files) classes.
+It also has a composition relationship with 3 `File` objects, that are used to store data.
+
+**Important methods in the `Storage` class:**
+
+* `loadData` - This method initializes the data file objects that are to be read from, and calls the relevant methods to
+load pre-existing data. Subsequently, it makes a call to relevant methods to rewrite the text files such that only valid
+data remain in them.
+* `loadPatients`, `loadVisits`, `loadPrescriptions` - each of these methods read data from corresponding text files and 
+check if they are valid. If so, initialise a relevant `Patient`, `Visit`, or `Prescription` and adds them to the relevant lists.
+* `savePatientData`, `saveVisitData`, `savePrescriptionData` - each of these methods take in the list of `Patient`s, `Visit`s, 
+or `Prescription`s, processes them one by one and calls the relevant helper method to log its data into the appropriate data 
+file in a pre-specified format.
+
+In particular, we can observe exactly how, for instance, `savePatientData` works.
+
+![](images/SavingPatientDataSequenceDiagram.png)
+1. The method, once called, creates a new `FileWriter` object used to write data.
+2. It calls `logPatients`, passing in the list of `Patient`s and the `FileWriter` object created.
+3. This method, process the list of `Patient`s one by one, calling another method called `logPatientIntoDataFile`, 
+passing the `Patient` and `FileWriter` objects.
+4. The most recently called method writes the data of this `Patient` attribute by attribute in a pre-specified format.
+5. After all iterations, control is returned to the class that called the `savePatientData` method.
+
+
+### UI Component
+* handles printing messages to the user
+* handles printing errors to the user
+
+**Important methods in the `UI` class:**
+* `printWelcomeMessage` - prints logo and welcome message to the user when opening "OneDoc"
+* `printObject` - prints object - patient/visit/prescription and their corresponding index 
+* `printMessageAndObject` - prints object - patient/visit/prescription and their corresponding index, given message and object type
+* `printErrorMessage` - prints error to the user
+
+
+### Parser Component
+
+The `Parser` component,
+* Interprets user input to identify the correct command
+* Parses the parameters and ensures correct typing of information
+* Identifies and runs the subsequent method in PatientList, VisitList, or PrescriptionList with the parsed parameters
+* Provides relevant error messages (specific to each command) based on incorrect user input
+
+The `Parser` class has dependencies on the `Pattern` (used to create regular expression patterns) and `Matcher`
+(used to find regular expressions in Strings) classes.
+
+**Important methods in the `Parser` class:**
+
+* `mainMenuParser` - This method interprets the initial user input to identify the correct submenu, and return that 
+state to the UI
+* `patientParser` - Once within the Patient Submenu, this method is called from the `UI` class on each user input.
+The user input is then parsed into an `add`, `edit`, `retrieve`, or `viewall` command. If the input is incorrect, it
+concludes as an error with a specific error message. Based on the command, the method will call the relevant method
+from the `PatientList` class with the parsed parameters. This method also checks for a call to `help`, `main`, or `bye`
+at the start.
+* `visitParser` - Once within the Visit Submenu, this method is called from the `UI` class on each user input
+The user input is then parsed into an `add`, `edit`, `deleteReason`, `viewPatient`, `viewVisit`, or `viewAll` command.
+If the input is incorrect, it concludes as an error with a specific error message. Based on the command, the method will
+call the relevant method from the `VisitList` class with the parsed parameters.  This method also checks for a call to
+`help`, `main`, or `bye` at the start.
+* `prescriptionParser` - Once within the Prescription Submenu, this method is called from the `UI` class on each user
+input. The user input is then parsed into an `add`, `edit`, `viewPatientPres`, `viewActPatientPres`, `activate`,
+`deactivate`, or `viewAll` command. If the input is incorrect, it concludes as an error with a specific error message. 
+Based on the command, the method will call the relevant method from the `PrescriptionList` class with the parsed
+parameters. This method also checks for a call to `help`, `main`, or `bye` at the start.
+
+In particular, we can observe exactly how, for instance, `patientParser` works.
+
+![](images/PatientParserSequenceDiagram.png)
+1. The method, once called, creates 3 new `Matcher` objects used to identify if there is a correctly-formatted command
+in the user's input of type `add`, `edit`, or `retrieve`. Since `viewAll` is a single word command, there doesn't need
+to be a Matcher for it.
+2. It checks for `viewAll`, and then checks for each `Matcher`.
+3. Based on the valid `Matcher` or `viewAll`, it calls the relevant method from `PatientList`
+4. The `PatientList` method performs the subsequent actions on `Patient`/s, and returns the result.
+5. The method then returns the result to the UI, which presents it to the user.
+6. If there is an error, the specific relevant command is identified in this method, and the format guide is returned
+to the user.
+
 
 ## Product scope
 ### Target user profile
@@ -166,32 +298,15 @@ of information.
 | v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
 | v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
 
-
-
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
 ## Non-Functional Requirements
 
-### Parser
-
-The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
-
-For usability, the input is automatically separated into distinct groups through the Java regex library, which allows
-input such as ID, name, etc. to be pulled out in multi-word or one word parts.
-
-For error-catching, the input is checked to be in a certain format (i.e. DOB is DD-MM-YYYY)
-or of a certain type (i.e. the ID is one word made up of letters and numbers).
-
-If there is an error, the regex also helps with identifying the exact error issue, and
-sending that back to the user.
-
-For example: the `add` command for `Patient`
-
-`To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]`
-* n/ checks for one or two words to store as the name
-* g/ checks for one letter indicating male or female
-* d/ checks for date of birth formatted as (DD-MM-YYY)
-* i/ checks for a single ID containing numbers or letters
+* Should work on any mainstream OS as long as it has Java 11 or above installed.
+* A doctor with above-average typing speed for regular English text and numbers (i.e. not code or system commands)
+should  be able to add, retrieve, and edit information faster using these commands than with a mouse.
+* Should be able to hold up to 1000 patients, with overall 1000 visits and 1000 prescriptions without a noticeable
+sluggishness in performance for typical usage.
+* Data is unable to be deleted on the program (besides directly editing the data files), preventing malicious actors
+from deleting essential health records
 
 ### Index Reference
 
@@ -204,19 +319,18 @@ visit menu, and then use the given index of the visit you find to edit it. The s
 
 * *patient* - A single individual with a unique ID
 * *visit* - A single visit of one existing patient on a specific date and time
-* *prescription* - A single prescription of one existing patient, either inactive if it has been updated
-* or active based on in the patient has been using it or if a new record has replaced it
+* *prescription* - A single prescription of one existing patient, active based on in the patient is currently using it
 
 ## Instructions for manual testing
 
 To load sample data, please reference the following formats:
 
-`patient.txt`: Name | DOB | G | ID
-- Example: Jane Doe | 09-09-1978 | F | T1
+`patient.txt`: `Name | DOB | G | ID`
+<br>Example: `Jane Doe | 09-09-1978 | F | T1`
 
-`visit.txt`: ID | Reason | Date | Time
-- Example: T1 | checkup | 08-11-2022 | 08:00
+`visit.txt`: `ID | Reason | Date | Time`
+<br>Example: `T1 | checkup | 08-11-2022 | 08:00`
 
-`prescription.txt`: ID | Name | Dosage | Time Interval | Active Status (True or False)
-- Example: T2 | penicillin | 1 tablet | every 3 days | T
+`prescription.txt`: `ID | Name | Dosage | Time Interval | Active Status (T or F)`
+<br>Example: `T2 | penicillin | 1 tablet | every 3 days | T`
 
