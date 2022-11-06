@@ -333,8 +333,7 @@ public class Parser {
      * checks that the months in the input date are valid.
      * @param day
      * @param month
-     * @throws OneDocException
-     * when the day or month is valid
+     * @throws OneDocException when the day or month is valid
      */
     private void checkDayAndMonth(int day,int month) throws OneDocException {
         try {
@@ -349,8 +348,7 @@ public class Parser {
     /**
      * checks that the date input is valid i.e. month, day and year are valid.
      * @param date
-     * @throws OneDocException
-     * when the date is invalid
+     * @throws OneDocException when the date is invalid
      */
     private void checkDate(String date) throws OneDocException {
         try {
@@ -369,8 +367,7 @@ public class Parser {
      * checks that the birthdate is valid i.e. valid day,
      * month and year and was not born after today.
      * @param date
-     * @throws OneDocException
-     * when the birthdate is invalid
+     * @throws OneDocException when the birthdate is invalid
      */
     private void checkBirthDate(String date) throws OneDocException {
         try {
