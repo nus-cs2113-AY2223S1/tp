@@ -27,7 +27,6 @@ public class Deposit {
         else{
             balance = balance + amount;
         }
-
     }
 
     public void withdraw(Double amount){

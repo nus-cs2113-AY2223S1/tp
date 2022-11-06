@@ -27,7 +27,8 @@ public class FinanceException extends Throwable {
         ACCOUNT_OVERDRAW,
         URL_REQUEST_EXCEPTION,
         UPDATE_EXCHANGE_RATE_EXCEPTION,
-        SAME_USER_TRANSFER
+        SAME_USER_TRANSFER,
+        EXISITING_CURRENCY
     }
 
     private final ExceptionCollection exceptionType;
@@ -40,6 +41,12 @@ public class FinanceException extends Throwable {
     public void handleException() {
         String errorMessage;
         switch (exceptionType) {
+        case URL_REQUEST_EXCEPTION:
+            errorMessage = "Fail to update the exchange lists due to bad Internet connection. Fall back to last local record.";
+            break;
+        case UPDATE_EXCHANGE_RATE_EXCEPTION:
+            errorMessage = "Fail to update the exchange lists. Fall back to last local record.";
+            break;
         case COMMAND_TYPE_EXCEPTION:
             errorMessage = "Command type not correct.";
             break;
@@ -97,15 +104,11 @@ public class FinanceException extends Throwable {
         case EXIT_LOGIN_TERMINAL:
             errorMessage = "You have exited the login sequence";
             break;
-        case URL_REQUEST_EXCEPTION:
-            errorMessage = "Fail to update the exchange lists due to bad Internet connection. Fall back to last local record.";
-            break;
-        case UPDATE_EXCHANGE_RATE_EXCEPTION:
-            errorMessage = "Fail to update the exchange lists. Fall back to last local record.";
-            break;
-        
         case SAME_USER_TRANSFER:
             errorMessage = "You can't transfer money to yourself";
+            break;
+        case EXISITING_CURRENCY:
+            errorMessage = "You can't create an existing currency";
             break;
         default:
             errorMessage = "Unknown exception happens.";

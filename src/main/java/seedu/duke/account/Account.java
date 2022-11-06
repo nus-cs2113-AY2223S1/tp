@@ -173,7 +173,7 @@ public class Account {
         return isAccountExit;
     }
 
-    private boolean helpCenter(){
+    public boolean helpCenter(){
         boolean isExit = false;
         while(!isExit){
             String in = InputManager.receiveInputLine().toLowerCase();
