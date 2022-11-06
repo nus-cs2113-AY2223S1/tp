@@ -376,8 +376,8 @@ public class Parser {
             String[] timeSplit = time.split(":");
             int hour = Integer.parseInt(timeSplit[0]);
             int minute = Integer.parseInt(timeSplit[1]);
-            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE || minute > MAX_MINUTE_RANGE)
-            {
+            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE
+                    || minute > MAX_MINUTE_RANGE) {
                 throw new OneDocException("Invalid time entered, make sure the hours are in range 0-23 and the "
                         + "minutes are in range 0-59 in the format HH:MM");
             }
@@ -409,7 +409,7 @@ public class Parser {
         }
     }
 
-    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException{
+    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException{ 
         String reason = matcher.group(4);
         checkDate(matcher.group(2));
         checkTime(matcher.group(3));
