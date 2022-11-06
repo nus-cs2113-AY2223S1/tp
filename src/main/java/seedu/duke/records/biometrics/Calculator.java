@@ -1,6 +1,6 @@
 package seedu.duke.records.biometrics;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.food.Food;
 
@@ -22,7 +22,6 @@ public class Calculator {
     private double overweight = 24.9;
     private double obese = 29.9;
     private double maxbmi = 105.3;
-
 
 
     public Calculator(String gender, int weight, int height, int age, int activityLevel) {

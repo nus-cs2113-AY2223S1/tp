@@ -1,6 +1,6 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;

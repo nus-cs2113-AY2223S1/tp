@@ -1,6 +1,5 @@
 package seedu.duke.logic;
 
-import seedu.duke.exception.IllegalValueException;
 import seedu.duke.logic.command.AddCommand;
 import seedu.duke.logic.command.Command;
 import seedu.duke.logic.command.ExitCommand;
@@ -12,6 +11,7 @@ import seedu.duke.logic.command.MarkCommand;
 import seedu.duke.logic.command.RemoveCommand;
 import seedu.duke.logic.command.SetCommand;
 import seedu.duke.logic.command.ViewCommand;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

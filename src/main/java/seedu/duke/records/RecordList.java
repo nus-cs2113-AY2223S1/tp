@@ -1,6 +1,6 @@
 package seedu.duke.records;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.food.Food;

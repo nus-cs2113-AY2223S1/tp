@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import seedu.duke.exception.DukeException;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.DukeException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.logic.command.Command;
 import seedu.duke.logic.command.GreetCommand;
