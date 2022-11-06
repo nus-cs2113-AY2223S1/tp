@@ -20,7 +20,7 @@ Below is an example usage scenario and how the addition mechanism behaves at eac
 
 Step 1: The user launches the application for the first time. A ModuleList object will be initiated with empty content.
 
-Step 2: The user input of "add m/cs2113 s/y2s1 mc/4 g/a" will be taken in for parser and an object of class 'Add' will be returned.
+Step 2: The user input of `add m/cs2113 s/y2s1 mc/4 g/a` will be taken in for parser and an object of class 'Add' will be returned.
 
 Step 3: The execute method in the Add class that is overrides will be called with parameter of moduleList and module to be added passed. This will add the Module into the module list created in step 1.
 
@@ -34,9 +34,9 @@ The deletion mechanism is facilitated by 'Parser', 'Delete', 'ModuleList' and 'U
 
 Below is an example usage scenario and how the deletion mechanism behaves at each step:
 
-Step 1: Assume that the user has already added a module named CS2113 into the ModuleList using the following command, "add m/cs2113 s/y2s1 mc/4 g/a"
+Step 1: Assume that the user has already added a module named CS2113 into the ModuleList using the following command, `add m/cs2113 s/y2s1 mc/4 g/a`
 
-Step 2: The user input of "delete m/cs2113" will be taken in for the parser and an object of class 'Delete' will be returned.
+Step 2: The user input of `delete m/cs2113` will be taken in for the parser and an object of class 'Delete' will be returned.
 
 Step 3: The execute method in the Delete class that is overrides will be called with parameter of the modCode and will iterate through moduleList looking for a Module that matches. It will then remove the Module from the moduleList.
 
@@ -52,10 +52,10 @@ a semester and the modules taken in that semester are displayed.
 Below is an example usage scenario and how the view mechanism behaves at each step.
 
 Step 1: Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+The first module is CS2113, a 4 MC module which was added using the following command `add m/cs2113 s/y2s1 mc/4 g/a`
+The second module is CS2030, a 4 MC module which was added using the following command `add m/cs2030 s/y2s1 mc/4 g/a`
 
-Step 2: The user input of "view s/y2s1" will be taken in for the parser and an object of class 'View' will be returned.
+Step 2: The user input of `view s/y2s1` will be taken in for the parser and an object of class 'View' will be returned.
 
 Step 3: The execute method of View class that is overrides will be called with parameter of the semester and will iterate through
 the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then the module will be added to an ArrayList called matchingModules. In the end, the arrayList matchingModules will be returned.
@@ -74,10 +74,10 @@ a semester and the total number of mcs taken that semester is calculated and dis
 Below is an example usage scenario and how the mcs mechanism behaves at each step.
 
 Step 1: Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+The first module is CS2113, a 4 MC module which was added using the following command `add m/cs2113 s/y2s1 mc/4 g/a`
+The second module is CS2030, a 4 MC module which was added using the following command `add m/cs2030 s/y2s1 mc/4 g/a`
 
-Step 2: The user input of "mcs s/y2s1" will be taken in for the parser and an object of class 'Mcs' will be returned.
+Step 2: The user input of `mcs s/y2s1` will be taken in for the parser and an object of class 'Mcs' will be returned.
 
 Step 3: The execute method of MCs class that is overrides will be called with parameter of the semester and will iterate through 
 the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then mcsCount variable 
@@ -96,10 +96,10 @@ a keyword and the modules containing the keyword in one of its fields will be di
 Below is an example usage scenario and how the find mechanism behaves at each step.
 
 Step 1: Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+The first module is CS2113, a 4 MC module which was added using the following command `add m/cs2113 s/y2s1 mc/4 g/a`
+The second module is CS2030, a 4 MC module which was added using the following command `add m/cs2030 s/y2s1 mc/4 g/b`
 
-Step 2: The user input of "find a" will be taken in for the parser and an object of class 'Find' will be returned.
+Step 2: The user input of `find a` will be taken in for the parser and an object of class 'Find' will be returned.
 
 Step 3: The execute method of Find class that is overrides will be called with parameter of the keyword inputted and will iterate through
 the moduleList. If the keyword matches a field of a particular module, the module will be added to a separate array list 
@@ -119,10 +119,10 @@ according to the semester inputted by the user and removed from the module list.
 Below is an example usage scenario and how the clear mechanism behaves at each step:
 
 Step 1:  Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+The first module is CS2113, a 4 MC module which was added using the following command `add m/cs2113 s/y2s1 mc/4 g/a`
+The second module is CS2030, a 4 MC module which was added using the following command `add m/cs2030 s/y2s1 mc/4 g/b`
 
-Step 2: The user input of "clear s/Y2S1" will be taken in for the parser and an object of class 'Clear' will be returned.
+Step 2: The user input of `clear s/Y2S1` will be taken in for the parser and an object of class 'Clear' will be returned.
 
 Step 3: The execute method in the clear class that is overrides will be called 
 with parameter of the semester and will iterate through moduleList looking for a Module that matches. It will then remove the Module from the moduleList.
@@ -132,6 +132,8 @@ Step 4: After clearing, the appropriate message to be displayed is called from t
 (Note: If the user inputs "clear all", then the same mechanism is followed but instead of matching the modules to the semester entered, all the modules will be cleared.)
 
 The sequence diagram below illustrates this clear mechanism:
+
+![ClearUML.png](diagrams/ClearUML.png)
 
 ### Check feature
 
@@ -143,10 +145,10 @@ The eligibility requirements for NOC and SEP can be found in the glossary.
 Below is an example usage scenario and how the check mechanism behaves at each step.
 
 Step 1: Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+The first module is CS2113, a 4 MC module which was added using the following command `add m/cs2113 s/y2s1 mc/4 g/a`
+The second module is CS2030, a 4 MC module which was added using the following command `add m/cs2030 s/y2s1 mc/4 g/b`
 
-Step 2: The user input of "check noc" or "check sep" will be taken in for 
+Step 2: The user input of `check noc` or `check sep` will be taken in for 
 the parser and an object of class 'Check' will be returned.
 
 Step 3: The execute method of Check class that is overrides 
@@ -161,22 +163,19 @@ The sequence diagram below illustrates this check mechanism.
 
 ### Overview feature
 
-The Overview mechanism is facilitated by 'Parser', 'Overview', 'ModuleList', and 'UI', where the
+The Overview mechanism is facilitated by 'Parser', 'Overview', 'Check', 'ModuleList', and 'UI', where the
 user enters the command and an overview of the user's entire plan is displayed.
 
 Below is an example usage scenario and how the overview mechanism behaves at each step.
 
-Step 1: Assume that the user has already added two modules to y2s1:
-The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
-The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+Step 1: The user wishes to find out about the summary of his current inputs. The user input of `overview` will be taken in for the parser and an object of class 'Overview' will be returned.
 
-Step 2: The user input of "overview" will be taken in for the parser and an object of class 'Overview' will be returned.
-
-Step 3: The execute method of Overview class that is overrides will be called and will iterate through
-the moduleList. All the modules and the entire plan will be displayed with the 
-appropriate message from the UI class.
+Step 2: The execute method of Overview class that is overrides will be called and in the UI, it will call for the respective classes 
+for the wanted information to be displayed.
 
 The sequence diagram below illustrates this overview mechanism.
+
+![OverviewUML.png](diagrams/OverviewUML.png)
 
 ### Help feature
 
@@ -185,7 +184,7 @@ the various commands summary will be displayed.
 
 Below is an example usage scenario and how the help mechanism behaves at each step.
 
-Step 1: The user input of "help" will be taken in for the parser and an object of class "Help" will be returned.
+Step 1: The user input of `help` will be taken in for the parser and an object of class "Help" will be returned.
 
 Step 2: The execute method of Help class that is overrides
 will be called. Then the help message will be called from the UI class which will be displayed to the user.
@@ -203,15 +202,13 @@ This allows the program to exit smoothly with an exit message displayed when the
 
 Below is an example usage scenario and how the exit mechanism behaves at each step.
 
-Step 1: The user input of "exit" will be taken in for the parser and an object of 
+Step 1: The user input of `exit` will be taken in for the parser and an object of 
 class "Exit" will be returned.
 
 Step 2: The execute method of Exit class that is overrides
 will be called. Then the isExit variable will be set to true and the Exit message is called and displayed from the user class.
 
 Step 3: When the outer loop in the Duke class checks and finds isExit to be true, the program terminates. 
-
-
 
 The sequence diagram below illustrates this exit mechanism.
 
