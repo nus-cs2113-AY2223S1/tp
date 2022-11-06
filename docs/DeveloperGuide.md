@@ -249,6 +249,9 @@ The following class diagram illustrates the relationship between UserModuleMappi
 
 ![UserModuleMappingList Diagram](./images/UserModuleMapping_Class.png)
 
+The following sequence diagram helps explain the key steps behind adding and deleting of modules in the UserModuleMappingList class
+![UserModuleMappingList_Sequence](./images/UserModuleMapping_Sequence.png)
+
 ### User University List Manager
 
 #### UserUniversityList
