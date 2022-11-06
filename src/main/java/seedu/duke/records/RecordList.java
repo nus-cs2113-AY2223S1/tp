@@ -1,16 +1,13 @@
 package seedu.duke.records;
 
-import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.records.biometrics.WeightAndFatList;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.Exercise;
-import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.Food;
-import seedu.duke.records.food.FoodList;
 
 import java.util.ArrayList;
 
-import static seedu.duke.command.DateCommand.sortDateForAll;
+import static seedu.duke.logic.command.DateCommand.sortDateForAll;
 
 public class RecordList {
     ArrayList<Record> recordList;
@@ -41,13 +38,13 @@ public class RecordList {
                                            ArrayList<Food> foodArrayList,
                                            ArrayList<Exercise> exerciseArrayList) {
         recordList = new ArrayList<Record>();
-        for (WeightAndFat w: weightAndFatList) {
+        for (WeightAndFat w : weightAndFatList) {
             recordList.add(w);
         }
-        for (Food f: foodArrayList) {
+        for (Food f : foodArrayList) {
             recordList.add(f);
         }
-        for (Exercise ex: exerciseArrayList) {
+        for (Exercise ex : exerciseArrayList) {
             recordList.add(ex);
         }
         sortDateForAll(recordList);

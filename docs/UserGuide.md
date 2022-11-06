@@ -37,6 +37,7 @@ Please follow these guidelines when entering commands into the terminal:
   without a date parameter
     - **If no date is entered for a new record, the current local date on your computer will be used**
 - All dates should be entered in the format `DD-MM-YYYY`. For example, `31-12-2020`.
+- Parameters must not contain `/`
 
 Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit
 
@@ -121,7 +122,7 @@ Date       | Calories Consumed | Calories Burnt | Net Calories | Status         
 
 #### Setting Biometrics: `set biometrics`
 
-Sets user biometrics in TracknFit  
+Sets user biometrics in TracknFit
 
 Format: `set biometrics /{age} /{gender} /{height} /{activity level}`
 
@@ -135,7 +136,7 @@ Example of usage: `set biometrics /15 /male /146 /98 /55 /2`
 
 #### Adding weight and fat record: `add weight`
 
-Adds a record of weight and fat to TracknFit  
+Adds a record of weight and fat to TracknFit
 
 Format: `add weight /{weight} /{fat percentage}`
 
@@ -147,7 +148,7 @@ Example of usage: `add weight /133 /42`
 
 #### View BMI : `view bmi`
 
-Allows the user to check their BMI  
+Allows the user to check their BMI
 
 Format : view bmi
 
@@ -187,7 +188,7 @@ Format: `add strength /{exercise name} /{weight} /{sets} /{reps} [/{date}]`
 - weight must be positive int and less or equal to 1000.
 - sets must be integer ranges from 1 to 100 inclusive
 - reps must be integer ranges from 1 to 100 inclusive.
-- date must be in the format of `dd-MM-yyyy` and cannot be before the current date and not more than a month after.
+- date must be in the format of `dd-MM-yyyy` and cannot be more than a month after.
 - the current date will be set if date is omitted.
 
 Example of usage: `add strength /squat /100 /5 /5 /28-10-2022`
@@ -221,12 +222,15 @@ Expected outcome: Uncompleted strength exercises will be displayed
 
 ```
 -------------------------------------------------------------------------------
+
+Strength exercises completed: 1
+-------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 -------------------------------------------------------------------------------
-1     | press    | 120    | 5    | 5    | -    | -        | 27-10-2022 | [X]
-2     | squat    | 100    | 5    | 5    | -    | -        | 28-10-2022 | [X]
+1     | press    | 1      | 2    | 3    | -    | 49       | 06-11-2022 | [X]
 
 -------------------------------------------------------------------------------
+
 ```
 
 #### Finding strength exercise: `find strength`
@@ -249,6 +253,16 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 1     | squat    | 125    | 5    | 5    | -    | -        | 20-10-2022 | [X]
 2     | squat    | 100    | 5    | 5    | -    | -        | 28-10-2022 | [ ]
 
+-------------------------------------------------------------------------------
+```
+
+Example of usage: `find strength /x`
+
+Expected outcome: No matching found message displayed
+
+```
+-------------------------------------------------------------------------------
+No matching strength exercise found
 -------------------------------------------------------------------------------
 ```
 
@@ -338,7 +352,6 @@ Example of usage: `view exercise /done`
 Expected outcome: All completed exercises will be displayed.
 
 ```
--------------------------------------------------------------------------------
 Exercises completed: 2
 -------------------------------------------------------------------------------
 Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
@@ -348,9 +361,7 @@ Index | Exercise | Weight | Sets | Reps | Dist | Calories | Date       | Status
 
 -------------------------------------------------------------------------------
 
--------------------------------------------------------------------------------
 ```
-
 
 #### Remove exercise: `remove exercise`
 

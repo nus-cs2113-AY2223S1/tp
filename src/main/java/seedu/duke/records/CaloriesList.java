@@ -2,7 +2,7 @@ package seedu.duke.records;
 
 import java.util.ArrayList;
 
-import static seedu.duke.command.DateCommand.sortDateForCalories;
+import static seedu.duke.logic.command.DateCommand.sortDateForCalories;
 
 public class CaloriesList {
 

@@ -1,22 +1,21 @@
 package seedu.duke.command;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Parser;
-import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.command.Command;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
-import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
+import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.BeforeEach;
-import seedu.duke.records.food.FoodList;
-import seedu.duke.storage.Storage;
 
 class RemoveCommandTest {
 
