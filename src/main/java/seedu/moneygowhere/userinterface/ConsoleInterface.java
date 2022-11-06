@@ -689,6 +689,7 @@ public class ConsoleInterface {
         }
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
 
         runLocalStorageSaveToFile();
@@ -1076,6 +1077,7 @@ public class ConsoleInterface {
             return;
         }
 
+        printInformationalMessage("---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----");
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS);
