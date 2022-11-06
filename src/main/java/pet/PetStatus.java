@@ -1,5 +1,3 @@
 package pet;
 
-public interface PetStatus {
-    String getPetStatusDescription();
-}
+public interface PetStatus {}

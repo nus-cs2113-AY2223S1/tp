@@ -15,6 +15,10 @@ public class EmployeeList {
         }
     }
 
+    public static ArrayList<Employee> employeeArrayList() {
+        return employees;
+    }
+
     public static void addEmployee(Employee employee) {
         employees.add(employee);
         System.out.print("Got it. I've added this employee: ");

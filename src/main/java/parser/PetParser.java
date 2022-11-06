@@ -78,8 +78,10 @@ public class PetParser {
                 System.out.println("Invalid Input! health entered invalid for adding a pet");
                 throw new DukeException();
             }
-            boolean isHealthy = statusInt == 0 ? false : true;
 
+            boolean isHealthy = statusInt == 0 ? false : true;
+            assert name.length() > 0;
+            assert species.length() > 0;
             return new AddPetCommand(name, species, isHealthy);
         } catch (DukeException e) {
             return new EmptyCommand();
@@ -94,6 +96,7 @@ public class PetParser {
                 System.out.println("Invalid Input! a valid pet id is in the format of 2xxx");
                 throw new DukeException();
             }
+            assert index > 0;
             return new RemovePetCommand(index);
         } catch (DukeException e) {
             return new EmptyCommand();

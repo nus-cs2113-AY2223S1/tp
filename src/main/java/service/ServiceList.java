@@ -11,8 +11,6 @@ public class ServiceList {
     public static void listService() {
         System.out.println("Here are the services in your service list:");
         for (Service service : services) {
-            assert service.getServiceId() > 0;
-            assert service.getServiceId() < services.size();
             System.out.print(service.getServiceId() + ". ");
             System.out.println(service.getServiceDescription());
         }
