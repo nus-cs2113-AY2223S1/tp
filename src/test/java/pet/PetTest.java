@@ -82,7 +82,7 @@ class PetTest {
     }
 
     @Test
-    void toStringTest(){
+    void toStringTest() {
         Pet newPet5 = new Pet("neo", "dog", false);
         newPet5.setPetStatus(1);
         String expectedOutPut = "I am a cute dog, my name is neo, and I am currently unhealthy and dying";

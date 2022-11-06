@@ -6,7 +6,8 @@ import command.taskcommand.AddTaskCommand;
 import employee.Employee;
 import exception.DukeException;
 import org.junit.jupiter.api.Test;
-import task.*;
+import task.Task;
+import task.TaskList;
 
 import java.util.Date;
 
@@ -34,6 +35,7 @@ class AppointmentTest {
             TaskList.addTask(task);
             task.setDone();
             assertEquals(task.getStatus(), "Done");
+            appointment.updateAppointmentStatus();
             assertEquals(appointment.getAppointmentStatus(), "PROCESSED");
         } catch (DukeException e) {
             // no-op
@@ -43,23 +45,22 @@ class AppointmentTest {
     @Test
     public void checkInvalidFormattedDateTest() {
         String validDate = "2023-1-1";
-        String oldDate = "2022-1-1";
-        String invalideMonthDate = "2022-13-1";
-        String invalidDayDate = "2022-02-30";
-        String largeDate = "22222-1-1";
-
         Date date1 = Appointment.checkFormattedDate(validDate);
         assertEquals(Appointment.formatter.format(date1), "2023-01-01");
 
+        String oldDate = "2022-1-1";
         Date date2 = Appointment.checkFormattedDate(oldDate);
         assertNull(date2);
 
+        String invalideMonthDate = "2022-13-1";
         Date date3 = Appointment.checkFormattedDate(invalideMonthDate);
         assertNull(date3);
 
+        String invalidDayDate = "2022-02-30";
         Date date4 = Appointment.checkFormattedDate(invalidDayDate);
         assertNull(date4);
 
+        String largeDate = "22222-1-1";
         Date date5 = Appointment.checkFormattedDate(largeDate);
         assertNull(date5);
     }
