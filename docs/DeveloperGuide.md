@@ -95,6 +95,7 @@ The API component is also able to:
 - Get API authentication status.
 
 The following sequence diagram shows how the API key is loaded.
+
 ![Api Loading Sequence Diagram](images/LoadApiSequenceDiagram.png)
 
 ### 2.4 Storage Component
@@ -169,6 +170,8 @@ within are static and final.
 `CommonData` contains assorted information that is packed together for easy access. These fields are ones that may be 
 likely to need to be modified. Some examples are strings showing the correct format for using commands, used between 
 command classes whenever an invalid input is entered, and the strings containing URLs for the API.
+
+![Common Component Class Diagram](images/CommonsClassDiagram-0.png)
 
 
 ## 3 Implementation
