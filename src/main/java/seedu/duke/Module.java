@@ -2,10 +2,10 @@ package seedu.duke;
 
 public class Module {
 
-    private String course;
-    private String semesterTaken;
-    private String grade;
-    private int mcs;
+    private final String course;
+    private final String semesterTaken;
+    private final String grade;
+    private final int mcs;
 
     /**
      * Contructor to initialize the class variables of Module class
@@ -22,9 +22,8 @@ public class Module {
     }
 
     public String toString() {
-        String moduleInformation = this.course + " " + this.semesterTaken + " "
+        return this.course + " " + this.semesterTaken + " "
                 + this.grade + " " + this.mcs;
-        return moduleInformation;
     }
 
     public String getCourse() {

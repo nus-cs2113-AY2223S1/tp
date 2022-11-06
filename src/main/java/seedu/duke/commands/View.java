@@ -18,6 +18,7 @@ public class View extends Command {
      * @param input input entered by user. Format: String
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
+     * @throws InvalidOverallInputException exception thrown if the overall input is wrong
      */
     public View(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         input = input.trim();
@@ -125,8 +126,9 @@ public class View extends Command {
     }
 
     /**
-     * throws InvalidSemesterException only when invalidFormat for semester
-     * Ignores when requesting for "all" semester
+     * checks if year is valid or not
+     * @param semester contains the semester given by the user that needs to be checked. Format: String
+     * @throws InvalidSemesterException exception thrown if the year entered by user is invalid
      */
     public void checkYear(String semester) throws InvalidSemesterException {
         if (!semester.equals("all")) {

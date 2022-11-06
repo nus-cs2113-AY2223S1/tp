@@ -14,7 +14,7 @@ public class Check extends Command {
     public static double CAP_MINIMUM_SEP = 3.0;
     public static int SEMESTER_MINIMUM_SEP = 2;
     public static int SEMESTER_MAXIMUM_SEP = 6;
-    private ArrayList<Module> modules = ModuleList.modules;
+    private final ArrayList<Module> modules = ModuleList.modules;
     private String type;
 
     /**
