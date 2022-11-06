@@ -19,7 +19,7 @@ public class InvalidSemesterException extends Exception {
     public static boolean invalidYearNumber(String semester) {
         String year = semester.substring(semester.indexOf('Y') + 1,semester.indexOf('S'));
         if (year.length() == 1 && year.matches("[0-9]+")) {
-            if (Integer.parseInt(year) < 7 && Integer.parseInt(year) > 0) {
+            if (Integer.parseInt(year) < 5 && Integer.parseInt(year) > 0) {
                 return false;
             }
 

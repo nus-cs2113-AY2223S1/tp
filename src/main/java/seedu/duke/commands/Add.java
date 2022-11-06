@@ -27,7 +27,7 @@ public class Add extends Command {
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      * @throws InvalidOverallInputException exception to be thrown if any issues with the input
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);

@@ -198,11 +198,11 @@ public class UI {
 
     }
 
-    public static void overview(ModuleList moduleList) throws InvalidInputContentException, InvalidInputContentException {
+    public static void overview(ModuleList moduleList) throws InvalidInputContentException {
 
         System.out.println("Here’s an overview of your Profile:" + "\n");
         System.out.println("* Current Semester: " + new Check().findCurrentSemesterInString() + "\n");
-        System.out.println("* Total MCs completed : " + moduleList.totalMcs());
+        System.out.println("* Total MCs : " + moduleList.totalMcs());
         System.out.println("* Total Graded MCs : " + moduleList.totalGradedMcs());
         System.out.println("* Total Ungraded (-) MCs : " + moduleList.totalUngradedMcs());
         System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
