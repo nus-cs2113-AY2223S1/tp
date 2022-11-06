@@ -4,17 +4,19 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class ListCommand {
+    - successful: boolean
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
-    <u>+ HEADING_LENGTH: int
     <u>+ DETAILS_INDENT: int
-    - successful: boolean
+    <u>+ HEADING_LENGTH: int
 
-    + formatSelectedModule(SelectedModule, int): String
-    + formatSelectedSlots(Module, Map<LessonType, String>, int): String
-    - formatSingleSlot(Module, LessonType, String, int): String
-    - formatWeeks(List<Integer>): String
+    + ListCommand(input: String[])
+    + formatSelectedModule(module: SelectedModule, semester: int): String
+    + formatSelectedModuleList(currentSelectedModules: List<SelectedModule>, semester: int): String
+    + formatSelectedSlots(module: Module, map: Map<LessonType, String>, semester: int): String
+    - formatSingleSlot(module: Module, type: LessonType, classNo: String, semester: int): String
+    - formatWeeks(weeks: List<Integer>): String
 }
 
 @enduml

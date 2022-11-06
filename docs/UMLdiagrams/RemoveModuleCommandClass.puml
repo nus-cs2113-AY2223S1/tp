@@ -4,12 +4,15 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class RemoveModuleCommand {
+    - module: Module
+    - successful: boolean
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
     <u>- ERROR_WRONG_FORMAT: String
-    - module: Module
-    - successful: boolean
+    <u>+ MODULE_NOT_FOUND: String
+
+    + RemoveModuleCommand(input: String[])
 }
 
 @enduml

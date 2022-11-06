@@ -4,10 +4,12 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class ImportCommand {
+    - nusModLink: String
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
-    - nusModLink: String
+
+    +ImportCommand(input: String[])
 }
 
 @enduml

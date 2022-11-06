@@ -4,17 +4,20 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class TimetableCommand {
-    <u>+ COMMAND_WORD: String
-    <u>+ COMMAND_USAGE: String
-    <u>+ COMMAND_DESCRIPTION: String
-    <u>- EMPTY_TIMETABLE_ERROR_MESSAGE: String
-    <u>- CONFLICTING_ERROR_MESSAGE: String
-    <u>- MISSING_BACKSLASH_ERROR_MESSAGE: String
-    <u>- UNKNOWN_PARAMETER_ERROR_MESSAGE: String
     - showFancy: boolean
     - showSimple: boolean
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_WORD: String
+    <u>- CONFLICTING_ERROR_MESSAGE: String
+    <u>- EMPTY_TIMETABLE_ERROR_MESSAGE: String
+    <u>+ FANCY_KEYWORD: String
+    <u>- MISSING_BACKSLASH_ERROR_MESSAGE: String
+    <u>+ SIMPLE_KEYWORD: String
+    <u>- UNKNOWN_PARAMETER_ERROR_MESSAGE: String
 
-    - addToLessonsList(int, List<Pair<Module, RawLesson>>, SelectedModule)
-    - addValidLesson(List<Pair<Module, RawLesson, Module, List<RawLesson>)
+    + TimetableCommand(input: String)
+    - addToLessonsList(semester: int, lessons: List<Pair<Module, RawLesson>>, selectedModule: SelectedModule)
+    - addValidLesson(lessons: List<Pair<Module, RawLesson>>, module: Module, potentialLesson: List<RawLesson>)
 }
 @enduml

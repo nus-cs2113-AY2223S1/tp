@@ -346,7 +346,7 @@ the number of commands available will involve refactoring at multiple parts of t
 
 #### 3.4.4 SearchModuleCommand
 
-![SearchModuleCommand](images/SearchModuleCommand.png)
+![SearchModuleCommand](images/SearchModuleCommandClass.png)
 
 ##### 3.4.4.1 How the feature is implemented
 
