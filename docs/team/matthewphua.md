@@ -15,7 +15,7 @@ Command Line Interface (CLI).
   * Justification: All commands need an overall similar structure to provide continuity within implementation.
   * Highlights: Had to make an overall structure for all command actions.
   Implemented the OOP model into our design. 
-* **New Feature**: AddCommand
+* **New Feature**: Add Command
   * What it does: Adds the review to storage.
   * Justification: This is the most essential behavior to our application. 
   It allows the user to add own personal reviews to storage.
@@ -34,81 +34,53 @@ Command Line Interface (CLI).
 * **New Feature** Find Command
   * What it does: Finds a review with a specific title
   * Justification: Allows user to find a particular review without having to sort through the long list of reviews.
+  * Highlight: Leveraged list command behavior to prevent redundancy in code when printing out the find command output. 
 * **New Feature** Review List
   * What it does: Stores reviews in current session in array list
   * Justification: We needed an object to store all the user's reviews and have the appropriate
   accessors and behavior methods to perform all necessary actions.
-  * Highlights: Follows the OOP model by creating an object for storage. 
-  
-**Timeline:**
+  * Highlights: Follows the OOP model by creating an object for storage.
 
-For version 1 MVP:
-1) Architected, designed, and created the initial structure for `Commands` Class 
-2) Created subclasses that inherited from `Command` class (`AddCommand`, `RemoveCommand`, `ListCommand`). 
-This includes writing the execute function to make the necessary changes to review list.
-5) Created the `ReviewList` class to store local reviews
 
-For version 2:
-1) Updated and wrote executeCommand classes in `Parser` class
-   (`executeClear`, `executeFind`, `executeDelete`)
-2) Created subclasses that inherited from `Command` class
-   (`FindCommand`,`ClearCommand`)
-3) Created Tests 
-   `RemoveCommandTest`, `ListCommandTest`, `UiTest`, `ClearCommandTest`
-4) Updated `listCommand` to separate tvShows and movies
-5) Updated `removeCommand` to allow the users to choose to remove 
-either a movie or tv show.
+**Enhancements to existing features**:
+* Wrote JUnit tests for `Parser`, `RemoveCommand`, `UI`, `ClearCommand`, `AddCommand`, `ListCommand`
+* Fixed various bugs (Parsing errors, incorrect input, handling different cases)
+* Incorporated a library that helps test for system.out.print output
+  [documentation](https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println)
 
-For version 2.1:
-1) Fixed the primary reported bug: Parsing errors related adding movie and tvShows.
-Handled error catching and edge cases.
-   1) non-number inputs for rating
-   2) '/' character used aside from delimiter usage
-   3) incorrect number of arguments
-2) Fixed parsing errors with Remove command
-   1) incorrect index
-   2) bug with deleting an index when specifying category 
-   3) non-number input for index
-3) Added Parser tests to reach higher coverage for edge cases
+**Contributions to the DG**
+* Wrote Sequence Diagram/Step-by-step walk through for `SortCommand` and `ListCommand` using PlantUML.
+* Created user stories for user story list, non-functional requirements, and step-by-step guide for manual testing
 
-**Contributions to the DG** 
-1) Wrote Sequence Diagram for `SortCommand` and `ListCommand`
-2) Created user stories for user story list
-3) Came up with non-functional requirements 
-4) Created step-by-step guide for manual testing
-
-**Contributions to the UG** 
-1) Helped create command guide by adding descriptions, 
-example input and output.
-2) Created the feature list in UG.
+**Contributions to the UG**
+* Helped create command guide by adding descriptions, 
+example input and output. (`add`, `clear`, `delete`, etc.)
+* Created the feature list in UG.
 
 **Review/mentoring contributions**
-1) Helped architect overall structure of CLI
-2) Given that I am the most senior of my group and have had internship
-experience, I provided them with resources and advice to obtain and be successful in interviews.
-   1) Ex: I am an exchange student from berkeley, so I sent them a course I took 
-on [leetcode](https://algorithmicthinking.github.io/#/) that I thought was really helpful
-3) Sent stack overflow links to help solve issues.
-   1) Ex: Testing for functions that have print statements and verifying the print
-statements have proper output. 
-[documentation](https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println)
+* Helped architect overall structure of CLI
+* Given that I am the most senior of my group and have had internship
+experience, I provided them with resources and advice to obtain and be successful in interviews. 
+  * Ex: I am an exchange student from berkeley, so I sent them a course I took 
+  on [leetcode](https://algorithmicthinking.github.io/#/) that I thought was really helpful 
+* Sent stack overflow links to help solve issues. 
+  * Ex: Testing for functions that have print statements and verifying the print
+  statements have proper output. 
+  [documentation](https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println)
 
 **Contributions to team-based tasks**
-1) Tagged issues and pull requests with proper tags, milestone, assignees
-2) commented on PRs
-3) Helped with function header comments
-4) Incorporated a library that helps test for system.out.print output
-   [documentation](https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println)
-5) Created feature list in User Guide
-6) Created manual-testing instructions in Developer Guide
-7) Created non-functional requirements
-8) Fixed code style throughout codebase
+* Tagged issues and pull requests with proper tags, milestone, assignees 
+* commented on PRs
+* Helped with function header comments
+* Created feature list in User Guide
+* Created manual-testing instructions, non-functional requirements in Developer Guide 
+* Fixed code style throughout codebase
 
 **Contributions beyond the project team**
-1) Reviewed repo in PE-dry-run and reported [16 bugs](https://github.com/matthewphua/ped)
+* Reviewed repo in PE-dry-run and reported [16 bugs](https://github.com/matthewphua/ped)
 ("16 bugs to be exact, putting you in the top 10%")
-   1) 4 High severity
-   2) 4 Medium severity
-   3) 8 Low severity
-2) Reviewed other teams code:
-   1) example: [Organizer Manager](https://github.com/nus-cs2113-AY2223S1/tp/pull/32)
+  * 4 High severity 
+  * 4 Medium severity 
+  * 8 Low severity 
+* Reviewed other teams code:
+  * example: [Organizer Manager](https://github.com/nus-cs2113-AY2223S1/tp/pull/32)
