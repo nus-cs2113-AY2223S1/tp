@@ -393,13 +393,9 @@ an error may be generated if these standards are not adhered to.
 **A**: A flight detail with a designated flight numbers has to be **recorded or exist** in the flight
 list before a passenger flying with an airline of the same flight number can be added into the passenger logbook.
 
-<br>
-
 **Q**: Can I enter 2 flights with the same flight number in the input list?
 
 **A**: No. SkyControl lists are only valid for 1 day and hence we prohibit duplicate flight numbers.
-
-<br>
 
 **Q**: Can I use SkyControl to save a flight/ passenger registered in a different airport terminal or on a different
 day?
