@@ -103,7 +103,7 @@ this means that:
 
 - Modules with no lessons cannot be accessed
 - For modules with lessons, lesson types, such as tutorial and lecture, that possess less than 1 unique class number
-cannot be accessed. (See below for example)
+  cannot be accessed. (See below for example)
 
 ```
 CS2113
@@ -194,12 +194,14 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 &nbsp;&nbsp; (b) Write ```X``` for the clashed intervals <br>
 &nbsp;&nbsp; (c) Write the clashed module code in  ```clashModCodeList``` <br>
 
+
 - If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
 - If there is ```XXXX``` - activity will stop due to this unexpected behavior.
 - If there are no ```XXXX```  - mark of a clash - proceed to write the lessons into ```timeTable```: <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
 &nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
+
 
 - ```timeTable``` is converted into strings for output.
 - Module codes which clashes from ```clashedModCodeList``` is appended at the end of the output string
@@ -236,11 +238,11 @@ module code the user inputs, it will return an array of information about the mo
 
 - Module Code, example:  `CS2113`
 - Module Name, example: `Software Engineering & Object-Oriented Programming`
-- Module Description, example: `This module introduces the necessary skills for systematic and rigorous development of 
-software systems. It covers requirements, design, implementation, quality assurance, and project management aspects of 
-small-to-medium size multi-person software projects. The module uses the Object Oriented Programming paradigm. Students 
-of this module will receive hands-on practice of tools commonly used in the industry, such as test automation tools, 
-build automation tools, and code revisioning tools will be covered.`
+- Module Description, example: `This module introduces the necessary skills for systematic and rigorous development of
+  software systems. It covers requirements, design, implementation, quality assurance, and project management aspects of
+  small-to-medium size multi-person software projects. The module uses the Object Oriented Programming paradigm. Students
+  of this module will receive hands-on practice of tools commonly used in the industry, such as test automation tools,
+  build automation tools, and code revisioning tools will be covered.`
 
 As this command makes a HTTP request to the NUSMods API, different inputs will trigger different responses from the API.
 In order to check for the validity of each input, the response code of each HTTP response is tracked and only a response
@@ -257,9 +259,9 @@ The ***Sequence Diagram*** above is a simplified depiction of how modules are de
 **Design Decision:**
 <p style='text-align: justify;'>
 
-The class `CommandAddModule` is a control abstraction to the operations of 
-(1) checking whether the timetable is empty; 
-(2) query the module to delete from timetable; and 
+The class `CommandAddModule` is a control abstraction to the operations of
+(1) checking whether the timetable is empty;
+(2) query the module to delete from timetable; and
 (3) delete the module, if any.</p>
 
 <p style='text-align: justify;'>
@@ -291,7 +293,7 @@ The query of user input is implemented through the UI class, instead of directly
 **Handling Corrupted File:**
 In the case of the user illegally tampering with the `.txt` data files, the program is designed handle it in a more elegant way. However, do note that the program is not designed for the user to intentionally tamper with the data file. With a corrupted file, there are 2 possibilities.
 
-1. The file is only slightly tampered and does not affect the API calls during load up. This will not be flagged as it does not cause severe problems to the program. However in future versions of the product, this can be further refined.
+1. The file is only slightly tampered and does not affect the API calls during load up. This will not be flagged. However in future versions of the product, this can be further refined. Do note that other features such as `allocate` will be affected by this form of corruption.
 
 2. Important data such as the module code has been affected. In this case, there might be an API call failure. However, the program cannot be certain if the failure is due to a corrupt file or absence of internet connection. The program is thus designed with a data protocol feature which checks with the user if he has stable internet.
     - If he has, the program deems the file to be corrupted and deletes all data files for the semester and continues

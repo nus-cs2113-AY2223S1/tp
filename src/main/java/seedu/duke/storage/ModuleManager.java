@@ -62,6 +62,8 @@ public class ModuleManager {
         case "Sorry, this module is not available in the current semester.":
         case "The API request was interrupted, please try again.":
         case "Module not found, please enter a valid module code next time!":
+        case "Only up to 7 modules are allowed!":
+        case "Weekend modules are currently not supported!":
             throw new Exceptions.FileLoadException();
         default:
             break;
