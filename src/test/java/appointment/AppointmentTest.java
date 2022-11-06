@@ -6,9 +6,11 @@ import org.junit.jupiter.api.Test;
 import task.*;
 import employee.Employee;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 class AppointmentTest {
@@ -39,8 +41,27 @@ class AppointmentTest {
     }
 
     @Test
-    public void checkFormattedDateTest() {
+    public void checkInvalidFormattedDateTest() {
+        String validDate = "2023-1-1";
+        String oldDate = "2022-1-1";
+        String invalideMonthDate = "2022-13-1";
+        String invalidDayDate = "2022-02-30";
+        String largeDate = "22222-1-1";
 
+        Date date1 = Appointment.checkFormattedDate(validDate);
+        assertEquals(Appointment.formatter.format(date1), "2023-01-01");
+
+        Date date2 = Appointment.checkFormattedDate(oldDate);
+        assertNull(date2);
+
+        Date date3 = Appointment.checkFormattedDate(invalideMonthDate);
+        assertNull(date3);
+
+        Date date4 = Appointment.checkFormattedDate(invalidDayDate);
+        assertNull(date4);
+
+        Date date5 = Appointment.checkFormattedDate(largeDate);
+        assertNull(date5);
     }
 
 }
