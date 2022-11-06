@@ -113,8 +113,9 @@ ____________________________________________________________________________
 Adds/Updates a (previous) note for the input Partner University module code in the input university list.
 
 > <span style="color: #FFA500;">**IMPORTANT**</span>: 
->  - Can only add a note after previously adding the Partner University module code in the input university list.
+>  - Can only add a note after creating the university list for the input {UNIVERSITY_NAME} and adding the corresponding module {MODULE_CODE} to the list
 >  - Only the latest comment will be stored. 
+>  - Comment should not contain any invalid characters such as `/`, `{`, `_`, `%`
 
 Example input:
 

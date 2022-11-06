@@ -40,38 +40,16 @@ public class UserUniversityListManager {
 
     }
 
-    private boolean checkEmpty(String comment) {
-        if (comment.length() == 0) {
-            return true;
-        }
-        for (int i = 0; i < comment.length(); ++i) {
-            if (comment.charAt(i) != ' ') {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public void updateComment(String universityName, String moduleCode, String comment)
             throws InvalidUserCommandException, UniversityNotFoundException {
         if (!containsKey(universityName)) {
             throw new UniversityNotFoundException("Error: No list containing such university\n"
             + "Please create university and add relevant module before adding a comment");
         } else {
-            if (checkEmpty(comment)) {
-                System.out.println("Error: Invalid Comment");
-                return;
-            } else if (isNotValidComment(comment)) {
-                System.out.println("Error: Invalid Comment");
-                return;
-            }
             getList(universityName).updateComment(moduleCode, comment);
         }
     }
 
-    private boolean isNotValidComment(String comment) {
-        return comment.contains("_") || comment.contains("%") || comment.contains("/") || comment.contains(";");
-    }
 
     public void deleteComment(String universityName, String moduleCode) throws InvalidUserCommandException,
             UniversityNotFoundException {
@@ -119,7 +97,7 @@ public class UserUniversityListManager {
         if (containsKey(inputSchool)) {
             getUserUniversityList(inputSchool).addModule(inputModule);
         } else {
-            throw new InvalidUserCommandException("No such university found in your university lists. "
+            throw new InvalidUserCommandException("Error: No list containing such university\n"
                     + "Please create a list for " + inputSchool + " first!");
         }
     }
@@ -140,7 +118,7 @@ public class UserUniversityListManager {
             ttManager.getTimetableByUniversityName(inputSchool).deleteLessonByCode(puCode);
         } else {
             throw new InvalidUserCommandException("No such university found in your university lists. "
-                    + "Please create a list for " + inputSchool + " first!");
+                    + "Please create a list for " + inputSchool + " first");
         }
     }
 
