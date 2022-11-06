@@ -14,6 +14,7 @@ import java.util.logging.FileHandler;
 public class DeleteFlightCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(DeleteFlightCommand.class.getName());
 
+    //@@author Jordankwua
     public static void setUpLogger() {
         LogManager.getLogManager().reset();
         DeleteFlightCommand.LOGGER.setLevel(Level.ALL);
@@ -21,7 +22,7 @@ public class DeleteFlightCommand extends Command {
         consoleHandler.setLevel(Level.SEVERE);
         DeleteFlightCommand.LOGGER.addHandler(consoleHandler);
         createFileHandler();
-        DeleteFlightCommand.LOGGER.log(Level.INFO,ui.getLoggerStartUpMessage());
+        DeleteFlightCommand.LOGGER.log(Level.INFO, ui.getLoggerStartUpMessage());
     }
 
     private static void createFileHandler() {
@@ -34,6 +35,7 @@ public class DeleteFlightCommand extends Command {
         }
     }
 
+    //@@author ivanthengwr
     @Override
     public void execute(OperationList flights, String lineInput) {
         try {
