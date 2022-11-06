@@ -8,6 +8,8 @@ class ByeCommand {
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
     <u>- MESSAGE_EXIT: String
+
+    + ByeCommand(input: String[])
 }
 
 @enduml

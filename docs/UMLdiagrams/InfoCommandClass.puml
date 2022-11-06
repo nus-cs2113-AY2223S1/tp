@@ -4,6 +4,7 @@ hide circle
 skinparam classAttributeIconSize 0
 
 class InfoCommand {
+    - module: Module
     <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
@@ -11,11 +12,11 @@ class InfoCommand {
     <u>- DESCRIPTION_SIZE: int
     <u>- HEADING_LENGTH: int
     <u>+ MISSING_MODULE_CODE: String
-    - module: Module
     <u>+ MODULE_NOT_FOUND: String
 
-    - addLine(Ui, String, String)
-    - splitLongDescription(String): String
+    + InfoCommand(input: String[])
+    - addLine(ui: Ui, heading: String, details: String)
+    - splitLongDescription(longDescription: String): String
 }
 
 @enduml
