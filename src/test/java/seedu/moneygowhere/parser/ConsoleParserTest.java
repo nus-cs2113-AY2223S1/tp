@@ -15,6 +15,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
+import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewIncome;
@@ -36,6 +37,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvali
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandPayRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewExpenseInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewIncomeInvalidException;
@@ -50,6 +52,11 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@@author xzynos
+
+/**
+ * Defines JUnit test cases for {@link ConsoleParser}.
+ */
 @SuppressWarnings({"FieldMayBeFinal", "ConstantConditions"})
 class ConsoleParserTest {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
@@ -3548,6 +3555,178 @@ class ConsoleParserTest {
                 + "\"";
 
         assertThrows(ConsoleParserCommandEditRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+    //endregion
+
+    //region Defines JUnit test cases for command Pay-RecurringPayment
+    //@@author xzynos
+    @Test
+    void parseCommand_prpIndex_ccprpIndex() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        ConsoleCommandPayRecurringPayment consoleCommandPayRecurringPayment =
+                (ConsoleCommandPayRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandPayRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isDateTimeEqual = true;
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpAllArguments_ccprpAllArguments() throws
+            MoneyGoWhereException {
+        int recurringPaymentIndex = 0;
+        LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+                + " \""
+                + dateTime.format(dateTimeFormatter)
+                + "\"";
+
+        ConsoleCommandPayRecurringPayment consoleCommandPayRecurringPayment =
+                (ConsoleCommandPayRecurringPayment) ConsoleParser.parse(input);
+
+        boolean isRecurringPaymentIndexEqual = consoleCommandPayRecurringPayment
+                .getRecurringPaymentIndex()
+                == recurringPaymentIndex;
+        boolean isDateTimeEqual = consoleCommandPayRecurringPayment
+                .getDateTime()
+                .equals(dateTime);
+
+        assertTrue(
+                isRecurringPaymentIndexEqual
+                        && isDateTimeEqual
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prp_ccprpInvalidException() {
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT;
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpInvalidIndex1_ccprpInvalidException() {
+        String recurringPaymentIndex = "InvalidIndex";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpInvalidIndex2_ccprpInvalidException() {
+        String recurringPaymentIndex = "-1";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpInvalidIndex3_ccprpInvalidException() {
+        String recurringPaymentIndex = "999999999999999999999999";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex;
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpIndexInvalidDateTime1_ccprpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String dateTime = "InvalidDateTime";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
+                ConsoleParser.parse(input)
+        );
+    }
+
+    //@@author xzynos
+    @Test
+    void parseCommand_prpIndexInvalidDateTime2_ccprpInvalidException() {
+        String recurringPaymentIndex = "0";
+        String dateTime = "29/02/2022 2359";
+
+        String input = ""
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX
+                + " "
+                + recurringPaymentIndex
+                + " -"
+                + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+                + " \""
+                + dateTime
+                + "\"";
+
+        assertThrows(ConsoleParserCommandPayRecurringPaymentInvalidException.class, () ->
                 ConsoleParser.parse(input)
         );
     }

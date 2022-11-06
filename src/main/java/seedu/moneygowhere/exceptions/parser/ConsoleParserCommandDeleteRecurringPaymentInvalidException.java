@@ -5,7 +5,7 @@ import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 //@@author xzynos
 
 /**
- * Defines exception to be thrown when the command Add-Target is invalid.
+ * Defines exception to be thrown when the command Delete-RecurringPayment is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandDeleteRecurringPaymentInvalidException extends MoneyGoWhereException {

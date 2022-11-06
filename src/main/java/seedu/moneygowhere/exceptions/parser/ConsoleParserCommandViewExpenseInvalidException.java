@@ -3,6 +3,10 @@ package seedu.moneygowhere.exceptions.parser;
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
 //@@author xzynos
+
+/**
+ * Defines exception to be thrown when the command View-Expense is invalid.
+ */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandViewExpenseInvalidException extends MoneyGoWhereException {
     public ConsoleParserCommandViewExpenseInvalidException() {
