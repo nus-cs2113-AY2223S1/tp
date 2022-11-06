@@ -1,7 +1,6 @@
 package seedu.duke.logic.command;
 
 import seedu.duke.exception.IllegalValueException;
-import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
@@ -20,7 +19,7 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
-        if (Parser.getArgumentsCount(arguments) > 0) {
+        if (arguments.length() > 0) {
             throw new IllegalValueException("Invalid help command");
         }
         ui.output("Help will always be given at Hogwarts to those who ask for it" + System.lineSeparator()
