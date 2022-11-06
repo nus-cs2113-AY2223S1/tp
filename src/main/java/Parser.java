@@ -678,8 +678,8 @@ public class Parser {
     private static final String ERROR_MESSAGE = "Your input is incorrect! Please format it as such:";
     private static final String HELP_MESSAGE = "\nIf you want to see the whole list of commands, type help!";
     private static final int MIN_DOB_YEAR_RANGE = 1922;
-    private static final int MIN_YEAR_RANGE = 2012;
-    private static final int MAX_YEAR_RANGE = 2032;
+    private static final int MIN_YEAR_RANGE = 2000;
+    private static final int MAX_YEAR_RANGE = 2050;
     private static final int MIN_DAY_RANGE = 1;
     private static final int MAX_DAY_RANGE = 31;
     private static final int MIN_MONTH_RANGE = 1;
