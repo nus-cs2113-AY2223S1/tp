@@ -245,7 +245,6 @@ public class Link {
      */
     private static boolean isLessonInfo(String lessonInfo) {
         //pattern for classNo is not definite.
-        System.out.println(lessonInfo);
         Pattern pattern = Pattern.compile("^[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
         return matcher.find();
