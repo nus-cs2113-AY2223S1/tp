@@ -60,7 +60,7 @@ class FavouriteCommandTest {
         String[] userInput = {"favourite", "list"};
         FavouriteCommand favourite = new FavouriteCommand(storedReviews, userInput);
 
-        String assertOutput = "You have 1 favourite in total.\n" +  "---Here are the reviews in your list---\n\n"
+        String assertOutput = "You have 1 favourite in total.\n" +  "---Here are the reviews---\n\n"
                 + "Movies:\n" + "1. [Movie] Harry Potter Rating: 1.0  Genre:SciFi  Date watched: 10-01-2020\n\n"
                 + "TV Shows:";
 

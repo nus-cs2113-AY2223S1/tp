@@ -8,10 +8,6 @@ import seedu.duke.TvShow;
 import java.util.ArrayList;
 
 public class FindCommand extends Commands {
-    private final String outputString = "---Here are the reviews that match the keyword---\n";
-    private final String movieString = "\nMovies:\n";
-    private final String tvShowString = "\nTV Shows:\n";
-    private final String listDelimiter = ". ";
     protected String searchTerm;
 
     public FindCommand(ReviewList reviews, String searchTerm) {
@@ -26,23 +22,17 @@ public class FindCommand extends Commands {
      */
     @Override
     public String execute() {
-        String moviesList = "";
-        String tvShowList = "";
-        int movieIndex = 1;
-        int tvShowIndex = 1;
+        ReviewList matchedReviews = new ReviewList();
 
         for (int i = 0; i < reviewList.inputs.size(); i++) {
             Media media = reviewList.inputs.get(i);
-            if (media instanceof Movie && media.getTitle().contains(searchTerm)) {
-                moviesList += (movieIndex) + listDelimiter + reviewList.inputs.get(i).toString() + "\n";
-                movieIndex += 1;
-            } else if (media instanceof TvShow && media.getTitle().contains(searchTerm)) {
-                tvShowList += (tvShowIndex) + listDelimiter + reviewList.inputs.get(i).toString() + "\n";
-                tvShowIndex += 1;
+            if (media.getTitle().contains(searchTerm)) {
+                matchedReviews.add(media);
             }
         }
-        String output = outputString + movieString + moviesList + tvShowString + tvShowList;
-        output = output.strip();
+
+        ListCommand outputList = new ListCommand(matchedReviews);
+        String output = outputList.execute();
         return output;
     }
 
