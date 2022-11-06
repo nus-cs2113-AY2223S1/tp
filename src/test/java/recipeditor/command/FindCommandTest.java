@@ -66,7 +66,7 @@ public class FindCommandTest {
     }
 
     @AfterAll
-    static void end() {
+    static void tearDown() {
         RecipeList.deleteRecipeFromTitle("Test title for Find Command");
         Storage.deleteRecipeFile("ETest title for Find Command");
         Storage.rewriteRecipeListToFile();
