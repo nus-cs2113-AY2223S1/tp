@@ -61,12 +61,6 @@ public class Mcs extends Command {
             throw new InvalidInputFormatException();
         }
     }
-    /**
-     * Function to check if content entered by user is empty or not
-     * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
-     * @throws InvalidInputContentException exception thrown if content of input is empty
-     */
 
     /**
      * Function to check if content entered by user is empty or not

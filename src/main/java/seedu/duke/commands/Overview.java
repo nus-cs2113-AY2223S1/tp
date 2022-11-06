@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Overview extends Command {
 
-    private ArrayList<Module> modules = ModuleList.modules;
+    private final ArrayList<Module> modules = ModuleList.modules;
 
     /**
      * Constructor to initialize an object of Overview class

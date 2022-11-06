@@ -12,17 +12,14 @@ public class InvalidInputContentException extends Exception {
     public static boolean emptyContent(int startIndex, int endIndex, String input) {
         if (startIndex == endIndex) {
             return true;
-        } else if (startIndex == input.length()) {
-            return true;
         } else {
-            return false;
+            return startIndex == input.length();
         }
     }
 
     public String getMessage() {
-        String message = "INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!"
+        return "INPUT CONTENT IS WRONG!! PLEASE KEY IN THE CORRECT INPUT!!"
                 + "\n"  + "input 'help' if you are unsure about the requirements" + "\n";
-        return message;
     }
 
 }

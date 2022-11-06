@@ -4,7 +4,7 @@ import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.ModuleList;
 
 public class Find extends Command {
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructor to create an object of the Find Command class
