@@ -64,44 +64,81 @@ class ParserTest {
     @Test
     void parseCommand_printCommandEmpty_parsedCorrectly() {
         String output = "              :              :              :              :              "
-                + ":               \n" 
-                + "              : MON          : TUE          : WED          : THU          : FRI           \n"
-                + "==============:==============:==============:==============:==============:===============\n"
-                + "   0800       :              :              :              :              :               \n"
-                + "   0830       :              :              :              :              :               \n"
-                + "   0900       :              :              :              :              :               \n"
-                + "   0930       :              :              :              :              :               \n"
-                + "   1000       :              :              :              :              :               \n"
-                + "   1030       :              :              :              :              :               \n"
-                + "   1100       :              :              :              :              :               \n"
-                + "   1130       :              :              :              :              :               \n"
-                + "   1200       :              :              :              :              :               \n"
-                + "   1230       :              :              :              :              :               \n"
-                + "   1300       :              :              :              :              :               \n"
-                + "   1330       :              :              :              :              :               \n"
-                + "   1400       :              :              :              :              :               \n"
-                + "   1430       :              :              :              :              :               \n"
-                + "   1500       :              :              :              :              :               \n"
-                + "   1530       :              :              :              :              :               \n"
-                + "   1600       :              :              :              :              :               \n"
-                + "   1630       :              :              :              :              :               \n"
-                + "   1700       :              :              :              :              :               \n"
-                + "   1730       :              :              :              :              :               \n"
-                + "   1800       :              :              :              :              :               \n"
-                + "   1830       :              :              :              :              :               \n"
-                + "   1900       :              :              :              :              :               \n"
-                + "   1930       :              :              :              :              :               \n"
-                + "   2000       :              :              :              :              :               \n"
-                + "   2030       :              :              :              :              :               \n"
-                + "   2100       :              :              :              :              :               \n"
-                + "   2130       :              :              :              :              :               \n"
-                + "   2200       :              :              :              :              :               \n"
-                + " \n"
-                + " * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot.\n"
-                + " * Slots with XXXXXX indicates that there is a clash between two or more lessons.\n"
-                + " * Modules, if any, that start before 8am or ends after 10pm timings are excluded.\n"
+                + ":               "
+                + System.lineSeparator()
+                + "              : MON          : TUE          : WED          : THU          : FRI           "
+                + System.lineSeparator()
+                + "==============:==============:==============:==============:==============:==============="
+                + System.lineSeparator()
+                + "   0800       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   0830       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   0900       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   0930       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1000       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1030       :              :              :              :              :              "
+                + System.lineSeparator()
+                + "   1100       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1130       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1200       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1230       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1300       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1330       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1400       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1430       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1500       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1530       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1600       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1630       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1700       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1730       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1800       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1830       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1900       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   1930       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   2000       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   2030       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   2100       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   2130       :              :              :              :              :               "
+                + System.lineSeparator()
+                + "   2200       :              :              :              :              :               "
+                + System.lineSeparator()
+                + " "
+                + System.lineSeparator()
+                + " * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot."
+                + System.lineSeparator()
+                + " * Slots with XXXXXX indicates that there is a clash between two or more lessons."
+                + System.lineSeparator()
+                + " * Modules, if any, that start before 8am or ends after 10pm timings are excluded."
+                + System.lineSeparator()
                 + " * Timings are approximated to 30 minutes block with valid assumption that NUS mods are "
-                + "typically designed in such blocks.\n";
+                + "typically designed in such blocks." + System.lineSeparator();
+
 
         assertEquals(output, Parser.parseCommand(printCommand, currentSemester));
     }
