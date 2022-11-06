@@ -3,12 +3,19 @@ package recipeditor.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import recipeditor.command.*;
+import recipeditor.command.Command;
+import recipeditor.command.CommandResult;
+import recipeditor.command.DeleteCommand;
+import recipeditor.command.EditCommand;
+import recipeditor.command.ExitCommand;
+import recipeditor.command.FindCommand;
+import recipeditor.command.InvalidCommand;
+import recipeditor.command.ListCommand;
+import recipeditor.command.ViewCommand;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -98,14 +105,14 @@ class ParserTest {
         assertEquals(EditCommand.class, Parser.parseCommand(input).getClass());
     }
 
-    //    @Test
-    //    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
-    //        String input = "/exit";
-    //        Command commandExecuted = Parser.parseCommand(input);
-    //        CommandResult commandExecutedResult = commandExecuted.execute();
-    //        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
-    //        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
-    //    }
+    @Test
+    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
+        String input = "/exit";
+        Command commandExecuted = Parser.parseCommand(input);
+        CommandResult commandExecutedResult = commandExecuted.execute();
+        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
+        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
+    }
 
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {
