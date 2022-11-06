@@ -1,6 +1,7 @@
 package task;
 
-import appointment.AppointmentList;
+import appointment.*;
+import employee.Employee;
 import employee.EmployeeList;
 
 public class Task {
@@ -61,8 +62,15 @@ public class Task {
     public void printTask() {
         System.out.println("Task ID:" + this.taskId);
         System.out.println("Description: " + this.taskDescription);
-        System.out.println("Performed by: " + EmployeeList.findEmployee(this.employeeId).getEmployeeName());
-        AppointmentList.findAppointment(this.appointmentId).printAppointmentDetails();
+        Employee employee = EmployeeList.findEmployee(this.employeeId);
+        if (employee != null) {
+            System.out.println("Description: " + employee.getEmployeeName());
+        }
+
+        Appointment appointment = AppointmentList.findAppointment(this.appointmentId);
+        if (appointment != null) {
+            appointment.viewTasks();
+        }
         System.out.println("Status: " + this.getStatus());
     }
 

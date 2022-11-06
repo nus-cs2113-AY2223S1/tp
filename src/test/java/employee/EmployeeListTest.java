@@ -89,6 +89,8 @@ class EmployeeListTest {
         // different os may operate the tests in different order
         if (numOfEmployee == numOfEmployeeAfterRemove) {
             assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
+        } else if (numOfEmployee == numOfEmployeeAfterRemove + 1){
+            assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 1);
         } else {
             assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 2);
         }

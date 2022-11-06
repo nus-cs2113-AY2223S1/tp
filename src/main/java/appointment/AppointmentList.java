@@ -61,7 +61,7 @@ public class AppointmentList {
 
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
-        System.out.println("Pet " + appointment.petId + " | " + "Service " + appointment.service);
+        System.out.println("Pet " + pet.name + "(" + pet.petId + ")" + "\t" + "Service " + appointment.service);
         System.out.println("Now you have " + appointments.size() + " appointments in the list.");
 
     }
@@ -83,20 +83,20 @@ public class AppointmentList {
         }
     }
 
-    private static AppointmentStatus intToAppointmentStatus(int statusIdx) {
+    public static AppointmentStatus intToAppointmentStatus(int statusIdx) {
         switch (statusIdx) {
         case 0:
-            // fall through
+            return AppointmentStatus.PENDING;
         case 1:
             return AppointmentStatus.PROCESSING;
         case 2:
             return AppointmentStatus.PROCESSED;
         default:
-            return AppointmentStatus.PENDING;
+            return null;
         }
     }
 
-    public static void updateAppointmentStatus(int appointmentId) {
+    public static Boolean updateAppointmentStatus(int appointmentId) {
         boolean setFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
@@ -110,13 +110,9 @@ public class AppointmentList {
         }
         if (!setFlag) {
             System.out.println("Sorry, no corresponding appointment found.");
+            return false;
         }
-    }
-
-    public static void viewAppointmentTasks(int appointmentId) {
-        Appointment associatedAppointment = AppointmentList.findAppointment(appointmentId);
-        assert associatedAppointment != null;
-        associatedAppointment.viewTasks();
+        return true;
     }
 
 }
