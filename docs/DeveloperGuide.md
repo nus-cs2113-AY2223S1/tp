@@ -7,6 +7,11 @@ from [regex101](https://regex101.com/).
 
 Storage class and its functions are largely adapted from [Dhanish's IP](https://github.com/dhanish265/ip) on Duke.
 
+## Quick Start
+
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `OneDoc` from [here](https://github.com/AY2223S1-CS2113-F11-4/tp/releases/tag/v2.1).
+
 ## Design & implementation
 
 ### PatientList Component
