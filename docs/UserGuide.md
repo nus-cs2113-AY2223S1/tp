@@ -20,14 +20,16 @@ Command Line Interface (CLI) and is able to display information quickly with min
 7. task add i/3001 e/1001 d/prepare hot water
 8. task add i/3001 e/1001 d/wash hair
 9. task view
-10. task finish i/4001
-11. task finish i/4002
-12. task view
-13. appointment view
-14. pet view
-15. appointment remove i/3001
-16. pet remove i/2001
-17. bye
+10. employee add n/sally
+11. task reassign i/4001 e/1002
+12. task finish i/4001
+13. task finish i/4002
+14. task view
+15. appointment view
+16. pet view
+17. appointment remove i/3001
+18. pet remove i/2001
+19. bye
 
 
 ## Features 
