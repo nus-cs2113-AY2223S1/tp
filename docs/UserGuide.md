@@ -609,7 +609,7 @@ Possible Error:
     --------------------------------------------------------------------------------
     Processing "timetable show" ...
     
-    Error! 	Unknown command. Maybe you meant "view".
+    Error! 	Unknown command. Maybe you meant "timetable < /fancy | /simple >".
     --------------------------------------------------------------------------------
     ```
 
@@ -670,6 +670,8 @@ Assuming empty list of modules:
 ```
 Sem [1] >> list
 --------------------------------------------------------------------------------
+Processing "list" ...
+
 You currently have no selected module(s)!
 --------------------------------------------------------------------------------
 ```
