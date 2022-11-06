@@ -376,6 +376,7 @@ create an instantiation of `DeleteFlightCommand`.
    successful delete operation
 5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
 the information of the passengers which contain the flight number that has been successfully removed.
+
 ---
 
 ### Delay a flight feature
