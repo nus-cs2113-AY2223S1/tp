@@ -20,22 +20,25 @@ public class ItemListTest {
     @BeforeEach
     void initializeTest() throws InvalidCategoryException {
         itemList = new ItemList();
-        item = new Item("28sd37h2","pen", 2, 0.50, "jingwei");
+        item = new Item("28sd37h2", "pen", 2, 0.50, "jingwei");
         itemList.addItem(item);
         transactionList = new TransactionList();
     }
+
     @Test
     void add_addOneItem_expectSizeTwo() throws InvalidCategoryException {
-        Item item2 = new Item("30fd39h2","ball", 2, 0.75, "jingwei");
+        Item item2 = new Item("30fd39h2", "ball", 2, 0.75, "jingwei");
         itemList.addItem(item2);
         assertEquals(2, itemList.getListSize());
     }
+
     @Test
-    void delete_expectSizeOne() throws InvalidCategoryException, ItemNotFoundException, InvalidItemException {
-        itemList.deleteItem(item.getItemId(),transactionList);
+    void delete_expectSizeOne() throws ItemNotFoundException, InvalidItemException {
+        itemList.deleteItem(item.getItemId(), transactionList);
         assertEquals(0, itemList.getListSize());
     }
-    void getItemById_expect_pen() throws ItemNotFoundException{
-        assertEquals("pen",itemList.getItemById("28sd37h2").getName());
+
+    void getItemById_expect_pen() throws ItemNotFoundException {
+        assertEquals("pen", itemList.getItemById("28sd37h2").getName());
     }
 }

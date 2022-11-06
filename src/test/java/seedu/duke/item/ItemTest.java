@@ -3,20 +3,15 @@ package seedu.duke.item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidCategoryException;
-import seedu.duke.item.Item;
-import seedu.duke.item.ItemList;
-import seedu.duke.ui.Ui;
 
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ItemTest {
 
     Item item;
 
     @BeforeEach
-    void initializeTest() throws InvalidCategoryException{
+    void initializeTest() throws InvalidCategoryException {
         item = new Item("pen", 2, 0.75, "jingwei");
     }
 
@@ -32,22 +27,22 @@ public class ItemTest {
 
     @Test
     void getPricePerDay_expect_zeroPointSevenFive() {
-        assert(item.getPricePerDay() == 0.75);
+        assert (item.getPricePerDay() == 0.75);
     }
 
     @Test
     void getCategory_expect_two() {
-        assertEquals("2", item.getCategory());
+        assertEquals(2, Category.setCategory(item.getCategory()));
     }
 
     @Test
-    void updatePriceTest() throws InvalidCategoryException{
-        item.updatePrice(0.50);
+    void updatePriceTest() throws InvalidCategoryException {
+        item = item.updatePrice(0.50);
         assertEquals(0.50, item.getPricePerDay());
     }
 
     @Test
-    void convertItemToFileFormatTest() throws InvalidCategoryException {
+    void convertItemToFileFormatTest() {
         String itemId = item.getItemId();
         assertEquals("pen | 2 | 0.75 | jingwei | " + itemId,
                 item.convertItemToFileFormat());
