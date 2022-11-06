@@ -85,4 +85,5 @@ the data files and the program is seamless
     - GUI functionality
     - Text to Recipe Parsing
     - Text to Recipe List Parsing
-    - Add detailed manual testing for GUI and Storage features
+    - Manual testing (including making the files for manual testing)
+  

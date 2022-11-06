@@ -10,33 +10,32 @@ public class RecipeFileParser {
 
     private static final Logger logger = Logger.getLogger(RecipeFileParser.class.getName());
 
-    private static final String UNIMPORTANT_TEXT = "There are unimportant text that cannot be parsed. Please follow "
-            + "the Template";
-    private static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
-    private static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
-            + "(except whitespace)";
-    private static final String TITLE_ERROR_LIMIT = "TITLE is too long! TITLE should be less than 255 characters!";
 
-    private static final String INGREDIENT_ERROR_FORMAT = "INGREDIENT format is incorrect!\nFORMAT: "
+    public static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
+    public static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
+            + "(except whitespace)";
+    public static final String TITLE_ERROR_LIMIT = "TITLE is too long! TITLE should be less than 255 characters!";
+
+    public static final String INGREDIENT_ERROR_FORMAT = "INGREDIENT format is incorrect!\nFORMAT: "
             + "index. "
             + "ingredient_name / "
             + "amount_in_positive_rational / unit\nNOTE: ingredient_name and unit SHOULD NOT have / ";
-    private static final String INGREDIENT_ERROR_INDEX = "INGREDIENT index must be a positive integer!";
+    public static final String INGREDIENT_ERROR_INDEX = "INGREDIENT index must be a positive integer!";
 
-    private static final String INGREDIENT_ERROR_AMOUNT = "INGREDIENT amount should be a positive rational number! "
+    public static final String INGREDIENT_ERROR_AMOUNT = "INGREDIENT amount should be a positive rational number! "
             + "Please indicate fraction in number as well.\nExample: 12, 0.1, 0.5 (for half)";
 
-    private static final String INGREDIENT_ERROR_INDEX_INCREMENT = "INGREDIENT index increment is incorrect! "
+    public static final String INGREDIENT_ERROR_INDEX_INCREMENT = "INGREDIENT index increment is incorrect! "
         + "Index starts from 1";
-    private static final String STEP_ERROR_FORMAT = "STEP format is incorrect!\nFORMAT: index. step_description\n"
+    public static final String STEP_ERROR_FORMAT = "STEP format is incorrect!\nFORMAT: index. step_description\n"
             + "STEP index must be a positive integer!";
-    private static final String STEP_ERROR_INDEX = "STEP index must be a positive integer!";
-    private static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
+    public static final String STEP_ERROR_INDEX = "STEP index must be a positive integer!";
+    public static final String STEP_ERROR_INDEX_INCREMENT = "STEP index increment is incorrect! Index starts "
             + "from 1";
-    private static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
-    private static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in "
+    public static final String HEADING_OCCURRENCE = "Incorrect number of HEADINGS! Please follow the template!";
+    public static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in "
             + "content";
-    private static final String EMPTY = "There is an empty field. The recipe is not valid";
+    public static final String EMPTY = "There is an empty field. The recipe is not valid";
     private static final String HASHTAG = "Don't use # in the content if it is not a heading";
 
 

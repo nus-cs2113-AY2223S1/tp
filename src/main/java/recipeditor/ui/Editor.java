@@ -38,7 +38,7 @@ public class Editor extends JFrame implements ActionListener {
     private final JButton buttonSave;
     private final JButton buttonExit;
     private final JMenuBar menu;
-    private EditorState state = EditorState.USING;
+    public EditorState state = EditorState.USING;
 
     public Editor() {
         try {
@@ -162,7 +162,7 @@ public class Editor extends JFrame implements ActionListener {
         scan.close();
     }
 
-    private enum EditorState {
+    public enum EditorState {
         USING, SAVE, EXIT
     }
 }
