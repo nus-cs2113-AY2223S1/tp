@@ -20,8 +20,8 @@ import seedu.duke.ui.Ui;
 
 public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
+    
     private static final String DATABASE_FILE_NAME = "data.csv";
-
     private static final String FILE_DIRECTORY = "data";
 
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
@@ -34,29 +34,18 @@ public class DatabaseStorage {
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
-        // File file = new File(FILE_PATH);
-
-        // file.createNewFile();
-        // Path target = Path.of(FILE_PATH);
-        // URL source = new
-        // URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
-        // try (InputStream in = source.openStream()) {
-        // Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
-        // }
     }
 
     /**
-     * Loads data from data.csv into database.
+     * Loads data from data.csv into database and creates data folder to store save
+     * files.
      */
     public static void loadDatabase() {
         logger.log(Level.INFO, "Start loading database");
-        try {
-            createDatabase();
-        } catch (IOException e) {
-            Ui.printExceptionMessage(e);
-        }
+
         try {
             readFile(DATABASE_FILE_NAME);
+            createDatabase();
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
