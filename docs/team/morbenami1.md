@@ -2,8 +2,8 @@
 
 ## Project: OneDoc
 
-OneDoc is a desktop CLI application that is intended for doctors and other medical
-professionals to efficiently keep track of patients, their visits and prescriptions. 
+OneDoc is a desktop CLI application that is intended for doctors to in order to help them manage
+and keep track of their patients, patient visits and prescriptions all in one place. 
 
 ### Summary of Contributions
 
@@ -17,6 +17,7 @@ professionals to efficiently keep track of patients, their visits and prescripti
   * __developer guide__:
     * added user stories
     * added data to prescription explanation 
+    * UI description 
 * __Enhancements__:
   * found code duplicate and combined function to remove it
   * fixed formatting issues
