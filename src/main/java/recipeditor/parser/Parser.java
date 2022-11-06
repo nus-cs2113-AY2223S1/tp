@@ -73,8 +73,9 @@ public class Parser {
     private static Command parseAddCommand() {
         try {
             GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
+
             logger.log(Level.INFO, "Add command initialised");
-            return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+            return new AddCommand(returnValues.getValid(), returnValues.getRecipe());
         } catch (FileNotFoundException e) {
             Storage.generateTemplateFile();
             return new InvalidCommand(InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE);
@@ -165,7 +166,7 @@ public class Parser {
 
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
                 logger.log(Level.INFO, "Edit command initialised in GUI");
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), title);
+                return new EditCommand(returnValues.getValid(), index, returnValues.getRecipe(), title);
             } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
                 Recipe targetRecipe = RecipeList.getRecipe(index);
@@ -201,10 +202,10 @@ public class Parser {
                 logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
-                return new InvalidCommand();
+                return new InvalidCommand(InvalidCommand.INDEX_NOT_VALID);
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (Exception e) {
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }

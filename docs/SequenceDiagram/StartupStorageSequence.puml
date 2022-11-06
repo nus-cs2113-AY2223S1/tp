@@ -1,0 +1,82 @@
+@startuml
+skinparam Style strictuml
+autonumber
+
+
+participant ":Recipeditor" as recipeditor
+participant ":Storage" as store
+participant ":TitleFileParser" as titleparse
+participant ":RecipeFileParser" as recipeparse
+participant ":RecipeList" as recipelist
+participant ":Files" as files
+participant ":FileWriter" as fw
+database FileDirectory
+
+recipeditor -> recipeditor: start()
+recipeditor -> store: createAppFolder()
+
+
+store -> files: createDirectories(RECIPES_FOLDER_PATH)
+files -> FileDirectory: create folder "./RecipeData/Recipes"
+store -> files: createDirectories(APP_DATA_FOLDER_PATH)
+files -> FileDirectory: create folder "./RecipeData/App"
+destroy files
+
+store -> store: templateFile()
+
+alt TEMPLATE_FILE_PATH exists
+
+else
+store-> fw: FileWriter(TEMPLATE_FILE_PATH)
+store-> fw: write(TEMPLATE_FILE)
+fw->FileDirectory: create file `Template.txt``
+store-> fw: close()
+destroy fw
+end
+
+
+recipeditor -> store: createFile(ALL_RECIPES_FILE_PATH)
+store -> files: Files(ALL_RECIPES_FILE_PATH)
+store -> files: createnewFile()
+files -> FileDirectory: create file `AllRecipes.txt`
+destroy files
+
+
+
+recipeditor -> store: loadRecipesToRecipeTitlesList()
+store -> store: loadFileContent(ALL_RECIPES_FILE_PATH)
+store -> FileDirectory: via Scanner
+FileDirectory --> store: return content of `AllRecipes.txt`
+store -> titleparse: parseTitleFileToRecipeTitles(content)
+loop line of `AllRecipes.txt`
+    alt line is blank || not alphanumerical || >255 characters
+    else no recipe file with that title
+    titleparse -> store: checkIfFileExists()
+    store -> FileDirectory: check file existence
+    else
+    titleparse -> recipelist: addRecipeTitle(line)
+    end alt
+end loop
+destroy titleparse
+
+recipeditor -> store: loadRecipesToRecipeList()
+
+loop String recipeTitle : RecipeList.iterateRecipeTitles()
+store -> store: loadFileContent(recipeFilePath)
+store -> FileDirectory: via Scanner
+FileDirectory --> store: return content of recipeFilePath
+store -> recipeparse: parseTextToRecipe(content)
+    ref over recipeparse
+        Parse Text to Recipe
+    end
+recipeparse --> store: return addedRecipe
+store -> recipelist: addRecipe(addedRecipe)
+end loop
+
+
+
+store --> recipeditor:
+
+
+
+@enduml

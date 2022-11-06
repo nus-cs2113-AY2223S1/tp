@@ -11,12 +11,6 @@ public class RecipeList {
     private static ArrayList<String> recipeTitles = new ArrayList<>();
     private static ArrayList<Recipe> recipes = new ArrayList<>();
 
-    private RecipeList(ArrayList<Recipe> load) {
-        recipes = new ArrayList<>();
-        recipeTitles = new ArrayList<>();
-        recipes.addAll(load);
-    }
-
     public static Recipe getRecipe(int index) throws IndexOutOfBoundsException {
         assert index > -1;
         return recipes.get(index);
@@ -83,13 +77,6 @@ public class RecipeList {
             i++;
         }
         throw new RecipeNotFoundException(recipeTitle);
-    }
-
-    public static ArrayList<String> findRecipeTitles(String findInput) {
-        ArrayList<String> output = findRecipeTitlesFromRecipeTitle(findInput);
-        ArrayList<String> foundRecipeTitlesFromIngredientName = findRecipeTitlesFromIngredientName(findInput);
-        output.addAll(foundRecipeTitlesFromIngredientName);
-        return output;
     }
 
     public static ArrayList<String> findRecipeTitlesFromRecipeTitle(String findInput) {

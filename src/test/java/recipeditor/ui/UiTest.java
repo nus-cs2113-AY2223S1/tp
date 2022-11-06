@@ -2,6 +2,7 @@ package recipeditor.ui;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import recipeditor.command.CommandResult;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,6 +25,26 @@ public class UiTest {
         System.setOut(new PrintStream(out));
         System.out.print("test output");
         Assertions.assertEquals("test output", out.toString());
+    }
+
+    @Test
+    public void showGreeting_success() {
+        Ui.showGreeting();
+    }
+
+    @Test
+    public void showExit_success() {
+        Ui.showExit();
+    }
+
+    @Test
+    public void showMessage_success() {
+        Ui.showMessage("test message");
+    }
+
+    @Test
+    public void showPrompt_success() {
+        Ui.showPrompt();
     }
 
 }

@@ -1,0 +1,23 @@
+@startuml
+skinparam Style strictuml
+autonumber
+
+
+participant ":GuiWorkFlow" as gui
+participant ":RecipeFileParser" as recipeparser
+
+gui -> recipeparser: parseTextToRecipe(text)
+ref over recipeparser
+Variables
+lineType: LineType
+stage: LineType
+stageCounter = {0,0,0,0}
+ingredientIndex = 1
+stepIndex = 1
+end
+loop go through each line
+ref over recipeparser
+recipeparser
+end
+end loop
+@enduml
