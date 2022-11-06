@@ -3,57 +3,58 @@
 hide footbox
 
 == Initialisation ==
-activate Duke
-participant UserStorageParser
-Duke -> UserStorage : setFilePathsAtStartUp()
-activate UserStorage
-UserStorage --> Duke
-deactivate UserStorage
+activate ": Duke"
+participant ": UserStorageParser"
+": Duke" -> ": UserStorage" : setFilePathsAtStartUp()
+activate ": UserStorage"
+": UserStorage" --> ": Duke"
+deactivate ": UserStorage"
 
-Duke -> UserStorageParser : getSavedLists()
-activate UserStorageParser
-UserStorageParser -> UserStorage : getFilePaths()
-activate UserStorage
-UserStorage --> UserStorageParser : filePaths : HashMap<String, String>
-deactivate UserStorage
+": Duke" -> ": UserStorageParser" : getSavedLists()
+activate ": UserStorageParser"
+": UserStorageParser" -> ": UserStorage": getFilePaths()
+activate ": UserStorage"
+": UserStorage" --> ": UserStorageParser" : filePaths : HashMap<String, String>
+deactivate ": UserStorage"
 alt filePaths is empty
-UserStorageParser --> Duke : userUniversityListManager : UserUniversityListManager
+": UserStorageParser" --> ": Duke" : userUniversityListManager : UserUniversityListManager
 
 else filePaths not empty
 loop
-UserStorageParser -> UserStorageParser : extractInfoFromTextFile()
-activate UserStorageParser
-UserStorageParser --> UserStorageParser
-deactivate UserStorageParser
+": UserStorageParser" -> ": UserStorageParser" : extractInfoFromTextFile()
+activate ": UserStorageParser"
+": UserStorageParser" --> ": UserStorageParser"
+deactivate ": UserStorageParser"
 end
-UserStorageParser -> UserStorage : setFilePaths(newFilePaths : HashMap<String, String>)
-activate UserStorage
-UserStorage --> UserStorageParser
-UserStorageParser --> Duke : userUniversityListManager : UserUniversityListManager
-deactivate UserStorageParser
+": UserStorageParser" -> ": UserStorage" : setFilePaths(newFilePaths : HashMap<String, String>)
+activate ": UserStorage"
+": UserStorage" --> ": UserStorageParser"
+deactivate ": UserStorage"
+": UserStorageParser" --> ": Duke": userUniversityListManager : UserUniversityListManager
+deactivate ": UserStorageParser"
 end
 
 == During Program Execution ==
 loop getting user commands
 alt add modules/add lessons/add favourites/create university lists/delete modules/delete lessons/delete favourites
-Duke -> UserStorageParser : storeInfoToUserStorageByUni(uniName : String, userUniversityListManager : UserUniversityListManager)
-activate UserStorageParser
-UserStorageParser -> UserStorage : saveFile(uniName : String, fileContent : String)
-activate UserStorage
-UserStorage --> UserStorageParser
-deactivate UserStorage
-UserStorageParser --> Duke
-deactivate UserStorageParser
+": Duke" -> ": UserStorageParser" : storeInfoToUserStorageByUni(uniName : String, userUniversityListManager : UserUniversityListManager)
+activate ": UserStorageParser"
+": UserStorageParser" -> ": UserStorage" : saveFile(uniName : String, fileContent : String)
+activate ": UserStorage"
+": UserStorage" --> ": UserStorageParser"
+deactivate ": UserStorage"
+": UserStorageParser" --> ": Duke"
+deactivate ": UserStorageParser"
 
 else delete university lists
-Duke -> UserStorageParser : deleteUserStorageByUni(uniName : String, fromStartUp : boolean)
-activate UserStorageParser
-UserStorageParser -> UserStorage : deleteFile(uniName : String, fromStartUp : boolean)
-activate UserStorage
-UserStorage --> UserStorageParser
-deactivate UserStorage
-UserStorageParser --> Duke
-deactivate UserStorageParser
+": Duke" -> ": UserStorageParser" : deleteUserStorageByUni(uniName : String, fromStartUp : boolean)
+activate ": UserStorageParser"
+": UserStorageParser" -> ": UserStorage" : deleteFile(uniName : String, fromStartUp : boolean)
+activate ": UserStorage"
+": UserStorage" --> ": UserStorageParser"
+deactivate ": UserStorage"
+": UserStorageParser" --> ": Duke"
+deactivate ": UserStorageParser"
 end
 end
 
