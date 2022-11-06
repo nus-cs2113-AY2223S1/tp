@@ -506,6 +506,12 @@ Amount          : 10.80
 Currency        : SGD
 
 
+Name            : Rec Exp 1
+Interval (Days) : 31
+Description     : This is a test recurring payment 1
+Amount          : 7.81
+Currency        : SGD
+
 The recurring payment was edited successfully.
 
 
