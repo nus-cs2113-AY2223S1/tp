@@ -617,7 +617,14 @@ Our program comes with a storage feature to ensure user data gets saved each tim
 If you are accessing Moolah Manager via our JAR file release, the storage file, **duke.txt** would be newly created in a newly created **data** folder in your current directory.
 
 In duke.txt, the monthly budget value would be stored on the 1st line, with the different transaction entries on subsequent lines.
-We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program.  
+When Moolah Manager is started, the program will attempt to store the budget and transaction values locally into the program.
+
+If the duke.txt  data is in **incorrectly formatted** when Moolah Manager is started, none of the data would be stored into the program. 
+An error message would be shown to inform users of the corrupted data and recommend editing the entries correctly. 
+Suppose users want to continue with the program in the current state without updating the corrupted duke.txt data, 
+they can enter any command which would add or alter the budget / transaction values which promptly **overwrites** the duke.txt data.
+
+We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program to **prevent lose of data**.  
 
 _Written by: Yong Chin Han_
 
