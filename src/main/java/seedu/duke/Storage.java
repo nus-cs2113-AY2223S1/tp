@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.IllegalFormatException;
 import java.util.Scanner;
 import java.io.FileWriter;
 
@@ -11,6 +12,14 @@ import java.io.FileWriter;
 public class Storage {
     private String filepath;
     private String folderpath;
+    static final String SPLITTER = "\\|";
+    static final String MOVIE_TYPE = "M";
+    static final String TV_TYPE = "T";
+    static final String YES_STRING = "Y";
+    static final String MOVIE_KEY = "M|";
+    static final String TV_KEY = "T|";
+    static final int NUM_FIELDS_MOVIE = 6;
+    static final int NUM_FIELDS_TV = 7;
 
     public Storage(String filepath, String folderpath) {
         assert filepath.length() > 0 : "Filepath length cannot be 0";
@@ -27,7 +36,6 @@ public class Storage {
      */
     public File getMakeFile() {
         try {
-            
             File folder = new File(folderpath);
             File file = new File(filepath);
             
@@ -49,29 +57,62 @@ public class Storage {
         }
     }
 
-    public void loadMedia(File f, ReviewList reviewList) {
-        final String splitter = "\\|";
-        final String movieIdentifier = "M";
-        final String tvShowIdentifier = "T";
-        final String yesString = "Y";
+    public Boolean isValidFields(String lineInput) {
+        String[] fields = lineInput.split(SPLITTER);
+        
+        if (!(lineInput.contains(TV_KEY) || lineInput.contains(MOVIE_KEY))) {
+            System.out.println(lineInput);
+            System.out.println(TV_KEY);
+            return false;
+        }
 
+        if ((lineInput.contains(TV_KEY) && fields.length != NUM_FIELDS_TV)
+            || (lineInput.contains(MOVIE_KEY) && fields.length != NUM_FIELDS_MOVIE)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void loadMedia(File f, ReviewList reviewList) {
         // read in past saved data
         try {
             Scanner fileScanner = new Scanner(f);
+            int counter = 0;
         
             while (fileScanner.hasNext()) {
+                counter++;
                 String lineInput = fileScanner.nextLine();
-                String[] words = lineInput.split(splitter);
-                double rating = Double.parseDouble(words[3]);
+        
+                try {
+                    if (!isValidFields(lineInput)) {
+                        throw new IllegalArgumentException("Error in format of saved data (line " 
+                            + counter + "): Entry ignored.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    Ui.print(e.getMessage());
+                    continue;
+                }
+
+                String[] words = lineInput.split(SPLITTER);
                 Media newMedia = new Media();
 
+                try {
+                    Double.parseDouble(words[3]);
+                } catch (NumberFormatException e) {
+                    Ui.print("Error reading value from line " + counter + ". Entry ignored.");
+                    continue;
+                }
+
+                double rating = Double.parseDouble(words[3]);
+
                 switch (words[0]) {
-                case movieIdentifier:
+                case MOVIE_TYPE:
                     newMedia = new Movie(words[2], rating, words[4], words[5]);
                     reviewList.add(newMedia);
                     break;
 
-                case tvShowIdentifier:
+                case TV_TYPE:
                     newMedia = new TvShow(words[2], rating, words[4], words[5], words[6]);
                     reviewList.add(newMedia);
                     break;
@@ -80,7 +121,7 @@ public class Storage {
                     break;
                 }
 
-                if (words[1].equals(yesString)) {
+                if (words[1].equals(YES_STRING)) {
                     newMedia.setFavourite(true);
                 }
             }
@@ -88,9 +129,9 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             Ui.print("Error accessing file.");
+            
         } catch (Exception e) {
-            Ui.print("Sorry, your saved file was corrupted. You may continue using myReviews with a new "
-                    + "list.");
+            Ui.print("Corrupted file. You may continue using Myreviews, a new file will now be used.");
             f.delete();
             f.mkdirs();
         }

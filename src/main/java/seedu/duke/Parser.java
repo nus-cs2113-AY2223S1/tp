@@ -75,7 +75,7 @@ public class Parser {
     }
 
     public void checkEmptyCommand(String parsedInput) throws InvalidCommandException {
-        if (parsedInput.isEmpty()) {
+        if (parsedInput.isBlank()) {
             throw new InvalidCommandException();
         }
     }
@@ -97,7 +97,7 @@ public class Parser {
             final String favouriteCommand = "favourite";
             final String sortCommand = "sort";
             final String findCommand = "find";
-            final String NT = "";
+            final String nothing = "";
 
             String[] parsedCommand = getCommandWord(userInput);
 
@@ -137,7 +137,8 @@ public class Parser {
                 executeSort(parsedCommand);
                 break;
 
-            case NT:
+            case nothing:
+                break;
 
             default:
                 logger.log(Level.WARNING, "An unrecognised command was given by the user.");
@@ -336,7 +337,8 @@ public class Parser {
             dateFormat.setLenient(false);
             date = dateFormat.parse(dateWatchedString);
         } catch (ParseException e) {
-            Ui.print("Invalid date format. Use the following format: DD-MM-YYYY.");
+            //just return true and b/c future date and invalid date are both invalid inputs.
+            return true;
         }
 
         Date currentDate = new Date();
