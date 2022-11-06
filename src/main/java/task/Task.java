@@ -1,6 +1,7 @@
 package task;
 
-import appointment.*;
+import appointment.Appointment;
+import appointment.AppointmentList;
 import employee.Employee;
 import employee.EmployeeList;
 

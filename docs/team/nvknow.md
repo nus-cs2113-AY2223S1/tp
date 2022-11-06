@@ -33,3 +33,9 @@
 - Added the UML diagram of Employee Management
 
 **Contributions to team-based tasks**
+
+- Serving as a team leader
+- Deciding on weekly meetings and task assignments
+- Maintaining the issue tracker
+- Maintaining the milestone
+- Release management
