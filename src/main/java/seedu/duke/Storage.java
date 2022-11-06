@@ -88,8 +88,9 @@ public class Storage {
      * Initializes the duke.txt by checking its existence, then store the data values to the program.
      *
      * @return The TransactionList storing entries which would be used in the program.
-     * @throws StorageFileCorruptedTransactionException If there are errors due to corrupted duke.txt data.
+     * @throws StorageFileCorruptedTransactionException If there are errors due to corrupted duke.txt transaction data.
      * @throws StorageWriteErrorException               If the file could not be created or could not be written.
+     * @throws StorageFileCorruptedBudgetException      If the budget value in duke,txt has been corrupted.
      */
     public TransactionList initializeFile() throws MoolahException {
         try {
@@ -114,7 +115,7 @@ public class Storage {
      * Stores budget value from duke.txt to the program by parsing the first line of the file.
      *
      * @param monthlyBudget The budget value to be parsed.
-     * @throws MoolahException When there are parsing errors, due to corrupted data.
+     * @throws StorageFileCorruptedBudgetException     If the budget value in duke,txt has been corrupted.
      */
     private void storeBudgetLocally(String monthlyBudget) throws MoolahException {
         try {
@@ -134,7 +135,7 @@ public class Storage {
      * Stores Transaction parameters from duke.txt to the program by parsing each line of the file after Budget value.
      *
      * @param lineString The individual lines from duke.txt which would be parsed.
-     * @throws MoolahException When there are parsing errors, due to corrupted data.
+     * @throws StorageFileCorruptedTransactionException If there are errors due to corrupted duke.txt transaction data.
      */
     private void storeTransactionsLocally(String lineString) throws MoolahException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateFormats.DATE_STORAGE_OUTPUT_PATTERN.toString());
