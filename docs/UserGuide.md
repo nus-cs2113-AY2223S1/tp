@@ -195,8 +195,8 @@ Expected outcome:
 ____________________________________________________________
 Here is the user you have requested to view: 
 Username: bui Age: 20 Contact: 12345678 
-The user's loss is $0.0
-The user's gain is $0.0
+The user's loss is $0.00
+The user's gain is $0.00
 Here are 2 item(s) in the list:
 1. [Available] ItemId: 69b69ff2
    Item name: charger
@@ -267,7 +267,7 @@ Example of usage: ```view-user-loss /u jingwei```
 Expected outcome:
 ```
 ____________________________________________________________
-The amount of money loss of jingwei is: $2.5
+The amount of money loss of jingwei is: $2.50
 ____________________________________________________________
 ```
 
@@ -281,7 +281,7 @@ Example of usage: ```view-user-gain /u bui```
 Expected outcome:
 ```
 ____________________________________________________________
-The amount of money earned of bui is: $2.5
+The amount of money earned of bui is: $2.50
 ____________________________________________________________
 ```
 
@@ -350,6 +350,7 @@ Note:
 1. Item name length must be less than 20 chars
 2. To choose category, please use ```list-categories``` to list them out and use the index
 3. Price must be a float, and in range from 0 to 10000
+4. Note that price is in terms of SGD, and has 2 decimal places rounded to the nearest cent (e.g 0.5 -> $0.50)
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -361,7 +362,7 @@ Status: [Available] ItemId: 2cc4edf3
    Item: weight 
    Category: SPORTS_EQUIPMENT 
    Owner: bui 
-   PricePerDay: $0.5
+   PricePerDay: $0.50
 Total item(s) in database: 2
 ____________________________________________________________
 ```
@@ -384,7 +385,7 @@ Status: [Available] ItemId: 2cc4edf3
    Item: weight 
    Category: SPORTS_EQUIPMENT 
    Owner: bui 
-   PricePerDay: $0.5
+   PricePerDay: $0.50
 Total item(s) in database: 1
 ____________________________________________________________
 ```
@@ -404,7 +405,7 @@ Here are 1 item(s) in the list:
    Item: toy 
    Category: SPORTS_EQUIPMENT 
    Owner: WinstonLimCherHong 
-   PricePerDay: $4.0
+   PricePerDay: $4.00
 ____________________________________________________________
 ```
 
@@ -427,7 +428,7 @@ Status: [Available] ItemId: 99995bb2
    Item: scale 
    Category: SPORTS_EQUIPMENT 
    Owner: jingwei 
-   PricePerDay: $1.0
+   PricePerDay: $1.00
 ____________________________________________________________
 ```
 
@@ -480,12 +481,12 @@ Here are 2 item(s) in your filtered list:
    Item: battery 
    Category: ELECTRICAL_APPLIANCES 
    Owner: jingwei 
-   PricePerDay: $1.5
+   PricePerDay: $1.50
 2. Status: [Available] ItemId: 4621bcf6 
    Item: charger 
    Category: ELECTRICAL_APPLIANCES 
    Owner: winston 
-   PricePerDay: $2.0
+   PricePerDay: $2.00
 ____________________________________________________________
 ```
 
@@ -532,17 +533,17 @@ Here are 3 item(s) in the list:
    Item: book 
    Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
-   PricePerDay: $99.0
+   PricePerDay: $99.00
 2. Status: [Available] ItemId: 4e6f4b89 
    Item: books1 
    Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
-   PricePerDay: $99.0
+   PricePerDay: $99.00
 3. Status: [Available] ItemId: 75d7d384 
    Item: textbook 
    Category: TEXTBOOKS_AND_NOTES
    Owner: jingwei 
-   PricePerDay: $99.0
+   PricePerDay: $99.00
 ____________________________________________________________
 ```
 
@@ -573,7 +574,7 @@ OK! I will add the following transaction:
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: $10.0 
+   MoneyTransacted: $10.00
 Total transaction(s) in database: 3
 ____________________________________________________________
 ```
@@ -598,7 +599,7 @@ OK! I will remove the following item:
    Borrower: bui 
    Duration: 5 
    ReturnedDate: Tue, Oct 25 2022 
-   MoneyTransacted: $10.0 
+   MoneyTransacted: $10.00
 Total transactions(s) in database: 2
 ____________________________________________________________
 ```
@@ -620,7 +621,7 @@ Here are 2 transaction(s) you want to view:
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: $5.0 
+   MoneyTransacted: $5.00
 2. [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Lender: thanh 
@@ -651,7 +652,7 @@ Here is the transaction you requested to view:
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: $900.0 
+   MoneyTransacted: $900.00
 ____________________________________________________________
 ```
 
@@ -672,14 +673,14 @@ Here are the uncompleted transactions:
    Borrower: jorelle 
    Duration: 5 
    ReturnDate: Fri, Oct 28 2022 (0 day(s) left) 
-   MoneyTransacted: $5.0 
+   MoneyTransacted: $5.00
 [Unfinished] TxID: 9e27c530 
    ItemName: laptop ItemID: bd4961ed 
    Lender: thanh 
    Borrower: winston 
    Duration: 100 
    ReturnDate: Sat, Jan 21 2023 (85 day(s) left) 
-   MoneyTransacted: $900.0 
+   MoneyTransacted: $900.00
 ____________________________________________________________
 ```
 
@@ -704,7 +705,7 @@ Done! Here is the updated transaction:
    Borrower: jorelle 
    Duration: 10 
    ReturnDate: Wed, Nov 02 2022 (5 day(s) left) 
-   MoneyTransacted: $10.0 
+   MoneyTransacted: $10.00
 ____________________________________________________________
 ```
 
