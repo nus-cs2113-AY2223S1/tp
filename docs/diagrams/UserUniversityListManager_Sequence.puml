@@ -10,14 +10,17 @@ activate ":UserUniversityListManager"
 activate ":UserUniversityListManager"
 return : boolean
 
-alt school already exists
-
-else new school list
+opt is a new school
     ":UserUniversityListManager" -> ":UserUniversityList" **: new
     activate ":UserUniversityList"
     return ":UserUniversityList"
+
     ":UserUniversityListManager" -> ":UserUniversityListManager" : put(input, newList)
     activate ":UserUniversityListManager"
+
+    ":UserUniversityListManager" -> ":TimetableManager" : createTimetable(input, false)
+    activate ":TimetableManager"
+    return
 
     ":UserUniversityListManager" -> ":Ui" : printPuListCreatedAcknowledgement(input)
     activate ":Ui"
@@ -36,14 +39,19 @@ activate ":UserUniversityListManager"
 activate ":UserUniversityListManager"
 return : boolean
 
-alt inputSchool exists
+opt inputSchool exists
     ":UserUniversityListManager" -> ":UserUniversityListManager" : remove(inputSchool)
     activate ":UserUniversityListManager"
 
     ":UserUniversityListManager" -> ":Ui" : printPuListDeletedAcknowledgement(inputSchool)
     activate ":Ui"
     return
-else inputSchool does not exist
+
+    ":UserUniversityListManager" -> ":TimetableManager" : deleteTimetable(inputSchool)
+    activate ":TimetableManager"
+    return
+
+    return
 end
 
 return
@@ -55,20 +63,18 @@ activate ":UserUniversityListManager"
 activate ":UserUniversityListManager"
 return : boolean
 
-alt inputSchool exists
+opt inputSchool exists
     ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
     activate ":UserUniversityListManager"
     return : ":UserUniversityList"
     ":UserUniversityListManager" -> ":UserUniversityList" : addModule(inputModule)
     activate ":UserUniversityList"
 
-    ":UserUniversityList" -> ":UserUniversityList" : addModule(input)
     activate ":UserUniversityList"
     ":UserUniversityList" -> ":UserUniversityList" : findModuleByCode(input)
     activate ":UserUniversityList"
     return : boolean
-    alt module already exists
-    else new module
+    opt new module
         ":UserUniversityList" -> ":UserUniversityList" : add(input)
         activate ":UserUniversityList"
 
@@ -78,14 +84,12 @@ alt inputSchool exists
         deactivate ":Ui"
         return
     end
-    ":UserUniversityList" <-- ":UserUniversityList"
-    deactivate ":UserUniversityList"
-    ":UserUniversityListManager" <-- ":UserUniversityList"
     deactivate ":UserUniversityList"
 
-else inputSchool does not exist
 
 end
+return
+
 return
 deactivate ":UserUniversityListManager"
 
