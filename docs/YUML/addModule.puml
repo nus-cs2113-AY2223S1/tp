@@ -22,7 +22,7 @@ activate Nusmods
 Nusmods --> Nusmods : :String
 deactivate Nusmods
 
-Nusmods -> Api : HTTP_Request()
+Nusmods -> Api : send(request : HttpRequest)
 activate Api
 Api --> Nusmods : data:JsonNode
 deactivate Api

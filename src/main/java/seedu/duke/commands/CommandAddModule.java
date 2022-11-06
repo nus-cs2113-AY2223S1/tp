@@ -22,6 +22,11 @@ public class CommandAddModule {
 
     public static String runAddModuleProcedure(String currentSemester, String moduleCode) {
         Nusmods mod = new Nusmods();
+
+        if (Timetable.listOfModules.size() >= 7) {
+            return "Only up to 7 modules are allowed!";
+        }
+
         List<Lesson> lessons;
         String[] info = new String[3];
 
@@ -35,6 +40,8 @@ public class CommandAddModule {
             return "Sorry, this module is not available in the current semester or this semester is invalid.";
         } catch (Exceptions.InvalidModuleCodeException e) {
             return "Module not found, please enter a valid module code next time!";
+        } catch (Exceptions.InvalidDayException e) {
+            return "Weekend modules are currently not supported!";
         }
 
         lgr.info("api call successful, attempting to add module to timetable");
