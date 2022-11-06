@@ -80,6 +80,7 @@ public class Parser {
                 errorIfNoMatchPatient(matcherAdd, ADD_COMMAND);
                 String patientId = matcherAdd.group(4).toUpperCase();
                 errorForPatientID(patientId, false);
+                checkBirthDate(matcherAdd.group(3));
                 patientList.addPatient(ui, matcherAdd.group(1), matcherAdd.group(3),
                         matcherAdd.group(2), patientId);
                 storage.savePatientData(patientList);
@@ -328,6 +329,63 @@ public class Parser {
         }
     }
 
+    private void checkDayAndMonth(int day,int month) throws OneDocException {
+        try {
+            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
+                throw new OneDocException("Invalid date entered, make sure the date is in the correct format:\n"
+                        + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12");
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+        }
+    }
+
+    private void checkDate(String date) throws OneDocException {
+        try {
+            String[] dateSplit = date.split("-");
+            checkDayAndMonth(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]));
+            int year = Integer.parseInt(dateSplit[2]);
+            if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
+                throw new OneDocException("Invalid year entered in the date, year should be in the range 2012-2032");
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+        }
+    }
+
+    private void checkBirthDate(String date) throws OneDocException {
+        try {
+            String[] dateSplit = date.split("-");
+            int day = Integer.parseInt(dateSplit[0]);
+            int month = Integer.parseInt(dateSplit[1]);
+            int year = Integer.parseInt(dateSplit[2]);
+            checkDayAndMonth(day,month);
+            if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
+                    && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE) {
+                throw new OneDocException("Invalid date for birth date, make sure the date range is between 1922 to "
+                        + "today");
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+        }
+    }
+
+
+    private void checkTime(String time) throws OneDocException {
+        try {
+            String[] timeSplit = time.split(":");
+            int hour = Integer.parseInt(timeSplit[0]);
+            int minute = Integer.parseInt(timeSplit[1]);
+            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE
+                    || minute > MAX_MINUTE_RANGE) {
+                throw new OneDocException("Invalid time entered, make sure the hours are in range 0-23 and the "
+                        + "minutes are in range 0-59 in the format HH:MM");
+            }
+        } catch (NumberFormatException e) {
+            throw new OneDocException("Invalid time entered - please enter digits (0-9) in the format HH:MM");
+        }
+    }
+
     private void checkViewAllCommand(String inputLower, String type) {
         if (inputLower.length() > VIEW_ALL_COMMAND.length()) {
             System.out.println("A viewall command will print all "
@@ -351,8 +409,10 @@ public class Parser {
         }
     }
 
-    private void parseAddVisit(Matcher matcher, String patientId) {
+    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
         String reason = matcher.group(4);
+        checkDate(matcher.group(2));
+        checkTime(matcher.group(3));
         if (reason == null || reason.isEmpty()) {
             visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
             storage.saveVisitData(visitList);
@@ -400,6 +460,7 @@ public class Parser {
         case "d":
             Pattern matchDob = Pattern.compile("^" + DATE_REGEX + "$", Pattern.CASE_INSENSITIVE);
             if (matchDob.matcher(input).find()) {
+                checkBirthDate(input);
                 patientList.modifyPatientDetails(ui, id, "", input, "");
                 storage.savePatientData(patientList);
             } else {
@@ -616,4 +677,14 @@ public class Parser {
 
     private static final String ERROR_MESSAGE = "Your input is incorrect! Please format it as such:";
     private static final String HELP_MESSAGE = "\nIf you want to see the whole list of commands, type help!";
+    private static final int MIN_DOB_YEAR_RANGE = 1922;
+    private static final int MIN_YEAR_RANGE = 2000;
+    private static final int MAX_YEAR_RANGE = 2050;
+    private static final int MIN_DAY_RANGE = 1;
+    private static final int MAX_DAY_RANGE = 31;
+    private static final int MIN_MONTH_RANGE = 1;
+    private static final int MAX_MONTH_RANGE = 12;
+    private static final int MIN_TIME_RANGE = 0;
+    private static final int MAX_HOUR_RANGE = 23;
+    private static final int MAX_MINUTE_RANGE = 59;
 }
