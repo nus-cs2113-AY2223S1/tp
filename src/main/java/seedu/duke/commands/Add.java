@@ -45,11 +45,11 @@ public class Add extends Command {
         String course = extractingContent(input, indexes[0], indexes[1]);
         String semester = extractingContent(input, indexes[2], indexes[3]);
         String mcString = extractingContent(input, indexes[4], indexes[5]);
-        int mcInt = Integer.parseInt(mcString);
         String grade = extractingContent(input, indexes[6], indexes[7]);
 
-        checkOverallExceptionForAdd(course, semester, mcString, mcInt, grade);
+        checkOverallExceptionForAdd(course, semester, mcString, grade);
 
+        int mcInt = Integer.parseInt(mcString);
         this.mod = new Module(course, semester, grade, mcInt);
 
     }
@@ -59,12 +59,11 @@ public class Add extends Command {
      * @param course Course taken. Format: String
      * @param semester Semester taken. Format: String
      * @param mcString MC in string format. Format: String
-     * @param mcInt MC in Integer format. Format: Integer
      * @param grade Grade received for the module. Format: String
      * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
     private void checkOverallExceptionForAdd(String course, String semester,
-                                       String mcString, Integer mcInt, String grade) throws InvalidOverallInputException {
+                                       String mcString, String grade) throws InvalidOverallInputException {
 
         String errorMessage = "";
 
@@ -82,11 +81,7 @@ public class Add extends Command {
 
         try {
             checkMcString(mcString);
-        } catch (Exception e) {
-            errorMessage += e.getMessage();
-        }
-
-        try {
+            int mcInt = Integer.parseInt(mcString);
             checkMc(mcInt);
         } catch (Exception e) {
             errorMessage += e.getMessage();
