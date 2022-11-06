@@ -61,7 +61,7 @@ public class AppointmentList {
 
         appointments.add(appointment);
         System.out.print("Got it. I've added this appointment: ");
-        System.out.println("Pet " + appointment.petId + " | " + "Service " + appointment.service);
+        System.out.println("Pet " + pet.name + "(" + pet.petId + ")" + "\t" + "Service " + appointment.service);
         System.out.println("Now you have " + appointments.size() + " appointments in the list.");
 
     }
