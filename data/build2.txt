@@ -1,3 +1,9 @@
-cpu/AMD RYZEN/500/80/AM4/3.7
-drive/Samsung EVO/500/35/500/ssd
-gpu/nvidia3090x/2500/130/16/1395
+cpu/cpu2/2/12/ABC/4.0
+gpu/gpu2/2/45/4/5
+motherboard/mobo2/2/12/DEF/Mini ATX/0/0
+memory/memory2/2/12/2/4
+drive/drive2/2/12/1/HDD
+monitor/monitor2/2/12/144/4/3440x1440
+cooler/cooler2/2/12/XYZ/1500/40
+case/case2/2/1/Full ATX/0
+powersupply/powersupply2/2/50
