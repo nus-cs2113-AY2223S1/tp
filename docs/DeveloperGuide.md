@@ -2,9 +2,15 @@
 
 ## Acknowledgements
 
-Parser class and its functions are largely adapted from Ria's IP and help from regex101 (https://regex101.com/).
+Parser class and its functions are adapted with inspiration from [Ria's IP](https://github.com/riavora/ip) and help
+from [regex101](https://regex101.com/).
 
 Storage class and its functions are largely adapted from [Dhanish's IP](https://github.com/dhanish265/ip) on Duke.
+
+## Quick Start
+
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `OneDoc` from [here](https://github.com/AY2223S1-CS2113-F11-4/tp/releases/tag/v2.1).
 
 ## Design & implementation
 
@@ -246,6 +252,62 @@ passing the `Patient` and `FileWriter` objects.
 5. After all iterations, control is returned to the class that called the `savePatientData` method.
 
 
+### UI Component
+* handles printing messages to the user
+* handles printing errors to the user
+
+**Important methods in the `UI` class:**
+* `printWelcomeMessage` - prints logo and welcome message to the user when opening "OneDoc"
+* `printObject` - prints object - patient/visit/prescription and their corresponding index 
+* `printMessageAndObject` - prints object - patient/visit/prescription and their corresponding index, given message and object type
+* `printErrorMessage` - prints error to the user
+
+
+### Parser Component
+
+The `Parser` component,
+* Interprets user input to identify the correct command
+* Parses the parameters and ensures correct typing of information
+* Identifies and runs the subsequent method in PatientList, VisitList, or PrescriptionList with the parsed parameters
+* Provides relevant error messages (specific to each command) based on incorrect user input
+
+The `Parser` class has dependencies on the `Pattern` (used to create regular expression patterns) and `Matcher`
+(used to find regular expressions in Strings) classes.
+
+**Important methods in the `Parser` class:**
+
+* `mainMenuParser` - This method interprets the initial user input to identify the correct submenu, and return that 
+state to the UI
+* `patientParser` - Once within the Patient Submenu, this method is called from the `UI` class on each user input.
+The user input is then parsed into an `add`, `edit`, `retrieve`, or `viewall` command. If the input is incorrect, it
+concludes as an error with a specific error message. Based on the command, the method will call the relevant method
+from the `PatientList` class with the parsed parameters. This method also checks for a call to `help`, `main`, or `bye`
+at the start.
+* `visitParser` - Once within the Visit Submenu, this method is called from the `UI` class on each user input
+The user input is then parsed into an `add`, `edit`, `deleteReason`, `viewPatient`, `viewVisit`, or `viewAll` command.
+If the input is incorrect, it concludes as an error with a specific error message. Based on the command, the method will
+call the relevant method from the `VisitList` class with the parsed parameters.  This method also checks for a call to
+`help`, `main`, or `bye` at the start.
+* `prescriptionParser` - Once within the Prescription Submenu, this method is called from the `UI` class on each user
+input. The user input is then parsed into an `add`, `edit`, `viewPatientPres`, `viewActPatientPres`, `activate`,
+`deactivate`, or `viewAll` command. If the input is incorrect, it concludes as an error with a specific error message. 
+Based on the command, the method will call the relevant method from the `PrescriptionList` class with the parsed
+parameters. This method also checks for a call to `help`, `main`, or `bye` at the start.
+
+In particular, we can observe exactly how, for instance, `patientParser` works.
+
+![](images/PatientParserSequenceDiagram.png)
+1. The method, once called, creates 3 new `Matcher` objects used to identify if there is a correctly-formatted command
+in the user's input of type `add`, `edit`, or `retrieve`. Since `viewAll` is a single word command, there doesn't need
+to be a Matcher for it.
+2. It checks for `viewAll`, and then checks for each `Matcher`.
+3. Based on the valid `Matcher` or `viewAll`, it calls the relevant method from `PatientList`
+4. The `PatientList` method performs the subsequent actions on `Patient`/s, and returns the result.
+5. The method then returns the result to the UI, which presents it to the user.
+6. If there is an error, the specific relevant command is identified in this method, and the format guide is returned
+to the user.
+
+
 ## Product scope
 ### Target user profile
 
@@ -283,30 +345,16 @@ of information.
 | v2.0    | doctor/user | view list of all active prescriptions for all of patients   | see which prescription the patient is currently taking                              |
 | v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
 | v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
-| v2.0    | user        | find a to-do item by name                                   | locate a to-do without having to go through the entire list                         |
 
 ## Non-Functional Requirements
 
-### Parser
-
-The parsing class utilizes regex for each of the commands for two main reasons: usability and error-catching.
-
-For usability, the input is automatically separated into distinct groups through the Java regex library, which allows
-input such as ID, name, etc. to be pulled out in multi-word or one word parts.
-
-For error-catching, the input is checked to be in a certain format (i.e. DOB is DD-MM-YYYY)
-or of a certain type (i.e. the ID is one word made up of letters and numbers).
-
-If there is an error, the regex also helps with identifying the exact error issue, and
-sending that back to the user.
-
-For example: the `add` command for `Patient`
-
-`To add a patient: add n/[name] g/[M/F] d/[DOB] i/[ID]`
-* n/ checks for one or two words to store as the name
-* g/ checks for one letter indicating male or female
-* d/ checks for date of birth formatted as (DD-MM-YYY)
-* i/ checks for a single ID containing numbers or letters
+* Should work on any mainstream OS as long as it has Java 11 or above installed.
+* A doctor with above-average typing speed for regular English text and numbers (i.e. not code or system commands)
+should  be able to add, retrieve, and edit information faster using these commands than with a mouse.
+* Should be able to hold up to 1000 patients, with overall 1000 visits and 1000 prescriptions without a noticeable
+sluggishness in performance for typical usage.
+* Data is unable to be deleted on the program (besides directly editing the data files), preventing malicious actors
+from deleting essential health records
 
 ### Index Reference
 
@@ -319,19 +367,18 @@ visit menu, and then use the given index of the visit you find to edit it. The s
 
 * *patient* - A single individual with a unique ID
 * *visit* - A single visit of one existing patient on a specific date and time
-* *prescription* - A single prescription of one existing patient, either inactive if it has been updated
-* or active based on in the patient has been using it or if a new record has replaced it
+* *prescription* - A single prescription of one existing patient, active based on in the patient is currently using it
 
 ## Instructions for manual testing
 
 To load sample data, please reference the following formats:
 
-`patient.txt`: Name | DOB | G | ID
-- Example: Jane Doe | 09-09-1978 | F | T1
+`patient.txt`: `Name | DOB | G | ID`
+<br>Example: `Jane Doe | 09-09-1978 | F | T1`
 
-`visit.txt`: ID | Reason | Date | Time
-- Example: T1 | checkup | 08-11-2022 | 08:00
+`visit.txt`: `ID | Reason | Date | Time`
+<br>Example: `T1 | checkup | 08-11-2022 | 08:00`
 
-`prescription.txt`: ID | Name | Dosage | Time Interval | Active Status (True or False)
-- Example: T2 | penicillin | 1 tablet | every 3 days | T
+`prescription.txt`: `ID | Name | Dosage | Time Interval | Active Status (T or F)`
+<br>Example: `T2 | penicillin | 1 tablet | every 3 days | T`
 
