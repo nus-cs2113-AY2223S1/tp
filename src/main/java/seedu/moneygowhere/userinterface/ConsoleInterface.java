@@ -347,9 +347,10 @@ public class ConsoleInterface {
         }
     }
 
+    //@@author jeyvia
     private void runCommandHelp(ConsoleCommandHelp consoleCommandHelp) {
         String helpStr = "";
-        helpStr += "---- EXPENSE-RELATED-COMMANDS ----" + "\n";
+        helpStr += "---- EXPENSE RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_EXPENSE
                 + Messages.CONSOLE_COMMAND_ADD_EXPENSE_FORMAT
                 + "\n";
@@ -371,7 +372,7 @@ public class ConsoleInterface {
 
         helpStr += "\n";
 
-        helpStr += "---- RECURRING-PAYMENT-RELATED-COMMANDS ----" + "\n";
+        helpStr += "---- RECURRING PAYMENT RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_FORMAT
                 + "\n";
@@ -390,7 +391,7 @@ public class ConsoleInterface {
 
         helpStr += "\n";
 
-        helpStr += "---- INCOME-RELATED-COMMANDS ----" + "\n";
+        helpStr += "---- INCOME RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_INCOME
                 + Messages.CONSOLE_COMMAND_ADD_INCOME_FORMAT
                 + "\n";
@@ -406,7 +407,7 @@ public class ConsoleInterface {
 
         helpStr += "\n";
 
-        helpStr += "---- TARGET-RELATED-COMMANDS ----" + "\n";
+        helpStr += "---- TARGET RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_TARGET
                 + Messages.CONSOLE_COMMAND_ADD_TARGET_FORMAT
                 + "\n";
@@ -422,7 +423,7 @@ public class ConsoleInterface {
 
         helpStr += "\n";
 
-        helpStr += "---- STORAGE-RELATED-COMMANDS ----" + "\n";
+        helpStr += "---- STORAGE RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_MERGE_FILE
                 + Messages.CONSOLE_COMMAND_MERGE_FILE_FORMAT;
 
