@@ -57,6 +57,11 @@ This section allows users to understand all the features that we offer, includin
 >3. Phrases in ```[CAPITAL_WORDS]``` are the parameters for you to input.
 >4. Argument value cannot contain ```/``` or ```|```.
 >5. You must put a space between delimiter and value. For example, ```/nbuiducthanh``` is an error, but ```/n buiducthanh``` is correct
+>6. Note that price inputs can only have at most 2 decimal places:
+    1. 0.5 -> $0.50 (GOOD)
+    2. 1 -> $1.00 (GOOD)
+    3. 1.01 -> $1.01 (GOOD)
+    4. 0.9666 -> error (BAD)
 
 
 ### 3.1. Getting help
@@ -350,7 +355,7 @@ Note:
 1. Item name length must be less than 20 chars
 2. To choose category, please use ```list-categories``` to list them out and use the index
 3. Price must be a float, and in range from 0 to 10000
-4. Note that price is in terms of SGD, and has 2 decimal places rounded to the nearest cent (e.g 0.5 -> $0.50)
+4. Note that price must have at most 2 decimal places
 
 Example of usage: ```add-item /n weight /c 1 /p 0.5 /o bui```
 
@@ -443,6 +448,7 @@ Note:
 2. A valid price must be given i.e. non-zero and non-negative
 3. Price is in price per day, and in range from 0 to 10000
 4. You may or may not use floating point numbers for price
+5. Note that price must have at most 2 decimal places
 
 Example of usage: ```update-item /i ea608c61 /p 4```
 
@@ -454,7 +460,7 @@ Status: [On loan] ItemId: ea608c61
    Item: toy 
    Category: SPORTS_EQUIPMENT 
    Owner: WinstonLimCherHong 
-   PricePerDay: $4.0
+   PricePerDay: $4.00
 ____________________________________________________________
 ```
 
@@ -469,7 +475,8 @@ Note:
 2. Mode, minimum price, maximum price and category filters are **optional**. If you do not use, please exclude the whole part (for example: exclude ```/min [MIN_PRICE]```)
 3. Minimum and Maximum price must be no less than 0 and no more than 10000
 4. Minimum price must be less than maximum price
-5. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
+5. Note that price can only have at most 2 decimal places
+6. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5 /cat 3```
 
