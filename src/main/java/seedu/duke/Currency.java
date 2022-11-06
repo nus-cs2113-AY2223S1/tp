@@ -65,17 +65,19 @@ public class Currency {
                     try {
                         CurrencyStructure currency1 = findCurrencyByAbbrName(splitInput[1], allCurrencies);
                         CurrencyStructure currency2 = findCurrencyByAbbrName(splitInput[2], allCurrencies);
-                        double rate1 = currency1.getRate();
-                        double rate2 = currency2.getRate();
-                        System.out.println("Exchange rate from " + splitInput[1] + " to " + splitInput[2] + " is "
-                                + rate2 / rate1);
+                        double rate = currency1.getRate()/currency2.getRate();
+                        System.out.printf("Exchange rate from " + splitInput[1] + " to " + splitInput[2] + " is %.4f %n"
+                                , rate);
+                        System.out.println();
                     } catch (IndexOutOfBoundsException e) {
                         boolean isErrorOne = true;
                         try {
                             CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
                             double rate = currency.getRate()/defaultCurrency.getRate();
-                            System.out.println(
-                                    "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is " + rate);
+                            System.out.printf(
+                                    "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is %.4f %n"
+                                            , rate);
+                            System.out.println();
                         } catch (IndexOutOfBoundsException f) {
                             isErrorOne = false;
                             BasicUi.showIncorrectCurrencyConversion();

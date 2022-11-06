@@ -139,7 +139,8 @@ public class Account {
             else if (splits.length == 4){
                 String commandType = splits[0];
                 String recipientUsername = splits[1];
-                int amount = Integer.parseInt(splits[2]);
+                try {
+                    int amount = Integer.parseInt(splits[2]);
                 String transferCurrency = splits[3];
 
                 try {
@@ -153,12 +154,16 @@ public class Account {
                         MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
                         AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
                         AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+
                         break;
                     default:
                         throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                     }
                 } catch (FinanceException e) {
                     e.handleException();
+                }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please make sure to use integers for transfer amount");
                 }
             }
             else {

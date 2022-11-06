@@ -44,21 +44,26 @@ public class MoneyCommand {
     }
 
     public static void transferWithdrawCommand(Wallet wallet, String commandArg) throws FinanceException {
-        String[] splittedCommandArgs = commandArg.split(" ");
-        String argCurrency,argAmount;
-        if (splittedCommandArgs.length == 1) {
-            argCurrency = wallet.getDefaultCurrency().getAbbrName();
-            argAmount = splittedCommandArgs[0]; 
-        } else if (splittedCommandArgs.length == 2) {
-            argCurrency = splittedCommandArgs[0];
-            argAmount = splittedCommandArgs[1]; 
-        } else {
-            throw new FinanceException(ExceptionCollection.WITHDRAW_MONEY_EXCEPTION);
+        try {
+            String[] splittedCommandArgs = commandArg.split(" ");
+            String argCurrency,argAmount;
+            if (splittedCommandArgs.length == 1) {
+                argCurrency = wallet.getDefaultCurrency().getAbbrName();
+                argAmount = splittedCommandArgs[0];
+            } else if (splittedCommandArgs.length == 2) {
+                argCurrency = splittedCommandArgs[0];
+                argAmount = splittedCommandArgs[1];
+            } else {
+                throw new FinanceException(ExceptionCollection.WITHDRAW_MONEY_EXCEPTION);
+            }
+            CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
+            double amount = parsePositiveAmount(argAmount);
+            wallet.withdrawMoney(currency, amount);
+            WalletFile.updateWallet(wallet);
         }
-        CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
-        double amount = parsePositiveAmount(argAmount);
-        wallet.withdrawMoney(currency, amount);
-        WalletFile.updateWallet(wallet);
+            catch (NumberFormatException e){
+            System.out.println("Please make sure to use integers for amount");
+        }
     }
 
     public static void convertAllCommand(Wallet wallet, String commandArg) throws FinanceException {
@@ -85,16 +90,21 @@ public class MoneyCommand {
     }
 
     public static void transferSaveCommand(Wallet wallet, String commandArg) throws FinanceException {
-        String[] splittedCommandArgs = commandArg.split(" ");
-        if (splittedCommandArgs.length != 2) {
-            throw new FinanceException(ExceptionCollection.SAVE_MONEY_EXCEPTION);
+        try {
+            String[] splittedCommandArgs = commandArg.split(" ");
+            if (splittedCommandArgs.length != 2) {
+                throw new FinanceException(ExceptionCollection.SAVE_MONEY_EXCEPTION);
+            }
+            String argCurrency = splittedCommandArgs[0];
+            String argAmount = splittedCommandArgs[1];
+            CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
+            double amount = parsePositiveAmount(argAmount);
+            wallet.saveMoney(currency, amount);
+            WalletFile.updateWallet(wallet);
         }
-        String argCurrency = splittedCommandArgs[0];
-        String argAmount = splittedCommandArgs[1];
-        CurrencyStructure currency = CurrencyList.findCurrencyByAbbrName(argCurrency);
-        double amount = parsePositiveAmount(argAmount);
-        wallet.saveMoney(currency, amount);
-        WalletFile.updateWallet(wallet);
+        catch (NumberFormatException e){
+            System.out.println("Please make sure to use integers for amount");
+        }
     }
 
     public static double parsePositiveAmount(String argAmount) throws FinanceException{
@@ -122,10 +132,20 @@ public class MoneyCommand {
 
     public static void transferMoney(Wallet currentUserWallet, String recipientUsername, String transferCurrency, int amount) throws FinanceException {
         String commandArg = transferCurrency + " " + amount;
-        transferWithdrawCommand(currentUserWallet, commandArg);
-
         Wallet recipientWallet = WalletFile.getWallet(recipientUsername);
-        transferSaveCommand(recipientWallet, commandArg);
+        String currentWalletName = currentUserWallet.getUserName();
+
+        if (Wallet.getDeposits().size() == 0) {
+            throw new FinanceException(ExceptionCollection.ACCOUNT_OVERDRAW);
+        }
+        else if (currentWalletName.equals(recipientUsername)) {
+            throw new FinanceException(ExceptionCollection.SAME_USER_TRANSFER);
+        }
+        else {
+            transferSaveCommand(recipientWallet, commandArg);
+            transferWithdrawCommand(currentUserWallet, commandArg);
+
+        }
         //i should withdraw the amount from the current wallet based on the withdraw function, but maybe a new one without print
         //then get the new wallet and increment that amount
     }

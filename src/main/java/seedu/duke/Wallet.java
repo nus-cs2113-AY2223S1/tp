@@ -13,9 +13,9 @@ public class Wallet {
     protected String passWord;
     protected CurrencyStructure defaultCurrency;
     protected double totalBalance;
-    protected List<Deposit> deposits;
+    protected static List<Deposit> deposits;
 
-    public Wallet(String userName, String passWord) {
+    public Wallet(String userName, String passWord) throws FinanceException {
         this.userName = userName;
         this.passWord = passWord;
         totalBalance = 0;
@@ -48,7 +48,7 @@ public class Wallet {
         return totalBalance;
     }
 
-    public List<Deposit> getDeposits() {
+    public static List<Deposit> getDeposits() {
         return deposits;
     }
 
