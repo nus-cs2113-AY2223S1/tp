@@ -61,6 +61,7 @@ check the compatibility of the parts.
     * BuildManagerFindSequence (Pull request: #138)
     * BuildManagerListSequence (Pull request: #138)
 
+<div style="page-break-after: always;"></div>
 ### Contributions beyond the project team
 * I helped to find bugs during the PE-demo.
 * I helped review some PRs. (Pull request: #132)
