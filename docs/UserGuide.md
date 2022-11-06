@@ -76,7 +76,7 @@ Sem [1] >>
 > Notes about the command format:
 > - The first word of each command specifies the command type.
 > - Words in `UPPERCASE` information to be supplied by the user.
-    e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
+    e.g. in `add [ MODULE_CODE ]`, `MODULE_CODE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
