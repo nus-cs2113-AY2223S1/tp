@@ -63,8 +63,8 @@ class ParserTest {
 
     @Test
     void parseCommand_printCommandEmpty_parsedCorrectly() {
-        String output = "              :              :              :              :              "
-                + ":               "
+        String output = ""
+                + "              :              :              :              :              :               "
                 + System.lineSeparator()
                 + "              : MON          : TUE          : WED          : THU          : FRI           "
                 + System.lineSeparator()
@@ -80,7 +80,7 @@ class ParserTest {
                 + System.lineSeparator()
                 + "   1000       :              :              :              :              :               "
                 + System.lineSeparator()
-                + "   1030       :              :              :              :              :              "
+                + "   1030       :              :              :              :              :               "
                 + System.lineSeparator()
                 + "   1100       :              :              :              :              :               "
                 + System.lineSeparator()
@@ -127,9 +127,7 @@ class ParserTest {
                 + "   2130       :              :              :              :              :               "
                 + System.lineSeparator()
                 + "   2200       :              :              :              :              :               "
-                + System.lineSeparator()
-                + " "
-                + System.lineSeparator()
+                + System.lineSeparator() + " "  + System.lineSeparator()
                 + " * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot."
                 + System.lineSeparator()
                 + " * Slots with XXXXXX indicates that there is a clash between two or more lessons."
