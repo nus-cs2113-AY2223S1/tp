@@ -8,10 +8,12 @@ creating and maintaining lists for them and also favouriting selected ones for e
 
 ## Summary of contributions
 
-### Code Contributed
+### 
 
-This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=wangtingjia&breakdown=true) indicates the contribution,
+[Code contributions](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=wangtingjia&breakdown=true)
 broken down into documentation, functional and test code.
+
+[Pull requests](https://github.com/AY2223S1-CS2113-W13-2/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Awangtingjia) authored.
 
 
 ### Features & Enhancements Implemented
@@ -56,18 +58,20 @@ broken down into documentation, functional and test code.
 * **Notable PRs**: [#178](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/178), [#191](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/191), [#192](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/192)
 
 ### Contributions to the User Guide UG
-* Completed the bulk of the User Guide first draft, documenting all functions, valid inputs and expected outputs
+* Completed the bulk of the User Guide first draft.
+* Documented majority of the functions including `VIEW`, `ADD`, `FAVOURITE`, `CREATE`, `DELETE`.
+* Generated valid inputs and expected outputs for each of these comments.
 * **Notable PRs**: [#115](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/115)
 
 ### Contributions to the Developer Guide DG
-* Added relevant UML & Sequence diagrams for my classes
+* Added relevant UML & Sequence diagrams for my classes under sections `2.7 User Module Mapping` and `2.8 User University List Manager`.
 * **Some notable PRs**: [#95](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/95), [#78](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/78), [#113](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/113), [#108](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/108)
 
 ### Contributions to Team-Based Tasks
-- to be added
-
-### Review / Mentoring Contributions
-- to be added
+* Maintained GitHub issues on existing bugs and assigned team members to various tasks
+* Reviewed from all team members, verifying that contributions for each PR is meaningful and code quality is acceptable
 
 ### Contributions beyond the project team
-- to be added
+* Forum Contributions: Clarified doubts about CI checkstyle issue on CS2113 GitHub [Forum Post #35](https://github.com/nus-cs2113-AY2223S1/forum/issues/35)
+* Reviewing / Mentoring Contributions: Provided feedback to other students taking the modules for their projects [iP #5](https://github.com/nus-cs2113-AY2223S1/ip/pull/5), [iP #42](https://github.com/nus-cs2113-AY2223S1/ip/pull/42), [tP #3](https://github.com/nus-cs2113-AY2223S1/tp/pull/3)
+* Provided feedback during PED [Bugs Reported](https://github.com/wangtingjia/ped/issues)
