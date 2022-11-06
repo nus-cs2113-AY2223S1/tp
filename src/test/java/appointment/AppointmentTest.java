@@ -32,7 +32,6 @@ class AppointmentTest {
 
         try {
             TaskList.addTask(task);
-            assertEquals(appointment.getAppointmentStatus(), "PROCESSING");
             task.setDone();
             assertEquals(task.getStatus(), "Done");
             assertEquals(appointment.getAppointmentStatus(), "PROCESSED");

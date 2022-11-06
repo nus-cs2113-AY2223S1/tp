@@ -130,8 +130,8 @@ class AppointmentListTest {
         Appointment appointment2 = new Appointment(2002, new Date(), "Hug");
         AppointmentList.appointments.add(appointment1);
         AppointmentList.appointments.add(appointment2);
-        assertEquals(AppointmentList.updateAppointmentStatus(3002), true);
-        assertEquals(AppointmentList.updateAppointmentStatus(2003), false);
+        assertEquals(AppointmentList.updateAppointmentStatus(Appointment.idCounter), true);
+        assertEquals(AppointmentList.updateAppointmentStatus(0000), false);
     }
 
     @Test

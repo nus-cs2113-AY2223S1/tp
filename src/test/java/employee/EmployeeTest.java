@@ -39,6 +39,7 @@ class EmployeeTest {
         assertEquals(numOfTaskAfterRemove - numOfTask, 0);
     }
 
+    /*
     @Test
     public void viewTasksTest() {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Feed");
@@ -59,5 +60,5 @@ class EmployeeTest {
         int numOfTaskAfterView = TaskList.getTasks().size();
         assertEquals(numOfTaskAfterView - numOfTask, 0);
     }
-
+     */
 }
