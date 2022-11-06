@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class LoadCommand {
++execute(): void
+}
+
+class SaveCommand {
++execute(): void
+}
+
+class Storage {
+-dataFile: Path
++createDataFile(): void
++loadData(ui: Ui, biometrics: Biometrics, exerciseList: ExerciseList,
+foodList: FoodList, recordList: RecordList): void
++saveData(ui: Ui, biometrics: Biometrics, exerciseList: ExerciseList,
+foodList: FoodList): void
+}
+
+class DataLoader {
+{static} +loadData(dataFile: Path, ui: Ui, storage: Storage, biometrics: Biometrics,
+{static}    exerciseList: ExerciseList, foodList: FoodList, recordList: RecordList): void
+}
+
+class DataSaver {
+{static} +saveData(dataFile: Path, ui: Ui, biometrics: Biometrics,
+{static}    exerciseList: ExerciseList, foodList: FoodList, recordList: RecordList): void
+}
+
+class AddCommand {
+-arguments: String
++execute(): void
+}
+
+class SetCommand {
+-arguments: String
++execute(): void
+}
+
+class Biometrics {
++saveBiometrics(): String
+}
+
+class WeightAndFat {
++saveWeightAndFat(): String
+}
+
+class Exercise {
++saveExercise(): String
+}
+
+class Food {
++saveFood(): String
+}
+
+class Ui {
++output(output: String...): void
+}
+
+LoadCommand --> Storage
+SaveCommand --> Storage
+Storage ..> DataLoader
+Storage ..> DataSaver
+DataLoader ..> Ui
+DataLoader ..> AddCommand
+DataLoader ..> SetCommand
+DataSaver ..> Biometrics
+DataSaver ..> WeightAndFat
+DataSaver ..> Exercise
+DataSaver ..> Food
+@enduml

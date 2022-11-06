@@ -44,7 +44,7 @@ public class Storage {
     public void loadData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList,
                          RecordList recordList)
             throws FileNotFoundException, IllegalValueException {
-        LoadData.loadData(dataFile, ui, this, biometrics, exerciseList, foodList, recordList);
+        DataLoader.loadData(dataFile, ui, this, biometrics, exerciseList, foodList, recordList);
     }
 
     /**
@@ -55,7 +55,7 @@ public class Storage {
      */
     public void saveData(Ui ui, Biometrics biometrics, ExerciseList exerciseList, FoodList foodList)
             throws IOException, IllegalValueException {
-        SaveData.saveData(dataFile, ui, biometrics, exerciseList, foodList);
+        DataSaver.saveData(dataFile, ui, biometrics, exerciseList, foodList);
     }
 
 }

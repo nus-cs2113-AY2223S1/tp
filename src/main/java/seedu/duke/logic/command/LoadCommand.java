@@ -43,8 +43,8 @@ public class LoadCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         try {
-            storage.loadData(ui, biometrics, exerciseList, foodList, recordList);
             ui.output("Remembering existing data......");
+            storage.loadData(ui, biometrics, exerciseList, foodList, recordList);
         } catch (FileNotFoundException e) {
             try {
                 storage.createDataFile();
