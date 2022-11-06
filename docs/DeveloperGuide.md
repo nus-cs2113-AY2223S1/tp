@@ -9,7 +9,10 @@ Nay Chi's Individual Project: https://github.com/NayChi-7/ip
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+
+![](UmlDiagrams/ArchitectureDiagram.png)
+The Architecture Diagram given above explains the high-leve design of the App.
 
 ### Class Diagrams
 
@@ -67,7 +70,6 @@ Marking exercise
 
 Finding a record
 ![Find.png](UmlDiagrams/Find.png)
-
 
 Viewing historical records
 ![View.png](UmlDiagrams/View.png)
