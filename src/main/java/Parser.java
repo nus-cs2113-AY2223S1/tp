@@ -329,12 +329,6 @@ public class Parser {
         }
     }
 
-    /**
-     * checks that the months in the input date are valid.
-     * @param day
-     * @param month
-     * @throws OneDocException when the day or month is valid
-     */
     private void checkDayAndMonth(int day,int month) throws OneDocException {
         try {
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
@@ -345,11 +339,6 @@ public class Parser {
         }
     }
 
-    /**
-     * checks that the date input is valid i.e. month, day and year are valid.
-     * @param date
-     * @throws OneDocException when the date is invalid
-     */
     private void checkDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
@@ -363,12 +352,6 @@ public class Parser {
         }
     }
 
-    /**
-     * checks that the birthdate is valid i.e. valid day,
-     * month and year and was not born after today.
-     * @param date
-     * @throws OneDocException when the birthdate is invalid
-     */
     private void checkBirthDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
