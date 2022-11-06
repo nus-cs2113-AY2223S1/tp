@@ -128,11 +128,11 @@ public class Recipe {
     }
 
     public String getRecipeSaveableFormatted() {
-        String recipeAttributesStringFormatted = "# TITLE \n"
-                + title + "\n\n" + "# DESCRIPTION \n"
-                + description.trim() + "\n\n" + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"  //Remove trim
+        String recipeAttributesStringFormatted = "# TITLE\n"
+                + title + "\n\n" + "# DESCRIPTION\n"
+                + description.trim() + "\n\n" + "# INGREDIENTS\n"  //Remove trim
                 + getIngredientAttributesFormatted() + "\n" + "# STEPS \n"
-                + getStepAttributesFormatted() + "\n\n";
+                + getStepAttributesFormatted();
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;
@@ -143,7 +143,7 @@ public class Recipe {
                 + title + "\n\n" + "DESCRIPTION:\n"
                 + description.trim() + "\n\n" + "INGREDIENTS: "
                 + "\n" + getIngredientAttributesFormatted() + "\n" + "STEPS: "
-                + "\n" + getStepAttributesFormatted() + "\n\n";
+                + "\n" + getStepAttributesFormatted() ;
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;

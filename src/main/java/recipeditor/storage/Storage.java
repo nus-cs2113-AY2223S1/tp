@@ -25,13 +25,13 @@ public class Storage {
     public static final String ALL_RECIPES_FILE_PATH = "./RecipeData/AllRecipes.txt";
     private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
     private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
-    private static final String TEMPLATE_FILE = "# TITLE \n"
-            + "Example Title \n\n"
+    private static final String TEMPLATE_FILE = "# TITLE (1 line)\n"
+            + "Example Title\n\n"
             + "# DESCRIPTION\n"
             + "Example Description\n\n"
-            + "# INGREDIENTS ingredient_name / amount / unit \n"
+            + "# INGREDIENTS  index. ingredient_name / amount / unit \n"
             + "1. Example ingredient / 1.2 / example unit \n\n"
-            + "# STEPS \n"
+            + "# STEPS index. description\n"
             + "1. Example step \n";
 
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
