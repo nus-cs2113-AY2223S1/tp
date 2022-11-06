@@ -22,7 +22,7 @@ public class Authentication {
                 LoginCommand.handleLogin();
                 break;
             case CURRENCIES:
-                Currency.exchangeCommands(new CurrencyStructure("usd", "us dollar", "$", 1));
+                Currency.exchangeCommands(new CurrencyStructure("usd", "us dollar", "$", 1.0));
                 break;
             case BYE:
                 isProgramEnd = true;

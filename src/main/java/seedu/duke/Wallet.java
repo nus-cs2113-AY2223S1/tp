@@ -7,7 +7,7 @@ import seedu.duke.account.Deposit;
 import seedu.duke.exception.FinanceException;
 
 public class Wallet {
-    final static CurrencyStructure INITIAL_CURRENCY = new CurrencyStructure("usd", "us dollar", "$", 1);
+    final static CurrencyStructure INITIAL_CURRENCY = new CurrencyStructure("usd", "us dollar", "$", 1.0);
 
     protected String userName;
     protected String passWord;

@@ -6,7 +6,7 @@ public class CurrencyStructure {
     protected String symbol;
     protected double rate;
 
-    public CurrencyStructure(String abbrName, String fullName, String symbol, double rate) {
+    public CurrencyStructure(String abbrName, String fullName, String symbol, Double rate) {
         this.abbrName = abbrName;
         this.fullName = fullName;
         this.symbol = symbol;
@@ -25,23 +25,27 @@ public class CurrencyStructure {
         return symbol;
     }
 
-    public double getRate(){
+    public Double getRate(){
         return rate;
     }
 
-    public boolean isSameCurrency(CurrencyStructure currency){
+    public Double setRate(Double rate){
+        return this.rate = rate;
+    }
+
+    public Boolean isSameCurrency(CurrencyStructure currency){
         return this.abbrName.equals(currency.getAbbrName());
     }
 
-    public boolean isMatchedCurrencyByAbbrName(String abbrName) {
+    public Boolean isMatchedCurrencyByAbbrName(String abbrName) {
         return this.abbrName.equals(abbrName);
     }
 
-    public boolean isMatchedCurrencyByAnyPart(String anyPart) {
+    public Boolean isMatchedCurrencyByAnyPart(String anyPart) {
         return this.abbrName.contains(anyPart) || this.fullName.contains(anyPart) || this.symbol.contains(anyPart);
     }
 
-    public boolean isMatchedCurrencyByAnyExact(String anyExact) {
+    public Boolean isMatchedCurrencyByAnyExact(String anyExact) {
         return this.abbrName.equals(anyExact) || this.fullName.equals(anyExact) || this.symbol.equals(anyExact);
     }
 

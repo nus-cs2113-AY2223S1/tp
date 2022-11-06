@@ -20,7 +20,7 @@ import java.util.List;
 
 class DukeTest {
     Wallet emptyWallet = new Wallet("EmptyWalletUser" , "EmptyWalletPass");
-    CurrencyStructure USD = new CurrencyStructure("usd", "us dollar", "$", 1);
+    CurrencyStructure USD = new CurrencyStructure("usd", "us dollar", "$", 1.0);
     Deposit deposit = new Deposit(USD, 1000);
     List<Deposit> depositList = new ArrayList<>();
     //depositList.add(deposit);

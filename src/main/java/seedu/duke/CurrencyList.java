@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import seedu.duke.exception.FinanceException;
 import seedu.duke.exception.FinanceException.ExceptionCollection;
@@ -9,7 +10,7 @@ import seedu.duke.exception.FinanceException.ExceptionCollection;
 public class CurrencyList {
     public static List<CurrencyStructure> currencyList = new ArrayList<>();
 
-    public static void initializeCurrencyList() throws FinanceException{
+    public static void initializeCurrencyList() throws FinanceException {
         currencyList = getListOfAllCurrencies();
     }
 
@@ -34,6 +35,21 @@ public class CurrencyList {
             currencyList.add(currency);
         }
         return currencyList;
+    }
+
+    public static void updateCurrencyList(Map<String, Double> currencyRecords) {
+        for (String currencyAbbrName : currencyRecords.keySet()) {
+            Double exchangeRate = currencyRecords.get(currencyAbbrName);
+            updateCurrencyItem(currencyAbbrName.toLowerCase(), exchangeRate);
+        }
+    }
+
+    private static void updateCurrencyItem(String abbrName, Double rate) {
+        for (CurrencyStructure currency : currencyList) {
+            if (currency.isMatchedCurrencyByAbbrName(abbrName)) {
+                currency.setRate(rate);
+            }
+        }
     }
 
     public static CurrencyStructure findCurrencyByAbbrName(String abbrName)

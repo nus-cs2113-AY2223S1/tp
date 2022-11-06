@@ -17,10 +17,11 @@ public class Duke {
         }
     }
 
-    private static void initializeCurrencyList(){
+    private static void initializeCurrencyList() {
         try {
             CurrencyList.initializeCurrencyList();
             PersonalCurrencyList.initializeCurrencyList();
+            CurrencyUpdater.updateExchangeRate();
         } catch (FinanceException e) {
             e.handleException();
         }

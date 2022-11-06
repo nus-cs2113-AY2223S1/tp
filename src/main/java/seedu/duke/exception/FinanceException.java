@@ -22,7 +22,11 @@ public class FinanceException extends Throwable {
         NOT_PERSONAL_CURRENCY,
         CURRENCY_ARRAY_FULL,
         SET_DEFAULT_CURRENCY_EXCEPTION,
-        INVALID_USERNAME, EXIT_LOGIN_TERMINAL, ACCOUNT_OVERDRAW,
+        INVALID_USERNAME,
+        EXIT_LOGIN_TERMINAL,
+        ACCOUNT_OVERDRAW,
+        URL_REQUEST_EXCEPTION,
+        UPDATE_EXCHANGE_RATE_EXCEPTION,
         SAME_USER_TRANSFER
     }
 
@@ -93,6 +97,13 @@ public class FinanceException extends Throwable {
         case EXIT_LOGIN_TERMINAL:
             errorMessage = "You have exited the login sequence";
             break;
+        case URL_REQUEST_EXCEPTION:
+            errorMessage = "Fail to update the exchange lists due to bad Internet connection. Fall back to last local record.";
+            break;
+        case UPDATE_EXCHANGE_RATE_EXCEPTION:
+            errorMessage = "Fail to update the exchange lists. Fall back to last local record.";
+            break;
+        
         case SAME_USER_TRANSFER:
             errorMessage = "You can't transfer money to yourself";
             break;
