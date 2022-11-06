@@ -79,7 +79,7 @@ The ***Sequence Diagram*** above is a simplified depiction of how new modules ar
 * Module object consists of all relevant data for the module, including code, name, details, all available lessons, and lessons that is to be attented by the user.
 
 **Design Decision:**
-<p style='text-align: justify;'>The class CommandAddModule provides control abstraction to the comlpex operation as it abstracts away lower level data items such as the day and time of a specific tutorial class for a particular module.</p>
+<p style='text-align: justify;'>The class CommandAddModule provides control abstraction to the complex operation as it abstracts away lower level data items such as the day and time of a specific tutorial class for a particular module.</p>
 
 <p style='text-align: justify;'>By having a separate class Nusmods deal with all API calls and JsonNode objects, it allows the other classes/components to only have to work with simpler data types and native objects (such as Module and Lesson objects).</p>
 
@@ -131,7 +131,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 
 3. Original variable names in `CommandPrintTimetable` are italicized if they appear in the activity diagrams.
 
-4. Only activities with rake symbol will have a separate section below. Steps of Decalre / Initialize 2D array will be explained in section 4.4.1.
+4. Only activities with rake symbol will have a separate section below. Steps of Declare / Initialize 2D array will be explained in section 4.4.1.
 
 </p></details>
 
@@ -194,12 +194,14 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 &nbsp;&nbsp; (b) Write ```X``` for the clashed intervals <br>
 &nbsp;&nbsp; (c) Write the clashed module code in  ```clashModCodeList``` <br>
 
-- If there are no clashes: Get ```lesson``` objects from ```rawTimetable```.
+
+- If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
 - If there is ```XXXX``` - activity will stop due to this unexpected behavior.
-- If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```: <br>
-  &nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
-  &nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
-  &nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
+- If there are no ```XXXX```  - mark of a clash - proceed to write the lessons into ```timeTable```: <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
+
 
 - ```timeTable``` is converted into strings for output.
 - Module codes which clashes from ```clashedModCodeList``` is appended at the end of the output string
@@ -216,7 +218,7 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 <img src="images/listTimetable.png" width="580" />
 
 Above is the sequence diagram for the listing of modules in the timetable. A few points to note regarding this feature are:
-* In order to accomodate a unique `noModuleResponse`, an if-else statement acting as a guard clause is used. If no modules exist, the if statement returns the `noModuleResponse`. Else, the header for the module list is appended before entering the `for` loop. Below is a snippet of the code:
+* In order to accommodate a unique `noModuleResponse`, an if-else statement acting as a guard clause is used. If no modules exist, the if statement returns the `noModuleResponse`. Else, the header for the module list is appended before entering the `for` loop. Below is a snippet of the code:
     ```
     if (listOfModules.size() == 0) {
         return "You have no modules at the moment!";
