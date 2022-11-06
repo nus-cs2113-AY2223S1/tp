@@ -1,7 +1,6 @@
 package computercomponentchooser;
 
 import computercomponentchooser.exceptions.DuplicateBuildException;
-import computercomponentchooser.export.ExportText;
 import computercomponentchooser.storage.Storage;
 
 import java.io.FileNotFoundException;
