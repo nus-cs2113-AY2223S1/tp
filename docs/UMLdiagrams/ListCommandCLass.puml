@@ -13,6 +13,7 @@ class ListCommand {
 
     + ListCommand(input: String[])
     + formatSelectedModule(module: SelectedModule, semester: int): String
+    + formatSelectedModuleList(currentSelectedModules: List<SelectedModule>, semester: int): String
     + formatSelectedSlots(module: Module, map: Map<LessonType, String>, semester: int): String
     - formatSingleSlot(module: Module, type: LessonType, classNo: String, semester: int): String
     - formatWeeks(weeks: List<Integer>): String
