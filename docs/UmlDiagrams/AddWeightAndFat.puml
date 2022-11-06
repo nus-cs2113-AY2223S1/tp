@@ -6,6 +6,10 @@ autoactivate on
 
 activate addCommand
     addCommand -> addCommand: addWeightAndFat(argumentList: String[])
+    opt date provided
+        addCommand -> Parser: parseDate(date: String)
+        return date: LocalDate
+    end
     addCommand -> weightAndFat **: new
     activate weightAndFat
     addCommand <-- weightAndFat: weightAndFat: WeightAndFat
@@ -16,7 +20,7 @@ activate addCommand
         return weightAndFatString: String
         addCommand -> ui: output(weightAndFatString: String)
         return
-        addCommand -> ui: output(success message: String)
+        addCommand -> ui: output(successMessage: String)
         return
     end
 return

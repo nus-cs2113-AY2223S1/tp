@@ -33,10 +33,10 @@ Please follow these guidelines when entering commands into the terminal:
 
 - Parameters in square brackets `[]` are optional.  
   e.g. in `add strength /{name} /{weight} /{sets} /{reps} [/{date}]`, the `add strength` command can be used with or
-  without a date parameter
-    - **If no date is entered for a new record, the current local date on your computer will be used**
+  without a date parameter.
+    - **If no date is entered for a new record, the current local date on your computer will be used.**
 - All dates should be entered in the format `DD-MM-YYYY`. For example, `31-12-2020`.
-- Parameters must not contain `/`
+- Parameters must not contain `/` within them. For example, `cheese/burger` is an invalid name for food
 
 Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit
 
@@ -606,31 +606,15 @@ Index | Description                                         | Calories | Date   
 
 * Display help message `help`
 * Exit TracknFit `exit`
-* Set biometrics `set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage}`
-* Add weight and fat percentage `add weight /{weight} /{fat percentage}`
-* Add food consumed `add food /{description} /{calories}`
-* View weight and fat percentage records `view weight`
-* View food records `view food`
-* Delete a food record `remove food /{index}`
+* Set biometrics `set biometrics /{age} /{gender} /{height} /{activity level}`
+* View records `view {biometrics/food/exercise/strength/cardio/weight/bmi/maintenance/calories/all}`
+* View exercise records marked as done `view {exercise/strength/cardio} /{done}`
+* Add strength record `add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]`
+* Add cardio record `add cardio /{description} /{distance} /{repetitions} [/{date}]`
+* Add food record `add food /{description} /{calories} [/{date}]`
+* Add weight and fat record `add weight /{weight} /{fat percentage} [/{date}]`
+* Delete a record `remove {food/exercise/weight} /{record index}`
+* Mark an exercise as done `mark {done} /{exercise index} /{time} /{metabolic equivalent}`
+* Mark an exercise as not done `mark {undone} /{exercise index}`
 * Find food records using a keyword `find food /{description}`
 
-    - Viewing help: `help`
-    - Setting your biometrics within the app: `set biometrics`
-    - Add a record of weight and fat percentage: `add weight`
-    - View records of weight and fat percentage: `view weight`
-    - Adding food consumption: `add food`
-    - Viewing food consumptions: `view food`
-    - Remove food: `remove food`
-    - Find food consumptions: `find food`
-    - Adding a strength exercise: `add strength`
-    - Viewing strength exercise: `view strength`
-    - Finding strength exercise: `find strength`
-    - Adding a cardio exercise: `add cardio`
-    - Viewing cardio exercise: `view cardio`
-    - Finding cardio exercise: `find cardio`
-    - Viewing exercise: `view exercise`
-    - Remove exercise: `remove exercise`
-    - Marking exercise as done or undone: `mark`
-    - Viewing BMI: `view BMI`
-    - Viewing maintenance calories: `view maintenance`
-    - Viewing daily calorie consumption, burn and net intake: `view calories`
