@@ -17,6 +17,8 @@
   * [User Stories](#user-stories)
   * [Non-Functional Requirements](#non-functional-requirements)
   * [Glossary](#glossary)
+    * [PC parts](#pc-parts)
+    * [PC parts parameters](#pc-parts-parameters)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Design & implementation
@@ -57,9 +59,9 @@ This feature allows users to add a build to the list.
 When the user first inputs a command for the adding of a build, the `Parser` class will parse the command and call the
 method `mainParseAdd()` in the Parser Class. 
 
-The 'mainParseAdd() will check if the provided name is valid or is blank or made up of white spaces. If the provided 
+The `mainParseAdd()` will check if the provided name is valid or is blank or made up of white spaces. If the provided 
 name is valid, the method will create a build with the provided name and the method will call the method `addBuild()` 
-in the `BuildManager` class, passing `addBuild` the created build object with the provided name. If the provided name is 
+in the `BuildManager` class, passing the created build object with the provided name to the `addBuild()` method. If the provided name is 
 empty or made up of whitespaces, the `BlankStringException` exception will be thrown and an error message will be printed.
 
 The `addBuild()` method will check if the provided name is already in the list of builds. If the provided name is not
@@ -69,7 +71,7 @@ list of builds, the `DuplicateBuildException` exception will be thrown and an er
 After adding the build into the list, the program will return to the `mainParseAdd` method where the method will print
 a message, telling the user the build has been added.
 
-Finally, the `mainParseAdd` method will call the `saveBuilds()` method in the `Storage` class to save the list of builds
+Finally, the `mainParseAdd` method will call the `saveBuild()` method in the `Storage` class to save the list of builds
 into the data file.
 
 The following sequence diagram shows how the add build operation works:
@@ -90,7 +92,7 @@ The following sequence diagram shows how the list operation works:
 
 ##### Finding a build
 
-This features allows users to find builds that contain a search term.
+This feature allows users to find builds that contain the search term.
 
 When the user first inputs a command for the finding of a build, the `Parser` class will parse the command and call the
 method `mainParseFind()` in the Parser Class. 
@@ -206,8 +208,8 @@ are stored in their respective build text file.
 
 The `Storage` class has a constructor that takes in a `BuildManager` object. The `BuildManager` object is used to access the
 builds in the `BuildManager` object. The `Storage` class has a `loadBuild()` method that loads the builds from the text file
-a `saveBuild()` method that saves the builds from the `BuildManager` object into the text file. The `Storage` class also has
-a `loadComponent()` and `saveComponent()` methods utilize the `BuildManager` object to access the `Build` object to load and save
+and a `saveBuild()` method that saves the builds from the `BuildManager` object into the text file. The `Storage` class also has
+a `loadComponent()` and `saveComponent()` methods that utilize the `BuildManager` object to access the `Build` object to load and save
 the components of the build into their respective text files. The `deleteBuild()` method deletes the build from the text file with the path
 `BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
 
@@ -224,17 +226,25 @@ are then added to the `Build` object. If the text file does not exist, an error 
 
 #### Save
 
-Save is split into two parts, saving the build names and saving the components of the build.
+Save is divided into two parts, saving the build names and saving the components of the build.
 
 ![](images/StorageSaveBuildSequence.png)
 
-The `saveBuild()` method is called when the user adds a build. The `saveBuild()` method writes the build names in the `BuildManager` object
-into the text file with the path `BUILD_FILE_PATH`. Same process applies to the method `deleteBuild()` when the user deletes a build.
+When the user adds a new build, it will be read by in the `readline()` method, which will then be passed to the `mainParseAdd()` method
+in the `Parser` class to check if the build name is valid. If the build name is empty, `BlankStringException` will be thrown. Also, if the build name is similar to 
+the name of an existing build or the name of text file with the path `BUILD_FILE_PATH`, `DuplicateBuildException` and `InvalidBuildException` will be thrown
+respectively. Otherwise, the `saveBuild()` method will be called. The `saveBuild()` method will then write the build names in the `BuildManager` object
+into the text file with the path `BUILD_FILE_PATH`. If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
+If the text file does not exist, `createFile()` will be called to create the text file with the path `BUILD_FILE_PATH`.
 
 ![](images/StorageSaveComponentSequence.png)
 
-The `saveComponent()` method is called when the user adds or delete a component to a build. The `saveComponent()` method writes the components of the build
-into the text file with the path `COMPONENT_FILE_PATH`. If the text file does not exist, the `saveComponent()` method will create a new text file with the path `COMPONENT_FILE_PATH`.
+Similar to the saving of build, when the user adds a new component, it will be read by the `readline()` method, but it will be passed 
+to the `parseAdd()` method in `EditParser` class instead. If the input parameters are empty or number of parameters that are being inputted exceed the required
+number of parameters, `BlankStringException` and `ArrayIndexOutOfBoundException` will be thrown respectively. Otherwise, the `saveComponent()` method will be called.
+The `saveComponent()` method writes the components of the build into the text file with the path `COMPONENT_FILE_PATH`. 
+If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
+If the text file does not exist, `createFile()` will be called to create a new text file with the path `COMPONENT_FILE_PATH`.
 
 
 
@@ -327,16 +337,42 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 
 ## Glossary
 
-* *glossary item* - Definition
-* 
-| Terms       | Definition                                                                                         |
-|-------------|----------------------------------------------------------------------------------------------------|
-| CPU         | The component of a computer system that controls the interpretation and execution of instructions. |
-| GPU         | Graphics processing unit, a specialized processor designed to accelerate graphics rendering.       |
-| Drive       | Storage devices to store user information.                                                         |
-| Memory      | A computer's short-term memory, where the data that the processor is currently using is stored.    |
-| Motherboard | The main circuit board within a computer that the other components plug into to create a whole.    |
-| Powersupply | A power supply is a hardware component that supplies power to the computer.                        |
+### [PC parts](#pc-parts)
+
+| Terms       | Definition                                                                                             |
+|-------------|--------------------------------------------------------------------------------------------------------|
+| cpu         | The component of a computer system that controls the interpretation and execution of instructions.     |
+| gpu         | Graphics processing unit, a specialized processor designed to accelerate graphics rendering.           |
+| drive       | Storage devices to store user information.                                                             |
+| memory      | A computer's short-term memory, where the data that the processor is currently using is stored.        |
+| motherboard | The main circuit board within a computer that the other components plug into to create a whole.        |
+| powersupply | A power supply is a hardware component that supplies power to the computer.                            |
+| case        | A case is a housing for the computer's components.                                                     |
+| cooler      | A cooler is a device that removes heat from a computer's components.                                   |
+| monitor     | A monitor is a display device that is used to display information.                                     |
+| other       | Any other components that are not currently represented in the application. <br/> E.g. Keyboard, Mouse |
+
+### [PC parts parameters](#pc-parts-parameters)
+
+| Parameter      | Examples                                                        |
+|----------------|-----------------------------------------------------------------|
+| Name           | Name of the component <br/> E.g. `Intel 10990x`                 |
+| Price          | Price of the component <br/> E.g. `1000`                        |
+| Power          | Power consumption of the component <br/> E.g. `80`              |
+| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
+| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                             |
+| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
+| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
+| MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
+| FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
+| MemorySize     | Memory size in GB <br/> E.g. `16`                               |
+| StorageSize    | Storage size in GB <br/> E.g. `1000`                            |
+| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                           |
+| FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
+| NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
+| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
+| ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
+| Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
 
 ## Instructions for manual testing
 
