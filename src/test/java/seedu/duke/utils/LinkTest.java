@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,28 @@ public class LinkTest {
                 .stream()
                 .filter(x -> x.getModule().moduleCode.equals("MA1511"))
                 .count(), 0);
+    }
+
+    @Test
+    public void parseLink_duplicateModules_firstModuleSaved() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10&MA1511=LEC:2,TUT:11", state, ui);
+        assertEquals(state.getSelectedModulesList().size(), 1);
+        Map<LessonType, String> selectedSlots = state.getSelectedModulesList().get(0).getSelectedSlots();
+        assertEquals("1", selectedSlots.get(LessonType.LECTURE));
+        assertEquals("10", selectedSlots.get(LessonType.TUTORIAL));
+    }
+
+    @Test
+    public void parseLink_duplicateLessons_firstLastLessonSaved() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10,TUT:11,LEC:2", state, ui);
+        assertEquals(state.getSelectedModulesList().size(), 1);
+        Map<LessonType, String> selectedSlots = state.getSelectedModulesList().get(0).getSelectedSlots();
+        assertEquals("2", selectedSlots.get(LessonType.LECTURE));
+        assertEquals("11", selectedSlots.get(LessonType.TUTORIAL));
     }
 
     @Test

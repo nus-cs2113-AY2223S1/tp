@@ -13,6 +13,6 @@ class Storage {
 
     + openPreviousState(State, Ui)
     - readPreviousState(): ArrayList<String>
-    + saveState(State, Ui)
+    + saveState(State, Ui, boolean)
 }
 @enduml

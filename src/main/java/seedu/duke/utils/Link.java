@@ -59,7 +59,8 @@ public class Link {
             + System.lineSeparator() + LINK_PROCESS_ERROR_MESSAGE;
 
     /**
-     * Parses the NUSMods export link into module code and lessons information.
+     * Parses the NUSMods export link into module code and lessons information. The link should
+     * only be parsed after validating the link through {@link #isValidLink(String)}.
      *
      * @param link  For exporting to NUSMods.
      * @param state Current state of the application to be saved to.
@@ -71,7 +72,6 @@ public class Link {
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         cleanModuleParam = cleanModuleParam.toUpperCase();
-
         if (cleanModuleParam.isEmpty()) {
             return;
         }
@@ -202,7 +202,7 @@ public class Link {
     private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester, Ui ui) {
         List<String> lessonsAdded = new ArrayList<>();
         for (String s : lessonsInfo) {
-            if (!isLessonInfo(s)) {
+            if (s.endsWith(":") || !isLessonInfo(s)) {
                 continue;
             }
             String[] lessonInfo = s.split(Pattern.quote(LESSON_TYPE_DELIMITER));
@@ -245,7 +245,8 @@ public class Link {
      */
     private static boolean isLessonInfo(String lessonInfo) {
         //pattern for classNo is not definite.
-        Pattern pattern = Pattern.compile("^[A-Z]{3,4}\\d?:.");
+        System.out.println(lessonInfo);
+        Pattern pattern = Pattern.compile("^[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
         return matcher.find();
     }
