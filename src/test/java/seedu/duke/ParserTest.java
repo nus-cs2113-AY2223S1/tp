@@ -15,6 +15,7 @@ class ParserTest {
     String exitCommand = "quit";
     String listCommand = "list";
     String allocateCommand = "allocate";
+    String printCommand = "print";
     String currentSemester = "1";
 
     @Test
@@ -58,5 +59,50 @@ class ParserTest {
         assertEquals("All your mods have been successfully allocated!",
                 Parser.parseCommand(allocateCommand, currentSemester));
         Timetable.deleteModule(1);
+    }
+
+    @Test
+    void parseCommand_printCommandEmpty_parsedCorrectly() {
+        String output = "              :              :              :              :              " +
+                ":               \n" +
+                "              : MON          : TUE          : WED          : THU          : FRI           \n" +
+                "==============:==============:==============:==============:==============:===============\n" +
+                "   0800       :              :              :              :              :               \n" +
+                "   0830       :              :              :              :              :               \n" +
+                "   0900       :              :              :              :              :               \n" +
+                "   0930       :              :              :              :              :               \n" +
+                "   1000       :              :              :              :              :               \n" +
+                "   1030       :              :              :              :              :               \n" +
+                "   1100       :              :              :              :              :               \n" +
+                "   1130       :              :              :              :              :               \n" +
+                "   1200       :              :              :              :              :               \n" +
+                "   1230       :              :              :              :              :               \n" +
+                "   1300       :              :              :              :              :               \n" +
+                "   1330       :              :              :              :              :               \n" +
+                "   1400       :              :              :              :              :               \n" +
+                "   1430       :              :              :              :              :               \n" +
+                "   1500       :              :              :              :              :               \n" +
+                "   1530       :              :              :              :              :               \n" +
+                "   1600       :              :              :              :              :               \n" +
+                "   1630       :              :              :              :              :               \n" +
+                "   1700       :              :              :              :              :               \n" +
+                "   1730       :              :              :              :              :               \n" +
+                "   1800       :              :              :              :              :               \n" +
+                "   1830       :              :              :              :              :               \n" +
+                "   1900       :              :              :              :              :               \n" +
+                "   1930       :              :              :              :              :               \n" +
+                "   2000       :              :              :              :              :               \n" +
+                "   2030       :              :              :              :              :               \n" +
+                "   2100       :              :              :              :              :               \n" +
+                "   2130       :              :              :              :              :               \n" +
+                "   2200       :              :              :              :              :               \n" +
+                " \n" +
+                " * Note that timings indicated refers to the start of the corresponding 30 minutes timeslot.\n" +
+                " * Slots with XXXXXX indicates that there is a clash between two or more lessons.\n" +
+                " * Modules, if any, that start before 8am or ends after 10pm timings are excluded.\n" +
+                " * Timings are approximated to 30 minutes block with valid assumption that NUS mods are " +
+                "typically designed in such blocks.\n";
+
+        assertEquals(output, Parser.parseCommand(printCommand, currentSemester));
     }
 }

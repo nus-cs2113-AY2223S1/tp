@@ -54,7 +54,6 @@ public class CommandPrintTimetable {
 
 
     private static void initializeRawTimeTable() {
-        //clashModCodeList.add("");
         for (int i = 0; i < DAY_PER_WEEK; i++) {
             rawTimetable.add(new ArrayList<>());
             emptySlotList.add(new ArrayList<>());
@@ -68,7 +67,6 @@ public class CommandPrintTimetable {
     private static void populateRawTimetable(List<Module> listOfModules) {
         rawTimetable = new ArrayList<>(DAY_PER_WEEK);
         emptySlotList = new ArrayList<>(DAY_PER_WEEK);
-        clashModCodeList = new ArrayList<>(DAY_PER_WEEK);
         initializeRawTimeTable();
 
         for (Module module : listOfModules) {
@@ -448,8 +446,8 @@ public class CommandPrintTimetable {
             Integer startInterval = Integer.parseInt(lesson[0].toString());
             Integer endInterval = Integer.parseInt(lesson[1].toString());
 
-            boolean isInStartRange = startInterval >= clashInterval[0];
-            boolean isInEndRange = endInterval <= clashInterval[1];
+            boolean isInStartRange = startInterval.equals(clashInterval[0]) || startInterval > clashInterval[0];
+            boolean isInEndRange = endInterval.equals(clashInterval[1]) || endInterval < clashInterval[1];
 
             // if the lesson is within the clash interval, add to printing list
             if (isInStartRange && isInEndRange) {
@@ -464,6 +462,7 @@ public class CommandPrintTimetable {
         boolean isDuplicateMod = clashModCodeList.contains(modToAdd);
         if (!isDuplicateMod) {
             clashModCodeList.add(modToAdd);
+
         }
 
     }
@@ -499,11 +498,6 @@ public class CommandPrintTimetable {
     }
 
 
-
-
-
-
-
     private static void sortSlotList(Integer day, Deque<Integer[]> deque,
                                      Stack<Integer[]> stack, ArrayList<ArrayList<Integer[]>> newEsl) {
 
@@ -519,16 +513,19 @@ public class CommandPrintTimetable {
                 top[1] = newEsl.get(day).get(i)[1];
                 deque.pop();
                 deque.push(top);
-                stack.pop();
+                popStack(stack);
             } else {
-                stack.pop();
+                popStack(stack);
             }
         }
 
 
+    }
 
-
-
+    private static void popStack(Stack<Integer[]> stack) {
+        if (!stack.isEmpty()) {
+            stack.pop();
+        }
     }
 
 
