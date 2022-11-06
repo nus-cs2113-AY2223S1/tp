@@ -7,9 +7,6 @@ class Build {
     +String:name
     addComponent()
     deleteComponent()
-    getComponent()
-    toString()
-    toCsv()
     getAllComponents()
     getTotalCost()
     getTotalPower()
@@ -19,9 +16,6 @@ class Build {
     checkExpansionSlots()
     checkGpuSlot()
     checkMemorySlot()
-    getCompatibility()
-    getBuildInfo()
-    getCompatibilityInfo()
 }
 
 class LinkedHashMap2D {
@@ -29,8 +23,6 @@ class LinkedHashMap2D {
     getElement()
     removeElement()
     getNameList()
-    GetTypeList()
-    GetNamesOfTypeList()
 }
 
 class Component {
@@ -38,6 +30,6 @@ class Component {
 
 
 Build *-- "1" LinkedHashMap2D
-LinkedHashMap2D *-- "many" Component
+LinkedHashMap2D *-- "*" Component
 
 @enduml
