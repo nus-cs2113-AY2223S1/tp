@@ -32,7 +32,7 @@ ArrayList in PatientList. A final call to savePatientData rewrites the data file
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
 
-**Important methods in PatientList class:**
+#### Important methods in PatientList class
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 `Patient` is created and added to the list of `Patient`s in PatientList.
 * `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
@@ -57,7 +57,7 @@ The `VisitList` Component,
 * can view a specific visit
 * depends on `UI` class (as the `VisitList` component interacts with user through the UI component, and makes use of its methods to print details)
 
-**Important methods in `VisitList` class:**
+#### Important methods in `VisitList` class
 * `addVisit` - This method allows user to add a visit to the `VisitList` by specifying `id` of patient, `dateOfVisit`, `timeOfVisit` 
 and `reason`. `reason` is optional, and it can be left blank, and be modified later on via the `editReason` method.
 * `editReason` - This method allows user to edit reason for an existing visit, by specifying `index` of visit and `reason` for visit. `reason` must not be left blank here, 
@@ -67,7 +67,7 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-**How adding a new `Visit` into the `VisitList` works**
+#### How adding a new `Visit` into the `VisitList` works
 
 ![](images/VisitListAdd.png)
 
@@ -89,22 +89,23 @@ The `PrescriptionList` component,
 * depends on `UI` class (because the `PrescriptionList` component needs to interact with user through the `UI` 
 component)
 
-**Methods in `PrescriptionList` class:**
+#### Important Methods in `PrescriptionList` class
 
-* **`add`** - This method allows user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
+* `add` - This method allow user to add prescription into the list by specifying `patientId`, `medicine`, `dosage` and 
 `timeInterval`.
-* **`viewAll`** - This method iterates through the list of all prescriptions and print the details of prescriptions from
+* `viewAll` - This method iterates through the list of all prescriptions and print the details of prescriptions from
 all patients.
-* **`viewPatientPrescription`** - This method iterates through the list of prescriptions and print the details of 
+* `viewPatientPrescription` - This method iterates through the list of prescriptions and print the details of 
 prescriptions from the specified `patientId`.
-* **`viewActivePatientPrescription`** - This method iterates through the list of prescriptions and print the details of
+* `viewActivePatientPrescription` - This method iterates through the list of prescriptions and print the details of
 all active prescriptions with the specified `patientId`
-* **`edit`** - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
+* `edit` - This method allows user to edit the `medicine`, `dosage` or `timeInterval` of the prescription of the 
 specified index
-* **`activatePrescription`** - This method allows user to set the prescription of specified index as active.
-* **`deactivatePrescription`** - This method allows user to set the prescription of specified index as inactive.
+* `activatePrescription` - This method allows user to set the prescription of specified index as active.
+* `deactivatePrescription` - This method allows user to set the prescription of specified index as inactive.
+* `loadPrescription` - This method assists the `Storage` component to load prescriptions from the .txt storage.
 
-**Members in `Prescription` class**
+#### Members in `Prescription` class
 
 * `medicine` - Stores the medicine name
 * `timeInterval` - The time Interval the medicine is taken between
@@ -112,22 +113,58 @@ specified index
 * `dosage` 
 * `isActive` - Whether is the prescription currently active or not
 
-How adding a new `Prescription` into the `PrescriptionList` works
+#### Adding a new prescription
+Users are allowed to add new prescriptions. The action works as follows:
 
 1. When `PrescriptionList` is called to add a new prescription with the given details, it calls the constructor of the 
 `Prescription` class to create the `Prescription` instance.
-2. The new prescription is then added to the `ArrayList<Prescription>`
-3. Lastly, `UI` prints an acknowledgement message of what the new prescription has.
+2. If the new prescription has no duplicates in the `prescriptionList`, then it is added to the list. And
+`ui` prints an acknowledgement message of what the new prescription has.
+3. Else, `ui` prints a message that the prescription is already existing, and print the details of the existing 
+prescription.
 
 ![](images/PrescriptionListAdd.png)
 
-How activating/deactivating an existing prescription in the list works
+#### Viewing prescriptions
 
-1. When `activate(ui, 1)` initiates an action in the `PrescriptionList`, it transfer the prescriptionNumber `1` into
-the index in the array.
-2. It gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
-3. Then, the `prescriptionEdited` is set active.
-4. Lastly, `UI` prints an acknowledgement message of the most updated details of the prescription.
+There are 3 viewing methods that users can view a list of prescriptions in different filter. The filters are:
+* No filters: `viewAll`
+* Patient prescription filter: `viewPatientPrescription`
+* Patient active prescription filter: `viewActivePatientPrescription`
+
+Here is an example of how viewing with a patient prescription filter works:
+1. When the function `viewPatientPrescription(ui, patientId)` is called, it first checks whether the list is empty and
+has no prescription associated with the given `patientId`. If either case is satisfied, `ui` prints a no
+matching prescription message and returns.
+2. If not, then `prescriptionList` is iterated. Whenever a `prescription`'s `patientId` matches the given `patientId`, 
+`ui` prints the `prescription` details.
+
+![](images/PrescriptionListViewPatientPrescription.png)
+
+The other 2 filters work similarly with slightly different conditions checked.
+
+#### Editing a prescription
+Users are allowed to edit the medicine name, dosage and time interval of the prescription. However, it is only allowed
+if the updated prescription does not repeat other existing prescriptions. The action works as follow:
+
+1. When the `edit` function is called, it returns if the `prescriptionNumber` is invalid.
+2. If `prescriptionNumber` is valid, `prescriptionEdited` is retrieved from the `ArrayList<>`, and `newPrescription` 
+object is created to represent the updated prescription.
+3. If `newPrescription` has a duplicate in the list, it returns with a prescription duplicated message from `ui`.
+4. If not, then `prescriptionEdited` is updated with a confirmation message from `ui`.
+
+![](images/PrescriptionListEdit.png)
+
+#### Activating / Deactivating a prescription
+Users are allowed to activate or deactivate a prescription to track whether a prescription is currently being prescribed
+to patients or not. Both actions work in a similar manner. The action works as follows:
+
+1. When `activate(ui, prescriptionNumber)` initiates an action in the `PrescriptionList`, it converts the 
+`prescriptionNumber` into the index in the array.
+2. If the index is `null`, i.e invalid, the function is returned.
+3. Else, it gets the `prescriptionEdited` from the `ArrayList<>` with the resolved index.
+4. Then, the `prescriptionEdited` is set active.
+5. Lastly, `UI` prints an acknowledgement message of the most updated details of the prescription.
 
 ![](images/PrescriptionListActivate.png)
 
