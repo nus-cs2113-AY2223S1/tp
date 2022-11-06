@@ -1,20 +1,54 @@
 @startuml
 !include Style.puml
-abstract class "Command"{
+
+class TransactionList {
+    + findTransactions(String) : String
+}
+
+abstract class Command {
     + execute() : void {abstract}
 }
 
-abstract class "FindCommand"{
+class CommandTag {
+    + COMMAND_TAG_FIND_KEYWORD {static}: String
+}
+
+class FindCommand {
+    - COMMAND_WORD: String {static}
     + keyword : String
     + getMandatoryTags() : String[]
     + execute() : void
     + findTransactions() : void
 }
 
+class CommandParser{
+    +getCommand()
+}
 
+class ParameterParser{
+    +setCommand(command:Command, splits:String[])
+}
+
+class Duke{
+    - transactions: TransactionList
+    - ui: Ui
+    + main()
+    + run()
+}
+
+class Ui{
+    + showList(list:String, message:String) : void {static}
+    + showInfoMessage(String) : void {static}
+}
 
 FindCommand -up-|> "Command"
 
-
+Duke <.. CommandParser: returns Command instance to Duke
+FindCommand --> Ui : display list or info message
+FindCommand .right.> CommandParser: instance created by
+FindCommand <-- ParameterParser: retrieves parameter from
+FindCommand <-- TransactionList: retrieves filtered \ntransactions output \nfrom
+FindCommand -up-> CommandTag: get its mandatory tag from
+FindCommand <-left- Duke: executes
 
 @enduml
