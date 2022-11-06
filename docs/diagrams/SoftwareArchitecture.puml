@@ -34,17 +34,17 @@ MoneyGoWhere -down-> UserInterface
 User --down-> UserInterface
 
 UserInterface -right-> Logger
-UserInterface -down-> Apis
 UserInterface -down-> Data
 UserInterface -left-> Parser
 
-Logger ...down.> LogFile
+Logger ..down.> LogFile
 
-Parser -down-> Command
+Parser -left-> Command
 
-Data -down-> Storage
+Data -left-> Storage
+Data -right-> Apis
 
 Storage .down.> DataFile
 
-Apis ..down.> ApiDataFile
+Apis .down.> ApiDataFile
 @enduml
