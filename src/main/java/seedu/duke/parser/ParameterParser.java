@@ -453,7 +453,8 @@ public class ParameterParser {
             return amount;
 
         } catch (NumberFormatException e) { // error inclusive of int overflows
-            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
+                    + parameter);
             throw new InputTransactionInvalidAmountException();
         }
     }
