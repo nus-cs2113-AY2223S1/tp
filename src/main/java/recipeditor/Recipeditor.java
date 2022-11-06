@@ -34,7 +34,7 @@ public class Recipeditor {
     }
 
     private static void exit() {
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
         Storage.deleteAllRecipe();
         Storage.saveAllRecipe();
         Ui.showExit();
