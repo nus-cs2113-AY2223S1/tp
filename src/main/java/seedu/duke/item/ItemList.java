@@ -236,7 +236,7 @@ public class ItemList {
      * @param price The input price
      * @throws InvalidPriceException If price value is out of range or if price has more than 2 decimal places
      */
-    private void checkValidPrice(String price) throws InvalidPriceException {
+    public void checkValidPrice(String price) throws InvalidPriceException {
         try {
             if (Double.parseDouble(price) < 0 || Double.parseDouble(price) > 10000) {
                 throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
@@ -295,7 +295,7 @@ public class ItemList {
      * @throws InvalidItemException  If they match
      * @throws ItemNotFoundException If item cannot be found in the list
      */
-    public void checkNameOwnerPriceOfItemMatching(String itemId, String itemName, String owner)
+    public void checkNameOwnerOfItemMatching(String itemId, String itemName, String owner)
             throws InvalidItemException, ItemNotFoundException {
         if (hasThisItem(itemId)) {
             Item item = getItemById(itemId);

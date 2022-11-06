@@ -93,7 +93,7 @@ public class ExceptionMessages {
                     + "If you cannot fix it, you will see this message again. Please delete the entire data folder\n"
                     + "to avoid errors, which also mean that all your data will be gone forever\n"
                     + "In that case, we will create three brand-new lists for your users, items, and transactions\n"
-                    + "REMEMBER that all files in data folder must be edited correctly\n"
+                    + "REMEMBER that all files in data folder must be edited correctly\n\n"
                     + "Do you want to force reset all files and restart? Y or N";
     public static final String MESSAGE_EXIT_DUKE = "Exit Duke and please edit correctly...";
     public static final String MESSAGE_RESET_DUKE = "Force reset files and please restart...";

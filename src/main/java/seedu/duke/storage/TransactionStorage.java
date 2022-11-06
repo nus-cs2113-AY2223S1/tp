@@ -75,9 +75,10 @@ public class TransactionStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new TransactionFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
+            String line = "____________________________________________________________\n";
             throw new StoreFailureException(
                     MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + lineNo + MESSAGE_STORAGE_REASON
-                            + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+                            + e.getMessage() + "\n" + line + MESSAGE_TO_FIX_FILES);
         }
     }
 
@@ -121,8 +122,9 @@ public class TransactionStorage extends Storage {
         checkIfArgsEmpty(splitTransactionLine, NUM_OF_ARGS,
                 MESSAGE_NUM_OF_ARGS_INVALID, MESSAGE_VALUE_OF_ARGS_INVALID);
         transactionList.checkValidArgsForStorage(splitTransactionLine);
-        itemList.checkNameOwnerPriceOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
+        itemList.checkNameOwnerOfItemMatching(splitTransactionLine[ITEM_ID_INDEX],
                 splitTransactionLine[ITEM_NAME_INDEX], splitTransactionLine[LENDER_INDEX]);
+        itemList.checkValidPrice(splitTransactionLine[MONEY_INDEX]);
         Transaction transaction = getTransactionFromTransactionLine(splitTransactionLine);
         transactionList.checkOldTransactionsOverlapWithNew(transaction);
         transactionList.checkLenderAndBorrowerUnfinishedTx(transaction, userList, itemList);

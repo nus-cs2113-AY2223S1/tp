@@ -481,11 +481,11 @@ Note:
 3. Minimum and Maximum price must be no less than 0 and no more than 10000
 4. Minimum price must be less than maximum price
 5. Note that price can only have at most 2 decimal places
-    1. 0.5 → $0.50 (GOOD)
-    2. 1 → $1.00 (GOOD)
-    3. 1.01 → $1.01 (GOOD)
-    4. 0.9666 → error (BAD)
-7. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
+   - 0.5 (GOOD)
+   - 1 (GOOD)
+   - 1.01 (GOOD)
+   - 0.9666 → error (BAD)
+6. Category number must be an integer from 1 to 8, (default: 0, which means all categories)
 
 Example of usage: ```sort-items /mode lh /min 1 /max 5 /cat 3```
 
@@ -790,18 +790,36 @@ If Duke crashes, is my data saved?
 
 >Yes, Duke will automatically save your data to files after each operation. Therefore, data will be saved no matter how you exit the program, even with ```Ctrl-C```.
 
-2. What will happen if I illegally modify data in the files?
+2. What will happen if I modify incorrectly data in the files?
 
-> Duke will detect if the data is modified or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
+> Duke will detect if the data is modified incorrectly or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
 > to use the app until Duke detect your data is fixed. If you cannot fix it, then you can choose to delete entire ```data``` folder. However, this also means that your previous data cannot be recovered.
 > Please edit your data files at your own risk, otherwise, you might have to input all over again.
 > 
 > Note: 
 > - Duke is designed not to be able to run with corrupted data file, not Duke crashes
 > - You are allowed to manipulate data by editing the files, but you do it at your own risk. It can potentially cause unexpected behaviours afterwards and loss of data.
+> - Example of expected error message when data is modified incorrectly:
+> 
+> ```
+> ____________________________________________________________
+> The TRANSACTION files has been corrupted at line 2
+> Reason: The transaction is uncompleted but item cannot be found in the list
+> ____________________________________________________________
+> Please try to fix your data in your files before running the app again
+> If you fix it correctly, you will see a greeting message in the next run
+> If you cannot fix it, you will see this message again. Please delete the entire data folder
+> to avoid errors, which also mean that all your data will be gone forever
+> In that case, we will create three brand-new lists for your users, items, and transactions
+> REMEMBER that all files in data folder must be edited correctly
+> 
+> Do you want to force reset all files and restart? Y or N
+> ____________________________________________________________
+>```
 
 3. How can I manually edit data files correctly?
 
+> 
 >**User file**
 > 
 > Each line represents one user with the format `[USERNAME] | [AGE] | [CONTACT]`
@@ -840,6 +858,10 @@ If Duke crashes, is my data saved?
 > - Created date range is from 2016-01-01 to today
 > - No transaction ID occurs twice
 > - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.
+>
+> You are allowed to change the username when all transactions related to them are finished and that username is unique.
+> You are allowed to change the item ID when all transactions related to them are finished and that ID is unique.
+> You are allowed to change the transaction ID if that new ID is unique.
 
 4. Why am I able to enter duplicates of the same item?
 > Upcycle allows for duplicate items to be listed as transactions are made through each item's unique ID instead of the item's name. 
