@@ -61,8 +61,9 @@ public class UserStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new UserFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
+            String line = "____________________________________________________________\n";
             throw new StoreFailureException(MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED + lineNo
-                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + line + MESSAGE_TO_FIX_FILES);
         }
     }
 

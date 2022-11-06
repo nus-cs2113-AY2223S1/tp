@@ -75,9 +75,10 @@ public class TransactionStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new TransactionFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
+            String line = "____________________________________________________________\n";
             throw new StoreFailureException(
                     MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED + lineNo + MESSAGE_STORAGE_REASON
-                            + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+                            + e.getMessage() + "\n" + line + MESSAGE_TO_FIX_FILES);
         }
     }
 

@@ -805,13 +805,14 @@ If Duke crashes, is my data saved?
 > ____________________________________________________________
 > The TRANSACTION files has been corrupted at line 2
 > Reason: The transaction is uncompleted but item cannot be found in the list
+> ____________________________________________________________
 > Please try to fix your data in your files before running the app again
 > If you fix it correctly, you will see a greeting message in the next run
 > If you cannot fix it, you will see this message again. Please delete the entire data folder
 > to avoid errors, which also mean that all your data will be gone forever
 > In that case, we will create three brand-new lists for your users, items, and transactions
 > REMEMBER that all files in data folder must be edited correctly
-> ____________________________________________________________
+> 
 > Do you want to force reset all files and restart? Y or N
 > ____________________________________________________________
 >```
