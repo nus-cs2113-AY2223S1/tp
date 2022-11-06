@@ -1,14 +1,10 @@
 package seedu.duke.command;
 
 import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,14 +20,11 @@ import seedu.duke.ui.Ui;
 
 public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
-    private static final String DATABASE_FILE_PATH = "./data/data.csv";
+    private static final String DATABASE_FILE_NAME = "data.csv";
 
     private static final String FILE_DIRECTORY = "data";
 
-    private static final String FILE_PATH = "data/data.csv";
-
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
-
 
     /**
      * Helps user set up the database.
@@ -41,14 +34,15 @@ public class DatabaseStorage {
         if (!fileDir.exists()) {
             fileDir.mkdir();
         }
-        File file = new File(FILE_PATH);
+        // File file = new File(FILE_PATH);
 
-        file.createNewFile();
-        Path target = Path.of(FILE_PATH);
-        URL source = new URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
-        try (InputStream in = source.openStream()) {
-            Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
-        }
+        // file.createNewFile();
+        // Path target = Path.of(FILE_PATH);
+        // URL source = new
+        // URL("https://raw.githubusercontent.com/AY2223S1-CS2113-W13-2/tp/master/data/data.csv");
+        // try (InputStream in = source.openStream()) {
+        // Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+        // }
     }
 
     /**
@@ -62,8 +56,8 @@ public class DatabaseStorage {
             Ui.printExceptionMessage(e);
         }
         try {
-            readFile(DATABASE_FILE_PATH);
-        } catch (FileNotFoundException e) {
+            readFile(DATABASE_FILE_NAME);
+        } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
 
@@ -74,22 +68,22 @@ public class DatabaseStorage {
      * Read entire data.csv file and populate database.
      * 
      * @param filePath File path to data.csv
-     * @throws FileNotFoundException If data.csv not found at file path
+     * @throws IOException If data.csv not found at file path
      */
-    private static void readFile(String filePath) throws FileNotFoundException {
-        File file = new File(filePath);
-
-        Scanner scanner = new Scanner(file);
+    private static void readFile(String filePath) throws IOException {
+        ClassLoader classLoader = DatabaseStorage.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         // ignore the first line of csv
-        String line = scanner.nextLine();
+        String line = reader.readLine();
 
         int databaseLineNumber = 1;
 
-        while (scanner.hasNext()) {
+        while (reader.ready()) {
             logger.log(Level.FINE, "Start reading database line " + databaseLineNumber);
 
-            line = scanner.nextLine();
+            line = reader.readLine();
 
             String[] lineData = readDatabaseLine(line);
             updateDatabase(lineData);
@@ -97,7 +91,7 @@ public class DatabaseStorage {
             databaseLineNumber += 1;
         }
 
-        scanner.close();
+        reader.close();
     }
 
     /**
