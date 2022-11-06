@@ -175,13 +175,14 @@ public class UI {
     }
 
 
-    public void printPatientList(PatientList patientList){
+    public void printPatientList(PatientList patientList) {
         System.out.println("Here are the list of patients in the system:");
         for (int i = 0; i < patientList.getTotalNumberofPatients(); i++) {
             printObject(patientList.getPatient(i).toString(), i, UI.PATIENT);
         }
         printLine();
     }
+
     public void printNoPatientFound() {
         System.out.println("Sorry! No patient exists in the system with the supplied ID!");
         printLine();
