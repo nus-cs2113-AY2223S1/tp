@@ -14,7 +14,8 @@ class HelpCommand {
     <u>+ MESSAGE_USER_GUIDE_REFERENCE: String
     <u>+ USER_GUIDE_LINK: String
 
-    - formatCommandDescription(String, String): String
+    + HelpCommand(input String[])
+    - formatCommandDescription(keyword: String, description: String): String
     - getAllCommandDescriptions(): ArrayList<String>
     - getAllCommandUsage(): ArrayList<String>
 }
