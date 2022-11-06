@@ -506,6 +506,7 @@ Amount          : 10.80
 Currency        : SGD
 
 
+---- RECURRING PAYMENT INDEX 0 ----
 Name            : Rec Exp 1
 Interval (Days) : 31
 Description     : This is a test recurring payment 1
