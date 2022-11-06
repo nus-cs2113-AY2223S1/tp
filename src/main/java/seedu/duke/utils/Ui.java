@@ -31,6 +31,12 @@ public class Ui {
     private ArrayList<String> uiBuffer;
     private Scanner scanner;
 
+    private static final String SEMESTER_ONE = "1";
+    private static final String SEMESTER_TWO = "2";
+    private static final String SEMESTER_SPECIAL_TERM_ONE = "ST1";
+    private static final String SEMESTER_SPECIAL_TERM_TWO = "ST2";
+    private static final String SEMESTER_UNKNNOWN = "Unknown";
+
     public Ui() {
         uiBuffer = new ArrayList<>();
         scanner = new Scanner(System.in);

@@ -2,9 +2,6 @@
 box Main
 Participant ":Duke" as Duke
 end box
-box Parser
-Participant ":Parser" as Parser
-end box
 box AddModuleCommand
 Participant ":AddModuleCommand" as AddModuleCommand
 end box
@@ -14,36 +11,36 @@ end box
 box State
 Participant ":State" as State
 end box
-box Storage
-Participant ":Storage" as Storage
-end box
 box Module
+Participant ":Module" as Module
+end box
+box SelectedModule
 Participant ":SelectedModule" as SelectedModule
 end box
 
-
-activate Duke
-group loop [!isExit]
-Duke -> Ui : readNext()
-activate Ui
-Ui --> Duke
-deactivate Ui
-Duke -> Parser : parse()
-activate Parser
-create AddModuleCommand
-Parser -> AddModuleCommand : new AddModuleCommand()
-activate AddModuleCommand
-AddModuleCommand --> Parser
-deactivate AddModuleCommand
-Parser --> Duke
-deactivate Parser
 Duke -> AddModuleCommand : execute()
 activate AddModuleCommand
 AddModuleCommand -> State : getSemester()
 activate State
 State --> AddModuleCommand
 deactivate State
-AddModuleCommand -> SelectedModule : selectedModule()
+AddModuleCommand -> Module :isOfferedInSemester()
+activate Module
+Module --> AddModuleCommand
+deactivate Module
+
+
+alt module is not offered in semester
+AddModuleCommand -> Ui: addMessage()
+activate Ui
+AddModuleCommand -> Ui: displayUi()
+Ui --> AddModuleCommand
+deactivate Ui
+AddModuleCommand --> Duke
+
+else module is offered in semester
+create SelectedModule
+AddModuleCommand -> SelectedModule : new SelectedModule()
 activate SelectedModule
 SelectedModule --> AddModuleCommand
 deactivate SelectedModule
@@ -51,33 +48,24 @@ AddModuleCommand -> State : getSelectedModulesList()
 activate State
 State --> AddModuleCommand
 deactivate State
+
+opt list does not contain module to be added
 AddModuleCommand -> State : addSelectedModule()
 activate State
 State --> AddModuleCommand
 deactivate State
-
-alt successful case
-
-    AddModuleCommand -> Ui: addMesasge()
-    activate Ui
-
-else not successful
-
-    AddModuleCommand -> Ui: addMessage()
-    deactivate Ui
 end
 
+AddModuleCommand -> Ui :addMessage()
+activate Ui
 AddModuleCommand -> Ui :displayUi()
 Ui --> AddModuleCommand :
-
-AddModuleCommand --> Duke
-deactivate AddModuleCommand
-destroy AddModuleCommand
+deactivate Ui
 end
 
-Duke -> Storage : saveState()
-activate Storage
-Storage --> Duke
-deactivate Storage
+AddModuleCommand --> Duke
+destroy AddModuleCommand
+
+hide footbox
 
 @enduml
