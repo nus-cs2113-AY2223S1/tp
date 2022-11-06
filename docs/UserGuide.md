@@ -860,7 +860,9 @@ ____________________________________________________________
 > - If that transaction is UNFINISHED, make sure that the name of lender, borrower and item ID must occur in the list.
 >
 > You are allowed to change the username when all transactions related to them are finished and that username is unique.
+> 
 > You are allowed to change the item ID when all transactions related to them are finished and that ID is unique.
+> 
 > You are allowed to change the transaction ID if that new ID is unique.
 
 **Question:** Why am I able to enter duplicates of the same item?
