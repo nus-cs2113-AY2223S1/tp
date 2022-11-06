@@ -41,6 +41,9 @@ public class Parser {
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
+    /**
+     * Setups up the logger config and file for this class's activity documentation.
+     */
     public static void setupLogger() {
         LogManager.getLogManager().reset();
         Parser.LOGGER.setLevel(Level.ALL);
@@ -61,6 +64,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse and make sense of the command that the user inputs.
+     *
+     * @param lineInput input of the user.
+     * @return the type of command to be executed.
+     * @throws SkyControlException an error if the input does not have a command or its blank
+     */
     public static Command parse(String lineInput) throws SkyControlException {
         Command command;
         checkEntity(lineInput);
@@ -88,6 +98,12 @@ public class Parser {
         isDelay = isDelayCommand(lineInput);
     }
 
+    /**
+     * Checks the operation of the user's Input.
+     *
+     * @param inputWords input of the user that have been split into two words, one for command,
+     *                  and the other for type of operation.
+     */
     public static void checkOperation(String[] inputWords) {
         operation = inputWords[OPERATION_INDEX];
         isAdd = operation.equalsIgnoreCase("add");
