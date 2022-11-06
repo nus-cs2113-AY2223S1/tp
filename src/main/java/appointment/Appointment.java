@@ -87,7 +87,9 @@ public class Appointment {
         }
         if (isDone) {
             appointmentStatus = AppointmentStatus.PROCESSED;
-            PetList.findPetById(petId).changePetStatus();
+            if (PetList.findPetById(petId) != null) {
+                PetList.findPetById(petId).changePetStatus();
+            }
         }
     }
 
