@@ -66,4 +66,6 @@ end
 AddModuleCommand --> Duke
 destroy AddModuleCommand
 
+hide footbox
+
 @enduml

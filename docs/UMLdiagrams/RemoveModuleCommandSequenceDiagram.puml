@@ -49,4 +49,6 @@ deactivate RemoveModuleCommand
 
 destroy RemoveModuleCommand
 
+hide footbox
+
 @enduml
