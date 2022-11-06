@@ -2,20 +2,44 @@
 !include Style.puml
 
 Participant ":Duke" as duke
+Participant ":CommandParser" as commandParser
+Participant ":ParameterParser" as parameterParser
 Participant ":HelpCommand" as command
 Participant ":Ui" as ui
 actor User
 
+-> duke
+activate duke
+duke -> commandParser:parse("help o/detailed")
+    activate commandParser
+    create command
+    commandParser -> command:new
+        activate command
+    return command:HelpCommand
+    commandParser -> parameterParser:parse
+        parameterParser -> command:set isDetailed
+        note left: Minimal\nnotation
+        parameterParser -> command:set hasSpecificCommand
+
+
+    return command:HelpCommand
+
 duke -> command:execute()
 activate command
-    alt parameter o/detailed found
-        command -> command : generateBasicHelp()
+    alt hasSpecificCommand
+        command -> command : generateSpecificHelp()
         activate command
         return message:String
-    else parameter o/detailed not found
-        command -> command :generateDetailedHelp()
-        activate command
-        return message:String
+    else else
+        alt isDetailed
+            command -> command :generateDetailedHelp()
+            activate command
+            return message:String
+        else else
+            command -> command :generateBasicHelp()
+            activate command
+            return message:String
+        end
     end
     command -> ui :showHelp(message)
     activate ui

@@ -11,7 +11,7 @@ package seedu.duke.common;
 public class Constants {
     //@@author paullowse
 
-    public static final int MINIMUM_YEAR = 1000;
+    public static final int MINIMUM_YEAR = 0;
     public static final int MAXIMUM_YEAR = 9999;
     public static final int MAXIMUM_STATS_NUMBER = 100;
     public static final int MINIMUM_STATS_NUMBER = 1;
@@ -23,6 +23,9 @@ public class Constants {
         1. TransactionList.calculateMonthlyTotalExpense()
         2. Budget.getBudgetLeft()
      */
+
+    // The fixed index for the first transaction entry
+    public static int MIN_TRANSACTIONS_INDEX = 1;
 
     // One million transactions is the capacity allowed
     public static int MAX_TRANSACTIONS_COUNT = 1000000;

@@ -10,6 +10,8 @@ import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StorageWriteErrorException;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
 import static seedu.duke.common.HelpMessages.BUDGET_COMMAND_BASIC_HELP;
@@ -24,6 +26,8 @@ public class BudgetCommand extends Command {
 
     //@@author wcwy
     private long budgetAmount;
+
+    private static final Logger budgetLogger = Logger.getLogger(BudgetCommand.class.getName());
 
     /**
      * Default constructor for BudgetCommand. Budget amount is initialised as 1000 (default value).
@@ -73,6 +77,8 @@ public class BudgetCommand extends Command {
         } catch (IOException e) {
             throw new StorageWriteErrorException();
         }
+        budgetLogger.setLevel(Level.SEVERE);
+        budgetLogger.log(Level.INFO, "Budget command has been executed to update the budget to: " + budgetAmount);
     }
 
     //@@author wcwy

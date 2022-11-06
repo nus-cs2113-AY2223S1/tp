@@ -81,7 +81,11 @@ public abstract class Command {
     public void setEntryNumber(int entryNumber) {
     }
 
-    public void setIsDetailedOption(boolean isDetailed) {
+    public void setKeyword(String keyword) {
+
+    }
+
+    public void isDetailed(boolean isDetailed) {
     }
 
     public void setStatsType(String statsType) {

@@ -112,7 +112,7 @@ public class StatsCommand extends ListAndStatsCommand {
         }
 
         // Checks if there are any error in the tag combinations related to DateIntervals
-        parseDateIntervalsTags();
+        checkContainDateIntervalsTags();
         listStatsByStatsType(transactions, ui);
     }
 

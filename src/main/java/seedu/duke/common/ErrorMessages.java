@@ -16,7 +16,8 @@ public enum ErrorMessages {
             + "<help> for the command guide."),
     ERROR_GLOBAL_EMPTY_PARAMETER("Parameter behind tag(s) is found to be empty, "
             + "please enter <help> for the command guide."),
-    ERROR_GLOBAL_INVALID_INDEX("Invalid index, please enter <help> for the command guide."),
+    ERROR_GLOBAL_INVALID_INDEX("The index of the transaction does not exist, "
+            + "please enter <help> for the command guide."),
     ERROR_GLOBAL_INVALID_MONTH("Invalid month! (Note: Month should be between 1 to 12) "
             + "Please enter <help> for the command guide."),
     ERROR_GLOBAL_INVALID_YEAR("Invalid year! (Note: Year should be 1000 - 9999) "
@@ -31,8 +32,6 @@ public enum ErrorMessages {
     ERROR_TRANSACTION_INVALID_CATEGORY("Invalid category, please enter <help> for the command guide."),
     ERROR_TRANSACTION_INVALID_DATE("Invalid date, please enter <help> for the command guide."),
     ERROR_TRANSACTION_INVALID_TYPE("Type of transaction given is invalid, please enter <help> for the command guide."),
-    ERROR_FIND_COMMAND_MISSING_KEYWORDS("Keyword(s) for your search expression missing,"
-            + " please enter <help> for the command guide."),
     ERROR_STATS_COMMAND_INVALID_TYPE("Type of statistics given is invalid, please enter <help> for the command guide."),
     ERROR_STATS_INVALID_NUMBER("Invalid number! (Note: Stats number must between 1 - 100) "
             + "Please enter <help> for the command guide."),
@@ -50,7 +49,11 @@ public enum ErrorMessages {
 
     ERROR_INVALID_BUDGET("Invalid budget amount! (Note: Budget must be a positive whole number of valid range)"
             + " Please enter <help> for the command guide."),
-    ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value.");
+    ERROR_DUPLICATE_BUDGET("Provided budget is the same as the originally set value."),
+
+    ERROR_EDIT_TAGS_EMPTY("Your tags are empty. Please enter <help> for the command guide."),
+
+    ERROR_EDIT_UNCHANGED("Your tags inputted does not edit the transaction.");
 
     //@@author chydarren
     public final String message;

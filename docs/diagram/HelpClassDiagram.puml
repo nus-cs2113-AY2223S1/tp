@@ -1,22 +1,24 @@
 @startuml
 !include Style.puml
 abstract class "Command"{
-    + getHelpMessage() : HelpMessage {abstract}
-    + getDetailedHelpMessage() : HelpMessage {abstract}
     + execute() : void {abstract}
 }
 
 class HelpCommand{
-    + getHelpMessage() : HelpMessage
-    + getDetailedHelpMessage() : HelpMessage
+    - isDetailed : Boolean
+    - hasSpecificCommand : Boolean
+    - queryCommand : String
+    + getHelpMessage() : HelpMessage {static}
+    + getDetailedHelpMessage() : HelpMessage {static}
     + execute() : void
     - generateBasicHelp() : String
     - generateDetailedHelp() : String
+    - generateSpecificHelp() : String
 }
 
 class AddCommand{
-    + getHelpMessage() : HelpMessage
-    + getDetailedHelpMessage() : HelpMessage
+    + getHelpMessage() : HelpMessage {static}
+    + getDetailedHelpMessage() : HelpMessage {static}
     + execute() : void
 }
 
@@ -41,8 +43,9 @@ enum "<<enumeration>>\nHelpMessage" {
     HELP_CMD_DETAILED_HELP
     BYE_CMD_BASIC_HELP
     BYE_CMD_DETAILED_HELP
+    BUDGET_CMD_BASIC_HELP
+    BUDGET_CMD_DETAILED_HELP
 }
-
 
 HelpCommand -up-|> "Command"
 AddCommand -up-|> "Command"

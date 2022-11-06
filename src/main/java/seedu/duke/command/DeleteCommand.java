@@ -68,25 +68,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before adding entry to arraylist
-        */
         try {
             deleteLogger.setLevel(Level.SEVERE);
             deleteLogger.log(Level.INFO, "Delete Command checks whether the index is valid "
                     + "before executing the command.");
-            boolean isInputValid = true;
             int index = entryNumber;
-            int numberOfTransactions;
-            numberOfTransactions = transactions.size();
-            if ((index > numberOfTransactions) || (index <= 0)) {
-                isInputValid = false;
-            }
-
-
+            boolean check = isIndexValid(transactions, index);
             assert index > 0;
-            if (isInputValid) {
+
+            if (check) {
                 LocalDate date = transactions.getEntry(index - 1).getDate();
                 String transaction = transactions.deleteTransaction(index - 1);
 
@@ -139,5 +129,17 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Performs a check to see if the index is a valid one.
+     *
+     * @param transactions The list of transactions
+     * @param index The input index
+     * @return A boolean value that indicates whether the program continues execution.
+     */
+    public boolean isIndexValid(TransactionList transactions, int index) {
+        int numberOfTransactions = transactions.size();
+        return (index <= numberOfTransactions) && (index > 0);
     }
 }

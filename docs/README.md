@@ -1,5 +1,9 @@
 # Moolah Manager
 
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
+
 Financial bookkeeping via traditional mobile applications has always been a hassle due to the repetitive clicks needed to manage monetary transactions. With Moolah Manager, you will be encouraged to take ownership of managing your finances via a time-saving and efficient command-line (CLI) interface.
 
 The main features of Moolah Manager include:
