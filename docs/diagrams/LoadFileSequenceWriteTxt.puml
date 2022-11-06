@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from JSON files
+
+participant "<<class>>\n:FileStorage" as FileStorage LOGIC_COLOR
+
+participant "carparkList:CarparkList" as carparkList LOGIC_COLOR
+
+participant "Text file" as textFile LOGIC_COLOR
+
+[-> FileStorage : saveCarparkList(carparkList)
+activate FileStorage
+FileStorage -> carparkList : getSaveString()
+activate carparkList
+
+
+return saveString
+FileStorage -> textFile : write data to file
+activate textFile
+return
+return
+
+
+
+
+
+
+
+@enduml

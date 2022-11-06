@@ -353,7 +353,7 @@ it can be that our program is at fault.
 Due to such bug discoveries, we made our carparkList parser much more robust and it now does data
 validation internally to ensure no such data is presented to the user.
 
-### 3.3 Updating CarparkList with JSON from API 
+### 3.3 Updating CarparkList with JSON file from API 
 The following is an overview of the sequence of what is called at initialization and with the use of the `update` command:
 
 ![Sequence Diagram](images/FileLoadOverview.png)
@@ -363,6 +363,8 @@ The sequence can be summarized as follows:
 2. Read and parse a JSON file containing new availability information into `newCarparkList`, also a `CarparkList` object
 3. Update `carparkList` with new availability information from `newCarparkList`
 4. Write the save string generated from `carparkList` into a .txt file
+
+> NOTE: For viewing ease the list of carparks inside the carparkList will be sorted upon generation by carpark ID.
 
 More detailed information including exception handling will be in the sections below:
 
@@ -374,11 +376,11 @@ of the CarparkList as last modified by the program. Additionally, the user can c
 (for example, renaming a carpark to "Near my house" for convenient viewing later), while will be loaded and stored by the program.
 
 The sequence of events is as follows: 
-1. The program attempts to read a save string from the given filepath (of the carparkList.txt file).
+1. The program attempts to read a save string from the given filepath (of the `carparkList.txt` file).
 2. If the text file exists and is of a valid format, the text string is returned to the method, which is then parsed
 into a valid CarparkList object, and then returned to the program.
 3. If the text file doesn't exist or has an invalid format, the text string is not written, and the Load JSON method is called instead
-to generate from a backup.
+to generate from a backup. This backup is guaranteed to be valid, as explained in [3.3.2 Loading CarparkList from JSON file](#332-loading-carparklist-from-json-file)
 
 ##### 3.3.1.1 Design Considerations
 **Choice of "last resort" backup loading**
@@ -406,14 +408,54 @@ between the user and the program.
 
 #### 3.3.2 Loading CarparkList from JSON file
 ![Sequence diagram](images/LoadFileSequenceJson.png)
-The sequence of events from loading from a JSON file is as follows: 
-
-The sequence of events is as follows:
+The sequence of events from loading from a JSON file is as follows:
 1. The program attempts to read a JSON from the given filepath for `LtaResponse.json`.
-2. If the text file exists and is of a valid format, the text string is returned to the method, which is then parsed
-   into a valid CarparkList object, and then returned to the program.
-3. If the text file doesn't exist or has an invalid format, the text string is not written, and the Load JSON method is called instead
-   to generate from a backup.
+2. If the `LtaResponse.json` file exists and is of a valid format, it is read by the Jackson parser, creating `Carpark`
+   objects, which will then be returned to the program.
+3. If the `LtaResponse.json` doesn't exist or has an invalid format, `LtaResponseSample.json` is read instead: a backup
+file to be used if there is no internet connection or an error with the LTA file. 
+4. If both the `LtaResponse.json` and `LtaResponseSample.json` file come with errors, the the `LtaResponseSample.json` is regenerated
+by copying from within the .jar file. It is then read again, and the `CarparkList` object is returned.
+
+**Invalid format behaviour**
+In the UG, users are warned not to tamper with these two files as it may result in regeneration of the files due to invalid format. As with the
+`carparkList.txt` file, any errors at all will cause the entire file to be ignored and the backup to be used instead. The backup `LtaResponseSample.json` should not be tampered with either, but if it is will always be regenerated from the `.jar`, which should never fail.
+
+#### 3.3.3 Writing to text file
+![Sequence diagram](images/LoadFileSequenceWriteTxt.png)
+The sequence of events for writing to a text file is as follows:
+1. The program calls the `getSaveString()` method inside of the `carparkList` passed in as a parameter.
+2. This save string is written to the text file.
+
+If the file cannot be found or the appropriate directories are missing, the file structure and new text file will be regenerated and then written to.
+
+### 3.4 The `filter` command
+![Filter Sequence Diagram](images/FilterSequenceDiagram.png)
+The `filter` command is one of the more complicated functions of the program. The sequence diagram above shows the sequence of events when the `filterByAddress` method inside of `carparkList` is called.
+
+The private `filterBySubstring` method assigns a `HashSet<Carpark>` object `carparkListBuffer`, all carparks with development sentences that 
+match the substring. At the same time, the `Word` object inside that `Carpark` object's developmentSentence that matches the substring is marked as bold, for use with the Jansi formatting later on, where words that match the query are marked with a different colour for easy viewing.
+
+The `Argument` class that the `filter` command uses for error checking is an extension of the `Sentence` class with additional methods to count dashed arguments. This is to ensure that the appropriate number of arguments and dashed arguments are in the command.
+
+> Note: Only prefixing substrings (substrings in the beginning of the word) will be counted as a match.
+
+### 3.5 Jansi formatting
+
+The `Ui` class makes use of the `jansi.render()` function to render strings that were formatted earlier with codes to mark which text should be coloured. 
+
+The Jansi library does not work within the IDE (tested in IntelliJ), but works with consoles in Mac, Linux and Windows 10 and above. If the console environment is currently not supported, `jansi.render()` strips all formatting and returns just the plain text, resulting in clean but uncoloured text.
+
+Future plans will support more extensive colouring of the UI.
+
+### 3.6 Exception Handling
+
+All custom exceptions within the program inherit from the abstract `ParkingException` class. The majority of custom exceptions have a built-in message in the class itself rather than loading a message in via a constructor. This is to encourage specific exceptions that should only have a message for one problem, and to prevent rewriting the same error message if the Exception is thrown in multiple files. In some cases, this string requires a `String.format()` method call to format properly - for example, with the `InvalidCommandException`.
+
+Exceptions are generally handled by using the `Ui.printError()` method which takes one parameter of type  `ParkingException`. This method will print the string by calling `getMessage()` in the exception and formatting it red so the user can recognise it is an error easily.  
+
+Some exceptions to the method is `InvalidFormatException` and `NoFileFoundException`. These exceptions, while being a specific
+problem, are wide enough in scope for messages to vary wildly depending on the nature of the file exception or the invalid format.
 
 
 ## 4 Product scope

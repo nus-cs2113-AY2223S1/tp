@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from JSON files
+
+
+participant "carparkList:CarparkList" as carparkList LOGIC_COLOR
+
+participant "searchQuery:Sentence" as Sentence LOGIC_COLOR
+participant ":CarparkFilteredList" as carparkFilteredList LOGIC_COLOR
+
+[-> carparkList : filterByAddress(Sentence)
+activate carparkList
+carparkList -> Sentence : getWords()
+activate Sentence
+return List<Word>
+
+loop all Word objects in searchQuery
+    carparkList -> carparkList : filterBySubstring(carparkListBuffer, wordString)
+end
+create carparkFilteredList
+carparkList -> carparkFilteredList : CarparkFilteredList(carparkListBuffer)
+activate carparkFilteredList
+return
+return carparkFilteredList
+
+
+
+@enduml
