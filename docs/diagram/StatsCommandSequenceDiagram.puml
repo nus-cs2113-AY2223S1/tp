@@ -40,7 +40,7 @@ duke -> command:execute(transactions, ui, storage)
                 activate transactions
                 transactions -> transactions:processCategoricalSavings\n(timeTransactions,\ncategoricalSavings)
                 activate transactions
-                return categoricalSavings:HashMap<String, Integer>
+                return categoricalSavings:\nHashMap<String, Integer>
                 return genericStatsList:String
             else statsType equals monthly_expenditure
                 ref over command, budget: get monthly expenditure list
@@ -63,17 +63,17 @@ duke -> command:execute(transactions, ui, storage)
             command -> command:statsTypeTimeInsights()
             activate command
             ref over command, transactions: get time insights list
-            command -> command:printTimeInsightsStatistics\n(timeInsightsList, timeInsightsValues, incomeMessage, expensesMessage, savingsMessage, habitMessage)
+            command -> command:printTimeInsightsStatistics\n(timeInsightsList, timeInsightsValues, \nincomeMessage, expensesMessage, \nsavingsMessage, habitMessage)
             activate command
 
             alt input containMonthYear
                ref over command, budget: retrieve budget information and generate budget advice
-               command->ui: showTimeInsightsList(timeInsightsList, message, incomeMessage, expensesMessage, savingsMessage, \nbudgetMessage, spendingHabitComment, budgetAdvice)
+               command->ui: showTimeInsightsList(timeInsightsList, message, \nincomeMessage, \nexpensesMessage, savingsMessage, \nbudgetMessage, spendingHabitComment, \nbudgetAdvice)
                activate ui
                ui->User
                return
             else else
-               command->ui: showTimeInsightsList(timeInsightsList, message, incomeMessage, expensesMessage, savingsMessage)
+               command->ui: showTimeInsightsList(timeInsightsList, \nmessage, \nincomeMessage, expensesMessage, \nsavingsMessage)
                activate ui
                ui->User
                return

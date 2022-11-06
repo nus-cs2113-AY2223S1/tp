@@ -525,30 +525,33 @@ stats s/time_insights p/PERIOD n/NUMBER
 **Examples:**
 
 - `stats s/time_insights y/2022`
-- `stats s/time_insights y/2022 m/10`
+- `stats s/time_insights y/2022 m/11`
 - `stats s/time_insights p/weeks n/3`
 - `stats s/time_insights p/months n/12`
 
 **Expected Output:**
 
-Viewing the Financial Insights for 2022
+Viewing the Financial Insights for November 2022
 
 ```
 stats s/time_insights y/2022
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-Year: 2022
+Year: 2022, Month: 11
 
 -----Categorical Savings-----
-[transport] -$10001
-[salary] $2000
-[food] -$20
+[salary] $3040
+[food] -$100
 
 -----Expenditure Summary-----
-Income: $2000
-Expense: $10021
-Savings: $-8021
+Income: $3040
+Expense: $100
+Savings: $2940
+Budget: $1000
+Spending Habit: Wow, keep up the good work. You saved at least two-third of your income.
+In terms of monthly budget, you have kept yourself well within the budget!
 ____________________________________________________________
+
 ```
 
 Viewing the Financial Insights for the Last 3 Weeks

@@ -327,7 +327,8 @@ _Written by: Brian Wong Yun Long_
 ### 5.2. Proposed Implementation
 
 Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income` or `Expense` type. Below is a class diagram that illustrates
-the attributes that are contained within each transaction and how it is associated with the `TransactionList`.
+the attributes that are contained within each transaction and how they are associated with the `TransactionList`. Note that non-important methods and variables have been omitted 
+from the class diagram below for simplicity.
 
 <p align="center">
     <img src="images/TransactionClassDiagram.png" width="100%">
@@ -357,6 +358,8 @@ The main CRUD operations in `TransactionList` that facilitates the data manipula
 
 Following which, `TransactionList` provides methods such as `listTransactions()`, `findTransactions()`, `getTransactionsByMonth()`, `getTransactionsByYear()`, 
 `getTransactionsByDayRange()`, `getTransactionsByWeekRange()` and `getTransactionsByMonthRange()` to enable users to view their past transaction records.
+Users will be able to retrieve transactions over the last N days, weeks or months as the `getTransactionsByXRange()` computes the difference in the dates between
+today's date and the previous date.
 
 _Written by: Chua Han Yong Darren_
 
@@ -511,10 +514,11 @@ The `FindCommand` class provides the search functionality for finding a specific
 Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
 compared with the description of each transaction object.
 
-Figure 17 below is a class diagram for the `Find` command class.
+Figure 17 below is a class diagram for the `Find` command class and its associations with other classes that contribute to the listing of filtered
+transactions. Some methods and variables have been ommitted from the class diagram for simplicity.
 
 <p align="center">
-    <img src="images/FindCommandClassDiagram.png" width="40%">
+    <img src="images/FindCommandClassDiagram.png" width="100%">
     <br />
     <i>Figure 17: Class Diagram for Find Command</i>
 </p>
@@ -666,7 +670,7 @@ _Written by: Brian Wong Yun Long_
 ### 6.1. Overview 
 
 Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats to show categorical savings or overall expenditure. 
-As such, we have developed streamlined methods to filter the transactions by time period prior to passing into the `Stats` command class for generating insights.
+As such, we have developed streamlined methods to filter the transactions by time period prior to passing them into the `Stats` command class for generating insights.
 Beyond gathering of these insights, users can also allocate a monthly budget to help them manage their spending.
 
 _Written by: Chua Han Yong Darren_
@@ -681,9 +685,23 @@ Figure 23 below is a class diagram that illustrates the inheritance for the `Sta
 
 <p align="center">
     <img src="images/StatsCommandClassDiagram.png" width="80%">
-    <br />
+    <br /> 
     <i>Figure 23: Class Diagram for Stats Command</i>
 </p>
+
+Elaborating on the checks for date interval tags and retrieval of the filtered transactions by time periods, the two significant methods are `checkContainDateIntervalsTags()` and `getTimeTransactions()`.
+The table below depicts the possible scenarios that may arise upon validation of these tags in the `ListAndStats` command class. These tags are used with `list` or `stats s/time_insights` commands.
+
+| Date Interval Tags | Purpose                                         | Outcome                                                                                                                                                          |
+|--------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `y/<YYYY>`         | View financial insights for a particular year.  | `TransactionList#getTransactionsByYear()` will be called for list of transactions filtered by year.                                                              |
+| `y/<YYYY> m/<N>`   | View financial insights for a particular month. | `TransactionList#getTransactionsByMonth()` will be called for a list of transactions filtered by month.                                                          |
+| `p/days n/<N>`     | View financial insights for the last N days.    | `TransactionList#getTransactionsByWeekRange()` will be called for a list of transactions filtered by last N days (backdated from today).                         |
+| `p/months n/<N>`   | View financial insights for the last N months.  | `TransactionList#getTransactionsByMonthRange()` will be called for a list of transactions filtered by last N months (backdated from first day of current month). |
+| `p/weeks n/<N>`    | View financial insights for the last N weeks.   | `TransactionList#getTransactionsByDayRange()` will be called for a list of transactions filtered by last N weeks (backdated from Monday of current week).        |
+
+If no date interval tags are used together with `s/time_insights` or they are combined incorrectly (i.e. their usage does not appear in the table above), exceptions will be thrown. This prevents an incorrect transactions list from being further passed to other
+methods within the `Stats` command class.
 
 The `budget` is a static variable stored inside the `Budget` class. The budget variable is checked during the following 
 phase of the applications, with relevant reminder, tips and advices displayed:
