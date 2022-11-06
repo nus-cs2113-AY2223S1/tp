@@ -21,7 +21,7 @@
 
 - Improved the index of Pet
 - Improved the interface of Duke to be more OOP
-- Modified all the format errors in v1.0 checked by Gradle
+- Fixed all the format errors in v1.0 checked by Gradle
 
 **Contributions to the UG**
 
@@ -35,7 +35,28 @@
 **Contributions to team-based tasks**
 
 - Serving as a team leader
+
 - Deciding on weekly meetings and task assignments
+
 - Maintaining the issue tracker
+
+  ![image-20221106145033594](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221106145033594.png)
+
 - Maintaining the milestone
+
 - Release management
+
+- Opened pull request from team repo to module repo
+
+**Mentoring contributions**
+
+- Helping team members to fix format errors checked by Gradle
+
+**Contributions beyond the project team**
+
+- Reviewed the pull requests of another team
+
+  ![review](D:\Junior1\CS2113\PPP graphs\review.jpg)
+
+  
+
