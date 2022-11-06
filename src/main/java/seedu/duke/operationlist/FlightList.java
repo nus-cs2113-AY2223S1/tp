@@ -27,6 +27,9 @@ public class FlightList extends OperationList {
     protected static boolean isFlightNumberPresent = false;
     protected static boolean isDepartureTimePresent = false;
     protected static boolean isGateNumberPresent = false;
+    protected static boolean isAdd = false;
+    protected static boolean isDelay = false;
+    protected static boolean isModify = false;
     protected static final String TIME_REGEX = "([01]\\d|2[0-3])[0-5]\\d";
     protected static final String CHECK_IN_REGEX = "[0-9]{2}-[0-9]{2}";
     protected static final String GATE_NUM_REGEX = "^([0-9]{2}$)";
@@ -75,6 +78,7 @@ public class FlightList extends OperationList {
 
     @Override
     public void addOperation(String command) throws SkyControlException {
+        setIsAdd();
         getNumberOfFlights();
         checkCommandLength(command.substring(FLIGHT_ADD_COMMAND.length()));
         getFlightDetails(command.substring(FLIGHT_ADD_DELIMITER.length()));
@@ -117,6 +121,7 @@ public class FlightList extends OperationList {
     //@@author shengiv
     @Override
     public void modifyFlightNum(String flightNum, String newFlightNum) throws SkyControlException {
+        setIsModify();
         getNumberOfFlights();
         FlightInfo flight = findFlightInfo(flightNum);
         getFlightAttributes(flight);
@@ -130,6 +135,7 @@ public class FlightList extends OperationList {
 
     @Override
     public void modifyGateNum(String flightNum, String newGateNum) throws SkyControlException {
+        setIsModify();
         getNumberOfFlights();
         FlightInfo flight = findFlightInfo(flightNum);
         getFlightAttributes(flight);
@@ -182,6 +188,24 @@ public class FlightList extends OperationList {
         }
     }
 
+    private void setIsAdd() {
+        isAdd = true;
+        isDelay = false;
+        isModify = false;
+    }
+
+    private void setIsDelay() {
+        isAdd = false;
+        isDelay = true;
+        isModify = false;
+    }
+
+    private void setIsModify() {
+        isAdd = false;
+        isDelay = false;
+        isModify = true;
+    }
+
     //@@author Franky4566
     @Override
     public void listOperation() {
@@ -210,6 +234,7 @@ public class FlightList extends OperationList {
     //@@author Franky4566
     @Override
     public void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException {
+        setIsDelay();
         getNumberOfFlights();
         FlightInfo flight = findFlightInfo(flightNum);
         getFlightAttributes(flight);

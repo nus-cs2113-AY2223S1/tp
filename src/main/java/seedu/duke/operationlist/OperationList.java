@@ -10,7 +10,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public abstract class OperationList extends Parser {
+public abstract class OperationList {
     public static final int EMPTY_FLIGHT_LIST = 0;
     protected static ArrayList<FlightInfo> flights = new ArrayList<>();
     protected static ArrayList<PassengerInfo> passengers = new ArrayList<>();

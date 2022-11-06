@@ -31,6 +31,8 @@ public class PassengerList extends OperationList {
     public static final int SEAT_NUM_SECOND_INDEX = 1;
     public static final int SEAT_NUM_FIRST_INDEX = 0;
     public static final int SEAT_NUM_THIRD_INDEX = 2;
+    protected boolean isAdd;
+    protected boolean isDelete;
     protected boolean isValidPassenger;
     protected boolean isDeleteSuccess;
     protected boolean isExceedNameLength;
@@ -228,6 +230,7 @@ public class PassengerList extends OperationList {
     //@@author shengiv
     @Override
     public void addOperation(String passengerDetail) throws SkyControlException {
+        setIsAdd();
         getNumberOfPassengers();
         getPassengerDetails(passengerDetail);
         validateDetailFormat();
@@ -322,6 +325,7 @@ public class PassengerList extends OperationList {
 
     @Override
     public void deleteOperation(String passengerDetail) throws SkyControlException {
+        setIsDelete();
         getNumberOfPassengers();
         getPassengerName(passengerDetail);
         getFlightNumber(passengerDetail);
@@ -433,6 +437,16 @@ public class PassengerList extends OperationList {
                 throw new SkyControlException(ui.getMissingDetailsError());
             }
         }
+    }
+
+    private void setIsAdd() {
+        isAdd = true;
+        isDelete = false;
+    }
+
+    private void setIsDelete() {
+        isAdd = false;
+        isDelete = true;
     }
 
     //@@author ivanthengwr
