@@ -7,32 +7,30 @@ Project: Pet Clinic Manager
 
 New Feature:
 - Added the ability to add/remove Tasks, and reassign Task from one employee to another
+
 What it does: 
 - After a Task is added into the overall TaskList, it is also added to the associated Appointment and Employee (to do the Task).
 - Reassigning a Task will move the Task from one employee's Task List to another employee's Task List.
+
 Justification: 
-- This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+- This feature is the main value add to the manager / head nurse using this application - being able to add and assign task to employees, ensuring effective management and delegation of work within the clinic
+- Taking into consideration that Tasks in a clinic can readily change hands, being able to reassign a task significantly improves functionality of the Task allocation feature
+
 Highlights: 
 - This enhancement was one of the most complex portions of this application as it required intricate interactions with almost every other feature (Appointment, Employee, Service, Pet)
-Credits: {mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}
-New Feature: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
-Code contributed: RepoSense link
+Credits:
+- Myself - for conceptualizing and building the connections with every other class
 
-Project management:
-Managed releases v1.3 - v1.5rc (3 releases) on GitHub
-
-Enhancements to existing features:
-
-Updated the GUI color scheme (Pull requests #33, #34)
-Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests #36, #38)
+Code contributed: 
+- [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=yongjicode&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=zoom&zA=yongjicode&zR=AY2223S1-CS2113-F11-2%2Ftp%5Bmaster%5D&zACS=177.888995215311&zS=2022-09-16&zFS=&zU=2022-11-06&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 Documentation:
 
 User Guide:
-Drafted the first version of the User Guide
+- Drafted the first version of the User Guide
 
 Developer Guide:
-Set up Developer Guide for the team
-Wrote the implementation of the main function of the application - Task Allocation Feature
-Drew the sequence diagram for the main function of the application - Task Allocation Feature
+- Set up Developer Guide for the team
+- Wrote the implementation of the main function of the application - Task Allocation Feature
+- Drew the sequence diagram for the main function of the application - Task Allocation Feature
