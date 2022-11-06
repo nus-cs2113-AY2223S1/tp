@@ -1,4 +1,7 @@
 @startuml
+
+hide footbox
+
 == Initialisation ==
 activate Duke
 participant UserStorageParser

@@ -108,7 +108,7 @@ NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western Univers
 ____________________________________________________________________________
 ```
 
-#### 2. Update Add Command Note for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
+#### 2. Add comments for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
 
 Adds/Updates a (previous) note for the input Partner University module code in the input university list.
 

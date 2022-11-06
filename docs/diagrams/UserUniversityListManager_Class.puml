@@ -38,7 +38,7 @@ class UserUniversityList {
 }
 
 class UserUniversityListManager {
-    - myManager:HashMap<String, UserUniversityList
+    - myManager:HashMap<String, UserUniversityList>
     - ttManager:TimetableManager
     - deletedModulesList:UserDeletedModules
     - logger:Logger
