@@ -38,7 +38,6 @@ InvalidCommandException should an invalid command be issued. Based on the comman
 splits the input to extract the relevant fields required for the specific command.
   * Highlights: This is a key feature as it converts raw user input to executable commands. The key challenge was 
 handling invalid inputs and dealing with edge cases where specific user inputs could cause the entire application to crash.
-  * Credits: [Shao Yong's iP](https://redders7.github.io/ip/)
 
 
 **Code contributed**: [RepoSense](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=redders7&tabRepo=AY2223S1-CS2113-T18-1b%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
@@ -53,28 +52,23 @@ handling invalid inputs and dealing with edge cases where specific user inputs c
 **Enhancements to existing features**:
   * Repackaged commands and exception classes (PR [\#131](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/131))
   * Created new exception classes to better reflect the specific error encountered. (PR [\#131](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/131))
-  * Wrote JUnit test cases for `add`, Media, Movie, TvShow and Ui classes. (PRs [\#66](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/66), [\#132](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/132))
-  * Increased test coverage for Parser class to 76%.
+  * Wrote JUnit test cases for `add`, Parser, Media, Movie, TvShow and Ui classes. (PRs [\#66](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/66), [\#132](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/132))
   * Fixed various bugs and issues found throughout the project.
 
-
-* **Documentation**:
-  * User Guide:
+**Documentation**:
+  * Contributions to User Guide:
     * Added documentation for the Quick Start guide.
     * Added documentation for the `add`, `find` and `delete` commands.
     * Fixed minor bugs found in PE-D.
-  * Developer Guide:
+  * Contributions to Developer Guide:
     * Added implementation details for the `add` and `find` features.
     * Drew UML sequence diagrams for `add` and `find` commands using PlantUML.
     * Drew UML class diagrams for Media and Ui classes using PlantUML.
-    * Fixed bugs found in UML diagrams.
     * Added user stories for v1.0 and v2.0.
 
 
 * **Community**:
   * Reviewed PRs and provided constructive feedback for other students: 
-    * tP [\#1](https://github.com/nus-cs2113-AY2223S1/tp/pull/1), 
-    * iP [\#15](https://github.com/nus-cs2113-AY2223S1/ip/pull/15), 
-    * iP [\#32](https://github.com/nus-cs2113-AY2223S1/ip/pull/32)
+    * tP [\#1](https://github.com/nus-cs2113-AY2223S1/tp/pull/1), iP [\#15](https://github.com/nus-cs2113-AY2223S1/ip/pull/15), iP [\#32](https://github.com/nus-cs2113-AY2223S1/ip/pull/32)
   * Reported [11 program bugs](https://github.com/redders7/ped/issues) during PE-D.
 
