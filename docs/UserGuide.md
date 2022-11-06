@@ -269,7 +269,7 @@ Example of usage: ```view-user-loss /u jingwei```
 Expected outcome:
 ```
 ____________________________________________________________
-The amount of money loss of jingwei is: $2.50
+The amount of money loss by jingwei is: $2.50
 ____________________________________________________________
 ```
 
@@ -283,7 +283,7 @@ Example of usage: ```view-user-gain /u bui```
 Expected outcome:
 ```
 ____________________________________________________________
-The amount of money earned of bui is: $2.50
+The amount of money earned by bui is: $2.50
 ____________________________________________________________
 ```
 
