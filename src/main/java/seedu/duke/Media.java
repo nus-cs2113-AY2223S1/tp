@@ -102,6 +102,7 @@ public class Media {
         }
     }
 
+    //@@author redders7
     public Media() {
         title = "";
         rating = 0;
