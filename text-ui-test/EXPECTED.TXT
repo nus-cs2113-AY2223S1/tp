@@ -105,11 +105,11 @@ Processing "import https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS10
 
 Semester 1 timetable imported.
 CG1111A added.
-The following lessons were added:
+The following lesson(s) were added:
 LABORATORY:01
 
 CS1010 added.
-The following lessons were added:
+The following lesson(s) were added:
 LABORATORY:C03
 TUTORIAL:10
 SECTIONAL_TEACHING:1
@@ -143,31 +143,31 @@ Here's a list of your current selected module(s)!
 Sem [1] >> --------------------------------------------------------------------------------
 Processing "timetable /simple" ...
 
-                                                                    
-          : Mon      : Tues     : Wed      : Thur     : Fri         
+
+          : Mon      : Tues     : Wed      : Thur     : Fri
 ====================================================================
-   0900   +----------+          +----------+          :             
-   0930   |CG1111A   |          |CG1111A   |          :             
-   1000   | LAB[01]  |          | LAB[01]  |          :             
-   1030   |          |          |          |          :             
-   1100   |          |          |          |          :             
-   1130   |          |          |          |          :             
-   1200   +----------+          +----------+----------+             
-   1230   |CS1010    |          :          |CS1010    |             
-   1300   | SEC[1]   |          :          | LAB[C03] |             
-   1330   |          |          :          |          |             
-   1400   +----------+          :          +----------+             
-   1430   :          :          :          :          :             
-   1500   :          :          :          :          :             
-   1530   :          :          :          :          :             
-   1600   :          :          :          :          :             
-   1630   :          :          :          :          :             
-   1700   :          :          +----------+          :             
-   1730   :          :          |CS1010    |          :             
-   1800   :          :          +-TUT[10]--+          :             
-   1830   :          :          :          :          :             
-   1900   :          :          :          :          :             
-                                                                    
+   0900   +----------+          +----------+          :
+   0930   |CG1111A   |          |CG1111A   |          :
+   1000   | LAB[01]  |          | LAB[01]  |          :
+   1030   |          |          |          |          :
+   1100   |          |          |          |          :
+   1130   |          |          |          |          :
+   1200   +----------+          +----------+----------+
+   1230   |CS1010    |          :          |CS1010    |
+   1300   | SEC[1]   |          :          | LAB[C03] |
+   1330   |          |          :          |          |
+   1400   +----------+          :          +----------+
+   1430   :          :          :          :          :
+   1500   :          :          :          :          :
+   1530   :          :          :          :          :
+   1600   :          :          :          :          :
+   1630   :          :          :          :          :
+   1700   :          :          +----------+          :
+   1730   :          :          |CS1010    |          :
+   1800   :          :          +-TUT[10]--+          :
+   1830   :          :          :          :          :
+   1900   :          :          :          :          :
+
 
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
@@ -210,28 +210,28 @@ Corequisite  : CS2101 Effective Communication for Computing Professionals is
                co-requisite for CS2113T. Students exempted from CS2101 will take
                CS2113 which does not have CS2101 as co-req. Otherwise, CS2113
                and CS2113T are identical.
-Schedule     : 
-                                                                               
-          : Mon      : Tues     : Wed      : Thur                : Fri         
+Schedule     :
+
+          : Mon      : Tues     : Wed      : Thur                : Fri
 ===============================================================================
-   1100   :          :          :          :                     +----------+  
-   1130   :          :          :          :                     |CS2113    |  
-   1200   :          :          +----------+                     +-TUT[4]---+  
-   1230   :          :          |CS2113    |                     :             
-   1300   :          :          +-TUT[1]---+                     :             
-   1330   :          :          |CS2113    |                     :             
-   1400   :          :          +-TUT[2]---+                     :             
-   1430   :          :          :          :                     :             
-   1500   :          :          :          :                     :             
-   1530   :          :          :          :                     :             
-   1600   :          :          :          :                     +----------+  
-   1630   :          :          :          :                     |CS2113    |  
-   1700   :          :          :          +----------+----------+ LEC[1]   |  
-   1730   :          :          :          |CS2113    |CS2113    |          |  
-   1800   :          :          :          +-TUT[3]---+-TUT[5]---+----------+  
-   1830   :          :          :          :                     :             
-   1900   :          :          :          :                     :             
-                                                                               
+   1100   :          :          :          :                     +----------+
+   1130   :          :          :          :                     |CS2113    |
+   1200   :          :          +----------+                     +-TUT[4]---+
+   1230   :          :          |CS2113    |                     :
+   1300   :          :          +-TUT[1]---+                     :
+   1330   :          :          |CS2113    |                     :
+   1400   :          :          +-TUT[2]---+                     :
+   1430   :          :          :          :                     :
+   1500   :          :          :          :                     :
+   1530   :          :          :          :                     :
+   1600   :          :          :          :                     +----------+
+   1630   :          :          :          :                     |CS2113    |
+   1700   :          :          :          +----------+----------+ LEC[1]   |
+   1730   :          :          :          |CS2113    |CS2113    |          |
+   1800   :          :          :          +-TUT[3]---+-TUT[5]---+----------+
+   1830   :          :          :          :                     :
+   1900   :          :          :          :                     :
+
 
 --------------------------------------------------------------------------------
 Sem [1] >> --------------------------------------------------------------------------------
@@ -264,28 +264,28 @@ Corequisite  : CS2101 Effective Communication for Computing Professionals is
                co-requisite for CS2113T. Students exempted from CS2101 will take
                CS2113 which does not have CS2101 as co-req. Otherwise, CS2113
                and CS2113T are identical.
-Schedule     : 
-                                                                    
-          : Mon      : Tues     : Wed      : Thur     : Fri         
+Schedule     :
+
+          : Mon      : Tues     : Wed      : Thur     : Fri
 ====================================================================
-   1100   :          :          :          +----------+             
-   1130   :          :          :          |CS2113    |             
-   1200   :          :          :          +-TUT[1]---+             
-   1230   :          :          :          :          :             
-   1300   :          :          :          +----------+             
-   1330   :          :          :          |CS2113    |             
-   1400   :          :          :          +-TUT[2]---+             
-   1430   :          :          :          :          :             
-   1500   :          :          :          +----------+             
-   1530   :          :          :          |CS2113    |             
-   1600   :          :          :          +-TUT[3]---+----------+  
-   1630   :          :          :          :          |CS2113    |  
-   1700   :          :          :          :          | LEC[1]   |  
-   1730   :          :          :          :          |          |  
-   1800   :          :          :          :          +----------+  
-   1830   :          :          :          :          :             
-   1900   :          :          :          :          :             
-                                                                    
+   1100   :          :          :          +----------+
+   1130   :          :          :          |CS2113    |
+   1200   :          :          :          +-TUT[1]---+
+   1230   :          :          :          :          :
+   1300   :          :          :          +----------+
+   1330   :          :          :          |CS2113    |
+   1400   :          :          :          +-TUT[2]---+
+   1430   :          :          :          :          :
+   1500   :          :          :          +----------+
+   1530   :          :          :          |CS2113    |
+   1600   :          :          :          +-TUT[3]---+----------+
+   1630   :          :          :          :          |CS2113    |
+   1700   :          :          :          :          | LEC[1]   |
+   1730   :          :          :          :          |          |
+   1800   :          :          :          :          +----------+
+   1830   :          :          :          :          :
+   1900   :          :          :          :          :
+
 
 --------------------------------------------------------------------------------
 Sem [2] >> --------------------------------------------------------------------------------
@@ -293,7 +293,7 @@ Processing "import https://nusmods.com/timetable/sem-2/share?CFG1002=" ...
 
 Semester 2 timetable imported.
 CFG1002 added.
-The following lessons were added:
+The following lesson(s) were added:
 
 Please check that the format of the link provided is correct if there are missing modules or lessons.
 Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-timetable-import
@@ -304,7 +304,7 @@ Sem [2] >> ---------------------------------------------------------------------
 Processing "list" ...
 
 CFG1002  Career Catalyst
-         
+
 
 
 Here's a list of your current selected module(s)!
@@ -320,24 +320,24 @@ Processing "import https://nusmods.com/timetable/sem-2/share?CFG1002=&EG1311=LEC
 
 Semester 2 timetable imported.
 CFG1002 added.
-The following lessons were added:
+The following lesson(s) were added:
 
 EG1311 added.
-The following lessons were added:
+The following lesson(s) were added:
 LECTURE:1
 LABORATORY:17
 
 EG3301R added.
-The following lessons were added:
+The following lesson(s) were added:
 TUTORIAL:G11
 LECTURE:1
 
 EG4301 added.
-The following lessons were added:
+The following lesson(s) were added:
 LECTURE:1
 
 EG5302 added.
-The following lessons were added:
+The following lesson(s) were added:
 LECTURE:1
 
 Please check that the format of the link provided is correct if there are missing modules or lessons.
@@ -354,39 +354,39 @@ Here is your NUSMod Link:
 Sem [2] >> --------------------------------------------------------------------------------
 Processing "timetable /simple" ...
 
-                                                                                          
-          : Mon      : Tues     : Wed      : Thur     : Fri      : Sat      : Sun         
+
+          : Mon      : Tues     : Wed      : Thur     : Fri      : Sat      : Sun
 ==========================================================================================
-   0800   :          :          :          :          :          +----------+             
-   0830   :          :          :          :          :          |EG4301    |             
-   0900   :          :          :          :          +----------+ LEC[1]   |             
-   0930   :          :          :          :          |EG1311    |          |             
-   1000   :          :          :          :          +-LEC[1]---+----------+             
-   1030   :          :          :          :          :          :          :             
-   1100   :          :          :          :          :          :          :             
-   1130   :          :          :          :          :          :          :             
-   1200   :          :          :          :          :          :          :             
-   1230   :          :          :          :          :          :          :             
-   1300   :          :          :          :          :          :          :             
-   1330   :          :          :          :          :          :          :             
-   1400   :          :          :          :          :          :          :             
-   1430   :          :          :          :          :          :          :             
-   1500   :          :          +----------+          +----------+          :             
-   1530   :          :          |EG1311    |          |EG3301R   |          :             
-   1600   :          :          | LAB[17]  |          | TUT[G11] |          :             
-   1630   :          :          |          |          |          |          :             
-   1700   :          :          +----------+          |          |          :             
-   1730   :          :          :          :          |          |          :             
-   1800   :          :          +----------+----------+----------+          :             
-   1830   :          :          |EG3301R   |EG5302    |          :          :             
-   1900   :          :          | LEC[1]   | LEC[1]   |          :          :             
-   1930   :          :          |          |          |          :          :             
-   2000   :          :          |          |          |          :          :             
-   2030   :          :          |          |          |          :          :             
-   2100   :          :          +----------+----------+          :          :             
-   2130   :          :          :          :          :          :          :             
-   2200   :          :          :          :          :          :          :             
-                                                                                          
+   0800   :          :          :          :          :          +----------+
+   0830   :          :          :          :          :          |EG4301    |
+   0900   :          :          :          :          +----------+ LEC[1]   |
+   0930   :          :          :          :          |EG1311    |          |
+   1000   :          :          :          :          +-LEC[1]---+----------+
+   1030   :          :          :          :          :          :          :
+   1100   :          :          :          :          :          :          :
+   1130   :          :          :          :          :          :          :
+   1200   :          :          :          :          :          :          :
+   1230   :          :          :          :          :          :          :
+   1300   :          :          :          :          :          :          :
+   1330   :          :          :          :          :          :          :
+   1400   :          :          :          :          :          :          :
+   1430   :          :          :          :          :          :          :
+   1500   :          :          +----------+          +----------+          :
+   1530   :          :          |EG1311    |          |EG3301R   |          :
+   1600   :          :          | LAB[17]  |          | TUT[G11] |          :
+   1630   :          :          |          |          |          |          :
+   1700   :          :          +----------+          |          |          :
+   1730   :          :          :          :          |          |          :
+   1800   :          :          +----------+----------+----------+          :
+   1830   :          :          |EG3301R   |EG5302    |          :          :
+   1900   :          :          | LEC[1]   | LEC[1]   |          :          :
+   1930   :          :          |          |          |          :          :
+   2000   :          :          |          |          |          :          :
+   2030   :          :          |          |          |          :          :
+   2100   :          :          +----------+----------+          :          :
+   2130   :          :          :          :          :          :          :
+   2200   :          :          :          :          :          :          :
+
 
 --------------------------------------------------------------------------------
 Sem [2] >> --------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ Processing "remove cfg" ...
 
 Error! 	Wrong format, should be: remove [ MODULE_CODE ]
 Module is invalid! Please enter a valid module code.
-Each module of study has a unique module code consisting of a two- 
+Each module of study has a unique module code consisting of a two-
 or three-letter prefix that generally denotes the discipline,
 and four digits, the first of which indicates the level of the module
 (e.g., 1000 indicates a Level 1 module and 2000, a Level 2 module).
@@ -412,7 +412,7 @@ Error! 	Module not found! Please enter a valid module code! Try searching if you
 Sem [2] >> --------------------------------------------------------------------------------
 Processing "select" ...
 
-Error! 	Wrong format given, should be 
+Error! 	Wrong format given, should be
 	select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]
 	Missing parameter /module
 --------------------------------------------------------------------------------
@@ -456,12 +456,12 @@ Processing "import https://nusmods.com/timetable/st-i/share?EE4302=PLEC:01,PTUT:
 
 Semester 3 timetable imported.
 EE4302 added.
-The following lessons were added:
+The following lesson(s) were added:
 PACKAGED_LECTURE:01
 PACKAGED_TUTORIAL:01
 
 EE4305E added.
-The following lessons were added:
+The following lesson(s) were added:
 LECTURE:1
 TUTORIAL:1
 

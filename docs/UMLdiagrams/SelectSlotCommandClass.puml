@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class SelectSlotCommand {
+    - classNo: String
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_WORD: String
+    <u>+ ERROR_MODULE_DOES_NOT_EXIST: String
+    <u>+ ERROR_MODULE_NOT_SELECTED: String
+    <u>+ ERROR_UNEXPECTED_PARAMETER: String
+    <u>+ ERROR_WRONG_FORMAT: String
+    - lessonType: LessonType
+    <u>+ MISSING_PARAMS_KEY_OR_VALUE: String
+    - moduleCode: String
+    - params: Map<String, String>
+    <u>+ SELECTION_DATA_VALIDATION_FAILED: String
+    <u>+ SUCCESSFUL_MESSAGE: String
+
+    - processParams(Map<String, String>)
+}
+
+@enduml

@@ -1,5 +1,6 @@
 package seedu.duke.utils;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,28 @@ public class LinkTest {
     }
 
     @Test
+    public void parseLink_duplicateModules_firstModuleSaved() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10&MA1511=LEC:2,TUT:11", state, ui);
+        assertEquals(state.getSelectedModulesList().size(), 1);
+        Map<LessonType, String> selectedSlots = state.getSelectedModulesList().get(0).getSelectedSlots();
+        assertEquals("1", selectedSlots.get(LessonType.LECTURE));
+        assertEquals("10", selectedSlots.get(LessonType.TUTORIAL));
+    }
+
+    @Test
+    public void parseLink_duplicateLessons_firstLastLessonSaved() throws YamomException {
+        State state = new State();
+        Ui ui = new Ui();
+        Link.parseLink("https://nusmods.com/timetable/sem-1/share?MA1511=LEC:1,TUT:10,TUT:11,LEC:2", state, ui);
+        assertEquals(state.getSelectedModulesList().size(), 1);
+        Map<LessonType, String> selectedSlots = state.getSelectedModulesList().get(0).getSelectedSlots();
+        assertEquals("2", selectedSlots.get(LessonType.LECTURE));
+        assertEquals("11", selectedSlots.get(LessonType.TUTORIAL));
+    }
+
+    @Test
     public void getLink_noModuleState_noModuleLink() {
         State state = new State();
         String link = Link.getLink(state);
@@ -71,6 +94,7 @@ public class LinkTest {
 
     @Test
     public void isValidLink_validLink_true() {
+        assertTrue(Link.isValidLink("https://nusmods.com/timetable/sem-1/share?"));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/sem-1/share?CS2113="));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-i/share?CS2113="));
         assertTrue(Link.isValidLink("https://nusmods.com/timetable/st-ii/share?CS2113="));
@@ -78,6 +102,7 @@ public class LinkTest {
 
     @Test
     public void isValidLink_notValidLink_false() {
+        assertFalse(Link.isValidLink("https://nusmods.com/timetable/sem-1share?"));
         assertFalse(Link.isValidLink("https://nusmods.com/timetable/sem-a/share?CS2113="));
         assertFalse(Link.isValidLink("https://nusmods.com/timetable/st-iii/share?CS2113="));
     }

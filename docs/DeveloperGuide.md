@@ -227,7 +227,7 @@ Finally, it will also lead to tight coupling and decreased cohesion.
 
 ### 3.4 Command Component
 
-![Command Abstract Class](images/commandClass.png)
+![Command Abstract Class](images/Command.png)
 
 The <code>Command</code> component can:
 
@@ -271,19 +271,11 @@ instance of `module` from its class. Boolean `successful` field is used to flag 
 to instances where it is not possible to add the `module` as it already exists in the `state`'s `selectedModuleList`.
 It overrides the `execute()` method from the `Command` class, and updates `successful` accordingly, which will later be
 passed on to the overridden `getExecutionMessage()` which displays the result of data validation that
-new `selectedModule`
-added are unique.
+new `selectedModule` added are unique.
 
 ##### 3.4.1.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and add the desired
-module.
+As we do not want users to add duplicate modules, we need to check if the module (to add) already exists in the `selectedModuleList`.
 
 The following sequence diagram shows how the operation works:
 
@@ -295,6 +287,8 @@ Initially, data validation was being handled by the `Parser` class, however in t
 and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
 #### 3.4.2 RemoveModuleCommand
+
+![RemoveModuleCommand](images/RemoveModuleCommandClass.png)
 
 The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
@@ -313,14 +307,8 @@ instance is only removed from the `selectedModuleList` if it exists.
 
 ##### 3.4.2.2 Why it is implemented this way
 
-In order to be able to be able to compare the new instance of `selectedModule` created of the module code the user wants
-to delete,
-in the constructor against an instance of the module the user has previously added into the `selectedModuleList`,
-the `equals()`
-method extended from super class `Object` has been overridden to return `true` for instances where `semester`
-and `module`
-(specifically `moduleCode` attribute from the parent class) are the same, allowing us to validate and remove the desired
-module.
+As it does not make sense to remove a module that does not exist in the `selectedModuleList`, the `RemoveModuleCommand`
+have to check if the module (to remove) exists in the `selectedModuleList` before removing it.
 
 ##### 3.4.2.3 Alternatives considered
 
@@ -329,6 +317,8 @@ coupling
 and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
+
+![HelpCommand](images/HelpCommandClass.png)
 
 The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
 
@@ -379,22 +369,24 @@ multiple times and the search process will be too long.
 
 #### 3.4.5 SelectSlotCommand
 
+![SelectSlotCommand](images/SelectSlotCommandClass.png)
+
 The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the
-different
-lesson types.
+different lesson types.
 
 #### 3.4.6 SelectSemesterCommand
 
+![SelectSemesterCommand](images/SelectSemesterCommandClass.png)
+
 The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that
-the
-user wish to plan for.
+the user wish to plan for.
 
 #### 3.4.7 InfoCommand
 
 The <code>InfoCommand</code> class extends from the <code>Command</code> class and gets all the details of the module
 that the user wants.
 
-![GetModuleCommand](images/GetModuleCommand.png)
+![InfoCommand](images/InfoCommandClass.png)
 
 <!-- TODO: update diagram -->
 
@@ -442,20 +434,28 @@ to create duplicate code to fulfil similar needs as the timetable is needed by o
 
 #### 3.4.9 ByeCommand
 
+![ByeCommand](images/ByeCommandClass.png)
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
+![ListCommand](images/ListCommandCLass.png)  
 
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
 
+![ExportCommand](images/ExportCommandClass.png)  
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links.
 
 #### 3.4.12 ImportCommand
+
+![ImportCommand](images/importCommandClass.png)  
 
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
@@ -541,12 +541,11 @@ users to swap to using YAMOM.
 ##### 3.5.3.3 Alternatives considered
 
 Storing as <code>.json</code> file
-
 - would have to implement another function for export/import function
 
 Using the java preference API, `java.util.prefs.Preferences` to save user preferences
+- will not pass the GitHub automated checkers since it access and stores data in the registry.
 
-- will not pass the github automated checkers
 
 ## 4. Documentation
 
@@ -565,12 +564,16 @@ classes.
 
 #### 5.1.1. Input/Output re-direction.
 
+To run the IO re-direction tests, type `./text-ui-test/runtest.sh` (Linux/Mac) or `./text-ui-test/runtest.bat` (Windows) in your terminal. 
+
 This method is used to simulate user input and to test the output of the program. This method was introduced in our
 individual project and was used to test out the Duke main class. Similarly, this method is used in YAMOM. As simple as
 it may seem, this method is very useful in testing the program as it allows us to test the program without having to
 waste time typing in the commands manually. A simple file comparison is done to check if the output is as expected.
 
 #### 5.1.2. Unit testing
+
+JUnit tests can be run using `./gradlew test`.
 
 Unit testing is done to test the individual functions of the classes. This is done to ensure that the functions are
 properly working in isolation. This is done by using the assertEquals/ assertTrue/ assertThrows method to check if
@@ -599,7 +602,7 @@ returned is as expected.
 #### 5.1.3. Regression testing
 
 Regression testing is done to ensure that the program is still working as expected after a change has been made. This
-is being done by running gradlew /test and checking if the tests are still passing. This is done to ensure that the
+is being done by running `./gradlew test` and checking if the tests are still passing. This is done to ensure that the
 newly added features do not break the previously existing features.
 
 #### 5.1.4. Developer testing
