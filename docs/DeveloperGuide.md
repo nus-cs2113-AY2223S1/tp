@@ -54,6 +54,8 @@
 * [Glossary](#glossary)
 * [Manual Testing](#manual-testing)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
