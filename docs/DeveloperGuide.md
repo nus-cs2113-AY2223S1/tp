@@ -227,23 +227,17 @@ further methods will be triggered as explained below.
 
 ### Delete a passenger feature
 
-<div align="justify">  
-
 A delete function that removes a passenger's detail from the passenger's log book is
 facilitated by `DeletePassengerCommand`. It extends an abstract `Command` with an override method called `execute`.
 The abstract `Command` extends a `Parser` which holds and validates the User input to determine the type of command.
-
-</div>  
 
 Furthermore, `DeletePassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
   to execute the delete operation that should remove a passenger from the logbook
 
-<div align="justify">  
 The class diagram as depicted below shows the behaviour of the passenger delete operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger delete` command for easier readability.  
-</div>  
+This scenario assumes that the manager have input a valid `passenger delete` command for easier readability.
 
 
 Part 1:
@@ -282,23 +276,17 @@ When `paser` verifies that the command is an entity `passenger` and `delete` ope
 
 ### List passengers feature
 
-<div align="justify">  
-
 A list function lists out all passengers' details in table form which is facilitated by `ListPassengerCommand`. It
 extends an abstract `Command` with an override method called `execute`.
 The abstract `Command` extends a `Parser` which holds and validates the User input to determine the type of command.
-
-</div>  
 
 Furthermore, `ListPassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
   to execute the list operation that should list out all the passengers from the logbook.
-
-<div align="justify">  
+ 
 The class diagram as depicted below shows the behaviour of the passenger list operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger list` command for easier readability.  
-</div>
+This scenario assumes that the manager have input a valid `passenger list` command for easier readability.
 
 Part 1:
 
@@ -734,6 +722,7 @@ Followed by the format that each parameter should adhere to.
 | NEW_GATE_NUMBER    | Input gate number should follow GATE_NUMBER constraints but must not be the same value                                                                                                                      | `22`                                |
 | BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
 | SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
+
 ### Storage of flights and passengers
 * Storage will automatically update in the `SkyControl.txt` file found in the `data` directory.
 * Both flight and passenger are stored in the same text file. 
