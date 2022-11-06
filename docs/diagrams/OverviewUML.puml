@@ -1,0 +1,52 @@
+'https://plantuml.com/sequence-diagram
+
+@startuml
+[-> Duke: User input
+activate Duke
+Duke -> Parser: parse(input)
+activate Parser
+Parser -> Parser: specificCase(commandWord, content)
+activate Parser
+create Overview
+Parser -> Overview: new Overview()
+activate Overview
+return c: Overview
+return c: Overview
+return c: Overview
+deactivate Parser
+Duke -> Overview: c.execute(moduleList)
+activate Overview
+Overview -> UI: printMessage
+activate UI
+create Check
+UI -> Check: findCurrentSem()
+activate Check
+return currentSem: String
+UI -> ModuleList: totalMcs()
+activate ModuleList
+return mcs: String
+UI -> ModuleList: totalGradedMcs()
+activate ModuleList
+return mcs: String
+UI -> ModuleList: totalUngradedMcs()
+activate ModuleList
+return mcs: String
+UI -> ModuleList: totalSUMcs()
+activate ModuleList
+return mcs: String
+UI -> ModuleList: calcCAP()
+activate ModuleList
+return cap: double
+UI -> ModuleList: mcsForGraduation()
+activate ModuleList
+return mcs: String
+UI -> Check: checkNOC()
+activate Check
+return eligibility: boolean
+UI -> Check: checkSEP()
+activate Check
+return eligibility: boolean
+deactivate UI
+deactivate Overview
+
+@enduml

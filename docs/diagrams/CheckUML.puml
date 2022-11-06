@@ -2,8 +2,8 @@
 'https://plantuml.com/sequence-diagram
 
 @startuml
-activate Duke
 [-> Duke: User input
+activate Duke
 Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
@@ -21,8 +21,8 @@ Check -> Check: eligibility
 activate Check
 return eligible: boolean
 Check -> UI: printCheckMessage()
-deactivate Check
 activate UI
 deactivate UI
+deactivate Check
 
 @enduml

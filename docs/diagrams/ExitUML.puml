@@ -2,8 +2,8 @@
 'https://plantuml.com/sequence-diagram
 
 @startuml
-activate Duke
 [-> Duke: User input
+activate Duke
 Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
@@ -18,9 +18,9 @@ deactivate Parser
 Duke -> Exit: c.execute(moduleList)
 activate Exit
 Exit -> UI: printExitMessage()
-deactivate Exit
 activate UI
 deactivate UI
+deactivate Exit
 deactivate Duke
 
 @enduml
