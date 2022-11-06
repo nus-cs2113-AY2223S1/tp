@@ -372,8 +372,9 @@ create an instantiation of `DeleteFlightCommand`.
 3. Given a valid flight number, `findAndRemoveFlight(flightNumber)` will search through the entire arraylist `flights`
    to find if the flight number exists and remove it from the arraylist.
 4. Upon successful deletion, `showFlightRemovedMessage()` is called which prints a message to the user to indicate a
-   successful
-   delete operation
+   successful delete operation
+5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
+the information of the passengers which contain the flight number that has been successfully removed.
 
 ---
 
