@@ -75,7 +75,7 @@ public class ViewUserGainCommand extends Command {
         if (isValidUser(userName)) {
             double totalProfit =
                     transactionList.getLendTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.printResponse("The amount of money earned of "
+            Ui.printResponse("The amount of money earned by "
                     + userName + " is: $" + String.format("%.2f", totalProfit));
         }
         return false;

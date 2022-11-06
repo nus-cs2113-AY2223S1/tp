@@ -74,7 +74,7 @@ public class ViewUserLossCommand extends Command {
         if (isValidUser(userName)) {
             double totalLoss =
                     transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.printResponse("The amount of money loss of " + userName + " is: $" + String.format("%.2f", totalLoss));
+            Ui.printResponse("The amount of money loss by " + userName + " is: $" + String.format("%.2f", totalLoss));
         }
         return false;
     }
