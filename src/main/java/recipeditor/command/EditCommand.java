@@ -11,11 +11,13 @@ import recipeditor.recipe.RecipeList;
 
 public class EditCommand extends Command {
     public static final String COMMAND_TYPE = "/edit";
+
     private static final String INCORRECT_SYNTAX_MESSAGE = "/edit syntax is incorrect. "
             + "Please check again using the '/help edit' command";
     private static final String EDIT_SUCCESS = " successfully edited.";
     private static final String EDIT_FAILED = "Edit failed";
     private static final String NO_EDIT = "No edit was made";
+
     private static final String COMMAND_FUNCTION = "\nEdit an existing recipe by: \n"
             + "-add Add a new step or ingredient \n"
             + "-del Delete an existing step or ingredient \n"

@@ -25,6 +25,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main parser class to parse command.
+ */
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
@@ -205,6 +208,9 @@ public class Parser {
                 editedRecipe.addSteps(originalRecipe.getSteps());
 
                 FlagType[] flags = FlagParser.getFlags(parsed);
+                if (flags == null) {
+                    return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                }
                 if (flags[0] == FlagType.NULL) {
                     throw new MissingFlagsException("command");
                 }
@@ -218,7 +224,7 @@ public class Parser {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             } catch (Exception e) {
-                Ui.showMessage(e.getMessage());
+                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);

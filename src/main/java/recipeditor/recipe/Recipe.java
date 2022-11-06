@@ -3,6 +3,7 @@ package recipeditor.recipe;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Recipe {
     private final ArrayList<Ingredient> ingredients;
@@ -66,15 +67,6 @@ public class Recipe {
         return this.ingredients.get(index);
     }
 
-    public Ingredient getIngredientByName(String ingredientName) {
-        for (Ingredient i : ingredients) {
-            if (i.getName().equals(ingredientName)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
     public void deleteIngredient(int index) throws IndexOutOfBoundsException {
         this.ingredients.remove(index);
     }
@@ -119,7 +111,8 @@ public class Recipe {
                     + 1, ingredient.getName(), ingredient.getAmount(), ingredient.getUnit().trim());
             recipeIngredientStringFormatted.append(textShown);
         }
-        //        logger.log(Level.INFO, "Get ingredients in" + title);
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Get ingredients in" + title);
         return recipeIngredientStringFormatted.toString();
     }
 
@@ -129,7 +122,8 @@ public class Recipe {
             String textShown = String.format("%d. %s%n", i + 1, getStep(i));
             recipeStepStringFormatted.append(textShown);
         }
-        //        logger.log(Level.INFO, "Get steps");
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Get steps");
         return recipeStepStringFormatted.toString();
     }
 
@@ -139,7 +133,8 @@ public class Recipe {
                 + description.trim() + "\n\n" + "# INGREDIENTS <ingredient name> / <amount> / <unit> \n"  //Remove trim
                 + getIngredientAttributesFormatted() + "\n" + "# STEPS \n"
                 + getStepAttributesFormatted() + "\n\n";
-        //        logger.log(Level.INFO, "Get attributes of " + title);
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;
     }
 
@@ -149,7 +144,8 @@ public class Recipe {
                 + description.trim() + "\n\n" + "INGREDIENTS: "
                 + "\n" + getIngredientAttributesFormatted() + "\n" + "STEPS: "
                 + "\n" + getStepAttributesFormatted() + "\n\n";
-        //        logger.log(Level.INFO, "Get attributes of " + title);
+        logger.setLevel(Level.WARNING);
+        logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;
     }
 

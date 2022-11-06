@@ -8,10 +8,15 @@ import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+
 public class Recipeditor {
     public static final String DATA_FILE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.WARNING);
         run(args);
     }
 
