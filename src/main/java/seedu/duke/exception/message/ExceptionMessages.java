@@ -94,7 +94,7 @@ public class ExceptionMessages {
                     + "to avoid errors, which also mean that all your data will be gone forever\n"
                     + "In that case, we will create three brand-new lists for your users, items, and transactions\n"
                     + "REMEMBER that all files in data folder must be edited correctly\n"
-                    + "Do you want to force reset all files and restart? y or n";
+                    + "Do you want to force reset all files and restart? Y or N";
     public static final String MESSAGE_EXIT_DUKE = "Exit Duke and please edit correctly...";
     public static final String MESSAGE_RESET_DUKE = "Force reset files and please restart...";
     public static final String MESSAGE_NAME_LENGTH_INVALID = "The length of name must be no more than 20 characters";

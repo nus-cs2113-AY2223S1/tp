@@ -66,8 +66,9 @@ public class ItemStorage extends Storage {
         } catch (FileNotFoundException e) {
             throw new ItemFileNotFoundException(MESSAGE_FILE_NOT_FOUND);
         } catch (Exception e) {
+            String line = "____________________________________________________________\n";
             throw new StoreFailureException(MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED + lineNo
-                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + MESSAGE_TO_FIX_FILES);
+                    + MESSAGE_STORAGE_REASON + e.getMessage() + "\n" + line + MESSAGE_TO_FIX_FILES);
         }
     }
 
