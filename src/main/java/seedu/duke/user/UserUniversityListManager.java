@@ -100,7 +100,7 @@ public class UserUniversityListManager {
             getUserUniversityList(inputSchool).addModule(inputModule);
         } else {
             throw new InvalidUserCommandException("Error: No list containing such university\n"
-                    + "Please create a list for " + inputSchool + " first!");
+                    + "Please create a list for " + inputSchool + " first");
         }
     }
 
