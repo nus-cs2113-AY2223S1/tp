@@ -203,6 +203,18 @@ passing the `Patient` and `FileWriter` objects.
 4. The most recently called method writes the data of this `Patient` attribute by attribute in a pre-specified format.
 5. After all iterations, control is returned to the class that called the `savePatientData` method.
 
+
+### UI Component
+* handles printing messages to the user
+* handles printing errors to the user
+
+**Important methods in the `UI` class:**
+* `printWelcomeMessage` - prints logo and welcome message to the user when opening "OneDoc"
+* `printObject` - prints object - patient/visit/prescription and their corresponding index 
+* `printMessageAndObject` - prints object - patient/visit/prescription and their corresponding index, given message and object type
+* `printErrorMessage` - prints error to the user
+
+
 ### Parser Component
 
 The `Parser` component,
@@ -246,6 +258,7 @@ to be a Matcher for it.
 5. The method then returns the result to the UI, which presents it to the user.
 6. If there is an error, the specific relevant command is identified in this method, and the format guide is returned
 to the user.
+
 
 ## Product scope
 ### Target user profile
