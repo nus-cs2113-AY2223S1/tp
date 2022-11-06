@@ -15,19 +15,24 @@ reception to record appointments, assign tasks, and manage data of pets/services
 - implemented duplicate check when adding service
 - improved index increment workflow in add task
 - improved input check of parsers
-- improved 
+- implemented all tasks related to an appointment be deleted one the appointment is removed
+- implemented all appointments related to a pet be deleted once the pet is removed.
 
 ### Contributions to the UG: 
-I wrote the introduction, quick start, features (Except from task finish), and command summary. I will also update UG 
-after other group members made changes to their code.
+- wrote the introduction, quick start, features (Except from task finish), and command summary
+- update UG after other group members made changes to their code.
 
 ### Contributions to the DG: 
 I drew the view employee uml diagram.
 
 ## Contributions to team-based tasks
 
+
 ### Review/mentoring contributions: 
 Links to PRs reviewed, instances of helping team members in other ways.
+[CS2113-W13-2](https://github.com/nus-cs2113-AY2223S1/tp/pull/6)
+
+
 ### Contributions beyond the project team:
-Evidence of helping others e.g. responses you posted in our forum, bugs you reported in other team's products,
-Evidence of technical leadership e.g. sharing useful information in the forum
+TP tested
+[CS2113-T17-3](https://github.com/sylviahe171/ped/issues)
