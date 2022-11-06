@@ -26,10 +26,13 @@ and transactions via a Command Line Interface.
     + Enhanced addUser command class made by bdthanh
     + Enhanced Transaction class made by bdthanh
     + Improved IDGenerator class made by bdthanh
+    + Modified commands that require price inputs
     + Tweaks to Ui's display messages
 + **User Guide contributions:**
     + Wrote guide for view-related and find-related commands (`view-user`, `view-item`, `view-tx`, `find-tx`)
     + Contributed to help command
+    + Ensured consistency in UG formatting
+    + Contributed to FAQ
 + **Developer Guide contributions:**
     + Wrote `Introduction`, `Duke` and `help` sections
     + Contributed to `User Stories` and `Glossary` 
