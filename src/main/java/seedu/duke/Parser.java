@@ -59,7 +59,8 @@ public class Parser {
 
     //@@author redders7
     public String[] getCommandWord(String input) {
-        String[] result = input.split(" ");
+        String trimmedInput = input.trim();
+        String[] result = trimmedInput.split(" ");
         return result;
     }
 
