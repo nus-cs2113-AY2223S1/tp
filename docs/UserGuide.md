@@ -782,15 +782,15 @@ ____________________________________________________________
 
 ## 5. Frequently Asked Questions
 
-1. How do I transfer my data to another computer?
+**Question:** How do I transfer my data to another computer?
 
 >On your other computer, download your ```Upcycle.jar``` file following the instructions in [Quick Start](#2-quick-start). Then, you copy the `data` folder and paste into your folder for Upcycle on your new computer. That's it, now you can run our app with your previous data on another computer.
 
-If Duke crashes, is my data saved?
+**Question:** If Duke crashes, is my data saved?
 
 >Yes, Duke will automatically save your data to files after each operation. Therefore, data will be saved no matter how you exit the program, even with ```Ctrl-C```.
 
-2. What will happen if I modify incorrectly data in the files?
+**Question:** What will happen if I modify incorrectly data in the files?
 
 > Duke will detect if the data is modified incorrectly or not. If yes, it would give you a chance to try to fix the data in the files, but they would not able
 > to use the app until Duke detect your data is fixed. If you cannot fix it, then you can choose to delete entire ```data``` folder. However, this also means that your previous data cannot be recovered.
@@ -817,7 +817,7 @@ If Duke crashes, is my data saved?
 > ____________________________________________________________
 >```
 
-3. How can I manually edit data files correctly?
+**Question:** How can I manually edit data files correctly?
 
 > 
 >**User file**
@@ -863,7 +863,7 @@ If Duke crashes, is my data saved?
 > You are allowed to change the item ID when all transactions related to them are finished and that ID is unique.
 > You are allowed to change the transaction ID if that new ID is unique.
 
-4. Why am I able to enter duplicates of the same item?
+**Question:** Why am I able to enter duplicates of the same item?
 > Upcycle allows for duplicate items to be listed as transactions are made through each item's unique ID instead of the item's name. 
 
 
