@@ -364,22 +364,17 @@ _Written by: Chua Han Yong Darren_
 
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
-The `AddCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `AddCommand` is
-shown below.
+The `AddCommand` inherits properties from the abstract `Command` class.
+
+`AddCommand` is dependent on `CommandParser` which accesses its `COMMAND_WORD` and creates a new `AddCommand` object which would be returned to `Duke`.
+`Duke` is associated to `AddCommand` by calling for `AddCommand#execute()`.
+It is also associated with `TransactionList`, `Ui`, `Storage`, which are used within `AddCommand` methods like `AddCommand#execute()` and `AddCommand#addTransaction()`.
+Lastly it is also associated with `ParameterParser` which calls for`AddCommand#getMandatoryTags()` that retrieves the mandatory tags (which itself is taken from `CommandTag`). 
+
+The relationship between the classes are shown below. Non-essential info has been omitted for simplification purposes.
 
 <p align="center">
-    <img src="images/AddCommandClassDiagram.png" width = "50%">
-    <br />
-    <i>Figure 11: Class Diagram for Add Command</i>
-</p>
-
-`AddCommand` is dependent on `CommandParser` which accesses its `COMMANDWORD` and creates a new `AddCommand` object. 
-It is also associated with `TransactionList`, `Ui`, `Storage`, which are used in `AddCommand#execute()`; and the `Duke` 
-which calls for `AddCommand#execute()`. Lastly it is also associated with `ParameterParser` which calls for 
-`AddCommand#getMandatoryTags()`. The relationship between the classes are shown below.
-
-<p align="center">
-    <img src="images/AddCommandDetailedClassDiagram.png">
+    <img src="images/AddCommandExternalClasses.png">
     <br />
     <i>Figure 12: Class Diagram for Add Command and Related Classes</i>
 </p>
@@ -387,8 +382,8 @@ which calls for `AddCommand#execute()`. Lastly it is also associated with `Param
 These are the important operations performed within the `AddCommand` class, with task description:
 
 - `AddCommand#execute(TransactionList transactions, Ui ui, Storage storage)` - Adds a `Transaction` object to the
-  `TransactionList transactions` ArrayList via transactions#addIncome() or transactions#addExpense() which would be
-  called based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
+  `TransactionList transactions` ArrayList via `AddCommand#addTransaction()` that calls for `transactions#addIncome()` 
+or `transactions#addExpense()` based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
   would be called to display the acknowledgement message to the interface. Also, the storage#writeToFile() method would
   be called to store the newly updated transactions values in the duke.txt file.
 
