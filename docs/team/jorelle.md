@@ -9,24 +9,25 @@ and transactions via a Command Line Interface.
 
 ### Summary of Contributions
 + **Code contributed:**
-    + Codes written can be seen [here]()
-    + List of PRs can be seen [here]()
-
+    + Code written for this project can be seen [here](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=zoom&zA=jorellesee&zR=AY2223S1-CS2113-W12-1%2Ftp%5Bmaster%5D&zACS=176.60059171597632&zS=2022-09-16&zFS=&zU=2022-11-05&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 + **Features and classes implementations:**
     + User-related features:
         + View a user's borrow transactions `view-user-borrow-tx`
         + View a user's lend transactions `view-user-lend-tx`
         + View a user's gain `view-user-gain`
         + View a user's loss `view-user-loss`
+        + Find user by keyword `find users`
     + Item-related features:
-          + Find items by keyword `find-items`
-    +  Wrote base class for Ui
-    + Testing: Wrote user-related tests.
+      + Find items by keyword `find-items`
+    + Wrote base class for Ui
+    + Testing: Wrote some Ui related tests.
     + DukeException: Contributed to some exception classes and ExceptionMessages.
 + **User Guide contributions:**
     + Wrote guide for all of the above features
 + **Developer Guide contributions:**
-    + Contributed to the Implementation subsection for all of the above features
+    + Contributed to the Implementation subsection for all of the above features. Below are some diagrams drawn:
+  ![](../images/FindItemSequence.png)
+  ![](../images/ViewBorrowTxByUser.png)
     + Contributed to User Stories
     + Contributed to User Profile
 + **Team tasks contributions:**
