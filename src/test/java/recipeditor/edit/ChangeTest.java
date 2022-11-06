@@ -33,6 +33,7 @@ public class ChangeTest {
         Recipe newRecipe = ed.execute();
         assertEquals(newRecipe.getIngredient(0).getName(), "new ingredient ");
     }
+
     @Test
     void changeStep_correctArgs_correctParsing() throws InvalidFlagException, ParseException {
         String newStep = "new step";

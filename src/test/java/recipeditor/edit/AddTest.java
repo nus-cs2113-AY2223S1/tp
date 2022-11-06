@@ -51,4 +51,17 @@ public class AddTest {
             assert false;
         }
     }
+
+    @Test
+    void addIngredient_correctArgs_incorrectParsing() {
+        String[] input = { "/edit", "1", "-add", "-i", "new ingredient" };
+        EditModeCommand ed = new Add(FlagType.INGREDIENT, input, recipe);
+        try {
+            ed.execute();
+        } catch (ParseException p) {
+            assert true;
+        } catch (Exception e) {
+            assert false;
+        }
+    }
 }

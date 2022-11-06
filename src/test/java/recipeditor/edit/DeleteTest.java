@@ -23,17 +23,30 @@ public class DeleteTest {
         recipe = new Recipe(TEST_RECIPE_TITLE, "test_description");
         recipe.addIngredient(new Ingredient("ingredient", 100.0, "g"));
         recipe.addStep("step 1");
-        recipe.addStep("finishing step ~");
     }
 
     @Test
-    public void delete_success() {
+    public void deleteIngredient_success() {
         String[] parsedCommand = {"/edit", "1", "-del", "-i", "1"};
         FlagType ingredientFlag = FlagType.INGREDIENT;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
         try {
             String actual = delete.execute().getIngredientAttributesFormatted();
             String expected = new Recipe().getIngredientAttributesFormatted();
+            assertEquals(expected, actual);
+        } catch (InvalidFlagException e) {
+            assert false;
+        }
+    }
+
+    @Test
+    public void deleteStep_success() {
+        String[] parsedCommand = {"/edit", "1", "-del", "-s", "1"};
+        FlagType ingredientFlag = FlagType.STEP;
+        Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
+        try {
+            String actual = delete.execute().getStepAttributesFormatted();
+            String expected = new Recipe().getStepAttributesFormatted();
             assertEquals(expected, actual);
         } catch (InvalidFlagException e) {
             assert false;
