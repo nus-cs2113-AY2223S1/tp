@@ -123,7 +123,10 @@ public class HelpCommand extends Command {
             "Please note that except for 'find-item' and 'find-user'"
                     + ", all other commands are case-sensitive!\n";
     private static final String INVALID_SYMBOLS_REMINDER =
-            "Refrain from using '|' and '/' as arguments!";
+            "Refrain from using '|' and '/' as arguments!\n";
+
+    private static final String PRICE_DECIMAL_REMINDER =
+            "Please note that price inputs can only have at most 2 decimals!";
 
     private static final String UNDERLINE = System.lineSeparator() + "--------------------";
     private final LinkedHashMap<String, String> commandToDetailMap;
@@ -190,7 +193,7 @@ public class HelpCommand extends Command {
             output.append(entry.getKey()).append(COMMAND_TO_DETAIL_SEPARATOR_TOKEN)
                     .append(entry.getValue()).append(System.lineSeparator());
         }
-        output.append(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER);
+        output.append(ADD_SPACE_REMINDER + CASE_SENSITIVE_REMINDER + INVALID_SYMBOLS_REMINDER + PRICE_DECIMAL_REMINDER);
         return output.toString();
     }
 }

@@ -13,11 +13,14 @@ import seedu.duke.item.ItemList;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 
+import java.math.BigDecimal;
+
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_NUMBER_OF_ARGS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_INVALID_PARTS;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_TOO_MANY_DECIMALS;
 
 // @@author winston-lim
 public class UpdateItemCommand extends Command {
@@ -98,12 +101,14 @@ public class UpdateItemCommand extends Command {
      * 
      * @param price String value of given price
      * @return true if price is valid
-     * @throws InvalidPriceException If price is out of range(0, 10000)
+     * @throws InvalidPriceException If price is out of range(0, 10000) or price has too many decimals
      */
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {
             if (Double.parseDouble(price) < MIN_PRICE || Double.parseDouble(price) > MAX_PRICE) {
                 throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
+            } else if (BigDecimal.valueOf(Double.parseDouble(price)).scale() > 2) {
+                throw new InvalidPriceException(MESSAGE_PRICE_TOO_MANY_DECIMALS);
             }
             return true;
         } catch (NumberFormatException e) {
