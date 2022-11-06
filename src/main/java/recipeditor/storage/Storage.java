@@ -128,6 +128,7 @@ public class Storage {
             for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
                 fw.write(recipeTitle + "\n");
             }
+            logger.log(Level.INFO, "writing to all recipe title file");
             fw.close();
         } catch (IOException ioException) {
             Ui.showMessage("Error in loading recipes to data file");
