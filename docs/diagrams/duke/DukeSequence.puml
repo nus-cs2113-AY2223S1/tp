@@ -8,8 +8,8 @@ activate ":Duke"
 activate "<<class>>\nUi"
 "<<class>>\nUi" --> ":Duke"
 deactivate "<<class>>\nUi"
-":Duke" -> ":Storage" : loadData()
-activate ":Storage"
+":Duke" -> ":StorageManager" : loadData()
+activate ":StorageManager"
 return userList, itemList, transactionList
 loop until isLastCommand
     ":Duke" -> "<<class>>\nUi": readInput()
@@ -36,8 +36,8 @@ loop until isLastCommand
         ":Command" --> ":Duke"
         deactivate ":Command"
         destroy ":Command"
-        ":Duke" -> ":Storage" : writeData()
-        activate ":Storage"
+        ":Duke" -> ":StorageManager" : writeData()
+        activate ":StorageManager"
         return
 
     else command is invalid
