@@ -263,7 +263,7 @@ Step 4: The list of items will then be displayed to the user via `Ui.printRespon
 The following sequence diagram shows how the view-user-items operation works:
 ![viewUserItemsSequence](images/ViewUserItemsSequence.png)
 
-### 4.1.6. Find Users by Keyword
+#### 4.1.6. Find Users by Keyword
 
 >This feature allows users to find items through the command ```find-user```.
 
@@ -277,7 +277,7 @@ Step 3: FindUserCommand will check for the delimiter "/k". If it is not present,
 
 Step 4: The UserList is iterated through to check for Users that match the provided keyword. Matched users are appended to a List which is returned and then printed by `Ui.printResponse()`.
 
-### 4.1.7. View User Loss
+#### 4.1.7. View User Loss
 
 >This feature allows users to find user debt by summing all moneyTransacted in all the Transactions in which the User is a Borrower through the command ```view-user-debt```.
 
