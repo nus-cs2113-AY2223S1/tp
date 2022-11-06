@@ -5,8 +5,8 @@ class AddModuleCommand {
     - module: Module
     - successful: boolean
     <u>+ ERROR_WRONG_FORMAT: String
-    <u>+ ERROR_WRONG_FORMAT: String
     <u>+ MODULE_NOT_FOUND: String
+    <u>+ COMMAND_DESCRIPTION: String
     <u>+ COMMAND_USAGE: String
     <u>+ COMMAND_WORD: String
 
