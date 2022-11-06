@@ -20,7 +20,7 @@ activate consoleInterface USER_INTERFACE_COLOR_1
 consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lloadFromFile(\n\tsavedExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedIncomes:ArrayList<Income>,\n\tsavedTargets:ArrayList<Target>\n)
 activate LocalStorage STORAGE_COLOR_1
 
-LocalStorage --[STORAGE_COLOR_1]> consoleInterface
+LocalStorage --[STORAGE_COLOR_1]> consoleInterface : sortCommandSetting:ConsoleCommandSortExpense
 deactivate LocalStorage
 
 consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lsetExpenses(\n\tsavedExpense\n\t:ArrayList<Expense>\n)
