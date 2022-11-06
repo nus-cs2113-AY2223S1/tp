@@ -44,7 +44,7 @@ and ensure that the components they pick are compatible with one another.
     - General bug fixes. (PR: [#17](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/17), [#38](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/18), 
   [#41](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/41), [#133](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/133))
 - **Documentation:**
-    - JavaDocs for Ui, Parser, Build, LinkedHashMap2D and Export classes. (PR: [#65](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/65))
+    - JavaDocs for Ui, Parser, EditParser, Build, LinkedHashMap2D and Export classes. (PR: [#65](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/65))
     - User Guide:
         - Added TOC, introduction, quick start, FAQ and summary of commands. (PR: [#60](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/60), 
         [#127](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/127))
