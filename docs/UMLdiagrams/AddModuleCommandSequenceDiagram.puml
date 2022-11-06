@@ -40,7 +40,7 @@ AddModuleCommand --> Duke
 
 else module is offered in semester
 create SelectedModule
-AddModuleCommand -> SelectedModule : SelectedModule()
+AddModuleCommand -> SelectedModule : new SelectedModule()
 activate SelectedModule
 SelectedModule --> AddModuleCommand
 deactivate SelectedModule
@@ -56,7 +56,7 @@ State --> AddModuleCommand
 deactivate State
 end
 
-AddModuleCommand -> Ui :addMessage(getExecutionMessage())
+AddModuleCommand -> Ui :addMessage()
 activate Ui
 AddModuleCommand -> Ui :displayUi()
 Ui --> AddModuleCommand :

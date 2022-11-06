@@ -23,7 +23,7 @@ State --> RemoveModuleCommand
 deactivate State
 
 create SelectedModule
-RemoveModuleCommand -> SelectedModule : SelectedModule()
+RemoveModuleCommand -> SelectedModule : new SelectedModule()
 activate SelectedModule
 SelectedModule --> RemoveModuleCommand
 deactivate SelectedModule
