@@ -11,6 +11,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String[] parameters, CommandType commandType, boolean isDeleteModule, Lesson lesson) {
         super(parameters, commandType);
+        assert commandType.equals(CommandType.DELETE);
         this.lesson = lesson;
         this.universityName = parameters[1].substring(2);
         if (isDeleteModule) {

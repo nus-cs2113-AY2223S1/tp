@@ -11,6 +11,7 @@ public class ListCommand extends Command {
      */
     public ListCommand(String[] parameters, CommandType commandType) {
         super(parameters, commandType);
+        assert commandType.equals(CommandType.LIST);
         if (parameters[1].equals("UNIVERSITIES")) {
             this.listOption = "UNIVERSITIES";
         } else if (parameters[1].equals("MODULES")) {
