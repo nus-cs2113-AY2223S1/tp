@@ -3,54 +3,47 @@
 skinparam classAttributeIconSize 0
 
 
-class Ui {
-+output(output: String ...): void
-}
-abstract class Command {
-{abstract} +execute(): void
-}
 class AddCommand {
 -arguments: String
 +execute(): void
-+addWeightAndFat(argumentList:
-String[]): void
+-addWeightAndFat(argumentList: String[]): void
 }
 class SetCommand {
 -arguments: String
 +execute(): void
--setBiometrics(argumentList:
-String[]): void
+-setBiometrics(argumentList: String[]): void
+}
+class RemoveCommand {
+-arguments: String
++execute(): void
+-removeWeight(index: int): void
 }
 class Biometrics {
--int age
--String gender
--int height
--int activityLevel
-+setBiometrics(age: int, gender: String,
-height: int, activityLevel: int): void
+-age: int
+-gender: String
+-height: int
+-activityLevel: int
++setBiometrics(age: int, gender: String, height: int, activityLevel: int): void
 +toString(): String
 +saveBiometrics(): String
 }
 class WeightAndFat {
--int weight
--int fat
+-weight: int
+-fat: int
+-date: LocalDate
 +toString(): String
 +saveWeightAndFat(): String
-+listWeightAndFat(): String
 }
 class WeightAndFatList {
-+addWeightAndFat(weightAndFat:
-WeightAndFat): void
++addWeightAndFat(weightAndFat: WeightAndFat): void
++getMostRecent(): WeightAndFat
++removeWeightAndFat(index: int): WeightAndFat
 }
 
-AddCommand --|> Command
-SetCommand --|> Command
-Duke --> AddCommand
-Duke --> SetCommand
-SetCommand ..> Ui
-AddCommand ..> Ui
+
 AddCommand --> "1"Biometrics
 SetCommand --> "1"Biometrics
+RemoveCommand --> "1"Biometrics
 Biometrics --> "1"WeightAndFatList
 WeightAndFatList *-> "*"WeightAndFat : ArrayList of >
 

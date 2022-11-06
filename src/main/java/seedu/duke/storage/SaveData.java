@@ -4,7 +4,7 @@ package seedu.duke.storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.Food;

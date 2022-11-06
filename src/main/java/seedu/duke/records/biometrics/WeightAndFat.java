@@ -1,7 +1,7 @@
 package seedu.duke.records.biometrics;
 
 import seedu.duke.records.Record;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,14 +58,10 @@ public class WeightAndFat extends Record {
         return String.format("/%d /%d /%s", weight, fat, getDateString());
     }
 
-    public String listWeightAndFat(ArrayList<WeightAndFat> weightAndFatArrayList) {
-        return String.format("%d | %d | %d", weightAndFatArrayList.indexOf(this) + 1, weight, fat);
-    }
-
     @Override
     public String toString() {
         return "Weight: " + weight + "kg" + System.lineSeparator()
                 + "Fat percentage: " + fat + "%" + System.lineSeparator()
-                + "Recorded on: " + getDateString();
+                + "Date: " + getDateString();
     }
 }

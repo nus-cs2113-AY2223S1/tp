@@ -1,7 +1,6 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.exception.IllegalValueException;
-import seedu.duke.logic.Parser;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
@@ -20,26 +19,27 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
-        if (Parser.getArgumentsCount(arguments) > 0) {
+        if (arguments.length() > 0) {
             throw new IllegalValueException("Invalid help command");
         }
         ui.output("Help will always be given at Hogwarts to those who ask for it" + System.lineSeparator()
                 + "Available commands:" + System.lineSeparator()
-                + "help - to display the help message" + System.lineSeparator()
-                + "exit - to exit the program" + System.lineSeparator()
-                + "set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}"
+                + "help" + System.lineSeparator()
+                + "exit" + System.lineSeparator()
+                + "set biometrics /{age} /{gender} /{height} /{activity level}" + System.lineSeparator()
+                + "view {biometrics/food/exercise/strength/cardio/weight/bmi/maintenance/calories/all}"
                 + System.lineSeparator()
-                + "view {biometrics/food/weight/bmi/maintenance/calories/all}" + System.lineSeparator()
                 + "view {exercise/strength/cardio} /{done}" + System.lineSeparator()
                 + "add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]" + System.lineSeparator()
                 + "add cardio /{description} /{distance} /{repetitions} [/{date}]" + System.lineSeparator()
                 + "add food /{description} /{calories} [/{date}]" + System.lineSeparator()
-                + "add weight /{weight} /{fat percentage}" + System.lineSeparator()
-                + "remove {food/exercise} /{food index/current exerciseList index}" + System.lineSeparator()
-                + "mark {done} /{exercise index} / {time} / {metabolic equivalent}" + System.lineSeparator()
+                + "add weight /{weight} /{fat percentage} [/{date}]" + System.lineSeparator()
+                + "remove {food/exercise/weight} /{record index}" + System.lineSeparator()
+                + "mark {done} /{exercise index} /{time} /{metabolic equivalent}" + System.lineSeparator()
                 + "mark {undone} /{exercise index}" + System.lineSeparator()
                 + "find {strength/cardio/food} /{description}" + System.lineSeparator()
-                + "find {calories} /{date}");
+                + "find {calories} /{date}" + System.lineSeparator()
+                + "Please read the user guide for more detailed explanations");
     }
 
     @Override

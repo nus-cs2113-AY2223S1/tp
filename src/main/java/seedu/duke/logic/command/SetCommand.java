@@ -1,7 +1,7 @@
 package seedu.duke.logic.command;
 
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
@@ -43,7 +43,7 @@ public class SetCommand extends Command {
     private void setBiometrics(String[] argumentList) throws IllegalValueException {
         try {
             if (argumentList.length != 5) {
-                throw new IllegalValueException("Insufficient parameters");
+                throw new IllegalValueException("Invalid set biometrics command");
             }
             int age = Integer.parseInt(argumentList[1]);
             String gender = argumentList[2];

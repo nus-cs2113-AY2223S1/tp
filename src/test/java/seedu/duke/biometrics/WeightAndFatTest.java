@@ -1,7 +1,7 @@
 package seedu.duke.biometrics;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.biometrics.WeightAndFat;
 
 import java.time.LocalDate;

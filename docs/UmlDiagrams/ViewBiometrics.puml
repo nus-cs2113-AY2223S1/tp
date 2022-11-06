@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+activate viewCommand
+    viewCommand -> viewCommand: viewBiometrics()
+    viewCommand -> biometrics: toString()
+    opt at least one weight and fat record
+        biometrics -> weightAndFatList: getMostRecent()
+        return mostRecentRecord: WeightAndFat
+    end
+
+    return biometrics: String
+    viewCommand -> ui: output(biometrics: String)
+    return
+return
+
+@enduml
