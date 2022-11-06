@@ -1,5 +1,8 @@
 package seedu.duke;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BasicUi {
     private static final String INDENTATION = "    ";
 
@@ -74,10 +77,10 @@ public class BasicUi {
     }
 
     public static void showCurrencyInfo(CurrencyStructure currency) {
-        final String[] MESSAGES = { "Abbreviation: " + currency.getAbbrName(), 
+        final String[] MESSAGES = { "Abbreviation: " + currency.getAbbrName(),
                 "Full Name: " + currency.getFullName(),
                 "Symbol: " + currency.getSymbol(),
-                "Exchange rate with USD: " + String.format("%.2f", currency.getRate())};
+                "Exchange rate with USD: " + String.format("%.2f", currency.getRate()) };
         final String MESSAGE = assembleMultipleLinesOutput(MESSAGES);
         showStandardOutput(MESSAGE);
     }
@@ -95,6 +98,29 @@ public class BasicUi {
     public static void showIncorrectCurrencyConversion() {
         final String MESSAGE = "Incorrect currency command, please enter one of these formats: conversion symbol or conversion symbol symbol";
         showStandardOutput(INDENTATION + MESSAGE);
+    }
+
+    public static void showCurrencyListUpdateSuccessInfo(Boolean isUpdateNeeded, Boolean isUpdateSuccess,
+            Date lastUpdateDate, Date nextUpdateDate) {
+        String UPDATE_RESULT;
+        if (isUpdateNeeded && !isUpdateSuccess) {
+            UPDATE_RESULT = "Online exchange rates update failure but local records loaded.";
+        } else {
+            UPDATE_RESULT = "Exchange rates up to date.";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String lastUpdateDateFormatted = sdf.format(lastUpdateDate);
+        String nextUpdateDateFormatted = sdf.format(nextUpdateDate);
+        String[] messages = { UPDATE_RESULT,
+                "Last update time: " + lastUpdateDateFormatted,
+                "Next update time: " + nextUpdateDateFormatted};
+        final String MESSAGE = assembleMultipleLinesOutput(messages);
+        showStandardOutput(MESSAGE);
+    }
+
+    public static void showCurrencyListUpdateFailureInfo() {
+        String MESSAGE = "Online exchange rates update failed and local records not found. Fall back to static records.";
+        showStandardOutput(MESSAGE + INDENTATION);
     }
 
     public static void showStandardOutput(String output) {

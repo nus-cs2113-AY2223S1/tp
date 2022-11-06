@@ -15,27 +15,27 @@ public class Authentication {
             String userInput = InputManager.receiveInputLine().replaceAll("\\s", "");
             Commands commandType = getCommandType(userInput);
             switch (commandType) {
-                case REGISTER:
-                    RegisterCommand.handleRegister();
-                    break;
-                case LOGIN:
-                    LoginCommand.handleLogin();
-                    break;
-                case CURRENCIES:
-                    Currency.exchangeCommands(new CurrencyStructure("usd", "us dollar", "$", 1));
-                    break;
-                case BYE:
-                    isProgramEnd = true;
-                    BasicUi.showExitMessage();
-                    break;
-                case NEW_CURRENCY:
-                    NewCurrency.addNewCurrency();
-                    break;
-                case REMOVE:
-                    NewCurrency.removeCurrency();
-                    break;
-                default:
-                    throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+            case REGISTER:
+                RegisterCommand.handleRegister();
+                break;
+            case LOGIN:
+                LoginCommand.handleLogin();
+                break;
+            case CURRENCIES:
+                Currency.exchangeCommands(new CurrencyStructure("usd", "us dollar", "$", 1.0));
+                break;
+            case BYE:
+                isProgramEnd = true;
+                BasicUi.showExitMessage();
+                break;
+            case NEW_CURRENCY:
+                NewCurrency.addNewCurrency();
+                break;
+            case REMOVE:
+                NewCurrency.removeCurrency();
+                break;
+            default:
+                throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
             }
         } catch (FinanceException e) {
             e.handleException();
