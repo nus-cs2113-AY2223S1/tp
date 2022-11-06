@@ -18,16 +18,8 @@ group sd Sub Menu Run
             Print sub menu and get user input
         end
 
-        alt mainMenuState == MainMenuState.PATIENT
-            A -> C : patientParser(input)
-            activate C
-            return subMenuState:SubMenuState
-        else mainMenuState == MainMenuState.VISIT
-             A -> C : visittParser(input)
-             activate C
-             return subMenuState:SubMenuState
-        else mainMenuState == MainMenuState.PRESCRIPTION
-            A -> C : prescriptionParser(input)
+        opt mainMenuState == MainMenuState.XYZ
+            A -> C : xyzParser(input)
             activate C
             return subMenuState:SubMenuState
         end

@@ -36,9 +36,12 @@ The object diagram below shows how are the instances of the components are conne
 #### Interaction between the architecture components 
 
 The following two sequence diagrams shows how the main flow of the app is navigating between main menu and the three sub
-menus. `OneDoc` component mainly interacts with `UI` and `Parser` components.
+menus. `OneDoc` component mainly interacts with `UI` and `Parser` components. (Xyz is a placeholder for `Patient`,
+`Visit` or `Prescription`. For example for `Patient`, the main menu state enum is `MainMenuState.PATIENT` and the parser
+function is `patientParser(input)`)
 
-![](images/OneDocSequenceDiagram.png) ![](images/OneDocSubMenuRefSequenceDiagram.png)
+<img align="top" src="images/OneDocSequenceDiagram.png">
+<img align="top" src="images/OneDocSubMenuRefSequenceDiagram.png">
 
 The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
 command `activate x/1` in the Prescription Sub Menu. 
