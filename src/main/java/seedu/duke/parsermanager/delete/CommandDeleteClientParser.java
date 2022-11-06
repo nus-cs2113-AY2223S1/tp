@@ -1,6 +1,6 @@
 //@@author FeliciaBeatrice
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.delete;
 
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
@@ -11,6 +11,7 @@ import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.Extr
 import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.InvalidDeleteClientIndexException;
 import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.MissingDeleteClientFlagException;
 import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.ParseDeleteClientException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 /**
  * Parser for delete client command.
  */
-public class CommandDeleteClientParser extends Parser {
+public class CommandDeleteClientParser extends CommandDeleteParser {
     private final String commandDescription;
     private final ClientList clientList;
 

@@ -1,6 +1,6 @@
 //@@author FeliciaBeatrice
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.check;
 
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
@@ -11,6 +11,7 @@ import seedu.duke.exception.check.CommandCheckNotIntegerException;
 import seedu.duke.exception.check.ParseCheckException;
 import seedu.duke.exception.check.checkclient.CheckClientInvalidIndexException;
 import seedu.duke.exception.check.checkclient.CheckClientMissingFlagException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ import static seedu.duke.CommandStructure.START_INDEX;
 /**
  * Parser for check client commands.
  */
-public class CommandCheckClientParser extends Parser {
+public class CommandCheckClientParser extends CommandCheckParser {
     private final String commandDescription;
 
     private final ClientList clientList;

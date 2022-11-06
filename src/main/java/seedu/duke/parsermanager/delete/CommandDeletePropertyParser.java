@@ -1,6 +1,6 @@
 //@@author FeliciaBeatrice
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.delete;
 
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
@@ -11,6 +11,7 @@ import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.Ex
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.InvalidDeletePropertyIndexException;
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.MissingDeletePropertyFlagException;
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.ParseDeletePropertyException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 /**
  * Parser for delete property command.
  */
-public class CommandDeletePropertyParser extends Parser {
+public class CommandDeletePropertyParser extends CommandDeleteParser {
     private final String commandDescription;
     private final PropertyList propertyList;
 
