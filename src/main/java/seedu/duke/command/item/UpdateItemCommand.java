@@ -98,7 +98,7 @@ public class UpdateItemCommand extends Command {
      * 
      * @param price String value of given price
      * @return true if price is valid
-     * @throws InvalidPriceException If price is out of range(0, 10000)
+     * @throws InvalidPriceException If price is out of range(0, 10000) or price has too many decimals
      */
     private boolean isValidPrice(String price) throws InvalidPriceException {
         try {

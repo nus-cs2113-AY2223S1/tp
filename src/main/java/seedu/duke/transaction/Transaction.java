@@ -3,8 +3,6 @@ package seedu.duke.transaction;
 import seedu.duke.id.IdGenerator;
 import seedu.duke.parser.DateParser;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -208,9 +206,8 @@ public class Transaction {
         String borrowerId = "   Borrower: " + this.borrower + "\n";
         String lenderId = "   Lender: " + this.lender + "\n";
         String duration = "   Duration: " + this.duration + "\n";
-        BigDecimal money = new BigDecimal(this.moneyTransacted);
         String moneyTransactedString =
-                "   MoneyTransacted: $" + money.setScale(2, RoundingMode.HALF_EVEN) + " ";
+                "   MoneyTransacted: $" + String.format("%.2f", this.moneyTransacted) + " ";
 
         if (!isFinished()) {
             String remainDays = " (" + ChronoUnit.DAYS.between(LocalDate.now(), getReturnDate())

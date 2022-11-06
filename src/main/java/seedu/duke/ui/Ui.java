@@ -238,8 +238,8 @@ public class Ui {
             TransactionList transactionList, Double loss, Double gain) {
         showLine();
         System.out.print("Here is the user you have requested to view: " + '\n' + user + "\n");
-        System.out.print("The user's gain is $" + gain + '\n');
-        System.out.print("The user's loss is $" + loss + '\n');
+        System.out.print("The user's gain is $" + String.format("%.2f", gain) + '\n');
+        System.out.print("The user's loss is $" + String.format("%.2f", loss) + '\n');
         System.out.print(userItems.toString(transactionList) + '\n');
         showLine();
     }
