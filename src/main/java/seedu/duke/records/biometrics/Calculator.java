@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Calculator {
+    public static final String EMPTY_WEIGHT_MESSAGE = "Weight cannot be 0. Pls update biometrics";
+    public static final double CALORIES_MULTIPLIER = 0.0175;
     private int height;
     private int weight;
     private int maintenanceCalories;
@@ -161,9 +163,9 @@ public class Calculator {
     public static int calculateExerciseCalories(Biometrics biometrics, double time,
                                                 double metabolicEquivalent) throws IllegalValueException {
         if (biometrics.getWeight() == 0) {
-            throw new IllegalValueException("Weight cannot be 0. Pls update biometrics");
+            throw new IllegalValueException(EMPTY_WEIGHT_MESSAGE);
         }
-        return (int) Math.round(0.0175 * biometrics.getWeight() * metabolicEquivalent * time);
+        return (int) Math.round(CALORIES_MULTIPLIER * biometrics.getWeight() * metabolicEquivalent * time);
     }
 
     public int calculateTotalCaloriesBurnt(ArrayList<Exercise> completedExerciseArrayList, String date) {
