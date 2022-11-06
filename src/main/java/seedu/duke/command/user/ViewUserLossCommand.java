@@ -72,9 +72,9 @@ public class ViewUserLossCommand extends Command {
             throws UserNotFoundException, InvalidArgumentException, InvalidTransactionException {
         String userName = getArgsViewUserDebtCmd();
         if (isValidUser(userName)) {
-            double totalDebt =
+            double totalLoss =
                     transactionList.getBorrowTransactionsByUser(userName).getTotalMoneyTransacted();
-            Ui.printResponse("The amount of money loss of " + userName + " is: $" + totalDebt);
+            Ui.printResponse("The amount of money loss of " + userName + " is: $" + String.format("%.2f", totalLoss));
         }
         return false;
     }

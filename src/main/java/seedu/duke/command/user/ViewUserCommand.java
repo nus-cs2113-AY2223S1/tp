@@ -67,7 +67,7 @@ public class ViewUserCommand extends Command {
      *
      * @return false
      * @throws InvalidArgumentException If there is a part that cannot be parsed
-     * @throws InsufficientArgumentsException If insufficent parts are given
+     * @throws InsufficientArgumentsException If insufficient parts are given
      * @throws UserNotFoundException If the user cannot be found in the list
      */
     public boolean executeCommand()
