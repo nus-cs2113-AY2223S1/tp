@@ -1,6 +1,5 @@
 package recipeditor.parser;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,19 +44,19 @@ class ParserTest {
     @Test
     void parseList_mixOfDifferentCases_returnListOfRecipeTitles() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("/LiST") instanceof ListCommand);
+        assertTrue(Parser.parseCommand("/LiST") instanceof ListCommand);
     }
 
     @Test
     void parseView_mixOfDifferentCases_returnViewOfSpecificRecipe() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("/VIEw -id 1") instanceof ViewCommand);
+        assertTrue(Parser.parseCommand("/VIEw -id 1") instanceof ViewCommand);
     }
 
     @Test
     void parseExit_mixOfDifferentCases_exitProgram() {
         Parser parse = new Parser();
-        assertTrue(parse.parseCommand("/Exit") instanceof ExitCommand);
+        assertTrue(Parser.parseCommand("/Exit") instanceof ExitCommand);
     }
 
     @Test
@@ -104,14 +103,14 @@ class ParserTest {
         assertEquals(EditCommand.class, Parser.parseCommand(input).getClass());
     }
 
-    @Test
-    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
-        String input = "/exit";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
-        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
-    }
+    //    @Test
+    //    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
+    //        String input = "/exit";
+    //        Command commandExecuted = Parser.parseCommand(input);
+    //        CommandResult commandExecutedResult = commandExecuted.execute();
+    //        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
+    //        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
+    //    }
 
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {
@@ -136,8 +135,8 @@ class ParserTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Try /help <command type>\n"
-                + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
+        String expected = "Try /help <command type>\n" + "Available commands: /add, /list, /view, /edit, /find,"
+                + " /delete, /exit, /help";
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }

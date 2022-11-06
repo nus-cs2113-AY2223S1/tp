@@ -1,0 +1,44 @@
+@startuml
+
+skinparam Style strictuml
+actor user
+database Storage
+
+user -> Main : Edit Recipe
+Main -> Parser: parseCommand()
+create Parser
+
+alt GUI
+create GuiWorkFlow
+Parser -> GuiWorkFlow: <<create>>
+create EditCommand
+GuiWorkFlow -> EditCommand: new EditCommand()
+EditCommand -> RecipeList: editRecipe()
+RecipeList -> Storage: saveRecipe()
+destroy EditCommand
+else CLI
+Parser -> EditCommand: new EditCommand()
+create EditModeCommand
+alt ADD
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else DELETE
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else SWAP
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else CHANGE
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+end
+EditCommand -> RecipeList: editRecipe()
+EditCommand -> Storage: saveRecipe()
+destroy EditCommand
+end
+
+@enduml
