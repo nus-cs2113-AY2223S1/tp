@@ -37,7 +37,7 @@ enum CommandType {
     FAVOURITE
 }
 
-class Command { 
+abstract class Command { 
     - commandType : CommandType
     - universityName : String
     - moduleCode : String
