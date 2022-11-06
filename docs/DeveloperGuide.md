@@ -236,6 +236,8 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
 `CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage Component
 
 The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
@@ -271,13 +273,19 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing an Expense
 
 ![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Saving Data to File
 
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Expense: `Add-Expense`
 
@@ -285,11 +293,15 @@ The `Add-Expense` command adds a new expense to the program.
 
 ![Implementation-Add-Expense](images/ImplementationAddExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing an Expense: `View-Expense`
 
 The `View-Expense` command displays existing expenses in the program.
 
 ![Implementation-View-Expense](images/ImplementationViewExpense.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Expense: `Delete-Expense`
 
@@ -297,11 +309,15 @@ The `Delete-Expense` command removes an existing expense from the program.
 
 ![Implementation-Delete-Expense](images/ImplementationDeleteExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an Expense: `Edit-Expense`
 
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](images/ImplementationEditExpense.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting Expenses: `Sort-Expense`
 
@@ -309,15 +325,21 @@ The `Sort-Expense` command sorts the existing expenses in the program.
 
 ![Implementation-Sort-Expense](images/ImplementationSortExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Converting Currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
 ![Implementation-Convert-Currency](images/ImplementationConvertCurrency.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing a Recurring Payment
 
 ![Implementation-SD-Print-RecurringPayment](images/ImplementationSDPrintRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Recurring Payment: `Add-RecurringPayment`
 
@@ -325,11 +347,15 @@ The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
 ![Implementation-Add-RecurringPayment](images/ImplementationAddRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a Recurring Payment: `View-RecurringPayment`
 
 The `View-RecurringPayment` command displays existing recurring payments in the program.
 
 ![Implementation-View-RecurringPayment](images/ImplementationViewRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Recurring Payment: `Delete-RecurringPayment`
 
@@ -337,11 +363,15 @@ The `Delete-RecurringPayment` command removes an existing recurring payment from
 
 ![Implementation-Delete-RecurringPayment](images/ImplementationDeleteRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Recurring Payment: `Edit-RecurringPayment`
 
 The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
 
 ![Implementation-Edit-RecurringPayment](images/ImplementationEditRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`
 
@@ -350,9 +380,13 @@ This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](images/ImplementationPayRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing an Income
 
 ![Implementation-SD-Print-Income](images/ImplementationSDPrintIncome.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Income: `Add-Income`
 
@@ -360,11 +394,15 @@ The `Add-Income` command adds a new income to the program.
 
 ![Implementation-Add-Income](images/ImplementationAddIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing an Income: `View-Income`
 
 The `View-Income` command displays existing incomes in the program.
 
 ![Implementation-View-Income](images/ImplementationViewIncome.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Income: `Delete-Income`
 
@@ -372,15 +410,21 @@ The `Delete-Income` command removes an existing income from the program.
 
 ![Implementation-Delete-Income](images/ImplementationDeleteIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an Income: `Edit-Income`
 
 The `Edit-Income` command changes the attributes of an existing income in the program.
 
 ![Implementation-Edit-Income](images/ImplementationEditIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing a Target
 
 ![Implementation-SD-Print-Target](images/ImplementationSDPrintTarget.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Target: `Add-Target`
 
@@ -388,11 +432,15 @@ The `Add-Target` command adds a new target to the program.
 
 ![Implementation-Add-Target](images/ImplementationAddTarget.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a Target: `View-Target`
 
 The `View-Target` command displays existing targets in the program.
 
 ![Implementation-View-Target](images/ImplementationViewTarget.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Target: `Delete-Target`
 
@@ -400,11 +448,15 @@ The `Delete-Target` command removes an existing target from the program.
 
 ![Implementation-Delete-Target](images/ImplementationDeleteTarget.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Target: `Edit-Target`
 
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
 ![Implementation-Edit-Target](images/ImplementationEditTarget.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Merging a data file: `Merge-File`
 
@@ -480,8 +532,6 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 | Secure Shell (ssh)                       | Protocol that enables secure access to a remote system      |
 | Secure Copy (scp)                        | Protocol enables secure data transfer with a remote system  |
 | Remote Sync (rsync)                      | Tool that synchronises a file between a client and a server |
-
-<div style="page-break-after: always;"></div>
 
 ## Manual Testing
 
