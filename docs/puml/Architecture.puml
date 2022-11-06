@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class ComputerComponentChooser {
+    +{static}main()
+}
+class Parser
+class EditParser
+class Ui
+class Storage
+class BuildManager
+
+
+
+ComputerComponentChooser --> Ui
+ComputerComponentChooser --> Parser
+ComputerComponentChooser --> EditParser
+ComputerComponentChooser --> Storage
+ComputerComponentChooser --> BuildManager
+
+@enduml
