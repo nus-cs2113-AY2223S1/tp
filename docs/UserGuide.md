@@ -48,7 +48,7 @@ program targeting PC enthusiasts and commercial PC builders who want to:
 [here](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
 3. Copy the file to an empty folder you want to use as the _home folder_
 4. Open a command window in that folder
-5. Run the command `java -jar tp.jar` to start the app
+5. Run the command `java -jar CCC.jar` to start the app
 6. Refer to the [Features](#features) below to try out some commands!
 
 Upon successfully starting the program, you will be greeted with the following:

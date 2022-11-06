@@ -26,6 +26,8 @@
     * [PC parts parameters](#pc-parts-parameters)
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
+
+
 ## Design & implementation
 ### Main Mode
 
@@ -382,4 +384,107 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 
 ## Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launching ComputerComponentChooser
+
+1. Ensure that you have `Java 11` installed.
+2. Download the latest version of `CCC` from
+   [here](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
+3. Copy the file to an empty folder you want to use as the _home folder_
+4. Open a command window in that folder
+5. Run the command `java -jar CCC.jar` to start the app
+
+Upon successfully starting the program, you will be greeted with the following:
+```
+Hello from
+  _____                     __         
+ / ___/__  __ _  ___  __ __/ /____ ____
+/ /__/ _ \/  ' \/ _ \/ // / __/ -_) __/
+\___/\___/_/_/_/ .__/\_,_/\__/\__/_/   
+              /_/                      
+  _____                                   __ 
+ / ___/__  __ _  ___  ___  ___  ___ ___  / /_
+/ /__/ _ \/  ' \/ _ \/ _ \/ _ \/ -_) _ \/ __/
+\___/\___/_/_/_/ .__/\___/_//_/\__/_//_/\__/ 
+              /_/                            
+  _______                        
+ / ___/ /  ___  ___  ___ ___ ____
+/ /__/ _ \/ _ \/ _ \(_-</ -_) __/
+\___/_//_/\___/\___/___/\__/_/   
+
+____________________________________________________________
+Hello! ComputerComponentChooser at your service!
+What can I do for you today?
+____________________________________________________________
+
+```
+### Testing in main mode
+
+1. Adding a build.
+   1. Requires name of the build to be added.
+   2. Test case: `add/test build`
+      1. Expected: Build named `test build` is added to BuildManager. Status message indicating 
+            successful addition of build is shown.
+   3. Test case: `add/`
+      1. Expected: No build is added to BuildManager. Error message indicating `String cannot be blank`
+            is shown.
+2. Deleting a build.
+   1. Requires name of the build to be deleted.
+   2. Test case: `delete/test build`
+      1. Expected: Build named `test build` is deleted from BuildManager. Status message indicating 
+            successful deletion of build is shown.
+   3. Test case: `delete/non-existent build`
+      1. Expected: No build is deleted from BuildManager. Error message indicating `This build does not exist`
+            is shown.
+3. Viewing a build.
+   1. Requires name of the build to be viewed.
+   2. Test case: `view/test build`
+      1. Expected: Build named `test build` is displayed along with its components and relevant information.
+   3. Test case: `view/non-existent build`  
+      1. Expected: No build is displayed. Error message indicating `This build does not exist` is shown.
+4. Listing all builds.
+   1. Test case: `list` when there are builds in BuildManager.
+      1. Expected: All builds are displayed.
+   2. Test case: `list` when there are no builds in BuildManager.
+      1. Expected: No builds are displayed. Error message indicating `You have no builds` is shown.
+5. Finding a build.
+   1. Requires keyword
+   2. Test case: `find/test`
+        1. Expected: All builds with `test` in their name are displayed.
+   3. Test case: `find/`
+       1. Expected: No builds are displayed. Error message indicating `Please enter a command 
+      with the correct number of paramters` is shown.
+   4. Test case: `find/non-existent build`
+       1. Expected: No builds are displayed. Error message indicating `No builds that meet specifications
+          found` is shown.
+6. Filtering builds via price.
+   1. Requires price range start and end.
+   2. Test case: `filter/price/1000/2000`
+       1. Expected: All builds with price between 1000 and 2000 are displayed.
+7. Filtering builds via power.
+   1. Requires power range start and end.
+   2. Test case: `filter/power/100/200`
+       1. Expected: All builds with power between 100 and 200 are displayed.
+8. Filtering builds via compatibility.
+   1. Test case: `filter/compatibility`
+       1. Expected: All builds that are compatible will be displayed.
+9. Exporting all builds to text file.
+   1. Test case: `export`
+       1. Expected: All builds are exported to text file located in data folder
+       which will contain the name of the build, its components and relevant information.
+10. Exporting all builds to a CSV file.
+    1. Test case: `exportCSV`
+        1. Expected: All builds are exported to CSV file located in data folder
+        which will contain the name of the build, its components and relevant information.
+    2. Test case: `exportCSV` when there are builds but they contain no components.
+        1. Expected: The CSV file will be empty as the rows are dependent on the components of all the builds
+        while the build names are columns in that they exist as a field for each component row.
+11. Editing a build.
+    1. Requires name of the build to be edited.
+    2. Test case: `edit/test build`
+        1. Expected: Build named `test build` is edited. Status message indicating successful editing of build is shown.
+       and user is brought into edit mode.
+    3. Test case: `edit/non-existent build`
+        1. Expected: No build is edited. Error message indicating `Builds does not exist!` is shown.
+### Testing in edit mode
+
+In edit mode the printed lines are dashes with arrow heads at both ends. This is to indicate that the user is in edit mode.
