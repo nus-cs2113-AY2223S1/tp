@@ -39,7 +39,25 @@ public class Check extends Command {
     public Check() {
     }
 
-
+    @Override
+    public void execute(ModuleList moduleList) {
+        switch (type) {
+        case "NOC":   // obtained >70 MCs, completed four semesters of study
+            if (checkNOC()) {
+                UI.nocEligibleMessage();
+            } else {
+                UI.nocIneligibleMessage();
+            }
+            break;
+        case "SEP":   //completed two semesters of study, cap above 3.0
+            if (checkSEP()) {
+                UI.sepEligibleMessage();
+            } else {
+                UI.sepIneligibleMessage();
+            }
+            break;
+        }
+    }
 
     /**
      * Function to find the current semester based on the latest graded semester
