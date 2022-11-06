@@ -24,7 +24,7 @@ public class Wallet {
     }
 
     public Wallet(String userName, String passWord, CurrencyStructure currency, double balance,
-            List<Deposit> deposits) {
+                  List<Deposit> deposits) {
         this.userName = userName;
         this.passWord = passWord;
         this.totalBalance = balance;
@@ -79,7 +79,7 @@ public class Wallet {
     public void exchangeMoney(CurrencyStructure oldCurrency, CurrencyStructure newCurrency, double oldAmount) throws FinanceException {
         double oldRate = oldCurrency.getRate();
         double newRate = newCurrency.getRate();
-        double newAmount = oldAmount * (newRate / oldRate); 
+        double newAmount = oldAmount * (newRate / oldRate);
         withdrawMoney(oldCurrency, oldAmount);
         saveMoney(newCurrency, newAmount);
     }

@@ -53,7 +53,7 @@ public class AccountUi {
     }
 
     public static void showExchangeResult(CurrencyStructure oldCurrency, double oldAmount,
-            CurrencyStructure newCurrency, double newAmount) {
+                                          CurrencyStructure newCurrency, double newAmount) {
         String formattedOldAmount = String.format("%.2f", oldAmount);
         String formattedNewAmount = String.format("%.2f", newAmount);
         final String MESSAGE = "You have successfully convert " + oldCurrency.getAbbrName() + " " + formattedOldAmount

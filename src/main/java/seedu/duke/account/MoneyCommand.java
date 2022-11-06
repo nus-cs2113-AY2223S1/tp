@@ -15,10 +15,10 @@ public class MoneyCommand {
         String argCurrency,argAmount;
         if (splittedCommandArgs.length == 1) {
             argCurrency = wallet.getDefaultCurrency().getAbbrName();
-            argAmount = splittedCommandArgs[0]; 
+            argAmount = splittedCommandArgs[0];
         } else if (splittedCommandArgs.length == 2) {
             argCurrency = splittedCommandArgs[0];
-            argAmount = splittedCommandArgs[1]; 
+            argAmount = splittedCommandArgs[1];
         } else {
             throw new FinanceException(ExceptionCollection.SAVE_MONEY_EXCEPTION);
         }
@@ -61,7 +61,7 @@ public class MoneyCommand {
             wallet.withdrawMoney(currency, amount);
             WalletFile.updateWallet(wallet);
         }
-            catch (NumberFormatException e){
+        catch (NumberFormatException e){
             System.out.println("Please make sure to use integers for amount");
         }
     }
@@ -83,7 +83,7 @@ public class MoneyCommand {
         CurrencyStructure newCurrency = CurrencyList.findCurrencyByAbbrName(argNewCurrency);
         double oldRate = oldCurrency.getRate();
         double newRate = newCurrency.getRate();
-        double newAmount = oldAmount * (newRate / oldRate); 
+        double newAmount = oldAmount * (newRate / oldRate);
         wallet.exchangeMoney(oldCurrency, newCurrency, oldAmount);
         WalletFile.updateWallet(wallet);
         AccountUi.showExchangeResult(oldCurrency, oldAmount, newCurrency, newAmount);
@@ -150,5 +150,5 @@ public class MoneyCommand {
         //then get the new wallet and increment that amount
     }
 
-    
+
 }
