@@ -542,6 +542,12 @@ ___
 ## Appendix D: Glossary
 
 * *client* - Person who is seeking for property to rent
+* *unit type* - Type of housing in Singapore (HDB, Condominium, Bungalow, etc)
+* *pairing* - If a client and property is paired, it implies that the client will be renting that property.
+* *unpair* - If a client and property is unpaired, it implies that the client is no longer renting any property.
+* *ui* - User Interface which is responsible for any interactions (read input / print messages) between application and user.
+* *storage* - Made up of plain text files storing client/property records.
+
 
 ---
 ## Appendix E: Instructions for Manual Testing
