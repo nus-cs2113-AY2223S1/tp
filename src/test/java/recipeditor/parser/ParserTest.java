@@ -27,19 +27,16 @@ class ParserTest {
 
     @Test
     void parseList_mixOfDifferentCases_returnListOfRecipeTitles() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/LiST") instanceof ListCommand);
     }
 
     @Test
     void parseView_mixOfDifferentCases_returnViewOfSpecificRecipe() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/VIEw -id 1") instanceof ViewCommand);
     }
 
     @Test
     void parseExit_mixOfDifferentCases_exitProgram() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/Exit") instanceof ExitCommand);
     }
 
@@ -91,14 +88,14 @@ class ParserTest {
         RecipeList.deleteRecipeFromTitle("");
     }
 
-    //    @Test
-    //    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
-    //        String input = "/exit";
-    //        Command commandExecuted = Parser.parseCommand(input);
-    //        CommandResult commandExecutedResult = commandExecuted.execute();
-    //        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
-    //        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
-    //    }
+    @Test
+    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
+        String input = "/exit";
+        Command commandExecuted = Parser.parseCommand(input);
+        CommandResult commandExecutedResult = commandExecuted.execute();
+        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
+        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
+    }
 
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {
