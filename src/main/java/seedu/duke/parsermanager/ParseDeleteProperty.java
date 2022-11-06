@@ -23,7 +23,6 @@ public class ParseDeleteProperty extends Parser {
 
 
     private static final int CORRECT_FLAG_POSITION = 0;
-    private static final int INDEX_POSITION = 2;
 
 
     public ParseDeleteProperty(String deleteCommandDescription, PropertyList propertyList) {
