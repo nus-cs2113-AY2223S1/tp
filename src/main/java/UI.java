@@ -337,6 +337,8 @@ public class UI {
             + "minutes are in range 0-59 in the format HH:MM";
     public static final String INVALID_DATE = "Invalid date entered, make sure the date is in the correct format:\n"
             + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12";
+    public static final String DATE_DOESNT_EXIST = "Invalid date entered - make sure the date exists and is in the "
+            + "correct format";
     public static final String INVALID_DATE_FORMAT = "Invalid Date entered - please enter digits (0-9) in the"
             + " format DD-MM-YYYY";
 

@@ -1,3 +1,7 @@
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -329,20 +333,25 @@ public class Parser {
         }
     }
 
-    private void checkDayAndMonth(int day,int month) throws OneDocException {
+    private void checkDate(int day, int month, String date) throws OneDocException {
         try {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd", Locale.US)
+                    .withResolverStyle(ResolverStyle.STRICT);
+                dateFormatter.parse(date);
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
                 throw new OneDocException(UI.INVALID_DATE);
             }
         } catch (NumberFormatException e) {
             throw new OneDocException(UI.INVALID_DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new OneDocException(UI.DATE_DOESNT_EXIST);
         }
     }
 
-    private void checkDate(String date) throws OneDocException {
+    private void checkDateForVisit(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
-            checkDayAndMonth(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]));
+            checkDate(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),date);
             int year = Integer.parseInt(dateSplit[2]);
             if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
                 throw new OneDocException(UI.INVALID_YEAR);
@@ -358,7 +367,7 @@ public class Parser {
             int day = Integer.parseInt(dateSplit[0]);
             int month = Integer.parseInt(dateSplit[1]);
             int year = Integer.parseInt(dateSplit[2]);
-            checkDayAndMonth(day,month);
+            checkDate(day,month,date);
             if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
                     && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE) {
                 throw new OneDocException(UI.INVALID_DOB);
@@ -408,7 +417,7 @@ public class Parser {
 
     private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
         String reason = matcher.group(4);
-        checkDate(matcher.group(2));
+        checkDateForVisit(matcher.group(2));
         checkTime(matcher.group(3));
         if (reason == null || reason.isEmpty()) {
             visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
