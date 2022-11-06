@@ -12,7 +12,7 @@ and transactions via a Command Line Interface.
     + Codes written can be seen [here](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=bdthanh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=bdthanh&tabRepo=AY2223S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=other~docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
     + List of PRs can be seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/pulls?q=is%3Aclose+is%3Apr+author%3Abdthanh+)
 
-+ **Features and lasses implementations:**
++ **Enhancements implemented:**
     + User-related features (Wrote final version base on first version of Winston): 
         + Add a user `add-user`
         + Remove a user `remove-user`
@@ -52,7 +52,7 @@ and transactions via a Command Line Interface.
     + Made Class diagrams in section 3.5 and 3.7 
     + Made Sequence diagrams in section 3.1, 4.1.1, 4.1.2, 4.2.1, 4.2.2, 4.3.1 and 4.3.2
     + Wrote the non-functional requirements `7. Non-functional Requirements`
-+ **Team tasks contributions:**
++ **Team-based tasks contributions:**
     + Maintained the issues tracker on GitHub.
     + Ensure that weekly and milestone tasks/features are completed in time.
 + **Community contributions:**
