@@ -298,10 +298,10 @@ public class TransactionList {
         int count = MIN_TRANSACTIONS_INDEX;
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
-            // Includes only transactions with their description matching the searching keywords
+            // Includes only transactions with their description matching the searching keyword
             if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
                     && keyword != "") {
-                transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR.toString();
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR;
             }
             count++;
         }
