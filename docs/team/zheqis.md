@@ -19,15 +19,16 @@
 
 - Added healthy status and unhealthy status of pets 
 - Added functionalities to find pets by their name and id
-- Add the functionality to initialise the pet status randomly.
+- Added the functionality to initialise the pet status randomly.
+- Added ChangePetStatusCommand to allow user change pet status.
 
 **Contributions to the UG**
 
-- Added the instructions of Finish Task
+- Added the instructions of Pet status
 
 **Contributions to the DG**
 
-- Added Employee management feature and its Design considerations
-- Added the UML diagram of Employee Management
+- Added Pet management feature and its Design considerations
+- Added the uml for AddPetCommand, RemovePetCommand and ViewPetCommand
 
 **Contributions to team-based tasks**
