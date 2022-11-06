@@ -3,13 +3,18 @@
 ## Table of Contents
 * [Design & Implementation](#design--implementation)
   * [Main Mode](#main-mode)
-    * [Build Manager](#build-manager) 
+    * [Build Manager](#build-manager)
+    * [Adding a Build](#adding-a-build)
+    * [Listing all Builds](#listing-all-builds)
+    * [Finding a Build](#finding-a-build)
+    * [Filtering Builds](#filtering-builds)
   * [Edit Mode](#edit-mode)
     * [Build](#build)
     * [Components](#components)
   * [Storage](#storage)
+    * [Load](#load)
+    * [Save](#save)
   * [Export](#export)
-
 * [Appendix](#appendix)
   * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
@@ -24,14 +29,15 @@
 ## Design & implementation
 ### Main Mode
 
-This section describes the implementation of Main Mode features.
+This section describes the implementation of Main Mode features. Main Mode only allows the user to manage the builds.
+If the user wish to edit a specific build, he/she can refer to the [Edit Mode](#edit-mode).
 
 Once the `main()` method of ComputerComponentChooser is called, instances for the `BuildManager`, `Parser`, 
 `editParser`, `Storage`, `Ui` classes are initialized.
 
 ![](/images/Architecture.png)
 
-#### BuildManager
+#### Build Manager
 
 ![](/images/BuildManager.png)
 
@@ -51,7 +57,7 @@ The `BuildManager` class is responsible for the following operations:
 - Find build that contains a search term from the list of builds
 - Filter builds based on user requirements
 
-##### Add a build to the list of builds
+##### Adding a Build
 
 This feature allows users to add a build to the list.
 
@@ -76,7 +82,7 @@ into the data file.
 The following sequence diagram shows how the add build operation works:
 ![](/images/BuildManagerAddBuildSequence.png)
 
-##### Listing all builds
+##### Listing all Builds
 
 This features allow users to list all builds. 
 
@@ -89,7 +95,7 @@ telling you "You have no builds".
 The following sequence diagram shows how the list operation works:
 ![](/images/BuildManagerListBuildSequence.png)
 
-##### Finding a build
+##### Finding a Build
 
 This feature allows users to find builds that contain the search term.
 
@@ -105,7 +111,7 @@ meet specifications found."
 The following sequence diagram shows how the find operation works:
 ![](/images/BuildManagerFindBuildSequence.png)
 
-##### Filtering builds based on user requirements
+##### Filtering Builds
 
 This feature allows users to filter builds based on user requirements. 
 
@@ -134,7 +140,7 @@ The following sequence diagram shows how the filter operation works:
 
 ### Edit Mode
 
-#### Build 
+#### Build
 
 ![](/images/Build.png)
 
@@ -179,75 +185,18 @@ The total power consumption is then returned.
 
 #### Get GPU slot compatibility
 
-The user can check if the number of GPUs in the build is compatible with the number of GPU slots in the motherboard. 
-This is done by calling the `getGPUSlotCompatibility()` method of the `Build` class. As shown in the sequence diagram below,
-when the method is called, it first initializes an `int` variable `totalPower` of value `0`. Then it calls the `getAllComponent` 
-method of the `Build` class. This method returns a list of all the components in the build. The `getGPUSlotCompatibility()` 
-method then loops through the list of components and checks if the component is of type `gpu`. If it is, the method increments the
-`totalPower` variable by 1. After the loop, the method checks if the `int` variable is less than or equal to the number of GPU slots
-in the motherboard. If it is, the method returns true. If it is not, the method returns false. Here true and false represent the
-compatibility of the number of GPUs in the build with the number of GPU slots in the motherboard.
+  The user can check if the number of GPUs in the build is compatible with the number of GPU slots in the motherboard. 
+  This is done by calling the `getGPUSlotCompatibility()` method of the `Build` class. As shown in the sequence diagram below,
+  when the method is called, it first initializes an `int` variable `totalPower` of value `0`. Then it calls the `getAllComponent` 
+  method of the `Build` class. This method returns a list of all the components in the build. The `getGPUSlotCompatibility()` 
+  method then loops through the list of components and checks if the component is of type `gpu`. If it is, the method increments the
+  `totalPower` variable by 1. After the loop, the method checks if the `int` variable is less than or equal to the number of GPU slots
+  in the motherboard. If it is, the method returns true. If it is not, the method returns false. Here true and false represent the
+  compatibility of the number of GPUs in the build with the number of GPU slots in the motherboard.
 
-![](/images/BuildSequenceCheckGpuSlot.png)
+  ![](/images/BuildSequenceCheckGpuSlot.png)
 
-### Storage
-
-![](/images/Storage.png)
-
-Note: Some methods are being left out to show the core functionality of the storage class.
-
-Storage is used for loading and saving the user's builds. The user can save their builds to a text file and load them 
-from a text file. 
-
-The `Storage` class has private attributes `FILE_DIRECTORY`, `BUILD_FILE_PATH` and `COMPONENT_FILE_PATH`. 
-`FILE_DIRECTORY` is the directory where the text files are stored. 
-`BUILD_FILE_PATH` is the path to the text file where all the build names are stored. 
-`COMPONENT_FILE_PATH` is the path to the text file where the file is named after the build name. The components of the build 
-are stored in their respective build text file.
-
-The `Storage` class has a constructor that takes in a `BuildManager` object. The `BuildManager` object is used to access the
-builds in the `BuildManager` object. The `Storage` class has a `loadBuild()` method that loads the builds from the text file
-and a `saveBuild()` method that saves the builds from the `BuildManager` object into the text file. The `Storage` class also has
-a `loadComponent()` and `saveComponent()` methods that utilize the `BuildManager` object to access the `Build` object to load and save
-the components of the build into their respective text files. The `deleteBuild()` method deletes the build from the text file with the path
-`BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
-
-
-#### Load
-
-![](images/StorageLoadSequence.png)
-
-The `loadBuild()` method is called when the program starts. The `loadBuild()` method reads the text file with the path `BUILD_FILE_PATH` and
-creates a `Build` object for each build name in the text file. If there are duplicate build names in the text file or the text file does not exist,
-respective error messages will be printed out. The `loadComponent()` method is called for each build name in the text file. The `loadComponent()` method
-reads the text file with the path `COMPONENT_FILE_PATH` and creates a `Component` object for each component in the text file. These `Component` objects
-are then added to the `Build` object. If the text file does not exist, an error message will be printed out.
-
-#### Save
-
-Save is divided into two parts, saving the build names and saving the components of the build.
-
-![](images/StorageSaveBuildSequence.png)
-
-When the user adds a new build, it will be read by in the `readline()` method, which will then be passed to the `mainParseAdd()` method
-in the `Parser` class to check if the build name is valid. If the build name is empty, `BlankStringException` will be thrown. Also, if the build name is similar to 
-the name of an existing build or the name of text file with the path `BUILD_FILE_PATH`, `DuplicateBuildException` and `InvalidBuildException` will be thrown
-respectively. Otherwise, the `saveBuild()` method will be called. The `saveBuild()` method will then write the build names in the `BuildManager` object
-into the text file with the path `BUILD_FILE_PATH`. If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
-If the text file does not exist, `createFile()` will be called to create the text file with the path `BUILD_FILE_PATH`.
-
-![](images/StorageSaveComponentSequence.png)
-
-Similar to the saving of build, when the user adds a new component, it will be read by the `readline()` method, but it will be passed 
-to the `parseAdd()` method in `EditParser` class instead. If the input parameters are empty or number of parameters that are being inputted exceed the required
-number of parameters, `BlankStringException` and `ArrayIndexOutOfBoundException` will be thrown respectively. Otherwise, the `saveComponent()` method will be called.
-The `saveComponent()` method writes the components of the build into the text file with the path `COMPONENT_FILE_PATH`. 
-If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
-If the text file does not exist, `createFile()` will be called to create a new text file with the path `COMPONENT_FILE_PATH`.
-
-
-
-### Components
+#### Components
 
 ![](/images/ComponentEdited.png)
 
@@ -271,10 +220,68 @@ In addition to the getters and setters for each of the class fields, the classes
 - `getDetails()` - returns a string representation of the component in a format that can be displayed to the user
 - `getType()` - returns the type of the component
 
+### Storage
+
+  ![](/images/Storage.png)
+
+  Note: Some methods are being left out to show the core functionality of the storage class.
+
+  Storage is used for loading and saving the user's builds. The user can save their builds to a text file and load them 
+  from a text file. 
+
+  The `Storage` class has private attributes `FILE_DIRECTORY`, `BUILD_FILE_PATH` and `COMPONENT_FILE_PATH`. 
+  `FILE_DIRECTORY` is the directory where the text files are stored. 
+  `BUILD_FILE_PATH` is the path to the text file where all the build names are stored. 
+  `COMPONENT_FILE_PATH` is the path to the text file where the file is named after the build name. The components of the build 
+  are stored in their respective build text file.
+
+  The `Storage` class has a constructor that takes in a `BuildManager` object. The `BuildManager` object is used to access the
+  builds in the `BuildManager` object. The `Storage` class has a `loadBuild()` method that loads the builds from the text file
+  and a `saveBuild()` method that saves the builds from the `BuildManager` object into the text file. The `Storage` class also has
+  a `loadComponent()` and `saveComponent()` methods that utilize the `BuildManager` object to access the `Build` object to load and save
+  the components of the build into their respective text files. The `deleteBuild()` method deletes the build from the text file with the path
+  `BUILD_FILE_PATH` and deletes the text file with the path `COMPONENT_FILE_PATH` that is named after the build name.
+
+
+#### Load
+
+  ![](images/StorageLoadSequence.png)
+
+  The `loadBuild()` method is called when the program starts. The `loadBuild()` method reads the text file with the path `BUILD_FILE_PATH` and
+  creates a `Build` object for each build name in the text file. If there are duplicate build names in the text file or the text file does not exist,
+  respective error messages will be printed out. The `loadComponent()` method is called for each build name in the text file. The `loadComponent()` method
+  reads the text file with the path `COMPONENT_FILE_PATH` and creates a `Component` object for each component in the text file. These `Component` objects
+  are then added to the `Build` object. If the text file does not exist, an error message will be printed out.
+
+#### Save
+
+  Save is divided into two parts, saving the build names and saving the components of the build.
+
+  ![](images/StorageSaveBuildSequence.png)
+
+  When the user adds a new build, it will be read by in the `readline()` method, which will then be passed to the `mainParseAdd()` method
+  in the `Parser` class to check if the build name is valid. If the build name is empty, `BlankStringException` will be thrown. Also, if the build name is similar to 
+  the name of an existing build or the name of text file with the path `BUILD_FILE_PATH`, `DuplicateBuildException` and `InvalidBuildException` will be thrown
+  respectively. Otherwise, the `saveBuild()` method will be called. The `saveBuild()` method will then write the build names in the `BuildManager` object
+  into the text file with the path `BUILD_FILE_PATH`. If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
+  If the text file does not exist, `createFile()` will be called to create the text file with the path `BUILD_FILE_PATH`.
+
+  ![](images/StorageSaveComponentSequence.png)
+
+  Similar to the saving of build, when the user adds a new component, it will be read by the `readline()` method, but it will be passed 
+  to the `parseAdd()` method in `EditParser` class instead. If the input parameters are empty or number of parameters that are being inputted exceed the required
+  number of parameters, `BlankStringException` and `ArrayIndexOutOfBoundException` will be thrown respectively. Otherwise, the `saveComponent()` method will be called.
+  The `saveComponent()` method writes the components of the build into the text file with the path `COMPONENT_FILE_PATH`. 
+  If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
+  If the text file does not exist, `createFile()` will be called to create a new text file with the path `COMPONENT_FILE_PATH`.
+
+
+
+
 ### Export
 
 In our application export is a utility class. The user can export all builds or a specific build to a text file. The user can also export
-all builds to a CSV file.
+all builds to a CSV file. The exported files are stored in the `data` folder.
 
 ![](/images/Export.png)
 
@@ -295,13 +302,13 @@ to each component type.
 __Note__: The exported CSV file will be empty if the existing builds do not have components.
 
 
-## Product scope
-### Target user profile
+## Product Scope
+### Target User Profile
 
 This product is targeted towards PC building enthusiasts and commercial custom PC builders who have a need and want to 
 keep track of their PC builds. It is optimized for users to work with a Command Line Interface (CLI).
 
-### Value proposition
+### Value Proposition
 
 This product helps builders to keep track of their PC builds and their components. It also helps them to keep track of
 their total power consumption and the total cost of their builds. Compatibility of components is also checked to ensure
@@ -336,7 +343,7 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 
 ## Glossary
 
-### [PC parts](#pc-parts)
+### PC parts
 
 | Terms       | Definition                                                                                             |
 |-------------|--------------------------------------------------------------------------------------------------------|
@@ -351,7 +358,7 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 | monitor     | A monitor is a display device that is used to display information.                                     |
 | other       | Any other components that are not currently represented in the application. <br/> E.g. Keyboard, Mouse |
 
-### [PC parts parameters](#pc-parts-parameters)
+### PC parts parameters
 
 | Parameter      | Examples                                                        |
 |----------------|-----------------------------------------------------------------|
@@ -359,20 +366,20 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 | Price          | Price of the component <br/> E.g. `1000`                        |
 | Power          | Power consumption of the component <br/> E.g. `80`              |
 | Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
-| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                             |
+| Clock          | Clock speed in GHz <br/> E.g. `3.8`                             |
 | ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
 | GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
 | MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
 | FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
 | MemorySize     | Memory size in GB <br/> E.g. `16`                               |
-| StorageSize    | Storage size in GB <br/> E.g. `1000`                            |
-| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                           |
+| Drivesize      | Storage size in GB <br/> E.g. `1000`                            |
+| DriveType      | Storage type <br/> E.g. `HDD` , `SDD`                           |
 | FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
 | NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
 | RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
 | ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
 | Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

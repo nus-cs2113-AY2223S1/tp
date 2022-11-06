@@ -14,7 +14,7 @@
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
         * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
-        * [Bye](#bye)
+        * [Exiting the program](#bye)
     * [Build Editing Mode](#build-editing-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
@@ -23,7 +23,7 @@
         * [Checking compatibility](#checking-compatibility-check)
         * [Information about a build](#information-about-a-build-info)
         * [Exporting a build](#exporting-a-build-export)
-        * [Exit edit mode](#exiting-edit-mode-back)
+        * [Exiting edit mode](#exiting-edit-mode-back)
     * [Storage](#storage)
     * [Export](#export)
 * [FAQ](#faq)
@@ -76,7 +76,7 @@ ____________________________________________________________
 
 ```
 
-## Features 
+## Features
 
 Our program has two modes, the [Build Management Mode](#build-management-mode) and the
 [Build Editing Mode](#build-editing-mode). 
@@ -190,7 +190,7 @@ Your current builds:
 ____________________________________________________________
 ```
 
-#### Finding build(s): `find`
+#### Finding builds: `find`
     
 List all builds that contain the keyword in their name.
 
@@ -208,7 +208,7 @@ test build
 ____________________________________________________________
 ```
 
-#### Filtering build(s): `filter`
+#### Filtering builds: `filter`
 
 List all builds that fit the specified requirements.
 `Filter` can filter builds that are compatible or has total cost/power within a specified range.
@@ -246,7 +246,7 @@ Filtered Builds:
 ____________________________________________________________
 ```
 
-#### Exporting build(s): `export`
+#### Exporting builds: `export`
 
 Exports all builds to a text file.
 
@@ -263,7 +263,7 @@ Exporting builds...
 ____________________________________________________________
 ```
 
-#### Exporting build(s) as a CSV : `exportCSV`
+#### Exporting builds as CSV: `exportCSV`
 
 Exports all builds to a CSV file.
 
@@ -279,7 +279,7 @@ ____________________________________________________________
 Exporting builds...
 ____________________________________________________________
 ```
-#### Bye: `bye`
+#### Exiting the program: `bye`
 
 Exits the program.
 
@@ -480,7 +480,7 @@ Loading and saving are done automatically, so you do not need to worry about sav
 
 ### Export
 
-The program exports all builds to text and CSV files. The text and CSV files are stored in the data folder.
+The program exports all builds to text and CSV files. The text and CSV files are stored in the `data` folder.
 
 It makes it easier for you to view the builds and components in a more readable format outside the program.
 
