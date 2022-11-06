@@ -65,12 +65,12 @@ public class Task {
         System.out.println("Description: " + this.taskDescription);
         Employee employee = EmployeeList.findEmployee(this.employeeId);
         if (employee != null) {
-            System.out.println("Description: " + employee.getEmployeeName());
+            System.out.println("Employee: " + employee.getEmployeeName());
         }
 
         Appointment appointment = AppointmentList.findAppointment(this.appointmentId);
         if (appointment != null) {
-            appointment.viewTasks();
+            appointment.printAppointmentDetails();
         }
         System.out.println("Status: " + this.getStatus());
     }
