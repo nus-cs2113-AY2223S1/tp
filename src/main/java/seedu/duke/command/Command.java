@@ -3,6 +3,7 @@ package seedu.duke.command;
 //@@author chinhan99
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.MoolahException;
 
@@ -15,12 +16,6 @@ public abstract class Command {
     //@@author wcwy
     // The command word used to trigger the execution of Moolah Manager's operations
     public static String COMMAND_WORD;
-    // The description for the usage of command
-    public static String COMMAND_DESCRIPTION;
-    // The guiding information for the usage of command
-    public static String COMMAND_USAGE;
-    // The formatting information for the parameters used by the command
-    public static String COMMAND_PARAMETERS_INFO;
 
     //@@author paullowse
 
@@ -55,6 +50,8 @@ public abstract class Command {
      */
     public abstract void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException;
 
+    //@@author paullowse
+
     /**
      * Enables the program to exit when the Bye command is issued.
      *
@@ -84,7 +81,11 @@ public abstract class Command {
     public void setEntryNumber(int entryNumber) {
     }
 
-    public void setIsDetailedOption(boolean isDetailed) {
+    public void setKeyword(String keyword) {
+
+    }
+
+    public void isDetailed(boolean isDetailed) {
     }
 
     public void setStatsType(String statsType) {
@@ -100,5 +101,8 @@ public abstract class Command {
     }
 
     public void setGlobalPeriod(String period) {
+    }
+
+    public void setQueryCommand(String queryCommand) {
     }
 }

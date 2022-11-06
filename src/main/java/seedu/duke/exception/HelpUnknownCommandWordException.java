@@ -1,12 +1,12 @@
 package seedu.duke.exception;
 
-//@@author chydarren
+//@@author wcwy
 import seedu.duke.common.ErrorMessages;
 
 /**
- * Represents the exception where there are missing keywords in the search expression.
+ * Represents the exception where the option chosen in help command is not "o/detailed".
  */
-public class FindTransactionMissingKeywordsException extends MoolahException {
+public class HelpUnknownCommandWordException extends MoolahException {
     /**
      * Returns the error message of the exception to alert user of the exception.
      *
@@ -14,6 +14,7 @@ public class FindTransactionMissingKeywordsException extends MoolahException {
      */
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_FIND_COMMAND_MISSING_KEYWORDS.toString();
+        return ErrorMessages.ERROR_UNKNOWN_HELP_COMMAND_WORD.toString();
     }
+
 }

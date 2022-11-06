@@ -20,7 +20,7 @@ ____________________________________________________________
 Gotcha! Here are the commands that you may use:
 Command Word: HELP
 Display basic or detailed help information explaining the commands available in the application.
-Usage: help [o/detailed]
+Usage: help [o/detailed] [q/COMMAND]
 
 Command Word: BUDGET
 Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
@@ -31,23 +31,32 @@ Add a new transaction entry, which could be either an "expense" or "income" into
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 
 Command Word: LIST
-List all or some transactions based on selection. If tag filters are used, the transactions retrieved from the records must match all the filter tags that have been specified in order to be recognized as a valid record. The m/MONTH and y/YEAR tags should not be used together with p/PERIOD and n/NUMBER tags.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
+List all or some transactions based on selection by the ascending order of date of transaction.
+If tag filters are used, the transactions retrieved from the records must match all the filter tags
+that have been specified in order to be recognized as a valid record.
+Usages:
+	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
+	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
 
 Command Word: FIND
-Find a specific or multiple transactions based on any keywords that have been specified.
-Usage: find KEYWORDS
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
 
 Command Word: STATS
-View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application. The m/MONTH and y/YEAR tags should not be used together with p/PERIOD and n/NUMBER tags.
-Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
+View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
+Usages:
+	(1) Categorical savings: stats s/categorical_savings
+	(2) Monthly expenditure: stats s/monthly_expenditure
+	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
 
 Command Word: EDIT
-Edit a transaction entry from the list of transactions.
+Edit a transaction entry from the unfiltered list of transactions.
 Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
 
 Command Word: DELETE
-Delete a transaction entry from the list of transactions.
+Delete a transaction entry from the unfiltered list of transactions.
 Usage: delete e/ENTRY
 
 Command Word: PURGE
@@ -63,67 +72,81 @@ ____________________________________________________________
 Gotcha! Here are the commands that you may use:
 Command Word: HELP
 Display basic or detailed help information explaining the commands available in the application.
-Usage: help [o/detailed]
+Usage: help [o/detailed] [q/COMMAND]
 Parameters information:
 - detailed: A detailed version of the guide.
+- COMMAND: A case-insensitive command word to search for.
 
 Command Word: BUDGET
 Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
 Usage: budget b/BUDGET
 Parameters information:
-- BUDGET: An estimate of expense for every month. . It is a positive whole number that is from 1 to 10^13 (Ten Trillion). No alphabet, symbol or spacing is allowed.
+- BUDGET: An estimate of expense for every month. It is a positive whole number ranging from 1 to 10^13 (Ten Trillion).
 
 Command Word: ADD
 Add a new transaction entry, which could be either an "expense" or "income" into the transactions list.
 Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
 Parameters information:
 - TYPE: The type of transaction. It should either be "expense" or "income".
-- CATEGORY: A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.
-- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000. No alphabet, symbol or spacing is allowed.
-- DESCRIPTION: More information regarding the transaction. It is a one-word parameter defined by the user without any spacing.
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
+- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
+- DESCRIPTION: More information regarding the transaction. It is any word without any spacing.
 
 Command Word: LIST
-List all or some transactions based on selection. If tag filters are used, the transactions retrieved from the records must match all the filter tags that have been specified in order to be recognized as a valid record. The m/MONTH and y/YEAR tags should not be used together with p/PERIOD and n/NUMBER tags.
-Usage: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
+List all or some transactions based on selection by the ascending order of date of transaction.
+If tag filters are used, the transactions retrieved from the records must match all the filter tags
+that have been specified in order to be recognized as a valid record.
+Usages:
+	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
+	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
 Parameters information:
 - TYPE: The type of transaction. It should either be "expense" or "income".
-- CATEGORY: A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
 - DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
-- MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January. This parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
-- PERIOD: The period which the transaction falls on. It should either be weeks or months. This parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number that is from 1 to 100. This parameter must be used together with the PERIOD parameter.
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
+		<!> - MONTH parameter must be used together with the YEAR parameter.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
+		<!> - PERIOD parameter must be used together with the NUMBER parameter.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
+		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: FIND
-Find a specific or multiple transactions based on any keywords that have been specified.
-Usage: find KEYWORDS
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
 Parameters information:
-- KEYWORDS: A string that represents a single or a group of words used to find matching transactions. Spacing is allowed.
+- KEYWORD: A case-insensitive word that matches the partial or the full description of a transaction entry. It is any word without any spacing.
 
 Command Word: STATS
-View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application. The m/MONTH and y/YEAR tags should not be used together with p/PERIOD and n/NUMBER tags.
-Usage: stats s/STATS_TYPE [m/MONTH] [y/YEAR] [p/PERIOD] [n/NUMBER]
+View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
+Usages:
+	(1) Categorical savings: stats s/categorical_savings
+	(2) Monthly expenditure: stats s/monthly_expenditure
+	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
 Parameters information:
-- STATS_TYPE: The type of statistics. It can be "categorical_savings", "monthly_expenditure", or "time_insights".
-- MONTH: The month which the transaction falls on. It is in numerical form, i.e. from 1 to 12, where 1 represents January. This parameter must be used together with the YEAR parameter.
-- YEAR: The year which the transaction falls on. It must be in yyyy format and only year 1000 and onwards are accepted.
-- PERIOD: The period which the transaction falls on. It should either be weeks or months. This parameter must be used together with the NUMBER parameter.
-- NUMBER: The last N number of weeks or months. It is a positive whole number that is from 1 to 100. This parameter must be used together with the PERIOD parameter.
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
+		<!> - MONTH parameter must be used together with the YEAR parameter.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
+		<!> - PERIOD parameter must be used together with the NUMBER parameter.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
+		<!> - NUMBER parameter must be used together with the PERIOD parameter.
 
 Command Word: EDIT
-Edit a transaction entry from the list of transactions.
+Edit a transaction entry from the unfiltered list of transactions.
 Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
 Parameters information:
 - ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
 - TYPE: The type of transaction. It should either be "expense" or "income".
-- CATEGORY: A category for the transaction. It is a one-word parameter flexibly defined by the user. No numeral, symbol or spacing is allowed.
-- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000. No alphabet, symbol or spacing is allowed.
-- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000. No alphabet, symbol or spacing is allowed.
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
+- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
 - DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
-- DESCRIPTION: More information regarding the transaction. It is a one-word parameter defined by the user without any spacing.
+- DESCRIPTION: More information regarding the transaction. It is any word without any spacing.
 
 Command Word: DELETE
-Delete a transaction entry from the list of transactions.
+Delete a transaction entry from the unfiltered list of transactions.
 Usage: delete e/ENTRY
 Parameters information:
 - ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
@@ -131,7 +154,7 @@ Parameters information:
 Command Word: PURGE
 Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
 Usage: purge
-Parameters information:  -NIL-
+Parameters information: -NIL-
 
 Command Word: BYE
 Exit the application.
@@ -150,6 +173,27 @@ Not supported tag(s) detected, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+Parameters information: -NIL-
+
 ____________________________________________________________
 ____________________________________________________________
 Duplicate tag(s) detected, please enter <help> for the command guide.
@@ -272,14 +316,14 @@ Type of transaction given is invalid, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
-[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
 
 ____________________________________________________________
 ____________________________________________________________
@@ -287,7 +331,7 @@ There are no transaction records found.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
 
 ____________________________________________________________
 ____________________________________________________________
@@ -295,12 +339,12 @@ Parameter behind tag(s) is found to be empty, please enter <help> for the comman
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
 
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
 
 ____________________________________________________________
 ____________________________________________________________
@@ -323,9 +367,9 @@ These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for t
 ____________________________________________________________
 ____________________________________________________________
 Here are your net categorical savings:
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 ____________________________________________________________
 ____________________________________________________________
@@ -347,7 +391,7 @@ In terms of monthly budget, you have kept yourself well within the budget!
 [Oct 2022]
 Income: $0
 Expense: $10001
-Savings: $-10001
+Savings: -$10001
 Budget: $10000
 Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
 In terms of monthly budget, you have spent more than your budget planned!
@@ -359,9 +403,9 @@ Here are the categorical savings and expenditure summary for
 Year: 2022
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 -----Expenditure Summary-----
 Income: $2000
@@ -373,7 +417,7 @@ Here are the categorical savings and expenditure summary for
 Year: 2022, Month: 10
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 
 -----Expenditure Summary-----
 Income: $0
@@ -391,7 +435,7 @@ Month tag must be accompanied by a year tag, please enter <help> for the command
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 3 weeks:
+The last 3 weeks:
 
 -----Categorical Savings-----
 
@@ -402,7 +446,7 @@ Savings: $0
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 5 days:
+The last 5 days:
 
 -----Categorical Savings-----
 
@@ -413,12 +457,12 @@ Savings: $0
 ____________________________________________________________
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-The past 4 months:
+The last 4 months:
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 -----Expenditure Summary-----
 Income: $2000
@@ -435,12 +479,12 @@ ____________________________________________________________
 Period and number tags must be provided together, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Keyword(s) for your search expression missing, please enter <help> for the command guide.
+Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are the transaction records that match your search expression:
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
-[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -448,10 +492,10 @@ There are no transaction records that match your search expression.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
-[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
-[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________
@@ -488,11 +532,11 @@ Mandatory tag(s) missing, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[-][food] $20 on Sep 13 2022 | Description: NIL
-[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
-[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
-[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+5: [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
 ____________________________________________________________
@@ -520,17 +564,17 @@ Remaining budget for Sep 2022: $10000000000000. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
-[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
-[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+1: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+3: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+4: [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
 
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please enter <help> for the command guide.
+The index of the transaction does not exist, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
-Invalid index, please enter <help> for the command guide.
+The index of the transaction does not exist, please enter <help> for the command guide.
 ____________________________________________________________
 ____________________________________________________________
 I have deleted the following transaction:
@@ -544,8 +588,8 @@ Remaining budget for Oct 2022: $9999999999999. Keep it up!
 ____________________________________________________________
 ____________________________________________________________
 Here are your transaction records:
-[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
-[-][transport] $1 on Oct 02 2022 | Description: bus_fare
+1: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
 
 ____________________________________________________________
 ____________________________________________________________

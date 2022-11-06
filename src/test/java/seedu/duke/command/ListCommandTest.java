@@ -62,7 +62,7 @@ public class ListCommandTest {
 
         assertThrows(
             GlobalUnsupportedTagCombinationException.class,
-            () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.checkContainDateIntervalsTags()
         );
     }
 
@@ -73,7 +73,7 @@ public class ListCommandTest {
 
         assertThrows(
             GlobalMissingPeriodNumberTagException.class,
-            () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.checkContainDateIntervalsTags()
         );
     }
 
@@ -84,7 +84,7 @@ public class ListCommandTest {
 
         assertThrows(
             GlobalMissingPeriodNumberTagException.class,
-            () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.checkContainDateIntervalsTags()
         );
     }
 
@@ -95,7 +95,7 @@ public class ListCommandTest {
 
         assertThrows(
             GlobalMissingYearTagException.class,
-            () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.checkContainDateIntervalsTags()
         );
     }
 
@@ -105,7 +105,7 @@ public class ListCommandTest {
         listCommand.setGlobalYear(2010);
 
         assertDoesNotThrow(
-            () -> listCommand.parseDateIntervalsTags()
+            () -> listCommand.checkContainDateIntervalsTags()
         );
     }
 }

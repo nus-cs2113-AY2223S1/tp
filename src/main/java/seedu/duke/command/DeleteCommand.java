@@ -4,6 +4,7 @@ package seedu.duke.command;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.common.DateFormats;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.exception.GlobalInvalidIndexException;
@@ -16,11 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_ENTRY;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_DELETE;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_DELETE;
+import static seedu.duke.common.HelpMessages.DELETE_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.DELETE_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_DELETE;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a delete command object that will execute the operations for Delete command.
@@ -29,17 +28,7 @@ public class DeleteCommand extends Command {
     //@@author brian-vb
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "DELETE";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_ENTRY;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_DELETE + LINE_SEPARATOR + COMMAND_USAGE_DELETE + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
-    //@@author brian-vb
     // The optional tags that may exist in the user input
     private static final Logger deleteLogger = Logger.getLogger(DeleteCommand.class.getName());
 
@@ -79,25 +68,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TransactionList transactions, Ui ui, Storage storage) throws MoolahException {
-        /*
-        Checks if userInput is in the correct input format by further parsing,
-        before adding entry to arraylist
-        */
         try {
             deleteLogger.setLevel(Level.SEVERE);
             deleteLogger.log(Level.INFO, "Delete Command checks whether the index is valid "
                     + "before executing the command.");
-            boolean isInputValid = true;
             int index = entryNumber;
-            int numberOfTransactions;
-            numberOfTransactions = transactions.size();
-            if ((index > numberOfTransactions) || (index <= 0)) {
-                isInputValid = false;
-            }
-
-
+            boolean check = isIndexValid(transactions, index);
             assert index > 0;
-            if (isInputValid) {
+
+            if (check) {
                 LocalDate date = transactions.getEntry(index - 1).getDate();
                 String transaction = transactions.deleteTransaction(index - 1);
 
@@ -120,6 +99,26 @@ public class DeleteCommand extends Command {
         deleteLogger.log(Level.INFO, "This is the end of the delete command.");
     }
 
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return DELETE_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return DELETE_COMMAND_DETAILED_HELP;
+    }
+
     //@@author paullowse
 
     /**
@@ -130,5 +129,17 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Performs a check to see if the index is a valid one.
+     *
+     * @param transactions The list of transactions
+     * @param index The input index
+     * @return A boolean value that indicates whether the program continues execution.
+     */
+    public boolean isIndexValid(TransactionList transactions, int index) {
+        int numberOfTransactions = transactions.size();
+        return (index <= numberOfTransactions) && (index > 0);
     }
 }

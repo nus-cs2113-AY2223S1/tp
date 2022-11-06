@@ -4,6 +4,7 @@ package seedu.duke.command;
 
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
@@ -21,13 +22,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_STATS_TYPE;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_MONTH;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_YEAR;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_PERIOD;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_NUMBER;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_STATS;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_STATS;
+import static seedu.duke.common.HelpMessages.STATS_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.STATS_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
@@ -50,17 +46,6 @@ public class StatsCommand extends ListAndStatsCommand {
     //@@author paullowse
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "STATS";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_STATS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_MONTH + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_YEAR + LINE_SEPARATOR + COMMAND_PARAMETERS_PERIOD + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_NUMBER;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_STATS + LINE_SEPARATOR + COMMAND_USAGE_STATS + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO
-            + LINE_SEPARATOR;
 
     //@@author chydarren
     private static final String CATEGORICAL_SAVINGS = "categorical_savings";
@@ -127,7 +112,7 @@ public class StatsCommand extends ListAndStatsCommand {
         }
 
         // Checks if there are any error in the tag combinations related to DateIntervals
-        parseDateIntervalsTags();
+        checkContainDateIntervalsTags();
         listStatsByStatsType(transactions, ui);
     }
 
@@ -262,6 +247,28 @@ public class StatsCommand extends ListAndStatsCommand {
                     expensesMessage, savingsMessage);
         }
     }
+
+    //@@author wcwy
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return STATS_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return STATS_COMMAND_DETAILED_HELP;
+    }
+
+    //@@author paullowse
 
     /**
      * Enables the program to exit when the Bye command is issued.

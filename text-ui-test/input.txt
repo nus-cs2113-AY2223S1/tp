@@ -5,6 +5,10 @@ help o/detailed blablabla
 help /
 help o/
 help o/detailed o/detailed
+help q/
+help q/BYE
+help q/BYE o/detailed
+help q/BYE q/ADD
 budget
 budget /
 budget b/
@@ -68,8 +72,8 @@ stats s/time_insights p/mont n/4
 stats s/time_insights n/4
 stats s/time_insights p/months
 find
-find bus_fare
-find TOTALLY_NON_EXISTING_STRING
+find k/bus_fare
+find k/TOTALLY_NON_EXISTING_STRING
 list
 add / c/bonus a/10000000 d/03102022 i/thank_you_boss
 add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss

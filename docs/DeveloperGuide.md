@@ -1,62 +1,74 @@
-# Developer Guide
+# Moolah Manager - Developer Guide
 
-- [Preface](#preface)
-- [Acknowledgements](#acknowledgements)
-- [Setting Up the Project](#setting-up-the-project)
-- [Design](#design)
-    * [Architecture](#architecture)
-    * [Command Component](#command-component)
-    * [Data Component](#data-component)
-    * [Storage Component](#storage-component)
-    * [Parser Component](#parser-component)
-    * [UI Component](#ui-component)
-    * [Common Component](#common-component)
-- [Implementation](#implementation)
-    * [Overview for Transaction](#overview-for-transaction)
-    * [Implementation for Transaction](#implementation-for-transaction)
-    * [Help Command](#help-command)
-    * [Budget Command](#budget-command)
-    * [Add Command](#add-command)
-    * [Edit Command](#edit-command)
-    * [List Command](#list-command)
-    * [Find Command](#find-command)
-    * [Stats Command](#stats-command)
-    * [Delete Command](#delete-command)
-    * [Purge Command](#purge-command)
-    * [Bye Command](#bye-command)
-    * [Storage Operations](#storage-operations)
-        + [Reading From a File](#reading-from-a-file)
-        + [Writing To a File](#writing-to-a-file)
-    * [Logging Operations](#logging-operations)
-- [Appendix A: Product scope](#appendix-a--product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-- [Appendix B: User Stories](#appendix-b--user-stories)
-- [Appendix C: Non-Functional Requirements](#appendix-c--non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d--glossary)
-- [Appendix E:  Instructions for manual testing](#appendix-e---instructions-for-manual-testing)
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
 
-## Preface
+- [1. Preface](#1-preface)
+- [2. Acknowledgements](#2-acknowledgements)
+- [3. Setting Up the Project](#3-setting-up-the-project)
+- [4. Design](#4-design)
+  * [4.1. Architecture](#41-architecture)
+  * [4.2. Command Component](#42-command-component)
+  * [4.3. Data Component](#43-data-component)
+  * [4.4. Storage Component](#44-storage-component)
+  * [4.5. Parser Component](#45-parser-component)
+  * [4.6. UI Component](#46-ui-component)
+  * [4.7. Common Component](#47-common-component)
+- [5. Implementation for Managing Transactions](#5-implementation-for-managing-transactions)
+  * [5.1. Overview for Transaction](#51-overview)
+  * [5.2. Implementation for Transaction](#52-proposed-implementation)
+  * [5.3. Add Command](#53-add-command)
+  * [5.4. Edit Command](#54-edit-command)
+  * [5.5. List Command](#55-list-command)
+  * [5.6. Find Command](#56-find-command)
+  * [5.7. Delete Command](#57-delete-command)
+  * [5.8. Purge Command](#58-purge-command)
+- [6. Implementation for Budgeting and Financial Insights](#6-implementation-for-budgeting-and-financial-insights)
+  * [6.1. Overview for Budgeting And Insights](#61-overview)
+  * [6.2. Proposed Implementation](#62-proposed-implementation)
+  * [6.3. Stats Command](#63-stats-command)
+  * [6.4. Budget Command](#64-budget-command)
+- [7. Implementation for Miscellaneous Operations](#7-implementation-for-miscellaneous-operations)
+  * [7.1. Help Command](#71-help-command)
+  * [7.2. Bye Command](#72-bye-command)
+  * [7.3. Storage Operations](#73-storage-operations)
+  * [7.4. Logging Operations](#74-logging-operations)
+- [Appendix A: Product scope](#appendix-a-product-scope)
+  * [A.1. Target user profile](#a1-target-user-profile)
+  * [A.2. Value proposition](#a2-value-proposition)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E:  Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
+  * [E.1. Launch and Shutdown](#e1-launch-and-shutdown)
+  * [E.2. Storage](#e2-storage)
+    
+## 1. Preface
 
-Moolah Manager is a desktop app for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
+Moolah Manager is a desktop application for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
 fast typists, it can help to process day-to-day monetary transactions that are classified into income and expense. Users can expect to get an overview of their transactions
 at a glance and be provided with valuable insights into their spending habits. They are also encouraged to set budget goals to minimise their spending.
 
-This document is meant assist developers in understanding how our program works.
+This developer guide for Moolah Manager V2.1 illustrates the high-level architecture and how the features are implemented within the application. Moreover, it specifies the 
+scope and requirements of the product that were established prior to the development of features. We hope that this guide will assist developers in understanding how the
+application works and be able to maintain it seamlessly. 
+
+You may [click here](https://github.com/AY2223S1-CS2113-W12-2/tp) to visit the GitHub repository of this project.
 
 _Written by: Brian Wong Yun Long_
 
-## Acknowledgements
+## 2. Acknowledgements
 
-The format of this development guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+The format of this developer guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+The class diagrams are styled using the Cyborg Outline theme by Brett Schwarz.
 
-Some parts of the source code in this program were reused and adapted from the team's individual projects during the CS2113 IP phase.
+Some parts of the source code in this application were reused and adapted from the team's individual projects during the CS2113 IP phase. 
 
 _Written by: Brian Wong Yun Long_
 
-## Setting Up the Project
+## 3. Setting Up the Project
 
-{Detail how to set up the project on one's computer, assuming the software is Intellij IDEA}
 Before setting up the project on your computer, kindly check that you have installed:
 
 * Java JDK 11
@@ -75,10 +87,16 @@ file in this project, right-click it, and choose `Run Duke.main()`.
 
 _Written by: Paul Low_
 
-## Design
+## 4. Design
 
-### Architecture
-![Architecture Diagram](images/ArchitectureDiagram.png)
+### 4.1. Architecture
+
+<p align="center">
+    <img src="images/ArchitectureDiagram.png">
+    <br />
+    <i>Figure 1: Architecture Diagram</i>
+</p>
+
 The Architecture Diagram shown above explains the high-level design of Moolah Manager. 
 The `Duke` class contain the main method which holds the responsibility for the following:
 1. On application launch, it will initialise the `UI`, `Storage` and `Data` components. 
@@ -95,16 +113,23 @@ The rest of the application consists of six components:
  - `Data`: Holds the data of the application in memory.
  - `Storage`: File I/O to store the data onto the hard disk.
 
-#### How the architecture components interact with each other
+#### How the Architecture Components Interact with Each Other:
+
 The sequence diagram below shows how the components interact on command `budget b/1000`.
-![Architecture Interaction](images/ArchitectureSequenceDiagram.png)
+
+<p align="center">
+    <img src="images/ArchitectureSequenceDiagram.png" width = "90%">
+    <br />
+    <i>Figure 2: Architecture Interaction</i>
+</p>
+
 The section below gives more detailed description of each component.
 
 _Written by: Chia Thin Hong_
 
-### Command Component
+### 4.2. Command Component
 
-The command component is represented by a `command` package which consists of all the classes that is part of the data stored
+The `Command` component is represented by a `command` package which consists of all the classes that is part of the data stored
 by Moolah Manager. Within the `command` package, there are many classes, each corresponding to all of our commands which are
 supported by the application.
 
@@ -131,21 +156,26 @@ The `PurgeCommand` class contains the operations pertaining to deleting all tran
 The `StatsCommand` class contains the operations pertaining to getting statistics based on your list of transactions.
 
 The structure of the command component in Moolah Manager is illustrated in the class diagram below:
-![Command Component Class Diagram](images/CommandComponentClassDiagram.png)
+
+<p align="center">
+    <img src="images/CommandComponentClassDiagram.png">
+    <br />
+    <i>Figure 3: Class Diagram for Command Component</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
-### Data Component 
+### 4.3. Data Component 
 
-The data component is represented by a `data` package which consists of all the classes that is part of the data stored 
+The `Data` component is represented by a `data` package which consists of all the classes that is part of the data stored 
 by Moolah Manager. Within the `data` package, a transaction package, a budget class and a transactionList class is 
 stored. 
 
-The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget and 
-differences from budget is implemented within this class.
+The `budget` class is a representation of the monthly budget of the users. Operations related to viewing the budget
+and generating budget reminders, tips and advices are implemented within this class.
 
 The `transactionList` class is a representation of a list of transactions, and the
-operations related to the `transactionList` implemented within this class.
+operations related to the transaction list are implemented within this class.
 
 Within the transaction package, the following classes are stored: 
 1. Transaction 
@@ -153,16 +183,20 @@ Within the transaction package, the following classes are stored:
 3. Expense
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
-![Data Component Class Diagram](images/DataComponentClassDiagram.png)
+
+<p align="center">
+    <img src="images/DataComponentClassDiagram.png">
+    <br />
+    <i>Figure 4: Class Diagram for Data Component</i>
+</p>
 
 From the class diagram, it can be seen that the transactionList contain the methods for CRUD operations to the list, 
 such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
-The `Transaction` class is the abstract classes of an `Income` or an `Expense`. A more detailed explanation on the 
-implementation on the transactions can be viewed under Section
-[Implementation for Transaction](#implementation-for-transaction).
+The `Transaction` class is the abstract class of an `Income` or an `Expense`. A more detailed explanation on the 
+implementation on the transactions can be viewed under Section [Implementation for Transaction](#5-implementation-for-managing-transactions).
 
-#### How the data component interacts
+#### How the Data Component Interacts:
 
 - When MoolahManager starts running, the `Duke` class will initialize a `Storage` object which will attempt to 
 read from the file and initialize both `budget` and `transactionList`. The temporary `transactionList` containing all the stored 
@@ -170,7 +204,11 @@ transaction records will be returned by the `Storage`.
 Based on the whether the initialization is successful, the corresponding constructor will be called to initialize a 
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
 
-  ![Sequence Diagram on Creation of TransactionList](images/TransactionListSequenceDiagram.png)
+<p align="center">
+    <img src="images/TransactionListSequenceDiagram.png" width = "80%">
+    <br />
+    <i>Figure 5: Sequence Diagram for Creation of Transaction List</i>
+</p>
 
 - A transaction (either an income or expense) is created by an `addCommand` class, can be modified by an `editCommand` 
 class and can be deleted by a `deleteCommand` or `purgeCommand` class. These interactions are described in further detail
@@ -180,14 +218,16 @@ under each command section below.
 
 _Written by: Chia Thin Hong_
 
-### Storage Component
+### 4.4. Storage Component
+
 The `Storage` component is a standalone class. It utilises its sub-methods and methods from external classes to perform it's read and write functions.
 
 The structure of `Storage` can be seen below.
+
 <p align="center">
     <img src="images/StorageComponentClassDiagram.png">
     <br />
-    <i> Simplified Class Diagram for Storage Component</i>
+    <i>Figure 6: Class Diagram for Storage Component</i>
 </p>
 
 1. `Duke` initializes `Storage` and `Storage#initializeFile` is called.
@@ -198,12 +238,18 @@ Methods from `Budget` and `TransactionList` would be used for the storage of `Bu
 
 _Written by: Yong Chin Han_
 
-### Parser Component
-The Parser component consists of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
+### 4.5. Parser Component
+
+The `Parser` component consists of two main parsers: `CommandParser` and `ParameterParser`. Together, both these 
 parsers are used to generate a command object with its accurate parameters according to the input from the UI. 
 
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ParsersClassDiagram.png)
+
+<p align="center">
+    <img src="images/ParsersClassDiagram.png" width="80%">
+    <br />
+    <i>Figure 7: Class Diagram for Parser Component</i>
+</p>
 
 After `run()` is called by `main()` in Duke, the `CommandParser` is first called to parse the command. The initial
  input is split into the commandWord and parameters using `splitInput()`. Next, the command word is parsed using 
@@ -218,159 +264,129 @@ With the checked and accurate commands and parameters, the command is then execu
 
 _Written by: Paul Low_
 
-### UI Component
+### 4.6. UI Component
 
-The UI component consists of a `Ui` class that displays information and error messages based on the user 
-input and the behavior of the application. Static messages are pre-defined in the `ErrorMessages` and `InfoMessages` 
-classes from the Common component, while  dynamic messages such as a transactions list may be generated during 
-execution of the application.
+The `UI` component is represented by a `Ui` class that handles the retrieval of user input and display of relevant information and error messages for the application. 
+Static messages are pre-defined in the `HelpMessages`, `InfoMessages` and `ErrorMessages` enum classes belonging to the `Common` package, while dynamic messages 
+such as the transactions list and statistics are generated during the execution of the application. 
+
+There are three types of pre-defined static messages:
+
+- Help messages detail the available commands and usage examples for the application. 
+- Info messages describe the functionalities of the application. 
+- Error messages provide user-friendly information about the exceptions that have been caught.
+
+The structure of the UI component in Moolah Manager is illustrated in the class diagram below:
 
 <p align="center">
     <img src="images/UiComponentClassDiagram.png">
     <br />
-    <i>Figure 2.6: Class Diagram for UI Component</i>
+    <i>Figure 8: Class Diagram for UI Component</i>
 </p>
 
-As seen from the class diagram, every command that requires the ability to print to the system output will have
-to call the functions from the `Ui` class. To add on, the `Duke` class will also use the `Ui` class to read user 
-input.
+As seen from the class diagram, every command that needs to print to the system output will have to call the methods from the `Ui` class. There are two important methods that 
+developers should take note of.
+
+- The `readCommand()` method is only called from the `Duke` class to read user input. 
+- The `printMessages()` method is called by all other methods in the `Ui` class to print messages to the system output. Examples of the caller methods include `showInfoMessage()`,
+`showHelp()`, `showList()` and `showTransactionAction()`. These caller methods are called from the rest of the application depending on what type of messages are to be printed
+to the user.
 
 _Written by: Chua Han Yong Darren_
 
-### Common Component
+### 4.7. Common Component 
 
-_Written by: Author name_
+The `Common` component consists of the classes that are used by multiple components.
 
-## Implementation
+- `Constants` class represents all the constant settings of the application.
+- `DateFormats` enum class provides the approved date formats for input and output.
+- `HelpMessages` enum class stores the help messages that detail the available commands and usage examples for the application.
+- `InfoMessages` enum class stores the info messages that describe the functionalities of the application.
+- `ErrorMessages` enum class store the error messages that provide information on exceptions that have been caught.
 
-### Overview for Transaction
+The class diagram below shows some types of information that are stored for the `Add` command in these classes.
 
-The following commands are accepted in Moolah Manager:
-1) `Add` - Adds an `Income` or `expense` type transaction into the list of transaction. [Add Command](#add-command)
-2) `Budget` - Adds an `Budget` into Moolah Manager, which sets the basis for financial tracking. [Budget Command](#budget-command)
-3) `Bye` - Exits Moolah Manager. [Bye Command](#bye-command)
-4) `Delete` - Deletes an `Income` or `expense` type transaction from the list of transaction. [Delete Command](#delete-command)
-5) `Edit` - Edits an `Income` or `expense` type transaction from the list of transaction. [Edit Command](#edit-command)
-6) `Find` - Searches for an `Income` or `expense` type transaction from the list of transaction given keywords. [Find Command](#find-command)
-7) `Help` - Outputs the usage of commands of Moolah Manager. [Help Command](#help-command)
-8) `List` - List all transactions. [List Command](#list-command)
-9) `Purge` - Deletes all transactions from the list of transaction. [Purge Command](#purge-command)
-10) `Stats` - View statistics on transactions based on the list of transactions in Moolah Manager. [Stats Command](#stats-command)
+<p align="center">
+    <img src="images/CommonComponentClassDiagram.png" width="80%">
+    <br />
+    <i>Figure 9: Class Diagram for Common Component</i>
+</p>
+
+_Written by: Chua Han Yong Darren_
+
+## 5. Implementation for Managing Transactions
+
+### 5.1. Overview
+
+Moolah Manager enables users to add, delete and edit their monetary transaction entries on a regular basis  to keep their records up-to-date.
+Some of the information that needs to be stored include the type of transaction, category it belongs to, amount, date and its description.
+As users eventually need to view their past records, it is imperative that these records are stored in a central list that is easily retrievable when needed.
 
 _Written by: Brian Wong Yun Long_
 
-### Implementation for Transaction
+### 5.2. Proposed Implementation
 
-Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income`
-or `Expense` type. Below is a simplified class diagram (with methods omitted) containing the attributes
-within each transaction and how each transaction is associated with the `TransactionList`.
+Each `Transaction` object in Moolah Manager represents a transaction record, which can be of `Income` or `Expense` type. Below is a class diagram that illustrates
+the attributes that are contained within each transaction and how they are associated with the `TransactionList`. Note that non-important methods and variables have been omitted 
+from the class diagram below for simplicity.
 
 <p align="center">
-    <img src="images/TransactionClassDiagram.png">
+    <img src="images/TransactionClassDiagram.png" width="100%">
     <br />
-    <i>Figure 1: Simplified Class Diagram for Transaction</i>
+    <i>Figure 10: Class Diagram for Transaction</i>
 </p>
 
-The `TransactionList` holds a dynamic array list that can store multiple `Transaction` objects.
+The `TransactionList` represents a dynamic array list that can store multiple `Transaction` objects, whereby each object contain the following mandatory attributes:
 
-Each Transaction object contains the following mandatory member attributes:
+| Attribute     | Description                                                                                            |
+|---------------|--------------------------------------------------------------------------------------------------------|
+| `category`    | The type of transaction. It should either be `expense` or `income`.                                    |
+| `description` | A category for the transaction. It can be any word without numeral, symbol or spacing.                 |
+| `amount`      | The amount of the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million). | 
+| `date`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.             |                                                                                                 
+| `description` | More information regarding the transaction. It is any word without any spacing.                        | 
 
-1. **category** A category for the transaction.
-2. **description** More information regarding the transaction, written without any space.
-3. **amount** Value of the transaction in numerical form. Only integers within 0 and 10000000 is accepted.
-4. **date** Date of the transaction. The format must be in "yyyyMMdd".
+The main CRUD operations in `TransactionList` that facilitates the data manipulation of `Transaction` object(s) include:
 
-Some important operations are performed within the `TransactionList` class, which implements the following:
+- `addIncome()` - Adds an income `Transaction` entry into the `TransactionList`.
+- `addExpense()` - Adds an expense `Transaction` entry into the `TransactionList`.
+- `editIncome()` - Edits an income `Transaction` entry from the `TransactionList`.
+- `editExpense()` - Edits an expense `Transaction` entry from the `TransactionList`.
+- `deleteTransaction()` - Deletes a `Transaction` entry from the `TransactionList`.
+- `purgeTransactions()` - Deletes all `Transaction` entries from the `TransactionList`.
+- `getEntry()` - Gets a specific `Transaction` entry from the `TransactionList`.
 
-- `TransactionList#addIncome(String description, int amount, String category, LocalDate date)` - Adds a transaction of
-  class type Income into the transactions list.
-- `TransactionList#addExpense(String description, int amount, String category, LocalDate date)` - Adds a transaction of
-  class type Expense into the transactions list.
-- `TransactionList#listTransactions(String type, String category, LocalDate date)` - List all or some transactions based
-  on selection.
-- `TransactionList#findTransactions(String keywords)` - Find specific transaction(s) based on any keywords inputted by
-  the user.
-- `TransactionList#deleteTransaction(int index)` - Deletes a transaction from the transactions list based on the
-  specified index.
-- `TransactionList#purgeTransactions()` - Purges all transactions in the transactions list.
+Following which, `TransactionList` provides methods such as `listTransactions()`, `findTransactions()`, `getTransactionsByMonth()`, `getTransactionsByYear()`, 
+`getTransactionsByDayRange()`, `getTransactionsByWeekRange()` and `getTransactionsByMonthRange()` to enable users to view their past transaction records.
+Users will be able to retrieve transactions over the last N days, weeks or months as the `getTransactionsByXRange()` computes the difference in the dates between
+today's date and the previous date.
 
 _Written by: Chua Han Yong Darren_
 
-### Help Command
-The help command displays the help message to the users to guide them on the usage and provide descriptions for each
-available command.
-
-The help command can be run as `help` or `help o/detailed`, where the latter will display a more detailed version of
-help messages to the users.
-
-The structure of the application focusing on the help command is illustrated in the class diagram below:
-![Data Component Class Diagram](images/HelpClassDiagram.png)
-
-For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
-will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
-
-In the help command, when `execute()` is called, it will call either generateBasicHelp() or generateDetailedHelp() method
-based on the help option chosen by the user.
-
-![Data Component Class Diagram](images/HelpSequenceDiagram.png)
-
-
-_Written by: Chia Thin Hong_
-
-### Budget Command
-
-The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the 
-`common/Constants.java` file, whereby the content of the file is as such:
-
-```
-public static int MAX_TRANSACTIONS_COUNT = 1000000;
-public static int MIN_AMOUNT_VALUE = 0;
-public static int MAX_AMOUNT_VALUE = 10000000;
-public static int MIN_BUDGET_VALUE = 1;
-public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
-```
-
-Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13, 
-and it ensures that no integer overflow will occur as the `long` data type is used. 
-
-To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the 
-valid range above. 
-
-The interaction of the components on setting a budget can be seen in the sequence diagram under 
-[Architecture](#How-the-architecture-components-interact-with-each-other).
-
-
-_Written by: Chia Thin Hong_
-
-### Add Command
+### 5.3. Add Command
 
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
-The `AddCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `AddCommand` is
-shown below.
+The `AddCommand` inherits properties from the abstract `Command` class.
+
+`AddCommand` is dependent on `CommandParser` which accesses its `COMMAND_WORD` and creates a new `AddCommand` object which would be returned to `Duke`.
+`Duke` is associated to `AddCommand` by calling for `AddCommand#execute()`.
+It is also associated with `TransactionList`, `Ui`, `Storage`, which are used within `AddCommand` methods like `AddCommand#execute()` and `AddCommand#addTransaction()`.
+Lastly it is also associated with `ParameterParser` which calls for`AddCommand#getMandatoryTags()` that retrieves the mandatory tags (which itself is taken from `CommandTag`). 
+
+The relationship between the classes are shown below. Non-essential info has been omitted for simplification purposes.
 
 <p align="center">
-    <img src="images/AddCommandClassDiagram.png">
+    <img src="images/AddCommandExternalClasses.png">
     <br />
-    <i>Figure 3.1: Class Diagram for AddCommand Showing Inheritance of Command</i>
-</p>
-
-`AddCommand` is dependent on `CommandParser` which accesses its `COMMANDWORD` and creates a new `AddCommand` object. 
-It is also associated with `TransactionList`, `Ui`, `Storage`, which are used in `AddCommand#execute()`; and the `Duke` 
-which calls for `AddCommand#execute()`. Lastly it is also associated with `ParameterParser` which calls for 
-`AddCommand#getMandatoryTags()`. The relationship between the classes are shown below.
-
-<p align="center">
-    <img src="images/AddCommandDetailedClassDiagram.png">
-    <br />
-    <i>Figure 3.2: Class Diagram for AddCommand and Related Classes</i>
+    <i>Figure 12: Class Diagram for Add Command and Related Classes</i>
 </p>
 
 These are the important operations performed within the `AddCommand` class, with task description:
 
 - `AddCommand#execute(TransactionList transactions, Ui ui, Storage storage)` - Adds a `Transaction` object to the
-  `TransactionList transactions` ArrayList via transactions#addIncome() or transactions#addExpense() which would be
-  called based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
+  `TransactionList transactions` ArrayList via `AddCommand#addTransaction()` that calls for `transactions#addIncome()` 
+or `transactions#addExpense()` based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
   would be called to display the acknowledgement message to the interface. Also, the storage#writeToFile() method would
   be called to store the newly updated transactions values in the duke.txt file.
 
@@ -378,20 +394,105 @@ These are the important operations performed within the `AddCommand` class, with
   It is used externally by ParameterParser to verify if the user input contains the mandatory command tags, to correctly
   store the Transaction object in the program.
 
+The structure of the application focusing on the Add command is illustrated in the simplified sequence diagram below:
+
+<p align="center">
+    <img src="images/AddCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 13: Sequence Diagram for Add Command</i>
+</p>
+
+In a command like `add t/expense c/food a/20 d/13092022 i/NIL` OR `add t/income c/salary a/2000 d/30092022 i/jan_salary`
+1. The user input would be parsed via `CommandParser.parse()` method. 
+2. In `CommandParser.parse()`, `getCommand()` would be called which initializes `AddCommand`. Then it would call `ParameterParser.parse()`.
+3. In `ParameterParser.parse()`, the user input will be parsed further before the data is stored into `AddCommand` via  `ParameterParser.setCommand()` , 
+which calls for  `ParameterParser.setParameter()` to set the attributes within the AddCommand instance. 
+4. The `CommandParser.parse()`, would then return the instance of `Addcommand` to Duke class.
+5. `AddCommand.execute()` would be called, in which it will attempt to add its objects to the `TransactionList` based on the type of transaction, either income or expense.  
+6. After the storage or the user input into `TransactionList`, `Storage.writeToFile()` would write the contents of `TransactionList` to the storage file, duke.txt.
+
 _Written by: Yong Chin Han_
 
-### Edit Command
+### 5.4. Edit Command
+
+The `EditCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `EditCommand` is
+shown below.
+
+<p align="center">
+    <img src="images/EditCommandClassDiagram.png" width="50%">
+    <br />
+    <i>Figure 14: Class Diagram for Edit Command</i>
+</p>
+
+The full command for `edit` is `edit [e/ENTRY] [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`.
+
+For example, if 'edit' is called, the specific entry inputted in the command is edited based on the parameters inputted.
+Only the entry and at least one tag is needed for this command to work.
+
+In a command like `edit e/2 t/expense c/food a/10 d/20102022 i/chicken`:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
+4. Within `setCommand()`, more functions are called internally.
+    1. `setParameter()` is called to set the index of the transaction to be deleted.
+    2. The setting is done via `command.setEntryNumber()` which takes in the parameter and executes it in the DeleteCommand Class.
+    3. The parameter, however, needs to be further parsed through the execution of the `parseEntryTag()` function.
+    4. It converts the parameter, which is currently a `String`, to a `Int`.
+
+5. The edit command is undergoing execution in `command.execute()` which will call functions within the EditCommand Class.
+    1. The index, which is the local `entryNumber` variable, goes under further checks by ascertaining whether it is greater than the total
+       number of transactions in the list or lesser than or equal to zero.
+    2. It tells the total size via the local `numberOfTransactions` variable which takes the value called by `transactions.size()`
+       which is located in the TransactionList class.
+    3. If the checks fail, i.e. the index is invalid, `isInputValid` is set as false.
+
+6. The if-else statements does the following:
+    1. Retrieves the transaction to be edited via `transactions.getEntry()`.
+    2. Checks if the local variable `newType` is `null`. This implies that no `t/expense` or `t/income` was indicated by the user.
+       The program then retrieves the type of transaction via `entry.getType()`
+    3. It then splits to another if-else branches which handles the edits using either `transactions.editExpense()` or `transactions.editIncome()`.
+    4. For each of these branches, should the optional tag be left blank, retrieves the relevant field using the getter functions.
+    5. In order to edit the following transaction, it has to be deleted first and then reinserted. This is done by calling `transactions.deleteTransaction()`
+       and then inserts back in at the same spot which is handled by `transactions.add()` at the specific entry.
+
+7. The display shows the successful deletion via `ui.showTransactionAction()` and writes it to file by `storage.writeToFile()`.
+
+The sequence diagram below shows the interactions of a successful execution of the `EditCommand`.
+
+<p align="center">
+    <img src="images/EditCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 15: Sequence Diagram for Edit Command</i>
+</p>
 
 _Written by: Brian Wong Yun Long_
 
-### List Command
+### 5.5. List Command
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
-Adding tags such as type, category and date will list all transactions to that category
+Adding tags such as year, month, day, type, category will list all transactions that apply to that tag.
 
 The structure of the application focusing on the list command is illustrated in the class diagram below:
-![Data Component Class Diagram](images/ListCommandSequenceDiagram.png)
+
+<p align="center">
+    <img src="images/ListCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 16: Sequence Diagram for List Command</i>
+</p>
 
 In a command like `list c/transport`
 
@@ -405,67 +506,54 @@ In a command like `list c/transport`
 6. Next, `getCommand()` is called to obtain a String of transactionList from the ArrayList.
 7. `ui.showTransactionsList()` is then executed since parameters are present, causing the matching transactions to be displayed.
 
-
-
 _Written by: Paul Low_
 
-### Find Command
+### 5.6. Find Command
 
-The `FindCommand` class provides the functionality of finding a specific or few transaction(s) 
-from the list of transactions recorded in Moolah Manager, based on  multiple searching keywords that 
-match the details of the transaction(s).
+The `FindCommand` class provides the search functionality for finding a specific or few transactions from the list of transactions in Moolah Manager. 
+Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
+compared with the description of each transaction object.
 
-The sequence diagram below shows the interactions of a successful execution of the `FindCommand`.
+Figure 17 below is a class diagram for the `Find` command class and its associations with other classes that contribute to the listing of filtered
+transactions. Some methods and variables have been ommitted from the class diagram for simplicity.
+
+<p align="center">
+    <img src="images/FindCommandClassDiagram.png" width="100%">
+    <br />
+    <i>Figure 17: Class Diagram for Find Command</i>
+</p>
+
+The sequence diagram below shows the interactions of a successful execution of the `FindCommand`, using an example of `find k/bus_fare`.
 
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.3: Sequence Diagram for Find Command</i>
+    <i>Figure 18: Sequence Diagram for Find Command</i>
 </p>
 
-**Step 1.** The user executes `find KEYWORDS` command with an intent to view a filtered list of transactions 
-that match the searching keywords.
+Referring to Figure 18, the following is a summarized steps of the interactions that `FindCommand` performs, with some higher level details in `CommandParser` and `ParameterParser`
+omitted for simplicity.
 
-**Step 2.** The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
-accompanied by a string of keywords to search for.
-
-**Step 3.** Moolah Manager (`Duke`) calls `FindCommand#execute()` method which first checks whether the string of 
-keywords is empty via the `FindCommand#checkFindFormat()` method. If `keywords` is empty, a 
-`FindTransactionMissingKeywordsException` object will be thrown with an error message.
-
-**Step 4.** Since there exists a string of keywords in a successful execution, the `TransactionList#findTransactions()` 
-method will be called to loop through all `Transaction` objects from `ArrayList<Transaction>`, checking if they match 
-(i.e. contain) any searching keywords given.
-
-**Step 5.** `Transaction` objects that contain the searching keywords will be appended into a formatted string and 
-returned by the `TransactionList#findTransactions()` method.
-
-**Step 6.** If `FindCommand` checks that `transactionsList` string is not empty, it will call `Ui#showTransactionsList()` 
-method to display the transactions. Otherwise, `Ui#showInfoMessage()` will be called.
+1. The user executes `find k/KEYWORD` command with an intent to view a filtered list of transactions that match the search keyword, e.g. `bus_fare`.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `FindCommand`, and thereafter, the initialization of the `keyword` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that only a single search keyword without spaces has been entered.
+4. Once all checks have passed, `FindCommand` class will `execute()` whereby it will call `FindTransactions()` twice (once within itself, and the other on the `TransactionList` class)
+to generate the list of filtered transactions. The purpose of `TransactionList#findTransactions()` is to loop through all `Transaction` objects from `ArrayList<Transaction> transactions`, checking if their 
+description match the keyword given. Note that it is checked on a case-insensitive basis.
+5. Matching `Transaction` objects will be appended into a formatted string and returned to the `FindCommand` class.
+6. If `FindCommand` class checks that `transactionsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the transactions. 
 
 _Written by: Chua Han Yong Darren_
 
-### Stats Command
-
-{Describe the implementation for the Stats Command}
-
-_Written by: Chua Han Yong Darren_
-
-### Bye Command
-
-{Describe the implementation for the Bye Command}
-
-_Written by: Brian Wong Yun Long_
-
-### Delete Command
+### 5.7. Delete Command
 
 The `DeleteCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `DeleteCommand` is
 shown below.
 
 <p align="center">
-    <img src="images/DeleteCommandClassDiagram.png">
+    <img src="images/DeleteCommandClassDiagram.png" width = "50%">
     <br />
-    <i>Figure 3.4: Class Diagram for DeleteCommand Showing Inheritance of Command</i>
+    <i>Figure 19: Class Diagram for Delete Command</i>
 </p>
 
 The full command for `delete` is `delete [e/ENTRY]`.
@@ -478,35 +566,35 @@ In a command like `delete e/2`:
    through `CommandParser.parse()`.
 
 2. Within `CommandParser.parse()`, a few functions are called internally.
-   1. `spiltInput()` is called which splits the command from the parameter.
-   2. `getCommand()` is called which searches for the command.
-   3. `ParameterParser.parse()` is called.
-   
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
 3. Within `ParameterParser.parse()`, a few functions are called internally as well.
-   1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
-   2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
-   3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
-   4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
-   5. Once all these checks are successful, `setCommand()` is called.
-   
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
 4. Within `setCommand()`, more functions are called internally.
-   1. `setParameter()` is called to set the index of the transaction to be deleted.
-   2. The setting is done via `command.setEntryNumber()` which takes in the parameter and executes it in the DeleteCommand Class.
-   3. The parameter, however, needs to be further parsed through the execution of the `parseEntryTag()` function.
-   4. It converts the parameter, which is currently a `String`, to a `Int`.
-   
+    1. `setParameter()` is called to set the index of the transaction to be deleted.
+    2. The setting is done via `command.setEntryNumber()` which takes in the parameter and executes it in the DeleteCommand Class.
+    3. The parameter, however, needs to be further parsed through the execution of the `parseEntryTag()` function.
+    4. It converts the parameter, which is currently a `String`, to a `Int`.
+
 5. The delete command is undergoing execution in `command.execute()` which will call functions within the DeleteCommand Class.
-   1. The index, which is the local `entryNumber` variable, goes under further checks by ascertaining whether it is greater than the total
-      number of transactions in the list or lesser than or equal to zero.
-   2. It tells the total size via the local `numberOfTransactions` variable which takes the value called by `transactions.size()`
-      which is located in the TransactionList class.
-   3. Should the above condition be true, it is no longer a valid input and the local `isInputValid` variable is set as false.
-   4. An exception is thrown if `isInputValid` is false. Otherwise, `transactions.deleteTransaction()` is called to remove it.
-   
+    1. The index, which is the local `entryNumber` variable, goes under further checks by ascertaining whether it is greater than the total
+       number of transactions in the list or lesser than or equal to zero.
+    2. It tells the total size via the local `numberOfTransactions` variable which takes the value called by `transactions.size()`
+       which is located in the TransactionList class.
+    3. Should the above condition be true, it is no longer a valid input and the local `isInputValid` variable is set as false.
+    4. An exception is thrown if `isInputValid` is false. Otherwise, `transactions.deleteTransaction()` is called to remove it.
+
 6. The above function is called in the TransactionList class which does the following:
-   1. Retrieves the transaction to be deleted via `transactions.get()`.
-   2. Removes it via `transactions.remove()`.
-   
+    1. Retrieves the transaction to be deleted via `transactions.get()`.
+    2. Removes it via `transactions.remove()`.
+
 7. The display shows the successful deletion via `ui.showTransactionAction()` and writes it to file by `storage.writeToFile()`.
 
 The sequence diagram below shows the interactions of a successful execution of the `DeleteCommand`.
@@ -514,20 +602,20 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/DeleteCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.5: Sequence Diagram for Delete Command</i>
+    <i>Figure 20: Sequence Diagram for Delete Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
 
-### Purge Command
+### 5.8. Purge Command
 
 The `PurgeCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `PurgeCommand` is
 shown below.
 
 <p align="center">
-    <img src="images/PurgeCommandClassDiagram.png">
+    <img src="images/PurgeCommandClassDiagram.png" width = "50%">
     <br />
-    <i>Figure 3.6: Class Diagram for PurgeCommand Showing Inheritance of Command</i>
+    <i>Figure 21: Class Diagram for Purge Command</i>
 </p>
 
 The full command for `purge` is `purge`.
@@ -539,37 +627,255 @@ This is how the command works:
    through `CommandParser.parse()`.
 
 2. Within `CommandParser.parse()`, a few functions are called internally.
-   1. `spiltInput()` is called which splits the command from the parameter.
-   2. `getCommand()` is called which searches for the command.
-   3. `ParameterParser.parse()` is called.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
 
 3. Within `ParameterParser.parse()`, a few functions are called internally as well.
-   1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
-   2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
-   3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
-   4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
-   5. Once all these checks are successful, `setCommand()` is called.
-   
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
 4. Within `setCommand()`, there is no parameters required to be set for `purge`.
 
 5. The purge command is undergoing execution in `command.execute()` which will call functions within the PurgeCommand Class.
-   1. The function calls `isEmpty()` which returns `true` if the list of transactions is zero, `false` otherwise. It is stored 
-      in the local `check` variable.
-   2. The above function compares the size of the transactions list through the `transactions.size()` which is executed in
-      the TransactionList class and see if both are equal to zero.
-   3. The display will show an empty message if `isEmpty()` returns `true` via `ui.showInfoMessage()`, which exits the command.
-   4. Otherwise, a warning is displayed through `ui.showInfoMessage()` and reads in an input for the user to respond through `ui.readCommand()`.
-   5. If the input is `Y`, the command goes ahead and executes the `transactions.purgeTransactions()`. Any other input will
-      abort the command and the display will show an aborted message through `ui.showInfoMessage()`.
-   
+    1. The function calls `isEmpty()` which returns `true` if the list of transactions is zero, `false` otherwise. It is stored
+       in the local `check` variable.
+    2. The above function compares the size of the transactions list through the `transactions.size()` which is executed in
+       the TransactionList class and see if both are equal to zero.
+    3. The display will show an empty message if `isEmpty()` returns `true` via `ui.showInfoMessage()`, which exits the command.
+    4. Otherwise, a warning is displayed through `ui.showInfoMessage()` and reads in an input for the user to respond through `ui.readCommand()`.
+    5. If the input is `Y`, the command goes ahead and executes the `transactions.purgeTransactions()`. Any other input will
+       abort the command and the display will show an aborted message through `ui.showInfoMessage()`.
+
 6. The `transactions.purgeTransactions()` function is executed in the TransactionList class.
-   1. The `transactions.clear()` function is called which deletes every single entry in Moolah Manager
+    1. The `transactions.clear()` function is called which deletes every single entry in Moolah Manager
 
 7. The display shows the successful purging via `ui.showInfoMessage()` and writes it to file by `storage.writeToFile()`.
 
+The sequence diagram below shows the interactions of a successful execution of the `PurgeCommand`.
+
+<p align="center">
+    <img src="images/PurgeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 22: Sequence Diagram for Purge Command</i>
+</p>
+
 _Written by: Brian Wong Yun Long_
 
-### Storage Operations
+## 6. Implementation for Budgeting and Financial Insights
+
+### 6.1. Overview 
+
+Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats to show categorical savings or overall expenditure. 
+As such, we have developed streamlined methods to filter the transactions by time period prior to passing them into the `Stats` command class for generating insights.
+Beyond gathering of these insights, users can also allocate a monthly budget to help them manage their spending.
+
+_Written by: Chua Han Yong Darren_
+
+### 6.2. Proposed Implementation
+
+The `List` and `Stats` command classes inherit their methods from the `ListAndStats` command class when setting global tags (year, month, number, period) and performing checks on their usage.
+Likewise, retrieval of filtered transactions by time periods is also done in `ListAndStats` command class, streamlining the workflow for both the `List` and `Stats` commands.
+This way, the `Stats` command class focuses on generating the different types of statistics rather than having to deal with an overhead of needing to consolidate the transaction entries of different time periods.
+
+Figure 23 below is a class diagram that illustrates the inheritance for the `Stats` command class.
+
+<p align="center">
+    <img src="images/StatsCommandClassDiagram.png" width="80%">
+    <br /> 
+    <i>Figure 23: Class Diagram for Stats Command</i>
+</p>
+
+Elaborating on the checks for date interval tags and retrieval of the filtered transactions by time periods, the two significant methods are `checkContainDateIntervalsTags()` and `getTimeTransactions()`.
+The table below depicts the possible scenarios that may arise upon validation of these tags in the `ListAndStats` command class. These tags are used with `list` or `stats s/time_insights` commands.
+
+| Date Interval Tags | Purpose                                         | Outcome                                                                                                                                                          |
+|--------------------|-------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `y/<YYYY>`         | View financial insights for a particular year.  | `TransactionList#getTransactionsByYear()` will be called for list of transactions filtered by year.                                                              |
+| `y/<YYYY> m/<N>`   | View financial insights for a particular month. | `TransactionList#getTransactionsByMonth()` will be called for a list of transactions filtered by month.                                                          |
+| `p/days n/<N>`     | View financial insights for the last N days.    | `TransactionList#getTransactionsByWeekRange()` will be called for a list of transactions filtered by last N days (backdated from today).                         |
+| `p/months n/<N>`   | View financial insights for the last N months.  | `TransactionList#getTransactionsByMonthRange()` will be called for a list of transactions filtered by last N months (backdated from first day of current month). |
+| `p/weeks n/<N>`    | View financial insights for the last N weeks.   | `TransactionList#getTransactionsByDayRange()` will be called for a list of transactions filtered by last N weeks (backdated from Monday of current week).        |
+
+If no date interval tags are used together with `s/time_insights` or they are combined incorrectly (i.e. their usage does not appear in the table above), exceptions will be thrown. This prevents an incorrect transactions list from being further passed to other
+methods within the `Stats` command class.
+
+The `budget` is a static variable stored inside the `Budget` class. The budget variable is checked during the following 
+phase of the applications, with relevant reminder, tips and advices displayed:
+
+| Application Phase                           | Display                       | Purpose                                                                   |
+|---------------------------------------------|-------------------------------|---------------------------------------------------------------------------|
+| Program starts                              | Budget Reminder               | To remind user on the budget remained for the current month.              |
+| Adding, editing or deleting of transactions | Budget Tip                    | To alert user on the effect of the new transaction on the month's budget. |
+| Monthly expenditure or insight              | Spending habit, budget advice | To advise user on the proportion of user's spending and budget.           |
+
+The spending habit and budget advices displayed on monthly expenditure or specific month insight are generated
+dynamically based on the proportion of user's spending. This allows the application to  provide suitable advices to the user.
+
+_Written by: Chua Han Yong Darren (List and Stats), Chia Thin Hong (Budget)_
+
+### 6.3. Stats Command 
+
+The `StatsCommand` class provides the functionalities for users to get an overview of their financial insights based on the statistics for the transactions. These 
+statistics are generated using the list of transactions that is stored in Moolah Manager application.
+
+The following are the available commands:
+- `stats s/categorical_savings` - Displays the total savings of all transactions in each category.
+- `stats s/monthly_expenditure` - Displays the total income, expense and savings of all transactions in each month.
+- `stats s/time_insights y/YEAR [m/MONTH]` - Displays the categorical savings and monthly expenditure for a specific month or year.
+- `stats s/time_insights p/PERIOD n/NUMBER` - Displays the categorical savings and monthly expenditure for the last N days, weeks or months.
+
+The sequence diagram below shows the interactions of a successful execution of the `StatsCommand`, using an example of `stats s/categorical_savings`.
+
+<p align="center">
+    <img src="images/StatsCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 24: Sequence Diagram for Stats Command</i>
+</p>
+
+Referring to Figure 24, the following is a summarized steps of the interactions that `StatsCommand` performs when a user is requesting for the categorical
+savings. Higher level details in `CommandParser` and `ParameterParser` have been omitted for simplicity. Additionally, segments of interaction for getting monthly
+expenditure and time insights have been put into isolated sequence diagrams to break down the information.
+
+1. The user executes `stats s/categorical_savings` command with an intent to view his or her categorical savings.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `StatsCommand`. The initialization of the `statsType` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that all the tags and parameters in the input have been filled up in correspondence to their respective requirements.
+4. Once all checks have passed, `StatsCommand` class will `execute()` whereby it will verify the related tags for date intervals (year, month, period, number) first to ensure that they are not entered
+together with the `s/categorical_savings` tag. This verification is performed in `ListAndStats` command class and is not shown in the sequence diagram for the brevity of this section. 
+5. Moving on, `listStatsByStatsType()` will be called and when it confirms that the requested statistics type is `categorical_savings`, it will call `statsTypeCategoricalSavingsOrMonthlyExpenditure()`
+method to produce the list of categorical savings. Here, `TransactionList#listCategoricalSavings()` will use a hashmap to store different categories from the `TransactionList` 
+and append the amount for each category accordingly until all transactions are exhausted.
+6. A formatted string of output collected from looping through the hashmap will be returned to the `StatsCommand` class.
+7. If `StatsCommand` class checks that `genericStatsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the categorical savings.
+
+Amongst the omitted frames in Figure 24, below two are the sequence diagrams for getting monthly expenditure and time insights.
+
+<p align="center">
+    <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 25: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
+</p>
+
+<p align="center">
+    <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 26: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
+</p>
+
+_Written by: Chua Han Yong Darren_
+
+### 6.4. Budget Command 
+
+The budget command allows user to set a new monthly budget. The range of accepted budget value is stored in the
+`common/Constants.java` file, whereby the content of the file is as such:
+
+```
+public static int MAX_TRANSACTIONS_COUNT = 1000000;
+public static int MIN_AMOUNT_VALUE = 0;
+public static int MAX_AMOUNT_VALUE = 10000000;
+public static int MIN_BUDGET_VALUE = 1;
+public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
+```
+
+Under the default setting, the acceptable range of the monthly budget, is 0 < budget <= 10000000000000, which is 10^13,
+and it ensures that no integer overflow will occur as the `long` data type is used.
+
+To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUNT` tag is any whole number within the
+valid range above.
+
+The interaction of the components on setting a budget can be seen in the sequence diagram under 
+[How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other).
+
+_Written by: Chia Thin Hong_
+
+## 7. Implementation for Miscellaneous Operations 
+
+### 7.1. Help Command 
+
+The help command displays the help message to the users to guide them on the usage and provide descriptions for each
+available command and parameter.
+
+The help command can be run as `help [q/COMMAND]` or `help o/detailed [q/COMMAND]`, where the latter will display a more detailed version of
+help messages to the users. If the user provide the optional `q/COMMAND` tag, the help command will only return the 
+help message of the chosen command.
+
+The structure of the application focusing on the help command is illustrated in the class diagram below:
+
+<p align="center">
+    <img src="images/HelpCommandClassDiagram.png" width = "95%">
+    <br />
+    <i>Figure 27: Class Diagram for Help Command</i>
+</p>
+
+For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
+will contain their corresponding HelpMessage Enum that stores the help messages as strings inside the enum.
+
+In the help command, when `execute()` is called, it will call either generateBasicHelp() or generateDetailedHelp() method
+based on the help option chosen by the user.
+
+<p align="center">
+    <img src="images/HelpCommandSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 28: Sequence Diagram for Help Command</i>
+</p>
+
+_Written by: Chia Thin Hong_
+
+### 7.2. Bye Command
+
+The `ByeCommand` inherits properties from the abstract `Command'` class. The inheritance of `Command` from `ByeCommand` is
+shown below.
+
+<p align="center">
+    <img src="images/ByeCommandClassDiagram.png" width = "50%">
+    <br />
+    <i>Figure 29: Class Diagram for Bye Command</i>
+</p>
+
+
+The full command for `bye` is `bye`.
+For example, if 'bye' is called, the program prints the exit message and terminates the program.
+
+This is how the command works:
+
+1. The `main()` method in Duke calls `run()` in Duke. The `ui` reads the command via `ui.readCommand()` and parses it
+   through `CommandParser.parse()`.
+
+2. Within `CommandParser.parse()`, a few functions are called internally.
+    1. `spiltInput()` is called which splits the command from the parameter.
+    2. `getCommand()` is called which searches for the command.
+    3. `ParameterParser.parse()` is called.
+
+3. Within `ParameterParser.parse()`, a few functions are called internally as well.
+    1. `checkMandatoryTagsExist()` is called where the parameters are checked for all required tags exist based on the command.
+    2. `checkUnsupportedTagsNotExist()` is called to check if the parameter do not contain any unsupported tags based on the command.
+    3. `checkDuplicateTagsNotExist()` is called to check if the parameter do not contain any duplicate tags.
+    4. `checkParameterNotEmpty()` is called to check that the parameter inputted is not empty.
+    5. Once all these checks are successful, `setCommand()` is called.
+
+4. Within `setCommand()`, there is no parameters required to be set for `bye`.
+
+5. The bye command is undergoing execution in `command.execute()` which will call functions within the ByeCommand Class.
+   1. It calls `ui.showInfoMessage()` which prints the exit message.
+   2. `isExit()` is set as true.
+   
+6. Within `run()` in Duke, the loop is exited and the program ends.
+
+The sequence diagram below shows the interactions of a successful execution of the `ByeCommand`.
+
+<p align="center">
+    <img src="images/ByeCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 30: Sequence Diagram for Bye Command</i>
+</p>
+
+_Written by: Brian Wong Yun Long_
+
+### 7.3. Storage Operations
+
 The Storage class is a standalone class that contains methods used for the storage of Transaction entries and the Budget value.
 
 The class is first called by `Duke` during the initialising of the `TransactionList`. In this process, the existence of duke.txt will be verified.
@@ -578,25 +884,27 @@ The class is first called by `Duke` during the initialising of the `TransactionL
 Else, the values would update the program's `Budget` and the entries in `TransactionList`without any issues.
 
 #### Reading From Duke.txt 
+
 This specific operation is done during the initializing of the program. The `Budget` value and `TransactionList` entries would be parsed before their values are added into the program.
 `Storage#initializeFile` is called by `Duke`.
 `Storage#checkIfFileExist` is used to check if `Duke.txt` exists, and creates a new `Duke.txt` file if it does not exist.
 `Storage#storeFileValuesLocally` uses sub-methods and methods from external classes to parse each line entry within `Duke.txt` and store the values in the program.
 
 #### Writing To Duke.txt
+
 This operation is done whenever the `TransactionList` entries or `Budget` value is changed via any of the `Command` classes;
 (e.g. Add, Delete, Purge , Edit and Budget commands). 
 The method `Storage#writeToFile` is used to update changes in `Budget` or `TransactionList`.
 
 _Written by: Yong Chin Han_ 
 
-### Logging Operations
+### 7.4. Logging Operations
 
-Our team used `java.util.logging` package for the purposes of logging. We instantiated various objects
-for different classes such as `parserLogger` and `addLogger` to set the log messages.
+Our team used `java.util.logging` package for the purposes of logging. We instantiated various objects for different classes such as `parserLogger` and `addLogger` to set the log messages.
 
 **Logging Levels**:
 
+* `SEVERE` : Critical problem detected which may cause the termination of the application
 * `ERROR`: An unexpected control flow captured
 * `WARNING`: An exception has been caught by the app
 * `INFO`: Information details what the app has done
@@ -605,13 +913,13 @@ _Written by: Paul Low_
 
 ## Appendix A: Product scope
 
-### Target user profile
+### A.1. Target user profile
 
 Moolah Manager is developed for IT professionals who prefer using Command Line Interface (CLI) applications
 to quickly track and update their daily monetary transactions. They ought to be reasonably comfortable in typing over
 mouse interactions and can type fast.
 
-### Value proposition
+### A.2. Value proposition
 
 Financial bookkeeping using a mobile application is often a hassle due to repetitive clicks. Moolah Manager  boasts a
 time-saving CLI that encourages individuals to take ownership of tracking and reviewing their daily or monthly
@@ -644,6 +952,10 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
 | v2.0    | user             | archive my financial transactions from the previous years                            | focus on transactions that matter only for the current year                                                                    |
 | v2.0    | careless user    | modify my spending or expenses in the application                                    | rectify any false input                                                                                                        |
 | v2.0    | forgetful user   | receive reminders on how I should spend my allowance                                 | be consciously aware of my budget constraints                                                                                  |
+| v2.1    | user             | view my remaining budget for each month                                              | better manage my expenses to keep them within my monthly budget                                                                | 
+| v2.1    | user             | gather a summary of my expenditure over the last N days                              | narrow down my scope of listing my transactions to specific situations, e.g. my transactions over the past 1 week              | 
+| v2.1    | user             | display my transactions and statistics in chronological order of date                | find my most recent transactions quickly                                                                                       | 
+| v2.1    | lazy user        | list the help message for a specific command                                         | choose not to scroll up and down to find the command I wish to refer to                                                        | 
 
 ## Appendix C: Non-Functional Requirements
 
@@ -655,43 +967,48 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
 ## Appendix D: Glossary
 
 - **Transaction:** An instance when someone makes or receives a payment including deposits, withdrawals, and exchanges
-- **Budget:** An estimate of income or expenditure for a set period of time
-- **Income:** Payment received from others for work or personal purpose
-- **Expense:** Payment made to others for a purpose
-- **Savings:** Portion of income that is not spent on current expenditures
+- **Budget:** An estimate of expense for every month
+- **Income:** Payment received from others
+- **Expense:** Payment made to others
+- **Savings:** Portion of income that is not spent on current expenditure
 
-## Appendix E:  Instructions for manual testing
+## Appendix E:  Instructions for Manual Testing
 
-### Launch and Shutdown
+### E.1. Launch and Shutdown
 
 - Initial Launch
-    1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.0/duke.jar) and
-       copy it into a separate directory.
-    2. Ensure that Java 11 has been installed and configured on your operating system.
-    3. Launch a command prompt or terminal and run the command `java -jar duke.jar`.<br>
-       **Expected:** Moolah Manager will display a greeting message and a remaining budget for the current month.
-       A data file, `duke.txt` may be loaded if it exists in `./data/` directory.
+  1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.1/duke.jar) and copy it into a separate directory.
+  2. Ensure that Java 11 has been installed and configured on your operating system.
+  3. Launch a command prompt or terminal and run the command `java -jar duke.jar`. 
+  4. **Expected Outcomes:** 
+     + Moolah Manager will display a greeting message and a remaining budget for the current month.
+     + A data file, `duke.txt` may be loaded if it exists in `./data/` directory.
 
 - Shutdown
-    1. Type `exit` to quit the program.<br>
-       **Expected:** Moolah Manager will terminate and displays a goodbye message.
+  1. Type `bye` to quit the application.
+  2. **Expected Outcome:** 
+     + Moolah Manager will terminate and display a goodbye message.
 
-### Storage
+### E.2. Storage
 
 - Loading Data
-    1. Launch the application and change the state of the program, such as adding a new transaction. Close the window.
-    2. Re-launch the application.<br>
-       **Expected:** Moolah Manager will load the `duke.txt` data file and the state of the program is the same as when it was closed.
+  1. Launch the application and change the state of the application, such as adding a new transaction. Close the window.
+  2. Re-launch the application.
+  3. **Expected Outcome:** 
+     + Moolah Manager will load the `duke.txt` data file and the state of the application is the same as when it was closed.
 
 - Missing Data File
-    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
-    2. In `./data/` directory, delete `duke.txt`.
-    3. Re-launch the application.<br>
-       **Expected:** No data file will be loaded into the application, and user may not see the former state of the program.
+  1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+  2. In `./data/` directory, delete `duke.txt`.
+  3. Re-launch the application.
+  4. **Expected Outcome:** 
+     + No data file will be loaded into the application, and user may not see the former state of the application.
 
 - Corrupted Data File
-    1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
-    2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
-       the first row. Save the changes to the file.
-    3. Re-launch the application.<br>
-       **Expected:** The data file will only be partially loaded into the application, and user will be prompted to STOP the program and fix the error before reloading. If users decide to continue using the program, the data would be overwritten.
+  1. As per the instructions from loading data, check there is a `duke.txt` data file in `./data/` directory.
+  2. In `./data/` directory, open `duke.txt` and try corrupting the records by e.g., removing the first pipe symbol from
+     the first row. Save the changes to the file.
+  3. Re-launch the application.
+  4. **Expected Outcomes:**
+     + The data file will only be partially loaded into the application, and user will be prompted to STOP the application and fix the error before reloading.
+     + If users decide to continue using the application, the data would be overwritten.

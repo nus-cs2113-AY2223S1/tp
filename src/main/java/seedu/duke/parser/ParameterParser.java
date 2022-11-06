@@ -27,6 +27,8 @@ import seedu.duke.exception.InputTransactionInvalidTypeException;
 import seedu.duke.exception.MoolahException;
 import seedu.duke.exception.StatsInvalidNumberException;
 import seedu.duke.exception.StatsInvalidTypeException;
+import seedu.duke.exception.HelpUnknownCommandWordException;
+import seedu.duke.exception.GlobalInvalidCommandException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -51,7 +53,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
-
+import static seedu.duke.command.CommandTag.COMMAND_TAG_FIND_KEYWORD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
 import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
@@ -62,7 +65,6 @@ import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
 import static seedu.duke.common.Constants.MIN_PARAMETER_LENGTH;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
-
 
 /**
  * Parses the parameter portion of the user input and set the parameters into the Command object.
@@ -198,7 +200,7 @@ public class ParameterParser {
     public static void checkDuplicateTagsNotExist(String[] splits) throws GlobalDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
-            assert split.length() >= MINIMUM_TAG_LENGTH;
+            assert split.length() >= MINIMUM_TAG_LENGTH : "The function argument splits has more length than expected";
             String tag = split.substring(0, SPLIT_POSITION);
 
             // The duplicated tag can be found in the hash map
@@ -307,7 +309,6 @@ public class ParameterParser {
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
-            // TODO: To standardise the format for transaction type for add and list
             if (command instanceof ListCommand) {
                 command.setType(parseTypeTagForListing(parameter));
             } else {
@@ -329,8 +330,11 @@ public class ParameterParser {
         case COMMAND_TAG_GLOBAL_ENTRY_NUMBER:
             command.setEntryNumber(parseEntryTag(parameter));
             break;
+        case COMMAND_TAG_FIND_KEYWORD:
+            command.setKeyword(parameter);
+            break;
         case COMMAND_TAG_HELP_OPTION:
-            command.setIsDetailedOption(parseHelpOptionTag(parameter));
+            command.isDetailed(parseHelpOptionTag(parameter));
             break;
         case COMMAND_TAG_STATS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
@@ -349,6 +353,9 @@ public class ParameterParser {
             break;
         case COMMAND_TAG_BUDGET_AMOUNT:
             command.setBudgetAmount(parseBudgetTag(parameter));
+            break;
+        case COMMAND_TAG_HELP_QUERY:
+            command.setQueryCommand(parseHelpQueryTag(parameter));
             break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
@@ -446,7 +453,8 @@ public class ParameterParser {
             return amount;
 
         } catch (NumberFormatException e) { // error inclusive of int overflows
-            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
+            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
+                    + parameter);
             throw new InputTransactionInvalidAmountException();
         }
     }
@@ -518,7 +526,8 @@ public class ParameterParser {
      * @throws HelpUnknownOptionException If the help option parameter selected is not 'detailed'.
      */
     public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
-        boolean isValidHelpOption = parameter.equals("detailed");
+        assert parameter != null : "The function argument passed must not be null!";
+        boolean isValidHelpOption = parameter.equalsIgnoreCase("detailed");
         if (isValidHelpOption) {
             return true;
         } else {
@@ -526,6 +535,25 @@ public class ParameterParser {
                     + parameter);
             throw new HelpUnknownOptionException();
         }
+    }
+
+    /**
+     * Returns the string containing the command queried by user for the help message if the command is valid.
+     *
+     * @param parameter The user input after the user tag.
+     * @return The received parameter.
+     * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
+     */
+    public static String parseHelpQueryTag(String parameter) throws HelpUnknownCommandWordException {
+        assert parameter != null : "Function argument passed must not be a null";
+        // An invalid command word queried by the user will result in an exception
+        try {
+            CommandParser.getCommand(parameter, "");
+        } catch (GlobalInvalidCommandException exception) {
+            throw new HelpUnknownCommandWordException();
+        }
+
+        return parameter;
     }
 
     /**

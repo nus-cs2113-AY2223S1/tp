@@ -10,7 +10,6 @@ import seedu.duke.exception.MoolahException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,9 +102,10 @@ public abstract class ListAndStatsCommand extends Command {
     /**
      * Parses the tags related to tag intervals and checks if there are any error in their combinations.
      *
+     * @return A boolean value that indicates whether date intervals tags are used in the command.
      * @throws MoolahException If any of the below exception conditions are met.
      */
-    public static void parseDateIntervalsTags() throws MoolahException {
+    public static boolean checkContainDateIntervalsTags() throws MoolahException {
         if (containMonthYear() != FALSE && containPeriodNumber() != FALSE) {
             // Throws an unsupported tag combination exception if tags are not supposed to be used together
             listStatsLogger.log(Level.WARNING, "Exception thrown as an invalid combination "
@@ -121,7 +121,10 @@ public abstract class ListAndStatsCommand extends Command {
             listStatsLogger.log(Level.WARNING, "Exception thrown as number and period needs "
                     + "to be given together.");
             throw new GlobalMissingPeriodNumberTagException();
+        } else if (containMonthYear() == FALSE && containPeriodNumber() == FALSE) {
+            return false;
         }
+        return true;
     }
 
     //@@author paullowse
@@ -147,8 +150,6 @@ public abstract class ListAndStatsCommand extends Command {
             timeTransactions = transactions.getTransactionsByDayRange(LocalDate.now(), number);
         }
 
-        // Sorts time-filtered transactions array list based on ascending order of date
-        Collections.sort(timeTransactions);
         return timeTransactions;
     }
 }

@@ -5,6 +5,7 @@ import seedu.duke.Storage;
 import seedu.duke.Ui;
 
 import seedu.duke.common.DateFormats;
+import seedu.duke.common.HelpMessages;
 import seedu.duke.data.Budget;
 import seedu.duke.data.TransactionList;
 import seedu.duke.data.transaction.Transaction;
@@ -28,13 +29,8 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
 
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_TYPE;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_CATEGORY;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_AMOUNT;
-import static seedu.duke.common.HelpMessages.COMMAND_PARAMETERS_DESCRIPTION;
-import static seedu.duke.common.HelpMessages.COMMAND_DESCRIPTION_ADD;
-import static seedu.duke.common.HelpMessages.COMMAND_USAGE_ADD;
-import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
+import static seedu.duke.common.HelpMessages.ADD_COMMAND_BASIC_HELP;
+import static seedu.duke.common.HelpMessages.ADD_COMMAND_DETAILED_HELP;
 import static seedu.duke.common.InfoMessages.INFO_ADD_EXPENSE;
 import static seedu.duke.common.InfoMessages.INFO_ADD_INCOME;
 
@@ -45,15 +41,6 @@ public class AddCommand extends Command {
     //@@author chinhan99
     // The command word used to trigger the execution of Moolah Manager's operations
     public static final String COMMAND_WORD = "ADD";
-    // The formatting information for the parameters used by the command
-    public static final String COMMAND_PARAMETERS_INFO = "Parameters information:" + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
-            + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR + COMMAND_PARAMETERS_DESCRIPTION;
-    // Basic help description
-    public static final String COMMAND_HELP = "Command Word: " + COMMAND_WORD + LINE_SEPARATOR
-            + COMMAND_DESCRIPTION_ADD + LINE_SEPARATOR + COMMAND_USAGE_ADD + LINE_SEPARATOR;
-    // Detailed help description
-    public static final String COMMAND_DETAILED_HELP = COMMAND_HELP + COMMAND_PARAMETERS_INFO + LINE_SEPARATOR;
 
     private static final Logger addLogger = Logger.getLogger(AddCommand.class.getName());
 
@@ -218,6 +205,24 @@ public class AddCommand extends Command {
         }
         setTransactionCreated(transaction);
         return messageBanner;
+    }
+
+    /**
+     * Retrieves the basic help message of the command.
+     *
+     * @return A string containing the basic help description of the command.
+     */
+    public static HelpMessages getHelpMessage() {
+        return ADD_COMMAND_BASIC_HELP;
+    }
+
+    /**
+     * Retrieves the detailed help message of the command.
+     *
+     * @return A string containing the detailed help description of the command.
+     */
+    public static HelpMessages getDetailedHelpMessage() {
+        return ADD_COMMAND_DETAILED_HELP;
     }
 
     //@@author paullowse

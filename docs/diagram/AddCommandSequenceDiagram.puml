@@ -1,0 +1,72 @@
+@startuml
+!include Style.puml
+
+'https://plantuml.com/sequence-diagram
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant ":ParameterParser" as ParameterParser
+Participant "command:AddCommand" as AddCommand
+Participant "transactions:TransactionList" as Transactions
+Participant ":Transaction" as Transaction
+Participant ":Storage" as Storage
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse()
+activate CommandParser
+
+
+CommandParser -> CommandParser:getCommand()
+activate CommandParser
+CommandParser -> AddCommand**
+activate AddCommand
+return
+
+
+CommandParser -> ParameterParser:parse()
+
+activate ParameterParser
+ParameterParser ->ParameterParser++:setCommand()
+
+'deactivate AddCommand
+ParameterParser ->ParameterParser++:setParameter()
+ParameterParser -> AddCommand: set attributes
+activate AddCommand
+return
+return
+return
+return
+return "command:AddCommand"
+return "command:AddCommand"
+
+
+deactivate CommandParser
+
+
+Duke -> AddCommand:AddCommand.execute()
+activate AddCommand
+AddCommand ->AddCommand++:addTransaction()
+
+alt  type == expense
+AddCommand -> Transactions:addExpense()
+activate Transactions
+Transactions -> Transaction:add()
+activate Transaction
+return
+
+return
+else if  type == income
+AddCommand->Transactions:addIncome()
+activate Transactions
+Transactions -> Transaction:add()
+activate Transaction
+return
+return
+end
+return
+AddCommand -> Storage:writeToFile()
+activate Storage
+return
+@enduml

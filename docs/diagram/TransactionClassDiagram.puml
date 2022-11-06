@@ -1,0 +1,54 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + getEntry(index:int): Transaction
+    + addExpense(description:String, amount:int,
+              category:String, date:LocalDate): String
+    + addIncome(description:String, amount:int,
+              category:String, date:LocalDate): String
+    + listTransactions(type:String, category:String,
+              date:LocalDate):String
+    + getTransactionsByMonth(year:int, month:int): String
+    + getTransactionsByYear(year:int): String
+    + getTransactionsByDayRange(date:LocalDate, numberOfDays:int): String
+    + getTransactionsByWeekRange(date:LocalDate, numberOfWeeks:int): String
+    + getTransactionsByMonthRange(date:LocalDate, numberOfMonths:int): String
+    + findTransaction(keyword:String): String
+    + deleteTransaction(index:int): String
+    + purgeTransactions()
+}
+
+abstract class "Transaction"{
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+    + Expense(description:String, amount:int,
+                  category:String, date:LocalDate)
+    + setDescription(String)
+    + setAmount(int)
+    + setCategory(String)
+    + setDate(LocalDate)
+}
+
+class Income {
+    + Income(description:String, amount:int,
+              category:String, date:LocalDate)
+}
+
+class Expense {
+    + Expense(description:String, amount:int,
+              category:String, date:LocalDate)
+}
+
+together {
+  class Income
+  class Expense
+}
+
+Income -up-|> "Transaction"
+Expense -up-|> "Transaction"
+
+TransactionList "1" *-right> "*" "Transaction" : contains
+@enduml

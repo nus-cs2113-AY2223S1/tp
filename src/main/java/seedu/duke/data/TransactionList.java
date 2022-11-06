@@ -10,16 +10,20 @@ import java.time.Year;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.abs;
 import static seedu.duke.common.Constants.NO_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.Constants.MIN_TRANSACTIONS_INDEX;
 import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.NEGATIVE_DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
@@ -113,18 +117,29 @@ public class TransactionList {
     public String deleteTransaction(int index) {
         Transaction transaction = transactions.get(index);
         transactions.remove(index);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return transaction.toString();
     }
 
     public String editExpense(String description, int amount, String category, LocalDate date, int index) {
+        transactions.remove(index);
         Expense expense = new Expense(description, amount, category, date);
-        transactions.add(index - 1, expense);
+        transactions.add(index, expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense.toString();
     }
 
     public String editIncome(String description, int amount, String category, LocalDate date, int index) {
+        transactions.remove(index);
         Income income = new Income(description, amount, category, date);
-        transactions.add(index - 1, income);
+        transactions.add(index, income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income.toString();
     }
 
@@ -142,6 +157,9 @@ public class TransactionList {
     public Expense addExpense(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return expense;
     }
 
@@ -157,20 +175,49 @@ public class TransactionList {
     public Income addIncome(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
         return income;
     }
 
     //@@author chinhan99
 
+    /**
+     * Adds a transaction of class type Income into the transactions list during storage.
+     * This method functions the same as addIncome , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
+
     public void addIncomeDuringStorage(String description, int amount, String category, LocalDate date) {
         Income income = new Income(description, amount, category, date);
         transactions.add(income);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
+
+    /**
+     * Adds a transaction of class type Expense into the transactions list during storage.
+     * This method functions the same as addExpense , but it DOES NOT return anything.
+     *
+     * @param description More information regarding the transaction, written without any space.
+     * @param amount      Value of the transaction in numerical form.
+     * @param category    A category for the transaction.
+     * @param date        Date of the transaction with format in "yyyyMMdd".
+     */
 
     public void addExpenseDuringStorage(String description, int amount, String category, LocalDate date) {
         Expense expense = new Expense(description, amount, category, date);
         transactions.add(expense);
+
+        // Sorts the list after deletion
+        Collections.sort(transactions);
     }
 
     //@@author chydarren
@@ -213,23 +260,29 @@ public class TransactionList {
     /**
      * Lists all or some transactions based on selection.
      *
-     * @param type     The type of transaction.
-     * @param category A category for the transaction.
-     * @param date     Date of the transaction with format in "yyyyMMdd".
+     * @param type                       The type of transaction.
+     * @param category                   A category for the transaction.
+     * @param date                       Date of the transaction with format in "yyyyMMdd".
+     * @param isContainDateIntervalsTags A boolean value that indicates whether date intervals tags are used in the
+     *                                   command.
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public String listTransactions(ArrayList<Transaction> timeTransactions, String type,
-                                   String category, LocalDate date)
+                                   String category, LocalDate date, Boolean isContainDateIntervalsTags)
             throws InputTransactionInvalidTypeException {
         String transactionsList = "";
 
         // Loops each transaction from the time transactions list
+        int count = MIN_TRANSACTIONS_INDEX;
         for (Transaction transaction : timeTransactions) {
             // Applies generic filter against each time transaction entry
-            if (isMatchListFilters(transaction, type, category, date)) {
+            if (isMatchListFilters(transaction, type, category, date) && !isContainDateIntervalsTags) {
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction.toString() + LINE_SEPARATOR;
+            } else if (isMatchListFilters(transaction, type, category, date)) {
                 transactionsList += transaction.toString() + LINE_SEPARATOR;
             }
+            count++;
         }
         return transactionsList;
     }
@@ -237,18 +290,20 @@ public class TransactionList {
     /**
      * Finds specific transaction(s) based on any keywords inputted by the user.
      *
-     * @param keywords Any partial or full keyword(s) that matches the details of the transaction.
+     * @param keyword A keyword that matches the partial or full description of the transaction.
      * @return A string containing the formatted transaction list.
      */
-    public String findTransactions(String keywords) {
+    public String findTransactions(String keyword) {
         String transactionsList = "";
+        int count = MIN_TRANSACTIONS_INDEX;
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
-            // Includes only transactions with their description matching the searching keywords
-            if (transaction.getDescription().toLowerCase().contains(keywords.toLowerCase())
-                    && keywords != "") {
-                transactionsList += transaction + LINE_SEPARATOR.toString();
+            // Includes only transactions with their description matching the searching keyword
+            if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
+                    && keyword != "") {
+                transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR;
             }
+            count++;
         }
         return transactionsList;
     }
@@ -287,6 +342,20 @@ public class TransactionList {
     }
 
     /**
+     * Prints the amount in the correct format, i.e. -$X or $X depending on the amount.
+     *
+     * @param amount The amount for the transaction.
+     * @return A string containing the formatted amount output to be added to the list.
+     */
+    public String constructAmountOutput(int amount) {
+        if (amount >= NO_AMOUNT_VALUE) {
+            return DOLLAR_SIGN + Integer.toString(amount);
+        } else {
+            return NEGATIVE_DOLLAR_SIGN + Integer.toString(abs(amount));
+        }
+    }
+
+    /**
      * Formats the hashmap of categorical savings into a categorical savings list, using timeTransactions.
      *
      * @param timeTransactions An array list of time-filtered transactions.
@@ -300,8 +369,8 @@ public class TransactionList {
 
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
-            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
+            categoricalSavingsList += String.format("%s%s%s %s%s", PREFIX_CATEGORY, entry.getKey(),
+                    POSTFIX_CATEGORY, constructAmountOutput(entry.getValue()), LINE_SEPARATOR);
         }
 
         return categoricalSavingsList;
@@ -388,8 +457,8 @@ public class TransactionList {
             // Puts income, expense, savings values into monthly expenditure list
             Enum[] accountType = {INFO_INCOME, INFO_EXPENSE, INFO_SAVINGS};
             for (int i = STARTING_INDEX; i < NUMBER_OF_ACCOUNT_TYPES; i++) {
-                monthlyExpenditureList += String.format("%s%s%s%s%s", accountType[i], COLON_SPACE, DOLLAR_SIGN,
-                        entry.getValue()[i], LINE_SEPARATOR);
+                monthlyExpenditureList += String.format("%s%s%s%s", accountType[i], COLON_SPACE,
+                        constructAmountOutput(entry.getValue()[i]), LINE_SEPARATOR);
             }
 
             // Puts monthly budget value into monthly expenditure list
@@ -432,7 +501,7 @@ public class TransactionList {
         String timeInsightsList = "";
 
         if (period != null && number != UNDEFINED_PARAMETER) {
-            timeInsightsList += "The past " + number + " " + period + ":" + LINE_SEPARATOR + LINE_SEPARATOR
+            timeInsightsList += "The last " + number + " " + period + ":" + LINE_SEPARATOR + LINE_SEPARATOR
                     + INFO_STATS_CATEGORIES_HEADER + LINE_SEPARATOR;
         } else if (month == UNDEFINED_PARAMETER) {
             timeInsightsList += "Year: " + year + LINE_SEPARATOR + LINE_SEPARATOR + INFO_STATS_CATEGORIES_HEADER
@@ -472,10 +541,10 @@ public class TransactionList {
         timeInsightsValues.add(Integer.toString(timeExpense));
         timeInsightsValues.add(Integer.toString(timeSavings));
 
-        if (timeExpense != NO_AMOUNT_VALUE) {
-            timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
+        if (timeExpense == NO_AMOUNT_VALUE && timeIncome == NO_AMOUNT_VALUE) {
+            timeInsightsValues.add("There is no spending habit available.");
         } else {
-            timeInsightsValues.add("There is no spending habit available for this month.");
+            timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
         }
 
         return timeInsightsValues;
@@ -634,9 +703,11 @@ public class TransactionList {
                     common.Constants.java is altered.
                  */
 
-                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
+                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0)
+                        : "Maximum amount and transaction set in Constants.java must not have negative value!";
                 assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT)
-                        > Long.valueOf(MAX_AMOUNT_VALUE));
+                        > Long.valueOf(MAX_AMOUNT_VALUE))
+                        : "Maximum transaction count value set in Constants.java must be higher than 1!";
 
                 totalExpense += transaction.getAmount();
             }

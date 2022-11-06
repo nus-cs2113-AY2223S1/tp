@@ -1,55 +1,47 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-hide footbox
+!include Style.puml
 
-Participant ":Duke" as Duke
-Participant ":CommandParser" as CommandParser
-Participant "command:FindCommand" as FindCommand
-Participant "transactions:TransactionList" as Transactions
-Participant "ui:Ui" as Ui
+Participant ":Duke" as duke
+Participant ":CommandParser" as commandParser
+Participant ":ParameterParser" as parameterParser
+Participant "command:FindCommand" as command
+Participant "transactions:TransactionList" as transactions
+Participant "ui:Ui" as ui
+actor User
 
--> Duke
-activate Duke
+-> duke
+activate duke
+duke -> commandParser:parse("find k/bus_fare")
+    activate commandParser
+    create command
+    commandParser -> command:new
+        activate command
+    return command:FindCommand
+    commandParser -> parameterParser:parse
+        parameterParser -> command:set keyword
+        note left: Minimal\nnotation
+    return command:FindCommand
 
-Duke -> CommandParser:parse("find bus_fare")
-activate CommandParser
+duke -> command:execute(transactions, ui, storage)
+    activate command
+    command -> command: findTransactions(transactions, ui, keyword)
+        activate command
+        command -> transactions:findTransactions(keyword:String)
+        activate transactions
+        return transactionsList:String
+        alt transactionsList isEmpty
+            command -> ui:showInfoMessage(message)
+            activate ui
+                ui -> User
+            return
+        else else
+            command -> ui:showList(transactionsList, message)
+            activate ui
+                ui -> User
+            return
+        end
+    return
 
-CommandParser -> CommandParser:splitInput("find bus_fare")
-activate CommandParser
-return inputTokens: String[]
-
-CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
-activate CommandParser
-
-create FindCommand
-CommandParser -> FindCommand
-activate FindCommand
-return
-
-return command: FindCommand
-
-return command: FindCommand
-deactivate CommandParser
-
-Duke -> FindCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
-activate FindCommand
-
-ref over FindCommand
-    checkFindFormat(keywords: String)
-end ref
-
-FindCommand -> Transactions:findTransactions(keywords: String)
-activate Transactions
-return transactionsList: String
-
-alt transactionsList is empty
-    FindCommand -> Ui:showInfoMessage(message: String)
-    activate Ui
-else else
-    FindCommand -> Ui:showTransactionsList(transactionsList: String, listMessage: String)
-end
-
-return
 
 return
 @enduml

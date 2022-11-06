@@ -1,4 +1,5 @@
 @startuml
+!include Style.puml
 'https://plantuml.com/sequence-diagram
 
 hide circle
@@ -62,15 +63,15 @@ class "BudgetCommand"{
 }
 
 Duke <.. Storage: Initializes >
-Storage --> "ParameterParser": uses methods from >
-Storage --> "CommandParser": uses methods from >
-Storage --> "TransactionList":uses methods from >
-Storage --> "Budget":uses methods from >
-Storage <-right- "AddCommand":writes to <
-Storage <-- "EditCommand":writes to <
-Storage <-right- "DeleteCommand":writes to <
-Storage <-left- "PurgeCommand":writes to <
-Storage <-left- "BudgetCommand":writes to <
+Storage --> "ParameterParser": uses parse methods from >
+Storage --> "CommandParser": uses parse methods from >
+Storage --> "TransactionList": adds transactions locally >
+Storage --> "Budget":adds budget locally >
+Storage <-right- "AddCommand":externally writes to <
+Storage <-- "EditCommand":externally writes to <
+Storage <-right- "DeleteCommand":externally writes to <
+Storage <-left- "PurgeCommand":externally writes to <
+Storage <-left- "BudgetCommand":externally writes to <
 
 
 @enduml

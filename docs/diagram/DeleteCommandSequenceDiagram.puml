@@ -1,5 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include Style.puml
 
 hide footbox
 
@@ -47,15 +47,19 @@ alt isInputValid is true
     return date: LocalDate
     DeleteCommand -> Transactions:deleteTransaction(index: int)
     activate Transactions
+    return
     DeleteCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
+    activate Transactions
     return addedMonthExpenseSum: long
     DeleteCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
     activate Budget
     return BudgetInfo: String
     DeleteCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
     activate Ui
+    return
 else else
     DeleteCommand -> Ui:showErrorMessage(message: String)
+    activate Ui
     return
 end
 
