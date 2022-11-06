@@ -11,7 +11,7 @@ import seedu.duke.transaction.TransactionList;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+// @@author jorellesee
 public class ItemListTest {
     ItemList itemList;
     Item item;
@@ -38,7 +38,9 @@ public class ItemListTest {
         assertEquals(0, itemList.getListSize());
     }
 
+    @Test
     void getItemById_expect_pen() throws ItemNotFoundException {
         assertEquals("pen", itemList.getItemById("28sd37h2").getName());
     }
+
 }

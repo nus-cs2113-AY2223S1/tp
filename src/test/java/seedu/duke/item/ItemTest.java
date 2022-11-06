@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidCategoryException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+// @@author jorellesee
 public class ItemTest {
 
     Item item;
