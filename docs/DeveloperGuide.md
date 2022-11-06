@@ -280,6 +280,8 @@ The following sequence diagram illustrates the process of loading data from loca
 
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Saving Data to File
 
 The following sequence diagram illustrates the process of saving data to local storage.
