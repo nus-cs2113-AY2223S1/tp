@@ -21,7 +21,7 @@ towards their fitness journeys.
 TracknFit offers 3 main components: **Biometrics, Exercises, and Food**  
 For each component, you can **add, remove and view** records.
 
-- Records are displayed in order of date by default
+- Records are displayed in descending order of date by default
 
 TracknFit can also summarise your caloric balance for each day.  
 Please follow these guidelines when entering commands into the terminal:
@@ -59,24 +59,21 @@ Expected outcome:
 All daily historical records of the user are displayed.
 
 ```
--------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------
-           | Weight&Fat              | Food                                                           | Exercise
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Date       | Weight | Fat Percentage | Description                                         | Calories | Exercise   | Weights    | Sets | Reps | Dist | Calories Burnt  | Status
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-23-10-2022 | 70     | 20             | 
-25-10-2022                           | chicken rice                                        | 200      | 
-25-10-2022                           | laksa                                               | 400      | 
-25-10-2022                           | cola                                                | 1000     | 
-25-10-2022                           | this is just for testing                            | 100      | 
-25-10-2022                           | ice cream                                           | 200      | 
-25-10-2022                           | very very very very long food name for testing view | 300      | 
-25-10-2022                           | dumplings                                           | 300      | 
-25-10-2022                                                                                            | strength   | 20         | 2    | 2    | -    | -               | [ ]
+-----------------------------------------------------------------------------------------------------------
+           | Weight&Fat              | Food                                                      | Exercise
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Date       | Weight | Fat Percentage | Description                                    | Calories | Exercise   | Weights    | Sets | Reps | Dist | Calories Burnt  | Status
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+06-11-2022 | 70     | 10             | 
+06-11-2022 |                         | chicken rice                                   | 200      | 
+06-11-2022 |                         | very very very very long food name for testing | 1000     | 
+06-11-2022 |                                                                                     | weights    | 30         | 10   | 2    | -    | -               | [ ]
+05-11-2022 |                         | noodles                                        | 300      | 
+05-11-2022 |                                                                                     | running    | -          | 1    | 1    | 1.0  | -               | [ ]
+04-11-2022 |                         | laksa                                          | 400      | 
+03-11-2022 | 60     | 20             | 
 
--------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------
 ```
 
 #### View Calories : `view calories`
@@ -449,28 +446,26 @@ Expected outcome:
 Food is added to the dietary consumption list.
 
 ```
-add food /dumplings /300
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Food Description: dumplings
 calories: 300
-Recorded on: 25-10-2022
+Recorded on: 06-11-2022
  This food is added to the food list successfully
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ```
 
 Adding with date:
 
-`add food /noodles /300 /24-10-2022`
+`add food /laksa /400 /04-11-2022`
 
 Expected outcome:
 Food is added to the dietary consumption list.
 
 ```
-add food /noodles /300 /24-10-2022
 -------------------------------------------------------------------------------
-Food Description: noodles
-calories: 300
-Recorded on: 24-10-2022
+Food Description: laksa
+calories: 400
+Recorded on: 04-11-2022
  This food is added to the food list successfully
 -------------------------------------------------------------------------------
 ```
@@ -488,21 +483,16 @@ Expected outcome:
 All historical records of the food consumed are displayed.
 
 ```
--------------------------------------------------------------------------------
---------------------------------------------------------------------------------------
-Index | Description                                         | Calories | Date       | 
---------------------------------------------------------------------------------------
-1     | noodles                                             | 300      | 24-10-2022 | 
-2     | chicken rice                                        | 200      | 25-10-2022 | 
-3     | laksa                                               | 400      | 25-10-2022 | 
-4     | cola                                                | 1000     | 25-10-2022 | 
-5     | this is just for testing                            | 100      | 25-10-2022 | 
-6     | ice cream                                           | 200      | 25-10-2022 | 
-7     | very very very very long food name for testing view | 300      | 25-10-2022 | 
-8     | dumplings                                           | 300      | 25-10-2022 | 
+---------------------------------------------------------------------------------
+Index | Description                                    | Calories | Date       | 
+---------------------------------------------------------------------------------
+1     | dumplings                                      | 300      | 06-11-2022 | 
+2     | chicken rice                                   | 200      | 06-11-2022 | 
+3     | very very very very long food name for testing | 1000     | 06-11-2022 | 
+4     | noodles                                        | 300      | 05-11-2022 | 
+5     | laksa                                          | 400      | 04-11-2022 | 
 
--------------------------------------------------------------------------------
-
+--------------------------------------------------------------------------------
 ```
 
 #### Remove Food Consumptions: `remove food`
@@ -518,15 +508,12 @@ Expected outcome:
 The first record in the food list will be deleted.
 
 ```
--------------------------------------------------------------------------------
-remove food /1
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
  This food has been deleted from the food list successfully
-Food Description: noodles
+Food Description: dumplings
 calories: 300
-Recorded on: 24-10-2022
--------------------------------------------------------------------------------
-
+Recorded on: 06-11-2022
+--------------------------------------------------------------------------------
 ```
 
 #### Find Food Consumptions Based On Description: `find food`
@@ -543,14 +530,14 @@ All relevant records from the history would be printed out for the user to see h
 have been consuming.
 
 ```
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 Here are the matching food in your food list:
 -----------------------------------------------
 Index | Description  | Calories | Date       | 
 -----------------------------------------------
-1     | laksa        | 400      | 25-10-2022 | 
+1     | laksa        | 400      | 04-11-2022 | 
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 ```
 
 #### Find Food Consumptions Based On Date: `find date_f`
@@ -560,28 +547,23 @@ Find specific food records from user's food consumption over time using keyword 
 Format: `find date_f /{date}`
 
 Example of usage:
-`find date_f /25-10-2022`
+`find date_f /06-11-2022`
 
 Expected outcome:
 All relevant records from the history would be printed out for the user to see how much of a specific food they
 have been consuming.
 
 ```
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 Here are the food records in your list matching this date:
---------------------------------------------------------------------------------------
-Index | Description                                         | Calories | Date       | 
---------------------------------------------------------------------------------------
-1     | chicken rice                                        | 200      | 25-10-2022 | 
-2     | laksa                                               | 400      | 25-10-2022 | 
-3     | cola                                                | 1000     | 25-10-2022 | 
-4     | this is just for testing                            | 100      | 25-10-2022 | 
-5     | ice cream                                           | 200      | 25-10-2022 | 
-6     | very very very very long food name for testing view | 300      | 25-10-2022 | 
-7     | dumplings                                           | 300      | 25-10-2022 | 
+---------------------------------------------------------------------------------
+Index | Description                                    | Calories | Date       | 
+---------------------------------------------------------------------------------
+1     | chicken rice                                   | 200      | 06-11-2022 | 
+2     | very very very very long food name for testing | 1000     | 06-11-2022 | 
 
--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 ```
 
