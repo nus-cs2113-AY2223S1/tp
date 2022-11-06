@@ -27,10 +27,10 @@ import static seedu.duke.CommandStructure.COMMAND_LIST;
 import static seedu.duke.CommandStructure.COMMAND_PAIR;
 import static seedu.duke.CommandStructure.COMMAND_UNPAIR;
 import static seedu.duke.CommandStructure.COMMAND_HELP;
-import static seedu.duke.CommandStructure.EVERYTHING_FLAG;
-import static seedu.duke.CommandStructure.PROPERTY_FLAG;
-import static seedu.duke.CommandStructure.CLIENT_FLAG;
-import static seedu.duke.CommandStructure.PAIR_FLAG;
+import static seedu.duke.CommandStructure.EVERYTHING_TAG;
+import static seedu.duke.CommandStructure.PROPERTY_TAG;
+import static seedu.duke.CommandStructure.CLIENT_TAG;
+import static seedu.duke.CommandStructure.PAIR_TAG;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
@@ -101,8 +101,8 @@ public class ParserManager {
         String subAddCommandType = processedAddCommandDetails.get(SUB_COMMAND_INDEX);
         String addCommandDescription = processedAddCommandDetails.get(COMMAND_DESCRIPTION_INDEX);
 
-        boolean isAddProperty = subAddCommandType.equals(PROPERTY_FLAG);
-        boolean isAddClient = subAddCommandType.equals(CLIENT_FLAG);
+        boolean isAddProperty = subAddCommandType.equals(PROPERTY_TAG);
+        boolean isAddClient = subAddCommandType.equals(CLIENT_TAG);
 
         if (isAddProperty) {
             return new CommandAddPropertyParser(addCommandDescription, propertyList);
@@ -118,13 +118,13 @@ public class ParserManager {
         String subDeleteCommandType = processedDeleteCommandDetails.get(SUB_COMMAND_INDEX);
         String deleteCommandDescription = processedDeleteCommandDetails.get(COMMAND_DESCRIPTION_INDEX);
 
-        boolean isDeleteProperty = subDeleteCommandType.equals(PROPERTY_FLAG);
-        boolean isDeleteClient = subDeleteCommandType.equals(CLIENT_FLAG);
+        boolean isDeleteProperty = subDeleteCommandType.equals(PROPERTY_TAG);
+        boolean isDeleteClient = subDeleteCommandType.equals(CLIENT_TAG);
 
         if (isDeleteProperty) {
-            return new ParseDeleteProperty(deleteCommandDescription, propertyList);
+            return new CommandDeletePropertyParser(deleteCommandDescription, propertyList);
         } else if (isDeleteClient) {
-            return new ParseDeleteClient(deleteCommandDescription, clientList);
+            return new CommandDeleteClientParser(deleteCommandDescription, clientList);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }
@@ -134,11 +134,12 @@ public class ParserManager {
         ArrayList<String> processedCheckCommandDetail = splitCommandAndCommandType(commandDetail);
         String subCheckCommandType = processedCheckCommandDetail.get(SUB_COMMAND_INDEX);
 
-        boolean isProperty = subCheckCommandType.equals(PROPERTY_FLAG);
-        boolean isClient = subCheckCommandType.equals(CLIENT_FLAG);
+        boolean isProperty = subCheckCommandType.equals(PROPERTY_TAG);
+        boolean isClient = subCheckCommandType.equals(CLIENT_TAG);
 
         if (isClient) {
-            return new ParseCheckClient(commandDetail, clientList);
+            String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
+            return new CommandCheckClientParser(commandDescription, clientList);
         } else if (isProperty) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
             return new CommandCheckPropertyParser(commandDescription);
@@ -152,10 +153,10 @@ public class ParserManager {
 
     private Parser parseListCommand(String commandDetail) throws UndefinedSubCommandTypeException {
         ArrayList<String> listCommandTypeAndFlags = getListCommandType(commandDetail);
-        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_FLAG);
-        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_FLAG);
-        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_FLAG);
-        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_FLAG);
+        boolean isListProperty = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).trim().equals(PROPERTY_TAG);
+        boolean isListClient = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(CLIENT_TAG);
+        boolean isListEverything = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(EVERYTHING_TAG);
+        boolean isListPairs = listCommandTypeAndFlags.get(SUB_COMMAND_INDEX).equals(PAIR_TAG);
         if (isListProperty) {
             return new ParseListProperty(listCommandTypeAndFlags.get(COMMAND_FLAG_INDEX));
         } else if (isListClient) {
@@ -173,8 +174,8 @@ public class ParserManager {
     private Parser parseFindCommand(String commandDetail) throws UndefinedSubCommandTypeException {
         ArrayList<String> findCommandTypeAndFlag = splitCommandAndCommandType(commandDetail);
         String findSubCommandType = findCommandTypeAndFlag.get(SUB_COMMAND_INDEX);
-        boolean isFindClient = findSubCommandType.equals(CLIENT_FLAG);
-        boolean isFindProperty = findSubCommandType.equals(PROPERTY_FLAG);
+        boolean isFindClient = findSubCommandType.equals(CLIENT_TAG);
+        boolean isFindProperty = findSubCommandType.equals(PROPERTY_TAG);
 
         String findCommandDescription = findCommandTypeAndFlag.get(COMMAND_DESCRIPTION_INDEX);
         if (isFindClient) {
