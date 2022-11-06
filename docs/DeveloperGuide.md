@@ -573,12 +573,16 @@ classes.
 
 #### 5.1.1. Input/Output re-direction.
 
+To run the IO re-direction tests, type `./text-ui-test/runtest.sh` (Linux/Mac) or `./text-ui-test/runtest.bat` (Windows) in your terminal. 
+
 This method is used to simulate user input and to test the output of the program. This method was introduced in our
 individual project and was used to test out the Duke main class. Similarly, this method is used in YAMOM. As simple as
 it may seem, this method is very useful in testing the program as it allows us to test the program without having to
 waste time typing in the commands manually. A simple file comparison is done to check if the output is as expected.
 
 #### 5.1.2. Unit testing
+
+JUnit tests can be run using `./gradlew test`.
 
 Unit testing is done to test the individual functions of the classes. This is done to ensure that the functions are
 properly working in isolation. This is done by using the assertEquals/ assertTrue/ assertThrows method to check if
@@ -607,7 +611,7 @@ returned is as expected.
 #### 5.1.3. Regression testing
 
 Regression testing is done to ensure that the program is still working as expected after a change has been made. This
-is being done by running gradlew /test and checking if the tests are still passing. This is done to ensure that the
+is being done by running `./gradlew test` and checking if the tests are still passing. This is done to ensure that the
 newly added features do not break the previously existing features.
 
 #### 5.1.4. Developer testing
