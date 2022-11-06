@@ -18,7 +18,7 @@ public class DeleteTest {
 
     @BeforeAll
     public static void setUp() {
-        Storage.loadRecipesToRecipeList();
+//        Storage.loadRecipesToRecipeList();
         Storage.loadRecipesToRecipeTitlesList();
         recipe = new Recipe(TEST_RECIPE_TITLE, "test_description");
         recipe.addIngredient(new Ingredient("ingredient", 100.0, "g"));

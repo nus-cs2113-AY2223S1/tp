@@ -15,7 +15,7 @@ public class AddTest {
 
     @BeforeAll
     public static void setUp() {
-        Storage.loadRecipesToRecipeList();
+//        Storage.loadRecipesToRecipeList();
         Storage.loadRecipesToRecipeTitlesList();
         recipe = new Recipe("title", "test_description");
         recipe.addIngredient(new Ingredient("ingredient", 100.0, "g"));

@@ -29,7 +29,7 @@ public class Recipeditor {
         Storage.createAppFolder();
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.loadRecipesToRecipeTitlesList();
-        Storage.loadRecipesToRecipeList();
+//        Storage.loadRecipesToRecipeList();
         Ui.showGreeting();
     }
 
