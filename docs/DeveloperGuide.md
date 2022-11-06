@@ -492,11 +492,12 @@ ___
 
 ### Target user profile
 Property agents who: 
-* are managing single owner rental units
+* are managing single owner rental units.
 * has a need to keep track of information of properties that are being put out for rental.
 * has a need to keep track of information of clients' (prospective tenants) information.
-* is a fast typist
+* is a fast typist.
 * favors a command-line interface over a Graphic User Interface.
+* work in Singapore and deal with Singapore properties.
 
 ### Value proposition
 Aids property agents in tracking information related to the properties and clients (prospective tenants) they manage. The 
@@ -505,6 +506,11 @@ app enables them to easily:
 - Record down information of clients (name, contact number, budget), who are looking to rent properties.
 - Record down instances where a client decides to rent a property/stop renting a property.
 - View client and property information quickly.
+
+In addition, the implemented validations will help relieve some burdens experienced by Singapore property agents when dealing with large number of properties. They include the following:
+- Manual checking for correct Singapore address format can be avoided with the aid of the application.
+- Application has condensed the unit type of Singapore properties to 15 variations. User will only need to select from one of them.
+- Removes the need to check for mismatch address and unit type of property (e.g. Unit type is HDB flats but address does not have unit level/number).
 
 ___
 
