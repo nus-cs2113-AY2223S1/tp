@@ -1,0 +1,42 @@
+
+'https://plantuml.com/sequence-diagram
+
+@startuml
+[-> Duke: User input
+activate Duke
+Duke -> Parser: parse(input)
+activate Parser
+Parser -> Parser: specificCase(commandWord, content)
+activate Parser
+create Clear
+Parser -> Clear: new Clear(content)
+activate Clear
+return c: Clear
+return c: Clear
+return c: Clear
+deactivate Parser
+Duke -> Clear: c.execute(moduleList)
+activate Clear
+Clear -> ModuleList: Clear(sem)
+activate ModuleList
+
+alt "all"
+    ModuleList -> ModuleList: clear all
+    activate ModuleList
+    deactivate ModuleList
+    ModuleList -> UI: allClearMessage()
+    activate UI
+    deactivate UI
+else specificSem
+    ModuleList -> ModuleList: clear sem
+    activate ModuleList
+    deactivate ModuleList
+    ModuleList -> UI: semClearMessage()
+    activate UI
+    deactivate UI
+end
+
+deactivate ModuleList
+deactivate Clear
+
+@enduml

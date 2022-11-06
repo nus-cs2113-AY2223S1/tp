@@ -1,8 +1,8 @@
 'https://plantuml.com/sequence-diagram
 
 @startuml
-activate Duke
 [-> Duke: User input
+activate Duke
 Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
@@ -16,14 +16,26 @@ return c: View
 deactivate Parser
 Duke -> View: c.execute(moduleList)
 activate View
+View -> ModuleList: view(sem)
 activate ModuleList
-View -> ModuleList: View(semester)
+
+alt "all"
+    ModuleList -> ModuleList: view all
+    activate ModuleList
+    ModuleList -> UI: viewAllMessage()
+    activate UI
+    deactivate UI
+    deactivate ModuleList
+else specificSem
+    ModuleList -> ModuleList: mod.getSemesterTaken().matches(sem)
+    activate ModuleList
+    return matchingModules: ArrayList<Module>
+    ModuleList -> UI: viewMessage(sem, matchingModules)
+    activate UI
+    deactivate UI
+end
+
+deactivate ModuleList
 deactivate View
-ModuleList -> ModuleList: mod.getSemesterTaken().matches(semester)
-activate ModuleList
-return matchingModules: ArrayList<Module>
-ModuleList -> UI: printResponse(semester, matchingModules)
-activate UI
-deactivate UI
 
 @enduml

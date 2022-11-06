@@ -1,8 +1,8 @@
 'https://plantuml.com/sequence-diagram
 
 @startuml
-activate Duke
 [-> Duke: User input
+activate Duke
 Duke -> Parser: parse(input)
 activate Parser
 Parser -> Parser: specificCase(commandWord, content)
@@ -16,14 +16,15 @@ return c: Mcs
 deactivate Parser
 Duke -> Mcs: c.execute(moduleList)
 activate Mcs
-activate ModuleList
 Mcs -> ModuleList: mc(semester)
-deactivate Mcs
+activate ModuleList
 ModuleList -> ModuleList: check mod.getSemesterTaken().matches(semester)
 activate ModuleList
-return mcsCount: integer
+return mcsCount: int
 ModuleList -> UI: mcMessage(semester, mcsCount)
 activate UI
 deactivate UI
+deactivate ModuleList
+deactivate Mcs
 
 @enduml

@@ -136,7 +136,7 @@ public class ModuleList {
      * If there is no modules in moduleList, will print no modules found message
      */
     public void viewAll() {
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 4; i++) {
             for (int j = 1; j <= 2; j++) {
                 ArrayList<Module> matchingModules = new ArrayList<>();
                 String sem = "Y" + i + "S" + j;
