@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.IllegalFormatCodePointException;
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -10,16 +9,15 @@ import java.io.FileWriter;
 /**
  * Represents the storage of information relating to the tasklist.
  */
-@SuppressWarnings("checkstyle:abbreviationaswordinname") 
 public class Storage {
     private String filepath;
     private String folderpath;
-    final String SPLITTER = "\\|";
-    final String MOVIE_TYPE = "M";
-    final String TV_TYPE = "T";
-    final String YES_STRING = "Y";
-    final String MOVIE_KEY = "M|";
-    final String TV_KEY = "T|";
+    final static String SPLITTER = "\\|";
+    final static String MOVIE_TYPE = "M";
+    final static String TV_TYPE = "T";
+    final static String YES_STRING = "Y";
+    final static String MOVIE_KEY = "M|";
+    final static String TV_KEY = "T|";
 
     public Storage(String filepath, String folderpath) {
         assert filepath.length() > 0 : "Filepath length cannot be 0";
@@ -89,7 +87,8 @@ public class Storage {
         
                 try {
                     if (!isValidFields(lineInput)) {
-                        throw new IllegalArgumentException("Error in format of saved data (line " + counter + "): Entry ignored.");
+                        throw new IllegalArgumentException("Error in format of saved data (line " 
+                            + counter + "): Entry ignored.");
                     }
                 } catch (IllegalArgumentException e) {
                     Ui.print(e.getMessage());
