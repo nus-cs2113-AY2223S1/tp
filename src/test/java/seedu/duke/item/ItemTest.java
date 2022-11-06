@@ -3,6 +3,7 @@ package seedu.duke.item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidCategoryException;
+import seedu.duke.exception.InvalidPriceException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
