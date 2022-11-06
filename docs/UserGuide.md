@@ -19,7 +19,8 @@ towards their fitness journeys.
 ## Features
 
 TracknFit offers 3 main components: **Biometrics, Exercises, and Food**  
-For each component, you can **add, remove and view** records.
+For each component, you can **add, remove and view** records. Additionally, **find** command
+is available for **Exercises and Food** components.
 
 - Records are displayed in descending order of date by default
 
