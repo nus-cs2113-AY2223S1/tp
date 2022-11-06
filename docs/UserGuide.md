@@ -51,8 +51,7 @@ through a CLI which is faster than a Graphical User Interface (GUI).
                __/ |
               |___/
 ````
-
-6. After SkyControl has been booted up successfully, enter a command below the welcome display
+After SkyControl has been booted up successfully, enter a command below the welcome display
    and hit the <kbd>Enter</kbd> button to execute it. Reflected below is an example.
 
 **Input Command**
