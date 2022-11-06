@@ -17,7 +17,6 @@ import seedu.duke.utils.Ui;
 /**
  * Select slots to be stored in state for SelectedModule.
  */
-
 public class SelectSlotCommand extends Command {
     public static final String COMMAND_WORD = "select";
     public static final String COMMAND_USAGE = "select [ /module MODULE_CODE ] "
@@ -26,7 +25,7 @@ public class SelectSlotCommand extends Command {
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
             + System.lineSeparator() + "\t" + COMMAND_USAGE;
     public static final String ERROR_MODULE_DOES_NOT_EXIST = "Module does not exist!";
-    public static final String ERROR_MODULE_NOT_SELECTED = 
+    public static final String ERROR_MODULE_NOT_SELECTED =
             "You need to add the module to your timetable first. Use the add command.";
     public static final String ERROR_UNEXPECTED_PARAMETER = "Unexpected parameter: ";
 
@@ -97,17 +96,17 @@ public class SelectSlotCommand extends Command {
     private void processParams(Map<String, String> params) throws YamomException {
         if (!params.containsKey("module") || params.get("module").isEmpty()) {
             throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /module");
-        } 
+        }
         if (!params.containsKey("type") || params.get("type").isEmpty()) {
             throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /type");
-        } 
+        }
         if (!params.containsKey("code") || params.get("code").isEmpty()) {
             throw new YamomException(ERROR_WRONG_FORMAT + "\n\tMissing parameter /code");
         }
         List<String> extraParams = params.keySet()
-            .stream()
-            .filter(k -> !List.of("module", "type", "code").contains(k))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(k -> !List.of("module", "type", "code").contains(k))
+                .collect(Collectors.toList());
         for (String p : extraParams) {
             throw new YamomException(ERROR_UNEXPECTED_PARAMETER + p);
         }
