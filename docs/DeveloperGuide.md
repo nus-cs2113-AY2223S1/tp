@@ -1,8 +1,6 @@
 # Developer Guide
 
-## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
 
@@ -32,9 +30,9 @@ The sequence diagram below illustrates this add mechanism:
 
 ### Deletion feature
 
-The deletion mechanism is facilitated by 'Parser', 'Add', 'ModuleList' and 'UI', where a Module object will be deleted according to the module code inputted by the user and removed from the module list.
+The deletion mechanism is facilitated by 'Parser', 'Delete', 'ModuleList' and 'UI', where a Module object will be deleted according to the module code inputted by the user and removed from the module list.
 
-Below is an example usage scenario and how the addition mechanism behaves at each step:
+Below is an example usage scenario and how the deletion mechanism behaves at each step:
 
 Step 1: Assume that the user has already added a module named CS2113 into the ModuleList using the following command, "add m/cs2113 s/y2s1 mc/4 g/a"
 
@@ -49,7 +47,7 @@ The sequence diagram below illustrates this delete mechanism:
 ### View feature
 
 The View mechanism is facilitated by 'Parser', 'View', 'ModuleList', and 'UI', where the user enters
-a semester and the total number of mcs taken that semester is calculated and displayed.
+a semester and the modules taken in that semester are displayed.
 
 Below is an example usage scenario and how the view mechanism behaves at each step.
 
@@ -61,6 +59,8 @@ Step 2: The user input of "view s/y2s1" will be taken in for the parser and an o
 
 Step 3: The execute method of View class that is overrides will be called with parameter of the semester and will iterate through
 the moduleList. If the semester in which a particular module is taken matches the semester given as the argument, then the module will be added to an ArrayList called matchingModules. In the end, the arrayList matchingModules will be returned.
+
+(Note: If the user inputs "view all", then the same mechanism is followed but instead of matching the modules to the semester entered, all the modules will be displayed.)
 
 The sequence diagram below illustrates this view mechanism.
 
@@ -110,21 +110,87 @@ The sequence diagram below illustrates this find mechanism.
 ![FindUML.png](diagrams/FindUML.png)
 
 
+### Clear feature
+
+The clear mechanism is facilitated by 'Parser', 'Clear', 
+'ModuleList' and 'UI', where all the Module object belonging to a semester will be cleared
+according to the semester inputted by the user and removed from the module list.
+
+Below is an example usage scenario and how the clear mechanism behaves at each step:
+
+Step 1:  Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+
+Step 2: The user input of "clear s/Y2S1" will be taken in for the parser and an object of class 'Clear' will be returned.
+
+Step 3: The execute method in the clear class that is overrides will be called 
+with parameter of the semester and will iterate through moduleList looking for a Module that matches. It will then remove the Module from the moduleList.
+
+Step 4: After clearing, the appropriate message to be displayed is called from the UI class to display to the user.
+
+(Note: If the user inputs "clear all", then the same mechanism is followed but instead of matching the modules to the semester entered, all the modules will be cleared.)
+
+The sequence diagram below illustrates this clear mechanism:
+
 ### Check feature
 
-The help mechanism is facilitated by 'Parser', 'Check' and 'UI', where the user enters the check command and the resulting 
+The check mechanism is facilitated by 'Parser', 'Check' and 'UI', where the user enters the check command and the resulting 
 eligibility status will be displayed.
 
 The eligibility requirements for NOC and SEP can be found in the glossary.
+
+Below is an example usage scenario and how the check mechanism behaves at each step.
+
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/b"
+
+Step 2: The user input of "check noc" or "check sep" will be taken in for 
+the parser and an object of class 'Check' will be returned.
+
+Step 3: The execute method of Check class that is overrides 
+will be called with parameter of the keyword inputted. It will first check if the user is checking for NOC or SEP.
+Then it will check if the user fulfills the requirements. Based on whether the user fulfills the requirements,
+the appropriate message will be called from the UI class which will then be displayed to the user.
 
 The sequence diagram below illustrates this check mechanism.
 
 ![CheckUML.png](diagrams/CheckUML.png)
 
+
+### Overview feature
+
+The Overview mechanism is facilitated by 'Parser', 'Overview', 'ModuleList', and 'UI', where the
+user enters the command and an overview of the user's entire plan is displayed.
+
+Below is an example usage scenario and how the overview mechanism behaves at each step.
+
+Step 1: Assume that the user has already added two modules to y2s1:
+The first module is CS2113, a 4 MC module which was added using the following command "add m/cs2113 s/y2s1 mc/4 g/a"
+The second module is CS2030, a 4 MC module which was added using the following command "add m/cs2030 s/y2s1 mc/4 g/a"
+
+Step 2: The user input of "overview" will be taken in for the parser and an object of class 'Overview' will be returned.
+
+Step 3: The execute method of Overview class that is overrides will be called and will iterate through
+the moduleList. All the modules and the entire plan will be displayed with the 
+appropriate message from the UI class.
+
+The sequence diagram below illustrates this overview mechanism.
+
 ### Help feature
 
 The help mechanism is facilitated by 'Parser', 'Help' and 'UI', where the user enters the word 'help' and a help message with 
 the various commands summary will be displayed.
+
+Below is an example usage scenario and how the help mechanism behaves at each step.
+
+Step 1: The user input of "help" will be taken in for the parser and an object of class "Help" will be returned.
+
+Step 2: The execute method of Help class that is overrides
+will be called. Then the help message will be called from the UI class which will be displayed to the user.
+
+
 
 The sequence diagram below illustrates this help mechanism.
 
@@ -134,6 +200,18 @@ The sequence diagram below illustrates this help mechanism.
 
 The exit mechanism is facilitated by 'Parser', 'Exit' and 'UI'. 
 This allows the program to exit smoothly with an exit message displayed when the user input is 'exit'.
+
+Below is an example usage scenario and how the exit mechanism behaves at each step.
+
+Step 1: The user input of "exit" will be taken in for the parser and an object of 
+class "Exit" will be returned.
+
+Step 2: The execute method of Exit class that is overrides
+will be called. Then the isExit variable will be set to true and the Exit message is called and displayed from the user class.
+
+Step 3: When the outer loop in the Duke class checks and finds isExit to be true, the program terminates. 
+
+
 
 The sequence diagram below illustrates this exit mechanism.
 

@@ -28,8 +28,9 @@ Contributions to UG:
 Contributions to DG:
 
 - Initial UML diagram for MCs
-- Write-up for MCs
+- Write-up for MCs, Check, Find, Exit, Clear, Overview)
 - Instructions for Manual testing 
+- did a final proofread of the DG
 
 Contributions to team-based tasks:
 
