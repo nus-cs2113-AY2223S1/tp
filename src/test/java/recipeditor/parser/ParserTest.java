@@ -1,28 +1,27 @@
 package recipeditor.parser;
 
-import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import recipeditor.Recipeditor;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 import recipeditor.command.Command;
 import recipeditor.command.CommandResult;
 import recipeditor.command.DeleteCommand;
 import recipeditor.command.EditCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.FindCommand;
-import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
-import recipeditor.exception.InvalidFlagException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
-import javax.swing.text.View;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -198,7 +197,7 @@ class ParserTest {
     }
 
     @Test
-    public void DeleteCommand_byIndex_invalidIndex() {
+    public void deleteCommand_byIndex_invalidIndex() {
         String input = "/delete -id index";
         Command deleteCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
@@ -208,7 +207,7 @@ class ParserTest {
     }
 
     @Test
-    public void DeleteCommand_byTitle_success() {
+    public void deleteCommand_byTitle_success() {
         String input = "/delete -t test title";
         Command deleteCommand = Parser.parseCommand(input);
         String expected = '\n' + RecipeList.getRecipe(0).getTitle()
@@ -220,7 +219,7 @@ class ParserTest {
     }
 
     @Test
-    public void DeleteCommand_byTitle_missingTitle() {
+    public void deleteCommand_byTitle_missingTitle() {
         String input = "/delete -t ";
         Command deleteCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
@@ -230,7 +229,7 @@ class ParserTest {
     }
 
     @Test
-    public void DeleteCommand_invalidFlag() {
+    public void deleteCommand_invalidFlag() {
         String input = "/delete -d ";
         Command deleteCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(DeleteCommand.CORRECT_FORMAT).execute().getMessage();
@@ -240,7 +239,7 @@ class ParserTest {
     }
 
     @Test
-    public void ViewCommand_byIndex_indexOutOfBound() {
+    public void viewCommand_byIndex_indexOutOfBound() {
         String input = "/view -id 0";
         Command viewCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
@@ -250,7 +249,7 @@ class ParserTest {
     }
 
     @Test
-    public void ViewCommand_byIndex_invalidIndex() {
+    public void viewCommand_byIndex_invalidIndex() {
         String input = "/view -id index";
         Command viewCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
@@ -260,7 +259,7 @@ class ParserTest {
     }
 
     @Test
-    public void ViewCommand_byTitle_success() {
+    public void viewCommand_byTitle_success() {
         String input = "/view -t test title";
         Command viewCommand = Parser.parseCommand(input);
         String expected = RecipeList.getRecipe(0).getRecipeAttributesFormatted();
@@ -270,7 +269,7 @@ class ParserTest {
     }
 
     @Test
-    public void ViewCommand_byTitle_missingTitle() {
+    public void viewCommand_byTitle_missingTitle() {
         String input = "/view -t ";
         Command viewCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
@@ -280,7 +279,7 @@ class ParserTest {
     }
 
     @Test
-    public void ViewCommand_invalidFlag() {
+    public void viewCommand_invalidFlag() {
         String input = "/view -d ";
         Command viewCommand = Parser.parseCommand(input);
         String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
