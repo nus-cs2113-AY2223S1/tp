@@ -811,7 +811,8 @@ If Duke crashes, is my data saved?
 > to avoid errors, which also mean that all your data will be gone forever
 > In that case, we will create three brand-new lists for your users, items, and transactions
 > REMEMBER that all files in data folder must be edited correctly
-> Do you want to force reset all files and restart? y or n
+> ____________________________________________________________
+> Do you want to force reset all files and restart? Y or N
 > ____________________________________________________________
 >```
 
