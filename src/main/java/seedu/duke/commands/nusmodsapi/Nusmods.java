@@ -137,7 +137,8 @@ public class Nusmods {
         return lessons;
     }
 
-    private static List<Lesson> findIndividualLessons(JsonNode currentNode, String moduleCode) throws Exceptions.InvalidDayException {
+    private static List<Lesson> findIndividualLessons(JsonNode currentNode, String moduleCode)
+            throws Exceptions.InvalidDayException {
         int arrayIndex = 0;
         List<Lesson> lessons = new ArrayList<>();
         while (currentNode.get(arrayIndex) != null) {
