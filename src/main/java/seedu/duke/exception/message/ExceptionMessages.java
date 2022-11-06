@@ -34,7 +34,7 @@ public class ExceptionMessages {
             "Price must be in range from 0 to 10000";
 
     public static final String MESSAGE_MONEY_TRANSACTED_OUT_OF_RANGE =
-            "Price must be in range from 0 to 15000000";
+            "Money transacted in one transaction must be in range from 0 to 15000000";
     public static final String MESSAGE_PRICE_TOO_MANY_DECIMALS =
             "Price must have at most 2 decimals, $0.01 is the smallest unit of price!";
     public static final String MESSAGE_SORT_MODE_INVALID = "Mode of sorting is invalid";
@@ -105,5 +105,5 @@ public class ExceptionMessages {
     public static final String MESSAGE_VALUE_OF_ARGS_INVALID = "The value of args for line is empty";
     public static final String MESSAGE_STORAGE_REASON = "\nReason: ";
     public static final String MESSAGE_YES_OR_NO
-            = "Please only input y or n. y for force resetting, n for self-editing";
+            = "Please only input Y or N. Y for force resetting, N for self-editing (lower case is accepted)";
 }
