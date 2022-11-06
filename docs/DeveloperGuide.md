@@ -6,10 +6,13 @@
 
 ## Design & implementation
 
-Our program is structured as pictured in the following class diagram:
-![ClassDiagram.png](diagrams/ClassDiagram.png)
+The general class structure of our program is pictured in the following class diagram:
+![GeneralClassDiagram.png](diagrams/GeneralClassDiagram.png)
 
-All the inheritors of Command are features that will be described below.
+The class structure of our commands are listed below:
+![CommandClassDiagram.png](diagrams/CommandClassDiagram.png)
+
+All the commands shown in the command class diagram above are features that will be described below.
 
 ### Addition feature
 
@@ -112,7 +115,9 @@ The sequence diagram below illustrates this find mechanism.
 The help mechanism is facilitated by 'Parser', 'Check' and 'UI', where the user enters the check command and the resulting 
 eligibility status will be displayed.
 
-The sequence diagram below illustrates this help mechanism.
+The eligibility requirements for NOC and SEP can be found in the glossary.
+
+The sequence diagram below illustrates this check mechanism.
 
 ![CheckUML.png](diagrams/CheckUML.png)
 
