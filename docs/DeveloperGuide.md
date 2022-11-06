@@ -270,8 +270,8 @@ new `selectedModule` added are unique.
 
 ##### 3.4.1.2 Why it is implemented this way
 
-The `AddModuleCommand` only allows for modules to be added if they are not already in the `selectedModuleList`. Hence,
-there is a need to check if the `module` already exists in the `selectedModuleList` in order to prevent duplicate modules. 
+As we do not want users to add duplicate modules, we need to check if the module already exists in the `selectedModuleList`.
+Hence, we need to check if the module (to add) already exists in the `selectedModuleList` before adding it.
 
 The following sequence diagram shows how the operation works:
 
@@ -303,8 +303,8 @@ instance is only removed from the `selectedModuleList` if it exists.
 
 ##### 3.4.2.2 Why it is implemented this way
 
-The `RemoveModuleCommand` only allows for modules to be removed if they are already in the `selectedModuleList`. Hence, 
-there is a need to check if the `module` exists in the `selectedModuleList` in order to prevent removing modules that do not exist.
+As it does not make sense to remove a module that does not exist in the `selectedModuleList`, the `RemoveModuleCommand`
+have to check if the module (to remove) exists in the `selectedModuleList` before removing it.
 
 ##### 3.4.2.3 Alternatives considered
 
