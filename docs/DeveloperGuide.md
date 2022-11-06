@@ -236,8 +236,6 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
 `CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
 
-<div style="page-break-after: always;"></div>
-
 ### Storage Component
 
 The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
@@ -245,8 +243,6 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 `LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and writing data to a xml file.\
 `LocalStorageNullErrorHandler` overwrites several default error handlers in the xml parser to allow for custom error handling.\
 `LocalStorage` defines functions that loads and saves data.
-
-<div style="page-break-after: always;"></div>
 
 ### API Component
 
@@ -260,8 +256,6 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
   * The data contains the currency codes and its corresponding exchange rates with respect to the Singapore Dollar.
   * The data is written into a text file called `exchangeRates.txt`.
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a HashMap of exchange rates.
-
-<div style="page-break-after: always;"></div>
 
 ### Logger Component
 
