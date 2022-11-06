@@ -22,7 +22,7 @@
 
 * The code package command was inspired by a similar package of [@ivanthengwr](https://github.com/ivanthengwr)'s
   [command package](https://github.com/ivanthengwr/ip/tree/master/src/main/java/duke/command) in his ip.
-* The style of document in for the developer guide is inspired by the DG of
+* The style of document for the developer guide is inspired by the DG of
   [AY2122S1-CS2113T-T10-3](https://github.com/AY2122S1-CS2113T-T10-3/tp/blob/master/docs/DeveloperGuide.md#purpose-of-this-guide)
 
 ## Design
@@ -31,7 +31,7 @@
 
 ![architecture_diagram](ug-diagrams/images/Architecture.jpg)
 
-The ***Architecture Diagram*** given above shows explains the high-level design of the application.
+The ***Architecture Diagram*** given above explains the high-level design of the application.
 
 Given below is a quick overview of the main components and how they work with each other.
 
