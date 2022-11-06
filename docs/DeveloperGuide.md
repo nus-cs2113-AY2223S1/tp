@@ -66,9 +66,9 @@ An example of a text file will look like [this](https://github.com/AY2223S1-CS21
 Here is how the information is stored:
 
 - First line contains 'T' indicated this list is favourited by the user, and 'F' otherwise.
-- From second line to '#', each line contains a partner university's module code and a comment if it was added to the module, which is separated by a ';'.
+- From second line to '#', each line contains a partner university's module code and a comment if it was added to the module, which is separated by ';'.
 - From '#' to end of file, each line contains a partner university's module code, lesson day, start time and end time, which are separated by ';'.
-- Every line is separated by a '%'.
+- Every line is separated by '%'.
 
 Only the partner university's module code is stored to prevent storing excessive information, avoiding potential tampering or corrupting of information.
 To retrieve the other information (ie. partner university's module title, NUS module code, NUS module title etc.), UserStorageParser will call Database to get the relevant information.
