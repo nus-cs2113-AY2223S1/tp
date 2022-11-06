@@ -10,17 +10,23 @@ import static seedu.duke.Messages.MESSAGE_INCORRECT_PAIR_LIST_FLAG;
 
 //@@author zoranabc201
 public class ParseListPair extends Parser {
-    private final String commandFlags;
+    private final String commandTags;
 
     public ParseListPair(String listPropertyCommandDescription) {
-        this.commandFlags = listPropertyCommandDescription;
+        this.commandTags = listPropertyCommandDescription;
     }
+
+    /**
+     * Checks tags(if any) entered by the user are valid, and returns the corresponding Command type.
+     * @return CommandListPairs object if no Tags are present. CommandListPairsShort object if short tag is present
+     * @throws IncorrectListFlagsException if an invalid tag is present
+     */
 
     @Override
     public Command parseCommand() throws IncorrectListFlagsException {
-        if (commandFlags.isEmpty()) {
+        if (commandTags.isEmpty()) {
             return new CommandListPairs();
-        } else if (commandFlags.equals(CommandStructure.SHORT_FLAG)) {
+        } else if (commandTags.equals(CommandStructure.SHORT_TAG)) {
             return new CommandListPairsShort();
         } else {
             throw new IncorrectListFlagsException(MESSAGE_INCORRECT_PAIR_LIST_FLAG);

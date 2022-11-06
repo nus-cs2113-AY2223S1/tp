@@ -15,18 +15,18 @@ public class CommandStructure {
     //@@author zoranabc201
     public static final int START_INDEX = 0;
     public static final int ONE_ITEM_IN_LIST = 1;
-    public static final String NAME_FLAG = "n/";
-    public static final String PAIR_FLAG = "-pair";
-    public static final String CONTACT_NUMBER_FLAG = "c/";
-    public static final String ADDRESS_FLAG = "a/";
-    public static final String TYPE_FLAG = "t/";
-    public static final String PRICE_FLAG = "p/";
-    public static final String EMAIL_FLAG = "e/";
-    public static final String BUDGET_FLAG = "b/";
-    public static final String PROPERTY_FLAG = "-property";
-    public static final String CLIENT_FLAG = "-client";
-    public static final String EVERYTHING_FLAG = "-everything";
-    public static final String SHORT_FLAG = "-short";
+    public static final String NAME_TAG = "n/";
+    public static final String PAIR_TAG = "-pair";
+    public static final String CONTACT_NUMBER_TAG = "c/";
+    public static final String ADDRESS_TAG = "a/";
+    public static final String TYPE_TAG = "t/";
+    public static final String PRICE_TAG = "p/";
+    public static final String EMAIL_TAG = "e/";
+    public static final String BUDGET_TAG = "b/";
+    public static final String PROPERTY_TAG = "-property";
+    public static final String CLIENT_TAG = "-client";
+    public static final String EVERYTHING_TAG = "-everything";
+    public static final String SHORT_TAG = "-short";
     //@@author
 
     public static final String FIND_FLAGS = "f/";

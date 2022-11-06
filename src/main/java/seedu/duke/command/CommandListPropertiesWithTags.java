@@ -12,35 +12,45 @@ import seedu.duke.CommandStructure;
 import static seedu.duke.Messages.MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT;
 
 public class CommandListPropertiesWithTags extends Command {
-    private final String commandFlag;
+    private final String commandTag;
 
     public CommandListPropertiesWithTags(String commandFlag) {
-        this.commandFlag = commandFlag;
+        this.commandTag = commandFlag;
     }
+
+    /**
+     * Uses information present in commandTag to determine what information needs to be printed, and calls the
+     * relevant method to print it.
+     * @param ui User interface object that handles interactions between user and the app.
+     * @param storage Storage object that is responsible for storing and loading the app data.
+     * @param propertyList PropertyList object that handles all app interactions with the list of properties.
+     * @param clientList ClientList object that handles all app interactions with the list of clients.
+     * @param pairingList PairingList object that handles all app interactions with the clients' rental of property.
+     */
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        assert commandFlag.equals(CommandStructure.TYPE_FLAG)
-                || commandFlag.equals(CommandStructure.ADDRESS_FLAG)
-                || commandFlag.equals(CommandStructure.NAME_FLAG)
-                || commandFlag.equals(CommandStructure.PRICE_FLAG)
-                || commandFlag.equals(CommandStructure.SHORT_FLAG)
+        assert commandTag.equals(CommandStructure.TYPE_TAG)
+                || commandTag.equals(CommandStructure.ADDRESS_TAG)
+                || commandTag.equals(CommandStructure.NAME_TAG)
+                || commandTag.equals(CommandStructure.PRICE_TAG)
+                || commandTag.equals(CommandStructure.SHORT_TAG)
                 : MESSAGE_LIST_PROPERTIES_WITH_TAGS_ASSERT;
-        switch (commandFlag) {
-        case CommandStructure.ADDRESS_FLAG:
+        switch (commandTag) {
+        case CommandStructure.ADDRESS_TAG:
             displayPropertyAddresses(propertyList, ui);
             break;
-        case CommandStructure.NAME_FLAG:
+        case CommandStructure.NAME_TAG:
             displayPropertyLandlordNames(propertyList, ui);
             break;
-        case CommandStructure.PRICE_FLAG:
+        case CommandStructure.PRICE_TAG:
             displayPropertyPrices(propertyList, ui);
             break;
-        case CommandStructure.TYPE_FLAG:
+        case CommandStructure.TYPE_TAG:
             displayPropertyTypes(propertyList, ui);
             break;
-        case CommandStructure.SHORT_FLAG:
+        case CommandStructure.SHORT_TAG:
             displayPropertyShort(propertyList, ui);
             break;
         default:
