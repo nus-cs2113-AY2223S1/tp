@@ -352,7 +352,7 @@ _If flight details logbook is empty_.
 
 | Command                | Format                                                                                                    | Example                                                              |
 |:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
-| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `       | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`           |
+| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`                        | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d`                   |
 | `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
 | `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
 | `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
@@ -393,13 +393,9 @@ an error may be generated if these standards are not adhered to.
 **A**: A flight detail with a designated flight numbers has to be **recorded or exist** in the flight
 list before a passenger flying with an airline of the same flight number can be added into the passenger logbook.
 
-<br>
-
 **Q**: Can I enter 2 flights with the same flight number in the input list?
 
 **A**: No. SkyControl lists are only valid for 1 day and hence we prohibit duplicate flight numbers.
-
-<br>
 
 **Q**: Can I use SkyControl to save a flight/ passenger registered in a different airport terminal or on a different
 day?

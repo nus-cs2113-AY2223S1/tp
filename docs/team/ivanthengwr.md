@@ -25,22 +25,24 @@ Here are my contributions to the project:
   + Highlights: This feature helps to aid new features like searching for a particular passenger's detail.  
 
 + ### Project management:
-  + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub
+  + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub  
+
+<div style="page-break-after: always;"></div>
 
 + ### Enhancement to existing features:
   + Updated order of input workflow between `add flight` and `add passenger` command. Order of priority changed to
   `add flight` command first were the manager has to add in an existing flight number before he/she is able to add in the
   passengers details of the same flight number. Rational is that the flight has to exist first before the passengers can
   be assigned to it, which is for syncing purposes. (Pull request [#46](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/46))
-  + Optimise `passenger add` command to omit `BOARDING TIME` and automate it be always set as an earlier time than before `DEPARTURE TIME`.
-  This would prevent bugs from occuring. i.e. the manage keys in a `BOARDING TIME` that is later than the `DEPARTURE TIME`.
+  + Optimise `passenger add` command to omit `BOARDING TIME` and automate it to always set as an earlier time than before `DEPARTURE TIME`.
+  This would prevent bugs from occurring. i.e. the manager may mistakenly input a `BOARDING TIME` that is later than the `DEPARTURE TIME`.
     (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87))
   + Improved `modify` command to auto update the `BOARDING TIME` for all passengers who had their flights delayed (Pull request [#87](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/87)) 
   + Wrote additional test and more catch exceptions to make code more defensive.
   (Pull requests [#17](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/17),
   [#28](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/28), [#42](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/42))
   + Optimise overall code integration to make it more OOP. (Pull requests [#14](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/14/files),
-  [#91](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/91/files))
+  [#94](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/94))
   + Solved bugs for a few features within SkyControl (Pull request [#61](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/61),
   [#16](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/16))  
 
@@ -57,6 +59,6 @@ Here are my contributions to the project:
 
 + ### Community:
   + PRs reviewed (with non-trivial review comments): [#12](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/12),
-  [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21), [27](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/27),
+  [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21), [#27](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/27),
   [#35](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/35)
   + Helped coordinated the update of RepoSense ownership distribution [#40](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/40)

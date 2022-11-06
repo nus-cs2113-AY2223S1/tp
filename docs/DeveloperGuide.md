@@ -11,8 +11,8 @@
     7. [Common classes](#common-classes)
 - [Implementation](#implementation)
 - [Product scope](#product-scope)
-- [Target user profile](#target-user-profile)
-- [Value proposition](#value-proposition)
+    1. [Target user profile](#target-user-profile)
+    2. [Value proposition](#value-proposition)
 - [User Stories](#user-stories)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Glossary](#glossary)
@@ -255,6 +255,8 @@ Part 2:
 
 **Sequence diagram**
 
+**_NOTE:_** Exceptions are omitted for readability.
+
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
 When `paser` verifies that the command is an entity `passenger` and `delete` operation,
@@ -316,6 +318,7 @@ When `paser` verifies that the command is an entity `passenger` and `list` opera
 2. Within `listOperation()`, it would first check if arraylist `passengers` obtained
    from `OperationList` is empty or not.
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
+4. The sequence diagram assumes that a passenger detail is present in the list to be deleted. 
 
 ---
 
@@ -393,8 +396,8 @@ When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is i
 
 ### Target user profile
 
-1. Required to keep track of flight schedule and passenger information
-2. Is comfortable with CLI
+1. Required to keep track of flight schedule and passenger information in a single working day
+2. Has experience using CLI 
 3. Can type fast
 4. Prefer using CLI over other types (such as GUI)
 
@@ -409,29 +412,32 @@ track of constant changes in flight scheduling and the relevant passenger detail
 
 ## User Stories
 
-| Version | As a ... | I can ...                                                         | So that I can ...                                         |
-|---------|----------|-------------------------------------------------------------------|-----------------------------------------------------------|
-| v1.0    | AOM      | add passenger details                                             | be able to manually add passenger details                 |
-| v1.0    | AOM      | remove passenger details                                          | be able to remove passenger details manually              |
-| v1.0    | AOM      | add flight details                                                | be able to manually add flight details                    |
-| v1.0    | AOM      | remove flight details                                             | be able to manually remove flight details                 |
-| v1.0    | AOM      | view the details of a passenger                                   | see the details of passengers and identify each passenger |
-| v1.0    | AOM      | view the flight schedule and their timings for each day           | see the details of each flight                            |
-| v2.0    | AOM      | include the flight details before inputting the passenger details | there is no confusion to flight availability              |
-| v2.0    | AOM      | change the flight number of different airlines                    | fix any modifications to the flight information easily    |
-| v2.0    | AOM      | change one or many passenger's boarding gate number               | fix any modifications to the passenger information easily |
-| v2.0    | AOM      | include a delay in departure/arrival time for flights             | accommodate for any delays in the flights                 |
-| v2.0    | AOM      | save the flight and passenger details that have been entered      | still access them after closing and reopening the program |
+| Version | As a ... | I can ...                                                         | So that I can ...                                                               |
+|---------|----------|-------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| v1.0    | AOM      | add a passenger details                                           | be able to manually add a passenger details                                     |
+| v1.0    | AOM      | delete a passenger details                                        | be able to delete a passenger details manually                                  |
+| v1.0    | AOM      | add flight detail                                                 | be able to manually add flight details                                          |
+| v1.0    | AOM      | remove flight details                                             | be able to manually remove flight details                                       |
+| v1.0    | AOM      | view the details of a passenger                                   | see the details of passengers and identify each passenger                       |
+| v1.0    | AOM      | view the flight schedule and their timings for each day           | see the details of each flight                                                  |
+| v2.0    | AOM      | include the flight details before inputting the passenger details | there is no confusion to flight availability                                    |
+| v2.0    | AOM      | change the flight number of different airlines                    | fix any modifications to the flight information easily                          |
+| v2.0    | AOM      | change one or many passenger's boarding gate number               | fix any modifications to the passenger information easily                       |
+| v2.0    | AOM      | include a delay in departure/arrival time for flights             | accommodate for any delays in the flights                                       |
+| v2.0    | AOM      | save the flight and passenger details that have been entered      | still access them after closing and reopening the program                       |
+| v2.1    | AOM      | automatically sync up passenger details with flight details       | prevent any error in input between passenger and flight detail for same details |
 
 ## Non-Functional Requirements
 
 1. User should work on Windows, Linux or OS-X as long as `Java-11` or above has been installed.
 2. Should be able to hold up to a hundred flights in a day without any noticeable decrease in processing speed.
-3. typing...
+3. User should be able to understand and be familiar with airport scheduling operations prior to the usage of this bot.
+4. A user with an above average typing speed for regular english text 
 
 ## Glossary
 
-* *AOM* - An Airport Operations Manager responsible for scheduling and directing airport operations.
+* *AOM* - Airport Operations Manager (A person responsible for scheduling and directing airport operations.)
+* *v1.0* - Version 1.0
 
 ## Instructions for manual testing
 
@@ -444,13 +450,48 @@ track of constant changes in flight scheduling and the relevant passenger detail
 
     Enter the command `quit` to close the program.
 
-<br>
+### Deleting passenger list till empty
+
+- Delete a passenger in an empty list
+   1. Prerequisites: There should be no passengers present in the passenger list.
+   2. Test case: `passenger delete n/Ivan Theng fn/SQ17 sn/17A`  
+   Expected: An error would be printed to inform the manager that no such passenger exist or that the list is empty  
+
+### Empty List  
+
+- List all passenger when there are no passengers
+   1. Prerequisites: There should be no passengers present in the passenger list. 
+   2. Test case: `passenger list`  
+   Expected: SkyControl would print out an empty list, stating that its empty  
+
+### Non-existent flight
+- Add passenger with a flight number that has not been tracked in the flight list
+    1. Prerequisites: The flight number of testing should not be present in the flight list
+   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` where fn/sq832 should not be added in the flight list yet.  
+   Expected: SkyControl would print an error informing the manager that he needs to flight add an existing flight number into
+   the list first before being able to add a passenger of the existing flight number into the logbook.  
+
+### Automated setting for boarding time  
+
+- Automated boarding time of 45minutes earlier than departure time placement
+   1. Prerequisites: User should intend to add a passenger into the passenger logbook, and flight number must exist.
+   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` then `passenger list`  
+   Expected: SkyControl should set the boarding time automatically to 45 minutes before the departure time that the manager has input.  
+
+### Syncing boarding time with delayed departure time  
+
+- Automated boarding time of 45minutes earlier than delayed departure time placement
+   1. Prerequistes: Existing flight details and passenger details of that particular flight should be present.
+   2. Test case: `delay KE632 dt/2100` then `passenger list`
+   Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
+   the tracked delayed departure time.
+   <br>
 
 
 
 | Command                | Format                                                                                                    | Example                                                              |
 |:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
-| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GATE sn/SEAT_NUMBER bt/BOARDING_TIME `       | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d bt/2100`           |
+| `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`                        | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d`                   |
 | `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
 | `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
 | `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
@@ -458,4 +499,4 @@ track of constant changes in flight scheduling and the relevant passenger detail
 | `flight list`          | `flight list`                                                                                             | `flight list`                                                        |
 | `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                               | `modify SQ832 fn/SQ654`                                              |
 | `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                 | `modify SQ654 gn/08`                                                 |
-
+| `delay`                | `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`                                                               | `delay KE632 dt/2100`                                                |
