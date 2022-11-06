@@ -10,7 +10,7 @@ and transactions via a Command Line Interface.
 ### Summary of Contributions
 + **Code contributed:**
     + Codes written can be seen [here](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=chiewyx&tabRepo=AY2223S1-CS2113-W12-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-    + List of PRs can be seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/pulls?q=is%3Apr+author%3A%40me+is%3Aclosed)
+    + List of PRs can be seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Achiewyx)
 
 + **Features and classes implementations:**
     + User-related features:
@@ -28,7 +28,8 @@ and transactions via a Command Line Interface.
       + SortItemsCommand (3.3.6)
       + ViewUserItemsCommand (3.2.5)
 + **Developer Guide contributions:**
-    + Wrote `5. Product Scope and 9. Instructions for manual testing`.
+    + Wrote `5. Product Scope`. 
+    + Wrote `9. Instructions for manual testing`.
     + Wrote the User component section `3.5. User component`.
     + Contributed to the Implementation subsection:
         + Wrote view user's items (4.1.5).
@@ -37,11 +38,11 @@ and transactions via a Command Line Interface.
     + Made Class diagrams in section 3.3.
     + Made Sequence diagrams in section 4.2.6 and 4.1.5.
     + Enhanced Sequence diagram for ViewUserCommand made by Jing Wei in section 4.1.4
-    + Contributed to `6. User stories` 
+    + Contributed to `6. User stories`
 + **Team tasks contributions:**
     + Reviewed teammates' PR.
     + Completed tasks and milestones before the deadline.
-    + Created some issues on the issue tracker to track tasks
+    + Created issues on the issue tracker to track tasks, as seen [here](https://github.com/AY2223S1-CS2113-W12-1/tp/issues?q=is%3Aissue+is%3Aclosed+author%3Achiewyx)
 + **Community contributions:**
-    + Reviewed peers' DG
+    + Reviewed peers' DG (CS2113-W13-2)
     + Reported bugs/flaws in peers' tp for PED
