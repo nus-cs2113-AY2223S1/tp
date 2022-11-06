@@ -1,0 +1,41 @@
+@startuml
+!include Style.puml
+
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:ByeCommand" as ByeCommand
+Participant "ui:Ui" as Ui
+
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("bye")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("bye")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create ByeCommand
+CommandParser -> ByeCommand
+activate ByeCommand
+return
+
+return command: ByeCommand
+
+return command: ByeCommand
+deactivate CommandParser
+
+Duke -> ByeCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate ByeCommand
+ByeCommand -> Ui:showInfoMessage(message: String)
+activate Ui
+return
+return
+@enduml

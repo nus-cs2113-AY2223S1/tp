@@ -38,11 +38,12 @@ public class CommandParser {
      * Parses the user input into Command class based on the command word.
      *
      * @param fullCommandInput A line of input entered by the user.
-     * @return IS_EXIT If input equals "bye", else return IS_CONTINUE.
+     * @return A valid parsed command object containing all required information for execution.
      * @throws MoolahException Any command input exceptions captured by Moolah Manager.
      */
     public static Command parse(String fullCommandInput) throws MoolahException {
-        Command command = null;
+        assert fullCommandInput != null : "Full command input received must not be null!";
+        Command command;
         String[] inputTokens = splitInput(fullCommandInput);
 
         assert inputTokens.length == 2;
@@ -52,13 +53,8 @@ public class CommandParser {
         // Parses the command word from user input
         command = getCommand(commandWordInput, parametersInput);
 
-        // TODO: To remove this if statement once a solution is found for managing parameter that allows space
-        if (command instanceof FindCommand) {
-            return command;
-        }
-
         // Parses the parameters from user input to set up the parameters for the command
-        assert command != null;
+        assert command != null : "Command variable must not be null after a valid getCommand() call!";
         ParameterParser.parse(command, parametersInput);
 
         return command;
@@ -94,8 +90,8 @@ public class CommandParser {
      */
     public static Command getCommand(String commandWordInput, String parameterInput) throws
             GlobalInvalidCommandException {
-        // TODO: Remove parameter input once a solution is found for managing parameter that allows space
-        Command command = null;
+        parserLogger.setLevel(Level.SEVERE);
+        Command command;
         switch (commandWordInput.toUpperCase()) {
         case HelpCommand.COMMAND_WORD:
             command = new HelpCommand();
@@ -110,7 +106,7 @@ public class CommandParser {
             command = new ListCommand();
             break;
         case FindCommand.COMMAND_WORD:
-            command = new FindCommand(parameterInput);
+            command = new FindCommand();
             break;
         case StatsCommand.COMMAND_WORD:
             command = new StatsCommand();

@@ -1,48 +1,46 @@
 package seedu.duke.parser;
 
-//@@author wcwy
 import seedu.duke.command.Command;
 import seedu.duke.command.ListCommand;
+
 import seedu.duke.data.Budget;
 import seedu.duke.data.transaction.Expense;
 import seedu.duke.data.transaction.Income;
 
-//@@author chydarren
+import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalEmptyParameterException;
+import seedu.duke.exception.GlobalInvalidIndexException;
 import seedu.duke.exception.GlobalInvalidMonthException;
-import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.exception.GlobalInvalidPeriodException;
 import seedu.duke.exception.GlobalInvalidYearException;
-import seedu.duke.exception.GlobalNumberNotNumericException;
-import seedu.duke.exception.GlobalDuplicateTagException;
 import seedu.duke.exception.GlobalMissingTagException;
-
-//@@author brian-vb
+import seedu.duke.exception.GlobalIndexNotNumericException;
+import seedu.duke.exception.GlobalNumberNotNumericException;
+import seedu.duke.exception.GlobalUnsupportedTagException;
+import seedu.duke.exception.HelpUnknownOptionException;
+import seedu.duke.exception.InputBudgetDuplicateException;
+import seedu.duke.exception.InputBudgetInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidAmountException;
 import seedu.duke.exception.InputTransactionInvalidCategoryException;
 import seedu.duke.exception.InputTransactionInvalidDateException;
 import seedu.duke.exception.InputTransactionInvalidTypeException;
-import seedu.duke.exception.GlobalUnsupportedTagException;
-import seedu.duke.exception.StatsInvalidTypeException;
 import seedu.duke.exception.MoolahException;
-import seedu.duke.exception.HelpUnknownOptionException;
+import seedu.duke.exception.StatsInvalidNumberException;
+import seedu.duke.exception.StatsInvalidTypeException;
+import seedu.duke.exception.HelpUnknownCommandWordException;
+import seedu.duke.exception.GlobalInvalidCommandException;
 
-//@@author wcwy
-import seedu.duke.exception.InputBudgetInvalidAmountException;
-import seedu.duke.exception.InputBudgetDuplicateException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
-import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
-import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 
-//@@author paullowse
+import static seedu.duke.command.CommandTag.COMMAND_TAG_BUDGET_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_OPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_ENTRY_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_STATS_TYPE;
@@ -50,17 +48,22 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_MONTH;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_NUMBER;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_YEAR;
-
-//@@author chinhan99
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_CATEGORY;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DATE;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
 import static seedu.duke.command.CommandTag.COMMAND_TAG_TRANSACTION_TYPE;
-
-//@@author chinhan99
+import static seedu.duke.command.CommandTag.COMMAND_TAG_FIND_KEYWORD;
+import static seedu.duke.command.CommandTag.COMMAND_TAG_HELP_QUERY;
+import static seedu.duke.common.Constants.MAX_BUDGET_VALUE;
+import static seedu.duke.common.Constants.MIN_BUDGET_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
+import static seedu.duke.common.Constants.MINIMUM_YEAR;
+import static seedu.duke.common.Constants.MAXIMUM_YEAR;
+import static seedu.duke.common.Constants.MAXIMUM_STATS_NUMBER;
+import static seedu.duke.common.Constants.MINIMUM_STATS_NUMBER;
+import static seedu.duke.common.Constants.MIN_PARAMETER_LENGTH;
 import static seedu.duke.common.DateFormats.DATE_INPUT_PATTERN;
 
 /**
@@ -75,18 +78,18 @@ public class ParameterParser {
     private static final String DELIMITER = " ";
     private static final int SPLIT_POSITION = 2;
     private static final int MINIMUM_TAG_LENGTH = 2;
-    private static final int MINIMUM_YEAR = 1000;
-    private static final int SMALLEST_POSITIVE_INTEGER = 0;
     private static final int JANUARY = 1;
     private static final int DECEMBER = 12;
-
+    private static final int MAX_NUM_OF_MINUS_SIGNS = 1;
     private static final String CLASS_TYPE_EXPENSE = "seedu.duke.data.transaction.Expense";
     private static final String CLASS_TYPE_INCOME = "seedu.duke.data.transaction.Income";
-    private static final String CATEGORIES = "categories";
-    private static final String TIME = "time";
-
+    private static final String CATEGORICAL_SAVINGS = "categorical_savings";
+    private static final String MONTHLY_EXPENDITURE = "monthly_expenditure";
+    private static final String TIME_INSIGHTS = "time_insights";
+    private static final String DAYS = "days";
     private static final String WEEKS = "weeks";
     private static final String MONTHS = "months";
+
 
     //@@author wcwy
     private static final Logger parserLogger = Logger.getLogger(ParameterParser.class.getName());
@@ -197,7 +200,7 @@ public class ParameterParser {
     public static void checkDuplicateTagsNotExist(String[] splits) throws GlobalDuplicateTagException {
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
-            assert split.length() >= MINIMUM_TAG_LENGTH;
+            assert split.length() >= MINIMUM_TAG_LENGTH : "The function argument splits has more length than expected";
             String tag = split.substring(0, SPLIT_POSITION);
 
             // The duplicated tag can be found in the hash map
@@ -306,7 +309,6 @@ public class ParameterParser {
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
-            // TODO: To standardise the format for transaction type for add and list
             if (command instanceof ListCommand) {
                 command.setType(parseTypeTagForListing(parameter));
             } else {
@@ -328,8 +330,11 @@ public class ParameterParser {
         case COMMAND_TAG_GLOBAL_ENTRY_NUMBER:
             command.setEntryNumber(parseEntryTag(parameter));
             break;
+        case COMMAND_TAG_FIND_KEYWORD:
+            command.setKeyword(parameter);
+            break;
         case COMMAND_TAG_HELP_OPTION:
-            command.setIsDetailedOption(parseHelpOptionTag(parameter));
+            command.isDetailed(parseHelpOptionTag(parameter));
             break;
         case COMMAND_TAG_STATS_TYPE:
             command.setStatsType(parseStatsTypeTag(parameter));
@@ -348,6 +353,9 @@ public class ParameterParser {
             break;
         case COMMAND_TAG_BUDGET_AMOUNT:
             command.setBudgetAmount(parseBudgetTag(parameter));
+            break;
+        case COMMAND_TAG_HELP_QUERY:
+            command.setQueryCommand(parseHelpQueryTag(parameter));
             break;
         default:
             parserLogger.log(Level.WARNING, "An unsupported tag exception is caught: " + tag);
@@ -426,9 +434,12 @@ public class ParameterParser {
      * @return The amount integer if no exceptions are thrown.
      * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
-    private static int parseAmountTag(String parameter) throws InputTransactionInvalidAmountException {
+    private static int parseAmountTag(String parameter) throws MoolahException {
         try {
+
+            //Checks if parameter is non-numerical or negative values.
             if (containAlphabet(parameter) || containSymbol(parameter)) {
+
                 parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
                         + parameter);
                 throw new InputTransactionInvalidAmountException();
@@ -441,8 +452,9 @@ public class ParameterParser {
             }
             return amount;
 
-        } catch (NumberFormatException e) {
-            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: " + parameter);
+        } catch (NumberFormatException e) { // error inclusive of int overflows
+            parserLogger.log(Level.WARNING, "An invalid amount error is caught for the given parameter: "
+                    + parameter);
             throw new InputTransactionInvalidAmountException();
         }
     }
@@ -459,7 +471,7 @@ public class ParameterParser {
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_PATTERN.toString());
-            LocalDate date = LocalDate.parse(parameter, formatter);
+            LocalDate date = LocalDate.parse(parameter, formatter.withResolverStyle(ResolverStyle.STRICT));
             return date;
         } catch (DateTimeParseException exception) {
             parserLogger.log(Level.WARNING, "An invalid date error "
@@ -479,16 +491,30 @@ public class ParameterParser {
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
         int index;
+        //@@chinhan99
+        if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
+            throw new GlobalIndexNotNumericException();
+        } else if (startsWithMinusSign(parameter)) { // Checks if parameter is negative value
+            if (parameter.length() == MIN_PARAMETER_LENGTH) { //Means parameter == "-"
+                throw new GlobalIndexNotNumericException();
+            }
+            throw new GlobalInvalidIndexException();
+        } else if (containSymbol(parameter)) { // Checks if contains any other symbols
+            throw new GlobalIndexNotNumericException();
+        }
+        //@@author brian-vb
         try {
+            // At this stage, the parameter is only positive numerical values
             index = Integer.parseInt(parameter);
-        } catch (NumberFormatException e) {
+            assert index >= 0; // Due to earlier parsers, there are no negative values
+        } catch (NumberFormatException e) { // If overflow from integer value , continue to throw as invalid index
             parserLogger.log(Level.WARNING, "An invalid entry number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalNumberNotNumericException();
+            throw new GlobalInvalidIndexException();
         }
-
         return index;
     }
+
 
     //@@author wcwy
 
@@ -500,7 +526,8 @@ public class ParameterParser {
      * @throws HelpUnknownOptionException If the help option parameter selected is not 'detailed'.
      */
     public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
-        boolean isValidHelpOption = parameter.equals("detailed");
+        assert parameter != null : "The function argument passed must not be null!";
+        boolean isValidHelpOption = parameter.equalsIgnoreCase("detailed");
         if (isValidHelpOption) {
             return true;
         } else {
@@ -508,6 +535,25 @@ public class ParameterParser {
                     + parameter);
             throw new HelpUnknownOptionException();
         }
+    }
+
+    /**
+     * Returns the string containing the command queried by user for the help message if the command is valid.
+     *
+     * @param parameter The user input after the user tag.
+     * @return The received parameter.
+     * @throws HelpUnknownCommandWordException If the command word queried is not a valid command.
+     */
+    public static String parseHelpQueryTag(String parameter) throws HelpUnknownCommandWordException {
+        assert parameter != null : "Function argument passed must not be a null";
+        // An invalid command word queried by the user will result in an exception
+        try {
+            CommandParser.getCommand(parameter, "");
+        } catch (GlobalInvalidCommandException exception) {
+            throw new HelpUnknownCommandWordException();
+        }
+
+        return parameter;
     }
 
     /**
@@ -562,10 +608,12 @@ public class ParameterParser {
      */
     public static String parseStatsTypeTag(String parameter) throws StatsInvalidTypeException {
         switch (parameter) {
-        case CATEGORIES:
-            return CATEGORIES;
-        case TIME:
-            return TIME;
+        case CATEGORICAL_SAVINGS:
+            return CATEGORICAL_SAVINGS;
+        case MONTHLY_EXPENDITURE:
+            return MONTHLY_EXPENDITURE;
+        case TIME_INSIGHTS:
+            return TIME_INSIGHTS;
         default:
             parserLogger.log(Level.WARNING, "An invalid statistic type error is caught for the given parameter: "
                     + parameter);
@@ -604,7 +652,7 @@ public class ParameterParser {
                     + parameter);
             throw new GlobalNumberNotNumericException();
         }
-        if (year < MINIMUM_YEAR) {
+        if (year < MINIMUM_YEAR || year > MAXIMUM_YEAR) {
             parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
                     + parameter);
             throw new GlobalInvalidYearException();
@@ -615,6 +663,8 @@ public class ParameterParser {
     public static String parsePeriodTag(String parameter) throws GlobalInvalidPeriodException {
         String period;
         switch (parameter) {
+        case DAYS:
+            return DAYS;
         case WEEKS:
             return WEEKS;
         case MONTHS:
@@ -626,20 +676,19 @@ public class ParameterParser {
         }
     }
 
-    public static int parseNumberTag(String parameter) throws GlobalNumberNotNumericException,
-            GlobalInvalidNumberException {
+    public static int parseNumberTag(String parameter) throws MoolahException {
         int statsNumber;
         try {
             statsNumber = Integer.parseInt(parameter);
         } catch (NumberFormatException e) {
             parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalNumberNotNumericException();
+            throw new StatsInvalidNumberException();
         }
-        if (statsNumber < SMALLEST_POSITIVE_INTEGER) {
-            parserLogger.log(Level.WARNING, "An invalid year number error is caught for the given parameter: "
+        if (statsNumber < MINIMUM_STATS_NUMBER || statsNumber > MAXIMUM_STATS_NUMBER) {
+            parserLogger.log(Level.WARNING, "An invalid number error is caught for the given parameter: "
                     + parameter);
-            throw new GlobalInvalidNumberException();
+            throw new StatsInvalidNumberException();
         }
         return statsNumber;
     }
@@ -689,5 +738,40 @@ public class ParameterParser {
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
 
         return hasSpecialSymbols.find();
+    }
+
+
+    /**
+     * Checks if the parameter starts with the minus sign.
+     * Typically called after an alphabetical check on the parameter.
+     *
+     * @param parameter The user input after the user tag.
+     * @return true if the parameter starts with a minus sign only.
+     */
+
+    public static boolean startsWithMinusSign(String parameter) {
+        Pattern rejectedSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~]");
+        Pattern minusSymbol = Pattern.compile("-");
+        Matcher hasRejectedSymbols = rejectedSymbols.matcher(parameter);
+        Matcher hasMinusSymbol = minusSymbol.matcher(parameter);
+
+        if (hasRejectedSymbols.find()) {
+            return false;
+        }
+
+        int countOfMinusSymbol = 0;
+        if (parameter.startsWith(String.valueOf(minusSymbol))) {
+            while (hasMinusSymbol.find()) {
+                countOfMinusSymbol += 1;
+            }
+        } else { // immediately return false as parameter does not start with minus sign
+            return false;
+        }
+
+        // At this stage, parameter definitely starts with minus, and double check how many minus signs are in parameter
+        if (countOfMinusSymbol == MAX_NUM_OF_MINUS_SIGNS) { // Only 1 minus sign allowed
+            return true;
+        }
+        return false;
     }
 }

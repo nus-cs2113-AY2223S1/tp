@@ -5,6 +5,10 @@ help o/detailed blablabla
 help /
 help o/
 help o/detailed o/detailed
+help q/
+help q/BYE
+help q/BYE o/detailed
+help q/BYE q/ADD
 budget
 budget /
 budget b/
@@ -19,11 +23,14 @@ stats blablabla
 stats /
 stats s/
 stats s/invalid
-stats s/categories blablabla
-stats s/categories s/categories
-stats s/categories
+stats s/categorical_savings blablabla
+stats s/categorical_savings s/categorical_savings
+stats s/categorical_savings
 list
 add t/expense c/food a/20 d/13092022 i/NIL
+add t/expense c/food a/0 d/13092022 i/NIL
+add t/expense c/food a/00000 d/13092022 i/NIL
+add t/expense c/food a/9999999999999999999999999999999999999999999999999999999999999999999999999 d/13092022 i/NIL
 add t/income c/salary a/2000 d/30092022 i/jan_salary
 add t/expense c/transport a/1 d/02102022 i/bus_fare
 add t/ c/transport a/1 d/02102022 i/bus_fare
@@ -32,6 +39,7 @@ add t/expense c/transport a/ d/02102022 i/bus_fare
 add t/expense c/transport a/1 d/ i/bus_fare
 add t/expense c/transport a/1 d/02102022 i/
 add t/expense c/transport a/1 d/02102022 i/bus_fare i/mrt_fare
+add t/expense c/transport a/10000 d/03102022 i/bus_fare
 list /
 list t/
 list T/
@@ -42,10 +50,30 @@ list c/food d/30092022
 list c/food d/13092022
 list t/income d/
 list t/income d/30092022
-stats s/categories
+list t/expense c/food d/13092022
+stats s/categorical_savings y/2022
+stats s/categorical_savings m/10
+stats s/categorical_savings y/2022 m/10
+stats s/categorical_savings p/weeks
+stats s/categorical_savings n/5
+stats s/categorical_savings p/days n/4
+stats s/categorical_savings
+stats s/monthly_expenditure p/months n/5
+stats s/monthly_expenditure y/2021 m/4
+stats s/monthly_expenditure
+stats s/time_insights y/2022
+stats s/time_insights y/2022 m/10
+stats s/time_insights p/days
+stats s/time_insights m/10
+stats s/time_insights p/weeks n/3
+stats s/time_insights p/days n/5
+stats s/time_insights p/months n/4
+stats s/time_insights p/mont n/4
+stats s/time_insights n/4
+stats s/time_insights p/months
 find
-find bus_fare
-find TOTALLY_NON_EXISTING_STRING
+find k/bus_fare
+find k/TOTALLY_NON_EXISTING_STRING
 list
 add / c/bonus a/10000000 d/03102022 i/thank_you_boss
 add t/income c/bonus a/10000000 d/03102022 i/thank_you_boss
@@ -58,6 +86,9 @@ add t/income c/bonus a/10000000 d/20220101 i/thank_you_boss
 add t/income c/bonus a/10000000 d/obviouslyFalseDate i/thank_you_boss
 add t/income c/bonus a/10000000
 list
+budget b/100
+budget b/10000000000000
+budget b/10000000000000000000000000000000000000000000
 delete 1
 delete e/1
 list

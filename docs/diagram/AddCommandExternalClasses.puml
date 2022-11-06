@@ -1,17 +1,29 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
+!include Style.puml
 hide circle
 skinparam classAttributeIconSize 0
 
 class AddCommand {
+    - COMMAND_WORD: String
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
 
     +getMandatoryTags()
+    -addTransaction()
     +{abstract}execute()
+
 }
 
 class "{abstract}\n Command"{
-
+    - COMMAND_WORD: String
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
 
     +getMandatoryTags()
     +{abstract}execute()
@@ -22,14 +34,17 @@ class Ui{
 +showTransactionAction()
 }
 
-class ParameterParser{
-+checkUnsupportedTagsNotExist()
-+checkMandatoryTagsExist()
-}
+
 
 class CommandParser{
 +getCommand()
 }
+
+class ParameterParser{
++checkMandatoryTagsExist()
++checkUnsupportedTagsNotExist()
+}
+
 class Storage{
 +writeToFile()
 }
@@ -42,13 +57,24 @@ class TransactionList{
 class Duke{
 +run()
 }
-AddCommand <-- Ui
-AddCommand .right.> CommandParser
-AddCommand <-- ParameterParser
-AddCommand <-- Storage
-AddCommand <-- TransactionList
-AddCommand -left-> Duke
+
+class CommandTag{
+  +COMMAND_TAG_TRANSACTION_TYPE:String
+  +COMMAND_TAG_TRANSACTION_CATEGORY:String
+  +COMMAND_TAG_TRANSACTION_AMOUNT:String
+  +COMMAND_TAG_TRANSACTION_DATE:String
+  +COMMAND_TAG_TRANSACTION_DESCRIPTION:String
+}
+
+Duke <.. CommandParser: returns Command instance to Duke
+AddCommand --> Ui : display acknowledgement message
+AddCommand .right.> CommandParser: instance created by
+AddCommand <-- ParameterParser: retrieves mandatory tags from
+AddCommand -left-> Storage: externally store transaction via
+AddCommand -left-> TransactionList: adds transaction locally
+AddCommand --> CommandTag: get its mandatory tags from
+AddCommand <-left- Duke: executes
 
 
-AddCommand -up-|> "{abstract}\n Command"
+AddCommand -up-|> "{abstract}\n Command" :inherits from
 @enduml

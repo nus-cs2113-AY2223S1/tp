@@ -1,27 +1,19 @@
 @startuml
 !include Style.puml
-class Category{
-
-}
-
-class CategoryList{
-
-}
 
 class TransactionList {
-    + TransactionList()
-    + TransactionList(TransactionList)
-    + getEntry(int) : Transaction
-    + size() : int
+    + getEntry(int index):Transaction
     + addExpense(description:String, amount:int,
               category:String, date:LocalDate) : String
     + addIncome(description:String, amount:int,
               category:String, date:LocalDate) : String
     + listTransactions(type: String, category:String,
               date:LocalDate) : String
+    + getTransactionsByMonth(year: int, month:int) : String
     + findTransaction(String) : String
     + deleteTransaction(int) : String
     + purgeTransactions()
+
 }
 
 abstract class "Transaction"{
@@ -29,46 +21,69 @@ abstract class "Transaction"{
     - description: String
     - amount: int
     - date: LocalDate
-    + Transaction(description:String, amount:int,
-          category:String, date:LocalDate)
-    + getType() : String {abstract}
-    + getDescription() : String
+    + Expense(description:String, amount:int,
+                  category:String, date:LocalDate)
     + setDescription(String)
-    + getAmount() : int
     + setAmount(int)
-    + getCategory() : String
     + setCategory(String)
-    + getDate() : LocalDate
     + setDate(LocalDate)
-    + printFormattedDate() : String
-    + printFormattedCategory() : String
-    + toString() : String
 }
 
 class Income {
-    + TRANSACTION_NAME: String = "income"{static}
-    + ICON_INCOME: String = "[+]" {static}
     + Income(description:String, amount:int,
               category:String, date:LocalDate)
-      getType() : String
-      getIcon() : String
-      toString() : String
 }
 
 class Expense {
-    + TRANSACTION_NAME: String = "expense"{static}
-    + ICON_INCOME: String = "[-]" {static}
     + Expense(description:String, amount:int,
               category:String, date:LocalDate)
-      getType() : String
-      getIcon() : String
-      toString() : String
+}
+
+abstract class Command {
+    + execute()
+}
+
+abstract class Storage {
+    + initializeFile()
+    - storeFileValuesLocally()
 }
 
 
-Income -up-|> "Transaction"
-Expense -up-|> "Transaction"
+class Budget{
+    - budget : long {static}
+    + getBudget() : long {static}
+    + setBudget(long) {static}
+}
 
-TransactionList -> "*" "Transaction" : contains >
+class Duke{
+}
+
+together {
+  class Command
+  class Income
+  class Expense
+}
+
+
+together {
+  class Storage
+  class TransactionList
+  class Budget
+}
+
+
+Income --|> "Transaction"
+Expense --|> "Transaction"
+
+TransactionList "1" *-down> "*" "Transaction" : contains
+Storage -[dashed]up-> "Budget" : initialize >
+Storage -[dashed]down-> "TransactionList" : initialize >
+Command -[dashed]up-> "Budget" : set >
+Command -[dashed]right-> "TransactionList" : add, edit, delete, purge, find, list, stats >
+
+Duke -down-> "1" "TransactionList"
+Duke  -> "1" "Storage"
+Duke -[dashed]left-> "Command" : executes >
+
 
 @enduml

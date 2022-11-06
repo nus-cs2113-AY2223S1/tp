@@ -1,0 +1,88 @@
+@startuml
+!include Style.puml
+
+Participant ":Duke" as duke
+Participant ":CommandParser" as commandParser
+Participant ":ParameterParser" as parameterParser
+Participant "command:StatsCommand" as command
+Participant "transactions:TransactionList" as transactions
+Participant ":Budget" as budget
+Participant "ui:Ui" as ui
+actor User
+
+-> duke
+activate duke
+duke -> commandParser:parse("stats s/categorical_savings")
+    activate commandParser
+    create command
+    commandParser -> command:new
+        activate command
+    return command:StatsCommand
+    commandParser -> parameterParser:parse
+        parameterParser -> command:set statsType
+        parameterParser -> command:set globalYear
+        parameterParser -> command:set globalMonth
+        note left: Minimal\nnotation
+        parameterParser -> command:set globalPeriod
+        parameterParser -> command:set globalNumber
+
+    return command:StatsCommand
+
+duke -> command:execute(transactions, ui, storage)
+    activate command
+    command -> command:listStatsByStatsType(transactions, ui)
+        activate command
+        alt statsType equals categorical_savings\n or monthly_expenditure
+            command -> command:statsTypeCategoricalSavings\nOrMonthlyExpenditure(transactions, ui)
+            activate command
+            alt statsType equals categorical_savings
+                command -> transactions:listCategoricalSavings\n(timeTransactions)
+                activate transactions
+                transactions -> transactions:processCategoricalSavings\n(timeTransactions,\ncategoricalSavings)
+                activate transactions
+                return categoricalSavings:\nHashMap<String, Integer>
+                return genericStatsList:String
+            else statsType equals monthly_expenditure
+                ref over command, budget: get monthly expenditure list
+            end
+
+            alt genericStatsListIsEmpty
+                command->ui: showInfoMessage(message)
+                activate ui
+                ui->User
+                return
+            else else
+                command->ui: showList(genericStatsList, message)
+                activate ui
+                ui->User
+                return
+            end
+            return
+
+        else statsType equals time_insights
+            command -> command:statsTypeTimeInsights()
+            activate command
+            ref over command, transactions: get time insights list
+            command -> command:printTimeInsightsStatistics\n(timeInsightsList, timeInsightsValues, \nincomeMessage, expensesMessage, \nsavingsMessage, habitMessage)
+            activate command
+
+            alt input containMonthYear
+               ref over command, budget: retrieve budget information and generate budget advice
+               command->ui: showTimeInsightsList(timeInsightsList, message, \nincomeMessage, \nexpensesMessage, savingsMessage, \nbudgetMessage, spendingHabitComment, \nbudgetAdvice)
+               activate ui
+               ui->User
+               return
+            else else
+               command->ui: showTimeInsightsList(timeInsightsList, \nmessage, \nincomeMessage, expensesMessage, \nsavingsMessage)
+               activate ui
+               ui->User
+               return
+            end
+            return
+
+        return
+        end
+    return
+    return
+return
+@enduml
