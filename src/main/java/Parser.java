@@ -340,7 +340,7 @@ public class Parser {
         }
     }
 
-    private void checkDate(String date) throws OneDocException{
+    private void checkDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             checkDayAndMonth(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]));
@@ -348,12 +348,12 @@ public class Parser {
             if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
                 throw new OneDocException("Invalid year entered in the date, year should be in the range 2012-2032");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
         }
     }
 
-    private void checkBirthDate(String date) throws OneDocException{
+    private void checkBirthDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             int day = Integer.parseInt(dateSplit[0]);
@@ -361,17 +361,17 @@ public class Parser {
             int year = Integer.parseInt(dateSplit[2]);
             checkDayAndMonth(day,month);
             if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
-                    && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE){
+                    && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE) {
                 throw new OneDocException("Invalid date for birth date, make sure the date range is between 1922 to "
                         + "today");
             }
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
         }
     }
 
 
-    private void checkTime(String time) throws OneDocException{
+    private void checkTime(String time) throws OneDocException {
         try {
             String[] timeSplit = time.split(":");
             int hour = Integer.parseInt(timeSplit[0]);
@@ -409,7 +409,7 @@ public class Parser {
         }
     }
 
-    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException{ 
+    private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException{
         String reason = matcher.group(4);
         checkDate(matcher.group(2));
         checkTime(matcher.group(3));
