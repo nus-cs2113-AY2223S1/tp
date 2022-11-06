@@ -202,10 +202,10 @@ public class Parser {
                 logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(InvalidCommand.INDEX_NOT_VALID);
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (Exception e) {
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }
