@@ -22,7 +22,8 @@ command result.
 * New feature: Added the `auth` command to authenticate the user's secret api key.
 
 * Enhancement to code:
-  * Refactored the code to improve readability, and meet OOP standards. (Notable PR: [#97](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/97))
+  * Refactored the code to improve readability, and meet OOP standards. 
+  (Notable PR: [#96](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/96), [#97](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/97))
   * Wrote the `Parking` class, which is our `main` class.
 
 ### Contributions to the User Guide:
