@@ -491,9 +491,10 @@ To specify a command for flights or passengers, the word `flight` and `passenger
 Adding a new flight can be done using the `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` command.
 
 1. Add a flight with all details filled in correctly.
-   1. Test Case:
+   1. Prerequisite: Any flight with the same flight number as the test case should not be in the flight logbook.
+   2. Test Case:
 `flight add fn/sq832 a/Singapore Airlines d/bangkok dt/1600 gn/05 c/03-03`
-   2. Expected Output:
+   3Expected Output:
     ```
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Flight added!
@@ -549,6 +550,9 @@ SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check
     ```
 
 ### Modify a flight
+- There are 2 flight attributes which the user can modify. They are the flight number and gate number. 
+Both values have to follow the format specified in our table of parameters.
+
 1. Modify flight number
    1. Test Case: `modify SQ832 fn/SQ654`
    2. Expected Output:
@@ -566,6 +570,7 @@ SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check
     ````
 
 ### Delay a flight
+- In the event the flight cannot depart on time and needs to be delayed, users can use this input to delay the flight to a later timing within the same day.
 1. Delaying an existing flight with a later timing .
    1. Test Case: `delay sq654 dt/2100`
    2. Expected Output:
@@ -585,13 +590,14 @@ SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check
 
 ### Add a passenger
 1. Adding a passenger to an existing flight with all details filled in correctly.
-   1. Test Case: `passenger add n/Ivan Theng fn/sq654 bg/06 sn/17d`
-   2. Expected Output: 
+   1. Prerequisite: No passenger in the same flight should be occupying the seat specified in the test case.
+   2. Test Case: `passenger add n/Ivan Theng fn/sq654 bg/06 sn/17d`
+   3. Expected Output: 
     ````
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Passenger IVAN THENG of SQ654 17D has been added.
     ````
-2. Adding a passenger to a flight that does not exist in flight logbook.
+2. Adding a passenger to a flight that does not exist in the flight logbook.
    1. Test Case: `passenger add n/Susan Lee fn/ke987 bg/34 sn/22e`
    2. Expected Output: SkyControl would print an error informing the manager that he needs to flight add an existing flight number into
 the list first before being able to add a passenger of the existing flight number into the logbook.
@@ -700,6 +706,7 @@ while the second commands lists all passengers in the passenger logbook.
    ```
    
 Below is a summary of all the possible commands that you can execute in SkyControl as well as their required formats and an example. 
+Followed by the format that each parameter should adhere to.
 
 | Command                | Format                                                                                                    | Example                                                              |
 |:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
@@ -713,6 +720,19 @@ Below is a summary of all the possible commands that you can execute in SkyContr
 | `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                 | `modify SQ654 gn/08`                                                 |
 | `delay`                | `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`                                                               | `delay KE632 dt/2100`                                                |
 
+**Table of parameters:**
+
+| Parameter          | Format to adhere by                                                                                                                                                                                         | Example                             |
+|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------|
+| PASSENGER_NAME     | Input name should be no more than 24 characters                                                                                                                                                             | `Ivan Lim`                          |
+| DEPARTURE_TIME     | Input departure time should be in 24 Hours format                                                                                                                                                           | `2100`                              |
+| NEW_DEPARTURE_TIME | Input departure time should be in 24 Hours format and later than the existing departure time                                                                                                                | `2200`                              |
+| FLIGHT_NUMBER      | Input flight number should start with 2 letter character, followed either by <br/>Two numbers for international flights <br/>Three numbers for regional flights<br/> Four numbers for domestic flights <br> | `SQ12`</br>`SQ123`</br>`SQ1234`<br> |
+| NEW_FLIGHT_NUMBER  | Input flight number should follow FLIGHT_NUMBER constraints but must not be the same flight code                                                                                                            | `KE356`                             |
+| GATE_NUMBER        | Input gate number should be 2 digits and between ranges 00 and 99                                                                                                                                           | `05`                                |
+| NEW_GATE_NUMBER    | Input gate number should follow GATE_NUMBER constraints but must not be the same value                                                                                                                      | `22`                                |
+| BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
+| SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
 ### Storage of flights and passengers
 * Storage will automatically update in the `SkyControl.txt` file found in the `data` directory.
 * Both flight and passenger are stored in the same text file. 
