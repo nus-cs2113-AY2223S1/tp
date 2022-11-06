@@ -28,6 +28,7 @@ Note: The author "DESKTOP-8022BOQ\Admin" in Intellij IDE refers to me.
       have a more personalized experience.
     - Highlights: This feature required the use of inheritance to reduce the amount of code that is needed to be written.
       This was done to ensure that the code is more readable and easier to maintain.
+  
 ### Summary of Documentation Contributions
 - **Documentation Contribution:** [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=lcsroy&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs)
 - **JavaDoc:**
