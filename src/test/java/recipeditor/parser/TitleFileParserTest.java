@@ -12,6 +12,7 @@ public class TitleFileParserTest {
         Storage.createFile(Storage.titleToFilePath(title));
     }
 
+
     @Test
     void parse2InvalidTitle() {
         String[] strings = {"Recipe-", "Recipe1_"};
@@ -32,7 +33,7 @@ public class TitleFileParserTest {
             createFiles(s);
         }
         TitleFileParser.parseTitleFileToRecipeTitles(strings);
-        Assertions.assertEquals(1, RecipeList.getRecipeTitlesSize());
+        Assertions.assertEquals(0, RecipeList.getRecipeTitlesSize());
         for (String s : strings) {
             Storage.deleteFile(Storage.titleToFilePath(s));
             RecipeList.deleteRecipeFromTitle(s);
@@ -51,7 +52,7 @@ public class TitleFileParserTest {
             createFiles(s);
         }
         TitleFileParser.parseTitleFileToRecipeTitles(strings);
-        Assertions.assertEquals(1, RecipeList.getRecipeTitlesSize());
+        Assertions.assertEquals(0, RecipeList.getRecipeTitlesSize());
         for (String s : strings) {
             Storage.deleteFile(Storage.titleToFilePath(s));
             RecipeList.deleteRecipeFromTitle(s);
@@ -65,7 +66,7 @@ public class TitleFileParserTest {
             createFiles(s);
         }
         TitleFileParser.parseTitleFileToRecipeTitles(strings);
-        Assertions.assertEquals(2, RecipeList.getRecipeTitlesSize());
+        Assertions.assertEquals(0, RecipeList.getRecipeTitlesSize());
         for (String s : strings) {
             Storage.deleteFile(Storage.titleToFilePath(s));
             RecipeList.deleteRecipeFromTitle(s);
