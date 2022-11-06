@@ -82,10 +82,10 @@ public class ExceptionMessages {
     public static final String MESSAGE_ARGUMENT_EMPTY = "The value cannot be empty";
     public static final String MESSAGE_CONTAIN_DATA_SEPARATOR =
             "Input cannot contain | character because it can cause errors when loading data";
-    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED = "The USER files has been corrupted at line ";
-    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED = "The ITEM files has been corrupted at line ";
+    public static final String MESSAGE_USER_STORAGE_ILLEGALLY_MODIFIED = "The USER file has been corrupted at line ";
+    public static final String MESSAGE_ITEM_STORAGE_ILLEGALLY_MODIFIED = "The ITEM file has been corrupted at line ";
     public static final String MESSAGE_TRANSACTION_STORAGE_ILLEGALLY_MODIFIED =
-            "The TRANSACTION files has been corrupted at line ";
+            "The TRANSACTION file has been corrupted at line ";
     public static final String MESSAGE_FILES_ILLEGALLY_DELETED = "One or more files has been deleted\n";
     public static final String MESSAGE_TO_FIX_FILES =
             "Please try to fix your data in your files before running the app again\n"
