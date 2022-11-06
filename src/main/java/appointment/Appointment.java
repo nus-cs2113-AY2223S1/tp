@@ -57,7 +57,7 @@ public class Appointment {
     }
 
     /**
-     * View the tasks associated with this instance of Appointment
+     * View the tasks associated with this instance of Appointment.
      */
     public void viewTasks() {
         System.out.println("Appointment " + appointmentId + " Task List:");
@@ -114,8 +114,8 @@ public class Appointment {
 
 
     /**
-     * Find and remove a particular task from this instance of appointment, by task ID
-     * @param taskId
+     * Find and remove a particular task from this instance of appointment, by task ID.
+     * @param taskId id of task to be removed from appointment.
      */
     public void removeTaskFromAppointment(int taskId) {
         for (Task task: tasks) {
