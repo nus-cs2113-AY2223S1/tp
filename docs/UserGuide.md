@@ -164,8 +164,8 @@ Processing "bye" ...
 These are your export links:
 https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
 https://nusmods.com/timetable/sem-2/share?
-https://nusmods.com/timetable/sem-3/share?
-https://nusmods.com/timetable/sem-4/share?
+https://nusmods.com/timetable/st-i/share?
+https://nusmods.com/timetable/st-ii/share?
 Bye bye, See you again
 --------------------------------------------------------------------------------
 ```
@@ -206,6 +206,8 @@ Possible Error:
    ```
    Sem [1] >> add cs203
    --------------------------------------------------------------------------------
+   Processing "add cs203" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Module is invalid! Please enter a valid module code.
    Each module of study has a unique module code consisting of a two-
@@ -220,6 +222,8 @@ Possible Error:
    ```
    Sem [1] >> add CS1231 CS2101
    --------------------------------------------------------------------------------
+   Processing "add CS1231 CS2101" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Unknown command, try again.
    --------------------------------------------------------------------------------
