@@ -167,6 +167,11 @@ It consists of the following classes:
 
 ![Model Classes](images/model.png)
 
+An object diagram of an instance of `SelectedModule`, the abstracted unit that will be mainly dealt with in the model is
+shown below.
+
+![Model Classes](images/SelectedModuleObjectDiagram.png)
+
 #### 3.2.1 Module Loader
 
 Module loading is handled by the `ModuleLoader` class. This class contains logic to parse the data file stored
