@@ -2,13 +2,8 @@ package seedu.duke.user;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.user.AddUserCommand;
-import seedu.duke.exception.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import seedu.duke.user.UserList;
 
 //@@author chiewyx
 public class UserTest {
