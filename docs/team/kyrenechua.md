@@ -28,7 +28,6 @@ command result.
 ### Contributions to the User Guide:
 * Formulated the documentation on the `Filter`, `Exit`, `Help`, `List`, `Favourite`, `Unfavourite`, and `Find` commands.
 * Wrote the introduction and disclaimer sections of the User Guide.
-* 
 
 ### Contributions to the Developer Guide:
 * Wrote the User Stories section
