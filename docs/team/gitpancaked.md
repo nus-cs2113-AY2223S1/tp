@@ -43,6 +43,8 @@ and ensure that the components they pick are compatible with one another.
     - Created the Ui class along with the product logo. (PR: [#9](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/9))
     - General bug fixes. (PR: [#17](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/17), [#38](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/18), 
   [#41](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/41), [#133](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/133))
+    - Added UnknownCommandException to handle unknown commands and UnlistedComponentTypeException to handle commands that input
+  unknown component types. (PR: [#16](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/16), [#135](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/135))
 - **Documentation:**
     - JavaDocs for Ui, Parser, EditParser, Build, LinkedHashMap2D and Export classes. (PR: [#65](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/65))
     - User Guide:
