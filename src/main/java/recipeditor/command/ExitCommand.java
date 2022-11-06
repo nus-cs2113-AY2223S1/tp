@@ -23,19 +23,8 @@ public class ExitCommand extends Command {
      * @return CommandResult a message of exiting software
      */
     public CommandResult execute() {
-        // AllRecipe
         Storage.rewriteRecipeListToFile();
 
-        //Delete all recipes in the folder
-        File directory = new File(Storage.RECIPES_FOLDER_PATH);
-        for (File file : directory.listFiles()) {
-            file.delete();
-        }
-        //Overwrite the files
-        for (Recipe r : RecipeList.getRecipes()) {
-            String recipeFileSourcePath = Storage.titleToFilePath(r.getTitle());
-            Storage.saveRecipe(r, "", recipeFileSourcePath);
-        }
         return new CommandResult(EXIT_MESSAGE);
     }
 }

@@ -13,22 +13,24 @@ import java.io.FileNotFoundException;
 public class GuiWorkFlow {
     private static final String ABORT_QUESTION = "Do you want to FIX the recipe? (Y/N)";
     private final Mode mode;
-    boolean saveToTemp;
-    private boolean validity = false;
+    private boolean saveToTemp;
+    private String path;
+    private boolean isValid = false;
     private Recipe recipe = new Recipe();
-    private boolean exitLoop;
+    private boolean shouldExitLoop;
 
     /**
      * A class that handle the GUI call and the intermediate interaction between the GUI and CLI.
      * Ask the user whether they want to make changes when the format of the text in Editor is wrong.
-     * @param path load the content of the file
+     * @param inputPath load the content of the file
      * @throws FileNotFoundException Handled by the parser
      */
-    public GuiWorkFlow(String path) throws FileNotFoundException {
+    public GuiWorkFlow(String inputPath) throws FileNotFoundException {
+        path = inputPath;
         mode = getMode(path);
         saveToTemp = new Editor().enterEditor(path);
-        exitLoop = !saveToTemp;
-        while (!exitLoop) {
+        shouldExitLoop = !saveToTemp;
+        while (!shouldExitLoop) {
             guiLoop();
         }
     }
@@ -61,16 +63,16 @@ public class GuiWorkFlow {
             String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
             recipe = new RecipeFileParser().parseTextToRecipe(content);
             checkDuplicate();
-            validity = true;
-            exitLoop = true;
+            isValid = true;
+            shouldExitLoop = true;
         } catch (ParseFileException | FileNotFoundException | DuplicateRecipeTitleException e) {
             Ui.showMessage(e.getMessage());
             YesNoLoopAnswer ans = yesNoLoop(ABORT_QUESTION);
             if (ans.equals(YesNoLoopAnswer.YES)) {
                 saveToTemp = new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
-                exitLoop = !saveToTemp;
+                shouldExitLoop = !saveToTemp;
             } else {
-                exitLoop = true;
+                shouldExitLoop = true;
             }
         }
     }
@@ -81,8 +83,8 @@ public class GuiWorkFlow {
         }
     }
 
-    public boolean getValidity() {
-        return validity;
+    public boolean getValid() {
+        return isValid;
     }
 
     public Recipe getRecipe() {

@@ -1,0 +1,62 @@
+@startuml
+skinparam Style strictuml
+
+class GuiWorkFlow{
+- mode: Mode
+- recipe: Recipe
+- path: String
+- isValid: boolean
+- shouldExitLoop: boolean
+- guiLoop()
+- getMode(String path)
+- getValid()
+- getRecipe()
+- checkDuplicate()
+}
+class Editor{
+-textArea: JTextArea
+-frame: JFrame
+-scrollPane: JScrollPane
+-buttonSave: JButton
+-buttonExit: JButton
+-menu: JMenuBar
+-state: EditorState
++enterEditor()
++actionPerformed()
+-waitForChangeOfState()
+-loadFileToTextArea(String path)
+}
+
+interface "<<interface>>\nActionListener" as act{
+}
+
+class JFrame
+
+enum "<<enum>>\nMode" as mode{
+ADD
+EDIT
+}
+enum "<<enum>>\nEditorState" as editor{
+USING
+SAVE
+EXIT
+}
+
+class Recipe{
+}
+note left: Will not elaborate on Recipe to avoid clutter
+
+note as N1
+Will not elaborate as they are classes and interface
+from library javax.swing and java.awt.event
+end note
+
+GuiWorkFlow "1" *-l- "1"Editor
+GuiWorkFlow *-u- mode: mode >
+GuiWorkFlow "*" o-d- "1" Recipe: recipe >
+Editor -u-|> JFrame
+Editor *-l- "1"editor
+Editor .u-|> act
+JFrame .-u N1
+act .-u N1
+@enduml
