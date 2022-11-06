@@ -13,8 +13,8 @@
         * [Finding builds](#finding-builds-find)
         * [Filtering builds](#filtering-builds-filter)
         * [Exporting builds](#exporting-builds-export)
-        * [Exporting builds as CSV](#exporting-builds-as-a-csv--exportcsv)
-        * [Exiting the program](#bye)
+        * [Exporting builds as CSV](#exporting-builds-as-csv-exportcsv)
+        * [Exiting the program](#exiting-the-program-bye)
     * [Build Editing Mode](#build-editing-mode)
         * [Adding a component](#adding-a-component-add)
         * [Deleting a component](#deleting-a-component-delete)
@@ -23,7 +23,7 @@
         * [Checking compatibility](#checking-compatibility-check)
         * [Information about a build](#information-about-a-build-info)
         * [Exporting a build](#exporting-a-build-export)
-        * [Exiting edit mode](#exiting-edit-mode-back)
+        * [Exiting edit mode](#exiting-build-editing-mode-back)
     * [Storage](#storage)
     * [Export](#export)
 * [FAQ](#faq)
@@ -31,7 +31,7 @@
     * [Main Mode Summary](#main-mode-summary)
     * [Edit Mode Summary](#edit-mode-summary)
 * [Glossary](#glossary)
-    * [PC Component Parameters Glossary](#pc-component-parameters-summary)
+    * [PC Component Parameters Glossary](#pc-component-parameters-glossary)
 
 ## Introduction
 
@@ -451,15 +451,15 @@ Exporting build to text file...
 <--------------------------------------------------------->
 ```
 
-#### Exiting edit mode: `back`
+#### Exiting Build Editing mode: `back`
 
-Exits edit mode.
+Exits Build Editing mode.
 
 Format: `back`
 
-Example of usage: Enter `back` to exit edit mode.
+Example of usage: Enter `back` to exit Build Editing mode.
 
-Expected outcome: The program will exit edit mode.
+Expected outcome: The program will exit Build Editing mode.
 ```
 <--------------------------------------------------------->
 back
