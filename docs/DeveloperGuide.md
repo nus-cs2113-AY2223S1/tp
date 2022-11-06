@@ -57,6 +57,7 @@ The aim of this guide is to help readers understand how the different components
 This section describes the architecture design of Upcycle with its components, and UML diagrams are used to support.
 
 The overall architecture loosely follows the following diagram:
+
 ![Architecture](images/architecture.png)
 
 A few things to note about the overall architecture:
