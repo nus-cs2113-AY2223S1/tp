@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.ScrollPaneConstants;
 
 
-import java.awt.Dimension;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,7 +38,7 @@ public class Editor extends JFrame implements ActionListener {
     private final JButton buttonSave;
     private final JButton buttonExit;
     private final JMenuBar menu;
-    private EditorState state = EditorState.USING;
+    public EditorState state = EditorState.USING;
 
     public Editor() {
         try {
@@ -66,7 +66,6 @@ public class Editor extends JFrame implements ActionListener {
 
         menu = new JMenuBar();
         frame.setJMenuBar(menu);
-
 
 
         frame.add(buttonSave);
@@ -162,7 +161,7 @@ public class Editor extends JFrame implements ActionListener {
         scan.close();
     }
 
-    private enum EditorState {
+    public enum EditorState {
         USING, SAVE, EXIT
     }
 }

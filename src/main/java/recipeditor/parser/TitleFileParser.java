@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 public class TitleFileParser {
     private static final String FILE_NOT_EXIST = "Recipe Title is found without the Recipe. Skip this recipe!";
     private static final String TITLE_INVALID = "Recipe Title is not valid!";
+    private static final String ADDED = "%s added";
     private static final Logger logger = Logger.getLogger(TitleFileParser.class.getName());
 
     /**
@@ -31,6 +32,7 @@ public class TitleFileParser {
                 continue;
             }
             RecipeList.addRecipeTitle(line);
+            logger.log(Level.INFO, String.format(ADDED,line));
         }
     }
 }

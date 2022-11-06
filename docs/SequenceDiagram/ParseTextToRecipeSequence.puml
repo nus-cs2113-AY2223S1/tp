@@ -1,0 +1,9 @@
+@startuml
+skinparam Style strictuml
+
+group Parse Text to Recipe
+
+
+end
+
+@enduml
