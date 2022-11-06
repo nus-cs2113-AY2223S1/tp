@@ -20,13 +20,12 @@ and transactions via a Command Line Interface.
     + Item-related features:
       + Find items by keyword `find-items`
     + Wrote base class for Ui
-    + Testing: Wrote some Ui related tests.
+    + Testing: Wrote some Item and ItemList related tests.
     + DukeException: Contributed to some exception classes and ExceptionMessages.
 + **User Guide contributions:**
     + Wrote guide for all of the above features
 + **Developer Guide contributions:**
     + Contributed to the Implementation subsection for all of the above features. Below are some diagrams drawn:
-  ![](../images/FindItemSequence.png)
   ![](../images/ViewBorrowTxByUser.png)
     + Contributed to User Stories
     + Contributed to User Profile

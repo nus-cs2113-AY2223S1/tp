@@ -1,16 +1,41 @@
 package seedu.duke.item;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidCategoryException;
+import seedu.duke.exception.InvalidItemException;
+import seedu.duke.exception.ItemNotFoundException;
+import seedu.duke.transaction.Transaction;
+import seedu.duke.transaction.TransactionList;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ItemListTest {
-    @Test
-    void add_addOneItem_expectSizeOne() throws InvalidCategoryException {
-        ItemList itemList = new ItemList();
-        Item item = new Item("Cup", 1, 1.0, "jorelle");
+    ItemList itemList;
+    Item item;
+    TransactionList transactionList;
+
+    @BeforeEach
+    void initializeTest() throws InvalidCategoryException {
+        itemList = new ItemList();
+        item = new Item("28sd37h2","pen", 2, 0.50, "jingwei");
         itemList.addItem(item);
-        assertEquals(1, itemList.getListSize());
+        transactionList = new TransactionList();
+    }
+    @Test
+    void add_addOneItem_expectSizeTwo() throws InvalidCategoryException {
+        Item item2 = new Item("30fd39h2","ball", 2, 0.75, "jingwei");
+        itemList.addItem(item2);
+        assertEquals(2, itemList.getListSize());
+    }
+    @Test
+    void delete_expectSizeOne() throws InvalidCategoryException, ItemNotFoundException, InvalidItemException {
+        itemList.deleteItem(item.getItemId(),transactionList);
+        assertEquals(0, itemList.getListSize());
+    }
+    void getItemById_expect_pen() throws ItemNotFoundException{
+        assertEquals("pen",itemList.getItemById("28sd37h2").getName());
     }
 }

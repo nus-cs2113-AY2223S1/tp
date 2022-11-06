@@ -1,23 +1,37 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+Actor User
+"User" -> ":Duke": "view-borrow..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewBorrowTxCommand"**: new
+activate ":ViewBorrowTxCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
 
-CommandParser -> Command: createCommand()
-Command -> Command: getArgs()
-Command -> Command: isValidArgument(arg)
+":Duke" -> ":ViewBorrowTxCommand" : executeCommand()
+activate ":ViewBorrowTxCommand"
+":ViewBorrowTxCommand" -> ":ViewBorrowTxCommand" : getArgs
+activate ":ViewBorrowTxCommand"
+":ViewBorrowTxCommand" -> ":TxList" : getBorrowTxByUser(user)
+deactivate ":ViewBorrowTxCommand"
+activate ":TxList"
+":TxList" -> ":TxList" : new TxList()
+activate ":TxList"
+    loop until all items checked
+        opt (given user is borrower in transaction)
+            ":TxList" -> ":TxList" : addTx()
+        end
+    end
+deactivate ":TxList"
+":TxList" --> ":ViewBorrowTxCommand"
+deactivate ":TxList"
+":ViewBorrowTxCommand" -> "Ui": printResponse();
+deactivate ":ViewBorrowTxCommand"
+Ui --> User:
 
-Command -> transactionList: getTransactions(arg)
-loop n times
-transactionList -> transactionList: iterate through list
-note right
-Check transaction.borrowerId.equals(arg)
-end note
-end
-transactionList -> Command: getTransactions(),
-note right
-Return array of transactions
-end note
 
-Command -> Ui: viewResponse()
 @enduml
