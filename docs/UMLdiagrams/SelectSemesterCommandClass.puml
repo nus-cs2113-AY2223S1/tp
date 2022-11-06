@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class SelectSemesterCommand {
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_WORD: String
+    <u>- ERROR_MISSING_SEMESTER: String
+    <u>- ERROR_WRONG_FORMAT: String
+    <u>- INVALID_SEMESTER_SELECTED: String
+    - logger: Logger
+    <u>- PLANNING_FOR: String
+    <u>+ SUBSYSTEM_NAME: String
+    - updatedSemester: int
+}
+
+@enduml

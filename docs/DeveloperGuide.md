@@ -222,7 +222,7 @@ Finally, it will also lead to tight coupling and decreased cohesion.
 
 ### 3.4 Command Component
 
-![Command Abstract Class](images/commandClass.png)
+![Command Abstract Class](images/Command.png)
 
 The <code>Command</code> component can:
 
@@ -291,6 +291,8 @@ and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
 #### 3.4.2 RemoveModuleCommand
 
+![RemoveModuleCommand](images/RemoveModuleCommandClass.png)
+
 The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
 
@@ -324,6 +326,8 @@ coupling
 and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
+
+![HelpCommand](images/HelpCommandClass.png)
 
 The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
 
@@ -374,22 +378,24 @@ multiple times and the search process will be too long.
 
 #### 3.4.5 SelectSlotCommand
 
+![SelectSlotCommand](images/SelectSlotCommandClass.png)
+
 The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the
-different
-lesson types.
+different lesson types.
 
 #### 3.4.6 SelectSemesterCommand
 
+![SelectSemesterCommand](images/SelectSemesterCommandClass.png)
+
 The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that
-the
-user wish to plan for.
+the user wish to plan for.
 
 #### 3.4.7 InfoCommand
 
 The <code>InfoCommand</code> class extends from the <code>Command</code> class and gets all the details of the module
 that the user wants.
 
-![GetModuleCommand](images/GetModuleCommand.png)
+![InfoCommand](images/InfoCommandClass.png)
 
 <!-- TODO: update diagram -->
 
@@ -437,20 +443,28 @@ to create duplicate code to fulfil similar needs as the timetable is needed by o
 
 #### 3.4.9 ByeCommand
 
+![ByeCommand](images/ByeCommandClass.png)
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
+![ListCommand](images/ListCommandCLass.png)  
 
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
 
+![ExportCommand](images/ExportCommandClass.png)  
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links.
 
 #### 3.4.12 ImportCommand
+
+![ImportCommand](images/importCommandClass.png)  
 
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
@@ -536,12 +550,11 @@ users to swap to using YAMOM.
 ##### 3.5.3.3 Alternatives considered
 
 Storing as <code>.json</code> file
-
 - would have to implement another function for export/import function
 
 Using the java preference API, `java.util.prefs.Preferences` to save user preferences
+- will not pass the GitHub automated checkers since it access and stores data in the registry.
 
-- will not pass the github automated checkers
 
 ## 4. Documentation
 

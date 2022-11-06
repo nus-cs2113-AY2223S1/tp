@@ -1,5 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/class-diagram
 hide circle
 skinparam classAttributeIconSize 0
 
@@ -13,6 +13,6 @@ class Storage {
 
     + openPreviousState(State, Ui)
     - readPreviousState(): ArrayList<String>
-    + saveState(State, Ui)
+    + saveState(State, Ui, boolean)
 }
 @enduml
