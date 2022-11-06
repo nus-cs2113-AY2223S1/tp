@@ -684,6 +684,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
@@ -792,6 +796,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
