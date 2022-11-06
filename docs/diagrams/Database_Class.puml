@@ -5,6 +5,8 @@ skinparam classAttributeIconSize 0
 
 class DatabaseStorage {
     {static} + loadDatabase() : void
+    {static} - checkDatabaseFolder() : void
+    {static} - createDatabaseFolder() : void
     {static} - readFile(String filePath) : void
     {static} - readDatabaseLine(String line) : String[]
     {static} - updateDatabase(String[] lineData) : void
