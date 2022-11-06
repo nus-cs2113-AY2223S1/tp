@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             assert addedRecipe != null;
             RecipeList.addRecipe(addedRecipe);
             RecipeList.addRecipeTitle(addedRecipe.getTitle());
-            Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+            Storage.rewriteRecipeListToFile();
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
             StringBuilder response = new StringBuilder();

@@ -7,7 +7,6 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Content page
 
-- [Acknowledgements](#acknowledgements)
 - [Design](#design)
   - [Architecture](#architecture) - Qian Hui
   - [Ui Component](#ui-component) - Qian Hui
@@ -29,31 +28,26 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
 - [User Stories](#user-stories)
-- [Non-Functional Requirements](#non-functional-requirements)
-- [Glossary](#glossary)
-- [Instructions for manual testing](#instructions-for-manual-testing)
-
-## Acknowledgements
-
-### External Libraries
-- org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
-- org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
+- [Instructions for Manual Testing](#instructions-for-manual-testing)
+- [Non-functional Requirements](#non-functional-requirements)
+- [Acknowledgements](#acknowledgements)
 
 ## Design
 
 ### Architecture
 
-<p align="center" width="100%">
-  <img width="80%" src="images/Architecture.png" alt="Storage Class Diagram"/>
+<p align="center" width="50%">
+  <img width="40%" src="images/Architecture.png" alt="Storage Class Diagram"/>
 </p>
 
 `Recipeditor` calls to various class a perform all the tasks assigned by the user.
 
-- `Ui`: handles interactions with users, including printing and reading
-- `Storage`: manages the storage of the list of recipes
-- `Command`: instructs the current task to perform
-- `CommandResult`: explains the outcome of each command performed
+- `Ui`: handles interactions with users, including printing messages and reading of inputs
+- `Storage`: manages the storage of the list of recipes by reading and writing data
+- `Command`: command executor to instruct what task to perform
 - `Parser`: interprets the user input into different commands
+- `Recipe`: main entrypoint of the program.
+- `Exception`: exceptions thrown by the program.
 
 #### Software running flow:   Choose between this or the below
 
@@ -113,6 +107,8 @@ The UI component is responsible for all user interfaces of the application.
 1. `Ui` takes `CommandResult` as a parameter to show the output message after a command is completed.
 2. `AddMode` calls `Recipe` to add new recipe into the list.
 3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
+4. `Editor` takes `Storage` as a parameter to access the temporary file path, where the recipe will be 
+temporarily stored at.
 
 
 ### Parser Component
@@ -130,13 +126,19 @@ The storage component allows data to be read from and saved to a storage file.
 1. `Storage` calls `Recipe` when saving data from `RecipeList` to an external storage file.
 2. `Storage` calls `RecipeList` when loading recipe data from external storage file to.
 3. `Storage` calls `Ui` to show relevant messages to the user.
+4. `Storage` calls `ParserFileException` when there is an error in parsing recipe file content.
+5. `Storage` uses a method in `RecipeFileParser` to parse the content in the individual recipe text file
+into recipe.
+6. `Storage` uses a method in `TitleFileParser` to parse the title of the text file into recipe title.
 
 The external storage file contains:
-
-- Recipe Name
-- Recipe Description
-- Recipe Ingredients (name, amount, unit)
-- Recipe Steps
+1. Individual Recipe Text File
+   - Recipe Name
+   - Recipe Description
+   - Recipe Ingredients (name, amount, unit)
+   - Recipe Steps
+   
+2. All Recipe Text File - that contains the recipe title of all the recipes in the list.
 
 ### Command Component
 
@@ -299,31 +301,30 @@ of invalid `AddCommand` will be returned backed to `Main`.
 
 ### Target user profile
 
-Target user of the application is avid cook who wants to organize their recipe list for ease of reference and search
+Avid cook who wants to organize their recipe list for ease of reference and search.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Helps people who cook often to keep track of the many recipes that they have so that they don't have to go about
+memorising all the recipe details. RecipEditor helps to manage all these recipes where users can add, edit and
+delete recipes of their choice. Furthermore, they can find relevant recipes quickly using RecipEditor. For example,
+if the user wants to make a dish with tomato, he/she can use RecipEditor to find recipes that uses tomato as ingredient
+quickly.
 
 ## User Stories
 
-|Version| As a ... | I want to ...                                 | So that I can ...                                                                               |
-|--------|---------|-----------------------------------------------|-------------------------------------------------------------------------------------------------|
-|v1.0|new user| see usage instructions                        | refer to them when I forget how to use the application                                          |
-|v1.0|user| add new recipes                               | store recipes that I need without having to remember everything                                 |
-|v1.0|user| delete existing recipes                       | remove recipes that I no longer use so that the list will not be cluttered                      |
-|v1.0|user| show all recipes in my list                   | view an overview of what recipes I have added beforehand                                        |
-|v1.0|user| show detailed recipe that I specified         | view detailed recipe (name, description, ingredients and steps) of the one that I am interested |
-|v1.0|user| exit the application                          | close the entire application                                                                    |
-|v2.0|user| find recipe by recipe name or ingredient name | locate a recipe without having to go through the entire list    g                               |
+| Version | As a ... | I want to ...                                 | So that I can ...                                                                                           |
+|---------|----------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| v1.0    | new user | see usage instructions                        | refer to them when I forget how to use the application                                                      |
+| v1.0    | user     | add new recipes                               | store recipes that I need without having to remember everything                                             |
+| v1.0    | user     | delete existing recipes                       | remove recipes that I no longer use so that the list will not be cluttered                                  |
+| v1.0    | user     | show all recipes in my list                   | see the overview of what recipes I have added beforehand                                                    |
+| v1.0    | user     | exit the application                          | close the entire application                                                                                |
+| v2.0    | user     | edit a previously saved recipe                | update the recipe without having go through the trouble to delete and add the updated version of the recipe |
+| v2.0    | user     | find recipe by recipe name or ingredient name | locate a recipe without having to go through the entire list                                                |
+| v2.0    | user     | show detailed recipe that I specified         | view detailed recipe (name, description, ingredients and steps) of the one that I am interested             |
+| v2.0    | new user | view the list of available commands           | use the appropriate command according to my needs                                                           |
 
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
 
 ## Instructions for manual testing
 
@@ -442,6 +443,23 @@ Target user of the application is avid cook who wants to organize their recipe l
 - **Tamper the recipe file (parseable recipe)**
     - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
+<<<<<<< HEAD
+  - The program will not load the recipe 
+
+## Non-Functional Requirements
+
+1. Should work on any OS as long as it has Java 11 or above installed on their PC.
+2. Should be able to hold up to 1000 recipes without a slowdown of performance.
+3. Any user that is comfortable with typing of speeds >55 words per minute would be able to accomplish these tasks faster than if they used a mouse to navigate.
+
+
+## Acknowledgements
+
+### External Libraries
+
+- org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
+- org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
+=======
     - The program will skip this
 
 #### Other files
@@ -453,3 +471,4 @@ Target user of the application is avid cook who wants to organize their recipe l
     - Everything will continue to work but without a proper template, it is hard for the user
 - **Delete `TemporaryFile.txt` then `/add`**
     - No effect because it will be constantly overwritten based on content in the Editor when closed
+>>>>>>> aee7e29689b0b76d3dcf391b0330ce27b1810296

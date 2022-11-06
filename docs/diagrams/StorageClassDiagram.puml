@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide class fields
+hide class methods
+
+package Recipe {
+class RecipeList
+class Recipe
+class Ingredient
+}
+
+package Parser {
+class RecipeFileParser
+class TitleFileParser
+}
+
+class ParseFileException
+
+Storage -up-> Ui
+Storage -down-> Recipe
+Storage -down-> Ingredient
+Storage -down-> RecipeList
+Storage ..> RecipeFileParser
+Storage ..> TitleFileParser
+Storage -left-> ParseFileException
+
+Recipe "1" *-right-> "*" Ingredient
+RecipeList "1" *-right-> "*"  Recipe
+@enduml

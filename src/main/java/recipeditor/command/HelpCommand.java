@@ -20,9 +20,9 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Execute help command, which shows some helper messages.
+     * Execute help command, which shows some helper messages according to the commands user want.
      *
-     * @return CommandResult list of avaliable commands
+     * @return CommandResult list of available commands
      */
     public CommandResult execute() {
 

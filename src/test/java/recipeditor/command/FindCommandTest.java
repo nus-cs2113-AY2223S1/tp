@@ -1,33 +1,42 @@
 package recipeditor.command;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import recipeditor.parser.Parser;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class FindCommandTest {
+
+    private static Recipe recipe;
+
+    @BeforeAll
+    static void setUp() {
+        recipe = new Recipe("Test title for Find Command", "Test description");
+        RecipeList.addRecipe(recipe);
+        RecipeList.addRecipeTitle(recipe.getTitle());
+        Storage.rewriteRecipeListToFile();
+        String recipeFileSourcePath = Storage.titleToFilePath(recipe.getTitle());
+        Storage.saveRecipe(recipe, "", recipeFileSourcePath);
+
+        Ingredient newIngredient = new Ingredient("test ingredient", 1, "whole");
+        recipe.addIngredient(newIngredient);
+    }
 
     @Test
     void correctFindRecipeTitleCommand_correctFindCommandFormat_listOfRecipeTitles() {
-        Recipe addedRecipe = new Recipe("Example title", "Example description");
-        RecipeList.addRecipe(addedRecipe);
-        RecipeList.addRecipeTitle(addedRecipe.getTitle());
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
-        String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
-        Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
         String input = "/find -t title";
         assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
     }
 
     @Test
     void correctFindIngredientNameCommand_correctFindCommandFormat_listOfRecipeTitles() {
-        Recipe addedRecipe = new Recipe("Example title", "Example description");
-        Ingredient newIngredient = new Ingredient("new ingredient", 1, "whole");
-        addedRecipe.addIngredient(newIngredient);
         String input = "/find -i ing";
         assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
     }
@@ -54,9 +63,12 @@ public class FindCommandTest {
                 + "-t: Recipe Title\n"
                 + "-i: Ingredient name";
         assertEquals(expected, commandExecutedResult.getMessage());
-        RecipeList.deleteRecipeFromTitle("Example title");
-        Storage.deleteRecipeFile("Example title");
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
     }
 
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle("Test title for Find Command");
+        Storage.deleteRecipeFile("ETest title for Find Command");
+        Storage.rewriteRecipeListToFile();
+    }
 }
