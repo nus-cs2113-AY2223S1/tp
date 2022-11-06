@@ -335,7 +335,8 @@ public class Parser {
 
     private void checkDate(int day, int month, String date) throws OneDocException {
         try {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu", Locale.US).withResolverStyle(ResolverStyle.STRICT);
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu", Locale.US)
+                    .withResolverStyle(ResolverStyle.STRICT);
             dateFormatter.parse(date);
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
                 throw new OneDocException(UI.INVALID_DATE);
