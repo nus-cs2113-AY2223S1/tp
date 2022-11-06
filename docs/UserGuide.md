@@ -13,6 +13,9 @@ Timetabler is a **desktop app** that allows **NUS students** taking official NUS
 4. Open a command window or terminal for mac in that folder.
 5. Run the command `java -jar tp.jar` in the same folder.
 6. You will be prompted to enter the `semester` (1 or 2) you are planning for when the program first starts.
+7. Note that you should not modify the files created by the program unless you are certain of what you are doing. In 
+the event that the files have been incorrectly modified, see the 
+[appendix](#span-stylecolororange-dealing-with-corrupted-files--loss-of-internet-connection-on-startupspan) for help.
 
 
 ##  <span style="color:orange ">Features</span>
@@ -50,9 +53,9 @@ Command used to list out all modules added to user's timetable.
 
 * Modules with duplicate lesson types means that students are expected to go for at least that number of classes of that lesson type.
 
-*For example: 2 Lecture slots means that students are expected to attend 2 different lecture slots.*
+* For example: 2 Lecture slots means that students are expected to attend 2 different lecture slots.
 
-* The app does not restrict users from leaving empty lesson slots or other unoffical lesson combinations. This gives users freedom and caters to their unique situations.
+* Note that certain lessons are fixed and will be displayed without any
 
 **Example of Usage:**
 input: `list`
@@ -60,9 +63,9 @@ input: `list`
 ```
 Here are your modules:
 1. CS2040C: Data Structures and Algorithms
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time
+     [Lecture 1] Wednesday   10:00 - 12:00   Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+     [Lecture 2] Thursday   17:00 - 18:00   Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+     [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time   Weeks: NA
 ```
 ---
 ###  <span style="color:orange ">Finding information on a module: `info`</span>
@@ -102,13 +105,27 @@ Which module would you like to set lessons for? Enter corresponding valid index
 input: `1`
 ```
 Which lesson type do you want to set? Enter corresponding valid index
-1. Lecture     2. Lecture     3. Laboratory     
+1. Laboratory  
 ```
-input: `2`
+input: `1`
 ```
 Which is your preferred timeslot? Enter corresponding valid index
-1. [Lecture] Wednesday   10:00 - 12:00
-2. [Lecture] Thursday   17:00 - 18:00
+1:
+Monday   10:00 - 12:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+2:
+Monday   16:00 - 18:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+3:
+Tuesday   10:00 - 12:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+4:
+Tuesday   12:00 - 14:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+5:
+Tuesday   16:00 - 18:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+6:
+Tuesday   14:00 - 16:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+7:
+Monday   12:00 - 14:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
+8:
+Monday   14:00 - 16:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
 ```
 input: `1`
 ```
@@ -127,9 +144,9 @@ input: `delete`
 Which module you would like to delete? Please enter the index of that module. 
 Here are your modules:
 1. CS2040C: Data Structures and Algorithms
-     [Lecture] Undetermined Day   Undetermined Time - Undetermined Time
-     [Lecture] Wednesday   10:00 - 12:00
-     [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time
+     [Lecture 1] Wednesday   10:00 - 12:00   Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+     [Lecture 2] Thursday   17:00 - 18:00   Weeks: 1,2,3,4,5,6,7,8,9,10,11,12,13
+     [Laboratory] Monday   16:00 - 18:00   Weeks: 3,4,5,6,7,8,9,10,11,12,13
 
 ```
 input: `1`
@@ -228,3 +245,38 @@ input: `quit`
 **Q**: How do I transfer my data to another computer?
 
 **A**: Copy all data files `Sem1DataDirectory` or / and `Sem2DataDirectory` together with the jar file to the new computer, in the same directory.
+
+##  <span style="color:orange ">Feature Summary</span>
+| Feature                            |   Input    |
+|------------------------------------|:----------:|
+| adding a module                    |   `add`    |
+| listing all added modules          |   `list`   | 
+| finding information about a module |   `info`   |
+| setting the lesson for a module    |   `set`    |
+| deleting a module                  |  `delete`  |
+| auto allocation of lessons         | `allocate` |
+| printing the timetable             |  `print`   |
+| exiting the program                |   `quit`   |
+
+
+##  <span style="color:orange ">Appendix</span>
+
+###  <span style="color:orange ">Dealing with corrupted files / loss of internet connection on startup</span>
+
+In the event that either of these situations occur, a prompt will be displayed when the program is launched. This gives
+you the option to try to rerun the program, or delete the files that are currently saved in your system.
+
+This is how the prompt will look like:
+```
+Oops! Something went wrong. Either a file is corrupted or you are not connected to the internet.
+Enter 0 if you are sure you have internet connection - files will be deleted and recreated before continuing.
+Enter 1 if you have no internet connection - program will quit without losing data.
+```
+
+
+Entering `0` will cause the program to delete all the files saved in your system and allows you to start the
+program in a clean state.
+
+
+Entering `1` will exit the program without deleting the saved files, allowing you try to run the program again.
+
