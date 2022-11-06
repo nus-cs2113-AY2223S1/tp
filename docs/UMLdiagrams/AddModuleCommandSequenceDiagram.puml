@@ -30,19 +30,18 @@ Module --> AddModuleCommand
 deactivate Module
 
 
-opt module is not offered in semester
+alt module is not offered in semester
 AddModuleCommand -> Ui: addMessage()
 activate Ui
 AddModuleCommand -> Ui: displayUi()
 Ui --> AddModuleCommand
 deactivate Ui
 AddModuleCommand --> Duke
-destroy AddModuleCommand
-end
 
+else module is offered in semester
 create SelectedModule
 AddModuleCommand -> SelectedModule : selectedModule()
-activate AddModuleCommand
+'activate AddModuleCommand
 activate SelectedModule
 SelectedModule --> AddModuleCommand
 deactivate SelectedModule
@@ -52,17 +51,18 @@ State --> AddModuleCommand
 deactivate State
 
 opt list does not contain module to be added
-    AddModuleCommand -> State : addSelectedModule()
-    activate State
-    State --> AddModuleCommand
-    deactivate State
-end opt
+AddModuleCommand -> State : addSelectedModule()
+activate State
+State --> AddModuleCommand
+deactivate State
+end
 
 AddModuleCommand -> Ui :addMessage(getExecutionMessage())
 activate Ui
 AddModuleCommand -> Ui :displayUi()
 Ui --> AddModuleCommand :
 deactivate Ui
+end
 
 AddModuleCommand --> Duke
 destroy AddModuleCommand
