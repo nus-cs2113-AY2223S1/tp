@@ -41,4 +41,4 @@
 - Assisted in small bug fixing and data validation.
 - Assisted and implemented several unit testing for features not implemented by me such as AddModuleCommand.
 - Reviewed PRs and provided feedback.
- 
+- Made the final video presentation.

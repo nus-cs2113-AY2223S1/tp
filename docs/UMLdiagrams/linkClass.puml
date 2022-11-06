@@ -1,11 +1,10 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/class-diagram
 hide circle
 skinparam classAttributeIconSize 0
 
 class Link {
     <u>- DELIMITER: String
-    <u>- DELIMITER_REGEX: String
     <u>- DOMAIN: String
     <u>- LESSON_DELIMITER: String
     <u>- LESSON_TYPE_DELIMITER: String
@@ -23,10 +22,10 @@ class Link {
     <u>- SUPPOSED_PREFIX_REGEX: String
 
     <u>- addLessons(String[], SelectedModule, int, Ui)
-    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui)
+    <u>- addValidLesson(SelectedModule, int, LessonType, String, Ui, List<String>)
     <u>- appendModules(List<SelectedModule>, StringBuilder)
     <u>- appendSemester(State, StringBuilder)
-    <u>- extractModulesAndLessons(Ui, int, String[], List<SelectedModule>)
+    <u>- extractModulesAndLessons(Ui, int, String[], List<SelectedModule>, List<String>)
     <u>- extractSemester(State, Ui, String[]): int
     <u>+ getLessonType(String, Ui): LessonType
     <u>+ getLink(State): String

@@ -23,8 +23,6 @@ public class Link {
 
     private static final String DELIMITER = "/";
 
-    private static final String DELIMITER_REGEX = "\\/";
-
     private static final String SEMESTER_DELIMITER = "sem-";
 
     private static final String SPECIAL_TERM_1_SEMESTER_DELIMITER = "st-i";
@@ -37,8 +35,9 @@ public class Link {
 
     private static final String MODULE_CODE_DELIMITER = "=";
 
-    private static final String SUPPOSED_PREFIX_REGEX = "^" + DOMAIN + "(" + SPECIAL_TERM_1_SEMESTER_DELIMITER + "|"
-            + SPECIAL_TERM_2_SEMESTER_DELIMITER + "|" + SEMESTER_DELIMITER + "\\d" + ")/share\\?.";
+    private static final String SUPPOSED_PREFIX_REGEX = "^" + Pattern.quote(DOMAIN) + "("
+            + SPECIAL_TERM_1_SEMESTER_DELIMITER + "|" + SPECIAL_TERM_2_SEMESTER_DELIMITER
+            + "|" + SEMESTER_DELIMITER + "\\d" + ")" + Pattern.quote(DELIMITER + SHARE_DELIMITER);
 
     private static final String MODULE_DELIMITER = "&";
 
@@ -60,25 +59,26 @@ public class Link {
             + System.lineSeparator() + LINK_PROCESS_ERROR_MESSAGE;
 
     /**
-     * Parses the NUSMods export link into module code and lessons information.
+     * Parses the NUSMods export link into module code and lessons information. The link should
+     * only be parsed after validating the link through {@link #isValidLink(String)}.
      *
      * @param link  For exporting to NUSMods.
      * @param state Current state of the application to be saved to.
      */
     public static void parseLink(String link, State state, Ui ui) throws YamomException {
-        String[] infoParam = link.split(DELIMITER_REGEX);
+        String[] infoParam = link.split(Pattern.quote(DELIMITER));
 
         int semester = extractSemester(state, ui, infoParam);
         String modulesParam = infoParam[MODULES_PARAM_INDEX];
         String cleanModuleParam = modulesParam.replace(SHARE_DELIMITER, "");
         cleanModuleParam = cleanModuleParam.toUpperCase();
-
         if (cleanModuleParam.isEmpty()) {
             return;
         }
-        String[] moduleAndLessonsArray = cleanModuleParam.split(MODULE_DELIMITER);
+        String[] moduleAndLessonsArray = cleanModuleParam.split(Pattern.quote(MODULE_DELIMITER));
         List<SelectedModule> selectedModules = new ArrayList<>();
-        extractModulesAndLessons(ui, semester, moduleAndLessonsArray, selectedModules);
+        List<String> moduleCodesAdded = new ArrayList<>();
+        extractModulesAndLessons(ui, semester, moduleAndLessonsArray, selectedModules, moduleCodesAdded);
         ui.addMessage("Please check that the format of the link provided is correct if there are missing "
                 + "modules or lessons.");
         ui.addMessage("Please visit https://ay2223s1-cs2113-f11-3.github.io/tp/UserGuide.html#import-a-"
@@ -92,11 +92,12 @@ public class Link {
      *
      * @param ui                    To output to the user.
      * @param semester              Semester in which lessons are being selected for.
-     * @param moduleAndLessonsArray The segment of user input that contains the modules information.
+     * @param moduleAndLessonsArray The segment of user input that contains the modules' information.
      * @param selectedModules       To store all the modules specified in a standardized format.
+     * @param moduleCodesAdded      To verify that there are no duplicate modules added.
      */
     private static void extractModulesAndLessons(Ui ui, int semester, String[] moduleAndLessonsArray,
-                                                 List<SelectedModule> selectedModules) {
+                                                 List<SelectedModule> selectedModules, List<String> moduleCodesAdded) {
         for (String moduleAndLessons : moduleAndLessonsArray) {
             String[] splitModuleAndLesson = moduleAndLessons.split(Pattern.quote(MODULE_CODE_DELIMITER));
             if (splitModuleAndLesson.length == 0) {
@@ -104,15 +105,16 @@ public class Link {
             }
             String moduleCode = splitModuleAndLesson[0];
             Module module = Module.get(moduleCode);
-            if (module == null || module.getSemesterData(semester) == null) {
+            if (module == null || module.getSemesterData(semester) == null || moduleCodesAdded.contains(moduleCode)) {
                 continue;
             }
             ui.addMessage(moduleCode + " added.");
-            ui.addMessage("The following lessons were added:");
+            ui.addMessage("The following lesson(s) were added:");
             SelectedModule selectedModule = new SelectedModule(module, semester);
-            //only parses the lessons between the first and second = sign (there is not supposed to be a second = sign)
+            moduleCodesAdded.add(moduleCode);
+
             if (splitModuleAndLesson.length > 1) {
-                String[] lessonsInfo = (splitModuleAndLesson[1]).split(LESSON_DELIMITER);
+                String[] lessonsInfo = (splitModuleAndLesson[1]).split(Pattern.quote(LESSON_DELIMITER));
                 addLessons(lessonsInfo, selectedModule, semester, ui);
             }
             selectedModules.add(selectedModule);
@@ -198,14 +200,18 @@ public class Link {
      * @param ui             To output to the user.
      */
     private static void addLessons(String[] lessonsInfo, SelectedModule selectedModule, int semester, Ui ui) {
+        List<String> lessonsAdded = new ArrayList<>();
         for (String s : lessonsInfo) {
-            if (!isLessonInfo(s)) {
+            if (s.endsWith(":") || !isLessonInfo(s)) {
                 continue;
             }
-            String[] lessonInfo = s.split(LESSON_TYPE_DELIMITER);
+            String[] lessonInfo = s.split(Pattern.quote(LESSON_TYPE_DELIMITER));
             LessonType lessonType = getLessonType(lessonInfo[0], ui);
             String classNo = lessonInfo[1];
-            addValidLesson(selectedModule, semester, lessonType, classNo, ui);
+            if (lessonsAdded.contains(lessonType + ":" + classNo)) {
+                continue;
+            }
+            addValidLesson(selectedModule, semester, lessonType, classNo, ui, lessonsAdded);
         }
     }
 
@@ -217,27 +223,29 @@ public class Link {
      * @param lessonType     Specified lesson type.
      * @param classNo        Specified class number.
      * @param ui             To output to the user.
+     * @param lessonsAdded   To verify that there are no duplicate lessons added.
      */
-    private static void addValidLesson(SelectedModule selectedModule, int semester,
-                                       LessonType lessonType, String classNo, Ui ui) {
+    private static void addValidLesson(SelectedModule selectedModule, int semester, LessonType lessonType,
+                                       String classNo, Ui ui, List<String> lessonsAdded) {
         List<RawLesson> potentialLesson = selectedModule.getModule().getSemesterData(semester)
             .getLessonsByTypeAndNo(lessonType, classNo);
         if (!potentialLesson.isEmpty()) {
             selectedModule.selectSlot(lessonType, classNo);
             ui.addMessage(lessonType + ":" + classNo);
+            lessonsAdded.add(lessonType + ":" + classNo);
         }
     }
 
     /**
      * Checks if the lesson information is of a valid form. It should begin with 3 to 4 alphanumeric
-     * capital alphabets defined in the {@link LessonTypeParser#parse(String)} function.
+     * alphabets defined in the {@link LessonTypeParser#parse(String)} function.
      *
      * @param lessonInfo Single lesson information of a module.
      * @return <code>true</code> if the lesson information is of a valid form.
      */
     private static boolean isLessonInfo(String lessonInfo) {
         //pattern for classNo is not definite.
-        Pattern pattern = Pattern.compile("[A-Z]{3,4}\\d?:");
+        Pattern pattern = Pattern.compile("^[A-Z]{3,4}\\d?:");
         Matcher matcher = pattern.matcher(lessonInfo);
         return matcher.find();
     }

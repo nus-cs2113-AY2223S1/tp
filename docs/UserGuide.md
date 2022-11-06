@@ -51,10 +51,10 @@ for timetable organization. YAMOM is designed for users who are proficient in Co
    - Do you have an NUSMods share link to [import](#import-a-timetable-import)?
    - If not, do you know what modules you want to add to your timetable? If so proceed to [add](#add-a-module-add) them to your timetable.
    - Otherwise, you might want to [search](#search-for-modules-search) for your desired modules and find more [info](#read-more-details-about-a-module-info) about them.
-   - After you have added your modules, [select](#select-a-timetable-slot-select) your desired lecture/tutorial/lab/etc slots. Not sure which slot to select? Head back to [info](#read-more-details-about-a-module-info) for any details you need.
+   - After you have added your modules, [select](#select-a-timetable-slot-select) your desired lecture/tutorial/lab/etc. slots. Not sure which slot to select? Head back to [info](#read-more-details-about-a-module-info) for any details you need.
    - Once done, [list](#list-out-all-selected-modules-list) your selected modules to verify your choice and view your [timetable](#view-user-timetable-timetable).
    - Added a module wrongly? No worries, just [remove](#remove-a-module-remove) it.
-   - Need your timetable on mobile? Mobile devices are typically not CLI friendly so you have no choice but to [export](#export-current-timetable-export) your data back to NUSMods.
+   - Need your timetable on mobile? Mobile devices are typically not CLI friendly, so you have no choice but to [export](#export-current-timetable-export) your data back to NUSMods.
    - If stuck or confused, remember [help](#seek-help-help) will always be given to those who ask for it. 
 
 
@@ -76,7 +76,7 @@ Sem [1] >>
 > Notes about the command format:
 > - The first word of each command specifies the command type.
 > - Words in `UPPERCASE` information to be supplied by the user.
-    e.g. in `add [ MODULE ]`, `MODULE` is an expected parameter for the command, such as `add CS1010`.
+    e.g. in `add [ MODULE_CODE ]`, `MODULE_CODE` is an expected parameter for the command, such as `add CS1010`.
 > - Extraneous parameters will be rejected or ignored.
 > - Parameters surrounded by square brackets, `[ ]` are required parameters.
 > - Parameters surrounded by angle brackets, `< >` are optional parameters.
@@ -164,8 +164,8 @@ Processing "bye" ...
 These are your export links:
 https://nusmods.com/timetable/sem-1/share?CS1010=LAB:B03,SEC:1,TUT:01
 https://nusmods.com/timetable/sem-2/share?
-https://nusmods.com/timetable/sem-3/share?
-https://nusmods.com/timetable/sem-4/share?
+https://nusmods.com/timetable/st-i/share?
+https://nusmods.com/timetable/st-ii/share?
 Bye bye, See you again
 --------------------------------------------------------------------------------
 ```
@@ -206,6 +206,8 @@ Possible Error:
    ```
    Sem [1] >> add cs203
    --------------------------------------------------------------------------------
+   Processing "add cs203" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Module is invalid! Please enter a valid module code.
    Each module of study has a unique module code consisting of a two-
@@ -220,6 +222,8 @@ Possible Error:
    ```
    Sem [1] >> add CS1231 CS2101
    --------------------------------------------------------------------------------
+   Processing "add CS1231 CS2101" ...
+   
    Error! 	Wrong format, should be: add [MODULE_CODE]
    Unknown command, try again.
    --------------------------------------------------------------------------------
@@ -605,7 +609,7 @@ Possible Error:
     --------------------------------------------------------------------------------
     Processing "timetable show" ...
     
-    Error! 	Unknown command. Maybe you meant "view".
+    Error! 	Unknown command. Maybe you meant "timetable < /fancy | /simple >".
     --------------------------------------------------------------------------------
     ```
 
@@ -666,6 +670,8 @@ Assuming empty list of modules:
 ```
 Sem [1] >> list
 --------------------------------------------------------------------------------
+Processing "list" ...
+
 You currently have no selected module(s)!
 --------------------------------------------------------------------------------
 ```
@@ -689,7 +695,7 @@ Selects a timeslot to be added to the user timetable.
 
 Format: `select [ /module MODULE_CODE ] [ /type LESSON_TYPE ] [ /code CLASS_NO ]`
 
-* The `CLASS_NO` will be an alphanumeric String. This needs need to be an exact match and is not case sensitive. For example, if the code is `03`, then `/code 3` will not be accepted. Similarly, for code `T01`, `/code T1`, `/code 01` and `/code 1` will not be accepted, while `/code T01` and `/code t01` are valid.
+* The `CLASS_NO` will be an alphanumeric String. This needs to be an exact match and is not case-sensitive. For example, if the code is `03`, then `/code 3` will not be accepted. Similarly, for code `T01`, `/code T1`, `/code 01` and `/code 1` will not be accepted, while `/code T01` and `/code t01` are valid.
 * The `LESSON_TYPE` can be any of the following spelt out or in short form (not case-sensitive). Here are some non-exhaustive examples:  
   *  TUTORIAL                   e.g. *tut, tutorial*
   *  TUTORIAL_TYPE_2            e.g. *tut2, tutorial2*
@@ -808,11 +814,15 @@ Format: `import [ NUSMOD_LINK ]`
   * `LAB`  representing LABORATORY
   * `PROJ` representing MINI_PROJECT
   * `SEM`  representing SEMINAR_STYLE_MODULE_CLASS  
-  note: other lesson types are currently not supported.
+  note: other lesson types are currently not supported. Preliminary checks based on the first 4 characters have been implemented to ensure that 
+  * `LESSON_TYPE_SHORT_FORM` is of the above-mentioned form. E.g. `TUTA` will be accepted as representing TUTORIAL.
 * `LESSON_NUMBER` can vary and is not of a certain form. Take note `01` is not the same as `1`. 
 * If `SEMESTER_NUMBER` is incorrect, the whole link will not be parsed.
 * If `MODULE_CODE` is incorrect, that module will not be added.
+* If there are duplicated `MODULE_CODE`, only the first module information will be parsed.
 * If `LESSONS_INFO` is incorrect, that lesson will not be added.
+* If there are duplicated `LESSON_TYPE` within the lesson information, only the last lesson 
+information of that `LESSON_TYPE` will be saved although all will be parsed.
 * The other parts of the link that is valid will still be parsed and a success message will be displayed.
 
 Example of usage:
