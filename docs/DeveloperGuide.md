@@ -740,6 +740,44 @@ java -jar PropertyRentalManager.jar
 
 
 ### Delete
+1. Successful deletion of client
+   1. Prerequisite:
+        * Have at least 1 client added to the app
+   2. Test case: `delete -client i/1`
+      
+      Expected: Terminal shows a successful client deletion message and the deleted client's details.
+   
+
+2. Successful deletion of property
+   1. Prerequisite:
+        * Have at least 1 property added to the app
+   2. Test case: `delete -property i/1`
+   
+      Expected: Terminal shows a successful property deletion message and the deleted property's details.
+   
+
+3. Unsuccessful deletion of client
+   1. Test case: `delete -client`
+   
+      Expected: Terminal shows error message.
+   2. Test case: `delete -client i/[INDEX]` where INDEX is an index that is not in the client list (1-indexed)
+
+      Expected: Terminal shows error message.
+   3. Test case: `delete -client i/hi`
+
+      Expected: Terminal shows error message.
+
+
+3. Unsuccessful deletion of property
+    1. Test case: `delete -property`
+
+       Expected: Terminal shows error message. 
+   2.  Test case: `delete -property i/[INDEX]` where INDEX is an index that is not in the property list (1-indexed)
+
+       Expected: Terminal shows error message.
+    3. Test case: `delete -property i/hi`
+
+       Expected: Terminal shows error message.
 
 ### List
 1. List clients with or without tags
@@ -925,6 +963,33 @@ java -jar PropertyRentalManager.jar
 
 
 ### Check
+
+#### Check Client
+1. Successful check client
+    1. Prerequisites:
+        * Have at least 2 clients and 2 properties added to the app.
+        * Ensure that all clients have budgets equal to or greater than that of the properties.
+        * Pair one of the properties with 2 clients: e.g. input `pair ip/1 ic/1` and `pair ip/1 ic/2`
+    2. Test case: `check -client i/1`
+
+       Expected: Terminal shows details of the client and information of the property this client is renting. Number of list results is greater than 0.
+    3. Test case: `check -client i/2`
+
+       Expected: Terminal shows details of the client and a message showing that this client is not renting any property.
+
+
+2. Unsuccessful check client
+    1. Test case: `check -client i/0`
+
+       Expected: Terminal shows error message.
+
+    2. Test case: `check -client i/[INDEX]`, where INDEX is an index that is not in the client list (1-indexed).
+
+       Expected: Terminal shows error message.
+
+    3. Test case: `check -client i/hello`
+
+       Expected: Terminal shows error message.
 
 #### Check Property
 1. Successful check property
