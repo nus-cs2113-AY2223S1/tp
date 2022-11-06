@@ -1,5 +1,39 @@
 # Developer Guide
 
+## Table of Contents
+
+* [Acknowledgements](#acknowledgements)
+* [Quick Start](#quick-start)
+* [Design & implementation](#design--implementation)
+  * [Architecture](#architecture)
+    * [Main components of the architecture](#main-components-of-the-architecture)
+    * [Interaction between the architecture components](#interaction-between-the-architecture-components)
+  * [PatientList Component](#patientlist-component)
+    * [Important methods in `PatientList` class](#important-methods-in-patientlist-class)
+  * [VisitList Component](#visitlist-component)
+    * [Important methods in `VisitList` class](#important-methods-in-visitlist-class)
+    * [Adding a new visit](#adding-a-new-visit)
+  * [PrescriptionList component](#prescriptionlist-component)
+    * [Important Methods in `PrescriptionList` class](#important-methods-in-prescriptionlist-class)
+    * [Members in `Prescription` class](#members-in-prescription-class)
+    * [Adding a new prescription](#adding-a-new-prescription)
+    * [Viewing prescriptions](#viewing-prescriptions)
+    * [Editing a prescription](#editing-a-prescription)
+    * [Activating / Deactivating a prescription](#activating--deactivating-a-prescription)
+  * [Storage Component](#storage-component)
+  * [UI Component](#ui-component)
+    * [Important methods in the `UI` class](#important-methods-in-the-ui-class)
+  * [Parser Component](#parser-component)
+    * [Important methods in the `Parser` class](#important-methods-in-the-parser-class)
+* [Product scope](#product-scope)
+  * [Target user profile](#target-user-profile)
+  * [Value proposition](#value-proposition)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+  * [Index Reference](#index-reference)
+* [Glossary](#glossary)
+* [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Acknowledgements
 
 Parser class and its functions are adapted with inspiration from [Ria's IP](https://github.com/riavora/ip) and help
@@ -81,7 +115,7 @@ ArrayList in PatientList. A final call to savePatientData rewrites the data file
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
 
-#### Important methods in PatientList class
+#### Important methods in `PatientList` class
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 `Patient` is created and added to the list of `Patient`s in PatientList.
 * `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
@@ -116,7 +150,7 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-#### How adding a new `Visit` into the `VisitList` works
+#### Adding a new visit
 
 ![](images/VisitListAdd.png)
 
@@ -256,7 +290,7 @@ passing the `Patient` and `FileWriter` objects.
 * handles printing messages to the user
 * handles printing errors to the user
 
-**Important methods in the `UI` class:**
+#### Important methods in the `UI` class
 * `printWelcomeMessage` - prints logo and welcome message to the user when opening "OneDoc"
 * `printObject` - prints object - patient/visit/prescription and their corresponding index 
 * `printMessageAndObject` - prints object - patient/visit/prescription and their corresponding index, given message and object type
@@ -274,7 +308,7 @@ The `Parser` component,
 The `Parser` class has dependencies on the `Pattern` (used to create regular expression patterns) and `Matcher`
 (used to find regular expressions in Strings) classes.
 
-**Important methods in the `Parser` class:**
+#### Important methods in the `Parser` class
 
 * `mainMenuParser` - This method interprets the initial user input to identify the correct submenu, and return that 
 state to the UI
