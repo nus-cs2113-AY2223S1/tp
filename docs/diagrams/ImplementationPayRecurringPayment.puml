@@ -4,9 +4,9 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "expense:Expense" as expense DATA_COLOR_1
-Participant "expenseManager:ExpenseManager" as expenseManager DATA_COLOR_1
-Participant "recurringPaymentManager:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_4
+Participant "expense\n:Expense" as expense DATA_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "recurringPaymentManager\n:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_4
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1

@@ -14,10 +14,10 @@ Currencies loaded successfully :)
 
 
 ---- EXPENSE-RELATED-COMMANDS ----
-Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
-View your expenses: View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]
+Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
+View your expenses: View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]
 Delete an expense: Delete-Expense -e EXPENSE-INDEX
-Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
+Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending
 Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
 
@@ -39,6 +39,9 @@ Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHm
 View your targets: View-Target [-e TARGET-INDEX]
 Delete a target: Delete-Target -e TARGET-INDEX
 Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
+
+---- STORAGE-RELATED-COMMANDS ----
+Merging a file: Merge-File -p PATH-STRING
 
 
 ERROR: The command entered is invalid.
@@ -101,7 +104,7 @@ Currency        : SGD
 The expense was added successfully.
 
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 
 
 ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.

@@ -97,7 +97,8 @@ public class ExpenseManager {
 
         try {
             for (Expense expense : expenses) {
-                if (expense.getName().equalsIgnoreCase(expenseName)) {
+                String name = expense.getName();
+                if (name.toLowerCase().contains(expenseName.toLowerCase())) {
                     expensesByName.add(expense);
                 }
             }

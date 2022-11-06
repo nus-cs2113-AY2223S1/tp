@@ -4,8 +4,8 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "target:Target" as target DATA_COLOR_4
-Participant "targetManager:targetManager" as targetManager DATA_COLOR_4
+Participant "target\n:Target" as target DATA_COLOR_4
+Participant "targetManager\n:targetManager" as targetManager DATA_COLOR_4
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1

@@ -4,8 +4,8 @@
 skinparam sequenceReferenceBackgroundColor #ffffff
 
 Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
-Participant "income:Income" as income DATA_COLOR_4
-Participant "incomeManager:IncomeManager" as incomeManager DATA_COLOR_4
+Participant "income\n:Income" as income DATA_COLOR_4
+Participant "incomeManager\n:IncomeManager" as incomeManager DATA_COLOR_4
 Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
 
 activate consoleInterface USER_INTERFACE_COLOR_1
