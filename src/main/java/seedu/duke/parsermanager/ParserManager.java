@@ -122,9 +122,9 @@ public class ParserManager {
         boolean isDeleteClient = subDeleteCommandType.equals(CLIENT_FLAG);
 
         if (isDeleteProperty) {
-            return new ParseDeleteProperty(deleteCommandDescription, propertyList);
+            return new CommandDeletePropertyParser(deleteCommandDescription, propertyList);
         } else if (isDeleteClient) {
-            return new ParseDeleteClient(deleteCommandDescription, clientList);
+            return new CommandDeleteClientParser(deleteCommandDescription, clientList);
         } else {
             throw new UndefinedSubCommandTypeException(MESSAGE_MISSING_SUB_COMMAND_TYPE);
         }
@@ -139,7 +139,7 @@ public class ParserManager {
 
         if (isClient) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
-            return new ParseCheckClient(commandDescription, clientList);
+            return new CommandCheckClientParser(commandDescription, clientList);
         } else if (isProperty) {
             String commandDescription = processedCheckCommandDetail.get(COMMAND_DESCRIPTION_INDEX);
             return new CommandCheckPropertyParser(commandDescription);
