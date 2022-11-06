@@ -9,7 +9,7 @@ activate ": DatabaseStorage"
 ": DatabaseStorage" -> ": DatabaseStorage" : readFile(DATABASE_FILE_PATH)
 activate ": DatabaseStorage"
 
-loop hasNextLine
+loop has next line
     ": DatabaseStorage" -> ": DatabaseStorage" : readDatabaseLine(line)
     activate ": DatabaseStorage"
 
@@ -55,6 +55,19 @@ loop hasNextLine
     deactivate ": Database"
 
     deactivate ": DatabaseStorage"
+end
+
+deactivate ": DatabaseStorage"
+
+": DatabaseStorage" -> ": DatabaseStorage" : checkDatabaseFolder()
+activate ": DatabaseStorage"
+
+opt database folder does not exist
+
+    ": DatabaseStorage" -> ": DatabaseStorage" : createDatabaseFolder()
+    activate ": DatabaseStorage"
+    deactivate ": DatabaseStorage"
+
 end
 
 deactivate ": DatabaseStorage"
