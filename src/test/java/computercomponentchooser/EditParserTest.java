@@ -3,7 +3,8 @@ package computercomponentchooser;
 import org.junit.jupiter.api.Test;
 
 import static computercomponentchooser.ComputerComponentChooser.editParser;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse
 
 public class EditParserTest {
 
