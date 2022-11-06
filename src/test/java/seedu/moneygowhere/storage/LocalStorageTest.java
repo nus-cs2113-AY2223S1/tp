@@ -18,17 +18,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.moneygowhere.storage.LocalStorage.loadFromFile;
 import static seedu.moneygowhere.storage.LocalStorage.saveToFile;
 
+//@@author LokQiJun
+
 class LocalStorageTest {
     @Test
     void save_Load_File() {
         String name = "Test";
+        int interval = 10;
         BigDecimal amount = new BigDecimal("7.80");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
                 Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
         );
         LocalDateTime dateTime = LocalDateTime.parse("01/01/2022 2359", dateTimeFormatter);
         String currency = "SGD";
-        Integer interval = 10;
 
         Expense testExpense = new Expense(name, dateTime, null, amount,
                 null, null, currency, null);

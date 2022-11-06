@@ -20,8 +20,9 @@
   * [API Component](#api-component)
   * [Logger Component](#logger-component)
 * [Implementation](#implementation)
-  * [Printing an expense](#printing-an-expense)
+  * [Loading Data to File](#loading-data-from-file)
   * [Saving Data to File](#saving-data-to-file)
+  * [Printing an expense](#printing-an-expense)
   * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
   * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
   * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
@@ -53,6 +54,8 @@
 * [Glossary](#glossary)
 * [Manual Testing](#manual-testing)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction
 
 MoneyGoWhere is a financial tracker designed to help computing professionals manage their finances.
@@ -64,6 +67,8 @@ We would like to acknowledge the following sources which our team has referenced
 * AddressBook-Level3's User Guide and Developer Guide ([Website](https://se-education.org/addressbook-level3/))
 * Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
 * Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
+
+<div style="page-break-after: always;"></div>
 
 ## Getting Started
 
@@ -90,11 +95,15 @@ You should see the following greeting message if the project setup is successful
 Your MoneyGoWhere? Let me help you track it.
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Design
 ### Software Architecture
 The software architecture diagram below describes the program's design and the interaction between components.
 
 ![Software-Architecture](images/SoftwareArchitecture.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Core Components
 
@@ -110,6 +119,8 @@ The software architecture diagram below describes the program's design and the i
 | Storage       | Provide functions to save and load data.                                 |
 | API           | Provide functions to interact with external APIs.                        |
 | Logger        | Provide functions to log user actions and the program's behaviour.       |
+
+<div style="page-break-after: always;"></div>
 
 ### Component Interactions
 The sequence diagram below describes the interaction between the various core components when a command is entered.
@@ -131,6 +142,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
 In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
 * After the operations are performed, command handler functions calls `UserInterface#runLocalStorageSaveToFile()` functions to save data to local storage.
+
+<div style="page-break-after: always;"></div>
 
 #### Component Interaction Reference Diagrams
 
@@ -158,12 +171,16 @@ In the example above, `UserInterface` calls `UserInterface#convertExpenseToConso
 * `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
 * `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
 
+<div style="page-break-after: always;"></div>
+
 ### Common Component
 
 The Common component consists of the classes `Messages` and `Configurations`.\
 \
 `Messages` defines the messages used by the program during execution. It includes the informational, warning and error messages that are displayed to the user.\
 `Configurations` defines the configuration parameters used by the program. It stores parameters such as data formatting information, directory and file paths, and the URLs of different APIs.
+
+<div style="page-break-after: always;"></div>
 
 ### Exceptions Component
 
@@ -175,6 +192,8 @@ The exceptions are thrown and handled by the program depending on the conditions
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
 Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
 
+<div style="page-break-after: always;"></div>
+
 ### UserInterface Component
 
 The UserInterface component consists of the class `ConsoleInterface` which runs the command line interface that the user interacts with.
@@ -184,6 +203,8 @@ The UserInterface component consists of the class `ConsoleInterface` which runs 
 `ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
 For example, entering the command string `Add-Expense -n Expense -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
 Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
+
+<div style="page-break-after: always;"></div>
 
 ### Parser Component
 
@@ -196,6 +217,8 @@ When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 * `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
 * The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
 
+<div style="page-break-after: always;"></div>
+
 ### Commands Component
 
 The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
@@ -206,6 +229,8 @@ The corresponding console command subclass is returned by `ConsoleParser#parse()
 For example, supplying the command string `Add-Expense -n Expense -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
 Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
 
+<div style="page-break-after: always;"></div>
+
 ### Data Component
 
 The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.
@@ -215,6 +240,8 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 `Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
 `ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
 `CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
+
+<div style="page-break-after: always;"></div>
 
 ### Storage Component
 
@@ -244,18 +271,32 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 `LocalLoggerFormatter` formats the log record before it is written to a log file.
 `LocalLogger` defines functions to log different types of messages to a log file.
 
+<div style="page-break-after: always;"></div>
+
 ## Implementation
 ### Loading Data from File
 
+The following sequence diagram illustrates the process of loading data from local storage.
+
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
 
-### Printing an Expense
-
-![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
+<div style="page-break-after: always;"></div>
 
 ### Saving Data to File
 
+The following sequence diagram illustrates the process of saving data to local storage.
+
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
+
+<div style="page-break-after: always;"></div>
+
+### Printing an Expense
+
+The following sequence diagram illustrates the process of printing and logging an `Expense` object.
+
+![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Expense: `Add-Expense`
 
@@ -263,11 +304,15 @@ The `Add-Expense` command adds a new expense to the program.
 
 ![Implementation-Add-Expense](images/ImplementationAddExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing an Expense: `View-Expense`
 
 The `View-Expense` command displays existing expenses in the program.
 
 ![Implementation-View-Expense](images/ImplementationViewExpense.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Expense: `Delete-Expense`
 
@@ -275,11 +320,15 @@ The `Delete-Expense` command removes an existing expense from the program.
 
 ![Implementation-Delete-Expense](images/ImplementationDeleteExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an Expense: `Edit-Expense`
 
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
 ![Implementation-Edit-Expense](images/ImplementationEditExpense.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting Expenses: `Sort-Expense`
 
@@ -287,15 +336,23 @@ The `Sort-Expense` command sorts the existing expenses in the program.
 
 ![Implementation-Sort-Expense](images/ImplementationSortExpense.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Converting Currencies: `Convert-Currency`
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
 ![Implementation-Convert-Currency](images/ImplementationConvertCurrency.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing a Recurring Payment
 
+The following sequence diagram illustrates the process of printing and logging a `RecurringPayment` object.
+
 ![Implementation-SD-Print-RecurringPayment](images/ImplementationSDPrintRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Recurring Payment: `Add-RecurringPayment`
 
@@ -303,11 +360,15 @@ The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
 ![Implementation-Add-RecurringPayment](images/ImplementationAddRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a Recurring Payment: `View-RecurringPayment`
 
 The `View-RecurringPayment` command displays existing recurring payments in the program.
 
 ![Implementation-View-RecurringPayment](images/ImplementationViewRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Recurring Payment: `Delete-RecurringPayment`
 
@@ -315,11 +376,15 @@ The `Delete-RecurringPayment` command removes an existing recurring payment from
 
 ![Implementation-Delete-RecurringPayment](images/ImplementationDeleteRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Recurring Payment: `Edit-RecurringPayment`
 
 The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
 
 ![Implementation-Edit-RecurringPayment](images/ImplementationEditRecurringPayment.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`
 
@@ -328,9 +393,15 @@ This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](images/ImplementationPayRecurringPayment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing an Income
 
+The following sequence diagram illustrates the process of printing and logging an `Income` object.
+
 ![Implementation-SD-Print-Income](images/ImplementationSDPrintIncome.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an Income: `Add-Income`
 
@@ -338,11 +409,15 @@ The `Add-Income` command adds a new income to the program.
 
 ![Implementation-Add-Income](images/ImplementationAddIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing an Income: `View-Income`
 
 The `View-Income` command displays existing incomes in the program.
 
 ![Implementation-View-Income](images/ImplementationViewIncome.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an Income: `Delete-Income`
 
@@ -350,15 +425,23 @@ The `Delete-Income` command removes an existing income from the program.
 
 ![Implementation-Delete-Income](images/ImplementationDeleteIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an Income: `Edit-Income`
 
 The `Edit-Income` command changes the attributes of an existing income in the program.
 
 ![Implementation-Edit-Income](images/ImplementationEditIncome.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Printing a Target
 
+The following sequence diagram illustrates the process of printing and logging a `Target` object.
+
 ![Implementation-SD-Print-Target](images/ImplementationSDPrintTarget.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a Target: `Add-Target`
 
@@ -366,11 +449,15 @@ The `Add-Target` command adds a new target to the program.
 
 ![Implementation-Add-Target](images/ImplementationAddTarget.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing a Target: `View-Target`
 
 The `View-Target` command displays existing targets in the program.
 
 ![Implementation-View-Target](images/ImplementationViewTarget.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a Target: `Delete-Target`
 
@@ -378,17 +465,23 @@ The `Delete-Target` command removes an existing target from the program.
 
 ![Implementation-Delete-Target](images/ImplementationDeleteTarget.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a Target: `Edit-Target`
 
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
 ![Implementation-Edit-Target](images/ImplementationEditTarget.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Merging a data file: `Merge-File`
 
-The `Merge-File` command merges an external data file with the current data file.
+The `Merge-File` command merges data from an external data file with the existing data in the current data file.
 
-![Implementation-SD-Load-External-Data](images/ImplementationSDLoadExternalData.png)
+![Implementation-Merge-File](images/ImplementationMergeFile.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Product Scope
 ### Target User Profile
@@ -404,6 +497,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 * Runs on mainstream desktop operating system
 * Works over remote command shells such as `ssh`, allowing easy access over the internet
 * Stores data using the Extensible Markup Language, simplifying the transfer and backup of data using tools such as `scp` or `rsync`
+
+<div style="page-break-after: always;"></div>
 
 ## User Stories
 
@@ -437,6 +532,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 |               v2.0               |   user   | edit recurring payments                           | keep track of my recurring payments               |
 |               v2.0               |   user   | add an expense from an existing recurring payment | keep track of when recurring payments were paid   |
 |               v2.0               |   user   | merge several data files together                 | consolidate my expenses easily                    |
+
+<div style="page-break-after: always;"></div>
 
 ## Non-Functional Requirements
 

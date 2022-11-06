@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam noteTextAlignment left
 
@@ -23,13 +23,13 @@ activate LocalStorage STORAGE_COLOR_1
 LocalStorage --[STORAGE_COLOR_1]> consoleInterface
 deactivate LocalStorage
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : setExpenses(savedExpense:ArrayList<Expense>)
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lsetExpenses(\n\tsavedExpense\n\t:ArrayList<Expense>\n)
 activate expenseManager DATA_COLOR_1
 
 expenseManager --[DATA_COLOR_1]> consoleInterface
 deactivate expenseManager
 
-consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lupdateSortCommandSetting(\n\tsortCommandSetting:ConsoleCommandSortExpense\n)
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lupdateSortCommandSetting(\n\tsortCommandSetting\n\t:ConsoleCommandSortExpense\n)
 activate expenseManager DATA_COLOR_1
 
 expenseManager --[DATA_COLOR_1]> consoleInterface

@@ -1036,7 +1036,7 @@ public class ConsoleParser {
 
         if (rateStr != null) {
             BigDecimal rate = new BigDecimal(rateStr);
-            if (rate.compareTo(BigDecimal.ZERO) != 1) {
+            if (rate.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new ConsoleParserCommandConvertCurrencyInvalidException();
             }
         }
@@ -2825,7 +2825,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG
         );
 
-        if (isDateTimeArgumentInvalid(dateTimeStr)) {
+        if (dateTimeStr != null && isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandPayRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_INVALID
             );

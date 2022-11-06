@@ -2,8 +2,9 @@ package seedu.moneygowhere.apis;
 
 import seedu.moneygowhere.data.currency.CurrencyManager;
 
+//@@author jeyvia
 public class CurrencyApiManager {
-    public static void getCurrencyApi(CurrencyManager currencyManager) {
+    public void getCurrencyApi(CurrencyManager currencyManager) {
         CurrencyApi.getJson();
         CurrencyApi.loadFromFile(currencyManager);
     }
