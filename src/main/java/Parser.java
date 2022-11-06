@@ -331,7 +331,7 @@ public class Parser {
 
     private void checkDayAndMonth(int day,int month) throws OneDocException{
         try {
-            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12 ){
+            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12){
                 throw new OneDocException("Invalid date entered, make sure the date is in the correct format:\n"
                         + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12");
             }
@@ -345,8 +345,9 @@ public class Parser {
             String[] dateSplit = date.split("-");
             checkDayAndMonth(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]));
             int year = Integer.parseInt(dateSplit[2]);
-            if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE)
+            if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
                 throw new OneDocException("Invalid year entered in the date, year should be in the range 2012-2032");
+            }
         } catch (NumberFormatException e){
             throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
         }
@@ -361,7 +362,8 @@ public class Parser {
             checkDayAndMonth(day,month);
             if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
                     && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE){
-                throw new OneDocException("Invalid date for birth date, make sure the date range is between 1922 to today");
+                throw new OneDocException("Invalid date for birth date, make sure the date range is between 1922 to "
+                        + "today");
             }
         } catch (NumberFormatException e){
             throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
@@ -374,9 +376,10 @@ public class Parser {
             String[] timeSplit = time.split(":");
             int hour = Integer.parseInt(timeSplit[0]);
             int minute = Integer.parseInt(timeSplit[1]);
-            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE || minute > MAX_MINUTE_RANGE){
-                throw new OneDocException("Invalid time entered, make sure the hours are in range 0-23 and the " +
-                        "minutes are in range 0-59 in the format HH:MM");
+            if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE || minute > MAX_MINUTE_RANGE)
+            {
+                throw new OneDocException("Invalid time entered, make sure the hours are in range 0-23 and the "
+                        + "minutes are in range 0-59 in the format HH:MM");
             }
         } catch (NumberFormatException e) {
             throw new OneDocException("Invalid time entered - please enter digits (0-9) in the format HH:MM");
