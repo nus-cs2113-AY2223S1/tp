@@ -1,10 +1,10 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.ui.Ui;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
-import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.Food;
@@ -17,7 +17,7 @@ import java.nio.file.Path;
 /**
  * Represents operation of saving data to save file.
  */
-public class SaveData {
+public class DataSaver {
 
     /**
      * Saves tasks from taskList to save file.

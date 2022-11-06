@@ -6,7 +6,7 @@ Zhou Zhou's Individual Project: https://github.com/maanyos/ip \
 Nay Chi's Individual Project: https://github.com/NayChi-7/ip \
 Addressbook-level3:https://github.com/se-edu/addressbook-level3
 
-## Design & implementation
+## Design
 
 ### Architecture
 
@@ -78,6 +78,18 @@ filter exercise based on its status when user want to view the exercises based o
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
 
+### Storage component
+![](UmlDiagrams/Storage.png)
+The storage component of TracknFit is responsible for loading data from the save file when the program starts,
+and saves the data into the save file when the program stops. The Storage class uses the static methods in
+DataLoader and DataSaver to load and save data respectively.   
+Data is loaded by directing the text input into AddCommand and SetCommand classes as if they were user inputs. 
+If an error is encountered when loading, the line is printed to inform the user and logged at warning level. Remaining data continues to load.  
+Data is saved by calling the save methods for the different data types, which return Strings in the same format
+as the user input.
+
+## Implementation
+
 ### Sequence diagrams
 
 Adding a new record  
@@ -109,6 +121,15 @@ Viewing calories
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
+
+### Design considerations
+**Saving data:**
+* Option 1 (current implementation): Saves data only when user exits from TracknFit
+  * Pros: Better efficiency for executing each command, easier to implement
+  * Cons: If user exits TracknFit incorrectly or TracknFit crashes, all changes made in the session are lost
+* Option 2: Saves the data to save file after every user command
+  * Pros: All changes are saved even if TracknFit closes incorrectly or crashes
+  * Cons: High overhead in executing each command, always O(N) time, where N is total number of records
 
 ## Product scope
 
