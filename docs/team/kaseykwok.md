@@ -1,4 +1,4 @@
-# Kasey Kwok's Project Portfolio Page
+# Kwok Ying Kwan Kasey's Project Portfolio Page
 
 ## Project: OneDoc
 OneDoc is a desktop application used for managing medical records and patient details. The user interacts with it using 
