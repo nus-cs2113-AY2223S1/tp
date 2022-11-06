@@ -15,6 +15,7 @@ import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.Pars
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.DELETE_CLIENT_FLAGS;
+import static seedu.duke.CommandStructure.START_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
 public class CommandDeleteClientParser extends Parser {
@@ -23,7 +24,6 @@ public class CommandDeleteClientParser extends Parser {
 
 
     private static final int CORRECT_FLAG_POSITION = 0;
-    private static final int INDEX_POSITION = 2;
 
 
     public CommandDeleteClientParser(String deleteCommandDescription, ClientList clientList) {
@@ -60,14 +60,14 @@ public class CommandDeleteClientParser extends Parser {
     }
 
     private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraDeleteClientFlagsException {
-        if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
+        if (flagIndexPositions[START_INDEX] != CORRECT_FLAG_POSITION) {
             throw new ExtraDeleteClientFlagsException();
         }
     }
 
     private void checkForInvalidClientIndexDelete(int clientIndex) throws InvalidDeleteClientIndexException {
         int currentListSize = clientList.getCurrentListSize();
-        if (clientIndex < 0 || clientIndex >= currentListSize) {
+        if (clientIndex < START_INDEX || clientIndex >= currentListSize) {
             throw new InvalidDeleteClientIndexException();
         }
     }

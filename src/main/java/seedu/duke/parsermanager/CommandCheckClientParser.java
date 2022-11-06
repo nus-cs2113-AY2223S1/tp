@@ -61,7 +61,7 @@ public class CommandCheckClientParser extends Parser {
     }
 
     private void validateCheckClientDetails(ArrayList<Integer> clientDetails) throws CheckClientInvalidIndexException {
-        int clientIndex = clientDetails.get(0);
+        int clientIndex = clientDetails.get(START_INDEX);
         checkForClientListIndexOutOfBounds(clientIndex);
     }
 
@@ -74,7 +74,7 @@ public class CommandCheckClientParser extends Parser {
     }
 
     private void checkForClientListIndexOutOfBounds(int clientIndex) throws CheckClientInvalidIndexException {
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
+        if (clientIndex < START_INDEX || clientIndex > clientList.getCurrentListSize() - 1) {
             throw new CheckClientInvalidIndexException();
         }
     }
