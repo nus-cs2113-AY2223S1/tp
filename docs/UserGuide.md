@@ -86,6 +86,9 @@ Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHm
 View your targets: View-Target [-e TARGET-INDEX]
 Delete a target: Delete-Target -e TARGET-INDEX
 Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
+
+---- STORAGE-RELATED-COMMANDS ----
+Merging a file: Merge-File -p PATH-STRING
 ```
 
 ## Managing your expenses
@@ -394,7 +397,8 @@ Examples of usage:
 
 ## Handling your data
 ### Merging a data file: `Merge-File`
-Merges save file from an external source given path to the .xml save file
+Merges save file from an external source given path to the .xml save file.
+If there is a duplicate entry, duplicate entry from external file will be ignored.
 
 Syntax: `Merge-File -p PATH_STRING` 
 
@@ -470,30 +474,38 @@ The recurring payment was added as an expense successfully.
 As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the *.jar* file.
 You may use any of your preferred tool to transfer the **Memory/MoneyGoWhereData.xml** data file to another computer and run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
 
+**Q**: What is a duplicate entry as mentioned in merging an external file?
+
+**A**:
+A duplicate entry is defined as an entry that has the same value for all variable as another existing entry.
+
+
 ## Command Summary
 
 A list of all valid commands.
 
-* Add expense: `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
-* View expense: `View-Expense`
-* Delete expense: `Delete-Expense -e 1`
-* Edit expense: `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`
-* Sort expense: `Sort-Expense -t alphabetical -o ascending"`
-* Convert currency: `Convert-Currency -e 1 -x USD`
-* Add recurring payment: `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`
-* View recurring payment: `View-RecurringPayment`
-* Delete recurring payment: `Delete-RecurringPayment -r 1`
-* Edit recurring payment: `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`
-* Pay recurring payment: `Pay-RecurringPayment -r 1`
-* Add income: `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`
-* View income: `View-Income -e 1`
-* Delete income: `Delete-Income -e 1`
-* Edit income: `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`
-* Add target: `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`
-* View target: `View-Target -e 1`
-* Delete target: `Delete-Target -e 1`
-* Edit target: `Edit-Target -e 1 -n "October Target" -a 100.00`
-* Merge file: `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`
-* Help: `help`
-* Exit: `bye`
+| Command                  | Example                                                                                                                                    |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| Add expense              | `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD`       |
+| View expense             | `View-Expense`                                                                                                                             |
+| Delete expense           | `Delete-Expense -e 1`                                                                                                                      |
+| Edit expense             | `Edit-Expense -e 1 -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD` |
+| Sort expense             | `Sort-Expense -t alphabetical -o ascending"`                                                                                               | 
+| Convert currency         | `Convert-Currency -e 1 -x USD`                                                                                                             |  
+| Add recurring payment    | `Add-RecurringPayment -n "Mobile Plan" -i 30 -a 20.00`                                                                                     |                                                      
+| View recurring payment   | `View-RecurringPayment`                                                                                                                    |                                                      
+| Delete recurring payment | `Delete-RecurringPayment -r 1`                                                                                                             |                                                    
+| Edit recurring payment   | `Edit-RecurringPayment -r 1 -n "Mobile Plan" -i 30 -a 20.00 -t "Monthly payment for my mobile plan" -c Telecom -x SGD -p Card`             |        
+| Pay recurring payment    | `Pay-RecurringPayment -r 1`                                                                                                                |                                                   
+| Add income               | `Add-Income -n "Stocks" -a 500.00 -d "01/02/2022 2359" -t "Investment payouts"`                                                            |                                       
+| View income              | `View-Income -e 1`                                                                                                                         |                                      
+| Delete income            | `Delete-Income -e 1`                                                                                                                       |                                     
+| Edit income              | `Edit-Income -e 1 -n "Monthly Salary" -a 3000 -d "01/01/2022 2359" -t "Monthly payment"`                                                   |                                    
+| Add target               | `Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"`                                          |                                   
+| View target              | `View-Target -e 1`                                                                                                                         |                                  
+| Delete target            | `Delete-Target -e 1`                                                                                                                       |                                 
+| Edit target              | `Edit-Target -e 1 -n "October Target" -a 100.00`                                                                                           |                                
+| Merge file               | `Merge-File -p "C:\Users\the_d\Downloads\expenses.xml"`                                                                                    |                               
+| Help                     | `help`                                                                                                                                     |                              
+| Exit                     | `bye`                                                                                                                                      |                             
 

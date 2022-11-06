@@ -2,6 +2,11 @@ package seedu.moneygowhere.exceptions.parser;
 
 import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 
+//@@author xzynos
+
+/**
+ * Defines exception to be thrown when the command Pay-RecurringPayment is invalid.
+ */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandPayRecurringPaymentInvalidException extends MoneyGoWhereException {
     public ConsoleParserCommandPayRecurringPaymentInvalidException() {
