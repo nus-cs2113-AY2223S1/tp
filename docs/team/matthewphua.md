@@ -35,7 +35,7 @@ Command Line Interface (CLI).
   * Justification: Allows user to see reviews added. Also provides index numbers for removing reviews.
 * **New Feature** Find Command
   * What it does: Finds a review with a specific title.
-  * Justification: Allows user to find a particular review without having to sort through the long list of reviews.
+  * Justification: Allows user to find a specific review w/o viewing all reviews.
   * Highlight: Leveraged list command behavior to prevent redundancy in code when printing out the find command output. 
 
 
@@ -48,7 +48,7 @@ Command Line Interface (CLI).
 
 
 **Contributions to the DG**
-* Wrote Sequence Diagram/Step-by-step walk through for `SortCommand` and `ListCommand` using PlantUML.
+* Wrote Sequence Diagram/Step-by-step walk through for `SortCommand`/ `ListCommand`.
 * Created user stories for user story list, non-functional requirements, and step-by-step guide for manual testing
 
 **Contributions to the UG**
@@ -57,7 +57,7 @@ example input and output. (`add`, `clear`, `delete`, etc.)
 * Created the feature list in UG.
 
 **Review/mentoring contributions**
-* Helped architect overall structure of CLI
+* Helped architect overall structure of CLI and answered any questions from teammates
 * I am the most senior of my group and have had internship
 experiences, so I provided them with resources and advice to get and be successful in interviews. 
   * Ex: I sent them a course I took 
@@ -67,7 +67,7 @@ experiences, so I provided them with resources and advice to get and be successf
   [documentation](https://stackoverflow.com/questions/1119385/junit-test-for-system-out-println)
 
 **Contributions to team-based tasks**
-* Tagged issues and pull requests with proper tags, milestone, assignees 
+* Tagged issues and PRs with proper tags, milestone, assignees 
 / Commented on PRs
 * Helped with function header comments, fixed code style throughout codebase
 * Created feature list in User Guide
