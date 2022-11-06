@@ -2,16 +2,15 @@
 hide footbox
 
 Actor User
-User -> ":Duke" : run
 activate ":Duke"
 ":Duke" -> "<<class>>\nUi" : printGreeting()
 activate "<<class>>\nUi"
 "<<class>>\nUi" --> ":Duke"
 deactivate "<<class>>\nUi"
-":Duke" -> ":Storage" : loadData()
-activate ":Storage"
-return userList, itemList, transactionList
-loop until isLastCommand
+
+loop until isExit
+    ":Duke" -> ":Duke": readInputAndParseCommand()
+    activate ":Duke"
     ":Duke" -> "<<class>>\nUi": readInput()
     activate "<<class>>\nUi"
     User -> "<<class>>\nUi":input
@@ -36,18 +35,22 @@ loop until isLastCommand
         ":Command" --> ":Duke"
         deactivate ":Command"
         destroy ":Command"
-        ":Duke" -> ":Storage" : writeData()
-        activate ":Storage"
+        ":Duke" -> ":StorageManager" : writeDataToFiles()
+        activate ":StorageManager"
         return
+        deactivate ":Duke"
 
     else command is invalid
-        ":Duke" -> "<<class>>\nUi" : print error
+        ":Duke" -> "<<class>>\nUi" : printErrorMessage()
         activate "<<class>>\nUi"
+        "<<class>>\nUi" -> ":DukeException" : getMessage()
+        activate ":DukeException"
+        ":DukeException" --> "<<class>>\nUi"
+        destroy ":DukeException"
         "<<class>>\nUi" --> ":Duke"
         deactivate "<<class>>\nUi"
     end
 end
-":Duke" --> "User"
 deactivate ":Duke"
 
 @enduml
