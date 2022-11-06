@@ -25,7 +25,7 @@ public class Currency2D {
             "cny,chinese yuan renminbi,¥,7.1939",
             "cop,colombian peso,cop$,4734.0812",
             "hrk,croatian kuna,kn,7.6422",
-            "czk,czech koruna,kč,24.9592",
+            "czk,czech koruna,kc,24.9592",
             "dkk,danish krone,kr,7.5517",
             "aed,emirati dirham,dh,3.6725",
             "hkd,hong kong dollar,hkd$,7.85",

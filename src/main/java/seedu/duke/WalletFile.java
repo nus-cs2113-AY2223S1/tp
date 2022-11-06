@@ -24,7 +24,7 @@ public class WalletFile {
     static final Path FILE_PATH = Paths.get("src","main","data");
 
     public static void createNewWallet(Wallet newWallet) throws IOException {
-        File f = new File(FILE_PATH + "/" + newWallet.userName + ".txt");
+        File f = new File(FILE_PATH + File.separator + newWallet.userName + ".txt");
         FileWriter fw = new FileWriter(f, true); // create a FileWriter in append mode
         String encodedPassword = Base64.getEncoder().encodeToString(newWallet.passWord.getBytes());
         fw.write("password:" + encodedPassword);
@@ -38,7 +38,7 @@ public class WalletFile {
 
     public static void updateWallet(Wallet wallet) throws FinanceException {
         final String SEPARATOR = System.lineSeparator();
-        File f = new File(FILE_PATH + "/" + wallet.userName + ".txt");
+        File f = new File(FILE_PATH + File.separator + wallet.userName + ".txt");
         FileWriter fw;
         try {
             fw = new FileWriter(f, false);
@@ -58,7 +58,7 @@ public class WalletFile {
     }
 
     public static Wallet getWallet(String userName) throws FinanceException {
-        File f = new File(FILE_PATH + "/" + userName + ".txt");
+        File f = new File(FILE_PATH + File.separator + userName + ".txt");
         Scanner scan;
         try {
             scan = new Scanner(f);

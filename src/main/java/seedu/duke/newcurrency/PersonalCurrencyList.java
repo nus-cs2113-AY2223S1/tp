@@ -26,7 +26,7 @@ public class PersonalCurrencyList {
         return currencies;
     }
 
-    protected static List<CurrencyStructure> readInCurrencies() throws FinanceException {
+    public static List<CurrencyStructure> readInCurrencies() throws FinanceException {
         List<CurrencyStructure> personalCurrencyList = new ArrayList<>();
         String[] currenciesArray = Currency2D.getArray();
 
@@ -39,7 +39,6 @@ public class PersonalCurrencyList {
                 String symbol = items[2];
                 double rate = Double.parseDouble(items[3]);
                 CurrencyStructure currency = new CurrencyStructure(abbrName, fullName, symbol, rate);
-
                 personalCurrencyList.add(currency);
             }
 

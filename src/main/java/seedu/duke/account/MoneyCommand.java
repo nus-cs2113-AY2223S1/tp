@@ -1,7 +1,5 @@
 package seedu.duke.account;
 
-import java.util.List;
-
 import seedu.duke.CurrencyList;
 import seedu.duke.CurrencyStructure;
 import seedu.duke.Wallet;
@@ -149,6 +147,4 @@ public class MoneyCommand {
         //i should withdraw the amount from the current wallet based on the withdraw function, but maybe a new one without print
         //then get the new wallet and increment that amount
     }
-
-
 }
