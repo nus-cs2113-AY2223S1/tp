@@ -33,6 +33,21 @@ public class RecipeFileParserTest {
         }
     }
 
+
+    @Test
+    void parseTextToRecipe_Empty() {
+        try {
+            String string = "# TITLE (1 line)\n"
+                    + "# DESCRIPTION\n"
+                    + "# INGREDIENTS  index. ingredient_name / amount / unit \n"
+                    + "# STEPS index. description\n";
+            new RecipeFileParser().parseTextToRecipe(string);
+            Assertions.fail();
+        } catch (Exception e) {
+            Assertions.assertTrue(e.getMessage().contains(RecipeFileParser.EMPTY));
+        }
+    }
+
     @Test
     void parseTextToRecipe_MissingHeading() {
         try {
@@ -120,7 +135,7 @@ public class RecipeFileParserTest {
     @Test
     void parseTextToRecipe_Whitespace() {
         try {
-            String string = "# TITLE (1 line)\n"
+            String string = "\n\n\n\n\n\n# TITLE (1 line)\n"
                     + "         Example Title\n\n"
                     + "          # DESCRIPTION\n"
                     + "    "

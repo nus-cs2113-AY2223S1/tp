@@ -21,10 +21,6 @@ public class InvalidCommand extends Command {
         this.message = message;
     }
 
-    public InvalidCommand() {
-        this.message = INVALID_MESSAGE;
-    }
-
     /**
      * Execute invalid result, which only returns a message on invalid command details.
      *
