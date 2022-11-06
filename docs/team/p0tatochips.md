@@ -53,13 +53,13 @@ check the compatibility of the parts.
   * Helped with minor edits/fixes to the User Guide.
 * **Developer Guide**:
   * Added to User Stories section to Developer Guide. 
-  (Pull requests: [#39](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/39)), 
-  [#76](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/76)))
+  (Pull requests: [#39](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/39), 
+  [#76](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/76))
   * Added a glossary for PC parts to the Developer Guide to explain terms for non-technical readers. (Pull request: #39)
   * Contributed the BuildManager, Adding a build, Listing all builds, Finding builds, Filtering builds of the Developer 
   Guide. (Pull requests: [#138](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/138))
   * Added to the Manual Testing section of the Developer Guide (Build Editing mode and Exiting the Program). 
-  (Pull request: [#151]((Pull requests: [#138](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/151))))
+  (Pull request: [#151](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/151))
   * Created diagrams for the Developer Guide:
     * BuildManager (Pull request: [#76](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/76), 
     [#79](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/79))
@@ -70,5 +70,4 @@ check the compatibility of the parts.
 
 ### Contributions beyond the project team
 * I helped to find bugs during the PE-demo.
-* I helped review some PRs. (Pull request: [#132]
-(Pull requests: [#138](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/132)))
+* I helped review some PRs. (Pull request: [#132](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/132))
