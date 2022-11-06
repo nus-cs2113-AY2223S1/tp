@@ -38,25 +38,28 @@
     * [Launch and shutdown](#launch-and-shutdown)
     * [Navigating between main menu and sub menus](#navigating-between-main-menu-and-sub-menus)
     * [Loading sample data](#loading-sample-data)
-    * [Adding a new patient](#adding-a-new-patient)
-    * [Viewing all patients](#viewing-all-patients)
-    * [Retrieving a patient’s records](#retrieving-a-patients-records)
-    * [Modifying the details of a patient](#modifying-the-details-of-a-patient)
-    * [Viewing the commands in Patient menu](#viewing-the-commands-in-patient-menu)
-    * [Adding a visit](#adding-a-visit)
-    * [Adding/editing a reason for existing visit](#addingediting-a-reason-for-existing-visit)
-    * [Deleting a reason for existing visit](#deleting-a-reason-for-existing-visit)
-    * [Viewing all visits](#viewing-all-visits)
-    * [Viewing a patient’s visits](#viewing-a-patients-visits)
-    * [Viewing a specific visit](#viewing-a-specific-visit)
-    * [Viewing the commands in the Visit menu](#viewing-the-commands-in-the-visit-menu)
-    * [Adding a new prescription](#adding-a-new-prescription)
-    * [Modifying a patient’s prescription](#modifying-a-patients-prescription)
-    * [Viewing list of all existing Prescriptions](#viewing-list-of-all-existing-prescriptions)
-    * [Viewing all prescriptions of a patient](#viewing-all-prescriptions-of-a-patient)
-    * [Viewing all active prescriptions of a patient](#viewing-all-active-prescriptions-of-a-patient)
-    * [Changing prescription status](#changing-prescription-status)
-    * [Viewing the commands in the Prescription menu](#viewing-the-commands-in-the-prescription-menu)
+    * [Patient menu tests](#patient-menu-tests)
+      * [Adding a new patient](#adding-a-new-patient)
+      * [Viewing all patients](#viewing-all-patients)
+      * [Retrieving a patient’s records](#retrieving-a-patients-records)
+      * [Modifying the details of a patient](#modifying-the-details-of-a-patient)
+      * [Viewing the commands in Patient menu](#viewing-the-commands-in-patient-menu)
+    * [Visit menu tests](#visit-menu-tests)
+      * [Adding a visit](#adding-a-visit)
+      * [Adding/editing a reason for existing visit](#addingediting-a-reason-for-existing-visit)
+      * [Deleting a reason for existing visit](#deleting-a-reason-for-existing-visit)
+      * [Viewing all visits](#viewing-all-visits)
+      * [Viewing a patient’s visits](#viewing-a-patients-visits)
+      * [Viewing a specific visit](#viewing-a-specific-visit)
+      * [Viewing the commands in the Visit menu](#viewing-the-commands-in-the-visit-menu)
+    * [Prescription menu tests](#prescription-menu-tests)
+      * [Adding a new prescription](#adding-a-new-prescription)
+      * [Modifying a patient’s prescription](#modifying-a-patients-prescription)
+      * [Viewing list of all existing Prescriptions](#viewing-list-of-all-existing-prescriptions)
+      * [Viewing all prescriptions of a patient](#viewing-all-prescriptions-of-a-patient)
+      * [Viewing all active prescriptions of a patient](#viewing-all-active-prescriptions-of-a-patient)
+      * [Changing prescription status](#changing-prescription-status)
+      * [Viewing the commands in the Prescription menu](#viewing-the-commands-in-the-prescription-menu)
 
 ## Acknowledgements
 
@@ -456,43 +459,124 @@ To load sample data, please reference the following formats:
 <br>Example: `T1 | checkup | 08-11-2022 | 08:00`
 
 `prescription.txt`: `ID | Name | Dosage | Time Interval | Active Status (T or F)`
-<br>Example: `T2 | penicillin | 1 tablet | every 3 days | T`
+<br>Example: `T1 | penicillin | 1 tablet | every 3 days | T`
 
-#### Adding a new patient
+#### Patient menu tests
 
-#### Viewing all patients
+##### Adding a new patient
 
-#### Retrieving a patient’s records
+##### Viewing all patients
 
-#### Modifying the details of a patient
+##### Retrieving a patient’s records
 
-#### Viewing the commands in Patient menu
+##### Modifying the details of a patient
 
-#### Adding a visit
+##### Viewing the commands in Patient menu
 
-#### Adding/editing a reason for existing visit
+#### Visit menu tests
 
-#### Deleting a reason for existing visit
+##### Adding a visit
 
-#### Viewing all visits
+##### Adding/editing a reason for existing visit
 
-#### Viewing a patient’s visits
+##### Deleting a reason for existing visit
 
-#### Viewing a specific visit
+##### Viewing all visits
 
-#### Viewing the commands in the Visit menu
+##### Viewing a patient’s visits
 
-#### Adding a new prescription
+##### Viewing a specific visit
 
-#### Modifying a patient’s prescription
+##### Viewing the commands in the Visit menu
 
-#### Viewing list of all existing Prescriptions
+#### Prescription menu tests
+Please navigate to prescription menu by inputting `3` in the main menu before testing the features below.
 
-#### Viewing all prescriptions of a patient
+##### Adding a new prescription
+Please ensure that a patient with ID `T1` exists before testing this feature, and there is no patient with ID `321`.
 
-#### Viewing all active prescriptions of a patient
+1. Add a valid prescription
+   1. Input `add i/T1 n/Problaxan d/10 mg t/take 15 minutes after every meal`. 
+   2. The prescription should be added successfully with the prescription details printed
+2. Add repeated prescription
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day`. 
+   2. Input `add i/T1 n/Panadol d/5 mg t/Once a day` once again.
+   3. The 2nd addition should be rejected, and the existing prescription with the same details should be shown.
+3. Add prescription for non-existing patient
+   1. Input `add i/321 n/Panadol d/5 mg t/Once a day`.
+   2. The addition should be rejected with an error message stating that the patient ID does not exist.
+4. Add prescription with invalid format
+   1. Input `add i/T1 n/Panadol d/A pill t/Once a day`.
+   2. The addition should be rejected with hints of the correct input format for adding prescription.
 
-#### Changing prescription status
+##### Modifying a patient’s prescription
 
-#### Viewing the commands in the Prescription menu
+1. Edit an existing prescription's medicine name
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   2. Input `edit x/<index> n/Problaxan` with the index shown when adding the prescription. (Index is the number next to
+   Prescription #)
+   3. The prescription's medicine name should be changed to `Problaxan` without changing all other attributes.
+2. Edit a non-existing prescription's medicine dosage
+   1. Input `edit x/0 d/19 mg`.
+   2. The modification should be rejected with a message stating the index number is out of range.
+3. Edit an existing prescription which the new version is a duplicate of another existing prescription
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   2. Input `add i/T1 n/Panadol d/10 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   3. Input `edit x/<index> d/5 mg` with the index shown when adding the prescription with `10 mg` dosage. (Index is the
+   number next to Prescription #)
+   4. The modification should be rejected, and the existing prescription with the same details should be shown.
 
+##### Viewing list of all existing Prescriptions
+
+1. View prescriptions when there are prescriptions
+   1. Input `viewall`.
+   2. All prescriptions that are saved in the `prescription.txt` file should be listed.
+2. View prescriptions when there are no prescription
+   1. Clear the `prescription.txt` file manually if it is not empty.
+   2. Input `viewall`. 
+   3. There should be a message stating that there is no prescriptions in the system.
+
+##### Viewing all prescriptions of a patient
+
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID 
+`321`. Please add prescriptions for patient `T1` and not for `T2`.
+
+1. View prescriptions of a patient with existing prescriptions
+   1. Input `viewPatientPres i/T1`
+   2. The prescriptions corresponding to patient `T1` should be listed.
+2. View prescriptions of a patient with no existing prescriptions
+   1. Input `viewPatientPres i/T2`
+   2. There should be a message stating that there is no prescriptions from this patient in the system.
+3. View prescriptions of non-existing patient
+   1. Input `viewPatientPres i/321`
+   2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Viewing all active prescriptions of a patient
+
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID
+`321`. Please add prescriptions for patient `T1` and not for `T2`.
+
+1. View prescriptions of a patient with existing prescriptions
+   1. Input `viewActPatientPres i/T1`
+   2. The active prescriptions corresponding to patient `T1` should be listed.
+2. View prescriptions of a patient with no existing prescriptions
+   1. Input `viewActPatientPres i/T2`
+   2. There should be a message stating that there is no active prescriptions from this patient in the system.
+3. View prescriptions of non-existing patient
+   1. Input `viewActPatientPres i/321`
+   2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Changing prescription status
+
+1. Activate existing prescription
+   1. Input `viewall` and check the index of the last prescription in the system. Please add 1 if there isn't any.
+   2. Input `activate x/<index>`, where the index is the one retrieved from Step 1.
+   3. The status of the prescription should be updated to `Active`.
+2. Deactivate non-existing prescription
+   1. Input `deactivate x/0`.
+   2. There should be a message stating the index number is out of range shown.
+
+##### Viewing the commands in the Prescription menu
+
+1. Input `help`
+2. All commands supported in the Prescription menu should be shown.
