@@ -19,7 +19,7 @@
 - **Saving and Reading from Hard Disk** 
   - What it does: Saves the application state periodically
   - Justification: This ensures that there will e no data loss if the programme suddenly crashes. We also want the users to not have to input their timetable everytime the application is loaded.
-  - Highlights: Initially the format of saving the file was not specified and the storage class was implemented in a simplistic way. However there was a change in idea to be able to export and import as a NUSMods link which meant that the whole functionality had to be reworked. Parts of the function was refactored into a new link class to isolate the function of each class.
+  - Highlights: Initially the format of saving the file was not specified and the storage class was implemented in a simplistic way. However, there was a change in idea to be able to export and import as a NUSMods link which meant that the whole functionality had to be reworked. Parts of the function was refactored into a new link class to isolate the function of each class.
 
 - **Parsing of NUSMods link**
   - What it does: Handles both converting the current application state into a NUSMods link and vice-versa from a NUSMods link to update the current state.
@@ -29,7 +29,7 @@
 - **View Timetable**
   - What it does: Users will be able to view their selected modules and lessons in a timetable format.
   - Justification: A visual representation helps the user visualize their selected modules to see if there are any clashes or if the timeslots fit their schedule.
-  - Highlights: How the timetable was being displayed and what it required was done by Owen Leong. He also handled how the data about the modules were stored. The implementation of this was challenging as there were alot of information that have to be understood first before knowing how it should be implemented.
+  - Highlights: How the timetable was being displayed and what it required was done by Owen Leong. He also handled how the data about the modules were stored. The implementation of this was challenging as there were a lot of information that have to be understood first before knowing how it should be implemented.
 
 ### Enhancements to existing features
 - **Command Architecture** Formulated and deliberated on the command architecture so ensure that our group can function effectively and efficiently.
@@ -45,7 +45,8 @@
 
 - Standardize formatting of DG.
 - Add the overall architecture diagram.
-- Add class diagrams for `Parser`,`Link`,`Storage` and `TimetableCommand` components.
+- Add class diagrams for all `Command` classes.
+- Add class diagrams for `Parser`,`Link`,`Storage` components.
 - Added documentation for the `Parser`,`Link`,`Storage` and `TimetableCommand` component that elaborates how it works.
 - Ensured that all the features of the application is represented in the DG.
 
