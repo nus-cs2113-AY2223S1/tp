@@ -10,26 +10,27 @@ It is written in Java, and has about 10 kLoC.
 ### Summary of Contributions
 
 * **Code
-  Contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
+  Contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other):  
+https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other
 
 
-* **Enhancements implemented**: 
-  1) Implemented and tested parsing methods to ensure that they do not allow erroneous user inputs to be accepted by the program.  
-  2) Implemented storage compatibility to the program with storage file checks regarding the correctness of the stored data.
-  3) Added test cases to check on correctness of parsing methods.
+* **Enhancements implemented**:
+- Implemented and tested parsing methods to ensure that they do not allow erroneous user inputs to be accepted by the program.
+- Implemented storage compatibility to the program with storage file checks regarding the correctness of the stored data.
+- Added test cases to check on correctness of parsing methods.
 
 
 * **Contributions to the UG**:
-  1) Described the Add transaction command.
-  2) Described the automated storage feature. 
-  3) Added the Command cheatsheet, detailing the syntax users need to use to correctly use the program.
+  - Described the Add transaction command.
+  - Described the automated storage feature. 
+  - Added the Command cheatsheet, detailing the syntax users need to use to correctly use the program.
 
 
 * **Contributions to the DG**:
 Contributed to the followings DG segments with their attached diagrams and descriptions:
-  1) Storage Component.
-  2) Storage Operation.
-  3) Add Command.
+  - Storage Component.
+  - Storage Operation.
+  - Add Command.
 
 
 * **Contributions to team based tasks** (Highlighted **a few examples for conciseness**):
