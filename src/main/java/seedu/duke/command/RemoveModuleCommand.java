@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Delete module to state by module code, updates storage and displays execution through ui.
  */
-
 public class RemoveModuleCommand extends Command {
     private Module module;
     private boolean successful;

@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 /**
  * Select semester currently being modelled in state.
  */
-
 public class SelectSemesterCommand extends Command {
     public static final String COMMAND_WORD = "semester";
     public static final String COMMAND_USAGE = "semester [ SEMESTER ]";

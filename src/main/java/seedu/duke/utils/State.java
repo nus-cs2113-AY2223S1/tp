@@ -13,8 +13,7 @@ public class State {
 
     /**
      * State class stores the attributes of the 'model' of the application.
-     * */
-    
+     */
     public State() {
         this.semester = 1;
         this.selectedModulesList = new ArrayList<>();
