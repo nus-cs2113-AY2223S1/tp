@@ -7,13 +7,14 @@ autoactivate on
 'User --> ui: user input
 'Duke <-- ui: user input
 
-Duke -> viewCommand: execute()
+-> viewCommand: execute()
 viewCommand -> parser: getArgumentList(arguments: String)
 return argumentList: String[]
 viewCommand -> parser: getClassType(argumentList: String[])
 return viewType: String
 
 alt biometrics
+    ref over viewCommand: viewBiometrics
 
 else food
 

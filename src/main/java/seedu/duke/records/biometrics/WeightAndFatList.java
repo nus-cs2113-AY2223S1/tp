@@ -22,11 +22,11 @@ public class WeightAndFatList {
         return weightAndFatArrayList.get(0);
     }
 
-    public void removeWeightAndFat(int index) throws IllegalValueException {
+    public WeightAndFat removeWeightAndFat(int index) throws IllegalValueException {
         if (index < 0 || index >= weightAndFatArrayList.size()) {
             throw new IllegalValueException("Weight and fat record does not exist");
         }
-        weightAndFatArrayList.remove(index);
+        return weightAndFatArrayList.remove(index);
     }
 
     public int getSize() {
