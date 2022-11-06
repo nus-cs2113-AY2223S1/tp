@@ -541,33 +541,6 @@ Index | Description  | Calories | Date       |
 --------------------------------------------------------------------------------
 ```
 
-#### Find Food Consumptions Based On Date: `find date_f`
-
-Find specific food records from user's food consumption over time using keyword in TracknFit
-
-Format: `find date_f /{date}`
-
-Example of usage:
-`find date_f /06-11-2022`
-
-Expected outcome:
-All relevant records from the history would be printed out for the user to see how much of a specific food they
-have been consuming.
-
-```
---------------------------------------------------------------------------------
-
-Here are the food records in your list matching this date:
----------------------------------------------------------------------------------
-Index | Description                                    | Calories | Date       | 
----------------------------------------------------------------------------------
-1     | chicken rice                                   | 200      | 06-11-2022 | 
-2     | very very very very long food name for testing | 1000     | 06-11-2022 | 
-
---------------------------------------------------------------------------------
-
-```
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?

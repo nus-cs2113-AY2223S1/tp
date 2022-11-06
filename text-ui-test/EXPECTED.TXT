@@ -25,7 +25,7 @@ add weight /{weight} /{fat percentage}
 remove {food/exercise} /{food index/current exerciseList index}
 mark {done} /{exercise index} / {time} / {metabolic equivalent}
 mark {undone} /{exercise index}
-find {strength/cardio/food/date_f} /{description}
+find {strength/cardio/food} /{description}
 find {calories} /{date}
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

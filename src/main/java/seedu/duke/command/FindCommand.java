@@ -58,9 +58,6 @@ public class FindCommand extends Command {
         case "food":
             findFood(argumentList, slashesCount);
             break;
-        case "date_f":
-            findDateFood(argumentList, slashesCount);
-            break;
         case "calories":
             findCalories(argumentList,slashesCount);
             break;
@@ -92,12 +89,6 @@ public class FindCommand extends Command {
         ui.outputCalories(clist);
     }
 
-    private void findDateFood(String[] argumentList, int slashesCount) throws IllegalValueException {
-        handleInvalidFindDateCommand(argumentList);
-        ArrayList<Food> filteredFoodDateList = getFilteredFoodDateList(argumentList);
-        ui.output("", "Here are the food records in your list matching this date:");
-        ui.outputFoodList(filteredFoodDateList);
-    }
 
     private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
@@ -159,14 +150,6 @@ public class FindCommand extends Command {
                 .filter(f -> f.getFoodDescription().contains(argumentList[1]))
                 .collect(Collectors.toList());
         return filteredFoodList;
-    }
-
-    private ArrayList<Food> getFilteredFoodDateList(String[] argumentList) {
-        ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodList.getFoodList()
-                .stream().filter(Food.class::isInstance)
-                .filter(f -> f.getDateString().contains(argumentList[1]))
-                .collect(Collectors.toList());
-        return filteredFoodDateList;
     }
 
 
