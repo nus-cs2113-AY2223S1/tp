@@ -30,7 +30,7 @@ public class TaskList {
     /**
      * Function adds a new Task to the overall TaskList and to the associated Appointment and Employee's Task list.
      * @param task Constructed by AddTaskCommand and passed in to be added to the overall list.
-     * @throws DukeException
+     * @throws DukeException exception thrown when associated appointment and employee cannot be found.
      */
     public static void addTask(Task task) throws DukeException {
 
@@ -67,7 +67,7 @@ public class TaskList {
      * Function reassigns a task from one employee to another.
      * @param taskId Id of the task to be reassigned.
      * @param employeeId Id of the employee the task is to be reassigned to.
-     * @throws DukeException
+     * @throws DukeException exception thrown when associated task and employee cannot be found.
      */
     // assign task to be done by another person
     public static void reassignTask(int taskId, int employeeId) throws DukeException {
