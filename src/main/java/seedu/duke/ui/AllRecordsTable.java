@@ -13,15 +13,14 @@ public class AllRecordsTable extends TableFrame {
 
     private String caption;
     private final int[] relevantIndices = {DATE_INDEX, WEIGHT_INDEX, FAT_INDEX, FOOD_DESCRIPTION_INDEX,
-                FOOD_CALORIES_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_WEIGHT_INDEX, EXERCISE_SET_INDEX,
-                EXERCISE_REPETITION_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_CALORIES_INDEX, STATUS_INDEX};
+        FOOD_CALORIES_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_WEIGHT_INDEX, EXERCISE_SET_INDEX,
+        EXERCISE_REPETITION_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_CALORIES_INDEX, STATUS_INDEX};
 
-
-    private final String[] mainheadings = {"Weight & Fat", "Food", "Exercises"};
+    private final String[] mainHeadings = {"Weight & Fat", "Food", "Exercises"};
 
     public static final int MAXIMUM_WEIGHT_COLUMN_SPACING = 12;
 
-    private int[] maincolumnSpacingArray = {0, 0, 0};
+    private int[] mainColumnSpacingArray = {0, 0, 0};
 
     public AllRecordsTable(ArrayList<Food> foodArrayList,
                           ArrayList<WeightAndFat> weightAndFatArrayList,
@@ -97,20 +96,20 @@ public class AllRecordsTable extends TableFrame {
     public String addMainHeadingRow(ArrayList<String> tableFrame) {
         setMainHeaderSpacing();
         StringBuilder headingRow = new StringBuilder();
-        headingRow.append(addRightPadding("", maincolumnSpacingArray[0]));
-        for (int i = 1; i < mainheadings.length; i++) {
-            headingRow.append(addRightPadding(mainheadings[i - 1], maincolumnSpacingArray[i]));
+        headingRow.append(addRightPadding("", mainColumnSpacingArray[0]));
+        for (int i = 1; i < mainHeadings.length; i++) {
+            headingRow.append(addRightPadding(mainHeadings[i - 1], mainColumnSpacingArray[i]));
         }
-        headingRow.append(mainheadings[2]);
+        headingRow.append(mainHeadings[2]);
         tableFrame.add(ROW_SEPARATOR.repeat(headingRow.length()));
         tableFrame.add(headingRow.toString());
         return headingRow.toString();
     }
 
     public void setMainHeaderSpacing() {
-        maincolumnSpacingArray[0] = MAXIMUM_DATE_COLUMN_SPACING;
-        maincolumnSpacingArray[1] = MAXIMUM_WEIGHT_COLUMN_SPACING;
-        maincolumnSpacingArray[2] = columnSpacingArray[FOOD_DESCRIPTION_INDEX]
+        mainColumnSpacingArray[0] = MAXIMUM_DATE_COLUMN_SPACING;
+        mainColumnSpacingArray[1] = MAXIMUM_WEIGHT_COLUMN_SPACING;
+        mainColumnSpacingArray[2] = columnSpacingArray[FOOD_DESCRIPTION_INDEX]
                 + columnSpacingArray[FOOD_CALORIES_INDEX] + 3;
     }
 
