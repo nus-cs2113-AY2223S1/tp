@@ -157,7 +157,7 @@ Example:
 
 ### CLI Editor
 The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
-and take note of the format before entering the command.
+and take note of the format before entering the command. Trailing arguments will be discarded.
 
 Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 

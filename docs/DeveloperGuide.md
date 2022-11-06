@@ -182,16 +182,24 @@ otherwise show error message on `index out of bound`
 The recipe module encapsulates the array, recipe and ingredient objects.
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/RecipeClassDiagram.png" alt="Recipe Module Diagram"/>
+  <img width="50%" src="images/ClassDiagrams/RecipeClassDiagram.png" alt="Recipe Module Diagram"/>
 </p>
 
-**API:** `RecipeList.java`
+**API:** `Ingredient.java`
 
-1. `RecipeList` calls `Recipe` to add, edit or delete recipes
+Stores the name, amount and unit of recipes. Smallest class in the module.
 
 **API:** `Recipe.java`
 
-1. `Recipe` calls `Ingredient` to add, edit or delete ingredients
+`Recipe` calls `Ingredient` to add, edit or delete ingredients. It contains methods to parse a recipe, 
+convert a recipe into printable or saveable format and perform operations on `ingredient` and `step` ArrayList objects
+which are instantiated whenever a `Recipe` object is created.
+
+**API:** `RecipeList.java`
+
+`RecipeList` calls `Recipe` to add, edit or delete recipes. It consists of two ArrayList objects (`recipes` to store 
+recipes and `recipeTitles` to store titles). It contains methods to count the number of existing recipes, 
+search for recipes based on the given parameter and save edited recipe into `Storage`.
 
 ### Edit CLI Component
 
@@ -201,15 +209,13 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 
 The edit component consists of three parts:
 
-- Parser
-    - Parses the user input, instantiates the EditCommand class
-- EditModeCommand
-    - Handles the edit functions that falls under `EditModeCommand` 
-  (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
-- EditCommand
+- **Parser**
+    - Parses the user input, instantiates `EditCommand` and `GUIWorkFlow`, switches between different flags
+- **EditModeCommand**
+    - Handles the edit functions that falls under `EditModeCommand` (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
+- **EditCommand**
     - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
-      CLI,
-      handles saving the edited recipe
+      CLI, saves the edited recipe to `Storage`
 
 #### Parser
 
@@ -232,22 +238,22 @@ The following illustrates the work sequence to edit a recipe.
 <p align="center" width="100%">
   <img width="80%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
 </p>
-The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+The user first call the edit command from the `Main` class which will then be passed to the `Parser` class. It decides
 whether the GUI or CLI should be called through the number of arguments passed by the user.
 
 #### GUI Edit
-
-- GUI window is called by GuiWorkFlow
-- After the GUI edit has finished, EditCommand is instantiated and the new recipe is saved to Storage through the
-  RecipeList class
+Called if the user provides exacty two parameters.
+- GUI window is called by `GuiWorkFlow`
+- After the GUI edit has finished, `EditCommand` is instantiated and the new recipe is saved to `Storage` through the
+  `RecipeList` class
 
 #### CLI Edit
-
-- EditCommand is instantiated with the corresponding flags parsed from the arguments provided by the user
-- Depending on the flags passed, it instantiates the abstract class EditModeCommand using different constructors
-  (Add, Delete, Swap, Change)
-- Once it has been executed, it returns the new edited recipe, which will be saved to Storage through the RecipeList
-  class
+Called if the user provides more than two parameters.
+- `EditCommand` is instantiated with the corresponding flags parsed from the arguments provided by the user
+- Depending on the flags passed, it instantiates the abstract class `EditModeCommand` using different constructors
+  (`Add`, `Delete`, `Swap`, `Change`)
+- Once it has been executed, it returns the new edited `Recipe`, which will be saved to `Storage` through the 
+`RecipeList` class
 
 ### GUI Component
 
