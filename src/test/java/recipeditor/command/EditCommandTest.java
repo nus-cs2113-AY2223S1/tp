@@ -31,8 +31,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(flags, parsed, 0, recipe, "test title");
         final String actual = editCommand.execute().getMessage();
         new DeleteCommand(recipe.getTitle()).execute();
-        String expected = "\n" +
-                "test title: ingredient successfully edited.";
+        String expected = "\n"
+                + "test title: ingredient successfully edited.";
         assertEquals(expected, actual);
     }
 
