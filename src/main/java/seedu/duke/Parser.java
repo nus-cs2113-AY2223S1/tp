@@ -97,7 +97,7 @@ public class Parser {
             final String favouriteCommand = "favourite";
             final String sortCommand = "sort";
             final String findCommand = "find";
-            final String NOTHING = "";
+            final String nothing = "";
 
             String[] parsedCommand = getCommandWord(userInput);
 
@@ -137,9 +137,9 @@ public class Parser {
                 executeSort(parsedCommand);
                 break;
 
-            case NOTHING:
+            case nothing:
                 break;
-                
+
             default:
                 logger.log(Level.WARNING, "An unrecognised command was given by the user.");
                 Ui.print("Unrecognised command");

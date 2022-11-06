@@ -12,12 +12,14 @@ import java.io.FileWriter;
 public class Storage {
     private String filepath;
     private String folderpath;
-    final static String SPLITTER = "\\|";
-    final static String MOVIE_TYPE = "M";
-    final static String TV_TYPE = "T";
-    final static String YES_STRING = "Y";
-    final static String MOVIE_KEY = "M|";
-    final static String TV_KEY = "T|";
+    static final String SPLITTER = "\\|";
+    static final String MOVIE_TYPE = "M";
+    static final String TV_TYPE = "T";
+    static final String YES_STRING = "Y";
+    static final String MOVIE_KEY = "M|";
+    static final String TV_KEY = "T|";
+    static final int NUM_FIELDS_MOVIE = 6;
+    static final int NUM_FIELDS_TV = 7;
 
     public Storage(String filepath, String folderpath) {
         assert filepath.length() > 0 : "Filepath length cannot be 0";
@@ -56,9 +58,6 @@ public class Storage {
     }
 
     public Boolean isValidFields(String lineInput) {
-        final int NUM_FIELDS_MOVIE = 6;
-        final int NUM_FIELDS_TV = 7;
-        
         String[] fields = lineInput.split(SPLITTER);
         
         if (!(lineInput.contains(TV_KEY) || lineInput.contains(MOVIE_KEY))) {
