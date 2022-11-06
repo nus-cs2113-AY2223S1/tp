@@ -1076,6 +1076,8 @@ public class ConsoleInterface {
             return;
         }
 
+        printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS);
 
         runLocalStorageSaveToFile();
