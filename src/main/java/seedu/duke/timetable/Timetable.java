@@ -59,12 +59,14 @@ public class Timetable {
         return list.toString();
     }
 
+    //@@author HT-T
     public static void deleteModule(int index) {
         Module module = listOfModules.get(index - 1);
         timetableDict.deleteModule(module);
         listOfModules.remove(index - 1);
         listOfChangeableModules.remove(module);
     }    // the nth module in list has index n-1
+    //@@author HT-T
 
     public static int getListLength() {
         return listOfModules.size();

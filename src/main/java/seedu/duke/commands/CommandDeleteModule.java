@@ -53,7 +53,11 @@ public class CommandDeleteModule {
     }
 
     private static boolean isInvalidInput(String index, int length) {
-        return (!isInteger(index) || Integer.parseInt(index) < 1 || Integer.parseInt(index) > length);
+        boolean isInteger = isInteger(index);
+        boolean lessThanLength = Integer.parseInt(index) < 1;
+        boolean moreThanLength = Integer.parseInt(index) > length;
+        boolean isInvalidFlag = !isInteger || lessThanLength || moreThanLength;
+        return isInvalidFlag;
     }
 
     private static boolean isInteger(String str) {
@@ -64,5 +68,5 @@ public class CommandDeleteModule {
         }
         return true;
     }
-    // code from Chee Heng
+
 }

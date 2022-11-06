@@ -10,6 +10,9 @@
     - [4.2. Setting lessons for individual modules](#42-setting-lessons-for-individual-modules)
     - [4.3. Auto-allocating lessons](#43-auto-allocating-lessons)
     - [4.4. Printing the timetable](#44-printing-the-timetable)
+        - [4.4.1. Populate lesson data from timetable](#441-populate-lesson-data-from-timetable)
+        - [4.4.2. Write day and time headers for timetable](#442-write-day-and-time-headers-for-timetable)
+        - [4.4.3. Write day and time headers for timetable](#443-write-day-and-time-headers-for-timetable)
     - [4.5. Listing current modules](#45-listing-current-modules)
     - [4.6. Getting info on modules](#46-getting-info-on-modules)
     - [4.7. Deleting modules from timetable](#47-deleting-modules-from-timetable)
@@ -117,6 +120,96 @@ Tutorial : 5 lessons with class numbers "1", "2", "3", "4" and "5" (Hence, tutor
 
 #### 4.4. Printing the timetable
 
+The ***Activity Diagram*** below is a simplified depiction of the module `CommandPrintTimetable`.  
+<img src="images/printTimetable_0.png" width="380" />
+
+<details><summary>Please read the notes for the following section of 4.4</summary><p style='text-align: justify;'>
+
+1. There is no rake symbol in PlantUML Language Reference Guide. Considering the recommendation from [this CS2103 forum](https://github.com/nus-cs2103-AY1920S2/forum/issues/105), ```[rake ⋔]``` is used in place of the rake symbol in textbook.
+
+2. The following detailed explanations will include collapsible tabs for better navigation in this long section.
+
+3. Original variable names in `CommandPrintTimetable` are italicized if they appear in the activity diagrams.
+
+4. Only activities with rake symbol will have a separate section below. Steps of Decalre / Initialize 2D array will be explained in section 4.4.1.
+
+</p></details>
+
+
+
+##### 4.4.1 Populate lesson data from timetable
+
+<img src="images/printTimetable_1.png" width="480" />
+
+
+ <details><summary>Activity of 4.4.1</summary><p style='text-align: justify;' markdown="1">
+
+- Three ArrayLists are populated from ```timetable``` module.
+- ```rawTimetable``` stores the ```lesson``` object for each day;
+- ```emptySlotList``` stores pairs of ```integer``` of starting and ending slots for each day;
+- ```clashModCodeList``` stores a list of clashed module code of ```string```, if any.
+
+</p></details>
+
+
+<details><summary>Activity of Declare / Initialize 2D Arrays</summary><p style='text-align: justify;' markdown="1">
+
+- A 2D array,```timeTable``` of ```string``` type is declared and initialized with empty strings first. This array is for storing the output strings of the actual timetable for print later on.
+
+</p></details>
+
+
+##### 4.4.2 Write day and time headers for timetable
+<img src="images/printTimetable_2.png" width="480" />
+<details><summary>Activity of 4.4.2</summary><p style='text-align: justify;' markdown="1">
+
+- Time headers in 24 hours, from 0800 to 2200, is written into ```timeTable```.
+- Monday to Friday headers are written into ```timeTable``` as well.
+- Column divider ```:``` serves as the vertical separation line among different days from Monday to Friday.
+- Row divider ```=``` serves as the horizontal separation line between days of a week and the actual lessons below.
+
+
+</p></details>
+
+
+##### 4.4.3 Write day and time headers for timetable
+<img src="images/printTimetable_3.png" width="280" />
+<details><summary>Activity of 4.4.3</summary><p style='text-align: justify;' markdown="1">
+
+- ```emptySlotList```, with pairs of ```integers``` of starting and ending slots for different days in a week, is sorted by the starting slot. This is to prepare for the checking and finding overlapping lesson intervals later.
+- If there are clashes:
+
+ <details><summary>&nbsp;&nbsp; (a) Get all clash intervals of the day </summary><p>
+
+&nbsp;&nbsp; <img src="images/printTimetable_3_1.png" width="280" />
+
+&nbsp;&nbsp;&nbsp;&nbsp; I.Merge all the overlapping intervals. e.g. ```[0800,1000] , [0900,1100] , [1100,1200]``` will be merged as ```[0800,1100] , [1100,1200]``` <br>
+&nbsp;&nbsp;&nbsp;&nbsp; II.Re-popularize and sort ```rawTimetable``` - to make sure starting and ending slots of lessons are not affected by the merging algorithm <br>
+&nbsp;&nbsp;&nbsp;&nbsp; III. Popularize ```clashSlotList``` for each day - to store the merged overlapping intervals in step I. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; IV. Remove un-clashed lesson slots. In the above example, ```[1100,1200]``` is not a clashed interval, which is removed in this step. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; V. Return ```clashSlotList```, now an ```ArrayList``` of clashed intervals. <br>
+</p></details> 
+
+
+&nbsp;&nbsp; (b) Write ```X``` for the clashed intervals <br>
+&nbsp;&nbsp; (c) Write the clashed module code in  ```clashModCodeList``` <br>
+
+- If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
+- If there is ```XXXX``` - activity will stop due to this unexpcted behavior.
+- If there are no ```XXXX```  - mark of a clash - proceed to write the lesssons into ```timeTable```: <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
+&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
+
+- ```timeTable``` is converted into strings for output.
+- Module codes which clashes from ```clashedModCodeList``` is appended at the end of the output string
+- Remarks and notes are then appended at the end of the output string
+- Finally, the whole output string is returned and printed on the terminal.
+
+
+</p></details> 
+
+
 ---
 
 #### 4.5. Listing current modules
@@ -157,6 +250,22 @@ with a code of 200 is accepted.
 ---
 
 #### 4.7. Deleting modules from timetable
+<img src="images/deleteModule.png" width="580" />
+
+The ***Sequence Diagram*** above is a simplified depiction of how modules are deleted from timetable. As this feature is implemented after function of adding module, the class `CommandDeleteModule` manages the key actions (as explained above) from a higher level.</p>
+
+**Design Decision:**
+<p style='text-align: justify;'>
+
+The class `CommandAddModule` is a control abstraction to the operations of 
+(1) checking whether the timetable is empty; 
+(2) query the module to delete from timetable; and 
+(3) delete the module, if any.</p>
+
+<p style='text-align: justify;'>
+
+The query of user input is implemented through the UI class, instead of directly importing ```java.util.Scanner```, for more uniformed packaging of input and output commands.</p>
+
 
 ---
 
