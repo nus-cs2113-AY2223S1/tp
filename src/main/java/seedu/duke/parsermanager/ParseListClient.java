@@ -11,31 +11,44 @@ import static seedu.duke.Messages.MESSAGE_INCORRECT_CLIENT_LIST_FLAG;
 
 public class ParseListClient extends Parser {
 
-    private final String commandFlags;
+    private final String commandTags;
 
     public ParseListClient(String listClientCommandDescription) {
-        this.commandFlags = listClientCommandDescription;
+        this.commandTags = listClientCommandDescription;
     }
+
+    /**
+     * Checks whether the input tags are present. If present, check their validity and returns the corresponding
+     * command type.
+     * @return CommandListClients object if no tags present. CommandListClientsWithTags if valid tag present.
+     * @throws IncorrectListFlagsException if invalid tags present
+     */
 
     @Override
     public Command parseCommand() throws IncorrectListFlagsException {
-        if (commandFlags.isEmpty()) {
+        if (commandTags.isEmpty()) {
             return new CommandListClients();
-        } else if (isValidTag(commandFlags)) {
-            return new CommandListClientsWithTags(commandFlags);
+        } else if (isValidTag(commandTags)) {
+            return new CommandListClientsWithTags(commandTags);
         } else {
             throw new IncorrectListFlagsException(MESSAGE_INCORRECT_CLIENT_LIST_FLAG);
         }
     }
 
-    boolean isValidTag(String commandFlags) {
-        switch (commandFlags) {
-        case CommandStructure.NAME_FLAG:
-            //deliberate fall through till SHORT_FLAG
-        case CommandStructure.CONTACT_NUMBER_FLAG:
-        case CommandStructure.EMAIL_FLAG:
-        case CommandStructure.BUDGET_FLAG:
-        case CommandStructure.SHORT_FLAG:
+    /**
+     * Checks whether the TAG entered by the user is a valid one, as described in the UG.
+     * @param commandTags Contains the information about what tags are entered by the user
+     * @return true if valid flag. False otherwise.
+     */
+
+    boolean isValidTag(String commandTags) {
+        switch (commandTags) {
+        case CommandStructure.NAME_TAG:
+            //deliberate fall through till SHORT_TAG
+        case CommandStructure.CONTACT_NUMBER_TAG:
+        case CommandStructure.EMAIL_TAG:
+        case CommandStructure.BUDGET_TAG:
+        case CommandStructure.SHORT_TAG:
             return true;
             //break not needed as we are returning
         default:

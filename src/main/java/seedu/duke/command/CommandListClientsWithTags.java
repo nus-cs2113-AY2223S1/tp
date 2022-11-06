@@ -10,35 +10,45 @@ import seedu.duke.CommandStructure;
 import static seedu.duke.Messages.MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT;
 
 public class CommandListClientsWithTags extends Command {
-    private final String commandFlag;
+    private final String commandTag;
 
     public CommandListClientsWithTags(String commandFlag) {
-        this.commandFlag = commandFlag;
+        this.commandTag = commandFlag;
     }
+
+    /**
+     * Uses information present in commandTag to determine what information needs to be printed, and calls the
+     * relevant method to print it.
+     * @param ui User interface object that handles interactions between user and the app.
+     * @param storage Storage object that is responsible for storing and loading the app data.
+     * @param propertyList PropertyList object that handles all app interactions with the list of properties.
+     * @param clientList ClientList object that handles all app interactions with the list of clients.
+     * @param pairingList PairingList object that handles all app interactions with the clients' rental of property.
+     */
 
     @Override
     public void execute(Ui ui, Storage storage, PropertyList propertyList, ClientList clientList,
                         PairingList pairingList) {
-        assert commandFlag.equals(CommandStructure.CONTACT_NUMBER_FLAG)
-                || commandFlag.equals(CommandStructure.NAME_FLAG)
-                || commandFlag.equals(CommandStructure.EMAIL_FLAG)
-                || commandFlag.equals(CommandStructure.BUDGET_FLAG)
-                || commandFlag.equals(CommandStructure.SHORT_FLAG)
+        assert commandTag.equals(CommandStructure.CONTACT_NUMBER_TAG)
+                || commandTag.equals(CommandStructure.NAME_TAG)
+                || commandTag.equals(CommandStructure.EMAIL_TAG)
+                || commandTag.equals(CommandStructure.BUDGET_TAG)
+                || commandTag.equals(CommandStructure.SHORT_TAG)
                 : MESSAGE_LIST_CLIENTS_WITH_TAGS_ASSERT;
-        switch (commandFlag) {
-        case CommandStructure.CONTACT_NUMBER_FLAG:
+        switch (commandTag) {
+        case CommandStructure.CONTACT_NUMBER_TAG:
             displayClientContacts(clientList, ui);
             break;
-        case CommandStructure.NAME_FLAG:
+        case CommandStructure.NAME_TAG:
             displayClientNames(clientList, ui);
             break;
-        case CommandStructure.EMAIL_FLAG:
+        case CommandStructure.EMAIL_TAG:
             displayClientEmails(clientList, ui);
             break;
-        case CommandStructure.BUDGET_FLAG:
+        case CommandStructure.BUDGET_TAG:
             displayClientBudget(clientList, ui);
             break;
-        case CommandStructure.SHORT_FLAG:
+        case CommandStructure.SHORT_TAG:
             displayClientShort(clientList, ui);
             break;
         default:
