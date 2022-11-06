@@ -209,8 +209,8 @@ class ParserTest {
         int index = RecipeList.getRecipeSize();
         String input = "/delete -id " + index;
         Command deleteCommand = Parser.parseCommand(input);
-        String expected = '\n' + recipe.getTitle()
-                + " is deleted from the recipe list." + '\n';
+        String expected = String.format("\n" + recipe.getTitle()
+                + " is deleted from the recipe list.%n");
         String commandExecutedResult = deleteCommand.execute().getMessage();
         resetDeletedRecipe();
         assertEquals(expected, commandExecutedResult);
@@ -241,8 +241,8 @@ class ParserTest {
     public void deleteCommand_byTitle_success() {
         String input = "/delete -t " + TEST_RECIPE_TITLE;
         Command deleteCommand = Parser.parseCommand(input);
-        String expected = '\n' + RecipeList.getRecipeFromTitle(TEST_RECIPE_TITLE).getTitle()
-                + " is deleted from the recipe list." + '\n';
+        String expected = String.format("\n" + recipe.getTitle()
+                + " is deleted from the recipe list.%n");
         String commandExecutedResult = deleteCommand.execute().getMessage();
         resetDeletedRecipe();
         assertEquals(expected, commandExecutedResult);
