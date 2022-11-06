@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 /**
  * Class to contain data used by multiple classes.
  */
-public class CommonFiles {
+public abstract class CommonFiles {
     public static final String API_JSON_DIRECTORY = "./resources/api";
     public static final String LTA_JSON_FILE = "ltaResponse.json";
     public static final String CARPARK_LIST_DIRECTORY = "./resources";

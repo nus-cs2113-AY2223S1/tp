@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Model <<Rectangle>> {
+Class asd #FFFFFF
+}
+
+package API <<Rectangle>> {
+Class aasdsd #FFFFFF
+}
+
+package Storage <<Rectangle>> {
+    abstract Class FileReader {
+        +{static} loadLtaJson(Path, Path): List<Carpark>
+        -{static} getCarparks(Path): List<Carpark>
+        +{static} readStringFromTxt(String, String): String
+        +{static} loadCarparkListFromTxt(String, String): CarparkList
+    }
+
+    Class FileStorage {
+        -directoryPath: String
+        -filePath: String
+        -file: File
+        -ui: Ui
+
+        +FileStorage(String, String)
+        -checkFileExists()
+        +writeDataToFile(String)
+        +{static}ensureBackup()
+        +{static}saveCarparkList(CarparkList)
+    }
+
+    Class LtaJsonWrapper {
+        -metadata: String
+        -value: List<Carpark>
+        +setMetadata(String)
+        +setValue(List<Carpark>)
+        +getValue(): List<Carpark>
+    }
+}
+
+
+
+Class HiddenOutside #FFFFFF
+FileReader -[dashed]-> LtaJsonWrapper : uses
+FileReader <-[dashed]- Model
+FileReader <-[dashed]- API
+
+
+@enduml

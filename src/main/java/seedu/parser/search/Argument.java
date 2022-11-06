@@ -8,17 +8,17 @@ import seedu.exception.DashedArgumentsNotInFrontException;
 /**
  * A representation of command arguments for use with the {@link seedu.parser.Parser Parser} class.
  */
-public class Arguments {
+public class Argument {
     private final ArrayList<String> dashedArgs = new ArrayList<>();
     private Sentence arguments;
 
     /**
-     * Constructor for the {@link Arguments} class. Parses a string into a collection of arguments.
+     * Constructor for the {@link Argument} class. Parses a string into a collection of arguments.
      *
      * @param argString Argument string to parse.
      * @throws DashedArgumentsNotInFrontException If the order of dashed arguments and regular arguments are wrong.
      */
-    public Arguments(String argString) throws DashedArgumentsNotInFrontException {
+    public Argument(String argString) throws DashedArgumentsNotInFrontException {
         List<String> allArgs = new ArrayList<>(List.of(argString.split(" ", 0)));
         boolean dashes = true;
         ArrayList<String> noDashArgs = new ArrayList<>();

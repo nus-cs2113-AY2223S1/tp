@@ -19,13 +19,13 @@ import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoFileFoundException;
 import seedu.exception.ParkingException;
-import seedu.files.parsing.LtaJsonWrapper;
+import seedu.files.wrapper.LtaJsonWrapper;
 import seedu.ui.Ui;
 
 /**
  * Deals with reading from files
  */
-public class FileReader {
+public abstract class FileReader {
 
     /**
      * Loads .json file as an ArrayList of {@link Carpark} class
