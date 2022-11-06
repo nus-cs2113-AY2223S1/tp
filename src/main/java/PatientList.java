@@ -30,8 +30,7 @@ public class PatientList {
                 return;
             }
         }
-        ui.printLine();
-        System.out.println("Sorry, no patient exists with the supplied ID!");
+        ui.printNoPatientFound();
     }
 
     public Patient findPatient(String id) {
@@ -47,8 +46,7 @@ public class PatientList {
     public void modifyPatientDetails(UI ui, String id, String name, String birthDate, String gender) {
         Patient patientToBeModified = findPatient(id);
         if (patientToBeModified == null) {
-            System.out.println("Sorry! No patient exists in the system with the supplied ID!");
-            ui.printLine();
+            ui.printNoPatientFound();
             return;
         }
         if (!name.isEmpty()) {
@@ -72,7 +70,7 @@ public class PatientList {
         return patients.size();
     }
 
-    private Patient getPatient(int patientNumber) {
+    public Patient getPatient(int patientNumber) {
         return patients.get(patientNumber);
     }
 
@@ -87,16 +85,10 @@ public class PatientList {
 
     public void listPatients(UI ui) {
         if (isEmpty()) {
-            System.out.println("There are no patients in the system right now!");
+            ui.printNoPatientsMessage();
             return;
         }
-        System.out.println("Here are the list of patients in the system:");
-        for (int i = 0; i < getTotalNumberofPatients(); i++) {
-            ui.printObject(getPatient(i).toString(), i, UI.PATIENT);
-        }
-
-        ui.printLine();
-
+        ui.printPatientList(this);
     }
 
     public ArrayList<Patient> getPatients() {

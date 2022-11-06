@@ -94,7 +94,7 @@ public class Parser {
                 errorIfNoMatchPatient(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
@@ -150,7 +150,7 @@ public class Parser {
                 errorIfNoMatchVisit(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
@@ -217,7 +217,7 @@ public class Parser {
                 errorIfNoMatchPrescription(null, "default");
             }
         } catch (OneDocException e) {
-            System.out.println("Incorrect format: " + e.getMessage());
+            ui.printInvalidFormatMessage(e.getMessage());
         } catch (Exception e) {
             System.out.println("Unexpected issue: " + e.getMessage());
         }
@@ -329,30 +329,45 @@ public class Parser {
         }
     }
 
+    /***
+     * checks that the months in the input date are valid
+     * @param day
+     * @param month
+     * @throws OneDocException
+     */
     private void checkDayAndMonth(int day,int month) throws OneDocException {
         try {
             if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
-                throw new OneDocException("Invalid date entered, make sure the date is in the correct format:\n"
-                        + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12");
+                throw new OneDocException(UI.INVALID_DATE);
             }
         } catch (NumberFormatException e) {
-            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+            throw new OneDocException(UI.INVALID_DATE_FORMAT);
         }
     }
 
+    /***
+     * checks that the date input is valid i.e. month, day and year are valid
+     * @param date
+     * @throws OneDocException
+     */
     private void checkDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             checkDayAndMonth(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]));
             int year = Integer.parseInt(dateSplit[2]);
             if (year < MIN_YEAR_RANGE || year > MAX_YEAR_RANGE) {
-                throw new OneDocException("Invalid year entered in the date, year should be in the range 2012-2032");
+                throw new OneDocException(UI.INVALID_YEAR);
             }
         } catch (NumberFormatException e) {
-            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+            throw new OneDocException(UI.INVALID_DATE_FORMAT);
         }
     }
 
+    /***
+     * checks that the birthdate is valid i.e. valid day, month and year and was not born after today
+     * @param date
+     * @throws OneDocException
+     */
     private void checkBirthDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
@@ -362,11 +377,10 @@ public class Parser {
             checkDayAndMonth(day,month);
             if ((day > java.time.LocalDate.now().getDayOfMonth() && month >= java.time.LocalDate.now().getMonthValue()
                     && year >= java.time.LocalDate.now().getYear()) || year < MIN_DOB_YEAR_RANGE) {
-                throw new OneDocException("Invalid date for birth date, make sure the date range is between 1922 to "
-                        + "today");
+                throw new OneDocException(UI.INVALID_DOB);
             }
         } catch (NumberFormatException e) {
-            throw new OneDocException("Invalid Date entered - please enter digits (0-9) in the format DD-MM-YYYY");
+            throw new OneDocException(UI.INVALID_DATE);
         }
     }
 
@@ -378,11 +392,10 @@ public class Parser {
             int minute = Integer.parseInt(timeSplit[1]);
             if (hour < MIN_TIME_RANGE || hour > MAX_HOUR_RANGE || minute < MIN_TIME_RANGE
                     || minute > MAX_MINUTE_RANGE) {
-                throw new OneDocException("Invalid time entered, make sure the hours are in range 0-23 and the "
-                        + "minutes are in range 0-59 in the format HH:MM");
+                throw new OneDocException(UI.INVALID_TIME);
             }
         } catch (NumberFormatException e) {
-            throw new OneDocException("Invalid time entered - please enter digits (0-9) in the format HH:MM");
+            throw new OneDocException(UI.INVALID_TIME);
         }
     }
 
