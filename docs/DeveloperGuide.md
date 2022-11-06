@@ -276,15 +276,21 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 ## Implementation
 ### Loading Data from File
 
+The following sequence diagram illustrates the process of loading data from local storage.
+
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
 
 ### Saving Data to File
+
+The following sequence diagram illustrates the process of saving data to local storage.
 
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
 
 <div style="page-break-after: always;"></div>
 
 ### Printing an Expense
+
+The following sequence diagram illustrates the process of printing and logging an `Expense` object.
 
 ![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
 
@@ -340,6 +346,8 @@ The `Convert-Currency` command converts the currency of an existing expense in t
 
 ### Printing a Recurring Payment
 
+The following sequence diagram illustrates the process of printing and logging a `RecurringPayment` object.
+
 ![Implementation-SD-Print-RecurringPayment](images/ImplementationSDPrintRecurringPayment.png)
 
 <div style="page-break-after: always;"></div>
@@ -387,6 +395,8 @@ This command helps the user to track when recurring payments are paid.
 
 ### Printing an Income
 
+The following sequence diagram illustrates the process of printing and logging an `Income` object.
+
 ![Implementation-SD-Print-Income](images/ImplementationSDPrintIncome.png)
 
 <div style="page-break-after: always;"></div>
@@ -424,6 +434,8 @@ The `Edit-Income` command changes the attributes of an existing income in the pr
 <div style="page-break-after: always;"></div>
 
 ### Printing a Target
+
+The following sequence diagram illustrates the process of printing and logging a `Target` object.
 
 ![Implementation-SD-Print-Target](images/ImplementationSDPrintTarget.png)
 
@@ -463,9 +475,9 @@ The `Edit-Target` command changes the attributes of an existing target in the pr
 
 ### Merging a data file: `Merge-File`
 
-The `Merge-File` command merges an external data file with the current data file.
+The `Merge-File` command merges data from an external data file with the existing data in the current data file.
 
-![Implementation-SD-Load-External-Data](images/ImplementationSDLoadExternalData.png)
+![Implementation-Merge-File](images/ImplementationMergeFile.png)
 
 <div style="page-break-after: always;"></div>
 
