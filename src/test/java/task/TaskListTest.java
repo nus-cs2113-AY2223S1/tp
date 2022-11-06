@@ -22,7 +22,7 @@ class TaskListTest {
     }
 
     @Test
-    void addTask() {
+    void addTaskSuccess() {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
@@ -55,7 +55,7 @@ class TaskListTest {
     }
 
     @Test
-    void reassignTask() {
+    void reassignTaskSuccess() {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
@@ -89,7 +89,7 @@ class TaskListTest {
     }
 
     @Test
-    void removeTask() {
+    void removeTaskSuccess() {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
@@ -126,8 +126,49 @@ class TaskListTest {
     }
 
     @Test
-    void findTask() {
-        assertEquals(null, TaskList.findTask(987654321));
+    void findTaskSuccessAndFail() {
+        // Add 1 pet
+        AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
+        addPetCommand.execute();
+        // Add 1 service
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Tooth Surgery");
+        addServiceCommand.execute();
+        // Add 1 appointment
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2001, "2022-12-01", "Tooth Surgery");
+        addAppointmentCommand.execute();
+        // Add 1 employee
+        AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Tom");
+        addEmployeeCommand.execute();
+
+        // Add a task associated to the above appointment and employee
+        AddTaskCommand addTaskCommand = new AddTaskCommand(3001, 1001, "Set up equipment");
+        addTaskCommand.execute();
+        assertEquals("Set up equipment", TaskList.findTask(4001).getTaskDescription());
+        assertEquals(null, TaskList.findTask(987654321)
+        );
+    }
+
+    @Test
+    void finishTask() {
+        // Add 1 pet
+        AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
+        addPetCommand.execute();
+        // Add 1 service
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Tooth Surgery");
+        addServiceCommand.execute();
+        // Add 1 appointment
+        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2001, "2022-12-01", "Tooth Surgery");
+        addAppointmentCommand.execute();
+        // Add 1 employee
+        AddEmployeeCommand addEmployeeCommand = new AddEmployeeCommand("Tom");
+        addEmployeeCommand.execute();
+
+        // Add a task associated to the above appointment and employee
+        AddTaskCommand addTaskCommand = new AddTaskCommand(3001, 1001, "Set up equipment");
+        addTaskCommand.execute();
+        assertEquals("Not Done", Objects.requireNonNull(TaskList.findTask(4001)).getStatus());
+        TaskList.finishTask(4001);
+        assertEquals("Done", Objects.requireNonNull(TaskList.findTask(4001)).getStatus());
     }
 
 }
