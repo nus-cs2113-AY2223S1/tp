@@ -22,9 +22,6 @@
 * [Instructions for Manual Testing](#instructions-for-manual-testing)
 
 ## Design & implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Main Mode
 
 This section describes the implementation of Main Mode features.
@@ -32,19 +29,21 @@ This section describes the implementation of Main Mode features.
 Once the `main()` method of ComputerComponentChooser is called, instances for the `BuildManager`, `Parser`, 
 `editParser`, `Storage`, `Ui` classes are initialized.
 
+![](/images/Architecture.png)
+
 #### BuildManager
 
 ![](/images/BuildManager.png)
 
-The builds are managed by the BuildManager class. It contains a list of builds in a HashMap. The class also contains
-methods to find and filter builds based on user requirements. The BuildManager class is a singleton class, meaning that
+The builds are managed by the `BuildManager` class. It contains a list of builds in a `HashMap`. The class also contains
+methods to find and filter builds based on user requirements. The `BuildManager` class is a singleton class, meaning that
 there is only one instance of the class in the program. This is to ensure that there is only one list of builds in the
 program. 
 
-In our application, BuildManager is a class object that contains a HashMap of builds. The HashMap is used to store the
-builds in the program. The key of the HashMap is the name of the build, and the value is the build object.
+In our application, `BuildManager` is a class object that contains a HashMap of builds. The `HashMap` is used to store the
+builds in the program. The key of the `HashMap` is the name of the build, and the value is the build object.
 
-The BuildManager class is responsible for the following operations:
+The `BuildManager` class is responsible for the following operations:
 - Add a build to the list of builds
 - Delete a build from the list of builds
 - Get a particular build from the list of builds
@@ -250,7 +249,7 @@ If the text file does not exist, `createFile()` will be called to create a new t
 
 ### Components
 
-![](/images/Component.png)
+![](/images/ComponentEdited.png)
 
 Each of the various components are represented by classes stored in the `components` package. The current components represented are the following:
 - `Cpu`

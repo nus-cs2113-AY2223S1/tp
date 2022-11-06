@@ -1,0 +1,78 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+hide circle
+skinparam classAttributeIconSize 0
+
+scale 1.5
+
+class Drive {
+# String size
+# String driveType
+
+}
+class Motherboard {
+# String socket
+# String formFactor
+# String memorySlots
+# String gpuSlots
+
+}
+class Memory {
+# String speed
+# String size
+
+}
+class PowerSupply {
+
+}
+class Monitor {
+# String refreshRate
+# String responseTime
+# String resolution
+
+}
+class Case {
+# String formFactor
+# String expansionSlots
+
+}
+class Other {
+
+}
+class Cooler {
+# String socket
+# String fanSpeed
+# String noiseLevel
+
+}
+class Cpu {
+# String socket
+# String clock
+
+}
+class Gpu {
+# String chipset
+# String memory
+# String clock
+
+}
+abstract class Component {
+# String name
+# String price
+# String power
+
+}
+
+
+Component <|-- Drive
+Component <|-- Motherboard
+Component <|-- Memory
+Component <|-- PowerSupply
+Component <|-- Monitor
+Component <|-- Case
+Component <|-- Other
+Component <|-- Cooler
+Component <|-- Cpu
+Component <|-- Gpu
+@enduml
