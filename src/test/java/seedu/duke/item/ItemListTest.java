@@ -8,7 +8,7 @@ import seedu.duke.exception.ItemNotFoundException;
 import seedu.duke.transaction.TransactionList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+// @@author jorellesee
 public class ItemListTest {
     ItemList itemList;
     Item item;
@@ -39,4 +39,5 @@ public class ItemListTest {
     void getItemById_expect_pen() throws ItemNotFoundException {
         assertEquals("pen", itemList.getItemById("28sd37h2").getName());
     }
+
 }
