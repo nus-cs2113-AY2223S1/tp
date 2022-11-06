@@ -170,8 +170,7 @@ public class Parser {
      * Checks for valid special term 1 and 2. Spaces and capitalization does not matter.
      * If the user entered a valid special term, the keyword at index 1 will be replaced
      * with the system understood semester number for special term (3/4) for the
-     * {@link #selectSemesterCommandError(String[], String)} to correctly instantiate
-     * the semester number.
+     * {@link SelectSemesterCommand} to correctly instantiate the semester number.
      *
      * @param keywords Contains the user input split by spaces.
      * @return If the user entered a valid special term.

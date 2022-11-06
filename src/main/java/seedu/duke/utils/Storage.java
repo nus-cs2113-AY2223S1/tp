@@ -25,8 +25,6 @@ public class Storage {
 
     public static final String LOADING_PREVIOUS_STATE_MESSAGE = "Loading previous state.";
 
-    public static final String NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE = "There are no modules saved.";
-
     public static final String EXPORT_MESSAGE = "These are your export links:";
 
     private Logger logger = Logger.getLogger(Storage.class.getName());
@@ -48,10 +46,8 @@ public class Storage {
             ArrayList<String> links = readPreviousState();
             for (String link: links) {
                 Link.parseLink(link, state, ui);
-                if (Link.isEmptyLink(link)) {
-                    ui.addMessage(NO_PREVIOUS_SAVED_MODULE_ERROR_MESSAGE);
-                }
             }
+            //default semester when starting the application will be 1.
             state.setSemester(1);
             ui.addMessage(LOADING_PREVIOUS_STATE_MESSAGE);
             logger.log(Level.FINE, "Opened previous saved file");
@@ -78,7 +74,7 @@ public class Storage {
         Scanner scanner = new Scanner(file);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (Link.isValidLink(line)) {
+            if (Link.isValidLink(line) && !Link.isEmptyLink(line)) {
                 links.add(line);
             }
         }
@@ -127,6 +123,5 @@ public class Storage {
         if (SystemUtils.IS_OS_WINDOWS) {
             Files.setAttribute(path, "dos:hidden", true);
         }
-
     }
 }

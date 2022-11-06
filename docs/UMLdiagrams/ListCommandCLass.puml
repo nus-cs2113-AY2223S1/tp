@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class ListCommand {
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_WORD: String
+    <u>+ HEADING_LENGTH: int
+    <u>+ DETAILS_INDENT: int
+    - successful: boolean
+
+    + formatSelectedModule(SelectedModule, int): String
+    + formatSelectedSlots(Module, Map<LessonType, String>, int): String
+    - formatSingleSlot(Module, LessonType, String, int): String
+    - formatWeeks(List<Integer>): String
+}
+
+@enduml

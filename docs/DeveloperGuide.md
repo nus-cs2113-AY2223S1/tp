@@ -222,7 +222,7 @@ Finally, it will also lead to tight coupling and decreased cohesion.
 
 ### 3.4 Command Component
 
-![Command Abstract Class](images/commandClass.png)
+![Command Abstract Class](images/Command.png)
 
 The <code>Command</code> component can:
 
@@ -284,6 +284,8 @@ and improving cohesion, it was moved back under the `AddModuleCommand` class.
 
 #### 3.4.2 RemoveModuleCommand
 
+![RemoveModuleCommand](images/RemoveModuleCommandClass.png)
+
 The <code>RemoveModuleCommand</code> class extends from the <code>Command</code> class and deletes the user input module
 from their timetable.
 
@@ -311,6 +313,8 @@ coupling
 and improving cohesion, it was moved back under the `RemoveModuleCommand` class.
 
 #### 3.4.3 HelpCommand
+
+![HelpCommand](images/HelpCommandClass.png)
 
 The <code>HelpCommand</code> class extends from the <code>Command</code> class and displays the help message.
 
@@ -361,22 +365,24 @@ multiple times and the search process will be too long.
 
 #### 3.4.5 SelectSlotCommand
 
+![SelectSlotCommand](images/SelectSlotCommandClass.png)
+
 The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the
-different
-lesson types.
+different lesson types.
 
 #### 3.4.6 SelectSemesterCommand
 
+![SelectSemesterCommand](images/SelectSemesterCommandClass.png)
+
 The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that
-the
-user wish to plan for.
+the user wish to plan for.
 
 #### 3.4.7 InfoCommand
 
 The <code>InfoCommand</code> class extends from the <code>Command</code> class and gets all the details of the module
 that the user wants.
 
-![GetModuleCommand](images/GetModuleCommand.png)
+![InfoCommand](images/InfoCommandClass.png)
 
 <!-- TODO: update diagram -->
 
@@ -424,20 +430,28 @@ to create duplicate code to fulfil similar needs as the timetable is needed by o
 
 #### 3.4.9 ByeCommand
 
+![ByeCommand](images/ByeCommandClass.png)
+
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
 #### 3.4.10 ListCommand
+
+![ListCommand](images/ListCommandCLass.png)  
 
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
 
 #### 3.4.11 ExportCommand
 
+![ExportCommand](images/ExportCommandClass.png)  
+
 The <code>ExportCommand</code> class extends from the <code>Command</code> class and exports the current state
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links.
 
 #### 3.4.12 ImportCommand
+
+![ImportCommand](images/importCommandClass.png)  
 
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
@@ -523,12 +537,11 @@ users to swap to using YAMOM.
 ##### 3.5.3.3 Alternatives considered
 
 Storing as <code>.json</code> file
-
 - would have to implement another function for export/import function
 
 Using the java preference API, `java.util.prefs.Preferences` to save user preferences
+- will not pass the GitHub automated checkers since it access and stores data in the registry.
 
-- will not pass the github automated checkers
 
 ## 4. Documentation
 
@@ -603,68 +616,28 @@ The methodology of hybrid unit + integration testing is followed such that we mi
 time
 develop our plentiful base of unit tests. An example of hybrid unit + integration testing is as follows:
 
+In this test we aim to check if the 'glue code' `execute()` method from the `AddModuleCommand` class integrates with
+in particular `State` and `SelectedModule` class instances. We are testing
+if the selected `Module` in this case `CS1010` object, by asserting it does not exist in the state object before
+invocation of `execute()` and exists within the `State` instance after.
+
 ```
- @Test
-    void testRemoveSelectedModule_returnedListEqualsGenericListOfSelectedModulesAdded() {
-
-        // validate correct module details
-        Module module1 = Module.get("CS1010S");
-        Module module2 = Module.get("CS1231");
-        validateTwoTestModulesCS1010SandCS1231(module1, module2);
-
-        // Validating list of selectedModules
-        List<SelectedModule> list = new ArrayList<>();
-        int semester = 1;
-
-        SelectedModule selectedModule1 = new SelectedModule(module1, semester);
-        SelectedModule selectedModule2 = new SelectedModule(module1, semester);
-        assertNotNull(selectedModule1.getModule());
-        assertNotNull(selectedModule2.getModule());
-
-        list.add(selectedModule2);
-        assertNotNull(list);
+    @Test
+    void testExecute_validModuleAdded_StateUpdatedWithNewModule() throws YamomException {
+        Module module = Module.get("CS1010S");
+        assertNotNull(module);
         State state = new State();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        int semester = 1;
+        state.setSemester(semester);
+        SelectedModule selectedModule = new SelectedModule(module, semester);
+        assertFalse(state.getSelectedModulesList().contains(selectedModule));
 
-        // Add modules via state instance method
-        state.addSelectedModule(selectedModule1);
-        state.addSelectedModule(selectedModule2);
-
-        // Remove modules via state instance method
-        state.removeSelectedModule(selectedModule1);
-
-        List<SelectedModule> returnedListOfAddedModules = state.getSelectedModulesList();
-        assertEquals(list, returnedListOfAddedModules);
-
-        state.removeSelectedModule(selectedModule2);
-        returnedListOfAddedModules = state.getSelectedModulesList();
-
-        list.remove(selectedModule2);
-        assertEquals(returnedListOfAddedModules, list);
-    }
-```
-
-In this test we aim to check if the `RemoveModuleCommand` class integrates with the `State` class. While we are testing
-if the added `Module` objects are removed correctly, we also validate each component in units via smaller unit tests
-such
-as `validateTwoTestModulesCS1010SandCS1231()` as below:
-
-```
-void validateTwoTestModulesCS1010SandCS1231(Module module1, Module module2) {
-        assertNotNull(module1);
-        assertEquals("CS1010S", module1.moduleCode);
-        assertEquals("Programming Methodology", module1.title);
-        assertEquals(List.of(2, 1, 1, 3, 3), module1.workload);
-        assertEquals(2, module1.semesterData.size());
-        assertEquals("Computer Science", module1.department);
-        assertEquals("Computing", module1.faculty);
-
-        assertNotNull(module2);
-        assertEquals("CS1231", module2.moduleCode);
-        assertEquals("Discrete Structures", module2.title);
-        assertEquals(List.of(3, 1, 0, 3, 3), module2.workload);
-        assertEquals(2, module2.semesterData.size());
-        assertEquals("Computer Science", module2.department);
-        assertEquals("Computing", module2.faculty);
+        String[] testInput = {"add", "cs1010s"};
+        AddModuleCommand addModuleCommand = new AddModuleCommand(testInput);
+        addModuleCommand.execute(state, ui, storage);
+        assertTrue(state.getSelectedModulesList().contains(selectedModule));
     }
 ```
 
@@ -676,36 +649,16 @@ System test cases are based on the specified external behavior of the system. So
 bounds defined in the specification. This is useful when testing that the system fails 'gracefully' when pushed beyond
 its limits.
 
-An example of system testing would be users not following the formats for command inputs. We have account for various
-possible unexpected user inputs. An example would be the user missing out when `[ MODULE_CODE ]`  using the
-`info [ MODULE_CODE ]` command. The expected behaviour should be to throw an error when the
-`[ MODULE_CODE ]` field is empty and display a helpful error message to the user. To validate that YAMOM fails
-gracefully instead of
-throwing a NullPointerException and crashing, the following test checks on the custom exception catching that also warns
-users.
-
-```
-    @Test
-    void infoCommand_emptyModuleCode_exceptionThrown() {
-        Ui ui = new Ui();
-        State state = new State();
-        state.setSemester(1);
-        try {
-            String[] input = {"info"};
-            InfoCommand infoCommand = new InfoCommand(input);
-            infoCommand.execute(state, ui, null);
-            fail();
-        } catch (YamomException e) {
-            assertEquals("Error! \tPlease enter a module code!", e.getMessage());
-        }
-    }
-```
+As of now, YAMOM being a lightweight personal CLI application we do not foresee the need for system testing as on most
+modern personal computing system, more than adequate speed is provided. In the future, if the project evolves to be
+deployed on to a server, and the architecture of the application changes to become an API for users to interact with,
+we will be using system testing.
 
 ### 5.2 Instructions for manual testing
 
 <!-- {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing} -->
 
-Typically, for manual testing, the good flow of testing would be to follow the principles that we try to implement in 
+Typically, for manual testing, the good flow of testing would be to follow the principles that we try to implement in
 the `text-ui-test/input.txt` file. Here is a small excerpt:
 
 ```
@@ -723,11 +676,13 @@ list
 ```
 
 When manual testing, the developer should attempt to invoke commands then visually confirm the expected behaviour from a
-user standpoint. From there, the developer should iterate and attempt to check edge cases, push program boundaries etc., 
+user standpoint. From there, the developer should iterate and attempt to check edge cases, push program boundaries etc.,
 in order to . Running through the excerpt above, after invoking `help` to look at available commands and input formats,
-the developer attempts to use the `add` command then visually confirm that his intended module has been added to the 
-timetable with the `list` command. From here a suggestion for manual testing could be to attempt to input invalid commands
-such as `add cs2` then confirming with the `list` command to ensure that unexpected behaviours from user is accounted for
+the developer attempts to use the `add` command then visually confirm that his intended module has been added to the
+timetable with the `list` command. From here a suggestion for manual testing could be to attempt to input invalid
+commands
+such as `add cs2` then confirming with the `list` command to ensure that unexpected behaviours from user is accounted
+for
 and handled.
 
 Manual product testing also has the benefit of being able to replicate user experience before alpha releases, thus it is
@@ -752,6 +707,9 @@ search and timetable builder for the National University of Singapore, optimized
 (CLI). If you can type fast, YAMOM can get your timetable done faster than traditional GUI apps.
 
 ## Appendix A: Product scope
+
+YAMOM is meant to be for personal use. As of now we aim to support single users running the application locally on their
+personal devices.
 
 ## Appendix B: User Stories
 
