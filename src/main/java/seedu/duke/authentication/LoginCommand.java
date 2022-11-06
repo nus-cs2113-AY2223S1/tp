@@ -6,6 +6,8 @@ import seedu.duke.WalletFile;
 import seedu.duke.account.Account;
 import seedu.duke.exception.FinanceException;
 
+import java.io.IOException;
+
 public class LoginCommand {
     public static void handleLogin() throws FinanceException {
         boolean isLoginSuccess = false;
@@ -30,6 +32,8 @@ public class LoginCommand {
                         }
                         catch(FinanceException e){
                             e.handleException();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
                     }
                 } else {
