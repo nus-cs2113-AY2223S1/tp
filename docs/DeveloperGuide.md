@@ -2,13 +2,13 @@
 
 ## Table of Contents
 * [Design & Implementation](#design--implementation)
-  * [Main Mode](#main-mode)
+  * [Build Management Mode](#build-management-mode)
     * [Build Manager](#build-manager)
     * [Adding a Build](#adding-a-build)
     * [Listing all Builds](#listing-all-builds)
     * [Finding a Build](#finding-a-build)
     * [Filtering Builds](#filtering-builds)
-  * [Edit Mode](#edit-mode)
+  * [Build Editing Mode](#build-editing-mode)
     * [Build](#build)
     * [Components](#components)
   * [Storage](#storage)
@@ -29,10 +29,11 @@
 
 
 ## Design & implementation
-### Main Mode
+### Build Management Mode
 
-This section describes the implementation of Main Mode features. Main Mode only allows the user to manage the builds.
-If the user wish to edit a specific build, he/she can refer to the [Edit Mode](#edit-mode).
+This section describes the implementation of Build Management Mode features. Build Management Mode only allows the user 
+to manage the builds.
+If the user wish to edit a specific build, he/she can refer to the [Build Editing Mode](#build-editing-mode).
 
 Once the `main()` method of ComputerComponentChooser is called, instances for the `BuildManager`, `Parser`, 
 `editParser`, `Storage`, `Ui` classes are initialized.
@@ -140,7 +141,7 @@ list of builds that pass all the compatibility checks.
 The following sequence diagram shows how the filter operation works:
 ![](/images/BuildManagerFilterSequence.png)
 
-### Edit Mode
+### Build Editing Mode
 
 #### Build
 
@@ -303,20 +304,20 @@ to each component type.
 
 __Note__: The exported CSV file will be empty if the existing builds do not have components.
 
-
-## Product Scope
-### Target User Profile
+## Appendix 
+### Product Scope
+#### Target User Profile
 
 This product is targeted towards PC building enthusiasts and commercial custom PC builders who have a need and want to 
 keep track of their PC builds. It is optimized for users to work with a Command Line Interface (CLI).
 
-### Value Proposition
+#### Value Proposition
 
 This product helps builders to keep track of their PC builds and their components. It also helps them to keep track of
 their total power consumption and the total cost of their builds. Compatibility of components is also checked to ensure
 that the build is able to function properly..
 
-## User Stories
+### User Stories
 The following user stories will be implemented in the version stated in the table and will be available as a feature
 from that version onwards.
 
@@ -339,13 +340,13 @@ from that version onwards.
 | v2.0    | user     | filter builds              | find all builds that are within a certain power range       |
 | v2.0    | user     | filter builds              | find all builds that are compatible                         |
 
-## Non-Functional Requirements
+### Non-Functional Requirements
 
 Product should work on any mainstream OS as long as it has Java 11 or above installed.
 
-## Glossary
+### Glossary
 
-### PC parts
+#### PC parts
 
 | Terms       | Definition                                                                                             |
 |-------------|--------------------------------------------------------------------------------------------------------|
@@ -360,7 +361,7 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 | monitor     | A monitor is a display device that is used to display information.                                     |
 | other       | Any other components that are not currently represented in the application. <br/> E.g. Keyboard, Mouse |
 
-### PC parts parameters
+#### PC parts parameters
 
 | Parameter      | Examples                                                        |
 |----------------|-----------------------------------------------------------------|
@@ -417,7 +418,7 @@ What can I do for you today?
 ____________________________________________________________
 
 ```
-### Testing in main mode
+### Testing in Build Management mode
 
 1. Adding a build.
    1. Requires name of the build to be added.
@@ -482,9 +483,51 @@ ____________________________________________________________
     1. Requires name of the build to be edited.
     2. Test case: `edit/test build`
         1. Expected: Build named `test build` is edited. Status message indicating successful editing of build is shown.
-       and user is brought into edit mode.
+       and user is brought into Build Editing mode.
     3. Test case: `edit/non-existent build`
         1. Expected: No build is edited. Error message indicating `Builds does not exist!` is shown.
-### Testing in edit mode
+#### Testing in Build Editing mode
 
-In edit mode the printed lines are dashes with arrow heads at both ends. This is to indicate that the user is in edit mode.
+In Build Editing mode the printed lines are dashes with arrow heads at both ends. This is to indicate that the user is 
+in Build Editing mode.
+1. Adding a component.
+   1. Requires name of the component to be added.
+   2. Test case: `add/cpu/test cpu/200/50/am4/4`
+      1. Expected: Component named `test cpu` is added to `test build`. Status message indicating 
+            successful addition of component is shown.
+   3. Test case: `add`
+      1. Expected: The component is not added. Error message indicating `Please enter a command with the correct 
+      number of parameters` is shown.
+2. Deleting a component.
+   1. Requires name of the component to be deleted.
+   2. Test case: `delete/cpu/test cpu`
+      1. Expected: Component named `test cpu` is deleted from `test build`. Status message indicating 
+            successful deletion of component is shown.
+   3. Test case: `delete/cpu/non-existent cpu`
+      1. Expected: The component is not deleted. Error message indicating `This component does not exist` is shown.
+3. Viewing a component.
+   1. Requires name of the component to be viewed.   
+   2. Test case: `view/cpu/test cpu`
+      1. Expected: Component named `test cpu` is displayed along with its relevant information.
+   3. Test case: `view/cpu/non-existent cpu`
+      1. Expected: No component is displayed. Error message indicating `This component does not exist` is shown.
+4. Listing all components.
+   1. Test case: `list` when there are components in `test build`.
+      1. Expected: All components are displayed.
+   2. Test case: `list` when there are no components in `test build`.
+      1. Expected: No components are displayed. Error message indicating `You have no components` is shown.
+5. Checking compatibility.
+   1. Test case: `check`
+      1. Expected: All components are checked for compatibility. Information regarding the compatibility of the build is
+      displayed.
+6. Information of a build.
+    1. Test case: `info`
+        1. Expected: Information regarding the build is displayed.
+7.  Exporting the build.
+    1. Test case: `export`
+        1. Expected: The build is exported to text file located in data folder
+        which will contain the name of the build, its components and relevant information.
+8.  Returning to Build Management mode.
+    1. Test case: `back`
+        1. Expected: The user is returned to Build Management Mode. Status message indicating successful exit from 
+        Build Editing mode is shown.
