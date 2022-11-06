@@ -130,7 +130,7 @@ public class AddCommand extends Command {
         }
     }
 
-    private static Exercise createStrengthExercise(String[] argumentList) throws IllegalValueException {
+    private Exercise createStrengthExercise(String[] argumentList) throws IllegalValueException {
         String description = Validator
                 .getDescriptionWithValidation(argumentList[STRENGTH_EXERCISE_DESCRIPTION_INDEX]);
         int weight = Validator.getWeightWithValidation(argumentList[STRENGTH_EXERCISE_WEIGHT_INDEX]);
@@ -144,10 +144,10 @@ public class AddCommand extends Command {
         return new StrengthExercise(description, weight, set, repetition, date);
     }
 
-    private static LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
+    private LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
             throws IllegalValueException {
         LocalDate date;
-        if (argumentList.length == maximumLength) {
+        if (!toDisplay || argumentList.length == maximumLength) {
             date = Parser.parseDate(argumentList[dateIndex], MONTHS_TO_ADD);
         } else {
             date = LocalDate.now();
