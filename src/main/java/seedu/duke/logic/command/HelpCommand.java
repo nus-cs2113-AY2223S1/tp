@@ -1,6 +1,6 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;

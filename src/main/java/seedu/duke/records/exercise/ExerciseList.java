@@ -1,7 +1,7 @@
 package seedu.duke.records.exercise;
 
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.util.ArrayList;
 

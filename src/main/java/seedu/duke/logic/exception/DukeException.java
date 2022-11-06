@@ -1,4 +1,4 @@
-package seedu.duke.exception;
+package seedu.duke.logic.exception;
 
 public class DukeException extends Exception {
     public DukeException(String message) {

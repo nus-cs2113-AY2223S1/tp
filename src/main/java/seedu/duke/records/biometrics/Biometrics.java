@@ -1,6 +1,6 @@
 package seedu.duke.records.biometrics;
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.util.Arrays;
 

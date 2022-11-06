@@ -1,7 +1,7 @@
 package seedu.duke.records.biometrics;
 
 import seedu.duke.records.Record;
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

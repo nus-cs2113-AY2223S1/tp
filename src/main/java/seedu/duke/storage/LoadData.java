@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
 
-import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.command.AddCommand;
 import seedu.duke.logic.command.SetCommand;
 import seedu.duke.records.RecordList;
