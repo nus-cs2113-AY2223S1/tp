@@ -274,8 +274,6 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
 
-<div style="page-break-after: always;"></div>
-
 ### Saving Data to File
 
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
