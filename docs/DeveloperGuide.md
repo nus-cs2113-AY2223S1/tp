@@ -70,17 +70,17 @@ The proposed task allocation mechanism is facilitated by `Appointment` , `TaskLi
 
 Given below is an example usage scenario and how the Task-Employee mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The user executes `task add i/1 e/1 d/Wash Equipment` command which calls `TaskList#addTask()` and creates a task to "wash equipment" for appointment id = 1, to be done by employee id = 1. The `task add` command also calls `AppointmentList#addTaskToAppointment()` to allocate the task to Appointment 1. The user is prompted with a list of employees to allocate this task, and the user executes `1` to allocate the task to ‘Sally’.
+Step 1. The user launches the application. The user executes `task add i/3001 e/1001 d/Wash Equipment` command which calls `TaskList#addTask()` and creates a task to "wash equipment" for appointment id = 3001, to be done by employee id = 1001. The `task add` command also calls `Appointment#addTaskToAppointment()` to allocate the task to Appointment 3001, and calls 'Employee#addTaskToEmployee()' to allocate the task to Employee 1001.
 
 Step 2. The user executes `task view` command to view all the current tasks for the clinic. The command calls `TaskList#listTasks()` to display all existing tasks and the employee allocation.
 
-Step 3. The user then wishes to reassign task id = 1 to another employee and executes `task reassign i/1 e/2` . The `task reassign` command calls `TaskList#reassignTask()` and the task is reassigned from Employee 1 - ‘Sally’ to Employee 2 - ‘John’.
+Step 3. The user then wishes to reassign task id = 4001 to another employee and executes `task reassign i/4001 e/1002` . The `task reassign` command calls `TaskList#reassignTask()` and the task is reassigned from Employee 1001 - ‘Sally’ to Employee 1002 - ‘John’.
 
 > The following sequence diagram shows how the task allocation/reallocation operation works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png)
 
-Step 4. The user then executes the command `employee task i/2` to view the tasks of employee 2, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewEmployeeTasks()`. Due to the reassignment done in step 3, the task id = 1 now belongs to Employee id = 2, and task 1 will not show up in Employee id = 1’s tasks.
+Step 4. The user then executes the command `employee task i/1002` to view the tasks of employee 1002, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewEmployeeTasks()`. Due to the reassignment done in step 3, task 4001 now belongs to Employee 1002, and task 4001 will not show up in Employee 1001’s tasks.
 
 ### Design considerations:
 
