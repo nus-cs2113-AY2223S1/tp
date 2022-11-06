@@ -20,7 +20,7 @@ requires dealing with tons of data; therefore, noting down all information with 
 It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items,
 and transactions via a Command Line Interface.
 
-This UserGuide introduces you a brief overview of our features with example of usage and expected outcome. Let's hop into the section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
+This UserGuide introduces you a brief overview of our features with examples of usage and expected outcome. Let's hop into section [2. Quick Start](#2-quick-start) to start using Upcycle quickly.
 
 ## 2. Quick Start
 
@@ -132,7 +132,7 @@ Format: ```add-user /n [USERNAME] /a [AGE] /c [CONTACT_NUMBER]```
 
 Note:
 1. Username is unique, length must be no more than 20 chars
-2. Age must be an integer in range from 10 to 100
+2. Age must be an integer in the range from 10 to 100
 3. Contact number must an integer of 8 digits
 
 Example of usage: ```add-user /n bui /a 20 /c 82364873```
@@ -351,7 +351,7 @@ Format: ```add-item /n [ITEM_NAME] /c [CATEGORY_INDEX] /p [PRICE] /o [USERNAME]`
 Note:
 1. Item name length must be less than 20 chars
 2. To choose category, please use ```list-categories``` to list them out and use the index
-3. Price must be a float, and in range from 0 to 10000
+3. Price must be a float, and in the range from 0 to 10000
 4. Note that price must have at most 2 decimal places
     1. 0.5 → $0.50 (GOOD)
     2. 1 → $1.00 (GOOD)
@@ -447,7 +447,7 @@ Note:
 
 1. `itemId` must exist i.e. item has been created and was not deleted 
 2. A valid price must be given i.e. non-zero and non-negative
-3. Price is in price per day, and in range from 0 to 10000
+3. Price is in price per day, and in the range from 0 to 10000
 4. You may or may not use floating point numbers for price
 5. Note that price must have at most 2 decimal places
     1. 0.5 → $0.50 (GOOD)
@@ -572,7 +572,7 @@ Format: ```add-tx /i [ITEM_ID] /b [BORROWER_NAME] /d [DURATION] /c [CREATED_DATE
 
 Note:
 1. The unit of duration is days
-2. Duration must be an integer, in range from 0 to 1461 days (4 years)
+2. Duration must be an integer, in the range from 0 to 1461 days (4 years)
 3. The format of create date is YYYY-MM-DD, and it must be before the input date
 4. The item must be available during the period of new transaction.
 5. The moneyTransacted of transaction will only use the pricePerDay of the items at the moment of input. If the item's price is updated, it will not affect the moneyTransacted.

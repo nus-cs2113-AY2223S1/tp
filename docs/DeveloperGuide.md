@@ -32,8 +32,8 @@ This project is based on the skeleton code and documents of [SE-EDU AddressBook 
 
 ## 1. Introduction
 
-The goal of Upcycle to create a perfect desktop app dedicated to managing rental businesses. The target audience are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
-The aim of this guide is to help readers understand how the different components of Upcycle is implemented and integrated to create a functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
+The goal of Upcycle is to create a perfect desktop app dedicated to managing rental businesses. The target audiences are businesses that require dealing with tons of data. It is developed for rental business managers, who can type fast to efficiently keep track of all of their customers, items, and transactions via a Command Line Interface. 
+The aim of this guide is to help readers understand how the different components of Upcycle are implemented and integrated to create a functional and efficient system. The guide serves to help developers understand the architecture of Upcycle.
 
 ## 2. Setup the environment
 
@@ -112,7 +112,7 @@ All user-related commands operate mainly on a list of users (userList:UserList).
 
 ### 3.4. Item component
 
-The Class diagram below show how Item-related classes interact with each other. `Item` object contains `itemId`, `itemName`, `ownerId`, `pricePerDay` and `category` 
+The Class diagram below shows how Item-related classes interact with each other. `Item` object contains `itemId`, `itemName`, `ownerId`, `pricePerDay` and `category` 
 attributes. Among those, `itemId` is created by `IdGenerator`'s static method to create a unique id for each item (To allow for duplicate items), and `category` is created by `Category`'s method to map the item to its specific category.
 Items are stored in `itemList`, which will be loaded and written on the file by `itemStorage` (inherits from `Item`) whenever a command is executed successfully. All item-related 
 commands operate mainly on a list of items (itemList:ItemList).
@@ -122,7 +122,7 @@ Both `item` and `itemList` classes have methods that depend on TransactionList a
 
 ### 3.5. Transaction component
 
-The Class diagram below show how Transaction-related classes interact with each other and theirs components. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
+The Class diagram below shows how Transaction-related classes interact with each other and their components. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
 attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are formatted by `DateParser`. Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` 
 (inherits from `Storage`) whenever a command is executed successfully. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
 
@@ -138,7 +138,7 @@ For reading inputs, there is simply `UI::readInput`
 For printing responses, there are `UI::printResponse` and `UI::printErrorResponse`
 Further methods for printing specific responses that correspond to a user's behavior are defined for convenience.
 
-The design of the UI component is to simply act as a helper class i.e. one consists mainly of static methods that is called directly from the class.
+The design of the UI component is to simply act as a helper class i.e. one consists mainly of static methods that are called directly from the class.
 This makes sense as the UI class should not to be instantiated and is not inherited by other classes.
 
 Below, we detail the design of the UI class with a class diagram
@@ -148,7 +148,7 @@ Below, we detail the design of the UI class with a class diagram
 
 ### 3.7. Storage component
 
-Upcycle has three separate Storage class, dedicated for three types of object: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
+Upcycle has three separate Storage classes, dedicated for three types of objects: ```UserStorage```, ```ItemStorage```, and ```TransactionStorage```. All of these inherit from an abstract class called ```Storage```. 
 Moreover, we also `StorageManager` class as a bridge between main class `Duke` and other storage, which handles data corruption in the files, writes data/loads data from/to all three lists.
 The following diagrams show more details about Storage classes _(some unimportant methods are removed from the diagram)_: 
 
@@ -157,14 +157,14 @@ The following diagrams show more details about Storage classes _(some unimportan
 Upcycle stores the user's data, including the user list, item list, and transaction list in three files ```user.txt```, ```item.txt```, and ```transaction.txt```, respectively.
 The data will be loaded when running the program and will be written to the files after each operation. These files can be found in ```data``` folder in the same directory as the folder containing project root.
 
-If Duke detects a change that potentially cause errors in the files, it will print out where the error is and its reason. It also asks if user wants to try re-edit it or let Duke force reset all list.
+If Duke detects a change that potentially causes errors in the files, it will print out where the error is and its reason. It also asks if user wants to try to re-edit it or let Duke force reset all list.
 
 ## 4. Implementation
 
-This section describe how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
+This section describes how features are implemented, where readers can get insight into the mechanisms of them with step-by-step descriptions and UML diagrams.
 > **Note:**
 > 
-> ```executeCommand()``` method of every command return a boolean. Only ```ExitCommand``` returns ```true``` since it informs Duke that this is the last command to exit.
+> ```executeCommand()``` method of every command returns a boolean. Only ```ExitCommand``` returns ```true``` since it informs Duke that this is the last command to exit.
 
 ### 4.1. User-related Features
 
@@ -602,7 +602,7 @@ The following sequence diagram models the operation:
 
 ### 4.4. Help Command
 
->This feature allows users to see all the commands and command format required by Upcycle
+>This feature allows users to see all the commands and command formats required by Upcycle
 
 Usage is very simple, and is prompted when the user first opens the Upcycle application.
 
@@ -610,7 +610,7 @@ Step 1: Type ```help``` in the command line. A list of all relevant commands are
 
 ### 4.5. Exit Command
 
->This feature allow users to exit the program, and they will receive goodbye message after executing the command ```bye```.
+>This feature allows users to exit the program, and they will receive goodbye message after executing the command ```bye```.
 
 Given below is an example usage scenario and how the command mechanism behaves at each step.
 
@@ -629,7 +629,7 @@ Step 4: The ```executeCommand()``` of ExitCommand returns true, so Duke will rec
 
 - Student at NUS
 - Reasonably comfortable using CLI
-- Student staying at campus
+- Student staying on campus
 - Has a passion to serve the student community
 - Student who wants to host a rental business for his/her hall
 - Student who wants to help others borrow or loan items
