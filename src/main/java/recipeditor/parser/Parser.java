@@ -11,10 +11,8 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
 
-import recipeditor.exception.ExcessFlagsException;
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.MissingFlagsException;
-import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
@@ -31,9 +29,10 @@ import java.util.logging.Logger;
 public class Parser {
     private static final Logger logger = Logger.getLogger("LOGS");
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
-            "Index is not present in the list, or wrong command format.";
+            "Index is not present in the list.";
+    private static final String WRONG_COMMAND_FORMAT_MESSAGE =
+            "Wrong command format.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
-    private static final String FILE_NOT_FOUND_MESSAGE = "File not found when deleting the recipe file";
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
@@ -107,13 +106,13 @@ public class Parser {
                 throw new InvalidFlagException();
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
+            Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
             Ui.showMessage(recipeTitleToDelete + INVALID_INDEX_MESSAGE);
-        } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
+        } catch (AssertionError e) {
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
         return new InvalidCommand(DeleteCommand.CORRECT_FORMAT);
     }
@@ -143,13 +142,13 @@ public class Parser {
                 throw new InvalidFlagException();
             }
         } catch (IndexOutOfBoundsException i) {
-            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
+            Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
             Ui.showMessage(parsed[2] + INVALID_INDEX_MESSAGE);
-        } catch (FileNotFoundException e) {
-            logger.log(Level.WARNING, FILE_NOT_FOUND_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
+        } catch (AssertionError e) {
+            Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
         return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
     }

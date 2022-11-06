@@ -46,11 +46,10 @@ public class DeleteCommand extends Command {
             Storage.deleteRecipeFile(recipeTitleToDelete);
             Storage.rewriteRecipeListToFile();
             return new CommandResult(String.format("\n" + recipeTitleToDelete
-                    + " is deleted from the recipe list. %n"));
+                    + " is deleted from the recipe list.%n"));
         } catch (Exception e) {
             Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipeSize()));
             return new CommandResult("Delete recipe index out of bound.");
         }
     }
 }
-

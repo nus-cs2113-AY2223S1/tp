@@ -20,7 +20,6 @@ public class Delete extends EditModeCommand {
      */
     @Override
     public Recipe execute() throws InvalidFlagException, IndexOutOfBoundsException {
-        Recipe oldRecipe = recipe;
         int index = Integer.parseInt(parsedCommand[4]) - 1;
         switch (ingredientFlag) {
         case INGREDIENT:

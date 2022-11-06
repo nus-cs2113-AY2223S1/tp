@@ -14,6 +14,7 @@ import static recipeditor.parser.FlagType.TITLE;
 import static recipeditor.parser.FlagType.DESCRIPTION;
 import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
+import recipeditor.exception.InvalidFlagException;
 
 public class FlagParser {
 
@@ -34,7 +35,7 @@ public class FlagParser {
      * @param parsedCommand the parsed command which to find flags from
      * @return the list of flags found in command
      */
-    public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException {
+    public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException, InvalidFlagException {
         FlagType[] flags = {NULL, NULL};
         int recipeFlagCount = 0;
         int commandFlagCount = 0;
@@ -78,7 +79,7 @@ public class FlagParser {
                     recipeFlagCount++;
                     break;
                 default:
-                    break;
+                    throw new InvalidFlagException();
                 }
             }
         }
