@@ -4,6 +4,7 @@ import appointment.AppointmentList;
 import command.appointmentcommand.AddAppointmentCommand;
 import command.employeecommand.AddEmployeeCommand;
 import command.petcommand.AddPetCommand;
+import command.servicecommand.AddServiceCommand;
 import command.taskcommand.AddTaskCommand;
 import command.taskcommand.ReassignTaskCommand;
 import command.taskcommand.RemoveTaskCommand;
@@ -25,6 +26,9 @@ class TaskListTest {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
+        // Add 1 service
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Tooth Surgery");
+        addServiceCommand.execute();
         // Add 1 appointment
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2001, "2022-12-01", "Tooth Surgery");
         addAppointmentCommand.execute();
@@ -55,6 +59,9 @@ class TaskListTest {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
+        // Add 1 service
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Tooth Surgery");
+        addServiceCommand.execute();
         // Add 1 appointment
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2001, "2022-12-01", "Tooth Surgery");
         addAppointmentCommand.execute();
@@ -72,6 +79,7 @@ class TaskListTest {
 
         // Reassign Task from Tom to Sally
         ReassignTaskCommand reassignTaskCommand = new ReassignTaskCommand(4001, 1002);
+        reassignTaskCommand.execute();
 
         int TomTasklistSizeAfterReassign = Objects.requireNonNull(EmployeeList.findEmployee(1001)).getTasks().size();
         int SallyTasklistSizeAfterReassign = Objects.requireNonNull(EmployeeList.findEmployee(1002)).getTasks().size();
@@ -85,6 +93,9 @@ class TaskListTest {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
+        // Add 1 service
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Tooth Surgery");
+        addServiceCommand.execute();
         // Add 1 appointment
         AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(2001, "2022-12-01", "Tooth Surgery");
         addAppointmentCommand.execute();
