@@ -154,14 +154,25 @@ Students might also have doubts of their eligibility for the exchange programs. 
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|Version| As a ...                          | I want to ...                                         | So that I can ...                                                               |
+|--------|-----------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------|
+|v1.0| new user                          | see usage instructions                                | refer to them when I forget how to use the application                          |
+|v1.0| student                           | add modules to my plan                                | select which modules I would want to take during my course of study             |
+|v1.0| student                           | delete modules from my plan                           | remove it in case I do not want to take the module anymore                      |
+|v1.0| student                           | calculate my number of MCs each semester              | plan my MCs accordingly in case I overload or underload for a semester          |
+|v1.0| new user                          | exit the program                                      | stop planning for my modules anytime I want                                     |
+|v2.0| user                              | clear all of the modules in my plan                   | make space for another 4 year plan                                              |
+|v2.0| user                              | find modules by course, grade, semester, number of MCs | locate the modules that fit into my filter without having to go through the list |
+|v2.0| student planning on going for NOC | check my eligibility for NOC                          | ensure that I am eligible to go for NOC at the appropriate time                 |
+|v2.0| student planning on going for SEP | check my eligibility for SEP                          | ensure that I am eligible to go for SEP at the appropriate time                 |
+|v2.0| user                              | store my plan locally                                 | open my plan without having to readd all of my modules                          |
+|v2.0| user                              | show an overview of my plan                           | summarize the details of my yearly plan instantly                               |
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Program should work on any operating system supporting Java 11 or above.
+2. Program should be accessible to users with no prior programming experience.
+3. User should be able to store and load data on any operating system without any loss of data.
 
 ## Glossary
 
