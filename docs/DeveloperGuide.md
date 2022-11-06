@@ -106,6 +106,18 @@ The UI component is responsible for all user interfaces of the application.
 
 ### Parser Component
 
+Parser class parses user input to various `command`. It parses user's input into commands through
+respective parsing functions.
+
+<p align="center" width="100%">
+  <img width="100%" src="images/ClassDiagrams/ParserClassDiagram.png" alt="Storage Class Diagram"/>
+</p>
+
+**API:** `Parser.java`
+
+`parseCommand` will takes in the user input for parsing, and call respective parsing functions
+after identifying the type of `command`. Then a `command` will be returned as the result of parsing.
+
 ### Storage Component
 
 The storage component allows data to be read from and saved to a storage file.
@@ -292,6 +304,11 @@ Before exiting, the program will
 This is to prevent manual tampering of the data that might affect the data in the next run
 
 ### Parsing of Commands
+The following sequence diagram shows the usage of relavent classes and methods when trying to parse
+an arbitrary intput into an executable `command` by software.
+<p align="center" width="100%">
+  <img width="80%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
+</p>
 
 ### Add Recipe
 

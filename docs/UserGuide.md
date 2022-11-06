@@ -280,7 +280,6 @@ amount and the respective units. As for the steps involved, user will specify th
 
 Format: `/view -t [RECIPE_TITLE] OR /view -id [RECIPE_INDEX]`
 
-
 Example: 
 ```
 /view -id 1
@@ -396,7 +395,7 @@ stored into the local drive and reloaded when _RecipEditor_ is restarted.
 - After `/edit INDEX`
     - Update existing IRF at INDEX
     - Update OF (change Title)
-- After `/delete RECIPE_TITLE`
+- After `/delete -t RECIPE_TITLE`
     - Delete existing IRF
     - Update OF by removing the Recipe Title of the recipe being deleted
 
@@ -414,13 +413,13 @@ stored into the local drive and reloaded when _RecipEditor_ is restarted.
 
 # Command Summary
 
-| Command | Action                                           | Format                                  | Example    |
-|---------|--------------------------------------------------|-----------------------------------------|------------|
-| add     | Add new recipe                                   | `/add`                                  | `/add`     |
-| edit    | Edit recipe at INDEX                             | `/edit INDEX`                           | `/edit 1`  |
-| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete RECIPE_TITLE`                  | `/delete carbonara`     |
-| list    | List all recipes                                 | `/list`                                 | `/list`    |
-| view    | View recipe at INDEX                             | `/view INDEX`                           | `/view 1`  |
-| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find RECIPE_TITLE_OR_INGREDIENT_NAME` | `/find egg` |
-| help    | Show available commands                          | `/help`                                 | `/help`    |
-| exit    | Exit the program                                 | `/exit`                                 | `/exit`    |
+| Command | Action                                           | Format                                              | Example    |
+|---------|--------------------------------------------------|-----------------------------------------------------|------------|
+| add     | Add new recipe                                   | `/add`                                              | `/add`     |
+| edit    | Edit recipe at INDEX                             | `/edit INDEX`                                       | `/edit 1`  |
+| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete -t RECIPE_TITLE`<br/>`/delete -id <INDEX<br/>>` | `/delete carbonara`     |
+| list    | List all recipes                                 | `/list`                                             | `/list`    |
+| view    | View recipe at INDEX                             | `/view INDEX`                                       | `/view 1`  |
+| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find -t <RECIPE_TITLE>`<br/>`/find -id <INDEX>`   | `/find egg` |
+| help    | Show available commands                          | `/help`                                             | `/help`    |
+| exit    | Exit the program                                 | `/exit`                                             | `/exit`    |
