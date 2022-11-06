@@ -54,8 +54,8 @@ public class ParseDeleteClient extends Parser {
 
         String[] flags = DELETE_CLIENT_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
-        checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);
+        checkForExtraFlags(flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
@@ -85,8 +85,7 @@ public class ParseDeleteClient extends Parser {
     }
 
     private void checkForEmptyDetails(String commandDetail) throws EmptyDeleteClientDetailException {
-        String clientIndex = commandDetail.substring(INDEX_POSITION);
-        boolean isEmptyDetail = isEmptyString(clientIndex);
+        boolean isEmptyDetail = isEmptyString(commandDetail);
         if (isEmptyDetail) {
             throw new EmptyDeleteClientDetailException();
         }

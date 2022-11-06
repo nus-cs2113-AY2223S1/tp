@@ -5,19 +5,16 @@ package seedu.duke.parsermanager;
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandDeleteProperty;
-import seedu.duke.exception.EmptyDetailException;
-import seedu.duke.exception.ExtraFlagsException;
-import seedu.duke.exception.IncorrectFlagOrderException;
-import seedu.duke.exception.InvalidIndexException;
-import seedu.duke.exception.MissingFlagException;
 import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.EmptyDeletePropertyDetailException;
+import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.ExtraDeletePropertyFlagsException;
+import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.InvalidDeletePropertyIndexException;
+import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.MissingDeletePropertyFlagException;
+import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.ParseDeletePropertyException;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
-import static seedu.duke.Messages.EXCEPTION;
-import static seedu.duke.Messages.MESSAGE_DELETE_PROPERTY_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
 public class ParseDeleteProperty extends Parser {
@@ -26,6 +23,7 @@ public class ParseDeleteProperty extends Parser {
 
 
     private static final int CORRECT_FLAG_POSITION = 0;
+    private static final int INDEX_POSITION = 2;
 
 
     public ParseDeleteProperty(String deleteCommandDescription, PropertyList propertyList) {
@@ -34,10 +32,10 @@ public class ParseDeleteProperty extends Parser {
     }
 
     @Override
-    public Command parseCommand() throws InvalidIndexException, MissingFlagException, IncorrectFlagOrderException,
-            NotIntegerException, EmptyDetailException, ExtraFlagsException {
+    public Command parseCommand() throws ParseDeletePropertyException, NotIntegerException {
         try {
             checkForEmptyDetails(commandDescription);
+
             ArrayList<String> deletePropertyDetailsString = processCommandDetails(commandDescription);
             ArrayList<Integer> deletePropertyDetailsInt = convertProcessedCommandDetailsToInteger(
                     deletePropertyDetailsString);
@@ -45,56 +43,39 @@ public class ParseDeleteProperty extends Parser {
             int propertyIndex = deletePropertyDetailsInt.get(0);
             checkForInvalidPropertyIndexDelete(propertyIndex);
             return new CommandDeleteProperty(propertyIndex);
-        } catch (InvalidIndexException e) {
-            throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
-        } catch (MissingFlagException e) {
-            throw new MissingFlagException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
-        } catch (IncorrectFlagOrderException e) {
-            throw new IncorrectFlagOrderException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
         } catch (NotIntegerException e) {
             throw new NotIntegerException(MESSAGE_NOT_INTEGER);
-        } catch (EmptyDetailException e) {
-            throw new EmptyDetailException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
-        } catch (ExtraFlagsException e) {
-            throw new ExtraFlagsException(MESSAGE_DELETE_PROPERTY_WRONG_FORMAT);
         }
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException, ExtraFlagsException {
+            throws ParseDeletePropertyException {
 
         String[] flags = CHECK_PROPERTY_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
-        checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);
-        checkFlagsOrder(flagIndexPositions);
+        checkForExtraFlags(flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
-    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraFlagsException {
+    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraDeletePropertyFlagsException {
         if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
-            throw new ExtraFlagsException(EXCEPTION);
+            throw new ExtraDeletePropertyFlagsException();
         }
     }
 
-    private void checkForInvalidPropertyIndexDelete(int propertyIndex) throws InvalidIndexException {
+    private void checkForInvalidPropertyIndexDelete(int propertyIndex) throws InvalidDeletePropertyIndexException {
         int currentListSize = propertyList.getCurrentListSize();
         if (propertyIndex < 0 || propertyIndex >= currentListSize) {
-            throw new InvalidIndexException(EXCEPTION);
+            throw new InvalidDeletePropertyIndexException();
         }
     }
 
-    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
+    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingDeletePropertyFlagException {
         for (int flagIndex : flagIndexPositions) {
             if (!isFlagPresent(flagIndex)) {
-                throw  new MissingFlagException(EXCEPTION);
+                throw new MissingDeletePropertyFlagException();
             }
-        }
-    }
-
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
         }
     }
 
@@ -102,17 +83,10 @@ public class ParseDeleteProperty extends Parser {
         return (flagIndexPosition != -1);
     }
 
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
-        }
-    }
-
-    protected void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
+    private void checkForEmptyDetails(String commandDetail) throws EmptyDeletePropertyDetailException {
         boolean isEmptyDetail = isEmptyString(commandDetail);
         if (isEmptyDetail) {
-            throw new EmptyDetailException(EXCEPTION);
+            throw new EmptyDeletePropertyDetailException();
         }
     }
 }
