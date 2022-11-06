@@ -18,7 +18,7 @@ Recipeditor ..> Ui : > execute
 Recipeditor ..> Parser : > execute
 Recipeditor ..> CommandResult : > read
 Recipeditor ..> Command : > execute
-Recipeditor ..> Storage : > read
+Recipeditor ..> torage : > read
 'Recipeditor <.. isExit
 
 'Storage <.. Ingredient

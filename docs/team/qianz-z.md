@@ -85,10 +85,12 @@ The following sections summarise what I have contributed to the project.
   [#104](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/104),
   [#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90))
 - Helped to find bugs and assign new issues to address bugs
-  ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149))
+  ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149)),
+  ([#170](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/170)),
+  ([#171](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/171))
+- Helped to review, give comments, approve and merge Github pull requests. ([#168](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/168))
 
-
-#### **Enhancements To Existing Features**:
+### **Enhancements To Existing Features**:
 
 #### **Built the skeleton code for Command classes**
 To start off the project, we needed a base structure to build on for parsing and execution of commands.
@@ -106,11 +108,12 @@ recipe. This helps to make the editing, deletion and finding of recipes easier.
 - User Guide:
   - Created the skeleton of the User Guide
   - Added introduction, about page, and quick start description. ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
-  - Added description of command, format, code example and important notes to all commands.([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
+  - Added description of command, format, code example and important notes to all commands. ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
   - Update Data Management section and Command Summary ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
-  - Added shortcuts back to content page after every major section for easier navigation (([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132)))
+  - Added shortcuts back to content page after every major section for easier navigation. (([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132)))
 - Developer Guide:
+  - Created the architecture diagram ()
   - Added documentation and class diagram for the [_`Storage` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#storage-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Standardised styling for PlantUML diagrams
-  - Standardised the styling on Github Pages for Product Website.
+  - Standardised the styling.

@@ -12,7 +12,6 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 
 public class Recipeditor {
-    public static final String DATA_FILE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
         ConsoleHandler ch = new ConsoleHandler();
@@ -26,11 +25,6 @@ public class Recipeditor {
         exit();
     }
 
-    /**
-     * Greetings and Load recipe titles to the RecipeList.
-     *
-     * @param args arguments
-     */
     private static void start(String[] args) {
         Storage.createAppFolder();
         Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
@@ -40,17 +34,11 @@ public class Recipeditor {
         Ui.showGreeting();
     }
 
-    /**
-     * Exit and do clean up.
-     */
     private static void exit() {
         Ui.showExit();
         System.exit(0);
     }
 
-    /**
-     * Main Command Loop Input -> Command -> Command Result -> Show & Save.
-     */
     private static void runCommandLoopUntilExitCommand() {
 
         Command command;

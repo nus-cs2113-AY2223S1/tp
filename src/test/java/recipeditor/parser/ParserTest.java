@@ -1,12 +1,10 @@
 package recipeditor.parser;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import recipeditor.command.Command;
 import recipeditor.command.CommandResult;
 import recipeditor.command.DeleteCommand;
@@ -22,9 +20,7 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.PrintStream;
 
 class ParserTest {
@@ -42,7 +38,7 @@ class ParserTest {
         recipe.addStep("finishing step ~");
         RecipeList.addRecipe(recipe);
         RecipeList.addRecipeTitle(recipe.getTitle());
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
         String recipeFileSourcePath = Storage.titleToFilePath(recipe.getTitle());
         Storage.saveRecipe(recipe, "", recipeFileSourcePath);
     }
@@ -51,32 +47,29 @@ class ParserTest {
     public static void tearDown() {
         RecipeList.deleteRecipeFromTitle(TEST_RECIPE_TITLE);
         Storage.deleteRecipeFile(TEST_RECIPE_TITLE);
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
     }
 
     public void resetDeletedRecipe() {
         RecipeList.addRecipe(recipe);
         RecipeList.addRecipeTitle(recipe.getTitle());
-        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.rewriteRecipeListToFile();
         String recipeFileSourcePath = Storage.titleToFilePath(recipe.getTitle());
         Storage.saveRecipe(recipe, "", recipeFileSourcePath);
     }
 
     @Test
     void parseList_mixOfDifferentCases_returnListOfRecipeTitles() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/LiST") instanceof ListCommand);
     }
 
     @Test
     void parseView_mixOfDifferentCases_returnViewOfSpecificRecipe() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/VIEw -id 1") instanceof ViewCommand);
     }
 
     @Test
     void parseExit_mixOfDifferentCases_exitProgram() {
-        Parser parse = new Parser();
         assertTrue(Parser.parseCommand("/Exit") instanceof ExitCommand);
     }
 
@@ -112,10 +105,10 @@ class ParserTest {
 
     @Test
     void incorrectEditCommand_wrongParameter_correctFormatForEditCommand() {
-        String input = "/edit 1 -i";
+        String input = "/edit 100";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        assertEquals(EditCommand.COMMAND_SYNTAX, commandExecutedResult.getMessage());
+        assertEquals(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE, commandExecutedResult.getMessage());
     }
 
     @Test
@@ -124,36 +117,12 @@ class ParserTest {
         assertEquals(EditCommand.class, Parser.parseCommand(input).getClass());
     }
 
-    //        @Test
-    //        void completeExitCommand_correctExitCommandFormat_ExitProgram() {
-    //            String input = "/exit";
-    //            Command commandExecuted = Parser.parseCommand(input);
-    //            CommandResult commandExecutedResult = commandExecuted.execute();
-    //            assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
-    //            assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
-    //        }
-
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {
         String input = "/find";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(FindCommand.CORRECT_FORMAT, commandExecutedResult.getMessage());
-    }
-
-    @Test
-    void completeFindRecipeTitleCommand_correctFindCommandFormat_FindRecipeTitleThatContainsFindInput() {
-        String input = "/find -t " + TEST_RECIPE_TITLE;
-        try {
-            int index = RecipeList.getRecipeIndexFromTitle(TEST_RECIPE_TITLE) + 1;
-            String expected = System.lineSeparator() + index + ". " + TEST_RECIPE_TITLE;
-            Command commandExecuted = Parser.parseCommand(input);
-            CommandResult commandExecutedResult = commandExecuted.execute();
-            assertEquals(expected, commandExecutedResult.getMessage());
-            assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
-        } catch (RecipeNotFoundException e) {
-            assert false;
-        }
     }
 
     @Test
@@ -165,24 +134,6 @@ class ParserTest {
                 + " /delete, /exit, /help";
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
-    }
-
-    @Test
-    void completeListCommand_correctListCommandFormat_listRecipeTitles() {
-        String input = "/list";
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        System.setOut(new PrintStream(outContent));
-        Ui.showMessage(commandExecutedResult.getMessage());
-        StringBuilder recipeTitlesList = new StringBuilder();
-        recipeTitlesList.append(RecipeList.printNumberOfRecipes());
-        for (int i = 0; i < RecipeList.getRecipeTitlesSize(); i++) {
-            recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipeTitle(i)));
-        }
-        String expected = recipeTitlesList.toString();
-        assertEquals(expected.trim(), outContent.toString().trim());
-        assertEquals(ListCommand.class, Parser.parseCommand(input).getClass());
     }
 
     @Test
@@ -330,5 +281,4 @@ class ParserTest {
     //        assertEquals(expected, actual);
     //        assert addCommand instanceof InvalidCommand;
     //    }
-
 }

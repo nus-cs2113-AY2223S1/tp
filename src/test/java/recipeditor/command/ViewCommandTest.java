@@ -1,18 +1,14 @@
 package recipeditor.command;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import recipeditor.Recipeditor;
 import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-
-import javax.swing.text.View;
+import recipeditor.parser.Parser;
+import recipeditor.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -70,6 +66,23 @@ class ViewCommandTest {
         }
     }
 
-
+    @Test
+    void completeViewCommand_correctViewCommandFormat_showSpecificRecipe() throws RecipeNotFoundException {
+        String testTitle = "Test Title for View Command";
+        Recipe addedRecipe = new Recipe(testTitle);
+        RecipeList.addRecipe(addedRecipe);
+        RecipeList.addRecipeTitle(addedRecipe.getTitle());
+        int index = RecipeList.getRecipeIndexFromTitle(testTitle) + 1;
+        String input = "/view -id " + index;
+        String expected = "TITLE:\n" + "Test Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
+                + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
+        Command commandExecuted = Parser.parseCommand(input);
+        CommandResult commandExecutedResult = commandExecuted.execute();
+        assertEquals(expected, commandExecutedResult.getMessage());
+        assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
+        RecipeList.deleteRecipeFromTitle(testTitle);
+        Storage.deleteRecipeFile(testTitle);
+        Storage.rewriteRecipeListToFile();
+    }
 
 }
