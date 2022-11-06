@@ -68,6 +68,8 @@ We would like to acknowledge the following sources which our team has referenced
 * Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
 * Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
 
+<div style="page-break-after: always;"></div>
+
 ## Getting Started
 
 Our team developed this program using Java JDK 11 and Intellij IDEA.
