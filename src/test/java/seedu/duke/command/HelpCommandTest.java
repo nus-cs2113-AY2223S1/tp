@@ -10,7 +10,7 @@ public class HelpCommandTest {
 
     @Test
     void testCommandsDisplayed() {
-        int numCommands = 29;
+        int numCommands = 30;
         int numHeaders = 7;
         int linesPerHeader = 3;
         assertEquals(numCommands + numHeaders * linesPerHeader, command.toString().lines().count());
