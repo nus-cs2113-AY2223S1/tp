@@ -108,4 +108,11 @@ public class ParseDeleteProperty extends Parser {
             throw new IncorrectFlagOrderException(EXCEPTION);
         }
     }
+
+    protected void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
+        boolean isEmptyDetail = isEmptyString(commandDetail);
+        if (isEmptyDetail) {
+            throw new EmptyDetailException(EXCEPTION);
+        }
+    }
 }

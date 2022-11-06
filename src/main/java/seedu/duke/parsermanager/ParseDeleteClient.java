@@ -5,19 +5,16 @@ package seedu.duke.parsermanager;
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandDeleteClient;
-import seedu.duke.exception.EmptyDetailException;
-import seedu.duke.exception.ExtraFlagsException;
-import seedu.duke.exception.IncorrectFlagOrderException;
-import seedu.duke.exception.InvalidIndexException;
-import seedu.duke.exception.MissingFlagException;
 import seedu.duke.exception.NotIntegerException;
+import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.EmptyDeleteClientDetailException;
+import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.ExtraDeleteClientFlagsException;
+import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.InvalidDeleteClientIndexException;
+import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.MissingDeleteClientFlagException;
+import seedu.duke.exception.parsedeleteexception.parsedeleteclientexception.ParseDeleteClientException;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.DELETE_CLIENT_FLAGS;
-import static seedu.duke.Messages.EXCEPTION;
-import static seedu.duke.Messages.MESSAGE_DELETE_CLIENT_WRONG_FORMAT;
-import static seedu.duke.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
 public class ParseDeleteClient extends Parser {
@@ -26,6 +23,7 @@ public class ParseDeleteClient extends Parser {
 
 
     private static final int CORRECT_FLAG_POSITION = 0;
+    private static final int INDEX_POSITION = 2;
 
 
     public ParseDeleteClient(String deleteCommandDescription, ClientList clientList) {
@@ -34,8 +32,8 @@ public class ParseDeleteClient extends Parser {
     }
 
     @Override
-    public Command parseCommand() throws InvalidIndexException, MissingFlagException, IncorrectFlagOrderException,
-            NotIntegerException, EmptyDetailException, ExtraFlagsException {
+    public Command parseCommand() throws ParseDeleteClientException,
+            NotIntegerException {
         try {
             checkForEmptyDetails(commandDescription);
 
@@ -46,57 +44,39 @@ public class ParseDeleteClient extends Parser {
             int clientIndex = deleteClientDetailsInt.get(0);
             checkForInvalidClientIndexDelete(clientIndex);
             return new CommandDeleteClient(clientIndex);
-
-        } catch (InvalidIndexException e) {
-            throw new InvalidIndexException(MESSAGE_INVALID_INDEX);
-        } catch (MissingFlagException e) {
-            throw new MissingFlagException(MESSAGE_DELETE_CLIENT_WRONG_FORMAT);
-        } catch (IncorrectFlagOrderException e) {
-            throw new IncorrectFlagOrderException(MESSAGE_DELETE_CLIENT_WRONG_FORMAT);
         } catch (NotIntegerException e) {
             throw new NotIntegerException(MESSAGE_NOT_INTEGER);
-        } catch (EmptyDetailException e) {
-            throw new EmptyDetailException(MESSAGE_DELETE_CLIENT_WRONG_FORMAT);
-        } catch (ExtraFlagsException e) {
-            throw new ExtraFlagsException(MESSAGE_DELETE_CLIENT_WRONG_FORMAT);
         }
     }
 
     private ArrayList<String> processCommandDetails(String rawCommandDetail)
-            throws MissingFlagException, IncorrectFlagOrderException, ExtraFlagsException {
+            throws ParseDeleteClientException {
 
         String[] flags = DELETE_CLIENT_FLAGS;
         int[] flagIndexPositions = getFlagIndexPositions(rawCommandDetail, flags);
         checkForExtraFlags(flagIndexPositions);
         checkForMissingFlags(flagIndexPositions);
-        checkFlagsOrder(flagIndexPositions);
         return extractCommandDetails(rawCommandDetail, flags, flagIndexPositions);
     }
 
-    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraFlagsException {
+    private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraDeleteClientFlagsException {
         if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
-            throw new ExtraFlagsException(EXCEPTION);
+            throw new ExtraDeleteClientFlagsException();
         }
     }
 
-    private void checkForInvalidClientIndexDelete(int clientIndex) throws InvalidIndexException {
+    private void checkForInvalidClientIndexDelete(int clientIndex) throws InvalidDeleteClientIndexException {
         int currentListSize = clientList.getCurrentListSize();
         if (clientIndex < 0 || clientIndex >= currentListSize) {
-            throw new InvalidIndexException(EXCEPTION);
+            throw new InvalidDeleteClientIndexException();
         }
     }
 
-    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingFlagException {
+    private void checkForMissingFlags(int[] flagIndexPositions) throws MissingDeleteClientFlagException {
         for (int flagIndex : flagIndexPositions) {
             if (!isFlagPresent(flagIndex)) {
-                throw new MissingFlagException(EXCEPTION);
+                throw new MissingDeleteClientFlagException();
             }
-        }
-    }
-
-    private void checkFlagsOrder(int[] flagIndexPositions) throws IncorrectFlagOrderException {
-        for (int i = 0; i < flagIndexPositions.length - 1; i++) {
-            checkForCorrectFlagOrder(flagIndexPositions[i], flagIndexPositions[i + 1]);
         }
     }
 
@@ -104,10 +84,11 @@ public class ParseDeleteClient extends Parser {
         return (flagIndexPosition != -1);
     }
 
-    private void checkForCorrectFlagOrder(int flagPosition, int nextFlagPosition) throws IncorrectFlagOrderException {
-        boolean hasCorrectOrder = (flagPosition < nextFlagPosition);
-        if (!hasCorrectOrder) {
-            throw new IncorrectFlagOrderException(EXCEPTION);
+    private void checkForEmptyDetails(String commandDetail) throws EmptyDeleteClientDetailException {
+        String clientIndex = commandDetail.substring(INDEX_POSITION);
+        boolean isEmptyDetail = isEmptyString(clientIndex);
+        if (isEmptyDetail) {
+            throw new EmptyDeleteClientDetailException();
         }
     }
 }
