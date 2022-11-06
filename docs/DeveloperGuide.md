@@ -6,7 +6,7 @@
     * [Build Manager](#build-manager)
     * [Adding a Build](#adding-a-build)
     * [Listing all Builds](#listing-all-builds)
-    * [Finding a Build](#finding-a-build)
+    * [Finding a Build](#finding-builds)
     * [Filtering Builds](#filtering-builds)
   * [Build Editing Mode](#build-editing-mode)
     * [Build](#build)
@@ -98,7 +98,7 @@ telling you "You have no builds".
 The following sequence diagram shows how the list operation works:
 ![](/images/BuildManagerListBuildSequence.png)
 
-##### Finding a Build
+##### Finding Builds
 
 This feature allows users to find builds that contain the search term.
 
@@ -486,7 +486,8 @@ ____________________________________________________________
        and user is brought into Build Editing mode.
     3. Test case: `edit/non-existent build`
         1. Expected: No build is edited. Error message indicating `Builds does not exist!` is shown.
-#### Testing in Build Editing mode
+
+### Testing in Build Editing mode
 
 In Build Editing mode the printed lines are dashes with arrow heads at both ends. This is to indicate that the user is 
 in Build Editing mode.
@@ -531,3 +532,8 @@ in Build Editing mode.
     1. Test case: `back`
         1. Expected: The user is returned to Build Management Mode. Status message indicating successful exit from 
         Build Editing mode is shown.
+
+#### Exiting the program
+1. Exiting the program.
+   1. Test case: `exit`
+      1. Expected: The program exits.
