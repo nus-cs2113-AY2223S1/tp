@@ -1,9 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Ui;
-import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.Validator;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
@@ -14,6 +13,7 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -23,13 +23,29 @@ import java.util.logging.Logger;
 
 public class AddCommand extends Command {
     public static final String INVALID_LOADING_STRENGTH_MESSAGE = "Unable to load strength exercise";
+    public static final int STRENGTH_EXERCISE_REPETITION_INDEX = 4;
     public static final String INVALID_LOADING_CARDIO_MESSAGE = "Unable to load cardio exercise";
-
     public static final int MINIMUM_ADD_STRENGTH_SLASHES = 4;
     public static final int MAXIMUM_ADD_STRENGTH_SLASHES = 5;
     public static final int MINIMUM_ADD_CARDIO_SLASHES = 3;
     public static final int MAXIMUM_ADD_CARDIO_SLASHES = 4;
     public static final int STRENGTH_LOADING_INPUT_COUNT = 8;
+    public static final int STRENGTH_EXERCISE_DESCRIPTION_INDEX = 1;
+    public static final int STRENGTH_EXERCISE_WEIGHT_INDEX = 2;
+    public static final int STRENGTH_EXERCISE_SET_INDEX = 3;
+    public static final int MONTHS_TO_ADD = 1;
+    public static final int STRENGTH_EXERCISE_DATE_INDEX = 5;
+    public static final int LOAD_STRENGTH_EXERCISE_DATE_INDEX = 6;
+    public static final int MAXIMUM_ADD_STRENGTH_ARGUMENT_LENGTH = 6;
+    public static final int LOAD_STRENGTH_EXERCISE_CALORIES_INDEX = 7;
+    public static final String ADD_STRENGTH_SUCCESS_MESSAGE = " This strength exercise is added "
+            + "to the exercise list successfully";
+    public static final String ADD_STRENGTH_ERROR_MESSAGE = "Weight, set and repetition must be integer";
+    public static final String ASSERT_ADD_STRENGTH_FAILURE_MESSAGE = "Exercise not added properly";
+    public static final String FOOD = "food";
+    public static final String STRENGTH = "strength";
+    public static final String CARDIO = "cardio";
+    public static final String WEIGHT = "weight";
     public static final int CARDIO_LOADING_INPUT_COUNT = 7;
     private final boolean isMarkDone;
     private Ui ui;
@@ -61,25 +77,86 @@ public class AddCommand extends Command {
         String[] argumentList = Parser.getArgumentList(arguments);
         String addType = Parser.getClassType(argumentList);
         switch (addType) {
-        case ("food"):
+        case FOOD:
             addFood(argumentList, slashesCount);
             break;
-        case ("strength"):
+        case STRENGTH:
             addStrengthExercise(argumentList, slashesCount);
             break;
-        case ("cardio"):
+        case CARDIO:
             addCardioExercise(argumentList, slashesCount);
             break;
-        case ("weight"):
+        case WEIGHT:
             addWeightAndFat(argumentList, slashesCount);
             break;
         default:
             handleInvalidAddType();
+            break;
         }
     }
 
 
     private void addStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
+        validateAddStrengthExerciseCommand(argumentList, slashesCount);
+        executeAddStrengthExercise(argumentList);
+    }
+
+    private void executeAddStrengthExercise(String[] argumentList) throws IllegalValueException {
+        try {
+            Exercise exercise = createStrengthExercise(argumentList);
+            exerciseList.addExercise(exercise);
+            assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
+                    .equals(exercise)) : ASSERT_ADD_STRENGTH_FAILURE_MESSAGE;
+            markDoneForLoading(argumentList);
+            outputAddingMessage(exercise);
+        } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, ADD_STRENGTH_ERROR_MESSAGE, e);
+            throw new IllegalValueException(ADD_STRENGTH_ERROR_MESSAGE);
+        }
+    }
+
+    private void outputAddingMessage(Exercise exercise) {
+        if (toDisplay) {
+            ui.output(exercise.toString());
+            ui.output(ADD_STRENGTH_SUCCESS_MESSAGE);
+        }
+    }
+
+    private void markDoneForLoading(String[] argumentList) throws IllegalValueException {
+        if (isMarkDone) {
+            double time = Validator.getTimeWithValidation(argumentList[LOAD_STRENGTH_EXERCISE_DATE_INDEX]);
+            int calories = Integer.parseInt(argumentList[LOAD_STRENGTH_EXERCISE_CALORIES_INDEX]);
+            exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
+        }
+    }
+
+    private static Exercise createStrengthExercise(String[] argumentList) throws IllegalValueException {
+        String description = Validator
+                .getDescriptionWithValidation(argumentList[STRENGTH_EXERCISE_DESCRIPTION_INDEX]);
+        int weight = Validator.getWeightWithValidation(argumentList[STRENGTH_EXERCISE_WEIGHT_INDEX]);
+        int set = Validator.getSetWithValidation(argumentList[STRENGTH_EXERCISE_SET_INDEX]);
+        int repetition = Validator
+                .getRepetitionWithValidation(argumentList[STRENGTH_EXERCISE_REPETITION_INDEX]);
+
+        LocalDate date;
+        date = getLocalDate(argumentList, MAXIMUM_ADD_STRENGTH_ARGUMENT_LENGTH,
+                STRENGTH_EXERCISE_DATE_INDEX);
+        return new StrengthExercise(description, weight, set, repetition, date);
+    }
+
+    private static LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
+            throws IllegalValueException {
+        LocalDate date;
+        if (argumentList.length == maximumLength) {
+            date = Parser.parseDate(argumentList[dateIndex], MONTHS_TO_ADD);
+        } else {
+            date = LocalDate.now();
+        }
+        return date;
+    }
+
+    private void validateAddStrengthExerciseCommand(String[] argumentList, int slashesCount)
+            throws IllegalValueException {
         if (toDisplay) {
             Validator.validateCommandInput(slashesCount, MINIMUM_ADD_STRENGTH_SLASHES,
                     MAXIMUM_ADD_STRENGTH_SLASHES, INVALID_STRENGTH_INPUT_MESSAGE,
@@ -87,35 +164,6 @@ public class AddCommand extends Command {
         }
         Validator.validateLoadingForExercise(STRENGTH_LOADING_INPUT_COUNT,
                 INVALID_LOADING_STRENGTH_MESSAGE, toDisplay, argumentList.length);
-        String description = Validator.getDescriptionWithValidation(argumentList[1]);
-        try {
-            int weight = Validator.getWeightWithValidation(argumentList[2]);
-            int set = Validator.getSetWithValidation(argumentList[3]);
-            int repetition = Validator.getRepetitionWithValidation(argumentList[4]);
-
-            LocalDate date;
-            if (argumentList.length == 6) {
-                date = Parser.parseDate(argumentList[5], 1);
-            } else {
-                date = LocalDate.now();
-            }
-            Exercise exercise = new StrengthExercise(description, weight, set, repetition, date);
-            exerciseList.addExercise(exercise);
-            assert (exerciseList.getCurrentExercise(exerciseList.getCurrentExerciseListSize() - 1)
-                    .equals(exercise)) : "Exercise not added properly";
-            if (isMarkDone) {
-                double time = Double.parseDouble(argumentList[6]);
-                int calories = Integer.parseInt(argumentList[7]);
-                exerciseList.markDone(exerciseList.getCurrentExerciseListSize() - 1, time, calories);
-            }
-            if (toDisplay) {
-                ui.output(exercise.toString());
-                ui.output(" This strength exercise is added to the exercise list successfully");
-            }
-        } catch (NumberFormatException e) {
-            LOGGER.log(Level.WARNING, "Error converting string to integer", e);
-            throw new IllegalValueException("Set and repetition must be integers");
-        }
     }
 
 

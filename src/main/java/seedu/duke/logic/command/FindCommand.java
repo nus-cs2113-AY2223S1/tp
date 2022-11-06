@@ -1,9 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Ui;
-import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
 import seedu.duke.records.RecordList;
@@ -16,6 +15,8 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -33,6 +34,14 @@ public class FindCommand extends Command {
     public static final String INVALID_FIND_DATE_COMMAND = "Invalid find date command";
 
     public static final int REQUIRED_COUNT = 1;
+    public static final String STRENGTH = "strength";
+    public static final String CARDIO = "cardio";
+    public static final String FOOD = "food";
+    public static final String DATE_E = "date_e";
+    public static final String DATE_F = "date_f";
+    public static final String CALORIES = "calories";
+    public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
+    public static final int EMPTY_LIST = 0;
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
@@ -49,28 +58,29 @@ public class FindCommand extends Command {
         String[] argumentList = Parser.getArgumentList(arguments);
         String findType = Parser.getClassType(argumentList);
         switch (findType) {
-        case "strength":
+        case STRENGTH:
             findStrength(argumentList, slashesCount);
             break;
-        case "cardio":
+        case CARDIO:
             findCardio(argumentList, slashesCount);
             break;
-        case "food":
+        case FOOD:
             findFood(argumentList, slashesCount);
             break;
-        case "date_f":
+        case DATE_F:
             findDateFood(argumentList, slashesCount);
             break;
-        case "calories":
-            findCalories(argumentList,slashesCount);
+        case CALORIES:
+            findCalories(argumentList, slashesCount);
             break;
         default:
             handleInvalidFindType();
+            break;
         }
     }
 
     private void findCalories(String[] argumentList, int slashesCount) throws IllegalValueException {
-        Validator.validateCommandInput(slashesCount,REQUIRED_COUNT,INVALID_FIND_DATE_COMMAND,
+        Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_DATE_COMMAND,
                 arguments.charAt(arguments.length() - 1));
         int caloriesConsumedEntry = getFilteredCaloriesConsumedList(argumentList);
         int caloriesBurntEntry = getFilteredCaloriesBurntList(argumentList);
@@ -91,6 +101,7 @@ public class FindCommand extends Command {
         ArrayList<Calories> clist = caloriesList.getCaloriesList();
         ui.outputCalories(clist);
     }
+
 
     private void findDateFood(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidFindDateCommand(argumentList);
@@ -131,11 +142,12 @@ public class FindCommand extends Command {
 
     private void outputFilteredExerciseList(ArrayList<Exercise> filteredExerciseList,
                                             String failureFeedback, String successFeedback) {
-        if (filteredExerciseList.size() == 0) {
+        if (filteredExerciseList.size() == EMPTY_LIST) {
             ui.output(failureFeedback);
         } else {
-            ui.output("", successFeedback);
-            ui.outputExerciseList(filteredExerciseList);
+            String caption = System.lineSeparator() + successFeedback;
+            ExerciseTable filterTable = new ExerciseTable(filteredExerciseList, caption);
+            ui.printTable(filterTable.getExerciseTable());
         }
     }
 
@@ -217,7 +229,7 @@ public class FindCommand extends Command {
 
 
     private void handleInvalidFindType() throws IllegalValueException {
-        throw new IllegalValueException("Invalid find command");
+        throw new IllegalValueException(INVALID_FIND_COMMAND_MESSAGE);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.logic;
 
 import seedu.duke.exception.IllegalValueException;
 
@@ -103,9 +103,9 @@ public class Validator {
     }
 
     public static LocalDate getDateWithValidation(String date) throws IllegalValueException {
-        validateDate(date,INVALID_DATE);
+        validateDate(date, INVALID_DATE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localdate = LocalDate.parse(date,formatter);
+        LocalDate localdate = LocalDate.parse(date, formatter);
         return localdate;
     }
 

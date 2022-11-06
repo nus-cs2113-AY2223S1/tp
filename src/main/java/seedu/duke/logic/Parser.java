@@ -1,17 +1,17 @@
-package seedu.duke;
+package seedu.duke.logic;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.FindCommand;
-import seedu.duke.command.GreetCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.InvalidCommand;
-import seedu.duke.command.MarkCommand;
-import seedu.duke.command.RemoveCommand;
-import seedu.duke.command.SetCommand;
-import seedu.duke.command.ViewCommand;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.command.AddCommand;
+import seedu.duke.logic.command.Command;
+import seedu.duke.logic.command.ExitCommand;
+import seedu.duke.logic.command.FindCommand;
+import seedu.duke.logic.command.GreetCommand;
+import seedu.duke.logic.command.HelpCommand;
+import seedu.duke.logic.command.InvalidCommand;
+import seedu.duke.logic.command.MarkCommand;
+import seedu.duke.logic.command.RemoveCommand;
+import seedu.duke.logic.command.SetCommand;
+import seedu.duke.logic.command.ViewCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

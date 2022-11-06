@@ -1,13 +1,13 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 public class RemoveCommand extends Command {
     private Ui ui;

@@ -1,9 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Ui;
-import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
@@ -18,6 +17,8 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +30,25 @@ public class ViewCommand extends Command {
     public static final String INVALID_VIEW_EXERCISE_COMMAND = "Invalid view exercise command";
     public static final String DONE = "done";
     public static final int ARRAY_LENGTH_FOR_VIEW_DONE = 2;
+    public static final String BIOMETRICS = "biometrics";
+    public static final String FOOD = "food";
+    public static final String EXERCISE = "exercise";
+    public static final String WEIGHT = "weight";
+    public static final String STRENGTH = "strength";
+    public static final String CARDIO = "cardio";
+    public static final String BMI = "bmi";
+    public static final String MAINTENANCE = "maintenance";
+    public static final String CALORIES = "calories";
+    public static final String ALL = "all";
+    public static final String INVALID_VIEW_COMMAND_MESSAGE = "Invalid view command";
+    public static final String BIOMETRICS_LABEL = "Biometrics:";
+    public static final String STRENGTH_EXERCISES_CAPTION = "Strength exercises";
+    public static final String EXERCISE_LIST_CAPTION = "Exercises";
+    public static final int MINIMUM_VIEW_EXERCISE_SLASH_COUNT = 0;
+    public static final int MAXIMUM_VIEW_EXERCISE_SLASH_COUNT = 1;
+    public static final int INDEX_FOR_DONE = 1;
+    public static final String TO_BE_DONE_MESSAGE = " to be done: ";
+    public static final String EXERCISE_COMPLETED_MESSAGE = " completed: ";
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;
@@ -48,38 +68,39 @@ public class ViewCommand extends Command {
         String viewType = Parser.getClassType(argumentList);
         int slashesCount = Parser.getArgumentsCount(arguments);
         switch (viewType) {
-        case ("biometrics"):
+        case BIOMETRICS:
             viewBiometrics();
             break;
-        case ("food"):
+        case FOOD:
             viewFood(argumentList);
             break;
-        case ("exercise"):
+        case EXERCISE:
             viewExercise(argumentList, slashesCount);
             break;
-        case ("weight"):
+        case WEIGHT:
             viewWeight();
             break;
-        case ("strength"):
+        case STRENGTH:
             viewStrengthExercise(argumentList, slashesCount);
             break;
-        case ("cardio"):
+        case CARDIO:
             viewCardioExercise(argumentList, slashesCount);
             break;
-        case ("bmi"):
+        case BMI:
             viewBmi();
             break;
-        case ("maintenance"):
+        case MAINTENANCE:
             viewMaintenanceCalories();
             break;
-        case ("calories"):
+        case CALORIES:
             viewCalories(argumentList);
             break;
-        case ("all"):
+        case ALL:
             viewAll(argumentList);
             break;
         default:
             handleInvalidViewType();
+            break;
         }
     }
 
@@ -170,7 +191,7 @@ public class ViewCommand extends Command {
 
 
     private void handleInvalidViewType() throws IllegalValueException {
-        throw new IllegalValueException("Invalid view command");
+        throw new IllegalValueException(INVALID_VIEW_COMMAND_MESSAGE);
     }
 
     private void viewAll(String[] argumentList) throws IllegalValueException {
@@ -184,7 +205,7 @@ public class ViewCommand extends Command {
     }
 
     private void viewBiometrics() {
-        ui.output("Biometrics:\n" + biometrics.toString());
+        ui.output(BIOMETRICS_LABEL + System.lineSeparator() + biometrics.toString());
     }
 
     private void viewWeight() {
@@ -220,12 +241,14 @@ public class ViewCommand extends Command {
     private void viewStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
-        ui.showExerciseListCaption(strengthExerciseArrayList.size(), argumentList, "Strength exercises");
-        ui.outputExerciseList(strengthExerciseArrayList);
+        String caption = getExerciseListCaption(strengthExerciseArrayList.size(),
+                argumentList, STRENGTH_EXERCISES_CAPTION);
+        ExerciseTable exerciseTable = new ExerciseTable(strengthExerciseArrayList, caption);
+        ui.printTable(exerciseTable.getExerciseTable());
     }
 
     private ArrayList<Exercise> getStrengthExerciseArrayListByCommand(String[] argumentList) {
-        if (argumentList.length == 1) {
+        if (isViewingCurrentList(argumentList)) {
             return (ArrayList<Exercise>) exerciseList.getCurrentExerciseList()
                     .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
         }
@@ -236,8 +259,9 @@ public class ViewCommand extends Command {
     private void viewCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> cardioExerciseArrayList = getCardioExerciseArrayListByCommand(argumentList);
-        ui.showExerciseListCaption(cardioExerciseArrayList.size(), argumentList, "Cardio exercises");
-        ui.outputExerciseList(cardioExerciseArrayList);
+        String caption = getExerciseListCaption(cardioExerciseArrayList.size(), argumentList, "Cardio exercises");
+        ExerciseTable exerciseTable = new ExerciseTable(cardioExerciseArrayList, caption);
+        ui.printTable(exerciseTable.getExerciseTable());
     }
 
     private ArrayList<Exercise> getCardioExerciseArrayListByCommand(String[] argumentList) {
@@ -253,28 +277,43 @@ public class ViewCommand extends Command {
     private void viewExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
-        ui.showExerciseListCaption(exerciseArrayList.size(), argumentList, "Exercises");
-        ui.outputExerciseList(exerciseArrayList);
+        String caption = getExerciseListCaption(exerciseArrayList.size(), argumentList, EXERCISE_LIST_CAPTION);
+        ExerciseTable exerciseTable = new ExerciseTable(exerciseArrayList, caption);
+        ArrayList<String> table = exerciseTable.getExerciseTable();
+        ui.printTable(table);
+
+    }
+
+    private String getExerciseListCaption(int size, String[] argumentList, String caption) {
+        if (isViewingCurrentList(argumentList)) {
+            return System.lineSeparator() + caption + TO_BE_DONE_MESSAGE + size;
+        }
+        return System.lineSeparator() + caption + EXERCISE_COMPLETED_MESSAGE + size;
     }
 
 
     private ArrayList<Exercise> getExerciseArrayListByCommand(String[] argumentList) {
-        if (argumentList.length == 1) {
+        if (isViewingCurrentList(argumentList)) {
             return exerciseList.getCurrentExerciseList();
         }
         return exerciseList.getCompletedExerciseList();
     }
 
+    private static boolean isViewingCurrentList(String[] argumentList) {
+        return argumentList.length == 1;
+    }
+
 
     private void handleInvalidViewExerciseCommand(String[] argumentList,
                                                   int slashesCount) throws IllegalValueException {
-        Validator.validateCommandInput(slashesCount, 0, 1, INVALID_VIEW_EXERCISE_COMMAND,
+        Validator.validateCommandInput(slashesCount, MINIMUM_VIEW_EXERCISE_SLASH_COUNT,
+                MAXIMUM_VIEW_EXERCISE_SLASH_COUNT, INVALID_VIEW_EXERCISE_COMMAND,
                 arguments.charAt(arguments.length() - 1));
         validateViewDone(argumentList, INVALID_VIEW_EXERCISE_COMMAND);
     }
 
     private void validateViewDone(String[] argumentList, String message) throws IllegalValueException {
-        if (argumentList.length == ARRAY_LENGTH_FOR_VIEW_DONE && !argumentList[1].equals(DONE)) {
+        if (argumentList.length == ARRAY_LENGTH_FOR_VIEW_DONE && !argumentList[INDEX_FOR_DONE].equals(DONE)) {
             throw new IllegalValueException(message);
         }
     }

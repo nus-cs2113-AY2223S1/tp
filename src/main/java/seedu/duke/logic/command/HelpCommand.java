@@ -1,13 +1,13 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Ui;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 public class HelpCommand extends Command {
 
@@ -29,8 +29,8 @@ public class HelpCommand extends Command {
                 + "exit - to exit the program" + System.lineSeparator()
                 + "set biometrics /{age} /{gender} /{height} /{weight} /{fat percentage} /{activity level}"
                 + System.lineSeparator()
-                + "view {biometrics/food/weight/bmi/maintenance/calories/all} {exercise/strength/cardio /{done}}"
-                + System.lineSeparator()
+                + "view {biometrics/food/weight/bmi/maintenance/calories/all}" + System.lineSeparator()
+                + "view {exercise/strength/cardio} /{done}" + System.lineSeparator()
                 + "add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]" + System.lineSeparator()
                 + "add cardio /{description} /{distance} /{repetitions} [/{date}]" + System.lineSeparator()
                 + "add food /{description} /{calories} [/{date}]" + System.lineSeparator()
