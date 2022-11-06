@@ -61,7 +61,13 @@ Expected Output:
 
 ```
 Hello welcome to
-ıllıllı OneDoc ıllıllı
+
+                        _
+                       | |
+  ___  _ __   ___    __| | ___   ___
+ / _ \| '_ \ / _ \  / _` |/ _ \ / __|
+| (_) | | | |  __/ | (_| | (_) | (__
+ \___/|_| |_|\___|  \__,_|\___/ \___|
 Please choose one of the following options:
 1 - Patients
 2 - Visits
@@ -241,18 +247,19 @@ Acceptable Formats:
 
 Example of usage:
 
-`add i/S123 d/30-02-2020 t/15:00 r/flu`
+`add i/400TXF d/30-05-2020 t/15:00`
 
 Expected Output:
 
 ```
 You have added a visit!
-    ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: flu
-    ____________________________________________________________
+	____________________________________________________________
+	Visit #1
+	ID: 400TXF
+	Date: 30-05-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
 ```
 
 #### Adding/editing a reason for existing visit: `edit`
@@ -261,23 +268,26 @@ Add/edit reason for an existing visit in the list of visits
 
 Format: `edit x/[index] r/[reason]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+  * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
+
 * `reason` can be in any alphabets, numbers and spaces, but cannot be left blank.
 
 Example of usage:
 
-`edit x/3 r/fever`
+`edit x/1 r/flu`
 
 Expected Output:
 
 ```
 You have edited reason for the visit. Here's the updated visit!
-        ____________________________________________________________
-        ID: S123
-        Date: 30-02-2020
-        Time: 15:00
-        Reason: fever
-    ____________________________________________________________
+	____________________________________________________________
+	Visit #1
+	ID: 400TXF
+	Date: 30-05-2020
+	Time: 15:00
+	Reason: flu
+	____________________________________________________________
 ```
 
 #### Deleting a reason for existing visit: `deleteReason`
@@ -286,22 +296,24 @@ Add/edit reason for an existing visit in the list of visits
 
 Format: `deleteReason x/[index]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+    * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
 
 Example of usage:
 
-`deleteReason x/3`
+`deleteReason x/1`
 
 Expected Output:
 
 ```
 You have deleted the reason for the visit. Here's the updated visit!
-    ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: NIL
-    ____________________________________________________________
+	____________________________________________________________
+	Visit #1
+	ID: 400TXF
+	Date: 30-05-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
 ```
 
 #### Viewing all visits: `viewall`
@@ -318,26 +330,19 @@ Expected Output:
 
 ```
 Here are the list of visits in the system:
-    ____________________________________________________________
-    VisitIndex #1)
-    ID: T1
-    Date: 08-11-2022
-    Time: 08:00
-    Reason: checkup
-    ____________________________________________________________
-    VisitIndex #2)
-    ID: T2
-    Date: 08-15-2022
-    Time: 09:00
-    Reason: new medication
-    ____________________________________________________________
-    VisitIndex #3)
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: NIL
-    ____________________________________________________________
-
+	____________________________________________________________
+	Visit #1
+	ID: 400TXF
+	Date: 30-05-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+	Visit #2
+	ID: 400TXF
+	Date: 30-06-2020
+	Time: 14:00
+	Reason: fever
+	____________________________________________________________
 ```
 
 #### Viewing a patient's visits: `viewPatient`
@@ -350,19 +355,25 @@ Format: `viewPatient i/[ID]`
 
 Example of usage:
 
-`viewPatient i/S123`
+`viewPatient i/400TXF`
 
 Expected Output:
 
 ```
-Here are the list of visits for Patient with ID: S123
-    ____________________________________________________________
-    VisitIndex #3)
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: NIL
-    ____________________________________________________________
+Here are the list of visits for Patient with ID: 400TXF
+	____________________________________________________________
+	Visit #1
+	ID: 400TXF
+	Date: 30-05-2020
+	Time: 15:00
+	Reason: NIL
+	____________________________________________________________
+	Visit #2
+	ID: 400TXF
+	Date: 30-06-2020
+	Time: 14:00
+	Reason: fever
+	____________________________________________________________
 ```
 
 #### Viewing a specific visit: `viewVisit`
@@ -371,22 +382,23 @@ Viewing a specific visit belonging to some patient.
 
 Format: `viewVisit x/[index]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+    * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
 
 Example of usage:
 
-`viewVisit x/3`
+`viewVisit x/2`
 
 Expected Output:
 
 ```
-Here is the visit with VisitIndex 3:
-    ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: NIL
-    ____________________________________________________________
+Here is Visit #2
+	____________________________________________________________
+	ID: 400TXF
+	Date: 30-06-2020
+	Time: 14:00
+	Reason: fever
+	____________________________________________________________
 ```
 
 #### Viewing the commands in the Visit menu: `help`
@@ -400,19 +412,19 @@ Expected Output:
 ```
 List of commands:
 * To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])
-    d - The date should be formatted as DD-MM-YYYY
-    t - The time should be formatted as HH:MM
-    r - The reason is optional, and can be any number of words
+	d - The date should be formatted as DD-MM-YYYY
+	t - The time should be formatted as HH:MM
+	r - The reason is optional, and can be any number of words
 * To edit a visit's reason: edit x/[index] r/[reason]
-    x - The index should be a displayed number next to the visit
-    r - The reason can be added or edited with any number of words
+	x - The index should be a displayed number next to the visit
+	r - The reason can be added or edited with any number of words
 * To delete a visit's reason: deleteReason x/[index]
 * To list all visits: viewall
 * To list all visits of one patient: viewPatient i/[ID]
 * To view a patient's specific visit: viewVisit x/[index]
 * To return to main menu: main
 * To quit OneDoc: bye
-    ____________________________________________________________
+	____________________________________________________________
 ```
 
 ### 3. Prescription

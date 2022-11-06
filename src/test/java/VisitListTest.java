@@ -14,6 +14,53 @@ public class VisitListTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
     private static final UI ui = new UI();
 
+    private static final String DASH = "\t____________________________________________________________";
+    private static final String ADD_VISIT_1 =
+            "You have added a visit!" + System.lineSeparator()
+                    + DASH
+                    + System.lineSeparator()
+                    + "\tVisit #1"
+                    + System.lineSeparator()
+                    + "\tID: S123" + System.lineSeparator()
+                    + "\tDate: 23-05-2020" + System.lineSeparator()
+                    + "\tTime: 13:00" + System.lineSeparator()
+                    + "\tReason: NIL" + System.lineSeparator()
+                    + DASH;
+
+    private static final String ADD_VISIT_2 =
+            "You have added a visit!" + System.lineSeparator()
+                    + DASH
+                    + System.lineSeparator()
+                    + "\tVisit #1"
+                    + System.lineSeparator()
+                    + "\tID: S123" + System.lineSeparator()
+                    + "\tDate: 23-05-2020" + System.lineSeparator()
+                    + "\tTime: 13:00" + System.lineSeparator()
+                    + "\tReason: flu" + System.lineSeparator()
+                    + DASH;
+
+    private static final String ADD_VISIT_3 =
+            "You have added a visit!" + System.lineSeparator()
+                    + DASH
+                    + System.lineSeparator()
+                    + "\tVisit #2"
+                    + System.lineSeparator()
+                    + "\tID: S124" + System.lineSeparator()
+                    + "\tDate: 24-05-2020" + System.lineSeparator()
+                    + "\tTime: 11:00" + System.lineSeparator()
+                    + "\tReason: fever" + System.lineSeparator()
+                    + DASH;
+
+
+    private static final String VIEW_VISIT_1 =
+            "\tVisit #1" + System.lineSeparator()
+                    + "\tID: S123" + System.lineSeparator()
+                    + "\tDate: 23-05-2020" + System.lineSeparator()
+                    + "\tTime: 13:00" + System.lineSeparator()
+                    + "\tReason: flu" + System.lineSeparator()
+                    + DASH;
+
+
     @BeforeEach
     void setUp() {
         // Switch the system output to byte array output stream
@@ -76,19 +123,10 @@ public class VisitListTest {
         visitList.addVisit(ui, "S123", "23-05-2020","13:00");
         visitList.viewVisit(ui,-1);
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
-                        + System.lineSeparator()
-                        + "\tVisit #1"
-                        + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: NIL" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        ADD_VISIT_1
                         + System.lineSeparator()
                         + "There is no such visit in the system with index -1!" + System.lineSeparator()
-                        + "\t____________________________________________________________";
+                        + DASH;
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 
@@ -98,19 +136,10 @@ public class VisitListTest {
         visitList.addVisit(ui, "S123", "23-05-2020","13:00");
         visitList.viewVisit(ui,4);
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
-                        + System.lineSeparator()
-                        + "\tVisit #1"
-                        + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: NIL" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        ADD_VISIT_1
                         + System.lineSeparator()
                         + "There is no such visit in the system with index 4!" + System.lineSeparator()
-                        + "\t____________________________________________________________";
+                        + DASH;
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 
@@ -126,19 +155,11 @@ public class VisitListTest {
         VisitList visitList = new VisitList();
         visitList.addVisit(ui, "S123", "23-05-2020","13:00");
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                + "\t____________________________________________________________"
-                + System.lineSeparator()
-                + "\tVisit #1" + System.lineSeparator()
-                + "\tID: S123" + System.lineSeparator()
-                + "\tDate: 23-05-2020" + System.lineSeparator()
-                + "\tTime: 13:00" + System.lineSeparator()
-                + "\tReason: NIL" + System.lineSeparator()
-                + "\t____________________________________________________________"
+                ADD_VISIT_1
                 + System.lineSeparator()
                 + "Sorry, Patient with ID S124 has no visits recorded yet!"
                 + System.lineSeparator()
-                + "\t____________________________________________________________";
+                + DASH;
         visitList.viewPatient(ui,"S124");
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
@@ -147,44 +168,18 @@ public class VisitListTest {
     void viewPatient_withVisits() {
         VisitList visitList = new VisitList();
         visitList.addVisit(ui, "S123", "23-05-2020","13:00", "flu");
-        visitList.addVisit(ui, "S123", "24-05-2020","11:00", "fever");
+        visitList.addVisit(ui, "S124", "24-05-2020","11:00", "fever");
         visitList.viewPatient(ui, "S123");
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                + "\t____________________________________________________________"
+                ADD_VISIT_2
                 + System.lineSeparator()
-                + "\tVisit #1"
+                + ADD_VISIT_3
                 + System.lineSeparator()
-                + "\tID: S123" + System.lineSeparator()
-                + "\tDate: 23-05-2020" + System.lineSeparator()
-                + "\tTime: 13:00" + System.lineSeparator()
-                + "\tReason: flu" + System.lineSeparator()
-                + "\t____________________________________________________________" + System.lineSeparator()
-                + "You have added a visit!" + System.lineSeparator()
-                + "\t____________________________________________________________"
-                + System.lineSeparator()
-                + "\tVisit #2"
-                + System.lineSeparator()
-                + "\tID: S123" + System.lineSeparator()
-                + "\tDate: 24-05-2020" + System.lineSeparator()
-                + "\tTime: 11:00" + System.lineSeparator()
-                + "\tReason: fever" + System.lineSeparator()
-                + "\t____________________________________________________________" + System.lineSeparator()
                 + "Here are the list of visits for Patient with ID: S123" + System.lineSeparator()
-                + "\t____________________________________________________________"
+                + DASH
                 + System.lineSeparator()
-                + "\tVisit #1" + System.lineSeparator()
-                + "\tID: S123" + System.lineSeparator()
-                + "\tDate: 23-05-2020" + System.lineSeparator()
-                + "\tTime: 13:00" + System.lineSeparator()
-                + "\tReason: flu" + System.lineSeparator()
-                + "\t____________________________________________________________" + System.lineSeparator()
-                + "\tVisit #2" + System.lineSeparator()
-                + "\tID: S123" + System.lineSeparator()
-                + "\tDate: 24-05-2020" + System.lineSeparator()
-                + "\tTime: 11:00" + System.lineSeparator()
-                + "\tReason: fever" + System.lineSeparator()
-                + "\t____________________________________________________________";
+                + VIEW_VISIT_1;
+
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 
@@ -202,41 +197,21 @@ public class VisitListTest {
         visitList.addVisit(ui, "S124", "24-05-2020","11:00", "fever");
         visitList.viewAll(ui);
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        ADD_VISIT_2
                         + System.lineSeparator()
-                        + "\tVisit #1"
+                        + ADD_VISIT_3
                         + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: flu" + System.lineSeparator()
-                        + "\t____________________________________________________________" + System.lineSeparator()
-                        + "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
-                        + System.lineSeparator()
-                        + "\tVisit #2"
-                        + System.lineSeparator()
-                        + "\tID: S124" + System.lineSeparator()
-                        + "\tDate: 24-05-2020" + System.lineSeparator()
-                        + "\tTime: 11:00" + System.lineSeparator()
-                        + "\tReason: fever" + System.lineSeparator()
-                        + "\t____________________________________________________________" + System.lineSeparator()
                         + "Here are the list of visits in the system:" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        + DASH
                         + System.lineSeparator()
-                        + "\tVisit #1" + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: flu" + System.lineSeparator()
-                        + "\t____________________________________________________________" + System.lineSeparator()
+                        + VIEW_VISIT_1
+                        + System.lineSeparator()
                         + "\tVisit #2" + System.lineSeparator()
                         + "\tID: S124" + System.lineSeparator()
                         + "\tDate: 24-05-2020" + System.lineSeparator()
                         + "\tTime: 11:00" + System.lineSeparator()
                         + "\tReason: fever" + System.lineSeparator()
-                        + "\t____________________________________________________________";
+                        + DASH;
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 
@@ -246,19 +221,10 @@ public class VisitListTest {
         visitList.addVisit(ui, "S123", "23-05-2020","13:00");
         visitList.editReason(ui, 1, "fever");
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
-                        + System.lineSeparator()
-                        + "\tVisit #1"
-                        + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: NIL" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        ADD_VISIT_1
                         + System.lineSeparator()
                         + "You have edited reason for the visit. Here's the updated visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        + DASH
                         + System.lineSeparator()
                         + "\tVisit #1"
                         + System.lineSeparator()
@@ -266,7 +232,7 @@ public class VisitListTest {
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
                         + "\tReason: fever" + System.lineSeparator()
-                        + "\t____________________________________________________________";
+                        + DASH;
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 
@@ -276,20 +242,11 @@ public class VisitListTest {
         visitList.addVisit(ui, "S123", "23-05-2020","13:00", "flu");
         visitList.deleteReason(ui, 1);
         String expectedOutput =
-                "You have added a visit!" + System.lineSeparator()
-                        + "\t____________________________________________________________"
-                        + System.lineSeparator()
-                        + "\tVisit #1"
-                        + System.lineSeparator()
-                        + "\tID: S123" + System.lineSeparator()
-                        + "\tDate: 23-05-2020" + System.lineSeparator()
-                        + "\tTime: 13:00" + System.lineSeparator()
-                        + "\tReason: flu" + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        ADD_VISIT_2
                         + System.lineSeparator()
                         + "You have deleted the reason for the visit. Here's the updated visit!"
                         + System.lineSeparator()
-                        + "\t____________________________________________________________"
+                        + DASH
                         + System.lineSeparator()
                         + "\tVisit #1"
                         + System.lineSeparator()
@@ -297,7 +254,7 @@ public class VisitListTest {
                         + "\tDate: 23-05-2020" + System.lineSeparator()
                         + "\tTime: 13:00" + System.lineSeparator()
                         + "\tReason: NIL" + System.lineSeparator()
-                        + "\t____________________________________________________________";
+                        + DASH;
         assertEquals(expectedOutput, OUTPUT_STREAM.toString().trim());
     }
 }

@@ -18,8 +18,10 @@ written in Java, and has about 3kLoC.
 * __Documentation__:
     * User Guide:
         * Added documentation for `Visit` related features
+        * Added minor tweaks to rectify flaws in User Guide
     * Developer Guide:
         * Added documentation for `Visit` component as well as related class and sequence diagrams for it
+        * Added Quick Start section to guide developers on how to run our application
 
 
 * __Enhancements__:
@@ -31,4 +33,15 @@ written in Java, and has about 3kLoC.
 
 
 * __Testing__: Added relevant JUnit test cases to thoroughly ensure `VisitList` methods are working as intended, after each PR.
+
+* **Community**:
+    * PRs reviewed (within team): 
+[#90](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/90),
+[#94](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/94),
+[#97](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/97),
+[#122](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/122),
+[#198](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/198),
+[#210](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/210),
+[#234](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/234)
+
 
