@@ -18,6 +18,9 @@ import static seedu.duke.CommandStructure.DELETE_CLIENT_FLAGS;
 import static seedu.duke.CommandStructure.START_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
+/**
+ * Parser for delete client command.
+ */
 public class CommandDeleteClientParser extends Parser {
     private final String commandDescription;
     private final ClientList clientList;

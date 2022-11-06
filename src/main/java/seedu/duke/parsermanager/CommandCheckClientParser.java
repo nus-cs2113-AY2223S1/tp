@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import static seedu.duke.CommandStructure.CHECK_CLIENT_FLAGS;
 import static seedu.duke.CommandStructure.START_INDEX;
 
+/**
+ * Parser for check client commands.
+ */
 public class CommandCheckClientParser extends Parser {
     private final String commandDescription;
 

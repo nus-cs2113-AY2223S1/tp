@@ -18,6 +18,9 @@ import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
 import static seedu.duke.CommandStructure.START_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
+/**
+ * Parser for delete property command.
+ */
 public class CommandDeletePropertyParser extends Parser {
     private final String commandDescription;
     private final PropertyList propertyList;
