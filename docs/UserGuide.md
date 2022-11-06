@@ -803,7 +803,7 @@ If Duke crashes, is my data saved?
 > 
 > ```
 > ____________________________________________________________
-> The TRANSACTION files has been corrupted at line 2
+> The TRANSACTION file has been corrupted at line 2
 > Reason: The transaction is uncompleted but item cannot be found in the list
 > ____________________________________________________________
 > Please try to fix your data in your files before running the app again
