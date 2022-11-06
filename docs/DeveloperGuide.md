@@ -35,6 +35,28 @@
     * [Index Reference](#index-reference)
   * [Glossary](#glossary)
   * [Instructions for manual testing](#instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Navigating between main menu and sub menus](#navigating-between-main-menu-and-sub-menus)
+    * [Loading sample data](#loading-sample-data)
+    * [Adding a new patient](#adding-a-new-patient)
+    * [Viewing all patients](#viewing-all-patients)
+    * [Retrieving a patient’s records](#retrieving-a-patients-records)
+    * [Modifying the details of a patient](#modifying-the-details-of-a-patient)
+    * [Viewing the commands in Patient menu](#viewing-the-commands-in-patient-menu)
+    * [Adding a visit](#adding-a-visit)
+    * [Adding/editing a reason for existing visit](#addingediting-a-reason-for-existing-visit)
+    * [Deleting a reason for existing visit](#deleting-a-reason-for-existing-visit)
+    * [Viewing all visits](#viewing-all-visits)
+    * [Viewing a patient’s visits](#viewing-a-patients-visits)
+    * [Viewing a specific visit](#viewing-a-specific-visit)
+    * [Viewing the commands in the Visit menu](#viewing-the-commands-in-the-visit-menu)
+    * [Adding a new prescription](#adding-a-new-prescription)
+    * [Modifying a patient’s prescription](#modifying-a-patients-prescription)
+    * [Viewing list of all existing Prescriptions](#viewing-list-of-all-existing-prescriptions)
+    * [Viewing all prescriptions of a patient](#viewing-all-prescriptions-of-a-patient)
+    * [Viewing all active prescriptions of a patient](#viewing-all-active-prescriptions-of-a-patient)
+    * [Changing prescription status](#changing-prescription-status)
+    * [Viewing the commands in the Prescription menu](#viewing-the-commands-in-the-prescription-menu)
 
 ## Acknowledgements
 
@@ -406,7 +428,25 @@ visit menu, and then use the given index of the visit you find to edit it. The s
 * *prescription* - A single prescription of one existing patient, active based on in the patient is currently using it
 
 ### Instructions for manual testing
+Given below are instructions to test the app manually.
 
+#### Launch and shutdown
+1. Initial launch
+   1. Download the jar file and move it into an empty folder.
+   2. Open the command prompt / terminal and change working directory to the folder.
+   3. Run the jar file by input `java -jar tp.jar` into the command line. The app should start running.
+2. Exit program
+   1. Input `bye`. The app should end with a greeting.
+
+#### Navigating between main menu and sub menus
+1. Go to Patient menu and return to main
+   1. Input `1`. The patient menu should be shown.
+   2. Input `main`. The main menu should be shown again.
+2. Go to Visit menu and exit the program
+   1. Input `2`. The visit menu should be shown.
+   2. Input `bye`. The app should end with a greeting.
+
+#### Loading sample data
 To load sample data, please reference the following formats:
 
 `patient.txt`: `Name | DOB | G | ID`
@@ -417,4 +457,42 @@ To load sample data, please reference the following formats:
 
 `prescription.txt`: `ID | Name | Dosage | Time Interval | Active Status (T or F)`
 <br>Example: `T2 | penicillin | 1 tablet | every 3 days | T`
+
+#### Adding a new patient
+
+#### Viewing all patients
+
+#### Retrieving a patient’s records
+
+#### Modifying the details of a patient
+
+#### Viewing the commands in Patient menu
+
+#### Adding a visit
+
+#### Adding/editing a reason for existing visit
+
+#### Deleting a reason for existing visit
+
+#### Viewing all visits
+
+#### Viewing a patient’s visits
+
+#### Viewing a specific visit
+
+#### Viewing the commands in the Visit menu
+
+#### Adding a new prescription
+
+#### Modifying a patient’s prescription
+
+#### Viewing list of all existing Prescriptions
+
+#### Viewing all prescriptions of a patient
+
+#### Viewing all active prescriptions of a patient
+
+#### Changing prescription status
+
+#### Viewing the commands in the Prescription menu
 

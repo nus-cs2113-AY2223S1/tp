@@ -26,8 +26,8 @@
         - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
         - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
         - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
-        - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
-        - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
+        - [Viewing all prescriptions of a patient: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
+        - [Viewing all active prescriptions of a patient: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
         - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
         - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
         - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
@@ -253,13 +253,13 @@ Expected Output:
 
 ```
 You have added a visit!
-	____________________________________________________________
-	Visit #1
-	ID: 400TXF
-	Date: 30-05-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Adding/editing a reason for existing visit: `edit`
@@ -281,13 +281,13 @@ Expected Output:
 
 ```
 You have edited reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	Visit #1
-	ID: 400TXF
-	Date: 30-05-2020
-	Time: 15:00
-	Reason: flu
-	____________________________________________________________
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: flu
+    ____________________________________________________________
 ```
 
 #### Deleting a reason for existing visit: `deleteReason`
@@ -307,13 +307,13 @@ Expected Output:
 
 ```
 You have deleted the reason for the visit. Here's the updated visit!
-	____________________________________________________________
-	Visit #1
-	ID: 400TXF
-	Date: 30-05-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
 ```
 
 #### Viewing all visits: `viewall`
@@ -330,19 +330,19 @@ Expected Output:
 
 ```
 Here are the list of visits in the system:
-	____________________________________________________________
-	Visit #1
-	ID: 400TXF
-	Date: 30-05-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
-	Visit #2
-	ID: 400TXF
-	Date: 30-06-2020
-	Time: 14:00
-	Reason: fever
-	____________________________________________________________
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
+    Visit #2
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
+    ____________________________________________________________
 ```
 
 #### Viewing a patient's visits: `viewPatient`
@@ -361,19 +361,19 @@ Expected Output:
 
 ```
 Here are the list of visits for Patient with ID: 400TXF
-	____________________________________________________________
-	Visit #1
-	ID: 400TXF
-	Date: 30-05-2020
-	Time: 15:00
-	Reason: NIL
-	____________________________________________________________
-	Visit #2
-	ID: 400TXF
-	Date: 30-06-2020
-	Time: 14:00
-	Reason: fever
-	____________________________________________________________
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: NIL
+    ____________________________________________________________
+    Visit #2
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
+    ____________________________________________________________
 ```
 
 #### Viewing a specific visit: `viewVisit`
@@ -393,12 +393,12 @@ Expected Output:
 
 ```
 Here is Visit #2
-	____________________________________________________________
-	ID: 400TXF
-	Date: 30-06-2020
-	Time: 14:00
-	Reason: fever
-	____________________________________________________________
+    ____________________________________________________________
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
+    ____________________________________________________________
 ```
 
 #### Viewing the commands in the Visit menu: `help`
@@ -412,19 +412,19 @@ Expected Output:
 ```
 List of commands:
 * To add a visit: add i/[ID] d/[date] t/[time] (optional: r/[reason])
-	d - The date should be formatted as DD-MM-YYYY
-	t - The time should be formatted as HH:MM
-	r - The reason is optional, and can be any number of words
+    d - The date should be formatted as DD-MM-YYYY
+    t - The time should be formatted as HH:MM
+    r - The reason is optional, and can be any number of words
 * To edit a visit's reason: edit x/[index] r/[reason]
-	x - The index should be a displayed number next to the visit
-	r - The reason can be added or edited with any number of words
+    x - The index should be a displayed number next to the visit
+    r - The reason can be added or edited with any number of words
 * To delete a visit's reason: deleteReason x/[index]
 * To list all visits: viewall
 * To list all visits of one patient: viewPatient i/[ID]
 * To view a patient's specific visit: viewVisit x/[index]
 * To return to main menu: main
 * To quit OneDoc: bye
-	____________________________________________________________
+    ____________________________________________________________
 ```
 
 ### 3. Prescription
