@@ -20,8 +20,9 @@
   * [API Component](#api-component)
   * [Logger Component](#logger-component)
 * [Implementation](#implementation)
-  * [Printing an expense](#printing-an-expense)
+  * [Loading Data to File](#loading-data-from-file)
   * [Saving Data to File](#saving-data-to-file)
+  * [Printing an expense](#printing-an-expense)
   * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
   * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
   * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
@@ -275,15 +276,15 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 
 <div style="page-break-after: always;"></div>
 
-### Printing an Expense
-
-![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
-
-<div style="page-break-after: always;"></div>
-
 ### Saving Data to File
 
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
+
+<div style="page-break-after: always;"></div>
+
+### Printing an Expense
+
+![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
 
 <div style="page-break-after: always;"></div>
 
