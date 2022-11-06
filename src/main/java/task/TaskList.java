@@ -12,7 +12,7 @@ import static appointment.AppointmentList.findAppointment;
 
 public class TaskList {
 
-    static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     //view every single task in the clinic
     public static void viewTasks() {
