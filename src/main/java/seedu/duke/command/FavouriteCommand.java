@@ -5,6 +5,7 @@ public class FavouriteCommand extends Command {
 
     public FavouriteCommand(String[] parameters, CommandType commandType) {
         super(parameters, commandType);
+        assert commandType.equals(CommandType.FAVOURITE);
         if (parameters[1].equals("VIEW")) {
             this.favouriteOption = "VIEW";
         } else if (parameters[1].startsWith("add/")) {
