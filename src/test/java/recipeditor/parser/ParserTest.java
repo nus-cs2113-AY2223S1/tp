@@ -14,6 +14,7 @@ import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+import recipeditor.exception.MissingFlagsException;
 import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
@@ -112,6 +113,42 @@ class ParserTest {
     }
 
     @Test
+    void incorrectEditCommand_invalidIndex_correctFormatForEditCommand() {
+        String input = "/edit tilapia dum";
+        Command commandExecuted = Parser.parseCommand(input);
+        CommandResult commandExecutedResult = commandExecuted.execute();
+        assertEquals(InvalidCommand.INDEX_NOT_VALID, commandExecutedResult.getMessage());
+    }
+
+    @Test
+    void incorrectEditCommand_outOfBoundIndex_correctFormatForEditCommand() {
+        String input = "/edit 150 dum";
+        Command commandExecuted = Parser.parseCommand(input);
+        CommandResult commandExecutedResult = commandExecuted.execute();
+        assertEquals(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE, commandExecutedResult.getMessage());
+    }
+
+    @Test
+    void incorrectEditCommand_missingCommandFlag() {
+        String input = "/edit 1 -i";
+        try {
+            Parser.parseCommand(input);
+        } catch (Exception e) {
+            assert e.getMessage().equals("command");
+        }
+    }
+
+    @Test
+    void incorrectEditCommand_missingIngredientFlag() {
+        String input = "/edit 1 -add";
+        try {
+            Parser.parseCommand(input);
+        } catch (Exception e) {
+            assert e.getMessage().equals("recipe");
+        }
+    }
+
+    @Test
     void completeEditCommand_correctEditCommandFormat_correspondingEditCommand() {
         String input = "/edit 1 -add -i tomato/2/whole";
         assertEquals(EditCommand.class, Parser.parseCommand(input).getClass());
@@ -125,6 +162,8 @@ class ParserTest {
         assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
         assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
     }
+
+
 
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {

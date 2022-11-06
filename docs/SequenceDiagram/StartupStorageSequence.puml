@@ -49,10 +49,13 @@ store -> FileDirectory: via Scanner
 FileDirectory --> store: return content of `AllRecipes.txt`
 store -> titleparse: parseTitleFileToRecipeTitles(content)
 loop line of `AllRecipes.txt`
-    ref over titleparse
-        Check that the line is a valid title
-    end
-titleparse -> recipelist: addRecipeTitle(line)
+    alt line is blank || not alphanumerical || >255 characters
+    else no recipe file with that title
+    titleparse -> store: checkIfFileExists()
+    store -> FileDirectory: check file existence
+    else
+    titleparse -> recipelist: addRecipeTitle(line)
+    end alt
 end loop
 destroy titleparse
 
