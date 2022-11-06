@@ -21,9 +21,9 @@ public class SearchModuleCommand extends Command {
     public static final String COMMAND_USAGE = "search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] "
             + "< /level MODULE_LEVEL > < /sem SEMESTER >"
             + System.lineSeparator() + Ui.INDENT + Ui.INDENT
-            + " * the search term can either be module code or a keyword in module title."
+            + " * the search term can either be module code or a keyword in module title, or both."
             + System.lineSeparator() + Ui.INDENT + Ui.INDENT
-            + " * MODULE_LEVEL and SEMESTER should be a single digit number.";
+            + " * MODULE_LEVEL and SEMESTER should be a single digit number specified in the User Guide.";
     public static final String COMMAND_DESCRIPTION = "List out all modules that contains a search term.";
 
     public static final String ERROR_WRONG_FORMAT = "Wrong format given, should be "
@@ -42,7 +42,7 @@ public class SearchModuleCommand extends Command {
 
     public static final String ERROR_UNEXPECTED_PARAMETER = "Unexpected parameter: ";
 
-    public static final String FOOTER = "\nTo get full details of the module, type 'info <module code>'";
+    public static final String FOOTER = "\nTo get full details of the module, enter 'info [ MODULE_CODE ]'";
 
     public static final String SUBSYSTEM_NAME = "SearchModuleCommand";
     public static final int HEADING_INDENT = 10;

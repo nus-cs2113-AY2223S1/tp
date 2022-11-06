@@ -16,22 +16,7 @@ public class StateTest {
     public void testGetSelectedModulesList_correctSelectedModuleList() {
         // validate correct module details
         Module module1 = Module.get("CS1010S");
-        assertNotNull(module1);
-        assertEquals("CS1010S", module1.moduleCode);
-        assertEquals("Programming Methodology", module1.title);
-        assertEquals(List.of(2, 1, 1, 3, 3), module1.workload);
-        assertEquals(2, module1.semesterData.size());
-        assertEquals("Computer Science", module1.department);
-        assertEquals("Computing", module1.faculty);
-
         Module module2 = Module.get("CS1231");
-        assertNotNull(module2);
-        assertEquals("CS1231", module2.moduleCode);
-        assertEquals("Discrete Structures", module2.title);
-        assertEquals(List.of(3, 1, 0, 3, 3), module2.workload);
-        assertEquals(2, module2.semesterData.size());
-        assertEquals("Computer Science", module2.department);
-        assertEquals("Computing", module2.faculty);
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
@@ -76,22 +61,7 @@ public class StateTest {
 
         // validate correct module details
         Module module1 = Module.get("CS1010S");
-        assertNotNull(module1);
-        assertEquals("CS1010S", module1.moduleCode);
-        assertEquals("Programming Methodology", module1.title);
-        assertEquals(List.of(2, 1, 1, 3, 3), module1.workload);
-        assertEquals(2, module1.semesterData.size());
-        assertEquals("Computer Science", module1.department);
-        assertEquals("Computing", module1.faculty);
-
         Module module2 = Module.get("CS1231");
-        assertNotNull(module2);
-        assertEquals("CS1231", module2.moduleCode);
-        assertEquals("Discrete Structures", module2.title);
-        assertEquals(List.of(3, 1, 0, 3, 3), module2.workload);
-        assertEquals(2, module2.semesterData.size());
-        assertEquals("Computer Science", module2.department);
-        assertEquals("Computing", module2.faculty);
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
@@ -121,33 +91,17 @@ public class StateTest {
 
         // validate correct module details
         Module module1 = Module.get("CS1010S");
-        assertNotNull(module1);
-        assertEquals("CS1010S", module1.moduleCode);
-        assertEquals("Programming Methodology", module1.title);
-        assertEquals(List.of(2, 1, 1, 3, 3), module1.workload);
-        assertEquals(2, module1.semesterData.size());
-        assertEquals("Computer Science", module1.department);
-        assertEquals("Computing", module1.faculty);
-
         Module module2 = Module.get("CS1231");
-        assertNotNull(module2);
-        assertEquals("CS1231", module2.moduleCode);
-        assertEquals("Discrete Structures", module2.title);
-        assertEquals(List.of(3, 1, 0, 3, 3), module2.workload);
-        assertEquals(2, module2.semesterData.size());
-        assertEquals("Computer Science", module2.department);
-        assertEquals("Computing", module2.faculty);
 
         // Validating list of selectedModules
         List<SelectedModule> list = new ArrayList<>();
         int semester = 1;
 
         SelectedModule selectedModule1 = new SelectedModule(module1, semester);
-        SelectedModule selectedModule2 = new SelectedModule(module1, semester);
+        SelectedModule selectedModule2 = new SelectedModule(module2, semester);
         assertNotNull(selectedModule1.getModule());
         assertNotNull(selectedModule2.getModule());
 
-        //list.add(selectedModule1);
         list.add(selectedModule2);
         assertNotNull(list);
         State state = new State();
@@ -168,5 +122,6 @@ public class StateTest {
         list.remove(selectedModule2);
         assertEquals(returnedListOfAddedModules, list);
     }
+
 
 }
