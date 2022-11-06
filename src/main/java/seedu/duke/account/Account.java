@@ -19,7 +19,7 @@ public class Account {
         loginTime = dtf.format(LocalDateTime.now());
     }
 
-    public boolean handleAccountRequest() throws FinanceException {
+    public boolean handleAccountRequest() throws FinanceException, IOException {
         boolean isAccountExit = false;
         AccountUi.showAccountEntryMessage(wallet.getUserName());
 
@@ -34,44 +34,44 @@ public class Account {
                 String commandType = splits[0];
                 try {
                     switch (commandType) {
-                    case "balance":
-                        double totalBalance = wallet.getTotalBalance();
-                        currency = wallet.getDefaultCurrency();
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        AccountUi.showTotalBalance(totalBalance, currency);
-                        break;
-                    case "details":
-                        String username = wallet.getUserName();
-                        currency = wallet.getDefaultCurrency();
-                        List<Deposit> deposits = wallet.getDeposits();
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        AccountUi.showWalletDetails(username, currency, deposits);
-                        break;
-                    case "help":
-                        AccountUi.showHelpPrompt();
-                        isAccountExit = helpCenter();
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        if(!isAccountExit){
+                        case "balance":
+                            double totalBalance = wallet.getTotalBalance();
+                            currency = wallet.getDefaultCurrency();
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            AccountUi.showTotalBalance(totalBalance, currency);
+                            break;
+                        case "details":
+                            String username = wallet.getUserName();
+                            currency = wallet.getDefaultCurrency();
+                            List<Deposit> deposits = wallet.getDeposits();
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            AccountUi.showWalletDetails(username, currency, deposits);
+                            break;
+                        case "help":
+                            AccountUi.showHelpPrompt();
+                            isAccountExit = helpCenter();
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            if(!isAccountExit){
+                                System.out.println("Back in the main account, please enter any commands.");
+                            }
+                            break;
+                        case "logout":
+                            isAccountExit = true;
+                            AccountHistoryFile.deleteFile(wallet.getUserName(), loginTime);
+                            AccountUi.showAccountExitMessage(wallet.getUserName());
+                            break;
+                        case "list":
+                            AccountUi.listCommands();
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                            break;
+                        case "currencies":
+                            Currency.exchangeCommands(wallet.getDefaultCurrency());
+                            System.out.println("Hi");
+                            AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
                             System.out.println("Back in the main account, please enter any commands.");
-                        }
-                        break;
-                    case "logout":
-                        isAccountExit = true;
-                        AccountHistoryFile.deleteFile(wallet.getUserName(), loginTime);
-                        AccountUi.showAccountExitMessage(wallet.getUserName());
-                        break;
-                    case "list":
-                        AccountUi.listCommands();
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        break;
-                    case "currencies":
-                        Currency.exchangeCommands(wallet.getDefaultCurrency());
-                        System.out.println("Hi");
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        System.out.println("Back in the main account, please enter any commands.");
-                        break;
-                    default:
-                        throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                            break;
+                        default:
+                            throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                     }
                 } catch (FinanceException e) {
                     e.handleException();
@@ -141,27 +141,27 @@ public class Account {
                 String recipientUsername = splits[1];
                 try {
                     int amount = Integer.parseInt(splits[2]);
-                String transferCurrency = splits[3];
+                    String transferCurrency = splits[3];
 
-                try {
+                    try {
 
-                    switch (commandType) {
-                    case "convert":
-                        MoneyCommand.exchangeCommand(wallet, splits[1]+" "+splits[2]+" "+splits[3]);
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
-                        break;
-                    case "transfer":
-                        MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
-                        AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
-                        AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                        switch (commandType) {
+                            case "convert":
+                                MoneyCommand.exchangeCommand(wallet, splits[1]+" "+splits[2]+" "+splits[3]);
+                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
+                                break;
+                            case "transfer":
+                                MoneyCommand.transferMoney(wallet, recipientUsername, transferCurrency, amount);
+                                AccountUi.showTransfer(recipientUsername, transferCurrency, amount);
+                                AccountHistoryFile.updateLoginAccount(wallet.getUserName(), loginTime, in);
 
-                        break;
-                    default:
-                        throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                                break;
+                            default:
+                                throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                        }
+                    } catch (FinanceException e) {
+                        e.handleException();
                     }
-                } catch (FinanceException e) {
-                    e.handleException();
-                }
                 } catch (NumberFormatException e) {
                     System.out.println("Please make sure to use integers for transfer amount");
                 }

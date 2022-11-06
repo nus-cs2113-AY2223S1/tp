@@ -51,57 +51,57 @@ public class Currency {
             String command = splitInput[0];
             try {
                 switch (command) {
-                case "info":
-                    try {
-                        CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
-                        BasicUi.showCurrencyInfo(currency);
-                    } catch (IndexOutOfBoundsException e) {
-                        BasicUi.showIncorrectCurrencyInfo(command);
-                    } catch (FinanceException e) {
-                        e.handleException();
-                    }
-                    break;
-                case "conversion":
-                    try {
-                        CurrencyStructure currency1 = findCurrencyByAbbrName(splitInput[1], allCurrencies);
-                        CurrencyStructure currency2 = findCurrencyByAbbrName(splitInput[2], allCurrencies);
-                        double rate = currency1.getRate()/currency2.getRate();
-                        System.out.printf("Exchange rate from " + splitInput[1] + " to " + splitInput[2] + " is %.4f %n"
-                                , rate);
-                        System.out.println();
-                    } catch (IndexOutOfBoundsException e) {
-                        boolean isErrorOne = true;
+                    case "info":
                         try {
                             CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
-                            double rate = currency.getRate()/defaultCurrency.getRate();
-                            System.out.printf(
-                                    "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is %.4f %n"
-                                            , rate);
+                            BasicUi.showCurrencyInfo(currency);
+                        } catch (IndexOutOfBoundsException e) {
+                            BasicUi.showIncorrectCurrencyInfo(command);
+                        } catch (FinanceException e) {
+                            e.handleException();
+                        }
+                        break;
+                    case "conversion":
+                        try {
+                            CurrencyStructure currency1 = findCurrencyByAbbrName(splitInput[1], allCurrencies);
+                            CurrencyStructure currency2 = findCurrencyByAbbrName(splitInput[2], allCurrencies);
+                            double rate = currency1.getRate()/currency2.getRate();
+                            System.out.printf("Exchange rate from " + splitInput[1] + " to " + splitInput[2] + " is %.4f %n"
+                                    , rate);
                             System.out.println();
-                        } catch (IndexOutOfBoundsException f) {
-                            isErrorOne = false;
-                            BasicUi.showIncorrectCurrencyConversion();
-                        } catch (FinanceException f) {
-                            f.handleException();
+                        } catch (IndexOutOfBoundsException e) {
+                            boolean isErrorOne = true;
+                            try {
+                                CurrencyStructure currency = findCurrencyByAbbrName(splitInput[1], allCurrencies);
+                                double rate = currency.getRate()/defaultCurrency.getRate();
+                                System.out.printf(
+                                        "Exchange rate from " + defaultCurrency.getSymbol() + " to " + splitInput[1] + " is %.4f %n"
+                                        , rate);
+                                System.out.println();
+                            } catch (IndexOutOfBoundsException f) {
+                                isErrorOne = false;
+                                BasicUi.showIncorrectCurrencyConversion();
+                            } catch (FinanceException f) {
+                                f.handleException();
+                            }
+                            if (!isErrorOne) {
+                                BasicUi.showIncorrectCurrencyConversion();
+                            }
+                        } catch (FinanceException e) {
+                            e.handleException();
                         }
-                        if (!isErrorOne) {
-                            BasicUi.showIncorrectCurrencyConversion();
+                        break;
+                    case "exit":
+                        isCurrencyExit = true;
+                        break;
+                    case "list":
+                        System.out.println("\t\t\tALL CURRENCIES");
+                        for (CurrencyStructure x : allCurrencies){
+                            BasicUi.showCurrencyInfo(x);
                         }
-                    } catch (FinanceException e) {
-                        e.handleException();
-                    }
-                    break;
-                case "exit":
-                    isCurrencyExit = true;
-                    break;
-                case "list":
-                    System.out.println("\t\t\tALL CURRENCIES");
-                    for (CurrencyStructure x : allCurrencies){
-                        BasicUi.showCurrencyInfo(x);
-                    }
-                    break;
-                default:
-                    throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
+                        break;
+                    default:
+                        throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                 }
             } catch (Exception e) {
                 BasicUi.showIncorrectCurrencyEntry();
