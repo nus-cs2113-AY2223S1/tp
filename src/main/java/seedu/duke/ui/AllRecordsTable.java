@@ -19,7 +19,7 @@ public class AllRecordsTable extends TableFrame {
 
     private final String[] mainheadings = {"Weight & Fat", "Food", "Exercises"};
 
-    public final int MAXIMUM_WEIGHT_COLUMN_SPACING = 12;
+    public static final int MAXIMUM_WEIGHT_COLUMN_SPACING = 12;
 
     private int[] maincolumnSpacingArray = {0, 0, 0};
 
