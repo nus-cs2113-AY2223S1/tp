@@ -52,6 +52,11 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//@@author xzynos
+
+/**
+ * Defines JUnit test cases for {@link ConsoleParser}.
+ */
 @SuppressWarnings({"FieldMayBeFinal", "ConstantConditions"})
 class ConsoleParserTest {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(

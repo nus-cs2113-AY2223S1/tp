@@ -1036,7 +1036,7 @@ public class ConsoleParser {
 
         if (rateStr != null) {
             BigDecimal rate = new BigDecimal(rateStr);
-            if (rate.compareTo(BigDecimal.ZERO) != 1) {
+            if (rate.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new ConsoleParserCommandConvertCurrencyInvalidException();
             }
         }
