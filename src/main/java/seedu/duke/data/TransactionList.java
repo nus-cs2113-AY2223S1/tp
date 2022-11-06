@@ -14,13 +14,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.abs;
 import static seedu.duke.common.Constants.NO_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MIN_AMOUNT_VALUE;
 import static seedu.duke.common.Constants.MAX_TRANSACTIONS_COUNT;
+import static seedu.duke.common.Constants.MIN_TRANSACTIONS_INDEX;
 import static seedu.duke.common.DateFormats.DATE_MONTH_PATTERN;
 import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 import static seedu.duke.common.InfoMessages.DOLLAR_SIGN;
+import static seedu.duke.common.InfoMessages.NEGATIVE_DOLLAR_SIGN;
 import static seedu.duke.common.InfoMessages.COLON_SPACE;
 import static seedu.duke.common.InfoMessages.INFO_INCOME;
 import static seedu.duke.common.InfoMessages.INFO_EXPENSE;
@@ -121,9 +124,9 @@ public class TransactionList {
     }
 
     public String editExpense(String description, int amount, String category, LocalDate date, int index) {
-        transactions.remove(index - 1);
+        transactions.remove(index);
         Expense expense = new Expense(description, amount, category, date);
-        transactions.add(index - 1, expense);
+        transactions.add(index, expense);
 
         // Sorts the list after deletion
         Collections.sort(transactions);
@@ -131,9 +134,9 @@ public class TransactionList {
     }
 
     public String editIncome(String description, int amount, String category, LocalDate date, int index) {
-        transactions.remove(index - 1);
+        transactions.remove(index);
         Income income = new Income(description, amount, category, date);
-        transactions.add(index - 1, income);
+        transactions.add(index, income);
 
         // Sorts the list after deletion
         Collections.sort(transactions);
@@ -257,25 +260,29 @@ public class TransactionList {
     /**
      * Lists all or some transactions based on selection.
      *
-     * @param type     The type of transaction.
-     * @param category A category for the transaction.
-     * @param date     Date of the transaction with format in "yyyyMMdd".
+     * @param type                       The type of transaction.
+     * @param category                   A category for the transaction.
+     * @param date                       Date of the transaction with format in "yyyyMMdd".
+     * @param isContainDateIntervalsTags A boolean value that indicates whether date intervals tags are used in the
+     *                                   command.
      * @return A string containing the formatted transaction list.
      * @throws InputTransactionInvalidTypeException If class type cannot be found in the packages.
      */
     public String listTransactions(ArrayList<Transaction> timeTransactions, String type,
-                                   String category, LocalDate date)
+                                   String category, LocalDate date, Boolean isContainDateIntervalsTags)
             throws InputTransactionInvalidTypeException {
         String transactionsList = "";
 
         // Loops each transaction from the time transactions list
-        int count = 1;
+        int count = MIN_TRANSACTIONS_INDEX;
         for (Transaction transaction : timeTransactions) {
             // Applies generic filter against each time transaction entry
-            if (isMatchListFilters(transaction, type, category, date)) {
+            if (isMatchListFilters(transaction, type, category, date) && !isContainDateIntervalsTags) {
                 transactionsList += Integer.toString(count) + COLON_SPACE + transaction.toString() + LINE_SEPARATOR;
-                count++;
+            } else if (isMatchListFilters(transaction, type, category, date)) {
+                transactionsList += transaction.toString() + LINE_SEPARATOR;
             }
+            count++;
         }
         return transactionsList;
     }
@@ -288,15 +295,15 @@ public class TransactionList {
      */
     public String findTransactions(String keyword) {
         String transactionsList = "";
-        int count = 1;
+        int count = MIN_TRANSACTIONS_INDEX;
         // Loops each transaction from the transactions list
         for (Transaction transaction : transactions) {
             // Includes only transactions with their description matching the searching keywords
             if (transaction.getDescription().toLowerCase().contains(keyword.toLowerCase())
                     && keyword != "") {
                 transactionsList += Integer.toString(count) + COLON_SPACE + transaction + LINE_SEPARATOR.toString();
-                count++;
             }
+            count++;
         }
         return transactionsList;
     }
@@ -335,6 +342,20 @@ public class TransactionList {
     }
 
     /**
+     * Prints the amount in the correct format, i.e. -$X or $X depending on the amount.
+     *
+     * @param amount The amount for the transaction.
+     * @return A string containing the formatted amount output to be added to the list.
+     */
+    public String constructAmountOutput(int amount) {
+        if (amount >= NO_AMOUNT_VALUE) {
+            return DOLLAR_SIGN + Integer.toString(amount);
+        } else {
+            return NEGATIVE_DOLLAR_SIGN + Integer.toString(abs(amount));
+        }
+    }
+
+    /**
      * Formats the hashmap of categorical savings into a categorical savings list, using timeTransactions.
      *
      * @param timeTransactions An array list of time-filtered transactions.
@@ -348,8 +369,8 @@ public class TransactionList {
 
         // Formats every entry in the hashmap into a categorical savings list
         for (HashMap.Entry<String, Integer> entry : categoricalSavings.entrySet()) {
-            categoricalSavingsList += String.format("%s%s%s %s%s%s", PREFIX_CATEGORY, entry.getKey(),
-                    POSTFIX_CATEGORY, DOLLAR_SIGN, entry.getValue(), LINE_SEPARATOR);
+            categoricalSavingsList += String.format("%s%s%s %s%s", PREFIX_CATEGORY, entry.getKey(),
+                    POSTFIX_CATEGORY, constructAmountOutput(entry.getValue()), LINE_SEPARATOR);
         }
 
         return categoricalSavingsList;
@@ -436,8 +457,8 @@ public class TransactionList {
             // Puts income, expense, savings values into monthly expenditure list
             Enum[] accountType = {INFO_INCOME, INFO_EXPENSE, INFO_SAVINGS};
             for (int i = STARTING_INDEX; i < NUMBER_OF_ACCOUNT_TYPES; i++) {
-                monthlyExpenditureList += String.format("%s%s%s%s%s", accountType[i], COLON_SPACE, DOLLAR_SIGN,
-                        entry.getValue()[i], LINE_SEPARATOR);
+                monthlyExpenditureList += String.format("%s%s%s%s", accountType[i], COLON_SPACE,
+                        constructAmountOutput(entry.getValue()[i]), LINE_SEPARATOR);
             }
 
             // Puts monthly budget value into monthly expenditure list
@@ -520,10 +541,10 @@ public class TransactionList {
         timeInsightsValues.add(Integer.toString(timeExpense));
         timeInsightsValues.add(Integer.toString(timeSavings));
 
-        if (timeExpense != NO_AMOUNT_VALUE) {
-            timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
+        if (timeExpense == NO_AMOUNT_VALUE && timeIncome == NO_AMOUNT_VALUE) {
+            timeInsightsValues.add("There is no spending habit available.");
         } else {
-            timeInsightsValues.add("There is no spending habit available for this month.");
+            timeInsightsValues.add(getSpendingHabitComment(timeIncome, timeSavings));
         }
 
         return timeInsightsValues;
@@ -682,9 +703,11 @@ public class TransactionList {
                     common.Constants.java is altered.
                  */
 
-                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0);
+                assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT) > 0)
+                        : "Maximum amount and transaction set in Constants.java must not have negative value!";
                 assert (Long.valueOf(MAX_AMOUNT_VALUE) * Long.valueOf(MAX_TRANSACTIONS_COUNT)
-                        > Long.valueOf(MAX_AMOUNT_VALUE));
+                        > Long.valueOf(MAX_AMOUNT_VALUE))
+                        : "Maximum transaction count value set in Constants.java must be higher than 1!";
 
                 totalExpense += transaction.getAmount();
             }

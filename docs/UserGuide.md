@@ -1,5 +1,9 @@
 # Moolah Manager - User Guide
 
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
+
 - [1. Introduction](#1-introduction)
 - [2. About This Guide](#2-about-this-guide)
   * [2.1. What is in Moolah Manager](#21-what-is-in-moolah-manager)
@@ -312,8 +316,10 @@ Listing All Transactions in November 2022
 list y/2022 m/11
 ____________________________________________________________
 Here are your transaction records:
-1: [-][food] $80 on Nov 13 2022 | Description: toilet_cake 
-2: [+][education] $20 on Nov 30 2022 | Description: sold_my_pe_bugs
+Indexes are not shown as your transactions have been consolidated for specific time periods.
+If you need to know an entry's index, use the Find command to search by description.
+[-][food] $80 on Nov 13 2022 | Description: toilet_cake 
+[+][education] $20 on Nov 30 2022 | Description: sold_my_pe_bugs
 ____________________________________________________________
 ```
 
@@ -325,9 +331,11 @@ Listing All Transactions in the Last 4 Weeks
 list n/4 p/weeks
 ____________________________________________________________
 Here are your transaction records:
-1: [-][beauty] $40 on Oct 11 2022 | Description: bought_a_facial_wash
-2: [+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
-3: [-][food] $120 on Oct 25 2022 | Description: enjoyed_my_steamboat
+Indexes are not shown as your transactions have been consolidated for specific time periods.
+If you need to know an entry's index, use the Find command to search by description.
+[-][beauty] $40 on Oct 11 2022 | Description: bought_a_facial_wash
+[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+[-][food] $120 on Oct 25 2022 | Description: enjoyed_my_steamboat
 ____________________________________________________________
 ```
 
@@ -339,7 +347,9 @@ Listing All Transactions in the Last 1 Month with a Date as 20 October 2022
 list d/20102022 n/1 p/months
 ____________________________________________________________
 Here are your transaction records:
-1: [+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
+Indexes are not shown as your transactions have been consolidated for specific time periods.
+If you need to know an entry's index, use the Find command to search by description.
+[+][salary] $2000 on Oct 20 2022 | Description: worked_at_the_cinema
 ____________________________________________________________
 ```
 
@@ -351,8 +361,10 @@ Listing All Transactions in the Last 7 Days (or Past 1 Week) for Expenses on Lei
 list t/expense c/leisure n/7 p/days
 ____________________________________________________________
 Here are your transaction records:
-1: [-][leisure] $40 on Nov 2 2022 | Description: went_for_salon_treatment
-2: [-][leisure] $120 on Nov 3 2022 | Description: spa_at_sentosa
+Indexes are not shown as your transactions have been consolidated for specific time periods.
+If you need to know an entry's index, use the Find command to search by description.
+[-][leisure] $40 on Nov 2 2022 | Description: went_for_salon_treatment
+[-][leisure] $120 on Nov 3 2022 | Description: spa_at_sentosa
 ____________________________________________________________
 ```
 
@@ -451,9 +463,9 @@ stats s/categorical_savings
 ____________________________________________________________
 Here are your net categorical savings:
 [bonus] $540
-[transport] $-10
+[transport] -$10
 [salary] $2000
-[food] $-80
+[food] -$80
 
 ____________________________________________________________
 ```
@@ -481,7 +493,7 @@ In terms of monthly budget, you have kept yourself well within the budget!
 [Oct 2022]
 Income: $0
 Expense: $10001
-Savings: $-10001
+Savings: -$10001
 Budget: $10000
 Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
 In terms of monthly budget, you have spent more than your budget planned!
@@ -528,9 +540,9 @@ Here are the categorical savings and expenditure summary for
 Year: 2022
 
 -----Categorical Savings-----
-[transport] $-10001
+[transport] -$10001
 [salary] $2000
-[food] $-20
+[food] -$20
 
 -----Expenditure Summary-----
 Income: $2000

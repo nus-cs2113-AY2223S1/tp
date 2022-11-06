@@ -1,5 +1,9 @@
 # Moolah Manager - Developer Guide
 
+<p align="center">
+    <img src="images/logo.png" width="30%">
+</p>
+
 - [1. Preface](#1-preface)
 - [2. Acknowledgements](#2-acknowledgements)
 - [3. Setting Up the Project](#3-setting-up-the-project)
@@ -21,21 +25,25 @@
   * [5.7. Delete Command](#57-delete-command)
   * [5.8. Purge Command](#58-purge-command)
 - [6. Implementation for Budgeting and Financial Insights](#6-implementation-for-budgeting-and-financial-insights)
-  * [6.1. Stats Command](#61-stats-command)
-  * [6.2. Budget Command](#62-budget-command)
+  * [6.1. Overview for Budgeting And Insights](#61-overview)
+  * [6.2. Proposed Implementation](#62-proposed-implementation)
+  * [6.3. Stats Command](#63-stats-command)
+  * [6.4. Budget Command](#64-budget-command)
 - [7. Implementation for Miscellaneous Operations](#7-implementation-for-miscellaneous-operations)
-  * [7.1. Storage Operations](#71-storage-operations)
-  * [7.2. Logging Operations](#72-logging-operations)
-- [Appendix A: Product scope](#appendix-a--product-scope)
+  * [7.1. Help Command](#71-help-command)
+  * [7.2. Bye Command](#72-bye-command)
+  * [7.3. Storage Operations](#73-storage-operations)
+  * [7.4. Logging Operations](#74-logging-operations)
+- [Appendix A: Product scope](#appendix-a-product-scope)
   * [A.1. Target user profile](#a1-target-user-profile)
   * [A.2. Value proposition](#a2-value-proposition)
-- [Appendix B: User Stories](#appendix-b--user-stories)
-- [Appendix C: Non-Functional Requirements](#appendix-c--non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d--glossary)
-- [Appendix E:  Instructions for Manual Testing](#appendix-e---instructions-for-manual-testing)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E:  Instructions for Manual Testing](#appendix-e--instructions-for-manual-testing)
   * [E.1. Launch and Shutdown](#e1-launch-and-shutdown)
   * [E.2. Storage](#e2-storage)
-
+    
 ## 1. Preface
 
 Moolah Manager is a desktop application for managing one's finances, optimised for use via a Command Line Interface (CLI). Designed for IT professionals who are
@@ -53,6 +61,7 @@ _Written by: Brian Wong Yun Long_
 ## 2. Acknowledgements
 
 The format of this developer guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
+The class diagrams are styled using the Cyborg Outline theme by Brett Schwarz.
 
 Some parts of the source code in this application were reused and adapted from the team's individual projects during the CS2113 IP phase. 
 
@@ -109,7 +118,7 @@ The rest of the application consists of six components:
 The sequence diagram below shows how the components interact on command `budget b/1000`.
 
 <p align="center">
-    <img src="images/ArchitectureSequenceDiagram.png">
+    <img src="images/ArchitectureSequenceDiagram.png" width = "90%">
     <br />
     <i>Figure 2: Architecture Interaction</i>
 </p>
@@ -185,7 +194,7 @@ From the class diagram, it can be seen that the transactionList contain the meth
 such as getting, adding, editing, deleting and purging of transaction(s) in the list.
 
 The `Transaction` class is the abstract class of an `Income` or an `Expense`. A more detailed explanation on the 
-implementation on the transactions can be viewed under Section [Implementation for Transaction](#implementation-for-transaction).
+implementation on the transactions can be viewed under Section [Implementation for Transaction](#5-implementation-for-managing-transactions).
 
 #### How the Data Component Interacts:
 
@@ -196,7 +205,7 @@ Based on the whether the initialization is successful, the corresponding constru
 `transactionList` object which will be used throughout the application running time to hold the `transactions` added.
 
 <p align="center">
-    <img src="images/TransactionListSequenceDiagram.png">
+    <img src="images/TransactionListSequenceDiagram.png" width = "80%">
     <br />
     <i>Figure 5: Sequence Diagram for Creation of Transaction List</i>
 </p>
@@ -237,7 +246,7 @@ parsers are used to generate a command object with its accurate parameters accor
 The structure of the data component in Moolah Manager is illustrated in the class diagram below:
 
 <p align="center">
-    <img src="images/ParsersClassDiagram.png">
+    <img src="images/ParsersClassDiagram.png" width="80%">
     <br />
     <i>Figure 7: Class Diagram for Parser Component</i>
 </p>
@@ -355,22 +364,17 @@ _Written by: Chua Han Yong Darren_
 
 **This feature allows the local and external (handled by Storage class) storage of transaction entries by the user.**
 
-The `AddCommand` inherits properties from the abstract `Command` class. The inheritance of `Command` from `AddCommand` is
-shown below.
+The `AddCommand` inherits properties from the abstract `Command` class.
+
+`AddCommand` is dependent on `CommandParser` which accesses its `COMMAND_WORD` and creates a new `AddCommand` object which would be returned to `Duke`.
+`Duke` is associated to `AddCommand` by calling for `AddCommand#execute()`.
+It is also associated with `TransactionList`, `Ui`, `Storage`, which are used within `AddCommand` methods like `AddCommand#execute()` and `AddCommand#addTransaction()`.
+Lastly it is also associated with `ParameterParser` which calls for`AddCommand#getMandatoryTags()` that retrieves the mandatory tags (which itself is taken from `CommandTag`). 
+
+The relationship between the classes are shown below. Non-essential info has been omitted for simplification purposes.
 
 <p align="center">
-    <img src="images/AddCommandClassDiagram.png">
-    <br />
-    <i>Figure 11: Class Diagram for Add Command</i>
-</p>
-
-`AddCommand` is dependent on `CommandParser` which accesses its `COMMANDWORD` and creates a new `AddCommand` object. 
-It is also associated with `TransactionList`, `Ui`, `Storage`, which are used in `AddCommand#execute()`; and the `Duke` 
-which calls for `AddCommand#execute()`. Lastly it is also associated with `ParameterParser` which calls for 
-`AddCommand#getMandatoryTags()`. The relationship between the classes are shown below.
-
-<p align="center">
-    <img src="images/AddCommandDetailedClassDiagram.png">
+    <img src="images/AddCommandExternalClasses.png">
     <br />
     <i>Figure 12: Class Diagram for Add Command and Related Classes</i>
 </p>
@@ -378,8 +382,8 @@ which calls for `AddCommand#execute()`. Lastly it is also associated with `Param
 These are the important operations performed within the `AddCommand` class, with task description:
 
 - `AddCommand#execute(TransactionList transactions, Ui ui, Storage storage)` - Adds a `Transaction` object to the
-  `TransactionList transactions` ArrayList via transactions#addIncome() or transactions#addExpense() which would be
-  called based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
+  `TransactionList transactions` ArrayList via `AddCommand#addTransaction()` that calls for `transactions#addIncome()` 
+or `transactions#addExpense()` based on the type of transaction. For successful additions of the Transaction object to the Arraylist, The UI
   would be called to display the acknowledgement message to the interface. Also, the storage#writeToFile() method would
   be called to store the newly updated transactions values in the duke.txt file.
 
@@ -414,7 +418,7 @@ shown below.
 <p align="center">
     <img src="images/EditCommandClassDiagram.png" width="50%">
     <br />
-    <i>Figure 14: Sequence Diagram for Edit Command</i>
+    <i>Figure 14: Class Diagram for Edit Command</i>
 </p>
 
 The full command for `edit` is `edit [e/ENTRY] [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`.
@@ -477,7 +481,7 @@ _Written by: Brian Wong Yun Long_
 
 The full command for list is `list [t/TYPE] [c/CATEGORY] [d/DATE]`
 For example, if 'list' is called, all transactions that are present in Moolah Manager will be listed out
-Adding tags such as type, category and date will list all transactions to that category
+Adding tags such as year, month, day, type, category will list all transactions that apply to that tag.
 
 The structure of the application focusing on the list command is illustrated in the class diagram below:
 
@@ -503,11 +507,19 @@ _Written by: Paul Low_
 
 ### 5.6. Find Command
 
-The `FindCommand` class provides the functionality of finding a specific or few transaction(s) 
-from the list of transactions recorded in Moolah Manager, based on  multiple searching keywords that 
-match the details of the transaction(s).
+The `FindCommand` class provides the search functionality for finding a specific or few transactions from the list of transactions in Moolah Manager. 
+Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
+compared with the description of each transaction object.
 
-The sequence diagram below shows the interactions of a successful execution of the `FindCommand`.
+Figure 17 below is a class diagram for the `Find` command class.
+
+<p align="center">
+    <img src="images/FindCommandClassDiagram.png" width="40%">
+    <br />
+    <i>Figure 17: Class Diagram for Find Command</i>
+</p>
+
+The sequence diagram below shows the interactions of a successful execution of the `FindCommand`, using an example of `find k/bus_fare`.
 
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
@@ -515,25 +527,17 @@ The sequence diagram below shows the interactions of a successful execution of t
     <i>Figure 18: Sequence Diagram for Find Command</i>
 </p>
 
-1. The user executes `find k/KEYWORDS` command with an intent to view a filtered list of transactions 
-that match the searching keywords.
+Referring to Figure 18, the following is a summarized steps of the interactions that `FindCommand` performs, with some higher level details in `CommandParser` and `ParameterParser`
+omitted for simplicity.
 
-2. The `CommandParser#parse()` method is called to initialize the `Command` object with `FindCommand`, 
-accompanied by a string of keywords to search for.
-
-3. Moolah Manager (`Duke`) calls `FindCommand#execute()` method which first checks whether the string of 
-keywords is empty via the `FindCommand#checkFindFormat()` method. If `keywords` is empty, a 
-`FindTransactionMissingKeywordsException` object will be thrown with an error message.
-
-4. Since there exists a string of keywords in a successful execution, the `TransactionList#findTransactions()` 
-method will be called to loop through all `Transaction` objects from `ArrayList<Transaction>`, checking if they match 
-(i.e. contain) any searching keywords given.
-
-5. `Transaction` objects that contain the searching keywords will be appended into a formatted string and 
-returned by the `TransactionList#findTransactions()` method.
-
-6. If `FindCommand` checks that `transactionsList` string is not empty, it will call `Ui#showTransactionsList()` 
-method to display the transactions. Otherwise, `Ui#showInfoMessage()` will be called.
+1. The user executes `find k/KEYWORD` command with an intent to view a filtered list of transactions that match the search keyword, e.g. `bus_fare`.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `FindCommand`, and thereafter, the initialization of the `keyword` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that only a single search keyword without spaces has been entered.
+4. Once all checks have passed, `FindCommand` class will `execute()` whereby it will call `FindTransactions()` twice (once within itself, and the other on the `TransactionList` class)
+to generate the list of filtered transactions. The purpose of `TransactionList#findTransactions()` is to loop through all `Transaction` objects from `ArrayList<Transaction> transactions`, checking if their 
+description match the keyword given. Note that it is checked on a case-insensitive basis.
+5. Matching `Transaction` objects will be appended into a formatted string and returned to the `FindCommand` class.
+6. If `FindCommand` class checks that `transactionsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the transactions. 
 
 _Written by: Chua Han Yong Darren_
 
@@ -543,7 +547,7 @@ The `DeleteCommand` inherits properties from the abstract `Command` class. The i
 shown below.
 
 <p align="center">
-    <img src="images/DeleteCommandSequenceDiagram.png">
+    <img src="images/DeleteCommandClassDiagram.png" width = "50%">
     <br />
     <i>Figure 19: Class Diagram for Delete Command</i>
 </p>
@@ -605,7 +609,7 @@ The `PurgeCommand` inherits properties from the abstract `Command` class. The in
 shown below.
 
 <p align="center">
-    <img src="images/PurgeCommandClassDiagram.png">
+    <img src="images/PurgeCommandClassDiagram.png" width = "50%">
     <br />
     <i>Figure 21: Class Diagram for Purge Command</i>
 </p>
@@ -661,19 +665,87 @@ _Written by: Brian Wong Yun Long_
 
 ### 6.1. Overview 
 
-{To describe briefly what is offered in Budgeting and Financial Insights}
+Moolah Manager supports the viewing of summarised expenses in daily, weekly and monthly formats to show categorical savings or overall expenditure. 
+As such, we have developed streamlined methods to filter the transactions by time period prior to passing into the `Stats` command class for generating insights.
+Beyond gathering of these insights, users can also allocate a monthly budget to help them manage their spending.
 
 _Written by: Chua Han Yong Darren_
 
 ### 6.2. Proposed Implementation
 
-{To illustrate how the List and Stats command inherit the ListAndStats command class}
+The `List` and `Stats` command classes inherit their methods from the `ListAndStats` command class when setting global tags (year, month, number, period) and performing checks on their usage.
+Likewise, retrieval of filtered transactions by time periods is also done in `ListAndStats` command class, streamlining the workflow for both the `List` and `Stats` commands.
+This way, the `Stats` command class focuses on generating the different types of statistics rather than having to deal with an overhead of needing to consolidate the transaction entries of different time periods.
 
-_Written by: Chua Han Yong Darren_
+Figure 23 below is a class diagram that illustrates the inheritance for the `Stats` command class.
+
+<p align="center">
+    <img src="images/StatsCommandClassDiagram.png" width="80%">
+    <br />
+    <i>Figure 23: Class Diagram for Stats Command</i>
+</p>
+
+The `budget` is a static variable stored inside the `Budget` class. The budget variable is checked during the following 
+phase of the applications, with relevant reminder, tips and advices displayed:
+
+| Application Phase                           | Display                       | Purpose                                                                   |
+|---------------------------------------------|-------------------------------|---------------------------------------------------------------------------|
+| Program starts                              | Budget Reminder               | To remind user on the budget remained for the current month.              |
+| Adding, editing or deleting of transactions | Budget Tip                    | To alert user on the effect of the new transaction on the month's budget. |
+| Monthly expenditure or insight              | Spending habit, budget advice | To advise user on the proportion of user's spending and budget.           |
+
+The spending habit and budget advices displayed on monthly expenditure or specific month insight are generated
+dynamically based on the proportion of user's spending. This allows the application to  provide suitable advices to the user.
+
+_Written by: Chua Han Yong Darren (List and Stats), Chia Thin Hong (Budget)_
 
 ### 6.3. Stats Command 
 
-{Describe the implementation for the Stats Command}
+The `StatsCommand` class provides the functionalities for users to get an overview of their financial insights based on the statistics for the transactions. These 
+statistics are generated using the list of transactions that is stored in Moolah Manager application.
+
+The following are the available commands:
+- `stats s/categorical_savings` - Displays the total savings of all transactions in each category.
+- `stats s/monthly_expenditure` - Displays the total income, expense and savings of all transactions in each month.
+- `stats s/time_insights y/YEAR [m/MONTH]` - Displays the categorical savings and monthly expenditure for a specific month or year.
+- `stats s/time_insights p/PERIOD n/NUMBER` - Displays the categorical savings and monthly expenditure for the last N days, weeks or months.
+
+The sequence diagram below shows the interactions of a successful execution of the `StatsCommand`, using an example of `stats s/categorical_savings`.
+
+<p align="center">
+    <img src="images/StatsCommandSequenceDiagram.png">
+    <br />
+    <i>Figure 24: Sequence Diagram for Stats Command</i>
+</p>
+
+Referring to Figure 24, the following is a summarized steps of the interactions that `StatsCommand` performs when a user is requesting for the categorical
+savings. Higher level details in `CommandParser` and `ParameterParser` have been omitted for simplicity. Additionally, segments of interaction for getting monthly
+expenditure and time insights have been put into isolated sequence diagrams to break down the information.
+
+1. The user executes `stats s/categorical_savings` command with an intent to view his or her categorical savings.
+2. The `CommandParser#parse()` method will initialize the `Command` object with `StatsCommand`. The initialization of the `statsType` variable is performed in the `ParameterParser` class.
+3. In the `ParameterParser` class, various checks are performed to ensure that all the tags and parameters in the input have been filled up in correspondence to their respective requirements.
+4. Once all checks have passed, `StatsCommand` class will `execute()` whereby it will verify the related tags for date intervals (year, month, period, number) first to ensure that they are not entered
+together with the `s/categorical_savings` tag. This verification is performed in `ListAndStats` command class and is not shown in the sequence diagram for the brevity of this section. 
+5. Moving on, `listStatsByStatsType()` will be called and when it confirms that the requested statistics type is `categorical_savings`, it will call `statsTypeCategoricalSavingsOrMonthlyExpenditure()`
+method to produce the list of categorical savings. Here, `TransactionList#listCategoricalSavings()` will use a hashmap to store different categories from the `TransactionList` 
+and append the amount for each category accordingly until all transactions are exhausted.
+6. A formatted string of output collected from looping through the hashmap will be returned to the `StatsCommand` class.
+7. If `StatsCommand` class checks that `genericStatsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the categorical savings.
+
+Amongst the omitted frames in Figure 24, below two are the sequence diagrams for getting monthly expenditure and time insights.
+
+<p align="center">
+    <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 25: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
+</p>
+
+<p align="center">
+    <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="80%">
+    <br />
+    <i>Figure 26: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
+</p>
 
 _Written by: Chua Han Yong Darren_
 
@@ -697,7 +769,7 @@ To set a new budget, user can use the command `budget b/AMOUNT` where the `AMOUN
 valid range above.
 
 The interaction of the components on setting a budget can be seen in the sequence diagram under 
-[How the Architecture Components Interact with Each Other](#How-the-Architecture-Components-Interact-with-Each-Other).
+[How the Architecture Components Interact with Each Other](#how-the-architecture-components-interact-with-each-other).
 
 _Written by: Chia Thin Hong_
 
@@ -717,7 +789,7 @@ The structure of the application focusing on the help command is illustrated in 
 <p align="center">
     <img src="images/HelpCommandClassDiagram.png" width = "95%">
     <br />
-    <i>Figure 26: Class Diagram for Help Command</i>
+    <i>Figure 27: Class Diagram for Help Command</i>
 </p>
 
 For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
@@ -729,7 +801,7 @@ based on the help option chosen by the user.
 <p align="center">
     <img src="images/HelpCommandSequenceDiagram.png" width="80%">
     <br />
-    <i>Figure 27: Sequence Diagram for Help Command</i>
+    <i>Figure 28: Sequence Diagram for Help Command</i>
 </p>
 
 _Written by: Chia Thin Hong_
@@ -740,9 +812,9 @@ The `ByeCommand` inherits properties from the abstract `Command'` class. The inh
 shown below.
 
 <p align="center">
-    <img src="images/ByeCommandSequenceDiagram.png">
+    <img src="images/ByeCommandClassDiagram.png" width = "50%">
     <br />
-    <i>Figure 28: Class Diagram for Bye Command</i>
+    <i>Figure 29: Class Diagram for Bye Command</i>
 </p>
 
 
@@ -779,7 +851,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/ByeCommandSequenceDiagram.png">
     <br />
-    <i>Figure 3.8: Sequence Diagram for Delete Command</i>
+    <i>Figure 30: Sequence Diagram for Bye Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -887,7 +959,7 @@ transactions in an efficient and effective way. Moreover, it facilitates budget 
 ### E.1. Launch and Shutdown
 
 - Initial Launch
-  1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.0/duke.jar) and copy it into a separate directory.
+  1. Download the latest [duke.jar](https://github.com/AY2223S1-CS2113-W12-2/tp/releases/download/v2.1/duke.jar) and copy it into a separate directory.
   2. Ensure that Java 11 has been installed and configured on your operating system.
   3. Launch a command prompt or terminal and run the command `java -jar duke.jar`. 
   4. **Expected Outcomes:** 

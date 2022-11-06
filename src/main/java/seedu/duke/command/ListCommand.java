@@ -24,8 +24,10 @@ import static seedu.duke.command.CommandTag.COMMAND_TAG_GLOBAL_PERIOD;
 
 import static seedu.duke.common.HelpMessages.LIST_COMMAND_BASIC_HELP;
 import static seedu.duke.common.HelpMessages.LIST_COMMAND_DETAILED_HELP;
-import static seedu.duke.common.InfoMessages.INFO_LIST;
 import static seedu.duke.common.InfoMessages.INFO_LIST_EMPTY;
+import static seedu.duke.common.InfoMessages.INFO_LIST;
+import static seedu.duke.common.InfoMessages.INFO_LIST_WITHOUT_INDEXES;
+import static seedu.duke.common.InfoMessages.LINE_SEPARATOR;
 
 /**
  * Represents a list command object that will execute the operations for List command.
@@ -103,8 +105,8 @@ public class ListCommand extends ListAndStatsCommand {
         listLogger.log(Level.INFO, "Entering execution of the List command.");
 
         // Checks if there are any error in the tag combinations related to DateIntervals
-        parseDateIntervalsTags();
-        listTransactions(transactions, ui);
+        Boolean isContainDateIntervalsTags = checkContainDateIntervalsTags();
+        listTransactions(transactions, ui, isContainDateIntervalsTags);
     }
 
     /**
@@ -113,7 +115,8 @@ public class ListCommand extends ListAndStatsCommand {
      * @param transactions An instance of the TransactionList class.
      * @throws MoolahException If any type of exception has been caught within the function calls.
      */
-    private void listTransactions(TransactionList transactions, Ui ui) throws MoolahException {
+    private void listTransactions(TransactionList transactions, Ui ui, Boolean isContainDateIntervalsTags)
+            throws MoolahException {
         // Gets array list of transactions based on time filters, if any, i.e. year, month, period
         ArrayList<Transaction> timeTransactions = getTimeTransactions(transactions);
 
@@ -121,16 +124,21 @@ public class ListCommand extends ListAndStatsCommand {
             Gets the list of transactions from the time-filtered array list based on whether each transaction
             matches the type, category or date (if any) filter(s) that have been given
          */
-        String transactionsList = transactions.listTransactions(timeTransactions, type, category, date);
+        String transactionsList = transactions.listTransactions(timeTransactions, type, category, date,
+                isContainDateIntervalsTags);
 
         // Prints the list if available, else print no matching transactions
         if (transactionsList.isEmpty()) {
             listLogger.log(Level.INFO, "Transactions list is empty as there are no matching transactions.");
             ui.showInfoMessage(INFO_LIST_EMPTY.toString());
             return;
+        } else if (isContainDateIntervalsTags) {
+            listLogger.log(Level.INFO, "There are matching transactions for the Transactions list but no "
+                    + "indexes will be shown.");
+            ui.showList(INFO_LIST_WITHOUT_INDEXES.toString() + LINE_SEPARATOR + transactionsList, INFO_LIST.toString());
+            return;
         }
 
-        assert !transactionsList.isEmpty();
         listLogger.log(Level.INFO, "There are matching transactions for the Transactions list.");
         ui.showList(transactionsList, INFO_LIST.toString());
     }

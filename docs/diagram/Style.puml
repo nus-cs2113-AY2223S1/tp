@@ -96,7 +96,7 @@ skinparam useBetaStyle false
 ''
 skinparam defaultFontName       "Verdana"
 skinparam defaultFontSize       12
-skinparam dpi                   600
+skinparam dpi                   100
 ' Set to 100 when you want to save the diagram
 skinparam shadowing             false
 skinparam roundcorner           8

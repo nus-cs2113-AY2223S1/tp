@@ -24,6 +24,9 @@ public class Constants {
         2. Budget.getBudgetLeft()
      */
 
+    // The fixed index for the first transaction entry
+    public static int MIN_TRANSACTIONS_INDEX = 1;
+
     // One million transactions is the capacity allowed
     public static int MAX_TRANSACTIONS_COUNT = 1000000;
 

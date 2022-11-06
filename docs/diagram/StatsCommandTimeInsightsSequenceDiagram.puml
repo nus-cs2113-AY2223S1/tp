@@ -1,0 +1,27 @@
+@startuml
+!include Style.puml
+
+Participant "command:StatsCommand" as command
+Participant "transactions:TransactionList" as transactions
+
+group sd get time insights list
+ ref over command: get filtered transactions by month, year, or number and period
+command -> transactions:transactionsListTimeStats\n(timeTransactions, year, month, period, number)
+    activate transactions
+        transactions -> transactions:listCategoricalSavings(timeTransactions)
+        activate transactions
+            ref over transactions: process categorical savings
+        return categoricalSavingsList:String
+    return timeInsightsList:String
+    command -> transactions:processTimeSummaryStats(timeTransactions)
+    activate transactions
+    opt
+transactions -> transactions:getSpendingHabitComment
+activate transactions
+return spendingHabitComment:String
+end
+return timeInsightsValues:ArrayList<String>
+end
+
+@enduml
+

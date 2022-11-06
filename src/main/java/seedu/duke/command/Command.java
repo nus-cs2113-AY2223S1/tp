@@ -85,7 +85,7 @@ public abstract class Command {
 
     }
 
-    public void setIsDetailedOption(boolean isDetailed) {
+    public void isDetailed(boolean isDetailed) {
     }
 
     public void setStatsType(String statsType) {
