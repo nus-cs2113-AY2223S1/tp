@@ -20,20 +20,30 @@ import seedu.duke.ui.Ui;
 
 public class DatabaseStorage {
     private static Logger logger = Logger.getLogger("DatabaseStorage");
-    
+
     private static final String DATABASE_FILE_NAME = "data.csv";
     private static final String FILE_DIRECTORY = "data";
 
     private static final String PARTNER_UNVIERSITY_COUNTRY = "nil";
 
     /**
-     * Helps user set up the database.
+     * Checks if database folder exists.
      */
-    public static void createDatabase() throws IOException {
+    private static void checkDatabaseFolder() throws IOException {
         File fileDir = new File(FILE_DIRECTORY);
+
         if (!fileDir.exists()) {
-            fileDir.mkdir();
+            createDatabaseFolder(fileDir);
         }
+    }
+
+    /**
+     * Creates database folder for user.
+     * 
+     * @param fileDir Name of folder to create
+     */
+    private static void createDatabaseFolder(File fileDir) {
+        fileDir.mkdir();
     }
 
     /**
@@ -45,7 +55,7 @@ public class DatabaseStorage {
 
         try {
             readFile(DATABASE_FILE_NAME);
-            createDatabase();
+            checkDatabaseFolder();
         } catch (IOException e) {
             Ui.printExceptionMessage(e);
         }
