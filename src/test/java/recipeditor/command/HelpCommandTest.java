@@ -47,7 +47,7 @@ public class HelpCommandTest {
         String expected = "Syntax: "
                 + '\n' + "\t /delete -id <recipe_index>"
                 + '\n' + "\t /delete -t <recipe_title>" + '\n'
-        + "Description: Delete the recipe of given title or index from recipeditor.";
+                + "Description: Delete the recipe of given title or index from recipeditor.";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 
