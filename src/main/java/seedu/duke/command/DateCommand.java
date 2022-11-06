@@ -63,7 +63,7 @@ public class DateCommand extends Command {
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 LocalDate f2Date = LocalDate.parse(Parser.getDateNoDateTracker(f2.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                return f1Date.compareTo(f2Date);
+                return f2Date.compareTo(f1Date);
             }
         });
     }
@@ -76,7 +76,7 @@ public class DateCommand extends Command {
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 LocalDate r2Date = LocalDate.parse(Parser.getDateNoDateTracker(r2.getDateString()),
                         DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                return r1Date.compareTo(r2Date);
+                return r2Date.compareTo(r1Date);
             }
         });
     }

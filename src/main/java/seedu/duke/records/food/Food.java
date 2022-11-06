@@ -32,6 +32,6 @@ public class Food extends Record {
     }
 
     public String saveFood() {
-        return String.format("/%s /%d", foodDescription, calories);
+        return String.format("/%s /%d /%s", foodDescription, calories, getDateString());
     }
 }
