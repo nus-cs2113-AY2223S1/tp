@@ -11,6 +11,7 @@ public class ViewCommand extends Command {
      */
     public ViewCommand(String[] parameters, CommandType commandType) {
         super(parameters, commandType);
+        assert commandType.equals(CommandType.VIEW);
         if (parameters[1].startsWith("u/")) {
             this.universityName = parameters[1].substring(2);
             this.viewOption = "UNIVERSITY";

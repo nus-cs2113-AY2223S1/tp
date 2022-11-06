@@ -15,6 +15,7 @@ public class AddCommand extends Command {
 
     public AddCommand(String[] parameters, CommandType commandType, Lesson lesson, String comment) {
         super(parameters, commandType);
+        assert commandType.equals(CommandType.ADD);
         this.lesson = lesson;
         this.universityName = parameters[1].substring(2);
         this.moduleCode = parameters[2].substring(2);
