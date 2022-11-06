@@ -164,6 +164,10 @@ public class Ui {
         showFormattedDetail();
     }
 
+    /**
+     * This is used to display the passenger details in table format.
+     *
+     */
     private static void showFormattedDetail() {
         System.out.printf("| %s | %s | %s | %s | %s | %s | %s | %s |\n"
                         + "+---------------------------------------------------------------"

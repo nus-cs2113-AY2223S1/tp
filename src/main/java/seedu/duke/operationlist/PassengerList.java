@@ -31,6 +31,8 @@ public class PassengerList extends OperationList {
     public static final int SEAT_NUM_SECOND_INDEX = 1;
     public static final int SEAT_NUM_FIRST_INDEX = 0;
     public static final int SEAT_NUM_THIRD_INDEX = 2;
+    protected boolean isAdd;
+    protected boolean isDelete;
     protected boolean isValidPassenger;
     protected boolean isDeleteSuccess;
     protected boolean isExceedNameLength;
@@ -41,13 +43,13 @@ public class PassengerList extends OperationList {
     protected String name;
     protected String departureDate;
     protected String departureTime;
-    protected String flightNumber;
+    protected static String flightNumber;
     protected String gateNumber;
     protected String seatNumber;
     protected String boardingTime;
     protected int numOfPassengers;
     protected int boardingGroup;
-    protected int startIndex;
+    protected static int startIndex;
 
     public PassengerList() {
         this.isValidPassenger = false;
@@ -60,13 +62,13 @@ public class PassengerList extends OperationList {
         this.name = null;
         this.departureDate = null;
         this.departureTime = null;
-        this.flightNumber = null;
+        flightNumber = null;
         this.gateNumber = null;
         this.seatNumber = null;
         this.boardingTime = null;
         this.numOfPassengers = 0;
         this.boardingGroup = 0;
-        this.startIndex = 0;
+        startIndex = 0;
 
     }
 
@@ -212,6 +214,10 @@ public class PassengerList extends OperationList {
         numOfPassengers = passengers.size();
     }
 
+    public int getNumberOfPassengersForFlight() {
+        return numOfPassengers;
+    }
+
     public void getIterateBoardingGroup(int index) {
         PassengerInfo passenger = passengers.get(index);
         boardingGroup = passenger.getBoardingGroup();
@@ -221,13 +227,14 @@ public class PassengerList extends OperationList {
         boardingGroup = Integer.parseInt(boardingGroupDetail);
     }
 
-    public void getStartIndex(int indexOfInterest, String delimiterOfInterest) {
+    public static void getStartIndex(int indexOfInterest, String delimiterOfInterest) {
         startIndex = indexOfInterest + delimiterOfInterest.length();
     }
 
     //@@author shengiv
     @Override
     public void addOperation(String passengerDetail) throws SkyControlException {
+        setIsAdd();
         getNumberOfPassengers();
         getPassengerDetails(passengerDetail);
         validateDetailFormat();
@@ -257,6 +264,12 @@ public class PassengerList extends OperationList {
     }
 
     //@@author ivanthengwr
+
+    /**
+     * Checks passenger details to see if the user has input the details with the correct format.
+     *
+     * @throws SkyControlException an error if the detail is blank or does not follow a specific format.
+     */
     private void checkPassengerDetails() throws SkyControlException {
         if (isExceedNameLength) {
             throw new SkyControlException(ui.getExceedNameLengthError(name));
@@ -322,24 +335,31 @@ public class PassengerList extends OperationList {
 
     @Override
     public void deleteOperation(String passengerDetail) throws SkyControlException {
+        setIsDelete();
         getNumberOfPassengers();
         getPassengerName(passengerDetail);
         getFlightNumber(passengerDetail);
         getSeatNumber(passengerDetail);
-        for (int i = 0; i < numOfPassengers; i++) {
-            validatePassenger(i);
-            if (isValidPassenger) {
-                passengers.remove(i);
-                getNumberOfPassengers();
-                Ui.showDeleteMessage(name, flightNumber, seatNumber, numOfPassengers);
-                setDeleteSuccess();
-                break;
-            }
+        executeDeletePassenger();
+        if (isValidPassenger) {
+            getNumberOfPassengers();
+            Ui.showDeleteMessage(name, flightNumber, seatNumber, numOfPassengers);
+            setDeleteSuccess();
         }
         if (!isDeleteSuccess) {
             throw new SkyControlException(ui.getDeleteError());
         }
         resetDeleteSuccess();
+    }
+
+    private void executeDeletePassenger() {
+        for (int i = 0; i < numOfPassengers; i++) {
+            validatePassenger(i);
+            if (isValidPassenger) {
+                passengers.remove(i);
+                break;
+            }
+        }
     }
 
     @Override
@@ -391,7 +411,14 @@ public class PassengerList extends OperationList {
     }
 
     //@@author ivanthengwr
-    public String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
+    /**
+     * Gets the flight number specifically from the passengerDetail.
+     *
+     * @param passengerDetail Obtains the passengerDetail from the main user input
+     * @return flightNumber which is the flight number that is obtained from the passengerDetail.
+     * @throws SkyControlException an error if the flight number does not follow the correct format.
+     */
+    static String getFlightNumberForSync(String passengerDetail) throws SkyControlException {
         flightNumber = getSubstringBetweenDelimiters(passengerDetail,
                 FLIGHT_NUMBER_DELIMITER, BOARDING_GROUP_DELIMITER);
         if (!isValidFlightNumber(flightNumber)) {
@@ -435,6 +462,16 @@ public class PassengerList extends OperationList {
         }
     }
 
+    private void setIsAdd() {
+        isAdd = true;
+        isDelete = false;
+    }
+
+    private void setIsDelete() {
+        isAdd = false;
+        isDelete = true;
+    }
+
     //@@author ivanthengwr
     private void getBoardingTime(String passengerDetail) {
         int indexOfBoardingTime = passengerDetail.indexOf(BOARDING_TIME_DELIMITER);
@@ -444,7 +481,7 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
-    private String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
+    private static String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
             throws SkyControlException {
         int indexOfStartDelimiter = inputString.indexOf(startDelimiter);
         getStartIndex(indexOfStartDelimiter, startDelimiter);
@@ -504,7 +541,7 @@ public class PassengerList extends OperationList {
         return isNotValidTime;
     }
 
-    private boolean isValidFlightNumber(String flightNumber) {
+    private static boolean isValidFlightNumber(String flightNumber) {
         int lenOfFlightNum = flightNumber.length();
         if (lenOfFlightNum < FN_MIN_LENGTH) {
             return false;
@@ -524,7 +561,7 @@ public class PassengerList extends OperationList {
     }
 
     //@@author ivanthengwr
-    private int checkNumOfDigits() {
+    private static int checkNumOfDigits() {
         int numOfDigits = 0;
         for (int i = 2; i < flightNumber.length(); i++) {
             if (Character.isDigit(flightNumber.charAt(i))) {
