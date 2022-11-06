@@ -329,9 +329,9 @@ public class Parser {
         }
     }
 
-    private void checkDayAndMonth(int day,int month) throws OneDocException{
+    private void checkDayAndMonth(int day,int month) throws OneDocException{ 
         try {
-            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12){
+            if (day < MIN_DAY_RANGE || day > MAX_DAY_RANGE || month < MIN_MONTH_RANGE || MAX_MONTH_RANGE > 12) {
                 throw new OneDocException("Invalid date entered, make sure the date is in the correct format:\n"
                         + "DD-MM-YYYY, day in the range 1-31, month in the range 1-12");
             }
