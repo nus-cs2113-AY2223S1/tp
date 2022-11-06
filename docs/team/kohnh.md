@@ -24,7 +24,7 @@
 - **Parsing of NUSMods link**
   - What it does: Handles both converting the current application state into a NUSMods link and vice-versa from a NUSMods link to update the current state.
   - Justification: Data validation needs to be carried out to verify that the link contains the necessary information. As such, users will be able to easily transition from NUSMods to our application easily without the loss of data.
-  - Highlights: The link contains many segments which each has to be validated separately. Many rounds of iterations were made to ensure that if any part of the link contains corrupted data (i.e. invalid parameters), the rest of the information in the link will still be parsed.
+  - Highlights: The link contains many segments which each has to be validated separately. Many rounds of regression testing was conducted to ensure that if any part of the link contains corrupted data (i.e. invalid parameters), the rest of the information will still be parsed.
 
 - **View Timetable**
   - What it does: Users will be able to view their selected modules and lessons in a timetable format.
@@ -46,13 +46,11 @@
 - Standardize formatting of DG.
 - Add the overall architecture diagram.
 - Add class diagrams for all `Command` classes.
-- Add class diagrams for `Parser`,`Link`,`Storage` components.
-- Added documentation for the `Parser`,`Link`,`Storage` and `TimetableCommand` component that elaborates how it works.
+- Add class diagrams and documentation for `Parser`,`Link`,`Storage` components.
 - Ensured that all the features of the application is represented in the DG.
 
 ### Contributions to the Project Team
 
 - PR reviewed (with non trivial comments): [#69](https://github.com/AY2223S1-CS2113-F11-3/tp/pull/69), [#101](https://github.com/AY2223S1-CS2113-F11-3/tp/pull/101), [#113](https://github.com/AY2223S1-CS2113-F11-3/tp/pull/113)
 - Assisted in the implementation of `Import` command since it relies on the `Link` class which I implemented.
-- Assisted in bug fixing. 
-- Resolved the issue of whitespaces causing testing to fail.
+- Assisted in bug fixing. (E.g. Resolved the issue of whitespaces causing testing to fail.)
