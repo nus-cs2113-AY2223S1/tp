@@ -53,8 +53,8 @@ check the compatibility of the parts.
   * Helped with minor edits/fixes to the User Guide.
 * **Developer Guide**:
   * Added to User Stories section to Developer Guide. 
-  (Pull requests: [#39](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/39)), 
-  [#76](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/76)))
+  (Pull requests: [#39](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/39), 
+  [#76](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/76))
   * Added a glossary for PC parts to the Developer Guide to explain terms for non-technical readers. (Pull request: #39)
   * Contributed the BuildManager, Adding a build, Listing all builds, Finding builds, Filtering builds of the Developer 
   Guide. (Pull requests: [#138](https://github.com/AY2223S1-CS2113T-W11-2/tp/pull/138))
