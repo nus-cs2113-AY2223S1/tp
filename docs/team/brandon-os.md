@@ -5,7 +5,7 @@ They can also check if they are eligible for NOC or SEP using this application.
 
 ### Summary of Contributions
 
-Code contributed:
+Code contributed: [Code Dashboard](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=brandon-os&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 Enhancement implemented:
 - Initial basic implementation of add, check, delete, find, mcs and view command features.
@@ -21,6 +21,7 @@ Contributions to DG:
 - Creation of General Class Diagram and Command Class Diagram.
 - Text for Delete feature.
 - Explanations for Product Scope
+- Added user stories
 
 Contributions to team-based tasks:
 - Initial skeleton code as a group effort.
@@ -32,4 +33,3 @@ Review/Mentoring contributions:
 Contributions beyond the project team:
 - [Bugs found during the PE Dry Run](https://github.com/Brandon-OS/ped/issues)
 - [Review on DG - OneDoc](https://github.com/nus-cs2113-AY2223S1/tp/pull/18)
-- [Review on DG - CurrencyManager](https://github.com/nus-cs2113-AY2223S1/tp/pull/49)
