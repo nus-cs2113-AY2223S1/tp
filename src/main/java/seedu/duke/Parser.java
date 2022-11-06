@@ -49,6 +49,16 @@ public class Parser {
     static final String TV_TYPE = "class seedu.duke.TvShow";
     private Commands executor;
     public ReviewList mediaList;
+    //@@author indraneelrp
+    static final String LIST_COMMAND = "list";
+    static final String ADD_COMMAND = "add";
+    static final String DELETE_COMMAND = "delete";
+    static final String CLEAR_COMMAND = "clear";
+    static final String END_COMMAND = "bye";
+    static final String FAVOURITE_COMMAND = "favourite";
+    static final String SORT_COMMAND = "sort";
+    static final String FIND_COMMAND = "find";
+    static final String NOTHING = "";
 
     //@@author naz019
     private static Logger logger = Logger.getLogger("DukeLogger");
@@ -81,24 +91,15 @@ public class Parser {
         }
     }
 
+    //@@author indraneelrp
     /**.
      * Checks that user input is valid, parses the input and executes any valid commands given
      * @param userInput Raw input given by user
      */
-    //@@author indraneelrp
     public void processUserInput(String userInput) {
         try {
             checkIllegalCharacter(userInput);
             //@@author indraneelrp
-            final String listCommand = "list";
-            final String addCommand = "add";
-            final String deleteCommand = "delete";
-            final String clearCommand = "clear";
-            final String endCommand = "bye";
-            final String favouriteCommand = "favourite";
-            final String sortCommand = "sort";
-            final String findCommand = "find";
-            final String nothing = "";
 
             String[] parsedCommand = getCommandWord(userInput);
 
@@ -107,38 +108,38 @@ public class Parser {
 
             //@@author indraneelrp
             switch (parsedCommand[0]) {
-            case endCommand:
+            case END_COMMAND:
                 break;
 
-            case listCommand:
+            case LIST_COMMAND:
                 executeList();
                 break;
 
-            case addCommand:
+            case ADD_COMMAND:
                 executeAdd(userInput);
                 break;
 
-            case deleteCommand:
+            case DELETE_COMMAND:
                 executeDelete(parsedCommand);
                 break;
 
-            case clearCommand:
+            case CLEAR_COMMAND:
                 executeClear();
                 break;
 
-            case favouriteCommand:
+            case FAVOURITE_COMMAND:
                 executeFavourite(parsedCommand);
                 break;
 
-            case findCommand:
+            case FIND_COMMAND:
                 executeFind(userInput);
                 break;
 
-            case sortCommand:
+            case SORT_COMMAND:
                 executeSort(parsedCommand);
                 break;
 
-            case nothing:
+            case NOTHING:
                 break;
 
             default:

@@ -63,6 +63,10 @@ Adds a new movie or TV show review to your list.
 
 **Note:** 
 Title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
+Entries with duplicate title names (case sensitive) are not allowed within the same media type. In other words,
+If the ReviewList contains the Movie "avengers", attempting to add new Movie "avengers" will not be allowed,
+however a TvShow called "avengers" will be allowed. A Movie "Avengers" (with different case) 
+is taken as a different Movie and will be accepted.
 
 **Format**: 
 
