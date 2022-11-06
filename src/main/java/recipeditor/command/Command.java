@@ -20,6 +20,7 @@ public abstract class Command {
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
     }
+
     public abstract CommandResult execute();
 
     public String getCommandFunction() {
