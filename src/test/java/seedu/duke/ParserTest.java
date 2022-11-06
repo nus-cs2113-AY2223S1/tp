@@ -1,9 +1,10 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.InvalidCommand;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.command.Command;
+import seedu.duke.logic.command.ExitCommand;
+import seedu.duke.logic.command.InvalidCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

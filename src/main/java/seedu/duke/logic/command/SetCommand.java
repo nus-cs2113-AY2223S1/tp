@@ -1,14 +1,14 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
 
+import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
-import seedu.duke.exception.IllegalValueException;
-import seedu.duke.Parser;
-import seedu.duke.ui.Ui;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

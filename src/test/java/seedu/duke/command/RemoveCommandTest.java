@@ -2,8 +2,9 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Parser;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.command.Command;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;

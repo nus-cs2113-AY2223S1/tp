@@ -1,14 +1,14 @@
 package seedu.duke.storage;
 
 
-import seedu.duke.ui.Ui;
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.SetCommand;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.command.AddCommand;
+import seedu.duke.logic.command.SetCommand;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
+import seedu.duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;

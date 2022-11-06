@@ -1,8 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.logic.command;
 
-import seedu.duke.Parser;
-import seedu.duke.Validator;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;

@@ -1,16 +1,18 @@
 package seedu.duke;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.GreetCommand;
-import seedu.duke.command.LoadCommand;
-import seedu.duke.command.SaveCommand;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.command.Command;
+import seedu.duke.logic.command.GreetCommand;
+import seedu.duke.logic.command.LoadCommand;
+import seedu.duke.logic.command.SaveCommand;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.storage.TrackNFitLogger;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
