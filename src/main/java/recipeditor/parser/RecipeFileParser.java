@@ -3,7 +3,6 @@ package recipeditor.parser;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.Ingredient;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.logging.Logger;
 
