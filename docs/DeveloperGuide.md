@@ -17,6 +17,16 @@
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Glossary](#glossary)
 - [Instructions for manual testing](#instructions-for-manual-testing)
+  - [Add a flight](#add-a-flight)
+  - [Delete a flight](#delete-a-flight)
+  - [Modify a flight](#modify-a-flight)
+  - [Delay a flight](#delete-a-flight)
+  - [Add a passenger](#add-a-passenger)
+  - [Delete a passenger](#delete-a-passenger)
+  - [Automated boarding time](#automated-setting-for-boarding-time)
+  - [Syncing passenger boarding time and flight departure time](#syncing-passenger-boarding-time-with-delayed-departure-time)
+  - [Listing flights and passenger](#listing-flights-and-passengers)
+  - [SkyControl Storage](#storage-of-flights-and-passengers)
 
 ## Acknowledgements
 
@@ -173,9 +183,10 @@ parser() method will not be reflected in order to improve readability.
 1. [Add a passenger feature](#add-a-passenger-feature)
 2. [Delete a passenger feature](#delete-a-passenger-feature)
 3. [List passengers feature](#list-passengers-feature)
-4. [Add a flight feature](#Add-a-flight-feature)
-5. [Delete a flight feature](#Delete-a-flight-feature)
-6. [List flights feature](#List-flights-feature)
+4. [Add a flight feature](#add-a-flight-feature)
+5. [Delete a flight feature](#delete-a-flight-feature)
+6. [Delay a flight feature](#delay-a-flight-feature)
+7. [List flights feature](#list-flights-feature)
 
 ---
 
@@ -324,7 +335,7 @@ When `paser` verifies that the command is an entity `passenger` and `list` opera
 
 ### Add a flight feature
 
-The Add a flight function adds a flight with its corresponding details to the flight list.
+The Add a flight function adds a flight with its corresponding details to the flight logbook.
 
 **Sequence Diagram**
 
@@ -332,19 +343,21 @@ The Add a flight function adds a flight with its corresponding details to the fl
 
 ![sequence diagram](ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
 
-When the `Parser` recognizes the `add flight` command, `AddFlightCommand` is instantiated.
+When the `Parser` recognizes the `add flight` command, the `AddFlightCommand()` is instantiated.
 
 1. The `AddFlightCommand` then implements a new `addOperation(lineInput:String)` in `FlightList`
-2. `FlightList` then instantiates the `FlightInfo` Object using the attributes retrieved from the
-   user input in the previous step.
-3. `Ui` class level method `showFlightAddedMessage()` is used to inform the user they have added a flight.
+2. Flight List will then check if the lineInput is empty or inputted incorrectly.
+If it is, it will not continue to make any changes to the flight logbook.
+3. If the user has inputted correctly, `getFlightDetails(flightDetails:String)` extracts the various flight details into an attribute.
+4. The `FlightInfo` is then instantiated using the details retrieved from the previous step. And the flight Object can then be added to the flight array list.
+5. Finally,`showFlightAddedMessage()` in the UI class prints a message to inform the user that they have added the flight.
 
 ---
 
 ### Delete a flight feature
 
 A delete function which allows the user to delete a flight specified with its flight number and
-departure time from the flight list.
+departure time from the flight logbook.
 
 This feature is facilitated by `DeleteFlightCommand`. It extends an abstract `Command` with an override
 method `execute`. The abstract `Command` extends a `Parser` which holds and validates the User input
@@ -375,6 +388,26 @@ create an instantiation of `DeleteFlightCommand`.
    successful delete operation
 5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
 the information of the passengers which contain the flight number that has been successfully removed.
+---
+
+### Delay a flight feature
+In the event of a flight not being able to depart on time and needs to be delayed,
+the `flight delay` command allows the AOM to delay the departure time of an existing flight.
+
+**Sequence Diagram**
+
+![sequence diagram](ug-diagrams/images/delayFlightCmdSeqDiagram.jpg)
+
+When the `Parser` recognizes the `delay` command has been inputted, `DelayFlightCommand` is instantiated.
+
+1. `execute(entityList, lineInput)` will run in the `DelayFlightCommand` and call on the `delayFLightDeparture`
+    method which helps extract the flight number to be changed and new departure timing from the user lineInput.
+2. Once FlightList Class has this information, it will check if the lineInput was empty or entered incorrectly. If it is empty or incorrect,
+no delay changes will be made.
+3. Else, the method `findFlightInfo` will find the index of the flight to change.
+4. Once it is found, `getFLightAttributes` is called to retrieve all the relevant flight details from `FlightInfo`.
+5. Using the retrieve information, `setDepartureTime(newDepartureTime)` would append the flight records and change the departure time.
+6. Finally, `showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime` informs the user the flight delay has been saved.
 
 ---
 
@@ -433,7 +466,7 @@ track of constant changes in flight scheduling and the relevant passenger detail
 1. User should work on Windows, Linux or OS-X as long as `Java-11` or above has been installed.
 2. Should be able to hold up to a hundred flights in a day without any noticeable decrease in processing speed.
 3. User should be able to understand and be familiar with airport scheduling operations prior to the usage of this bot.
-4. A user with an above average typing speed for regular english text 
+4. A user with an above average typing speed for regular english text
 
 ## Glossary
 
@@ -445,59 +478,267 @@ track of constant changes in flight scheduling and the relevant passenger detail
 ### Launch and Exit
 
 1. Launch
-    
-    To launch SkyControl, please follow the instruction on our [Quick Start Guide](#).
+
+    To launch SkyControl, please follow the instructions on our [Getting Started](https://ay2223s1-cs2113-t17-1.github.io/tp/UserGuide.html#getting-started).
 2. Exit
 
     Enter the command `quit` to close the program.
 
-### Deleting passenger list till empty
+### Commands
 
-- Delete a passenger in an empty list
+To specify a command for flights or passengers, the word `flight` and `passenger` has to be added in front respectively.
+
+### Add a flight
+Adding a new flight can be done using the `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` command.
+
+1. Add a flight with all details filled in correctly.
+   1. Prerequisite: Any flight with the same flight number as the test case should not be in the flight logbook.
+   2. Test Case:
+`flight add fn/sq832 a/Singapore Airlines d/bangkok dt/1600 gn/05 c/03-03`
+   3. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Flight added!
+    ```
+2. Add a flight with missing details.
+   1. Test Case:`flight add fn/sq832 a/Singapore Airlines`
+   2. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    The system is unable to read your command, please try again.
+    ```
+
+3. Add a flight with invalid details. 
+SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check in numbers.
+   1. Test Case with invalid departure time outside the 24HR format:
+`flight add fn/sq832 a/Singapore Airlines d/bangkok dt/7200 gn/05 c/03-03`
+   2. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Stop! The departure time input format is wrong.
+    Please try again in 24Hr time format.
+    ```
+   1. Test Case with wrong flight number:
+   `flight add fn/WRONG123 a/Singapore Airlines d/bangkok dt/1200 gn/05 c/03-03`
+   2. Expected Output:
+   ```
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Stop! The flight number input format is wrong.
+    Please try again with the following format:
+    'SQ12' - For international flights
+    'SQ123' - For regional flights
+    'SQ1234' - For domestic flights
+   ```
+4. Other incorrect flight add commands to try:
+    1. Test Case: `flight add fn/sq832 a/Singapore Airlines d/bangkok dt/7200 gn/x c/y`
+       (where x is not within 00 to 99 while y is not a valid row-door number)
+    2. Expected Output: Similar to previous with slight variation specifying the correct gate number or check-in row/door format user should use.
+
+### Delete a flight
+1. Deleting an existing flight 
+   1. Test Case: `flight delete sq832`
+   2. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    FLIGHT SQ832 HAS BEEN DELETED.
+    ```
+2. Deleting a flight that does not exist
+   1. Test Case: `flight delete sq456`
+   2. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    FLIGHT SQ832 NOT FOUND.
+    ```
+
+### Modify a flight
+- There are 2 flight attributes which the user can modify. They are the flight number and gate number. 
+Both values have to follow the format specified in our table of parameters.
+
+1. Modify flight number
+   1. Test Case: `modify SQ832 fn/SQ654`
+   2. Expected Output:
+    ````
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Flight number of flight SQ832 is updated to SQ654.
+    ````
+
+2. Modify gate number
+   1. Test Case: `modify SQ654 gn/08`
+   2. Expected Output:
+    ````
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Gate number of flight SQ654 is updated to 08.
+    ````
+
+### Delay a flight
+- In the event the flight cannot depart on time and needs to be delayed, users can use this input to delay the flight to a later timing within the same day.
+1. Delaying an existing flight with a later timing .
+   1. Test Case: `delay sq654 dt/2100`
+   2. Expected Output:
+    ```
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Departure time of flight SQ654 is delayed from 1600 to 2100.
+    ```
+
+2. Delaying an existing flight but with an earlier invalid timing.
+   1. Test Case: `delay sq654 dt/0800`
+   2. Expected Output:
+    ````
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Stop! Please enter a valid departure time for flight SQ654. 
+    Time must be later than 2100.
+    ````
+
+### Add a passenger
+1. Adding a passenger to an existing flight with all details filled in correctly.
+   1. Prerequisite: No passenger in the same flight should be occupying the seat specified in the test case.
+   2. Test Case: `passenger add n/Ivan Theng fn/sq654 bg/06 sn/17d`
+   3. Expected Output: 
+    ````
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Passenger IVAN THENG of SQ654 17D has been added.
+    ````
+2. Adding a passenger to a flight that does not exist in the flight logbook.
+   1. Test Case: `passenger add n/Susan Lee fn/ke987 bg/34 sn/22e`
+   2. Expected Output: SkyControl would print an error informing the manager that he needs to flight add an existing flight number into
+the list first before being able to add a passenger of the existing flight number into the logbook.
+   ```
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Stop! The input passenger detail does not have a flight number that exist yet.
+    Flight detail of the specific flight number should input first.
+   ```
+### Delete a passenger
+1. Deleting an existing passenger with all details filled in correctly.
+   1. Test Case: `passenger delete n/Ivan Theng fn/sq654 sn/17d`
+   2. Expected Output:
+    ````
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Passenger IVAN THENG from SQ654 of seat number 17D have been
+    deleted from the passenger list.
+    1 passenger(s) left on the passenger list.
+    ````
+
+2. Deleting a passenger that does not exist or passenger list is empty.
    1. Prerequisites: There should be no passengers present in the passenger list.
-   2. Test case: `passenger delete n/Ivan Theng fn/SQ17 sn/17A`  
-   Expected: An error would be printed to inform the manager that no such passenger exist or that the list is empty  
+   2. Test Case: `passenger delete n/Ivan Theng fn/sq654 sn/17d`
+   3. Expected Output: An error would be printed to inform the manager that no such passenger exist or that the list is empty
+    ```
+   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    The system is unable to delete the specified passenger
+    as he/she is not found in the passenger list or his/her
+    detail have been input incorrectly.
+   ```
 
-### Empty List  
-
-- List all passenger when there are no passengers
-   1. Prerequisites: There should be no passengers present in the passenger list. 
-   2. Test case: `passenger list`  
-   Expected: SkyControl would print out an empty list, stating that its empty  
-
-### Non-existent flight
-- Add passenger with a flight number that has not been tracked in the flight list
-    1. Prerequisites: The flight number of testing should not be present in the flight list
-   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` where fn/sq832 should not be added in the flight list yet.  
-   Expected: SkyControl would print an error informing the manager that he needs to flight add an existing flight number into
-   the list first before being able to add a passenger of the existing flight number into the logbook.  
-
-### Automated setting for boarding time  
+### Automated setting for boarding time
 
 - Automated boarding time of 45minutes earlier than departure time placement
-   1. Prerequisites: User should intend to add a passenger into the passenger logbook, and flight number must exist.
-   2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` then `passenger list`  
-   Expected: SkyControl should set the boarding time automatically to 45 minutes before the departure time that the manager has input.  
+    1. Prerequisites: User should intend to add a passenger into the passenger logbook, and flight number must exist.
+    2. Test case: `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d` followed by `passenger list`  
+       Expected: SkyControl should set the boarding time automatically to 45 minutes before the departure time that the manager has input.
 
-### Syncing boarding time with delayed departure time  
+### Syncing passenger boarding time with delayed departure time
 
 - Automated boarding time of 45minutes earlier than delayed departure time placement
-   1. Prerequistes: Existing flight details and passenger details of that particular flight should be present.
-   2. Test case: `delay KE632 dt/2100` then `passenger list`
-   Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
-   the tracked delayed departure time.
-   <br>
+    1. Prerequisites: Existing flight details and passenger details of that particular flight should be present.
+    2. Test case: `delay KE632 dt/2100` then `passenger list`
+       Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
+       the tracked delayed departure time.
 
+### Listing Flights and Passengers
+The list command has 2 variations:
 
+- `flight list`
+- `passenger list`
+
+The first command lists all flights in the flight logbook 
+while the second commands lists all passengers in the passenger logbook.
+
+1. Listing Flights
+   1. Test Case: `flight list`
+   2. Expected Output:
+   ```
+   +----------------------------------------------------------------------------------------------------------------------------------+
+    |                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+    | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+    |      SQ654 |       06-11-22 |     SINGAPORE AIRLINES |               BANGKOK |           2100 |       08 |               03-03 |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+   ```
+2. Listing Passengers
+   1. Test Case: `passenger list`
+   2. Expected Output:
+   ````
+   +------------------------------------------------------------------------------------------------------------------------------+
+    |                                                  PASSENGER DETAILS LOGBOOK                                                   |
+    +------------------------------------------------------------------------------------------------------------------------------+
+    |           NAME           | DEPARTURE DATE | DEPARTURE TIME | FLIGHT NUM | GATE NUM | BOARDING GRP | SEAT NUM | BOARDING TIME |
+    +------------------------------------------------------------------------------------------------------------------------------+
+    | IVAN THENG               | 06-11-22       | 2100           | SQ654      | 08       | 6            | 17D      | 2015          |
+    +------------------------------------------------------------------------------------------------------------------------------+
+   ````
+
+3. Empty Flight List
+   1. Prerequisite: There should be no flight present in the flight logbook. (All flight have been deleted or no flight has been inputted into SkyControl.txt)
+   2. Test case: `flight list`
+   3. Expected Output: SkyControl would print out an empty list, stating that its empty
+   ```
+   +----------------------------------------------------------------------------------------------------------------------------------+
+    |                                                  FLIGHT DETAILS LOGBOOK FOR TERMINAL 1                                         |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+    | FLIGHT NUM | DEPARTURE DATE |        AIRLINE         |      DESTINATION      | DEPARTURE TIME | GATE NUM |  CHECK-IN ROW/DOOR  |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+    |                                             The flight details logbook is empty.                                               |
+    +----------------------------------------------------------------------------------------------------------------------------------+
+   ```
+
+4. Empty Passenger List
+   1. Prerequisite: There should be no passengers present in the passenger list.
+   2. Test case: `passenger list`
+   3. Expected Output: SkyControl would print out an empty list, stating that its empty
+   ```
+   +------------------------------------------------------------------------------------------------------------------------------+
+    |                                                  PASSENGER DETAILS LOGBOOK                                                   |
+    +------------------------------------------------------------------------------------------------------------------------------+
+    |           NAME           | DEPARTURE DATE | DEPARTURE TIME | FLIGHT NUM | GATE NUM | BOARDING GRP | SEAT NUM | BOARDING TIME |
+    +------------------------------------------------------------------------------------------------------------------------------+
+    |                                          The passenger details logbook is empty.                                             |
+    +------------------------------------------------------------------------------------------------------------------------------+
+   ```
+   
+Below is a summary of all the possible commands that you can execute in SkyControl as well as their required formats and an example. 
+Followed by the format that each parameter should adhere to.
 
 | Command                | Format                                                                                                    | Example                                                              |
 |:-----------------------|:----------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------|
 | `passenger add`        | `passenger add n/PASSENGER_NAME fn/FLIGHT_NUMBER bg/BOARDING_GROUP sn/SEAT_NUMBER`                        | `passenger add n/Ivan Theng fn/sq832 bg/01 sn/17d`                   |
 | `flight add`           | `flight add fn/FLIGHT_NUMBER a/AIRLINE d/DESTINATION dt/DEPARTURE_TIME gn/GATE_NUMBER c/CHECKIN_ROW_DOOR` | `flight add fn/KE632 a/Korea Airlines d/Korea dt/1200 gn/32 c/12-03` |
 | `passenger delete`     | `passenger delete n/PASSENGER_NAME fn/FLIGHT_NUMBER sn/SEAT_NUMBER`                                       | `passenger delete n/Ivan Theng fn/sq832 sn/17d`                      |
-| `flight delete`        | `flight delete fn/FLIGHT_NUMBER`                                                                          | `flight delete ke632`                                                |
+| `flight delete`        | `flight delete FLIGHT_NUMBER`                                                                             | `flight delete ke632`                                                |
 | `passenger list`       | `passenger list`                                                                                          | `passenger list`                                                     |
 | `flight list`          | `flight list`                                                                                             | `flight list`                                                        |
 | `modify flight number` | `modify FLIGHT_NUMBER fn/NEW_FLIGHT_NUMBER`                                                               | `modify SQ832 fn/SQ654`                                              |
 | `modify gate number`   | `modify FLIGHT_NUMBER gn/NEW_GATE_NUMBER`                                                                 | `modify SQ654 gn/08`                                                 |
 | `delay`                | `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`                                                               | `delay KE632 dt/2100`                                                |
+
+**Table of parameters:**
+
+| Parameter          | Format to adhere by                                                                                                                                                                                         | Example                             |
+|:-------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------|
+| PASSENGER_NAME     | Input name should be no more than 24 characters                                                                                                                                                             | `Ivan Lim`                          |
+| DEPARTURE_TIME     | Input departure time should be in 24 Hours format                                                                                                                                                           | `2100`                              |
+| NEW_DEPARTURE_TIME | Input departure time should be in 24 Hours format and later than the existing departure time                                                                                                                | `2200`                              |
+| FLIGHT_NUMBER      | Input flight number should start with 2 letter character, followed either by <br/>Two numbers for international flights <br/>Three numbers for regional flights<br/> Four numbers for domestic flights <br> | `SQ12`</br>`SQ123`</br>`SQ1234`<br> |
+| NEW_FLIGHT_NUMBER  | Input flight number should follow FLIGHT_NUMBER constraints but must not be the same flight code                                                                                                            | `KE356`                             |
+| GATE_NUMBER        | Input gate number should be 2 digits and between ranges 00 and 99                                                                                                                                           | `05`                                |
+| NEW_GATE_NUMBER    | Input gate number should follow GATE_NUMBER constraints but must not be the same value                                                                                                                      | `22`                                |
+| BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
+| SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
+### Storage of flights and passengers
+* Storage will automatically update in the `SkyControl.txt` file found in the `data` directory.
+* Both flight and passenger are stored in the same text file. 
+However, after running SkyControl, the flight and passenger lists wil update automatically.
+* It is highly not advised to tamper this file but to use SkyControl to view and edit the passenger and flight logbooks.
+
+<br>
+
