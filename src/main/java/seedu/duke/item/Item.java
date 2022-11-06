@@ -78,10 +78,6 @@ public class Item {
         return !transactionList.hasThisItemBeingBorrowed(itemId);
     }
 
-    public String getStatus(TransactionList transactionList) {
-        return (this.isAvailable(transactionList) ? "YES" : "NO");
-    }
-
     /**
      * Gives a readable string representation of an item.
      * 

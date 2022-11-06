@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exception.InvalidCategoryException;
 import seedu.duke.exception.InvalidItemException;
 import seedu.duke.exception.ItemNotFoundException;
-import seedu.duke.transaction.Transaction;
 import seedu.duke.transaction.TransactionList;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 // @@author jorellesee
 public class ItemListTest {
     ItemList itemList;
