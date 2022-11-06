@@ -1,45 +1,23 @@
 @startuml
 skinparam Style strictuml
-actor user
+participant ":Recipeditor" as Main
+participant ":Parser" as Parser
+participant ":GuiWorkFlow" as GuiWorkFlow
+participant ":AddCommand" as AddCommand
+participant ":RecipeList" as RecipeList
+participant ":Storage" as Storage
 database FileDirectory
-user -> Main : Add Recipe
-Main -> Parser: parseCommand()
-create Parser
-create GuiWorkFlow
+
+Main-> Parser: parseCommand()
 
 alt Add Command
-Parser -> GuiWorkFlow: <<create>>
-
-create Editor
-GuiWorkFlow -> Editor: <<create>>
-
-Editor -> Editor : enterEditor()
-Editor --> GuiWorkFlow:
-Storage -> Editor: loadFileContent("Template.txt")
-
-loop until exit editor
-user -> Editor: Make changes to the template
-Editor -> Storage: save "Temporary.txt"
+create GuiWorkFlow
+Parser -> GuiWorkFlow: GuiWorkFlow(TEMPLATE_FILE)
+ref over GuiWorkFlow
+GUI Sequence Diagram
 end
-
-Editor --> GuiWorkFlow:
-destroy Editor
-
-create TextFileParser
-GuiWorkFlow -> TextFileParser: parseTextToRecipe()
-ref over TextFileParser
-Parse Text to Recipe
-end
-TextFileParser --> GuiWorkFlow: return recipe or throw ParseFileException
-destroy TextFileParser
-
-alt recipe not in storage
-    GuiWorkFlow -> Parser: newly added recipe is valid
-else
-    GuiWorkFlow -> Parser: DuplicateRecipeTitleException()
-end
-
-GuiWorkFlow --> Parser:
+Parser -> GuiWorkFlow: getValid() && getRecipe()
+GuiWorkFlow --> Parser: return isValid, return recipe
 
 create AddCommand
 Parser -> AddCommand: new AddCommand (validity, recipe)
@@ -51,9 +29,12 @@ Main -> AddCommand: execute()
 alt valid
     AddCommand -> RecipeList: addRecipe()
     RecipeList -> Storage: rewriteRecipeListToStorage()
-    AddCommand -> Main: Success Message
+    Storage -> FileDirectory: save `AllRecipe.txt`
+    AddCommand -> Storage: saveRecipe(recipe,path)
+    Storage -> FileDirectory: save recipe file
+    AddCommand -> Main: return CommandResult with successful message
 else invalid
-    AddCommand -> Main: Fail Message
+    AddCommand -> Main: return CommandResult with failed message
 end
 destroy AddCommand
 

@@ -17,11 +17,12 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
     - [Edit CLI Component](#edit-component) - William
     - [GUI Component](#gui-component) - Huy
 - [Implementation](#implementation)
-    - [Data on Startup and Exit](#loading-of-data-on-startup) - Huy
+    - [Data on Startup and Exit](#data-on-startup-and-exit) - Huy
     - [Parsing of Commands](#parsing-of-commands) - Bian Rui
-    - [Add a New Recipe](#add-recipe) - Huy
-    - [Edit an Existing Recipe](#add-an-existing-recipe) - William
-    - [Parse Text to Recipe](#parse) - Huy
+    - [Add Recipe](#add-recipe) - Huy
+    - [GUI WorkFlow](#gui-workflow) - Huy
+    - [Parse Text to Recipe](#parse-text-to-recipe) - Huy
+    - [Edit an Existing Recipe](#edit-an-existing-recipe) - William
     - [Find Recipe](#find-recipe) - Qian Hui
     - [Delete Recipe](#delete-recipe) - Bian Rui
 - [Product Scope](#product-scope)
@@ -39,7 +40,6 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 - org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
 - org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
 
-
 ## Design
 
 ### Architecture
@@ -56,20 +56,6 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 - `Parser`: interprets the user input into different commands
 - `Recipe`: main entrypoint of the program.
 - `Exception`: exceptions thrown by the program.
-
-#### Software running flow:   Choose between this or the below
-
-Upon start, Recipeditor will check load or create saves.
-
-During software run, it will repeat iterations of reading and executing commands.
-In each iteration,raw user inputs are read from CLI. They will be
-interpreted into commands for the software to execute.
-Each execution will either write or read the list of recipes
-depending on the command. Finally, the result of current iteration
-is reflected to the user.
-
-Termination of software purges all temporary data, while saved changes
-can be loaded from saves upon next software launch.
 
 #### Happy user workflow
 
@@ -115,8 +101,8 @@ The UI component is responsible for all user interfaces of the application.
 1. `Ui` takes `CommandResult` as a parameter to show the output message after a command is completed.
 2. `AddMode` calls `Recipe` to add new recipe into the list.
 3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
-4. `Editor` takes `Storage` as a parameter to access the temporary file path, where the recipe will be 
-temporarily stored at.
+4. `Editor` takes `Storage` as a parameter to access the temporary file path, where the recipe will be
+   temporarily stored at.
 
 ### Parser Component
 
@@ -135,16 +121,17 @@ The storage component allows data to be read from and saved to a storage file.
 3. `Storage` calls `Ui` to show relevant messages to the user.
 4. `Storage` calls `ParserFileException` when there is an error in parsing recipe file content.
 5. `Storage` uses a method in `RecipeFileParser` to parse the content in the individual recipe text file
-into recipe.
+   into recipe.
 6. `Storage` uses a method in `TitleFileParser` to parse the title of the text file into recipe title.
 
 The external storage file contains:
+
 1. Individual Recipe Text File
-   - Recipe Name
-   - Recipe Description
-   - Recipe Ingredients (name, amount, unit)
-   - Recipe Steps
-   
+    - Recipe Name
+    - Recipe Description
+    - Recipe Ingredients (name, amount, unit)
+    - Recipe Steps
+
 2. All Recipe Text File - that contains the recipe title of all the recipes in the list.
 
 ### Command Component
@@ -250,61 +237,94 @@ whether the GUI or CLI should be called through the number of arguments passed b
 
 ### GUI Component
 
-When the user type
+<p align="center" width="100%">
+  <img width="80%" src="images/ClassDiagrams/GUIComponent.png" alt="GUI Component"/>
+</p>
+
+The GUI component consists of 2 main classes: `Editor` and `GuiWorkFlow`
+
+- `Editor` extends `Jframe` and implements `ActionListener`: This is the class that brings up the GUI
+- `GUIWorkFlow` is the class that call `Editor`: This class have various methods that handle the transition between CLI
+  and GUI
+- Check [GUI WorkFlow](#gui-workflow), for the implementation
 
 ## Implementation
 
 ### Data on Startup and Exit
 
-### Parsing of Commands
-
-### Add a new recipe
-
-The following sequence diagram shows the usage of relevant classes when trying
-to add a new recipe to storage.
+#### Startup
 
 <p align="center" width="100%">
-  <img width="80%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/StartupStorageSequence.png" alt="Startup storage"/>
 </p>
 
-Step 1: User will first input a customer `AddCommand`. The user input
-is read by `Main` and is parsed by the static method `Parser.parseCommand()`.
+When the program starts, it will
 
-Step 2: If `AddCommand` of correct format is parsed, `Parser` will create a new
-instance of `GuiWorkFlow`.
+- First run
+    - Create the storage folders
+        - `./RecipeData/App`: to store `Template.txt` and `Temporary.txt`
+        - `./RecipeData/Recipes`: to store recipe files
+    - Create `AllRecipes.txt` file to keep track of the recipe titles
+    - Create `Template.txt` file for Add Command
+- Subsequent run
+    - Load the recipe titles from `Tempate.txt` into ArrayList `RecipeList.recipeTitles`
+    - It will **check for the validity** of the titles
+        - Title is not blank
+        - Title is alphanumeric
+        - Title does not exceed 255 characters
+        - Title has an corresponding recipe file in `./RecipeData/Recipes`
+    - Load the recipe file in `./RecipeData/Recipes` into ArrayList `RecipeList.recipes`
+      - The recipe file content is parsed by the `RecipeFileParser` class. Check [Parse Text to Recipe](#parse-text-to-recipe)
 
-Step 3: When the new instance of `GuiWorkFlow` is constructed, it creates a new
-instance of `Editor`, and it calls `enterEditor`. This opens the GUI editor for
-user input of `recipe`.
+#### Exit
 
-Step 4: `GuiWorkFlow` will load a template `recipe` to Editor for user to edit on it.
+<p align="center" width="100%">
+  <img width="100%" src="images/SequenceDiagram/ExitStorageSequence.png" alt="Exit storage"/>
+</p>
 
-Step 5: `GuiWorkFlow` will keep listening to changes made in the editor and save them to
-`Template.txt` in `Storage`. This process loops until user exits the editor manually.
+Before exiting, the program will
 
-Step 6: `GuiWorkFlow` will create an instance of `TextFileParser` and calls `parseTextToRecipe`
-to store the newly added `recipe` in itself.
+- Regenerate the `AllRecipes.txt`
+- Delete existing all recipe files
+- Generate the recipe files from RecipeList Model
 
-Step 7: `GuiWorkFlow` checks if the user input of recipe has a valid title, which is not
-the same as titles of any existing `recipe` in `Storage`.
+This is to prevent manual tampering of the data that might affect the data in the next run
 
-Step 8: The content and validity of `recipe` are used to create an instance of `AddCommand`,
-which is returned to `Main` for execution.
+### Parsing of Commands
 
-Step 9: Upon execution of `AddCommand`, its validity is checked. If the `AddCommand` is valid,
-the `recipe` in it will be written to `RecipeList` and `Storage` successfully. Otherwise, a message
-of invalid `AddCommand` will be returned backed to `Main`.
+### Add Recipe
+<p align="center" width="100%">
+  <img width="100%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
+</p>
+
+- When the `Parser` parsed the AddCommand, an instance of `GuiWorkFlow` will be created
+- The internal working of `GuiWorkFlow` is elaborated in [GUI WorkFlow](#gui-workflow)
+- `Parser` will call `getValid()` and `getRecipe()` from the `GuiWorkFlow`
+  - After the user interact with the GUI, if the text the user provides is a valid recipe, the Add command will be valid
+- If the recipe is valid
+  - The recipe title is added to `AllRecipes.txt` file
+  - A recipe file will be saved to the FileDirectory
+  - A `CommandResult` instance is returned with a successful message
+
+### GUI WorkFlow
+<p align="center" width="100%">
+  <img width="100%" src="images/SequenceDiagram/GUISequence.png" alt="Recipe Module Diagram"/>
+</p>
+
+
+### Parse Text to Recipe
+- The parsing of is solely handled by `RecipeFileParser` with little interaction with other classes. Hence there will be no diagram.
+- 
 
 ### Edit an Existing Recipe
 
 #### GUI
 
-- Similar to [Add a New Recipe](#add-a-new-recipe) but instead of `GUIWorkflow(Temporaryfile)` it
-  is `GUIWorkflow(recipeName)`
+- The workflow is similar to [Add Recipe](#add-recipe), check [GUI WorkFlow](#gui-workflow)
+- Instead of loading `Template.txt`, the recipe file with the title name corresponding to the index will be loaded
 
 #### CLI
 
-### Parse Text to Recipe
 
 ### Find Recipe
 
@@ -342,6 +362,10 @@ quickly.
 | v2.0    | user     | show detailed recipe that I specified         | view detailed recipe (name, description, ingredients and steps) of the one that I am interested             |
 | v2.0    | new user | view the list of available commands           | use the appropriate command according to my needs                                                           |
 
+
+## Non-functional Requirement
+
+## Glossary
 
 ## Instructions for manual testing
 
