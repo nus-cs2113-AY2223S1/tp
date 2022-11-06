@@ -12,7 +12,18 @@ import seedu.duke.user.UserList;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static seedu.duke.exception.message.ExceptionMessages.*;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_FOUND;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_UNAVAILABLE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_NAME_LENGTH_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_CATEGORY_INDEX_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_TOO_MANY_DECIMALS;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_DUPLICATE_ITEM_ID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_ITEM_NOT_MATCHED;
+
+
+
 
 // @@author jingwei55
 public class ItemList {
@@ -223,7 +234,7 @@ public class ItemList {
      * Checks if a price is valid or not.
      *
      * @param price The input price
-     * @throws InvalidPriceException If price value is out of range or if there are too many decimal places
+     * @throws InvalidPriceException If price value is out of range or if price has more than 2 decimal places
      */
     private void checkValidPrice(String price) throws InvalidPriceException {
         try {

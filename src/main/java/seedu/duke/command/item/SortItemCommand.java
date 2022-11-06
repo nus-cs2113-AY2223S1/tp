@@ -13,6 +13,7 @@ import seedu.duke.parser.CommandParser;
 import seedu.duke.transaction.TransactionList;
 import seedu.duke.ui.Ui;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -25,6 +26,7 @@ import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_BOUND
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_FORMAT_INVALID;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_OUT_OF_RANGE;
 import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_SORT_MODE_INVALID;
+import static seedu.duke.exception.message.ExceptionMessages.MESSAGE_PRICE_TOO_MANY_DECIMALS;
 
 // @@author chiewyx
 
@@ -134,6 +136,8 @@ public class SortItemCommand extends Command {
         try {
             if (Double.parseDouble(minPrice) < 0 || Double.parseDouble(minPrice) > 10000) {
                 throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
+            } else if (BigDecimal.valueOf(Double.parseDouble(minPrice)).scale() > 2) {
+                throw new InvalidPriceException(MESSAGE_PRICE_TOO_MANY_DECIMALS);
             }
             return true;
         } catch (NumberFormatException e) {
@@ -152,6 +156,8 @@ public class SortItemCommand extends Command {
         try {
             if (Double.parseDouble(maxPrice) < 0 || Double.parseDouble(maxPrice) > 10000) {
                 throw new InvalidPriceException(MESSAGE_PRICE_OUT_OF_RANGE);
+            } else if (BigDecimal.valueOf(Double.parseDouble(maxPrice)).scale() > 2) {
+                throw new InvalidPriceException(MESSAGE_PRICE_TOO_MANY_DECIMALS);
             }
             return true;
         } catch (NumberFormatException e) {
