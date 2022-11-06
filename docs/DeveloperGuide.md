@@ -210,21 +210,23 @@ The edit component consists of three parts:
 - Parser
     - Parses the user input, instantiates the EditCommand class
 - EditModeCommand
-    - Handles the edit functions (Add, Swap, Change, Delete, Invalid)
+    - Handles the edit functions that falls under `EditModeCommand` 
+  (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
 - EditCommand
-    - Instantiated by parser whenever /edit is called, instantiates the flag parser, switches the flow between GUI and
+    - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
       CLI,
       handles saving the edited recipe
 
 #### Parser
 
-The FlagParser contains several functions to extract flags from the user input in the FlagType format. It is used to
+The `FlagParser` contains several functions to extract flags from the user input in the FlagType format. It is used to
 instantiate the necessary EditModeCommand.
-GuiWorkFlow bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
+
+`GuiWorkFlow` bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
 
 #### EditModeCommand
 
-An abstract class instantiated by EditCommand in CLI mode. It takes in the old recipe and, once executed,
+An abstract class instantiated by `EditCommand` in CLI mode. It takes in the old recipe and, once executed,
 returns a new recipe which will be saved to Storage.
 
 #### EditCommand
@@ -261,11 +263,94 @@ When the user type
 ### Data on Startup and Exit
 
 ### Parsing of Commands
-The following sequence diagram shows the usage of relavent classes and methods when trying to parse
-an arbitrary intput into an executable `command` by software.
+The following sequence diagram shows the usage of relevant classes and methods when trying to parse
+an arbitrary input into an executable `command` by software.
 <p align="center" width="100%">
-  <img width="80%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
 </p>
+
+Step 1:
+A user input will be parsed into `parser` and checked for the command word by `parseCommand`.
+
+Step 2.1:
+If command word is `/add`, `parseAddCommand()` will be called by `Parser`. If the input is a valid `AddCommand`,
+an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned. 
+
+Step 2.2:
+If `templateFileMissingException` occurs,`Parser` will call `generateFile()` in `Storage` to create
+the template file. An `InvalidCommand`containing this exception will be returned.
+
+Step 3.1:
+If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a valid `EditCommand`
+to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned. 
+
+Step 3.1.1:
+If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException` 
+or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will 
+be returned.
+
+Step 3.2:
+If the command input is a valid `EditCommand` to edit in CLI, an instance of `EditCommand` to interpret user
+input into changes made to `recipe` is returned.
+
+Step 3.2.2:
+If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
+or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
+be returned.
+
+Step 4:
+If the command word is `/list`, an instance of `ListCommand` will be returned to `Parser`.
+
+Step 5:
+If the command word is `/exit`, an instance of `ExitCommand` will be returned to `Parser`.
+
+Step 6.1:
+If the command word is `/view`, `Parser` will call `parseViewCommand()` from itself. If the command views
+`recipe` by index, a `ViewCommand` that instructs showing `recipe` at the given index will be returned
+to `Parser`.
+
+Step 6.2:
+If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given 
+title will be returned to `Parser`.
+
+Step 6.3:
+If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing 
+information on the respective `Exception` or `Error` will be returned to `Parser`.
+
+Step 7.1:
+If the command word is `/delete`, `Parser` will call `parseDeleteCommand()` from itself. If the command deletes
+`recipe` by index, a `DeleteCommand` that instructs deleting `recipe` at the given index will be returned
+to `Parser`.
+
+Step 7.2:
+If the command deletes `recipe` by title, a `DeleteCommand` that instructs deleting `recipe` of the given
+title will be returned to `Parser`.
+
+Step 7.3:
+If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
+information on the respective `Exception` or `Error` will be returned to `Parser`.
+
+Step 8.1:
+If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid 
+`FindCommand`, an instance containing the respective `flag` and other input information will be returned to 
+`Parser`.
+
+Step 8.2:
+If the input is shorter than the expected length of a `FindCommand` input, an instance of `InvalidCommand` containing
+information on the correct format for `FindCommand` input will be returned to `Parser`.
+
+Step 9.1:
+If the command word is `/help`, `Parser` will call `parseHelpCommand()` from itself. If the input is a valid
+`HelpCommand`, an instance containing input information will be returned to `Parser`.
+
+Step 9.2:
+If the input is not of the same length as the expected length of a `HelpCommand` input, an instance of `InvalidCommand` 
+containing information on the correct format for `HelpCommand` input will be returned to `Parser`.
+
+Step 10:
+If the command word is none of the above, an instance of `InvalidCommand` will be returned to `Parser`.
 
 ### Add a new recipe
 
@@ -273,7 +358,7 @@ The following sequence diagram shows the usage of relevant classes when trying
 to add a new recipe to storage.
 
 <p align="center" width="100%">
-  <img width="80%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
 </p>
 
 Step 1: User will first input a customer `AddCommand`. The user input
@@ -350,7 +435,7 @@ quickly.
 ### Parsing  from Text to Recipe using Add or Edit GUI
 
 - For the ease of testing, use `/add` command and edit directly on the template
-- When the parser throw an error and you were asked `Do you want to FIX the recipe? (Y/N)`, type `y`
+- When the parser throw an error, and you were asked `Do you want to FIX the recipe? (Y/N)`, type `y`
 
 #### General errors
 
