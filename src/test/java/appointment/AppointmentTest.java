@@ -1,8 +1,13 @@
 package appointment;
 
+import command.appointmentcommand.AddAppointmentCommand;
+import command.petcommand.AddPetCommand;
+import command.servicecommand.AddServiceCommand;
+import command.taskcommand.AddTaskCommand;
 import employee.Employee;
 import exception.DukeException;
 import org.junit.jupiter.api.Test;
+import pet.Pet;
 import task.*;
 import employee.Employee;
 
@@ -64,4 +69,16 @@ class AppointmentTest {
         assertNull(date5);
     }
 
+    @Test
+    public void removeTaskFromAppointmentTest() {
+        AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
+        addServiceCommand.execute();
+        AddPetCommand addPetCommand = new AddPetCommand("Yuhuan", "cat", true);
+        addPetCommand.execute();
+        Appointment appointment = new Appointment(2001, new Date(), "Trim");
+        AddTaskCommand addTaskCommand = new AddTaskCommand(3001, 1001, "Cuddle with Yuhuan");
+        addTaskCommand.execute();
+        appointment.removeTaskFromAppointment(4001);
+        assertEquals(appointment.tasks.size(), 0);
+    }
 }
