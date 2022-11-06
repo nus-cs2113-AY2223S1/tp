@@ -5,7 +5,7 @@ import seedu.moneygowhere.exceptions.MoneyGoWhereException;
 //@@author LokQiJun
 
 /**
- * Defines exception to be thrown when the command View-RecurringPayment is invalid.
+ * Defines exception to be thrown when the command Merge-File is invalid.
  */
 @SuppressWarnings("unused")
 public class ConsoleParserCommandMergeFileInvalidException extends MoneyGoWhereException {
