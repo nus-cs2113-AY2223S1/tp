@@ -10,14 +10,23 @@ It is written in Java, and has about 10 kLoC.
 ### Summary of Contributions
 
 * **Code
-  Contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other):  
-https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other
+  Contributed**: [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=chinhan99&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)  
 
 
-* **Enhancements implemented**:
-- Implemented and tested parsing methods to ensure that they do not allow erroneous user inputs to be accepted by the program.
-- Implemented storage compatibility to the program with storage file checks regarding the correctness of the stored data.
-- Added test cases to check on correctness of parsing methods.
+* **Implementations**: Added and tested parsing capabilities to check for erroneous user inputs.
+  * What it does: The parser is required for all commands, it checks for the necessary tags and parameters required in the particular command. If the user input contains errors, the program will output an error message. 
+  If the user input is a valid input after it has been parsed, the input values will be further parsed by the command's respective methods. 
+  * Justification: Essential in preventing incorrect data from being accepted into the program and informs users regarding error tags or parameters.
+  * Highlights: Parsing methods are used by all features within the program. It serves as the first line of checks on the user's inputs.
+
+
+* **Implementations**: Added storage capabilities for the program into external file duke.txt
+  * What it does: Each time a transaction/budget is edited or added to the program, it's values will be updated into external file duke.txt.
+  When users want to reuse these data after shutting down Moolah Manager, these values can be reused.
+  * Justification: As users would want to continuously use the program at different points of time, storage is essential to ensure that data gets stored correctly. 
+  * Highlights: During the storage of file values when Moolah Manager is started up, the parsers would check for erroneous data in the file.
+  Incorrect data parameters would trigger an error message to inform users to edit the incorrect data (to prevent overwriting the file ). 
+
 
 
 * **Contributions to the UG**:
@@ -34,25 +43,27 @@ Contributed to the followings DG segments with their attached diagrams and descr
 
 
 * **Contributions to team based tasks** (Highlighted **a few examples for conciseness**):
+
+
   1) Conducted extensive testing of program beyond personal scope and published bug findings regularly.
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/issues/76
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/issues/128
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/issues/145
+  - [Issue 1](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/76)
+  - [Issue 2](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/128)
+  - [Issue 3](https://github.com/AY2223S1-CS2113-W12-2/tp/issues/145)
   
   2) Assisted team to fix bugs beyond personal assigned tasking.
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/80
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/157
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/205
+  - [Bug 1](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/80)
+  - [Bug 2](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/157)
+  - [Bug 3](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/205)
   
   3) Reviewed and Commented on team's PR code with improvement suggestions. 
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/77
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/126
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/149
-  - https://github.com/AY2223S1-CS2113-W12-2/tp/pull/154
+  - [PR 1](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/77)
+  - [PR 2](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/126)
+  - [PR 3](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/149)
+  - [PR 4](https://github.com/AY2223S1-CS2113-W12-2/tp/pull/154)
 
 
 * **Contributions beyond the project team**: Contribution of Issues to other projects.
-  - https://github.com/chinhan99/ped/issues/1
-  - https://github.com/chinhan99/ped/issues/2
-  - https://github.com/chinhan99/ped/issues/3
-  - https://github.com/chinhan99/ped/issues/5
+  - [Issue 1](https://github.com/chinhan99/ped/issues/1)
+  - [Issue 2](https://github.com/chinhan99/ped/issues/2)
+  - [Issue 3](https://github.com/chinhan99/ped/issues/3)
+  - [Issue 4](https://github.com/chinhan99/ped/issues/5)
