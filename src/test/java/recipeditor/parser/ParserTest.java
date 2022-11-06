@@ -4,25 +4,20 @@ package recipeditor.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import recipeditor.command.Command;
-import recipeditor.command.CommandResult;
-import recipeditor.command.DeleteCommand;
-import recipeditor.command.EditCommand;
-import recipeditor.command.ExitCommand;
-import recipeditor.command.FindCommand;
-import recipeditor.command.InvalidCommand;
-import recipeditor.command.ListCommand;
-import recipeditor.command.ViewCommand;
+import recipeditor.command.*;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
+import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 
 class ParserTest {
@@ -286,6 +281,18 @@ class ParserTest {
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
+    }
+
+    @Test
+    public void addCommand_missingTemplateFile() {
+        File file = new File(Storage.TEMPLATE_FILE_PATH);
+        file.delete();
+        Command addCommand = Parser.parseCommand("/add");
+        String actual = addCommand.execute().getMessage();
+        String expected = new InvalidCommand(
+                InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE).execute().getMessage();
+        assertEquals(expected, actual);
+        assert addCommand instanceof InvalidCommand;
     }
 
 }
