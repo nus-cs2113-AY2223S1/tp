@@ -141,8 +141,9 @@ public class Transaction {
      */
     public String convertTransactionToFileFormat() {
         String separator = " | ";
-        return itemId + separator + borrower + separator + duration + separator + createdAt + separator
-                + lender + separator + itemName + separator + moneyTransacted + separator + transactionId;
+        return itemId + separator + borrower + separator + duration + separator
+                + createdAt + separator + lender + separator + itemName + separator
+                + String.format("%.2f", moneyTransacted) + separator + transactionId;
     }
 
     // @@author winston-lim
