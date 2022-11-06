@@ -1,6 +1,6 @@
 //@@author FeliciaBeatrice
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.delete;
 
 import seedu.duke.PropertyList;
 import seedu.duke.command.Command;
@@ -11,13 +11,18 @@ import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.Ex
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.InvalidDeletePropertyIndexException;
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.MissingDeletePropertyFlagException;
 import seedu.duke.exception.parsedeleteexception.parsedeletepropertyexception.ParseDeletePropertyException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_PROPERTY_FLAGS;
+import static seedu.duke.CommandStructure.START_INDEX;
 import static seedu.duke.Messages.MESSAGE_NOT_INTEGER;
 
-public class CommandDeletePropertyParser extends Parser {
+/**
+ * Parser for delete property command.
+ */
+public class CommandDeletePropertyParser extends CommandDeleteParser {
     private final String commandDescription;
     private final PropertyList propertyList;
 
@@ -58,14 +63,14 @@ public class CommandDeletePropertyParser extends Parser {
     }
 
     private void checkForExtraFlags(int[] flagIndexPositions) throws ExtraDeletePropertyFlagsException {
-        if (flagIndexPositions[0] != CORRECT_FLAG_POSITION) {
+        if (flagIndexPositions[START_INDEX] != CORRECT_FLAG_POSITION) {
             throw new ExtraDeletePropertyFlagsException();
         }
     }
 
     private void checkForInvalidPropertyIndexDelete(int propertyIndex) throws InvalidDeletePropertyIndexException {
         int currentListSize = propertyList.getCurrentListSize();
-        if (propertyIndex < 0 || propertyIndex >= currentListSize) {
+        if (propertyIndex < START_INDEX || propertyIndex >= currentListSize) {
             throw new InvalidDeletePropertyIndexException();
         }
     }

@@ -1,6 +1,6 @@
 //@@author FeliciaBeatrice
 
-package seedu.duke.parsermanager;
+package seedu.duke.parsermanager.check;
 
 import seedu.duke.ClientList;
 import seedu.duke.command.Command;
@@ -11,13 +11,17 @@ import seedu.duke.exception.check.CommandCheckNotIntegerException;
 import seedu.duke.exception.check.ParseCheckException;
 import seedu.duke.exception.check.checkclient.CheckClientInvalidIndexException;
 import seedu.duke.exception.check.checkclient.CheckClientMissingFlagException;
+import seedu.duke.parsermanager.Parser;
 
 import java.util.ArrayList;
 
 import static seedu.duke.CommandStructure.CHECK_CLIENT_FLAGS;
 import static seedu.duke.CommandStructure.START_INDEX;
 
-public class CommandCheckClientParser extends Parser {
+/**
+ * Parser for check client commands.
+ */
+public class CommandCheckClientParser extends CommandCheckParser {
     private final String commandDescription;
 
     private final ClientList clientList;
@@ -61,7 +65,7 @@ public class CommandCheckClientParser extends Parser {
     }
 
     private void validateCheckClientDetails(ArrayList<Integer> clientDetails) throws CheckClientInvalidIndexException {
-        int clientIndex = clientDetails.get(0);
+        int clientIndex = clientDetails.get(START_INDEX);
         checkForClientListIndexOutOfBounds(clientIndex);
     }
 
@@ -74,7 +78,7 @@ public class CommandCheckClientParser extends Parser {
     }
 
     private void checkForClientListIndexOutOfBounds(int clientIndex) throws CheckClientInvalidIndexException {
-        if (clientIndex < 0 || clientIndex > clientList.getCurrentListSize() - 1) {
+        if (clientIndex < START_INDEX || clientIndex > clientList.getCurrentListSize() - 1) {
             throw new CheckClientInvalidIndexException();
         }
     }
