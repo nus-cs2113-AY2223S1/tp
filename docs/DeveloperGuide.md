@@ -227,23 +227,17 @@ further methods will be triggered as explained below.
 
 ### Delete a passenger feature
 
-<div align="justify">  
-
 A delete function that removes a passenger's detail from the passenger's log book is
 facilitated by `DeletePassengerCommand`. It extends an abstract `Command` with an override method called `execute`.
 The abstract `Command` extends a `Parser` which holds and validates the User input to determine the type of command.
-
-</div>  
 
 Furthermore, `DeletePassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
   to execute the delete operation that should remove a passenger from the logbook
 
-<div align="justify">  
 The class diagram as depicted below shows the behaviour of the passenger delete operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger delete` command for easier readability.  
-</div>  
+This scenario assumes that the manager have input a valid `passenger delete` command for easier readability.
 
 
 Part 1:
@@ -282,23 +276,17 @@ When `paser` verifies that the command is an entity `passenger` and `delete` ope
 
 ### List passengers feature
 
-<div align="justify">  
-
 A list function lists out all passengers' details in table form which is facilitated by `ListPassengerCommand`. It
 extends an abstract `Command` with an override method called `execute`.
 The abstract `Command` extends a `Parser` which holds and validates the User input to determine the type of command.
-
-</div>  
 
 Furthermore, `ListPassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
   to execute the list operation that should list out all the passengers from the logbook.
-
-<div align="justify">  
+ 
 The class diagram as depicted below shows the behaviour of the passenger list operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger list` command for easier readability.  
-</div>
+This scenario assumes that the manager have input a valid `passenger list` command for easier readability.
 
 Part 1:
 
@@ -385,8 +373,10 @@ create an instantiation of `DeleteFlightCommand`.
 3. Given a valid flight number, `findAndRemoveFlight(flightNumber)` will search through the entire arraylist `flights`
    to find if the flight number exists and remove it from the arraylist.
 4. Upon successful deletion, `showFlightRemovedMessage()` is called which prints a message to the user to indicate a
-   successful
-   delete operation
+   successful delete operation
+5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
+the information of the passengers which contain the flight number that has been successfully removed.
+
 ---
 
 ### Delay a flight feature
@@ -478,7 +468,7 @@ track of constant changes in flight scheduling and the relevant passenger detail
 
 1. Launch
 
-    To launch SkyControl, please follow the instruction on our [Quick Start Guide](https://ay2223s1-cs2113-t17-1.github.io/tp/UserGuide.html#getting-started).
+    To launch SkyControl, please follow the instructions on our [Getting Started](https://ay2223s1-cs2113-t17-1.github.io/tp/UserGuide.html#getting-started).
 2. Exit
 
     Enter the command `quit` to close the program.
@@ -494,7 +484,7 @@ Adding a new flight can be done using the `flight add fn/FLIGHT_NUMBER a/AIRLINE
    1. Prerequisite: Any flight with the same flight number as the test case should not be in the flight logbook.
    2. Test Case:
 `flight add fn/sq832 a/Singapore Airlines d/bangkok dt/1600 gn/05 c/03-03`
-   3Expected Output:
+   3. Expected Output:
     ```
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Flight added!
@@ -638,7 +628,7 @@ the list first before being able to add a passenger of the existing flight numbe
 ### Syncing passenger boarding time with delayed departure time
 
 - Automated boarding time of 45minutes earlier than delayed departure time placement
-    1. Prerequistes: Existing flight details and passenger details of that particular flight should be present.
+    1. Prerequisites: Existing flight details and passenger details of that particular flight should be present.
     2. Test case: `delay KE632 dt/2100` then `passenger list`
        Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
        the tracked delayed departure time.
