@@ -205,7 +205,7 @@ public class Transaction {
         String itemName = "   ItemName: " + this.itemName + " ";
         String borrowerId = "   Borrower: " + this.borrower + "\n";
         String lenderId = "   Lender: " + this.lender + "\n";
-        String duration = "   Duration: " + this.duration + "\n";
+        String duration = "   Duration: " + this.duration + " Days\n";
         String moneyTransactedString =
                 "   MoneyTransacted: $" + String.format("%.2f", this.moneyTransacted) + " ";
 
