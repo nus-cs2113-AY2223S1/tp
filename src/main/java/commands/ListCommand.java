@@ -6,10 +6,10 @@ import seedu.duke.ReviewList;
 import seedu.duke.TvShow;
 
 public class ListCommand extends Commands {
-    private final String outputString = "---Here are the reviews in your list---\n";
-    private final String movieString = "\nMovies:\n";
-    private final String tvShowString = "\nTV Shows:\n";
-    private final String listDelimeter = ". ";
+    private static final String OUTPUT_STRING = "---Here are the reviews---\n";
+    private static final String MOVIE_STRING = "\nMovies:\n";
+    private static final String TV_SHOW_STRING = "\nTV Shows:\n";
+    private static final String LIST_DELIMITER = ". ";
 
     public ListCommand(ReviewList reviews) {
         super(reviews);
@@ -30,14 +30,14 @@ public class ListCommand extends Commands {
         for (int i = 0; i < reviewList.inputs.size(); i++) {
             Media media = reviewList.inputs.get(i);
             if (media instanceof Movie) {
-                moviesList += (movieIndex) + listDelimeter + reviewList.inputs.get(i).toString() + "\n";
+                moviesList += (movieIndex) + LIST_DELIMITER + reviewList.inputs.get(i).toString() + "\n";
                 movieIndex += 1;
             } else if (media instanceof TvShow) {
-                tvShowList += (tvShowIndex) + listDelimeter + reviewList.inputs.get(i).toString() + "\n";
+                tvShowList += (tvShowIndex) + LIST_DELIMITER + reviewList.inputs.get(i).toString() + "\n";
                 tvShowIndex += 1;
             }
         }
-        String output = outputString + movieString + moviesList + tvShowString + tvShowList;
+        String output = OUTPUT_STRING + MOVIE_STRING + moviesList + TV_SHOW_STRING + tvShowList;
         output = output.strip();
         return output;
     }

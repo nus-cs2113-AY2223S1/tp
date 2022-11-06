@@ -131,7 +131,7 @@ public class Parser {
                 break;
 
             case findCommand:
-                executeFind(parsedCommand);
+                executeFind(userInput);
                 break;
 
             case sortCommand:
@@ -155,10 +155,10 @@ public class Parser {
     /**
      * Executes the find action by creating a find object.
      */
-    public ArrayList<Media> executeFind(String[] words) {
+    public ArrayList<Media> executeFind(String words) {
         ArrayList<Media> found = new ArrayList<>();
         try {
-            String keyWord = words[1];
+            String keyWord = words.replace("find", "").strip();
             //@@author indraneelrp
             FindCommand executor;
             executor = new FindCommand(mediaList, keyWord);
