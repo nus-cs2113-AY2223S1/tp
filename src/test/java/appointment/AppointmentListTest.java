@@ -4,19 +4,23 @@ import command.appointmentcommand.AddAppointmentCommand;
 import command.appointmentcommand.RemoveAppointmentCommand;
 import command.petcommand.AddPetCommand;
 import command.servicecommand.AddServiceCommand;
+import exception.DukeException;
 import org.junit.jupiter.api.Test;
 import pet.Pet;
+import service.Service;
 
+import javax.print.DocFlavor;
+import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class AppointmentListTest {
 
     @Test
     void listAppointment() {
-
+        Appointment appointment1 =
+        AppointmentList.listAppointment();
     }
 
     @Test
@@ -47,6 +51,37 @@ class AppointmentListTest {
         int numOfAppointmentAfterAdd = AppointmentList.appointments.size();
         assertEquals(numOfAppointmentAfterAdd - numOfAppointment, 1);
     }
+
+    @Test
+    void addNullDateAppointmentTest() {
+        assertThrows(DukeException.class,
+                ()->{
+                Pet pet = new Pet("Yuhuan", "cat", true);
+                Appointment appointment = new Appointment(2001, null, "Meow meow");
+                AppointmentList.addAppointment(appointment);
+                });
+    }
+
+    @Test
+    void addInvalidServiceAppointmentTest() {
+        assertThrows(DukeException.class,
+                ()->{
+                    Pet pet = new Pet("Yuhuan", "cat", true);
+                    Appointment appointment = new Appointment(2001, new Date(), "Non exist service");
+                    AppointmentList.addAppointment(appointment);
+                });
+    }
+
+    @Test
+    void addInvalidPetAppointmentTest() {
+        assertThrows(DukeException.class,
+                ()->{
+                    Service service = new Service("Trim");
+                    Appointment appointment = new Appointment(2000, null, "Trim");
+                    AppointmentList.addAppointment(appointment);
+                });
+    }
+
 
     @Test
     void removeAppointment() {
