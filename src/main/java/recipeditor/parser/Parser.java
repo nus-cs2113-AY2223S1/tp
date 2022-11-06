@@ -11,10 +11,8 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
 
-import recipeditor.exception.ExcessFlagsException;
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.MissingFlagsException;
-import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
@@ -74,7 +72,7 @@ public class Parser {
     private static Command parseAddCommand() {
         try {
             GuiWorkFlow returnValues = new GuiWorkFlow(Storage.TEMPLATE_FILE_PATH);
-            return new AddCommand(returnValues.getValidity(), returnValues.getRecipe());
+            return new AddCommand(returnValues.getValid(), returnValues.getRecipe());
         } catch (FileNotFoundException e) {
             Storage.generateTemplateFile();
             return new InvalidCommand(InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE);
@@ -183,7 +181,7 @@ public class Parser {
                 String path = Storage.titleToFilePath(title);
 
                 GuiWorkFlow returnValues = new GuiWorkFlow(path);
-                return new EditCommand(returnValues.getValidity(), index, returnValues.getRecipe(), title);
+                return new EditCommand(returnValues.getValid(), index, returnValues.getRecipe(), title);
             } catch (FileNotFoundException e) {
                 logger.log(Level.INFO, e.getMessage());
                 Recipe targetRecipe = RecipeList.getRecipe(index);

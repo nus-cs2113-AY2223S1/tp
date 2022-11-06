@@ -1,6 +1,8 @@
 package recipeditor;
 
 import recipeditor.parser.Parser;
+import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
@@ -8,15 +10,13 @@ import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
+import java.io.File;
+
 
 public class Recipeditor {
     public static final String DATA_FILE_PATH = "./data/data.txt";
 
     public static void main(String[] args) {
-        ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel(Level.WARNING);
         run(args);
     }
 
@@ -33,7 +33,6 @@ public class Recipeditor {
      */
     private static void start(String[] args) {
         Storage.createAppFolder();
-        Storage.createFolder(Storage.RECIPES_FOLDER_PATH);
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.loadRecipesToRecipeTitlesList();
         Storage.loadRecipesToRecipeList();
@@ -44,6 +43,9 @@ public class Recipeditor {
      * Exit and do clean up.
      */
     private static void exit() {
+        Storage.rewriteRecipeListToFile(Storage.ALL_RECIPES_FILE_PATH);
+        Storage.deleteAllRecipe();
+        Storage.saveAllRecipe();
         Ui.showExit();
         System.exit(0);
     }

@@ -1,7 +1,7 @@
 @startuml
 skinparam Style strictuml
 actor user
-database Storage
+database FileDirectory
 user -> Main : Add Recipe
 Main -> Parser: parseCommand()
 create Parser
@@ -26,9 +26,11 @@ Editor --> GuiWorkFlow:
 destroy Editor
 
 create TextFileParser
-GuiWorkFlow -> TextFileParser: <<create>>
-TextFileParser -> GuiWorkFlow: parseTextToRecipe
-TextFileParser --> GuiWorkFlow
+GuiWorkFlow -> TextFileParser: parseTextToRecipe()
+ref over TextFileParser
+Parse Text to Recipe
+end
+TextFileParser --> GuiWorkFlow: return recipe or throw ParseFileException
 destroy TextFileParser
 
 alt recipe not in storage

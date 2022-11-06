@@ -11,7 +11,6 @@ import recipeditor.command.DeleteCommand;
 import recipeditor.command.EditCommand;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.FindCommand;
-import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
@@ -90,14 +89,14 @@ class ParserTest {
         RecipeList.deleteRecipeFromTitle("");
     }
 
-    //    @Test
-    //    void completeExitCommand_correctExitCommandFormat_ExitProgram() {
-    //        String input = "/exit";
-    //        Command commandExecuted = Parser.parseCommand(input);
-    //        CommandResult commandExecutedResult = commandExecuted.execute();
-    //        assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
-    //        assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
-    //    }
+        @Test
+        void completeExitCommand_correctExitCommandFormat_ExitProgram() {
+            String input = "/exit";
+            Command commandExecuted = Parser.parseCommand(input);
+            CommandResult commandExecutedResult = commandExecuted.execute();
+            assertEquals(ExitCommand.EXIT_MESSAGE, commandExecutedResult.getMessage());
+            assertEquals(ExitCommand.class, Parser.parseCommand(input).getClass());
+        }
 
     @Test
     void incorrectFindCommand_wrongParameter_correctFormatForFindCommand() {

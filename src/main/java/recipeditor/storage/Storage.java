@@ -23,14 +23,14 @@ public class Storage {
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
     public static final String ALL_RECIPES_FILE_PATH = "./RecipeData/AllRecipes.txt";
-    private static final String DATA_STORAGE_FOLDER_PATH = "./RecipeData/";
-    private static final String DATA_TEMPORARY_FOLDER_PATH = "./RecipeData/App";
+    private static final String APP_DATA_FOLDER_PATH = "./RecipeData/App";
     private static final String TEMPLATE_FILE = "# TITLE (1 line)\n"
             + "Example Title\n\n"
             + "# DESCRIPTION\n"
             + "Example Description\n\n"
             + "# INGREDIENTS  index. ingredient_name / amount / unit \n"
-            + "1. Example ingredient / 1.2 / example unit \n\n"
+            + "1. Example "
+            + "ingredient / 1.2 / example unit \n\n"
             + "# STEPS index. description\n"
             + "1. Example step \n";
 
@@ -67,9 +67,9 @@ public class Storage {
      */
     public static void createAppFolder() {
         try {
-            Files.createDirectories(Paths.get(DATA_STORAGE_FOLDER_PATH));
-            Files.createDirectories(Paths.get(DATA_TEMPORARY_FOLDER_PATH));
-            logger.log(Level.INFO, DATA_STORAGE_FOLDER_PATH + " Directory created");
+            Files.createDirectories(Paths.get(RECIPES_FOLDER_PATH));
+            Files.createDirectories(Paths.get(APP_DATA_FOLDER_PATH));
+            logger.log(Level.INFO, RECIPES_FOLDER_PATH + " Directory created");
             templateFile();
         } catch (IOException e) {
             logger.log(Level.WARNING, "Error creating folder");
@@ -93,7 +93,7 @@ public class Storage {
         try {
             String allRecipeFileContent = loadFileContent(ALL_RECIPES_FILE_PATH);
             String[] recipeTitles = allRecipeFileContent.split("\\r?\\n");
-            TitleFileParser.parseTitleFileToRecipeTitles(recipeTitles); //Check Title Validity
+            TitleFileParser.parseTitleFileToRecipeTitles(recipeTitles);
         } catch (FileNotFoundException e) {
             Ui.showMessage("File not found :< Creating your data file for all recipes now...");
             createFile(ALL_RECIPES_FILE_PATH);
@@ -133,7 +133,6 @@ public class Storage {
             Ui.showMessage("Error in loading recipes to data file");
         }
     }
-
 
 
     public static void saveRecipe(Recipe recipe, String oldFile, String recipeFileDestinationPath) {
@@ -193,17 +192,17 @@ public class Storage {
         return getContent.toString();
     }
 
-    public static void saveRecipeFile(String recipeFileSourcePath, String recipeFileDestinationPath) {
-        FileWriter fileWrite;
-        try {
-            fileWrite = new FileWriter(recipeFileDestinationPath);
-            String recipeContent = loadFileContent(recipeFileSourcePath);
-            fileWrite.write(recipeContent);
-            fileWrite.close();
-        } catch (IOException e) {
-            logger.log(Level.WARNING, "Error writing recipe file into the ./RecipeData/Recipes folder");
-        } finally {
-            logger.log(Level.INFO, "Recipe file created at " + recipeFileDestinationPath);
+    public static void deleteAllRecipe() {
+        File directory = new File(Storage.RECIPES_FOLDER_PATH);
+        for (File file : directory.listFiles()) {
+            file.delete();
+        }
+    }
+
+    public static void saveAllRecipe() {
+        for (Recipe r : RecipeList.getRecipes()) {
+            String recipeFileSourcePath = Storage.titleToFilePath(r.getTitle());
+            Storage.saveRecipe(r, "", recipeFileSourcePath);
         }
     }
 }

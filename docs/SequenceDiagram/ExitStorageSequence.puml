@@ -1,0 +1,58 @@
+@startuml
+skinparam Style strictuml
+autonumber
+'autoactivate on
+
+
+participant ":Recipeditor" as recipeditor
+participant ":Storage" as store
+participant ":RecipeList" as recipelist
+participant "directory:File" as directory
+participant "fw:FileWriter" as fw
+database FileDirectory
+
+recipeditor -> recipeditor: exit()
+recipeditor -> store: rewriteRecipeListToFile(ALL_RECIPES_FILE_PATH)
+store -> fw: FileWriter(ALL_RECIPES_FILE_PATH))
+loop iterateRecipeTitles
+store -> recipelist: iterateRecipeTitles()
+recipelist --> store: return recipeTitle
+store -> fw: write(recipeTitle)
+fw -> FileDirectory: append title to 'AllRecipes.txt'
+fw --> store
+end loop
+store -> fw: close()
+destroy fw
+
+
+
+recipeditor -> store: deleteAllRecipe()
+create directory
+store -> directory: File(RECIPES_FOLDER_PATH)
+loop directory.listFiles()
+directory -> FileDirectory: delete()
+end loop
+destroy directory
+
+
+recipeditor -> store: saveAllRecipe()
+loop Recipe recipe : RecipeList.getRecipes()
+store -> store: titleToFilePath(r.getTitle())
+store --> store: return recipeFileSourcePath
+store -> store: saveRecipe(recipe,recipeFileSourcePath)
+
+store -> fw: FileWriter(recipeFileSourcePath)
+store -> fw: write(recipe.getRecipeSaveableFormatted())
+fw -> FileDirectory: save individual recipe files
+store -> fw: close()
+destroy fw
+end loop
+
+
+destroy recipelist
+
+destroy store
+destroy recipeditor
+
+
+@enduml
