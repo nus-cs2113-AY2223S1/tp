@@ -2825,7 +2825,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG
         );
 
-        if (isDateTimeArgumentInvalid(dateTimeStr)) {
+        if (dateTimeStr != null && isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandPayRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_INVALID
             );
