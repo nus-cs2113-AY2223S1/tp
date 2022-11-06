@@ -4,6 +4,7 @@ import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.ExerciseList;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
@@ -49,8 +50,9 @@ public class RemoveCommand extends Command {
     }
 
     private void removeWeight(int index) throws IllegalValueException {
-        biometrics.weightAndFatList.removeWeightAndFat(index - 1);
-        ui.output("Weight and fat record removed successfully");
+        WeightAndFat deletedWeightAndFat = biometrics.weightAndFatList.removeWeightAndFat(index - 1);
+        ui.output("This weight and fat record has been deleted successfully!");
+        ui.output(deletedWeightAndFat.toString());
     }
 
     private void removeExercise(String[] argumentList) {

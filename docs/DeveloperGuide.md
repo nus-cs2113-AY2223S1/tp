@@ -43,15 +43,15 @@ Given below is an overview of main components and how they interact with each ot
 
 ### Class Diagrams
 
-Biometrics component:  
+**Biometrics component:**  
 The Biometrics component stores information about the user's biometrics and holds a reference
 to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
 WeightAndFatList is separated from Biometrics for better abstraction and cohesion.  
-Weight and fat records will be associated with a date, and the WeightAndFatList class
+Weight and fat records are associated with a date, and the WeightAndFatList class
 stores records in descending order of date for viewing purposes.
-![Biometrics.png](UmlDiagrams/Biometrics.png)
+![](UmlDiagrams/Biometrics.png)
 
-Food component:
+**Food component:**
 
 Food and FoodList are two classes implemented for storing user's food consumption.
 The interaction between the Food, FoodList class and Command classes(Addcommand, RemoveCommand,
@@ -63,7 +63,7 @@ diagram below for readability.
 [Proposed] Food records will be associated with a date, and the FoodList class
 stores records in descending order of date for viewing purposes.
 
-CardioExercise/StrengthExercise and ExerciseList components:
+**CardioExercise/StrengthExercise and ExerciseList components:**
 
 CardioExercise/StrengthExercise and ExerciseList are classes to store user's cardio/strength training exercises.
 Both CardioExercise and StrengthExercise inherit from Exercise and work similarly.
@@ -81,12 +81,12 @@ date for viewing purposes.
 ### Sequence diagrams
 
 Adding a new record  
-![Add.png](UmlDiagrams/Add.png)
+![](UmlDiagrams/Add.png)
 
 Adding weight and fat record
-![AddWeightAndFat.png](UmlDiagrams/AddWeightAndFat.png)
+![](UmlDiagrams/AddWeightAndFat.png)
 
-Adding food record
+Adding food record  
 ![AddFood.png](UmlDiagrams/AddFood.png)
 
 Adding strength exercise
@@ -95,16 +95,19 @@ Adding strength exercise
 Marking exercise
 ![](UmlDiagrams/MarkExercise.png)
 
-Finding a record
+Finding a record  
 ![Find.png](UmlDiagrams/Find.png)
 
-Viewing historical records
+Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
-Viewing calories
+Viewing biometrics  
+![](UmlDiagrams/ViewBiometrics.png)
+
+Viewing calories  
 ![ViewCalories.png](UmlDiagrams/ViewCalories.png)
 
-Viewing all historical records sorted by date
+Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
 
 ## Product scope

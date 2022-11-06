@@ -7,22 +7,21 @@ autoactivate on
 'User --> ui: user input
 'Duke <-- ui: user input
 
-Duke -> addCommand: execute()
+
+-> addCommand: execute()
 addCommand -> parser: getArgumentList(arguments: String)
 return argumentList: String[]
 addCommand -> parser: getClassType(argumentList: String[])
 return addType: String
 
 alt food
-
+    ref over addCommand: addFood
 else strength
-
+    ref over addCommand: addStrengthExercise
 else cardio
 
 else weight
-    ref over addCommand: addWeightAndFat
-
-else invalid addType
+    ref over addCommand: addWeightAndFa
 
 end
 
