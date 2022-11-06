@@ -1,3 +1,10 @@
+---
+title: Developer Guide
+layout: default
+nav_order: 3
+description: "Documentation for developers to understand the workings behind MoneyGoWhere."
+permalink: /developerguide/
+---
 # MoneyGoWhere: Developer Guide
 
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
@@ -7,48 +14,48 @@
 * [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design](#design)
-  * [Software Architecture](#software-architecture)
-  * [Core Components](#core-components)
-  * [Component Interactions](#component-interactions)
-  * [Common Component](#common-component)
-  * [Exceptions Component](#exceptions-component)
-  * [UserInterface Component](#userinterface-component)
-  * [Parser Component](#parser-component)
-  * [Commands Component](#commands-component)
-  * [Data Component](#data-component)
-  * [Storage Component](#storage-component)
-  * [API Component](#api-component)
-  * [Logger Component](#logger-component)
+    * [Software Architecture](#software-architecture)
+    * [Core Components](#core-components)
+    * [Component Interactions](#component-interactions)
+    * [Common Component](#common-component)
+    * [Exceptions Component](#exceptions-component)
+    * [UserInterface Component](#userinterface-component)
+    * [Parser Component](#parser-component)
+    * [Commands Component](#commands-component)
+    * [Data Component](#data-component)
+    * [Storage Component](#storage-component)
+    * [API Component](#api-component)
+    * [Logger Component](#logger-component)
 * [Implementation](#implementation)
-  * [Loading Data to File](#loading-data-from-file)
-  * [Saving Data to File](#saving-data-to-file)
-  * [Printing an expense](#printing-an-expense)
-  * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
-  * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
-  * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
-  * [Editing an Expense: `Edit-Expense`](#editing-an-expense-edit-expense)
-  * [Sorting Expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
-  * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
-  * [Printing a Recurring Payment](#printing-a-recurring-payment)
-  * [Adding a Recurring Payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
-  * [Viewing a Recurring Payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
-  * [Deleting a Recurring Payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
-  * [Editing a Recurring Payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
-  * [Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
-  * [Printing an Income](#printing-an-income)
-  * [Adding an Income: `Add-Income`](#adding-an-income-add-income)
-  * [Viewing an Income: `View-Income`](#viewing-an-income-view-income)
-  * [Deleting an Income: `Delete-Income`](#deleting-an-income-delete-income)
-  * [Editing an Income: `Edit-Income`](#editing-an-income-edit-income)
-  * [Printing a Target](#printing-a-target)
-  * [Adding a Target: `Add-Target`](#adding-a-target-add-target)
-  * [Viewing a Target: `View-Target`](#viewing-a-target-view-target)
-  * [Deleting a Target: `Delete-Target`](#deleting-a-target-delete-target)
-  * [Editing a Target: `Edit-Target`](#editing-a-target-edit-target)
-  * [Merging a data file: `Merge-File`](#merging-a-data-file-merge-file)
+    * [Loading Data to File](#loading-data-from-file)
+    * [Saving Data to File](#saving-data-to-file)
+    * [Printing an expense](#printing-an-expense)
+    * [Adding an Expense: `Add-Expense`](#adding-an-expense-add-expense)
+    * [Viewing an Expense: `View-Expense`](#viewing-an-expense-view-expense)
+    * [Deleting an Expense: `Delete-Expense`](#deleting-an-expense-delete-expense)
+    * [Editing an Expense: `Edit-Expense`](#editing-an-expense-edit-expense)
+    * [Sorting Expenses: `Sort-Expense`](#sorting-expenses-sort-expense)
+    * [Converting currency: `Convert-Currency`](#converting-currencies-convert-currency)
+    * [Printing a Recurring Payment](#printing-a-recurring-payment)
+    * [Adding a Recurring Payment: `Add-RecurringPayment`](#adding-a-recurring-payment-add-recurringpayment)
+    * [Viewing a Recurring Payment: `View-RecurringPayment`](#viewing-a-recurring-payment-view-recurringpayment)
+    * [Deleting a Recurring Payment: `Delete-RecurringPayment`](#deleting-a-recurring-payment-delete-recurringpayment)
+    * [Editing a Recurring Payment: `Edit-RecurringPayment`](#editing-a-recurring-payment-edit-recurringpayment)
+    * [Adding an Expense from a Recurring Payment: `Pay-RecurringPayment`](#adding-an-expense-from-a-recurring-payment-pay-recurringpayment)
+    * [Printing an Income](#printing-an-income)
+    * [Adding an Income: `Add-Income`](#adding-an-income-add-income)
+    * [Viewing an Income: `View-Income`](#viewing-an-income-view-income)
+    * [Deleting an Income: `Delete-Income`](#deleting-an-income-delete-income)
+    * [Editing an Income: `Edit-Income`](#editing-an-income-edit-income)
+    * [Printing a Target](#printing-a-target)
+    * [Adding a Target: `Add-Target`](#adding-a-target-add-target)
+    * [Viewing a Target: `View-Target`](#viewing-a-target-view-target)
+    * [Deleting a Target: `Delete-Target`](#deleting-a-target-delete-target)
+    * [Editing a Target: `Edit-Target`](#editing-a-target-edit-target)
+    * [Merging a data file: `Merge-File`](#merging-a-data-file-merge-file)
 * [Product Scope](#product-scope)
-  * [Target User Profile](#target-user-profile)
-  * [Value Proposition](#value-proposition)
+    * [Target User Profile](#target-user-profile)
+    * [Value Proposition](#value-proposition)
 * [User Stories](#user-stories)
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
@@ -63,7 +70,7 @@ This developer guide explains the design considerations and implementation detai
 
 ## Acknowledgements
 
-We would like to acknowledge the following sources which our team has referenced during the development of MoneyGoWhere:
+We would like to acknowledge the following sources from which our team has referenced during the development of MoneyGoWhere:
 * AddressBook-Level3's User Guide and Developer Guide ([Website](https://se-education.org/addressbook-level3/))
 * Apache Commons CLI Library ([Website](https://commons.apache.org/proper/commons-cli/))
 * Apache Commons Text Library ([Website](https://commons.apache.org/proper/commons-text/))
@@ -80,7 +87,7 @@ The following steps will guide you through the setup process to get your develop
 4. Launch Intellij IDEA and open the repository you have cloned.
 5. Navigate to `File > Project Structure > Project Settings > Project` and set `SDK` to `11`.
 6. Verify the setup process by running `MoneyGoWhere#main()`.
-You should see the following greeting message if the project setup is successful:
+   You should see the following greeting message if the project setup is successful:
 
 ```
   __  __                         _____   __          ___                   
@@ -124,7 +131,7 @@ The software architecture diagram below describes the program's design and the i
 
 ### Component Interactions
 The sequence diagram below describes the interaction between the various core components when a command is entered.
-In this example, 
+In this example,
 the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
 The sequence diagrams referenced by the component interaction diagram can be seen [below](#component-interaction-reference-diagrams).
 
@@ -137,10 +144,10 @@ The sequence diagrams referenced by the component interaction diagram can be see
 * `UserInterface#run()` will execute continuously in a loop until the user enters the command `Bye`.
 * `UserInterface#run()` calls `UserInterface#getConsoleCommand()` to read and parse the user's input.
 * `UserInterface#run()` will then call the corresponding command handler function based on the user's input.\
-In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
-`UserInterface#runCommandAddExpense()` is called.
+  In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpense` and hence,
+  `UserInterface#runCommandAddExpense()` is called.
 * When the command handler function is called, it calls `Data` functions to perform operations on data.\
-In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
+  In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpense()` to add an expense to the program.
 * After the operations are performed, command handler functions calls `UserInterface#runLocalStorageSaveToFile()` functions to save data to local storage.
 
 <div style="page-break-after: always;"></div>
@@ -161,7 +168,7 @@ In the example above, `UserInterface#runCommandAddExpense()` calls `Data#addExpe
 ![Component-Interaction-SD-Print-Expense](images/ComponentInteractionsSDPrintingAnExpense.png)
 
 1. `UserInterface` calls the corresponding convert object function based on the data object's class.\
-In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+   In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 2. `UserInterface` calls `UserInterface#printInformationalMessage()` to print the formatted string.
 3. `UserInterface#printInformationalMessage()` calls `System.out.println()` to print the formatted string to a standard out.
 4. `UserInterface#printInformationalMessage()` calls `Logger#logInformationalMessage()` to log the formatted string to a log file.
@@ -190,7 +197,7 @@ The Exceptions component consists of various exception classes which inherits fr
 
 The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.\
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
-Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions. 
+Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions.
 
 <div style="page-break-after: always;"></div>
 
@@ -259,9 +266,9 @@ The `CurrencyApiManager` class calls functions in `CurrencyApi`.\
 The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a HashMap of exchange rates.\
 \
 When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of currencies and their corresponding conversion rates:
-* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson()` to fetch data from the API in the form of a JSON file. 
-  * The data contains the currency codes and its corresponding exchange rates with respect to the Singapore Dollar.
-  * The data is written into a text file called `exchangeRates.txt`.
+* `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson()` to fetch data from the API in the form of a JSON file.
+    * The data contains the currency codes and its corresponding exchange rates with respect to the Singapore Dollar.
+    * The data is written into a text file called `exchangeRates.txt`.
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#loadFromFile()` to load the data from `exchangeRates.txt` into a HashMap of exchange rates.
 
 ### Logger Component
@@ -493,7 +500,7 @@ MoneyGoWhere is targeted at users who
 
 ### Value Proposition
 
-MoneyGoWhere is a financial tracker designed specifically to help computing professionals manage their finances. The program 
+MoneyGoWhere is a financial tracker designed specifically to help computing professionals manage their finances. The program
 * Runs on mainstream desktop operating system
 * Works over remote command shells such as `ssh`, allowing easy access over the internet
 * Stores data using the Extensible Markup Language, simplifying the transfer and backup of data using tools such as `scp` or `rsync`
@@ -558,8 +565,9 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 ### Running Commands
 1. Refer to the [User Guide](https://ay2223s1-cs2113t-w11-1.github.io/tp/UserGuide.html) for the list of commands and its corresponding arguments.
-It details the type of values accepted by each argument and which arguments are mandatory and optional.
+   It details the type of values accepted by each argument and which arguments are mandatory and optional.
 2. Enter a command into the program.
 
 ### Terminating MoneyGoWhere
 1. Enter `Bye` into the console.
+
