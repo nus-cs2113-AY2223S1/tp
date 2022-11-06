@@ -270,8 +270,7 @@ new `selectedModule` added are unique.
 
 ##### 3.4.1.2 Why it is implemented this way
 
-As we do not want users to add duplicate modules, we need to check if the module already exists in the `selectedModuleList`.
-Hence, we need to check if the module (to add) already exists in the `selectedModuleList` before adding it.
+As we do not want users to add duplicate modules, we need to check if the module (to add) already exists in the `selectedModuleList`.
 
 The following sequence diagram shows how the operation works:
 
