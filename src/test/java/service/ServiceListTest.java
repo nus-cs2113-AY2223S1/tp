@@ -63,7 +63,7 @@ class ServiceListTest {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Prepare fruits");
         addServiceCommand.execute();
         boolean serviceExist = false;
-        if (ServiceList.findService("Prepare fruits") != null){
+        if (ServiceList.findService("Prepare fruits") != null) {
             serviceExist = true;
         }
         assertEquals(true, serviceExist);
@@ -72,14 +72,14 @@ class ServiceListTest {
     @Test
     void findServiceNotExist() {
         boolean serviceExist = false;
-        if (ServiceList.findService("no one will add this") != null){
+        if (ServiceList.findService("no one will add this") != null) {
             serviceExist = true;
         }
         assertEquals(false, serviceExist);
     }
 
     @Test
-    void listService(){
+    void listService() {
         int beforeList = ServiceList.services.size();
         ServiceList.listService();
         int afterList = ServiceList.services.size();

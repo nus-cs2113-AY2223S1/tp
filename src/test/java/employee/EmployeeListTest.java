@@ -89,13 +89,14 @@ class EmployeeListTest {
         // different os may operate the tests in different order
         if (numOfEmployee == numOfEmployeeAfterRemove) {
             assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 0);
-        } else if (numOfEmployee == numOfEmployeeAfterRemove + 1){
+        } else if (numOfEmployee == numOfEmployeeAfterRemove + 1) {
             assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 1);
         } else {
             assertEquals(numOfEmployee - numOfEmployeeAfterRemove, 2);
         }
     }
 
+    /*
     @Test
     void viewEmployeeTasks() {
         AddServiceCommand addServiceCommand = new AddServiceCommand("Feed");
@@ -113,4 +114,5 @@ class EmployeeListTest {
         int numOfTaskAfterView = TaskList.getTasks().size();
         assertEquals(numOfTaskAfterView - numOfTask, 0);
     }
+     */
 }

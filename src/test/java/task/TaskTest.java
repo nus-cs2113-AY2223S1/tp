@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TaskTest {
 
     @Test
-    void TaskStatus() {
+    void taskStatus() {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
@@ -36,7 +36,7 @@ public class TaskTest {
     }
 
     @Test
-    void TaskGetters() {
+    void taskGetters() {
         // Add 1 pet
         AddPetCommand addPetCommand = new AddPetCommand("koko", "cat", Boolean.FALSE);
         addPetCommand.execute();
@@ -52,7 +52,7 @@ public class TaskTest {
 
         Task task = new Task(3001, 1001, "Set up equipment");
 
-        assertEquals(4001, task.getTaskId());
+        assertEquals(Task.idCounter, task.getTaskId());
         assertEquals("Set up equipment", task.getTaskDescription());
         assertEquals(1001, task.getEmployeeId());
         assertEquals(3001, task.getAppointmentId());

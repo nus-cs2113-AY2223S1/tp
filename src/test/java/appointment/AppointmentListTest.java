@@ -8,13 +8,14 @@ import exception.DukeException;
 import org.junit.jupiter.api.Test;
 import pet.Pet;
 import pet.PetList;
-import service.Service;
-import service.ServiceList;
 
-import javax.print.DocFlavor;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 
 class AppointmentListTest {
@@ -65,33 +66,33 @@ class AppointmentListTest {
 
     @Test
     void addNullDateAppointmentTest() {
-        assertThrows(DukeException.class,
-                ()->{
-                Pet pet = new Pet("Yuhuan", "cat", true);
-                Appointment appointment = new Appointment(2001, null, "Meow meow");
-                AppointmentList.addAppointment(appointment);
-                });
+        assertThrows(DukeException.class, () -> {
+            Pet pet = new Pet("Yuhuan", "cat", true);
+            Appointment appointment = new Appointment(2001, null, "Meow meow");
+            AppointmentList.addAppointment(appointment);
+            }
+        );
     }
 
     @Test
     void addInvalidServiceAppointmentTest() {
-        assertThrows(DukeException.class,
-                ()->{
-                    Pet pet = new Pet("Yuhuan", "cat", true);
-                    Appointment appointment = new Appointment(2001, new Date(), "Non exist service");
-                    AppointmentList.addAppointment(appointment);
-                });
+        assertThrows(DukeException.class, () -> {
+            Pet pet = new Pet("Yuhuan", "cat", true);
+            Appointment appointment = new Appointment(2001, new Date(), "Non exist service");
+            AppointmentList.addAppointment(appointment);
+            }
+        );
     }
 
     @Test
     void addInvalidPetAppointmentTest() {
-        assertThrows(DukeException.class,
-                ()->{
-                    AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
-                    addServiceCommand.execute();
-                    Appointment appointment = new Appointment(2000, null, "Trim");
-                    AppointmentList.addAppointment(appointment);
-                });
+        assertThrows(DukeException.class, () -> {
+            AddServiceCommand addServiceCommand = new AddServiceCommand("Trim");
+            addServiceCommand.execute();
+            Appointment appointment = new Appointment(2000, null, "Trim");
+            AppointmentList.addAppointment(appointment);
+            }
+        );
     }
 
 
@@ -130,8 +131,8 @@ class AppointmentListTest {
         Appointment appointment2 = new Appointment(2002, new Date(), "Hug");
         AppointmentList.appointments.add(appointment1);
         AppointmentList.appointments.add(appointment2);
-        assertEquals(AppointmentList.updateAppointmentStatus(3002), true);
-        assertEquals(AppointmentList.updateAppointmentStatus(2003), false);
+        assertEquals(AppointmentList.updateAppointmentStatus(Appointment.idCounter), true);
+        assertEquals(AppointmentList.updateAppointmentStatus(0000), false);
     }
 
     @Test
