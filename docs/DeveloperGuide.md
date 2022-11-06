@@ -21,18 +21,20 @@
     * [Editing a prescription](#editing-a-prescription)
     * [Activating / Deactivating a prescription](#activating--deactivating-a-prescription)
   * [Storage Component](#storage-component)
+    * [Important methods in the `Storage` class](#important-methods-in-the-storage-class)
   * [UI Component](#ui-component)
     * [Important methods in the `UI` class](#important-methods-in-the-ui-class)
   * [Parser Component](#parser-component)
     * [Important methods in the `Parser` class](#important-methods-in-the-parser-class)
-* [Product scope](#product-scope)
-  * [Target user profile](#target-user-profile)
-  * [Value proposition](#value-proposition)
-* [User Stories](#user-stories)
-* [Non-Functional Requirements](#non-functional-requirements)
-  * [Index Reference](#index-reference)
-* [Glossary](#glossary)
-* [Instructions for manual testing](#instructions-for-manual-testing)
+* [Appendix](#appendix)
+  * [Product scope](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+    * [Index Reference](#index-reference)
+  * [Glossary](#glossary)
+  * [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -264,7 +266,7 @@ The class diagram summarises the functions of the `Storage` component at a glanc
 The `Storage` class has dependencies on the `Scanner` (used to read files) and `FileWriter` (used to write to files) classes.
 It also has a composition relationship with 3 `File` objects, that are used to store data.
 
-**Important methods in the `Storage` class:**
+#### Important methods in the `Storage` class
 
 * `loadData` - This method initializes the data file objects that are to be read from, and calls the relevant methods to
 load pre-existing data. Subsequently, it makes a call to relevant methods to rewrite the text files such that only valid
@@ -341,16 +343,16 @@ to be a Matcher for it.
 6. If there is an error, the specific relevant command is identified in this method, and the format guide is returned
 to the user.
 
-
-## Product scope
-### Target user profile
+## Appendix
+### Product scope
+#### Target user profile
 
 Our target user profile is a doctor in need of quick access to information about his/her patients, visits, and
 prescriptions. The doctor can quickly see all of the prescriptions that have been given, when a patient has visited, 
 what their reasons were, etc. through this interface. The doctor can also quickly update this before, during, or after
 each visit and prescription to ensure that it stays up to date and easy-to-use.
 
-### Value proposition
+#### Value proposition
 
 Doctors tend to use sticky notes or quick pieces of paper to jot down notes such as prescriptions, reason for visit, etc.
 This platform allows a doctor to quickly reference basic information about a patient, find their previous prescriptions
@@ -358,7 +360,7 @@ and visits, and look at the history to make a decision. A doctor can mark a pres
 a consistent history. Moreover, the only part of these records that a doctor can delete is a reason, ensuring continuity
 of information.
 
-## User Stories
+### User Stories
 
 | Version | As a ...    | I want to ...                                               | So that I can ...                                                                   |
 |---------|-------------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
@@ -380,7 +382,7 @@ of information.
 | v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
 | v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
 
-## Non-Functional Requirements
+### Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java 11 or above installed.
 * A doctor with above-average typing speed for regular English text and numbers (i.e. not code or system commands)
@@ -390,20 +392,20 @@ sluggishness in performance for typical usage.
 * Data is unable to be deleted on the program (besides directly editing the data files), preventing malicious actors
 from deleting essential health records
 
-### Index Reference
+#### Index Reference
 
 We utilize both ID and index reference in this tP, which may look confusing at first.
 Indices for visit and prescription are unique when created, and can be found when adding, editing, or viewing
 a visit or prescription. If you want to find a visit, you can search for a patient's visits through viewPatient in the
 visit menu, and then use the given index of the visit you find to edit it. The same workflow applies for prescription.
 
-## Glossary
+### Glossary
 
 * *patient* - A single individual with a unique ID
 * *visit* - A single visit of one existing patient on a specific date and time
 * *prescription* - A single prescription of one existing patient, active based on in the patient is currently using it
 
-## Instructions for manual testing
+### Instructions for manual testing
 
 To load sample data, please reference the following formats:
 
