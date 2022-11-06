@@ -10,7 +10,6 @@ import computercomponentchooser.components.Memory;
 import computercomponentchooser.components.Monitor;
 import computercomponentchooser.components.PowerSupply;
 import computercomponentchooser.components.Other;
-import computercomponentchooser.components.Component;
 import computercomponentchooser.exceptions.NegativeNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
