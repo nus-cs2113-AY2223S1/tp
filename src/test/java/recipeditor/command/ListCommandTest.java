@@ -24,12 +24,7 @@ public class ListCommandTest {
         CommandResult commandExecutedResult = commandExecuted.execute();
         System.setOut(new PrintStream(outContent));
         Ui.showMessage(commandExecutedResult.getMessage());
-        StringBuilder recipeTitlesList = new StringBuilder();
-        recipeTitlesList.append(RecipeList.printNumberOfRecipes());
-        for (int i = 0; i < RecipeList.getRecipeTitlesSize(); i++) {
-            recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipeTitle(i)));
-        }
-        String expected = recipeTitlesList.toString();
+        String expected = "There are 1 recipes in the recipe list" + System.lineSeparator() + "1. Test Title";
         assertEquals(expected.trim(), outContent.toString().trim());
         assertEquals(ListCommand.class, Parser.parseCommand(input).getClass());
         RecipeList.deleteRecipeFromTitle("Test Title");
