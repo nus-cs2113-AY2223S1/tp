@@ -486,7 +486,8 @@ ____________________________________________________________
        and user is brought into Build Editing mode.
     3. Test case: `edit/non-existent build`
         1. Expected: No build is edited. Error message indicating `Builds does not exist!` is shown.
-#### Testing in Build Editing mode
+
+### Testing in Build Editing mode
 
 In Build Editing mode the printed lines are dashes with arrow heads at both ends. This is to indicate that the user is 
 in Build Editing mode.
