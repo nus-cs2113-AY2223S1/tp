@@ -34,12 +34,12 @@ This UserGuide introduces you a brief overview of our features with example of u
 ```
 ____________________________________________________________
 Hello from
-                             _      
+                                _      
  /\ /\ _ __   ___ _   _  ___| | ___ 
 / / \ \ '_ \ / __| | | |/ __| |/ _ \
 \ \_/ / |_) | (__| |_| | (__| |  __/
  \___/| .__/ \___|\__, |\___|_|\___|
-      |_|         |___/             
+         |_|         |___/             
 What would you like to do?
 To get started, type "help" to see the list of available commands
 ____________________________________________________________

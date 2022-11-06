@@ -105,7 +105,7 @@ A few things to take note are:
 
 ### 3.3. User component
 
-The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever Upcycle runs or exits.
+The class diagram below shows how User-related classes interact with each other. `User` object contains `name`, `age`, `contactNumber` attributes. Users are stored in UserList, which will be loaded and written on the file by `UserStorage` (inherits from `Storage`) whenever a command is executed successfully.
 All user-related commands operate mainly on a list of users (userList:UserList).
 
 ![UserClassDiagram](images/UserClassDiagram.png)
@@ -114,7 +114,7 @@ All user-related commands operate mainly on a list of users (userList:UserList).
 
 The Class diagram below show how Item-related classes interact with each other. `Item` object contains `itemId`, `itemName`, `ownerId`, `pricePerDay` and `category` 
 attributes. Among those, `itemId` is created by `IdGenerator`'s static method to create a unique id for each item (To allow for duplicate items), and `category` is created by `Category`'s method to map the item to its specific category.
-Items are stored in `itemList`, which will be loaded and written on the file by `itemStorage` (inherits from `Item`) whenever Upcycle runs or exits. All item-related 
+Items are stored in `itemList`, which will be loaded and written on the file by `itemStorage` (inherits from `Item`) whenever a command is executed successfully. All item-related 
 commands operate mainly on a list of items (itemList:ItemList).
 Both `item` and `itemList` classes have methods that depend on TransactionList as well for cross-checking of information between the classes.
 
@@ -124,7 +124,7 @@ Both `item` and `itemList` classes have methods that depend on TransactionList a
 
 The Class diagram below show how Transaction-related classes interact with each other and theirs components. `Transaction` object contains `transactionId`, `itemName`, `itemId`, `borrower`, `duration`, `createdAt`, `returnedAt` and `moneyTransacted` 
 attributes. Among those, `transactionId` is created by `IdGenerator`'s static method and dates are formatted by `DateParser`. Transactions are stored in `TransactionList`, which will be loaded and written on the file by `TransactionStorage` 
-(inherits from `Storage`) whenever Upcycle runs or exits. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
+(inherits from `Storage`) whenever a command is executed successfully. All transaction-related commands operate mainly on a list of transaction (transactionList:TransactionList)
 
 Some unimportant methods are ignored in this diagram, for example, some "get" methods, and some in [Storage class](#37-storage-component)
 
