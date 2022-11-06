@@ -14,7 +14,7 @@
   * [User Module Mapping](#user-module-mappings)
   * [User University List Manager](#user-university-list-manager)
 
-* ### [Appendix: Requirements](#appendix-requirements)
+* ### [Appendix: Requirements](#appendix-requirements-1)
   * [Appendix A: Product Scope](#appendix-a-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
