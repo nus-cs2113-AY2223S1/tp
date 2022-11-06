@@ -377,6 +377,7 @@ For properties, it will identify if the query text matches:
 For example, if a query text is "Ken" and the address is "Kent Ridge", it will be identified as a match since the word is contained within part of the address.
 
 Upon identifying a match, the program will print out the message to the console providing the full details, inclusive of their respective index number. This is to help facilitate other commands such as pairing or checking.
+
 ---
 
 ### Storage Feature
@@ -533,11 +534,9 @@ ___
 
 ## Appendix C: Non-Functional Requirements
 1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
-2. The application should respond to the user input within 2 seconds.
-3. The application adheres to stict user input formatting to prevent corruption of data.
-4. The application is programmed to recognise only English text. Any other language might not be recognised by the program.
-5. The application stores the data in the text file in the data directory. Any deletion of the file would result in the loss of data.
-6. This application is contrained under a single user. Multiple users are not supported
+2. The system should respond to the user input within 2 seconds.
+3. This program should support loading and storing operation on any mainstream operating system.
+4. The program does not require users to have prior programming experience to use.
 
 ---
 ## Appendix D: Glossary
@@ -562,6 +561,183 @@ java -jar PropertyRentalManager.jar
 3. Expected: The app's welcome message is printed onto the terminal. 
     
 ### Add
+**Add client**
+1. Successful addition of client (With Email)
+   1. Prerequisites:
+      * Ensure that a valid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+      * Ensure that email provided adhere to RFC 5322 Official Email Standard.
+      * Ensure that positive integer is provided for budget.
+   2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`  
+      Expected: New client is added. Terminal shows successful add client message along with client details (name, contact number, email, budget per month).
+
+
+2. Successful addition of client (Without Email)
+    1. Prerequisites:
+        * Ensure that a valid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+        * Ensure that no email is provided.
+        * Ensure that positive integer is provided for budget.
+    2. Test case: `add -client n/Gary Oaks c/90876543 b/1550`  
+       Expected: New client is added. Terminal shows successful add client message along with client details (name, contact number, budget per month).
+
+
+3. Unsuccessful addition of client (Invalid Contact Number)
+    1. Prerequisites:
+        * Ensure that an invalid Singapore contact number is provided. Singapore contact number starts with a `6`, `8` or `9` followed by 7 digits.
+    2. Test case: `add -client n/Gary Oaks c/10876543 e/garyoaks@example.com b/1550`  
+       Expected: Terminal shows invalid Singapore contact number message.
+
+       
+4. Unsuccessful addition of client (Invalid Email)
+    1. Prerequisites:
+        * Ensure that an invalid email is provided. An easy way to replicate an invalid email is to exclude the `@` symbol.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaksexample.com b/1550`  
+       Expected: Terminal shows invalid email message.
+
+
+5. Unsuccessful addition of client (Invalid Budget)
+    1. Prerequisites:
+        * Ensure that a non-positive integer input is provided for budget.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/0`  
+       Expected: Terminal shows invalid budget message.
+
+
+6. Unsuccessful addition of client (Duplication)
+    1. Prerequisites:
+        * Successful add a client.
+        * Ensure that second client entry has either the same name, contact number. email or any combinations.
+    2. Test cases:
+       
+       `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com b/1550`
+        
+       `add -client n/Gary Oaks c/60876543 e/garyoaks@example.com b/1550`  
+       Expected: Terminal shows duplicating client error message along with the details of existing client.
+
+
+7. Unsuccessful addition of client (Empty Client Detail)
+    1. Prerequisites:
+        * Ensure that no client detail is provided.
+    2. Test case: `add -client`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+8. Unsuccessful addition of client (Missing Client Detail)
+    1. Prerequisites:
+        * Ensure that all client flags (except `e/`) are included in the right order.
+        * Ensure that at least one of the client details (except email) after any client flags is blank.
+    2. Test case: `add -client n/ c/90876543 e/garyoaks@example.com b/`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+9. Unsuccessful addition of client (Missing Client Flag)
+    1. Prerequisites:
+        * Ensure that at least one of the client flags (except `e/`) is missing.
+    2. Test case: `add -client n/Gary Oaks c/90876543 e/garyoaks@example.com 1550`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+10. Unsuccessful addition of client (Wrong Ordering of Client Flags)
+    1. Prerequisites:
+       * Ensure that all client flags (except `e/`) are present.
+       * Ensure that client flags are not in the right order.
+    2. Test case: `add -client b/Gary Oaks c/90876543 e/garyoaks@example.com n/1550`  
+       Expected: Terminal shows add client format error message. Message will include the required input format to add client, as well as an example to help user visualize actual input.
+
+
+**Add property**
+1. Successful addition of property (Landed Property)
+    1. Prerequisites:
+        * Ensure that a valid Singapore landed property address (app-specified format) is provided. Landed property address will not have unit level.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that unit type label provided contains `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: New property is added. Terminal shows successful add property message along with property details (landlord name, address, renting price, unit type).
+
+
+2. Successful addition of property (Non-Landed Property)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that unit type label provided do not contain `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/1600 t/HDB 3`  
+       Expected: New property is added. Terminal shows successful add property message along with property details (landlord name, address, renting price, unit type).
+
+
+3. Unsuccessful addition of property (Invalid address format)
+    1. Prerequisites:
+        * Ensure that an invalid Singapore address (different from required format) is provided. 
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that a valid unit type label is provided.
+    2. Test case: `add -property n/Ash Ketchun a/idk whats my address p/1600 t/LP BGL`  
+       Expected: Terminal shows invalid address message. Message consists of required address formats and examples to aid user.
+
+
+4. Unsuccessful addition of property (Invalid Rental Price)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that non-positive integer is provided for rental price.
+        * Ensure that unit type label provided do not contain `LP`. `LP` implies landed property unit type.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/00 t/HDB 3`  
+       Expected: Terminal shows invalid rental price message.
+
+
+5. Unsuccessful addition of property (Invalid Unit Type)
+    1. Prerequisites:
+        * Ensure that a valid Singapore building address (app-specified format) is provided. Building address will have unit level and number.
+        * Ensure that positive integer is provided for rental price.
+        * Ensure that none of the 15 app-defined unit type labels is provided. However, unit type must not be empty.
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street #12-05, S059020 p/1600 t/hi`  
+       Expected: Terminal shows invalid unit type message along with the list of unit type labels pre-defined by the app.
+
+
+6. Unsuccessful addition of property (Mismatch Address Format and Unit Type)
+    1. Prerequisites:
+        * Ensure that positive integer is provided for rental price.
+        * To simulate mismatch, ensure address format and unit type of property do not belong to the same category (landed property or not).
+    2. Test case: `add -property n/Ash Ketchun a/101 Marlow Street, S059020 p/1600 t/HDB 3`  
+       Expected: Terminal shows address format and unit type mismatch message along with required formats and examples.
+
+
+7. Unsuccessful addition of property (Duplication)
+    1. Prerequisites:
+        * Successful add a property.
+        * Ensure that second property entry's address is identical to the first. Its address can have differing letter cases.
+    2. Test cases:
+       
+       `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+        
+       `add -property n/Joe a/25A pAlLeT ToWn, S121111 p/1600 t/LP BGL`   
+       Expected: Terminal shows duplicating property error message along with details of existing property.
+
+
+8. Unsuccessful addition of property (Empty Property Detail)
+    1. Prerequisites:
+        * Ensure that no property detail is provided.
+    2. Test case: `add -property`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+9. Unsuccessful addition of property (Missing Property Detail)
+    1. Prerequisites:
+        * Ensure that all property flags are included in the right order.
+        * Ensure that at least one of the property details after any property flags is blank.
+    2. Test case: `add -property n/Ash Ketchun a/25A Pallet Town, S121111 p/ t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+10. Unsuccessful addition of property (Missing Property Flag)
+    1. Prerequisites:
+        * Ensure that at least one of the property flags is missing.
+    2. Test case: `add -property Ash Ketchun a/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
+
+11. Unsuccessful addition of property (Wrong Ordering of Property Flags)
+    1. Prerequisites:
+        * Ensure that all property flags are present.
+        * Ensure that property flags are not in the right order.
+    2. Test case: `add -property a/Ash Ketchun n/25A Pallet Town, S121111 p/1600 t/LP BGL`  
+       Expected: Terminal shows add property format error message. Message will include the required input format to add property, as well as an example to help user visualize actual input.
+
 
 ### Delete
 
