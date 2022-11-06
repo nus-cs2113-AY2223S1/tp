@@ -20,6 +20,7 @@ and Prescription menu)
   * Managed releases `v1.0` and `v2.0` on GitHub, including their corresponding milestones.
   * Protected the `master` branch of the team repo with mandatory status checks to pass before merging so that the CIs
   must pass for the branch.
+  * Created issues and assigned issues to the team member.
 * **Enhancements to existing features**:
   * Refactored most I/O interactions to the `UI` class and align printing format in `v1.0` (Pull Request 
   [#64](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/64))
@@ -36,7 +37,8 @@ and Prescription menu)
     object and sequence diagrams.
     * Added details for the `Prescription` component, including a class diagram. 
     * Added implementation details for 4 main commands in Prescription menu, with their respective sequence diagrams.
-    * Added instruction for manual testing's launch and shutdown, navigation and prescription menu tests.
+    * Added instruction for manual testing section's launch and shutdown, navigation and prescription menu tests.
+    * Restructured the DG to have a similar structure with AB3-AddressBook.
 * **Community**:
   * PRs reviewed (within team): [#34](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/34),
   [#35](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/35),
