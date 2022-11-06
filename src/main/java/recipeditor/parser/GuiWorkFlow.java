@@ -1,6 +1,5 @@
 package recipeditor.parser;
 
-import recipeditor.exception.DuplicateRecipeTitleException;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -11,7 +10,7 @@ import recipeditor.ui.Ui;
 import java.io.FileNotFoundException;
 
 public class GuiWorkFlow {
-    private static final String ABORT_QUESTION = "Do you want to FIX the recipe? (Y/N)";
+    private static final String FIX_THE_RECIPE_Y_N = "Do you want to FIX the recipe? (Y/N)";
     private final Mode mode;
     private boolean saveToTemp;
     private String path;
@@ -62,12 +61,12 @@ public class GuiWorkFlow {
         try {
             String content = Storage.loadFileContent(Storage.TEMPORARY_FILE_PATH);
             recipe = new RecipeFileParser().parseTextToRecipe(content);
-            checkDuplicate();
+            checkDuplicateTitle();
             isValid = true;
             shouldExitLoop = true;
-        } catch (ParseFileException | FileNotFoundException | DuplicateRecipeTitleException e) {
+        } catch (ParseFileException | FileNotFoundException e) {
             Ui.showMessage(e.getMessage());
-            YesNoLoopAnswer ans = yesNoLoop(ABORT_QUESTION);
+            YesNoLoopAnswer ans = yesNoLoop(FIX_THE_RECIPE_Y_N);
             if (ans.equals(YesNoLoopAnswer.YES)) {
                 saveToTemp = new Editor().enterEditor(Storage.TEMPORARY_FILE_PATH);
                 shouldExitLoop = !saveToTemp;
@@ -77,9 +76,9 @@ public class GuiWorkFlow {
         }
     }
 
-    private void checkDuplicate() throws DuplicateRecipeTitleException {
+    private void checkDuplicateTitle() throws ParseFileException {
         if (RecipeList.containsRecipe(recipe) && mode.equals(Mode.ADD)) {
-            throw new DuplicateRecipeTitleException(DuplicateRecipeTitleException.DUPLICATE_IN_MODEL);
+            throw new ParseFileException(ParseFileException.DUPLICATE_IN_MODEL);
         }
     }
 
