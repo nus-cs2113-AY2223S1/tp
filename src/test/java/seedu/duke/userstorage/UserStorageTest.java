@@ -232,9 +232,9 @@ public class UserStorageTest {
         File dir = new File(directory);
         dummyFile.createNewFile();
         bostonFile.createNewFile();
-        assertEquals(3, Objects.requireNonNull(dir.list()).length);
-        UserStorage.setFilePathsAtStartUp();
         assertEquals(2, Objects.requireNonNull(dir.list()).length);
+        UserStorage.setFilePathsAtStartUp();
+        assertEquals(1, Objects.requireNonNull(dir.list()).length);
         UserStorageParser.deleteUserStorageByUni("Boston University", false);
         Database.clearDatabase();
     }
@@ -247,7 +247,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -261,7 +261,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -275,7 +275,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -289,7 +289,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -303,7 +303,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -317,7 +317,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -331,7 +331,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -345,7 +345,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
@@ -359,7 +359,7 @@ public class UserStorageTest {
         File dir = new File(directory);
         UserStorage.setFilePathsAtStartUp();
         UserStorageParser.getSavedLists();
-        assertEquals(1, Objects.requireNonNull(dir.list()).length);
+        assertEquals(0, Objects.requireNonNull(dir.list()).length);
         assertEquals(0, testManager.getMyManager().size());
         assertEquals(0, testManager.getTtManager().getTimetableManager().size());
         Database.clearDatabase();
