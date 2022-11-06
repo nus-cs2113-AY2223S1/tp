@@ -2,9 +2,9 @@
 
 ## Table of contents
 
-* ### [General Overview](#general-overview)
+* ### [General Overview](#general-overview-1)
 
-* ### [Design & Implementation](#design--implementation)
+* ### [Design & Implementation](#design--implementation-1)
   * [Database](#database)
   * [User Storage](#user-storage)
   * [Timetable](#timetable)
@@ -14,8 +14,8 @@
   * [User Module Mapping](#user-module-mappings)
   * [User University List Manager](#user-university-list-manager)
 
-* ### [Appendix: Requirements](#appendix:-requirements)
-  * [Appendix A: Product Scope](#appendix-a:-product-scope)
+* ### [Appendix: Requirements](#appendix-requirements)
+  * [Appendix A: Product Scope](#appendix-a-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
     * [Problem Addressed](#problem-addressed)
@@ -23,7 +23,8 @@
   * [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
   * [Appendix D: Glossary](#appendix-d-glossary)
   * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
-___
+
+
 ## General Overview
 
 Below is an architecture diagram that provides a brief overview of how the program works.
@@ -31,7 +32,7 @@ Below is an architecture diagram that provides a brief overview of how the progr
 ![Architecture Diagram](./images/ArchitectureDiagram.png)
 
 The program will first make use of the save file and database file to populate its internal memory. This is stored in the program's user storage and database storage respectively. When the user then interacts with the program's UI, the program logic will take over and make use of the information from database storage to update the user storage. The user storage then updates the save file accordingly. This process will continue until the user makes no further inputs and exits the program.
-___
+
 ## Design & Implementation
 
 ### Database
@@ -60,7 +61,7 @@ Saving of user information into text file occurs when user inputs an add/delete/
 
 Based on the user's saved university lists, user storage will save each university list's information in a separate text file.
 Each text file is named after the partner university (ie. `Boston University.txt`) and will contain the user's favourites, saved modules, timetable information.
-An example of a text file will look like [this](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/f7e161ad29e5891cabae3fdde616eae362f82877/docs/Example%20University.txt).
+An example of a text file will look like [this](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/master/docs/Example%20University.txt).
 
 Here is how the information is stored:
 
@@ -73,7 +74,7 @@ Only the partner university's module code is stored to prevent storing excessive
 To retrieve the other information (ie. partner university's module title, NUS module code, NUS module title etc.), UserStorageParser will call Database to get the relevant information.
 
 Upon starting easySEP, UserStorage will first load its private `HashMap` called filePaths, which stores all mappings of university name to the corresponding file path.
-UserStorage will also extract all valid information from the text files into a `String` and convert them into a `UserUniversityListManager` to be used in the main Duke class.
+UserStorage will also extract all valid information from the text files into a `String` and convert them into a UserUniversityListManager to be used in the main Duke class.
 
 InvalidUserStorageFileException is thrown when there are unexpected scenarios. Such instances include
 
@@ -280,7 +281,7 @@ The following class diagram illustrates the relationship between UserUniversityL
 The following sequence diagram helps explain the key steps behind the main functions in UserUniversityListManager.
 
 ![UserUniversityListManager Sequence](./images/UserUniversityListManager_Sequence.png)
-___
+
 ## Appendix: Requirements
 
 ### Appendix A: Product Scope
