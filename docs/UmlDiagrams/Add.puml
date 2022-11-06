@@ -21,7 +21,7 @@ else strength
 else cardio
 
 else weight
-    ref over addCommand: addWeightAndFa
+    ref over addCommand: addWeightAndFat
 
 end
 

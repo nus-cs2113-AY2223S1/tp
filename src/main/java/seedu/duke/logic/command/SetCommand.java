@@ -17,7 +17,7 @@ public class SetCommand extends Command {
 
 
     private static Logger logger = Logger.getLogger("SetCommand");
-
+    public static final String INVALID_BIOMETRICS_INPUT_MESSAGE = "Invalid set biometrics command";
     private Ui ui;
     private Biometrics biometrics;
 
@@ -31,6 +31,10 @@ public class SetCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
+        int slashesCount = Parser.getArgumentsCount(arguments);
+        if (slashesCount > 4) {
+            throw new IllegalValueException(INVALID_BIOMETRICS_INPUT_MESSAGE);
+        }
         String[] argumentList = Parser.getArgumentList(arguments);
         try {
             setBiometrics(argumentList);
