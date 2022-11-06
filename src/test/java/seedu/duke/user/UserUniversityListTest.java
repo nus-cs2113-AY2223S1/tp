@@ -229,7 +229,7 @@ public class UserUniversityListTest {
     void updateComment_UclaWrongUpdates_throwExceptions()
             throws InvalidUserCommandException, UniversityNotFoundException {
         assertThrows(UniversityNotFoundException.class,
-                () -> testManager.updateComment("UCLA", "CS101", "testing 1"));
+            () -> testManager.updateComment("UCLA", "CS101", "testing 1"));
         testManager.createList("UCLA");
         UserModuleMapping mod = new UserModuleMapping("CS101", "Programming Intro", "CS1010",
                 "Programming Methodology", "4", "4", "UCLA", "USA");
