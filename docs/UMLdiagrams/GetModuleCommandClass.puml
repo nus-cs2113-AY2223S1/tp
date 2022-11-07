@@ -1,0 +1,10 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class getModuleCommand {
+ +addLine() : void
+ +isModuleOfferedInCurrentSem() : boolean
+ +isModuleExist() : boolean
+ -splitLongDescription() : String
+}
+@enduml

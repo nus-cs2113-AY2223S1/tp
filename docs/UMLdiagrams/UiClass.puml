@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam classAttributeIconSize 0
+hide circle
+
+class Ui {
+    - scanner: Scanner
+    - uiBuffer: ArrayList<String>
+    + INDENT: String
+    + LINE_DIVIDER: String
+    + LOGO: String
+    + MESSAGE_BYE: String
+    + MESSAGE_GREET: String
+
+    + Ui()
+    + addMessage(messages: ArrayList<String>)
+    + addMessage(messages: ArrayList<String>, hasIndent: boolean)
+    + addMessage(message: String)
+    + addMessage(message: String, hasIndent: boolean)
+    + clearUiBuffer()
+    + close()
+    - currentUserSemester(semester: int): String
+    + displayDivider()
+    + displayMessage(message: String)
+    + displayUi()
+    + displayUi(hasLineDivider: boolean)
+    + displayUserPrompt(semester: int)
+    + endMessage()
+    + readNext(): String
+    - sanitizeInput(input: String): String
+    + startMessage()
+}
+@enduml
