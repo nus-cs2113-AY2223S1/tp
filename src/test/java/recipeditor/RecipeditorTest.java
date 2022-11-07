@@ -11,7 +11,7 @@ import java.io.InputStream;
 class RecipeditorTest {
 
     @Test
-    void runAndExit(){
+    void runAndExit() {
         String simulatedInput = "/exit";
         ByteArrayInputStream input = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(input);
