@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/object-diagram
+map UI {
+}
+map Duke {
+}
+map Parser {
+}
+map Storage {
+}
+map Timetable {
+}
+map Commands {
+}
+
+UI-r->Duke
+Duke-->UI
+Duke-u->Parser
+Parser-l->Commands
+Commands-->UI
+UI-->Commands
+Storage..>Timetable
+Timetable..>Storage
+Duke-r->Storage
+Commands-u->Timetable
+
+
+@enduml

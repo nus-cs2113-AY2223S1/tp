@@ -2,8 +2,7 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![]() | John Toh Jia Jun | [Github](https://github.com/jjtoh) | [Portfolio](team/jjtoh.md)
+![](https://avatars.githubusercontent.com/u/102953783?s=70&v=4) | Aaron Chan Zhi | [Github](https://github.com/AaaaaronC) | [Portfolio](team/aaaaaaronc.md)
+![](https://avatars.githubusercontent.com/u/88090694?s=70&v=4) | Koh Chee Heng | [Github](https://github.com/cheehengk) | [Portfolio](team/cheehengk.md)
+![]() | Hang Tian | [Github](https://github.com/HT-T) | [Portfolio](team/ht-t.md)
