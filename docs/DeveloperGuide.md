@@ -1148,6 +1148,8 @@ The `Edit-Target` command changes the attributes of an existing target in the pr
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Target User Profile
 
 MoneyGoWhere is targeted at users who
@@ -1176,6 +1178,7 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 <br>
 <br>
+
 <div style="page-break-after: always;"></div>
 
 ## User Stories
@@ -1217,6 +1220,7 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 <br>
 <br>
+
 <div style="page-break-after: always;"></div>
 
 ## Non-Functional Requirements
@@ -1248,6 +1252,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Manual Testing
 
 ## Sub-Contents
@@ -1259,6 +1265,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Launching MoneyGoWhere
 1. Set up the project according to the steps in [Getting Started](#getting-started).
