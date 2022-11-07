@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static recipeditor.parser.FlagType.*;
+import static recipeditor.parser.FlagType.TITLE;
+import static recipeditor.parser.FlagType.DESCRIPTION;
+import static recipeditor.parser.FlagType.INGREDIENT;
 
 import recipeditor.parser.FlagType;
 import recipeditor.parser.Parser;

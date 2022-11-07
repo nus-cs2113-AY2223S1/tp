@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RecipeListTest {
 
     private static Recipe recipe;
+
     @BeforeAll
     static void setUp() {
         recipe = new Recipe("Test title for RecipeList", "Test description");

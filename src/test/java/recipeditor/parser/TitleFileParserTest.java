@@ -1,9 +1,8 @@
 package recipeditor.parser;
 
-import org.junit.jupiter.api.*;
-import recipeditor.exception.RecipeNotFoundException;
-import recipeditor.recipe.RecipeList;
+import org.junit.jupiter.api.Test;
 
+import recipeditor.recipe.RecipeList;
 import org.junit.jupiter.api.Assertions;
 import recipeditor.storage.Storage;
 
@@ -63,7 +62,6 @@ public class TitleFileParserTest {
         Assertions.assertEquals(1, RecipeList.getRecipeTitlesSize());
         for (String s : strings) {
             Storage.deleteRecipeFile(s);
-//            Storage.deleteFile(Storage.titleToFilePath(s));
             RecipeList.deleteRecipeFromTitle(s);
         }
     }
