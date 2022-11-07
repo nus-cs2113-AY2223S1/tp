@@ -11,7 +11,7 @@ Enhancement implemented:
 - Implementation of JUnit Test (Pull Request(s): [#7](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/7))
 - Created 'Overview' Feature + Implemented of CAP Calculation (Pull Request(s): [#154](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/154), [#157](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/157), [#158](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/158))
 - Created 'Clear' Feature (Pull Request(s): [#151](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/151), [#158](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/158))
-- Created Overall exception for command input to showcase all format issue(s) in 'Add', 'Delete', 'View', 'Clear', 'MCs' and 'View' features (Pull Request(s): [#140](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/140), [#145](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/146), [#146](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/146), [#147](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/147))
+- Created Overall exception for command input to showcase all format issue(s) in 'Add', 'Delete', 'View', 'Clear', 'MCs' and 'View' features (Pull Request(s): [#140](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/140), [#145](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/145), [#146](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/146), [#147](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/147))
 - Modified Welcome message to introduce 'Help' feature (Pull Request(s): [#115](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/115))
 - Addition of 'PlanIt!' Welcome Message ASCII Art (Pull Request(s): [#149](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/149))
 - Modified 'Help' command summary Message (Pull Request(s): [#116](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/116), [#148](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/148))
@@ -28,7 +28,7 @@ Contributions to DG:
 - Review of sequence diagrams in DG
 
 Contributions to team-based tasks:
-- Took full responsibility of managing the User Guide from scratch (Pull Request(s): [#45](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/45))
+- Took full responsibility of managing the User Guide from scratch (Pull Request(s): [#45](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/45), [#159](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/159))
 - Fixed and closed issues (Issue(s) : [#52](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/52), [#92](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/92), [#108](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/108), [#109](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/109), [#138](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/138), [#139](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/139), [#143](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/143), [#144](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/144), [#150](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/150), [#155](https://github.com/AY2223S1-CS2113-T17-2/tp/issues/155))
 
 Review/Mentoring contributions:
