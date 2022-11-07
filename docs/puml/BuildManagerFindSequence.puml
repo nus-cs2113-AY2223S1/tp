@@ -5,7 +5,7 @@ Participant ":Ui" as Ui #AquaMarine
 Participant ":Parser" as Parser #Orange
 Participant ":BuildManager" as BuildManager #Yellow
 
-User -> Ui ++ #AquaMarine : "list"
+User -> Ui ++ #AquaMarine : "find/<search term>"
 
 Ui -> Ui ++ #AquaMarine : readLine()
 
@@ -25,4 +25,6 @@ return
 return
 
 return
+
+return builds with search term
 @enduml

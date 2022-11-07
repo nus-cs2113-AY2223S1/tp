@@ -28,8 +28,8 @@
     * [Export](#export)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
-    * [Main Mode Summary](#main-mode-summary)
-    * [Edit Mode Summary](#edit-mode-summary)
+    * [Main Mode Summary](#build-management-mode-summary)
+    * [Edit Mode Summary](#build-editing-mode-summary)
 * [Glossary](#glossary)
     * [PC Component Parameters Glossary](#pc-component-parameters-glossary)
 
@@ -46,9 +46,9 @@ program targeting PC enthusiasts and commercial PC builders who want to:
 1. Ensure that you have `Java 11` installed.
 2. Download the latest version of `CCC` from 
 [here](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
-3. Copy the file to an empty folder you want to use as the _home folder_
-4. Open a command window in that folder
-5. Run the command `java -jar CCC.jar` to start the app
+3. Copy the file to an empty folder you want to use as the _home folder_.
+4. Open a command window in that folder.
+5. Run the command `java -jar CCC.jar` to start the app.
 6. Refer to the [Features](#features) below to try out some commands!
 
 Upon successfully starting the program, you will be greeted with the following:
@@ -83,16 +83,20 @@ Our program has two modes, the [Build Management Mode](#build-management-mode) a
 
 Upon starting the Program, you will be situated in the [Build Management Mode](#build-management-mode).
 
+__Note__: Adding too many parameters will not affect command execution.
+
 ### Build Management Mode
 
-Main mode handles the management of your builds. 
+Build Management Mode handles the management of your builds. 
 
 #### Adding a build: `add`
 
 Adds a build to the list of builds currently managed by the program. You only need to specify the name of the
 build.
 
-Note: If you wish to edit your build after adding it, you can do so by following this command [Editing a build](#editing-a-build-edit).
+__Note__: If you wish to edit your build after adding it, you can do so by following this command [Editing a build](#editing-a-build-edit).
+
+__Note__: Build name cannot contain a slash.
 
 Format: `add/NAME`
 
@@ -115,7 +119,7 @@ build.
 
 Format: `edit/NAME`
 
-Note: If you wish to go back to the main mode, you can do so by following this command [Exit edit mode](#exiting-edit-mode-back).
+__Note__: If you wish to go back to the main mode, you can do so by following this command [Exit Build Editing Mode](#exiting-build-editing-mode-back).
 
 Example of usage: Enter `edit/test build` to edit the build named 'test build'.
 
@@ -221,6 +225,8 @@ Acceptable Formats:
 - `RANGESTART` must be integer or float number
 - `RANGEEND` must be integer or float number
 
+__Note__: The `RANGESTART` and `RANGEEND` will be swapped if `RANGESTART` is greater than `RANGEEND`.
+
 Examples of usage: 
 1. Enter `filter/compatibility` to find all builds that are compatible.
 2. Enter `filter/price/3000/4000` to find all builds that have a total cost between $3000 and $4000.
@@ -248,13 +254,15 @@ ____________________________________________________________
 
 #### Exporting builds: `export`
 
-Exports all builds to a text file.
+Exports all builds to a text file in the `data/export` folder.
 
 Format: `export`
 
 Example of usage: Enter `export` to export all builds.
 
-Expected outcome: The program will export all builds to a text file.
+Expected outcome: The program will export all builds to a text file in the `data/export` folder.
+
+__Note__: The file will not be empty even if there are no components in all builds.
 ```
 ____________________________________________________________
 export
@@ -265,13 +273,15 @@ ____________________________________________________________
 
 #### Exporting builds as CSV: `exportCSV`
 
-Exports all builds to a CSV file.
+Exports all builds to a CSV file in the `data/export` folder.
 
 Format: `exportCSV`
 
 Example of usage: Enter `exportCSV` to export all builds.
 
-Expected outcome: The program will export all builds to a CSV file.
+Expected outcome: The program will export all builds to a CSV file in the `data/export` folder.
+
+__Note__: The CSV file will be empty if there are no components in all the builds.
 ```
 ____________________________________________________________
 exportCSV
@@ -295,14 +305,14 @@ ____________________________________________________________
 ```
 ### Build Editing Mode
 
-Edit mode handles the management of the computer components of a build. If you want to go back to the main mode,
-you can do so by following this command [Exit edit mode](#exiting-edit-mode-back).
+Build Editing Mode handles the management of the computer components of a build. If you want to go back to the Build 
+Management Mode, you can do so by following this command [Exit Build Editing Mode](#exiting-build-editing-mode-back).
 
 #### Adding a component: `add`
 
 Adds a component to the list of components of a build.
 
-Note: 
+__Note__: 
 - If you want to see the components that have been added in the Edit Mode, you can do so by following this command [Listing all components](#listing-all-components-list).
 - If you want to see the information of the component you have added, you can do so by following this command [Viewing a component](#viewing-a-component-view).
 
@@ -318,7 +328,7 @@ Acceptable Formats:
 9. `add/monitor/Name/Price/Power/RefreshRate/ResponseTime/Resolution`
 10. `add/other/Name/Price/Power`
 
-Note: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-summary).
+__Note__: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-glossary).
 
 Example of usage: 
 Enter `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
@@ -436,13 +446,15 @@ Compatibility: Not compatible
 
 #### Exporting a build: `export`
 
-Exports a build to a text file.
+Exports a build to a text file in the `data/export` folder.
 
 Format: `export`
 
 Example of usage: Enter `export` to export a build.
 
-Expected outcome: The program will export a build to a text file.
+Expected outcome: The program will export a build to a text file in the `data/export` folder.
+
+__Note__: The file will not be empty even if there are no components in the build.
 ```
 <--------------------------------------------------------->
 export
@@ -480,7 +492,7 @@ Loading and saving are done automatically, so you do not need to worry about sav
 
 ### Export
 
-The program exports all builds to text and CSV files. The text and CSV files are stored in the `data` folder.
+The program exports all builds to text and CSV files. The text and CSV files are stored in the `data\export` folder.
 
 It makes it easier for you to view the builds and components in a more readable format outside the program.
 
@@ -492,7 +504,7 @@ It makes it easier for you to view the builds and components in a more readable 
 to the data folder of the new program on your new computer to carry over your data.
 
 ## Command Summary
-### Main Mode Summary
+### Build Management Mode Summary
 
 | Action    | Format, Examples                                                                                   |
 |-----------|----------------------------------------------------------------------------------------------------|
@@ -507,7 +519,7 @@ to the data folder of the new program on your new computer to carry over your da
 | ExportCSV | `exportCSV`                                                                                        |
 | Bye       | `bye`                                                                                              |
 
-### Edit Mode Summary
+### Build Editing Mode Summary
 
 | Action | Format, Examples                                                                            |
 |--------|---------------------------------------------------------------------------------------------|
@@ -522,25 +534,25 @@ to the data folder of the new program on your new computer to carry over your da
 
 ## Glossary
 ### PC Component Parameters Glossary
-| Parameter      | Examples                                                        |
-|----------------|-----------------------------------------------------------------|
-| Name           | Name of the component <br/> E.g. `Intel 10990x`                 |
-| Price          | Price of the component <br/> E.g. `1000`                        |
-| Power          | Power consumption of the component <br/> E.g. `80`              |
-| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
-| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                             |
-| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
-| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
-| MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
-| FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
-| MemorySize     | Memory size in GB <br/> E.g. `16`                               |
-| StorageSize    | Storage size in GB <br/> E.g. `1000`                            |
-| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                           |
- | FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
-| NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
-| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
-| ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
-| Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
+| Parameter      | Examples                                                         |
+|----------------|------------------------------------------------------------------|
+| Name           | Name of the component <br/> E.g. `Intel 10990x`                  |
+| Price          | Price of the component <br/> E.g. `1000`                         |
+| Power          | Power consumption of the component <br/> E.g. `80`               |
+| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`     |
+| ClockSpeed     | Clock speed in GHz <br/> E.g. `3.8`                              |
+| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                          |
+| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                               |
+| MemorySlots    | Number of Memory slots <br/> E.g. `4`                            |
+| FormFactor     | Form factor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
+| MemorySize     | Memory size in GB <br/> E.g. `16`                                |
+| StorageSize    | Storage size in GB <br/> E.g. `1000`                             |
+| StorageType    | Storage type <br/> E.g. `HDD` , `SDD`                            |
+ | FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                               |
+| NoiseLevel     | Noise level in dB <br/> E.g. `50`                                |
+| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                              |
+| ResponseTime   | Response Time in ms <br/> E.g. `1`                               |
+| Resolution     | Resolution in pixels <br/> E.g. `4000`                           |
 
 
 

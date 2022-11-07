@@ -105,11 +105,12 @@ public class BuildManager {
         } // Guard Clause, check if searchTerm is blank or not
 
         for (String name : builds.keySet()) {
-            if (i == 0) {
-                System.out.println("Found Builds:");
-                i++;
-            }
+
             if (name.contains(searchTerm)) {
+                if (i == 0) {
+                    System.out.println("Found Builds:");
+                    i++;
+                }
                 System.out.println(name);
                 i++;
             }

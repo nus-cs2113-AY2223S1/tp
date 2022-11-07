@@ -34,4 +34,6 @@ return
 return
 
 return
+
+return message "Build added"
 @enduml

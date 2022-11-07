@@ -5,7 +5,7 @@ Participant ":Ui" as Ui #AquaMarine
 Participant ":Parser" as Parser #Orange
 Participant ":BuildManager" as BuildManager #Yellow
 
-User -> Ui ++ #AquaMarine : "list"
+User -> Ui ++ #AquaMarine : "filter/..."
 
 Ui -> Ui ++ #AquaMarine : readLine()
 
@@ -43,4 +43,6 @@ return
 return
 
 return
+
+return prints the filtered builds
 @enduml
