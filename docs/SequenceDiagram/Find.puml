@@ -1,0 +1,27 @@
+@startuml
+skinparam Style strictuml
+autonumber
+participant ":Recipeditor" as recipeditor
+participant ":FindCommand" as view
+participant ":RecipeList" as recipelist
+
+
+recipeditor-> view: execute()
+alt valid format
+alt user give title
+view -> recipelist: findRecipeTitlesFromRecipeTitle(title)
+recipelist --> view:
+
+
+else user give ingredient
+view -> recipelist: findRecipeTitlesFromIngredientName(ingredient)
+recipelist --> view:
+
+end alt
+view --> recipeditor: return recipeTitle in foundRecipeList
+
+
+else invalid format
+view --> recipeditor: return CommandResult for valid format
+end alt
+@enduml

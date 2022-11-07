@@ -1,6 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
+skinparam Style strictuml
 hide fields
 hide methods
 

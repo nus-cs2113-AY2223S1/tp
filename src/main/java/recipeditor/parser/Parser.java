@@ -16,6 +16,7 @@ import recipeditor.exception.MissingFlagsException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
+import recipeditor.ui.GuiWorkFlow;
 import recipeditor.ui.Ui;
 
 import java.io.FileNotFoundException;

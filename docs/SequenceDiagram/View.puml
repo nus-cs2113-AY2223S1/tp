@@ -1,0 +1,27 @@
+@startuml
+skinparam Style strictuml
+autonumber
+participant ":Recipeditor" as recipeditor
+participant ":ViewCommand" as view
+participant ":RecipeList" as recipelist
+participant "recipe:Recipe" as recipe
+
+ref over view
+When parsing View Command
+- if user gives recipeTitle, get index
+- else user gives index
+end
+recipeditor-> view: execute()
+alt valid index or title
+view -> recipelist: getRecipe(index)
+recipelist --> view: return recipe
+create recipe
+view -> recipe: getRecipeAttributesFormatted()
+recipe --> view: return commandResultOutput
+destroy recipe
+view --> recipeditor: return CommandResult
+
+else invalid idnex or title
+view --> recipeditor: return CommandResult for invalid
+end alt
+@enduml
