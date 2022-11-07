@@ -33,8 +33,8 @@ Some example commands you can try:
 ### Notes about format of input:
 1. Words in UPPER_CASE are the parameters to be supplied by the user. 
 2. YEAR_NUMBER_SEMESTER_NUMBER should be in the form YXSZ where X is the year number and Z is the semester number. For example, Year 2 Semester 1 will be Y2S1. 
-3. Module Code must contain both Number and Alphabet. Also, must be less than 10 Characters.
-4. Grade can be either the letter grade  (eg. A+, A, A-), the S/U grade (eg. S, U) or Nil ("-") if the module has not been completed and has no grade yet. 
+3. MODULE_CODE must contain both Number and Alphabet. Also, must be less than 10 Characters.
+4. GRADE can be either the letter grade  (eg. A+, A, A-), the S/U grade (eg. S, U) or Nil ("-") if the module has not been completed and has no grade yet. 
 4. Parameters can be in any order. e.g. if the command specifies m/MODULE_CODE s/YEAR_NUMBER_SEMESTER_NUMBER , s/YEAR_NUMBER_SEMESTER_NUMBER m/MODULE_CODE  is also acceptable. 
 5. Every part of the command should be separated by a spacing " ".
 
