@@ -1,9 +1,114 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome to
+   _____ _             _____            _             _
+  / ____| |           / ____|          | |           | |
+ | (___ | | ___   _  | |     ___  _ __ | |_ _ __ ___ | |
+  \___ \| |/ / | | | | |    / _ \| '_ \| __| '__/ _ \| |
+  ____) |   <| |_| | | |___| (_) | | | | |_| | | (_) | |
+ |_____/|_|\_\\__, |  \_____\___/|_| |_|\__|_|  \___/|_|
+               __/ |
+              |___/
 
-What is your name?
-Hello James Gosling
+File or directory does not exist.
+
+Trying to create file now.
+File is created at: ./data/SkyControl.txt
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! The input passenger detail does not have a flight number that exist yet.
+Flight detail of the specific flight number should input first.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Passenger IVAN THENG of SQ832 17D has been added.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! The boarding group input format is wrong.
+Boarding group should not be more than 10 and should be in digit form,
+please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Please fill up details for all fields.
+ Invalid input. Try again!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Unable to add Passenger. Seat number is already occupied on the flight!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Unable to add Flight!
+Designated gate is already occupied at that time, please select a different gate number.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Unable to add Flight! Flight already exist.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! The departure time input format is wrong.
+Please try again in 24Hr time format.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+FLIGHT SQ324 NOT FOUND.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Detail of the operation is blank,
+please try again and input all necessary details.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+oops! The description is empty :(
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Passenger IVAN THENG from SQ832 of seat number 17D have been
+deleted from the passenger list.
+0 passenger(s) left on the passenger list.
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+You did not input an operation.
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+You did not input an operation.
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+You did not input an operation.
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+You did not input an operation.
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Stop! The flight number input format is wrong.
+Please try again with the following format:
+'SQ12' - For international flights
+'SQ123' - For regional flights
+'SQ1234' - For domestic flights
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight added!
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Passenger IVAN THENG of SQ832 17D has been added.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Flight number of flight SQ832 is updated to SQ234.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Gate number of flight SQ234 is updated to 04.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The system is unable to read your command, please try again.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Unable to modify flight number.
+The new flight number is already taken up by another flight in the flight list.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Thank you, come again! :)
+
