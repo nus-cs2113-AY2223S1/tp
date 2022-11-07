@@ -956,8 +956,6 @@ The recurring payment was added as an expense successfully.
 <br>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ## Managing your incomes
 
 ## Sub-Contents
@@ -1085,8 +1083,6 @@ The income was deleted successfully.
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Editing an income: `Edit-Income`
 Edits an existing income in the list of incomes.
