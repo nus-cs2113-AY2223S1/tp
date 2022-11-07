@@ -1,10 +1,19 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+!include style.puml
+
 autoactivate on
 
--> removeCommand: execute()
-    removeCommand -> Parser: getArgumentList()
+box Logic LOGIC_COLOR_T1
+participant ":RemoveCommand" as removeCommand LOGIC_COLOR
+participant "<<class>>\nParser" as parser LOGIC_COLOR
+end box
+
+participant "<<class>>\nInteger" as Integer LOGIC_COLOR
+
+[-> removeCommand: execute()
+    removeCommand -> parser: getArgumentList()
     return argumentList: String[]
     removeCommand -> "Integer": parseInt(argumentList[1]: String)
     return index: int
@@ -16,5 +25,6 @@ autoactivate on
         ref over removeCommand: removeWeight
     end
 return
+destroy removeCommand
 
 @enduml

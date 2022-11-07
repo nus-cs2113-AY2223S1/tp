@@ -236,7 +236,7 @@ Food records are retrieved from FoodList, exercises are retrieved from ExerciseL
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
 
-**Removing records**  
+### Removing records  
 The sequence diagrams below represent the interactions when a user removes a record.  
 ![](UmlDiagrams/Remove.png)  
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
@@ -260,34 +260,35 @@ The interactions for removing other types of records are similar.
 
 ### Target user profile
 
-{Describe the target user profile}  
 TracknFit is designed for fitness enthusiasts who are new or moderately experienced in fitness
 and do not require specialised fitness advice
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}  
 TracknFit helps the user track their exercise routines, dietary habits and biometrics, allowing them
 to better understand their journey and progress towards their fitness goals.
 
 ## User Stories
 
-| Version | As a ...       | I want to ...                     | So that I can ...                                           |
-|---------|----------------|-----------------------------------|-------------------------------------------------------------|
-| v1.0    | new user       | see usage instructions            | refer to them when I forget how to use the application      |
-| v1.0    | user           | add my food consumption           | to keep track of my food consumptions over time             |
-| v1.0    | user           | view my food consumption          | to see my record of food consumptions                       |
-| v1.0    | new user       | add any exercises                 | can keep track of all my exercises to be done               |
-| v1.0    | long term user | view my remaining exercises       | so that I can know what are the exercise to be done.        |
-| v1.0    | long term user | view my completed exercises       | so that I can plan for the next workout                     |
-| v2.0    | old user       | record my biometrics over time    | see how I am progressing in my fitness journey              |
-| v2.0    | user           | find a to-do item by name         | locate a to-do without having to go through the entire list |
-| v2.0    | long term user | save my food consumptions         | to keep a record of all my food data over time              |
-| v2.0    | long term user | find certain food consumption     | to see my consumption of certain food over time             |
-| v2.0    | long term user | save my strength/cardio trainings | monitor my strength/cardio progress over time               |
-| v2.1    | long term user | check my overall calorie usage    | monitor my daily calorie intake and burn over time          |
-| v2.1    | user           | find my calorie usage by date     | monitor my overall calorie usage on a certain date          |
-| v2.1    | new user       | set my biometrics                 | receive personalised recommendations                        |
+
+| Version | As a ...         | I want to ...                                | So that I can ...                                      |
+|---------|------------------|----------------------------------------------|--------------------------------------------------------|
+| v1.0    | new user         | see usage instructions                       | refer to them when I forget how to use the application |
+| v1.0    | user             | add my food consumption                      | to keep track of my food consumptions over time        |
+| v1.0    | user             | view my food consumption                     | to see my record of food consumptions                  |
+| v1.0    | new user         | add any exercises                            | can keep track of all my exercises to be done          |
+| v1.0    | long term user   | view my remaining exercises                  | so that I can know what are the exercise to be done.   |
+| v1.0    | long term user   | view my completed exercises                  | so that I can plan for the next workout                |
+| v2.0    | user             | have my records saved                        | see my past records                                    |
+| v2.0    | long term user   | record my weight and fat over time           | see how I am progressing in my fitness journey         |
+| v2.0    | long term user   | find certain food consumption                | to see my consumption of certain food over time        |
+| v2.0    | user             | remove a record                              | rectify incorrect entries                              |
+| v2.0    | long term user   | have my records displayed by descending date | see the most relevant records easily                   |
+| v2.0    | new user         | set my biometrics                            | receive personalised recommendations                   |
+| v2.1    | fitness beginner | receive calorie recommendations              | set a target to hit every day                          |
+| v2.1    | long term user   | check my overall calorie usage               | monitor my daily calorie intake and burn over time     |
+| v2.1    | user             | find my calorie usage by date                | monitor my overall calorie usage on a certain date     |
+
 
 ## Non-Functional Requirements
 
