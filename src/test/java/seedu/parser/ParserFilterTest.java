@@ -49,7 +49,7 @@ public class ParserFilterTest {
         String result = command.execute().showToUser;
         Assertions.assertEquals("Invalid dashed argument.\n"
                 + "`filter -address QUERY` or `fil -add QUERY` \t: Filter carparks based on its Carpark address.\n"
-                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark Id.", result);
+                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark ID.", result);
     }
 
     @Test
@@ -62,6 +62,6 @@ public class ParserFilterTest {
         Assertions.assertEquals("This command only takes exactly 1 dashed argument(s). Valid command(s):\n"
                 + "`filter QUERY` or `fil QUERY`\t: Filter carparks based on Carpark information.\n"
                 + "`filter -address QUERY` or `fil -add QUERY` \t: Filter carparks based on its Carpark address.\n"
-                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark Id.", result);
+                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark ID.", result);
     }
 }

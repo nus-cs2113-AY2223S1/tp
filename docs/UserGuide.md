@@ -454,7 +454,7 @@ Here are the list of available commands to use! Refer to the user guide at https
 `filter QUERY` or `fil QUERY`	: Filter carparks based on Carpark information.
 `filter -address QUERY` or `fil -add QUERY` 	: Filter carparks based on its Carpark address.
 `filter -id QUERY` or `fil -id QUERY` 	: Filter carparks based on its Carpark ID.
-`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark based on carpark ID.
 `favourite list` or `fav list` 	: To get the list of favourited carparks.
 `favourite CARPARK_ID` or `fav CARPARK_ID` 	: Favourite carpark by its ID.
 `unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: Unfavourite carpark by its ID.
