@@ -538,6 +538,9 @@ Each row corresponds to one carpark, and fields can be edited and retained to be
 carpark with a development of `BLK 309 CLEMENTI AVE 1` can be renamed to `Mum's place`, and future updates to this file
 will retain that information for easy tracking and use within the program.
 
+The `carparkList.txt` file is only loaded at initialisation, and should only be edited while the program is not open. Editing the `carparkList.txt` file while 
+the program is running will result in your changes being overwritten. 
+
 
 > Any files with invalid format will be **erased and written over** with a valid format from within the program. Please make sure that the format is strictly adhered to or risk losing all your data.
 
