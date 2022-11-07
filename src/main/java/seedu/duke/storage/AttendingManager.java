@@ -75,6 +75,12 @@ public class AttendingManager {
         }
     }
 
+    /**
+     * Creates the data structure that holds information about lessons of a specific module.
+     *
+     * @param newLessons The data structure that holds information about the lessons in the module.
+     * @param newLesson A single lesson that is read from the txt file.
+     */
     private static void addLessonsIntoMap(LinkedHashMap<String, LinkedHashMap<String,
             ArrayList<Lesson>>> newLessons, Lesson newLesson) {
 
@@ -94,6 +100,9 @@ public class AttendingManager {
         }
     }
 
+    /**
+     * Loads all data stored in txt file into the program during start up.
+     */
     public static void loadNewAttendingOnStartUp() {
         int currModuleIndex = 0;
         List<Module> moduleList = Timetable.getListOfModules();
