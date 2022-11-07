@@ -33,7 +33,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_EXPENSE_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_DATE_TIME_IS_MAND = false;
@@ -120,7 +120,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_IS_MAND = false;
@@ -220,7 +220,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_TARGET_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_TARGET_ARG_DATE_TIME_IS_MAND = false;
@@ -281,7 +281,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_TARGET_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_TARGET_ARG_DATE_TIME_IS_MAND = false;
@@ -308,7 +308,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_INCOME_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_INCOME_ARG_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_INCOME_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_INCOME_ARG_DATE_TIME_IS_MAND = false;
@@ -364,7 +364,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_IS_MAND = false;
@@ -545,7 +545,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
             true;
     public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME = "d";
-    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND = false;
