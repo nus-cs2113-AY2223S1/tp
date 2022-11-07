@@ -36,27 +36,27 @@ The head nurse can now:
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|Head Nurse|add appointments|schedule a customer’s appointment|
-|v1.0|Head Nurse|remove appointments|cancel a customer’s appointment|
-|v1.0|Head Nurse|view all the upcoming appointments|keep track of the clinic’s schedule|
-|v1.0|Head Nurse|set the appointment status||
+|Version| As a ... | I want to ... | So that I can ...                                         |
+|--------|----------|---------------|-----------------------------------------------------------|
+|v1.0|Head Nurse|add appointments| schedule a customer’s appointment                         |
+|v1.0|Head Nurse|remove appointments| cancel a customer’s appointment                           |
+|v1.0|Head Nurse|view all the upcoming appointments| keep track of the clinic’s schedule                       |
+|v1.0|Head Nurse|set the appointment status| update appointment status after some operations           |
 |v1.0|Head Nurse|add new employees||
 |v1.0|Head Nurse|remove employee||
 |v1.0|Head Nurse|view employee||
-|v1.0|Head Nurse|register a new pet|keep track of new pets|
+|v1.0|Head Nurse|register a new pet| keep track of new pets                                    |
 |v1.0|Head Nurse|remove a pet||
-|v1.0|Head Nurse|view all of the pets|check all of the pets|
-|v1.0|Head Nurse|change the status of pets|know whether the pets are recovered|
-|v1.0|Head Nurse|add to the list of services this clinic can provide|select corresponding service when entering an appointment|
+|v1.0|Head Nurse|view all of the pets| check all of the pets                                     |
+|v1.0|Head Nurse|change the status of pets| know whether the pets are recovered                       |
+|v1.0|Head Nurse|add to the list of services this clinic can provide| select corresponding service when entering an appointment |
 |v1.0|Head Nurse|remove a service from the list of services the clinic can provide||
 |v1.0|Head Nurse|view the list of services this clinic can provide||
-|v2.0|Head Nurse|add tasks|create tasks to be done for the clinic|
-|v2.0|Head Nurse|remove tasks|remove tasks to be done for the clinic|
-|v2.0|Head Nurse|set tasks as completed|mark tasks as done when they are fulfilled|
-|v2.0|Head Nurse|view tasks|view the list of tasks that needs to be done|
-|v2.0|Head Nurse|reassign tasks|reassign a task from an employee to another|
+|v2.0|Head Nurse|add tasks| create tasks to be done for the clinic                    |
+|v2.0|Head Nurse|remove tasks| remove tasks to be done for the clinic                    |
+|v2.0|Head Nurse|set tasks as completed| mark tasks as done when they are fulfilled                |
+|v2.0|Head Nurse|view tasks| view the list of tasks that needs to be done              |
+|v2.0|Head Nurse|reassign tasks| reassign a task from an employee to another               |
 
 ## Implementation
 
@@ -102,29 +102,113 @@ Step 4. The user then executes the command `employee task i/1002` to view the ta
 
 ------
 
+### Appointment Manage Feature
+
+### Implementation
+
+The proposed appointment feature is facilitated by the `appointment`, `service`, `pet` package. It implements the following operations:  
+- `AppointmentList#addAppointment()`— Adds an appointment to the appointment list.
+- `AppointmentList#listAppointment()`— Views all appointments in the appointment list.
+- `AppointmentList#removeAppointment()`— Removes an appointment to the appointment list.
+- `AppointmentList#updateAppointmentStatus()`— Updates the status of an appointment in the appointment list.
+
+Given below is an example usage scenario and how the appointment management behaves at each step.
+
+Step 1. The user launches the application. The user executes `appointment add s/bath p/2001 d/2022-12-12` command which calls `AppointmentList#addAppointment()`. 
+To create an appointment with bath service for pet with id = 2001, scheduled on date 2022-12-12, after all checking, creates the corresponding appointment and adds it into appointment list.
+
+Step 2. The user executes `appointment view` command to view all the current appointments for the clinic. The command calls `AppointmentList#listAppointment()` to display all existing appointments details.
+
+Step 3. The user then wishes to remove an existing appointment id = 3001 and executes `appointment remove i/3001` . The `appointment remove` command calls `AppointmentList#removeAppointment()` and then,  
+- First the appointment is removed from the appointment list.
+- Secondly all tasks related to this appointment are also removed from task list.
+
+The following sequence diagram shows how the add appointment operation works:
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
+
+### Design Considerations
+**Aspect: How addAppointment executes:**
+
+Alternative 1 (current choice):
+To relate appointment with existing service, pet and valid date, check all three attributes before adding an appointment to the appointment list:
+- First calls `Appointment#checkFormattedDate()` to check if the given date is valid.
+- Secondly calls `ServiceList#findService()` to check if the corresponding service with given description exists.
+- Thirdly calls `PetList#findPet()` to check if the corresponding pet with given id exists.
+
+  - Pros: Easy to understand.
+  - Cons: An invalid appointment may not be added to the appointment list but will consume an appointment id, which causes the valid id not contiguous.
+
+**Aspect: How to reschedule appointments:**
+
+Alternative 1 (current choice):  
+Delete the old appointment and then creating a new one.
+- Pros: Easy to implement, no extra function needs to be added.
+- Cons: Have to destruct and construct even if only one attribute needs to be changed.
+
+Alternative 2:  
+Add a new feature called `rescheduleAppointment`.
+- Pros: Less overhead when rescheduling the appointment.
+- Cons: Harder to implement.
+
+
 ### Appointment Status Feature
 
 ### Implementation
 
-The proposed appointment feature is facilitated by the appointment package. The following classes in the package works together to allow users to manage their appointments.
+The proposed appointment feature is facilitated by the `appointment` package. The following classes in the package works together to allow users to manage their appointments:
 
-- `AppointmentList#setStatus()` — Sets the status of an appointment.
+#### 1. AppointmentStatus  
+An enumeration class, which has the following 3 status:  
+- `AppointmentStatus::PENDING` — When an appointment is first created.
+- `AppointmentStatus::PROCESSING` — When at least one of the tasks is derived from the appointment, while not all tasks are marked as done.
+- `AppointmentStatus::PROCESSED` — When all tasks from the appointment are marked as done.
 
-Given below is an example usage scenario and how the Appointment mechanism behaves at each step.
-//TODO add appointment status DG
-
-> The following sequence diagram shows how the add appointment operation works:
-
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
+#### 2. Appointment
+- `Appointment#updateAppointmentStatus()` — It helps to update the appointment status under following circumstances respectively:
+  - After one task is created from this appointment, update it to `PROCESSING`.
+  - After one task related to this appointment is finished, check all the tasks in the taskList of this appointment. 
+  If every task is finished already, update it to `PROCESSED`.
+- `Appointment#getAppointmentStatus()` — Return the status of one appointment in string format.
 
 ### Design Considerations:
 
-**Aspect: How status feature executes:**
+**Aspect: How status feature represents:**
 
-- Alternative 1 (current choice):
+- Alternative 1 (current choice):   
+use enumeration class.
+  - Pros: Give every status a human-readable name. And it's easy to extend for more status.
+  - Cons: Add more overhead to create another class.
 
+- Alternative 2:  
+use hard-code integer or string.
+  - Pros: Low cost of constructing a status.
+  - Cons: Hard to read. And have to recode if status changes much.
 
-- Alternative 2:
+### Appointment Date Feature
+
+### Implementation
+
+The proposed appointment feature is facilitated by the `appointment` class and the formatter from `SimpleDateFormat`. The following methods in the package works together to filter appointment date input:
+
+- `Appointment#formatter` — A simple date formatter which allows tailored date format `yyyy-MM-dd`.
+- `Appointment#checkFormattedDate()` — Check if the given date is valid for an appointment, which:
+  - First, use the `Parser` from `SimpleDateFormat` to examine the format with valid year, month and day value.
+  - Secondly, check if the formatted date is too old , i.e. before the using day, since a new appointment should be scheduled in the future.
+
+### Design Considerations:
+
+**Aspect: How status feature represents:**
+
+- Alternative 1 (current choice):   
+  use `Date` type.
+  - Pros: Give every status a human-readable name. And it's easy to extend for more status.
+  - Cons: Add more overhead to create another class.
+
+- Alternative 2:  
+  use `String` type.
+  - Pros: Low cost of constructing a status.
+  - Cons: Hard to read. And have to recode if status changes much.
 
 ### Employee management Feature
 
