@@ -287,6 +287,14 @@ public class Account {
                                     }
                                     else{
                                         System.out.println("Your username has been successfully changed, please type exit to leave the help menu.");
+                                        UserNameFileWorkings.deleteUserName(wallet.getUserName());
+                                        try{
+                                            AccountHistoryFile.deleteFile(wallet.getUserName());
+                                            UserNameFileWorkings.writeToUserNames(tempUser);
+                                        }
+                                        catch(IOException e){
+
+                                        }
                                         wallet.setUserName(tempUser);
                                         WalletFile.updateWallet(wallet);
                                         isUserExists = true;

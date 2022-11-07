@@ -61,10 +61,16 @@ public class AccountHistoryFile {
         }
     }
 
-    public static void deleteFile(String username, String loginTime){
+    public static void deleteFile(String username, String loginTime) throws IOException {
         String fileName = (username + loginTime + ".txt").replaceAll(":|>|<" , ".");
-        File f = new File(FILE_PATH + File.separator + fileName);
-        f.delete();
+        fileName = FILE_PATH + File.separator + fileName;
+        System.out.println(fileName);
+        Files.deleteIfExists(Paths.get(fileName));
+    }
+
+    public static void deleteFile(String username) throws IOException {
+        String fileName = FILE_PATH + "/" + username + ".txt";
+        Files.deleteIfExists(Paths.get(fileName));
     }
 
     public static void printFile(String username, String loginTime){
