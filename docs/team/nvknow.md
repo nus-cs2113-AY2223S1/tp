@@ -15,7 +15,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
   - Justification: an employee is the one who operate each task, which is crucial in the management system.
 - Implemented the attributes and functions of Service and ServiceList
   - What it does: add a service into the service list, remove a service in the service list, view the services, etc.
-  - Justification: a service is attached to each appointment and used to improve the status of the pet, which is the service goal of the clinic.
+  - Justification: a service is attached to each appointment and used to improve the status of the pet, which is the service goal.
 - Implemented the attributes and functions of Ui
   - What it does: show logo and welcome messages to the user, read the user's command and show error messages.
 - Implemented the tests of Employee and EmployeeList
