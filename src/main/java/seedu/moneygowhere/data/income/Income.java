@@ -15,7 +15,14 @@ public class Income {
     private String description;
     private BigDecimal amount;
 
-    public Income(String name, LocalDateTime dateTime, String description, BigDecimal amount) {
+    public Income(String name,
+                  LocalDateTime dateTime,
+                  String description,
+                  BigDecimal amount) {
+        assert !(name == null || name.isEmpty() || name.trim().isEmpty()) :
+                "There must be a name";
+        assert amount != null : "There must be an amount";
+        assert dateTime != null : "There must be a date and time";
         this.name = name;
         this.dateTime = dateTime;
         this.description = description;

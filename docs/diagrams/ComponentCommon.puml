@@ -1,0 +1,8 @@
+@startuml
+!include Styles.puml
+
+package Common {
+    Class Configurations COMMON_COLOR_1
+    Class Messages COMMON_COLOR_1
+}
+@enduml

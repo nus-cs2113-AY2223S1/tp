@@ -34,7 +34,13 @@ public class TargetManager {
         return new ArrayList<>(targets);
     }
 
-    public void deleteTarget(int targetIndex) throws TargetManagerTargetNotFoundException {
+    //@@author LokQiJun
+    public void setTargets(ArrayList<Target> savedTargets) {
+        this.targets = new ArrayList<>(savedTargets);
+    }
+
+    public void deleteTarget(int targetIndex)
+            throws TargetManagerTargetNotFoundException {
         try {
             targets.remove(targetIndex);
         } catch (IndexOutOfBoundsException exception) {
@@ -42,7 +48,8 @@ public class TargetManager {
         }
     }
 
-    public void editTarget(int targetIndex, Target target) throws TargetManagerTargetNotFoundException {
+    public void editTarget(int targetIndex, Target target)
+            throws TargetManagerTargetNotFoundException {
         try {
             targets.set(targetIndex, target);
         } catch (IndexOutOfBoundsException exception) {
@@ -50,7 +57,15 @@ public class TargetManager {
         }
     }
 
-    public void updateTargets(ArrayList<Target> targets) {
-        this.targets = targets;
+    public boolean hasTarget(Target target) {
+        return targets.contains(target);
+    }
+
+    public void updateTargets(ArrayList<Target> newTargets) {
+        for (Target newTarget : newTargets) {
+            if (!hasTarget(newTarget)) {
+                this.targets.add(newTarget);
+            }
+        }
     }
 }

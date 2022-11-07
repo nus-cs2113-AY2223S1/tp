@@ -14,14 +14,21 @@ import java.util.ArrayList;
 public class RecurringPaymentManager {
     private ArrayList<RecurringPayment> recurringPayments;
 
+    //@@author xzynos
     public RecurringPaymentManager() {
         recurringPayments = new ArrayList<>();
     }
 
+    //@@author xzynos
     public void addRecurringPayment(RecurringPayment recurringPayment) {
         recurringPayments.add(recurringPayment);
     }
 
+    public boolean hasRecurringPayment(RecurringPayment recurringPayment) {
+        return recurringPayments.contains(recurringPayment);
+    }
+
+    //@@author xzynos
     public RecurringPayment getRecurringPayment(int recurringPaymentIndex) throws
             RecurringPaymentManagerRecurringPaymentNotFoundException {
         try {
@@ -33,10 +40,17 @@ public class RecurringPaymentManager {
         }
     }
 
+    //@@author xzynos
     public ArrayList<RecurringPayment> getRecurringPayments() {
         return recurringPayments;
     }
 
+    //@@author LokQiJun
+    public void setRecurringPayments(ArrayList<RecurringPayment> savedRecurringPayments) {
+        this.recurringPayments = new ArrayList<>(savedRecurringPayments);
+    }
+
+    //@@author xzynos
     public void deleteRecurringPayment(int recurringPaymentIndex) throws
             RecurringPaymentManagerRecurringPaymentNotFoundException {
         try {
@@ -48,6 +62,7 @@ public class RecurringPaymentManager {
         }
     }
 
+    //@@author xzynos
     public void editRecurringPayment(int recurringPaymentIndex, RecurringPayment recurringPayment) throws
             RecurringPaymentManagerRecurringPaymentNotFoundException {
         try {
@@ -58,4 +73,13 @@ public class RecurringPaymentManager {
             );
         }
     }
+
+    public void updateRecurringPayments(ArrayList<RecurringPayment> newRecurringPayments) {
+        for (RecurringPayment newRecurringPayment : newRecurringPayments) {
+            if (!hasRecurringPayment(newRecurringPayment)) {
+                this.recurringPayments.add(newRecurringPayment);
+            }
+        }
+    }
+
 }

@@ -34,7 +34,13 @@ public class IncomeManager {
         return new ArrayList<>(incomes);
     }
 
-    public void deleteIncome(int incomeIndex) throws IncomeManagerIncomeNotFoundException {
+    //@@author LokQiJun
+    public void setIncomes(ArrayList<Income> savedIncomes) {
+        this.incomes = new ArrayList<>(savedIncomes);
+    }
+
+    public void deleteIncome(int incomeIndex)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.remove(incomeIndex);
         } catch (IndexOutOfBoundsException exception) {
@@ -42,7 +48,8 @@ public class IncomeManager {
         }
     }
 
-    public void editIncome(int incomeIndex, Income income) throws IncomeManagerIncomeNotFoundException {
+    public void editIncome(int incomeIndex, Income income)
+            throws IncomeManagerIncomeNotFoundException {
         try {
             incomes.set(incomeIndex, income);
         } catch (IndexOutOfBoundsException exception) {
@@ -50,7 +57,15 @@ public class IncomeManager {
         }
     }
 
-    public void updateIncomes(ArrayList<Income> incomes) {
-        this.incomes = incomes;
+    public boolean hasIncome(Income income) {
+        return incomes.contains(income);
+    }
+
+    public void updateIncomes(ArrayList<Income> newIncomes) {
+        for (Income newIncome : newIncomes) {
+            if (!hasIncome(newIncome)) {
+                this.incomes.add(newIncome);
+            }
+        }
     }
 }

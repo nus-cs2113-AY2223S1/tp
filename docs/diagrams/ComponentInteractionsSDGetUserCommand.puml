@@ -1,0 +1,52 @@
+@startuml
+!include Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd get user command
+Actor User USER_COLOR
+Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Parser" as Parser PARSER_COLOR_1
+Participant ":Logger" as Logger LOGGER_COLOR_1
+Participant ":ConsoleCommandAddExpense" as ConsoleCommandAddExpense DATA_COLOR_1
+
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleCommand()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : getConsoleInput()
+activate UserInterface USER_INTERFACE_COLOR_1
+
+User -[USER_COLOR]> UserInterface : "Add-Expense -n Lunch -a 7.80"
+note right
+    getConsoleInput() reads the command entered
+    by the user. This arrow represents the command
+    and is not an activation line.
+end note
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput:String
+deactivate UserInterface
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Logger : logCommand(consoleInput:String)
+activate Logger LOGGER_COLOR_1
+
+Logger --[LOGGER_COLOR_1]> UserInterface
+deactivate Logger
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
+activate Parser PARSER_COLOR_1
+
+create ConsoleCommandAddExpense
+Parser -[PARSER_COLOR_1]> ConsoleCommandAddExpense : create
+activate ConsoleCommandAddExpense DATA_COLOR_1
+
+ConsoleCommandAddExpense --[DATA_COLOR_1]> Parser
+deactivate ConsoleCommandAddExpense
+
+Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand:ConsoleCommandAddExpense
+deactivate Parser
+
+UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleCommand:ConsoleCommandAddExpense
+deactivate UserInterface
+@enduml
