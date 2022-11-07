@@ -12,6 +12,7 @@ public class FlightList extends OperationList {
     private static final int FLIGHT_NUMBER_MAX_LENGTH = 6;
     private static final int FLIGHT_NUMBER_MIN_LENGTH = 4;
     public static final int INITIAL_INDEX = 0;
+    private static final int FLIGHT_NUMBER_INDEX = 14;
     public static int flightIndex = 0;
     private static final String FLIGHT_ADD_COMMAND = "flight add";
     private static final String FLIGHT_ADD_DELIMITER = "flight add ";
@@ -100,8 +101,8 @@ public class FlightList extends OperationList {
     @Override
     public void deleteOperation(String detail) throws SkyControlException {
         checkCommandLength(detail.substring(FLIGHT_DELETE_COMMAND.length()));
-        checkValidFlightNumber(detail.substring("flight delete ".length()));
-        String flightNum = detail.substring("flight delete ".length()).toUpperCase();
+        checkValidFlightNumber(detail.substring(FLIGHT_NUMBER_INDEX));
+        String flightNum = detail.substring(FLIGHT_NUMBER_INDEX).toUpperCase();
         findAndRemoveFlight(flightNum);
         deletePassengersOnSameFlightNumber(flightNum);
     }
@@ -134,9 +135,9 @@ public class FlightList extends OperationList {
      * Checks if the flight number of the passenger matches the flight number that is deleted in flight list.
      *
      * @param flightNum a parameter that is taken from the deleteOperation function
-     * @param index increment of the index in passengers
+     * @param index     increment of the index in passengers
      * @return a boolean value that indicates if the flight number of the passenger
-     *     matches the flight number that is deleted.
+     * matches the flight number that is deleted.
      */
     private boolean isFlightNumberPresent(String flightNum, int index) {
         boolean isFlightNumberPresent;
@@ -147,8 +148,16 @@ public class FlightList extends OperationList {
     }
 
     //@@author JordanKwua
+
+    /**
+     * Checks if the flight number from the user input is a valid flight number to be added or deleted
+     *
+     * @param substring the String containing the flight number to be checked
+     * @throws SkyControlException if the flight number is invalid
+     */
     private void checkValidFlightNumber(String substring) throws SkyControlException {
         String[] letters = substring.split("");
+        assert letters.length > 0;
         if (letters.length > FLIGHT_NUMBER_MAX_LENGTH || letters.length < FLIGHT_NUMBER_MIN_LENGTH) {
             throw new SkyControlException(ui.getFlightNumberError());
         }
@@ -259,6 +268,14 @@ public class FlightList extends OperationList {
     }
 
     //@@author JordanKwua
+
+    /**
+     * Searches through the entire list of flights to find if the specified flight number exists,
+     * and removes it from the list if it exists
+     *
+     * @param flightNumber the String containing the flight number of the flight to be removed
+     * @throws SkyControlException if the flight is not found within the list
+     */
     private void findAndRemoveFlight(String flightNumber) throws SkyControlException {
         getNumberOfFlights();
         boolean isFlightFound = false;

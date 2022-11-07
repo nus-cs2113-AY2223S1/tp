@@ -376,6 +376,30 @@ public class Ui {
     public void showFileNotFoundMessage() {
         System.out.println("Cannot read data from file, file or directory does not exist.\n");
     }
+
+    public void showFileDoesNotExistMessage() {
+        System.out.println("File or directory does not exist.\n");
+    }
+
+    public void showFileCreationMessage() {
+        System.out.println("Trying to create file now.");
+    }
+
+    public void showDirectoryCreationErrorMessage() {
+        System.out.println("Directory could not be created");
+    }
+
+    public void showFileCreatedMessage(String pathName) {
+        System.out.println("File is created at: " + pathName);
+    }
+
+    public void showFileExistsMessage(String pathName) {
+        System.out.println("File already exists at: " + pathName);
+    }
+
+    public void showFileCannotCreateMessage() {
+        System.out.println("File could not be created");
+    }
 }
 
 
