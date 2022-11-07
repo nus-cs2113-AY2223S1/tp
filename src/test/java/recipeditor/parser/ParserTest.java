@@ -14,15 +14,10 @@ import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
-import recipeditor.exception.MissingFlagsException;
-import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.Ui;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 class ParserTest {
 
@@ -178,8 +173,7 @@ class ParserTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Try /help <command type>\n" + "Available commands: /add, /list, /view, /edit, /find,"
-                + " /delete, /exit, /help";
+        String expected = "Try /help <command type>";
         assertEquals(expected, commandExecutedResult.getMessage());
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }
