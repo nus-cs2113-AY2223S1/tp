@@ -30,7 +30,6 @@ public class Recipe {
         steps = new ArrayList<>();
     }
 
-
     public String getTitle() {
         return title;
     }
