@@ -361,7 +361,7 @@ testers are expected to do more *exploratory* testing.
 2. Down the latest version of `tp` from [here](http://link.to/duke).
 3. Copy the jar file into an empty folder.
 4. Open a command window or terminal for mac in that folder.
-5. Run the command `java -jar [CS2113-T17-3][Timetabler].jar` in the same folder.
+5. Run the command `java -jar \[CS2113-T17-3\]\[Timetabler\].jar` in the same folder.
 6. To shutdown, either enter `0` when prompted to enter a semester, or `quit` as a command in the main program.
 
 ##### Adding a module
