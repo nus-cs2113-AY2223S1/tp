@@ -1,9 +1,9 @@
 # Indraneel Paranjape - Project Portfolio Page
 
 ## Overview
-myReviews is a desktop application allowing users to save, rate and track movies or TV shows that they
-have watched easily. myReviews is fully written in Java, and users can interact with the application using
-Command Line Interface (CLI). Given below are my contributions to the project:
+myReviews is a desktop application allowing users to easily save, rate and track movies or TV shows that they
+have watched. myReviews is fully written in Java, and users interact with the application via Command Line Interface (CLI). 
+Given below are my contributions to the project:
 
 ### Summary of Contributions
 
@@ -20,20 +20,19 @@ Command Line Interface (CLI). Given below are my contributions to the project:
   * Justification: The parser class is vital to the program, as it is responsible for proessing the user's string input
   and triggering the appropriate function. By having a Parser as a dedicated feature, the resolution of user input can be compartmentalised into a specific class, keeping the main code clean.
   * Highlights: The parser splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, the respective functions, where needed, obtain the arguments for the particular command by splitting the user input using "/". The presence of exact arguments are 
-  also determined by checking for the presence of specific keywords. Within the execute functions, the manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), again to keep a separation of concerns.
+  also determined by checking for the presence of specific keywords. Then, the manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), again to keep a separation of concerns.
 
-  * **New Feature**: Storage
+* **New Feature**: Storage
   * What it does: This feature ensures the user's information can be saved into local storage and retrieved
   every time the program is run.
   * Justification: Storage is vital for the persistence of data. This ensures the user does not have to remember the information.
-  * Highlights: The Storage class includes validation while reading in the input to make sure it is corectly formatted in file.
-  The storage class checks for the existence of a file or folder at the specified path and then makes the approriate file if it does not exist.
+  * Highlights: The Storage class includes validation while reading in the input from the file to make sure it is corectly 
+  formatted. The storage class checks for the existence of a file at the specified path and makes the approriate file if it does not exist.
 
 * **New Feature**: Ui
   * What it does: This feature is responsible for the interaction with the user at the command line. It gets user input from the command line and also prints out the appropriate information on the command line.
   * Justification: The UI is a key component for interaction with the user. 
-  * Highlights: Keeps getting input from the user. Prevents NoSuchElementException by using HasNextLine(). StackOverflow 
-  resource used: https://stackoverflow.com/questions/7209110/java-util-nosuchelementexception-no-line-found.
+  * Highlights: Prevents NoSuchElementException by using HasNextLine(). StackOverflow resource used: https://stackoverflow.com/questions/7209110/java-util-nosuchelementexception-no-line-found.
 
 * **Code contributed**: [Personal RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=indraneelrp&tabRepo=AY2223S1-CS2113-T18-1b%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
@@ -45,11 +44,9 @@ Command Line Interface (CLI). Given below are my contributions to the project:
   * Led discussion on how to structure the project in V1.0.
 
 * **Enhancements to existing features**:
-  * Wrote JUnit test cases for Storage, Parser, UI, and media. For the largest feature, Parser,
-  I brought the unit tests to 70% coverage as of v2.0.
-  * Researched and directed logging information from the console to a log file. Youtube video used as reference: 
-  https://www.youtube.com/watch?v=W0_Man88Z3Q
-  * Enhanced the add feature to ensure that entries with duplicate names would be rejected while trying to be added.
+  * Wrote JUnit test cases for Storage, Parser, UI, and Moivie. For the largest feature, Parser, brought the unit tests to 70% coverage for v2.0.
+  * Researched and implemented how to direct logging information from the console to a log file. Youtube video used as reference: https://www.youtube.com/watch?v=W0_Man88Z3Q.
+  * Enhanced the add feature to ensure that entries with duplicate names would be rejected if attempted. This ensures that the total count of items is accurate and reduces redundant information when sorting.
 
 * **Documentation**:
   * User guide:
@@ -58,7 +55,7 @@ Command Line Interface (CLI). Given below are my contributions to the project:
     * Added details for add, list and find.
   * Developer guide:
     * Drew UML class diagrams for `storage`, `ui`, classes.
-    * Added implementation detail for them.
+    * Added implementation details for them.
 
 * **Community**:
   * PRs reviewed:
