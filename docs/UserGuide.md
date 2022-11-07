@@ -11,7 +11,7 @@
 #### 3.1 [Add Command](#add-command-add)
 
 3.11 [Add Command for Module Mapping](#1-add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
-3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-noteinput))\
+3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-noteinput)\
 3.13 [Add Command for Lessons](#3-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
 
 #### 3.2 [Create Command](#create-command-create-uuniversity_name)
