@@ -3,18 +3,14 @@
 
 !include style.puml
 
-
-box Logic LOGIC_COLOR_T1
-participant ":AddCommand" as AddCommand LOGIC_COLOR
-participant "<<Class>>\nParser" as Parser LOGIC_COLOR
-end box
-
 [-> AddCommand : execute
 activate AddCommand
-AddCommand -> Parser++: getArgumentsCount(argumentList: String[]):
+AddCommand -> Parser++: getArgumentsCount(arguments: String)
 return slashesCount: int
-AddCommand -> Parser++: getClassType(argumentList: String[])
-return addType: String
+
+AddCommand -> Parser++: getArgumentList(arguments: String)
+return argumentList: String[]
+
 AddCommand -> Parser++: getClassType(argumentList: String[])
 return addType: String
 
@@ -30,5 +26,6 @@ else invalidType
     ref over AddCommand: handleInvalidAddType
 end
 return
+AddCommand -[hidden]-> Parser
 destroy AddCommand
 @enduml
