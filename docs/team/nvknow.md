@@ -31,8 +31,8 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 **Contributions to the UG**
 
 - Added the instructions of Finish Task
-- Added Setting Up and Getting Started
-- Updated workflow
+- Added Setting Up
+- Updated Sample Workflow
 - Fixed some formatting issues
 
 **Contributions to the DG**
