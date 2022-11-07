@@ -46,9 +46,6 @@ public class Duke {
                 isCommandQuit = (command instanceof CommandQuit);
 
             } catch (DukeException e) {
-                // For issue #174
-                // Added some newline before and after exception message (Can try out to see what works best)
-                // Not done for Invalid Command Message
                 ui.printNewline();
                 ui.showExceptionMessage(e);
                 ui.printNewline();

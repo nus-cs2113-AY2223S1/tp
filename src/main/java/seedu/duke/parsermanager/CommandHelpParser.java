@@ -6,12 +6,12 @@ import seedu.duke.exception.DukeException;
 import seedu.duke.exception.helpexception.UnwantedTextException;
 
 
-public class ParseHelp extends Parser {
+public class CommandHelpParser extends Parser {
     private String command;
     private static String SPACE = " ";
 
 
-    public ParseHelp(String input) {
+    public CommandHelpParser(String input) {
         this.command = input;
     }
 
