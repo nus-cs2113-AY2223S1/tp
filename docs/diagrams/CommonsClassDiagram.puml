@@ -6,7 +6,7 @@ skinparam classBackgroundColor MODEL_COLOR
 show field
 show methods
 
-package common <<Rectangle>> {
+package Common <<Rectangle>> {
 Class CommonData {
     +<u> API_KEY_DEFAULT : String
     +<u> LTA_BASE_URL : String
