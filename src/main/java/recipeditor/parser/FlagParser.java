@@ -33,7 +33,7 @@ public class FlagParser {
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
     private static final String COMMAND_TYPE = "/edit";
-    private static final int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
+    private static int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
     private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
     private static final int FLAG_POSITION_OTHER_COMMAND = 2;
     private static final int STARTING_COUNT = 0;
@@ -54,6 +54,9 @@ public class FlagParser {
         String commandWord = parsedCommand[0];
         int recipeFlagCount = STARTING_COUNT;
         int commandFlagCount = STARTING_COUNT;
+
+        STRINGS_UNTIL_FLAG_EDIT_COMMAND = getLastFlagIndex(parsedCommand) + 1;
+
         int index = 0;
         for (String s : parsedCommand) {
             index++;
@@ -138,5 +141,22 @@ public class FlagParser {
             break;
         }
         return flag;
+    }
+
+    public static int getLastFlagIndex(String[] parsedCommand) {
+        int lastIndex = -1;
+        for (int i = 0; i < parsedCommand.length; i++) {
+            if (parsedCommand[i].contains("-")) {
+                switch (parsedCommand[i]) {
+                case INDEX_FLAG: case ADD_FLAG: case DELETE_FLAG: case SWAP_FLAG: case CHANGE_FLAG:
+                case INGREDIENT_FLAG: case STEP_FLAG: case TITLE_FLAG: case DESCRIPTION_FLAG:
+                    lastIndex = i;
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        return lastIndex;
     }
 }

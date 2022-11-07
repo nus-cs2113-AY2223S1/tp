@@ -63,6 +63,8 @@ public class DeleteTest {
             assert false;
         } catch (InvalidFlagException e) {
             assert true;
+        }  catch (NumberFormatException n) {
+            assert true;
         }
     }
 

@@ -2,16 +2,18 @@ package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
+import recipeditor.parser.FlagParser;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 
 public class Add extends EditModeCommand {
 
-    private static final int ARGS_START = 4;
+    private static int INDEX_LOCATION = 4;
 
     public Add(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
         super(ingredientFlag, parsedCommand, recipe);
+        INDEX_LOCATION = FlagParser.getLastFlagIndex(parsedCommand) + 1;
     }
 
     /**
@@ -24,7 +26,7 @@ public class Add extends EditModeCommand {
     @Override
     public Recipe execute() throws ParseException, InvalidFlagException {
         StringBuilder content = new StringBuilder();
-        for (int i = ARGS_START; i < parsedCommand.length; i++) {
+        for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
             content.append(parsedCommand[i]).append(" ");
         }
 

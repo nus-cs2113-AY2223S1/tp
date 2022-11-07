@@ -157,7 +157,7 @@ Example:
 
 ### CLI Editor
 The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
-and take note of the format before entering the command. Trailing arguments will be discarded.
+and take note of the format before entering the command.
 
 Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 
@@ -233,6 +233,15 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 an edit command.
 
 ℹ Not including the index, adding the wrong flags or using inappropriate parameters will throw an error.
+
+ℹ Trailing arguments and extra input before the last flag will be discarded.
+
+The following two commands are identical to each other:
+```
+/edit 1 GARBAGE -i GARBAGE -swp 1 2 GARBAGE
+
+/edit 1 -swp -i 1 2
+```
 
 [⏫ Back to content page](#content-page)
 
