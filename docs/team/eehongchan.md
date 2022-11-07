@@ -13,7 +13,7 @@ Given below are my contributions to the project.
   - Justification: This feature improves the user experience as it saves the user time by allowing the user to view the 
 number of available lots of all favourited carparks immediately with one command, instead of searching for each carpark individually, making it more convenient for the user
   - Highlights: Implementing this feature required good understanding of the implementation details of many other classes (e.g. `FileReader`, `FileStorage`, `CarparkList`) and how they interact with each other.
-- **New Feature**: Added the 'Ui' class
+- **New Feature**: Added the `Ui` class
   - What it does: It is responsible for taking in user input and printing output to communicate with the user.
   - Justification: This feature is important as it bridges the gap between the source code and the user and allows them to interact with each other.
 - **Code Contributed**: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=eehongchan&breakdown=true).
@@ -29,3 +29,6 @@ number of available lots of all favourited carparks immediately with one command
     - Added documentation for the `Ui` Component [#103](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/103).
     - Created class diagram in PlantUML for `favourite` command [#87](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/87).
     - Created sequence diagram in PlantUML for `favourite` command [#103](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/103).
+- **Team-based Tasks**:
+  - Final clean up of JavaDoc comments and unused methods for all classes [#226](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/226).
+  - Creating and managing GitHub issues.

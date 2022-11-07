@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.data.CarparkList;
+import seedu.data.Favourite;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
