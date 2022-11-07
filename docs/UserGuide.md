@@ -62,6 +62,7 @@ If successfully loaded, you will see this screen:
 <p align="center" width="100%">
   <img width="70%" src="./images/UserGuide/ProgramStartScreen.png"/>
 </p>
+
 [⏫ Back to content page](#content-page)
 
 # Features 

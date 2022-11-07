@@ -128,12 +128,11 @@ public class Parser {
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
-                if (actualRecipeTitle != null) {
-                    logger.log(Level.INFO, "Delete command initialised");
-                    return new DeleteCommand(actualRecipeTitle);
+                if (actualRecipeTitle == null) {
+                    Ui.showMessage(recipeTitleToDelete + InvalidCommand.INVALID_TITLE_MESSAGE);
                 }
-                Ui.showMessage(recipeTitleToDelete + InvalidCommand.INVALID_TITLE_MESSAGE);
-                break;
+                logger.log(Level.INFO, "Delete command initialised");
+                return new DeleteCommand(actualRecipeTitle);
             case NULL:
                 throw new MissingFlagsException();
             default:
