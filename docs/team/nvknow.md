@@ -22,6 +22,7 @@
 - Added exception handling to ServiceParser
 - Improved the index of Pet
 - Improved the interface of Duke to be more OOP
+- Improved the overall output information
 - Fixed all the format errors in v1.0 checked by Gradle
 
 **Contributions to the UG**
