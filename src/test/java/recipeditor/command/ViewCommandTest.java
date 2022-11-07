@@ -16,17 +16,10 @@ class ViewCommandTest {
 
     @BeforeAll
     public static void setUp() {
-        Recipe recipe = new Recipe("test_title", "test_description");
-        recipe.addIngredient(new Ingredient("ingredient", 100.0, "g"));
-        recipe.addStep("step 1");
-        recipe.addStep("finshing step ~");
+        Recipe recipe = new Recipe("Test Title for View Command");
         RecipeList.addRecipe(recipe);
     }
 
-    @AfterAll
-    public static void tearDown() {
-        RecipeList.deleteRecipeFromTitle("test_title");
-    }
 
     @Test
     public void constructAndExecuteViewCommand_byIndex_success() {
@@ -85,4 +78,10 @@ class ViewCommandTest {
         Storage.rewriteRecipeListToFile();
     }
 
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle("Test Title for View Command");
+        Storage.deleteRecipeFile("Test Title for View Command");
+        Storage.rewriteRecipeListToFile();
+    }
 }

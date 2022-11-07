@@ -467,6 +467,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 7. Check if the recipe has empty fields
     - Because the blank lines are disregarded but considered valid
 
+
 ### Edit an Existing Recipe
 
 #### GUI

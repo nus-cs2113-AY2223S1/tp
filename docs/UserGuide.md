@@ -157,7 +157,7 @@ Example:
 
 ### CLI Editor
 The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
-and take note of the format before entering the command. Trailing arguments will be discarded.
+and take note of the format before entering the command.
 
 Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 
@@ -234,6 +234,15 @@ an edit command.
 
 ℹ Not including the index, adding the wrong flags or using inappropriate parameters will throw an error.
 
+ℹ Trailing arguments and extra input before the last flag will be discarded.
+
+The following two commands are identical to each other:
+```
+/edit 1 GARBAGE -i GARBAGE -swp 1 2 GARBAGE
+
+/edit 1 -swp -i 1 2
+```
+
 [⏫ Back to content page](#content-page)
 
 ## Delete Command
@@ -268,7 +277,7 @@ Format: `/list`
 Example:
 ```
 /list
-
+There are 3 recipes in the recipe list
 1. Apple Crumble
 2. Gyoza
 3. Nasi Briyani
@@ -310,6 +319,7 @@ Recipe Steps:
 4. Once the water has reached a rolling boil, add the dry pasta, and cook, uncovered, at a rolling boil.
 5. Add the beaten egg mixture.
 6. Pour the mixture over the pasta.
+
 ```
 [⏫ Back to content page](#content-page)
 
@@ -351,7 +361,7 @@ Example:
 ```
 /help find
 
-Syntax: /find <ingredient/title>
+Syntax: /find -<flag> <recipe title/ingredient name>
 Description: For the given ingredient or title, find recipes which contains it.
 ```
 

@@ -5,7 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static recipeditor.parser.FlagType.TITLE;
+import static recipeditor.parser.FlagType.DESCRIPTION;
+import static recipeditor.parser.FlagType.INGREDIENT;
 
+import recipeditor.parser.FlagType;
 import recipeditor.parser.Parser;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
@@ -30,39 +34,51 @@ public class FindCommandTest {
     }
 
     @Test
-    void correctFindRecipeTitleCommand_correctFindCommandFormat_listOfRecipeTitles() {
+    void correctFindRecipeTitleCommand_correctFindCommandFormat_findCommandClassExecuted() {
         String input = "/find -t title";
         assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
     }
 
     @Test
-    void correctFindIngredientNameCommand_correctFindCommandFormat_listOfRecipeTitles() {
+    public void correctFindRecipeTitleCommand_correctFindCommand_listOfRecipeTitles() {
+        FlagType flag = TITLE;
+        String actual = new FindCommand(flag, "title").execute().getMessage();
+        String expected = "1. Test title for Find Command";
+        assertEquals(actual.trim(), expected.trim());
+    }
+
+    @Test
+    void correctFindIngredientNameCommand_correctFindCommandFormat_findCommandClassExecuted() {
         String input = "/find -i ing";
         assertEquals(FindCommand.class, Parser.parseCommand(input).getClass());
     }
 
     @Test
-    void incorrectHelpCommand_missingRecipeFlag_syntaxForFindCommand() {
-        String input = "/find ing";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "The correct format should be '/find -<flag> <recipe title/ingredient name>'.\n"
-                + "Flags:\n"
-                + "-t: Recipe Title\n"
-                + "-i: Ingredient name";
-        assertEquals(expected, commandExecutedResult.getMessage());
+    public void correctFindIngredientNameCommand_correctFindCommand_listOfRecipeTitles() {
+        FlagType flag = INGREDIENT;
+        String actual = new FindCommand(flag, "ingredient").execute().getMessage();
+        String expected = "1. Test title for Find Command";
+        assertEquals(actual.trim(), expected.trim());
     }
 
     @Test
-    void incorrectHelpCommand_invalidInput_syntaxForFindCommand() {
-        String input = "/find -flag input";
-        Command commandExecuted = Parser.parseCommand(input);
-        CommandResult commandExecutedResult = commandExecuted.execute();
+    void incorrectFindCommand_missingRecipeFlag_syntaxForFindCommandMessage() {
+        String actual = new FindCommand(null, "ingredient").execute().getMessage();
         String expected = "The correct format should be '/find -<flag> <recipe title/ingredient name>'.\n"
                 + "Flags:\n"
                 + "-t: Recipe Title\n"
                 + "-i: Ingredient name";
-        assertEquals(expected, commandExecutedResult.getMessage());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void incorrectFindCommand_incorrectRecipeFlag_syntaxForFindCommandMessage() {
+        String actual = new FindCommand(DESCRIPTION, "ingredient").execute().getMessage();
+        String expected = "Incorrect flag!\n\n"
+                + "Flags:\n"
+                + "-t: Recipe Title\n"
+                + "-i: Ingredient name";
+        assertEquals(expected, actual);
     }
 
     @AfterAll

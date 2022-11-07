@@ -10,7 +10,7 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containRecipeAndCommandFlags_success() {
-        String[] args = {"-swp", "-t"};
+        String[] args = {"/edit", "1", "-swp", "-t"};
         try {
             FlagType[] flags = FlagParser.getFlags(args);
             assertEquals(flags[0], FlagType.SWAP);
@@ -25,7 +25,7 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containsRecipeFlag_success() {
-        String[] args = {"-d"};
+        String[] args = {"/edit", "1", "", "-d"};
         try {
             FlagType[] flags = FlagParser.getFlags(args);
             assertEquals(flags[0], FlagType.NULL);
@@ -37,7 +37,7 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containsRecipeFlag_excess() {
-        String[] args = {"-d", "-s", "-chg"};
+        String[] args = {"/edit", "1", "-d", "-s"};
         try {
             FlagParser.getFlags(args);
             assert false;
@@ -48,7 +48,7 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containsCommandFlag_success() {
-        String[] args = {"-del"};
+        String[] args = {"/edit", "1", "-del", ""};
         try {
             FlagType[] flags = FlagParser.getFlags(args);
             assertEquals(flags[0], FlagType.DELETE);
@@ -60,23 +60,12 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containsCommandFlag_excess() {
-        String[] args = {"-swp", "-i", "-chg"};
+        String[] args = {"/edit", "-i", "-chg", "-swp"};
         try {
             FlagParser.getFlags(args);
             assert false;
         } catch (Exception e) {
             assertEquals(new ExcessFlagsException("command").getMessage(), e.getMessage());
-        }
-    }
-
-    @Test
-    public void existFlags_invalidFlags() {
-        String[]  args = {"-chg", "-id", "-", "ok"};
-        try {
-            FlagParser.getFlags(args);
-            assert false;
-        } catch (Exception e) {
-            assertEquals(new InvalidFlagException().getMessage(), e.getMessage());
         }
     }
 }
