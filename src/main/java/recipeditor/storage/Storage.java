@@ -25,14 +25,14 @@ public class Storage {
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
     public static final String ALL_RECIPES_FILE_PATH = "./RecipeData/AllRecipes.txt";
     private static final String APP_DATA_FOLDER_PATH = "./RecipeData/App";
-    private static final String TEMPLATE_FILE = "# TITLE (1 line)\n"
+    private static final String TEMPLATE_FILE = "# TITLE \n"
             + "Example Title\n\n"
             + "# DESCRIPTION\n"
             + "Example Description\n\n"
-            + "# INGREDIENTS  index. ingredient_name / amount / unit \n"
+            + "# INGREDIENTS  INDEX. INGREDIENT_NAME / AMOUNT / UNIT \n"
             + "1. Example "
             + "ingredient / 1.2 / example unit \n\n"
-            + "# STEPS index. description\n"
+            + "# STEPS INDEX. DESCRIPTION\n"
             + "1. Example step \n";
 
     private static final Logger logger = Logger.getLogger(Storage.class.getName());
@@ -118,25 +118,26 @@ public class Storage {
         }
     }
 
-    /**
-     * Loading the recipe into RecipeList recipe array from individual recipe file.
-     */
-    public static void loadRecipesToRecipeList() {
-        try {
-            for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
-                logger.log(Level.INFO, recipeTitle);
-                String recipeFilePath = titleToFilePath(recipeTitle);
-                String content = Storage.loadFileContent(recipeFilePath);
-                Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
-                RecipeList.addRecipe(addedRecipe);
-                logger.log(Level.INFO, recipeTitle + " is added to recipeList");
-            }
-        } catch (FileNotFoundException e) {
-            Ui.showMessage("RecipesToRecipeList Fail");
-        } catch (ParseFileException e) {
-            Ui.showMessage("Error in parsing recipe file content.");
-        }
-    }
+    //    /**
+    //     * Loading the recipe into RecipeList recipe array from individual recipe file.
+    //     */
+    //    public static void loadRecipesToRecipeList() {
+    //
+    //        for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
+    //            try {
+    //                logger.log(Level.INFO, recipeTitle);
+    //                String recipeFilePath = titleToFilePath(recipeTitle);
+    //                String content = Storage.loadFileContent(recipeFilePath);
+    //                Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
+    //                RecipeList.addRecipe(addedRecipe);
+    //                logger.log(Level.INFO, recipeTitle + " is added to recipeList");
+    //            } catch (FileNotFoundException e) {
+    //                logger.log(Level.INFO,"Error in parsing recipe file content.");
+    //            } catch (ParseFileException e) {
+    //                logger.log(Level.INFO,"Error in parsing recipe file content.");
+    //            }
+    //        }
+    //    }
 
     /**
      * Find file path of the given recipe title.
