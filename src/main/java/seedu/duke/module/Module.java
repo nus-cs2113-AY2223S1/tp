@@ -44,10 +44,10 @@ public class Module {
     }
 
     /**
-     * Constructor for a module object
-     * @param moduleCode A valid module code from NUSMods
-     * @param moduleName The name of the module
-     * @param lessons The array of lessons from the module
+     * Constructor for a module object.
+     * @param moduleCode A valid module code from NUSMods.
+     * @param moduleName The name of the module.
+     * @param lessons The array of lessons from the module.
      */
     public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
         this.moduleCode = moduleCode;
@@ -150,7 +150,8 @@ public class Module {
      * @param lessonType The type of the lesson attended.
      * @param size Number of lessons that share the same class number.
      */
-    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> unknownClass, String lessonType, int size) {
+    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> unknownClass,
+                                           String lessonType, int size) {
         ArrayList<Lesson> classes = new ArrayList<Lesson>();
         String day = "Undetermined Day";
         String startTime = "Undetermined";
