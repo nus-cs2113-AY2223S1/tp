@@ -4,6 +4,10 @@ import seedu.duke.logic.exception.IllegalValueException;
 
 import java.util.Arrays;
 
+/**
+ * Represents the biometrics component. Stores information about static biometrics (age, gender, height, activity level)
+ * and dynamic biometrics (weight and fat percentage).
+ */
 public class Biometrics {
 
     private static final String[] GENDER_OPTIONS = new String[]{"male", "female", "others"};
@@ -49,6 +53,15 @@ public class Biometrics {
         return activityLevel;
     }
 
+    /**
+     * Sets the biometrics to user's inputs.
+     *
+     * @param age           user's input for age
+     * @param gender        user's input for gender
+     * @param height        user's input for height
+     * @param activityLevel user's input for activity level
+     * @throws IllegalValueException if any of the parameters are out of the accepted range of values
+     */
     public void setBiometrics(int age, String gender, int height, int activityLevel)
             throws IllegalValueException {
         setAge(age);
@@ -89,6 +102,13 @@ public class Biometrics {
         }
         this.activityLevel = activityLevel;
     }
+
+    /**
+     * Converts biometrics into String for output. If at least one weight and fat record exists, the most recent
+     * record will also be displayed.
+     *
+     * @return returns the biometrics String for printing
+     */
 
     @Override
     public String toString() {
