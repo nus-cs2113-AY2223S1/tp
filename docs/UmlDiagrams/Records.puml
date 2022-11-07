@@ -46,5 +46,6 @@ Calculator ..> FoodList : uses >
 Calculator ..> Biometrics : uses >
 Calculator ..> ExerciseList : uses >
 Logic -left-> Record : uses
+Calculator <.left.Calories
 hide empty members
 @enduml

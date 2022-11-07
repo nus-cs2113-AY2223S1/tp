@@ -1,26 +1,34 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autoactivate on
+!include style.puml
 
 
--> addCommand: execute()
-addCommand -> parser: getArgumentList(arguments: String)
-return argumentList: String[]
-addCommand -> parser: getClassType(argumentList: String[])
+box Logic LOGIC_COLOR_T1
+participant ":AddCommand" as AddCommand LOGIC_COLOR
+participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+end box
+
+[-> AddCommand : execute
+activate AddCommand
+AddCommand -> Parser++: getArgumentsCount((argumentList: String[]):
+return slashesCount: int
+AddCommand -> Parser++: getClassType(argumentList: String[])
+return addType: String
+AddCommand -> Parser++: getClassType(argumentList: String[])
 return addType: String
 
 alt food
-    ref over addCommand: addFood
+    ref over AddCommand: addFood
 else strength
-    ref over addCommand: addStrengthExercise
+    ref over AddCommand: addStrengthExercise
 else cardio
 
 else weight
-    ref over addCommand: addWeightAndFat
-
+    ref over AddCommand: addWeightAndFat
+else invalidType
+    ref over AddCommand: handleInvalidAddType
 end
-
 return
-
+destroy AddCommand
 @enduml
