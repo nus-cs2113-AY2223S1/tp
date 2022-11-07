@@ -520,7 +520,7 @@ Figure 17 below is a class diagram for the `Find` command class and its associat
 transactions. Some methods and variables have been ommitted from the class diagram for simplicity.
 
 <p align="center">
-    <img src="images/FindCommandClassDiagram.png" width="100%">
+    <img src="images/FindCommandClassDiagram.png" width="80%">
     <br />
     <i>Figure 17: Class Diagram for Find Command</i>
 </p>
@@ -756,13 +756,13 @@ and append the amount for each category accordingly until all transactions are e
 Amongst the omitted frames in Figure 24, below two are the sequence diagrams for getting monthly expenditure and time insights.
 
 <p align="center">
-    <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="80%">
+    <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="70%">
     <br />
     <i>Figure 25: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
 </p>
 
 <p align="center">
-    <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="80%">
+    <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="70%">
     <br />
     <i>Figure 26: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
 </p>
