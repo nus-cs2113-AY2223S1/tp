@@ -7,6 +7,9 @@ import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a display table for all food records.
+ */
 public class FoodTable extends TableFrame {
 
     private ArrayList<String> foodTable;
@@ -32,6 +35,13 @@ public class FoodTable extends TableFrame {
         return foodTable;
     }
 
+
+    /**
+     * Fills the table with all the data from the food list.
+     *
+     * @param foodArrayList an ArrayList storing all the food records that user has inputted
+     * @param tableFrame a empty table to be filled with the record data
+     */
     private void fillFoodTable(ArrayList<Food> foodArrayList, ArrayList<String> tableFrame) {
         for (int i = 0; i < foodArrayList.size(); i++) {
             Food food = foodArrayList.get(i);
@@ -45,6 +55,9 @@ public class FoodTable extends TableFrame {
         }
     }
 
+    /**
+     * Adds a caption to the table.
+     */
     private void addCaption() {
         foodTable.add(caption);
     }

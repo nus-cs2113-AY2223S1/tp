@@ -144,18 +144,45 @@ Adding food record
 Adding strength exercise  
 ![](UmlDiagrams/AddStrengthExercise.png)
 
-Marking exercise  
+### Mark Feature
+Marking exercise
+The sequence diagrams below represent the interactions when a user marks an exercise record as done or undone.
+
 ![](UmlDiagrams/MarkExercise.png)
 
+The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a mark command.
+First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
+number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
+parameters. Then, markExercise(argumentList, slashesCount) will be called to obtain the type of markCommand for 
+that correct type of mark command to be executed.
+
+If the mark command type is of "done", the calories burnt via the exercise would be determined by executing
+calculateExerciseCalories(biometrics, time, met). Then, the exercise at the given index would be mark done and
+a corresponding message regarding the information of the exercise that is marked "done" will be printed via the Ui 
+Component.
+
+If the mark command type is of "undone", then the exercise would be mark undone at the given index and a corresponding 
+message regarding the information of the exercise that is marked "undone" will be printed via the Ui Component.
+
+### Find Feature
 Finding a record
 The sequence diagrams below represent the interactions when a user find a record.
 ![Find.png](UmlDiagrams/Find.png)
 
-In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
-As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
-removeCommand to be printed on the ui.
-![](UmlDiagrams/RemoveWeight.png)  
-The interactions for removing other types of records are similar.
+The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
+First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
+number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing 
+parameters. Finally, Parser.getClassType() will be called to obtain the type of findCommand for that correct type of
+find command to be executed.
+
+![](UmlDiagrams/FindFood.png)  
+In the case that user finds a food record, the findFood method in findCommand is executed, which will then execute
+getFilteredFoodList(argumentList) to get arrayList of food records which contain the keyword that the user has parsed
+in. If the filtered list is empty, a "Food not found" message is printed via the Ui Component. However, if the filtered
+list is not empty, a table is created and filled with the data from the list. The table is then printed via the Ui
+Component.
+
+The interactions for finding other types of records are similar.
 
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)

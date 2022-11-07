@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.Record;
 import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.Exercise;
@@ -7,6 +8,9 @@ import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a display table for all records.
+ */
 public class AllRecordsTable extends TableFrame {
 
     private ArrayList<String> allRecordsTable;
@@ -32,6 +36,9 @@ public class AllRecordsTable extends TableFrame {
         allRecordsTable = new ArrayList<>();
     }
 
+    /**
+     * Returns the table with filled data for all the records.
+     */
     public ArrayList<String> getAllRecordsTable() {
         setColumnsSpacingForAll();
         addCaption();
@@ -41,6 +48,14 @@ public class AllRecordsTable extends TableFrame {
         return allRecordsTable;
     }
 
+    /**
+     * Fills the table with all the data from the record list.
+     *
+     * @param recordArrayList an ArrayList storing all the records that user has inputted
+     * @param tableFrame a empty table to be filled with the record data
+     * @param mainHeading a string of header descriptions
+     *
+     */
     private void fillAllRecordsTable(ArrayList<Record> recordArrayList, ArrayList<String> tableFrame,
                                      String mainHeading) {
         for (int i = 0; i < recordArrayList.size(); i++) {
@@ -67,7 +82,6 @@ public class AllRecordsTable extends TableFrame {
                 tableFrame.add(row);
             }
 
-
             if (recordArrayList.get(i) instanceof Exercise) {
                 String date = addRightPadding(recordArrayList.get(i).getDateString(), columnSpacingArray[DATE_INDEX]);
                 String extraPadding = addRightPadding("", mainHeading.substring(
@@ -93,6 +107,13 @@ public class AllRecordsTable extends TableFrame {
 
     }
 
+
+    /**
+     * Fills the tableFrame with the main header descriptions.
+     *
+     * @param tableFrame a empty table to be filled with the record data
+     *
+     */
     public String addMainHeadingRow(ArrayList<String> tableFrame) {
         setMainHeaderSpacing();
         StringBuilder headingRow = new StringBuilder();
@@ -106,6 +127,9 @@ public class AllRecordsTable extends TableFrame {
         return headingRow.toString();
     }
 
+    /**
+     * Determines the spacing for the main header descriptions.
+     */
     public void setMainHeaderSpacing() {
         mainColumnSpacingArray[0] = MAXIMUM_DATE_COLUMN_SPACING;
         mainColumnSpacingArray[1] = MAXIMUM_WEIGHT_COLUMN_SPACING;
@@ -113,6 +137,9 @@ public class AllRecordsTable extends TableFrame {
                 + columnSpacingArray[FOOD_CALORIES_INDEX] + 3;
     }
 
+    /**
+     * Adds a caption to the table.
+     */
     private void addCaption() {
         allRecordsTable.add(caption);
     }
