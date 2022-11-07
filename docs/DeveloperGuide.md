@@ -126,7 +126,7 @@ be called.
 
 ![](UmlDiagrams/AddWeightAndFat.png)
 
-When the add command type is WeightAndFat, addWeightAndFat method will be called. If date is provided in the input, 
+When the add command type is WeightAndFat, addWeightAndFat method will be called. If date is provided in the input,
 parseDate method in Parser will be called, otherwise date is initialised to current date.
 WeightAndFat object will then be created and added to the WeightAndFatList. If display is set to true, weightAndFat will
 be converted to string, and prints with a success message to inform the user.
@@ -135,13 +135,8 @@ be converted to string, and prints with a success message to inform the user.
 
 ![](UmlDiagrams/AddFood.png)
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
-<<<<<<< HEAD
-object is being created. Food is then added to the FoodList. If is display,food is converted to string and output to
-user, followed by success message.
-=======
 object is being created. Food is then added to the FoodList. If display is set to true, food is converted to string and
 prints with a success message to inform the user.
->>>>>>> master
 
 #### Adding strength exercise
 
@@ -194,9 +189,6 @@ list is not empty, a table is created and filled with the data from the list. Th
 Component.
 
 The interactions for finding other types of records are similar.
-
-<<<<<<< HEAD
-=======
 
 ### View Feature
 
