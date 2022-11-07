@@ -11,6 +11,11 @@ public class CommandDeleteModule {
 
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Delete a module that is in the timetable.
+     *
+     * @return Delete successful message. If error occurs, return appropriate error message.
+     */
     public static String deleteModule() {
 
         int listLength = Timetable.getListLength();
@@ -52,6 +57,12 @@ public class CommandDeleteModule {
         return "Successfully deleted module!";
     }
 
+    /**
+     * Checks if an input is inside index bounds of lesson list.
+     *
+     * @param index User's input index.
+     * @return True if index is within lesson list index bounds, false otherwise.
+     */
     private static boolean isInvalidInput(String index, int length) {
         boolean isInteger = isInteger(index);
         boolean lessThanLength = Integer.parseInt(index) < 1;
@@ -60,6 +71,12 @@ public class CommandDeleteModule {
         return isInvalidFlag;
     }
 
+    /**
+     * Checks if an input is integer.
+     *
+     * @param str User's input index.
+     * @return True if index is an integer, false otherwise.
+     */
     private static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);

@@ -52,7 +52,11 @@ public class CommandPrintTimetable {
         return printTimetable(timeTable);
     }
 
-
+    /**
+     * Initialize list of lesson data type
+     * and list of empty slot list, a pair of integers.
+     *
+     */
     private static void initializeRawTimeTable() {
         for (int i = 0; i < DAY_PER_WEEK; i++) {
             rawTimetable.add(new ArrayList<>());
@@ -63,7 +67,12 @@ public class CommandPrintTimetable {
 
 
 
-
+    /**
+     * Reads from user's list of lessons and populates timetable structure
+     * and emptySlotList respectively.
+     *
+     * @param listOfModules User's attending list of lessons and modules.
+     */
     private static void populateRawTimetable(List<Module> listOfModules) {
         rawTimetable = new ArrayList<>(DAY_PER_WEEK);
         emptySlotList = new ArrayList<>(DAY_PER_WEEK);
@@ -82,7 +91,12 @@ public class CommandPrintTimetable {
         }
     }
 
-
+    /**
+     * Read from each lesson data type and write them into lists.
+     *
+     * @param lessons User's list of attending lessons.
+     * @param code The module code of user's attending lesson
+     */
     private static void writeRawTimetable(List<Lesson> lessons, String code) {
         for (Lesson les : lessons) {
             int[] info = convertTimeToIndex(les.getDay(), les.getStartTime(), les.getEndTime());
@@ -94,6 +108,14 @@ public class CommandPrintTimetable {
     }
 
 
+    /**
+     * Helper function that transforms and writes lesson structure from timetable to
+     * lesson structure printTimetable method uses.
+     *
+     * @param code User's attending module code.
+     * @param les User's lesson type of that module.
+     * @param info Array of lesson's starting and ending slot.
+     */
     private static void populateDailyRawTimetable(String code, Lesson les, int[] info) {
         Object[] rawLesson = new Object[4];
         rawLesson[0] = info[1]; // starting slot
@@ -118,6 +140,15 @@ public class CommandPrintTimetable {
     }
 
 
+    /**
+     * Convert 24-hour data from nusMODS to integer of slots for use of
+     * lesson data structure in printTimetable method.
+     *
+     * @param day Day of the week.
+     * @param startTime Starting time of the lesson.
+     * @param endTime Ending time of the lesson.
+     * @return Integer array of lesson with day, starting, and ending times.
+     */
     private static int[] convertTimeToIndex(String day, String startTime, String endTime) {
         int[] info = new int[3];
 
@@ -170,6 +201,11 @@ public class CommandPrintTimetable {
     }
 
 
+    /**
+     * Declares timeTable, 2D array of String to store the output of timetable,
+     * initializes ArrayList of clashed module codes.
+     *
+     */
     private static void setTable() {
         timeTable = new String[TIMETABLE_HEIGHT][TIMETABLE_WIDTH];
         clashModCodeList = new ArrayList<>();
@@ -185,7 +221,10 @@ public class CommandPrintTimetable {
         }
     }
 
-
+    /**
+     * Write day, time headers, and rows and columns of the timetable.
+     *
+     */
     private static void writeTableHeader() {
         // draw border below days
         for (int i = 0; i < TIMETABLE_WIDTH; i++) {
@@ -217,7 +256,13 @@ public class CommandPrintTimetable {
         }
     }
 
-
+    /**
+     * Write desired strings to desired destination in 2D array.
+     *
+     * @param text String to write into array
+     * @param row Row of the to-be-written string
+     * @param column Column of the to-be-written string
+     */
     private static void write(String text, int row, int column) {
         timeTable[row][column] = "" + text.charAt(0);
         for (int i = 1; i < text.length(); i++) {
@@ -225,7 +270,13 @@ public class CommandPrintTimetable {
         }
     }
 
-
+    /**
+     * Convert slot integer index to actual timings.
+     * Differentiate half hours and full hours
+     *
+     * @param index Integer index of lesson's starting and ending slot
+     * @return String of the represented actual time
+     */
     private static String indexToTime(int index) {
         boolean isHalf = index % 2 == 0; // even index in timetable is half hours
         int hours = (index - ROW_DIFFERENCE) / 2 + FIRST_HOUR; 
@@ -242,7 +293,9 @@ public class CommandPrintTimetable {
         return columnIndex + TIMETABLE_TIME_WIDTH; 
     }
 
-
+    /**
+     * Write the output timetable with lessons and boxes.
+     */
     private static void writeTable() {
         for (int i = 0; i < rawTimetable.size(); i++) {
             if (!rawTimetable.get(i).isEmpty()) {
@@ -256,7 +309,12 @@ public class CommandPrintTimetable {
 
     }
 
-
+    /**
+     * Read lesson data structure from list and write them into output timetable.
+     *
+     * @param day Day of the week.
+     * @param dayIterator List of lesson data structure of that day.
+     */
     private static void createTimetableString(int day, ArrayList<Object[]> dayIterator) {
         for (Object[] rawLesson : dayIterator) {
             int modStartSlot = Integer.parseInt(rawLesson[0].toString());
@@ -283,6 +341,16 @@ public class CommandPrintTimetable {
         }
     }
 
+
+    /**
+     * Write the module and type of lesson into output timetable.
+     *
+     * @param start Starting slot of the lesson
+     * @param end Ending slot of the lesson
+     * @param code Module code of the lesson
+     * @param type Type of lesson
+     * @param col Column of that lesson in the output timetable
+     */
     private static void writeLesson(Integer start, Integer end, String code, String type, Integer col) {
         try {
             assert end > start : "End slot index is smaller than start index!";
@@ -304,6 +372,15 @@ public class CommandPrintTimetable {
         }
     }
 
+    /**
+     * Write the box boarders of the lessons.
+     *
+     * @param start Starting slot of the lesson
+     * @param end Ending slot of the lesson
+     * @param upLine Upper boarder of the lesson box
+     * @param lowLine Lower boarder of the lesson box
+     * @param col Column of that lesson in the output timetable
+     */
     private static void writeBoarder(int start, int end, StringBuilder upLine, StringBuilder lowLine, Integer col) {
         Integer endRowIndex = end + ROW_DIFFERENCE;
         try {
@@ -330,18 +407,11 @@ public class CommandPrintTimetable {
     }
 
 
-
-
-    private static void buildNarrowLowBoarder(String currentModType, StringBuilder lowerBoarder) {
-        lowerBoarder.append(UI.HORIZONTAL_BORDER);
-        String lessonType = currentModType.substring(0,3).toUpperCase();
-        lowerBoarder.append(lessonType);
-        int currentLength = lowerBoarder.length();
-        String stringToWrite = UI.HORIZONTAL_BORDER.repeat(COLUMN_WIDTH - 1 - currentLength);
-        lowerBoarder.append(stringToWrite);
-    }
-
-
+    /**
+     * Creates list of clashed slots, write them as "XXX" into output timetable.
+     *
+     * @param day Day of the week.
+     */
     private static void initializeClashSlotList(int day) {
         boolean dailyClashFlag = checkDailySlotClash(day);
         if (dailyClashFlag) {
@@ -374,7 +444,12 @@ public class CommandPrintTimetable {
         }
     }
 
-
+    /**
+     * Writes and returns output timetable.
+     *
+     * @param timeTable 2D array of timeTable string for output
+     * @return String of timetable for print
+     */
     private static String printTimetable(String[][] timeTable) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < TIMETABLE_HEIGHT; i++) {
@@ -388,7 +463,12 @@ public class CommandPrintTimetable {
         return output.toString();
     }
 
-
+    /**
+     * Check whether there is clash lessons that day.
+     *
+     * @param day Day of the week.
+     * @return True if there is clash that day, false otherwise.
+     */
     private static boolean checkDailySlotClash(Integer day) {
         if (emptySlotList.size() > 0) {
             sortDailySlots(day, emptySlotList);
@@ -403,7 +483,12 @@ public class CommandPrintTimetable {
 
     }
 
-
+    /**
+     * Get an ArrayList of merged clash lesson's starting and ending slots for that day.
+     *
+     * @param day Day of the week.
+     * @return Arraylist of clashing slots for each day.
+     */
     private static ArrayList<Integer[]> getDailyClashSlot(Integer day) {
         if (emptySlotList.size() > 0) {
             sortDailySlots(day, emptySlotList);
@@ -441,6 +526,12 @@ public class CommandPrintTimetable {
 
     }
 
+    /**
+     * Reads lesson data structure from the rawTimetable and popualtes ArrayList of clashed lesson slots.
+     *
+     * @param todayRawTimetable Raw timetable data structure for that day
+     * @param clashInterval ArrayList for storing clashed interval of that day
+     */
     private static void addClashLesson(ArrayList<Object[]> todayRawTimetable, Integer[] clashInterval) {
         for (Object[] lesson : todayRawTimetable) {
             // compare original lessons with clash interval one by one
@@ -457,6 +548,12 @@ public class CommandPrintTimetable {
         }
     }
 
+    /**
+     * Check if the module code is already in the clashed module code list.
+     * Add them if not in such list.
+     *
+     * @param lesson User's attending lesson data structure.
+     */
     private static void addCodeToList(Object[] lesson) {
         // make sure there are no duplicates in list before adding
         String modToAdd = lesson[2].toString();
@@ -477,6 +574,13 @@ public class CommandPrintTimetable {
         return clashSlotList;
     }
 
+    /**
+     * Removes non-clashing lessons from the merged intervals of clashing lessons.
+     *
+     * @param day Day of the week
+     * @param clashList List of all intervals, both clashed and un-clashed lessons
+     * @param refStack Stack of un-clash lessons
+     */
     private static void removeUnclashSlot(Integer day, ArrayList<Integer[]> clashList, Stack<Integer[]> refStack) {
         ArrayList<Integer> removeIndex = new ArrayList<>();
         for (Integer[] untouchedSlot : refStack) {
@@ -499,6 +603,15 @@ public class CommandPrintTimetable {
     }
 
 
+    /**
+     * Merge the overlapping clashing lesson's intervals.
+     * Intervals are pairs of integers marking the starting and ending slots of lessons.
+     *
+     * @param day Day of the week
+     * @param deque Intervals of merged clash intervals and un-clash unintervals of lesson
+     * @param stack Stack of un-clash lessons
+     * @param newEsl List of lessons for that day
+     */
     private static void sortSlotList(Integer day, Deque<Integer[]> deque,
                                      Stack<Integer[]> stack, ArrayList<ArrayList<Integer[]>> newEsl) {
 
@@ -534,7 +647,12 @@ public class CommandPrintTimetable {
         return timeTable[row][column].equals("X");
     }
 
-
+    /**
+     * Add comments under the output timetable.
+     *
+     * @param timetable Stringbuilder for output timetable
+     * @return String of output timetable
+     */
     private static String addRemarks(StringBuilder timetable) {
         timetable.append(System.lineSeparator()
                 + " * Note that timings indicated refers to the start of "
@@ -547,6 +665,13 @@ public class CommandPrintTimetable {
                 + "NUS mods are typically designed in such blocks." + System.lineSeparator());
         return timetable.toString();
     }
+
+    /**
+     * Add module codes that cause crash at the end ot the output timetable.
+     *
+     * @param timetable Stringbuilder of output timetable
+     * @return String of output timetable
+     */
 
     private static String addClashModList(StringBuilder timetable) {
         boolean isClashListEmpty = clashModCodeList.isEmpty();

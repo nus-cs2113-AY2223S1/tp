@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.Objects;
 
-
+/**
+ * The class that represents a module object.
+ */
 public class Module {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private String moduleName;
@@ -22,7 +24,6 @@ public class Module {
     private final LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> uniqueLessonMap;
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> attendingMap;
     private List<Lesson> attendingList;
-    private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
 
 
     public String getModuleName() {
@@ -37,22 +38,33 @@ public class Module {
         return attendingList;
     }
 
-    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getLessonMap() {
-        return lessonMap;
-    }
 
     public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getUniqueLessonMap() {
         return uniqueLessonMap;
     }
 
-    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getAttendingMap() {
-        return attendingMap;
+    /**
+     * Constructor for a module object.
+     * @param moduleCode A valid module code from NUSMods.
+     * @param moduleName The name of the module.
+     * @param lessons The array of lessons from the module.
+     */
+    public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
+        this.lessonList = lessons;
+        this.lessonMap = populateData(); //this is the new classifiedLessons
+        this.uniqueLessonMap = populateUniqueData(); //lessonMap with classes occupying the same timing removed
+        this.attendingMap = populateAttending(); //this is the new attending
+        this.attendingList = getAttendingInListForm();
     }
 
-    public List<Lesson> getClassFromLessonMap(String lessonType, String classNumber) {
-        return lessonMap.get(lessonType).get(classNumber);
-    }
-
+    /**
+     * Obtains the information about the lessons that share a single class number.
+     *
+     * @param currClass A list of lessons that share the same class number.
+     * @return A list information of the list of lessons.
+     */
     private List<List<String>> getClassInfo(List<Lesson> currClass) {
         List<List<String>> lessonsInfoList = new ArrayList<>();
         for (Lesson lesson : currClass) {
@@ -61,11 +73,22 @@ public class Module {
         return lessonsInfoList;
     }
 
+    /**
+     * Obtains the list of lessons that the user is attending via the attendingMap.
+     *
+     * @param lessonType The type of lesson to be obtained.
+     * @return A list of attending lessons that share the same class number.
+     */
     public List<Lesson> getClassFromAttendingMap(String lessonType) {
         String classNumber = attendingMap.get(lessonType).keySet().iterator().next();
         return attendingMap.get(lessonType).get(classNumber);
     }
 
+    /**
+     * Reduces the attendingMap into a list, where all attending lessons are stored.
+     *
+     * @return The list of attending lessons.
+     */
     public List<Lesson> getAttendingInListForm() {
         List<Lesson> allAttending = new ArrayList<Lesson>();
         for (LinkedHashMap<String, ArrayList<Lesson>> lessonTypes : this.attendingMap.values()) {
@@ -78,22 +101,22 @@ public class Module {
         return allAttending;
     }
 
+    /**
+     * Getter for lessonList.
+     *
+     * @return List of all lessons.
+     */
     public List<Lesson> getLessonList() {
         return lessonList;
     }
 
 
-    public Module(String moduleCode, String moduleName, List<Lesson> lessons) {
-        this.moduleCode = moduleCode;
-        this.moduleName = moduleName;
-        this.lessonList = lessons;
-        this.classifiedLessons = classifyLessons(lessons);
-        this.lessonMap = populateData(); //this is the new classifiedLessons
-        this.uniqueLessonMap = populateUniqueData(); //lessonMap with classes occupying the same timing removed
-        this.attendingMap = populateAttending(); //this is the new attending
-        this.attendingList = getAttendingInListForm();
-    }
-
+    /**
+     * This method fills up the attendingMap with information about each lesson that the user is attending.
+     * If the lesson does not have a specific attending timing, a placeholder timing will be added.
+     *
+     * @return The data structure that holds all information about the lessons the user are attending.
+     */
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateAttending() {
         LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> entry
                 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
@@ -120,7 +143,15 @@ public class Module {
         return entry;
     }
 
-    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> tempList, String lessonType, int size) {
+    /**
+     * This method helps to fill up attendingMap by adding placeholder lesson information.
+     *
+     * @param unknownClass The particular class that has undetermined lessons.
+     * @param lessonType The type of the lesson attended.
+     * @param size Number of lessons that share the same class number.
+     */
+    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> unknownClass,
+                                           String lessonType, int size) {
         ArrayList<Lesson> classes = new ArrayList<Lesson>();
         String day = "Undetermined Day";
         String startTime = "Undetermined";
@@ -130,9 +161,13 @@ public class Module {
         for (int i = 0; i < size; i++) {
             classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, weeks, moduleCode));
         }
-        tempList.put(classNumber, classes);
+        unknownClass.put(classNumber, classes);
     }
 
+    /**
+     * Generates the text to be displayed to the user when they list the modules.
+     * @return The formatted text to be displayed.
+     */
     public String getModuleDetails() {
         StringBuilder details = new StringBuilder(this.getModuleCode() + ": " + this.getModuleName() + "\n");
 
@@ -148,6 +183,14 @@ public class Module {
         return details.toString();
     }
 
+    /**
+     * Obtains the number of lessons a certain lesson type has, in order to format
+     * the list to be displayed to user.
+     *
+     * @param lessonDupe The hashmap to track the number of each lesson type.
+     * @param lesson The lesson to be checked.
+     * @return The index tagged to the lesson type that is displayed to the user.
+     */
     private String getCount(HashMap<String, Integer> lessonDupe, Lesson lesson) {
         String type = lesson.getLessonType();
         if (lessonDupe.containsKey(type)) {
@@ -161,6 +204,14 @@ public class Module {
         }
     }
 
+    /**
+     * Checks if a certain lesson type has dupes when looping through all the attending lessons.
+     * If there are no lesson that share the same lesson type, no index is appended to the list
+     * the user sees.
+     *
+     * @param lesson The lesson to be checked.
+     * @return The index tagged to the lesson type that is displayed to the user.
+     */
     private String checkForMoreDupes(Lesson lesson) {
         int count = 0;
         for (Lesson tempLesson : attendingList) {
@@ -174,6 +225,12 @@ public class Module {
         return "";
     }
 
+    /**
+     * Adds a ':' to separate the hours and the minutes of the time.
+     *
+     * @param time The time without a colon in 24hr format.
+     * @return An array that represents the new time format.
+     */
     private String convertTime(String time) {
         char[] arr = time.toCharArray();
         if (arr.length != 4) {
@@ -184,7 +241,7 @@ public class Module {
     }
 
     /**
-     * Gets the lessonTypes that the user can choose when
+     * Gets the lesson types that the user can choose when
      * they are setting the lessons for the current module.
      *
      * @return The formatted list of options the user will see.
@@ -204,7 +261,7 @@ public class Module {
     /**
      * Gets the number of lesson types whose lessons are adjustable.
      *
-     * @return Number of lesson types
+     * @return Number of lesson types.
      */
     public int getNumLessonTypes() {
         int length = 0;
@@ -238,6 +295,13 @@ public class Module {
         return null;
     }
 
+    /**
+     * Gets all the possible classes that the user can choose to set and the information of
+     * the lessons in the class. This is then formatted and displayed to the user.
+     *
+     * @param targetType Type of lesson to be replaced.
+     * @return The formatted list of replacement that the user sees.
+     */
     public String getListOfLessonReplacements(String targetType) {
         StringBuilder details = new StringBuilder();
         int index = 1;
@@ -257,6 +321,13 @@ public class Module {
         return lessonMap.get(targetType).size();
     }
 
+    /**
+     * Obtains the replacement class that the user chooses to set.
+     *
+     * @param targetType Type of lesson to be replaced.
+     * @param index Index of the class the user chose.
+     * @return The array representing the class that the user chose.
+     */
     public ArrayList<Lesson> getReplacement(String targetType, int index) {
         assert index >= 0 : "index should be within range";
         assert index <= lessonMap.get(targetType).size() : "index should be within range";
@@ -274,7 +345,11 @@ public class Module {
         return null;
     }
 
-
+    /**
+     * Replaces attendingMap with the information generated from local txt file.
+     *
+     * @param loadedLessons The data structure representing the lessons from the local txt file.
+     */
     public void replaceAllAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
         this.attendingMap = loadedLessons;
         for (String lessonType : loadedLessons.keySet()) {
@@ -340,8 +415,13 @@ public class Module {
         }
     }
 
-    private ArrayList<Lesson> getOldLessons(String moduleCode) {
-        return attendingMap.get(moduleCode).values().iterator().next();
+    /**
+     * Gets the old lessons present in attendingMap that is to be replaced.
+     * @param lessonType The lesson type of the lesson to be replaced.
+     * @return The first (and only) list of lessons with the specific lesson type.
+     */
+    private ArrayList<Lesson> getOldLessons(String lessonType) {
+        return attendingMap.get(lessonType).values().iterator().next();
     }
 
 
@@ -372,11 +452,15 @@ public class Module {
         return data;
     }
 
+    /**
+     * Creates a data structure that holds data about lessons that have unique information.
+     *
+     * @return The data structure created.
+     */
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateUniqueData() {
         LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> uniqueData
                 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
         List<List<List<String>>> classInfoList = new ArrayList<>();
-        // System.out.println("POPULATING UNIQUE DATA: " + moduleCode);
         for (String lessonType : lessonMap.keySet()) {
             uniqueData.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
             for (String classNumber : lessonMap.get(lessonType).keySet()) {
@@ -385,7 +469,6 @@ public class Module {
                 if (classInfoList.contains(currClassInfo)) {
                     continue;
                 } else {
-                    // System.out.println("currClassInfo: " + currClassInfo.toString() + " added");
                     classInfoList.add(currClassInfo);
                     uniqueData.get(lessonType).put(classNumber, currClass);
                 }
@@ -394,28 +477,17 @@ public class Module {
         return uniqueData;
     }
 
-    private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
-        LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons = new LinkedHashMap<>();
-        for (Lesson lesson : lessons) {
-            if (!classifiedLessons.containsKey(lesson.getLessonType())) {
-                classifiedLessons.put(lesson.getLessonType(), new ArrayList<>());
-                classifiedLessons.get(lesson.getLessonType()).add(lesson);
-            } else {
-                classifiedLessons.get(lesson.getLessonType()).add(lesson);
-            }
-        }
-        return classifiedLessons;
-    }
-
-    public LinkedHashMap<String, ArrayList<Lesson>> getClassifiedLessons() {
-        return classifiedLessons;
-    }
-
     @Override
     public String toString() {
         return moduleCode + " : " + moduleName;
     }
 
+    /**
+     * Checks if a certain lesson type has already been set.
+     *
+     * @param lessonType The lesson type to be checked.
+     * @return Whether the lesson is set or not.
+     */
     public boolean isLessonTypeAttended(String lessonType) {
         boolean isLessonTypeAttended = false;
         for (Lesson attendingLesson : attendingList) {
@@ -432,6 +504,11 @@ public class Module {
         return isLessonTypeAttended;
     }
 
+    /**
+     * Finds the number of unique lesson types for the module.
+     *
+     * @return A list of all lesson types.
+     */
     public List<String> getAttendingLessonTypes() {
         List<String> attendingLessonTypes = new ArrayList<String>();
         for (String lessonType : attendingMap.keySet()) {
@@ -440,12 +517,18 @@ public class Module {
         return attendingLessonTypes;
     }
 
+    /**
+     * Checks whether a module has lessons to swap. It checks whether the module
+     * has any lessons. If it does, it will check if it has more than 1 unique class.
+     *
+     * @return Whether a module has lessons to swap.
+     */
     public boolean hasAvailableLessonsToSwap() {
         if (lessonMap.size() == 0) {
             return false;
         }
-        for (LinkedHashMap<String, ArrayList<Lesson>> singleClass : lessonMap.values()) {
-            if (singleClass.size() > 1) {
+        for (LinkedHashMap<String, ArrayList<Lesson>> allClasses : lessonMap.values()) {
+            if (allClasses.size() > 1) {
                 return true;
             }
         }
