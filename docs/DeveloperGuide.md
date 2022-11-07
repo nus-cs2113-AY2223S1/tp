@@ -282,7 +282,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 - The following sequence diagram shows the usage of relevant classes and methods when trying to parse
 an input
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Parser.png" alt="Parser Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/ParserSeq.png" alt="Parser Diagram"/>
 </p>
 
 - Step 1:

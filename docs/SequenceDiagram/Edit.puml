@@ -2,12 +2,12 @@
 skinparam Style strictuml
 autonumber
 
-participant Recipeditor
-participant Parser
-participant GuiWorkFlow
-participant EditCommand
-participant EditModeCommand
-participant RecipeList
+participant ":Recipeditor" as Recipeditor
+participant ":Parser" as Parser
+participant "GuiWorkFlow" as GuiWorkFlow
+participant ":EditCommand" as EditCommand
+participant ":EditModeCommand" as EditModeCommand
+participant ":RecipeList" as RecipeList
 
 database Storage
 

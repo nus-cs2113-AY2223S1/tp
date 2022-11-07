@@ -1,6 +1,23 @@
 @startuml
-'skinparam Style strictuml
+skinparam Style strictuml
 'skinparam SequenceMessageAlignment center
+autonumber
+
+participant ":Parser" as Parser
+participant ":Storage" as Storage
+participant ":InvalidCommand" as InvalidCommand
+participant ":Addcommand" as AddCommand
+participant ":EditCommand" as EditCommand
+participant ":ListCommand" as List
+participant ":ExitCommand" as Exit
+participant ":ViewCommand" as ViewCommand
+participant ":DeleteCommand" as DeleteCommand
+participant ":FindCommand" as FindCommand
+participant ":HelpCommand" as HelpCommand
+
+
+
+participant ":InvalidCommand" as InvalidCommand
 
 Parser -> Parser: parseCommand(input)
 
@@ -12,7 +29,8 @@ alt AddCommand
     ref over Parser: GuiWorkFlow
     Parser -> AddCommand: <<create>>
     activate AddCommand
-    AddCommand -> Parser:
+    AddCommand --> Parser:
+    destroy AddCommand
     deactivate AddCommand
     else  templateFileNotFoundException
     Parser -> Storage:
@@ -21,7 +39,8 @@ alt AddCommand
     create InvalidCommand
     Parser -> InvalidCommand: template file missing
     activate InvalidCommand
-    InvalidCommand -> Parser
+    InvalidCommand --> Parser
+    destroy InvalidCommand
     deactivate InvalidCommand
     end
 
@@ -33,13 +52,16 @@ else EditCommand
         create EditCommand
         Parser -> EditCommand: create EditCommand for Gui edit
         activate EditCommand
-        EditCommand -> Parser:
+        EditCommand --> Parser:
+         destroy EditCommand
+
         deactivate EditCommand
     else FileNotFoundException | IndexOutOfBoundException | NumberFormatException
         create InvalidCommand
         Parser -> InvalidCommand: Exceptions
         activate InvalidCommand
-        InvalidCommand -> Parser:
+        InvalidCommand --> Parser:
+        destroy InvalidCommand
         deactivate InvalidCommand
     end
 
@@ -48,29 +70,31 @@ else EditCommand
         create EditCommand
         Parser -> EditCommand: create EditCommand for CLI edit
         activate EditCommand
-        EditCommand -> Parser
+        EditCommand --> Parser
+        destroy EditCommand
         deactivate EditCommand
     else IndexOutOfBoundException | NumberFormatException | MissingFlagException
         create InvalidCommand
         Parser -> InvalidCommand: Exceptions
         activate InvalidCommand
-        InvalidCommand -> Parser:
+        InvalidCommand --> Parser:
+        destroy InvalidCommand
         deactivate InvalidCommand
     end
 
 else ListCommand
-    participant ":ListCommand" as List
     create List
     Parser -> List:<<create>>
     activate List
     List -> Parser: ListCommand
+    destroy List
     deactivate List
 else ExitCommand
-    participant ":ExitCommand" as Exit
     create Exit
     Parser -> Exit: <<create>>
     activate Exit
-    Exit -> Parser: ExitCommand
+    Exit --> Parser: ExitCommand
+    destroy Exit
     deactivate Exit
 else ViewCommand
 
@@ -78,19 +102,22 @@ else ViewCommand
         create ViewCommand
         Parser -> ViewCommand: create ViewCommand by index
         activate ViewCommand
-        ViewCommand -> Parser
+        ViewCommand --> Parser
+        destroy ViewCommand
         deactivate ViewCommand
     else view by title
         create ViewCommand
         Parser -> ViewCommand: create ViewCommand by title
         activate ViewCommand
-        ViewCommand -> Parser
+        ViewCommand --> Parser
+        destroy ViewCommand
         deactivate ViewCommand
     else InvalidFlagException | MissingFlagException | IndexOutOfBoundException | NumberFormatException | AssertionError
         create InvalidCommand
         Parser -> InvalidCommand: Exceptions
         activate InvalidCommand
-        InvalidCommand -> Parser
+        InvalidCommand --> Parser
+        destroy InvalidCommand
         deactivate InvalidCommand
     end
 
@@ -100,20 +127,23 @@ else DeleteCommand
         create DeleteCommand
         Parser -> DeleteCommand: create DeleteCommand by index
         activate DeleteCommand
-        DeleteCommand -> Parser
+        DeleteCommand --> Parser
+        destroy DeleteCommand
         deactivate DeleteCommand
     else delete by title
         create DeleteCommand
         Parser -> DeleteCommand: create DeleteCommand by title
         activate DeleteCommand
-        DeleteCommand -> Parser
+        DeleteCommand --> Parser
+        destroy DeleteCommand
         deactivate DeleteCommand
     else InvalidFlagException | MissingFlagException | IndexOutOfBoundException | NumberFormatException | AssertionError
-        create InvalidCommand
-        Parser -> InvalidCommand: Exceptions
-        activate InvalidCommand
-        InvalidCommand -> Parser
-        deactivate InvalidCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: Exceptions
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
     end
 
 else FindCommand
@@ -122,14 +152,16 @@ else FindCommand
         create FindCommand
         Parser -> FindCommand: <<create>>
         activate FindCommand
-        FindCommand -> Parser:
+        FindCommand --> Parser:
+        destroy FindCommand
         deactivate FindCommand
     else too short for FindCommand
-        create InvalidCommand
-        Parser -> InvalidCommand: FindCommand format
-        activate InvalidCommand
-        InvalidCommand -> Parser
-        deactivate InvalidCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: FindCommand format
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
     end
 
 else HelpCommand
@@ -138,22 +170,24 @@ else HelpCommand
          create HelpCommand
          Parser -> HelpCommand: <<create>>
          activate HelpCommand
-         HelpCommand -> Parser:
+         HelpCommand --> Parser:
+         destroy HelpCommand
          deactivate HelpCommand
     else too short or long for HelpCommand
-        create InvalidCommand
-        Parser -> InvalidCommand: HelpCommand format
-        activate InvalidCommand
-        InvalidCommand -> Parser
-        deactivate InvalidCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: HelpCommand format
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
     end
 
 else InvalidCommand
-    participant ":InvalidCommand" as Invalid
-    create Invalid
-    Parser -> Invalid:<<create>>
-    activate Invalid
-    Invalid -> Parser: InvalidCommand
-    deactivate Invalid
+    create InvalidCommand
+    Parser -> InvalidCommand: <<create>>
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
 end
 @enduml
