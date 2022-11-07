@@ -1,0 +1,12 @@
+@startuml
+!include style.puml
+
+class Storage {
+    -filepath: String
+    -folderpath: String
+    +File getMakeFile()
+    +void loadMedia(f: File, reviewList: ReviewList)
+    +void updateFile(reviewList: ReviewList)
+}
+
+@enduml

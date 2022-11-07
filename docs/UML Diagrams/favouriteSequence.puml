@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant ":Parser"
+
+-> ":Parser" : userInput: String
+activate ":Parser"
+":Parser" -> ":Parser": processUserInput(userInput)
+activate ":Parser"
+return parsedCommand: String[]
+
+ref over ":Parser"
+favouriteCommand is given
+end ref
+
+":Parser" -> ":Parser" : executeFavourite()
+activate ":Parser"
+
+create "executor:\nFavouriteCommand"
+":Parser" -> "executor:\nFavouriteCommand"
+
+activate "executor:\nFavouriteCommand"
+"executor:\nFavouriteCommand" --> ":Parser"
+deactivate "executor:\nFavouriteCommand"
+
+":Parser" -> "executor:\nFavouriteCommand" : execute()
+activate "executor:\nFavouriteCommand"
+
+alt Invalid media type given
+
+    create "e:\nDukeException"
+        "executor:\nFavouriteCommand" -> "e:\nDukeException"
+        activate "e:\nDukeException"
+        "e:\nDukeException" --> "executor:\nFavouriteCommand"
+        destroy "e:\nDukeException"
+
+end
+
+alt User wants to mark/unmark a review as favourite
+
+    participant ":Media"
+
+    loop For each review
+
+    alt Review is of the type to be marked/unmarked and is at the given index
+
+    alt The review is not a favourite
+
+        "executor:\nFavouriteCommand" -> ":Media": setFavourite(true)
+        activate ":Media"
+        ":Media" --> "executor:\nFavouriteCommand"
+        deactivate ":Media"
+
+    else The review is a favourite
+
+        "executor:\nFavouriteCommand" -> ":Media": setFavourite(false)
+        activate ":Media"
+        ":Media" --> "executor:\nFavouriteCommand"
+        deactivate ":Media"
+
+    end
+
+    end
+
+    end
+
+else User wants to view a list of favourites
+
+    loop For each review
+        alt Review is a favourite
+            "executor:\nFavouriteCommand" -> ":Media": toString()
+            activate ":Media"
+            ":Media" --> "executor:\nFavouriteCommand"
+            deactivate ":Media"
+        end
+    end
+
+end
+
+"executor:\nFavouriteCommand" --> ":Parser": output : String
+deactivate "executor:\nFavouriteCommand"
+
+participant ":Ui"
+
+":Parser" -> ":Ui" : print(output)
+activate ":Ui"
+":Ui" --> ":Parser"
+deactivate ":Ui"
+
+":Parser" --> ":Parser"
+destroy "executor:\nFavouriteCommand"
+deactivate ":Parser"
+
+
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant ":Parser"
+
+-> ":Parser" : userInput: String
+activate ":Parser"
+":Parser" -> ":Parser": processUserInput(userInput)
+activate ":Parser"
+return parsedCommand: String[]
+
+ref over ":Parser"
+clearCommand is given
+end ref
+
+":Parser" -> ":Parser" : executeClear()
+activate ":Parser"
+
+create "executor:\nClearCommand"
+":Parser" -> "executor:\nClearCommand"
+
+activate "executor:\nClearCommand"
+"executor:\nClearCommand" --> ":Parser"
+deactivate "executor:\nClearCommand"
+
+":Parser" -> "executor:\nClearCommand" : execute()
+activate "executor:\nClearCommand"
+
+participant "reviewList :ReviewList"
+"executor:\nClearCommand" -> "reviewList :ReviewList" : clear()
+activate "reviewList :ReviewList"
+"reviewList :ReviewList" --> "executor:\nClearCommand"
+deactivate "reviewList :ReviewList"
+
+"executor:\nClearCommand" --> ":Parser": output : String
+deactivate "executor:\nClearCommand"
+
+participant ":Ui"
+
+":Parser" -> ":Ui" : print(output)
+activate ":Ui"
+":Ui" --> ":Parser"
+deactivate ":Ui"
+
+":Parser" --> ":Parser"
+destroy "executor:\nClearCommand"
+deactivate ":Parser"
+
+
+
+
+@enduml

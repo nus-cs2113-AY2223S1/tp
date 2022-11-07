@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+
+class "{abstract} \n Media" {
+    +title: String
+    +rating: Double
+    +genre: String
+    +dateWatched: Date
+    +dateString: String
+    +isFavourite: boolean
+    +void toString()
+}
+
+class Movie {
+    +Movie(title: String, rating: Double, genre: String,
+    dateWatchedString: String)
+    +void toString()
+}
+
+class TvShow {
+    +site: String
+    +dateWatched: String
+    +TvShow(title: String, rating: Double, genre: String,
+    dateWatchedString: String, site: String)
+    +void toString()
+}
+
+skinparam groupInheritance 2
+"{abstract} \n Media" <|-down- Movie
+"{abstract} \n Media" <|-down- TvShow
+
+@enduml
