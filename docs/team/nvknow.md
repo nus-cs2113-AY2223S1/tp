@@ -24,7 +24,6 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 - Added the function of Finish Task
   - What it does: set the status of a task as done.
-  - Justification: when all the tasks related to an appointment are set as done, the appointment is set as processed. So the completion of task is highly related to the completion of appointment.
 - Added more diverse status to Pet
   - What it does: set built-in integer index of the pet. The higher the index, the better the condition of a pet. Each integer represents a specific status.
 - Added the function of improving the status of a pet when an appointment is processed
