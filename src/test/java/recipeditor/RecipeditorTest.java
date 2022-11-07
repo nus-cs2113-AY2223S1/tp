@@ -11,11 +11,10 @@ import java.io.InputStream;
 class RecipeditorTest {
 
     @Test
-    void runAndExit() {
+    void runAndExit_correctExitCommand_programRunsThenExit() {
         String simulatedInput = "/exit";
         ByteArrayInputStream input = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(input);
-        String[] args = {""};
         Recipeditor.run();
         Assertions.assertTrue(true);
     }

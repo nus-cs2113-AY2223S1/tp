@@ -9,7 +9,7 @@ import recipeditor.ui.Ui;
 public class IngredientTest {
 
     @Test
-    public void parseIngredient_success() {
+    void parseIngredient_validFormat_success() {
         String ingredient = "new ig/100.0/g";
         try {
             Ingredient parsedIngredient =  Ingredient.parsedIngredients(ingredient);
@@ -22,7 +22,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void parseIngredient_emptyFields() {
+    void parseIngredient_emptyFields_fail() {
         String ingredient = "new ig/100.0/";
         try {
             Ingredient.parsedIngredients(ingredient);
@@ -33,7 +33,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void parseIngredient_wrongFormat_missingDivider() {
+    void parseIngredient_wrongFormat_fail() {
         String ingredient = "new ig";
         try {
             Ingredient.parsedIngredients(ingredient);
@@ -44,7 +44,7 @@ public class IngredientTest {
     }
 
     @Test
-    public void parseIngredient_wrongFormat_missingField() {
+    void parseIngredient_wrongFormatWithSlash_fail() {
         String ingredient = "new ig//";
         try {
             Ingredient.parsedIngredients(ingredient);

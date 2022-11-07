@@ -68,15 +68,4 @@ public class FlagParserTest {
             assertEquals(new ExcessFlagsException("command").getMessage(), e.getMessage());
         }
     }
-
-    @Test
-    public void existFlags_invalidFlags() {
-        String[]  args = {"-chg", "-k", "-", "ok"};
-        try {
-            FlagParser.getFlags(args);
-            assert false;
-        } catch (Exception e) {
-            assertEquals(new InvalidFlagException().getMessage(), e.getMessage());
-        }
-    }
 }

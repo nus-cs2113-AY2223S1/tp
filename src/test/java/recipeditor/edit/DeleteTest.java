@@ -1,5 +1,6 @@
 package recipeditor.edit;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import recipeditor.command.InvalidCommand;
@@ -25,7 +26,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void deleteIngredient_success() {
+    public void deleteIngredient_validInputFormat_success() {
         String[] parsedCommand = {"/edit", "1", "-del", "-i", "1"};
         FlagType ingredientFlag = FlagType.INGREDIENT;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -39,7 +40,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void deleteStep_success() {
+    public void deleteStep_validInputFormat_success() {
         String[] parsedCommand = {"/edit", "1", "-del", "-s", "1"};
         FlagType ingredientFlag = FlagType.STEP;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -53,7 +54,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void delete_invalidFlag() {
+    public void deleteCommand_invalidFlag_errorMessage() {
         String[] parsedCommand = {"/edit", "1", "-del", "-k", "1"};
         FlagType ingredientFlag = FlagType.NULL;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -66,7 +67,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void delete_noIndex() {
+    public void delete_noIndex_errorMessage() {
         String[] parsedCommand = {"/edit", "1", "-del", "-i"};
         FlagType ingredientFlag = FlagType.INGREDIENT;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -81,7 +82,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void delete_indexOutOfBound() {
+    public void delete_indexOutOfBound_errorMessage() {
         String[] parsedCommand = {"/edit", "1", "-del", "-s", "0"};
         FlagType ingredientFlag = FlagType.STEP;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -96,7 +97,7 @@ public class DeleteTest {
     }
 
     @Test
-    public void delete_expectIndexRecieveString() {
+    public void delete_expectIndexReceiveString_errorMessage() {
         String[] parsedCommand = {"/edit", "1", "-del", "-i", "string"};
         FlagType ingredientFlag = FlagType.INGREDIENT;
         Delete delete = new Delete(ingredientFlag, parsedCommand, recipe);
@@ -108,6 +109,13 @@ public class DeleteTest {
         } catch (Exception e) {
             assert false;
         }
+    }
+
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle(TEST_RECIPE_TITLE);
+        Storage.deleteRecipeFile(TEST_RECIPE_TITLE);
+        Storage.rewriteRecipeListToFile();
     }
 
 }

@@ -15,6 +15,7 @@ import recipeditor.command.HelpCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -288,10 +289,11 @@ class ParserTest {
     }
 
     @Test
-    public void viewCommand_byTitle_success() {
+    public void viewCommand_byTitle_success() throws RecipeNotFoundException {
         String input = "/view -t " + TEST_RECIPE_TITLE;
         Command viewCommand = Parser.parseCommand(input);
-        String expected = RecipeList.getRecipeFromTitle(TEST_RECIPE_TITLE).getRecipeAttributesFormatted();
+        int recipeIndex = RecipeList.getRecipeIndexFromTitle(TEST_RECIPE_TITLE);
+        String expected = RecipeList.getRecipe(recipeIndex).getRecipeAttributesFormatted();
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
@@ -316,16 +318,4 @@ class ParserTest {
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }
-
-    //    @Test
-    //    public void addCommand_missingTemplateFile() {
-    //        File file = new File(Storage.TEMPLATE_FILE_PATH);
-    //        file.delete();
-    //        Command addCommand = Parser.parseCommand("/add");
-    //        String actual = addCommand.execute().getMessage();
-    //        String expected = new InvalidCommand(
-    //                InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE).execute().getMessage();
-    //        assertEquals(expected, actual);
-    //        assert addCommand instanceof InvalidCommand;
-    //    }
 }

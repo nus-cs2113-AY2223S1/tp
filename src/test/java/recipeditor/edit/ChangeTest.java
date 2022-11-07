@@ -3,6 +3,7 @@ package recipeditor.edit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import recipeditor.exception.InvalidFlagException;
@@ -10,6 +11,7 @@ import recipeditor.exception.ParseException;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 
 public class ChangeTest {
@@ -58,5 +60,12 @@ public class ChangeTest {
         EditModeCommand ed = new Change(FlagType.DESCRIPTION, input, recipe);
         Recipe newRecipe = ed.execute();
         assertEquals(newRecipe.getDescription(), newDescription);
+    }
+
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle("title");
+        Storage.deleteRecipeFile("title");
+        Storage.rewriteRecipeListToFile();
     }
 }
