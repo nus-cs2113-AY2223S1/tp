@@ -15,5 +15,6 @@ class BuildManager {
 
 class Build {
 }
+
 BuildManager "1"---"*" Build
 @enduml
