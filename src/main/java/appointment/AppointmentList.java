@@ -67,20 +67,16 @@ public class AppointmentList {
     }
 
     public static void removeAppointment(int appointmentId) {
-        boolean removeFlag = false;
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
                 appointments.remove(appointment);
                 System.out.print("Noted. I've removed this appointment: ");
                 System.out.println("Pet " + appointment.petId + " | " + "Service " + appointment.service);
                 System.out.println("Now you have " + (appointments.size()) + " appointments in the list.");
-                removeFlag = true;
-                break;
+                return;
             }
         }
-        if (!removeFlag) {
-            System.out.println("Sorry, no corresponding appointment found.");
-        }
+        System.out.println("Sorry, no corresponding appointment found.");
     }
 
     public static AppointmentStatus intToAppointmentStatus(int statusIdx) {
@@ -97,7 +93,7 @@ public class AppointmentList {
     }
 
     public static Boolean updateAppointmentStatus(int appointmentId) {
-        boolean setFlag = false;
+
         for (Appointment appointment : appointments) {
             if (appointment.appointmentId == appointmentId) {
 
@@ -105,14 +101,11 @@ public class AppointmentList {
                 System.out.print("Noted. I've set this service: ");
                 System.out.print("Pet " + appointment.petId + " | " + "Service " + appointment.service);
                 System.out.println(" as " + appointment.getAppointmentStatus());
-                setFlag = true;
+                return true;
             }
         }
-        if (!setFlag) {
-            System.out.println("Sorry, no corresponding appointment found.");
-            return false;
-        }
-        return true;
+        System.out.println("Sorry, no corresponding appointment found.");
+        return false;
     }
 
 }
