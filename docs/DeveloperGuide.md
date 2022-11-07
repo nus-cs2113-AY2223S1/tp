@@ -1,6 +1,6 @@
 # MoneyGoWhere: Developer Guide
 
-<p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
+<p align="center"><img alt="icon" width="256" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 
 ## Contents
 * [Introduction](#introduction)
