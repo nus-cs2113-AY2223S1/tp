@@ -187,8 +187,7 @@ Base on the value of health, 1 out of 10 different status of pets will be genera
 
 * `HEALTH = 1`: happy / boring / sleepy / energetic / fantastic
 * `HEALTH = 0`: exhausted / painful / injured / bleeding / dying
-* The random `HEALTH` status assigned is for fun. Whether is the pet happy or sleepy is not important. Whether the
-* health state is 1 or 0 is important.
+* The random `HEALTH` status assigned is for fun. Whether is the pet happy or sleepy is not important. Whether the health state is 1 or 0 is important.
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
