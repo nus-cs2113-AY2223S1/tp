@@ -31,7 +31,7 @@ public class Parser {
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
             "Index is not present in the list.";
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
-            "Wrong command format.";
+            "Wrong command format. Missing title or index from input.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
     private static final String INVALID_TITLE_MESSAGE = " is not a valid title.";
     private static final int COMMAND_INPUT_LENGTH = 2;
@@ -208,6 +208,8 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
+            } catch (InvalidFlagException e) {
+                return new InvalidCommand(e.getMessage());
             } catch (Exception e) {
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }

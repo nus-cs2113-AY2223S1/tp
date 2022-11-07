@@ -1,5 +1,6 @@
 package recipeditor.parser;
 
+import recipeditor.command.EditCommand;
 import recipeditor.exception.ExcessFlagsException;
 
 import static recipeditor.parser.FlagType.NULL;
@@ -28,6 +29,9 @@ public class FlagParser {
     private static final String TITLE_FLAG = FLAG_INITIAL + "t";
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
+    private static final String COMMAND_WORD_EDIT = "/edit";
+    private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
+    private static final int FLAG_POSITION_OTHER_COMMAND = 2;
 
     /**
      * Fina all the flags in a given command.
@@ -37,9 +41,19 @@ public class FlagParser {
      */
     public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException, InvalidFlagException {
         FlagType[] flags = {NULL, NULL};
+        String commandWord = parsedCommand[0];
         int recipeFlagCount = 0;
         int commandFlagCount = 0;
+        int index = 0;
         for (String s : parsedCommand) {
+            index++;
+            if (commandWord.equals(COMMAND_WORD_EDIT)
+                    && index < STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
+                continue;
+            }
+            if (index != FLAG_POSITION_OTHER_COMMAND) {
+                continue;
+            }
             if (s.contains("-")) {
                 switch (s) {
                 case INDEX_FLAG:
@@ -81,6 +95,8 @@ public class FlagParser {
                 default:
                     throw new InvalidFlagException();
                 }
+            } else {
+                throw new InvalidFlagException();
             }
         }
         if (recipeFlagCount > 1) {
