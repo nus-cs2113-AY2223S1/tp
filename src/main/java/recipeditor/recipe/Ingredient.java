@@ -10,6 +10,9 @@ public class Ingredient {
             "Ingredient name and unit cannot be empty!";
     private static final String DIVIDER = "/";
     private static final int MAX_DIVIDES = 3;
+    private static final int START_INDEX = 0;
+    private static final int AMOUNT_INDEX = 1;
+    private static final int UNIT_INDEX = 2;
     private String name;
     private double amount;
     private String unit;
@@ -42,12 +45,12 @@ public class Ingredient {
     public static Ingredient parsedIngredients(String input) throws ParseException {
         String[] parsed = input.split(DIVIDER, MAX_DIVIDES);
         try {
-            double amount = Double.parseDouble(parsed[1]);
-            if (parsed[0].isBlank() || parsed[2].isBlank()) {
+            double amount = Double.parseDouble(parsed[AMOUNT_INDEX]);
+            if (parsed[START_INDEX].isBlank() || parsed[UNIT_INDEX].isBlank()) {
                 Ui.showMessage(EMPTY_INGREDIENT_FILEDS);
                 throw new ParseException(INGREDIENT_FORMAT);
             }
-            return new Ingredient(parsed[0], amount, parsed[2]);
+            return new Ingredient(parsed[START_INDEX], amount, parsed[UNIT_INDEX]);
         } catch (Exception e) {
             throw new ParseException(INGREDIENT_FORMAT);
         }
