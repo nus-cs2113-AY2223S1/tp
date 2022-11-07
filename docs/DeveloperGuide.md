@@ -613,4 +613,32 @@ Please ensure that a patient with ID `T1` and `T2` exists before testing this fe
     1. All commands supported in the Prescription menu should be shown.
 
 #### Visit menu tests
-Please follow the same format as Patient, but also include testing for `viewPatient` and `viewVisit`
+Please follow the same format as Patient & Prescription for `add`, `edit`, `viewall`, etc.
+For `viewPatient` and `viewVisit` please read below.
+
+##### Viewing a patient's visits
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID
+`321`. Please add visits for patient `T1` and not for `T2`.
+
+1. View visits of a patient with existing visits
+    1. Input `viewPatient i/T1`
+    2. The  visits corresponding to patient `T1` should be listed.
+2. View visits of a patient with no existing visits
+    1. Input `viewPatient i/T2`
+    2. There should be a message stating that there is no visits from this patient in the system.
+3. View visits of non-existing patient
+    1. Input `viewPatient i/321`
+    2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Viewing a visit
+Please ensure that a patient with ID `T1` exists before testing this feature, and there is no patient with ID
+`321`. Please add at least two visits for patient `T1`, and there are no other visits in the system.
+
+1. View visits of a patient with existing visits
+    1. Input `viewPatient i/T1`
+    2. The visits corresponding to patient `T1` should be listed.
+    3. Input `viewVisit x/1`
+    4. The single visit should be displayed with an index of 1
+2. View visits that do not exist
+    1. Input `viewVisit x/5`
+    2. There should be a message stating that there is no visit with that index.
