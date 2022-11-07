@@ -86,7 +86,7 @@ See more detail in the [Features Section](#features) section below.
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
 | `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
 | `favourite list`         | `fav list`        | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks) |
-| `help`                   | `h`               | [List all possible commands](#help)                                                        |   
+| `help`                   | `h`               | [List all possible commands](#list-all-possible-commands)                                                        |   
 | `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                |
 
 ### Authenticate user API
@@ -624,6 +624,6 @@ when you restart the program.
 | `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
 | `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
 | `favourite list`         | `fav list`        | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks) |
-| `help`                   | `h`               | [Lists all possible commands](#help)                                                        |   
+| `help`                   | `h`               | [Lists all possible commands](#list-all-possible-commands)                                                        |   
 | `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                 |
 
