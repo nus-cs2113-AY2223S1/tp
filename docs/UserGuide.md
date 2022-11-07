@@ -44,7 +44,7 @@ Stores all the forex rates in one place and allows the user to store different t
 
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Duke` from [here](http://link.to/duke).
+2. Download the latest version of `Duke` from [here](https://github.com/AY2223S1-CS2113-W13-1/tp/releases).
 
 ## Features 
 
@@ -58,8 +58,8 @@ Format:
   2. `Please enter your username: <username>`
   3. `Please enter your password: <password>`
 
-* The <username> has to be a unique username.
-* The <password> has to be at least 8 characters long.  
+* The username has to be a unique username.
+* The password has to be at least 8 characters long.  
 
 Example of usage: 
 
@@ -413,57 +413,93 @@ Example of Usage: `exit`
 ## FAQ
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: You can just create a zip file of your jar file with your data folders that contain all the information about your wallet(s) so once you copy those over you can automatically keep working there
 
 ## Command Summary
-#login
-#register
-#Please enter your username: <username>
-#Please enter your password: <password>
+ 
+ ### 1) Login / Register
+ 
+ - `login`
+ - `register`
+ - `Please enter your username: <username>`
+ - `Please enter your password: <password>`
   
-#new_currency
-#Please enter your new currency's abbreviation: <abbreviation>
-#Please enter your new currency's full name: <full name>
-#Please enter your new currency's symbol: <symbol>
-#Please enter your new currency's rate: <rate>
+ ### 2) New Currency
+ 
+ - `new_currency`
+ - `Please enter your new currency's abbreviation: <abbreviation>`
+ - `Please enter your new currency's full name: <full name>`
+ - `Please enter your new currency's symbol: <symbol>`
+ - `Please enter your new currency's rate: <rate>`
   
-#remove
-#OK, which currency would you like to remove? Enter the abbreviation of that currency: <abbreviation>
-#change default currency
+### 3) Remove currency
+ 
+ - `remove
+ - `OK, which currency would you like to remove? Enter the abbreviation of that currency: <abbreviation>`
+ - `change default currency`
   
-#password: password123
-#Enter the currency you would like to change your default to: eur
+ 
+ ### 4) Adding password during register
+ 
+ 
+ - `password: password123`
+ - `Enter the currency you would like to change your default to: eur`
   
-#change password
-#password: password123
-#Enter the currency you would like to change your default to: eur
+### 5) Changing password
+ 
+ 
+ - `change password`
+ - `password: password123`
+ - `Enter the currency you would like to change your default to: eur`
   
-#change username
-#password: password123
-#New username: testing1
+ ### 5) Changing username
+ 
+ - `change username`
+ - `password: password123`
+ - `New username: testing1`
   
-#delete account
-#y
+ ### 6) Deleting account
+ 
+ - `delete account`
+ - `y`
   
-#balance
+ ### 7) Getting balance
+ 
+ - `balance`
   
-#detail
+ ### 8) Getting detailed view of your wallet
+ 
+ - `detail`
   
-#save <currency> <amount>
-#save <amount>
+ ### 9) Depositing money to your account
+ 
+ - `deposit <currency> <amount>`
+ - `deposit <amount>`
   
-#withdraw <currency> <amount>
-#withdraw <amount>
+ ### 10) Withdrawing money from your account
+ 
+ - `withdraw <currency> <amount>`
+ - `withdraw <amount>`
 
-#convert
-#convertAll
-#setDefault
+  ### 11) Converting all your money to one currency
+ 
+ - `convert`
+ - `convertAll`
+ - `setDefault`
 
-#list
+  ### 12) Getting a list view of all the currencies
+ 
+ - `list`
   
-#transfer <recipient> <amount> <currency>
+  ### 13) Transfer money to another wallet
+ 
+ - `transfer <recipient> <amount> <currency>`
   
-#info
+  ### 14) Getting info about a currency
+ 
+ - `info <currency>`
 
-#conversion <abbreviation>
-#conversion <abbreviation> <abbreviation>
+ ### 15) Converting from one currency to another
+ 
+ - `conversion <abbreviation>`
+ - `conversion <abbreviation> <abbreviation>`
