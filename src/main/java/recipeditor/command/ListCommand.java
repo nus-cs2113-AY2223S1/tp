@@ -1,8 +1,6 @@
 package recipeditor.command;
 
-import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
-import recipeditor.ui.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_TYPE = "/list";

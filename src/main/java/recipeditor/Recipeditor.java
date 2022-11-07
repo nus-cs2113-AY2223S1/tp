@@ -8,9 +8,6 @@ import recipeditor.command.Command;
 import recipeditor.command.ExitCommand;
 import recipeditor.command.CommandResult;
 
-import java.io.File;
-
-
 public class Recipeditor {
 
     public static void main(String[] args) {
@@ -40,7 +37,6 @@ public class Recipeditor {
     }
 
     private static void runCommandLoopUntilExitCommand() {
-
         Command command;
         do {
             String input = Ui.readInput();

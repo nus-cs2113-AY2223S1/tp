@@ -1,6 +1,5 @@
 package recipeditor.command;
 
-
 public class InvalidCommand extends Command {
     public static final String COMMAND_TYPE = "/invalid";
     public static String INVALID_MESSAGE = "This is not a valid command! "

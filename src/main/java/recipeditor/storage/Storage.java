@@ -10,15 +10,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import recipeditor.exception.ParseFileException;
-import recipeditor.parser.RecipeFileParser;
 import recipeditor.parser.TitleFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.ui.Ui;
 
 public class Storage {
-    public static final String LOG_FILE = "./RecipeData/App/Log.txt";
     public static final String FORWARD_SLASH_DIVIDER = "/";
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
@@ -122,6 +119,7 @@ public class Storage {
      * Find file path of the given recipe title.
      *
      * @param title recipe title of file to change to file path
+     * @return file path of the recipe
      */
     public static String titleToFilePath(String title) {
         return RECIPES_FOLDER_PATH + FORWARD_SLASH_DIVIDER + title + FORWARD_SLASH_DIVIDER;

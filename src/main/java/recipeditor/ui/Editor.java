@@ -11,8 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.ScrollPaneConstants;
 
-
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,6 +94,7 @@ public class Editor extends JFrame implements ActionListener {
     }
     /**
      * Change behavior of actionPerformed of ActionListener.
+     *
      * @param e the event to be processed
      */
 
@@ -122,6 +121,7 @@ public class Editor extends JFrame implements ActionListener {
 
     /**
      * Enter the editor.
+     *
      * @param path load the content to the text area
      * @return true if the file is properly saved.
      * @throws FileNotFoundException handle by GUI Flow

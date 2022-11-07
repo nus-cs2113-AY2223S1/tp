@@ -4,7 +4,6 @@ import recipeditor.exception.ParseException;
 import recipeditor.ui.Ui;
 
 public class Ingredient {
-    private static final String ERROR_PARSING = "Error Parsing Ingredients";
     public static final String INGREDIENT_FORMAT = "Ingredient must follow format:"
             + '\n' + "<name>/<amount in number>/<unit>";
     public static final String EMPTY_INGREDIENT_FILEDS =
@@ -53,5 +52,4 @@ public class Ingredient {
             throw new ParseException(INGREDIENT_FORMAT);
         }
     }
-
 }

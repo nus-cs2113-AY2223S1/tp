@@ -1,10 +1,8 @@
 package recipeditor.parser;
 
-import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -1,6 +1,5 @@
 package recipeditor.parser;
 
-import recipeditor.command.EditCommand;
 import recipeditor.exception.ExcessFlagsException;
 
 import static recipeditor.parser.FlagType.NULL;
@@ -17,7 +16,6 @@ import static recipeditor.parser.FlagType.DESCRIPTION;
 import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
 import recipeditor.exception.InvalidFlagException;
-import recipeditor.ui.Ui;
 
 public class FlagParser {
 
