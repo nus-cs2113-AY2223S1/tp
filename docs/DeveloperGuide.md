@@ -92,15 +92,15 @@ The model component consists of a `Api` class that supports API call to LTA Data
 package `seedu.api`.
 
 This component:
-* Focuses on communicating with an external Api by using HTTP requests. 
+* Focuses on communicating with an external API by using HTTP requests. 
 * JSON response will be stored in the local JSON file as long as the response is `200 OK` and not empty.
-* Only reads from the secret.txt file once and stores the API as a variable (will only read from the file
+* Only reads from the `secret.txt` file once and stores the API as a variable (will only read from the file
 if requested again).
 
 
 The API component is also able to:
-- Loads in key from a local file storage (in txt format).
-- Authenticate user API key. If no user key inputted, default key will be loaded.
+- Loads in key from a local file storage (in .txt format).
+- Authenticate user API key. If there is no user key input in the program, default key will be loaded.
 - Get API authentication status.
 
 The following sequence diagram shows how the API key is loaded.
@@ -117,14 +117,14 @@ A `LtaJsonWrapper` class is also present, for use with the Jackson JSON parser.
 
 This component: 
 - Reads and parses JSON files into a usable format for the program (`CarparkList` and 
-`Carpark` classes)
+`Carpark` classes).
 - Read and parse a .txt file with save data into a usable format for the program (`CarparkList` and
-  `Carpark` classes)
+  `Carpark` classes).
 - Write to a .txt containing save information for carparks that may have been edited by the user
-- Regenerate files when an invalid format is detected, and ignore invalid values
+- Regenerate files when an invalid format is detected, and ignore invalid values.
 
 For more information on the process of loading files from JSON, please see the section 
-[Updating CarparkList with JSON from API](#33-updating-carparklist-with-json-file-from-api).
+[3.3 Updating CarparkList with JSON file from API](#33-updating-carparklist-with-json-file-from-api).
 
 ### 2.5 UI Component
 
@@ -132,8 +132,8 @@ The user-facing parts of the program are implemented with the `Ui` class.
 
 It implements the following main functions:
 
-- `println()` - Prints either a String or an Ansi followed by a newline using System.out.println().
-- `print()` - Prints either a String or an Ansi using System.out.println().
+- `println()` - Prints either a String or an Ansi followed by a newline using `System.out.println()`.
+- `print()` - Prints either a String or an Ansi using `System.out.print()`.
 - `printGreen()` - Prints a String in green colour.
 - `printRed()` - Prints a String in red colour.
 - `printRenderedString()` - Prints a String to render.
@@ -158,12 +158,12 @@ interface so that they can be treated similarly where possible.
 
 How the command works:
 
-* When the `Parser` returns back as a `Command` object, it will run `execute`, which is a method to execute the command
-and return the intended result. `Execute` returns a `CommandResult`, which is an object that takes in `String` and
+* When the `Parser` returns a `Command` object, it runs `Command.execute()`, which is a method to execute the command
+and return the intended result. This method returns a `CommandResult`, which is an object that takes in `String` and
 `CarparkList` and returns what the user will be seeing on the terminal.
 * Each command will have its own class `ABCCommand` (`ABC` is a placeholder for the specific command name e.g. 
 `FindCommand`) as an extension of the `Command` class.
-* All `ABCCommand` classes will have an override `execute` method, which will override the `execute` method in `Command` 
+* All `ABCCommand` classes will have an override `execute()` method, which will override the `execute` method in `Command` 
 and return the respective `CommandResult` result of the Command.
 
 ![Logic Class Diagram](images/LogicClassDiagram.png)
@@ -289,13 +289,13 @@ Before going deep into how the data is fetched from the LTA API, we will run thr
 1. The initialisation of the class will make an instance of the `Storage`, `HttpClient` and `Ui` class.
 2. If the program just started, the Parking class will call the `loadApiKey` method.
     - If no file called `secret.txt` is found, file will be created.
-    - If the file is empty, default key will be loaded to the Api instance (but not written to the local file).
-3. To get a certain data set from the Api Service,
+    - If the file is empty, default key will be loaded to the `Api` instance (but not written to the local file).
+3. To get a certain data set from the API Service,
     - Call `asyncExecuteRequest` method to construct the HTTP request packet header and sends the request
       asynchronously.
-    - Call `fetchData` method to get response immediately from the Api.
-        - This method will also validate the response from the Api by identifying the response code.
-        - Unless its 401 Unauthorised Access (due to invalid Api key), the method will try to fetch data
+    - Call `fetchData` method to get response immediately from the API.
+        - This method will also validate the response from the API by identifying the response code.
+        - Unless its 401 Unauthorised Access (due to invalid API key), the method will try to fetch data
           at most 5 times.
 
 Since each API call only returns 500 data, we need to make multiple api calls. Thus, there is another function
