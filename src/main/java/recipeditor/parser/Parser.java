@@ -11,6 +11,7 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
 
+import recipeditor.edit.Invalid;
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.MissingFlagsException;
 import recipeditor.recipe.Recipe;
@@ -32,12 +33,21 @@ public class Parser {
             "Index is not present in the list.";
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
             "Wrong command format.";
-    private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
+    private static final int COMMAND_INDEX = 0;
+
     private static final int COMMAND_LENGTH = 1;
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
     private static final int COMMAND_FLAG_INPUT_LENGTH = 3;
+    private static final String SPACE_DIVIDER = " ";
+    private static final int DELETE_COMMAND_FLAG_INDEX = 1;
+    private static final int DELETE_COMMAND_RECIPE_INDEX = 2;
+    private static final int VIEW_COMMAND_FLAG_INDEX = 1;
+    private static final int VIEW_COMMAND_RECIPE_INDEX = 2;
+    private static final int EDIT_COMMAND_RECIPE_INDEX = 1;
+    private static final int ACCOUNT_ZERO_INDEXING = -1;
+
 
     /**
      * Parse the input command and returns respective executable command.
@@ -46,8 +56,8 @@ public class Parser {
      * @return command that can be executed
      */
     public static Command parseCommand(String input) {
-        String[] parsed = input.split(" ");
-        String commandWord = parsed[0].toLowerCase();
+        String[] parsed = input.split(SPACE_DIVIDER);
+        String commandWord = parsed[COMMAND_INDEX].toLowerCase();
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
@@ -96,16 +106,16 @@ public class Parser {
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
-        String recipeTitleToDelete = "";
+        String recipeTitleToDelete;
         try {
             FlagType[] flags = FlagParser.getFlags(parsed);
-            switch (flags[1]) {
+            switch (flags[DELETE_COMMAND_FLAG_INDEX]) {
             case INDEX:
-                int recipeIndexToDelete = Integer.parseInt(parsed[2]) - 1;
+                int recipeIndexToDelete = Integer.parseInt(parsed[DELETE_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert recipeIndexToDelete > -1;
                 return new DeleteCommand(recipeIndexToDelete);
             case TITLE:
-                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 2, parsed.length);
+                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, DELETE_COMMAND_RECIPE_INDEX, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
@@ -122,7 +132,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + INVALID_INDEX_MESSAGE);
+            Ui.showMessage(InvalidCommand.INVALID_INDEX_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {
@@ -132,16 +142,16 @@ public class Parser {
     }
 
     private static Command parseViewCommand(String[] parsed) {
-        String recipeTitleToView = "";
+        String recipeTitleToView;
         try {
             FlagType[] flags = FlagParser.getFlags(parsed);
-            switch (flags[1]) {
+            switch (flags[VIEW_COMMAND_FLAG_INDEX]) {
             case INDEX:
-                int index = Integer.parseInt(parsed[2]) - 1; // to account for 0-based indexing in recipelist
+                int index = Integer.parseInt(parsed[VIEW_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 return new ViewCommand(index);
             case TITLE:
-                String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, 2, parsed.length);
+                String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, VIEW_COMMAND_RECIPE_INDEX, parsed.length);
                 recipeTitleToView = convertStringArrayToString(recipeTitleToViewArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToView);
@@ -158,7 +168,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(parsed[2] + INVALID_INDEX_MESSAGE);
+            Ui.showMessage(InvalidCommand.INVALID_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {
@@ -171,7 +181,7 @@ public class Parser {
         int index = -1;
         if (parsed.length == COMMAND_INDEX_LENGTH) {
             try {
-                index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                index = Integer.parseInt(parsed[EDIT_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
@@ -194,7 +204,7 @@ public class Parser {
             }
         } else if (parsed.length >= COMMAND_FLAG_INPUT_LENGTH) {
             try {
-                index = Integer.parseInt(parsed[1]) - 1;
+                index = Integer.parseInt(parsed[EDIT_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 Recipe originalRecipe = RecipeList.getRecipe(index);
                 Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
@@ -248,7 +258,7 @@ public class Parser {
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
         for (String string : stringArray) {
-            content.append(string + " ");
+            content.append(string + SPACE_DIVIDER);
         }
         content.deleteCharAt(content.length() - 1);
         return content.toString();
