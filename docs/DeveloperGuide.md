@@ -129,9 +129,10 @@ _Written by: Chia Thin Hong_
 
 ### 4.2. Command Component
 
-The `Command` component is represented by a `command` package which consists of all the classes that is part of the data stored
-by Moolah Manager. Within the `command` package, there are many classes, each corresponding to all of our commands which are
-supported by the application.
+The `Command` component is represented by a `command` package and a `ListAndStats` package. The packages contain all the 
+classes that is part of the data stored by Moolah Manager. Within the `command` package, there are many classes, 
+each corresponding to all of our commands which are supported by the application. The other package contains the
+`ListCommand` and `StatsCommand` commands.
 
 The `AddCommand` class contains the operations pertaining to adding a transaction into the list of transactions.
 
@@ -145,7 +146,8 @@ The `DeleteCommand` class contains the operations pertaining to deleting a trans
 
 The `EditCommand` class contains the operations pertaining to editing a transaction from the list of transactions.
 
-The `FindCommand` class contains the operations pertaining to searching the list of transactions for transactions that match the inputted keywords.
+The `FindCommand` class contains the operations pertaining to searching the list of transactions for transactions that 
+match the inputted keywords.
 
 The `HelpCommand` class contains the operations pertaining to displaying help messages for the user.
 

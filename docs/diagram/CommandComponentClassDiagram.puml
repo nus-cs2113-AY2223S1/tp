@@ -1,131 +1,187 @@
 @startuml
 !include Style.puml
 
-class "{abstract}\n Command" {
-        + COMMAND_WORD: String
-        + COMMAND_DESCRIPTION: String
-        + COMMAND_USAGE: String
-        + COMMAND_PARAMETERS_INFO: String
+package "Command Component" <<Rectangle>> {
+    abstract class Command
+    abstract class ListAndStatsCommand
+    class AddCommand
+    class BudgetCommand
+    class ByeCommand
+    class CommandTag
+    class DeleteCommand
+    class EditCommand
+    class FindCommand
+    class HelpCommand
+    class ListCommand
+    class PurgeCommand
+    class StatsCommand
+}
 
-        - type: String
-        - category: String
-        - description: String
-        - amount: int
-        - date: LocalDate
+abstract class Command {
+    - COMMAND_WORD {static} : String
+    + getMandatoryTags() : String[]
+    + getOptionalTags() : String[]
+    + execute(TransactionList, Ui, Storage) {abstract}: void
+}
 
-        +getMandatoryTags()
-        +setBudgetAmount()
-        +{abstract}execute()
+abstract class ListAndStatsCommand {
+    - UNDEFINED_PARAMETER {static}: int
+    - FALSE {static}: int
+    + CONTAIN_BOTH {static} : int
+    + CONTAIN_EITHER {static} : int
+    + CONTAIN_EITHER_INVALID {static} : int
+    - DAYS {static} : String
+    - WEEKS {static} : String
+    - MONTHS {static} : String
+    + month {static} : int
+    + year {static} : int
+    + period {static} : String
+    + number {static} : int
+    + containMonthYear() {static} : int
+    + containPeriodNumber() {static} : int
+    + checkContainDateIntervalTags() {static} : boolean
+    + getTimeTransactions(TransactionList) : ArrayList<Transaction>
+}
+
+class ListCommand {
+    - COMMAND_WORD {static}: String
+    - category : String
+    - date : LocalDate
+    - type : String
+    + getOptionalTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + listTransactions(TransactionList, Ui, boolean) : void
+}
+
+class StatsCommand {
+    - COMMAND_WORD {static}: String
+    - CATEGORICAL_SAVINGS {static}: String
+    - MONTHLY_EXPENDITURE {static}: String
+    - TIME_INSIGHTS {static}: String
+    - FALSE {static}: int
+    - statsType : String
+    + getMandatoryTags() : String[]
+    + getOptionalTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + listStatsByStatsType(TransactionList, Ui) : void
+    + statsTypeCategoricalSavingsOrMonthlyExpenditure(TransactionList, Ui) : void
+    + statsTypeTimeInsights(TransactionList, Ui) : void
+    - printTimeInsightsStatistics(String, ArrayList<String>, String, String, String, String) {static} : void
+}
+
+class ByeCommand {
+    - COMMAND_WORD: String {static}
+    + execute(TransactionList, Ui, Storage) : void
+}
+
+class EditCommand {
+    - COMMAND_WORD: String {static}
+    - entryNumber: int
+    - type : String
+    - description : String
+    - amount : int
+    - category : String
+    - date : LocalDate
+    + getMandatoryTags() : String[]
+    + getOptionalTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + isTagsNonEmpty(String, String, int, String, LocalDate) : boolean
+    + isIndexValid(TransactionList, int) : boolean
+    + isParameterChanged(Transaction, String, String, int, String, LocalDate) : boolean
+    + updateType(Transaction, String) : String
+    + updateDate(Transaction, LocalDate) : LocalDate
+    + updateDescription(Transaction, String) : String
+    + updateCategory(Transaction, String) : String
+    + updateAmount(Transaction, int) : int
+}
+
+class DeleteCommand {
+    - COMMAND_WORD: String {static}
+    - entryNumber: int
+    + getMandatoryTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + isIndexValid(TransactionList, int) : boolean
+}
+
+class PurgeCommand {
+    - COMMAND_WORD: String {static}
+    + execute(TransactionList, Ui, Storage) : void
+    + isEmpty(TransactionList) : boolean
+}
+
+class FindCommand {
+    - COMMAND_WORD: String {static}
+    + keyword : String
+    + getMandatoryTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + findTransactions(TransactionList, Ui, String) : void
+}
+
+class HelpCommand{
+    - COMMAND_WORD: String {static}
+    - isDetailed : Boolean
+    - hasSpecificCommand : Boolean
+    - queryCommand : String
+    + getHelpMessage() : HelpMessage {static}
+    + getDetailedHelpMessage() : HelpMessage {static}
+    + execute(TransactionList, Ui, Storage) : void
+    - generateBasicHelp() : String
+    - generateDetailedHelp() : String
+    - generateSpecificHelp() : String
+    + getOptionalTags() : String[]
 }
 
 class AddCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
+    - COMMAND_WORD: String
     - type: String
     - category: String
     - description: String
     - amount: int
     - date: LocalDate
-
-    +getMandatoryTags()
-    +{abstract}execute()
-}
-
-class ByeCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-
-    +{abstract}execute()
-}
-
-class DeleteCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-    - entryNumber: int
-
-    +getMandatoryTags()
-    +setEntryNumber(): int
-    +{abstract}execute()
-}
-
-class ListCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-    - type: String
-    - category: String
-    - date: LocalDate
-
-    -listTransactions: TransactionList
-    +{abstract}execute()
-}
-
-class PurgeCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-
-    +isEmpty(): TransactionList
-    +{abstract}execute()
-}
-
-class FindCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-    - keywords: String
-
-    +checkFindFormat() : String
-    +{abstract}execute()
-}
-
-class HelpCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-    - isDetailed : Boolean
-
-    -generateBasicHelp() : String
-    -generateDetailedHelp() : String
-    +{abstract}execute()
+    - transactionCreated: Transaction
+    + getMandatoryTags() : String[]
+    - addTransaction(TransactionList) : String
+    + checkTransactionCreated(TransactionList) {static} : void
+    + execute(TransactionList, Ui, Storage) : void
 }
 
 class BudgetCommand {
-+ COMMAND_WORD: String
-    + COMMAND_DESCRIPTION: String
-    + COMMAND_USAGE: String
-    + COMMAND_PARAMETERS_INFO: String
-
-    - budgetAmount: long
-
-    +getMandatoryTags()
-    +setBudgetAmount()
-    +{abstract}execute()
+    - COMMAND_WORD: String {static}
+    - budgetAmount : long
+    + getMandatoryTags(): String[]
+    + execute(TransactionList, Ui, Storage) : void
 }
 
-FindCommand --|> "{abstract}\n Command"
-ByeCommand -up-|> "{abstract}\n Command"
-AddCommand -up-|> "{abstract}\n Command"
-DeleteCommand --|> "{abstract}\n Command"
-ListCommand --|> "{abstract}\n Command"
-PurgeCommand -up-|> "{abstract}\n Command"
-HelpCommand -left-|> "{abstract}\n Command"
-BudgetCommand -right-|> "{abstract}\n Command"
+class CommandTag {
+    + COMMAND_TAG_TRANSACTION_TYPE : String {static}
+    + COMMAND_TAG_TRANSACTION_CATEGORY : String {static}
+    + COMMAND_TAG_TRANSACTION_AMOUNT : String {static}
+    + COMMAND_TAG_TRANSACTION_DATE : String {static}
+    + COMMAND_TAG_TRANSACTION_DESCRIPTION : String {static}
+    + COMMAND_TAG_GLOBAL_ENTRY_NUMBER : String {static}
+    + COMMAND_TAG_GLOBAL_MONTH : String {static}
+    + COMMAND_TAG_GLOBAL_YEAR : String {static}
+    + COMMAND_TAG_GLOBAL_NUMBER : String {static}
+    + COMMAND_TAG_GLOBAL_PERIOD : String {static}
+    + COMMAND_TAG_FIND_KEYWORD : String {static}
+    + COMMAND_TAG_HELP_OPTION : String {static}
+    + COMMAND_TAG_HELP_QUERY : String {static}
+    + COMMAND_TAG_STATS_TYPE : String {static}
+    + COMMAND_TAG_BUDGET_AMOUNT : String {static}
+}
+
+ListCommand -up-|> ListAndStatsCommand : inherits from
+StatsCommand -up-|> ListAndStatsCommand : inherits from
+
+ListAndStatsCommand --|> Command : inherits from
+
+AddCommand --|> Command : inherits from
+BudgetCommand --|> Command : inherits from
+CommandTag --|> Command : inherits from
+PurgeCommand --|> Command : inherits from
+DeleteCommand -left-|> Command : inherits from
+EditCommand -right-|> Command : inherits from
+FindCommand -up-|> Command : inherits from
+ByeCommand -up-|> Command : inherits from
+HelpCommand -up-|> Command : inherits from
 @enduml
