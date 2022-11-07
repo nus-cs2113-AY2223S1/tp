@@ -207,7 +207,8 @@ The following sequence diagrams to showcase the list of commands,
 7. [Delay a flight feature](#delay-a-flight-feature)
 8. [List flights feature](#list-flights-feature)
 
----
+---  
+
 <div style="page-break-after: always;"></div>  
 
 ### Add a passenger feature
