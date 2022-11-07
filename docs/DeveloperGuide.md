@@ -26,8 +26,24 @@ Given below is an overview of main components and how they interact with each ot
 * Reading inputs from user and printing feedbacks to the user
 
 `Logic:`
+Here's a class diagram of the logic component.
+![Logic.png](UmlDiagrams/Logic.png)
 
-* The command executor
+How the logic component works:
+* After taking in the input from the user, it is parsed to the Parser class of the Logic component 
+to interpret the user's command.
+* This results in a Command object (more precisely, an object of one of its subclasses 
+e.g., AddCommand), which would then be executed by Duke.
+* The command can communicate with the Records when it is executed (e.g. adding a new food record or finding an
+exercise record). 
+* The command can also communicate with the Storage Component when it is executed (e.g. saving and loading records).
+* Additionally, the command also communicates with Ui Component to display the results of the execution back to the 
+user.
+* The command is validated by the Validator class to handle user's input accurately and prevent bad commands from being
+executed.
+* Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses, 
+e.g. Duke Exception) is thrown.
+
 
 `Records:`
 
@@ -137,14 +153,22 @@ Adding strength exercise
 Marking exercise  
 ![](UmlDiagrams/MarkExercise.png)
 
-Finding a record  
+Finding a record
+The sequence diagrams below represent the interactions when a user find a record.
 ![Find.png](UmlDiagrams/Find.png)
+
+
+In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
+As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
+removeCommand to be printed on the ui.
+![](UmlDiagrams/RemoveWeight.png)  
+The interactions for removing other types of records are similar.
+
 
 
 The following sequence diagram shows how the view operation works:
 
 There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
-
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
