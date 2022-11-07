@@ -24,7 +24,7 @@ reception to record appointments, assign tasks, and manage data of pets/services
 ### Contributions to the DG: 
 - drew employee view, appointment view, pet view, task view, service view uml diagram.
 
-## Contributions to team-based tasks
+### Contributions to team-based tasks
 - actively fix issues reported in PE-D, including the case when the issues may not concern with the section I am responsible for.
 Continually update UG according to changes made to the program.
 - TP testing
