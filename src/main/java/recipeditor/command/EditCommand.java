@@ -14,6 +14,9 @@ public class EditCommand extends Command {
 
     private static final String INCORRECT_SYNTAX_MESSAGE = "/edit syntax is incorrect. "
             + "Please check again using the '/help edit' command";
+
+    private static final String INCORRECT_INDEX = "/edit index is incorrect. "
+            + "Please check again using the '/help edit' command";
     private static final String EDIT_SUCCESS = " successfully edited.";
     private static final String EDIT_FAILED = "Edit failed";
     private static final String NO_EDIT = "No edit was made";

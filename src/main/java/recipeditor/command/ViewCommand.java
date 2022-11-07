@@ -8,8 +8,9 @@ import recipeditor.ui.Ui;
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "/view";
     public static final String COMMAND_FUNCTION = "View the full recipe of "
-            + "the specific index in the list of recipes";
-    public static final String COMMAND_SYNTAX = "Syntax for /view: \n" + "\t /view -<RECIPE_FLAG> <RECIPE_INDEX or RECIPE_TITLE>";
+            + "the specific index or title in the list of recipes";
+    public static final String COMMAND_SYNTAX = "\n" + "\t /view -id <recipe_index>"
+            + '\n' + "\t /view -t <recipe_title> ";
 
     private int index;
 

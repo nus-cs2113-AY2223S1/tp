@@ -11,7 +11,6 @@ import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
 
-import recipeditor.edit.Invalid;
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.MissingFlagsException;
 import recipeditor.recipe.Recipe;
@@ -115,7 +114,8 @@ public class Parser {
                 assert recipeIndexToDelete > -1;
                 return new DeleteCommand(recipeIndexToDelete);
             case TITLE:
-                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, DELETE_COMMAND_RECIPE_INDEX, parsed.length);
+                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed,
+                        DELETE_COMMAND_RECIPE_INDEX, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
@@ -123,6 +123,7 @@ public class Parser {
                     logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
                 }
+                Ui.showMessage(recipeTitleToDelete + InvalidCommand.INVALID_TITLE_MESSAGE);
                 break;
             case NULL:
                 throw new MissingFlagsException();
@@ -225,10 +226,10 @@ public class Parser {
                 logger.log(Level.INFO, "Edit command initialised in CLI");
                 return new EditCommand(flags, parsed, index, editedRecipe, originalRecipe.getTitle());
             } catch (NumberFormatException n) {
-                return new InvalidCommand();
+                return new InvalidCommand(InvalidCommand.INDEX_NOT_VALID);
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (Exception e) {
                 return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
             }

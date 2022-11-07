@@ -71,4 +71,13 @@ public class TitleFileParserTest {
             RecipeList.deleteRecipeFromTitle(s);
         }
     }
+
+    @Test
+    void parse2NoFileTitle() {
+        String[] strings = {"Recipe", "Recipe1"};
+        TitleFileParser.parseTitleFileToRecipeTitles(strings);
+        Assertions.assertEquals(0, RecipeList.getRecipeTitlesSize());
+    }
+
+
 }

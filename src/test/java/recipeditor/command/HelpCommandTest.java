@@ -1,6 +1,7 @@
 package recipeditor.command;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import recipeditor.parser.Parser;
@@ -13,8 +14,7 @@ public class HelpCommandTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Try /help <command type>\n"
-                + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
+        String expected = "Try /help <command type>";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 
@@ -43,8 +43,10 @@ public class HelpCommandTest {
         String input = "/help delete";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: /delete <title>\n"
-                + "Description: Delete the recipe of given title from recipeditor.";
+        String expected = "Syntax: "
+                + '\n' + "\t /delete -id <recipe_index>"
+                + '\n' + "\t /delete -t <recipe_title>" + '\n'
+                + "Description: Delete the recipe of given title or index from recipeditor.";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 
@@ -121,9 +123,10 @@ public class HelpCommandTest {
         String input = "/help view";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Syntax: Syntax for /view: \n"
-                + "\t /view <index or title>\n"
-                + "Description: View the full recipe of the sepcific index in the list of recipes";
+        String expected = "Syntax: "
+                + "\n" + "\t /view -id <recipe_index>"
+                + '\n' + "\t /view -t <recipe_title> " + '\n'
+                + "Description: View the full recipe of the specific index or title in the list of recipes";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 

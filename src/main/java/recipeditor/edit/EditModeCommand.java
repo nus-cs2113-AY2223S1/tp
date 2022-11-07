@@ -18,17 +18,11 @@ public abstract class EditModeCommand {
         this.recipe = recipe;
     }
 
-    public EditModeCommand(Recipe recipe) {
-        this.recipe = recipe;
-    }
 
     public String getMessage() {
         return message;
     }
 
-    public void setIngredientFlag(FlagType ingredientFlag) {
-        this.ingredientFlag = ingredientFlag;
-    }
 
     public abstract Recipe execute() throws InvalidFlagException, ParseException;
 }

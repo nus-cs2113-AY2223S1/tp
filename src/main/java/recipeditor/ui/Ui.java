@@ -21,13 +21,6 @@ public class Ui {
             + "                |";
 
     /**
-     * Prints divider (dash lines) on the console.
-     */
-    public static void showDivider() {
-        showMessage(DIVIDER);
-    }
-
-    /**
      * Prints RecipEditor logo, starting message and list of available commands on the console.
      */
     public static void showGreeting() {
@@ -89,20 +82,5 @@ public class Ui {
         showMessage(result.getMessage());
     }
 
-    /**
-     * Clear console screen on all OS.
-     */
-    public static void clear() {
-        try {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            //  Handle any exceptions.
-        }
-    }
 }
+

@@ -20,16 +20,13 @@ public class ListCommand extends Command {
      * @return a compiled list of all recipes
      */
     public CommandResult execute() {
-        try {
-            StringBuilder recipeTitlesList = new StringBuilder();
-            recipeTitlesList.append(RecipeList.printNumberOfRecipes());
-            for (int i = 0; i < RecipeList.getRecipeTitlesSize(); i++) {
-                recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipeTitle(i)));
-            }
-            return new CommandResult(recipeTitlesList.toString());
-        } catch (Exception e) {
-            return new CommandResult("An error happened.");
+
+        StringBuilder recipeTitlesList = new StringBuilder();
+        recipeTitlesList.append(RecipeList.printNumberOfRecipes());
+        for (int i = 0; i < RecipeList.getRecipeTitlesSize(); i++) {
+            recipeTitlesList.append(String.format("%n%d. %s", i + 1, RecipeList.getRecipeTitle(i)));
         }
+        return new CommandResult(recipeTitlesList.toString());
     }
 
 }
