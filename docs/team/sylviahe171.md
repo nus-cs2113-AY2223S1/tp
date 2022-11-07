@@ -6,7 +6,7 @@ following the course requirements of CS2113 within six weeks. PCMS is a desktop 
 reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
 
 ## Summary of Contributions
-### code contributed: 
+### Code contributed: 
 [CS2113_tP_Code_Dashboard](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=sylviahe171&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 - implemented Parser, AppointmentParser, EmployeeParser, PetParser, ServiceParser, TaskParser.
 - implemented ServiceListTest's functions except from addService and removeService
