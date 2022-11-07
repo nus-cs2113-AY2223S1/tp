@@ -95,16 +95,16 @@ as the user input.
 Adding a new record  
 ![](UmlDiagrams/Add.png)
 
-Adding weight and fat record
+Adding weight and fat record  
 ![](UmlDiagrams/AddWeightAndFat.png)
 
 Adding food record  
 ![AddFood.png](UmlDiagrams/AddFood.png)
 
-Adding strength exercise
+Adding strength exercise  
 ![](UmlDiagrams/AddStrengthExercise.png)
 
-Marking exercise
+Marking exercise  
 ![](UmlDiagrams/MarkExercise.png)
 
 Finding a record  
@@ -121,6 +121,15 @@ Viewing calories
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
+
+**Removing records**  
+The sequence diagrams below represent the interactions when a user removes a record.  
+![](UmlDiagrams/Remove.png)  
+In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
+As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
+removeCommand to be printed on the ui.
+![](UmlDiagrams/RemoveWeight.png)  
+The interactions for removing other types of records are similar.  
 
 ### Design considerations
 **Saving data:**

@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+activate removeCommand
+group removeWeight
+    removeCommand -> removeCommand: removeWeight(index: int)
+    removeCommand -> weightAndFatList: removeWeightAndFat(index: int)
+        weightAndFatList -> weightAndFatList: remove(index: int)
+        return deletedWeightAndFat: WeightAndFat
+    return deletedWeightAndFat: WeightAndFat
+    removeCommand -> ui: output(successMessage: String)
+    return
+    removeCommand -> weightAndFat: toString(deletedWeightAndFat: WeightAndFat)
+    return weightAndFatString: String
+    removeCommand -> ui: output(weightAndFatString: String)
+    return
+    return
+
+end
+
+deactivate removeCommand
+
+@enduml
