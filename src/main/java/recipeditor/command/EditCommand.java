@@ -39,6 +39,9 @@ public class EditCommand extends Command {
             + "\t -chg (recipe flag) (index) (input) \n"
             + "Recipe flags: \n"
             + "\t -i: ingredient, -s: step, -t: title, -d: description \n";
+    private static final int COMMAND_FLAG_INDEX = 0;
+    private static final int RECIPE_FLAG_INDEX = 1;
+    private static final String COLON_DELIMITER_WITH_SPACE = ": ";
     private int index;
     private String oldTitle;
     private Recipe editedRecipe;
@@ -87,18 +90,18 @@ public class EditCommand extends Command {
         } else {
             // CLI
             EditModeCommand cmd;
-            switch (flags[0]) {
+            switch (flags[COMMAND_FLAG_INDEX]) {
             case ADD:
-                cmd = new Add(flags[1], parsed, editedRecipe);
+                cmd = new Add(flags[RECIPE_FLAG_INDEX], parsed, editedRecipe);
                 break;
             case DELETE:
-                cmd = new Delete(flags[1], parsed, editedRecipe);
+                cmd = new Delete(flags[RECIPE_FLAG_INDEX], parsed, editedRecipe);
                 break;
             case SWAP:
-                cmd = new Swap(flags[1], parsed, editedRecipe);
+                cmd = new Swap(flags[RECIPE_FLAG_INDEX], parsed, editedRecipe);
                 break;
             case CHANGE:
-                cmd = new Change(flags[1], parsed, editedRecipe);
+                cmd = new Change(flags[RECIPE_FLAG_INDEX], parsed, editedRecipe);
                 break;
             default:
                 return new CommandResult(EDIT_FAILED);
@@ -106,8 +109,8 @@ public class EditCommand extends Command {
             try {
                 this.editedRecipe = cmd.execute();
                 RecipeList.editRecipe(index, editedRecipe, oldTitle);
-                return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + ": "
-                        + flags[1].toString().toLowerCase() + EDIT_SUCCESS);
+                return new CommandResult(cmd.getMessage() + '\n' + editedRecipe.getTitle() + COLON_DELIMITER_WITH_SPACE
+                        + flags[RECIPE_FLAG_INDEX].toString().toLowerCase() + EDIT_SUCCESS);
             } catch (IndexOutOfBoundsException e) {
                 return new CommandResult(InvalidCommand.INDEX_OUT_OF_RANGE_MESSAGE);
             } catch (Exception e) {

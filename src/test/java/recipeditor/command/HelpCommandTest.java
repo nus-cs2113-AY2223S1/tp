@@ -14,8 +14,7 @@ public class HelpCommandTest {
         String input = "/help";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
-        String expected = "Try /help <command type>\n"
-                + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
+        String expected = "Try /help <command type>";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 
@@ -127,7 +126,7 @@ public class HelpCommandTest {
         String expected = "Syntax: "
                 + "\n" + "\t /view -id <recipe_index>"
                 + '\n' + "\t /view -t <recipe_title> " + '\n'
-                + "Description: View the full recipe of the sepcific index or title in the list of recipes";
+                + "Description: View the full recipe of the specific index or title in the list of recipes";
         assertEquals(expected, commandExecutedResult.getMessage());
     }
 

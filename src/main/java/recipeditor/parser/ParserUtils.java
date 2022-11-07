@@ -1,6 +1,7 @@
 package recipeditor.parser;
 
 import org.apache.commons.lang3.StringUtils;
+import recipeditor.ui.Ui;
 
 /**
  * Utility class with useful method for parsing.
@@ -10,7 +11,7 @@ public class ParserUtils {
      * Check for alphanumeric.
      */
     public static boolean isTitleNotAlphanumeric(String title) {
-        String[] parsed = title.split(" ");
+        String[] parsed = title.split(Ui.SPACE_DIVIDER);
         for (String word : parsed) {
             if (!StringUtils.isAlphanumeric(word.trim()) && !word.isBlank()) {
                 return true;

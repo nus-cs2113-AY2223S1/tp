@@ -88,7 +88,9 @@ The following sections summarise what I have contributed to the project.
   ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149)),
   ([#170](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/170)),
   ([#171](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/171))
-- Helped to review, give comments, approve and merge Github pull requests. ([#168](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/168))
+- Helped to find bugs and solve them ([#176](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/176) to [#180](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/180))
+- Helped to review with non-trivial comments on teammate's Github pull requests. ([#168](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/168), [#172](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/172), [#190](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/190))
+- Initiation of weekly meeting (both physical and online)
 
 ### **Enhancements To Existing Features**:
 
@@ -117,3 +119,6 @@ recipe. This helps to make the editing, deletion and finding of recipes easier.
   - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Standardised styling for PlantUML diagrams
   - Standardised the styling.
+
+#### **Community**:
+- Reporting of bugs and giving suggestions to other groups during [PE-D](https://github.com/qianz-z/ped/issues)
