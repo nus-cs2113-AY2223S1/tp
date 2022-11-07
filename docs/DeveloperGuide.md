@@ -361,7 +361,7 @@ testers are expected to do more *exploratory* testing.
 2. Down the latest version of `tp` from [here](http://link.to/duke).
 3. Copy the jar file into an empty folder.
 4. Open a command window or terminal for mac in that folder.
-5. Run the command `java -jar tp.jar` in the same folder.
+5. Run the command `java -jar [CS2113-T17-3][Timetabler].jar` in the same folder.
 6. To shutdown, either enter `0` when prompted to enter a semester, or `quit` as a command in the main program.
 
 ##### Adding a module
@@ -390,9 +390,9 @@ testers are expected to do more *exploratory* testing.
 - Run the program, there should not be any errors and a new directory with the correct files should be created.
 
 2. Dealing with corrupted module data files
-- Add "abc" as a random string inside the data file `ModuleData.txt`.
+- Add "abc" as a random string inside the data file `ModuleData.txt` on a new line.
 - Run the program and enter the semester corresponding to the data file. The program should check with the user if he has internet connection. If he has, the program deems the file to be corrupted and deletes all data files for the semester and continues. Else, the program quits and does not alter any data files to preserve the user's last successful save.
 
 3. Dealing with corrupted attending data files
-- Add "abc" as a random string inside the data file `AttendingData.txt`.
+- Add "abc" as a random string inside the data file `AttendingData.txt` on a new line.
 - Run the program and enter the semester corresponding to the data file. If the `module code` is corrupted, the program will continue to ask the user if he has internet connection. The behaviour afterwards should be the same as described above. If any other data is modified, the program will continue and print the modified data.
