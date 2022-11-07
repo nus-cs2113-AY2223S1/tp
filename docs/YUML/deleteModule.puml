@@ -2,9 +2,9 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":CommandDeleteModule" as CommandDeleteModule LOGIC_COLOR
-participant ":Timetable" as Timetable LOGIC_COLOR
-participant ":UI" as UI LOGIC_COLOR
+participant "<color: red><<class>></color>\nCommandDeleteModule" as CommandDeleteModule LOGIC_COLOR
+participant "<color: red><<class>></color>\nTimetable" as Timetable LOGIC_COLOR
+participant "<color: red><<class>></color>\nUI" as UI LOGIC_COLOR
 end box
 
 

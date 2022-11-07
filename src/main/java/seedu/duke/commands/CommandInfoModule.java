@@ -6,9 +6,16 @@ import seedu.duke.commands.nusmodsapi.Nusmods;
 
 import java.io.IOException;
 
-
+/**
+ * Command class for managing the process of getting info on a particular module.
+ */
 public class CommandInfoModule {
 
+    /**
+     * Begins the process of getting module code and info on the corresponding module.
+     *
+     * @return A response string to be printed by UI class to the user.
+     */
     public static String findModule() {
         Nusmods mods = new Nusmods();
         String[] found = new String[3];
@@ -23,6 +30,12 @@ public class CommandInfoModule {
         return formatFoundModules(found);
     }
 
+    /**
+     * Returns a string with information found presented in the desired format.
+     *
+     * @param found Information on the queried module.
+     * @return String in the correct format for the user.
+     */
     private static String formatFoundModules(String[] found) {
         StringBuilder message = new StringBuilder();
         message.append("Here are some information about the module:\n");

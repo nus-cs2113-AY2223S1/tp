@@ -11,6 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class for managing the ModuleData data file.
+ */
 public class ModuleManager {
     private static String dataDirectoryPath;
     private static String currSemester;
@@ -43,6 +46,12 @@ public class ModuleManager {
         }
     }
 
+    /**
+     * Loads up the timetable from past module save by reading and adding through API calls.
+     *
+     * @throws FileNotFoundException If file is not found.
+     * @throws Exceptions.FileLoadException If there was an error in adding modules.
+     */
     public static void loadModules() throws FileNotFoundException, Exceptions.FileLoadException {
         File data = new File(dataDirectoryPath + "/ModuleData.txt");
         Scanner scanner = new Scanner(data);
@@ -70,6 +79,11 @@ public class ModuleManager {
         }
     }
 
+    /**
+     * Deletes all data in module save file.
+     *
+     * @param dataDirectoryPath Directory path to the file to be cleared.
+     */
     public static void deleteDataFile(String dataDirectoryPath) {
         File data = new File(dataDirectoryPath + " \"/ModuleData.txt\"");
         data.delete();
