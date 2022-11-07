@@ -99,10 +99,15 @@ public class TableFrame {
                     String.valueOf(food.getCalories()).length());
         }
 
-        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray, WEIGHT_INDEX, EXERCISE_SET_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_REPETITION_INDEX, EXERCISE_CALORIES_INDEX);
+        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray, WEIGHT_INDEX, EXERCISE_SET_INDEX,
+                EXERCISE_DISTANCE_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_REPETITION_INDEX,
+                EXERCISE_CALORIES_INDEX);
     }
 
-    public void setRemainingExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, int[] columnSpacingArray, int weightIndex, int exerciseSetIndex, int exerciseDistanceIndex, int exerciseDescriptionIndex, int exerciseRepetitionIndex, int exerciseCaloriesIndex) {
+    public void setRemainingExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, int[] columnSpacingArray,
+                                                   int weightIndex, int exerciseSetIndex, int exerciseDistanceIndex,
+                                                   int exerciseDescriptionIndex, int exerciseRepetitionIndex,
+                                                   int exerciseCaloriesIndex) {
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
                 columnSpacingArray[weightIndex] = Math.max(columnSpacingArray[weightIndex],

@@ -136,7 +136,8 @@ public class ExerciseTable extends TableFrame {
     }
 
     private void setFinalSpacingForRemainingColumns() {
-        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray, WEIGHT_INDEX, SET_INDEX, DISTANCE_INDEX, DESCRIPTION_INDEX, REPETITION_INDEX, CALORIES_INDEX);
+        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray,
+                WEIGHT_INDEX, SET_INDEX, DISTANCE_INDEX, DESCRIPTION_INDEX, REPETITION_INDEX, CALORIES_INDEX);
     }
 
     private void setFinalIndexColumnSpacing() {
