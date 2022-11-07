@@ -122,9 +122,9 @@ all possible permutations of lesson combinations and allocated lessons in a way 
 
 **Design Decisions:**
 * The algorithm involved in allocating lessons relies heavily on the ability to check if lessons clash with each other at any point in time. Thus, the allocation algorithm is implemented in the timetableDict to allow easy
-access to lessons at any point in the timetable.
-* Due to some modules having an excessive amounts of lessons, leading to extremely high number of possible lesson permutations during allocation, we have set a limit of 30 possible lesson permutations for each mod to be allocated. 
-Taking the maximum of 7 modules, this sets a limit of 2.187 x 10^10 total permutations for the algorithm. This prevents the program from exceeding the Java heap space memory allocated.
+  access to lessons at any point in the timetable.
+* Due to some modules having an excessive amounts of lessons, leading to extremely high number of possible lesson permutations during allocation, we have set a limit of 30 possible lesson permutations for each mod to be allocated.
+  Taking the maximum of 7 modules, this sets a limit of 2.187 x 10^10 total permutations for the algorithm. This prevents the program from exceeding the Java heap space memory allocated.
 
 ---
 
@@ -205,12 +205,12 @@ The ***Activity Diagram*** below is a simplified depiction of the module `Comman
 &nbsp;&nbsp; (c) Write the clashed module code in  ```clashModCodeList``` <br>
 
 
-- If there are no clashes: Get ```lesson``` objects from ```rawTimetable```. 
+- If there are no clashes: Get ```lesson``` objects from ```rawTimetable```.
 - If there is ```XXXX``` - activity will stop due to this unexpected behavior.
 - If there are no ```XXXX```  - mark of a clash - proceed to write the lessons into ```timeTable```: <br>
-&nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
-&nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
-&nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; (a) Upper boarder of each lesson is written. <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; (b) Module code is written in ```timeTable```. <br>
+  &nbsp;&nbsp; &nbsp;&nbsp; (c) Depending on the height of the box of lessons, those with 1 hour or less have to squeeze the module code with the lesson type together. Otherwise, write module code and lesson type below in ```timeTable```. <br>
 
 
 - ```timeTable``` is converted into strings for output.
@@ -352,8 +352,7 @@ The value proposition of the product lies in its ability to aid the management a
 
 Given below are instructions to test the app manually.
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** These instructions provides some cases for tester to begin testing.
 
 ##### Launch and shutdown
 
@@ -367,32 +366,58 @@ testers are expected to do more *exploratory* testing.
 ##### Adding a module
 
 1. Adding a module when module already exists in Timetable
+    - *Prerequisites*: List modules using the `list` command. There should already exist the module that is to be double added.
+    - *Test case*: `add`, then `exampleModuleCode`
+    - *Expected*: Module should not be double added. Use `list` command again to check.
 
-1. Prerequisites: List all persons using the `list` command. There should already exist the module that is to be double added.
+##### Setting a lesson for a module
 
-2. Test case: `add`, then `exampleModuleCode`
-   Expected: Module should not be double added. Use `list` command again to check.
+1. Setting a module with no settable lessons
+    - *Prerequisites*: Module `EE4032` should be added to the timetable, use `add` to add and `list` to check.
+    - *Test case*: `set`
+    - *Expected*: Module `EE4032` should not appear as one of the options to be chosen or
+      ```No modules available for lessons to be set```
+      will be printed as the response if the timetable is empty.
+
+##### Auto-allocating lessons in timetable
+
+1. Auto-allocating with no modules in timetable
+    - *Prerequisites*: Use `list` command to check that there is currently no modules. Else, use `delete` to delete the modules.
+    - *Test case*: `allocate`
+    - *Expected*: No allocation should take place
+      ```Sorry you have no modules to allocate!```
+
+##### Printing the timetable
+
+1. Printing with clashing modules
+    - *Prerequisites*: Ensure that there are two modules that have lesson clash (same time of the same day).
+    - *Test case*: `print`
+    - *Expected*: In the printed timetable, the slot where the clash occurs should contain `X` (as many to fill up the slot), instead of the module code and lesson type. The module codes of the modules involved in the clash should also be printed at the bottom of the output.
+         ```
+         These are the clashed modules : 
+         CG2027
+         CG2028
+         ```
+
+##### Getting module info
+1. Getting info for non-existent module
+    - *Prerequisites*: Module code to be used should be invalid, such as `abcd1234`
+    - *Test case*: `info`, then `abcd1234`
+    - *Expected*: Module should not be found
+         ```
+         Module not found, please try again.
+         Please enter module code
+         ```
 
 ##### Deleting a module
-1. Deleting a module when module already exists in Timetable
-
-    1. Prerequisites: List all persons using the `list` command. There should already exist the module that is to be deleted.
-
-    2. Test case: `delete`, then `exampleModuleCode`
-       Expected: Module should be deleted. Use `list` command again to check.
-
-    3. If there is no module in the list, user will be prompt that no module exists in the list.
+1. Deleting a module by entering invalid index
+    - *Prerequisites*: Use `list` to check that at least one module exists in the timetable.
+    - *Test case*: `delete`, then `0`
+    - *Expected*: No deletion should occur
+      ```Please input an index in range!```
 
 ##### Saving data
-
-1. Dealing with missing data files
-- Make a manual deletion of any saved data file with either name `Sem1Data` or `Sem2Data`.
-- Run the program, there should not be any errors and a new directory with the correct files should be created.
-
-2. Dealing with corrupted module data files
-- Add "abc" as a random string inside the data file `ModuleData.txt` on a new line.
-- Run the program and enter the semester corresponding to the data file. The program should check with the user if he has internet connection. If he has, the program deems the file to be corrupted and deletes all data files for the semester and continues. Else, the program quits and does not alter any data files to preserve the user's last successful save.
-
-3. Dealing with corrupted attending data files
-- Add "abc" as a random string inside the data file `AttendingData.txt` on a new line.
-- Run the program and enter the semester corresponding to the data file. If the `module code` is corrupted, the program will continue to ask the user if he has internet connection. The behaviour afterwards should be the same as described above. If any other data is modified, the program will continue and print the modified data.
+1. Saved file should exist after quitting the program.
+    - Check the directory which the `.jar` file is in
+    - Depending on the semester, either `Sem1Data` or/and `Sem2Data` directories should exist.
+    - Do note that illegal tampering of `.txt` files in these directories is not part of the scope of this iteration of Timetabler.
