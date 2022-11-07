@@ -17,7 +17,10 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.*;
+import seedu.duke.ui.CaloriesTable;
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.FoodTable;
+import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -95,6 +98,13 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * To output a Calorie entry on the date input of the user.
+     * @param argumentList an array of inputs from the user
+     * @param slashesCount to check if the number of slashes correspond with the required number of slashes
+     *
+     * @throws IllegalValueException if the input date does not have Calories entry yet
+     */
     private void findCalories(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_DATE_COMMAND,
                 arguments.charAt(arguments.length() - 1));
@@ -125,18 +135,14 @@ public class FindCommand extends Command {
         }
     }
 
-    private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 2) {
-            throw new IllegalValueException("Invalid find date command");
-        }
-        try {
-            LocalDate.parse(argumentList[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } catch (DateTimeException e) {
-            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
-        }
-    }
 
-
+    /**
+     * To find Cardio exercises corresponding to the date input of the user.
+     * @param argumentList an array of inputs from the user
+     * @param slashesCount to check if the number of slashes correspond with the required number of slashes
+     *
+     * @throws IllegalValueException if the user has entered an invalid date
+     */
     private void findCardio(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_CARDIO_COMMAND,
                 arguments.charAt(arguments.length() - 1));
@@ -199,6 +205,12 @@ public class FindCommand extends Command {
     }
 
 
+    /**
+     * Look through all cardio exercises and find a Cardio exercise containing the description in the exercise list.
+     * @param description The cardio exercise to be found
+     *
+     * @return a filtered list of Exercises according to name of the Exercise
+     */
     private ArrayList<Exercise> getFilteredCardioExerciseList(String description) {
         ArrayList<Exercise> filteredExerciseList = (ArrayList<Exercise>) exerciseList.getCompletedExerciseList()
                 .stream().filter(CardioExercise.class::isInstance)
@@ -211,6 +223,12 @@ public class FindCommand extends Command {
         return filteredExerciseList;
     }
 
+    /**
+     * To calculate total calories consumed by users based on dates.
+     * @param argumentList an array of inputs from the user
+     *
+     * @return total calories consumed by the user based on the date input in the argumentlist
+     */
     private int getFilteredCaloriesConsumedList(String[] argumentList) {
         int totalCaloriesConsumed;
         String filteredDate;
@@ -221,6 +239,12 @@ public class FindCommand extends Command {
         return totalCaloriesConsumed;
     }
 
+    /**
+     * To calculate total calories burnt by users based on dates.
+     * @param argumentList an array of inputs from the user
+     *
+     * @return total calories burnt by the user based on the date input in the argumentlist
+     */
     private int getFilteredCaloriesBurntList(String[] argumentList) {
         int totalCaloriesBurnt;
         String filteredDate;

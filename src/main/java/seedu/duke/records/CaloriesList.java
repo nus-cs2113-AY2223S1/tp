@@ -12,6 +12,10 @@ public class CaloriesList {
         this.caloriesList = new ArrayList<>();
     }
 
+
+    /**
+     * To add a new Calorie entry into caloriesList.
+     */
     public void addCalories(Calories caloriesInput) {
         caloriesList.add(caloriesInput);
     }

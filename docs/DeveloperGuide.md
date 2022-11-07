@@ -154,6 +154,7 @@ Marking exercise
 ![](UmlDiagrams/MarkExercise.png)
 
 Finding a record
+
 The sequence diagrams below represent the interactions when a user find a record.
 ![Find.png](UmlDiagrams/Find.png)
 
@@ -165,7 +166,6 @@ removeCommand to be printed on the ui.
 The interactions for removing other types of records are similar.
 
 
-
 The following sequence diagram shows how the view operation works:
 
 There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
@@ -175,11 +175,10 @@ Viewing historical records
 
 The following sequence diagram shows how the view operation works after `view biometrics` is executed.
 
-The most recent weight and fat records are retrieved.
+The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be displayed.
 
-Then, the most recently set biometrics of the user will be displayed.
+Viewing biometrics
 
-Viewing biometrics  
 ![](UmlDiagrams/ViewBiometrics.png)
 
 
@@ -187,9 +186,17 @@ The following sequence diagram shows how the view operation works after `view ca
 
 The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be displayed.
 The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the CompletedExerciseList and
-the net calories can then be calculated from the two according to a date. A
-Viewing calories  
+the net calories can then be calculated from the two, according to a date.
+
+These values are stored in a Calories object and output by a CaloriesList by calling ui.
+
+Viewing calories
+
 ![ViewCalories.png](UmlDiagrams/ViewCalories.png)
+
+The following sequence diagram shows how the view operation works after `view all` is executed.
+
+Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from RecordList and these data are output by outputAllRecords.
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)

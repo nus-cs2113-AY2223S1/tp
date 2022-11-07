@@ -21,6 +21,12 @@ import java.util.Comparator;
 
 public class DateCommand extends Command {
 
+    /**
+     * Sort Exercises according to date.
+     *
+     * @param list a list of Exercises
+     *
+     */
     public static void sortDateForExercise(ArrayList<Exercise> list) {
         Collections.sort(list, new Comparator<Exercise>() {
             /**
@@ -38,6 +44,12 @@ public class DateCommand extends Command {
         });
     }
 
+    /**
+     * Sort Calories according to date.
+     *
+     * @param list a list of Calories
+     *
+     */
     public static void sortDateForCalories(ArrayList<Calories> list) {
         Collections.sort(list, new Comparator<Calories>() {
             /**

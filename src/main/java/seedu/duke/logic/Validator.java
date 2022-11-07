@@ -90,6 +90,11 @@ public class Validator {
         return repetition;
     }
 
+    /**
+     * To check if the input distance by the user is valid.
+     * @return distance if distance input is valid
+     * @throws IllegalValueException if the input distance is too big or too small
+     */
     public static double getDistanceWithValidation(String dist) throws IllegalValueException {
         double distance = Math.round(Double.parseDouble(dist) * 1000.0) / 1000.0;
         validateDouble(distance, MAXIMUM_DISTANCE, MINIMUM_DISTANCE, INVALID_VALUE_FOR_DISTANCE);
@@ -102,6 +107,11 @@ public class Validator {
         return index - 1;
     }
 
+    /**
+     * To parse the String date into LocalDate date.
+     * @return localdate date if date input is valid
+     * @throws IllegalValueException if the input date is invalid
+     */
     public static LocalDate getDateWithValidation(String date) throws IllegalValueException {
         validateDate(date, INVALID_DATE);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -115,6 +125,10 @@ public class Validator {
         }
     }
 
+    /**
+     * To check if the input date by the user is valid.
+     * @throws IllegalValueException if the input date is invalid
+     */
     private static void validateDate(String date, String message) throws IllegalValueException {
         try {
             LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
