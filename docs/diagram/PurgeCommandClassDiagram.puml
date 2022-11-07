@@ -1,0 +1,54 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + purgeTransactions() : void
+}
+
+abstract class Command {
+    + execute(TransactionList, Ui, Storage) : void {abstract}
+}
+
+class PurgeCommand {
+    - COMMAND_WORD: String {static}
+    + execute(TransactionList, Ui, Storage) : void
+    + isEmpty(TransactionList) : boolean
+}
+
+class CommandParser{
+    +getCommand(String, String) {static} : Command
+}
+
+class ParameterParser{
+    +setCommand(command:Command, splits:String[]) {static} : void
+}
+
+class Duke{
+    - transactions: TransactionList
+    - ui: Ui
+    - storage : Storage
+    + main() {static} : void
+    + run() : void
+}
+
+class Ui{
+    + showInfoMessage(String) : void {static}
+    + readCommand(String) : String
+    + showErrorMessage(String) : void {static}
+}
+
+class Storage {
+    + writeToFile(ArrayList<Transaction>) : void
+}
+
+PurgeCommand -up-|> "Command": inherits from
+
+Duke <.. CommandParser: returns Command instance to Duke
+PurgeCommand --> Ui : display confirmation or error message
+PurgeCommand .right.> CommandParser: instance created by
+PurgeCommand <-- ParameterParser: retrieves parameter from
+PurgeCommand <-left- TransactionList: deletes all transaction
+PurgeCommand <-left- Duke: executes
+PurgeCommand --> Storage: externally stores the transaction via
+
+@enduml

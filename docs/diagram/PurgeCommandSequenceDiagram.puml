@@ -1,0 +1,69 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:PurgeCommand" as PurgeCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("purge")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("purge")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create PurgeCommand
+CommandParser -> PurgeCommand
+activate PurgeCommand
+return
+
+return command: PurgeCommand
+
+return command: PurgeCommand
+deactivate CommandParser
+
+Duke -> PurgeCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate PurgeCommand
+
+PurgeCommand -> PurgeCommand:isEmpty(transactions: TransactionList)
+activate PurgeCommand
+return check: boolean
+
+alt check is true
+    PurgeCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+    return
+    return
+else else
+    PurgeCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+    return
+    PurgeCommand -> Ui:readCommand()
+    activate Ui
+    return input: String
+    alt input is "Y"
+    PurgeCommand -> Transactions:purgeTransactions()
+    activate Transactions
+    return
+    PurgeCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+    return
+    else else
+    PurgeCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+    return
+    end
+end
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+!include Style.puml
+
+abstract class Command {
+    + execute(TransactionList, Ui, Storage) : void {abstract}
+}
+
+class ByeCommand {
+    - COMMAND_WORD: String {static}
+    + execute(TransactionList, Ui, Storage) : void
+}
+
+class CommandParser{
+    +getCommand(String, String) {static} : Command
+}
+
+class ParameterParser{
+    +setCommand(command:Command, splits:String[]) {static} : void
+}
+
+class Duke{
+    - transactions: TransactionList
+    - ui: Ui
+    - storage : Storage
+    + main() {static} : void
+    + run() : void
+}
+
+class Ui{
+    + showInfoMessage(String) : void {static}
+}
+
+ByeCommand -up-|> "Command": inherits from
+
+Duke <.. CommandParser: returns Command instance to Duke
+ByeCommand --> Ui : display exit message
+ByeCommand .right.> CommandParser: instance created by
+ByeCommand <-left- ParameterParser: retrieves parameter from
+ByeCommand <-left- Duke: executes
+
+@enduml

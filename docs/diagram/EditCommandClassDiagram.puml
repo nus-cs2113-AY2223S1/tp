@@ -1,0 +1,87 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + getEntry(int) : Transaction
+    + editExpense(String, int, String, LocalDate, int): String
+    + editIncome(String, int, String, LocalDate, int): String
+    + calculateMonthlyTotalExpense(LocalDate) {static} : long
+}
+
+abstract class Command {
+    + execute(TransactionList, Ui, Storage) : void {abstract}
+}
+
+class CommandTag {
+    + COMMAND_TAG_TRANSACTION_TYPE {static}: String
+    + COMMAND_TAG_TRANSACTION_CATEGORY {static}: String
+    + COMMAND_TAG_TRANSACTION_AMOUNT {static}: int
+    + COMMAND_TAG_TRANSACTION_DATE {static}: LocalDate
+    + COMMAND_TAG_TRANSACTION_DESCRIPTION {static}: String
+    + COMMAND_TAG_GLOBAL_ENTRY_NUMBER {static}: int
+}
+
+class EditCommand {
+    - COMMAND_WORD: String {static}
+    - entryNumber: int
+    - type : String
+    - description : String
+    - amount : int
+    - category : String
+    - date : LocalDate
+    + getMandatoryTags() : String[]
+    + getOptionalTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + isTagsNonEmpty(String, String, int, String, LocalDate) : boolean
+    + isIndexValid(TransactionList, int) : boolean
+    + isParameterChanged(Transaction, String, String, int, String, LocalDate) : boolean
+    + updateType(Transaction, String) : String
+    + updateDate(Transaction, LocalDate) : LocalDate
+    + updateDescription(Transaction, String) : String
+    + updateCategory(Transaction, String) : String
+    + updateAmount(Transaction, int) : int
+}
+
+class CommandParser{
+    +getCommand(String, String) {static} : Command
+}
+
+class ParameterParser{
+    +setCommand(command:Command, splits:String[]) {static} : void
+}
+
+class Duke{
+    - transactions: TransactionList
+    - ui: Ui
+    - storage : Storage
+    + main() {static} : void
+    + run() : void
+}
+
+class Ui{
+    + showTransactionAction(String, String, String) : void
+    + showErrorMessage(String) : void {static}
+}
+
+class Budget {
+    + generateBudgetRemainingMessage(long, boolean, String) {static} : String
+}
+
+class Storage {
+    + writeToFile(ArrayList<Transaction>) : void
+}
+
+EditCommand -up-|> "Command": inherits from
+
+Duke <.. CommandParser: returns Command instance to Duke
+EditCommand --> Ui : display confirmation or error message
+EditCommand .right.> CommandParser: instance created by
+EditCommand <-- ParameterParser: retrieves parameter from
+EditCommand <-- TransactionList: edits transaction
+EditCommand --> TransactionList: retrieves information from
+EditCommand -up-> CommandTag: get its mandatory tag from
+EditCommand <-left- Duke: executes
+EditCommand -left-> Budget: generates the message
+EditCommand --> Storage: externally stores the transaction via
+
+@enduml

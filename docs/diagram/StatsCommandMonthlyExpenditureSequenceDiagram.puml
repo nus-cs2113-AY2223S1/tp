@@ -1,0 +1,23 @@
+@startuml
+!include Style.puml
+
+Participant "command:StatsCommand" as command
+Participant "transactions:TransactionList" as transactions
+Participant ":Budget" as budget
+
+group sd get monthly expenditure list
+command -> transactions:listMonthlyExpenditure\n(timeTransactions)
+activate transactions
+transactions -> transactions:processMonthlyExpenditure\n(monthlyExpenditure)
+activate transactions
+return monthlyExpenditure:SortedMap<LocalDate, int[]>
+loop
+    transactions -> transactions:getSpendingHabitComment(income, savings)
+    activate transactions
+    return spendingHabitComment:String
+    ref over transactions, budget: retrieve budget information and generate budget advice
+end
+return genericStatsList:String
+
+end
+@enduml

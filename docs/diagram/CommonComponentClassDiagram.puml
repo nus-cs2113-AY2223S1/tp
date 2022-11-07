@@ -1,0 +1,52 @@
+@startuml
+!include Style.puml
+
+package "Common Component" <<Rectangle>> {
+    note "Only variables and methods in Common Component \n that are relevant to the Add command are shown" as 1
+    class Constants
+    enum "<<enumeration>>\nDateFormats"
+    enum "<<enumeration>>\nInfoMessages"
+    enum "<<enumeration>>\nErrorMessages"
+    enum "<<enumeration>>\nHelpMessages"
+}
+
+class Constants {
+    + MIN_AMOUNT_VALUE: int
+    + MIN_AMOUNT_VALUE: int
+}
+
+enum "<<enumeration>>\nDateFormats" {
+    DATE_INPUT_PATTERN
+    + toString() : String
+}
+
+enum "<<enumeration>>\nErrorMessages" {
+    ERROR_TRANSACTION_INVALID_AMOUNT
+    ERROR_TRANSACTION_INVALID_CATEGORY
+    ERROR_TRANSACTION_INVALID_DATE
+    ERROR_TRANSACTION_INVALID_TYPE
+    + toString() : String
+}
+
+enum "<<enumeration>>\nHelpMessages" {
+    COMMAND_DESCRIPTION_ADD
+    COMMAND_USAGE_ADD
+    COMMAND_HEADER_PARAMETERS
+    COMMAND_PARAMETERS_TYPE
+    COMMAND_PARAMETERS_CATEGORY
+    COMMAND_PARAMETERS_AMOUNT
+    COMMAND_PARAMETERS_DESCRIPTION
+    ADD_COMMAND_PARAMETERS_INFO
+    ADD_CMD_BASIC_HELP
+    ADD_CMD_DETAILED_HELP
+    + toString() : String
+
+}
+
+enum "<<enumeration>>\nInfoMessages" {
+    INFO_ADD_EXPENSE
+    INFO_ADD_INCOME
+    + toString() : String
+}
+
+@enduml

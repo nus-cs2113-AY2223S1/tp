@@ -1,0 +1,85 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant ":ParameterParser" as ParameterParser
+Participant "command:ListCommand" as ListCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("list c/transport")
+activate CommandParser
+
+
+CommandParser -> CommandParser:getCommand()
+activate CommandParser
+
+
+CommandParser -> ParameterParser:parse(input: String)
+activate ParameterParser
+
+ParameterParser ->ParameterParser:setParameter()
+activate ParameterParser
+return setCommand()
+return command
+
+create ListCommand
+CommandParser -> ListCommand
+activate ListCommand
+return
+
+return command: ListCommand
+
+return command: ListCommand
+deactivate CommandParser
+
+Duke -> ListCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate ListCommand
+
+ListCommand -> ListCommand:listTransactions()
+activate ListCommand
+
+alt containMonthYear() == CONTAIN_BOTH
+    ListCommand -> Transactions:getTransactionsByMonth()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if containMonthYear() == CONTAIN_EITHER
+    ListCommand -> Transactions:getTransactionsByYear()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == MONTHS
+    ListCommand -> Transactions:getTransactionsByMonthRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == WEEKS
+    ListCommand -> Transactions:getTransactionsByWeekRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+else if period == DAYS
+    ListCommand -> Transactions:getTransactionsByDayRange()
+    activate Transactions
+    return timeTransaction: ArrayList<Transaction>
+end
+
+ListCommand -> Transactions:listTransactions()
+activate Transactions
+return transactionsList: String
+
+
+alt transactionsList is empty
+    ListCommand -> Ui:showInfoMessage(message: String)
+    activate Ui
+else else
+    ListCommand -> Ui:showList(transactionsList: String)
+end
+
+return
+
+return
+@enduml

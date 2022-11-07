@@ -1,0 +1,68 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + getEntry(int) : Transaction
+    + deleteTransaction(int): String
+    + calculateMonthlyTotalExpense(LocalDate) {static} : long
+}
+
+abstract class Command {
+    + execute(TransactionList, Ui, Storage) : void {abstract}
+}
+
+class CommandTag {
+    + COMMAND_TAG_GLOBAL_ENTRY_NUMBER {static}: int
+}
+
+class DeleteCommand {
+    - COMMAND_WORD: String {static}
+    - entryNumber: int
+    + getMandatoryTags() : String[]
+    + execute(TransactionList, Ui, Storage) : void
+    + isIndexValid(TransactionList, int) : boolean
+}
+
+class CommandParser{
+    +getCommand(String, String) {static} : Command
+}
+
+class ParameterParser{
+    +setCommand(command:Command, splits:String[]) {static} : void
+}
+
+class Duke{
+    - transactions: TransactionList
+    - ui: Ui
+    - storage : Storage
+    + main() {static} : void
+    + run() : void
+}
+
+class Ui{
+    + showTransactionAction(String, String, String) : void
+    + showErrorMessage(String) : void {static}
+}
+
+class Budget {
+    + generateBudgetRemainingMessage(long, boolean, String) {static} : String
+}
+
+class Storage {
+    + writeToFile(ArrayList<Transaction>) : void
+}
+
+DeleteCommand -up-|> "Command": inherits from
+
+Duke <.. CommandParser: returns Command instance to Duke
+DeleteCommand --> Ui : display confirmation or error message
+DeleteCommand .right.> CommandParser: instance created by
+DeleteCommand <-- ParameterParser: retrieves parameter from
+DeleteCommand <-- TransactionList: deletes transaction
+DeleteCommand --> TransactionList: retrieves information from
+DeleteCommand -up-> CommandTag: get its mandatory tag from
+DeleteCommand <-left- Duke: executes
+DeleteCommand -left-> Budget: generates the message
+DeleteCommand --> Storage: externally stores the transaction via
+
+@enduml

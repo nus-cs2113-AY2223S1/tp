@@ -1,0 +1,68 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class Duke {
+    - storage: Storage
+    - transactions: TransactionList
+    - ui: Ui
+
+    +run()
+    +main()
+}
+
+class "CommandParser"{
+    - parserLogger: Logger
+
+    +parse(): Command
+    +splitInput(): String[]
+    +getCommand(): Command
+}
+
+class "ParameterParser"{
+    - parserLogger: Logger
+
+    +parse()
+    +checkMandatoryTagsExist()
+    +checkUnsupportedTagsNotExist()
+    +checkDuplicateTagsNotExist()
+    +checkParameterNotEmpty()
+    +findMatchingTagAmongInputs(): boolean
+    +findIfParameterTagAmongTags(): boolean
+    +setCommand()
+    +setParameter()
+    +parseTypeTagForListing(): String
+    +parseTypeTagForAdding(): String
+    +parseCategoryTag(): String
+    +parseAmountTag(): int
+    +parseDateTag(): LocalDate
+    +parseEntryTag(): int
+    +parseHelpOptionTag(): boolean
+    +parseStatsTypeTag(): String
+}
+
+class "{abstract}\n Command"{
+
+    + COMMAND_WORD: String
+    + COMMAND_DESCRIPTION: String
+    + COMMAND_USAGE: String
+    + COMMAND_PARAMETERS_INFO: String
+
+    - type: String
+    - category: String
+    - description: String
+    - amount: int
+    - date: LocalDate
+
+    +getMandatoryTags()
+    +{abstract}execute()
+}
+
+Duke "1" ..> "1" "CommandParser": calls
+"CommandParser" "1" ..> "1" "ParameterParser": calls
+"CommandParser" "1" ..> "1" "{abstract}\n Command" : creates
+
+@enduml

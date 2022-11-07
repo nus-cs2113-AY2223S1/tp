@@ -1,0 +1,65 @@
+@startuml
+!include Style.puml
+
+hide footbox
+
+Participant ":Duke" as Duke
+Participant ":CommandParser" as CommandParser
+Participant "command:DeleteCommand" as DeleteCommand
+Participant "transactions:TransactionList" as Transactions
+Participant "ui:Ui" as Ui
+Participant ":Budget" as Budget
+
+-> Duke
+activate Duke
+
+Duke -> CommandParser:parse("delete e/2")
+activate CommandParser
+
+CommandParser -> CommandParser:splitInput("delete e/2")
+activate CommandParser
+return inputTokens: String[]
+
+CommandParser -> CommandParser:getCommand(commandWordInput: String, parameterInput: String)
+activate CommandParser
+
+create DeleteCommand
+CommandParser -> DeleteCommand
+activate DeleteCommand
+return
+
+return command: DeleteCommand
+
+return command: DeleteCommand
+deactivate CommandParser
+
+Duke -> DeleteCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+activate DeleteCommand
+
+DeleteCommand -> DeleteCommand: isIndexValid(transactions: TransactionList, index: int)
+activate DeleteCommand
+return check: boolean
+alt check is true
+    DeleteCommand -> Transactions:getEntry(index: int)
+    activate Transactions
+    Transactions -> Transactions:getDate()
+    return date: LocalDate
+    DeleteCommand -> Transactions:deleteTransaction(index: int)
+    activate Transactions
+    return
+    DeleteCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
+    activate Transactions
+    return addedMonthExpenseSum: long
+    DeleteCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
+    activate Budget
+    return BudgetInfo: String
+    DeleteCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
+    activate Ui
+    return
+else else
+    DeleteCommand -> Ui:showErrorMessage(message: String)
+    activate Ui
+    return
+end
+
+@enduml

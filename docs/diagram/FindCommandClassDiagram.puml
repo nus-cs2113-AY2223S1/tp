@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+class TransactionList {
+    + findTransactions(String) : String
+}
+
+abstract class Command {
+    + execute() : void {abstract}
+}
+
+class FindCommand {
+    - COMMAND_WORD: String {static}
+    + keyword : String
+    + getMandatoryTags() : String[]
+    + execute() : void
+    + findTransactions() : void
+}
+
+class Ui{
+    + showList(list:String, message:String) : void {static}
+    + showInfoMessage(String) : void {static}
+}
+
+FindCommand -up-|> "Command"
+
+FindCommand ..> Ui : display list or info message
+FindCommand ..> TransactionList: retrieves filtered \ntransactions output \nfrom
+
+@enduml

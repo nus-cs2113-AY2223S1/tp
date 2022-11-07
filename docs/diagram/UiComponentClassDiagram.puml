@@ -1,0 +1,37 @@
+@startuml
+!include Style.puml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "UI Component" <<Rectangle>> {
+    class Ui
+}
+
+class Duke {
+    - transactions: TransactionList
+    - storage: Storage
+    + main()
+    + run()
+}
+
+class Ui {
+    - in: Scanner
+    - input: String
+    + printMessages(String... messages)
+    + readCommand(): String
+    + showInfoMessage(String message)
+    + showHelp(String message)
+    + showList(String list, String message)
+    + showTransactionAction(String message, String transactionDetails, String budgetInfo)
+}
+
+note bottom: Other methods that also use the printMessages(String... messages) have been omitted
+
+package XYZCommand <<Rectangle>> {
+}
+
+Duke -> Ui
+XYZCommand-[dashed]left-> Ui : uses >
+@enduml

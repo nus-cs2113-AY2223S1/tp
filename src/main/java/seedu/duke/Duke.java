@@ -1,21 +1,47 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.command.Command;
+import seedu.duke.data.TransactionList;
+import seedu.duke.exception.MoolahException;
+import seedu.duke.parser.CommandParser;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    //@@author paullowse
+    private Storage storage;
+    private TransactionList transactions;
+    private Ui ui;
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    //@@author chinhan99
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+
+        try {
+            transactions = new TransactionList(storage.initializeFile());
+        } catch (MoolahException e) {
+            Ui.showErrorMessage(e.getMessage());
+            transactions = new TransactionList();
+        }
+    }
+
+    //@@author paullowse
+    public void run() {
+        ui.showGreeting();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command command = CommandParser.parse(fullCommand);
+                command.execute(transactions, ui, storage);
+                isExit = command.isExit();
+            } catch (MoolahException e) {
+                Ui.showErrorMessage(e.getMessage());
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

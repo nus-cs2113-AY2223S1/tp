@@ -1,9 +1,654 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+____________________________________________________________
+* Created new directory *
+____________________________________________________________
+____________________________________________________________
+* Created new file for use *
+____________________________________________________________
+____________________________________________________________
+* Duke.txt file is currently empty and ready to be written *
+____________________________________________________________
+____________________________________________________________
+* duke.txt loaded successfully! *
+____________________________________________________________
+____________________________________________________________
+Hello! I'm Moo and I will help you to manage your finances.
+Remaining budget for current month: $1000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
+Enter <help> if you need the list of commands.
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: HELP
+Display basic or detailed help information explaining the commands available in the application.
+Usage: help [o/detailed] [q/COMMAND]
 
-What is your name?
-Hello James Gosling
+Command Word: BUDGET
+Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
+Usage: budget b/BUDGET
+
+Command Word: ADD
+Add a new transaction entry, which could be either an "expense" or "income" into the transactions list.
+Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
+
+Command Word: LIST
+List all or some transactions based on selection by the ascending order of date of transaction.
+If tag filters are used, the transactions retrieved from the records must match all the filter tags
+that have been specified in order to be recognized as a valid record.
+Usages:
+	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
+	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
+
+Command Word: FIND
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
+
+Command Word: STATS
+View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
+Usages:
+	(1) Categorical savings: stats s/categorical_savings
+	(2) Monthly expenditure: stats s/monthly_expenditure
+	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
+
+Command Word: EDIT
+Edit a transaction entry from the unfiltered list of transactions.
+Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
+
+Command Word: DELETE
+Delete a transaction entry from the unfiltered list of transactions.
+Usage: delete e/ENTRY
+
+Command Word: PURGE
+Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
+Usage: purge
+
+Command Word: BYE
+Exit the application.
+Usage: bye
+
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: HELP
+Display basic or detailed help information explaining the commands available in the application.
+Usage: help [o/detailed] [q/COMMAND]
+Parameters information:
+- detailed: A detailed version of the guide.
+- COMMAND: A case-insensitive command word to search for.
+
+Command Word: BUDGET
+Set the amount for monthly budget, with a value from 1 to 10^13 (Ten Trillion).
+Usage: budget b/BUDGET
+Parameters information:
+- BUDGET: An estimate of expense for every month. It is a positive whole number ranging from 1 to 10^13 (Ten Trillion).
+
+Command Word: ADD
+Add a new transaction entry, which could be either an "expense" or "income" into the transactions list.
+Usage: add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION
+Parameters information:
+- TYPE: The type of transaction. It should either be "expense" or "income".
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
+- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
+- DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
+- DESCRIPTION: More information regarding the transaction. It can be any word without any spacing.
+
+Command Word: LIST
+List all or some transactions based on selection by the ascending order of date of transaction.
+If tag filters are used, the transactions retrieved from the records must match all the filter tags
+that have been specified in order to be recognized as a valid record.
+Usages:
+	(1) Basic listing: list [t/TYPE] [c/CATEGORY] [d/DATE]
+	(2) Listing on specific month or year: list [t/TYPE] [c/CATEGORY] [d/DATE] [m/MONTH] y/YEAR
+	(3) Listing on last N days, weeks or months: list [t/TYPE] [c/CATEGORY] [d/DATE] p/PERIOD n/NUMBER
+Parameters information:
+- TYPE: The type of transaction. It should either be "expense" or "income".
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
+- DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
+		<!> - MONTH parameter must be used together with the YEAR parameter.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
+		<!> - PERIOD parameter must be used together with the NUMBER parameter.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
+		<!> - NUMBER parameter must be used together with the PERIOD parameter.
+
+Command Word: FIND
+Find a specific or multiple transactions based on any keyword that have been specified.
+Usage: find k/KEYWORD
+Parameters information:
+- KEYWORD: A case-insensitive word that matches the partial or the full description of a transaction entry. It can be any word without any spacing.
+
+Command Word: STATS
+View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
+Usages:
+	(1) Categorical savings: stats s/categorical_savings
+	(2) Monthly expenditure: stats s/monthly_expenditure
+	(3) Insights on specific month or year: stats s/time_insights y/YEAR [m/MONTH]
+	(4) Insights on last N days, weeks or months: stats s/time_insights p/PERIOD n/NUMBER
+Parameters information:
+- MONTH: The month which the transaction falls on. It is a positive whole number ranging from 1 to 12, where 1 represents January.
+		<!> - MONTH parameter must be used together with the YEAR parameter.
+- YEAR: The year which the transaction falls on. It is a positive whole number ranging from 0 to 9999, where 0 represents Year 0.
+- PERIOD: The period which the transaction falls on. It should either be days, weeks or months.
+		<!> - PERIOD parameter must be used together with the NUMBER parameter.
+- NUMBER: The last N number of days, weeks or months. It is a positive whole number ranging from 1 to 100.
+		<!> - NUMBER parameter must be used together with the PERIOD parameter.
+
+Command Word: EDIT
+Edit a transaction entry from the unfiltered list of transactions.
+Usage: edit e/ENTRY [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]
+Parameters information:
+- ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
+- TYPE: The type of transaction. It should either be "expense" or "income".
+- CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
+- AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
+- DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
+- DESCRIPTION: More information regarding the transaction. It can be any word without any spacing.
+
+Command Word: DELETE
+Delete a transaction entry from the unfiltered list of transactions.
+Usage: delete e/ENTRY
+Parameters information:
+- ENTRY: A list entry value for the transaction. It is a positive whole number ranging from 1 to 1000000.
+
+Command Word: PURGE
+Delete all transaction entries from the list of transactions. User must enter 'Y' to confirm the purge.
+Usage: purge
+Parameters information: -NIL-
+
+Command Word: BYE
+Exit the application.
+Usage: bye
+Parameters information: -NIL-
+
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+
+____________________________________________________________
+____________________________________________________________
+Gotcha! Here are the commands that you may use:
+Command Word: BYE
+Exit the application.
+Usage: bye
+Parameters information: -NIL-
+
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $10000
+Remaining budget for current month: $10000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Type of statistics given is invalid, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+There are no statistics available yet for the given statistics type.
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][food] $20 on Sep 13 2022 | Description: NIL
+Remaining budget for Sep 2022: $9980. Keep it up!
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+Remaining budget for Sep 2022: $9980. Keep it up!
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 on Oct 02 2022 | Description: bus_fare
+Remaining budget for Oct 2022: $9999. Keep it up!
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Duplicate tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+Budget exceeded for Oct 2022: $1. Consider spending less!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Type of transaction given is invalid, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+
+____________________________________________________________
+____________________________________________________________
+Parameter behind tag(s) is found to be empty, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are your net categorical savings:
+[transport] -$10001
+[salary] $2000
+[food] -$20
+
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+These tag(s) and/or parameter(s) are incorrectly used, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here is a summary of your monthly expenditure:
+[Sep 2022]
+Income: $2000
+Expense: $20
+Savings: $1980
+Budget: $10000
+Spending Habit: Wow, keep up the good work. You saved at least two-third of your income.
+In terms of monthly budget, you have kept yourself well within the budget!
+
+[Oct 2022]
+Income: $0
+Expense: $10001
+Savings: -$10001
+Budget: $10000
+Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
+In terms of monthly budget, you have spent more than your budget planned!
+
+
+____________________________________________________________
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+Year: 2022
+
+-----Categorical Savings-----
+[transport] -$10001
+[salary] $2000
+[food] -$20
+
+-----Expenditure Summary-----
+Income: $2000
+Expense: $10021
+Savings: $-8021
+____________________________________________________________
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+Year: 2022, Month: 10
+
+-----Categorical Savings-----
+[transport] -$10001
+
+-----Expenditure Summary-----
+Income: $0
+Expense: $10001
+Savings: $-10001
+Budget: $10000
+Spending Habit: You spent way more than what you have earned for the current month. Please spend wisely based on your income.
+In terms of monthly budget, you have spent more than your budget planned!
+____________________________________________________________
+____________________________________________________________
+Period and number tags must be provided together, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Month tag must be accompanied by a year tag, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+The last 3 weeks:
+
+-----Categorical Savings-----
+
+-----Expenditure Summary-----
+Income: $0
+Expense: $0
+Savings: $0
+____________________________________________________________
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+The last 5 days:
+
+-----Categorical Savings-----
+
+-----Expenditure Summary-----
+Income: $0
+Expense: $0
+Savings: $0
+____________________________________________________________
+____________________________________________________________
+Here are the categorical savings and expenditure summary for
+The last 4 months:
+
+-----Categorical Savings-----
+[transport] -$10001
+[salary] $2000
+[food] -$20
+
+-----Expenditure Summary-----
+Income: $2000
+Expense: $10021
+Savings: $-8021
+____________________________________________________________
+____________________________________________________________
+Type of period given is invalid, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Period and number tags must be provided together, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Period and number tags must be provided together, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are the transaction records that match your search expression:
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+There are no transaction records that match your search expression.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+I have added the following Income transaction:
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+Budget exceeded for Oct 2022: $1. Consider spending less!
+____________________________________________________________
+____________________________________________________________
+Type of transaction given is invalid, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid category, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid amount! (Note: Amount must be positive integer, $10000000 or less only) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid date, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Invalid date, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [-][food] $20 on Sep 13 2022 | Description: NIL
+2: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+3: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+4: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+5: [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $100
+Remaining budget for current month: $100
+REMINDER: Continue to stay within your budget for this month! Good fortune!
+____________________________________________________________
+____________________________________________________________
+You have successfully updated the budget.
+Monthly budget set as: $10000000000000
+Remaining budget for current month: $10000000000000
+REMINDER: Continue to stay within your budget for this month! Good fortune!
+____________________________________________________________
+____________________________________________________________
+Invalid budget amount! (Note: Budget must be a positive whole number of valid range) Please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Mandatory tag(s) missing, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[-][food] $20 on Sep 13 2022 | Description: NIL
+Remaining budget for Sep 2022: $10000000000000. Keep it up!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+3: [-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+4: [+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+
+____________________________________________________________
+____________________________________________________________
+The index of the transaction does not exist, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+The index of the transaction does not exist, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[+][bonus] $10000000 on Oct 03 2022 | Description: thank_you_boss
+Remaining budget for Oct 2022: $9999999989999. Keep it up!
+____________________________________________________________
+____________________________________________________________
+I have deleted the following transaction:
+[-][transport] $10000 on Oct 03 2022 | Description: bus_fare
+Remaining budget for Oct 2022: $9999999999999. Keep it up!
+____________________________________________________________
+____________________________________________________________
+Here are your transaction records:
+1: [+][salary] $2000 on Sep 30 2022 | Description: jan_salary
+2: [-][transport] $1 on Oct 02 2022 | Description: bus_fare
+
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+Purging has been aborted. All transactions records are retained.
+____________________________________________________________
+____________________________________________________________
+Are you sure you want to proceed with this command? Please enter 'Y' to confirm.
+____________________________________________________________
+____________________________________________________________
+All your transactions have been purged.
+____________________________________________________________
+____________________________________________________________
+The command is aborted as the transactions list is empty.
+____________________________________________________________
+____________________________________________________________
+There are no transaction records found.
+____________________________________________________________
+____________________________________________________________
+I have added the following Expense transaction:
+[-][transport] $1 on Oct 02 2022 | Description: i/i/i/i/
+Remaining budget for Oct 2022: $9999999999999. Keep it up!
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Not supported tag(s) detected, please enter <help> for the command guide.
+____________________________________________________________
+____________________________________________________________
+Goodbye and see you soon.
+____________________________________________________________
