@@ -68,6 +68,8 @@ Here are your modules:
      [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time   Weeks: NA
 ```
 ---
+<div style="page-break-after: always;"></div>
+
 ###  <span style="color:orange ">Finding information on a module: `info`</span>
 Command used to see information on a module.
 
