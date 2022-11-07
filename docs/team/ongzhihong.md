@@ -42,7 +42,7 @@ Added basic documentation with formats for Commands in the Command Package to in
 
 Added class diagram for Command package. Added sequence diagrams for the creation and execution of different commands, showing the interaction between Duke, CommandParser and other classes that are needed to execute the commands (Ui, Database, UserUniversityListManager, etc).
 
-* **Some notable PRs**: [#85](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/85), [#104](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/104)
+* **Some notable PRs**: [#85](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/85), [#104](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/104), [#249](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/249)
 
 ### Contributions to Team-Based Tasks
 
