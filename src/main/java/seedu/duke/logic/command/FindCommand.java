@@ -1,8 +1,8 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
@@ -17,15 +17,14 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.CaloriesTable;
 import seedu.duke.ui.ExerciseTable;
 import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.Ui;
-import seedu.duke.ui.CaloriesTable;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -105,9 +104,9 @@ public class FindCommand extends Command {
 
     /**
      * To output a Calorie entry on the date input of the user.
+     *
      * @param argumentList an array of inputs from the user
      * @param slashesCount to check if the number of slashes correspond with the required number of slashes
-     *
      * @throws IllegalValueException if the input date does not have Calories entry yet
      */
     private void findCalories(String[] argumentList, int slashesCount) throws IllegalValueException {
@@ -125,10 +124,10 @@ public class FindCommand extends Command {
         calculator.setHealthyCalorieSurplus();
         String message = calculator.calorieMessage(netCaloriesEntry);
         LocalDate localdate = Validator.getDateWithValidation(argumentList[1]);
-        Calories caloriesinput = new Calories(caloriesConsumedEntry,
+        Calories caloriesInput = new Calories(caloriesConsumedEntry,
                 caloriesBurntEntry, netCaloriesEntry, localdate, message);
         CaloriesList caloriesList = new CaloriesList();
-        caloriesList.addCalories(caloriesinput);
+        caloriesList.addCalories(caloriesInput);
         ArrayList<Calories> clist = caloriesList.getCaloriesList();
         if (clist.size() == EMPTY_LIST) {
             ui.output(CALORIES_NOT_FOUND);
@@ -143,9 +142,9 @@ public class FindCommand extends Command {
 
     /**
      * To find Cardio exercises corresponding to the date input of the user.
+     *
      * @param argumentList an array of inputs from the user
      * @param slashesCount to check if the number of slashes correspond with the required number of slashes
-     *
      * @throws IllegalValueException if the user has entered an invalid date
      */
     private void findCardio(String[] argumentList, int slashesCount) throws IllegalValueException {
@@ -183,7 +182,6 @@ public class FindCommand extends Command {
      *
      * @param argumentList a string array storing the user's input
      * @param slashesCount the number of parameters that the user has parsed in based on '/'
-     *
      * @throws IllegalValueException if finding food fails.
      */
     private void findFood(String[] argumentList, int slashesCount) throws IllegalValueException {
@@ -196,7 +194,7 @@ public class FindCommand extends Command {
             ui.output(FOOD_NOT_FOUND_MSG);
         } else {
             FoodTable tableFrame = new FoodTable(
-                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND_MSG);
+                    filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND_MSG);
             ArrayList<String> table = tableFrame.getFoodTable();
             ui.printTable(table);
         }
@@ -206,7 +204,6 @@ public class FindCommand extends Command {
      * Checks if the find food command is parsed in correctly.
      *
      * @param argumentList a string array storing the user's input
-     *
      * @throws IllegalValueException if the argumentList is not of correct length
      */
     private static void handleInvalidFindFoodCommand(String[] argumentList) throws IllegalValueException {
@@ -219,11 +216,10 @@ public class FindCommand extends Command {
      * Extract matching food records from the food list based on the description name.
      *
      * @param argumentList a string array storing the user's input
-     *
      */
     private ArrayList<Food> getFilteredFoodList(String[] argumentList) {
         ArrayList<Food> filteredFoodList = (ArrayList<Food>) foodList.getFoodList()
-                .stream().filter(Food.class::isInstance)
+                .stream().filter(Objects::nonNull)
                 .filter(f -> f.getFoodDescription().contains(argumentList[1]))
                 .collect(Collectors.toList());
         return filteredFoodList;
@@ -232,8 +228,8 @@ public class FindCommand extends Command {
 
     /**
      * Look through all cardio exercises and find a Cardio exercise containing the description in the exercise list.
-     * @param description The cardio exercise to be found
      *
+     * @param description The cardio exercise to be found
      * @return a filtered list of Exercises according to name of the Exercise
      */
     private ArrayList<Exercise> getFilteredCardioExerciseList(String description) {
@@ -250,9 +246,9 @@ public class FindCommand extends Command {
 
     /**
      * To calculate total calories consumed by users based on dates.
-     * @param argumentList an array of inputs from the user
      *
-     * @return total calories consumed by the user based on the date input in the argumentlist
+     * @param argumentList an array of inputs from the user
+     * @return total calories consumed by the user based on the date input in the argumentList
      */
     private int getFilteredCaloriesConsumedList(String[] argumentList) {
         int totalCaloriesConsumed;
@@ -266,8 +262,8 @@ public class FindCommand extends Command {
 
     /**
      * To calculate total calories burnt by users based on dates.
-     * @param argumentList an array of inputs from the user
      *
+     * @param argumentList an array of inputs from the user
      * @return total calories burnt by the user based on the date input in the argumentlist
      */
     private int getFilteredCaloriesBurntList(String[] argumentList) {

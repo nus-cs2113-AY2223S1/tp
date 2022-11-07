@@ -56,7 +56,7 @@ public class AddCommand extends Command {
     public static final String INVALID_FOOD_DESCRIPTION_INPUTS = "Please provide valid food description inputs!";
     public static final String NEGATIVE_CALORIES_ERROR_MESSAGE = "Calories inputs need to be positive integer values!";
     public static final String CALORIES_LIMIT_EXCEEDED = "It is impossible to have consumed more than 10000 kcal in a "
-        + "day!";
+            + "day!";
     public static final String INVALID_DATE_FORMAT = "Date should be in the format dd-mm-yyyy";
     public static final String INVALID_ADD_COMMAND = "Invalid add command";
     private final boolean isMarkDone;
@@ -112,12 +112,24 @@ public class AddCommand extends Command {
         }
     }
 
-
+    /**
+     * Adds strength exercise
+     *
+     * @param argumentList Input for the command
+     * @param slashesCount Number of slash in the input
+     * @throws IllegalValueException if the command is invalid
+     */
     private void addStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         validateAddStrengthExerciseCommand(argumentList, slashesCount);
         executeAddStrengthExercise(argumentList);
     }
 
+    /**
+     * Executes add strength command
+     *
+     * @param argumentList Input for the command
+     * @throws IllegalValueException If the command is invalid
+     */
     private void executeAddStrengthExercise(String[] argumentList) throws IllegalValueException {
         try {
             Exercise exercise = createStrengthExercise(argumentList);
@@ -132,6 +144,11 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Outputs success adding message
+     *
+     * @param exercise Exercise to be converted to string
+     */
     private void outputAddingMessage(Exercise exercise) {
         if (toDisplay) {
             ui.output(exercise.toString());
@@ -139,6 +156,13 @@ public class AddCommand extends Command {
         }
     }
 
+
+    /**
+     * Checks and executes mark done for exercise already done
+     *
+     * @param argumentList Inputs for the command
+     * @throws IllegalValueException If there is error in data from loading txt
+     */
     private void markDoneForLoading(String[] argumentList) throws IllegalValueException {
         if (isMarkDone) {
             double time = Validator.getTimeWithValidation(argumentList[LOAD_STRENGTH_EXERCISE_DATE_INDEX]);
@@ -147,6 +171,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Creates strength exercise
+     *
+     * @param argumentList Input for the command
+     * @return Strength exercise
+     * @throws IllegalValueException If there is invalid input
+     */
     private Exercise createStrengthExercise(String[] argumentList) throws IllegalValueException {
         String description = Validator
                 .getDescriptionWithValidation(argumentList[STRENGTH_EXERCISE_DESCRIPTION_INDEX]);
@@ -161,6 +192,16 @@ public class AddCommand extends Command {
         return new StrengthExercise(description, weight, set, repetition, date);
     }
 
+
+    /**
+     * Gets the date for the add command
+     *
+     * @param argumentList  Input for the command
+     * @param maximumLength Maximum length for the input
+     * @param dateIndex     Index of the date parameter
+     * @return LocalDate for the add command
+     * @throws IllegalValueException If there is error converting input date to LocalDate
+     */
     private LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
             throws IllegalValueException {
         LocalDate date = LocalDate.now();
@@ -170,6 +211,13 @@ public class AddCommand extends Command {
         return date;
     }
 
+    /**
+     * Validates the add strength command
+     *
+     * @param argumentList Input from the user
+     * @param slashesCount Number of slashes in the input
+     * @throws IllegalValueException If the input for the command is invalid
+     */
     private void validateAddStrengthExerciseCommand(String[] argumentList, int slashesCount)
             throws IllegalValueException {
         if (toDisplay) {
@@ -183,9 +231,9 @@ public class AddCommand extends Command {
 
     /**
      * To add a Cardio exercise to the exercise list.
+     *
      * @param argumentList an array of inputs from the user
      * @param slashesCount to check if the number of slashes correspond with the required number of slashes
-     *
      * @throws IllegalValueException if the user does not input distance in numbers or repetitions in integers
      */
     private void addCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
@@ -230,9 +278,8 @@ public class AddCommand extends Command {
     /**
      * Adds a new food record to the foodList.
      *
-     * @param argumentList a string array storing the user's input
+     * @param argumentList   a string array storing the user's input
      * @param argumentsCount the number of arguments that the user has parsed in based on '/'.
-     *
      * @throws IllegalValueException if adding food fails.
      */
 
@@ -287,7 +334,6 @@ public class AddCommand extends Command {
      * Checks if the food description is valid.
      *
      * @param input the food description based on user's input
-     *
      */
     private String validateFoodName(String input) throws IllegalValueException {
         if (Arrays.asList(invalidFoodNames).contains(input)) {
@@ -300,7 +346,6 @@ public class AddCommand extends Command {
      * Checks if the calories is valid.
      *
      * @param input the calories inputted by user
-     *
      */
     private int validateCalories(String input) throws IllegalValueException {
         int calories = Integer.parseInt(input);

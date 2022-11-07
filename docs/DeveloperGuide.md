@@ -83,7 +83,6 @@ data continues to load.
 Data is saved by calling the save methods for the different data types, which return Strings in the same format
 as the user input.
 
-
 **UI component**
 
 The API of this component is specified in UI package.
@@ -93,12 +92,11 @@ The API of this component is specified in UI package.
 The UI consists of a TableFrame.
 Parts such as FoodTable, ExerciseTable, CaloriesTable, AllRecordsTable inherit from the TableFrame class.
 
-
 The UI component,
+
 * executes user commands from the logic component.
 * listens for changes to records data so that the UI can be updated with the modified data.
 * keeps a reference to the logic component, because the UI relies on the logic to execute commands.
-
 
 ## Implementation
 
@@ -134,7 +132,7 @@ message.
 
 ![](UmlDiagrams/AddFood.png)
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
-object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
+object is being created. Food is then added to the FoodList. If is display,food is converted to string and output to
 user, followed by success message.
 
 #### Adding strength exercise
@@ -196,10 +194,6 @@ Component.
 
 The interactions for finding other types of records are similar.
 
-
-
-
-
 There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
 The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view command
 The following sequence diagram shows how the view operation works:
@@ -207,20 +201,21 @@ The following sequence diagram shows how the view operation works:
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
-
 The following sequence diagram shows how the view operation works after `view biometrics` is executed.
 
-The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be displayed.
+The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be
+displayed.
 
 Viewing biometrics
 
 ![](UmlDiagrams/ViewBiometrics.png)
 
-
 The following sequence diagram shows how the view operation works after `view calories` is executed.
 
-The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be displayed.
-The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the CompletedExerciseList and
+The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be
+displayed.
+The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the
+CompletedExerciseList and
 the net calories can then be calculated from the two, according to a date.
 
 These values are stored in a Calories object and output by a CaloriesList by calling ui.
@@ -231,12 +226,14 @@ Viewing calories
 
 The following sequence diagram shows how the view operation works after `view all` is executed.
 
-Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from RecordList and these data are output by outputAllRecords.
+Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from
+RecordList and these data are output by outputAllRecords.
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
 
-### Removing records  
+### Removing records
+
 The sequence diagrams below represent the interactions when a user removes a record.  
 ![](UmlDiagrams/Remove.png)  
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
@@ -270,25 +267,27 @@ to better understand their journey and progress towards their fitness goals.
 
 ## User Stories
 
-
-| Version | As a ...         | I want to ...                                | So that I can ...                                      |
-|---------|------------------|----------------------------------------------|--------------------------------------------------------|
-| v1.0    | new user         | see usage instructions                       | refer to them when I forget how to use the application |
-| v1.0    | user             | add my food consumption                      | to keep track of my food consumptions over time        |
-| v1.0    | user             | view my food consumption                     | to see my record of food consumptions                  |
-| v1.0    | new user         | add any exercises                            | can keep track of all my exercises to be done          |
-| v1.0    | long term user   | view my remaining exercises                  | so that I can know what are the exercise to be done.   |
-| v1.0    | long term user   | view my completed exercises                  | so that I can plan for the next workout                |
-| v2.0    | user             | have my records saved                        | see my past records                                    |
-| v2.0    | long term user   | record my weight and fat over time           | see how I am progressing in my fitness journey         |
-| v2.0    | long term user   | find certain food consumption                | to see my consumption of certain food over time        |
-| v2.0    | user             | remove a record                              | rectify incorrect entries                              |
-| v2.0    | long term user   | have my records displayed by descending date | see the most relevant records easily                   |
-| v2.0    | new user         | set my biometrics                            | receive personalised recommendations                   |
-| v2.1    | fitness beginner | receive calorie recommendations              | set a target to hit every day                          |
-| v2.1    | long term user   | check my overall calorie usage               | monitor my daily calorie intake and burn over time     |
-| v2.1    | user             | find my calorie usage by date                | monitor my overall calorie usage on a certain date     |
-
+| Version | As a ...              | I want to ...                                                                       | So that I can ...                                                  |
+|---------|-----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| v1.0    | new user              | see usage instructions                                                              | refer to them when I forget how to use the application             |
+| v1.0    | user                  | add my food consumption                                                             | to keep track of my food consumptions over time                    |
+| v1.0    | user                  | view my food consumption                                                            | to see my record of food consumptions                              |
+| v1.0    | new user              | add any exercises                                                                   | can keep track of all my exercises to be done                      |
+| v1.0    | long term user        | mark my exercise done                                                               | so that I track my progress over time.                             |
+| v1.0    | long term user        | view my remaining exercises                                                         | so that I can know what are the exercise to be done.               |
+| v1.0    | long term user        | view my completed exercises                                                         | so that I can plan for the next workout                            |
+| v2.0    | user                  | have my records saved                                                               | see my past records                                                |
+| v2.0    | long term user        | record my weight and fat over time                                                  | see how I am progressing in my fitness journey                     |
+| v2.0    | long term user        | find certain food consumption                                                       | to see my consumption of certain food over time                    |
+| v2.0    | user                  | remove a record                                                                     | rectify incorrect entries                                          |
+| v2.0    | long term user        | have my records displayed by descending date                                        | see the most relevant records easily                               |
+| v2.0    | new user              | set my biometrics                                                                   | receive personalised recommendations                               |
+| v2.0    | gym user              | record weight, set and reps for the exercise                                        | so that I reference the intensity for next work out                |
+| v2.0    | fitness enthusiastic  | estimate my calories for the workout based the time and intensity of the workout    | so that I can use it to estimate calories intake based on my goals |
+| v2.0    | long term user        | find strength exercise based on the name                                            | so that I can view my progress for that exercise over time         |
+| v2.1    | fitness beginner      | receive calorie recommendations                                                     | set a target to hit every day                                      |
+| v2.1    | long term user        | check my overall calorie usage                                                      | monitor my daily calorie intake and burn over time                 |
+| v2.1    | user                  | find my calorie usage by date                                                       | monitor my overall calorie usage on a certain date                 |
 
 ## Non-Functional Requirements
 
@@ -305,4 +304,7 @@ to better understand their journey and progress towards their fitness goals.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and shutdown
+
+
+  
