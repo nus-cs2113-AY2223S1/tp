@@ -22,6 +22,9 @@ public class RemoveCommand extends Command {
 
     public static final String INVALID_REMOVE_EXERCISE_COMMAND = "Invalid remove exercise command";
     public static final String INVALID_REMOVE_FOOD_COMMAND = "Invalid remove food command";
+
+    public static final String INDEX_OUT_OF_BOUNDS = "Invalid index put!";
+
     public static final String INVALID_REMOVE_WEIGHT_COMMAND = "Invalid remove weight command";
 
     public static final int REQUIRED_COUNT = 1;
@@ -108,7 +111,7 @@ public class RemoveCommand extends Command {
             assert argumentList.length == 2 : "Valid remove food command";
             int index = Integer.parseInt(argumentList[1]);
             if (index <= 0 || index > foodList.getFoodListSize()) {
-                throw new IllegalValueException(INVALID_REMOVE_FOOD_COMMAND);
+                throw new IllegalValueException(INDEX_OUT_OF_BOUNDS);
             }
             ui.output(REMOVE_FOOD_SUCCESS_MSG);
             ui.output(foodList.getFood(index - 1).toString());
