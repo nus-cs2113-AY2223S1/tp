@@ -101,6 +101,23 @@ filter exercise based on its status when user want to view the exercises based o
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
 
+
+**UI component**
+
+The API of this component is specified in UI package.
+
+![](UmlDiagrams/UI.png)
+
+The UI consists of a TableFrame.
+Parts such as FoodTable, ExerciseTable, CaloriesTable, AllRecordsTable inherit from the TableFrame class.
+
+
+The UI component,
+* executes user commands from the logic component.
+* listens for changes to records data so that the UI can be updated with the modified data.
+* keeps a reference to the logic component, because the UI relies on the logic to execute commands.
+
+
 ## Implementation
 
 ### Sequence diagrams
@@ -123,12 +140,30 @@ Marking exercise
 Finding a record  
 ![Find.png](UmlDiagrams/Find.png)
 
+
+The following sequence diagram shows how the view operation works:
+
+There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
+
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
+
+
+The following sequence diagram shows how the view operation works after `view biometrics` is executed.
+
+The most recent weight and fat records are retrieved.
+
+Then, the most recently set biometrics of the user will be displayed.
 
 Viewing biometrics  
 ![](UmlDiagrams/ViewBiometrics.png)
 
+
+The following sequence diagram shows how the view operation works after `view calories` is executed.
+
+The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be displayed.
+The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the CompletedExerciseList and
+the net calories can then be calculated from the two according to a date. A
 Viewing calories  
 ![ViewCalories.png](UmlDiagrams/ViewCalories.png)
 

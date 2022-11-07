@@ -262,6 +262,26 @@ You have a moderately active lifestyle!
 Thus your maintenance calories is 2350
 ```
 
+#### View Biometrics  : `view biometrics`
+
+Allows the user to check his/her biometrics
+
+Format : view biometrics
+
+Example of usage: `view biometrics`
+
+Expected outcome: Current biometrics of user will be displayed
+
+```
+Biometrics:
+Age: 15
+Gender: male
+Height: 176cm
+Weight: 83kg
+Fat percentage: 23%
+Activity Level: 2
+```
+
 ### Exercises
 
 #### Adding strength exercise: `add strength`

@@ -17,10 +17,7 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.AllRecordsTable;
-import seedu.duke.ui.ExerciseTable;
-import seedu.duke.ui.FoodTable;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -49,6 +46,8 @@ public class FindCommand extends Command {
     public static final String CALORIES = "calories";
     public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
     public static final int EMPTY_LIST = 0;
+    public static final String CALORIES_NOT_FOUND = "No matching calories entry found";
+    public static final String CALORIES_FOUND = "Here is the matching calorie entry in your list:";
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
@@ -116,7 +115,14 @@ public class FindCommand extends Command {
         CaloriesList caloriesList = new CaloriesList();
         caloriesList.addCalories(caloriesinput);
         ArrayList<Calories> clist = caloriesList.getCaloriesList();
-        ui.outputCalories(clist);
+        if (clist.size() == EMPTY_LIST) {
+            ui.output(CALORIES_NOT_FOUND);
+        } else {
+            CaloriesTable tableFrame = new CaloriesTable(
+                    foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, clist, CALORIES_FOUND);
+            ArrayList<String> table = tableFrame.getCaloriesTable();
+            ui.printTable(table);
+        }
     }
 
     private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
