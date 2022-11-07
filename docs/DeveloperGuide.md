@@ -779,6 +779,8 @@ The `Convert-Currency` command converts the currency of an existing expense in t
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Printing a recurring payment
 
 The following sequence diagram illustrates the process of printing and logging a `RecurringPayment` object.
@@ -912,6 +914,8 @@ This command helps the user to track when recurring payments are paid.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Printing an income
 
 The following sequence diagram illustrates the process of printing and logging an `Income` object.
@@ -1025,6 +1029,8 @@ The `Edit-Income` command changes the attributes of an existing income in the pr
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Printing a target
 
