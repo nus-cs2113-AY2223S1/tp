@@ -546,16 +546,83 @@ The following command(s) do not take any arguments:
 - `exit`
 - `update`
 
+Providing arguments will result in an error message, for example:
+
+Input:
+
+`help arg1`
+
+Output:
+
+```
+There were unrecognized arguments after the `help` command. Please try the `help` command again by itself.
+```
+
 The following command(s) take only 1 argument:
 - `find`
 - `auth`
-- `favourite`
+
+Providing no arguments will result in an error message, for example:
+
+Input:
+
+`find`
+
+Output:
+
+```
+Empty argument. Valid command(s):
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark based on carpark ID.
+```
+
+Providing too many arguments will result in an error message, for example:
+
+Input:
+
+`auth arg1 arg2`
+
+Output:
+
+```
+ENTER ERROR MESSAGE HERE
+```
 
 The following command(s) take in more than 1 argument:
 - `filter`
 - `filter -id`
 - `filter -address`
+- `unfavourite`
+- `favourite` (excluding `favourite list`)
+
+Providing no arguments will result in an error message, for example:
+
+Input:
+
+`filter`
+
+Output:
+
+```
+Empty argument. Valid command(s): 
+`filter QUERY` or `fil QUERY`	: Filter carparks based on Carpark information.
+```
+
+The following command does not take in any additional arguments:
+- `favourite list`
+
+Providing extra arguments will result in an error message, for example:
+
+Input:
+
+`favourite list arg1`
+
+Output:
+
+```
+INSERT ERROR MESSAGE HERE
+```
 
 Users can test both Favourite.txt and CarparkList.txt to modify the data being passed to the program.
 
-Refer to the User Guide for accurate information regarding the valid and invalid inputs. Users can try giving carpark IDs or addresses that do not exist.
+Refer to the User Guide for accurate information regarding the valid and invalid inputs. Users can try giving carpark 
+IDs or addresses that do not exist.
