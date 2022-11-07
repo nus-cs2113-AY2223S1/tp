@@ -33,7 +33,7 @@
 
 parKING is a desktop app that helps drivers choose the best place to park via the Command Line Interface (CLI).
 parKING allows users to search, save and look at car park availability information at a glance, while interfacing with 
-LTA's real-time API. Whenever you launch parKING, it automatically get the latest car park availability and updates the
+LTA's real-time API. Whenever you launch parKING, it automatically gets the latest carpark availability and updates the
 local data immediately. The best part about parKING is that it can be used offline (based on the data you have saved the 
 last time you are connected to the internet).
 
@@ -42,8 +42,8 @@ strive to become your driving companion, keeping you at ease while ensuring that
 lot when you arrive at your destination. We got you and your loved ones parked!
 
 ### Disclaimer regarding use of API key for the purposes of NUS CS2113
-We understand that an api key is something personal and should not be shared with everyone. However, for the purpose of
-NUS CS2113, we have provided a default api key for testing purposes. **This default api key will be removed at the end of
+We understand that an API key is something personal and should not be shared with everyone. However, for the purpose of
+NUS CS2113, we have provided a default API key for testing purposes. **This default API key will be removed at the end of
 module in Q4 2022**.
 
 ## Quick Start
@@ -54,13 +54,13 @@ module in Q4 2022**.
 4. Use the command `java -jar parKING.jar` to start the program!
 5. Note that the program will automatically create a directory called `resources` to store local data files.
 6. Here are some simple commands to get you started. 
-   1. To authenticate using your personal api key, use the command [`auth API_KEY`](#authenticate-user-api).
+   1. To authenticate using your personal API key, use the command [`auth API_KEY`](#authenticate-user-api).
    2. To get a detailed information on a carpark using its ID, use the command [`find CARPARK_ID`](#find-number-of-lots-by-carpark-id).
    3. To get the list of carpark by address keyword, use the command [`filter QUERY`](#filter-carparks-based-on-address).
    4. Use [`favourite CARPARK_ID`](#favourite-carparks-by-carpark-id)/[`unfavourite CARPARK_ID`](#unfavourite-carparks-by-carpark-id)
    to add / remove certain carparks into your favourite list.
       
-See more detail in the [Features Section](#features) section below.
+See more details in the [Features Section](#features) section below.
 
 ## Features
 
@@ -115,8 +115,8 @@ Authenticated successfully.
 **Authenticate using the default API key.**
 > Format: `auth default` or `a default`
 
-- For user with no API key, they can use the provided api key to access the services.
-- User will not be able to see the api key.
+- For user with no API key, they can use the provided API key to access the services.
+- User will not be able to see the API key.
 - A fetching sequence will be initiated also from LTA API.
 
 Example of usage:
@@ -134,10 +134,10 @@ Authenticated successfully using default API Key.
 
 ### Authentication status
 
-**Get the status of the api key authentication status.**
+**Get the status of the API key authentication status.**
 > Format: `auth status` or `a status`
 
-- It will inform the user whether the user api key is entered and valid or whether the default API key is used.
+- It will inform the user whether the user API key is entered and valid or whether the default API key is used.
 - If user has entered and validated their personal key before, they will be able to view their own API key.
   Otherwise, the default API key will not be revealed to the user.
 
