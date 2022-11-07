@@ -185,6 +185,8 @@ The sequence diagrams referenced by the component interaction diagram [below](#c
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 1. When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
 2. `UserInterface` creates instances of `Logger` and `Data`.
 3. `MoneyGoWhere` calls `UserInterface#run()` to start the interface between the program and the user.
@@ -276,6 +278,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 *A reference diagram showing the interactions between the UI, Data and Storage components when data is saved in MoneyGoWhere.*
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 * `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
 * `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
