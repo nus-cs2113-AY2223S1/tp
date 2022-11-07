@@ -68,6 +68,13 @@ public class FlagParser {
                 if (index <= STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
                     continue;
                 }
+            } else {
+                if (recipeFlagCount + commandFlagCount >= 1) {
+                    break;
+                }
+                if (index == 2 && !s.contains(DASH_DIVIDER)) {
+                    throw new NumberFormatException();
+                }
             }
 
             if (s.contains(DASH_DIVIDER)) {
