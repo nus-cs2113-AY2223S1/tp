@@ -58,8 +58,10 @@ public class Ui {
     private static final String NEXT_LINE = "\n";
     private static final String DOUBLE_SPACE = "  ";
     private static final String AND = " and ";
+    private static final String INDEX_DOT = ". ";
 
     private static final int FIRST_INDEX = 1;
+    private static final int OFFSET_UNIT_VALUE = 1;
 
     //@@author wilsonngja
     private static boolean isInputEmpty(String rawInput) {
@@ -81,7 +83,7 @@ public class Ui {
             isEmpty = isInputEmpty(rawInput);
         }
 
-        return rawInput;
+        return rawInput.trim();
     }
     //@@author
 
@@ -108,7 +110,7 @@ public class Ui {
         int currentListSize = propertyList.getCurrentListSize();
         printNewline();
         showToUser(MESSAGE_PROPERTY_ADDED);
-        showToUser("  " + propertyList.getPropertyList().get(currentListSize - 1));
+        showToUser(DOUBLE_SPACE + propertyList.getPropertyList().get(currentListSize - OFFSET_UNIT_VALUE));
         printNewline();
     }
 
@@ -116,7 +118,7 @@ public class Ui {
         int currentListSize = clientList.getCurrentListSize();
         printNewline();
         showToUser(MESSAGE_CLIENT_ADDED);
-        showToUser("  " + clientList.getClientList().get(currentListSize - 1));
+        showToUser(DOUBLE_SPACE + clientList.getClientList().get(currentListSize - OFFSET_UNIT_VALUE));
         printNewline();
     }
 
@@ -126,12 +128,12 @@ public class Ui {
     //@@author FeliciaBeatrice
     public void showPropertyDeletedConfirmationMessage(Property deletedProperty) {
         showToUser(MESSAGE_PROPERTY_DELETED);
-        showToUser("  " + deletedProperty);
+        showToUser(DOUBLE_SPACE + deletedProperty);
     }
 
     public void showClientDeletedConfirmationMessage(Client deletedClient) {
         showToUser(MESSAGE_CLIENT_DELETED);
-        showToUser("  " + deletedClient);
+        showToUser(DOUBLE_SPACE + deletedClient);
     }
 
     public void showPairedPropertiesDeletedConfirmationMessage(Client deletedClient, PairingList pairingList) {
@@ -139,7 +141,7 @@ public class Ui {
         if (clientPropertyPairs.containsKey(deletedClient)) {
             Property pairedProperty = clientPropertyPairs.get(deletedClient);
             showToUser(MESSAGE_PAIRED_PROPERTIES_DELETED);
-            showToUser("  " + pairedProperty.getPropertyAddress());
+            showToUser(DOUBLE_SPACE + pairedProperty.getPropertyAddress());
         }
     }
 
@@ -153,7 +155,7 @@ public class Ui {
                     showToUser(MESSAGE_PAIRED_CLIENTS_DELETED);
                 }
                 Client pairedClient = entry.getKey();
-                showToUser("  " + currentIndex + ". " + pairedClient.getClientName());
+                showToUser(DOUBLE_SPACE + currentIndex + INDEX_DOT + pairedClient.getClientName());
                 currentIndex++;
             }
         }
