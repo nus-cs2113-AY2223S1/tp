@@ -20,7 +20,8 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 **Enhancements implemented**
 
 - Added the function of Finish Task
-- Added status to Pet
+- Added more diverse status to Pet
+- Added the function of improving the status of a pet when an appointment is processed
 - Added exception handling to EmployeeParser
 - Added exception handling to ServiceParser
 - Improved the index of Pet
