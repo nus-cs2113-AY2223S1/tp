@@ -442,7 +442,7 @@ Syntax: `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `CATEGORY` and `NAME` are text strings.
 > * `CATEGORY` should be entered using its full name.
-> * If any of the optional arguments are provided, MoneyGoWhere will only display the specified expense(s).
+> * The optional arguments can only be used one at a time.
 
 <br>
 
@@ -468,8 +468,9 @@ Currency        : USD
 Mode of Payment : PayLah
 Mode of Payment : Card
 ```
+
 #### Viewing expenses by expense index
-```
+
 View-Expense -e 1
 
 ---- EXPENSE INDEX 1 ----
@@ -480,8 +481,9 @@ Category        : Work Expenses
 Currency        : USD
 Mode of Payment : Card
 ```
+
 #### Viewing expenses by category
-```
+
 View-Expense -c "Work Expenses"
 
 ---- EXPENSE INDEX 0 ----
@@ -1017,7 +1019,9 @@ Date and Time : 01 Feb 2022 23:59
 Description   : Investment payouts
 Amount        : 500.00
 ```
+
 #### Viewing incomes by income index
+
 ```
 View-Income -e 1
 
@@ -1199,7 +1203,9 @@ Description   : Money spent on food
 Amount        : 1000.00
 Current Amount: 1500.00
 ```
+
 #### Viewing targets by target index
+
 ```
 View-Target -e 1
 
