@@ -1,6 +1,24 @@
 @startuml
+skinparam Style strictuml
 
-Class Parser {
+
+package parser as pkg{
+class Parser
+class ParserUtils
+class RecipeFileParser
+class TitleFileParser
+note "attributes and methods omitted to avoid clutter" as N1
+}
+
+TitleFileParser o.- ParserUtils
+
+
+
+TitleFileParser .- N1
+RecipeFileParser .- N1
+
+
+class Parser{
     +{static}parseCommand()
     -parseAddCommand()
     -parseEditCommand()
@@ -11,9 +29,12 @@ Class Parser {
     -parseListCommand()
     -parseViewCommand()
 }
+
+
+
 package command {
 Abstract Command {
-    -commandResult:execute()
+    +commandResult:execute()
 }
 Class AddCommand
 Class EditCommand
@@ -25,13 +46,13 @@ Class ListCommand
 Class ViewCommand
 Class InvalidCommand
 }
-Parser *-right-> command
+Parser *-right- command
 AddCommand -up-|> Command
 EditCommand -up-|> Command
 DeleteCommand -up-|> Command
 ExitCommand -up-|> Command
 FindCommand -down-|> Command
-HelpCommand -l-> Command
+HelpCommand -l-|> Command
 ListCommand -down-|> Command
 ViewCommand -down-|> Command
 InvalidCommand -down-|> Command

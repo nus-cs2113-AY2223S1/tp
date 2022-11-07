@@ -1,0 +1,32 @@
+@startuml
+skinparam Style strictuml
+autoactivate on
+autonumber
+
+actor User
+participant "UI" as ui
+participant "Main" as main
+participant "Parser" as parser
+participant "Command" as command
+participant "Recipe" as recipe
+participant "Storage" as store
+
+User -> ui: "type command"
+ui -> main: "read input"
+main -> parser: parseCommand(input)
+parser -> command: "parse to correct command"
+command -> recipe: access and change the recipe state
+recipe --> command
+command -> store:
+store -> recipe: get state of Recipe
+recipe --> store:
+store -> store: save recipe file and `AllRecipes.txt`
+store --> store:
+store --> command:
+command --> parser:
+parser --> main:
+main --> ui:
+ui --> User:
+
+
+@enduml

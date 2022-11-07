@@ -35,13 +35,13 @@ Package " "<<Rectangle>>{
 Class "<$user>" as User MODEL_COLOR_T1
 Class "<$documents>" as File UI_COLOR_T1
 
-Main -up-> UI
-Main -down-> Parser
-Parser -right-> Command
-Command -right-> Storage
-Command -down-> Recipe
-Recipe -right> Storage
-Storage -left-> Recipe
+Main .up-> UI
+Main .down-> Parser
+Parser .right-> Command
+Command .right-> Storage
+Command .down-> Recipe
+Recipe .right> Storage
+Storage .left-> Recipe
 
 Storage .right.>File
 User ..> UI

@@ -1,6 +1,7 @@
-package recipeditor.parser;
+package recipeditor.ui;
 
 import recipeditor.exception.ParseFileException;
+import recipeditor.parser.RecipeFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;

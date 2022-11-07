@@ -1,34 +1,34 @@
 @startuml
-
+skinparam Style strictuml
 Abstract Class Command {
-    {static} commandType : String
-    {static} String : getCommandType()
-    {static} Boolean : isExit()
+    -{static} commandType : String
+    +{static} String : getCommandType()
+    +{static} Boolean : isExit()
 }
 
 Class CommandResult {
-    {static} message : String
+    -{static} message : String
 }
 
 Class AddCommand {
-    addedRecipe : recipe
+    -addedRecipe : recipe
 }
 
 Class DeleteCommand {
-    index : integer
+    -index : integer
 }
 
 Class ViewCommand {
-    index : integer
+    -index : integer
 }
 
-Command -> CommandResult : > execute
+Command - CommandResult : > execute()
 
-InvalidCommand -> Command
-Command <-- AddCommand
-Command <-- DeleteCommand
-Command <--- ListCommand
-Command <--- ViewCommand
+InvalidCommand -|> Command
+Command <|-- AddCommand
+Command <|-- DeleteCommand
+Command <|--- ListCommand
+Command <|--- ViewCommand
 AddCommand ...> RecipeList : > add to
 AddCommand ..> Storage : > write
 DeleteCommand ...> RecipeList : > delete from
