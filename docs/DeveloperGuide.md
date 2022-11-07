@@ -24,6 +24,7 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
     - [Parse Text to Recipe](#parse-text-to-recipe) - Huy
     - [Edit an Existing Recipe](#edit-an-existing-recipe) - William
     - [Find Recipe](#find-recipe) - Qian Hui
+    - [View Recipe](#view-recipe) - Bian Rui
     - [Delete Recipe](#delete-recipe) - Bian Rui
 - [Product Scope](#product-scope)
     - [Target User Profile](#target-user-profile)
@@ -509,7 +510,39 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 
 #### Based on Recipe Ingredient
 
+### View Recipe
+
+- `ViewCommad` can be constructed from the `index` or `title` of `recipe` to view.
+- When constructing `ViewCommand`from `title`, the constructor will store the `index` of `recipe` of given `title`.
+  If `title` of `recipe` is not found in `RecipeList`, constructor will throw a `RecipeNotFoundException` to the 
+class calling this constructor, and no valid `ViewCommand` will be generated from that. This ensures constructing 
+`ViewCommand` from `title` always contains valid `index` to inspect from the `RecipeList`.
+- If the given `index` is within the range of `RecipeList`:
+    - The stored `recipe` file is found by calling `RecipeList.getRecipe(index)`.
+    - The `recipe` information is formatted by calling `recipe.getRecipeAttributesFormatted()`.
+    - A `CommandReseult` containing message of formatted `recipe` of given index is returned from `execute()`.
+- If the given `index` is out of the range of `RecipeList`:
+    - An `IndexOutofBoundException` is thrown when `RecipeList.getRecipe(index)`.
+    - It is catched. `Ui` will show message on the total number of recipes in list.
+    - A `CommandResult` containing failure in viewing the specified `recipe` returned from `execute()`.
+
+
 ### Delete Recipe
+
+- `DeleteCommad` can be constructed from the `index` or `title` of `recipe` to delete. 
+- When constructing `DeleteCommand`from `index`, the constructor will store the `title` of `recipe` at given `index`.
+If `index` is not in the range of `recipe` in `RecipeList`, constructor will assign a `NULL` value to `title` of `recipe`
+to delete from. This will cause `execute()` of this `DeleteCommand` to always fail in deleting the specified
+unexisting `recipe`.
+- If the `recipe` of given `title` exist in the `RecipeList`:
+  - The stored `recipe` file is deleted by calling `Storage.deleteRecipeFile(title)`.
+  - The list of titles of all `recipe` is updated to remove the `title` of the deleted `recipe` by calling
+    `Storage.rewriteRecipeListToFile(title)`.
+  - A `CommandReseult` containing message of successful delete of `recipe` of given `title` is returned from `execute()`.
+- If the `recipe` of given `title` does not exis in the `RecipeList`:
+  - An `Exception` is thrown when calling `Storage.deleteRecipeFile()`.
+  - It is catched. `Ui` will show message on the total number of recipes in list.
+  - A `CommandResult` containing failure in deleting the specified `recipe` returned from `execute()`.
 
 ## Product scope
 

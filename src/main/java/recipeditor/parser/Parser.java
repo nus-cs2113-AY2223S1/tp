@@ -33,6 +33,7 @@ public class Parser {
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
             "Wrong command format.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
+    private static final String INVALID_TITLE_MESSAGE = " is not a valid title.";
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
@@ -100,6 +101,7 @@ public class Parser {
                     logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
                 }
+                Ui.showMessage(recipeTitleToDelete + INVALID_TITLE_MESSAGE);
                 break;
             case NULL:
                 throw new MissingFlagsException();
