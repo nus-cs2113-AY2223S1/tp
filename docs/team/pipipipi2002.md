@@ -36,7 +36,7 @@ red colour output for warnings and errors, green colour for successful messages 
 quickstart, example of usage.
 - Formulated the documentation on `auth` commands and `update` command.
 
-### Contributions to the DG: Which sections did you contribute to the DG?
+### Contributions to the DG:
 
 - Documentation for `Api`, `update` which includes class diagram and sequence diagram to explain
 how the api is loaded and how the data fetching process is implemented. 

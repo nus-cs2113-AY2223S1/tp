@@ -15,8 +15,8 @@ Class CarparkList {
     -carparkHashMap: HashMap<String, Carpark>
     -carparks: List<Carpark>
     +CarparkList(Path, Path)
-    +findCarpark(String) : Carpark
-    +filterByAllStrings(Sentence) : CarparkFilteredList
+    +findCarpark(String): Carpark
+    +filterByAllStrings(Sentence): CarparkFilteredList
 }
 
 Class Sentence {
@@ -26,8 +26,8 @@ Class Sentence {
 }
 
 Class Word {
-    - isBold :boolean
-    - text :String
+    - isBold:boolean
+    - text:String
     + toString(): String
 }
 
@@ -51,15 +51,30 @@ Class "<<enumeration>>\nLotType" as LotType
         HEAVY_VEHICLE
     }
     hide empty methods
+
+    Class Favourite {
+        -favouriteList: ArrayList<String>
+        -fileStorage: FileStorage
+        -directory: String
+        -file: String
+        +Favourite(String, String)
+        +updateFavouriteList(CarparkList)
+        +ensureValidity(CarparkList, ArrayList<String>): boolean
+        +writeFavouriteList()
+        +getFavouriteListString(): String
+    }
 }
+
+
 
 Class HiddenOutside #FFFFFF
 
 Storage -[dashed]-> CarparkList
-CarparkList *--> "1..*" Carpark : contains
+Storage -[dashed]-> Favourite
+CarparkList *--> "1..*" Carpark: contains
 CarparkList <|-- CarparkFilteredList
-CarparkFilteredList --> "*" Carpark : contains references to
-Carpark *--> "1" Sentence : contains
-Sentence *--> "1..*" Word : contains
+CarparkFilteredList --> "*" Carpark: contains references to
+Carpark *--> "1" Sentence: contains
+Sentence *--> "1..*" Word: contains
 Carpark -[dashed]-> LotType
 @enduml

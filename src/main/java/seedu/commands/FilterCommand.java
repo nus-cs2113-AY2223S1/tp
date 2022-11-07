@@ -35,7 +35,7 @@ public class FilterCommand extends Command {
      *      words in the searchQuery.
      */
     public static CarparkFilteredList runFilter(CarparkList carparkList, Sentence searchQuery) {
-        return carparkList.filterByAllStrings(searchQuery);
+        return carparkList.filterByAddress(searchQuery);
     }
 
     /**
