@@ -7,12 +7,14 @@ import recipeditor.ui.Ui;
 
 public class ViewCommand extends Command {
     public static final String COMMAND_TYPE = "/view";
-    public static final String COMMAND_FUNCTION = "View the full recipe of "
+    private static final String COMMAND_FUNCTION = "View the full recipe of "
             + "the specific index or title in the list of recipes";
-    public static final String COMMAND_SYNTAX = "\n" + "\t /view -id <recipe_index>"
+    private static final String COMMAND_SYNTAX = "\n" + "\t /view -id <recipe_index>"
             + '\n' + "\t /view -t <recipe_title> ";
     public static final String COMMAND_NAME = "view";
     public static final String CORRECT_FORMAT = "The input should be '/view <flag> <argument>.'";
+    private static final String CURRENT = "Current number of saved recipes:";
+    private static final String OUT_OF_BOUND = "View recipe index out of bound.";
 
     private int index;
 
@@ -52,8 +54,8 @@ public class ViewCommand extends Command {
             String commandResultOutput = recipe.getRecipeAttributesFormatted();
             return new CommandResult(commandResultOutput);
         } catch (IndexOutOfBoundsException e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipeSize()));
-            return new CommandResult("View recipe index out of bound.");
+            Ui.showMessageInline(CURRENT, Integer.toString(RecipeList.getRecipeSize()));
+            return new CommandResult(OUT_OF_BOUND);
         }
     }
 }

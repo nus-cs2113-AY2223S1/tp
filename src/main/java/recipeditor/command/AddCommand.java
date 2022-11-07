@@ -11,6 +11,7 @@ public class AddCommand extends Command {
     private static final String COMMAND_FUNCTION = "Edit a new recipe and add it to recipeditor.";
 
     private static final String NOTHING = "Nothing was added";
+    private static final String FORMAT = "\"%s\" added to the recipe list.\n";
 
     private Recipe addedRecipe;
     private boolean isValid;
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
             Storage.saveRecipe(addedRecipe, Ui.EMPTY_STRING, recipeFileSourcePath);
             StringBuilder response = new StringBuilder();
-            response.append(String.format("\"%s\" added to the recipe list.\n",addedRecipe.getTitle()));
+            response.append(String.format(FORMAT,addedRecipe.getTitle()));
             response.append(RecipeList.printNumberOfRecipes());
 
             return new CommandResult(response.toString());

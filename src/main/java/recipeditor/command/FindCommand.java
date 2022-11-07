@@ -57,7 +57,7 @@ public class FindCommand extends Command {
             }
             return new CommandResult(output.toString());
         } catch (NullPointerException e) {
-            return new CommandResult(FindCommand.CORRECT_FORMAT);
+            return new CommandResult(CORRECT_FORMAT);
         }
     }
 }

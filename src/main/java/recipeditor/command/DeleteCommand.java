@@ -13,6 +13,8 @@ public class DeleteCommand extends Command {
     private static final String COMMAND_FUNCTION =
             "Delete the recipe of given title or index from recipeditor.";
     public static final String CORRECT_FORMAT = "The input should be '/delete <flag> <argument>.'";
+    private static final String OUT_OF_BOUND = "Delete recipe index out of bound.";
+    private static final String CURRENT = "Current number of saved recipes:";
     private String recipeTitleToDelete;
 
     public DeleteCommand() {
@@ -52,8 +54,8 @@ public class DeleteCommand extends Command {
             return new CommandResult(String.format("\n" + recipeTitleToDelete
                     + " is deleted from the recipe list.%n"));
         } catch (Exception e) {
-            Ui.showMessageInline("Current number of saved recipes:", Integer.toString(RecipeList.getRecipeSize()));
-            return new CommandResult("Delete recipe index out of bound.");
+            Ui.showMessageInline(CURRENT, Integer.toString(RecipeList.getRecipeSize()));
+            return new CommandResult(OUT_OF_BOUND);
         }
     }
 }
