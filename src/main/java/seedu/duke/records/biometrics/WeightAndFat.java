@@ -6,6 +6,9 @@ import seedu.duke.logic.exception.IllegalValueException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Represents a record of weight and fat percentage.
+ */
 public class WeightAndFat extends Record {
 
     private static final int MAX_WEIGHT = 400;
