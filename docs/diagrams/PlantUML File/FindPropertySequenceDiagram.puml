@@ -1,0 +1,54 @@
+@startuml
+
+hide footbox
+
+Participant ":CommandFindProperty" as CommandFindProperty #F4F4B6
+Participant "propertyList : PropertyList" as PropertyList #F4F4B6
+Participant "property : Property" as Property #F4F4B6
+Participant "ui: Ui" as Ui #F4F4B6
+
+->CommandFindProperty:execute(ui: Ui, storage: Storage, propertyList: PropertyList, \nclientList: ClientList, pairingList: PairingList)
+activate CommandFindProperty #CDEFF9
+
+CommandFindProperty->PropertyList:getCurrentListSize()
+activate PropertyList #CDEFF9
+return currentListSize
+
+    loop i < currentListSize
+        CommandFindProperty->PropertyList:getCurrentList()
+        activate PropertyList #CDEFF9
+        PropertyList->Property:get(i: int)
+        activate Property #CDEFF9
+        return property
+        return currentProperty
+
+        CommandFindProperty->CommandFindProperty:hasQueryText(queryText: String, currentProperty: Property)
+        activate CommandFindProperty #E2CDF9
+        CommandFindProperty -> Property:getLandlordName()
+        activate Property #CDEFF9
+        return landlordName
+
+        CommandFindProperty -> Property:getPropertyAddress()
+        activate Property #CDEFF9
+        return propertyAddress
+
+        CommandFindProperty -> Property:getRentingPrice()
+        activate Property #CDEFF9
+        return rentingPrice
+
+        CommandFindProperty -> Property:getUnitType()
+        activate Property #CDEFF9
+        return unitType
+
+        return hasQueryTextInProperty
+        opt hasQueryTextInClients
+            CommandFindProperty->Ui:displayOneProperty(currentProperty: Property, clientIndex: int)
+            activate Ui #CDEFF9
+            return
+        end
+
+    end
+
+    return
+@enduml
+

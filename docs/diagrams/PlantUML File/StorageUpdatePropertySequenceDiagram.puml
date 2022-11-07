@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+Participant "storage : Storage" as Storage #F4F4B6
+Participant "propertyFile : FileWriter" as FileWriter #F4F4B6
+Participant "propertyList : PropertyList" as PropertyList #F4F4B6
+Participant "property : Property" as Property #F4F4B6
+
+->Storage:updateProperty()
+activate Storage #CDEFF9
+
+create FileWriter
+Storage -> FileWriter:FileWriter(PROPERTY_PATH: String)
+activate FileWriter #CDEFF9
+return
+
+Storage -> PropertyList:getPropertyList()
+activate PropertyList #CDEFF9
+return propertyList
+
+    loop for each property in propertyList
+        Storage -> Property:getLandlordName()
+        activate Property #CDEFF9
+        return landlordName
+
+        Storage -> Property:getPropertyAddress()
+        activate Property #CDEFF9
+        return propertyAddress
+
+        Storage -> Property:getRentalPrice()
+        activate Property #CDEFF9
+        return rentingPrice
+
+        Storage -> Property:getUnitType()
+        activate Property #CDEFF9
+        return unitType
+    end
+
+Storage -> FileWriter:write(propertyText: String)
+activate FileWriter #CDEFF9
+return
+
+Storage -> FileWriter:close()
+activate FileWriter #CDEFF9
+return
+return
+
+@enduml

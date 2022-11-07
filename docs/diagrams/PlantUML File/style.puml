@@ -1,0 +1,99 @@
+
+
+'Blue for PropertyList'
+!define PROPERTY_LIST_COLOR #3333C4
+!define PROPERTY_LIST_COLOR_T1 #C8C8FA
+!define PROPERTY_LIST_COLOR_T2 #6A6ADC
+!define PROPERTY_LIST_COLOR_T3 #1616B0
+!define PROPERTY_LIST_COLOR_T4 #101086
+
+'Red for ClientList'
+!define CLIENT_LIST_COLOR #9D0012
+!define CLIENT_LIST_COLOR_T1 #F97181
+!define CLIENT_LIST_COLOR_T2 #E41F36
+!define CLIENT_LIST_COLOR_T3 #7B000E
+!define CLIENT_LIST_COLOR_T4 #51000A
+
+'Yellow for Storage'
+!define STORAGE_COLOR #A38300
+!define STORAGE_COLOR_T1 #FFE374
+!define STORAGE_COLOR_T2 #EDC520
+!define STORAGE_COLOR_T3 #806600
+!define STORAGE_COLOR_T4 #544400
+
+'Green for PairingList'
+!define PAIRING_LIST_COLOR #1D8900
+!define PAIRING_LIST_COLOR_T1 #83E769
+!define PAIRING_LIST_COLOR_T2 #3FC71B
+!define PAIRING_LIST_COLOR_T3 #166800
+!define PAIRING_LIST_COLOR_T4 #0E4100
+
+'Purple for Parser'
+!define PARSER_COLOR #8202de
+!define PARSER_COLOR_T1 #b04df7
+!define PARSER_COLOR_T2 #5d029e
+!define PARSER_COLOR_T3 #7d02a6
+!define PARSER_COLOR_T4 #3f016b
+
+'Orange for Command'
+!define COMMAND_COLOR #db970d
+!define COMMAND_COLOR_T1 #bd820b
+!define COMMAND_COLOR_T2 #d9b00b
+!define COMMAND_COLOR_T3 #fadc66
+!define COMMAND_COLOR_T4 #de9e1d
+
+'Baby pink for Client'
+!define CLIENT_COLOR #e07099
+
+'Baby blue for Property'
+!define PROPERTY_COLOR #70b7e0
+
+'Grey for Duke'
+!define DUKE_COLOR #grey
+
+'Light grey for UI'
+!define UI_COLOR #lightgrey
+
+'Black for user color'
+!define USER_COLOR #000000
+
+skinparam BackgroundColor #FFFFF
+
+skinparam Shadowing false
+
+skinparam Class {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Actor {
+    BorderColor USER_COLOR
+    Color USER_COLOR
+    FontName Arial
+}
+
+skinparam Sequence {
+    MessageAlign center
+    BoxFontSize 15
+    BoxPadding 0
+    BoxFontColor #FFFFFF
+    FontName Arial
+}
+
+skinparam Participant {
+    FontColor #FFFFFFF
+    Padding 20
+}
+
+skinparam MinClassWidth 50
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+hide footbox
+hide members
+hide circle

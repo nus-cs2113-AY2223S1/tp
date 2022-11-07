@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+Participant "storage : Storage" as Storage #F4F4B6
+Participant "pairFile : FileWriter" as FileWriter #F4F4B6
+Participant "client : Client" as Client #F4F4B6
+Participant "clientPropertyPair : HashMap<Client, Property>" as ClientPropertyPair #F4F4B6
+Participant "property : Property" as Property #F4F4B6
+
+
+->Storage:updatePair()
+activate Storage #CDEFF9
+create FileWriter
+
+Storage -> FileWriter:FileWriter(PAIR_FILE: String)
+activate FileWriter #CDEFF9
+return
+
+Storage->Storage:getPairingFileText(HashMap<Client, \nProperty>: clientPropertyPair)
+activate Storage #E2CDF9
+    loop for each client in clientPropertyPair.keySet()
+        Storage->Client:getClientName()
+        activate Client #CDEFF9
+        return clientName
+
+        Storage->Client:getClientContactNumber()
+        activate Client #CDEFF9
+        return clientContactNumber
+
+        Storage->Client:getClientEmail()
+        activate Client #CDEFF9
+        return clientEmail
+
+        Storage->Client:getClientBudgetPerMonth()
+        activate Client #CDEFF9
+        return clientBudgetPerMonth
+
+        Storage->ClientPropertyPair:get(Client: client)
+        activate ClientPropertyPair #CDEFF9
+
+        ClientPropertyPair->Property:getLandlordName()
+        activate Property #CDEFF9
+        return landlordName
+
+        ClientPropertyPair->Property:getPropertyAddress()
+        activate Property #CDEFF9
+        return propertyAddress
+
+        ClientPropertyPair->Property:getRentingPrice()
+        activate Property #CDEFF9
+        return rentingPrice
+
+        ClientPropertyPair->Property:getUnitType()
+        activate Property #CDEFF9
+        return unitType
+        return pairText
+        return
+    end
+
+Storage->FileWriter:write(pairText: String)
+activate FileWriter #CDEFF9
+return
+
+Storage->FileWriter:close()
+activate FileWriter #CDEFF9
+return
+return
+
+
+@enduml

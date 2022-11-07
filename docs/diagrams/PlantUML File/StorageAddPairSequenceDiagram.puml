@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+Participant "storage : Storage" as Storage #F4F4B6
+Participant "fw : FileWriter" as FileWriter #F4F4B6
+
+
+->Storage:addToPairFile(clientFormat: String, propertyFormat: String)
+activate Storage #CDEFF9
+
+create FileWriter
+Storage -> FileWriter:FileWriter(PAIR_PATH: String, append: boolean)
+activate FileWriter #CDEFF9
+return
+
+Storage -> FileWriter:write(finalFormat: String)
+activate FileWriter #CDEFF9
+return
+
+Storage -> FileWriter:close()
+activate FileWriter #CDEFF9
+return
+
+return
+@enduml

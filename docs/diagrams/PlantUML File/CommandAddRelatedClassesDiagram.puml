@@ -1,0 +1,33 @@
+@startuml
+
+hide circle
+abstract class "{abstract}\nCommandAdd" as CommandAdd
+class CommandAddProperty
+class CommandAddClient
+
+CommandAdd <|-- CommandAddProperty
+CommandAdd <|-- CommandAddClient
+
+skinparam classAttributeIconSize 0
+class CommandAddProperty {
+- landlordName:String
+- propertyAddress:String
+- rentingPrice:String
+- unitType:String
+--
++ CommandAddProperty(propertyDetails: Arraylist<String>)
++ execute(Ui, Storage, PropertyList, ClientList, PairingList)
+}
+
+skinparam classAttributeIconSize 0
+class CommandAddClient {
+- clientName:String
+- clientContactNumber:String
+- clientEmail:String
+- clientBudgetPerMonth:String
+--
++ CommandAddClient(clientDetails: Arraylist<String>)
++ execute(Ui, Storage, PropertyList, ClientList, PairingList)
+}
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant "Command:CommandDeleteProperty" as CommandDeleteProperty COMMAND_COLOR
+participant "propertyList:PropertyList" as PropertyList PROPERTY_LIST_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
+participant "pairingList:PairingList" as PairingList PAIRING_LIST_COLOR
+
+->CommandDeleteProperty : execute(Ui, Storage, PropertyList, ClientList, PairingList)
+activate CommandDeleteProperty COMMAND_COLOR
+
+CommandDeleteProperty -> PropertyList : deleteProperty(propertyIndex:int)
+activate PropertyList PROPERTY_LIST_COLOR
+return deletedProperty:Property
+
+CommandDeleteProperty -> Ui : showPropertyDeletedConfirmationMessage(deletedProperty:Property)
+activate Ui UI_COLOR
+return
+
+CommandDeleteProperty -> Ui : showPairedClientsDeletedConfirmationMessage(deletedProperty:Property, pairingList:PairingList)
+activate Ui UI_COLOR
+return
+
+CommandDeleteProperty -> PairingList : deletePairing(deletedProperty:Property)
+activate PairingList PAIRING_LIST_COLOR
+return
+
+CommandDeleteProperty -> Storage : updateProperty()
+activate Storage STORAGE_COLOR
+return
+
+CommandDeleteProperty -> Storage : updatePair()
+activate Storage STORAGE_COLOR
+return
+
+return
+
+@enduml

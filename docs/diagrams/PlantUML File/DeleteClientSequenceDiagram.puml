@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+hide footbox
+
+participant "Command:CommandDeleteClient" as CommandDeleteClient COMMAND_COLOR
+participant "clientList:ClientList" as ClientList CLIENT_LIST_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
+participant "pairingList:PairingList" as PairingList PAIRING_LIST_COLOR
+
+->CommandDeleteClient : execute(Ui, Storage, PropertyList, ClientList, PairingList)
+activate CommandDeleteClient COMMAND_COLOR
+
+CommandDeleteClient -> ClientList : deleteClient(clientIndex:int)
+activate ClientList CLIENT_LIST_COLOR
+return deletedClient:Client
+
+CommandDeleteClient -> Ui : showClientDeletedConfirmationMessage(deletedClient:Client)
+activate Ui UI_COLOR
+return
+
+CommandDeleteClient -> Ui : showPairedPropertiesDeletedConfirmationMessage(deletedClient:Client, pairingList:PairingList)
+activate Ui UI_COLOR
+return
+
+CommandDeleteClient -> PairingList : deletePairing(deletedClient:Client)
+activate PairingList PAIRING_LIST_COLOR
+return
+
+CommandDeleteClient -> Storage : updateClient()
+activate Storage STORAGE_COLOR
+return
+
+CommandDeleteClient -> Storage : updatePair()
+activate Storage STORAGE_COLOR
+return
+
+return
+
+@enduml
