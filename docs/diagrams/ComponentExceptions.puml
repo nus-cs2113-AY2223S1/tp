@@ -1,15 +1,15 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam rectangleTextAlignment<<left>> left
 
 package Exceptions {
-    Class MoneyGoWhereException EXCEPTIONS_COLOR_1
+    Class "        MoneyGoWhereException        " as MoneyGoWhereException EXCEPTIONS_COLOR_1
 
     Class ExpenseManagerExpenseNotFoundException EXCEPTIONS_COLOR_1
+    Class RecurringPaymentManagerRecurringPaymentNotFoundException EXCEPTIONS_COLOR_1
     Class IncomeManagerIncomeNotFoundException EXCEPTIONS_COLOR_1
     Class TargetManagerTargetNotFoundException EXCEPTIONS_COLOR_1
-    Class RecurringPaymentManagerRecurringPaymentNotFoundException EXCEPTIONS_COLOR_1
     Class CurrencyManagerCurrencyInvalidException EXCEPTIONS_COLOR_1
 
     Class ConsoleParserCommandAddExpenseInvalidException EXCEPTIONS_COLOR_1
@@ -22,13 +22,19 @@ package Exceptions {
     end note
 }
 
+ExpenseManagerExpenseNotFoundException -down[hidden]-> RecurringPaymentManagerRecurringPaymentNotFoundException
+RecurringPaymentManagerRecurringPaymentNotFoundException -down[hidden]-> IncomeManagerIncomeNotFoundException
+IncomeManagerIncomeNotFoundException -down[hidden]-> TargetManagerTargetNotFoundException
+CurrencyManagerCurrencyInvalidException -down[hidden]-> ConsoleParserCommandAddExpenseInvalidException
+ConsoleParserCommandAddExpenseInvalidException -down[hidden]-> LocalStorageLoadDataException
+
 ExpenseManagerExpenseNotFoundException -up-|> MoneyGoWhereException
-IncomeManagerIncomeNotFoundException --up-|> MoneyGoWhereException
-TargetManagerTargetNotFoundException --up-|> MoneyGoWhereException
+IncomeManagerIncomeNotFoundException -up-|> MoneyGoWhereException
+TargetManagerTargetNotFoundException -up-|> MoneyGoWhereException
 RecurringPaymentManagerRecurringPaymentNotFoundException -up-|> MoneyGoWhereException
-CurrencyManagerCurrencyInvalidException --up-|> MoneyGoWhereException
+CurrencyManagerCurrencyInvalidException -up-|> MoneyGoWhereException
 
-ConsoleParserCommandAddExpenseInvalidException ---up-|> MoneyGoWhereException
+ConsoleParserCommandAddExpenseInvalidException -up-|> MoneyGoWhereException
 
-LocalStorageLoadDataException ---up-|> MoneyGoWhereException
+LocalStorageLoadDataException -up-|> MoneyGoWhereException
 @enduml

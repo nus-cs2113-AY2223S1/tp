@@ -1,5 +1,5 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam sequenceReferenceBackgroundColor #ffffff
 skinparam noteTextAlignment left
@@ -68,7 +68,7 @@ opt consoleCommand instanceof ConsoleCommandViewExpense
         viewExpenseByExpenseIndex(),
         viewExpenseByExpenseName(),
         viewExpenseByExpenseCategory(),
-        viewExpense()
+        and viewExpense()
         will call convertExpenseToConsoleString()
         and printInformationalMessage() to print
         the expense to the console. For simplicity,
