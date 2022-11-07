@@ -1,110 +1,81 @@
 @startuml
 
-activate Duke
+activate ":Duke"
 
 hide footbox
 
-Duke -> UserStorageParser : getSavedLists()
-activate UserStorageParser
+":Duke" -> ":Ui" : getUserInput()
+activate ":Ui"
 
-UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
-deactivate UserStorageParser
+":Ui" --> ":Duke" : userInput : String
+deactivate ":Ui"
 
-Duke -> UserStorageParser : getSavedTimeTables()
-activate UserStorageParser
+":Duke" -> ":CommandParser" : CommandParser.getUserCommand(userInput)
+activate ":CommandParser"
 
-UserStorageParser --> Duke : timetableManager :TimetableManager
-deactivate UserStorageParser
+":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
+activate ":CommandParser"
 
-Duke -> Ui : getUserInput()
-activate Ui
 
-Ui --> Duke : userInput : String
-deactivate Ui
-
-Duke -> CommandParser : CommandParser.getUserCommand(userInput)
-activate CommandParser
-
-CommandParser -> CommandParser : parseUserCommand(userInput)
-activate CommandParser
-
-alt user command with comments
-    CommandParser -> CommandParser : parseUserCommandWithComments(userInput)
-    activate CommandParser
-
-    CommandParser --> CommandParser : userInputTokenized : String[]
-    deactivate CommandParser
-
-else
-    CommandParser -> CommandParser : parseUserCommandWithoutComments(userInput)
-    activate CommandParser
-
-    CommandParser --> CommandParser : userInputTokenized : String[]
-    deactivate CommandParser 
-end
-
-CommandParser --> CommandParser : userInputTokenized : String[]
-deactivate CommandParser
+":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
+deactivate ":CommandParser"
 
 alt create command
 
-    CommandParser -> CommandParser : isValidCreateCommand(userInputTokenized)
-    activate CommandParser
+    ":CommandParser" -> ":CommandParser" : isValidCreateCommand(userInputTokenized)
+    activate ":CommandParser"
 
-    CommandParser -> CommandParser : isValidCommandOnUniversity(userInputTokenized)
-    activate CommandParser
-
-    CommandParser --> CommandParser : :boolean
-    deactivate CommandParser
-
-    CommandParser --> CommandParser : :boolean
-    deactivate CommandParser
+    ":CommandParser" --> ":CommandParser" : :boolean
+    deactivate ":CommandParser"
 
     opt is valid create command
 
-        create CreateCommand
-        CommandParser -> CreateCommand : CreateCommand(userInputTokenized, CommandType.CREATE)
-        activate CreateCommand
+        create ":CreateCommand"
+        ":CommandParser" -> ":CreateCommand" : CreateCommand(userInputTokenized, CommandType.CREATE)
+        activate ":CreateCommand"
 
-        CreateCommand --> CommandParser : newCreateCommand :CreateCommand
-        deactivate CreateCommand
+        ":CreateCommand" --> ":CommandParser" : newCreateCommand : CreateCommand
+        deactivate ":CreateCommand"
     end
 
 else other command
 
 end
 
-CommandParser --> Duke : newUserCommand : Command
-deactivate CommandParser
+":CommandParser" --> ":Duke" : newUserCommand : Command
+deactivate ":CommandParser"
 
 alt create command
 
-Duke -> Duke : executeCreateCommand(userUniversityListManager, timetableManager, newUserCommand)
-activate Duke
+":Duke" -> ":Duke" : executeCreateCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate ":Duke"
 
-    Duke -> CreateCommand : getUniversityName()
-    activate CreateCommand
+    ":Duke" -> ":CreateCommand" : getUniversityName()
+    activate ":CreateCommand"
 
-    CreateCommand --> Duke : universityName :String
-    deactivate CreateCommand
+    ":CreateCommand" --> ":Duke" : universityName :String
+    deactivate ":CreateCommand"
 
-    Duke -> UserUniversityListManager : createList(universityName)
-    activate UserUniversityListManager
+    ":Duke" -> ":UserUniversityListManager" : createList(universityName)
+    activate ":UserUniversityListManager"
 
-    deactivate UserUniversityListManager
+    deactivate ":UserUniversityListManager"
 
-    Duke -> TimetableManager : createTimetable(universityName)
+    ":Duke" -> ":TimetableManager" : createTimetable(universityName)
+    activate ":TimetableManager"
 
-    Duke -> UserStorageParser : storeCreatedLists(userUniversityListManager)
-    activate UserStorageParser
+    deactivate ":TimetableManager"
 
-    deactivate UserStorageParser
+    ":Duke" -> ":UserStorageParser" : storeCreatedLists(userUniversityListManager)
+    activate ":UserStorageParser"
 
-    Duke -> UserStorageParser : storeTimetable(timetableManager)
-    activate UserStorageParser
+    deactivate ":UserStorageParser"
 
-    deactivate UserStorageParser
-deactivate Duke
+    ":Duke" -> ":UserStorageParser" : storeTimetable(timetableManager)
+    activate ":UserStorageParser"
+
+    deactivate ":UserStorageParser"
+deactivate ":Duke"
 else other command
 end
 

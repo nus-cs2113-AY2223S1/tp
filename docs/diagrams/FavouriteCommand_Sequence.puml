@@ -3,18 +3,6 @@ hide footbox
 
 activate ":Duke"
 
-":Duke" -> ":UserStorageParser" : getSavedLists()
-activate ":UserStorageParser"
-
-":UserStorageParser" --> ":Duke" : userUniversityListManager :":UserUniversityListManager"
-deactivate ":UserStorageParser"
-
-":Duke" -> ":UserStorageParser" : getSavedTimeTables()
-activate ":UserStorageParser"
-
-":UserStorageParser" --> ":Duke" : timetableManager :TimetableManager
-deactivate ":UserStorageParser"
-
 ":Duke" -> ":Ui" : getUserInput()
 activate ":Ui"
 
@@ -27,21 +15,6 @@ activate ":CommandParser"
 ":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
 activate ":CommandParser"
 
-alt user command with comments
-    ":CommandParser" -> ":CommandParser" : parseUserCommandWithComments(userInput)
-    activate ":CommandParser"
-
-    ":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
-    deactivate ":CommandParser"
-
-else
-    ":CommandParser" -> ":CommandParser" : parseUserCommandWithoutComments(userInput)
-    activate ":CommandParser"
-
-    ":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
-    deactivate ":CommandParser"
-end
-
 ":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
 deactivate ":CommandParser"
 
@@ -49,12 +22,6 @@ alt help command
 
     ":CommandParser" -> ":CommandParser" : isValidFavouriteCommand(userInputTokenized)
     activate ":CommandParser"
-
-    ":CommandParser" -> ":CommandParser" : isValidFavouriteOption(userInputTokenized[FAVOURITE_OPTION_INDEX])
-    activate ":CommandParser"
-
-    ":CommandParser" --> ":CommandParser" : :boolean
-    deactivate ":CommandParser"
 
     ":CommandParser" --> ":CommandParser" : :boolean
     deactivate ":CommandParser"
