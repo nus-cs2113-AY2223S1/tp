@@ -12,6 +12,7 @@ public class ViewCommand extends Command {
     public static final String COMMAND_SYNTAX = "\n" + "\t /view -id <recipe_index>"
             + '\n' + "\t /view -t <recipe_title> ";
     public static final String COMMAND_NAME = "view";
+    public static final String CORRECT_FORMAT = "The input should be '/view <flag> <argument>.'";
 
     private int index;
 

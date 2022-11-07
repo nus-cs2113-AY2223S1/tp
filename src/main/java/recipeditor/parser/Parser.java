@@ -76,14 +76,14 @@ public class Parser {
             }
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
-            if (parsed.length != DELETE_COMMAND_LENGTH) {
+            if (parsed.length < DELETE_COMMAND_LENGTH) {
                 return parseHelpCommand(DeleteCommand.COMMAND_NAME);
             }
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
-            if (parsed.length != VIEW_COMMAND_LENGTH) {
+            if (parsed.length < VIEW_COMMAND_LENGTH) {
                 return parseHelpCommand(ViewCommand.COMMAND_NAME);
             }
             return parseViewCommand(parsed);
@@ -182,7 +182,7 @@ public class Parser {
         } catch (AssertionError e) {
             Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
-        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        return new InvalidCommand(ViewCommand.CORRECT_FORMAT);
     }
 
     private static Command parseEditCommand(String[] parsed) {

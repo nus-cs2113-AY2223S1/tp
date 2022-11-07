@@ -20,6 +20,8 @@ import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 
+import javax.swing.text.View;
+
 class ParserTest {
 
     private static final String TEST_RECIPE_TITLE = "eR$^.U*0(";
@@ -269,7 +271,7 @@ class ParserTest {
     public void viewCommand_byIndex_indexOutOfBound() {
         String input = "/view -id 0";
         Command viewCommand = Parser.parseCommand(input);
-        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String expected = ViewCommand.CORRECT_FORMAT;
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
@@ -279,7 +281,7 @@ class ParserTest {
     public void viewCommand_byIndex_invalidIndex() {
         String input = "/view -id index";
         Command viewCommand = Parser.parseCommand(input);
-        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String expected = ViewCommand.CORRECT_FORMAT;
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
@@ -309,7 +311,7 @@ class ParserTest {
     public void viewCommand_invalidFlag() {
         String input = "/view -d 1";
         Command viewCommand = Parser.parseCommand(input);
-        String expected = new InvalidCommand(ViewCommand.COMMAND_SYNTAX).execute().getMessage();
+        String expected = ViewCommand.CORRECT_FORMAT;
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
