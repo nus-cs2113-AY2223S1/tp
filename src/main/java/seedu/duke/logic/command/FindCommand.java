@@ -115,6 +115,7 @@ public class FindCommand extends Command {
                 arguments.charAt(arguments.length() - 1));
         int caloriesConsumedEntry = getFilteredCaloriesConsumedList(argumentList);
         int caloriesBurntEntry = getFilteredCaloriesBurntList(argumentList);
+        final LocalDate localdate = Validator.getDateWithValidation(argumentList[1]);
         if (caloriesConsumedEntry == 0 && caloriesBurntEntry == 0) {
             throw new IllegalValueException("Input date does not have entries yet!");
         }
@@ -124,7 +125,6 @@ public class FindCommand extends Command {
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
         String message = calculator.calorieMessage(netCaloriesEntry);
-        LocalDate localdate = Validator.getDateWithValidation(argumentList[1]);
         Calories caloriesinput = new Calories(caloriesConsumedEntry,
                 caloriesBurntEntry, netCaloriesEntry, localdate, message);
         CaloriesList caloriesList = new CaloriesList();
