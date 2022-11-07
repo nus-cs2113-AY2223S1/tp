@@ -1,15 +1,16 @@
-package seedu.files;
+package seedu.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
 import seedu.common.CommonFiles;
-import seedu.data.CarparkList;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidFormatException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
+import seedu.files.FileReader;
+import seedu.files.FileStorage;
 import seedu.ui.Ui;
 
 /**

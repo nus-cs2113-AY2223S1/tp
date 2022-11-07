@@ -19,9 +19,9 @@ import seedu.commands.UnfavouriteCommand;
 import seedu.commands.UpdateCommand;
 import seedu.common.CommonData;
 import seedu.data.CarparkList;
+import seedu.data.Favourite;
 import seedu.exception.DashedArgumentsNotInFrontException;
 import seedu.exception.UnneededArgumentsException;
-import seedu.files.Favourite;
 import seedu.parser.search.Argument;
 import seedu.parser.search.Sentence;
 

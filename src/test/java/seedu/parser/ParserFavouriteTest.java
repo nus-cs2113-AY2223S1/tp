@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.commands.Command;
 import seedu.data.CarparkList;
+import seedu.data.Favourite;
 import seedu.exception.FileWriteException;
 import seedu.exception.InvalidCommandException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
-import seedu.files.Favourite;
 
 public class ParserFavouriteTest {
     private final String testFileDirectory = "./src/test/java/seedu/testfiles";
