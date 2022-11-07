@@ -35,6 +35,7 @@ Command used to initiate the process of adding a new module.
 
 * You will be prompted to enter the module code after this command.
 * The module code is not case sensitive but must be of an official NUS module.
+* Only up to 7 modules can be added
 
 **Example of Usage:**
 input: `add`
