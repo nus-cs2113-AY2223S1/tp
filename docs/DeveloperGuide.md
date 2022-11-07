@@ -109,6 +109,7 @@ Given below is an example usage scenario and how the Appointment mechanism behav
 //TODO add appointment status DG
 
 > The following sequence diagram shows how the add appointment operation works:
+
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
 
 ### Design considerations:
