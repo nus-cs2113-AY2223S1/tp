@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,6 +50,11 @@ public class Storage {
     private static final String AMOUNT_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_AMOUNT;
     private static final String DATE_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DATE;
     private static final String DESCRIPTION_TAG_WITH_SPACE = " " + CommandTag.COMMAND_TAG_TRANSACTION_DESCRIPTION;
+    private static final int TYPE_PARAMETER = 0;
+    private static final int CATEGORY_PARAMETER = 1;
+    private static final int AMOUNT_PARAMETER = 2;
+    private static final int DATE_PARAMETER = 3;
+    private static final int DESCRIPTION_PARAMETER = 4;
 
 
     private TransactionList storedTransactions;
@@ -115,7 +121,7 @@ public class Storage {
      * Stores budget value from duke.txt to the program by parsing the first line of the file.
      *
      * @param monthlyBudget The budget value to be parsed.
-     * @throws StorageFileCorruptedBudgetException     If the budget value in duke,txt has been corrupted.
+     * @throws StorageFileCorruptedBudgetException If the budget value in duke,txt has been corrupted.
      */
     private void storeBudgetLocally(String monthlyBudget) throws MoolahException {
         try {
@@ -146,16 +152,17 @@ public class Storage {
             throw new StorageFileCorruptedTransactionException();
         }
 
-        String type = splits[0];
-        String category = splits[1];
-        String amountString = splits[2];
+        // Stores the parameters based on the sequence of parameters in the storage file duke.txt
+        String type = splits[TYPE_PARAMETER];
+        String category = splits[CATEGORY_PARAMETER];
+        String amountString = splits[AMOUNT_PARAMETER];
         // Date has been formatted in duke.txt and must be synthesized into the correct string format before parsing
         try {
-            LocalDate date = LocalDate.parse(splits[3], formatter);
+            LocalDate date = LocalDate.parse(splits[DATE_PARAMETER], formatter.withResolverStyle(ResolverStyle.STRICT));
             String dateString = synthesizeDateString(date);
 
 
-            String description = splits[4];
+            String description = splits[DESCRIPTION_PARAMETER];
 
             String parametersInput = TYPE_TAG + type + CATEGORY_TAG_WITH_SPACE + category
                     + AMOUNT_TAG_WITH_SPACE + amountString + DATE_TAG_WITH_SPACE + dateString
@@ -166,7 +173,7 @@ public class Storage {
             ParameterParser.parse(command, parametersInput);
 
             // amount would be converted into an integer before being used in the addition of transaction locally
-            int amount = Integer.parseInt(splits[2]);
+            int amount = Integer.parseInt(splits[AMOUNT_PARAMETER]);
 
             switch (type) {
             case "expense":
