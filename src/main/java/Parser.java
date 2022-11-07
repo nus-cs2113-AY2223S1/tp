@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -417,8 +419,10 @@ public class Parser {
 
     private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
         String reason = matcher.group(4);
-        checkDateForVisit(matcher.group(2));
+        String date = matcher.group(2);
+        checkDateForVisit(date);
         checkTime(matcher.group(3));
+        checkBirthDateVisitDate(date, patientId);
         if (reason == null || reason.isEmpty()) {
             visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
             storage.saveVisitData(visitList);
@@ -426,6 +430,20 @@ public class Parser {
             visitList.addVisit(ui, patientId, matcher.group(2),
                     matcher.group(3), matcher.group(4));
             storage.saveVisitData(visitList);
+        }
+    }
+
+    private void checkBirthDateVisitDate(String date, String patientId) throws OneDocException {
+        Patient patient = patientList.findPatient(patientId);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            if (!sdf.parse(patient.getBirthDate()).before(sdf.parse(date))) {
+                throw new OneDocException("This patient was born before this visit! Please use a different visit date");
+            }
+        } catch (OneDocException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new OneDocException("Unknown error with patient's birthdate and given visit date");
         }
     }
 
