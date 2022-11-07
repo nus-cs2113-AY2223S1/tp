@@ -5,5 +5,5 @@ package seedu.moneygowhere.commands;
 /**
  * Stores the command help and its arguments.
  */
-public class ConsoleCommandHelp extends ConsoleCommand{
+public class ConsoleCommandHelp extends ConsoleCommand {
 }

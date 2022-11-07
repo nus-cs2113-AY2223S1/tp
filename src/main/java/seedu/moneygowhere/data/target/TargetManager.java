@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -19,9 +18,8 @@ public class TargetManager {
         targets = new ArrayList<>();
     }
 
-    public void addTarget(Target target, LocalStorage localStorage) {
+    public void addTarget(Target target) {
         targets.add(target);
-        localStorage.setSavedTargets(targets);
     }
 
     public Target getTarget(int targetIndex) throws TargetManagerTargetNotFoundException {
@@ -38,30 +36,36 @@ public class TargetManager {
 
     //@@author LokQiJun
     public void setTargets(ArrayList<Target> savedTargets) {
-        this.targets = new ArrayList<Target>(savedTargets);
+        this.targets = new ArrayList<>(savedTargets);
     }
 
-    public void deleteTarget(int targetIndex, LocalStorage localStorage)
+    public void deleteTarget(int targetIndex)
             throws TargetManagerTargetNotFoundException {
         try {
             targets.remove(targetIndex);
-            localStorage.setSavedTargets(targets);
         } catch (IndexOutOfBoundsException exception) {
             throw new TargetManagerTargetNotFoundException(Messages.TARGET_MANAGER_ERROR_TARGET_NOT_FOUND);
         }
     }
 
-    public void editTarget(int targetIndex, Target target, LocalStorage localStorage)
+    public void editTarget(int targetIndex, Target target)
             throws TargetManagerTargetNotFoundException {
         try {
             targets.set(targetIndex, target);
-            localStorage.setSavedTargets(targets);
         } catch (IndexOutOfBoundsException exception) {
             throw new TargetManagerTargetNotFoundException(Messages.TARGET_MANAGER_ERROR_TARGET_NOT_FOUND);
         }
     }
 
-    public void updateTargets(ArrayList<Target> targets) {
-        this.targets = targets;
+    public boolean hasTarget(Target target) {
+        return targets.contains(target);
+    }
+
+    public void updateTargets(ArrayList<Target> newTargets) {
+        for (Target newTarget : newTargets) {
+            if (!hasTarget(newTarget)) {
+                this.targets.add(newTarget);
+            }
+        }
     }
 }

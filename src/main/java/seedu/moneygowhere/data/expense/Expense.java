@@ -2,6 +2,7 @@ package seedu.moneygowhere.data.expense;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 //@@author xzynos
 
@@ -18,7 +19,6 @@ public class Expense {
     private String remarks;
     private String currency;
     private String modeOfPayment;
-    private BigDecimal rate;
 
     public Expense(String name,
                    LocalDateTime dateTime,
@@ -108,11 +108,23 @@ public class Expense {
         this.modeOfPayment = modeOfPayment;
     }
 
-    public BigDecimal getRate() {
-        return rate;
-    }
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Expense) {
+            Expense e = (Expense) o;
 
-    public void setRate(BigDecimal rate) {
-        this.rate = rate;
+            boolean isEqual = Objects.equals(e.getName(), name)
+                    && Objects.equals(e.getDateTime(), dateTime)
+                    && Objects.equals(e.getDescription(), description)
+                    && Objects.equals(e.getAmount(), amount)
+                    && Objects.equals(e.getCategory(), category)
+                    && Objects.equals(e.getRemarks(), remarks)
+                    && Objects.equals(e.getCurrency(), currency)
+                    && Objects.equals(e.getModeOfPayment(), modeOfPayment);
+
+            return isEqual;
+        } else {
+            return false;
+        }
     }
 }

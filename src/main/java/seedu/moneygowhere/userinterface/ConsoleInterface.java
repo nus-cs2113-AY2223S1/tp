@@ -17,7 +17,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandHelp;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
 import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
@@ -54,7 +54,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInval
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandPayRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
@@ -64,10 +64,12 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewRecurringPay
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandViewTargetInvalidException;
 import seedu.moneygowhere.logger.LocalLogger;
 import seedu.moneygowhere.parser.ConsoleParser;
+import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 import seedu.moneygowhere.storage.LocalStorage;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -76,11 +78,16 @@ import java.util.Scanner;
 //@@author xzynos
 
 /**
- * Provide functions to interface with the user via standard input and standard output.
+ * Provides functions to interface with the user via standard input and standard output.
  */
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {
     private LocalLogger localLogger;
+
+    private boolean isLocalLoggerInitialized() {
+        return localLogger != null;
+    }
+
     private Scanner scanner;
     private ExpenseManager expenseManager;
     private TargetManager targetManager;
@@ -88,7 +95,6 @@ public class ConsoleInterface {
     private RecurringPaymentManager recurringPaymentManager;
     private CurrencyManager currencyManager;
 
-    private LocalStorage localStorage;
     private CurrencyApiManager currencyApiManager;
 
     //@@author xzynos
@@ -100,11 +106,11 @@ public class ConsoleInterface {
         try {
             localLogger = new LocalLogger();
         } catch (IOException e) {
-            printErrorMessage("An IO error occurred in the console logger. The logger will be disabled");
+            printErrorMessage("An IO error occurred in the local logger. The logger will be disabled");
         }
 
-        if (localLogger != null) {
-            localLogger.logInfo("Initializing MoneyGoWhere");
+        if (isLocalLoggerInitialized()) {
+            localLogger.logInformationalMessage("Initializing MoneyGoWhere");
         }
 
         scanner = new Scanner(System.in);
@@ -115,7 +121,6 @@ public class ConsoleInterface {
         recurringPaymentManager = new RecurringPaymentManager();
         currencyManager = new CurrencyManager();
 
-        localStorage = new LocalStorage();
         currencyApiManager = new CurrencyApiManager();
     }
 
@@ -173,8 +178,10 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printInformationalMessage(String message) {
+    public void printInformationalMessage(String message) {
         System.out.println(message);
+
+        localLogger.logInformationalMessage(message);
     }
 
     //@@author xzynos
@@ -184,8 +191,11 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printWarningMessage(String message) {
-        System.out.println("WARN: " + message);
+    public void printWarningMessage(String message) {
+        String warningMessageHeader = "WARN: ";
+        System.out.println(warningMessageHeader + message);
+
+        localLogger.logWarningMessage(message);
     }
 
     //@@author xzynos
@@ -195,8 +205,11 @@ public class ConsoleInterface {
      *
      * @param message Message to print.
      */
-    public static void printErrorMessage(String message) {
-        System.out.println("ERROR: " + message);
+    public void printErrorMessage(String message) {
+        String errorMessageHeader = "ERROR: ";
+        System.out.println(errorMessageHeader + message);
+
+        localLogger.logErrorMessage(message);
     }
 
     //@@author xzynos
@@ -229,15 +242,17 @@ public class ConsoleInterface {
         if (expense.getDescription() != null) {
             expenseStr += "Description     : " + expense.getDescription() + "\n";
         }
-        expenseStr += "Amount          : " + expense.getAmount() + "\n";
+        expenseStr += "Amount          : "
+                + expense.getAmount().setScale(2, RoundingMode.HALF_UP).toPlainString() + "\n";
         if (expense.getCategory() != null) {
             expenseStr += "Category        : " + expense.getCategory() + "\n";
         }
         if (expense.getRemarks() != null) {
             expenseStr += "Remarks         : " + expense.getRemarks() + "\n";
         }
-        expenseStr += "Currency        : " + expense.getCurrency() + "\n";
+        expenseStr += "Currency        : " + expense.getCurrency();
         if (expense.getModeOfPayment() != null) {
+            expenseStr += "\n";
             expenseStr += "Mode of Payment : " + expense.getModeOfPayment();
         }
 
@@ -263,8 +278,10 @@ public class ConsoleInterface {
         if (target.getDescription() != null) {
             targetStr += "Description   : " + target.getDescription() + "\n";
         }
-        targetStr += "Amount        : " + target.getAmount() + "\n";
-        targetStr += "Current Amount: " + target.getCurrentAmount();
+        targetStr += "Amount        : "
+                + target.getAmount().setScale(2, RoundingMode.HALF_UP).toPlainString() + "\n";
+        targetStr += "Current Amount: "
+                + target.getCurrentAmount().setScale(2, RoundingMode.HALF_UP).toPlainString();
 
         return targetStr;
     }
@@ -288,7 +305,8 @@ public class ConsoleInterface {
         if (income.getDescription() != null) {
             incomeStr += "Description   : " + income.getDescription() + "\n";
         }
-        incomeStr += "Amount        : " + income.getAmount();
+        incomeStr += "Amount        : "
+                + income.getAmount().setScale(2, RoundingMode.HALF_UP).toPlainString();
 
         return incomeStr;
     }
@@ -308,12 +326,14 @@ public class ConsoleInterface {
         if (recurringPayment.getDescription() != null) {
             recurringPaymentStr += "Description     : " + recurringPayment.getDescription() + "\n";
         }
-        recurringPaymentStr += "Amount          : " + recurringPayment.getAmount() + "\n";
+        recurringPaymentStr += "Amount          : "
+                + recurringPayment.getAmount().setScale(2, RoundingMode.HALF_UP).toPlainString() + "\n";
         if (recurringPayment.getCategory() != null) {
             recurringPaymentStr += "Category        : " + recurringPayment.getCategory() + "\n";
         }
-        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency() + "\n";
+        recurringPaymentStr += "Currency        : " + recurringPayment.getCurrency();
         if (recurringPayment.getModeOfPayment() != null) {
+            recurringPaymentStr += "\n";
             recurringPaymentStr += "Mode of Payment : " + recurringPayment.getModeOfPayment();
         }
 
@@ -323,14 +343,14 @@ public class ConsoleInterface {
     //@@author xzynos
     private void runCommandBye(ConsoleCommandBye consoleCommandBye) {
         if (localLogger != null) {
-            localLogger.logInfo("Terminating MoneyGoWhere");
+            localLogger.logInformationalMessage("Terminating MoneyGoWhere");
         }
     }
 
+    //@@author jeyvia
     private void runCommandHelp(ConsoleCommandHelp consoleCommandHelp) {
         String helpStr = "";
-        helpStr += "EXPENSE-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+        helpStr += "---- EXPENSE RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_EXPENSE
                 + Messages.CONSOLE_COMMAND_ADD_EXPENSE_FORMAT
                 + "\n";
@@ -349,8 +369,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_CONVERT_CURRENCIES
                 + Messages.CONSOLE_COMMAND_CONVERT_CURRENCY_FORMAT
                 + "\n";
-        helpStr += "\n" + "RECURRING-PAYMENT-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- RECURRING PAYMENT RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_FORMAT
                 + "\n";
@@ -366,8 +388,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_PAY_RECURRING_PAYMENT
                 + Messages.CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_FORMAT
                 + "\n";
-        helpStr += "\n" + "INCOME-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- INCOME RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_INCOME
                 + Messages.CONSOLE_COMMAND_ADD_INCOME_FORMAT
                 + "\n";
@@ -380,8 +404,10 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_INCOME
                 + Messages.CONSOLE_COMMAND_EDIT_INCOME_FORMAT
                 + "\n";
-        helpStr += "\n" + "TARGET-RELATED-COMMANDS:" + "\n";
-        helpStr += "___________________________________________" + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- TARGET RELATED COMMANDS ----" + "\n";
         helpStr += Messages.CONSOLE_COMMAND_HELP_ADD_TARGET
                 + Messages.CONSOLE_COMMAND_ADD_TARGET_FORMAT
                 + "\n";
@@ -394,6 +420,13 @@ public class ConsoleInterface {
         helpStr += Messages.CONSOLE_COMMAND_HELP_EDIT_TARGET
                 + Messages.CONSOLE_COMMAND_EDIT_TARGET_FORMAT
                 + "\n";
+
+        helpStr += "\n";
+
+        helpStr += "---- STORAGE RELATED COMMANDS ----" + "\n";
+        helpStr += Messages.CONSOLE_COMMAND_HELP_MERGE_FILE
+                + Messages.CONSOLE_COMMAND_MERGE_FILE_FORMAT;
+
         printInformationalMessage(helpStr);
     }
 
@@ -417,11 +450,20 @@ public class ConsoleInterface {
                 consoleCommandAddExpense.getRemarks(),
                 consoleCommandAddExpense.getCurrency(),
                 consoleCommandAddExpense.getModeOfPayment());
-        expenseManager.addExpense(expense, localStorage);
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_EXPENSE_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
+        expenseManager.addExpense(expense);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_EXPENSE_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
@@ -451,6 +493,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -471,6 +517,10 @@ public class ConsoleInterface {
             return;
         }
 
+        if (expenses.isEmpty()) {
+            printErrorMessage(Messages.EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND);
+        }
+
         for (int index = 0; index < expenses.size(); index++) {
             Expense expense = expenses.get(index);
 
@@ -484,7 +534,7 @@ public class ConsoleInterface {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
 
         if (expenses.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_EMPTY_LIST);
         }
 
         for (int index = 0; index < expenses.size(); index++) {
@@ -517,7 +567,7 @@ public class ConsoleInterface {
         int expenseIndex = consoleCommandDeleteExpense.getExpenseIndex();
 
         try {
-            expenseManager.deleteExpense(expenseIndex, localStorage);
+            expenseManager.deleteExpense(expenseIndex);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
 
@@ -525,6 +575,8 @@ public class ConsoleInterface {
         }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_EXPENSE_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
@@ -575,8 +627,9 @@ public class ConsoleInterface {
             expense.setModeOfPayment(consoleCommandEditExpense.getModeOfPayment());
         }
 
+
         try {
-            expenseManager.editExpense(expenseIndex, expense, localStorage);
+            expenseManager.editExpense(expenseIndex, expense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
             printErrorMessage(exception.getMessage());
 
@@ -587,17 +640,21 @@ public class ConsoleInterface {
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_EXPENSE_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
     private void runCommandSortExpense(ConsoleCommandSortExpense commandSortExpense) {
         ArrayList<Expense> expenses = expenseManager.getExpenses();
-        expenseManager.updateSortExpenses(commandSortExpense, localStorage);
         if (expenses.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_SORT_EXPENSE_EMPTY_LIST);
             return;
         }
+        expenseManager.updateSortExpenses(commandSortExpense);
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_SORTED_EXPENSE_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author jeyvia
@@ -613,9 +670,10 @@ public class ConsoleInterface {
         }
 
         BigDecimal rate = consoleCommandConvertCurrency.getRate();
+        String currency = consoleCommandConvertCurrency.getCurrency();
         if (rate == null) {
             try {
-                currencyManager.hasCurrency(consoleCommandConvertCurrency.getCurrency());
+                currencyManager.hasCurrency(currency);
             } catch (CurrencyInvalidException
                      | CurrencyRatesNotFoundException exception) {
                 printErrorMessage(exception.getMessage());
@@ -623,12 +681,19 @@ public class ConsoleInterface {
             }
         }
 
-        consoleCommandConvertCurrency.changeCurrency(expense, currencyManager);
-        localStorage.saveToFile();
-        expenseManager.sortExpenses();
+        try {
+            currencyManager.changeCurrency(expense, currency, rate);
+            expenseManager.sortExpenses();
+        } catch (CurrencyInvalidException exception) {
+            printErrorMessage(exception.getMessage());
+            return;
+        }
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_CONVERT_CURRENCY_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -639,11 +704,13 @@ public class ConsoleInterface {
                 consoleCommandAddTarget.getDescription(),
                 consoleCommandAddTarget.getAmount(),
                 consoleCommandAddTarget.getCurrentAmount());
-        targetManager.addTarget(target, localStorage);
+        targetManager.addTarget(target);
 
         printInformationalMessage(convertTargetToConsoleString(target));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_TARGET_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -666,7 +733,7 @@ public class ConsoleInterface {
         ArrayList<Target> targets = targetManager.getTargets();
 
         if (targets.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_TARGET_EMPTY_LIST);
         }
 
         for (int index = 0; index < targets.size(); index++) {
@@ -693,13 +760,15 @@ public class ConsoleInterface {
         int targetIndex = consoleCommandDeleteTarget.getTargetIndex();
 
         try {
-            targetManager.deleteTarget(targetIndex, localStorage);
+            targetManager.deleteTarget(targetIndex);
         } catch (TargetManagerTargetNotFoundException exception) {
             printErrorMessage(exception.getMessage());
             return;
         }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_TARGET_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -737,7 +806,7 @@ public class ConsoleInterface {
 
         Target newTarget = new Target(name, dateTime, description, amount, currentAmount);
         try {
-            targetManager.editTarget(targetIndex, newTarget, localStorage);
+            targetManager.editTarget(targetIndex, newTarget);
         } catch (TargetManagerTargetNotFoundException exception) {
             printErrorMessage(exception.getMessage());
             return;
@@ -747,6 +816,8 @@ public class ConsoleInterface {
         printInformationalMessage(convertTargetToConsoleString(newTarget));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_TARGET_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -756,11 +827,13 @@ public class ConsoleInterface {
                 consoleCommandAddIncome.getDateTime(),
                 consoleCommandAddIncome.getDescription(),
                 consoleCommandAddIncome.getAmount());
-        incomeManager.addIncome(income, localStorage);
+        incomeManager.addIncome(income);
 
         printInformationalMessage(convertIncomeToConsoleString(income));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_INCOME_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -783,7 +856,7 @@ public class ConsoleInterface {
         ArrayList<Income> incomes = incomeManager.getIncomes();
 
         if (incomes.isEmpty()) {
-            printInformationalMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
+            printErrorMessage(Messages.COMMAND_VIEW_INCOME_EMPTY_LIST);
         }
 
         for (int index = 0; index < incomes.size(); index++) {
@@ -810,13 +883,15 @@ public class ConsoleInterface {
         int incomeIndex = consoleCommandDeleteIncome.getIncomeIndex();
 
         try {
-            incomeManager.deleteIncome(incomeIndex, localStorage);
+            incomeManager.deleteIncome(incomeIndex);
         } catch (IncomeManagerIncomeNotFoundException exception) {
             printErrorMessage(exception.getMessage());
             return;
         }
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_INCOME_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author penguin-s
@@ -850,7 +925,7 @@ public class ConsoleInterface {
 
         Income newIncome = new Income(name, dateTime, description, amount);
         try {
-            incomeManager.editIncome(incomeIndex, newIncome, localStorage);
+            incomeManager.editIncome(incomeIndex, newIncome);
         } catch (IncomeManagerIncomeNotFoundException exception) {
             printErrorMessage(exception.getMessage());
             return;
@@ -860,6 +935,8 @@ public class ConsoleInterface {
         printInformationalMessage(convertIncomeToConsoleString(newIncome));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_INCOME_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
@@ -874,16 +951,28 @@ public class ConsoleInterface {
                 consoleCommandAddRecurringPayment.getModeOfPayment()
         );
 
-        recurringPaymentManager.addRecurringPayment(recurringPayment, localStorage);
+        if (recurringPaymentManager.hasRecurringPayment(recurringPayment)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT);
+
+            return;
+        }
+
+        recurringPaymentManager.addRecurringPayment(recurringPayment);
 
         printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_ADD_RECURRING_PAYMENT_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
     private void viewRecurringPayment() {
         ArrayList<RecurringPayment> recurringPayments = recurringPaymentManager.getRecurringPayments();
+
+        if (recurringPayments.isEmpty()) {
+            printErrorMessage(Messages.COMMAND_VIEW_RECURRING_PAYMENT_EMPTY_LIST);
+        }
 
         for (int index = 0; index < recurringPayments.size(); index++) {
             RecurringPayment recurringPayment = recurringPayments.get(index);
@@ -932,7 +1021,7 @@ public class ConsoleInterface {
         int recurringPaymentIndex = consoleCommandDeleteRecurringPayment.getRecurringPaymentIndex();
 
         try {
-            recurringPaymentManager.deleteRecurringPayment(recurringPaymentIndex, localStorage);
+            recurringPaymentManager.deleteRecurringPayment(recurringPaymentIndex);
         } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
             printErrorMessage(exception.getMessage());
 
@@ -941,7 +1030,7 @@ public class ConsoleInterface {
 
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_DELETE_RECURRING_PAYMENT_SUCCESS);
 
-        localStorage.saveToFile();
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
@@ -982,14 +1071,19 @@ public class ConsoleInterface {
         }
 
         try {
-            recurringPaymentManager.editRecurringPayment(recurringPaymentIndex, recurringPayment, localStorage);
+            recurringPaymentManager.editRecurringPayment(recurringPaymentIndex, recurringPayment);
         } catch (RecurringPaymentManagerRecurringPaymentNotFoundException exception) {
             printErrorMessage(exception.getMessage());
 
             return;
         }
 
+        printInformationalMessage("---- RECURRING PAYMENT INDEX " + recurringPaymentIndex + " ----");
+        printInformationalMessage(convertRecurringPaymentToConsoleString(recurringPayment));
+        printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_EDIT_RECURRING_PAYMENT_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author xzynos
@@ -1018,18 +1112,77 @@ public class ConsoleInterface {
                 recurringPayment.getCurrency(),
                 recurringPayment.getModeOfPayment()
         );
-        expenseManager.addExpense(expense, localStorage);
+
+        if (expenseManager.hasExpense(expense)) {
+            printErrorMessage(Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE);
+
+            return;
+        }
+
+        expenseManager.addExpense(expense);
 
         printInformationalMessage(convertExpenseToConsoleString(expense));
         printBlankLine();
         printInformationalMessage(Messages.CONSOLE_MESSAGE_COMMAND_PAY_RECURRING_PAYMENT_SUCCESS);
+
+        runLocalStorageSaveToFile();
     }
 
     //@@author LokQiJun
-    private void runCommandMergeExternalFile(ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile) {
-        String filePath = consoleCommandMergeExternalFile.getFilePath();
+    private void runCommandMergeFile(ConsoleCommandMergeFile consoleCommandMergeFile) {
+        String filePath = consoleCommandMergeFile.getFilePath();
+        ArrayList<Expense> savedExpenses = new ArrayList<>();
+        ArrayList<RecurringPayment> savedRecurringPayments = new ArrayList<>();
+        ArrayList<Target> savedTargets = new ArrayList<>();
+        ArrayList<Income> savedIncomes = new ArrayList<>();
+        LocalStorage.loadFromExternalFile(filePath, savedExpenses, savedRecurringPayments, savedTargets, savedIncomes);
+        expenseManager.updateExpenses(savedExpenses);
+        recurringPaymentManager.updateRecurringPayments(savedRecurringPayments);
+        targetManager.updateTargets(savedTargets);
+        incomeManager.updateIncomes(savedIncomes);
 
-        localStorage.loadFromExternalFile(filePath);
+        runLocalStorageSaveToFile();
+    }
+
+    //@@author LokQiJun
+    private void runLocalStorageLoadFromFile() {
+        ArrayList<Expense> savedExpenses = new ArrayList<>();
+        ConsoleCommandSortExpense sortCommandSetting = new ConsoleCommandSortExpense(
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_TYPE_VAL_ALPHABETICAL,
+                ConsoleParserConfigurations.COMMAND_SORT_EXPENSE_ARG_ORDER_VAL_ASCENDING
+        );
+        ArrayList<RecurringPayment> savedRecurringPayments = new ArrayList<>();
+        ArrayList<Target> savedTargets = new ArrayList<>();
+        ArrayList<Income> savedIncomes = new ArrayList<>();
+        sortCommandSetting = LocalStorage.loadFromFile(
+                savedExpenses,
+                sortCommandSetting,
+                savedRecurringPayments,
+                savedTargets,
+                savedIncomes);
+
+        expenseManager.setExpenses(savedExpenses);
+        recurringPaymentManager.setRecurringPayments(savedRecurringPayments);
+        targetManager.setTargets(savedTargets);
+        incomeManager.setIncomes(savedIncomes);
+        if (sortCommandSetting != null) {
+            expenseManager.updateSortExpenses(sortCommandSetting);
+        }
+    }
+
+    //@@author LokQiJun
+    private void runLocalStorageSaveToFile() {
+        ArrayList<Expense> currentExpenses = expenseManager.getExpenses();
+        ConsoleCommandSortExpense sortCommandSetting = expenseManager.getSortCommandSetting();
+        ArrayList<RecurringPayment> currentRecurringPayments = recurringPaymentManager.getRecurringPayments();
+        ArrayList<Target> currentTargets = targetManager.getTargets();
+        ArrayList<Income> currentIncomes = incomeManager.getIncomes();
+        LocalStorage.saveToFile(
+                currentExpenses,
+                sortCommandSetting,
+                currentRecurringPayments,
+                currentTargets,
+                currentIncomes);
     }
 
     //@@author xzynos
@@ -1037,6 +1190,10 @@ public class ConsoleInterface {
         String consoleInput = getConsoleInput();
 
         printBlankLine();
+
+        if (isLocalLoggerInitialized()) {
+            localLogger.logCommand(consoleInput);
+        }
 
         ConsoleCommand consoleCommand = null;
         try {
@@ -1061,7 +1218,7 @@ public class ConsoleInterface {
                  | ConsoleParserCommandDeleteRecurringPaymentInvalidException
                  | ConsoleParserCommandEditRecurringPaymentInvalidException
                  | ConsoleParserCommandPayRecurringPaymentInvalidException
-                 | ConsoleParserCommandMergeExternalFileInvalidException exception) {
+                 | ConsoleParserCommandMergeFileInvalidException exception) {
             printErrorMessage(exception.getMessage());
         }
 
@@ -1074,12 +1231,8 @@ public class ConsoleInterface {
      * Runs the command line interface which the user interacts with.
      */
     public void run() {
-        localStorage.loadFromFile();
-        expenseManager.setExpenses(localStorage.getSavedExpenses());
-        expenseManager.updateSortExpenses(localStorage.getSortCommandSetting());
-        recurringPaymentManager.setRecurringPayments(localStorage.getSavedRecurringPayments());
-        targetManager.setTargets(localStorage.getSavedTargets());
-        incomeManager.setIncomes(localStorage.getSavedIncomes());
+        runLocalStorageLoadFromFile();
+
         currencyApiManager.getCurrencyApi(currencyManager);
 
         printBlankLine();
@@ -1131,8 +1284,8 @@ public class ConsoleInterface {
                 runCommandEditRecurringPayment((ConsoleCommandEditRecurringPayment) consoleCommand);
             } else if (consoleCommand instanceof ConsoleCommandPayRecurringPayment) {
                 runCommandPayRecurringPayment((ConsoleCommandPayRecurringPayment) consoleCommand);
-            } else if (consoleCommand instanceof ConsoleCommandMergeExternalFile) {
-                runCommandMergeExternalFile((ConsoleCommandMergeExternalFile) consoleCommand);
+            } else if (consoleCommand instanceof ConsoleCommandMergeFile) {
+                runCommandMergeFile((ConsoleCommandMergeFile) consoleCommand);
             }
 
             printBlankLine();

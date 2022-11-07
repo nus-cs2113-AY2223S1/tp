@@ -1,0 +1,34 @@
+@startuml
+!include Styles.puml
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #707070
+    FontColor #ffffff
+    StereotypeFontColor #ffffff
+    FontName Arial
+}
+
+package Data {
+    Class ExpenseManager DATA_COLOR_1
+    Class Expense DATA_COLOR_1
+    Class IncomeManager DATA_COLOR_2
+    Class Income DATA_COLOR_2
+    Class RecurringPaymentManager DATA_COLOR_3
+    Class RecurringPayment DATA_COLOR_3
+    Class TargetManager DATA_COLOR_4
+    Class Target DATA_COLOR_4
+    Class CurrencyManager DATA_COLOR_5
+}
+
+ExpenseManager -right[hidden]-> IncomeManager
+IncomeManager -right[hidden]-> RecurringPaymentManager
+RecurringPaymentManager -right[hidden]-> TargetManager
+TargetManager -right[hidden]-> CurrencyManager
+
+ExpenseManager -down-> "*" Expense : > manages
+IncomeManager -down-> "*" Income : > manages
+RecurringPaymentManager -down-> "*" RecurringPayment : > manages
+TargetManager -down-> "*" Target : > manages
+
+@enduml

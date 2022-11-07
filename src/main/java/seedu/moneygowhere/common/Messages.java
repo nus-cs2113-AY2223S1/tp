@@ -26,8 +26,6 @@ public class Messages {
     //region Defines messages for ExpenseManager
     public static final String EXPENSE_MANAGER_ERROR_EXPENSE_NOT_FOUND = ""
             + "The expense is not found.";
-    public static final String EXPENSE_MANAGER_ERROR_DUPLICATE_EXPENSE = ""
-            + "There is already a similar expense";
 
     //endregion
 
@@ -119,16 +117,11 @@ public class Messages {
     //region Defines messages for CurrencyManager
     public static final String CURRENCY_MANAGER_ERROR_RATES_NOT_FOUND = ""
             + "There may be an error obtaining the updated Exchange Rate for your desired currency. " + '\n'
-            + "Please enter the exchange rate manually.";
+            + "Please restart the program to connect to the currency API or you may enter the exchange rate manually.";
     public static final String CURRENCY_MANAGER_ERROR_CURRENCY_NOT_FOUND = ""
-            + "Currency not found. Please try again.";
-
-    //endregion
-
-    //@@author jeyvia
-    //region Defines messages for InvalidAmountException
-    public static final String CONSOLE_PARSER_INVALID_AMOUNT_EXCEPTION = ""
-            + "Amount entered is invalid. Please enter an amount greater than 0.";
+            + "Currency entered cannot be found. Please try again or you may enter the exchange rate manually.";
+    public static final String CURRENCY_MANAGER_ERROR_CUSTOM_RATE_NOT_FOUND = ""
+            + "Expense currency rate not found. Please try again or you may enter the exchange rate manually.";
 
     //endregion
 
@@ -153,6 +146,7 @@ public class Messages {
     public static final String CONSOLE_COMMAND_HELP_VIEW_TARGET = "View your targets: ";
     public static final String CONSOLE_COMMAND_HELP_DELETE_TARGET = "Delete a target: ";
     public static final String CONSOLE_COMMAND_HELP_EDIT_TARGET = "Edit a target: ";
+    public static final String CONSOLE_COMMAND_HELP_MERGE_FILE = "Merging a file: ";
 
     //endregion
 
@@ -191,7 +185,7 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT
             + " "
-            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
@@ -201,6 +195,22 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_EXPENSE_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_EXPENSE_DUPLICATE_EXPENSE = ""
+            + "The expense already exists.";
 
     //endregion
 
@@ -215,11 +225,11 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY
             + " "
-            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_LONG.toUpperCase()
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_CATEGORY_DESC.toUpperCase()
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME
             + " "
-            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_LONG.toUpperCase()
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_NAME_DESC.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
@@ -227,7 +237,11 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_EXPENSE_SYNTAX;
-    public static final String COMMAND_VIEW_EXPENSE_EMPTY_LIST = ""
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_EXPENSE_ARG_EXPENSE_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_EXPENSE_EMPTY_LIST = ""
             + "Your list of expenses is empty. ";
 
     //endregion
@@ -248,6 +262,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_EXPENSE_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -290,7 +308,7 @@ public class Messages {
             + "] [-"
             + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT
             + " "
-            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX = ""
             + "SYNTAX: "
@@ -300,6 +318,26 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_EXPENSE_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_EXPENSE_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_EXPENSE_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_EXPENSE_DUPLICATE_EXPENSE = ""
+            + "The expense already exists.";
 
     //endregion
 
@@ -397,6 +435,26 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_DUPLICATE_TARGET = ""
+            + "The target already exists.";
 
     //endregion
 
@@ -417,6 +475,10 @@ public class Messages {
             + CONSOLE_COMMAND_VIEW_TARGET_SYNTAX;
     public static final String COMMAND_VIEW_TARGET_EMPTY_LIST = ""
             + "Your list of targets is empty. ";
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -436,6 +498,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -476,6 +542,30 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_DUPLICATE_TARGET = ""
+            + "The target already exists.";
 
     //endregion
 
@@ -508,6 +598,22 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_DUPLICATE_INCOME = ""
+            + "The income already exists.";
 
     //endregion
 
@@ -528,6 +634,10 @@ public class Messages {
             + CONSOLE_COMMAND_VIEW_INCOME_SYNTAX;
     public static final String COMMAND_VIEW_INCOME_EMPTY_LIST = ""
             + "Your list of incomes is empty. ";
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -547,6 +657,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -583,6 +697,26 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_DUPLICATE_INCOME = ""
+            + "The income already exists.";
 
     //endregion
 
@@ -614,6 +748,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
@@ -623,11 +761,27 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_INTERVAL_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_RECURRING_PAYMENT_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT = ""
+            + "The recurring payment already exists.";
 
     //endregion
 
     //@@author xzynos
     //region Defines messages for console command View-RecurringPayment
+    public static final String COMMAND_VIEW_RECURRING_PAYMENT_EMPTY_LIST = ""
+            + "Your list of recurring payments is empty.";
     public static final String CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_FORMAT = ""
             + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT
             + " [-"
@@ -641,6 +795,10 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_VIEW_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_VIEW_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -662,6 +820,11 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_DELETE_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations
+            .COMMAND_DELETE_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
 
     //endregion
 
@@ -697,6 +860,10 @@ public class Messages {
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY
             + " "
             + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_LONG.toUpperCase()
+            + "] [-"
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT
+            + " "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG.toUpperCase()
             + "]";
     public static final String CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
@@ -706,6 +873,24 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_EDIT_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_INTERVAL_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_RECURRING_PAYMENT_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_RECURRING_PAYMENT_DUPLICATE_RECURRING_PAYMENT = ""
+            + "The recurring payment already exists.";
 
     //endregion
 
@@ -727,19 +912,37 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG.toUpperCase()
+            + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_DUPLICATE_EXPENSE = ""
+            + "The expense already exists. Please provide a different date using the "
+            + "-"
+            + ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+            + " flag.";
 
     //endregion
 
     //@@author LokQiJun
     //region Defines messages for console command Merge-File
-    public static final String CONSOLE_COMMAND_MERGE_FILE_SYNTAX = ""
-            + "SYNTAX: "
+    public static final String CONSOLE_COMMAND_MERGE_FILE_FORMAT = ""
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE
             + " -"
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH
             + " "
             + ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG.toUpperCase()
             + "";
+    public static final String CONSOLE_COMMAND_MERGE_FILE_SYNTAX = ""
+            + "SYNTAX: "
+            + CONSOLE_COMMAND_MERGE_FILE_FORMAT;
+
     public static final String CONSOLE_ERROR_COMMAND_MERGE_FILE_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_MERGE_FILE_SYNTAX;

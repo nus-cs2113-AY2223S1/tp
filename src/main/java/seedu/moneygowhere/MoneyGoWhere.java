@@ -5,7 +5,7 @@ import seedu.moneygowhere.userinterface.ConsoleInterface;
 //@@author xzynos
 
 /**
- * Entrypoint of the MoneyGoWhere application.
+ * Defines the entrypoint of the MoneyGoWhere application.
  */
 public class MoneyGoWhere {
     /**

@@ -1,6 +1,7 @@
 package seedu.moneygowhere.data.recurringpayments;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 //@@author xzynos
 
@@ -94,5 +95,24 @@ public class RecurringPayment {
 
     public void setModeOfPayment(String modeOfPayment) {
         this.modeOfPayment = modeOfPayment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof RecurringPayment) {
+            RecurringPayment r = (RecurringPayment) o;
+
+            boolean isEqual = Objects.equals(r.getName(), name)
+                    && r.getInterval() == interval
+                    && Objects.equals(r.getDescription(), description)
+                    && Objects.equals(r.getAmount(), amount)
+                    && Objects.equals(r.getCategory(), category)
+                    && Objects.equals(r.getCurrency(), currency)
+                    && Objects.equals(r.getModeOfPayment(), modeOfPayment);
+
+            return isEqual;
+        } else {
+            return false;
+        }
     }
 }

@@ -33,7 +33,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_EXPENSE_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_EXPENSE_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_DATE_TIME_IS_MAND = false;
@@ -58,15 +58,11 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "MODE-OF-PAYMENT";
     public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "Mode of Payment";
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
-    public static final String COMMAND_ADD_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_ADD_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Add-Expense does not have all of the required options.";
     //endregion
@@ -124,7 +120,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_DATE_TIME_IS_MAND = false;
@@ -149,15 +145,11 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT = "p";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_LONG = "MODE-OF-PAYMENT";
     public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "Mode of Payment";
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_IS_MAND = false;
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYLAH = "PayLah";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_PAYNOW = "PayNow";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CASH = "Cash";
-    public static final String COMMAND_EDIT_EXPENSE_ARG_MODE_OF_PAYMENT_VAL_CARD = "Card";
     public static final String COMMAND_EDIT_EXPENSE_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
             + "Command Edit-Expense does not have all of the required options.";
     //endregion
@@ -228,7 +220,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_TARGET_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_TARGET_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_TARGET_ARG_DATE_TIME_IS_MAND = false;
@@ -287,9 +279,9 @@ public class ConsoleParserConfigurations {
     public static final String COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG = "current-amount";
     public static final String COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_DESC = "Current Amount";
     public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL = true;
-    public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = true;
+    public static final boolean COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_TARGET_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_TARGET_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_TARGET_ARG_DATE_TIME_IS_MAND = false;
@@ -316,7 +308,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_INCOME_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_INCOME_ARG_AMOUNT_IS_MAND = true;
     public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME = "d";
-    public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_ADD_INCOME_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_ADD_INCOME_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_ADD_INCOME_ARG_DATE_TIME_IS_MAND = false;
@@ -372,7 +364,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND = false;
     public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME = "d";
-    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_EDIT_INCOME_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_INCOME_ARG_DATE_TIME_IS_MAND = false;
@@ -419,9 +411,9 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT = "p";
-    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "MODE-OF-PAYMENT";
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "mode of payment";
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_ADD_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND = false;
     public static final String COMMAND_ADD_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
@@ -529,9 +521,9 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_CURRENCY_IS_MAND = false;
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT = "p";
-    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "mode of payment";
+    public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_LONG = "MODE-OF-PAYMENT";
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_DESC = ""
-            + "PayLah/PayNow/Cash/Card";
+            + "mode of payment";
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_HAS_VAL = true;
     public static final boolean COMMAND_EDIT_RECURRING_PAYMENT_ARG_MODE_OF_PAYMENT_IS_MAND = false;
     public static final String COMMAND_EDIT_RECURRING_PAYMENT_ASSERT_FAILURE_MESSAGE_ALL_CLI_OPTIONS = ""
@@ -553,7 +545,7 @@ public class ConsoleParserConfigurations {
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_IS_MAND =
             true;
     public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME = "d";
-    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "datetime";
+    public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG = "date-time";
     public static final String COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_DESC = "Date & time";
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_HAS_VAL = true;
     public static final boolean COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_IS_MAND = false;
@@ -1018,6 +1010,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_DESC
         );
+        optionCurrentAmount.setRequired(COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionTargetIndex);
@@ -1162,6 +1155,7 @@ public class ConsoleParserConfigurations {
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_HAS_VAL,
                 COMMAND_EDIT_INCOME_ARG_AMOUNT_DESC
         );
+        optionAmount.setRequired(COMMAND_EDIT_INCOME_ARG_AMOUNT_IS_MAND);
 
         Options options = new Options();
         options.addOption(optionIncomeIndex);
@@ -1402,7 +1396,7 @@ public class ConsoleParserConfigurations {
      *
      * @return {@link Options} object initialized with the required arguments.
      */
-    public static Options getCommandMergeExternalFileOptions() {
+    public static Options getCommandMergeFileOptions() {
         Option optionMergeFilePath = new Option(
                 COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH,
                 COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG,
