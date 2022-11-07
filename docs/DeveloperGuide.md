@@ -776,7 +776,7 @@ The budget command allows user to set a new monthly budget. The range of accepte
 
 ```
 public static int MAX_TRANSACTIONS_COUNT = 1000000;
-public static int MIN_AMOUNT_VALUE = 0;
+public static int MIN_AMOUNT_VALUE = 1;
 public static int MAX_AMOUNT_VALUE = 10000000;
 public static int MIN_BUDGET_VALUE = 1;
 public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
