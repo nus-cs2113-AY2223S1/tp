@@ -19,8 +19,7 @@ Given below are my contributions to the project:
   * What it does: This feature resolves the user input into a command to execute.
   * Justification: The parser class is vital to the program, as it is responsible for proessing the user's string input
   and triggering the appropriate function. By having a Parser as a dedicated feature, the resolution of user input can be compartmentalised into a specific class, keeping the main code clean.
-  * Highlights: The parser splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain 
-  the arguments for the particular command by further splitting user input. Specific keywords strings are used to check for arguments. Then, the manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), again to keep a separation of concerns.
+  * Highlights: The parser first splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain the arguments for the particular command by further splitting user input. Specific keywords strings check for the presence of arguments. The final manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand keeping a separation of concerns.
 
 * **New Feature**: Storage
   * What it does: This feature ensures the user's information can be saved into local storage and retrieved
@@ -52,8 +51,7 @@ Given below are my contributions to the project:
 * **Documentation**:
   * User guide:
     * Created the format of the User guide. i.e Header, Format, Usage, Output.
-    * Added information on which arguments were compulsory for each command.
-    * Added details for add, list and find.
+    * Added information on which arguments were compulsory for each command. Added details for add, list and find.
   * Developer guide:
     * Drew UML class diagrams for `storage`, `ui`, classes.
     * Added implementation details for them.
