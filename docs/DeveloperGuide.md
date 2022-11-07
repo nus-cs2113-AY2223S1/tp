@@ -241,14 +241,14 @@ Add Property Sequence Diagram
 ---
 
 ### Delete Client/Property feature
-The **delete client/property** mechanism involves the following classes: ```ParseDeleteClient```,
-```ParseDeleteProperty```, ```CommandDeleteClient```, ```CommandDeleteProperty```,
+The **delete client/property** mechanism involves the following classes: ```CommandDeleteClientParser```,
+```CommandDeletePropertyParser```, ```CommandDeleteClient```, ```CommandDeleteProperty```,
 ```ClientList```, ```PropertyList``` and ```PairingList```.
 
 Given below is an example usage scenario and how the delete client/property behaves at each step.
 
-**Step 1:** The user executes ```delete -client ic/INDEX``` or ```delete -property ip/INDEX```.
-The ```ParseDeleteClient``` or ```ParseDeleteProperty``` class is called respectively and the format of the user
+**Step 1:** The user executes ```delete -client i/INDEX``` or ```delete -property i/INDEX```.
+The ```CommandDeleteClientParser``` or ```CommandDeletePropertyParser``` class is called respectively and the format of the user
 input is checked for any incorrect formatting.
 
 **Step 2:** If there are no errors, ```CommandDeleteClient``` or ```CommandDeleteProperty``` is called respectively.
