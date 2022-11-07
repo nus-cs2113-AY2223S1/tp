@@ -533,6 +533,9 @@ for use via a Command Line Interface (CLI).
 - Program must not print any API key to console for security purposes.
 - Program must not keep users waiting after any command for more than 5 seconds (including fetching API information).
 - Commands must be user-friendly and well-documented in the User Guide.
+- Program must not crash under any circumstance.
+- Enhancements to the program should be easy to implement.
+- Program is not required to have any GPS capabilities.
 
 ## Appendix D: Glossary
 
@@ -584,7 +587,10 @@ Input:
 Output:
 
 ```
-ENTER ERROR MESSAGE HERE
+This command only takes exactly 1 argument(s). Valid command(s): 
+`auth API_KEY` or `a API_KEY` 	: To authenticate your personal API key.
+`auth default` or `a default` 	: To authenticate using the default key provided by parKING.
+`auth status` or `a status` 	: To get the authentication status.
 ```
 
 The following command(s) take in more than 1 argument:
@@ -619,7 +625,9 @@ Input:
 Output:
 
 ```
-INSERT ERROR MESSAGE HERE
+This command with the `list` argument cannot take any additional arguments. Valid commands(s): 
+`favourite list` or `fav list` 	: To get the list of favourited carparks.
+`favourite CARPARK_ID` or `fav CARPARK_ID` 	: Favourite carpark by its ID.
 ```
 
 Users can test both Favourite.txt and CarparkList.txt to modify the data being passed to the program.
