@@ -18,8 +18,8 @@
     * [3.2 The `filter` command](#32-the-filter-command)
       * [3.2.1 Design Considerations](#321-design-considerations)
     * [3.3 Updating Data from LTA API](#33-updating-data-from-lta-api)
-    * [3.3.1 Design Considerations](#331-design-considerations)
-    * [3.3.2 Limitations of the LTA API](#332-limitations-of-the-lta-api)
+      * [3.3.1 Design Considerations](#331-design-considerations)
+      * [3.3.2 Limitations of the LTA API](#332-limitations-of-the-lta-api)
     * [3.4 Updating CarparkList with JSON file from API](#34-updating-carparklist-with-json-file-from-api)
       * [3.4.1 Loading CarparkList from text file](#341-loading-carparklist-from-text-file)
       * [3.4.2 Loading CarparkList from JSON file](#342-loading-carparklist-from-json-file)
@@ -357,7 +357,7 @@ These are the reference sequence diagrams to supplement the above diagram.
 ![Execute Http Requests](images/asyncExecuteRequestApiSequenceDiagram.png)
 ![Fetch Data](images/fetchDataApiSequenceDiagram.png)
 
-### 3.3.1 Design Considerations
+#### 3.3.1 Design Considerations
 
 **Asynchronous request**
 
@@ -381,7 +381,7 @@ Although we are focusing more on the asynchronous part, the program right now al
 for future development such as updating a specific value instead of the whole data. By calling the 
 `asyncExecuteRequest()` and `fetchData()` methods we can simulate synchronous HTTP requests.
 
-### 3.3.2 Limitations of the LTA API
+#### 3.3.2 Limitations of the LTA API
 
 **Inconsistent dataset received**
 
