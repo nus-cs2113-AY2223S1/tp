@@ -37,7 +37,7 @@ public class FlagParserTest {
 
     @Test
     public void existFlags_containsRecipeFlag_excess() {
-        String[] args = {"/edit", "1","-d", "-s"};
+        String[] args = {"/edit", "1", "-d", "-s"};
         try {
             FlagParser.getFlags(args);
             assert false;

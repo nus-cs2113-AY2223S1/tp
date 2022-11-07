@@ -6,6 +6,7 @@ import recipeditor.ui.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_TYPE = "/delete";
+    public static final String COMMAND_NAME = "delete";
     private static final String COMMAND_SYNTAX =
             '\n' + "\t /delete -id <recipe_index>"
             + '\n' + "\t /delete -t <recipe_title>";

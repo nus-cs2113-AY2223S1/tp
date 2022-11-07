@@ -46,7 +46,8 @@ public class Parser {
     private static final int EDIT_COMMAND_RECIPE_INDEX = 1;
     private static final int ACCOUNT_ZERO_INDEXING = -1;
     private static final int REMOVE_LAST_CHAR_INDEX = -1;
-
+    private static final int DELETE_COMMAND_LENGTH = 3;
+    private static final int VIEW_COMMAND_LENGTH = 3;
 
     /**
      * Parse the input command and returns respective executable command.
@@ -75,10 +76,16 @@ public class Parser {
             }
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            if (parsed.length != DELETE_COMMAND_LENGTH) {
+                return parseHelpCommand(DeleteCommand.COMMAND_NAME);
+            }
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
+            if (parsed.length != VIEW_COMMAND_LENGTH) {
+                return parseHelpCommand(ViewCommand.COMMAND_NAME);
+            }
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
@@ -233,7 +240,7 @@ public class Parser {
             } catch (InvalidFlagException e) {
                 return new InvalidCommand(e.getMessage());
             } catch (Exception e) {
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(e.getMessage());
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
