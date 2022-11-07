@@ -1,0 +1,38 @@
+@startuml
+hide footbox
+
+participant ":OneDoc" as F
+participant ":UI" as B
+actor User as A
+participant ":Parser" as C
+participant "prescriptionList\n:PrescriptionList" as D
+participant ":Storage" as E
+
+activate F
+
+F -> B : readLine()
+activate B
+
+B -> A : Get user input
+A --> B : "activate x/1"
+
+B --> F : "activate x/1"
+
+F -> C : prescriptionParser("activate x/1")
+activate C
+
+C -> D : activatePrescription(ui, "1")
+activate D
+return
+
+C -> E : savePrescription(prescriptionList)
+activate E
+
+E -> E : Save to File
+activate E
+return
+return
+
+return IN_SUB_MENU:SubMenuState
+
+@enduml
