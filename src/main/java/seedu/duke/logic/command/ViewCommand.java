@@ -17,7 +17,12 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.*;
+import seedu.duke.ui.AllRecordsTable;
+import seedu.duke.ui.CaloriesTable;
+import seedu.duke.ui.FoodTable;
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.Ui;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -133,9 +138,14 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * To view the calories entries of the users based on dates.
+     * @param argumentList an array of inputs from the user
+     *
+     * @throws IllegalValueException biometrics are not set or if date is invalid
+     */
     private void viewCalories(String[] argumentList) throws IllegalValueException {
         handleInvalidViewCaloriesCommand(argumentList);
-        ArrayList<Food> foodArrayList = foodList.getFoodList();
         ArrayList<Integer> caloriesConsumed = new ArrayList<Integer>();
         ArrayList<Integer> caloriesBurnt = new ArrayList<Integer>();
         ArrayList<Integer> netCalories = new ArrayList<Integer>();
@@ -154,6 +164,7 @@ public class ViewCommand extends Command {
         calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
+        ArrayList<Food> foodArrayList = foodList.getFoodList();
         for (Food f : foodArrayList) {
             newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList, f.getDateString());
             if (!datesConsumption.contains(f.getDateString())) {
@@ -193,7 +204,7 @@ public class ViewCommand extends Command {
             if (datesNetCalories.indexOf(d) != -1) {
                 inputNetCaloriesEntry = netCalories.get(datesNetCalories.indexOf(d));
             }
-            if (calculator.getBmi() == 0){
+            if (calculator.getBmi() == 0) {
                 message = BIOMETRICS_NOT_SET;
             } else {
                 message = calculator.calorieMessage(inputNetCaloriesEntry);
@@ -215,6 +226,10 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * To view maintenance calories of the user and thus corresponding activity status.
+     *
+     */
     private void viewMaintenanceCalories() {
 
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
@@ -224,6 +239,9 @@ public class ViewCommand extends Command {
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
     }
 
+    /**
+     * To calculate the bmi of ths user and corresponding bmi status.
+     */
     private void viewBmi() {
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
@@ -306,6 +324,10 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * To handle an invalid view command.
+     * @throws IllegalValueException invalid view calories command if the calories input is not 1.
+     */
     private static void handleInvalidViewCaloriesCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 1) {
             throw new IllegalValueException("Invalid view calories command");

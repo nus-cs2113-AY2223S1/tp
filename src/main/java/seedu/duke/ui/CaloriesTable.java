@@ -8,11 +8,11 @@ import seedu.duke.records.food.Food;
 
 import java.util.ArrayList;
 
-public class CaloriesTable extends TableFrame{
+public class CaloriesTable extends TableFrame {
     public static final int DATE_INDEX = 0;
     public static final int CALORIES_CONSUMED_INDEX = 1;
     public static final int CALORIES_BURNT_INDEX = 2;
-    public static final int NET_CALORIES_INDEX= 3;
+    public static final int NET_CALORIES_INDEX = 3;
     public static final int STATUS_INDEX = 4;
     public static final int MAXIMUM_DATE_COLUMN_SPACING = 10;
     public static final String ROW_SEPARATOR = "-";

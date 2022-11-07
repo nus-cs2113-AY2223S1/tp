@@ -181,7 +181,13 @@ public class AddCommand extends Command {
                 INVALID_LOADING_STRENGTH_MESSAGE, toDisplay, argumentList.length);
     }
 
-
+    /**
+     * To add a Cardio exercise to the exercise list.
+     * @param argumentList an array of inputs from the user
+     * @param slashesCount to check if the number of slashes correspond with the required number of slashes
+     *
+     * @throws IllegalValueException if the user does not input distance in numbers or repetitions in integers
+     */
     private void addCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         if (toDisplay) {
             Validator.validateCommandInput(slashesCount, MINIMUM_ADD_CARDIO_SLASHES,
