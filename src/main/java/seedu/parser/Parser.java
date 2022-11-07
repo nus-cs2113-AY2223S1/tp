@@ -35,6 +35,8 @@ public class Parser {
         + "command(s): \n";
     private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)."
             + " Valid command(s):\n";
+    private static final String LIST_TOO_MANY_ARGS = "This command with the `list` argument cannot take any "
+        + "additional arguments. Valid commands(s): \n";
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
@@ -138,7 +140,7 @@ public class Parser {
         }
         if (numberOfArguments(arguments) != AuthCommand.NUMBER_OF_ARGUMENTS) {
             return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
-                    AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+                    AuthCommand.NUMBER_OF_ARGUMENTS) + CommonData.AUTH_FORMAT);
         }
         final String apiKey = arguments.trim();
         return new AuthCommand(api, apiKey);
@@ -157,6 +159,9 @@ public class Parser {
         if (numberOfArguments(arguments) < FavouriteCommand.NUMBER_OF_ARGUMENTS) {
             return new InvalidCommand(String.format(INVALID_NUMBER_OF_ARGS_HEADER,
                     FavouriteCommand.NUMBER_OF_ARGUMENTS) + CommonData.FAVOURITE_FORMAT);
+        }
+        if (arguments.split(" ")[0].toLowerCase().equals("list") && numberOfArguments(arguments) > 1) {
+            return new InvalidCommand(LIST_TOO_MANY_ARGS + CommonData.FAVOURITE_FORMAT);
         }
         final String carparkID = arguments.trim();
         return new FavouriteCommand(carparkID, favourite, carparkList);
