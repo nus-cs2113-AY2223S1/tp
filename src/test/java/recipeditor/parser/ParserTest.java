@@ -312,16 +312,4 @@ class ParserTest {
         assertEquals(expected, commandExecutedResult);
         assertEquals(InvalidCommand.class, Parser.parseCommand(input).getClass());
     }
-
-    //    @Test
-    //    public void addCommand_missingTemplateFile() {
-    //        File file = new File(Storage.TEMPLATE_FILE_PATH);
-    //        file.delete();
-    //        Command addCommand = Parser.parseCommand("/add");
-    //        String actual = addCommand.execute().getMessage();
-    //        String expected = new InvalidCommand(
-    //                InvalidCommand.TEMPLATE_FILE_MISSING_MESSAGE).execute().getMessage();
-    //        assertEquals(expected, actual);
-    //        assert addCommand instanceof InvalidCommand;
-    //    }
 }

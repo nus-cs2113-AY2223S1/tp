@@ -29,7 +29,7 @@ public class TitleFileParserTest {
     }
 
     @Test
-    void parse2InvalidTitle() {
+    void parseTitleFileToRecipeTitle_bothInvalidTitle_bothDoesNotParse() {
         String[] strings = {"Recipe-", "Recipe1_"};
         for (String s : strings) {
             createFiles(s);
@@ -44,7 +44,7 @@ public class TitleFileParserTest {
     }
 
     @Test
-    void parse1Valid_1Invalid() {
+    void parseTitleFileToRecipeTitle_oneInvalidTitle_oneDoesNotParse() {
         String[] strings = {"Recipe", "Recipe1_@#$"};
         for (String s : strings) {
             createFiles(s);
@@ -69,7 +69,7 @@ public class TitleFileParserTest {
     }
 
     @Test
-    void parse1Valid_1TooLong() {
+    void parseTitleFileToRecipeTitle_oneExceedLengthTitle_oneDoesNotParse() {
         String[] strings = {"Recipe", "Recipeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -99,7 +99,7 @@ public class TitleFileParserTest {
     }
 
     @Test
-    void parse2NoFileTitle() {
+    void parseTitleFileToRecipeTitle_bothNotExist_bothDoesNotParse() {
         String[] strings = {"Recipe12", "Recipe23"};
         for (String s : strings) {
             Storage.deleteFile(Storage.titleToFilePath(s));

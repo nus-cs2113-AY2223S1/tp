@@ -23,7 +23,7 @@ public class RecipeFileParserTest {
             + "1. Example step \n";
 
     @Test
-    void parseTextToRecipeValid() {
+    void parseTextToRecipe_validInput_true() {
         try {
             String string = BASE;
             new RecipeFileParser().parseTextToRecipe(string);
@@ -35,7 +35,7 @@ public class RecipeFileParserTest {
 
 
     @Test
-    void parseTextToRecipe_Empty() {
+    void parseTextToRecipe_emptyField_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "# DESCRIPTION\n"
@@ -49,7 +49,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_MissingHeading() {
+    void parseTextToRecipe_missingHeadingInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -67,7 +67,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_DuplicateHeading() {
+    void parseTextToRecipe_duplicateHeadingInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -90,7 +90,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_HeadingDifferentOrder() {
+    void parseTextToRecipe_headingDifferentOrderInput_true() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -110,7 +110,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_HashTag() {
+    void parseTextToRecipe_inputWithHashTag_true() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Exa##m@$tle asdfasdf\n\n"
@@ -131,9 +131,8 @@ public class RecipeFileParserTest {
         }
     }
 
-
     @Test
-    void parseTextToRecipe_Whitespace() {
+    void parseTextToRecipe_inputWithWhitespaceInFront_true() {
         try {
             String string = "\n\n\n\n\n\n# TITLE (1 line)\n"
                     + "         Example Title\n\n"
@@ -155,7 +154,7 @@ public class RecipeFileParserTest {
 
 
     @Test
-    void parseTextToRecipe_MultiLineTitle() {
+    void parseTextToRecipe_multiLineTitleInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -180,7 +179,7 @@ public class RecipeFileParserTest {
 
 
     @Test
-    void parseTextToRecipe_NonAlphanumericTitle() {
+    void parseTextToRecipe_nonAlphanumericTitleInput_true() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Exam@$tle asdfasdf\n\n"
@@ -202,7 +201,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_255Title() {
+    void parseTextToRecipe_exceedLengthTitleInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example "
@@ -232,7 +231,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_CharacterInFrontIngredients() {
+    void parseTextToRecipe_wordsInFrontIngredientsInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -252,7 +251,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_NegativeIndexIngredients() {
+    void parseTextToRecipe_negativeIndexIngredientsInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -272,7 +271,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_IndexIncrementIngredients() {
+    void parseTextToRecipe_wrongIndexIncrementIngredientsInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -292,7 +291,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_SlashIngredients() {
+    void parseTextToRecipe_ingredientsWithSlashInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -312,7 +311,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_DotIngredient() {
+    void parseTextToRecipe_ingredientsWithDot_true() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -335,7 +334,7 @@ public class RecipeFileParserTest {
 
 
     @Test
-    void parseTextToRecipe_AmountNegativeIngredients() {
+    void parseTextToRecipe_negativeAmountsIngredients_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -355,7 +354,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_AmountNonDoubleIngredients() {
+    void parseTextToRecipe_nonDoubleIngredientsAmount_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -375,7 +374,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_CharacterInFrontStep() {
+    void parseTextToRecipe_wordsInFrontStepInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -396,7 +395,7 @@ public class RecipeFileParserTest {
 
 
     @Test
-    void parseTextToRecipe_IndexIncrementStep() {
+    void parseTextToRecipe_wrongIndexIncrementStepInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -416,7 +415,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_NegativeIndexStep() {
+    void parseTextToRecipe_negativeIndexStepInput_fail() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"
@@ -436,7 +435,7 @@ public class RecipeFileParserTest {
     }
 
     @Test
-    void parseTextToRecipe_DotStep() {
+    void parseTextToRecipe_stepWithDotInput_true() {
         try {
             String string = "# TITLE (1 line)\n"
                     + "Example Title\n\n"

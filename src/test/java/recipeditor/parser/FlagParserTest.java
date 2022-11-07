@@ -70,7 +70,7 @@ public class FlagParserTest {
     }
 
     @Test
-    public void existFlags_invalidFlags() {
+    public void existFlags_invalidFlags_errorMessage() {
         String[]  args = {"-chg", "-id", "-", "ok"};
         try {
             FlagParser.getFlags(args);

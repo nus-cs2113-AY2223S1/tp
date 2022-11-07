@@ -79,7 +79,7 @@ class ViewCommandTest {
     }
 
     @AfterAll
-    static void tearDown() throws RecipeNotFoundException {
+    static void tearDown() {
         RecipeList.deleteRecipeFromTitle("Test Title for View Command");
         Storage.deleteRecipeFile("Test Title for View Command");
         Storage.rewriteRecipeListToFile();
