@@ -1,6 +1,6 @@
-# MoneyGoWhere: Developer Guide
+# Developer Guide
 
-<p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
+<p align="center"><img alt="icon" width="256" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 
 ## Contents
 * [Introduction](#introduction)
@@ -108,6 +108,8 @@ Your MoneyGoWhere? Let me help you track it.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Software Architecture
 The software architecture diagram below describes the program's design and the interaction between components.
 
@@ -123,8 +125,6 @@ The software architecture diagram below describes the program's design and the i
 <br>
 
 <div style="page-break-after: always;"></div>
-
-
 
 ### Core Components
 
@@ -166,6 +166,8 @@ The software architecture diagram below describes the program's design and the i
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### General Interaction of Components
 To illustrate how the components interact with each other as a whole, we will use the following example where:
 
@@ -182,6 +184,8 @@ The sequence diagrams referenced by the component interaction diagram [below](#c
 *A sequence diagram showing the interaction between core components of MoneyGoWhere when Add-Expense is executed.*
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 1. When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
 2. `UserInterface` creates instances of `Logger` and `Data`.
@@ -228,9 +232,11 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ##### Getting user commands
 
-[ComponentInteractionsSDGetUserCommand](images/ComponentInteractionsSDGetUserCommand.png)
+![ComponentInteractionsSDGetUserCommand](images/ComponentInteractionsSDGetUserCommand.png)
 
 *A reference diagram showing the interactions between the UI, Parser and Logger components when the user's input is retrieved.*
 
@@ -242,6 +248,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ##### Printing the output from a command
 
@@ -261,6 +269,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ##### Saving data
 
 ![ComponentInteractionsSDSaveDataToFile](images/ComponentInteractionsSDSaveDataToFile.png)
@@ -268,6 +278,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 *A reference diagram showing the interactions between the UI, Data and Storage components when data is saved in MoneyGoWhere.*
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 * `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
 * `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
@@ -461,6 +473,8 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### API Component
 
 The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
@@ -486,6 +500,8 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Logger Component
 
@@ -531,6 +547,8 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Loading data from file
 
@@ -607,6 +625,8 @@ The `Merge-File` command merges data from an external data file with the existin
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Printing an expense
 
@@ -763,6 +783,8 @@ The `Convert-Currency` command converts the currency of an existing expense in t
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Printing a recurring payment
 
 The following sequence diagram illustrates the process of printing and logging a `RecurringPayment` object.
@@ -896,6 +918,8 @@ This command helps the user to track when recurring payments are paid.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Printing an income
 
 The following sequence diagram illustrates the process of printing and logging an `Income` object.
@@ -1010,6 +1034,8 @@ The `Edit-Income` command changes the attributes of an existing income in the pr
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Printing a target
 
 The following sequence diagram illustrates the process of printing and logging a `Target` object.
@@ -1122,6 +1148,8 @@ The `Edit-Target` command changes the attributes of an existing target in the pr
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Target User Profile
 
 MoneyGoWhere is targeted at users who
@@ -1150,6 +1178,7 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 <br>
 <br>
+
 <div style="page-break-after: always;"></div>
 
 ## User Stories
@@ -1191,6 +1220,7 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 
 <br>
 <br>
+
 <div style="page-break-after: always;"></div>
 
 ## Non-Functional Requirements
@@ -1222,6 +1252,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Manual Testing
 
 ## Sub-Contents
@@ -1233,6 +1265,8 @@ MoneyGoWhere is a financial tracker designed specifically to help computing prof
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Launching MoneyGoWhere
 1. Set up the project according to the steps in [Getting Started](#getting-started).
