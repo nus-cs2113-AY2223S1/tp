@@ -29,6 +29,7 @@
 
 - Added the instructions of Finish Task
 - Updated workflow
+- Fixed some formatting issues
 
 **Contributions to the DG**
 
