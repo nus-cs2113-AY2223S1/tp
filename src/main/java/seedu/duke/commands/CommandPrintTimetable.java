@@ -595,7 +595,12 @@ public class CommandPrintTimetable {
 
         Collections.sort(removeIndex, Collections.reverseOrder());
         for (int i : removeIndex) {
-            clashList.remove(i);
+            try {
+                clashList.remove(i);
+            } catch (IndexOutOfBoundsException e) {
+                UI.printResponse("index out of bounds removing non-clashed lessons");
+
+            }
         }
 
 
@@ -618,15 +623,15 @@ public class CommandPrintTimetable {
         for (int i = 1; i < newEsl.get(day).size(); i++) {
             Integer[] top = deque.getLast();
             if (top[1] < newEsl.get(day).get(i)[0]) { //[1] is pair.second, [0] is pair.first
-                deque.push(newEsl.get(day).get(i));
+                deque.addLast(newEsl.get(day).get(i));
                 stack.push(newEsl.get(day).get(i));
             } else if (top[1].equals(newEsl.get(day).get(i)[0])) {
-                deque.push(newEsl.get(day).get(i));
+                deque.addLast(newEsl.get(day).get(i));
                 stack.push(newEsl.get(day).get(i));
             } else if (top[1] < newEsl.get(day).get(i)[1]) {
                 top[1] = newEsl.get(day).get(i)[1];
                 deque.pop();
-                deque.push(top);
+                deque.addLast(top);
                 popStack(stack);
             } else {
                 popStack(stack);
