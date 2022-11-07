@@ -137,16 +137,16 @@ The software architecture diagram below describes the program's design and the i
 
 | Component     | Function                                                                 |
 |---------------|--------------------------------------------------------------------------|
-| MoneyGoWhere  | Main entrypoint of the program.                                          |
-| Common        | Define various parameters used by the program.                           |
-| Exceptions    | Define the exceptions thrown by the program.                             |
+| MoneyGoWhere  | Defines the main entrypoint of the program.                              |
+| Common        | Defines various parameters used by the program.                          |
+| Exceptions    | Defines the exceptions thrown by the program.                            |
 | UserInterface | Interface with the user via standard I/O and handle commands.            |
-| Parser        | Provide functions to parse inputs read from standard input.              |
-| Command       | Define the commands accepted by the program along with its arguments.    |
+| Parser        | Provides functions to parse inputs read from standard input.             |
+| Command       | Defines the commands accepted by the program along with its arguments.   |
 | Data          | Defines classes to store data and provides functions to operate on data. |
-| Storage       | Provide functions to save and load data.                                 |
-| API           | Provide functions to interact with external APIs.                        |
-| Logger        | Provide functions to log user actions and the program's behaviour.       |
+| Storage       | Provides functions to save and load data.                                |
+| API           | Provides functions to interact with external APIs.                       |
+| Logger        | Provides functions to log user actions and the program's behaviour.      |
 
 <br>
 

@@ -16,7 +16,7 @@ activate UserInterface USER_INTERFACE_COLOR_1
 UserInterface -[USER_INTERFACE_COLOR_1]> Storage : \lloadFromFile(\n\tsavedExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedTargets:ArrayList<Target>,\n\tsavedIncomes:ArrayList<Income>\n);
 activate Storage STORAGE_COLOR_1
 
-Storage --[STORAGE_COLOR_1]> UserInterface
+Storage --[STORAGE_COLOR_1]> UserInterface : sortCommandSetting:ConsoleCommandSortExpense
 deactivate Storage
 
 UserInterface -[USER_INTERFACE_COLOR_1]> Data : \lsetExpenses(\n\tsavedExpenses:ArrayList<Expense>\n)

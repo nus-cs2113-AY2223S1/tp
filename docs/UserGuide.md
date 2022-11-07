@@ -277,7 +277,7 @@ Your MoneyGoWhere? Let me help you track it.
 |:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
 | Add expense           | `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]` |
 | View expense(s)       | `View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]`                                                     |
-| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]`                             |
+| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]`        |
 | Add income            | `Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                          |
 | Add target            | `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                        |
 | View command list     | `help`                                                                                                                        |
@@ -314,10 +314,10 @@ Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascendi
 Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
 
 ---- RECURRING-PAYMENT-RELATED-COMMANDS ----
-Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
+Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]
 View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
 Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
-Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]
+Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]
 Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
 
 ---- INCOME-RELATED-COMMANDS ----
@@ -364,7 +364,7 @@ Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEG
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
-> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+> * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 <br>
 
@@ -739,7 +739,7 @@ Edits a recurring payment in the list of recurring payments.
 
 <br>
 
-Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION]`
+Syntax: `Edit-RecurringPayment -r RECURRING_PAYMENT_INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]`
 
 {: .notes }
 > * `RECURRING_PAYMENT_INDEX` is an integer value.
@@ -821,7 +821,7 @@ Adds a new income to the list of incomes.
 Syntax: `Add-Income -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
 
 {: .notes }
-> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -1218,13 +1218,13 @@ A list of all valid commands.
 
 ### Recurring Payments
 
-| Command                  | Syntax                                                                                                                             |
-|:-------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|
-| Add recurring payment    | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]`                                  |
-| View recurring payments  | `View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]`                                                                                |
-| Delete recurring payment | `Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX`                                                                                |
-| Edit recurring payment   | `Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY]` |
-| Pay recurring payment    | `Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX`                                                                                   |
+| Command                  | Syntax                                                                                                                                                  |
+|:-------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add recurring payment    | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]`                                  |
+| View recurring payments  | `View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]`                                                                                                     |
+| Delete recurring payment | `Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX`                                                                                                     |
+| Edit recurring payment   | `Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]` |
+| Pay recurring payment    | `Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX`                                                                                                        |
 
 <br>
 
