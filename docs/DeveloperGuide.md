@@ -35,6 +35,8 @@
 * The style of document for the developer guide is inspired by the DG of
   [AY2122S1-CS2113T-T10-3](https://github.com/AY2122S1-CS2113T-T10-3/tp/blob/master/docs/DeveloperGuide.md#purpose-of-this-guide)
 
+<div style="page-break-after: always;"></div>
+
 ## Design
 
 ### Architecture
@@ -61,6 +63,8 @@ The rest of the app consists of five components.
   also holds the data of the App in memory
 - [Storage](#storage-component) : Reads data from, and writes data to the hard disk
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The sequence diagram below shows how the components interact with each other for the scenario where the user issues
@@ -84,6 +88,8 @@ The `Ui` component consists of:
   for printing to the user.
   It also contains methods which return strings to be printed to the user.
 
+<div style="page-break-after: always;"></div>
+
 ### Parser component
 
 Below is a partial class diagram that shows an overview of the `Parser` component.
@@ -101,6 +107,8 @@ The `Parser` component consists of:
   or `DeletePassengerCommand`, or `ListPassengerCommand` to be executed.
 - `ModificationParser`: Takes in the parsed user input from `Parser` and instantiates a new `ModifyFlightNumCommand`,
   or `ModifyGateNumCommand`, or `DelayFlightCommand` to be executed.
+
+<div style="page-break-after: always;"></div>
 
 ### Command component
 
@@ -127,11 +135,15 @@ The `Command` component consists of:
 - `ListPassengerCommand`: Handles the case when the command is to list all the passengers
 - `ExitCommand`: Handles the case when the command is to exit the application.
 
+<div style="page-break-after: always;"></div>
+
 ### OperationList component
 
 Below is a partial class diagram that shows an overview of the `OperationList` component.
 
 ![OperationList-class-diagram](ug-diagrams/images/OperationList%20Class%20Diagram.jpg)
+
+<div style="page-break-after: always;"></div>
 
 The various methods implemented to ensure the operations are done correctly are not included to
 maintain simplicity.
@@ -171,6 +183,8 @@ To add on, the `Storage` component is designed to only access the following fold
 The `seedu.duke.exceptions` package contains the `SkyControlException` class and `SyncException` class which are used
 by the various components to be thrown as exceptions and print specific error messages to the console.
 
+<div style="page-break-after: always;"></div>
+
 ## Implementation
 
 This section would focus on explaining the application flow and the specifics on how the features are implemented.
@@ -199,9 +213,9 @@ The command Add a passenger adds passenger details of a particular passenger to 
 
 **Sequence Diagram**
 
-
-
 ![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
+
+<div style="page-break-after: always;"></div>
 
 1. SkyControl first retrieves the parameters `departureTime` and `gateNumber` from the respective flight detail
    in FlightList and appends the details to the lineInput.
@@ -231,6 +245,8 @@ Furthermore, `DeletePassengerCommand` implements the following operation:
 **Sequence diagram**
 
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
+
+<div style="page-break-after: always;"></div>
 
 When `Parser` verifies that the command is an entity `passenger` and `delete` operation,
 `DeletePassengerCommend` is instantiated.
