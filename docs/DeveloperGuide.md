@@ -167,23 +167,21 @@ The software architecture diagram below describes the program's design and the i
 <br>
 
 #### General Interaction of Components
+To illustrate how the components interact with each other as a whole, we will use the following example where:
 
-The sequence diagram below depicts the interaction between the various core components when a command is entered.
-
-<br>
-
-In this example, the user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
-
-*The sequence diagrams referenced by the component interaction diagram [below](#component-interaction-reference-diagrams).*
+The user launches the program and enters the command `Add-Expense -n Expense -a 7.80` to add an expense with the name `Expense` and the amount `7.80`.
 
 <br>
 
-<p align = "center">
-<img src = images/ComponentInteractionsOnCommandEntered.png>
-</p>
-<p align = "center">
-A sequence diagram showing the interaction between core components of MoneyGoWhere when Add-Expense is executed.
-</p>
+The sequence diagrams referenced by the component interaction diagram [below](#component-interaction-reference-diagrams).
+
+<br>
+
+![ComponentInteractionsOnCommandEntered](images/ComponentInteractionsOnCommandEntered.png)
+
+*A sequence diagram showing the interaction between core components of MoneyGoWhere when Add-Expense is executed.*
+
+<br>
 
 1. When the user launches the program, `MoneyGoWhere` creates an instance of `UserInterface`.
 2. `UserInterface` creates instances of `Logger` and `Data`.
@@ -216,13 +214,12 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 
 ##### Loading data
-<p align = "center">
-<img src = images/ComponentInteractionsSDLoadDataFromFile.png>
-</p>
-<p align = "center">
-A reference diagram showing the interactions between the UI,
-Data and Storage components when data is loaded into MoneyGoWhere.
-</p>
+
+![ComponentInteractionsSDLoadDataFromFile](images/ComponentInteractionsSDLoadDataFromFile.png)
+
+*A reference diagram showing the interactions between the UI, Data and Storage components when data is loaded into MoneyGoWhere.*
+
+<br>
 
 1. `UserInterface#runLocalStorageLoadFromFile()` calls `Storage#loadFromFile()` to read any existing data from local storage.
 2. `UserInterface#runLocalStorageLoadFromFile()` calls the corresponding set functions to load the data into the program.
@@ -232,12 +229,11 @@ Data and Storage components when data is loaded into MoneyGoWhere.
 <br>
 
 ##### Getting user commands
-<p align = "center">
-<img src = images/ComponentInteractionsSDGetUserCommand.png>
-</p>
-<p align = "center">
-A reference diagram showing the interactions between the UI, Parser and Logger components when the user's input for Add-Expense is retrieved.
-</p>
+
+[ComponentInteractionsSDGetUserCommand](images/ComponentInteractionsSDGetUserCommand.png)
+
+*A reference diagram showing the interactions between the UI, Parser and Logger components when the user's input is retrieved.*
+
 
 1. `UserInterface#getConsoleCommand()` calls `UserInterface#getConsoleInput()` to read the user's input as a string.
 2. `UserInterface#getConsoleCommand()` calls `Logger#logCommand()` to log the command entered by the user into a log file.
@@ -248,12 +244,12 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Printing the output from a command
-<p align = "center">
-<img src = images/ComponentInteractionsSDPrintingAnExpense.png>
-</p>
-<p align = "center">
-A reference diagram showing the interactions between the UI, Parser and Logger components when the output of Add-Expense is printed..
-</p>
+
+![ComponentInteractionsSDPrintingAnExpense](images/ComponentInteractionsSDPrintingAnExpense.png)
+
+*A reference diagram showing the interactions between the UI, Parser and Logger components when the output of Add-Expense is printed.*
+
+<br>
 
 1. `UserInterface` calls the corresponding convert object function based on the data object's class.\
    In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
@@ -266,13 +262,12 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Saving data
-<p align = "center">
-<img src = images/ComponentInteractionsSDSaveDataToFile.png>
-</p>
-<p align = "center">
-A reference diagram showing the interactions between the UI,
-Data and Storage components when data is saved in MoneyGoWhere.
-</p>
+
+![ComponentInteractionsSDSaveDataToFile](images/ComponentInteractionsSDSaveDataToFile.png)
+
+*A reference diagram showing the interactions between the UI, Data and Storage components when data is saved in MoneyGoWhere.*
+
+<br>
 
 * `UserInterface#runLocalStorageSaveToFile()` calls the get functions to retrieve the data from the program.
 * `UserInterface#runLocalStorageSaveToFile()` calls `Storage#saveToFile()` to write the data to local storage.
@@ -309,7 +304,13 @@ The Common component consists of the classes `Messages` and `Configurations`.\
 
 The Exceptions component consists of various exception classes which inherits from `MoneyGoWhereException`.
 
+<br>
+
 ![Component-Exceptions](images/ComponentExceptions.png)
+
+*A reference diagram showing exception classes inherited from MoneyGoWhereException.*
+
+<br>
 
 The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.\
 For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
@@ -329,11 +330,22 @@ Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/m
 
 The UserInterface component consists of the class `ConsoleInterface` which runs the command line interface that the user interacts with.
 
+<br>
+
 ![Component-UserInterface](images/ComponentUserInterface.png)
 
-`ConsoleInterface` defines various command handlers which are called based on the command entered by the user.\
+*A reference diagram showing the interactions between ConsoleInterface and other components of MoneyGoWhere.*
+
+
+<br>
+
+`ConsoleInterface` defines various command handlers which are called based on the command entered by the user.
+
 For example, entering the command string `Add-Expense -n Expense -a 7.80` will result in the execution of the `ConsoleInterface#runCommandAddExpense()` command handler to add an expense to the program.
-Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java) class to view the full list of command handler functions.
+
+<br>
+
+*To view the full list of command handler functions, do refer to [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-1/tp/blob/master/src/main/java/seedu/moneygowhere/userinterface/ConsoleInterface.java).*
 
 <br>
 
@@ -347,11 +359,16 @@ Do refer to the [ConsoleInterface.java](https://github.com/AY2223S1-CS2113T-W11-
 
 ### Parser Component
 
-The Parser component consists of the classes `ConsoleParserConfigurations` and `ConsoleParser`.\
-\
-`ConsoleParserConfigurations` defines the syntax and arguments used by `ConsoleParser` when parsing the commands entered by the user.\
-`ConsoleParser` defines the `ConsoleParser#parse()` to parse commands and arguments into their corresponding console command subclasses.\
-\
+The Parser component consists of the classes `ConsoleParserConfigurations` and `ConsoleParser`.
+
+<br>
+
+`ConsoleParserConfigurations` defines the syntax and arguments used by `ConsoleParser` when parsing the commands entered by the user.
+
+`ConsoleParser` defines the `ConsoleParser#parse()` to parse commands and arguments into their corresponding console command subclasses.
+
+<br>
+
 When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 * `ConsoleParser#parse()` calls the corresponding command parser function to parse the command arguments.
 * The command parser function validates, parses and normalizes the command arguments before returning the corresponding console command subclass.
@@ -370,11 +387,21 @@ When `ConsoleParser#parse()` is invoked to parse a command entered by the user:
 
 The Commands component consists of various console command classes which inherits from the abstract class `ConsoleCommand`.
 
+<br>
+
 ![Component-Commands](images/ComponentCommands.png)
 
+*A reference diagram showing console command classes inherited from ConsoleCommand.*
+
+<br>
+
 The corresponding console command subclass is returned by `ConsoleParser#parse()` depending on the command supplied in the function's parameter.
+
 For example, supplying the command string `Add-Expense -n Expense -a 7.80` to `ConsoleParser#parse()` will return a `ConsoleCommandAddExpense` object.
-Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package to view the full list of console command subclasses.
+
+<br>
+
+*To view the full list of console command subclasses, do refer to the [commands package](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands).*
 
 <br>
 
@@ -390,10 +417,18 @@ Do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/mas
 
 The Data component consists of the classes `Expense`, `Income`, `RecurringPayment`, `Target` along with their corresponding manager classes.
 
+<br>
+
 ![Component-Data](images/ComponentData.png)
 
-`Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.\
-`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.\
+*A reference diagram showing the interaction between each class and their respective manager class.*
+
+<br>
+
+`Expense`, `Income`, `RecurringPayment` and `Target` define the attributes and their respective data types.
+
+`ExpenseManager`, `IncomeManager`, `RecurringPaymentManager` and `TargetManager` define functions to store and manage the respective data objects.
+
 `CurrencyManager` defines functions to add, retrieve, update and delete currencies and manages a HashMap of different currency codes and their corresponding exchange rates.
 
 <br>
@@ -408,10 +443,14 @@ The Data component consists of the classes `Expense`, `Income`, `RecurringPaymen
 
 ### Storage Component
 
-The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.\
-\
-`LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and writing data to a xml file.\
-`LocalStorageNullErrorHandler` overwrites several default error handlers in the xml parser to allow for custom error handling.\
+The Storage component consists of the classes `LocalStorageConfigurations`, `LocalStorageNullErrorHandler` and `LocalStorage`.
+
+<br>
+
+`LocalStorageConfigurations` defines the syntax and arguments used by `LocalStorage` when reading data from and writing data to a xml file.
+
+`LocalStorageNullErrorHandler` overwrites several default error handlers in the xml parser to allow for custom error handling.
+
 `LocalStorage` defines functions that loads and saves data.
 
 <br>
@@ -424,11 +463,16 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 
 ### API Component
 
-The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.\
-\
-The `CurrencyApiManager` class calls functions in `CurrencyApi`.\
+The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
+
+<br>
+
+The `CurrencyApiManager` class calls functions in `CurrencyApi`.
+
 The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a HashMap of exchange rates.\
-\
+
+<br>
+
 When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of currencies and their corresponding conversion rates:
 * `CurrencyApiManager#getCurrencyApi()` calls `CurrencyApi#getJson()` to fetch data from the API in the form of a JSON file.
     * The data contains the currency codes and its corresponding exchange rates with respect to the Singapore Dollar.
@@ -445,9 +489,12 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
 
 ### Logger Component
 
-The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.\
-\
+The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLogger`.
+
+<br>
+
 `LocalLoggerFormatter` formats the log record before it is written to a log file.
+
 `LocalLogger` defines functions to log different types of messages to a log file.
 
 <br>
@@ -489,7 +536,11 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 
 The following sequence diagram illustrates the process of loading data from local storage.
 
+<br>
+
 ![Implementation-SD-Load-Data](images/ImplementationSDLoadData.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and the manager classes when data is loaded into MoneyGoWhere.*
 
 <br>
 
@@ -505,7 +556,11 @@ The following sequence diagram illustrates the process of loading data from loca
 
 The following sequence diagram illustrates the process of saving data to local storage.
 
+<br>
+
 ![Implementation-SD-Save-Data](images/ImplementationSDSaveData.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and manager classes when data is saved in MoneyGoWhere.*
 
 <br>
 
@@ -521,7 +576,11 @@ The following sequence diagram illustrates the process of saving data to local s
 
 The `Merge-File` command merges data from an external data file with the existing data in the current data file.
 
+<br>
+
 ![Implementation-Merge-File](images/ImplementationMergeFile.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and manager classes when data from an external file is merged into the current data file.*
 
 <br>
 
@@ -553,7 +612,11 @@ The `Merge-File` command merges data from an external data file with the existin
 
 The following sequence diagram illustrates the process of printing and logging an `Expense` object.
 
+<br>
+
 ![Implementation-SD-Print-Expense](images/ImplementationSDPrintExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and Logger when an expense is printed.*
 
 <br>
 
@@ -569,7 +632,11 @@ The following sequence diagram illustrates the process of printing and logging a
 
 The `Add-Expense` command adds a new expense to the program.
 
+<br>
+
 ![Implementation-Add-Expense](images/ImplementationAddExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an expense is added.*
 
 <br>
 
@@ -585,7 +652,11 @@ The `Add-Expense` command adds a new expense to the program.
 
 The `View-Expense` command displays existing expenses in the program.
 
+<br>
+
 ![Implementation-View-Expense](images/ImplementationViewExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and ExpenseManager when expenses are printed as a list.*
 
 <br>
 
@@ -601,7 +672,11 @@ The `View-Expense` command displays existing expenses in the program.
 
 The `Delete-Expense` command removes an existing expense from the program.
 
+<br>
+
 ![Implementation-Delete-Expense](images/ImplementationDeleteExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an expense is deleted.*
 
 <br>
 
@@ -617,7 +692,11 @@ The `Delete-Expense` command removes an existing expense from the program.
 
 The `Edit-Expense` command changes the attributes of an existing expense in the program.
 
+<br>
+
 ![Implementation-Edit-Expense](images/ImplementationEditExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an expense is edited.*
 
 <br>
 
@@ -633,7 +712,11 @@ The `Edit-Expense` command changes the attributes of an existing expense in the 
 
 The `Sort-Expense` command sorts the existing expenses in the program.
 
+<br>
+
 ![Implementation-Sort-Expense](images/ImplementationSortExpense.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when expenses are sorted.*
 
 <br>
 
@@ -649,7 +732,11 @@ The `Sort-Expense` command sorts the existing expenses in the program.
 
 The `Convert-Currency` command converts the currency of an existing expense in the program.
 
+<br>
+
 ![Implementation-Convert-Currency](images/ImplementationConvertCurrency.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when the currency of an expense is converted.*
 
 <br>
 
@@ -682,6 +769,8 @@ The following sequence diagram illustrates the process of printing and logging a
 
 ![Implementation-SD-Print-RecurringPayment](images/ImplementationSDPrintRecurringPayment.png)
 
+*A sequence diagram showing the interactions between ConsoleInterface and Logger when a recurring payment is printed.*
+
 <br>
 
 [Back to Sub-Contents](#recurring-payment-commands)
@@ -696,7 +785,11 @@ The following sequence diagram illustrates the process of printing and logging a
 
 The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
+<br>
+
 ![Implementation-Add-RecurringPayment](images/ImplementationAddRecurringPayment.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a recurring payment is added.*
 
 <br>
 
@@ -712,7 +805,11 @@ The `Add-RecurringPayment` command adds a new recurring payment to the program.
 
 The `View-RecurringPayment` command displays existing recurring payments in the program.
 
+<br>
+
 ![Implementation-View-RecurringPayment](images/ImplementationViewRecurringPayment.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and RecurringPaymentManager when recurring payments are printed as a list.*
 
 <br>
 
@@ -728,7 +825,11 @@ The `View-RecurringPayment` command displays existing recurring payments in the 
 
 The `Delete-RecurringPayment` command removes an existing recurring payment from the program.
 
+<br>
+
 ![Implementation-Delete-RecurringPayment](images/ImplementationDeleteRecurringPayment.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a recurring payment is deleted.*
 
 <br>
 
@@ -744,7 +845,11 @@ The `Delete-RecurringPayment` command removes an existing recurring payment from
 
 The `Edit-RecurringPayment` command changes the attributes of an existing recurring payment in the program.
 
+<br>
+
 ![Implementation-Edit-RecurringPayment](images/ImplementationEditRecurringPayment.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a recurring payment is edited.*
 
 <br>
 
@@ -758,10 +863,14 @@ The `Edit-RecurringPayment` command changes the attributes of an existing recurr
 
 #### Adding an expense from a recurring payment: `Pay-RecurringPayment`
 
+<br>
+
 The `Pay-RecurringPayment` command adds a new expense based on an existing recurring payment.
 This command helps the user to track when recurring payments are paid.
 
 ![Implementation-Edit-RecurringPayment](images/ImplementationPayRecurringPayment.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a recurring payment is paid.*
 
 <br>
 
@@ -791,7 +900,11 @@ This command helps the user to track when recurring payments are paid.
 
 The following sequence diagram illustrates the process of printing and logging an `Income` object.
 
+<br>
+
 ![Implementation-SD-Print-Income](images/ImplementationSDPrintIncome.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and Logger when an income is printed.*
 
 <br>
 
@@ -807,7 +920,11 @@ The following sequence diagram illustrates the process of printing and logging a
 
 The `Add-Income` command adds a new income to the program.
 
+<br>
+
 ![Implementation-Add-Income](images/ImplementationAddIncome.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an income is added.*
 
 <br>
 
@@ -823,7 +940,11 @@ The `Add-Income` command adds a new income to the program.
 
 The `View-Income` command displays existing incomes in the program.
 
+<br>
+
 ![Implementation-View-Income](images/ImplementationViewIncome.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and IncomeManager when incomes are printed as a list.*
 
 <br>
 
@@ -839,7 +960,11 @@ The `View-Income` command displays existing incomes in the program.
 
 The `Delete-Income` command removes an existing income from the program.
 
+<br>
+
 ![Implementation-Delete-Income](images/ImplementationDeleteIncome.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an income is deleted.*
 
 <br>
 
@@ -855,7 +980,11 @@ The `Delete-Income` command removes an existing income from the program.
 
 The `Edit-Income` command changes the attributes of an existing income in the program.
 
+<br>
+
 ![Implementation-edit-income](images/ImplementationEditIncome.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when an income is edited.*
 
 <br>
 
@@ -885,7 +1014,12 @@ The `Edit-Income` command changes the attributes of an existing income in the pr
 
 The following sequence diagram illustrates the process of printing and logging a `Target` object.
 
+<br>
+
 ![Implementation-SD-Print-Target](images/ImplementationSDPrintTarget.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and Logger when a target is printed.*
+
 
 <br>
 
@@ -901,7 +1035,11 @@ The following sequence diagram illustrates the process of printing and logging a
 
 The `Add-Target` command adds a new target to the program.
 
+<br>
+
 ![Implementation-add-target](images/ImplementationAddTarget.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a target is added.*
 
 <br>
 
@@ -917,7 +1055,11 @@ The `Add-Target` command adds a new target to the program.
 
 The `View-Target` command displays existing targets in the program.
 
+<br>
+
 ![Implementation-View-Target](images/ImplementationViewTarget.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and TargetManager when targets are printed as a list.*
 
 <br>
 
@@ -933,7 +1075,11 @@ The `View-Target` command displays existing targets in the program.
 
 The `Delete-Target` command removes an existing target from the program.
 
+<br>
+
 ![Implementation-Delete-Target](images/ImplementationDeleteTarget.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a target is deleted.*
 
 <br>
 
@@ -947,9 +1093,13 @@ The `Delete-Target` command removes an existing target from the program.
 
 #### Editing a target: `Edit-Target`
 
+<br>
+
 The `Edit-Target` command changes the attributes of an existing target in the program.
 
 ![Implementation-Edit-Target](images/ImplementationEditTarget.png)
+
+*A sequence diagram showing the interactions between ConsoleInterface and other classes when a target is edited.*
 
 <br>
 
