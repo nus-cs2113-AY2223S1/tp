@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam componentStyle rectangle
+
+
+[RecordList] "1" *-- "*" [Record] : contains
+[Record] <|--- [Food]
+[Record] <|-- [WeightAndFat]
+[Record] <|-- [Exercise]
+[ExerciseList] "1" *--> "*" [Exercise]: contains >
+[ExerciseList] "1" *--> "*" [Exercise]: contains >
+[Exercise] <|-- [StrengthExercise]
+[Exercise] <|-- [CardioExercise]
+[FoodList] "1" *--> "*" [Food]: contains >
+[ExerciseList] <..  [RecordList]: use by >
+[WeightAndFatList] <..  [RecordList]: use by >
+[WeightAndFatList] "1" *--> "*" [WeightAndFat]: contains >
+[FoodList] <..  [RecordList]: use by >
+[Biometrics] "1" --> "1" [WeightAndFatList]: has >
+[CaloriesList] "1" *--> [Calories]
+
+hide empty members
+@enduml
