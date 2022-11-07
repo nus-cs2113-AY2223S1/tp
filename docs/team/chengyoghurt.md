@@ -72,7 +72,7 @@ Highlights:
 - It uses the `SimpleDateFormat` from java library to check format and perform validation.
 - It examines not only format, but also the logic, i.e. doesn't accept passed date, of the input date string.
 
-####others
+**others**
 - Added status of appointment as `AppointmentStauts` enum class
 - Added exception handler to functions related to appointment
 - Improved parser for removing appointment
@@ -86,8 +86,9 @@ Highlights:
 - Added Appointment status feature
 - Added Appointment date feature
 - Added Service manage feature
-- Added the UML diagram of
-- Added the UML diagram of
+- Added the UML diagram of appointment remove
+- Added the UML diagram of employee remove
+- Added the UML diagram of service remove
 
 **Mentoring contributions**
 
