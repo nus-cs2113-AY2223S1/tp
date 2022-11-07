@@ -189,10 +189,10 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
     - Exactly **1 (one)** integer must be provided.
   - Example:
   ```
-  /edit 2 -del -i 2 
-      
-  Delete "Lettuce"
-  Caesar salad: ingredient edited.
+  /edit 2 -del -i 2
+  ```
+  ```
+  /edit 2 -del -s 1
   ```
   
 - `-swp`: *Swaps two ingredients or steps*
@@ -200,10 +200,10 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
     - Exactly **2 (two)** integers must be provided.
   - Example:
   ```
+  /edit 1 -swp -i 1 2
+  ```
+  ```
   /edit 1 -swp -s 2 3
-      
-  Swap "Heat oil in a frying pan" and "Pour sauce into the pan"
-  Fried rice: step edited.
   ```
 
 - `-chg`: *Changes the ingredient, step, title or description*
@@ -217,16 +217,16 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
       - Step format: `STEP`
   - Examples: 
   ```
+  /edit 2 -chg -t Salad
+  ```
+  ```
   /edit 2 -chg -d Lettuce salad with croutons and dressing
-      
-  Change "Green salad" to "Lettuce salad with croutons and dressing"
-  Caesar salad: description edited.
   ```
   ```
   /edit 3 -chg -i 2 Oyster sauce / 1.0 / tbsp
-      
-  Change "Soy sauce / 2.0 / tsp" to "Oyster sauce / 1.0 / tbsp"
-  Stir fry: ingredient edited.
+  ```
+  ```
+  /edit 3 -chg -s 2 Cut the lettuce into smaller pieces.
   ```
 
 ℹ The flag order (recipe and command flag) does not matter, but exactly 1 (one) command flag and 1 (one) recipe flag are allowed in 
@@ -257,13 +257,9 @@ Format: `/delete -t [RECIPE_TITLE] OR /edit -id [RECIPE_INDEX]`
 Example: 
 ```
 /delete -t carbonara
-
-Carbonara is deleted from the recipe list.
 ```
 ```
 /delete -id 1
-
-Carbonara is deleted from the recipe list.
 ```
 
 [⏫ Back to content page](#content-page)
@@ -298,21 +294,21 @@ Format to view with recipe title: `/view -id [RECIPE_INDEX]`
 Example: 
 ```
 /view -id 1
-Recipe Title: 
+TITLE:
 Carbonara
 
-Recipe Description: 
+DESCRIPTION:
 Carbonara is an Italian pasta dish from Rome made with eggs, hard cheese, cured pork
 and black pepper. Hot pasta tossed with a creamy sauce of raw beaten eggs, accentuated with crisp bits of
 guanciale, and finished with a shower of grated aged Pecorino Romano cheese plus freshly ground black pepper.
 
-Recipe Ingredients: 
+INGREDIENTS:  
 1. Extra virgin olive oil / 1 / table spoon
 2. Eggs / 3 / whole
 3. Parmesan cheese / 1 / cup
 4. Spaghetti / 0.9 / pound
 
-Recipe Steps:
+STEPS: 
 1. Heat the pasta water.
 2. Sauté the pancetta or bacon and garlic.
 3. In a small bowl, beat the eggs and mix in about half of the cheese.
@@ -429,13 +425,13 @@ stored into the local drive and reloaded when _RecipEditor_ is restarted.
 
 # Command Summary
 
-| Command | Action                                           | Format                                                   | Example                                             |
-|---------|--------------------------------------------------|----------------------------------------------------------|-----------------------------------------------------|
-| add     | Add new recipe                                   | `/add`                                                   | `/add`                                              |
-| edit    | Edit recipe at INDEX                             | `/edit INDEX (FLAGS PARAMS)`                             | `/edit 1` <br/> `/edit 1 -add -s "new step"` |
-| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete -t RECIPE_TITLE`<br/>`/delete -id <INDEX<br/>>` | `/delete carbonara`                                 |
-| list    | List all recipes                                 | `/list`                                                  | `/list`                                             |
-| view    | View recipe at INDEX                             | `/view INDEX`                                            | `/view 1`                                           |
-| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find -t <RECIPE_TITLE>`<br/>`/find -id <INDEX>`        | `/find egg`                                         |
-| help    | Show available commands                          | `/help`                                                  | `/help`                                             |
-| exit    | Exit the program                                 | `/exit`                                                  | `/exit`                                             |
+| Command | Action                                           | Format                                                                       | Example                                      |
+|---------|--------------------------------------------------|------------------------------------------------------------------------------|----------------------------------------------|
+| add     | Add new recipe                                   | `/add`                                                                       | `/add`                                       |
+| edit    | Edit recipe at INDEX                             | `/edit INDEX` <br/> `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS` | `/edit 1` <br/> `/edit 1 -add -s "new step"` |
+| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete -t RECIPE_TITLE`<br/>`/delete -id RECIPE_INDEX`                     | `/delete carbonara`                          |
+| list    | List all recipes                                 | `/list`                                                                      | `/list`                                      |
+| view    | View recipe at INDEX                             | `/view -t RECIPE_TITLE`<br/>`/view -id RECIPE_INDEX`                         | `/view -t carbonara` <br/> `/view -id 1`     |
+| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find -t RECIPE_TITLE`<br/>`/find -i INGREDIENT_NAME`                       | `/find -t rice` <br/> `/find -i egg`         |
+| help    | Show available commands                          | `/help COMMAND`                                                              | `/help find`                                 |
+| exit    | Exit the program                                 | `/exit`                                                                      | `/exit`                                      |
