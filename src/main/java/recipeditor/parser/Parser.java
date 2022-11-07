@@ -40,13 +40,13 @@ public class Parser {
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
     private static final int COMMAND_FLAG_INPUT_LENGTH = 3;
-    private static final String SPACE_DIVIDER = " ";
     private static final int DELETE_COMMAND_FLAG_INDEX = 1;
     private static final int DELETE_COMMAND_RECIPE_INDEX = 2;
     private static final int VIEW_COMMAND_FLAG_INDEX = 1;
     private static final int VIEW_COMMAND_RECIPE_INDEX = 2;
     private static final int EDIT_COMMAND_RECIPE_INDEX = 1;
     private static final int ACCOUNT_ZERO_INDEXING = -1;
+    private static final int REMOVE_LAST_CHAR_INDEX = -1;
 
 
     /**
@@ -56,7 +56,7 @@ public class Parser {
      * @return command that can be executed
      */
     public static Command parseCommand(String input) {
-        String[] parsed = input.split(SPACE_DIVIDER);
+        String[] parsed = input.split(Ui.SPACE_DIVIDER);
         String commandWord = parsed[COMMAND_INDEX].toLowerCase();
 
         switch (commandWord) {
@@ -258,9 +258,9 @@ public class Parser {
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
         for (String string : stringArray) {
-            content.append(string + SPACE_DIVIDER);
+            content.append(string + Ui.SPACE_DIVIDER);
         }
-        content.deleteCharAt(content.length() - 1);
+        content.deleteCharAt(content.length() + REMOVE_LAST_CHAR_INDEX);
         return content.toString();
     }
 

@@ -1,11 +1,6 @@
 package recipeditor.command;
 
-import recipeditor.recipe.RecipeList;
-import recipeditor.recipe.Recipe;
 import recipeditor.storage.Storage;
-
-import java.io.File;
-
 
 public class ExitCommand extends Command {
     public static final String COMMAND_TYPE = "/exit";

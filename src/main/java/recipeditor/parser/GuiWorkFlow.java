@@ -18,6 +18,8 @@ public class GuiWorkFlow {
     private boolean isValid = false;
     private Recipe recipe = new Recipe();
     private boolean shouldExitLoop;
+    private static final String N_INPUT = "n";
+    private static final String Y_INPUT = "y";
 
     /**
      * A class that handle the GUI call and the intermediate interaction between the GUI and CLI.
@@ -50,9 +52,9 @@ public class GuiWorkFlow {
             switch (input.toLowerCase()) {
             default:
                 break;
-            case "n":
+            case N_INPUT:
                 return YesNoLoopAnswer.NO;
-            case "y":
+            case Y_INPUT:
                 return YesNoLoopAnswer.YES;
             }
         } while (true);

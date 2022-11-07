@@ -3,6 +3,7 @@ package recipeditor.command;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
+import recipeditor.ui.Ui;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
@@ -37,7 +38,7 @@ public class AddCommand extends Command {
             RecipeList.addRecipeTitle(addedRecipe.getTitle());
             Storage.rewriteRecipeListToFile();
             String recipeFileSourcePath = Storage.titleToFilePath(addedRecipe.getTitle());
-            Storage.saveRecipe(addedRecipe, "", recipeFileSourcePath);
+            Storage.saveRecipe(addedRecipe, Ui.EMPTY_STRING, recipeFileSourcePath);
             StringBuilder response = new StringBuilder();
             response.append(String.format("\"%s\" added to the recipe list.\n",addedRecipe.getTitle()));
             response.append(RecipeList.printNumberOfRecipes());

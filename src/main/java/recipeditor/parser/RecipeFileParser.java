@@ -3,13 +3,13 @@ package recipeditor.parser;
 import recipeditor.exception.ParseFileException;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.Ingredient;
+import recipeditor.ui.Ui;
 
 import java.util.logging.Logger;
 
 public class RecipeFileParser {
 
     private static final Logger logger = Logger.getLogger(RecipeFileParser.class.getName());
-
 
     public static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
     public static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
@@ -37,6 +37,11 @@ public class RecipeFileParser {
             + "content";
     public static final String EMPTY = "There is an empty field. The recipe is not valid";
     private static final String HASHTAG = "Don't use # in the content if it is not a heading";
+    private static final String TITLE_STRING = "title";
+    private static final String DESCRIPTION_STRING = "description";
+    private static final String INGREDIENTS_STRING = "ingredients";
+    private static final String STEPS_STRING = "steps";
+    private static final String HASH_DIVIDER = "#";
 
 
     Recipe recipe = new Recipe();
@@ -148,19 +153,19 @@ public class RecipeFileParser {
 
     private LineType checkLineType(String line, int[] stageCounter) throws ParseFileException {
         String trimmedLine = line.trim();
-        if (trimmedLine.contains("#")) {
-            String[] parsedWords = trimmedLine.replace("#"," ").trim().split(" ");
+        if (trimmedLine.contains(HASH_DIVIDER)) {
+            String[] parsedWords = trimmedLine.replace(HASH_DIVIDER, Ui.SPACE_DIVIDER).trim().split(Ui.SPACE_DIVIDER);
             switch (parsedWords[0].toLowerCase()) {
-            case "title":
+            case TITLE_STRING:
                 incrementStageCounterAt(stageCounter, 0);
                 return LineType.TITLE;
-            case "description":
+            case DESCRIPTION_STRING:
                 incrementStageCounterAt(stageCounter, 1);
                 return LineType.DESCRIPTION;
-            case "ingredients":
+            case INGREDIENTS_STRING:
                 incrementStageCounterAt(stageCounter, 2);
                 return LineType.INGREDIENT;
-            case "steps":
+            case STEPS_STRING:
                 incrementStageCounterAt(stageCounter, 3);
                 return LineType.STEP;
             default:
