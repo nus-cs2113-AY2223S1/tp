@@ -4,6 +4,9 @@
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 <br>
 
+<div style="page-break-after: always;"></div>
+
+
 ## Contents
 * [Introduction](#introduction)
 * [How to use the User Guide](#how-to-use-the-user-guide)
@@ -68,6 +71,8 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Understanding symbols used in the User Guide
 
 <br>
@@ -104,6 +109,8 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Understanding the Command Syntax
 
 <br>
@@ -138,6 +145,8 @@ Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATE
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Additional Syntax
 
@@ -186,6 +195,8 @@ The expense was added successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ##### Limitation on adding hyphens
 
 Argument values cannot be the same as argument options.
@@ -204,6 +215,8 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT 
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -232,6 +245,8 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT 
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### How to run MoneyGoWhere
 
@@ -283,6 +298,8 @@ Your MoneyGoWhere? Let me help you track it.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### On Linux OS
 
 1. Navigate to the **terminal** by locating it your **launcher** or by searching it in **Activities** at the top left of the screen.
@@ -310,6 +327,8 @@ Your MoneyGoWhere? Let me help you track it.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Basic commands
 
 | Command               | Syntax                                                                                                                              |
@@ -328,6 +347,8 @@ Your MoneyGoWhere? Let me help you track it.
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -378,6 +399,8 @@ Merging a file: Merge-File -p PATH-STRING
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Managing your expenses
 
 ### Sub-Contents
@@ -393,6 +416,7 @@ Merging a file: Merge-File -p PATH-STRING
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an expense: `Add-Expense`
 
@@ -442,6 +466,8 @@ The expense was added successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing expense(s): `View-Expense`
 Displays past expenses you have added.
@@ -526,6 +552,8 @@ Mode of Payment : Card
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an expense: `Delete-Expense`
 Deletes an expense from the list of expenses.
 
@@ -552,6 +580,8 @@ The expense was deleted successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
@@ -608,6 +638,8 @@ The expense was edited successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting expenses: `Sort-Expense`
 Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
 descending order.
@@ -661,6 +693,8 @@ Your expenses have been sorted successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Converting the currency of an expense: `Convert-Currency`
 Converts the currency of an expense from the list of expenses.
 
@@ -698,6 +732,8 @@ The expense's currency was changed successfully.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Managing your recurring payments
 
 ## Sub-Contents
@@ -711,6 +747,8 @@ The expense's currency was changed successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a recurring payment: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments.
@@ -759,6 +797,8 @@ The recurring payment was added successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing recurring payment(s): `View-RecurringPayment`
 Displays the past recurring payments you have added.
@@ -815,6 +855,8 @@ Mode of Payment : Card
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a recurring payment: `Delete-RecurringPayment`
 Deletes a recurring payment from the list of recurring payments.
 
@@ -841,6 +883,8 @@ The recurring payment was deleted successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a recurring payment: `Edit-RecurringPayment`
 Edits a recurring payment in the list of recurring payments.
@@ -893,6 +937,8 @@ The recurring payment was edited successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Paying a recurring payment: `Pay-RecurringPayment`
 Adds an expense based on an existing recurring payment.
 
@@ -928,6 +974,8 @@ The recurring payment was added as an expense successfully.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Managing your incomes
 
 ## Sub-Contents
@@ -940,6 +988,8 @@ The recurring payment was added as an expense successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an income: `Add-Income`
 Adds a new income to the list of incomes.
@@ -983,6 +1033,8 @@ The income was added successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing income(s): `View-Income`
 Displays past incomes you have added.
@@ -1033,6 +1085,8 @@ Amount        : 500.00
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting an income: `Delete-Income`
 Deletes an income from the list of incomes.
 
@@ -1055,6 +1109,8 @@ The income was deleted successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing an income: `Edit-Income`
 Edits an existing income in the list of incomes.
@@ -1102,6 +1158,8 @@ The income was edited successfully.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Managing your targets
 
 ## Sub-Contents
@@ -1114,6 +1172,8 @@ The income was edited successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a target: `Add-Target`
 Adds a new target to the list of targets.
@@ -1160,6 +1220,8 @@ The target was added successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing target(s): `View-Target`
 Displays past targets you have added.
@@ -1213,6 +1275,8 @@ Current Amount: 1500.00
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a target: `Delete-Target`
 Deletes a target from the list of targets.
 
@@ -1239,6 +1303,8 @@ The target was deleted successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a target: `Edit-Target`
 Edits an existing target in the list of targets.
@@ -1289,6 +1355,8 @@ The target was edited successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Handling your data
 By default, all lists are saved in the `MoneyGoWhereData.xml` file in the **Memory** folder created in the same directory as `MoneyGoWhere.jar`.
 
@@ -1321,15 +1389,17 @@ Example of usage:
 <br>
 <br>
 
-## Exiting the application: `bye`
+<div style="page-break-after: always;"></div>
+
+## Exiting the application: `Bye`
 
 Exits MoneyGoWhere.
 
-Syntax: `bye`
+Syntax: `Bye`
 
 Example of usage:
 
-`bye`
+`Bye`
 
 <br>
 
@@ -1355,6 +1425,8 @@ A compilation of frequently asked questions that can help you clarify common mis
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
