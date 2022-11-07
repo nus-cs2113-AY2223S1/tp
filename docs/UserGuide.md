@@ -38,7 +38,7 @@ MoneyGoWhere is a financial planner to help you manage your finances.
 
 ### Example: `Add-Expense`
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
 Examples of valid command syntax:
 * `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359" -t "Monthly payment" -c "Work expenses" -r "Remarks here" -x USD -p PayLah`
@@ -101,7 +101,7 @@ Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEG
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE OF PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
-> * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
+> * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
 
 Examples of usage: 
@@ -118,7 +118,7 @@ Syntax: `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`
 > ⚠️️️️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 >   * If this argument is provided, MoneyGoWhere will only display the specified expense.
-> * `EXPENSE-CATEGORY` and `EXPENSE-NAME` are text strings.
+> * `CATEGORY` and `NAME` are text strings.
 
 Examples of usage:
 * `View-Expense`
@@ -260,7 +260,7 @@ Examples of usage:
 ### Paying recurring payments: `Pay-RecurringPayment`
 Pays a recurring payment from the list of recurring payments.
 
-Syntax: `Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX [-d DATE_TIME]`
+Syntax: `Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX [-d DATE-TIME]`
 
 > ⚠️️️️ Syntax Notes
 > * `RECURRINGPAYMENT-INDEX` is an integer value. This value should be equal to or greater than 0.
@@ -276,7 +276,7 @@ Adds a new income to the list of incomes.
 Syntax: `Add-Income -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -339,7 +339,7 @@ Adds a new target to the list of targets.
 Syntax: `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d DATE-TIME] [-t DESCRIPTION]`
 
 > ⚠️️️️ Syntax Notes
-> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
+> * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` and `CURRENT-AMOUNT` are decimal value. The values should be greater than 0.
 > * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
 
@@ -400,10 +400,10 @@ Examples of usage:
 Merges save file from an external source given path to the .xml save file.
 If there is a duplicate entry, duplicate entry from external file will be ignored.
 
-Syntax: `Merge-File -p PATH_STRING` 
+Syntax: `Merge-File -p PATH-STRING` 
 
 > ⚠️️️️ Syntax Notes
-> * `PATH_STRING` is text string. If your path contains spaces, you would need to wrap the text with double quotes.
+> * `PATH-STRING` is text string. If your path contains spaces, you would need to wrap the text with double quotes.
 
 
 Example of usage:
