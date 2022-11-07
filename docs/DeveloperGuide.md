@@ -211,7 +211,7 @@ Set Up:
 2. Download the latest version of `myReviews` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
 3. Copy the jar file into the folder you want to store your reviews.
 4. Open terminal application and change directory to the above folder.
-5. Run the jar file by entering java -jar tp.jar into the terminal.
+5. Run the jar file by entering java -jar myReviews.jar into the terminal.
 
 Testing: 
 1. myReviews will display a greeting message. Enter a command and press Enter to execute it.

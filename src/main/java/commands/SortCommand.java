@@ -27,7 +27,6 @@ public class SortCommand extends Commands {
     public String execute() {
         String output = "";
 
-
         try {
             if (userInput.length != 2) {
                 throw new DukeException();
