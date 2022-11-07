@@ -137,7 +137,7 @@ public class FlightList extends OperationList {
      * @param flightNum a parameter that is taken from the deleteOperation function
      * @param index     increment of the index in passengers
      * @return a boolean value that indicates if the flight number of the passenger
-     * matches the flight number that is deleted.
+     *         matches the flight number that is deleted.
      */
     private boolean isFlightNumberPresent(String flightNum, int index) {
         boolean isFlightNumberPresent;
@@ -150,7 +150,7 @@ public class FlightList extends OperationList {
     //@@author JordanKwua
 
     /**
-     * Checks if the flight number from the user input is a valid flight number to be added or deleted
+     * Checks if the flight number from the user input is a valid flight number to be added or deleted.
      *
      * @param substring the String containing the flight number to be checked
      * @throws SkyControlException if the flight number is invalid
@@ -271,7 +271,7 @@ public class FlightList extends OperationList {
 
     /**
      * Searches through the entire list of flights to find if the specified flight number exists,
-     * and removes it from the list if it exists
+     * and removes it from the list if it exists.
      *
      * @param flightNumber the String containing the flight number of the flight to be removed
      * @throws SkyControlException if the flight is not found within the list

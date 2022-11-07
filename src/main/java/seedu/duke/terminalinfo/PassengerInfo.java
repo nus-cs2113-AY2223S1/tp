@@ -77,7 +77,7 @@ public class PassengerInfo {
 
     /**
      * Converts the passenger information in the list of passengers to a particular format for ease of storage
-     * and visibility
+     * and visibility.
      *
      * @return passengerDetails a formatted String containing the passenger information to be inserted
      *         into the data file
