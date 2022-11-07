@@ -3,6 +3,7 @@ package seedu.duke.parsermanager;
 //@@author wilsonngja
 import seedu.duke.ClientList;
 import seedu.duke.PropertyList;
+import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.exception.pairunpair.pair.ClientAlreadyPairedException;
 import seedu.duke.exception.DukeParseException;
 import seedu.duke.exception.pairunpair.pair.ExistingPairException;
@@ -37,6 +38,7 @@ import static seedu.duke.CommandStructure.CLIENT_TAG;
 import static seedu.duke.CommandStructure.PAIR_TAG;
 import static seedu.duke.Messages.MESSAGE_CHECK_CLIENT_WRONG_FORMAT;
 import static seedu.duke.Messages.MESSAGE_CHECK_PROPERTY_WRONG_FORMAT;
+import static seedu.duke.Messages.MESSAGE_COMMAND_UNDEFINED;
 import static seedu.duke.Messages.MESSAGE_INCORRECT_LIST_DETAILS;
 import static seedu.duke.Messages.MESSAGE_MISSING_SUB_COMMAND_TYPE;
 
@@ -61,7 +63,7 @@ public class ParserManager {
     }
 
     public Parser parseCommand(String input) throws DukeParseException, ExistingPairException,
-            ClientAlreadyPairedException, NoExistingPairException {
+            ClientAlreadyPairedException, NoExistingPairException, InvalidCommandException {
 
         ArrayList<String> processedCommandDetails = splitCommandAndCommandType(input);
         String commandType = processedCommandDetails.get(COMMAND_TYPE_INDEX);
@@ -93,14 +95,15 @@ public class ParserManager {
         case COMMAND_EXIT:
             return new ParseExit(commandDetail);
         case COMMAND_HELP:
-            return new ParseHelp(input);
+            return new CommandHelpParser(input);
         default:
             return new ParseUndefined();
         }
         return parser;
     }
 
-    private Parser parseAddCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+    private Parser parseAddCommand(String commandDetail) throws UndefinedSubCommandTypeException,
+            InvalidCommandException {
         ArrayList<String> processedAddCommandDetails = splitCommandAndCommandType(commandDetail);
         String subAddCommandType = processedAddCommandDetails.get(SUB_COMMAND_INDEX);
         String addCommandDescription = processedAddCommandDetails.get(COMMAND_DESCRIPTION_INDEX);
@@ -117,7 +120,8 @@ public class ParserManager {
         }
     }
 
-    private Parser parseDeleteCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+    private Parser parseDeleteCommand(String commandDetail) throws UndefinedSubCommandTypeException,
+            InvalidCommandException {
         ArrayList<String> processedDeleteCommandDetails = splitCommandAndCommandType(commandDetail);
         String subDeleteCommandType = processedDeleteCommandDetails.get(SUB_COMMAND_INDEX);
         String deleteCommandDescription = processedDeleteCommandDetails.get(COMMAND_DESCRIPTION_INDEX);
@@ -134,7 +138,8 @@ public class ParserManager {
         }
     }
 
-    private Parser parseCheckCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+    private Parser parseCheckCommand(String commandDetail) throws UndefinedSubCommandTypeException,
+            InvalidCommandException {
         ArrayList<String> processedCheckCommandDetail = splitCommandAndCommandType(commandDetail);
         String subCheckCommandType = processedCheckCommandDetail.get(SUB_COMMAND_INDEX);
 
@@ -175,7 +180,8 @@ public class ParserManager {
     }
     //@@author
 
-    private Parser parseFindCommand(String commandDetail) throws UndefinedSubCommandTypeException {
+    private Parser parseFindCommand(String commandDetail) throws UndefinedSubCommandTypeException,
+            InvalidCommandException {
         ArrayList<String> findCommandTypeAndFlag = splitCommandAndCommandType(commandDetail);
         String findSubCommandType = findCommandTypeAndFlag.get(SUB_COMMAND_INDEX);
         boolean isFindClient = findSubCommandType.equals(CLIENT_TAG);
@@ -192,11 +198,17 @@ public class ParserManager {
     }
 
 
-    private ArrayList<String> splitCommandAndCommandType(String fullCommandDetail) {
+    private ArrayList<String> splitCommandAndCommandType(String fullCommandDetail) throws InvalidCommandException {
         String[] inputDetails = fullCommandDetail.split(EMPTY_SPACE, MAX_LENGTH);
 
+        String commandFlag = "";
         String commandType = inputDetails[COMMAND_TYPE_INDEX];
-        String commandFlag = fullCommandDetail.replaceFirst(commandType, EMPTY_STRING).trim();
+        try {
+            commandFlag = fullCommandDetail.replaceFirst(commandType, EMPTY_STRING).trim();
+        } catch (Exception e) {
+            throw new InvalidCommandException(MESSAGE_COMMAND_UNDEFINED);
+        }
+
 
         ArrayList<String> processedCommandDetails = new ArrayList<>();
         processedCommandDetails.add(commandType);
