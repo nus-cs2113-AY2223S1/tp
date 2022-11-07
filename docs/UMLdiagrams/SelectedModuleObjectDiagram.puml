@@ -1,0 +1,44 @@
+@startuml
+object "<u>selectedModuleCs1010s:SelectedModule</u>" as selectedModule {
+semester = 1
+}
+object "<u>selectedSlots:Map</u>" as selectedSlots{
+{LABORATORY = B03,
+SECTIONAL_TEACHING = 1,
+TUTORIAL" = 01}
+}
+object "<u>cs1010s:Module</u>" as module {
+acadYear = "2022/2023"
+moduleCode = "CS1010S"
+title = "Programming ..."
+description = "This module ..."
+department = "Computer ..."
+faculty = "Computing"
+workload = [2, 1, 1, 3, 3]
+preclusion = "CS1010 ..."
+}
+object "<u>semester1:SemesterData</u>" as semesterData{
+semester = 1
+examDate = "2023-04-29T01:00:00.000Z",
+examDuration = 120
+lessonTypes = {LABORATORY, SECTIONAL_TEACHING, TUTORIAL}
+}
+
+object "<u>lesson:RawLesson</u>" as rawLesson{
+classNo = "23A",
+day = TUESDAY,
+endTime = "1800",
+startTime = "1700",
+venue = "I3-0339",
+weeks = [3,4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+lessonType = TUTORIAL,
+size = 16
+}
+
+
+selectedModule -- module
+selectedModule -- selectedSlots
+module -- semesterData
+semesterData -left- rawLesson
+
+@enduml
