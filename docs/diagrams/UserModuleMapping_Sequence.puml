@@ -35,7 +35,7 @@ activate ":UserModuleMappingList"
 loop for every module
     ":UserModuleMappingList" -> ":UserModuleMappingList" : get(index)
     activate ":UserModuleMappingList"
-    return ":UserModuleMapping"
+    return : UserModuleMapping
     ":UserModuleMappingList" -> ":UserModuleMapping" : getPuCode()
     activate ":UserModuleMapping"
     return puCode : String

@@ -15,21 +15,6 @@ activate ": CommandParser"
 ": CommandParser" -> ": CommandParser" : parseUserCommand(userInput)
 activate ": CommandParser"
 
-alt user command with comments
-    ": CommandParser" -> ": CommandParser" : parseUserCommandWithComments(userInput)
-    activate ": CommandParser"
-
-    ": CommandParser" --> ": CommandParser" : userInputTokenized : String[]
-    deactivate ": CommandParser"
-
-else
-    ": CommandParser" -> ": CommandParser" : parseUserCommandWithoutComments(userInput)
-    activate ": CommandParser"
-
-    ": CommandParser" --> ": CommandParser" : userInputTokenized : String[]
-    deactivate ": CommandParser" 
-end
-
 ": CommandParser" --> ": CommandParser" : userInputTokenized : String[]
 deactivate ": CommandParser"
 
@@ -37,11 +22,6 @@ alt list command
 
     ": CommandParser" -> ": CommandParser" : isValidListCommand(userInputTokenized)
     activate ": CommandParser"
-
-    ": CommandParser" -> ": CommandParser" : isValidListOption(parameters[LIST_OPTION_INDEX])
-    activate ": CommandParser"
-    ": CommandParser" --> ": CommandParser" : : boolean
-    deactivate ": CommandParser"
 
     ": CommandParser" --> ": CommandParser" : :boolean
     deactivate ": CommandParser"

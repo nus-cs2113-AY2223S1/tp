@@ -1,89 +1,62 @@
 @startuml
 
-activate Duke
+activate ":Duke"
 
 hide footbox
 
-Duke -> UserStorageParser : getSavedLists()
-activate UserStorageParser
+":Duke" -> ":Ui" : getUserInput()
+activate ":Ui"
 
-UserStorageParser --> Duke : userUniversityListManager :UserUniversityListManager
-deactivate UserStorageParser
+":Ui" --> ":Duke" : userInput : String
+deactivate ":Ui"
 
-Duke -> UserStorageParser : getSavedTimeTables()
-activate UserStorageParser
+":Duke" -> ":CommandParser" : CommandParser.getUserCommand(userInput)
+activate ":CommandParser"
 
-UserStorageParser --> Duke : timetableManager :TimetableManager
-deactivate UserStorageParser
+":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
+activate ":CommandParser"
 
-Duke -> Ui : getUserInput()
-activate Ui
-
-Ui --> Duke : userInput : String
-deactivate Ui
-
-Duke -> CommandParser : CommandParser.getUserCommand(userInput)
-activate CommandParser
-
-CommandParser -> CommandParser : parseUserCommand(userInput)
-activate CommandParser
-
-alt user command with comments
-    CommandParser -> CommandParser : parseUserCommandWithComments(userInput)
-    activate CommandParser
-
-    CommandParser --> CommandParser : userInputTokenized : String[]
-    deactivate CommandParser
-
-else
-    CommandParser -> CommandParser : parseUserCommandWithoutComments(userInput)
-    activate CommandParser
-
-    CommandParser --> CommandParser : userInputTokenized : String[]
-    deactivate CommandParser 
-end
-
-CommandParser --> CommandParser : userInputTokenized : String[]
-deactivate CommandParser
+":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
+deactivate ":CommandParser"
 
 alt help command
 
-    CommandParser -> CommandParser : isValidHelpCommand(userInputTokenized)
-    activate CommandParser
+    ":CommandParser" -> ":CommandParser" : isValidHelpCommand(userInputTokenized)
+    activate ":CommandParser"
 
-    CommandParser --> CommandParser : :boolean
-    deactivate CommandParser
+    ":CommandParser" --> ":CommandParser" : :boolean
+    deactivate ":CommandParser"
 
     opt is valid help command
 
-        create HelpCommand
-        CommandParser -> HelpCommand : HelpCommand(userInputTokenized, CommandType.HELP)
-        activate HelpCommand
+        create ":HelpCommand"
+        ":CommandParser" -> ":HelpCommand" : HelpCommand(userInputTokenized, CommandType.HELP)
+        activate ":HelpCommand"
 
-        HelpCommand --> CommandParser : newHelpCommand :HelpCommand
-        deactivate HelpCommand
+        ":HelpCommand" --> ":CommandParser" : newHelpCommand : HelpCommand
+        deactivate ":HelpCommand"
     end
 
 else other command
 
 end
 
-CommandParser --> Duke : newUserCommand : Command
-deactivate CommandParser
+":CommandParser" --> ":Duke" : newUserCommand : Command
+deactivate ":CommandParser"
 
 alt help command
 
-Duke -> Duke : executeHelpCommand()
-activate Duke
+":Duke" -> ":Duke" : executeHelpCommand()
+activate ":Duke"
 
-   Duke -> Ui : printCommands()
-   activate Ui
+   ":Duke" -> ":Ui" : printCommands()
+   activate ":Ui"
 
-   deactivate Ui
+   deactivate ":Ui"
 
-deactivate Duke
+deactivate ":Duke"
 else other command
 end
-deactivate Duke
+deactivate ":Duke"
 
 @enduml
