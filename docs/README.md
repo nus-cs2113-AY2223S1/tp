@@ -1,6 +1,6 @@
-# Duke
+# CurrencyManager
 
-{Give product intro here}
+Manage a wallet of various currencies.
 
 Useful links:
 * [User Guide](UserGuide.md)
