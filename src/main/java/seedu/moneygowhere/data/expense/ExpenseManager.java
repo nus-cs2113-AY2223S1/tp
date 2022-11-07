@@ -38,6 +38,7 @@ public class ExpenseManager {
     //@@author xzynos
     public void addExpense(Expense expense) {
         expenses.add(expense);
+        sortExpenses();
     }
 
     //@@author xzynos
@@ -66,9 +67,9 @@ public class ExpenseManager {
 
     //@@author LokQiJun
     public void updateExpenses(ArrayList<Expense> newExpenses) {
-        for (Expense newExpens : newExpenses) {
-            if (!hasExpense(newExpens)) {
-                this.expenses.add(newExpens);
+        for (Expense newExpense : newExpenses) {
+            if (!hasExpense(newExpense)) {
+                this.expenses.add(newExpense);
             }
         }
     }
