@@ -58,6 +58,6 @@ plan your timetable. It is optimized for use via a Command Line Interface (CLI).
 
 ### Contributions to the Project Team
 
-- PR reviewed (with non-trivial comments): [#82](https://github.com/AY2223S1-CS2113-F11-3/tp/pull/82), []
+- PR reviewed (with non-trivial comments): [#82](https://github.com/AY2223S1-CS2113-F11-3/tp/pull/82)
 - Assisted in unit testing
 - Assisted in product testing and bug fixing especially with data validation for various classes.
