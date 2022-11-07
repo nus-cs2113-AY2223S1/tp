@@ -7,11 +7,11 @@
 * [User Stories](#user-stories)
 * [Implementation](#Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
-  * [Appointment Status Feature](#Appointment Status Feature)
-  * [Employee Management Feature](#Employee Management Feature)
-  * [Pet Management Feature](#Pet Management Feature)
-  * [Service Management Feature](#Service Management Feature)
-* [Non-Functional Requirements](#Non-Functional Requirements)
+  * [Appointment Status Feature](#Appointment-Status-Feature)
+  * [Employee Management Feature](#Employee-Management-Feature)
+  * [Pet Management Feature](#Pet-Management-Feature)
+  * [Service Management Feature](#Service-Management-Feature)
+* [Non-Functional Requirements](#Non-Functional-Requirements)
 
 ## Setting Up and Getting Started
 
