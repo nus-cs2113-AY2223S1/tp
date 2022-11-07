@@ -204,8 +204,8 @@ The edit component consists of three parts:
 - Parser
     - Parses the user input, instantiates the EditCommand class
 - EditModeCommand
-    - Handles the edit functions that falls under `EditModeCommand` 
-  (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
+    - Handles the edit functions that falls under `EditModeCommand`
+      (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
 - EditCommand
     - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
       CLI,
@@ -281,15 +281,20 @@ When the program starts, it will
     - Create `AllRecipes.txt` file to keep track of the recipe titles
     - Create `Template.txt` file for Add Command
 - Subsequent run
-    - Load the recipe titles from `Tempate.txt` into ArrayList `RecipeList.recipeTitles`
-    - It will **check for the validity** of the titles
+    - Read the recipe titles from `Tempate.txt` line by line
+    - **Check for the validity** of the titles
         - Title is not blank
         - Title is alphanumeric
         - Title does not exceed 255 characters
-        - Title has an corresponding recipe file in `./RecipeData/Recipes`
-    - Load the recipe file in `./RecipeData/Recipes` into ArrayList `RecipeList.recipes`
+        - Title has a corresponding recipe file in `./RecipeData/Recipes`
+    - Read the recipe file in `./RecipeData/Recipes`
         - The recipe file content is parsed by the `RecipeFileParser` class.
           Check [Parse Text to Recipe](#parse-text-to-recipe)
+        - If the recipe title in the file content is different from the recipe file name, use the file name
+    - Only when the parsing is correct
+      - Load recipe into ArrayList `RecipeList.recipes`
+      - Load recipe title into ArrayList `RecipeList.recipeTitles`
+
 
 #### Exit
 
@@ -306,6 +311,7 @@ Before exiting, the program will
 This is to prevent manual tampering of the data that might affect the data in the next run
 
 ### Parsing of Commands
+
 The following sequence diagram shows the usage of relevant classes and methods when trying to parse
 an arbitrary input into an executable `command` by software.
 <p align="center" width="100%">
@@ -317,19 +323,20 @@ A user input will be parsed into `parser` and checked for the command word by `p
 
 Step 2.1:
 If command word is `/add`, `parseAddCommand()` will be called by `Parser`. If the input is a valid `AddCommand`,
-an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned. 
+an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned.
 
 Step 2.2:
 If `templateFileMissingException` occurs,`Parser` will call `generateFile()` in `Storage` to create
 the template file. An `InvalidCommand`containing this exception will be returned.
 
 Step 3.1:
-If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a valid `EditCommand`
-to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned. 
+If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a
+valid `EditCommand`
+to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned.
 
 Step 3.1.1:
-If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException` 
-or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will 
+If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
+or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
 be returned.
 
 Step 3.2:
@@ -353,12 +360,12 @@ If the command word is `/view`, `Parser` will call `parseViewCommand()` from its
 to `Parser`.
 
 Step 6.2:
-If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given 
+If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given
 title will be returned to `Parser`.
 
 Step 6.3:
 If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
-and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing 
+and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
 information on the respective `Exception` or `Error` will be returned to `Parser`.
 
 Step 7.1:
@@ -376,8 +383,8 @@ and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidC
 information on the respective `Exception` or `Error` will be returned to `Parser`.
 
 Step 8.1:
-If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid 
-`FindCommand`, an instance containing the respective `flag` and other input information will be returned to 
+If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid
+`FindCommand`, an instance containing the respective `flag` and other input information will be returned to
 `Parser`.
 
 Step 8.2:
@@ -389,7 +396,7 @@ If the command word is `/help`, `Parser` will call `parseHelpCommand()` from its
 `HelpCommand`, an instance containing input information will be returned to `Parser`.
 
 Step 9.2:
-If the input is not of the same length as the expected length of a `HelpCommand` input, an instance of `InvalidCommand` 
+If the input is not of the same length as the expected length of a `HelpCommand` input, an instance of `InvalidCommand`
 containing information on the correct format for `HelpCommand` input will be returned to `Parser`.
 
 Step 10:
@@ -419,22 +426,22 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 
 1. GUI is only triggered by Add and Edit command
 
-   - Add command will pass the path of the `Template.txt` file
-   - Edit command will pass the path of the recipe the user wants to edit
+    - Add command will pass the path of the `Template.txt` file
+    - Edit command will pass the path of the recipe the user wants to edit
 
 2. From the path, `GuiWorkFlow` class can detect whether it is `Mode.ADD` or `Mode.EDIT`
 
-   - `Mode.ADD` throws an exception when the recipe title already exist in the `RecipeList.recipes`
-   - `Mode.EDIT` overwrite the recipe title that already exist `RecipeList.recipes`
+    - `Mode.ADD` throws an exception when the recipe title already exist in the `RecipeList.recipes`
+    - `Mode.EDIT` overwrite the recipe title that already exist `RecipeList.recipes`
 
 3. There are an initial entry to `Editor` and a loop for subsequent entry to `Editor` if the user choose to fix the
    content of the recipe
 4. When exiting the `Editor`, the user can choose to SAVE or EXIT
 
-   - SAVE will return `saveToTemp = True` and save the content in the `Editor` to `Temporary.txt`
-   - EXIT will return `saveToTemp = False`
-   - if `saveToTemp = False`, program flow will exit the loop
-   - if `saveToTemp = False`, program flow will exit the loop
+    - SAVE will return `saveToTemp = True` and save the content in the `Editor` to `Temporary.txt`
+    - EXIT will return `saveToTemp = False`
+    - if `saveToTemp = False`, program flow will exit the loop
+    - if `saveToTemp = False`, program flow will exit the loop
 
 5. The loop is a PARSE and RE-ENTRY
 
@@ -453,39 +460,39 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 - The parsing of is solely handled by `RecipeFileParser` with little interaction with other classes. Hence there will be
   no diagram.
 - The parser has variables and counter to keep track of the parsing process
-  - `lineType`:`TITLE`, `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
-  - `stage`: `TITLE_START`, `TITLE`, `TITLE_END`,  `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
-  - `stageCounter = {0,0,0,0}`: count the occurrence of {TITLE, DESCRIPTION, INGREDIENT, STEP}
-  - `ingredientIndex`: keep track of the increment of INGREDIENT index
-  - `stepIndex`: keep track of the correct increment of STEP index
+    - `lineType`:`TITLE`, `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
+    - `stage`: `TITLE_START`, `TITLE`, `TITLE_END`,  `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
+    - `stageCounter = {0,0,0,0}`: count the occurrence of {TITLE, DESCRIPTION, INGREDIENT, STEP}
+    - `ingredientIndex`: keep track of the increment of INGREDIENT index
+    - `stepIndex`: keep track of the correct increment of STEP index
 
-- Go through the text line by line 
+- Go through the text line by line
 - Detect whether the line is a Heading (denoted by `#`) and assign the `lineType` for that line
-   - if `lineType` is a heading, assign `stage` appropriately, and increment `stageCounter` 
-   - else, the `lineType` is `NORMAL`
+    - if `lineType` is a heading, assign `stage` appropriately, and increment `stageCounter`
+    - else, the `lineType` is `NORMAL`
 - Parsing of line with `NORMAL` type is dependent on the `stage`
-  - If the line is blank, it does not affect the parsing
+    - If the line is blank, it does not affect the parsing
 - For `TITLE`:
-  - Perform validity check as the recipe title is a text file
-    - Alphanumerical
-    - less than 255 character
+    - Perform validity check as the recipe title is a text file
+        - Alphanumerical
+        - less than 255 character
 - For `DESCRIPTION`:
-  - Allow all characters, including blank lines 
-  - Blank lines will be recorded to give the user some freedom in describing the recipe
+    - Allow all characters, including blank lines
+    - Blank lines will be recorded to give the user some freedom in describing the recipe
 - For `INGREDIENT`:
-  - Check for the appropriate format `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
-    - Positive integer index
-    - Positive double amount
-  - Check for the correct index increment based on `ingredientIndex`
+    - Check for the appropriate format `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
+        - Positive integer index
+        - Positive double amount
+    - Check for the correct index increment based on `ingredientIndex`
 - For `STEP`
-  - Check for the appropriate format `INDEX. STEP_DESCRIPTION`
-    - Positive integer index
-  - Check for the correct index increment based on `stepIndex`
+    - Check for the appropriate format `INDEX. STEP_DESCRIPTION`
+        - Positive integer index
+    - Check for the correct index increment based on `stepIndex`
 
 - Check if the correct number of Heading occurrence is correct
 - Because of the `stage`, Headings are **parseable** in different order (but highly discouraged)
 - Check if the recipe is empty
-  - Because the blank lines are disregarded
+    - Because the blank lines are disregarded
 
 ### Edit an Existing Recipe
 
@@ -508,7 +515,8 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 
 ### Target user profile
 
-Avid cook who wants to organize their recipe list for ease of reference and search. The user is also a fast typer who can quickly type out all the part of the recipe
+Avid cook who wants to organize their recipe list for ease of reference and search. The user is also a fast typer who
+can quickly type out all the part of the recipe
 
 ### Value proposition
 
@@ -533,7 +541,9 @@ quickly.
 | v2.0    | new user | view the list of available commands           | use the appropriate command according to my needs                                                           |
 
 ## Non-functional Requirement
+
 - Work on all popular Operating System: Windows, Mac, Linux
+
 ## Glossary
 
 ## Instructions for manual testing
@@ -653,15 +663,16 @@ quickly.
 - **Tamper the recipe file (parseable recipe)**
     - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
-  - The program will not load the recipe 
-  - Recipes folder: with 3 sample recipes
-  - `AllRecipes.txt` with 3 sample recipe titles
-  
+    - The program will not load the recipe
+    - Recipes folder: with 3 sample recipes
+    - `AllRecipes.txt` with 3 sample recipe titles
+
 ## Non-Functional Requirements
 
 1. Should work on any OS as long as it has Java 11 or above installed on their PC.
 2. Should be able to hold up to 1000 recipes without a slowdown of performance.
-3. Any user that is comfortable with typing of speeds >55 words per minute would be able to accomplish these tasks faster than if they used a mouse to navigate.
+3. Any user that is comfortable with typing of speeds >55 words per minute would be able to accomplish these tasks
+   faster than if they used a mouse to navigate.
 4. Run the program for the first time, so that the program generates the `RecipeData` folder and `/exit` the program
 5. Copy the folder and file in 3. to `RecipeData`, overwriting existing files
 6. This gives you 3 sample recipes so you don't have to manually add recipes all the time

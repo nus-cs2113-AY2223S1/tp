@@ -1,8 +1,6 @@
 package recipeditor;
 
 import recipeditor.parser.Parser;
-import recipeditor.recipe.Recipe;
-import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
 
@@ -16,16 +14,18 @@ import java.io.File;
 public class Recipeditor {
 
     public static void main(String[] args) {
-        run(args);
+        run();
+        System.exit(0);
+
     }
 
-    private static void run(String[] args) {
-        start(args);
+    public static void run() {
+        start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
-    private static void start(String[] args) {
+    private static void start() {
         Storage.createAppFolder();
         Storage.createFile(Storage.ALL_RECIPES_FILE_PATH);
         Storage.loadRecipesToRecipeTitlesList();
@@ -37,7 +37,6 @@ public class Recipeditor {
         Storage.deleteAllRecipe();
         Storage.saveAllRecipe();
         Ui.showExit();
-        System.exit(0);
     }
 
     private static void runCommandLoopUntilExitCommand() {
@@ -53,12 +52,12 @@ public class Recipeditor {
     }
 
     private static CommandResult executeCommand(Command command) {
-        try {
-            CommandResult result = command.execute();
-            return result;
-        } catch (Exception e) {
-            Ui.showMessage(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    //        try {
+        CommandResult result = command.execute();
+        return result;
+    //        } catch (Exception e) {
+    //            Ui.showMessage(e.getMessage());
+    //            throw new RuntimeException(e);
+    //        }
     }
 }
