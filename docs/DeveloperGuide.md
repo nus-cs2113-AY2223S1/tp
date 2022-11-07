@@ -528,7 +528,10 @@ for use via a Command Line Interface (CLI).
 
 ## 6 Non-Functional Requirements
 
-{Give non-functional requirements}
+- Program must be able to run on Linux, Windows and Mac platforms.
+- Program must not print any API key to console for security purposes.
+- Program must not keep users waiting after any command for more than 5 seconds (including fetching API information).
+- Commands must be user-friendly and well-documented in the User Guide.
 
 ## 7 Glossary
 
