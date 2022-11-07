@@ -1,5 +1,7 @@
 package recipeditor.parser;
 
+import recipeditor.exception.ParseFileException;
+import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 import recipeditor.ui.Ui;
@@ -32,8 +34,17 @@ public class TitleFileParser {
                 logger.log(Level.INFO, FILE_NOT_EXIST);
                 continue;
             }
-            RecipeList.addRecipeTitle(line);
-            logger.log(Level.INFO, String.format(ADDED,line));
+            try {
+                String recipeFilePath = Storage.titleToFilePath(line);
+                String content = Storage.loadFileContent(recipeFilePath);
+                Recipe addedRecipe = new RecipeFileParser().parseTextToRecipe(content);
+                addedRecipe.setTitle(line);
+                RecipeList.addRecipe(addedRecipe);
+                RecipeList.addRecipeTitle(line);
+                logger.log(Level.INFO, String.format(ADDED, line));
+            } catch (Exception e) {
+                logger.log(Level.INFO, "Error in parsing recipe file content.");
+            }
         }
     }
 }
