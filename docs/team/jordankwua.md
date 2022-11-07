@@ -34,7 +34,7 @@ It was tedious to make it such that the storage combined both flight and passeng
 
 - ### Contributions to UG:
   + Added the introduction for the UG, and the `Delete a flight detail` component under `SkyControl's Features`
-    (Pull Requests [#55](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/55))
+    (Pull Request [#55](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/55))
 - ### Contributions to DG:
   + Added the description for `Architecture` and the various components under `Architecture`, added the Architecture diagram
 and various UML diagrams under these components (Pull Request [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/96))
@@ -43,7 +43,7 @@ and various UML diagrams under these components (Pull Request [#97](https://gith
 - ### Contributions to team-based tasks
   + Set up the GitHub team and repository
 - ### Team contributions
-- Reviewed code of other teammates (Pull Requests [#89](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/89))
-- Work together with teammates to update RepoSense ownership distribution [#40](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/40)
+- Reviewed code of other teammates (Pull Request [#89](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/89))
+- Work together with teammates to update RepoSense ownership distribution (Pull Request [#40](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/40))
 - ### External contributions
 - Helped spot bugs for team `CS2113T-W11-2` during PE Dry Run
