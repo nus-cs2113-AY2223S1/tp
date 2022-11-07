@@ -159,5 +159,4 @@ public class FlagParser {
         }
         return lastIndex;
     }
-
 }
