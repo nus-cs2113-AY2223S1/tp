@@ -3,8 +3,6 @@
 * [Product Scope](#product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
-
-* [User Stories](#user-stories)
 * [Design and Implementation](#Design-and-Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
   * [Appointment Manage Feature](#Appointment-Manage-Feature)
@@ -13,7 +11,8 @@
   * [Employee Management Feature](#Employee-Management-Feature)
   * [Pet Management Feature](#Pet-Management-Feature)
   * [Service Management Feature](#Service-Management-Feature)
-* [Non-Functional Requirements](#Non-Functional-Requirements)
+* [Appendix B: User Stories](#Appendix-B:-user-stories)
+* [Appendix C: Non-Functional Requirements](#Appendix-C:-Non-Functional-Requirements)
 
 ## Setting Up and Getting Started
 
@@ -34,31 +33,6 @@ The head nurse can now:
 - have an upcoming schedule of all appointments of the clinic in one place.
 - have an overview of all employees in the clinic and the ability to manage them.
 - create and assign tasks to be performed.
-
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...                                         |
-|--------|----------|---------------|-----------------------------------------------------------|
-|v1.0|Head Nurse|add appointments| schedule a customer’s appointment                         |
-|v1.0|Head Nurse|remove appointments| cancel a customer’s appointment                           |
-|v1.0|Head Nurse|view all the upcoming appointments| keep track of the clinic’s schedule                       |
-|v1.0|Head Nurse|set the appointment status| update appointment status after some operations           |
-|v1.0|Head Nurse|add new employees||
-|v1.0|Head Nurse|remove employee||
-|v1.0|Head Nurse|view employee||
-|v1.0|Head Nurse|register a new pet| keep track of new pets                                    |
-|v1.0|Head Nurse|remove a pet||
-|v1.0|Head Nurse|view all of the pets| check all of the pets                                     |
-|v1.0|Head Nurse|change the status of pets| know whether the pets are recovered                       |
-|v1.0|Head Nurse|add to the list of services this clinic can provide| select corresponding service when entering an appointment |
-|v1.0|Head Nurse|remove a service from the list of services the clinic can provide||
-|v1.0|Head Nurse|view the list of services this clinic can provide||
-|v2.0|Head Nurse|add tasks| create tasks to be done for the clinic                    |
-|v2.0|Head Nurse|remove tasks| remove tasks to be done for the clinic                    |
-|v2.0|Head Nurse|set tasks as completed| mark tasks as done when they are fulfilled                |
-|v2.0|Head Nurse|view tasks| view the list of tasks that needs to be done              |
-|v2.0|Head Nurse|reassign tasks| reassign a task from an employee to another               |
 
 ## Design and Implementation
 
@@ -368,7 +342,31 @@ The following sequence diagram shows how the service management works
 ---
   
 
-## Non-Functional Requirements
+## Appendix B: User Stories
+
+|Version| As a ... | I want to ... | So that I can ...                                         |
+|--------|----------|---------------|-----------------------------------------------------------|
+|v1.0|Head Nurse|add appointments| schedule a customer’s appointment                         |
+|v1.0|Head Nurse|remove appointments| cancel a customer’s appointment                           |
+|v1.0|Head Nurse|view all the upcoming appointments| keep track of the clinic’s schedule                       |
+|v1.0|Head Nurse|set the appointment status| update appointment status after some operations           |
+|v1.0|Head Nurse|add new employees||
+|v1.0|Head Nurse|remove employee||
+|v1.0|Head Nurse|view employee||
+|v1.0|Head Nurse|register a new pet| keep track of new pets                                    |
+|v1.0|Head Nurse|remove a pet||
+|v1.0|Head Nurse|view all of the pets| check all of the pets                                     |
+|v1.0|Head Nurse|change the status of pets| know whether the pets are recovered                       |
+|v1.0|Head Nurse|add to the list of services this clinic can provide| select corresponding service when entering an appointment |
+|v1.0|Head Nurse|remove a service from the list of services the clinic can provide||
+|v1.0|Head Nurse|view the list of services this clinic can provide||
+|v2.0|Head Nurse|add tasks| create tasks to be done for the clinic                    |
+|v2.0|Head Nurse|remove tasks| remove tasks to be done for the clinic                    |
+|v2.0|Head Nurse|set tasks as completed| mark tasks as done when they are fulfilled                |
+|v2.0|Head Nurse|view tasks| view the list of tasks that needs to be done              |
+|v2.0|Head Nurse|reassign tasks| reassign a task from an employee to another               |
+
+## Appendix C: Non-Functional Requirements
 
 1. Should work on any Windows, Linux and macOS that has Java `11` or above installed.
 2. Should not require users to have prior programming experience.
