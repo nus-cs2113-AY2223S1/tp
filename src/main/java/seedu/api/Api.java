@@ -173,7 +173,7 @@ public class Api implements ApiInterface {
 
         result += API_RESPONSE_TAIL;
 
-        Ui.println(totalDataCount + " Parking Lot data received from LTA!");
+        Ui.println(totalDataCount + " rows of carpark data received from LTA!");
 
         storage.writeDataToFile(result);
     }
@@ -191,10 +191,10 @@ public class Api implements ApiInterface {
     }
 
     /**
-     * Count the number of parking lot data received from LTA.
+     * Count the number of carpark data received from LTA.
      *
      * @param data processed data set to count.
-     * @return Number of parking lots.
+     * @return Number of carpark data.
      */
     public int countData(String data) {
         String[] individualData = data.trim().split("},\\{");

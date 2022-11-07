@@ -6,7 +6,7 @@ package seedu.commands;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
     public static final String COMMAND_WORD_SHORT = "e";
-    public static final String MESSAGE_EXIT = "Exiting programme.";
+    public static final String MESSAGE_EXIT = "Exiting program.";
 
     /**
      * To tell if the program is to be terminated or not.

@@ -9,6 +9,6 @@ public class ExitCommandTest {
     @Test
     void testExit() {
         String result = new ExitCommand().execute().showToUser;
-        Assertions.assertEquals("Exiting programme.", result);
+        Assertions.assertEquals("Exiting program.", result);
     }
 }

@@ -48,6 +48,6 @@ public class ParserFilterIdTest {
         Command command = new Parser().parseCommand(input, null, carparkList, null);
         String result = command.execute().showToUser;
         Assertions.assertEquals("Empty argument. Valid command(s): \n"
-                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark Id.", result);
+                + "`filter -id QUERY` or `fil -id QUERY` \t: Filter carparks based on its Carpark ID.", result);
     }
 }
