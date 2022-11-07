@@ -115,7 +115,7 @@ public class Module {
         return entry;
     }
 
-    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> temporaryList, String lessonType, int size) {
+    private void addUnknownToAttendingList(HashMap<String, ArrayList<Lesson>> tempList, String lessonType, int size) {
         ArrayList<Lesson> classes = new ArrayList<Lesson>();
         String day = "Undetermined Day";
         String startTime = "Undetermined";
@@ -125,7 +125,7 @@ public class Module {
         for (int i = 0; i < size; i++) {
             classes.add(new Lesson(day, startTime, endTime, lessonType, classNumber, weeks, moduleCode));
         }
-        temporaryList.put(classNumber, classes);
+        tempList.put(classNumber, classes);
     }
 
     public String getModuleDetails() {
