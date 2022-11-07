@@ -225,6 +225,7 @@ However, this will make the `Parser` class will be very long as it has to check 
 Additionally, it will be difficult to implement as different commands have different parameters that they require.
 Finally, it will also lead to tight coupling and decreased cohesion.
 
+
 ### 3.4 Command Component
 
 ![Command Abstract Class](images/Command.png)
@@ -371,8 +372,31 @@ multiple times and the search process will be too long.
 
 ![SelectSlotCommand](images/SelectSlotCommandClass.png)
 
-The <code>SelectCommand</code> class extends from the <code>Command</code> class and selects the time slot for the
+The <code>SelectSlotCommand</code> class extends from the <code>Command</code> class and selects the time slot for the
 different lesson types.
+
+
+#### 3.4.5.1 How the feature is implemented
+
+The `SelectSlotCommand` class locate the one of the modules that user has in the YAMOM timetable and changes the lesson slot 
+based on the information specified by the user.
+
+#### 3.4.5.2 Why it is implemented this way
+
+We believe that the user must first register for a module before being able to change their intended lesson slot, 
+which aligns with the user profile and typical user behaviour at National University of Singapore.
+
+Also, we felt that the logic to check for slots validity will only occur under the context of selecting a new lesson slot 
+and hence the logic is encapsulated within the class.
+
+#### 3.4.5.3 Alternatives considered
+
+We considered allowing user to select any modules (even those that are not in the user current timetable) to be added with specific lesson slot.
+However, this increases the coupling between different classes such as `Parser` and `State`, and does not align with the implementation of other commands.
+
+Furthermore, it does not align with our understanding of user profile where students need to first register for a module,
+before they have the intention to select for a better lesson slot that fits their existing timetable.
+
 
 #### 3.4.6 SelectSemesterCommand
 
@@ -380,6 +404,21 @@ different lesson types.
 
 The <code>SelectSemesterCommand</code> class extends from the <code>Command</code> class and selects the semester that
 the user wish to plan for.
+
+
+#### 3.4.6.1 How the feature is implemented
+
+The `SelectSemesterCommand` checks the value representing semester that the user inputted and change the state of the application to plan for the intended semester. 
+`SelectSemesterCommand` would notify the user should the semester value inputted is not valid and prompt for the accepted values.
+
+#### 3.4.6.2 Why it is implemented this way
+
+We thought that the logic to check for a valid semester would only occur under the context of selecting a different semester and hence the logic is implemented within the class.
+
+#### 3.4.6.3 Alternatives considered
+
+We attempted having `State` to check for the validity of a semester.
+However, we then felt that checking for the validity of a semester is beyond the intended purpose of the `State` class.
 
 #### 3.4.7 InfoCommand
 
@@ -438,12 +477,45 @@ to create duplicate code to fulfil similar needs as the timetable is needed by o
 
 The <code>ByeCommand</code> class extends from the <code>Command</code> class and exits the program.
 
+#### 3.4.9.1 How the feature is implemented
+
+The `ByeCommand` is the only `Command` subclass where it returns a `true` when the method `isExit` is invoked by the application class.
+The `ByeCommand` only display some messages to inform user that the application is exiting and does not modify the state of the application.
+
+#### 3.4.9.2 Why it is implemented this way
+
+We are able to check if the application is to terminate by checking against the `isExit` method regardless if it is the `ByeCommand`
+It simplifies the higher level business logic for running the application.
+
+#### 3.4.9.3 Alternatives considered
+
+We considered a mechanism to terminate the application within `ByeCommand` should user express intent to end the application. 
+However, this complicates the flow of the programme as it is hard to predict when the application would end.
+Furthermore, we intended to implement more logic at the application level to ensure that the application would exit gracefully with all user information properly handled.
+
+
 #### 3.4.10 ListCommand
 
 ![ListCommand](images/ListCommandCLass.png)  
 
 The <code>ListCommand</code> class extends from the <code>Command</code> class and lists out all the currently
 selected modules and lesson slots.
+
+
+#### 3.4.10.1 How the feature is implemented
+
+The `ListCommand` class takes the list of modules selected by the user at the current semester and parse each module to be formatted.
+The format of the module will display relevant information about the module taken to the user. 
+
+#### 3.4.10.2 Why it is implemented this way
+
+We felt that the logic to format and list out information about selected modules will only be called under the context of a `list` command.
+Hence, the logic for listing information of selected modules is encapsulated within the `ListCommand` class. 
+
+#### 3.4.10.3 Alternatives considered
+
+We considered having the logic to parse and format information under a separate class.
+However, we felt that it is unnecessary to do so as the logic will be employed only under the context of a `list` command, and it increases the complexity of the project.
 
 #### 3.4.11 ExportCommand
 
@@ -453,12 +525,45 @@ The <code>ExportCommand</code> class extends from the <code>Command</code> class
 of the application, namely the selected modules and the respective selected lesson slots for all semesters and
 outputs NUSMods links.
 
+#### 3.4.11.1 How the feature is implemented
+
+The `execute` method will invoke method from the `Link` class to create multiple sharable NUSMOD links by semester.
+The links will be created by the `Link` class and the mechanism to extract the modules from YAMOM timetable will be handled by the `Link` class.
+
+#### 3.4.11.2 Why it is implemented this way
+
+This encapsulates the logic of creating the sharable NUSMOD links within the `Link` class.
+The command class can focus on the higher level logic of calling classes to create NUSMOD link, and organizing the information to be
+presented to the user through the `Ui` class.
+
+#### 3.4.11.3 Alternatives considered
+
+We considered having the `export` class to create the NUSMOD link from the timetable
+However, this would increase coupling of business logic and reduce the reusability of creating NUSMOD link.
+
 #### 3.4.12 ImportCommand
 
 ![ImportCommand](images/importCommandClass.png)  
 
 The <code>ImportCommand</code> class extends from the <code>Command</code> class and imports a single semester
 from a NUSMods link.
+
+
+#### 3.4.12.1 How the feature is implemented
+
+The `execute` method will invoke method from the `Link` class to parse a sharable NUSMOD link.
+The link will be parsed by the `Link` class and the mechanism to add the modules to YAMOM timetable will be handled by the `Link` class.
+
+#### 3.4.12.2 Why it is implemented this way
+
+This encapsulates the logic of parsing the sharable NUSMOD link within the `Link` class.
+The command class can focus on the higher level logic of calling classes to parse link, and organizing the information to be 
+presented to the user through the `Ui` class.
+
+#### 3.4.12.3 Alternatives considered
+
+We considered having the `import` class to parse and add modules to the YAMOM timetable itself.
+However, this would increase coupling of business logic and reduce the reusability of parsing logic. 
 
 ### 3.5 Utils Component
 
@@ -494,8 +599,8 @@ The <code>Link</code> component can:
 - Parse a NUSMod link to import modules into YAMOM
 
 NUSMods export links are of the form:  
-https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO  
-The two useful segments are the SEMESTER_NUMBER and the MODULE_INFO.
+`https://nusmods.com/timetable/sem-SEMESTER_NUMBER/share?MODULE_INFO&MODULE_INFO`  
+The two useful segments are the `SEMESTER_NUMBER` and the `MODULE_INFO`.
 
 ##### 3.5.2.1 Why is it implemented this way
 
@@ -756,7 +861,9 @@ personal devices.
 Special thanks to the author of the following sources for inspiration and ideas that contributed to the development of
 **YAMOM**
 
-- https://stackoverflow.com/questions/25853393
+- `https://stackoverflow.com/questions/25853393`
+- `https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html`
+- `https://github.com/nusmodifications/nusmods/blob/master/scrapers/nus-v2/src/types/modules.ts`
 
 ### Third-party libraries
 

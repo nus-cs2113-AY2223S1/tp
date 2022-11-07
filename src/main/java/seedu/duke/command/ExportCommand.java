@@ -7,6 +7,9 @@ import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 import seedu.duke.utils.Link;
 
+/**
+ * Generates a shareable NUSMOD link.
+ */
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String COMMAND_USAGE = "export";

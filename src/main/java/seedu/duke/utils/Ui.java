@@ -8,9 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import seedu.duke.command.ByeCommand;
 
-//@author CheahHaoYi-reused
-//Reused from CheahHaoYi/ip Ui class with slight modification
-
 /**
  * The User Interface class that deals with interaction with user.
  * To read input from the terminal and to display responses to the user.
@@ -33,6 +30,12 @@ public class Ui {
 
     private ArrayList<String> uiBuffer;
     private Scanner scanner;
+
+    private static final String SEMESTER_ONE = "1";
+    private static final String SEMESTER_TWO = "2";
+    private static final String SEMESTER_SPECIAL_TERM_ONE = "ST1";
+    private static final String SEMESTER_SPECIAL_TERM_TWO = "ST2";
+    private static final String SEMESTER_UNKNOWN = "Unknown";
 
     public Ui() {
         uiBuffer = new ArrayList<>();
@@ -128,10 +131,16 @@ public class Ui {
         System.out.println(LINE_DIVIDER);
     }
 
+    /**
+     * Display the greeting message when user start the application.
+     */
     public void startMessage() {
         System.out.println(MESSAGE_GREET);
     }
 
+    /**
+     * Display the ending message when user terminates the application.
+     */
     public void endMessage() {
         System.out.println(MESSAGE_BYE);
         displayDivider();
@@ -152,16 +161,16 @@ public class Ui {
         assert semester >= 1 && semester <= 4 : "Invalid Semester given";
         switch (semester) {
         case (1):
-            return "1";
+            return SEMESTER_ONE;
         case (2):
-            return "2";
+            return SEMESTER_TWO;
         case (3):
-            return "ST1";
+            return SEMESTER_SPECIAL_TERM_ONE;
         case (4):
-            return "ST2";
+            return SEMESTER_SPECIAL_TERM_TWO;
         default:
-            return "Unknown";
+            return SEMESTER_UNKNOWN;
         }
     }
 }
-//@author
+
