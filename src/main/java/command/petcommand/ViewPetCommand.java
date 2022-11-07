@@ -9,9 +9,11 @@ public class ViewPetCommand extends Command {
 
     @Override
     public void execute() {
+        int counter = 0;
         System.out.println("Here are the pets in your pet list:");
         for (Pet pet : PetList.pets) {
-            System.out.println(String.format("%d. %s", (pet.petId), pet));
+            counter += 1;
+            System.out.println(String.format("%d.\tID:%d\t %s", counter, (pet.petId), pet));
         }
     }
 
