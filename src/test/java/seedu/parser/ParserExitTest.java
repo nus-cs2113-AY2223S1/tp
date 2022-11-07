@@ -15,7 +15,7 @@ public class ParserExitTest {
         String input = "exit";
         Command command = new Parser().parseCommand(input, null, null, null);
         String result = command.execute().showToUser;
-        Assertions.assertEquals("Exiting programme.", result);
+        Assertions.assertEquals("Exiting program.", result);
     }
 
     @Test
@@ -23,7 +23,7 @@ public class ParserExitTest {
         String input = "EXIT";
         Command command = new Parser().parseCommand(input, null, null, null);
         String result = command.execute().showToUser;
-        Assertions.assertEquals("Exiting programme.", result);
+        Assertions.assertEquals("Exiting program.", result);
     }
 
     @Test

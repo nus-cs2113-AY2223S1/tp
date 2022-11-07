@@ -61,10 +61,10 @@ public class UnfavouriteCommand extends Command {
                 }
             }
             if (!hasMatch) {
-                Ui.printRed("Some carparks not found in favourite list! Skipping...\n", true);
+                Ui.printRed("Some carparks not found in favourite list! Skipping...", true);
             }
             if (!isValid) {
-                Ui.printRed("Some values were invalid. Invalid values were skipped.\n", true);
+                Ui.printRed("Some values were invalid. Invalid values were skipped.", true);
             }
             setUnfavourite(validIDs);
             if (!validIDs.isEmpty()) {

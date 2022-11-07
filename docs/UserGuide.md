@@ -32,7 +32,7 @@
 ## Introduction
 
 parKING is a desktop app that helps drivers choose the best place to park via the Command Line Interface (CLI).
-parKING allows users to search, save and look at car park availability information at a glance, while interfacing with 
+parKING allows users to search, save and look at carpark availability information at a glance, while interfacing with 
 LTA's real-time API. Whenever you launch parKING, it automatically gets the latest carpark availability and updates the
 local data immediately. The best part about parKING is that it can be used offline (based on the data you have saved the 
 last time you are connected to the internet).
@@ -95,7 +95,7 @@ See more details in the [Features Section](#features) below.
 - Upon successful authentication, the key will be stored locally and future authentication is not required.
 - User can use `auth` to change the current key. Only one and the most recent key will be stored.
 - If API key is invalid, the new key will not be stored and the previous key will be retained.
-  If there are no API key beforehand, it will stay empty.
+  If there was no API key beforehand, it will stay empty.
 - Upon successful authentication, a fetching sequence will be initiated from the LTA API.
 
 Example of usage:
@@ -106,7 +106,7 @@ Example of usage:
 
 **Output**
 ```
-2312 Parking Lot data received from LTA!
+2316 rows of carpark data received from LTA!
 Authenticated successfully.
 ```
 
@@ -115,9 +115,9 @@ Authenticated successfully.
 **Authenticate using the default API key.**
 > Format: `auth default` or `a default`
 
-- For user with no API key, they can use the provided API key to access the services.
-- User will not be able to see the API key.
-- A fetching sequence will be initiated also from LTA API.
+- For users with no API key, they can use the provided API key to access the services.
+- The user will not be able to see the API key.
+- A fetching sequence will be initiated afterward from the LTA API.
 
 Example of usage:
 
@@ -128,7 +128,7 @@ Example of usage:
 **Output**
 
 ```
-2312 Parking Lot data received from LTA!
+2316 rows of carpark data received from LTA!
 Authenticated successfully using default API Key.
 ```
 
@@ -148,13 +148,13 @@ Example of usage:
 ```auth status```
 
 **Output**
-1. If user has inputted his personal API key and is authenticated
+1. If user has input his personal API key and is authenticated
 
 ```
 You have authenticated your API key successfully. API key stored in the local file is ********
 ```
 
-2. If user has not inputted his personal API key and/or not authenticated
+2. If user has not input his personal API key and/or is not authenticated
 
 ```
 You have not authenticated your personal API key. Currently you have access to the API but you are using our default key!
@@ -165,13 +165,13 @@ You have not authenticated your personal API key. Currently you have access to t
 **Returns detailed information about the carpark that the user has chosen to find.**
 > Format: `find CARPARK_ID` or `fin CARPARK_ID`
 
-- Using data from the API, after the user has inputted the ID of a certain carpark,
+- Using data from the API, after the user has input the ID of a certain carpark,
   the function will return detailed information regarding the aforementioned carpark (this includes the number 
   of available carparks of different types).
-- Note that it will also show empty car park lots.
+- Note that carparks with no empty lots will be shown as well.
 - The command can only take a complete carpark ID. If the user inputs a non-existing carpark ID or inputs the wrong format,
   the program will prompt the user to re-enter the correct and existing carpark ID.
-- `find` is case-insensitive and will find the correct carpark code even if lowercase is used.
+- `find` is case-insensitive and will find the carpark with the correct ID even if lowercase is used.
 
 Example of usage:
 
@@ -208,7 +208,7 @@ Last Updated: 04-11-2022 19:28:10
 - For convenience, the `filter` command also matches substrings at the _beginning_ of a word. Following the previous
   example, `clem` will also match the above carpark, but `ti` will not.
 - Only a summarised list of carparks with minimal information will be shown.
-- Note that it will also show empty car park lots.
+- Note that carparks with no empty available lots will be shown as well.
 - If supported by your console and operating system, matched words will be highlighted for ease of viewing.
 
 > **Note:**  The `filter` command allows for dashed arguments `-address` and `-id` to switch modes, but if none is provided it defaults to address mode above.
@@ -240,12 +240,12 @@ CarparkID C8 at BLK 335/338 CLEMENTI AVE 2
 **Shows a summarised list of carparks that match a given query.**
 > Format: `filter -id QUERY` or `fil -id QUERY`
 
-- The filter command allows the user to search a carpark based on the carpark ID. Different from the `find` command, the `filter -id` command displays a list of partial matches. For example, a carpark with ID `A35` can be matched by `fil -id A` or `fil -id 35`.
+- The filter command allows the user to search a carpark based on the carpark ID. Different from the `find` command, the `filter -id` command displays a list of partial matches as well as full matches. For example, a carpark with ID `A35` can be matched by `fil -id A` or `fil -id 35`.
 - The query is case-insensitive.
 - Unlike the `filter` command in address mode, rather than matching **all** words in the query, a carpark only needs to match **one or more** words in the query.
-- For convenience, the `filter -id` command also matches substrings _anywhere_ in the ID. For example, any of `A35`, `a`, `5` will match the above carpark.
+- For convenience, the `filter -id` command also matches substrings _anywhere_ in the ID. For example, any of `A35`, `a` or `5` will match the above carpark.
 - Only a summarised list of carparks with minimal information will be shown.
-- Note that it will also show empty car park lots.
+- Note that carparks with no empty available lots will be shown as well.
 
 > **Note:**  To use the `filter` command in ID mode, a dashed argument `-id` is **required**.
 
@@ -271,11 +271,11 @@ CarparkID T47A at BLK 864B TAMPINES STREET 83
 
 ### Get a list of carparks on the app
 
-**Returns a list of the available carparks from the JSON file.**
+**Returns a list of all the available carparks stored in parKING.**
 > Format: `list` or `l`
 
-- Using data from the API, after the user has inputted the command, the function will return a list of carparks from the API.
-> **Note:** This produces a very long list with Carpark ID in alphabetical order and result in a long output list in your terminal. Do not use if you need to refer 
+- Using data from the API, after the user has input the command, the function will return a list of carparks from the API.
+> **Note:** This produces a very long list with Carpark ID in alphabetical order, and result in a long output in your terminal. Do not use if you need to refer 
 to output already printed to the console before this.
 
 Example of usage:
@@ -305,7 +305,7 @@ CarparkID HG80 at BLK 941A HOUGANG STREET 92
 
 - The command requires a valid API access token and internet access to function.
 - This overwrites any previous carpark availability data for any carparks fetched by the API.
-- This command is useful for when the program is left opened for a very long time, and the data that has been fetched by
+- This command is useful for when the program is left open for a very long time, and the data that has been fetched by
 the API at the start of the program becomes outdated. The user can then use this command to update the data fetched by
 the API without having to exit and terminate the program.
 
@@ -320,7 +320,7 @@ Example of usage:
 **Output**
 
 ```
-2312 Parking Lot data received from LTA!
+2316 rows of carpark data received from LTA!
 Update Successful.
 ```
 
@@ -351,6 +351,7 @@ Added Carpark 1 to favourites!
 
 ```
 Carpark already in list.
+Nothing to add to favourites!
 ```
 
 **Input:**
@@ -366,7 +367,7 @@ No carpark was found.
 > For advanced users:
 >  - Favourite multiple carparks at once by entering more than one carpark ID after `favourite`.
 >  - Example of usage:
->    - `favourite 1 2 J8`
+>  - `favourite 1 2 J8`
 
 ### Unfavourite carparks by carpark ID
 
@@ -394,7 +395,8 @@ Removed Carpark 1 from favourites!
 **Output:**
 
 ```
-Carpark not found in favourite list!
+Some carparks not found in favourite list! Skipping...
+Nothing to remove from favourites!
 ```
 
 > For advanced users:
@@ -445,16 +447,17 @@ Here are the list of available commands to use! Refer to the user guide at https
 `help` or `h` 	: To display all possible commands.
 `exit` or `e` 	: To quit parKING.
 `list` or `l` 	: List the carparks and its details.
-`auth API_KEY` or `a API_KEY` 	: to authenticate your personal API key.
-`auth default` or `a default` 	: to authenticate using the default key provided by parKING.
-`auth status` or `a status` 	: to get the authentication status.
+`auth API_KEY` or `a API_KEY` 	: To authenticate your personal API key.
+`auth default` or `a default` 	: To authenticate using the default key provided by parKING.
+`auth status` or `a status` 	: To get the authentication status.
 `update` or `u` 	: To fetch the latest data from LTA.
-`filter QUERY` or `fil QUERY` or `fil -address QUERY` 	: Find carparks based on its address.
-`filter -id QUERY` or `fil -id QUERY` 	: Find carparks based on its Carpark Id.
+`filter QUERY` or `fil QUERY`	: Filter carparks based on Carpark information.
+`filter -address QUERY` or `fil -add QUERY` 	: Filter carparks based on its Carpark address.
+`filter -id QUERY` or `fil -id QUERY` 	: Filter carparks based on its Carpark Id.
 `find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark.
-`favourite list` or `fav list` 	: to get the list of favourited carparks.
-`favourite CARPARK_ID` or `fav CARPARK_ID` 	: favourite carpark by its ID.
-`unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: unfavourite carpark by its ID.
+`favourite list` or `fav list` 	: To get the list of favourited carparks.
+`favourite CARPARK_ID` or `fav CARPARK_ID` 	: Favourite carpark by its ID.
+`unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: Unfavourite carpark by its ID.
 ```
 
 ### Exiting the program
@@ -462,6 +465,16 @@ Here are the list of available commands to use! Refer to the user guide at https
 **Terminates the program.**
 
 > Format: `exit` or `e`
+
+**Input:**
+
+`exit`
+
+**Output**
+```
+Exiting program.
+Goodbye.
+```
 
 ## Editing Files
 
@@ -536,46 +549,46 @@ Format of one row in the `carparkList.txt` file is shown below:
 ```
 - Each row must be separated by a linebreak.
 - Each field of data is separated by the double pipes delimiter `||`.
-- The fields in order and what values are valid is below:
+- Valid values for each field are listed below in the order they appear in the format:
   - **Carpark ID**: 
-    - Must not be blank
+    - Must not be blank.
     - Can be in the following configurations:
-      - Any number of letters: `a`, `B`, `ABCDE`
-      - Any number of numbers: `1`, `34`, `340`
-      - Any number of letters followed by any number of numbers: `A5`, `p3`, `abc123`
-      - Any number of numbers followed by any number of letters: `5A`, `3b`, `123abc`
-      - Any number of letters followed by any number of numbers and then any numbers of letters: `A5R`, `p3NBC`, `B132A` 
-    - Any other configuration or characters will result in an invalid format. E.g. `35A9`, `29+A_`
+      - Any number of letters: `a`, `B`, `ABCDE`.
+      - Any number of numbers: `1`, `34`, `340`.
+      - Any number of letters followed by any number of numbers: `A5`, `p3`, `abc123`.
+      - Any number of numbers followed by any number of letters: `5A`, `3b`, `123abc`.
+      - Any number of letters followed by any number of numbers and then any numbers of letters: `A5R`, `p3NBC`, `B132A`. 
+    - Any other configuration or characters will result in an invalid format. E.g. `35A9`, `29+A_`.
   - **Area** (unused by ParKING): 
     - Typically the region or area the carpark is in.
-    - Can be blank
-    - Any values not containing `||`
+    - Can be blank.
+    - Any values not containing `||`.
   - **Development**: 
-    - Typically the address or name of the mall. 
-    - Any values not containing `||`
+    - Typically the address or name of the mall. In this guide we call this the "name" of the carpark. 
+    - Any values not containing `||`.
   - **Location** (unused by ParKING):
     - Longitude and latitude of the carpark.
-    - Can be blank
-    - Any values not containing `||`
+    - Can be blank.
+    - Any values not containing `||`.
   - **Available Lots**:
     - The total number of available lots.
-    - Must not be blank
-    - Must be a non-negative integer: any floats or negative values will be defaulted to `0`
+    - Must not be blank.
+    - Must be a non-negative integer: any floats or negative values will be defaulted to `0`.
     - _Note: Typically unused. This value is updated based on the "All Available Lots" field below._
   - **All Available Lots**:
     - Space-separated breakdown of available lots for different lot types.
     - Must not be blank
-    - Must have exactly **three** space-separated numbers, representing three different lot types in order: Car, Motorcycle, Heavy Vehicle
-    - Each number must be a non-negative integer: any floats or negative values will be defaulted to `0`
+    - Must have exactly **three** space-separated numbers, representing three different lot types in order: `Car`, `Motorcycle`, `Heavy Vehicle`.
+    - Each number must be a non-negative integer: any floats or negative values will be defaulted to `0`.
   - **Favourited**:
     - If at the time of saving the list was favourited (true/false).
     - **Note:** This value is only for the convenience of the user when viewing the file and **will not update the program on change**. Edit `favourites.txt` to change the favourites list.
   - **Agency**  (unused by ParKING):
     - Represents the agency which provided the data.
-    - Can be blank
+    - Can be blank.
   - **Last Updated Time**:
     - Represents the last time this carpark was updated.
-    - Must be in `DD-MM-YY HH:MM:SS` format, and must be a valid date-time (`36:99:99` is an invalid time)
+    - Must be in `DD-MM-YY HH:MM:SS` format, and must be a valid date-time (`36:99:99` is an invalid time).
     - **Note:** May be overwritten in the program, if the carpark was updated upon initialisation or with the `update` command.
   
 - Any extra delimiters `||` or not enough delimiters will result in an invalid format.
