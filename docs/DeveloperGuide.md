@@ -197,6 +197,10 @@ Step 4. The user executes `view pet` to display all pets in the pet manage syste
 
 The following sequence diagram shows how the status operation works:
 
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
+
 ### [Proposed] Service management feature
 
 ### Proposed Implementation

@@ -21,6 +21,7 @@
 - Added functionalities to find pets by their name and id
 - Added the functionality to initialise the pet status randomly.
 - Added ChangePetStatusCommand to allow user change pet status.
+- Edited the functionality about change the wellness and health status of the pet.
 
 **Contributions to the UG**
 
