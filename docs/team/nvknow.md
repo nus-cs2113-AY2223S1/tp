@@ -32,6 +32,9 @@
 
 - Added Employee management feature and its Design considerations
 - Added the UML diagram of Employee Management
+- Added the UML diagram of Employee Add
+- Added the UML diagram of Appointment Add
+- Added the UML diagram of Service Add
 - Added User Stories of v1.0 and v2.0
 
 **Contributions to team-based tasks**
