@@ -169,12 +169,16 @@ Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 
 **Command flags**: Specify the type of function to be used**
 - `-add`: *Adds a new ingredient or step*
-  
-      ℹ Only works for ingredient or step. Cannot add moreout  than 1 recipe title or description.
-      - Parameter: `INGREDIENT or STEP`
-      - Example:
+
+    ℹ Only works for ingredient or step. Cannot add recipe title or description.
+
+    - Parameter: `INGREDIENT or STEP`
+    - Example:
       ```
-      /edit 2 -add 
+      /edit 2 -add -i tomato/1/whole
+      ```
+      ```
+      /edit 2 -add -s Cut the tomato into half.
       ```
 
 - `-del`: *Deletes an ingredient or step*
