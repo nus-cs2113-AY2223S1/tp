@@ -7,8 +7,11 @@ import seedu.duke.Ui;
 
 import java.util.Comparator;
 
+
+
 public class SortCommand extends Commands {
     String[] userInput;
+    static final int SORT_FIELD = 1;
 
     public SortCommand(ReviewList reviews, String[] userInput) {
         super(reviews);
@@ -30,7 +33,7 @@ public class SortCommand extends Commands {
                 throw new DukeException();
             }
 
-            switch (userInput[1]) {
+            switch (userInput[SORT_FIELD]) {
             case "rating":
                 this.reviewList.inputs.sort(Comparator.comparing(Media::getRating).reversed());
                 break;
