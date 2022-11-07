@@ -395,7 +395,7 @@ When the `Parser` recognizes the `delay` command has been inputted, `DelayFlight
 no delay changes will be made.
 3. Else, the method `findFlightInfo` will find the index of the flight to change.
 4. Once it is found, `getFLightAttributes` is called to retrieve all the relevant flight details from `FlightInfo`.
-5. Using the retrieve information, `setDepartureTime(newDepartureTime)` would append the flight records and change the departure time.
+5. Using the information retrieved, `setDepartureTime(newDepartureTime)` appends the flight records and change the departure time.
 6. Finally, `showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime` informs the user the flight delay has been saved.
 
 ---
@@ -724,11 +724,11 @@ Followed by the format that each parameter should adhere to.
 | BOARDING_GROUP     | Input boarding Group should not be more than 10 and should be in digit form                                                                                                                                 | `01`                                |
 | SEAT_NUMBER        | Input Seat number should range between 00A to 99Z                                                                                                                                                           | `B01`                               |
 
+
 ### Storage of flights and passengers
 * Storage will automatically update in the `SkyControl.txt` file found in the `data` directory.
 * Both flight and passenger are stored in the same text file. 
 However, after running SkyControl, the flight and passenger lists wil update automatically.
 * It is highly not advised to tamper this file but to use SkyControl to view and edit the passenger and flight logbooks.
 
-<br>
 
