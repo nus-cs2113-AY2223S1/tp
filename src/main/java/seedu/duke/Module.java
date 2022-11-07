@@ -8,7 +8,7 @@ public class Module {
     private final int mcs;
 
     /**
-     * Contructor to initialize the class variables of Module class
+     * Constructor to initialize the class variables of Module class.
      * @param course the course taken or module code
      * @param semesterTaken the year and semester in which the course was taken
      * @param grade the grade received in the module

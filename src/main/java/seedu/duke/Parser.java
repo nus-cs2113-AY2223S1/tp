@@ -24,9 +24,9 @@ import seedu.duke.exceptions.InvalidSemesterException;
 public class Parser {
 
     /**
-     * Function to parse the input given by user
-     * @param input input message given by user in Command Line Interface. Format: String
-     * @return Command type based on parsed input. Format: Command
+     * Function to parse the input given by user.
+     * @param input input message given by user in Command Line Interface.
+     * @return Command type based on parsed input.
      */
     public static Command parse(String input) {
         String[] splitText = input.split(" ");
@@ -50,9 +50,9 @@ public class Parser {
     }
 
     /**
-     * function to parse all input from file
-     * @param input input from the file. Format: String
-     * @return returns an instance of class Module after parsing input from file.  Format: Module
+     * Function to parse all input from file.
+     * @param input input from the file.
+     * @return returns an instance of class Module after parsing input from file.
      * @throws InvalidInputFormatException exception thrown if input format is wrong
      * @throws InvalidInputContentException exception thrown if input content is wrong
      */
@@ -66,16 +66,16 @@ public class Parser {
     }
 
     /**
-     * Function to determine type of command entered by user
-     * @param commandWord The first word entered by user in CLI used to determine the type of command. Format: String
-     * @param input The entire input entered by user in CLI to pass on to other functions for further actions. Format: String
+     * Function to determine type of command entered by user.
+     * @param commandWord The first word entered by user in CLI used to determine the type of command.
+     * @param input The entire input entered by user in CLI to pass on to other functions for further actions.
      * @return Command type based on parsed input. Format: Either Add, Delete, View, Mcs, or Exit.
      * @throws InvalidCommandWordException Exception thrown when the command word is invalid
      * @throws InvalidInputFormatException Exception thrown when the input format is incorrect
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         switch (commandWord) {
         case "add":
             return new Add(input);

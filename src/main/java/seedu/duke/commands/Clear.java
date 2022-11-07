@@ -14,12 +14,14 @@ public class Clear extends Command {
     private String semester;
 
     /**
-     * Constructor to initialize an object of Delete class
-     * @param input input entered by user. Format: String
+     * Constructor to initialize an object of Clear class.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
+     * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
-    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException,
+            InvalidOverallInputException {
         input = input.trim();
         if (input.equals("all")) {
             this.semester = "all";
@@ -33,8 +35,8 @@ public class Clear extends Command {
     }
 
     /**
-     * function to find the semester from input for which the modules need to be viewed
-     * @param input input entered by user. Format: String
+     * Function to find the semester from input for which the modules need to be viewed.
+     * @param input input entered by user.
      * @param indexes An array of indexes which specify the positions at which details are present in the input
      */
     private void setSem(String input, int[] indexes) {
@@ -46,8 +48,8 @@ public class Clear extends Command {
     }
 
     /**
-     * Function to check if the format of input is correct or not
-     * @param input input entered by user. Format: String
+     * Function to check if the format of input is correct or not.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception thrown if format of input is incorrect
      */
     public void checkFormat(String input) throws InvalidInputFormatException {
@@ -57,8 +59,8 @@ public class Clear extends Command {
     }
 
     /**
-     * Function to check format of input
-     * @param isRight whether it is in correct format. Format: boolean
+     * Function to check format of input.
+     * @param isRight whether it is in correct format.
      * @throws InvalidInputFormatException exception thrown if content of input has issues
      */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
@@ -68,9 +70,10 @@ public class Clear extends Command {
     }
 
     /**
-     * Function to check if content entered by user is empty or not
-     * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
+     * Function to check if content entered by user is empty or not.
+     * @param input input entered by user.
+     * @param idx a collection of indexes where the details should be present.
+     *            If these are empty, an exception should be thrown.
      * @throws InvalidInputContentException exception thrown if content of input is empty
      */
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
@@ -80,8 +83,8 @@ public class Clear extends Command {
     }
 
     /**
-     * Function to check content of input
-     * @param isSame whether it is same or not. Format: boolean
+     * Function to check content of input.
+     * @param isSame whether it is same or not.
      * @throws InvalidInputContentException exception thrown if content has issues
      */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
@@ -91,8 +94,8 @@ public class Clear extends Command {
     }
 
     /**
-     * function to return the positions of the details in input
-     * @param input the input given by user. Format: String
+     * function to return the positions of the details in input.
+     * @param input the input given by user.
      * @return an integer array containing the positions of the details given by user
      */
     public int[] positions(String input) {
@@ -103,8 +106,8 @@ public class Clear extends Command {
     }
 
     /**
-     * Method to check for any exception caught due to input (semester) format issues
-     * @param semester Semester taken. Format: String
+     * Method to check for any exception caught due to input (semester) format issues.
+     * @param semester Semester taken
      * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
     private void checkOverallExceptionForClear(String semester) throws InvalidOverallInputException {
@@ -124,7 +127,8 @@ public class Clear extends Command {
     }
 
     /**
-     * Function that checks the format of semester input
+     * Function that checks the format of semester input.
+     * @param semester inputted content after s/
      * @throws InvalidSemesterException throws InvalidSemesterException only when invalidFormat for semester
      */
     public void checkYear(String semester) throws InvalidSemesterException {

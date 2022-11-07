@@ -13,7 +13,10 @@ import seedu.duke.exceptions.InvalidSemesterException;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 class DukeTest {
@@ -63,21 +66,21 @@ class DukeTest {
     @Test
     void testInvalidSemester() {
         System.out.println("Running JUnit tests for exceptions in case of invalid semester");
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S2Y1"));//Semester is given before the Year
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S1")); //Only semester is given
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3")); //Only year is given
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y*SJ")); //Special characters and letters are given for year and semester
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y9S2"));//Year greater than 6 is given
-        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3S7"));//Semester greater than 2 is given
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S2Y1"));
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("S1"));
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3"));
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y*SJ"));
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y9S2"));
+        assertThrows(InvalidSemesterException.class, () -> Add.checkYear("Y3S7"));
     }
 
     @Test
     void testInvalidMc() {
         System.out.println("Running JUnit tests for exceptions in case of invalid mc");
-        assertThrows(InvalidMcException.class, () -> Add.checkMc(-6)); //Negative mc is given
-        assertThrows(InvalidMcException.class, () -> Add.checkMc(21)); //MC greater than 20 is given
-        assertThrows(InvalidMcException.class, () -> Add.checkMcString("999999999999999999999999999999999999999999999999999999999999999999999999")); // Huge numeric mc is given
-        assertThrows(InvalidMcException.class, () -> Add.checkMcString("adr*")); // letters and special character for mc is given
+        assertThrows(InvalidMcException.class, () -> Add.checkMc(-6));
+        assertThrows(InvalidMcException.class, () -> Add.checkMc(21));
+        assertThrows(InvalidMcException.class, () -> Add.checkMcString("999999999999999999999999999999999999999999"));
+        assertThrows(InvalidMcException.class, () -> Add.checkMcString("adr*"));
     }
 
 
@@ -85,8 +88,8 @@ class DukeTest {
     @Test
     void testInvalidGrade() {
         System.out.println("Running JUnit tests for exceptions in case of invalid grade");
-        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("9987")); //Numeric grade is given
-        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("D-")); // One of the grades that are not possible is given
+        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("9987"));
+        assertThrows(InvalidGradeException.class, () -> Add.checkGrade("D-"));
     }
 
     @Test
@@ -94,14 +97,14 @@ class DukeTest {
         System.out.println("Running JUnit Test for Find");
 
         //add the modules
-        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
-        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
-        String input3 = "add m/cs2107 s/y2s1 mc/4 g/A";
         ModuleList modulelist = new ModuleList();
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
         Command c = Parser.parse(input1);
         c.execute(modulelist);
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
         c = Parser.parse(input2);
         c.execute(modulelist);
+        String input3 = "add m/cs2107 s/y2s1 mc/4 g/A";
         c = Parser.parse(input3);
         c.execute(modulelist);
 
@@ -115,29 +118,29 @@ class DukeTest {
         //Delete the modules
 
         String inputDelete1 = "delete m/CS2105";
-        String inputDelete2 = "delete m/CS2106";
-        String inputDelete3 = "delete m/CS2107";
         c = Parser.parse(inputDelete1);
         c.execute(modulelist);
+        String inputDelete2 = "delete m/CS2106";
         c = Parser.parse(inputDelete2);
         c.execute(modulelist);
+        String inputDelete3 = "delete m/CS2107";
         c = Parser.parse(inputDelete3);
         c.execute(modulelist);
     }
 
     @Test
-    void testClearforSemester() throws InvalidInputContentException {
+    void testClearForSemester() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Clear for an individual semester");
 
         //add the modules
-        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
-        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
-        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
         ModuleList modulelist = new ModuleList();
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
         Command c = Parser.parse(input1);
         c.execute(modulelist);
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
         c = Parser.parse(input2);
         c.execute(modulelist);
+        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
         c = Parser.parse(input3);
         c.execute(modulelist);
         int initialCount = modulelist.getCount();
@@ -157,18 +160,18 @@ class DukeTest {
     }
 
     @Test
-    void testClearforAll() throws InvalidInputContentException {
+    void testClearForAll() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Clear for all");
 
         //add the modules
-        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
-        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
-        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
         ModuleList modulelist = new ModuleList();
+        String input1 = "add m/cs2105 s/y1s1 mc/4 g/A+";
         Command c = Parser.parse(input1);
         c.execute(modulelist);
+        String input2 = "add m/cs2106 s/y1s2 mc/4 g/F";
         c = Parser.parse(input2);
         c.execute(modulelist);
+        String input3 = "add m/cs2107 s/y1s1 mc/4 g/A";
         c = Parser.parse(input3);
         c.execute(modulelist);
         int initialCount = modulelist.getCount();
@@ -324,7 +327,7 @@ class DukeTest {
     }
 
     @Test
-    void testCheckNOC() throws InvalidInputContentException {
+    void testCheckNoc() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Check NOC");
 
         // check NOC - Test whether the user is eligible for NOC based on the modules the user has added
@@ -333,12 +336,12 @@ class DukeTest {
         Check check = new Check("NOC");
 
         // Check initial NOC eligibility
-        boolean initialCheckNOCSem = check.checkNOCSem();
-        assertFalse(initialCheckNOCSem);
-        boolean initialCheckNOCMc = check.checkNOCMc();
-        assertFalse(initialCheckNOCMc);
-        boolean initialCheckNOC = check.checkNOC();
-        assertFalse(initialCheckNOC);
+        boolean initialCheckNocSem = check.checkNocSem();
+        assertFalse(initialCheckNocSem);
+        boolean initialCheckNocMc = check.checkNocMc();
+        assertFalse(initialCheckNocMc);
+        boolean initialCheckNoc = check.checkNoc();
+        assertFalse(initialCheckNoc);
 
         ArrayList<String> inputArray = new ArrayList<>();
         inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
@@ -372,18 +375,18 @@ class DukeTest {
         }
 
         // check final NOC eligibility
-        boolean finalCheckNOCSem = check.checkNOCSem();
-        assertTrue(finalCheckNOCSem);
-        boolean finalCheckNOCMc = check.checkNOCMc();
-        assertTrue(finalCheckNOCMc);
-        boolean finalCheckNOC = check.checkNOC();
-        assertTrue(finalCheckNOC);
+        boolean finalCheckNocSem = check.checkNocSem();
+        assertTrue(finalCheckNocSem);
+        boolean finalCheckNocMc = check.checkNocMc();
+        assertTrue(finalCheckNocMc);
+        boolean finalCheckNoc = check.checkNoc();
+        assertTrue(finalCheckNoc);
 
         ModuleList.modules.clear();
     }
 
     @Test
-    void testCheckSEP() throws InvalidInputContentException {
+    void testCheckSep() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Check SEP");
 
         // check SEP - Test whether the user is eligible for SEP based on the modules the user has added
@@ -392,12 +395,12 @@ class DukeTest {
         Check check = new Check("SEP");
 
         // Check initial NOC eligibility
-        boolean initialCheckSEPSem = check.checkSEPSem();
-        assertFalse(initialCheckSEPSem);
-        boolean initialCheckSEPCAP = check.checkSEPCAP();
-        assertFalse(initialCheckSEPCAP);
-        boolean initialCheckSEP = check.checkSEP();
-        assertFalse(initialCheckSEP);
+        boolean initialCheckSepSem = check.checkSepSem();
+        assertFalse(initialCheckSepSem);
+        boolean initialCheckSepCap = check.checkSepCap();
+        assertFalse(initialCheckSepCap);
+        boolean initialCheckSep = check.checkSep();
+        assertFalse(initialCheckSep);
 
         ArrayList<String> inputArray = new ArrayList<>();
         inputArray.add("add m/cs1011 s/y1s1 mc/4 g/A+");
@@ -431,12 +434,12 @@ class DukeTest {
         }
 
         // check final NOC eligibility
-        boolean finalCheckSEPSem = check.checkSEPSem();
-        assertTrue(finalCheckSEPSem);
-        boolean finalCheckSEPCAP = check.checkSEPCAP();
-        assertTrue(finalCheckSEPCAP);
-        boolean finalCheckSEP = check.checkSEP();
-        assertTrue(finalCheckSEP);
+        boolean finalCheckSepSem = check.checkSepSem();
+        assertTrue(finalCheckSepSem);
+        boolean finalCheckSepCap = check.checkSepCap();
+        assertTrue(finalCheckSepCap);
+        boolean finalCheckSep = check.checkSep();
+        assertTrue(finalCheckSep);
 
         ModuleList.modules.clear();
     }

@@ -1,9 +1,10 @@
 package seedu.duke.exceptions;
 
 public class InvalidGradeException extends Exception {
+
     /**
-     * function to check if format of grade is correct or not
-     * @param grade grade entered by user. Format: String
+     * Function to check if format of grade is correct or not.
+     * @param grade grade entered by user.
      * @return returns true if the format is correct. otherwise false. Format: boolean
      */
     public static boolean checkGradeFormat(String grade) {
@@ -11,9 +12,9 @@ public class InvalidGradeException extends Exception {
     }
 
     /**
-     * Function to check if grade is valid or not
-     * @param grade the grade entered by user. Format: String
-     * @return returns true if grade is valid. Otherwise eturns false. Format: boolean
+     * Function to check if grade is valid or not.
+     * @param grade the grade entered by user.
+     * @return returns true if grade is valid. Otherwise returns false. Format: boolean
      */
     public static boolean checkValidGrade(String grade) {
         String[] possibleGrades = {"A", "A+","A-","B","B+","B-", "C", "C+","D", "D+", "F", "F*", "S", "U", "-"};
@@ -24,6 +25,7 @@ public class InvalidGradeException extends Exception {
         }
         return false;
     }
+
     public String getMessage() {
         return "* Invalid grade input." + "\n";
     }

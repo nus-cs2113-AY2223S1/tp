@@ -18,9 +18,9 @@ public class Check extends Command {
     private String type;
 
     /**
-     * Constructor to initialize object of Check Command class
-     * Depending on the input it will either check for NOC or SEP
-     * @param input input entered by user. Format: String
+     * Constructor to initialize object of Check Command class.
+     * Depending on the input it will either check for NOC or SEP.
+     * @param input input entered by user.
      */
     public Check(String input) throws InvalidInputContentException {
         this.type = input.toUpperCase().trim();
@@ -34,39 +34,44 @@ public class Check extends Command {
     }
 
     /**
-     * Constructor to initialize object of Check Command class
+     * Constructor to initialize object of Check Command class.
      */
     public Check() {
     }
 
+    /**
+     * Checking the eligibility of program by overriding the method in the parent command class.
+     * @param moduleList the moduleList created in main
+     */
     @Override
     public void execute(ModuleList moduleList) {
         switch (type) {
         case "NOC":   // obtained >70 MCs, completed four semesters of study
-            if (checkNOC()) {
+            if (checkNoc()) {
                 UI.nocEligibleMessage();
             } else {
                 UI.nocIneligibleMessage();
             }
             break;
         case "SEP":   //completed two semesters of study, cap above 3.0
-            if (checkSEP()) {
+            if (checkSep()) {
                 UI.sepEligibleMessage();
             } else {
                 UI.sepIneligibleMessage();
             }
             break;
+        default:
         }
     }
 
     /**
-     * Function to find the current semester based on the latest graded semester
+     * Function to find the current semester based on the latest graded semester.
      * @return latest graded semester
      */
     public int findCurrentSemester() {
         int latestGradedSemester = 1;
         for (Module mod: modules) {
-            if(!(mod.getGrade().equals("-")) && (convertSemToNum(mod.getSemesterTaken()) >= latestGradedSemester)) {
+            if (!(mod.getGrade().equals("-")) && (convertSemToNum(mod.getSemesterTaken()) >= latestGradedSemester)) {
                 latestGradedSemester = convertSemToNum(mod.getSemesterTaken());
             }
         }
@@ -74,36 +79,35 @@ public class Check extends Command {
     }
 
     /**
-     * Function to find the current semester based on the latest graded semester
+     * Function to find the current semester based on the latest graded semester.
      * @return latest graded semester
      */
     public String findCurrentSemesterInString() {
         return convertNumToSem(findCurrentSemester());
     }
 
-
     /**
-     * Function to check if the user is eligible for NOC
+     * Function to check if the user is eligible for NOC.
      * @return true if eligible, false otherwise
      */
-    public boolean checkNOC() {
-        return checkNOCMc() && checkNOCSem();
+    public boolean checkNoc() {
+        return checkNocMc() && checkNocSem();
     }
 
     /**
-     * Function to check if the user fulfills the semester requirements for NOC
+     * Function to check if the user fulfills the semester requirements for NOC.
      * @return true if fulfilled, false otherwise
      */
-    public boolean checkNOCSem() {
+    public boolean checkNocSem() {
         int currentSemester = findCurrentSemester();
         return (currentSemester >= SEMESTER_MINIMUM_NOC) && (currentSemester <= SEMESTER_MAXIMUM_NOC);
     }
 
     /**
-     * Function to check if the user fulfills the MC requirements for NOC
+     * Function to check if the user fulfills the MC requirements for NOC.
      * @return true if fulfilled, false otherwise
      */
-    public boolean checkNOCMc() {
+    public boolean checkNocMc() {
         int totalMCs = 0;
         for (Module mod: modules) {
             totalMCs += mod.getMcs();
@@ -115,35 +119,35 @@ public class Check extends Command {
     }
 
     /**
-     * Function to check if the user is eligible for SEP
+     * Function to check if the user is eligible for SEP.
      * @return true if eligible, false otherwise
      */
-    public boolean checkSEP() {
-        return checkSEPCAP() && checkSEPSem();
+    public boolean checkSep() {
+        return checkSepCap() && checkSepSem();
     }
 
     /**
-     * Function to check if the user fulfills the CAP requirements for SEP
+     * Function to check if the user fulfills the CAP requirements for SEP.
      * @return true if fulfilled, false otherwise
      */
-    public boolean checkSEPCAP() {
+    public boolean checkSepCap() {
         ModuleList ml = new ModuleList(modules);
         double cap = ml.calculateCap();
         return cap >= CAP_MINIMUM_SEP;
     }
 
     /**
-     * Function to check if the user fulfills the semester requirements for SEP
+     * Function to check if the user fulfills the semester requirements for SEP.
      * @return true if fulfilled, false otherwise
      */
-    public boolean checkSEPSem() {
+    public boolean checkSepSem() {
         int currentSemester = findCurrentSemester();
-        return (currentSemester >= SEMESTER_MINIMUM_SEP) && (currentSemester <= SEMESTER_MAXIMUM_SEP) ;
+        return (currentSemester >= SEMESTER_MINIMUM_SEP) && (currentSemester <= SEMESTER_MAXIMUM_SEP);
     }
 
     /**
-     * Function to convert semester as a string into an integer
-     * @param semester the semester of a module  Format: String
+     * Function to convert semester as a string into an integer.
+     * @param semester the semester of a module.
      * @return the semester in the form of an integer
      */
     private static int convertSemToNum(String semester) {
@@ -170,30 +174,30 @@ public class Check extends Command {
     }
 
     /**
-     * Function to convert semester as a Number back to String
-     * @param semesterNumber the semester of a module  Format: int
+     * Function to convert semester as a Number back to String.
+     * @param semesterNumber the semester of a module.
      * @return the semester in the form of a String
      */
     private static String convertNumToSem(int semesterNumber) {
         switch (semesterNumber) {
-            case 1:
-                return "Y1S1";
-            case 2:
-                return "Y1S2";
-            case 3:
-                return "Y2S1";
-            case 4:
-                return "Y2S2";
-            case 5:
-                return "Y3S1";
-            case 6:
-                return "Y3S2";
-            case 7:
-                return "Y4S1";
-            case 8:
-                return "Y4S2";
-            default:
-                return "Y1S1";
+        case 1:
+            return "Y1S1";
+        case 2:
+            return "Y1S2";
+        case 3:
+            return "Y2S1";
+        case 4:
+            return "Y2S2";
+        case 5:
+            return "Y3S1";
+        case 6:
+            return "Y3S2";
+        case 7:
+            return "Y4S1";
+        case 8:
+            return "Y4S2";
+        default:
+            return "Y1S1";
         }
     }
 }

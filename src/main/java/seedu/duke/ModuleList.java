@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.exceptions.InvalidInputContentException;
 import seedu.duke.exceptions.InvalidInputFormatException;
-import seedu.duke.exceptions.InvalidOverallInputException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,22 +14,22 @@ public class ModuleList {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
-     * Contructor of ModuleList class to initialize an object of class moduleList
+     * Constructor of ModuleList class to initialize an object of class moduleList.
      */
     public ModuleList() {
 
     }
 
     /**
-     * Contructor of ModuleList class to initialize an object of class moduleList
-     * @param modules array of modules. Format : ArrayList<Module>
+     * Constructor of ModuleList class to initialize an object of class moduleList.
+     * @param modules array of modules
      */
     public ModuleList(ArrayList<Module> modules) {
         ModuleList.modules = modules;
     }
 
     /**
-     * Constructor to load the moduleList with input from file
+     * Constructor to load the moduleList with input from file.
      * @param fileReader Scanner input loaded from the file
      * @throws InvalidInputFormatException exception thrown when input is invalid
      * @throws InvalidInputContentException exception thrown when input content is empty
@@ -44,9 +43,10 @@ public class ModuleList {
     }
 
     /**
-     * Function to add a module to the moduleList if it does not already exist
+     * Function to add a module to the moduleList if it does not already exist.
      * @param mod The module to be added to the list
-     * @param isFromFile to check if the add command came from a module previously loaded in file. This decides whether to display add message or not
+     * @param isFromFile to check if the add command came from a module previously loaded in file.
+     *                   This decides whether to display add message or not
      */
     public void add(Module mod, boolean isFromFile) {
         boolean isRepeat = checkRepetition(mod);
@@ -69,7 +69,7 @@ public class ModuleList {
     }
 
     /**
-     * function to check if a given module already exists in the moduleList
+     * Function to check if a given module already exists in the moduleList.
      * @param mod the module that needs to be searched for in the moduleList
      * @return true if the module already exists. False if it does not. Format: boolean
      */
@@ -83,7 +83,7 @@ public class ModuleList {
     }
 
     /**
-     * function to delete a module from the moduleList. If the module is not found, an appropriate message is displayed
+     * Function to delete a module from the moduleList. If the module is not found, an appropriate message is displayed.
      * @param modCode the module which has to be deleted from the moduleList.
      */
     public void delete(String modCode) {
@@ -111,8 +111,8 @@ public class ModuleList {
     }
 
     /**
-     * Function to find a list of all modules taken in a particular semester
-     * The function then calls the printResponse() method to print the appropriate response message
+     * Function to find a list of all modules taken in a particular semester.
+     * The function then calls the printResponse() method to print the appropriate response message.
      * @param semester The semester for which the modules need to be printed
      */
     public void view(String semester) {
@@ -150,15 +150,16 @@ public class ModuleList {
                 }
             }
         }
-        if(modules.isEmpty()) {
+        if (modules.isEmpty()) {
             UI.noModulesFoundMessage();
         }
     }
 
     /**
-     * Function to clear modules in a particular or all semester
-     * Prints modules have been clear message if there is modules in semester
-     * Prints no modules found message if there is no modules in module list
+     * Function to clear modules in a particular or all semester.
+     * Prints modules have been clear message if there is modules in semester.
+     * Prints no modules found message if there is no modules in module list.
+     * @param semester the semester to be cleared
      */
     public void clear(String semester) {
         boolean isFound = false;
@@ -187,14 +188,14 @@ public class ModuleList {
     }
 
     /**
-     * Function to generate an empty module list
+     * Function to generate an empty module list.
      */
     public void clearAll() {
         modules = new ArrayList<>();
     }
 
     /**
-     * Function to print the response for a command to print a list of modules in a particular semester
+     * Function to print the response for a command to print a list of modules in a particular semester.
      * If the list is empty, an empty list message is displayed. Otherwise, the list is displayed.
      * @param semester Semester for which the list of modules needs to be displayed
      * @param matchingModules a Collection of all modules taken in the particular semester that need to be printed
@@ -222,10 +223,10 @@ public class ModuleList {
     }
 
     /**
-     * Function to find total Graded Mcs (Not S/U/-) in plan
+     * Function to find total Graded Mcs (Not S/U/-) in plan.
      * @return totalGradedMc Returns total graded Mcs taken in whole plan
      */
-    public Integer totalGradedMcs() {
+    public int totalGradedMcs() {
         int totalGradedMc = 0;
         for (Module mod : modules) {
             if (!(mod.getGrade().equals("-") || mod.getGrade().equals("S") || mod.getGrade().equals("U"))) {
@@ -236,10 +237,10 @@ public class ModuleList {
     }
 
     /**
-     * Function to find total Mcs taken in plan
+     * Function to find total Mcs taken in plan.
      * @return totalMcs Returns total Mcs taken in whole plan
      */
-    public Integer totalMcs() {
+    public int totalMcs() {
         int totalMcs = 0;
         for (Module mod : modules) {
             totalMcs += mod.getMcs();
@@ -248,10 +249,10 @@ public class ModuleList {
     }
 
     /**
-     * Function to find total S/U Module Mcs in plan
+     * Function to find total S/U Module Mcs in plan.
      * @return totalSuMcs Returns total S/U Module Mcs taken in whole plan
      */
-    public Integer totalSuMcs() {
+    public int totalSuMcs() {
         int totalSuMcs = 0;
         for (Module mod : modules) {
             if (mod.getGrade().equals("S") || mod.getGrade().equals("U")) {
@@ -262,10 +263,10 @@ public class ModuleList {
     }
 
     /**
-     * Function to find total ungraded Mcs (-) in plan
+     * Function to find total ungraded Mcs (-) in plan.
      * @return totalUngradedMcs Returns total ungraded Mcs taken in whole plan
      */
-    public Integer totalUngradedMcs() {
+    public int totalUngradedMcs() {
         int totalUngradedMcs = 0;
         for (Module mod : modules) {
             if (mod.getGrade().equals("-")) {
@@ -276,16 +277,16 @@ public class ModuleList {
     }
 
     /**
-     * Function to help compute total MCs needed to graduate
+     * Function to help compute total MCs needed to graduate.
      * @return 160 minus the total MCs taken and minus ungraded Mcs (-)
      */
-    public Integer mcsForGraduation() {
-        Integer mcsNeededForGraduation = 160;
+    public int mcsForGraduation() {
+        int mcsNeededForGraduation = 160;
         return  mcsNeededForGraduation - totalMcs() - totalUngradedMcs();
     }
 
     /**
-     * Function to Calculates CAP
+     * Function to Calculates CAP.
      * @return CAP based on modules in plan
      */
     public double calculateCap() {
@@ -297,33 +298,33 @@ public class ModuleList {
     }
 
     /**
-     * Function to convert a grade into grade point
+     * Function to convert a grade into grade point.
      * @param grade The letter grade of a module. Format: String
      * @return The equivalent gradePoint of the grade
      */
     public double gradePoint(String grade) {
         switch (grade) {
-            case "A+":
-            case "A":
-                return 5.0;
-            case "A-":
-                return 4.5;
-            case "B+":
-                return 4.0;
-            case "B":
-                return 3.5;
-            case "B-":
-                return 3.0;
-            case "C+":
-                return 2.5;
-            case "C":
-                return 2.0;
-            case "D+":
-                return 1.5;
-            case "D":
-                return 1.0;
-            default:
-                return 0.0;
+        case "A+":
+        case "A":
+            return 5.0;
+        case "A-":
+            return 4.5;
+        case "B+":
+            return 4.0;
+        case "B":
+            return 3.5;
+        case "B-":
+            return 3.0;
+        case "C+":
+            return 2.5;
+        case "C":
+            return 2.0;
+        case "D+":
+            return 1.5;
+        case "D":
+            return 1.0;
+        default:
+            return 0.0;
         }
     }
 
@@ -335,15 +336,16 @@ public class ModuleList {
      */
     public static boolean findMatch(String keyword, Module mod) {
         try {
-            return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword) ||
-                    mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
+            return mod.getCourse().contains(keyword) || mod.getGrade().contains(keyword)
+                    || mod.getSemesterTaken().contains(keyword) || (mod.getMcs() == Integer.parseInt(keyword));
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
     /**
-     * For checking is there is any existing modules with the keyword specified in its field and print the appropriate message.
+     * For checking is there is any existing modules with the keyword specified in its field
+     * and print the appropriate message.
      * @param keyword the word to search for in existing modules
      */
     public void find(String keyword) {
@@ -352,7 +354,7 @@ public class ModuleList {
     }
 
     /**
-     * Function that helps to fina matching modules based on keyword given
+     * Function that helps to fina matching modules based on keyword given.
      * @param keyword the word to search for in existing modules
      * @return returns the array list with matching modules
      */
@@ -367,7 +369,7 @@ public class ModuleList {
     }
 
     /**
-     * Printing the respective message with respect to the size of the matchingModules array list
+     * Printing the respective message with respect to the size of the matchingModules array list.
      * @param matchingModules the array list of modules containing the keyword
      */
     public void findMsg(ArrayList<Module> matchingModules) {
@@ -379,7 +381,7 @@ public class ModuleList {
     }
 
     /**
-     * Function to help count number of modules in array list
+     * Function to help count number of modules in array list.
      * @return Returns total number of Modules in modules Array
      */
     public int getCount() {
@@ -387,7 +389,7 @@ public class ModuleList {
     }
 
     /**
-     * Function to help get view count
+     * Function to help get view count.
      * @return Returns total number of Modules for the recent View command executed
      */
     public int getViewCount() {
@@ -395,7 +397,7 @@ public class ModuleList {
     }
 
     /**
-     * Function to help get MC Count
+     * Function to help get MC Count.
      * @return Returns total number of MCs for the recent mcs command executed
      */
     public int getMcsCount() {
