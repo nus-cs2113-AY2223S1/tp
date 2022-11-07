@@ -137,6 +137,9 @@ input: `1`
 Successfully set your lesson!
 ```
 ---
+
+<div style="page-break-after: always;"></div>
+
 ###  <span style="color:orange ">Deleting a module: `delete`</span>
 Command used to initiate the process of deleting a new module.
 
