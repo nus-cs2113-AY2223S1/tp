@@ -1,0 +1,56 @@
+@startuml
+hide circle
+hide File members
+hide Scanner members
+hide FileWriter members
+skinparam classAttributeIconSize 0
+skinparam minClassWidth 100
+left to right direction
+
+class Storage{
+- {static} PATIENT_FILE_NAME: String
+- {static} VISIT_FILE_NAME: String
+- {static} PRESCRIPTION_FILE_NAME: String
++ Storage()
+- setScanner(file: File) : void
+- {static} retrieveFilePath(): String
+- createFilePath(): void
+- closeFileWriter (fileWriter: FileWriter) : void
+
+- loadData(patientList: PatientList, visitList: VisitList, prescriptionList: PrescriptionList) : void
+- loadPatients(patientList: PatientList) : void
+- loadVisits(visitList: VisitList) : void
+- loadPrescriptions(prescriptionList: PrescriptionList) : void
+
++ savePatientData(patientList: PatientList) : void
++ saveVisitData (visitList: VisitList) : void
++ savePrescriptionData(prescriptionList: PrescriptionList) : void
+
+- logPatients(patientList: PatientList, fileWriter: fileWriter) : void
+- logVisits(visitList: VisitList, fileWriter: fileWriter) : void
+- logPrescriptions(prescriptionList: PrescriptionList, fileWriter: FileWriter) : void
+- logPatientIntoDataFile(fileWriter: FileWriter, patient: Patient) : void
+- logVisitIntoDataFile(fileWriter: FileWriter, visit: Visit) : void
+- logPrescriptionIntoDataFile(fileWriter: FileWriter, prescription: Prescription) : void
+
+
+}
+
+class File{
+
+}
+
+class Scanner {
+
+}
+
+class FileWriter {
+
+}
+
+Storage o--> "patientFile 1" File
+Storage o---> "visitFile 1" File
+Storage o--> "1 prescriptionFile" File
+Storage .left.> Scanner
+Storage .up.> FileWriter
+@enduml

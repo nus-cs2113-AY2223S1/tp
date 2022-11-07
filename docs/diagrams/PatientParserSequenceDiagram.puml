@@ -1,0 +1,52 @@
+@startuml
+hide footbox
+
+participant Parser as A
+participant Matcher as C
+participant Storage as D
+participant PatientList as B
+
+-> A : patientParser(input: String)
+activate A
+
+ref over A, C
+matcherAdd
+end ref
+
+ref over A, C
+matcherRetrieve
+end ref
+
+ref over A, C
+matcherEdit
+end ref
+
+alt input.equals("viewAll")
+A -> B : listPatients()
+activate B
+return
+
+else matcherRetrieve is valid
+A -> B : retrievePatient(id: String)
+activate B
+return
+
+else matcherAdd is valid
+A -> B : addPatient(name: String, gender: String, birthDate: String, id: String)
+activate B
+return
+ref over D, A: savePatientData
+
+else matcherEdit is valid
+A -> A : parseEditPatient(input: String)
+activate A
+A -> B : modifyPatientDetails(id: String, name: String, birthDate: String, gender: String)
+activate B
+return
+ref over D, A: savePatientData
+return
+
+end
+
+return SubMenuState.IN_SUB_MENU
+@enduml

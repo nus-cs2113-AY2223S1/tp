@@ -1,0 +1,38 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+box
+participant ":PrescriptionList" as A
+participant "prescriptionList\n:ArrayList<Prescription>" as C
+participant "prescriptionEdited\n:Prescription" as B
+end box
+
+participant "ui:UI" as D
+
+-> A : activate(ui, prescriptionNumber)
+activate A
+
+A -> A : getIndex(ui, prescriptionNumber)
+activate A
+return index
+
+opt index == null
+    <-- A
+end
+
+A -> C : get(index)
+activate C
+return prescriptionEdited
+
+A -> B : setActive()
+activate B
+return
+
+ref over A, D
+    print a prescription activated message along with
+    the prescriptionString and index of prescriptionEdited
+end
+
+return
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+box
+participant ":PrescriptionList" as A
+participant "prescription\n:Prescription" as B
+participant "prescriptionList\n:ArrayList<Prescription>" as C
+end box
+
+participant "ui:UI" as D
+
+[-> A : add(ui, patientId, \nmedicine, dosage, timeInterval)
+activate A
+
+create B
+A -> B : new Prescription(ui, patientId, \nmedicine, dosage, timeInterval)
+activate B
+B --> A : prescription:Prescription
+deactivate B
+
+A -> C : contains(prescription)
+activate C
+return hasDuplicate:boolean
+
+alt hasDuplicate == false
+    A -> C : add(prescription)
+    activate C
+    return
+
+    ref over A, B, C, D
+         print a prescription added message along with
+         the prescriptionString and index of prescription
+    end
+
+else else
+    ref over A, B, C, D
+        print a prescription duplicated message along with
+        the prescriptionString and index of the duplicated prescription
+    end
+end
+
+return
+
+@enduml

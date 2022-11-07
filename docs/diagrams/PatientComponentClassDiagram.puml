@@ -1,0 +1,30 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide UI members
+hide empty Patient methods
+hide circle
+
+class PatientList{
++ addPatient(ui: UI, name: String, birthdate: String, gender: String, id: String) : void
++ loadPatient(name: String, birthdate: String, gender: String, id: String) : void
++ retrievePatient(ui: UI, id: String) : void
++ findPatient(id: String) : Patient
++ modifyPatientDetails(ui: UI, name: String, birthdate: String, gender: String, id: String) : void
++ containsPatientID(id: String) : boolean
++ listPatients(ui: UI) : void
+}
+
+class Patient{
+- name: String
+- gender: String
+- birthdate: String
+- id: String
+}
+
+class UI{
+
+}
+
+PatientList *-down-> "*" Patient : "contains" >
+PatientList .right.> UI
+@enduml

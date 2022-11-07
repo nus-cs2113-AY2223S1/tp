@@ -1,0 +1,30 @@
+@startuml
+box
+participant ":VisitList" as A
+participant ":Visit" as B
+participant ":ArrayList<Visit>" as C
+end box
+
+participant ":UI" as D
+
+[-> A : add(ui, "S7039111G", "25-02-2020", "15:00", "flu")
+activate A
+A -> B : new Visit("S7039111G", "25-02-2020", \n"15:00", "flu")
+activate B
+return visit:Visit
+
+A -> C : add(visit)
+activate C
+return
+
+A -> B : toString()
+activate B
+return :String
+
+A -> D : printAddVisitMessage(:String)
+activate D
+return
+
+return
+
+@enduml

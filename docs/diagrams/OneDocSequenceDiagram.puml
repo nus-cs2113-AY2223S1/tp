@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+skinparam sequenceReferenceBackgroundColor #White
+
+participant ":OneDoc" as A
+participant ":UI" as B
+participant ":Parser" as C
+
+-> A : main(args)
+activate A
+
+A -> A : mainMenuRun()
+activate A
+
+loop true
+    ref over A,C
+        Print main menu,
+        Get and parse user input
+    end
+
+    alt mainMenuState == MainMenuState.EXIT
+    A --> A : Break loop
+    else mainMenuState != MainMenuState.INVALID
+        ref over A, C
+            Sub Menu Run
+        end
+    else else
+    end
+end
+return
+
+return
+
+@enduml

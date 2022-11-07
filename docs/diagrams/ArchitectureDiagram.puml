@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+hide members
+hide circle
+
+class User
+class "Xyz Text Files"
+
+package " "<<Rectangle>>{
+    class UI
+    class OneDoc
+    class Storage
+    class Parser
+    class XyzList
+}
+
+OneDoc -left> UI
+OneDoc -down-> Parser
+OneDoc -> Storage
+OneDoc -> XyzList
+
+Parser -> Storage
+Parser -down-> XyzList
+Parser -> UI
+
+Storage ..> XyzList
+
+User <..> UI
+Storage ..right> "Xyz Text Files"
+
+XyzList ..> UI
+Storage ..> UI
+
+@enduml
