@@ -1,7 +1,6 @@
 # User Guide
 
 ## Contents
-
 <!-- TOC -->
   * [Introduction](#introduction)
     * [Disclaimer regarding use of API key for the purposes of NUS CS2113](#disclaimer-regarding-use-of-api-key-for-the-purposes-of-nus-cs2113)
@@ -18,7 +17,7 @@
     * [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)
     * [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)
     * [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks)
-    * [Help](#help)
+    * [List all possible commands](#list-all-possible-commands)
     * [Exiting the program](#exiting-the-program)
   * [Editing Files](#editing-files)
     * [How files are generated](#how-files-are-generated)
@@ -56,7 +55,7 @@ module in Q4 2022**.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of parKING from [here](https://github.com/AY2223S1-CS2113-T17-4/tp/releases/download/v2.0/parKING.jar).
+2. Download the latest version of parKING from [here](https://github.com/AY2223S1-CS2113-T17-4/tp/releases/download/v2.1/parKING.jar).
 3. [__Recommended__] For continued usage of the application, do sign up for your personal API key through [LTA](https://datamall.lta.gov.sg/content/datamall/en/request-for-api.html).
 4. Use the command `java -jar parKING.jar` to start the program!
 5. Note that the program will automatically create a directory called `resources` to store local data files.
@@ -74,21 +73,21 @@ See more detail in the [Features Section](#features) section below.
 > Notes about the command format:
 >  - Words in `UPPER_CASE` are the parameters supplied by the user.
 
-| Command                  | Shortcuts         | Description                                                                                 |
-|--------------------------|-------------------|---------------------------------------------------------------------------------------------| 
-| `auth API_KEY`           | `a API_KEY`       | [Authenticate API using user's API key](#authenticate-user-api)                             |
-| `auth default`           | `a default`       | [Authenticate API using default key](#authenticate-default)                                 |
-| `auth status`            | `a status`        | [Authentication status](#authentication-status)                                             |
-| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)           | 
-| `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                       | 
-| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                 | 
-| `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)           |
-| `update`                 | `u`               | [Update data from API](#update-data-from-api)                                               |
-| `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                       |
-| `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                   |
+| Command                  | Shortcuts         | Description                                                                                |
+|--------------------------|-------------------|--------------------------------------------------------------------------------------------| 
+| `auth API_KEY`           | `a API_KEY`       | [Authenticate API using user's API key](#authenticate-user-api)                            |
+| `auth default`           | `a default`       | [Authenticate API using default key](#authenticate-default)                                |
+| `auth status`            | `a status`        | [Authentication status](#authentication-status)                                            |
+| `find CARPARK_ID`        | `fin CARPARK_ID`  | [Find number of lots available by carpark ID](#find-number-of-lots-by-carpark-id)          | 
+| `filter QUERY`           | `fil QUERY`       | [Filter carparks based on address](#filter-carparks-based-on-address)                      | 
+| `filter -id QUERY`       | `fil -id QUERY`   | [Filter carparks based on carpark ID](#filter-carparks-based-on-carpark-id)                | 
+| `list`                   | `l`               | [Get a list of available carparks on the app](#get-a-list-of-carparks-on-the-app)          |
+| `update`                 | `u`               | [Update data from API](#update-data-from-api)                                              |
+| `favourite CARPARK_ID`   | `fav CARPARK_ID`  | [Favourite carparks by carpark ID](#favourite-carparks-by-carpark-id)                      |
+| `unfavourite CARPARK_ID` | `ufav CARPARK_ID` | [Unfavourite carparks by carpark ID](#unfavourite-carparks-by-carpark-id)                  |
 | `favourite list`         | `fav list`        | [List lot availability of favourite carparks](#list-lot-availability-of-favourite-carparks) |
-| `help`                   | `h`               | [Lists all possible commands](#help)                                                        |   
-| `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                 |
+| `help`                   | `h`               | [List all possible commands](#help)                                                        |   
+| `exit`                   | `e`               | [Exiting the program](#exiting-the-program)                                                |
 
 ### Authenticate user API
 
@@ -433,7 +432,7 @@ CarparkID J8 at BLK 232/240 JURONG EAST ST 21: 318 lots available
 ===========================================
 ```
 
-### Help
+### List all possible commands
 
 **Returns a list of all the available command of the program.**
 > Format : `help` or `h`
@@ -481,7 +480,7 @@ for convenient finding. Below are the various files generated by parKING.
 If no files exist at the time of running the program, the necessary files and directories will be created within the directory that the .jar file was run from.
 
 ### `favourites.txt`  Favourites list
-
+Location: `.\resources\api\favourite\favourite.txt`
 #### How files are saved and loaded
 
 - This file contains the carpark IDs of all favourite carparks.
@@ -497,6 +496,7 @@ reflected after a `favourite` or `unfavourite` command.
 - If users enter an invalid carpark ID, it will be removed from this file after a `favourite` or `unfavourite` command.
 
 ### `secret.txt` Access token file
+Location: `.\resources\api\secret.txt`
 
 #### How files are saved and loaded
 
