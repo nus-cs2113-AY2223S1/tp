@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class UserModuleMappingList {
+}
+
+class InvalidUserCommandException {
+}
+
+class UserDeletedModules {
+    - deletedModules:ArrayDeque
+    + UserDeletedModules()
+    + addToDeletedModules(inputModule:UserModuleMapping)
+    + displayAll()
+}
+
+class Ui {
+}
+
+class TimetableManager {
+}
+
+class UserUniversityList {
+    - myModules:UserModuleMappingList
+    - universityName:String
+    - universityCountry:String
+    - isFavourite:boolean
+    + UserUniversityList(universityName:String)
+    + addModule(input:UserModuleMapping)
+    + deleteModuleByPuCode(puCode:String)
+    + deleteModule(index:int)
+    + displayModules()
+    + updateComment(moduleCode:String, comment:String)
+    + deleteComment(moduleCode:String)
+}
+
+class UserUniversityListManager {
+    - myManager:HashMap<String, UserUniversityList>
+    - ttManager:TimetableManager
+    - deletedModulesList:UserDeletedModules
+    - logger:Logger
+    + UserUniversityListManager()
+    + UserUniversityListManager(fileContent:String)
+    + createList(input:String)
+    + displayAll()
+    + displayFavourites()
+    + displayUniversity(input:String)
+    + containsKey(inputSchool:String)
+    + addModule(inputSchool:String, inputModule:UserModuleMapping)
+    + deleteModule(inputSchool:String, puCode:String)
+    + deleteList(inputSchool:String)
+    + addFavourite(input:String)
+    + deleteFavourite(input:String)
+    + updateComment((universityName:String, moduleCode:String, comment:String)
+}
+
+UserUniversityListManager " 1 " o--> " *   " UserUniversityList
+UserUniversityListManager " 1  " o---> " 0..1 " UserDeletedModules
+UserUniversityList " 1 " o--> "0..1 " UserModuleMappingList
+UserUniversityListManager -> InvalidUserCommandException :<<throws>>
+UserUniversityList --> InvalidUserCommandException :<<throws>>
+UserUniversityListManager .> Ui
+UserUniversityListManager " 1 " o--> " 1 " TimetableManager
+@enduml

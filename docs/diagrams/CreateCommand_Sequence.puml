@@ -1,0 +1,83 @@
+@startuml
+
+activate ":Duke"
+
+hide footbox
+
+":Duke" -> ":Ui" : getUserInput()
+activate ":Ui"
+
+":Ui" --> ":Duke" : userInput : String
+deactivate ":Ui"
+
+":Duke" -> ":CommandParser" : CommandParser.getUserCommand(userInput)
+activate ":CommandParser"
+
+":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
+activate ":CommandParser"
+
+
+":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
+deactivate ":CommandParser"
+
+alt create command
+
+    ":CommandParser" -> ":CommandParser" : isValidCreateCommand(userInputTokenized)
+    activate ":CommandParser"
+
+    ":CommandParser" --> ":CommandParser" : :boolean
+    deactivate ":CommandParser"
+
+    opt is valid create command
+
+        create ":CreateCommand"
+        ":CommandParser" -> ":CreateCommand" : CreateCommand(userInputTokenized, CommandType.CREATE)
+        activate ":CreateCommand"
+
+        ":CreateCommand" --> ":CommandParser" : newCreateCommand : CreateCommand
+        deactivate ":CreateCommand"
+    end
+
+else other command
+
+end
+
+":CommandParser" --> ":Duke" : newUserCommand : Command
+deactivate ":CommandParser"
+
+alt create command
+
+":Duke" -> ":Duke" : executeCreateCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate ":Duke"
+
+    ":Duke" -> ":CreateCommand" : getUniversityName()
+    activate ":CreateCommand"
+
+    ":CreateCommand" --> ":Duke" : universityName :String
+    deactivate ":CreateCommand"
+
+    ":Duke" -> ":UserUniversityListManager" : createList(universityName)
+    activate ":UserUniversityListManager"
+
+    deactivate ":UserUniversityListManager"
+
+    ":Duke" -> ":TimetableManager" : createTimetable(universityName)
+    activate ":TimetableManager"
+
+    deactivate ":TimetableManager"
+
+    ":Duke" -> ":UserStorageParser" : storeCreatedLists(userUniversityListManager)
+    activate ":UserStorageParser"
+
+    deactivate ":UserStorageParser"
+
+    ":Duke" -> ":UserStorageParser" : storeTimetable(timetableManager)
+    activate ":UserStorageParser"
+
+    deactivate ":UserStorageParser"
+deactivate ":Duke"
+else other command
+end
+
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class UserStorage {
+    {static} - filePaths : HashMap<String, String>
+    {static} - directory : String
+
+    {static} + saveFile(uniName : String, textToAdd : String) : void
+    {static} + loadFile(uniName : String) : String
+    {static} + deleteFile(uniName : String, fromStartUp : boolean) : void
+    {static} + setFilePathsAtStartUp() : void
+}
+
+class IOException {
+
+}
+
+class UserStorageParser {
+    {static} + storeInfoToUserStorageByUni(uniName : String, userUniversityListManager : UserUniversityListManager) : String
+    {static} + deleteUserStorageByUni(uniName : String, fromStartUp : boolean) : void
+    {static} + getSavedLists() : UserUniversityListManager
+    {static} - extractInfoFromTextFile(newFilePaths : HashMap<String, String>, filePaths : HashMap<String, String>, userUniversityListManager : UserUniversityListManager, entry : Map.Entry<String, String>) : void
+}
+
+class InvalidUserStorageFileException {
+
+}
+
+UserStorage --> IOException : <<throws>>
+UserStorage "1" --> "1" UserStorageParser
+UserStorageParser --> InvalidUserStorageFileException : << throws>>
+UserStorageParser --> IOException : <<throws>>
+@enduml

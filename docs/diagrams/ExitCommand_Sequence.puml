@@ -1,0 +1,62 @@
+@startuml
+
+activate ":Duke"
+
+hide footbox
+
+":Duke" -> ":Ui" : getUserInput()
+activate ":Ui"
+
+":Ui" --> ":Duke" : userInput : String
+deactivate ":Ui"
+
+":Duke" -> ":CommandParser" : CommandParser.getUserCommand(userInput)
+activate ":CommandParser"
+
+":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
+activate ":CommandParser"
+
+":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
+deactivate ":CommandParser"
+
+alt exit command
+
+    ":CommandParser" -> ":CommandParser" : isValidExitCommand(userInputTokenized)
+    activate ":CommandParser"
+
+    ":CommandParser" --> ":CommandParser" : :boolean
+    deactivate ":CommandParser"
+
+    opt is valid exit command
+
+        create ":ExitCommand"
+        ":CommandParser" -> ":ExitCommand" : ExitCommand(userInputTokenized, CommandType.EXIT)
+        activate ":ExitCommand"
+
+        ":ExitCommand" --> ":CommandParser" : newExitCommand :ExitCommand
+        deactivate ":ExitCommand"
+    end
+
+else other command
+
+end
+
+":CommandParser" --> ":Duke" : newUserCommand : Command
+deactivate ":CommandParser"
+
+alt exit command
+
+":Duke" -> ":Duke" : executeExitCommand()
+activate ":Duke"
+
+   ":Duke" -> ":Ui" : sayByeToUser()
+   activate ":Ui"
+
+   deactivate ":Ui"
+
+deactivate ":Duke"
+else other command
+end
+deactivate ":Duke"
+
+@enduml

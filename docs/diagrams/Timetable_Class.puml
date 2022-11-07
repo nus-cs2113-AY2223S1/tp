@@ -1,0 +1,95 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class TimetableManager {
+    - timetableManager: HashMap<String, Timetable>
+    + TimetableManager()
+    + getTimetableByUniversityName(universityName: String) : Timetable
+    - foundKeyAll(universityName: String) : boolean
+    + createTimetable(universityName: String) : void
+    + deleteTimetable(universityName: String) : void
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
+    + deleteLesson(oldLesson: Lesson) : void
+    + printTimetable(universityName: String) : void
+    + printAllTimetables() : void
+}
+
+class Timetable {
+    - userTimetable: HashMap<String, ArrayList<Lesson>>
+    + Timetable()
+    {static} + isValidDay(lesson: Lesson) : boolean
+    {static} + isValidStartTime(lesson: Lesson) : boolean
+    {static} + isValidEndTime(lesson: Lesson) : boolean
+    {static} + isValidTiming(lesson: Lesson) : boolean
+    + hasTimetableClash(lesson: Lesson) : boolean
+    + addLesson(newLesson: Lesson, isLoadFromFile: boolean) : void
+    + deleteLesson(oldLesson: Lesson) : void
+    + deleteLessonByCode(moduleCode: String) : void
+}
+
+class Lesson {
+    - day: String
+    - startTime: String
+    - endTime: String
+    + Lesson(code: String, title: String, university: University, day: String, startTime: String, endTime: String)
+    + getDay() : String
+    + setDay(day: String) : void
+    + getStartTime() : String
+    + setStartTime(startTime: String) : void
+    + getEndTime() : String
+    + setEndTime(endTime: String) : void
+    + equals(objectToCompare: Object) : boolean
+    + hashCode() : int
+}
+
+class Module {
+    - code: String
+    - title: String
+    - university: University
+    + Look at Module diagram for more attributes
+    + (): Look at Module diagram for more methods
+}
+
+class LessonNotFoundException {
+}
+
+class TimetableNotFoundException {
+}
+
+class TimetableClashException {
+}
+
+class InvalidModuleException {
+}
+
+class InvalidTimeFormatException {
+}
+
+class ParseException {
+}
+
+class InvalidLessonDayException {
+}
+
+class InvalidUniversityException {
+}
+
+class InvalidTimingException {
+}
+
+TimetableManager "1" --> "*" Timetable :> Manages
+Timetable "1" --> "*" Lesson :> Contains
+Lesson --> InvalidModuleException : <<throws>>
+Timetable --> InvalidTimeFormatException : <<throws>>
+Timetable --> InvalidTimingException : <<throws>>
+Timetable --> TimetableClashException : <<throws>>
+Timetable --> ParseException : <<throws>>
+Timetable --> LessonNotFoundException : <<throws>>
+Timetable --> InvalidLessonDayException : <<throws>>
+TimetableManager --> TimetableNotFoundException : <<throws>>
+TimetableManager --> InvalidUniversityException : <<throws>>
+Module <|-- Lesson
+
+@enduml

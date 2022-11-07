@@ -1,0 +1,96 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+-> ":UserUniversityListManager" : createList(input)
+activate ":UserUniversityListManager"
+
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey((input)
+activate ":UserUniversityListManager"
+return : boolean
+
+opt is a new school
+    ":UserUniversityListManager" -> ":UserUniversityList" **: new
+    activate ":UserUniversityList"
+    return ":UserUniversityList"
+
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : put(input, newList)
+    activate ":UserUniversityListManager"
+
+    ":UserUniversityListManager" -> ":TimetableManager" : createTimetable(input, false)
+    activate ":TimetableManager"
+    return
+
+    ":UserUniversityListManager" -> ":Ui" : printPuListCreatedAcknowledgement(input)
+    activate ":Ui"
+    return
+
+    return
+
+end
+return
+deactivate ":UserUniversityListManager"
+
+-> ":UserUniversityListManager" : deleteList(input)
+activate ":UserUniversityListManager"
+
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey((input)
+activate ":UserUniversityListManager"
+return : boolean
+
+opt inputSchool exists
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : remove(inputSchool)
+    activate ":UserUniversityListManager"
+
+    ":UserUniversityListManager" -> ":Ui" : printPuListDeletedAcknowledgement(inputSchool)
+    activate ":Ui"
+    return
+
+    ":UserUniversityListManager" -> ":TimetableManager" : deleteTimetable(inputSchool)
+    activate ":TimetableManager"
+    return
+
+    return
+end
+
+return
+deactivate ":UserUniversityListManager"
+
+-> ":UserUniversityListManager" : addModule(inputSchool, inputModule)
+activate ":UserUniversityListManager"
+":UserUniversityListManager" -> ":UserUniversityListManager" : containsKey(inputSchool)
+activate ":UserUniversityListManager"
+return : boolean
+
+opt inputSchool exists
+    ":UserUniversityListManager" -> ":UserUniversityListManager" : getUserUniversityList(inputSchool)
+    activate ":UserUniversityListManager"
+    return : ":UserUniversityList"
+    ":UserUniversityListManager" -> ":UserUniversityList" : addModule(inputModule)
+    activate ":UserUniversityList"
+
+    activate ":UserUniversityList"
+    ":UserUniversityList" -> ":UserUniversityList" : findModuleByCode(input)
+    activate ":UserUniversityList"
+    return : boolean
+    opt new module
+        ":UserUniversityList" -> ":UserUniversityList" : add(input)
+        activate ":UserUniversityList"
+
+        ":UserUniversityList" -> ":Ui" : printModuleAddedAcknowledgement(input)
+        activate ":Ui"
+        ":UserUniversityList" <-- ":Ui"
+        deactivate ":Ui"
+        return
+    end
+    deactivate ":UserUniversityList"
+
+
+end
+return
+
+return
+deactivate ":UserUniversityListManager"
+
+@enduml

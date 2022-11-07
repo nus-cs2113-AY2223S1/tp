@@ -1,0 +1,77 @@
+@startuml
+
+hide footbox
+
+activate ": DatabaseStorage"
+
+-> ": DatabaseStorage" : loadDatabase()
+
+": DatabaseStorage" -> ": DatabaseStorage" : readFile(DATABASE_FILE_PATH)
+activate ": DatabaseStorage"
+
+loop has next line
+    ": DatabaseStorage" -> ": DatabaseStorage" : readDatabaseLine(line)
+    activate ": DatabaseStorage"
+
+    ": DatabaseStorage" -> ": DatabaseParser" : parseDatabaseLine(line)
+    activate ": DatabaseParser"
+    ": DatabaseParser" --> ": DatabaseStorage" : lineData : String[]
+    deactivate ": DatabaseParser"
+
+    ": DatabaseStorage" -> ": Database" : addUniversity(newUniversity)
+    activate ": Database"
+
+    ": Database" -> ": Database" : isNewUniversity(newUniversity)
+    activate ": Database"
+
+    opt new university
+
+        ": Database" -> ": Database" : appendUniversities(newUniversity)
+        activate ": Database"
+        deactivate ": Database"
+
+    end
+
+    deactivate ": Database"
+
+    deactivate ": Database"
+
+    ": DatabaseStorage" -> ": Database" : addModuleMapping(newModuleMapping)
+    activate ": Database"
+
+    ": Database" -> ": Database" : isNewModuleMapping(newModuleMapping)
+    activate ": Database"
+
+    opt new module mapping
+
+        ": Database" -> ": Database" : appendModuleMappings(newModuleMapping)
+        activate ": Database"
+        deactivate ": Database"
+
+    end
+
+    deactivate ": Database"
+
+    deactivate ": Database"
+
+    deactivate ": DatabaseStorage"
+end
+
+deactivate ": DatabaseStorage"
+
+": DatabaseStorage" -> ": DatabaseStorage" : checkDatabaseFolder()
+activate ": DatabaseStorage"
+
+opt database folder does not exist
+
+    ": DatabaseStorage" -> ": DatabaseStorage" : createDatabaseFolder()
+    activate ": DatabaseStorage"
+    deactivate ": DatabaseStorage"
+
+end
+
+deactivate ": DatabaseStorage"
+
+deactivate ": DatabaseStorage"
+
+@enduml

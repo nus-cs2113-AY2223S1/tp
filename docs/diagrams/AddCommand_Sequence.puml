@@ -1,0 +1,117 @@
+@startuml
+
+activate ":Duke"
+
+":Duke" -> ":Ui" : getUserInput()
+activate ":Ui"
+
+":Ui" --> ":Duke" : userInput : String
+deactivate ":Ui"
+
+":Duke" -> ":CommandParser" : CommandParser.getUserCommand(userInput)
+activate ":CommandParser"
+
+":CommandParser" -> ":CommandParser" : parseUserCommand(userInput)
+activate ":CommandParser"
+
+":CommandParser" --> ":CommandParser" : userInputTokenized : String[]
+deactivate ":CommandParser"
+
+alt add command
+
+    ":CommandParser" -> ":CommandParser" : isValidAddCommand(userInputTokenized)
+    activate ":CommandParser"
+
+    ":CommandParser" --> ":CommandParser" : :boolean
+    deactivate ":CommandParser"
+
+    opt is valid add command
+        ":CommandParser" -> ":CommandParser" : parseLesson(userInputTokenized)
+        activate ":CommandParser"
+
+        ":CommandParser" -> ":Database" : findPuMapping(userInputTokenized[MODULE_INDEX])
+        activate ":Database"
+
+        ":Database" --> ":CommandParser" : puModule :Module
+        deactivate ":Database"
+
+        create ":Lesson"
+        ":CommandParser" -> ":Lesson" : Lesson()
+        activate ":Lesson"
+
+        ":Lesson" --> ":CommandParser" : lesson : Lesson
+        deactivate ":Lesson"
+
+        ":CommandParser" --> ":CommandParser" : lessonToAdd : Lesson
+        deactivate ":CommandParser"
+
+        create ":AddCommand"
+        ":CommandParser" -> ":AddCommand" : AddCommand(userInputTokenized, CommandType.ADD, lessonToAdd, comment)
+        activate ":AddCommand"
+
+        ":AddCommand" -> ":AddCommand" : isValidComment(comment)
+        activate ":AddCommand"
+
+        ":AddCommand" --> ":AddCommand" : boolean
+        deactivate ":AddCommand"
+
+        ":AddCommand" --> ":CommandParser" : newAddCommand : AddCommand
+        deactivate ":AddCommand"
+    end
+
+else other command
+
+end
+
+":CommandParser" --> ":Duke" : newUserCommand : Command
+deactivate ":CommandParser"
+
+alt add command
+
+":Duke" -> ":Duke" : executeAddCommand(userUniversityListManager, timetableManager, newUserCommand)
+activate ":Duke"
+
+    ":Duke" -> ":AddCommand" : getLesson()
+    activate ":AddCommand"
+
+    ":AddCommand" --> ":Duke" : lesson : Lesson
+    deactivate ":AddCommand"
+
+    alt lesson is not null
+    ":Duke" -> ":TimetableManager" : addLesson(lesson, false)
+    activate ":TimetableManager"
+
+    deactivate ":TimetableManager"
+
+    ":Duke" -> ":UserStorageParser" : storeTimetable(timetableManager)
+    activate ":UserStorageParser"
+
+    deactivate ":UserStorageParser"
+
+    else lesson is null
+
+    create ":UserModuleMapping"
+    ":Duke" -> ":UserModuleMapping" : UserModuleMapping()
+    activate ":UserModuleMapping"
+
+    ":UserModuleMapping" --> ":Duke" : userModuleToAdd : UserModuleMapping
+    deactivate ":UserModuleMapping"
+
+    ":Duke" -> ":UserUniversityListManager" : addModule(universityName, userModuleToAdd)
+    activate ":UserUniversityListManager"
+
+    deactivate ":UserUniversityListManager"
+
+    ":Duke" -> ":UserStorageParser" : storeCreatedLists(userUniversityListManager)
+    activate ":UserStorageParser"
+
+    deactivate ":UserStorageParser"
+
+    end
+
+deactivate ":Duke"
+else other command
+end
+
+
+@enduml

@@ -1,0 +1,4 @@
+T%                              //T indicates favourited, F indicates otherwise
+CS103;this is a comment%        //saved module code + corresponding comment
+MET CS 248;%                    //saved module code + no comment
+#CS103;monday;10:00;12:00%      //saved lesson (module code, day, start time, end time)
