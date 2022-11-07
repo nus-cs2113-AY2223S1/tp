@@ -35,7 +35,7 @@
 * The style of document for the developer guide is inspired by the DG of
   [AY2122S1-CS2113T-T10-3](https://github.com/AY2122S1-CS2113T-T10-3/tp/blob/master/docs/DeveloperGuide.md#purpose-of-this-guide)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
 
 ## Design
 
