@@ -58,6 +58,11 @@ public class Storage {
         }
     }
 
+    /**.
+     * Checks that stored input has a valid format that can be added to the list
+     * @param lineInput Current line from stored file to be processed
+     * @return True if fields are valid, false if invalid
+     */
     public Boolean isValidFields(String lineInput) {
         String[] fields = lineInput.split(SPLITTER);
         
@@ -75,6 +80,11 @@ public class Storage {
         return true;
     }
 
+    /**.
+     * Load saved list from stored.txt file to current instance of the program
+     * @param f Text file to be loaded from, stored.txt
+     * @param reviewList List for reviews to be loaded into
+     */
     public void loadMedia(File f, ReviewList reviewList) {
         // read in past saved data
         try {
@@ -130,9 +140,8 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             Ui.print("Error accessing file.");
-            
         } catch (Exception e) {
-            Ui.print("Corrupted file. You may continue using Myreviews, a new file will now be used.");
+            Ui.print("Corrupted file. You may continue using myReviews with a new list.");
             f.delete();
             f.mkdirs();
         }

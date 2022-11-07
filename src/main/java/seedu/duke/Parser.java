@@ -68,6 +68,12 @@ public class Parser {
     }
 
     //@@author redders7
+
+    /**.
+     * Retrieves the command word from the user input
+     * @param input Raw user input
+     * @return Parsed command input to be executed
+     */
     public String[] getCommandWord(String input) {
         String trimmedInput = input.trim();
         String[] result = trimmedInput.split(" ");
@@ -85,6 +91,11 @@ public class Parser {
         }
     }
 
+    /**.
+     * Ensures input fields are non-empty
+     * @param parsedInput Input to be checked
+     * @throws InvalidCommandException Error thrown if fields are empty
+     */
     public void checkEmptyCommand(String parsedInput) throws InvalidCommandException {
         if (parsedInput.isBlank()) {
             throw new InvalidCommandException();
@@ -302,6 +313,13 @@ public class Parser {
         }
     }
 
+    //@@author redders7
+    /**.
+     * Ensures current media does not exist in stored review list
+     * @param title Title of current media to be added
+     * @param spacingType Identifies type of media (Movie or Tv Show)
+     * @return True if it is a duplicate, false otherwise
+     */
     //@@author indraneelrp
     public boolean isDuplicate(String title, int spacingType) {
         for (int i = 0; i < mediaList.inputs.size(); i++) {
@@ -314,6 +332,12 @@ public class Parser {
         return false;
     }
 
+    //@@author redders7
+    /**.
+     * Identifies type of Media
+     * @param spacingType Identifier for media, represented by an Integer
+     * @return Subclass that is represented by the identifier, spacingType
+     */
     public String getMediaTypeString(int spacingType) {
         if (spacingType == SPACING_MOVIE) {
             return MOVIE_TYPE;
