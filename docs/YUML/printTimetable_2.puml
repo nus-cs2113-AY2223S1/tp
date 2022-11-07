@@ -1,0 +1,19 @@
+@startuml
+start
+fork
+:Write time header 
+to <i>timeTable</i>;
+fork again
+:Write Monday to Friday
+to <i>timeTable</i>;
+fork again
+:Write column divider ":" 
+to <i>timeTable</i>;
+fork again
+:Write row divider "="
+between day header
+and lessons
+to <i>timeTable</i>;
+endfork
+stop
+@enduml 

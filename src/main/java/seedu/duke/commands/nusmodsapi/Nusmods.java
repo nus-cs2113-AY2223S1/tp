@@ -81,7 +81,7 @@ public class Nusmods {
 
     public List<Lesson> addModuleInfo(String currentSemester, String[] info, String moduleCode)
             throws IOException, InterruptedException, Exceptions.InvalidSemException,
-            Exceptions.InvalidModuleCodeException {
+            Exceptions.InvalidModuleCodeException, Exceptions.InvalidDayException {
         while (true) {
             HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
@@ -95,7 +95,7 @@ public class Nusmods {
     }
 
     private List<Lesson> addModuleComponents(String response, String currentSemester, String[] info)
-            throws JsonProcessingException, Exceptions.InvalidSemException {
+            throws JsonProcessingException, Exceptions.InvalidSemException, Exceptions.InvalidDayException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode node = mapper.readTree(response);
 
@@ -115,7 +115,7 @@ public class Nusmods {
     }
 
     private static List<Lesson> checkAllLessons(String currentSemester, ArrayNode semData, String moduleCode)
-            throws Exceptions.InvalidSemException {
+            throws Exceptions.InvalidSemException, Exceptions.InvalidDayException {
         lgr.fine("attempting to add lessons data to module object");
 
         int arrayIndex = 0;
@@ -137,12 +137,16 @@ public class Nusmods {
         return lessons;
     }
 
-    private static List<Lesson> findIndividualLessons(JsonNode currentNode, String moduleCode) {
+    private static List<Lesson> findIndividualLessons(JsonNode currentNode, String moduleCode)
+            throws Exceptions.InvalidDayException {
         int arrayIndex = 0;
         List<Lesson> lessons = new ArrayList<>();
         while (currentNode.get(arrayIndex) != null) {
             JsonNode lessonNode = currentNode.get(arrayIndex);
             String day = lessonNode.get("day").asText();
+            if (!isValidDay(day)) {
+                throw new Exceptions.InvalidDayException();
+            }
             String startTime = lessonNode.get("startTime").asText();
             String endTime = lessonNode.get("endTime").asText();
             String lessonType = removeQuotes(lessonNode.get("lessonType").toString());
@@ -154,6 +158,10 @@ public class Nusmods {
         }
         lgr.fine("lessons are added, returning list of lesson data");
         return lessons;
+    }
+
+    private static boolean isValidDay(String day) {
+        return !day.equals("Saturday") && !day.equals("Sunday");
     }
 
     private static String removeQuotes(String lessonType) {

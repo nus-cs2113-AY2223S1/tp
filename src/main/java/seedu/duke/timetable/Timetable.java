@@ -59,12 +59,14 @@ public class Timetable {
         return list.toString();
     }
 
+    //@@author HT-T
     public static void deleteModule(int index) {
         Module module = listOfModules.get(index - 1);
         timetableDict.deleteModule(module);
         listOfModules.remove(index - 1);
         listOfChangeableModules.remove(module);
     }    // the nth module in list has index n-1
+    //@@author HT-T
 
     public static int getListLength() {
         return listOfModules.size();
@@ -130,7 +132,7 @@ public class Timetable {
                                                                  String targetType) {
         assert indexForModule >= 0 : "index should be within range";
 
-        return listOfModules.get(indexForModule).getReplacement(targetType, indexForTarget);
+        return listOfChangeableModules.get(indexForModule).getReplacement(targetType, indexForTarget);
     }
 
     public static void replaceSettableLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {

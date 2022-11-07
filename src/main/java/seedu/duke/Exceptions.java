@@ -15,6 +15,6 @@ public class Exceptions {
     public static class FileLoadException extends Exception {
     }
 
-    public static class TooManyLessonsException extends Exception {
+    public static class InvalidDayException extends Exception {
     }
 }
