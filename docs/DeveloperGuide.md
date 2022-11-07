@@ -231,7 +231,8 @@ The command Add a passenger adds passenger details of a particular passenger to 
 6. `Ui` class level method `showAddedPassenger(PassengerInfo passenger)` is used to display to the user that passenger
    has been added to the list successfully.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Delete a passenger feature
 
@@ -248,8 +249,6 @@ Furthermore, `DeletePassengerCommand` implements the following operation:
 
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
-<div style="page-break-after: always;"></div>
-
 When `Parser` verifies that the command is an entity `passenger` and `delete` operation,
 `DeletePassengerCommend` is instantiated.
 
@@ -259,7 +258,8 @@ When `Parser` verifies that the command is an entity `passenger` and `delete` op
 3. If passenger is found, delete object `passenger` from `passengers`. ELse, return without deletion.
 4. The sequence diagram above assumes that a valid passenger is present in the passenger list to be deleted.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### List passengers feature
 
@@ -286,7 +286,8 @@ When `Parser` verifies that the command is an entity `passenger` and `list` oper
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
 4. The sequence diagram assumes that a passenger detail is present in the list to be deleted. 
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Add a flight feature
 
