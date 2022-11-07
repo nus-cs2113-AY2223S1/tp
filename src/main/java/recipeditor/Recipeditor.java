@@ -52,12 +52,12 @@ public class Recipeditor {
     }
 
     private static CommandResult executeCommand(Command command) {
-        //        try {
-        CommandResult result = command.execute();
-        return result;
-        //        } catch (Exception e) {
-        //            Ui.showMessage(e.getMessage());
-        //            throw new RuntimeException(e);
-        //        }
+        try {
+            CommandResult result = command.execute();
+            return result;
+        } catch (Exception e) {
+            Ui.showMessage(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }

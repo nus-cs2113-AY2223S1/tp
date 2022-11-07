@@ -41,7 +41,7 @@ RecipeList "1" *-l-> "*"  Recipe
 Storage .right..> FileDirectory: recipe files
 Storage .> FileDirectory: `AllRecipes.txt`
 Storage .> FileDirectory: `Template.txt`
-Storage .> FileDirectory: `Temporary.txt`
+Storage .> FileDirectory: `TemporaryFile.txt`
 
 note "not supposed to be in a \nstrict class diagram but helpful" as N1
 FileDirectory .r- N1
