@@ -36,11 +36,10 @@ deactivate CommandParser
 Duke -> DeleteCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
 activate DeleteCommand
 
-DeleteCommand -> Transactions:transactions.size()
-activate Transactions
-return numberOfTransactions: int
-
-alt isInputValid is true
+DeleteCommand -> DeleteCommand: isIndexValid(transactions: TransactionList, index: int)
+activate DeleteCommand
+return check: boolean
+alt check is true
     DeleteCommand -> Transactions:getEntry(index: int)
     activate Transactions
     Transactions -> Transactions:getDate()

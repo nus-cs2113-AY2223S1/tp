@@ -9,7 +9,6 @@ Participant ":Duke" as Duke
 Participant ":CommandParser" as CommandParser
 Participant "command:EditCommand" as EditCommand
 Participant "transactions:TransactionList" as Transactions
-Participant "Transaction" as Transaction
 Participant "ui:Ui" as Ui
 Participant ":Budget" as Budget
 
@@ -37,99 +36,92 @@ return command: EditCommand
 return command: EditCommand
 deactivate CommandParser
 
-Duke -> EditCommand:execute(transactions: TransactionList, ui: Ui, storage: Storage)
+Duke -> EditCommand: execute(transactions: TransactionList, ui: Ui, storage: Storage)
 activate EditCommand
 
-EditCommand -> Transactions:transactions.size()
-activate Transactions
-return numberOfTransactions: int
+EditCommand -> EditCommand: isIndexValid(transactions: TransactionList, index: int)
+activate EditCommand
+return check: boolean
+EditCommand -> EditCommand: isTagsNonEmpty(newType: String, newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate)
+activate EditCommand
+return secondCheck: boolean
 
-alt isInputValid is true
-    EditCommand -> Transactions:getEntry(index: int)
+alt check is true
+    EditCommand -> Transactions: getEntry(index: int)
     activate Transactions
     return entry: Transaction
-    opt newType is null
-        EditCommand -> Transaction:getType()
-        activate Transaction
+    EditCommand -> EditCommand: isParametersChanged(entry: Transaction, newType: String, newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate)
+    activate EditCommand
+    return thirdCheck: boolean
+    alt secondCheck && thirdCheck are true
+        EditCommand -> EditCommand: updateType(entry: Transaction, newType: String)
+        activate EditCommand
         return newType: String
-    end
-    alt newType is Expense
-        opt newDate is null
-            EditCommand -> Transaction:getDate()
-            activate Transaction
+        alt newType is "expense"
+            EditCommand -> EditCommand: updateDate(entry: Transaction, newDate: LocalDate)
+            activate EditCommand
             return newDate: LocalDate
-        end
-        opt newDescription is null
-            EditCommand -> Transaction:getDescription()
-            activate Transaction
+            EditCommand -> EditCommand: updateDescription(entry: Transaction, newDescription: String)
+            activate EditCommand
             return newDescription: String
-        end
-        opt newCategory is null
-            EditCommand -> Transaction:getCategory()
-            activate Transaction
+            EditCommand -> EditCommand: updateCategory(entry: Transaction, newCategory: String)
+            activate EditCommand
             return newCategory: String
+            EditCommand -> EditCommand: updateAmount(entry: Transaction, newAmount: int)
+            activate EditCommand
+            return newAmount: int
+            EditCommand -> Transactions: editExpense(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
+            activate Transactions
+            return message: String
+            EditCommand -> Transactions: calculateMonthlyTotalExpense(newDate: LocalDate)
+            activate Transactions
+            return addedMonthExpenseSum: long
+            EditCommand -> Budget: generateBudgetRemainingMessage(addedMonthExpenseSum: long, true: boolean, monthYear: String)
+            activate Budget
+            return budgetInfo: String
+            EditCommand -> Ui: showTransactionAction(INFO_EDIT_EXPENSE.toString(): String, message: String, budgetInfo: String)
+            activate Ui
+            return
+        else else
+            EditCommand -> EditCommand: updateDate(entry: Transaction, newDate: LocalDate)
+            activate EditCommand
+            return newDate: LocalDate
+            EditCommand -> EditCommand: updateDescription(entry: Transaction, newDescription: String)
+            activate EditCommand
+            return newDescription: String
+            EditCommand -> EditCommand: updateCategory(entry: Transaction, newCategory: String)
+            activate EditCommand
+            return newCategory: String
+            EditCommand -> EditCommand: updateAmount(entry: Transaction, newAmount: int)
+            activate EditCommand
+            return newAmount: int
+            EditCommand -> Transactions: editIncome(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
+            activate Transactions
+            return message: String
+            EditCommand -> Transactions: calculateMonthlyTotalExpense(newDate: LocalDate)
+            activate Transactions
+            return addedMonthExpenseSum: long
+            EditCommand -> Budget: generateBudgetRemainingMessage(addedMonthExpenseSum: long, true: boolean, monthYear: String)
+            activate Budget
+            return budgetInfo: String
+            EditCommand -> Ui: showTransactionAction(INFO_EDIT_INCOME.toString(): String, message: String, budgetInfo: String)
+            activate Ui
+            return
         end
-        opt newAmount is zero
-            EditCommand -> Transaction:getAmount()
-            activate Transaction
-            return newAmount: String
-        end
-        EditCommand -> Transactions:deleteTransaction(index: int)
-        activate Transactions
-        return
-        EditCommand -> Transactions:editExpense(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
-        activate Transactions
-        return message: String
-        EditCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
-        activate Transactions
-        return addedMonthExpenseSum: long
-        EditCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
-        activate Budget
-        return BudgetInfo: String
-        EditCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
-        activate Ui
-        return
     else else
-        opt newDate is null
-            EditCommand -> Transaction:getDate()
-            activate Transaction
-            return newDate: LocalDate
-        end
-        opt newDescription is null
-            EditCommand -> Transaction:getDescription()
-            activate Transaction
-            return newDescription: String
-        end
-        opt newCategory is null
-            EditCommand -> Transaction:getCategory()
-            activate Transaction
-            return newCategory: String
-        end
-        opt newAmount is zero
-            EditCommand -> Transaction:getAmount()
-            activate Transaction
-            return newAmount: String
-        end
-        EditCommand -> Transactions:deleteTransaction(index: int)
-        activate Transactions
+    alt secondCheck is false (Tags are empty)
+        EditCommand -> Ui: showErrorMessage(message: String)
+        activate Ui
         return
-        EditCommand -> Transactions:editIncome(newDescription: String, newAmount: int, newCategory: String, newDate: LocalDate, index: int)
-        activate Transactions
-        return message: String
-        EditCommand -> Transactions:calculateMonthlyTotalExpense(date: LocalDate)
-        activate Transactions
-        return addedMonthExpenseSum: long
-        EditCommand -> Budget:generateBudgetRemainingMessage(totalMonthlyExpenses: long, withTips: boolean, monthYear: String)
-        activate Budget
-        return BudgetInfo: String
-        EditCommand -> Ui:showTransactionAction(message: String, transactionDetails: String, budgetInfo: String)
+    else else (Transaction is unchanged)
+        EditCommand -> Ui: showErrorMessage(message: String)
         activate Ui
         return
     end
-else else
-    EditCommand -> Ui:showErrorMessage(message: String)
-    activate Ui
-    return
+    end
+    else else (Index is invalid)
+        EditCommand -> Ui: showErrorMessage(message: String)
+        activate Ui
+        return
 end
-
 @enduml
