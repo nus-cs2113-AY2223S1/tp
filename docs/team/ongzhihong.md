@@ -6,7 +6,7 @@ easySEP is a CLI application created to assist NUS Computer Engineering (CEG) un
 ## Code Contributed
 This [link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=ongzhihong&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other) indicates the breakdown of code contributed, in terms of documentation, functional code, and test code.
 
-### Summary of Contributions
+## Summary of Contributions
 
 ### Command Package
 
