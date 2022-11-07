@@ -157,7 +157,7 @@ Example:
 
 ### CLI Editor
 The CLI Editor updates the recipe directly on the CLI. Users have to input the appropriate flags (recipe and command flags)
-and take note of the format before entering the command.
+and take note of the format before entering the command. Trailing arguments will be discarded.
 
 Format: `/edit RECIPE_INDEX COMMAND_FLAG RECIPE_FLAG PARAMETERS`
 
@@ -419,13 +419,13 @@ stored into the local drive and reloaded when _RecipEditor_ is restarted.
 
 # Command Summary
 
-| Command | Action                                           | Format                                              | Example    |
-|---------|--------------------------------------------------|-----------------------------------------------------|------------|
-| add     | Add new recipe                                   | `/add`                                              | `/add`     |
-| edit    | Edit recipe at INDEX                             | `/edit INDEX`                                       | `/edit 1`  |
-| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete -t RECIPE_TITLE`<br/>`/delete -id <INDEX<br/>>` | `/delete carbonara`     |
-| list    | List all recipes                                 | `/list`                                             | `/list`    |
-| view    | View recipe at INDEX                             | `/view INDEX`                                       | `/view 1`  |
-| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find -t <RECIPE_TITLE>`<br/>`/find -id <INDEX>`   | `/find egg` |
-| help    | Show available commands                          | `/help`                                             | `/help`    |
-| exit    | Exit the program                                 | `/exit`                                             | `/exit`    |
+| Command | Action                                           | Format                                                   | Example                                             |
+|---------|--------------------------------------------------|----------------------------------------------------------|-----------------------------------------------------|
+| add     | Add new recipe                                   | `/add`                                                   | `/add`                                              |
+| edit    | Edit recipe at INDEX                             | `/edit INDEX (FLAGS PARAMS)`                             | `/edit 1` <br/> `/edit 1 -add -s "new step"` |
+| delete  | Deletes recipe of given RECIPE_TITLE             | `/delete -t RECIPE_TITLE`<br/>`/delete -id <INDEX<br/>>` | `/delete carbonara`                                 |
+| list    | List all recipes                                 | `/list`                                                  | `/list`                                             |
+| view    | View recipe at INDEX                             | `/view INDEX`                                            | `/view 1`                                           |
+| find    | Find recipe with RECIPE_TITLE or INGREDIENT_NAME | `/find -t <RECIPE_TITLE>`<br/>`/find -id <INDEX>`        | `/find egg`                                         |
+| help    | Show available commands                          | `/help`                                                  | `/help`                                             |
+| exit    | Exit the program                                 | `/exit`                                                  | `/exit`                                             |
