@@ -16,7 +16,7 @@ The Architecture Diagram given above explains the high-leve design of the App.
 
 Given below is an overview of main components and how they interact with each other.
 
-`Main:`
+`Duke:`
 
 * At Launching: Initialise the components in the correct sequence and connects them with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
@@ -40,6 +40,29 @@ Given below is an overview of main components and how they interact with each ot
 `Exception:`
 
 * Stores the exception classes for the app.
+
+### Record component
+
+![](UmlDiagrams/Records.png)
+The record component,
+
+* calls by logic components
+* stores the exercise list data, all `Exercise` objects
+* stores the food list data, all `Food` objects
+* stores the biometrics data, in `Biometrics` object.
+* stores wight and fat list data, all `WeightAndFat` objects.
+
+### Storage component
+
+![](UmlDiagrams/Storage.png)
+The storage component of TracknFit is responsible for loading data from the save file when the program starts,
+and saves the data into the save file when the program stops. The Storage class uses the static methods in
+DataLoader and DataSaver to load and save data respectively.   
+Data is loaded by directing the text input into AddCommand and SetCommand classes as if they were user inputs.
+If an error is encountered when loading, the line is printed to inform the user and logged at warning level. Remaining
+data continues to load.  
+Data is saved by calling the save methods for the different data types, which return Strings in the same format
+as the user input.
 
 ### Class Diagrams
 
@@ -77,16 +100,6 @@ filter exercise based on its status when user want to view the exercises based o
 
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
-
-### Storage component
-![](UmlDiagrams/Storage.png)
-The storage component of TracknFit is responsible for loading data from the save file when the program starts,
-and saves the data into the save file when the program stops. The Storage class uses the static methods in
-DataLoader and DataSaver to load and save data respectively.   
-Data is loaded by directing the text input into AddCommand and SetCommand classes as if they were user inputs. 
-If an error is encountered when loading, the line is printed to inform the user and logged at warning level. Remaining data continues to load.  
-Data is saved by calling the save methods for the different data types, which return Strings in the same format
-as the user input.
 
 ## Implementation
 
@@ -132,13 +145,15 @@ removeCommand to be printed on the ui.
 The interactions for removing other types of records are similar.  
 
 ### Design considerations
+
 **Saving data:**
+
 * Option 1 (current implementation): Saves data only when user exits from TracknFit
-  * Pros: Better efficiency for executing each command, easier to implement
-  * Cons: If user exits TracknFit incorrectly or TracknFit crashes, all changes made in the session are lost
+    * Pros: Better efficiency for executing each command, easier to implement
+    * Cons: If user exits TracknFit incorrectly or TracknFit crashes, all changes made in the session are lost
 * Option 2: Saves the data to save file after every user command
-  * Pros: All changes are saved even if TracknFit closes incorrectly or crashes
-  * Cons: High overhead in executing each command, always O(N) time, where N is total number of records
+    * Pros: All changes are saved even if TracknFit closes incorrectly or crashes
+    * Cons: High overhead in executing each command, always O(N) time, where N is total number of records
 
 ## Product scope
 

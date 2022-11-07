@@ -38,7 +38,7 @@ public class HelpCommand extends Command {
                 + "mark {done} /{exercise index} /{time} /{metabolic equivalent}" + System.lineSeparator()
                 + "mark {undone} /{exercise index}" + System.lineSeparator()
                 + "find {strength/cardio/food} /{description}" + System.lineSeparator()
-                + "find {calories} /{date}" + System.lineSeparator()
+                + "find {calories} /[{date}]" + System.lineSeparator()
                 + "Please read the user guide for more detailed explanations");
     }
 
