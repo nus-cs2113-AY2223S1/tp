@@ -381,7 +381,7 @@ The relationship between the classes are shown below. Non-essential info has bee
 <p align="center">
     <img src="images/AddCommandExternalClasses.png">
     <br />
-    <i>Figure 12: Class Diagram for Add Command and Related Classes</i>
+    <i>Figure 11: Class Diagram for Add Command and Related Classes</i>
 </p>
 
 These are the important operations performed within the `AddCommand` class, with task description:
@@ -401,7 +401,7 @@ The structure of the application focusing on the Add command is illustrated in t
 <p align="center">
     <img src="images/AddCommandSequenceDiagram.png">
     <br />
-    <i>Figure 13: Sequence Diagram for Add Command</i>
+    <i>Figure 12: Sequence Diagram for Add Command</i>
 </p>
 
 In a command like `add t/expense c/food a/20 d/13092022 i/NIL` OR `add t/income c/salary a/2000 d/30092022 i/jan_salary`
@@ -423,7 +423,7 @@ shown below.
 <p align="center">
     <img src="images/EditCommandClassDiagram.png" width="80%">
     <br />
-    <i>Figure 14: Class Diagram for Edit Command</i>
+    <i>Figure 13: Class Diagram for Edit Command</i>
 </p>
 
 The full command for `edit` is `edit [e/ENTRY] [t/TYPE] [c/CATEGORY] [a/AMOUNT] [d/DATE] [i/DESCRIPTION]`.
@@ -477,7 +477,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/EditCommandSequenceDiagram.png">
     <br />
-    <i>Figure 15: Sequence Diagram for Edit Command</i>
+    <i>Figure 14: Sequence Diagram for Edit Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -493,7 +493,7 @@ The structure of the application focusing on the list command is illustrated in 
 <p align="center">
     <img src="images/ListCommandSequenceDiagram.png">
     <br />
-    <i>Figure 16: Sequence Diagram for List Command</i>
+    <i>Figure 15: Sequence Diagram for List Command</i>
 </p>
 
 In a command like `list c/transport`
@@ -516,13 +516,13 @@ The `FindCommand` class provides the search functionality for finding a specific
 Using the command `find k/KEYWORD`, the criteria for retrieving the matching transactions is based upon the partial or full match of the user `KEYWORD` input 
 compared with the description of each transaction object.
 
-Figure 17 below is a class diagram for the `Find` command class and its associations with other classes that contribute to the listing of filtered
+Figure 16 below is a class diagram for the `Find` command class and its associations with other classes that contribute to the listing of filtered
 transactions. Some methods and variables have been omitted from the class diagram for simplicity.
 
 <p align="center">
     <img src="images/FindCommandClassDiagram.png" width="80%">
     <br />
-    <i>Figure 17: Class Diagram for Find Command</i>
+    <i>Figure 16: Class Diagram for Find Command</i>
 </p>
 
 The sequence diagram below shows the interactions of a successful execution of the `FindCommand`, using an example of `find k/bus_fare`.
@@ -530,10 +530,10 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/FindCommandSequenceDiagram.png">
     <br />
-    <i>Figure 18: Sequence Diagram for Find Command</i>
+    <i>Figure 17: Sequence Diagram for Find Command</i>
 </p>
 
-Referring to Figure 18, the following is a summarized steps of the interactions that `FindCommand` performs, with some higher level details in `CommandParser` and `ParameterParser`
+Referring to Figure 17, the following is a summarized steps of the interactions that `FindCommand` performs, with some higher level details in `CommandParser` and `ParameterParser`
 omitted for simplicity.
 
 1. The user executes `find k/KEYWORD` command with an intent to view a filtered list of transactions that match the search keyword, e.g. `bus_fare`.
@@ -555,7 +555,7 @@ shown below.
 <p align="center">
     <img src="images/DeleteCommandClassDiagram.png" width = "80%">
     <br />
-    <i>Figure 19: Class Diagram for Delete Command</i>
+    <i>Figure 18: Class Diagram for Delete Command</i>
 </p>
 
 The full command for `delete` is `delete [e/ENTRY]`.
@@ -604,7 +604,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/DeleteCommandSequenceDiagram.png">
     <br />
-    <i>Figure 20: Sequence Diagram for Delete Command</i>
+    <i>Figure 19: Sequence Diagram for Delete Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -617,7 +617,7 @@ shown below.
 <p align="center">
     <img src="images/PurgeCommandClassDiagram.png" width = "80%">
     <br />
-    <i>Figure 21: Class Diagram for Purge Command</i>
+    <i>Figure 20: Class Diagram for Purge Command</i>
 </p>
 
 The full command for `purge` is `purge`.
@@ -662,7 +662,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/PurgeCommandSequenceDiagram.png">
     <br />
-    <i>Figure 22: Sequence Diagram for Purge Command</i>
+    <i>Figure 21: Sequence Diagram for Purge Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
@@ -683,12 +683,12 @@ The `List` and `Stats` command classes inherit their methods from the `ListAndSt
 Likewise, retrieval of filtered transactions by time periods is also done in `ListAndStats` command class, streamlining the workflow for both the `List` and `Stats` commands.
 This way, the `Stats` command class focuses on generating the different types of statistics rather than having to deal with an overhead of needing to consolidate the transaction entries of different time periods.
 
-Figure 23 below is a class diagram that illustrates the inheritance for the `Stats` command class.
+Figure 22 below is a class diagram that illustrates the inheritance for the `Stats` command class.
 
 <p align="center">
     <img src="images/StatsCommandClassDiagram.png" width="80%">
     <br /> 
-    <i>Figure 23: Class Diagram for Stats Command</i>
+    <i>Figure 22: Class Diagram for Stats Command</i>
 </p>
 
 Elaborating on the checks for date interval tags and retrieval of the filtered transactions by time periods, the two significant methods are `checkContainDateIntervalsTags()` and `getTimeTransactions()`.
@@ -735,10 +735,10 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/StatsCommandSequenceDiagram.png">
     <br />
-    <i>Figure 24: Sequence Diagram for Stats Command</i>
+    <i>Figure 23: Sequence Diagram for Stats Command</i>
 </p>
 
-Referring to Figure 24, the following is a summarized steps of the interactions that `StatsCommand` performs when a user is requesting for the categorical
+Referring to Figure 23, the following is a summarized steps of the interactions that `StatsCommand` performs when a user is requesting for the categorical
 savings. Higher level details in `CommandParser` and `ParameterParser` have been omitted for simplicity. Additionally, segments of interaction for getting monthly
 expenditure and time insights have been put into isolated sequence diagrams to break down the information.
 
@@ -753,18 +753,18 @@ and append the amount for each category accordingly until all transactions are e
 6. A formatted string of output collected from looping through the hashmap will be returned to the `StatsCommand` class.
 7. If `StatsCommand` class checks that `genericStatsList` string is empty, it will call `Ui#showInfoMessage()`. Otherwise, `Ui#showList()` method is called to display the categorical savings.
 
-Amongst the omitted frames in Figure 24, below two are the sequence diagrams for getting monthly expenditure and time insights.
+Amongst the omitted frames in Figure 23, below two are the sequence diagrams for getting monthly expenditure and time insights.
 
 <p align="center">
     <img src="images/StatsCommandMonthlyExpenditureSequenceDiagram.png" width="70%">
     <br />
-    <i>Figure 25: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
+    <i>Figure 24: Sequence Diagram for Stats Command (Getting Monthly Expenditure List) </i>
 </p>
 
 <p align="center">
     <img src="images/StatsCommandTimeInsightsSequenceDiagram.png" width="70%">
     <br />
-    <i>Figure 26: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
+    <i>Figure 25: Sequence Diagram for Stats Command (Getting Time Insights List)</i>
 </p>
 
 _Written by: Chua Han Yong Darren_
@@ -776,7 +776,7 @@ The budget command allows user to set a new monthly budget. The range of accepte
 
 ```
 public static int MAX_TRANSACTIONS_COUNT = 1000000;
-public static int MIN_AMOUNT_VALUE = 0;
+public static int MIN_AMOUNT_VALUE = 1;
 public static int MAX_AMOUNT_VALUE = 10000000;
 public static int MIN_BUDGET_VALUE = 1;
 public static long MAX_BUDGET_VALUE = Long.valueOf(MAX_TRANSACTIONS_COUNT) * Long.valueOf(MAX_AMOUNT_VALUE);
@@ -809,7 +809,7 @@ The structure of the application focusing on the help command is illustrated in 
 <p align="center">
     <img src="images/HelpCommandClassDiagram.png" width = "95%">
     <br />
-    <i>Figure 27: Class Diagram for Help Command</i>
+    <i>Figure 26: Class Diagram for Help Command</i>
 </p>
 
 For each command subclass, they will implement the getHelpMessage() and getDetailedHelpMessage() methods. These methods
@@ -821,7 +821,7 @@ based on the help option chosen by the user.
 <p align="center">
     <img src="images/HelpCommandSequenceDiagram.png" width="80%">
     <br />
-    <i>Figure 28: Sequence Diagram for Help Command</i>
+    <i>Figure 27: Sequence Diagram for Help Command</i>
 </p>
 
 _Written by: Chia Thin Hong_
@@ -834,7 +834,7 @@ shown below.
 <p align="center">
     <img src="images/ByeCommandClassDiagram.png" width = "80%">
     <br />
-    <i>Figure 29: Class Diagram for Bye Command</i>
+    <i>Figure 28: Class Diagram for Bye Command</i>
 </p>
 
 
@@ -871,7 +871,7 @@ The sequence diagram below shows the interactions of a successful execution of t
 <p align="center">
     <img src="images/ByeCommandSequenceDiagram.png">
     <br />
-    <i>Figure 30: Sequence Diagram for Bye Command</i>
+    <i>Figure 29: Sequence Diagram for Bye Command</i>
 </p>
 
 _Written by: Brian Wong Yun Long_
