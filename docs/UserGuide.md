@@ -194,6 +194,10 @@ Command used to produce a timetable for a straightforward view.
 * Clashes are indicated with `XXXXXX` in place of the module code. At the end of the timetable, clashed modules will be listed out, if any.
   Alternatively, you may use `list` command to find the clash and deconflict with `set` feature.
 
+
+<div style="page-break-after: always;"></div>
+
+
 **Example of Usage:**
 input: `print`
 
