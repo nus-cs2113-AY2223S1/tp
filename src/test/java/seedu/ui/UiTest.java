@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public class UiTest {
 
-    //@@author eehongchan-reused
-    //Reused from https://stackoverflow.com/questions/3228427/redirect-system-out-println
+    //@@author Vic Seedoubleyew-reused
+    //Reused from https://stackoverflow.com/a/36558036
     // with minor modifications
     @Test
     void testStringPrinting() {
