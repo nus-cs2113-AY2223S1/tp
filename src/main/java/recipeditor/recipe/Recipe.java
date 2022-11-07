@@ -73,6 +73,9 @@ public class Recipe {
 
     public void setIngredient(int index, Ingredient ingredient) throws IndexOutOfBoundsException {
         this.ingredients.set(index, ingredient);
+        if (index >= ingredients.size()) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     public ArrayList<String> getSteps() {
