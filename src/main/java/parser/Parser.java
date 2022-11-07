@@ -112,6 +112,9 @@ public class Parser {
 
     public int isHealthy(String input) throws DukeException {
         try {
+            if (input.length() > 4) {
+                throw new DukeException();
+            }
             return numberInInput(input, healthFlag);
         } catch (DukeException e) {
             System.out.println("Please enter 0 or 1 for health status");

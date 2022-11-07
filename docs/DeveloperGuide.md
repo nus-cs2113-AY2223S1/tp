@@ -189,6 +189,10 @@ Step 3. The user executes `pet remove 2/index` command to remove the second pet 
 
 Step 4. The user executes `view pet` to display all pets in the pet manage system.
 
+
+The following sequence diagram shows how the view operation works:
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png)
+
 The following sequence diagram shows how the status operation works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png)
