@@ -1,6 +1,7 @@
 @startuml
 
 
+hide circle
 abstract class "{abstract}\nCommandAddParser" as CommandAddParser
 class CommandAddPropertyParser
 class CommandAddClientParser
