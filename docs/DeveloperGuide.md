@@ -124,7 +124,7 @@ This component:
 - Regenerate files when an invalid format is detected, and ignore invalid values
 
 For more information on the process of loading files from JSON, please see the section 
-[Updating CarparkList with JSON from API](#33-updating-carparklist-with-json-from-api).
+[Updating CarparkList with JSON from API](#33-updating-carparklist-with-json-file-from-api).
 
 ### 2.5 UI Component
 
@@ -150,10 +150,10 @@ different commands.
 How the parsing works:
 
 * When called upon to parse a user command, the `Parser` class creates an `ABCCommandParser` (`ABC` is a placeholder 
-for the specific command name eg. `FindCommandParser`) which uses the other classes to parse the user command and
-create an `ABCCommand` object (eg. `FindCommand`), which the `Parser` returns back as a `Command` object.
+for the specific command name e.g. `FindCommandParser`) which uses the other classes to parse the user command and
+create an `ABCCommand` object (e.g. `FindCommand`), which the `Parser` returns back as a `Command` object.
 
-* All `ABCCommandParser` classes (eg. `FindCommandParser`, `FilterCommandParser` etc) inherit from the `Parser` 
+* All `ABCCommandParser` classes (e.g. `FindCommandParser`, `FilterCommandParser` etc) inherit from the `Parser` 
 interface so that they can be treated similarly where possible.
 
 How the command works:
@@ -161,7 +161,7 @@ How the command works:
 * When the `Parser` returns back as a `Command` object, it will run `execute`, which is a method to execute the command
 and return the intended result. `Execute` returns a `CommandResult`, which is an object that takes in `String` and
 `CarparkList` and returns what the user will be seeing on the terminal.
-* Each command will have its own class `ABCCommand` (`ABC` is a placeholder for the specific command name eg. 
+* Each command will have its own class `ABCCommand` (`ABC` is a placeholder for the specific command name e.g. 
 `FindCommand`) as an extension of the `Command` class.
 * All `ABCCommand` classes will have an override `execute` method, which will override the `execute` method in `Command` 
 and return the respective `CommandResult` result of the Command.
@@ -319,7 +319,7 @@ These are the reference sequence diagram to complement the above diagram.
 **Asynchronous request**
 
 We chose Land Transport Authority's API service to provide us with the carpark availability due to
-it having access to multiple agency's database. Thus by using only one API we can get more carpark
+it having access to multiple agency's databases. Thus, by using only one API we can get more carpark
 lots. Government API services usually utilise pagination (in this case the `skip` parameter), such that
 each query only gives you a maximum of 500 data. As a result, multiple calls are needed to capture
 the complete database that the API service can offer.
@@ -329,7 +329,7 @@ one by one. This means that the responses coming into our program are not bottle
 faster than if we were to use synchronous request.
 
 After receiving all the data from the responses, we need to concatenate them into one file 
-such that the parser only needs to read from one file. This is done so as to minimise the possibility
+such that the parser only needs to read from one file. This is done to minimise the possibility
 of read failure or exception being thrown.
 
 **Synchronous request capability**
@@ -345,7 +345,7 @@ for future development such as updating a specific value instead of the whole da
 During the course of our development, we found out that sometimes the responses we receive are not the
 full set of 500 data per call. This led to some confusion at first but the behaviour seems random
 and definitely not caused by our program. Thus, we have to do multiple checks such as checking whether 
-any data is being send over (even if response is 200 OK) and tabulate the number of carpark that exists
+any data is being sent over (even if response is 200 OK) and tabulate the number of carpark that exists
 in the response.
 
 **Dataset does not adhere to the documentation**
@@ -355,11 +355,11 @@ that LTA may give us invalid data. For example, in the documentation, only 3 typ
 of carpark lot type exists: C (Car), H (Heavy Vehicles) and Y (Motorcycle). However, upon further inspection
 we found out that there is a fourth type, M.
 
-Another problem we found out is that LTA does not do its own data validation. Thus we found some 
+Another problem we found out is that LTA does not do its own data validation. Thus, we found some 
 carparks having negative number of available lots. This is a big problem as from the user's perspective
 it can be that our program is at fault. 
 
-Due to such bug discoveries, we made our carparkList parser much more robust and it now does data
+Due to such bug discoveries, we made our carparkList parser much more robust, and it now does data
 validation internally to ensure no such data is presented to the user.
 
 ### 3.3 Updating CarparkList with JSON file from API 
@@ -423,17 +423,17 @@ The sequence of events from loading from a JSON file is as follows:
    objects, which will then be returned to the program.
 3. If the `LtaResponse.json` doesn't exist or has an invalid format, `LtaResponseSample.json` is read instead: a backup
 file to be used if there is no internet connection or an error with the LTA file. 
-4. If both the `LtaResponse.json` and `LtaResponseSample.json` file come with errors, the the `LtaResponseSample.json` is regenerated
+4. If both the `LtaResponse.json` and `LtaResponseSample.json` file come with errors, the `LtaResponseSample.json` is regenerated
 by copying from within the .jar file. It is then read again, and the `CarparkList` object is returned.
 
 **Invalid format behaviour**
 In the UG, users are warned not to tamper with these two files as it may result in regeneration of the files due to invalid format. As with the
-`carparkList.txt` file, any errors at all will cause the entire file to be ignored and the backup to be used instead. The backup `LtaResponseSample.json` should not be tampered with either, but if it is will always be regenerated from the `.jar`, which should never fail.
+`carparkList.txt` file, any errors at all will cause the entire file to be ignored and the backup to be used instead. The backup `LtaResponseSample.json` should not be tampered with either, but if it is, it will always be regenerated from the `.jar`, which should never fail.
 
 #### 3.3.3 Writing to text file
 ![Sequence diagram](images/LoadFileSequenceWriteTxt.png)
 The sequence of events for writing to a text file is as follows:
-1. The program calls the `getSaveString()` method inside of the `carparkList` passed in as a parameter.
+1. The program calls the `getSaveString()` method inside the `carparkList` passed in as a parameter.
 2. This save string is written to the text file.
 
 If the file cannot be found or the appropriate directories are missing, the file structure and new text file will be regenerated and then written to.
@@ -486,15 +486,15 @@ for use via a Command Line Interface (CLI).
 
 ## 5 User Stories
 
-| Version | As a ... | I want to ...                                                  | So that I can ...                                        |
-|---------|------|----------------------------------------------------------------|----------------------------------------------------------|
-| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
-| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
-| v2.0    |Driver| Be able to save favourites                                     | I can monitor carparks important to me                   |
-| v2.0    |Driver| Import my favourite carparks                                   | Import saved settings/preferences                        |
-| v2.0    |Driver| Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
-| v2.1    |Driver| Search for carparks I want based on carpark ID                 | I can search for carparks with a specific code           |
-| v2.1    |Driver| Have my carpark information be colour coordinated              | I can look at carpark information with ease              |
+| Version | As a ...              | I want to ...                                                  | So that I can ...                                        |
+|---------|-----------------------|----------------------------------------------------------------|----------------------------------------------------------|
+| v1.0    | Driver                | Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
+| v1.0    | User with no internet | Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
+| v2.0    | Driver                | Be able to save favourites                                     | I can monitor carparks important to me                   |
+| v2.0    | Driver                | Import my favourite carparks                                   | Import saved settings/preferences                        |
+| v2.0    | Driver                | Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
+| v2.1    | Driver                | Search for carparks I want based on carpark ID                 | I can search for carparks with a specific code           |
+| v2.1    | Driver                | Have my carpark information be colour coordinated              | I can look at carpark information with ease              |
 
 
 ## 6 Non-Functional Requirements
