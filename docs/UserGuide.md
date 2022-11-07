@@ -39,14 +39,40 @@ Please follow these guidelines when entering commands into the terminal:
 - All dates should be entered in the format `DD-MM-YYYY`. For example, `31-12-2020`.
 - Parameters must not contain `/` within them. For example, `cheese/burger` is an invalid name for food
 
-Records are automatically saved when exiting TracknFit, and loaded when starting TracknFit
+Records are automatically loaded when starting TracknFit, and saved when exiting TracknFit. Note that you must exit
+TracknFit using the `exit` command (and not by closing the terminal) in order to save your changes.
 
 ### General
 
 #### Display help message: `help`
 
 Display the help message  
-Format: `help`
+
+Format: `help`  
+
+Example of usage: `help`  
+
+Expected outcome: help message is displayed
+
+```
+Help will always be given at Hogwarts to those who ask for it
+Available commands:
+help
+exit
+set biometrics /{age} /{gender} /{height} /{activity level}
+view {biometrics/food/exercise/strength/cardio/weight/bmi/maintenance/calories/all}
+view {exercise/strength/cardio} /{done}
+add strength /{description} /{weight} /{sets} /{repetitions} [/{date}]
+add cardio /{description} /{distance} /{repetitions} [/{date}]
+add food /{description} /{calories} [/{date}]
+add weight /{weight} /{fat percentage} [/{date}]
+remove {food/exercise/weight} /{record index}
+mark {done} /{exercise index} /{time} /{metabolic equivalent}
+mark {undone} /{exercise index}
+find {strength/cardio/food} /{description}
+find {calories} /{date}
+Please read the user guide for more detailed explanations
+```
 
 #### Viewing All Daily Records: `view all`
 
@@ -132,19 +158,79 @@ Format: `set biometrics /{age} /{gender} /{height} /{activity level}`
 * height should be in units of cm and cannot exceed 300cm
 * activity level should be between 1 and 5
 
-Example of usage: `set biometrics /15 /male /146 /98 /55 /2`
+Example of usage: `set biometrics /15 /male /146 /2`
+
+Expected outcome: biometrics is set successfully
+
+```
+Biometrics set:
+Age: 15
+Gender: male
+Height: 146cm
+Activity Level: 2
+```
 
 #### Adding weight and fat record: `add weight`
 
 Adds a record of weight and fat to TracknFit
 
-Format: `add weight /{weight} /{fat percentage}`
+Format: `add weight /{weight} /{fat percentage} [/{date}]`
 
 * weight and fat percentage should be integer values
 * weight should be in units of kg and cannot exceed 400kg
 * fat percentage should be between 1% and 99%
+* date, if provided, cannot be in the future
 
 Example of usage: `add weight /133 /42`
+
+Expected outcome: weight and fat record is added successfully
+
+```
+Weight: 133kg
+Fat percentage: 42%
+Date: 07-11-2022
+ Weight and fat percentage are recorded successfully
+```
+
+#### Viewing weight and fat records: `view weight`
+
+Views all records of weight and fat stored in TracknFit
+
+Format: `view weight`
+
+Example of usage: `view weight`
+
+Expected outcome: all weight and fat records displayed in descending order of date
+
+```
+3 records of weight and fat percentage:
+-----------------------------------------------
+Index | Weight | Fat Percentage | Date       | 
+-----------------------------------------------
+1     | 133    | 42             | 07-11-2022 | 
+2     | 122    | 22             | 12-10-2022 | 
+3     | 118    | 33             | 08-04-2022 | 
+
+```
+
+#### Removing weight and fat record: `remove weight`
+
+Removes a record of weight and fat from TracknFit
+
+Format: `remove weight /{record index}`
+
+* record index corresponds with the index when viewing weight records
+
+Example of usage: `remove weight /2`
+
+Expected outcome: weight and fat record is removed successfully
+
+```
+This weight and fat record has been deleted successfully!
+Weight: 122kg
+Fat percentage: 22%
+Date: 12-10-2022
+```
 
 #### View BMI : `view bmi`
 

@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor RECORD_COLOR
+skinparam classBackgroundColor RECORD_COLOR
+
+package Record {
+Class "{abstract}\nRecord"
+Class Food
+Class WeightAndFat
+Class Exercise
+Class ExerciseList
+Class StrengthExercise
+Class CardioExercise
+Class FoodList
+Class Food
+Class RecordList
+Class Biometrics
+Class WeightAndFatList
+Class Calories
+Class CaloriesList
+Class Calculator
+}
+
+package Logic {
+}
+
+RecordList "1" *-- "*" "{abstract}\nRecord" : contains
+"{abstract}\nRecord" <|--- Food
+"{abstract}\nRecord"<|-- WeightAndFat
+"{abstract}\nRecord" <|-- Exercise
+ExerciseList "1" *--> "*" Exercise: contains >
+ExerciseList "1" *--> "*" Exercise: contains >
+Exercise <|-- StrengthExercise
+Exercise <|-- CardioExercise
+FoodList "1" *--> "*" Food: contains >
+ExerciseList <..  RecordList: use by >
+WeightAndFatList <..  RecordList: use by >
+WeightAndFatList "1" *--> "*" WeightAndFat: contains >
+FoodList <..  RecordList: use by >
+Biometrics "1" --> "1" WeightAndFatList: has >
+CaloriesList "1" *-up-> Calories
+Calculator ..> FoodList : uses >
+Calculator ..> Biometrics : uses >
+Calculator ..> ExerciseList : uses >
+Logic -left-> Record : uses
+hide empty members
+@enduml

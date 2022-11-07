@@ -59,8 +59,8 @@ class Ui {
 +output(output: String...): void
 }
 
-LoadCommand --> Storage
-SaveCommand --> Storage
+LoadCommand --> "1"Storage
+SaveCommand --> "1"Storage
 Storage ..> DataLoader
 Storage ..> DataSaver
 DataLoader ..> Ui

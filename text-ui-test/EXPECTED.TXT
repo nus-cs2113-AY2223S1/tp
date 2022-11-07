@@ -27,7 +27,7 @@ remove {food/exercise/weight} /{record index}
 mark {done} /{exercise index} /{time} /{metabolic equivalent}
 mark {undone} /{exercise index}
 find {strength/cardio/food} /{description}
-find {calories} /{date}
+find {calories} /[{date}]
 Please read the user guide for more detailed explanations
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
