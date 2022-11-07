@@ -225,7 +225,7 @@ Step 1. On startup, `Favourite` is initialised. The main programs calls `loadFav
 carpark IDs in the file.
 
 Step 2. The user executes `favourite 1` to favourite the carpark with carpark ID `1`. The command is passed to the
-Parser class which returns a Command with value `FAVOURITE` to the main program.
+Parser class which returns a `FavouriteCommand` object to the main program.
 The main program then calls `executeCommand()` which calls `execute()` from the `FavouriteCommand` class.
 It first checks if the second argument in the command is equal to `list`. Since this is false, `execute()` checks if 
 there exists a carpark with carpark ID `1` by calling `isCarparkValid()` from the `CarparkList` class. If the carpark 
@@ -243,7 +243,7 @@ similar to Step 2, except now `execute()` will repeat the execution for each add
 over the invalid carpark IDs.
 
 Step 4. The user realises he/she made a mistake and wants to unfavourite the carpark with carpark ID `2`, and executes
-`unfavourite 2`. The command is passed to the Parser class which returns a Command with value `UNFAVOURITE`.
+`unfavourite 2`. The command is passed to the Parser class which returns a `UnfavouriteCommand` object.
 The main program calls `executeCommand()` which calls `execute()` from the `UnfavouriteCommand` class. `execute()` 
 checks if there exists a carpark with carpark ID `2` by calling `isCarparkValid()` from the`CarparkList` class. If the 
 carpark ID is valid, `setUnfavourite()` is called, which first checks if `favouriteList` contains an entry that matches 
@@ -251,7 +251,7 @@ carpark ID is valid, `setUnfavourite()` is called, which first checks if `favour
 `setUnfavourite()` calls `writeFavouriteList()` which overwrites data from `favouriteList` to the favourites file.
 
 Step 5. The user wants to view all favourited carparks and executes `favourite list`. The command is passed to the
-Parser class which returns a Command with value `FAVOURITE`. The main program calls `executeCommand()` which calls 
+Parser class which returns a `FavouriteCommand` object. The main program calls `executeCommand()` which calls 
 `execute()` from the `FavouriteCommand` class. After checking if the second argument is equal to `list`, 
 `updateFavouriteList()` and `writeFavouriteList()` are called to get and validate the most updated favourited carpark 
 IDs before `getFavouriteListString()` is called. The carpark IDs and lot availability of all favourited carparks are 

@@ -6,7 +6,7 @@ skinparam classBackgroundColor MODEL_COLOR
 show field
 show methods
 
-package commands <<Rectangle>> {
+package Commands <<Rectangle>> {
 Class FavouriteCommand {
     -favourite : Favourite
     -argument : String
@@ -24,16 +24,14 @@ Class UnfavouriteCommand {
     +<u>COMMAND_WORD_SHORT : String
     +UnfavouriteCommand(String, Favourite)
     +execute() : CommandResult
-    +setUnFavourite(String)
+    +setUnfavourite(String)
 }
 
 Command <|-- FavouriteCommand
 Command <|-- UnfavouriteCommand
 }
 
-
-
-package Favourite <<Rectangle>> {
+package Model <<Rectangle>> {
 Class Favourite {
     -favouriteList: ArrayList<String>
     -directory: String
@@ -45,7 +43,9 @@ Class Favourite {
     +<u>getFavouriteList() : ArrayList<String>
     +getFavouriteListString() : String
 }
+}
 
+package Storage <<Rectangle>> {
 Class FileStorage {
     -directoryPath: String
     -filePath: String
