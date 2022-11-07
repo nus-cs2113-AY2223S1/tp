@@ -226,7 +226,7 @@ public class Parser {
 
     //@@author indraneelrp
     /**
-     * Triggers the listing of all the items in the ReviewList object
+     * Triggers the listing of all the items in the ReviewList object.
      */
     public void executeList() {
         executor = new ListCommand(mediaList);

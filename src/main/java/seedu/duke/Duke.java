@@ -46,7 +46,7 @@ public class Duke {
     }
 
     /**.
-     * Sets up the logger so that logger information will be directed to a log file
+     * Sets up the logger so that logger information will be directed to a log file.
      */
     private static void setupLogger() {
         LogManager.getLogManager().reset();
