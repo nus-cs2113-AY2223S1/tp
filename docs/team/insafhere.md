@@ -10,23 +10,23 @@ They can also check if they are eligible for NOC or SEP using this application.
 Given below are my contributions to the project:
 
 * **New Feature**: Added the ability to Clear modules in the Student Plan
-    * What it does: Allows the user to Clear modules for one Semester or all Semesters in with one command
+    * What it does: Allows the user to Clear modules for one Semester or all Semesters with one command
     * Justification: This feature enables users to simply remove modules in their Plan
-    * Highlights: This enhancement is very usefully for users when they want to restart or modify their Academic Plan
+    * Highlights: This enhancement is very useful for users when they want to restart or modify their Academic Plan
     * Credits: NIL
     * Pull Request(s): [#151](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/151), [#158](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/158)
 
-* **New Feature**: Added the ability to Overview Student Profile
+* **New Feature**: Added the ability to Overview Student Academic Plan
     * What it does: Allows the User to view their total MCs taken, CAP and Eligibility for SEP/NOC in one command
     * Justification: This feature is useful to have a quick glance of their Academic Plan
-    * Highlights: This enhancement was challenging to implement as it requires implementation of other features such as `Check` and `View` features
+    * Highlights: This enhancement was challenging to implement as it requires implementations and modifications to other features such as `Check` and `View`.
     * Credits: NIL
     * Pull Request(s) : Pull Request(s): [#154](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/154), [#157](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/157), [#158](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/158)
 
-* **New Feature**: Added the ability for users to view all format input issues for commands
-    * What it does: Allows the user to view all input format issue(s) in when using the `Add`, `Delete`, `View`, `Clear`, `MCs` and `View` command
+* **New Feature**: Added the ability for users to view all format input issues for commands at once
+    * What it does: Allows the user to view all input format issue(s) at once when using the `Add`, `Delete`, `View`, `Clear`, `MCs` and `View` command
     * Justification: This feature is useful for users if they made multiple errors when using a command, so they can rectify it accordingly
-    * Highlights: This enhancement was tedious to implement due to the non-existence of getMessage() method for each exception implemented previous, hence had to restructure the exceptions for best implementation of this feature
+    * Highlights: This enhancement was tedious to implement due to the non-existence of getMessage() method for each exception implemented previously, hence had to restructure the exceptions for best implementation of this feature
     * Credits: NIL
     * Pull Request(s): [#140](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/140), [#145](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/145), [#146](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/146), [#147](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/147)
 
@@ -34,7 +34,7 @@ Given below are my contributions to the project:
     * What it does: Allows the user to have a pleasant welcoming experience
     * Justification: This feature improves the Users' experience when using the app
     * Highlights: This enhancement required the use of external code reference
-    * Credits: This code is licensed under - CC Attribution CC BY 4.0. [#Link](https://www.quickprogrammingtips.com/java/ascii-art-generator-library-in-java.html)
+    * Credits: Code is referenced from [QuickProgrammingTips](https://www.quickprogrammingtips.com/java/ascii-art-generator-library-in-java.html)
     * Pull Request(s): [#149](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/149)
 
 * **Code contributed**: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=insafhere&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code)
