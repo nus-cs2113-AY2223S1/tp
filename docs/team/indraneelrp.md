@@ -32,7 +32,7 @@ Given below are my contributions to the project:
 * **New Feature**: Ui
   * What it does: This feature is responsible for the interaction with the user at the command line. It gets user input from the command line and also prints out the appropriate information on the command line.
   * Justification: The UI is a key component for interaction with the user. 
-  * Highlights: Prevents NoSuchElementException by using HasNextLine(). StackOverflow resource used: https://stackoverflow.com/questions/7209110/java-util-nosuchelementexception-no-line-found.
+  * Highlights: Accounts for NoSuchElementException by using HasNextLine(). [StackOverflow resource](https://stackoverflow.com/questions/7209110/java-util-nosuchelementexception-no-line-found)
 
 * **Code contributed**: [Personal RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=indraneelrp&tabRepo=AY2223S1-CS2113-T18-1b%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
