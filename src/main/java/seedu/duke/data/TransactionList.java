@@ -447,7 +447,7 @@ public class TransactionList {
      */
     public String listMonthlyExpenditure() {
         String monthlyExpenditureList = "";
-        SortedMap<LocalDate, int[]> monthlyExpenditure = new TreeMap<LocalDate, int[]>();
+        SortedMap<LocalDate, int[]> monthlyExpenditure = new TreeMap<>();
         // Adds each amount from transactions list to the month and year in monthly expenditure hashmap
         monthlyExpenditure = processMonthlyExpenditure(monthlyExpenditure);
 
