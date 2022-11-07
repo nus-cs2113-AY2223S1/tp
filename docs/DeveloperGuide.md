@@ -6,7 +6,7 @@
     * [Build Manager](#build-manager)
     * [Adding a Build](#adding-a-build)
     * [Listing all Builds](#listing-all-builds)
-    * [Finding a Build](#finding-builds)
+    * [Finding Builds](#finding-builds)
     * [Filtering Builds](#filtering-builds)
   * [Build Editing Mode](#build-editing-mode)
     * [Build](#build)
