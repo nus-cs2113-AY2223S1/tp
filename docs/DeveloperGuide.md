@@ -637,7 +637,9 @@ the list first before being able to add a passenger of the existing flight numbe
     1. Prerequisites: Existing flight details and passenger details of that particular flight should be present.
     2. Test case: `delay KE632 dt/2100` then `passenger list`
        Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
-       the tracked delayed departure time.
+       the tracked delayed departure time.  
+
+<div style="page-break-after: always;"></div>  
 
 ### Listing Flights and Passengers
 The list command has 2 variations:
