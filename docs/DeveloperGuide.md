@@ -127,39 +127,42 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 - First the appointment is removed from the appointment list.
 - Secondly all tasks related to this appointment are also removed from task list.
 
+The following sequence diagram shows how the add appointment operation works:
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
+
 ### Appointment Status Feature
 
 ### Implementation
 
-The proposed appointment feature is facilitated by the `appointment`, `employee`, `pet` package. The following classes in the package works together to allow users to manage their appointments:
+The proposed appointment feature is facilitated by the `appointment` package. The following classes in the package works together to allow users to manage their appointments:
 
-#### 1. Appointment
-
-#### 2. AppointmentStatus  
+#### 1. AppointmentStatus  
 An enumeration class, which has the following 3 status:  
-- `PENDING` — When an appointment is first created.
-- `PROCESSING` — When at least one of the tasks is derived from the appointment, while not all tasks are marked as done.
-- `PROCESSED` — When all tasks from the appointment are marked as done.
+- `AppointmentStatus::PENDING` — When an appointment is first created.
+- `AppointmentStatus::PROCESSING` — When at least one of the tasks is derived from the appointment, while not all tasks are marked as done.
+- `AppointmentStatus::PROCESSED` — When all tasks from the appointment are marked as done.
 
-
-#### 3. AppointmentList
-- `AppointmentList#setStatus()` — Sets the status of an appointment.
-
-Given below is an example usage scenario and how the Appointment mechanism behaves at each step.
-//TODO add appointment status DG
-
-> The following sequence diagram shows how the add appointment operation works:
-
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
+#### 2. Appointment
+- `Appointment#updateAppointmentStatus()` — It helps to update the appointment status under following circumstances respectively:
+  - After one task is created from this appointment, update it to `PROCESSING`.
+  - After one task related to this appointment is finished, check all the tasks in the taskList of this appointment. 
+  If every task is finished already, update it to `PROCESSED`.
+- `Appointment#getAppointmentStatus()` — Return the status of one appointment in string format.
 
 ### Design Considerations:
 
-**Aspect: How status feature executes:**
+**Aspect: How status feature represents:**
 
-- Alternative 1 (current choice):
+- Alternative 1 (current choice):   
+use enumeration class.
+  - Pros: Give every status a human-readable name. And it's easy to extend for more status.
+  - Cons: Add more overhead to create another class.
 
-
-- Alternative 2:
+- Alternative 2:  
+use hard-code integer or string.
+  - Pros: Low cost of constructing a status.
+  - Cons: Hard to read. And have to recode if status changes much.
 
 ### Employee management Feature
 
