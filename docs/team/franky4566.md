@@ -36,8 +36,8 @@ Given below are my contributions to the project.
 
 + ### Enhancement to Existing Features:
   + Created SkyControl Exception class to handle exceptions [#11](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/11)
-  + Improved Code Defensiveness by creating checks for valid gate number, 24HR time and check in.
-  + Reformatted part of class FlightList to improve code quality and modularity for easier implementation of future methods.
+  + Improved Code Defensiveness by creating checks for valid gate number, 24HR time and check in for flights to prevent saving garbage or incorrect data.
+  + Reformatted part of class FlightList to improve code quality and modularity for easier implementation of future methods.[#35](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/35)
 
 + ### Documentation:
   + User Guide:
@@ -47,7 +47,7 @@ Given below are my contributions to the project.
   + Developer Guide:
     + Added implementation details of the `flight add`, `flight list` and `delay` feature with their respective sequence diagrams. 
     [#45](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/45)
-    + Populated Non-Functional Requirements, Glossary and Manual Testing Instructions section.
+    + Populated Non-Functional Requirements, Glossary and Manual Testing Instructions section.[#103](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/103)
 
 + ### Community:
   + PRs reviewed (with non-trivial review comments): [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21)

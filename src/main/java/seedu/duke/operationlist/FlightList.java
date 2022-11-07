@@ -48,12 +48,27 @@ public class FlightList extends OperationList {
     protected PassengerList passengerList = new PassengerList();
 
     //@@author Franky4566
+
+    /**
+     * Checks if user has inputted command with the correct format.
+     * @param description user input
+     * @throws SkyControlException empty description error
+     */
     public static void checkCommandLength(String description) throws SkyControlException {
         if (description.isEmpty()) {
             throw new SkyControlException(ui.showEmptyDescriptionMessage());
         }
     }
 
+    /**
+     * Extracts specific flight details from user input.
+     * @param command user input before extraction.
+     * @param start delimiter for flight detail.
+     * @param end delimiter for next flight detail.
+     *
+     * @return flight detail
+     * @throws SkyControlException
+     */
     public static String extractDetail(String command, String start, String end) throws SkyControlException {
         String extractedDetail;
         int startIndex = command.indexOf(start) + start.length();
@@ -66,12 +81,24 @@ public class FlightList extends OperationList {
         return extractedDetail;
     }
 
+    /**
+     * Calls complex method to check if flight detail is missing.
+     * @param startIndex beginning index of flight detail.
+     * @param endIndex end index of flight detail.
+     * @throws SkyControlException if flight detail is empty.
+     */
     public static void checkNoDetailsMissing(int startIndex, int endIndex) throws SkyControlException {
         if (missingDetailsChecker(startIndex, endIndex)) {
             throw new SkyControlException(ui.getErrorMessage());
         }
     }
 
+    /**
+     * Checks if flight detail is empty.
+     * @param startIndex beginning index of flight detail.
+     * @param endIndex end index of flight detail.
+     * @return true if detail is missing else, return false.
+     */
     public static boolean missingDetailsChecker(int startIndex, int endIndex) {
         boolean isMissing = false;
         if (endIndex <= startIndex || endIndex < CHECK_MISSING_DETAIL || startIndex < CHECK_MISSING_DETAIL) {
@@ -80,6 +107,12 @@ public class FlightList extends OperationList {
         return isMissing;
     }
 
+    /**
+     * Adds a flight the flight logbook.
+     * @param command which is the input of the user that regards to the operation that is being carried out.
+     *               i.e. if add Operation, the following details would be input after the operation.
+     * @throws SkyControlException if any of the exceptions are caught.
+     */
     @Override
     public void addOperation(String command) throws SkyControlException {
         setIsAdd();
@@ -133,8 +166,8 @@ public class FlightList extends OperationList {
     /**
      * Checks if the flight number of the passenger matches the flight number that is deleted in flight list.
      *
-     * @param flightNum a parameter that is taken from the deleteOperation function
-     * @param index increment of the index in passengers
+     * @param flightNum a parameter that is taken from the deleteOperation function.
+     * @param index increment of the index in passengers.
      * @return a boolean value that indicates if the flight number of the passenger
      *     matches the flight number that is deleted.
      */
@@ -293,6 +326,10 @@ public class FlightList extends OperationList {
         ui.showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime);
     }
 
+    /**
+     * Checks if new delayed departure time is later than the original departure time.
+     * @throws SkyControlException if it is earlier than the orginal departure time.
+     */
     private void checkDelayTime() throws SkyControlException {
         if (Integer.parseInt(oldDepartureTime) > Integer.parseInt(departureTime)) {
             throw new SkyControlException(ui.getWrongDelayTimeError(flightNumber, oldDepartureTime));
@@ -353,6 +390,10 @@ public class FlightList extends OperationList {
         checkValidFlightNumber(flightNumber);
     }
 
+    /**
+     * Checks if a flight number is already present.
+     * @throws SkyControlException if flight number is present and that there should be no duplicates.
+     */
     private void checkFlightNumberDuplicates() throws SkyControlException {
         getNumberOfFlights();
         for (int i = 0; i < flightIndex; i++) {
@@ -368,6 +409,10 @@ public class FlightList extends OperationList {
         }
     }
 
+    /**
+     * Check if the same gate number is occupied at a specific time.
+     * @throws SkyControlException if gate is occupied and cannot be used.
+     */
     private void checkAvailableGateNumber() throws SkyControlException {
         getNumberOfFlights();
         for (int i = 0; i < flightIndex; i++) {
@@ -415,18 +460,33 @@ public class FlightList extends OperationList {
         return isGateOccupied;
     }
 
+    /**
+     * Validates that the airline specified can fit into the logbook table.
+     * @param airline
+     * @throws SkyControlException if number of characters is exceeded.
+     */
     private void validateAirlineLength(String airline) throws SkyControlException {
         if (airline.length() > AIRLINE_LENGTH_LIMIT) {
             throw new SkyControlException(ui.getExceedAirlineLengthError(airline));
         }
     }
 
+    /**
+     * Validates that the destination specified can fit into the logbook table.
+     * @param destination destination of flight.
+     * @throws SkyControlException if number of characters is exceeded.
+     */
     private void validateDestinationLength(String destination) throws SkyControlException {
         if (destination.length() > DESTINATION_LENGTH_LIMIT) {
             throw new SkyControlException(ui.getExceedDestinationLengthError(destination));
         }
     }
 
+    /**
+     * Ensures time entered is in 24HR format.
+     * @param time
+     * @throws SkyControlException if time does not follow 24HR format.
+     */
     private void validateTime(String time) throws SkyControlException {
         Pattern p = Pattern.compile(TIME_REGEX);
         Matcher m = p.matcher(time);
@@ -435,6 +495,11 @@ public class FlightList extends OperationList {
         }
     }
 
+    /**
+     * Ensures check in row/door entered are valid digits.
+     * @param checkIn
+     * @throws SkyControlException if check in does not follow row-door format.
+     */
     private void validateCheckIn(String checkIn) throws SkyControlException {
         Pattern p = Pattern.compile(CHECK_IN_REGEX);
         Matcher m = p.matcher(checkIn);
@@ -443,6 +508,11 @@ public class FlightList extends OperationList {
         }
     }
 
+    /**
+     * Ensures the gate number entered is a valid gate
+     * @param gateNumber
+     * @throws SkyControlException if gate number is not valid.
+     */
     private void validateGateNumber(String gateNumber) throws SkyControlException {
         Pattern p = Pattern.compile(GATE_NUM_REGEX);
         Matcher m = p.matcher(gateNumber);
