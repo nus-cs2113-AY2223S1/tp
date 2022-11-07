@@ -3,31 +3,40 @@
 
 autoactivate on
 
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ViewCommand" as viewCommand LOGIC_COLOR
+participant "<<class>>\nParser" as Parser LOGIC_COLOR
+end box
+
+box Records RECORD_COLOR_T1
+
+participant ":foodList" as foodList LOGIC_COLOR
+participant ":recordList" as recordList LOGIC_COLOR
+
+end box
+
+
+box Ui UI_COLOR_T1
+participant "ui:AllRecordsTable" as AllRecordsTable UI_COLOR
+participant "ui:tableFrame" as tableFrame UI_COLOR
+participant "ui:Ui" as ui UI_COLOR
+
+end box
+
 
 activate viewCommand
+[-> viewCommand : execute()
     viewCommand -> viewCommand: viewAll(argumentList)
+    viewCommand -> AllRecordsTable: AllRecordsTable(foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,ALL_RECORDS_TABLE_CAPTION)
+    return tableFrame: AllRecordsTable
+    viewCommand -> tableFrame : getAllRecordsTable()
+    return table : ArrayList<String>
+    viewCommand -> ui: printTable(table)
+    ui -> ui: output(row)
 
-    viewCommand -> foodList: getFoodList()
-    return foodArrayList: ArrayList<Food>
-    viewCommand -> viewCommand: getExerciseArrayListByCommand()
-    return exerciseArrayList: ArrayList<Exercise>
-    viewCommand -> recordList: getRecordList()
-    return recordArrayList: ArrayList<Record>
-    viewCommand -> ui: outputAllRecords(recordArrayList, weightAndFatList, foodArrayList, exerciseArrayList)
-    ui -> ui: getAllRecordsColumnsSpacing(weightAndFatArrayList,foodArrayList, exerciseArrayList, columnSpacingArraySubHeader)
-    return
-    ui -> ui: generateAllDataTableSubHeader(columnSpacingArraySubHeader)
-    return subHeader: String
-    ui -> ui: getAllRecordsHeaderSpacing(columnSpacingArrayHeader, subHeader)
-    return
-    ui -> ui: generateAllDataTableHeader(columnSpacingArrayHeader)
-    return
-    ui -> ui: output(separatorLine, subHeader, separatorLine)
-    return
-    ui -> ui: printAllRecords(recordArrayList, columnSpacingArraySubHeader, subHeader)
-    return
-    ui -> ui: printEmptyLine()
-    return
-return
+
+destroy viewCommand
 
 @enduml

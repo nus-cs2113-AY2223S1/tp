@@ -8,6 +8,7 @@ nutritional habits and biometrics, to help the user better understand and progre
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add cardio exercise to TracknFit.
+* **New Feature**: Added the ability to remove exercise by index.
 * **New Feature**: Added the ability to view calories in a table
     * What it does: displays total calories consumed, total calories burnt and net calories based on date in a table format
     * Justification: This feature improves the product significantly by enhancing user's ability to review their total
