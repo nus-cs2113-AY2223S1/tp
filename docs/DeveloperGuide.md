@@ -8,11 +8,11 @@
   * [Employee Management Feature](#Employee-Management-Feature)
   * [Pet Management Feature](#Pet-Management-Feature)
   * [Service Management Feature](#Service-Management-Feature)
-* [Appendix A Product Scope](#Appendix-A-Product-Scope)
+* [Appendix A: Product Scope](#Appendix-A-Product-Scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
-* [Appendix B User Stories](#Appendix-B-User-Stories)
-* [Appendix C Non-Functional Requirements](#Appendix-C-Non-Functional-Requirements)
+* [Appendix B: User Stories](#Appendix-B-User-Stories)
+* [Appendix C: Non-Functional Requirements](#Appendix-C-Non-Functional-Requirements)
 
 ## Setting Up and Getting Started
 
