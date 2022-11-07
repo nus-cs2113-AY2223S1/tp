@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Storage <<Rectangle>> {
+Class HiddenStorage #FFFFFF
+}
+
+package UI <<Rectangle>> {
+Class Ui #FFFFFF
+}
+
+package API <<Rectangle>> {
+Class "<<interface>>\nApiInterface" as ApiInterface {
+    syncFetchData()
+}
+Class Api {
+    -<u>FETCH_TRIES: int
+    -client: HttpClient
+    -request: HttpRequest
+    -responseFutureList: ArrayList<CompletableFuture<HttpResponse<String>>>
+    -apiKey: String
+    +Api(String, String)
+    +getRequest(): HttpRequest
+    +getApiKey(): String
+    +getApiAuthStatusString(): String
+    +getAuthStatus(): AuthenticationStatus
+    +setAuthStatus(AuthenticationStatus)
+    +loadApiKey(String, String, boolean)
+    +loadDefaultApiKey()
+    +isApiValid(String): boolean
+    +syncFetchData()
+    +generateHttpRequestCarpark(int)
+    +asyncExecuteRequest(int, int)
+    +fetchData(int): String
+    +processData(String): String
+    +countData(String): int
+    +isValidResponse(int): boolean
+    -asyncGetResponse(int): String
+    }
+
+Class ApiStub {
+    +ApiStub(String, String)
+    +syncFetchData()
+}
+
+Class "<<enumeration>>\nAuthenticationStatus" as AuthenticationStatus
+    {
+        SUCCESS
+        API_CHANGED
+        FAIL
+        DEFAULT
+    }
+    hide empty methods
+}
+Api -[dashed]-|> ApiInterface
+ApiStub -[dashed]-|> ApiInterface
+Api -[dashed]-> AuthenticationStatus
+Api *-->"1" Storage
+Api *-->"1" Ui
+ApiStub *-->"1" Storage
+
+@enduml

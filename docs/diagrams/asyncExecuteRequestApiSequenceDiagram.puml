@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Execute HTTP requests
+
+box Api LOGIC_COLOR_T1
+participant ":Api" as Api LOGIC_COLOR
+end box
+
+activate Api
+
+loop 5 times with i as index
+Api -> Api : asyncExecuteRequest(i*500,i)
+activate Api
+Api -> Api : generateHttpRequestCarpark(i)
+activate Api
+Api --> Api
+deactivate Api
+Api --> Api
+deactivate Api
+end
+
+@enduml

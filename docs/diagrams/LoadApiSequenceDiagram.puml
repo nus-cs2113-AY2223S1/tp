@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Loading API Key (during startup)
+
+box Api LOGIC_COLOR_T1
+participant ":Api" as Api LOGIC_COLOR
+end box
+
+box Storage LOGIC_COLOR_T1
+participant "<<class>>\nFileReader" as FileReader LOGIC_COLOR
+end box
+
+box System Files LOGIC_COLOR_T2
+end box
+
+[-> Api : loadApiKey("secrets.txt", "./resources/api", true)
+activate Api
+Api -> FileReader : readStringFromTxt("secrets.txt", "./resources/api", true)
+activate FileReader
+]--> FileReader : API_KEY
+
+FileReader --> Api : key
+destroy FileReader
+
+Api -->[
+
+@enduml

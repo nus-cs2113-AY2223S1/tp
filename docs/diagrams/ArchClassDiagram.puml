@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Architecture Class Diagram
+
+package  {
+class Parking{}
+class Api{}
+class Ui{}
+class Command{}
+class Parser{}
+class CommandResult{}
+}
+
+class Storage{}
+
+Parking --> "1" Ui
+Parking --> "1"Api
+Ui --> "1"Command
+Command -> "1"Parser
+Command --> "1"CommandResult
+Parser "1" <- Storage
+
+
+@enduml

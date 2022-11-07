@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Fetch Data
+
+box Api LOGIC_COLOR_T1
+participant ":Api" as Api LOGIC_COLOR
+end box
+
+activate Api
+loop tries 5 times and empty result
+Api -> Api : asyncGetResponse(index)
+activate Api
+Api -> Api : isValidResponse(responseCode)
+activate Api
+Api --> Api : valid
+deactivate Api
+Api --> Api : result
+deactivate Api
+end
+@enduml

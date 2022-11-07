@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Common <<Rectangle>> {
+Class CommonData {
+    +<u> API_KEY_DEFAULT : String
+    +<u> LTA_BASE_URL : String
+    +<u> API_RESPONSE_HEADER : String
+    +<u> API_RESPONSE_TAIL : String
+    +<u> LOT_TYPE_TO_STRING : HashMap<LotType, String
+    +<u> DATE_TIME_FORMATTER : DateTimeFormatter
+    +<u> AUTH_FORMAT : String
+    +<u> FAVOURITE_FORMAT : String
+    +<u> UNFAVOURITE_FORMAT : String
+    +<u> FIND_FORMAT : String
+    +<u> FILTER_FORMAT : String
+    +<u> FILTER_ADDRESS_FORMAT : String
+    +<u> FILTER_ID_FORMAT : String
+    +<u> UPDATE_FORMAT : String
+    +<u> EXIT_FORMAT : String
+    +<u> HELP_FORMAT : String
+}
+
+
+Class CommonFiles {
+    +<u> API_JSON_DIRECTORY : String
+    +<u> LTA_JSON_FILE : String
+    +<u> CARPARK_LIST_DIRECTORY : String
+    +<u> CARPARK_LIST_FILE : String
+    +<u> LTA_FILE_PATH : Path
+    +<u> LTA_BACKUP_FILE_PATH : Path
+    +<u> API_KEY_FILE : String
+    +<u> API_KEY_FILE_PATH : Path
+    +<u> FAVOURITE_DIRECTORY : String
+    +<u> FAVOURITE_FILE : String
+    +<u> FAVOURITE_PATH : Path
+}
+}
+
+
+
+CommonData "*" <-- Parser
+CommonData "*" <-- Api
+CommonData "*" <-- HelpCommand
+CommonFiles "*" <-- Parking
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from JSON files
+
+
+participant "newCarparkList:CarparkList" as newCarparkList LOGIC_COLOR
+
+participant "<<class>>\n:FileReader" as FileReader LOGIC_COLOR
+participant "<<class>>\n:FileStorage" as FileStorage LOGIC_COLOR
+
+
+participant "JSON file from API" as file LOGIC_COLOR
+
+participant "Backup JSON file" as backupfile LOGIC_COLOR
+
+participant "JSON file from inside .jar" as backupjarfile LOGIC_COLOR
+
+[-> newCarparkList : CarparkList(JsonDirectory, backupJsonDirectory)
+activate newCarparkList
+alt LtaResponse.json exists AND is formatted properly
+
+    newCarparkList -> FileReader : getLtaJson(JsonDirectory)
+    activate FileReader
+    FileReader -> file : Parsing via Jackson
+    activate file
+    return List<Carparks> carparks
+    return carparkList
+
+
+else (LtaResponse.json does not exist OR is not formatted properly) AND (LtaResponseSample exists AND is valid)
+    newCarparkList -> FileReader : getLtaJson(JsonDirectory)
+    activate FileReader
+    FileReader -> backupfile : Parsing via Jackson
+    activate backupfile
+    return List<Carparks> carparks
+    return carparkList
+
+else Both JSON files are non-existent or invalid
+    newCarparkList -> FileStorage : ensureBackup()
+    activate FileStorage
+    FileStorage -> backupjarfile: url.openStream()
+    activate backupjarfile
+    return inputStream
+    FileStorage -> backupfile: Files.copy(inputStream, backupJsonDirectory)
+    activate backupfile
+    return
+    return
+
+    newCarparkList -> FileReader : getLtaJson(JsonDirectory)
+    activate FileReader
+    FileReader -> backupfile : Parsing via Jackson
+    activate backupfile
+    return List<Carparks> carparks
+    return carparkList
+
+
+end
+newCarparkList -->[ : carparkList
+deactivate newCarparkList
+
+
+
+@enduml

@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam ParticipantBackgroundColor MODEL_COLOR
+
+create ":CarparkList"
+create ":FavouriteCommand"
+create ":UnfavouriteCommand"
+create ":Favourite" order 10
+activate ":Parking"
+":Parking" -> ":Favourite": Favourite()
+activate ":Favourite"
+
+create ":FileStorage" order 20
+":Favourite" -> ":FileStorage": FileStorage()
+activate ":FileStorage"
+return
+return
+
+":Parking" -> ":Favourite": updateFavouriteList()
+activate ":Favourite"
+":Favourite" -> ":Favourite": ensureValidity()
+activate ":Favourite"
+return result
+return
+
+":Parking" -> ":Favourite": writeFavouriteList()
+activate ":Favourite"
+":Favourite" -> ":FileStorage": writeDataToFile()
+activate ":FileStorage"
+return
+return
+deactivate ":Favourite"
+
+alt "favourite list"
+    ":Parking" -> ":FavouriteCommand": execute()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":Favourite": updateFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":Favourite": ensureValidity()
+    activate ":Favourite"
+    return result
+    return
+
+    ":FavouriteCommand" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return CommandResult
+    deactivate ":Favourite"
+    deactivate ":FavouriteCommand"
+
+else "favourite CARPARK_ID"
+    ":Parking" -> ":FavouriteCommand": execute()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":CarparkList": isCarparkValid()
+    activate ":CarparkList"
+    return result
+    ":FavouriteCommand" -> ":CarparkList": findCarpark()
+    activate ":CarparkList"
+    return Carpark
+    ":FavouriteCommand" -> ":FavouriteCommand": setFavourite()
+    activate ":FavouriteCommand"
+    ":FavouriteCommand" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return
+    return CommandResult
+
+else "unfavourite CARPARK_ID"
+    ":Parking" -> ":UnfavouriteCommand": execute()
+    activate ":UnfavouriteCommand"
+    ":UnfavouriteCommand" -> ":CarparkList": isCarparkValid()
+    activate ":CarparkList"
+    return result
+    ":UnfavouriteCommand" -> ":UnfavouriteCommand": setUnfavourite()
+    activate ":UnfavouriteCommand"
+    ":UnfavouriteCommand" -> ":Favourite": writeFavouriteList()
+    activate ":Favourite"
+    ":Favourite" -> ":FileStorage": writeDataToFile()
+    activate ":FileStorage"
+    return
+    return
+    return
+    return CommandResult
+end
+
+deactivate ":Parking"
+
+@enduml

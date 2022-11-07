@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+package Commands <<Rectangle>> {
+Class FavouriteCommand {
+    -favourite : Favourite
+    -argument : String
+    +<u>COMMAND_WORD : String
+    +<u>COMMAND_WORD_SHORT : String
+    +FavouriteCommand(String, Favourite)
+    +execute() : CommandResult
+    +setFavourite(String)
+}
+
+Class UnfavouriteCommand {
+    -favourite : Favourite
+    -argument : String
+    +<u>COMMAND_WORD : String
+    +<u>COMMAND_WORD_SHORT : String
+    +UnfavouriteCommand(String, Favourite)
+    +execute() : CommandResult
+    +setUnfavourite(String)
+}
+
+Command <|-- FavouriteCommand
+Command <|-- UnfavouriteCommand
+}
+
+package Model <<Rectangle>> {
+Class Favourite {
+    -favouriteList: ArrayList<String>
+    -directory: String
+    -file: String
+    +Favourite(directory: String, file: String)
+    +updateFavouriteList()
+    +ensureValidity() : Boolean
+    +writeFavouriteList()
+    +<u>getFavouriteList() : ArrayList<String>
+    +getFavouriteListString() : String
+}
+}
+
+package Storage <<Rectangle>> {
+Class FileStorage {
+    -directoryPath: String
+    -filePath: String
+    -file: File
+    -ui: Ui
+    +FileStorage(directory: String, file: String)
+    -checkFileExists()
+    +writeDataToFile(data: String)
+}
+Favourite --> "1" FileStorage
+}
+
+FavouriteCommand <-- "1" Favourite
+UnfavouriteCommand <-- "1" Favourite
+@enduml

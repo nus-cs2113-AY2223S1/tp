@@ -1,0 +1,110 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+show field
+show methods
+
+title Read data from files
+
+box Parking LOGIC_COLOR_T1
+participant ":Parking" as Parking LOGIC_COLOR
+end box
+
+box Ui LOGIC_COLOR_T1
+participant "ui:UI" as Ui LOGIC_COLOR
+end box
+
+box FileReader LOGIC_COLOR_T1
+participant "<<class>>\n:FileStorage" as FileStorage LOGIC_COLOR
+participant "<<class>>\n:FileReader" as FileReader LOGIC_COLOR
+end box
+
+
+
+box CarparkList LOGIC_COLOR_T1
+participant "carparkList:CarparkList" as CarparkList LOGIC_COLOR
+participant "newCarparkList:CarparkList" as newCarparkList LOGIC_COLOR
+end box
+
+participant "text file" as file LOGIC_COLOR
+
+[-> Parking : loadJson()
+activate Parking
+
+Parking -> Ui : showLoadingDataMessage()
+activate Ui
+Ui --> Parking : Message printed to console
+deactivate Ui
+
+Parking -> FileReader : loadCarparkListFromTxt(filepath, directorypath)
+activate FileReader
+
+FileReader -> FileReader : readStringFromTxt(filepath, directorypath)
+activate FileReader
+
+alt .txt file exists AND is formatted properly
+    FileReader --> FileReader : textString
+    create CarparkList
+    FileReader --> CarparkList : CarparkList(textString)
+    activate CarparkList
+    CarparkList --> FileReader
+    deactivate CarparkList
+    FileReader --> Parking : carparkList
+
+else .txt file does not exist OR is not formatted properly
+    FileReader --> FileReader : exception thrown
+    deactivate FileReader
+    create CarparkList
+    FileReader -> CarparkList : CarparkList(backupJsonDirectory, backupJsonDirectory)
+    activate CarparkList
+    ref over FileReader, CarparkList : load from json file
+    CarparkList --> FileReader
+    deactivate CarparkList
+    FileReader --> Parking : carparkList
+
+
+        deactivate FileReader
+end
+
+create newCarparkList
+Parking -> newCarparkList : CarparkList(JsonDirectory, backupJsonDirectory)
+activate newCarparkList
+ref over FileReader, newCarparkList : load from json file
+return : newCarparkList
+
+Parking -> CarparkList : update(newCarparkList)
+activate CarparkList
+CarparkList --> Parking
+deactivate CarparkList
+
+Parking -> FileStorage : saveCarparkList(carparkList)
+activate FileStorage
+FileStorage -> FileStorage : fileStorage(filePath, directoryPath)
+activate FileStorage
+FileStorage -> CarparkList : getSaveString()
+activate CarparkList
+return saveString
+
+FileStorage -> FileStorage : writeDataToFile()
+activate FileStorage
+FileStorage x--> file
+deactivate FileStorage
+deactivate FileStorage
+return
+
+Parking -> Ui : showLoadingDataSuccess()
+activate Ui
+return Message printed to console
+<-- Parking
+deactivate Parking
+
+
+
+
+
+
+
+
+@enduml
