@@ -63,6 +63,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 **Mentoring contributions**
 
+- Helped team members to initiate the check of Gradle
 - Helped team members to fix format errors checked by Gradle (which could be proven by any team member)
 
 **Contributions beyond the project team**
