@@ -116,6 +116,7 @@ Example of usage: `view calories`
 Expected outcome: The total calorie consumption/burn and net surplus/deficit of the user will be displayed by date
 
 ```
+Calories Records: 2
 --------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
 Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             | 
