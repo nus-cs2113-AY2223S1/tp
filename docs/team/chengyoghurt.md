@@ -78,10 +78,10 @@ Highlights:
 - Improved parser for removing appointment
 - Fixed nearly half of the format errors in v1.0 checked by Gradle
 - 
-**Contributions to the UG**
+### Contributions to the UG
 - First version of functions related to appointment
 
-**Contributions to the DG**  
+### Contributions to the DG
 - Added Appointment manage feature
 - Added Appointment status feature
 - Added Appointment date feature
@@ -90,16 +90,16 @@ Highlights:
 - Added the UML diagram of employee remove
 - Added the UML diagram of service remove
 
-**Mentoring contributions**
+### Mentoring contributions
 
 - Helped team members to use `git` command line interface when `source tree` somehow failed
 - Helped team members to use `coverage` when testing
 
-**Contributions to team-based tasks**
+### Contributions to team-based tasks
 
 - Engaged in discussion on design and enhancements of the product
 - Fixed issues of projects after PE dry-run
 
-**Contributions beyond the project team**
+### Contributions beyond the project team
 - Reviewed the pull requests and DG of another [team](https://github.com/nus-cs2113-AY2223S1/tp/pull/3)
 - Tested the product of other two teams during PE [dry-run](https://github.com/ChengYoghurt/ped/tree/main/files)
