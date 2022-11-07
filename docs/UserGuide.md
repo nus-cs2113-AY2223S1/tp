@@ -104,6 +104,9 @@ input: `set`
 Which module would you like to set lessons for? Enter corresponding valid index
 1. CS2040C : Data Structures and Algorithms
 ```
+
+<div style="page-break-after: always;"></div>
+
 input: `1`
 ```
 Which lesson type do you want to set? Enter corresponding valid index
