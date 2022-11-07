@@ -2,72 +2,38 @@
 'https://plantuml.com/class-diagram
 skinparam classAttributeIconSize 0
 
-class LoadCommand {
-+execute(): void
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage {
+Class Storage
+Class DataLoader
+Class DataSaver
+Class AddCommand
+Class SetCommand
+Class Biometrics
+Class WeightAndFat
+Class Exercise
+Class Food
+Class Ui
 }
 
-class SaveCommand {
-+execute(): void
-}
-
-class Storage {
--dataFile: Path
-+createDataFile(): void
-+loadData(ui: Ui, biometrics: Biometrics, exerciseList: ExerciseList,
-foodList: FoodList, recordList: RecordList): void
-+saveData(ui: Ui, biometrics: Biometrics, exerciseList: ExerciseList,
-foodList: FoodList): void
-}
-
-class DataLoader {
-{static} +loadData(dataFile: Path, ui: Ui, storage: Storage, biometrics: Biometrics,
-{static}    exerciseList: ExerciseList, foodList: FoodList, recordList: RecordList): void
-}
-
-class DataSaver {
-{static} +saveData(dataFile: Path, ui: Ui, biometrics: Biometrics,
-{static}    exerciseList: ExerciseList, foodList: FoodList, recordList: RecordList): void
-}
-
-class AddCommand {
--arguments: String
-+execute(): void
-}
-
-class SetCommand {
--arguments: String
-+execute(): void
-}
-
-class Biometrics {
-+saveBiometrics(): String
-}
-
-class WeightAndFat {
-+saveWeightAndFat(): String
-}
-
-class Exercise {
-+saveExercise(): String
-}
-
-class Food {
-+saveFood(): String
-}
-
-class Ui {
-+output(output: String...): void
+package Logic {
+Class LoadCommand
+Class SaveCommand
 }
 
 LoadCommand --> "1"Storage
 SaveCommand --> "1"Storage
-Storage ..> DataLoader
-Storage ..> DataSaver
-DataLoader ..> Ui
-DataLoader ..> AddCommand
-DataLoader ..> SetCommand
-DataSaver ..> Biometrics
-DataSaver ..> WeightAndFat
-DataSaver ..> Exercise
-DataSaver ..> Food
+Storage ..> DataLoader: uses >
+Storage ..> DataSaver: uses >
+DataLoader ..> Ui: prints using >
+DataLoader ..> AddCommand: creates & executes >
+DataLoader ..> SetCommand: creates & executes >
+DataSaver ..> Biometrics: gets data from >
+DataSaver ..> WeightAndFat: gets data from >
+DataSaver ..> Exercise: gets data from >
+DataSaver ..> Food: gets data from >
 @enduml

@@ -34,9 +34,16 @@ Given below are my contributions to the project.
 
 * Documentation:
     * User Guide:
-        * Added documentation for the features mark and view exercise, add and find strength exercise.
+        * Added documentation for the features mark and view exercise, add and find strength
+          exercise.
+      <div style="page-break-after: always;"></div>
     * Developer Guide:
-        * Added implementation details of add and mark strength feature
+        * Added architecture diagram
+        * Added sequence diagram for add feature
+        * Added user stories for add, find strength, mark and view exercise
+
+* **Review/mentoring contributions**:
+    * Provide code review and help teammate to debug code
 
 
 * Contributions to team-based tasks
