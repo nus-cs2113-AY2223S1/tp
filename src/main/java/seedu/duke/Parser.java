@@ -45,11 +45,11 @@ public class Parser {
     static final int POS_DATE = 3;
     static final int POS_GENRE = 4;
     static final int POS_SITE = 5;
+    //@@author indraneelrp
     static final String MOVIE_TYPE = "class seedu.duke.Movie";
     static final String TV_TYPE = "class seedu.duke.TvShow";
     private Commands executor;
     public ReviewList mediaList;
-    //@@author indraneelrp
     static final String LIST_COMMAND = "list";
     static final String ADD_COMMAND = "add";
     static final String DELETE_COMMAND = "delete";
@@ -68,7 +68,6 @@ public class Parser {
     }
 
     //@@author redders7
-
     /**.
      * Retrieves the command word from the user input
      * @param input Raw user input
@@ -226,6 +225,9 @@ public class Parser {
     }
 
     //@@author indraneelrp
+    /**
+     * Triggers the listing of all the items in the ReviewList object.
+     */
     public void executeList() {
         executor = new ListCommand(mediaList);
         String output = executor.execute();
