@@ -11,7 +11,7 @@
 #### 3.1 [Add Command](#add-command-add)
 
 3.11 [Add Command for Module Mapping](#1-add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
-3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-notenote_with_spaces)
+3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-notenote_with_spaces)\
 3.13 [Add Command for Lessons](#3-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
 
 #### 3.2 [Create Command](#create-command-create-uuniversity_name)
@@ -20,7 +20,7 @@
 
 3.31 [Delete Command for Universities](#1-delete-command-for-universities-delete-uuniversity_name)\
 3.32 [Delete Command for Modules](#2-delete-command-for-modules-delete-uuniversity_name-mmodule_code)\
-3.33 [Delete Command for Lessons](#3-delete-command-for-lessons-delete-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
+3.33 [Delete Command for Lessons](#3-delete-command-for-lessons-delete-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)\
 3.34 [Delete Command for Comments](#4-delete-command-for-comments-delete-uuniversity_name-mmodule_code-note)
 
 #### 3.4 [Exit Command](#exit-command-exit)
