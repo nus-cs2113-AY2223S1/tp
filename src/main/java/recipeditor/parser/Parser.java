@@ -33,6 +33,7 @@ public class Parser {
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
             "Wrong command format.";
     private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
+    private static final int COMMAND_LENGTH = 1;
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
@@ -50,10 +51,19 @@ public class Parser {
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(AddCommand.COMMAND_NAME);
+            }
             return parseAddCommand();
         case ListCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(ListCommand.COMMAND_NAME);
+            }
             return new ListCommand();
         case ExitCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(ExitCommand.COMMAND_NAME);
+            }
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
             return parseDeleteCommand(parsed);
@@ -64,7 +74,10 @@ public class Parser {
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         case HelpCommand.COMMAND_TYPE:
-            return parseHelpCommand(parsed);
+            if (parsed.length != COMMAND_INPUT_LENGTH) {
+                return new InvalidCommand(HelpCommand.CORRECT_FORMAT);
+            }
+            return parseHelpCommand(parsed[1]);
         default:
             return new InvalidCommand(InvalidCommand.INVALID_MESSAGE);
         }
@@ -227,13 +240,9 @@ public class Parser {
     }
 
 
-    public static Command parseHelpCommand(String[] parsed) {
-
-        if (parsed.length == COMMAND_INPUT_LENGTH) {
-            logger.log(Level.INFO, "Help command initialised");
-            return new HelpCommand(parsed[1]);
-        }
-        return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
+    public static Command parseHelpCommand(String params) {
+        logger.log(Level.INFO, "Help command initialised");
+        return new HelpCommand(params);
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
@@ -246,7 +255,7 @@ public class Parser {
     }
 
     // To account for case insensitivity of user
-    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
+    private static String actualRecipeTitle(String recipeTitleToBeFound) {
         String actualRecipeTitle = null;
         for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
             if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {

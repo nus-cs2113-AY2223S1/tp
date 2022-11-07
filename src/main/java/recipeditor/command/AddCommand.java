@@ -6,7 +6,7 @@ import recipeditor.storage.Storage;
 
 public class AddCommand extends Command {
     public static final String COMMAND_TYPE = "/add";
-    private static final String COMMAND_SYNTAX = "/add";
+    public static final String COMMAND_NAME = "add";
     private static final String COMMAND_FUNCTION = "Edit a new recipe and add it to recipeditor.";
 
     private static final String NOTHING = "Nothing was added";
@@ -15,7 +15,7 @@ public class AddCommand extends Command {
     private boolean isValid;
 
     public AddCommand() {
-        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+        super(COMMAND_TYPE, COMMAND_FUNCTION);
     }
 
     public AddCommand(boolean isValid, Recipe addedRecipe) {
