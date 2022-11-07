@@ -532,6 +532,7 @@ to the data folder of the new program on your new computer to carry over your da
 
 ## Glossary
 ### PC Component Parameters Glossary
+
 | Parameter      | Examples                                                         |
 |----------------|------------------------------------------------------------------|
 | Name           | Name of the component <br/> E.g. `Intel 10990x`                  |
