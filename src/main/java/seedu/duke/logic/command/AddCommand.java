@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Adds a new record to relevant list
+ * Adds a new record to relevant list.
  */
 public class AddCommand extends Command {
     public static final String INVALID_LOADING_STRENGTH_MESSAGE = "Unable to load strength exercise";
@@ -55,7 +55,8 @@ public class AddCommand extends Command {
     public static final String ADD_FOOD_SUCCESS_MESSAGE = "This food is added to the food list successfully";
     public static final String INVALID_FOOD_DESCRIPTION_INPUTS = "Please provide valid food description inputs!";
     public static final String NEGATIVE_CALORIES_ERROR_MESSAGE = "Calories inputs need to be positive integer values!";
-    public static final String CALORIES_LIMIT_EXCEEDED = "It is impossible to have consumed more than 10000 kcal in a day!";
+    public static final String CALORIES_LIMIT_EXCEEDED = "It is impossible to have consumed more than 10000 kcal in a "
+        + "day!";
     public static final String INVALID_DATE_FORMAT = "Date should be in the format dd-mm-yyyy";
     public static final String INVALID_ADD_COMMAND = "Invalid add command";
     private final boolean isMarkDone;
@@ -285,7 +286,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if the food description is valid
+     * Checks if the food description is valid.
      *
      * @param input the food description based on user's input
      *
@@ -298,7 +299,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks if the calories is valid
+     * Checks if the calories is valid.
      *
      * @param input the calories inputted by user
      *

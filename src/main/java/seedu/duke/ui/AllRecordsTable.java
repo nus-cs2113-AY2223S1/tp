@@ -49,7 +49,7 @@ public class AllRecordsTable extends TableFrame {
     }
 
     /**
-     * Fills the table with all the data from the record list
+     * Fills the table with all the data from the record list.
      *
      * @param recordArrayList an ArrayList storing all the records that user has inputted
      * @param tableFrame a empty table to be filled with the record data

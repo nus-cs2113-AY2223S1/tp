@@ -229,7 +229,7 @@ public class ViewCommand extends Command {
         handleInvalidViewAllCommand(argumentList);
         AllRecordsTable tableFrame = new AllRecordsTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-          ALL_RECORDS_TABLE_CAPTION);
+            ALL_RECORDS_TABLE_CAPTION);
         ArrayList<String> table = tableFrame.getAllRecordsTable();
         ui.printTable(table);
     }
@@ -255,7 +255,7 @@ public class ViewCommand extends Command {
         handleInvalidViewFoodCommand(argumentList);
         FoodTable tableFrame = new FoodTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-          FOOD_TABLE_CAPTION);
+            FOOD_TABLE_CAPTION);
         ArrayList<String> table = tableFrame.getFoodTable();
         ui.printTable(table);
     }

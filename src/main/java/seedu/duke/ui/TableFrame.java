@@ -70,7 +70,7 @@ public class TableFrame {
 
 
     /**
-     * Fills the tableFrame with the relevant header descriptions
+     * Fills the tableFrame with the relevant header descriptions.
      *
      * @param tableFrame a empty table to be filled with the relevant headers
      * @param relevantIndices an array containing the relevant indices to extract the headers for the table
@@ -88,7 +88,7 @@ public class TableFrame {
 
 
     /**
-     * Determines the column spacing for all the tables later
+     * Determines the column spacing for all the tables later.
      */
     public void setColumnsSpacingForAll() {
         setColumnSpacingBaseOnHeaderLength();
@@ -138,7 +138,7 @@ public class TableFrame {
     }
 
     /**
-     * Determines the column spacing for all the tables based on the length of the header descriptions
+     * Determines the column spacing for all the tables based on the length of the header descriptions.
      */
     private void setColumnSpacingBaseOnHeaderLength() {
         for (int i = 0; i < headings.length; i++) {

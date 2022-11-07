@@ -36,8 +36,7 @@ public class RemoveCommand extends Command {
     /**
      * Determines and invoke the correct type of remove function by checking user's input.
      *
-     * @throws IllegalValueException if the user input for remove type does not exist or if the number of arguments are
-     * not as expected.
+     * @throws IllegalValueException if the number of arguments are not as expected.
      */
     @Override
     public void execute() throws IllegalValueException {

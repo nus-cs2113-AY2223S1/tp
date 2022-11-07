@@ -37,7 +37,7 @@ public class FoodTable extends TableFrame {
 
 
     /**
-     * Fills the table with all the data from the food list
+     * Fills the table with all the data from the food list.
      *
      * @param foodArrayList an ArrayList storing all the food records that user has inputted
      * @param tableFrame a empty table to be filled with the record data
