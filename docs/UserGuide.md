@@ -197,7 +197,8 @@ Command used to produce a timetable for a straightforward view.
 **Example of Usage:**
 input: `print`
 
-```              :              :              :              :              :               
+```
+              :              :              :              :              :               
               : MON          : TUE          : WED          : THU          : FRI           
 ==============:==============:==============:==============:==============:===============
    0800       :              :              :XXXXXXXXXXXXXX:              :               
