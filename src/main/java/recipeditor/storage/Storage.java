@@ -136,6 +136,7 @@ public class Storage {
             for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
                 fw.write(recipeTitle + "\n");
             }
+            logger.setLevel(Level.WARNING);
             logger.log(Level.INFO, "writing to all recipe title file");
             fw.close();
         } catch (IOException ioException) {
@@ -193,6 +194,7 @@ public class Storage {
     private static void templateFile() {
         File file = new File(TEMPLATE_FILE_PATH);
         if (file.exists()) {
+            logger.setLevel(Level.WARNING);
             logger.log(Level.INFO, "Template File exists");
         } else {
             generateTemplateFile();

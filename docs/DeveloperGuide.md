@@ -633,7 +633,7 @@ quickly.
 ### Setup
 
 1. Follow the instruction in the User Guide to setup the program
-2. For sample recipes, download and unzip `ManualTestData.rar`. There are
+2. For sample recipes, download and unzip `ManualTestData.rar` from [Release](https://github.com/AY2223S1-CS2113-T18-2/tp/releases). There are
    - `Recipes` folder
    - `AllRecipes.txt` file
 3. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
