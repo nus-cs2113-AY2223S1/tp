@@ -15,7 +15,7 @@
 
 ## Setting Up and Getting Started
 
-1. Ensure that you have Java 11 installed.
+1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `tp.main.jar` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp/releases).
 3. Put the JAR file into a folder you would like to use.
 4. Open the command line in that folder and run the command `java -jar [filename].jar`.
