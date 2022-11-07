@@ -452,7 +452,7 @@ public class Parser {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             if (!sdf.parse(patient.getBirthDate()).before(sdf.parse(date))) {
-                throw new OneDocException("This patient was born before this visit! Please use a different visit date");
+                throw new OneDocException("This patient was born after this visit! Please use a different visit date");
             }
         } catch (OneDocException e) {
             throw e;
