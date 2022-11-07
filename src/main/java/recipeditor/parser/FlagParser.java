@@ -13,9 +13,11 @@ import static recipeditor.parser.FlagType.INGREDIENT;
 import static recipeditor.parser.FlagType.STEP;
 import static recipeditor.parser.FlagType.TITLE;
 import static recipeditor.parser.FlagType.DESCRIPTION;
+
 import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
 import recipeditor.exception.InvalidFlagException;
+import recipeditor.ui.Ui;
 
 public class FlagParser {
 
@@ -31,6 +33,7 @@ public class FlagParser {
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
     private static final String COMMAND_WORD_EDIT = "/edit";
+    private static final int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
     private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
     private static final int FLAG_POSITION_OTHER_COMMAND = 2;
     private static final int STARTING_COUNT = 0;
@@ -54,13 +57,20 @@ public class FlagParser {
         int index = 0;
         for (String s : parsedCommand) {
             index++;
-            if (commandWord.equals(COMMAND_WORD_EDIT)
-                    && index < STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
-                continue;
+
+            if (commandWord.equals(COMMAND_WORD_EDIT)) {
+                if (index > STRINGS_UNTIL_FLAG_EDIT_COMMAND) {
+                    break;
+                }
+                if (index <= STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
+                    continue;
+                }
+            } else {
+                if (index != FLAG_POSITION_OTHER_COMMAND) {
+                    continue;
+                }
             }
-            if (index != FLAG_POSITION_OTHER_COMMAND) {
-                continue;
-            }
+
             if (s.contains(DASH_DIVIDER)) {
                 switch (s) {
                 case ADD_FLAG:
@@ -102,10 +112,9 @@ public class FlagParser {
                 default:
                     throw new InvalidFlagException();
                 }
-            } else {
-                throw new InvalidFlagException();
             }
         }
+
         if (recipeFlagCount > MAX_NUMBER_OF_RECIPE_FLAGS) {
             throw new ExcessFlagsException("recipe");
         }
