@@ -46,6 +46,7 @@ Given below is an overview of main components and how they interact with each ot
 ![](UmlDiagrams/Records.png)
 The record component,
 
+* calls by logic components
 * stores the exercise list data, all `Exercise` objects
 * stores the food list data, all `Food` objects
 * stores the biometrics data, in `Biometrics` object.
