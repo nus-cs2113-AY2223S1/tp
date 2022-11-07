@@ -26,6 +26,23 @@ Given below is an overview of main components and how they interact with each ot
 * Reading inputs from user and printing feedbacks to the user
 
 `Logic:`
+
+* The command executor
+
+`Records:`
+
+* Holds the data of the App in memory
+
+`Storage:`
+
+* Reads data and writes data to the hard disk.
+
+`Exception:`
+
+* Stores the exception classes for the app.
+
+### Logic component
+
 Here's a class diagram of the logic component.
 ![Logic.png](UmlDiagrams/Logic.png)
 
@@ -44,18 +61,6 @@ How the logic component works:
   executed.
 * Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses,
   e.g. Duke Exception) is thrown.
-
-`Records:`
-
-* Holds the data of the App in memory
-
-`Storage:`
-
-* Reads data and writes data to the hard disk.
-
-`Exception:`
-
-* Stores the exception classes for the app.
 
 ### Record component
 
@@ -177,13 +182,6 @@ The sequence diagrams below represent the interactions when a user find a record
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
 removeCommand to be printed on the ui.
-![](UmlDiagrams/RemoveWeight.png)  
-The interactions for removing other types of records are similar.
-The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
-First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
-number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
-parameters. Finally, Parser.getClassType() will be called to obtain the type of findCommand for that correct type of
-find command to be executed.
 
 ![](UmlDiagrams/FindFood.png)  
 In the case that user finds a food record, the findFood method in findCommand is executed, which will then execute
@@ -194,9 +192,16 @@ Component.
 
 The interactions for finding other types of records are similar.
 
-There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
-The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view command
-The following sequence diagram shows how the view operation works:
+<<<<<<< HEAD
+=======
+
+### View Feature
+
+> > > > > > > master
+> > > > > > > There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
+> > > > > > > The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view
+> > > > > > > command
+> > > > > > > The following sequence diagram shows how the view operation works:
 
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
@@ -304,7 +309,91 @@ to better understand their journey and progress towards their fitness goals.
 
 ## Instructions for manual testing
 
-### Launch and shutdown
+Given below are instructions to test the app manually. Please utilize these instructions as a starting point for your
+testing.
+
+### Launch and Shutdown
+
+* Initial launch
+    * Download the jar file and copy into an empty folder
+    * Open your terminal and redirect it to the folder that you previously downloaded the jar file into
+    * Please type in "java -jar tp.jar" and press "Enter" to run the file. (Expected: A data.txt file will be created).
+
+Saving window preferences
+
+Resize the window to an optimum size. Move the window to a different location. Close the window.
+
+Re-launch the app by double-clicking the jar file.
+Expected: The most recent window size and location is retained.
+
+### Adding a food record
+
+Adding a food record
+
+Test case: `add food /ice cream /300`
+
+Expected: Ice cream is added to the food list. Details of the added food are shown in the status message.
+
+Test case: `add food /dummy /dummy`
+
+Expected: No food is added. Error details shown in the status message.
+
+Other incorrect add food commands to try: `add food`, `add food /x`, `...` (where x is larger than the 10000)
+Expected: Similar to previous.
+
+### Adding a strength exercise
+
+Adding a strength exercise
+
+Test case: `add strength /press /5 /5 /5 /01-11-2022`
+
+Expected: press is added to the exercise list. Details of the added exercise are shown in the status message.
+
+Test case: `add strength / /5 /dummy /5 /01-11-2022`
+
+Expected: No strength exercise is added. Error message shown in the status message
+
+### Mark exercise
+
+Mark exercise in the exercise list as done or done.
+
+Prerequisites:
+List all exercises using the view exercise command for mark done.
+List all completed exercises using the view exercise /done command
+Ensure index is not out of range for each exercise list.
+
+Test case: `mark done /1`
+
+Expected: First exercise in the current exercise is mark as done
+
+Test case: `mark undone /1`
+
+Expected: First exercise in the completed exercise is mark as undone
+
+### Removing an exercise record
+
+Removing an exercise record while all exercise records are being shown
+
+Prerequisites: List all exercises using the view exercise command. Multiple exercises in the list.
+
+Test case: `remove exercise /1`
+
+Expected: First exercise is deleted from the list. Details of the deleted exercise shown in the status message.
+
+Test case: `remove exercise /0`
+
+Expected: No exercise is deleted. Error details shown in the status message.
+
+Other incorrect remove commands to try: `remove exercise`, `remove exercise /x`, `...` (where x is less than 0)
+Expected: Similar to previous.
+
+### Saving data
+
+Data will be saved ./data.txt after exiting the programme
+
+### Dealing with missing/corrupted data files
+
+Delete the ./data.txt file for corrupted data and restart the programme.
 
 
   

@@ -3,6 +3,7 @@
 
 !include style.puml
 
+<<<<<<< HEAD
 autoactivate on
 
 box Logic LOGIC_COLOR_T1
@@ -19,6 +20,26 @@ box Ui UI_COLOR_T1
 participant ":Ui" as ui UI_COLOR
 end box
 
+=======
+box Logic LOGIC_COLOR_T1
+participant ":ViewCommand" as viewCommand LOGIC_COLOR
+participant "<<class>>\nParser" as Parser LOGIC_COLOR
+end box
+
+box Records RECORD_COLOR_T1
+participant ":weightAndFatList" as weightAndFatList LOGIC_COLOR
+participant ":weightAndFat" as weightAndFat LOGIC_COLOR
+participant ":biometrics" as biometrics LOGIC_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant "ui:Ui" as ui UI_COLOR
+end box
+
+autoactivate on
+
+[-> viewCommand : execute()
+>>>>>>> newbranch
 activate viewCommand
 group viewBiometrics
     viewCommand -> viewCommand: viewBiometrics()
@@ -39,6 +60,6 @@ return
 
 end
 
-deactivate viewCommand
+destroy viewCommand
 
 @enduml
