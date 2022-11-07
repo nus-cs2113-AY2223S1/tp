@@ -29,6 +29,7 @@ The following sections summarise what I have contributed to the project.
   the users previously saved.
 - Pull requests: [#73](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/73)
 
+<div style="page-break-after: always;"></div>
 
 #### **New Feature**: Find relevant Recipes according to user's input of recipe title or ingredient name
 - What it does:
