@@ -18,7 +18,8 @@
 
 - Added the function of Finish Task
 - Added status to Pet
-
+- Added exception handling to EmployeeParser
+- Added exception handling to ServiceParser
 - Improved the index of Pet
 - Improved the interface of Duke to be more OOP
 - Fixed all the format errors in v1.0 checked by Gradle
