@@ -256,6 +256,7 @@ The following class diagram illustrates the relationship between UserModuleMappi
 ![UserModuleMappingList Diagram](./images/UserModuleMapping_Class.png)
 
 The following sequence diagram helps explain the key steps behind adding and deleting of modules in the UserModuleMappingList class
+
 ![UserModuleMappingList_Sequence](./images/UserModuleMapping_Sequence.png)
 
 ### User University List Manager
@@ -273,6 +274,9 @@ The UserUniversityListManager manages a hashmap of lists, with the `universityNa
 wastage. HashMap is also an efficient data structure to obtain the UserUniversityList as the value in constant time. The UserUniversityListManager
 has the notable functions `addModule` and `deleteModule` which allows users to add and delete module in a specific list. It also has the `addFavourite`
 and `deleteFavourite` function which helps the users to organise their lists.
+
+Additionally, the UserUniversityListManager also has a `timetableManager`, for users to add lessons and plan out their timetables at partner universities.
+They are able to plan for any potential timetable clashes. Users are only able to add / delete lesson times from existing Partner University lists. 
 
 The following class diagram illustrates the relationship between UserUniversityListManager and UserUniversityList as well as other relevant classes.
 
