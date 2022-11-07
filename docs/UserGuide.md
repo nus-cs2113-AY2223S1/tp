@@ -551,15 +551,8 @@ Add user's food consumption in TracknFit
 
 Format: `add food /{description} /{calories} [/{date}]`
 
-<<<<<<< HEAD
 * calories should be positive integer inputs in the units of kcal and must not exceed 10000kcal
 * If user does not input a specific date, the program will automatically fill it with today's date
-=======
-* description needs to be a string
-* calories should be positive integer inputs in the units of kcal
-* date is an optional parameter. date must be in the format of `dd-MM-yyyy` and cannot be more than a month after. If user does not input a specific date,
-  the program will automatically fill it with today's date
->>>>>>> newbranch
 
 Example of usage:
 
