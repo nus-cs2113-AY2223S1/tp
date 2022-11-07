@@ -73,6 +73,9 @@ public class Recipe {
 
     public void setIngredient(int index, Ingredient ingredient) throws IndexOutOfBoundsException {
         this.ingredients.set(index, ingredient);
+        if (index >= ingredients.size()) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     public ArrayList<String> getSteps() {
@@ -143,7 +146,7 @@ public class Recipe {
                 + title + "\n\n" + "DESCRIPTION:\n"
                 + description.trim() + "\n\n" + "INGREDIENTS: "
                 + "\n" + getIngredientAttributesFormatted() + "\n" + "STEPS: "
-                + "\n" + getStepAttributesFormatted() + "\n\n";
+                + "\n" + getStepAttributesFormatted();
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;

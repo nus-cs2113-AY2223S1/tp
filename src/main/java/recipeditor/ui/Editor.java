@@ -104,7 +104,7 @@ public class Editor extends JFrame implements ActionListener {
         if (e.getSource() == buttonSave) {
             state = EditorState.SAVE;
             // Save to temporary
-            File temp = new File(Storage.TEMPORARY_FILE_PATH);
+            new File(Storage.TEMPORARY_FILE_PATH);
             try {
                 FileWriter writer = new FileWriter(Storage.TEMPORARY_FILE_PATH);
                 writer.write(textArea.getText());

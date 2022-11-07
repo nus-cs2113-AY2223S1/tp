@@ -31,12 +31,23 @@ public class Parser {
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
             "Index is not present in the list.";
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
-            "Wrong command format.";
-    private static final String INVALID_INDEX_MESSAGE = " is not a valid index.";
+            "Wrong command format. Missing title or index from input.";
+    private static final int COMMAND_INDEX = 0;
+
+    private static final int COMMAND_LENGTH = 1;
     private static final int COMMAND_INPUT_LENGTH = 2;
     private static final int COMMAND_INDEX_LENGTH = 2;
     private static final int INDEX_AFTER_COMMAND = 2;
     private static final int COMMAND_FLAG_INPUT_LENGTH = 3;
+    private static final int DELETE_COMMAND_FLAG_INDEX = 1;
+    private static final int DELETE_COMMAND_RECIPE_INDEX = 2;
+    private static final int VIEW_COMMAND_FLAG_INDEX = 1;
+    private static final int VIEW_COMMAND_RECIPE_INDEX = 2;
+    private static final int EDIT_COMMAND_RECIPE_INDEX = 1;
+    private static final int ACCOUNT_ZERO_INDEXING = -1;
+    private static final int REMOVE_LAST_CHAR_INDEX = -1;
+    private static final int DELETE_COMMAND_LENGTH = 3;
+    private static final int VIEW_COMMAND_LENGTH = 3;
 
     /**
      * Parse the input command and returns respective executable command.
@@ -45,26 +56,44 @@ public class Parser {
      * @return command that can be executed
      */
     public static Command parseCommand(String input) {
-        String[] parsed = input.split(" ");
-        String commandWord = parsed[0].toLowerCase();
+        String[] parsed = input.split(Ui.SPACE_DIVIDER);
+        String commandWord = parsed[COMMAND_INDEX].toLowerCase();
 
         switch (commandWord) {
         case AddCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(AddCommand.COMMAND_NAME);
+            }
             return parseAddCommand();
         case ListCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(ListCommand.COMMAND_NAME);
+            }
             return new ListCommand();
         case ExitCommand.COMMAND_TYPE:
+            if (parsed.length != COMMAND_LENGTH) {
+                return parseHelpCommand(ExitCommand.COMMAND_NAME);
+            }
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            if (parsed.length < DELETE_COMMAND_LENGTH) {
+                return parseHelpCommand(DeleteCommand.COMMAND_NAME);
+            }
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
+            if (parsed.length < VIEW_COMMAND_LENGTH) {
+                return parseHelpCommand(ViewCommand.COMMAND_NAME);
+            }
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
         case HelpCommand.COMMAND_TYPE:
-            return parseHelpCommand(parsed);
+            if (parsed.length != COMMAND_INPUT_LENGTH) {
+                return new InvalidCommand(HelpCommand.CORRECT_FORMAT);
+            }
+            return parseHelpCommand(parsed[1]);
         default:
             return new InvalidCommand(InvalidCommand.INVALID_MESSAGE);
         }
@@ -83,16 +112,17 @@ public class Parser {
     }
 
     private static Command parseDeleteCommand(String[] parsed) {
-        String recipeTitleToDelete = "";
+        String recipeTitleToDelete;
         try {
             FlagType[] flags = FlagParser.getFlags(parsed);
-            switch (flags[1]) {
+            switch (flags[DELETE_COMMAND_FLAG_INDEX]) {
             case INDEX:
-                int recipeIndexToDelete = Integer.parseInt(parsed[2]) - 1;
+                int recipeIndexToDelete = Integer.parseInt(parsed[DELETE_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert recipeIndexToDelete > -1;
                 return new DeleteCommand(recipeIndexToDelete);
             case TITLE:
-                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed, 2, parsed.length);
+                String[] recipeTitleToDeleteArray = Arrays.copyOfRange(parsed,
+                        DELETE_COMMAND_RECIPE_INDEX, parsed.length);
                 recipeTitleToDelete = convertStringArrayToString(recipeTitleToDeleteArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToDelete);
@@ -100,6 +130,7 @@ public class Parser {
                     logger.log(Level.INFO, "Delete command initialised");
                     return new DeleteCommand(actualRecipeTitle);
                 }
+                Ui.showMessage(recipeTitleToDelete + InvalidCommand.INVALID_TITLE_MESSAGE);
                 break;
             case NULL:
                 throw new MissingFlagsException();
@@ -109,7 +140,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(recipeTitleToDelete + INVALID_INDEX_MESSAGE);
+            Ui.showMessage(parsed[2] + InvalidCommand.INVALID_INDEX_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {
@@ -119,16 +150,16 @@ public class Parser {
     }
 
     private static Command parseViewCommand(String[] parsed) {
-        String recipeTitleToView = "";
+        String recipeTitleToView;
         try {
             FlagType[] flags = FlagParser.getFlags(parsed);
-            switch (flags[1]) {
+            switch (flags[VIEW_COMMAND_FLAG_INDEX]) {
             case INDEX:
-                int index = Integer.parseInt(parsed[2]) - 1; // to account for 0-based indexing in recipelist
+                int index = Integer.parseInt(parsed[VIEW_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 return new ViewCommand(index);
             case TITLE:
-                String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, 2, parsed.length);
+                String[] recipeTitleToViewArray = Arrays.copyOfRange(parsed, VIEW_COMMAND_RECIPE_INDEX, parsed.length);
                 recipeTitleToView = convertStringArrayToString(recipeTitleToViewArray);
                 // check if recipe title is inside the list
                 String actualRecipeTitle = actualRecipeTitle(recipeTitleToView);
@@ -145,20 +176,20 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(parsed[2] + INVALID_INDEX_MESSAGE);
+            Ui.showMessage(InvalidCommand.INVALID_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {
             Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
-        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        return new InvalidCommand(ViewCommand.CORRECT_FORMAT);
     }
 
     private static Command parseEditCommand(String[] parsed) {
         int index = -1;
         if (parsed.length == COMMAND_INDEX_LENGTH) {
             try {
-                index = Integer.parseInt(parsed[1]) - 1; // to account for 0-based indexing in recipelist
+                index = Integer.parseInt(parsed[EDIT_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 Recipe targetRecipe = RecipeList.getRecipe(index);
                 String title = targetRecipe.getTitle();
@@ -181,7 +212,7 @@ public class Parser {
             }
         } else if (parsed.length >= COMMAND_FLAG_INPUT_LENGTH) {
             try {
-                index = Integer.parseInt(parsed[1]) - 1;
+                index = Integer.parseInt(parsed[EDIT_COMMAND_RECIPE_INDEX]) + ACCOUNT_ZERO_INDEXING;
                 assert index > -1;
                 Recipe originalRecipe = RecipeList.getRecipe(index);
                 Recipe editedRecipe = new Recipe(originalRecipe.getTitle(), originalRecipe.getDescription());
@@ -206,8 +237,10 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
+            } catch (InvalidFlagException e) {
+                return new InvalidCommand(e.getMessage());
             } catch (Exception e) {
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(e.getMessage());
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
@@ -227,26 +260,22 @@ public class Parser {
     }
 
 
-    public static Command parseHelpCommand(String[] parsed) {
-
-        if (parsed.length == COMMAND_INPUT_LENGTH) {
-            logger.log(Level.INFO, "Help command initialised");
-            return new HelpCommand(parsed[1]);
-        }
-        return new InvalidCommand(HelpCommand.CORRECT_FORMAT + HelpCommand.HELP_MESSAGE);
+    public static Command parseHelpCommand(String params) {
+        logger.log(Level.INFO, "Help command initialised");
+        return new HelpCommand(params);
     }
 
     private static String convertStringArrayToString(String[] stringArray) {
         StringBuilder content = new StringBuilder();
         for (String string : stringArray) {
-            content.append(string + " ");
+            content.append(string + Ui.SPACE_DIVIDER);
         }
-        content.deleteCharAt(content.length() - 1);
+        content.deleteCharAt(content.length() + REMOVE_LAST_CHAR_INDEX);
         return content.toString();
     }
 
     // To account for case insensitivity of user
-    private static String actualRecipeTitle(String recipeTitleToBeFound) throws FileNotFoundException {
+    private static String actualRecipeTitle(String recipeTitleToBeFound) {
         String actualRecipeTitle = null;
         for (String recipeTitle : RecipeList.iterateRecipeTitles()) {
             if (recipeTitle.trim().equalsIgnoreCase(recipeTitleToBeFound)) {

@@ -1,5 +1,6 @@
 package recipeditor.parser;
 
+import recipeditor.command.EditCommand;
 import recipeditor.exception.ExcessFlagsException;
 
 import static recipeditor.parser.FlagType.NULL;
@@ -12,13 +13,16 @@ import static recipeditor.parser.FlagType.INGREDIENT;
 import static recipeditor.parser.FlagType.STEP;
 import static recipeditor.parser.FlagType.TITLE;
 import static recipeditor.parser.FlagType.DESCRIPTION;
+
 import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
 import recipeditor.exception.InvalidFlagException;
+import recipeditor.ui.Ui;
 
 public class FlagParser {
 
     private static final String FLAG_INITIAL = "-";
+    private static final String DASH_DIVIDER = "-";
     private static final String ADD_FLAG = FLAG_INITIAL + "add";
     private static final String DELETE_FLAG = FLAG_INITIAL + "del";
     private static final String SWAP_FLAG = FLAG_INITIAL + "swp";
@@ -28,6 +32,16 @@ public class FlagParser {
     private static final String TITLE_FLAG = FLAG_INITIAL + "t";
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
+    private static final String COMMAND_TYPE = "/edit";
+    private static final int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
+    private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
+    private static final int FLAG_POSITION_OTHER_COMMAND = 2;
+    private static final int STARTING_COUNT = 0;
+    private static final int COMMAND_FLAG_INDEX = 0;
+    private static final int RECIPE_FLAG_INDEX = 1;
+    private static final int MAX_NUMBER_OF_COMMAND_FLAGS = 1;
+    private static final int MAX_NUMBER_OF_RECIPE_FLAGS = 1;
+
 
     /**
      * Fina all the flags in a given command.
@@ -37,45 +51,62 @@ public class FlagParser {
      */
     public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException, InvalidFlagException {
         FlagType[] flags = {NULL, NULL};
-        int recipeFlagCount = 0;
-        int commandFlagCount = 0;
+        String commandWord = parsedCommand[0];
+        int recipeFlagCount = STARTING_COUNT;
+        int commandFlagCount = STARTING_COUNT;
+        int index = 0;
         for (String s : parsedCommand) {
-            if (s.contains("-")) {
-                switch (s) {
-                case INDEX_FLAG:
-                    flags[1] = INDEX;
-                    recipeFlagCount++;
+            index++;
+
+            if (commandWord.equals(COMMAND_TYPE)) {
+                if (index > STRINGS_UNTIL_FLAG_EDIT_COMMAND) {
                     break;
+                }
+                if (index <= STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
+                    continue;
+                }
+            } else {
+                if (index != FLAG_POSITION_OTHER_COMMAND) {
+                    continue;
+                }
+            }
+
+            if (s.contains(DASH_DIVIDER)) {
+                switch (s) {
                 case ADD_FLAG:
-                    flags[0] = ADD;
+                    flags[COMMAND_FLAG_INDEX] = ADD;
                     commandFlagCount++;
                     break;
                 case DELETE_FLAG:
-                    flags[0] = DELETE;
+                    flags[COMMAND_FLAG_INDEX] = DELETE;
                     commandFlagCount++;
                     break;
                 case SWAP_FLAG:
-                    flags[0] = SWAP;
+                    flags[COMMAND_FLAG_INDEX] = SWAP;
                     commandFlagCount++;
                     break;
                 case CHANGE_FLAG:
-                    flags[0] = CHANGE;
+                    flags[COMMAND_FLAG_INDEX] = CHANGE;
                     commandFlagCount++;
                     break;
+                case INDEX_FLAG:
+                    flags[RECIPE_FLAG_INDEX] = INDEX;
+                    recipeFlagCount++;
+                    break;
                 case INGREDIENT_FLAG:
-                    flags[1] = INGREDIENT;
+                    flags[RECIPE_FLAG_INDEX] = INGREDIENT;
                     recipeFlagCount++;
                     break;
                 case STEP_FLAG:
-                    flags[1] = STEP;
+                    flags[RECIPE_FLAG_INDEX] = STEP;
                     recipeFlagCount++;
                     break;
                 case TITLE_FLAG:
-                    flags[1] = TITLE;
+                    flags[RECIPE_FLAG_INDEX] = TITLE;
                     recipeFlagCount++;
                     break;
                 case DESCRIPTION_FLAG:
-                    flags[1] = DESCRIPTION;
+                    flags[RECIPE_FLAG_INDEX] = DESCRIPTION;
                     recipeFlagCount++;
                     break;
                 default:
@@ -83,10 +114,11 @@ public class FlagParser {
                 }
             }
         }
-        if (recipeFlagCount > 1) {
+
+        if (recipeFlagCount > MAX_NUMBER_OF_RECIPE_FLAGS) {
             throw new ExcessFlagsException("recipe");
         }
-        if (commandFlagCount > 1) {
+        if (commandFlagCount > MAX_NUMBER_OF_COMMAND_FLAGS) {
             throw new ExcessFlagsException("command");
         }
         return flags;
@@ -94,7 +126,7 @@ public class FlagParser {
 
     static FlagType getRecipeFlag(String[] parsedCommand) {
         FlagType flag = null;
-        switch (parsedCommand[1]) {
+        switch (parsedCommand[RECIPE_FLAG_INDEX]) {
         case INGREDIENT_FLAG:
             flag = FlagType.INGREDIENT;
             break;
