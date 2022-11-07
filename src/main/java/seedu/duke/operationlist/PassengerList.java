@@ -510,16 +510,19 @@ public class PassengerList extends OperationList {
 
     private boolean isValidSeatNumber() {
         boolean isNotValidLength = seatNumber.length() != 3;
-        boolean isNotValidTag = !Character.isLetter(seatNumber.charAt(SEAT_NUM_THIRD_INDEX));
-        boolean isNotValidNumber = !Character.isDigit(seatNumber.charAt(SEAT_NUM_FIRST_INDEX))
-                || !Character.isDigit(seatNumber.charAt(SEAT_NUM_SECOND_INDEX));
         if (isNotValidLength) {
             return true;
-        } else if (isNotValidTag) {
-            return true;
-        } else {
-            return isNotValidNumber;
         }
+        boolean isNotValidTag = !Character.isLetter(seatNumber.charAt(SEAT_NUM_THIRD_INDEX));
+        if (isNotValidTag) {
+            return true;
+        }
+        boolean isNotValidNumber = !Character.isDigit(seatNumber.charAt(SEAT_NUM_FIRST_INDEX))
+                || !Character.isDigit(seatNumber.charAt(SEAT_NUM_SECOND_INDEX));
+        if (isNotValidNumber) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isValidBoardingGroup() {

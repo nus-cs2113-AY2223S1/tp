@@ -75,6 +75,14 @@ public class PassengerInfo {
         this.gateNumber = newGateNum;
     }
 
+    /**
+     * Converts the passenger information in the list of passengers to a particular format for ease of storage
+     * and visibility.
+     *
+     * @return passengerDetails a formatted String containing the passenger information to be inserted
+     *         into the data file
+     */
+
     public String convertToFileFormat() {
         String passengerDetails = (this.name + "|" + this.departureTime + "|" + this.flightNumber
                 + "|" + this.gateNumber + "|" + this.boardingGroup
