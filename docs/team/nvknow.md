@@ -22,7 +22,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 - Implemented the attributes and functions of Ui
   - What it does: show logo and welcome messages to the user, read the user's command and show error messages when receiving a wrong input.
-  - Justification: the Ui is the core of the Command Line Interface.
+  - Justification: the Ui is essential for the Command Line Interface requirement.
 
 - Implemented the tests of Employee and EmployeeList
 
