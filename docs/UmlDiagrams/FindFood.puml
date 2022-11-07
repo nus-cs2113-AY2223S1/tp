@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+activate findCommand
+group findFood
+    findCommand -> findCommand: findFood(argumentList: String, slashesCount: Int)
+    findCommand -> findCommand: getFilteredFoodList(argumentList)
+    return filteredFoodList : ArrayList<Food>
+    alt filteredFoodList.size() = 0
+    findCommand -> Ui : output(FOOD_NOT_FOUND: String)
+    return
+    else filteredFoodList.size() != 0
+    findCommand -> tableFrame **: new FoodTable();
+    findCommand -> tableFrame: getFoodTable();
+    return table: ArrayList<String>
+    findCommand -> Ui: ouptut(table)
+    return
+
+end
+deactivate findCommand
+@enduml

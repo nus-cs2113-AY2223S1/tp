@@ -1,0 +1,30 @@
+@startuml
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam ComponentStyle rectangle
+
+component {
+ [Parser] ..> [XYZCommand] : creates >
+ [XYZCommand] ..>[XYZException] : throws >
+ [XYZCommand] ..> [Validator] : validates >
+ [XYZCommand] --|> [{abstract}\nCommand]
+ [XYZCommand] --> "0..1" [Storage] : storage
+ [XYZCommand] --> "1" [Ui] : ui
+
+ note left of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+}
+
+package Storage{
+}
+
+package Ui{
+}
+package Records{
+}
+
+[XYZCommand] -->"*" Records : get Records >
+[Duke] --> "1"[XYZCommand] : executes >
+[Duke] ..> [Parser] : parses >
+
+
+
+@enduml

@@ -4,11 +4,11 @@
 
 autoactivate on
 
-
-
 Duke -> findCommand: execute()
 findCommand -> parser: getArgumentList(arguments: String)
 return argumentList: String[]
+
+
 findCommand -> parser: getClassType(argumentList: String[])
 return findType: String
 
@@ -25,5 +25,6 @@ else calories
 else invalid findType
 
 end
+return
 
 @enduml
