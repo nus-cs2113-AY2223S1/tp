@@ -136,23 +136,7 @@ public class ExerciseTable extends TableFrame {
     }
 
     private void setFinalSpacingForRemainingColumns() {
-        for (Exercise exercise : exerciseArrayList) {
-            if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[WEIGHT_INDEX] = Math.max(columnSpacingArray[WEIGHT_INDEX],
-                        String.valueOf(exercise.getWeight()).length());
-                columnSpacingArray[SET_INDEX] = Math.max(columnSpacingArray[SET_INDEX],
-                        String.valueOf(exercise.getSet()).length());
-            } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[DISTANCE_INDEX] = Math.max(columnSpacingArray[DISTANCE_INDEX],
-                        String.valueOf(exercise.getDistance()).length());
-            }
-            columnSpacingArray[DESCRIPTION_INDEX] = Math.max(columnSpacingArray[DESCRIPTION_INDEX],
-                    exercise.getExerciseName().length());
-            columnSpacingArray[REPETITION_INDEX] = Math.max(columnSpacingArray[REPETITION_INDEX],
-                    String.valueOf(exercise.getRepetition()).length());
-            columnSpacingArray[CALORIES_INDEX] = Math.max(columnSpacingArray[CALORIES_INDEX],
-                    String.valueOf(exercise.getCaloriesBurnt()).length());
-        }
+        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray, WEIGHT_INDEX, SET_INDEX, DISTANCE_INDEX, DESCRIPTION_INDEX, REPETITION_INDEX, CALORIES_INDEX);
     }
 
     private void setFinalIndexColumnSpacing() {

@@ -99,21 +99,25 @@ public class TableFrame {
                     String.valueOf(food.getCalories()).length());
         }
 
+        setRemainingExerciseColumnsSpacing(exerciseArrayList, columnSpacingArray, WEIGHT_INDEX, EXERCISE_SET_INDEX, EXERCISE_DISTANCE_INDEX, EXERCISE_DESCRIPTION_INDEX, EXERCISE_REPETITION_INDEX, EXERCISE_CALORIES_INDEX);
+    }
+
+    public void setRemainingExerciseColumnsSpacing(ArrayList<Exercise> exerciseArrayList, int[] columnSpacingArray, int weightIndex, int exerciseSetIndex, int exerciseDistanceIndex, int exerciseDescriptionIndex, int exerciseRepetitionIndex, int exerciseCaloriesIndex) {
         for (Exercise exercise : exerciseArrayList) {
             if (exercise instanceof StrengthExercise) {
-                columnSpacingArray[WEIGHT_INDEX] = Math.max(columnSpacingArray[WEIGHT_INDEX],
+                columnSpacingArray[weightIndex] = Math.max(columnSpacingArray[weightIndex],
                         String.valueOf(exercise.getWeight()).length());
-                columnSpacingArray[EXERCISE_SET_INDEX] = Math.max(columnSpacingArray[EXERCISE_SET_INDEX],
+                columnSpacingArray[exerciseSetIndex] = Math.max(columnSpacingArray[exerciseSetIndex],
                         String.valueOf(exercise.getSet()).length());
             } else if (exercise instanceof CardioExercise) {
-                columnSpacingArray[EXERCISE_DISTANCE_INDEX] = Math.max(columnSpacingArray[EXERCISE_DISTANCE_INDEX],
+                columnSpacingArray[exerciseDistanceIndex] = Math.max(columnSpacingArray[exerciseDistanceIndex],
                         String.valueOf(exercise.getDistance()).length());
             }
-            columnSpacingArray[EXERCISE_DESCRIPTION_INDEX] = Math.max(columnSpacingArray[EXERCISE_DESCRIPTION_INDEX],
+            columnSpacingArray[exerciseDescriptionIndex] = Math.max(columnSpacingArray[exerciseDescriptionIndex],
                     exercise.getExerciseName().length());
-            columnSpacingArray[EXERCISE_REPETITION_INDEX] = Math.max(columnSpacingArray[EXERCISE_REPETITION_INDEX],
+            columnSpacingArray[exerciseRepetitionIndex] = Math.max(columnSpacingArray[exerciseRepetitionIndex],
                     String.valueOf(exercise.getRepetition()).length());
-            columnSpacingArray[EXERCISE_CALORIES_INDEX] = Math.max(columnSpacingArray[EXERCISE_CALORIES_INDEX],
+            columnSpacingArray[exerciseCaloriesIndex] = Math.max(columnSpacingArray[exerciseCaloriesIndex],
                     String.valueOf(exercise.getCaloriesBurnt()).length());
         }
     }
