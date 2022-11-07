@@ -329,6 +329,8 @@ instance is only removed from the `selectedModuleList` if it exists.
 As it does not make sense to remove a module that does not exist in the `selectedModuleList`, the `RemoveModuleCommand`
 have to check if the module (to remove) exists in the `selectedModuleList` before removing it.
 
+![RemoveModuleCommandSequenceDiagram](images/RemoveModuleCommandSequenceDiagram.png)
+
 ##### 3.4.2.3 Alternatives considered
 
 Once again, data validation was being handled by the `Parser` class, however in the principles of avoiding tight
