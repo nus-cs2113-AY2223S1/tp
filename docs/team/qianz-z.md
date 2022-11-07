@@ -96,7 +96,7 @@ The following sections summarise what I have contributed to the project.
 
 #### **Built the skeleton code for Command classes**
 To start off the project, we needed a base structure to build on for parsing and execution of commands.
-I set up the abstract `Command` class and the initial few `XYZCommand` classes for v1.0 to provide the
+I set up the abstract `Command` class and the initial few `Command` classes for v1.0 to provide the
 structure for the rest of the team to build on.
 ([#1](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/1))
 
@@ -119,7 +119,7 @@ recipe. This helps to make the editing, deletion and finding of recipes easier.
   - Added documentation and class diagram for the [_`Storage` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#storage-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Standardised styling for PlantUML diagrams
-  - Standardised the styling.
+  - Standardised the styling
 
 #### **Community**:
 - Reporting of bugs and giving suggestions to other groups during [PE-D](https://github.com/qianz-z/ped/issues)
