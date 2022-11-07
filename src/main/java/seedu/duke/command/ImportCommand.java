@@ -10,6 +10,9 @@ import seedu.duke.utils.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Import a sharable NUSMOD link into the YAMOM timetable.
+ */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
     public static final String COMMAND_USAGE = "import [ NUSMODS_LINK ]";

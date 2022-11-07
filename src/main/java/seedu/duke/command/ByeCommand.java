@@ -6,6 +6,9 @@ import seedu.duke.utils.State;
 import seedu.duke.utils.Storage;
 import seedu.duke.utils.Ui;
 
+/**
+ * Exits the application.
+ */
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String COMMAND_USAGE = "bye";

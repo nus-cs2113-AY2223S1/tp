@@ -156,6 +156,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Check if user entered a valid semester for semester related commands.
+     * The semester validity is based on the academic schedule at National University of Singapore
+     *
+     * @param keywords Contains the user input split by spaces
+     * @return if the user entered a valid semester
+     */
     public static boolean isValidSemester(String[] keywords) {
         try {
             int semesterInput = Integer.parseInt(keywords[1]);

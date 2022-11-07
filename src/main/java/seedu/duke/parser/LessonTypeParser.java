@@ -4,6 +4,10 @@ import java.lang.IllegalArgumentException;
 
 import seedu.duke.model.LessonType;
 
+/**
+ * This class parse out the lesson type component within user input from common expected inputs.
+ * Replace with enums that can integrate with internal logic of various component in YAMOM
+ */
 public class LessonTypeParser {
 
     public static LessonType parse(String input) throws IllegalArgumentException {

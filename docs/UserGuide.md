@@ -239,6 +239,7 @@ Possible Error:
     Your command is incomplete.
     --------------------------------------------------------------------------------
    ```
+
 ### Remove a module: `remove`
 
 Removes a module from the user timetable.
@@ -275,7 +276,17 @@ Possible Error:
     CS3219 does not exist in current list of selected list modules!
     --------------------------------------------------------------------------------
    ```
-   
+
+2. The module indicated is not a valid module:
+    ```
+   Sem [1] >> remove XX1234
+    --------------------------------------------------------------------------------
+    Processing "remove XX1234" ...
+    
+    Error! 	Module not found in database! Please enter a valid module code!
+    --------------------------------------------------------------------------------
+   ```
+
 * The other errors for remove is similar to the command `add`, see [add](#add-a-module-add).
 
 ### Search for Modules: `search`
@@ -514,6 +525,8 @@ Format: `timetable < /fancy | /simple >`
 Example of usage:
 
 `timetable`
+`timetable /simple`
+`timetable /fancy`
 
 Sample Output:
 
@@ -882,7 +895,7 @@ Possible error:
 
 ### Data Storage
 
-The user data will be saved in the same directory where the jar file is being run from. The user should not modify the data file in any way. The data is stored as NUSMods links for each semester. The data will be overwritten each time so there will not be any persistent corrupt data file.
+The user data will be saved in the same directory where the jar file is being run from. The user **should not** modify the data file in any way. The data is stored as NUSMods links for each semester. The data will be overwritten each time so there will not be any persistent corrupt data file.
 
 ### Data Loading
 

@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * List out all the modules that the user has in the timetable.
+ */
 public class ListCommand extends Command {
     private boolean successful;
     public static final String COMMAND_WORD = "list";
@@ -123,22 +126,16 @@ public class ListCommand extends Command {
             formattedResult = formatSelectedModuleList(currentSelectedModules, state.getSemester());
             successful = true;
             ui.addMessage(formattedResult);
-            // ui.displayUi();
         }
         ui.addMessage(getExecutionMessage());
         ui.displayUi();
     }
 
-    /** This function does not exit the program.
-     */
     @Override
     public boolean isExit() {
         return false;
     }
 
-    /** This method indicates whether the list command was executed successfully.
-     * @return outputMessage indicates to user through ui display on status of selected modules list
-     */
     @Override
     public String getExecutionMessage() {
         String outputMessage;

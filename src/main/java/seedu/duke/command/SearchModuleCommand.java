@@ -16,6 +16,10 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Filter and list out modules that match user's search.
+ * User can search by module code, module title, module level and the semester where the module is offered.
+ */
 public class SearchModuleCommand extends Command {
     public static final String COMMAND_WORD = "search";
     public static final String COMMAND_USAGE = "search [ /code PARTIAL_MODULE_CODE | /title KEYWORD ] "
@@ -239,7 +243,13 @@ public class SearchModuleCommand extends Command {
         return updatedSearchResult;
     }
 
-    // filter the searchResult if toSearchLevel is not empty and level does not match
+    /**
+     * Filter the list of search result by module level.
+     *
+     * @param searchResult A list of prior search result
+     * @param toSearchLevel The module level to search for
+     * @return an updated list of search result with the desired module level
+     */
     public static List<Module> filterByLevel(List<Module> searchResult, Integer toSearchLevel) {
         List<Module> updatedSearchResult = new ArrayList<>();
         for (Module module : searchResult) {
@@ -250,7 +260,13 @@ public class SearchModuleCommand extends Command {
         return updatedSearchResult;
     }
 
-    // filter the searchResult if toSearchSemester is not empty and semester does not match
+    /**
+     * Filter the list of search result by the semester offered.
+     *
+     * @param searchResult A list of prior search result
+     * @param toSearchSemester The semester offered to check for
+     * @return an updated list of search result where the module is offered in the desired semester
+     */
     public static List<Module> filterBySemester(List<Module> searchResult, Integer toSearchSemester) {
         List<Module> updatedSearchResult = new ArrayList<>();
         for (Module module : searchResult) {

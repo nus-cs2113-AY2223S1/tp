@@ -2,7 +2,12 @@ package seedu.duke.parser;
 
 import seedu.duke.model.Day;
 
+/**
+ * This class parse out the day type component within user input from common expected inputs.
+ * Replace with enums that can integrate with internal logic of various component in YAMOM
+ */
 public class DayParser {
+
     public static Day parse(String day) {
         day = day.toLowerCase();
         if (day.startsWith("mon")) {

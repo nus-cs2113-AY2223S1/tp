@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Provide a concise help guide to inform user of commands available and how to use them.
+ */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String COMMAND_USAGE = "help";
