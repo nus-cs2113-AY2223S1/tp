@@ -195,7 +195,7 @@ Format: `add t/TYPE c/CATEGORY a/AMOUNT d/DATE i/DESCRIPTION`
 | `CATEGORY`    | A category for the transaction. It can be any word without numeral, symbol or spacing.                 |
 | `AMOUNT`      | The amount of the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million). | 
 | `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.             |                                                                                                 
-| `DESCRIPTION` | More information regarding the transaction. It is any word without any spacing.                        | 
+| `DESCRIPTION` | More information regarding the transaction. It can be any word without any spacing.                    | 
 
 **Important Information:**
 
@@ -246,7 +246,7 @@ Edit a transaction entry from the list of transactions.
 | `CATEGORY`    | A category for the transaction. It can be any word without numeral, symbol or spacing.                 |
 | `AMOUNT`      | The amount of the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million). | 
 | `DATE`        | The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.             |                                                                                                 
-| `DESCRIPTION` | More information regarding the transaction. It is any word without any spacing.                        |
+| `DESCRIPTION` | More information regarding the transaction. It can be any word without any spacing.                    |
 
 **Important Information:**
 
@@ -376,9 +376,9 @@ Find a specific or multiple transactions based on any keyword that have been spe
 
 **Format:** `find k/KEYWORD`
 
-| Parameter | Description                                                                                                                      |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------|
-| `KEYWORD` | A case-insensitive word that matches the partial or full description of a transaction entry. It is any word without any spacing. |
+| Parameter | Description                                                                                                                          |
+|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `KEYWORD` | A case-insensitive word that matches the partial or full description of a transaction entry. It can be any word without any spacing. |
 
 **Example:**
 

@@ -68,12 +68,12 @@ public enum HelpMessages {
     COMMAND_PARAMETERS_DATE("- DATE: The date when the transaction took place on. It must be in ddMMyyyy "
             + "format, e.g. 29102022."),
     COMMAND_PARAMETERS_DESCRIPTION("- DESCRIPTION: More information regarding the transaction. "
-            + "It is any word without any spacing."),
+            + "It can be any word without any spacing."),
     COMMAND_PARAMETERS_DETAILED("- detailed: A detailed version of the guide."),
     COMMAND_PARAMETERS_ENTRY("- ENTRY: A list entry value for the transaction. It is a positive whole number "
             + "ranging from 1 to 1000000."),
     COMMAND_PARAMETERS_KEYWORD("- KEYWORD: A case-insensitive word that matches the partial or the full description "
-            + "of a transaction entry. It is any word without any spacing."),
+            + "of a transaction entry. It can be any word without any spacing."),
     COMMAND_PARAMETERS_MONTH("- MONTH: The month which the transaction falls on. It is a positive whole number ranging "
             + "from 1 to 12, where 1 represents January." + LINE_SEPARATOR
             + "\t\t<!> - MONTH parameter must be used together with the YEAR parameter."),
@@ -98,6 +98,7 @@ public enum HelpMessages {
             + COMMAND_PARAMETERS_TYPE + LINE_SEPARATOR
             + COMMAND_PARAMETERS_CATEGORY + LINE_SEPARATOR
             + COMMAND_PARAMETERS_AMOUNT + LINE_SEPARATOR
+            + COMMAND_PARAMETERS_DATE + LINE_SEPARATOR
             + COMMAND_PARAMETERS_DESCRIPTION),
     ADD_COMMAND_BASIC_HELP(COMMAND_HEADER_COMMAND_WORD + AddCommand.COMMAND_WORD + LINE_SEPARATOR
             + COMMAND_DESCRIPTION_ADD + LINE_SEPARATOR
