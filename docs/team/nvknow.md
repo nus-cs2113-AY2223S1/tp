@@ -39,7 +39,6 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 **Contributions to the DG**
 
 - Added Employee management feature and its Design considerations
-- Added the UML diagram of Employee Management
 - Added the UML diagram of Employee Add
 - Added the UML diagram of Appointment Add
 - Added the UML diagram of Service Add
