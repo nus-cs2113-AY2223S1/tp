@@ -28,4 +28,7 @@ Storage ..> XyzList
 User <..> UI
 Storage ..right> "Xyz Text Files"
 
+XyzList ..> UI
+Storage ..> UI
+
 @enduml
