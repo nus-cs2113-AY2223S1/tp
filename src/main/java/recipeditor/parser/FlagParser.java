@@ -113,12 +113,12 @@ public class FlagParser {
         for (int i = 0; i < parsedCommand.length; i++) {
             if (parsedCommand[i].contains("-")) {
                 switch (parsedCommand[i]) {
-                    case INDEX_FLAG: case ADD_FLAG: case DELETE_FLAG: case SWAP_FLAG: case CHANGE_FLAG:
-                    case INGREDIENT_FLAG: case STEP_FLAG: case TITLE_FLAG: case DESCRIPTION_FLAG:
-                        lastIndex = i;
-                        break;
-                    default:
-                        break;
+                case INDEX_FLAG: case ADD_FLAG: case DELETE_FLAG: case SWAP_FLAG: case CHANGE_FLAG:
+                case INGREDIENT_FLAG: case STEP_FLAG: case TITLE_FLAG: case DESCRIPTION_FLAG:
+                    lastIndex = i;
+                    break;
+                default:
+                    break;
                 }
             }
         }
