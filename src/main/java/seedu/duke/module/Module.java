@@ -272,6 +272,13 @@ public class Module {
 
     public void replaceAllAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
         this.attendingMap = loadedLessons;
+        for (String lessonType : loadedLessons.keySet()) {
+            LinkedHashMap<String, ArrayList<Lesson>> classes = loadedLessons.get(lessonType);
+            for (String classNumber : classes.keySet()) {
+                List<Lesson> currClass = loadedLessons.get(lessonType).get(classNumber);
+                Timetable.timetableDict.addClass(currClass);
+            }
+        }
         this.attendingList = getAttendingInListForm();
     }
 

@@ -406,19 +406,19 @@ public class TimetableDict {
                 }
             }
         }
-        // int permutationCounter = 1;
-        // System.out.println("------ " + module.getModuleCode() + " ------");
-        // for (List<List<Lesson>> permutation : result) {
-        //     System.out.println("--- Permutation" + permutationCounter + " ---");
-        //     for (List<Lesson> currClass : permutation) {
-        //         for (Lesson lesson : currClass) {
-        //             System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
-        //                 + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
-        //         }
-        //     }
-        //     permutationCounter++;
-        // }
-        // System.out.print("\n");
+        int permutationCounter = 1;
+        System.out.println("------ " + module.getModuleCode() + " ------");
+        for (List<List<Lesson>> permutation : result) {
+            System.out.println("--- Permutation" + permutationCounter + " ---");
+            for (List<Lesson> currClass : permutation) {
+                for (Lesson lesson : currClass) {
+                    System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
+                        + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+                }
+            }
+            permutationCounter++;
+        }
+        System.out.print("\n");
         return result;
     }
 
@@ -450,5 +450,19 @@ public class TimetableDict {
         List<List<List<Lesson>>> result = generateLessonPermutations(numOfClassesPerType, 
                                                 lessonTypes, numOfPermutations, module);
         return result;
+    }
+
+    //For debugging
+    public void print() {
+        for (String day : timetable.keySet()) {
+            System.out.println(day + ":");
+            for (String time : timetable.get(day).keySet()) {
+                if (timetable.get(day).get(time) == null) {
+                    System.out.println("_______");
+                    continue;
+                }
+                System.out.println(time + ": " + timetable.get(day).get(time).getModuleCode());
+            }
+        }
     }
 }

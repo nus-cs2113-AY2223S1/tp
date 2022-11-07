@@ -163,6 +163,8 @@ a string telling the user to manually set those lessons before running the comma
 * Users can still choose to manually set the modules to clash with the command `set`.
 * Lessons which have already been set by the user or automatically set due to it being a fixed lesson will not be altered. Hence, if a user manually sets a clash,
 the `allocation` command will not resolve such clashes.
+* As the number of permutations that the program has to consider can be very large, some time may be needed for the program to run.
+If no error messages are shown, the program is still running as expected.
 
 **Example of Usage:** input: `allocate`
 * Successful allocation with no clashes:
