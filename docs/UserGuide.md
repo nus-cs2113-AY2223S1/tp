@@ -35,6 +35,10 @@ Based on a Command Line Interface (CLI), you can add your `expenses`, `income` s
 Although this application is mainly targeted at computing professionals who are familiar with CLI, **you don't have to worry if you're not an expert** -- MoneyGoWhere is **easy to pick up** and can help you start organising your finances in a matter of **moments**.
 
 <br>
+
+[Back to Contents](#contents)
+
+<br>
 <br>
 
 ## How to use the User Guide
@@ -56,7 +60,6 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
     * [Basic Syntax](#basic-syntax)
     * [Additional Syntax](#additional-syntax)
         * [Adding spaces](#adding-spaces)
-        * [Adding double quotes](#adding-double-quotes)
         * [Limitation on adding double quotes](#limitation-on-adding-double-quotes)
         * [Limitation on adding hyphens](#limitation-on-adding-hyphens)
 * [Back to Contents](#contents)
@@ -69,19 +72,33 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 
 <br>
 
-{: .invalid }
-> {: .opaque }
+> ❌ Invalid Input
+> 
 > Cross symbols (❌) indicate **invalid** input into MoneyGoWhere.
 
-{: .valid }
-> {: .opaque }
+> ✔️ Valid Input
+> 
 > Tick symbols (✔️) indicate **valid** input into MoneyGoWhere.
 
-{: .tips }
+> ℹ️ Tips
+> 
 > Information symbols (ℹ️) indicate **tips** or **notes** that contain extra information to clarify functions for you.
 
-{: .notes }
+> ⚠️ Notes
+> 
 > Warning symbols (⚠️) indicate **precautions** that you should take when using the function.
+
+> ❓ Question
+>
+> Question symbols (❓) indicate common **enquiries** that users ask about MoneyGoWhere.
+
+> 🔎 Answer
+>
+> Answer symbols (🔎) indicate **solutions** to user enquiries stated beforehand.
+
+<br>
+
+[Back to Sub-Contents](#how-to-use-the-user-guide)
 
 <br>
 <hr>
@@ -102,15 +119,20 @@ When inputting arguments:
 
 Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
-{: .invalid }
+> ❌ Invalid Input
 > `Add-Expense -n Lunch`
 >
 > `Add-Expense -a 13.37`
 
-{: .valid }
+> ✔️ Valid Input
+>
 > `Add-Expense -n Lunch -a 13.37`
 >
 > `Add-Expense -n Lunch -a 13.37 -x SGD -p Card`
+
+<br>
+
+[Back to Sub-Contents](#how-to-use-the-user-guide)
 
 <br>
 <hr>
@@ -123,23 +145,7 @@ Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATE
 ##### Adding spaces
 Argument values with spaces should be enclosed with double quotes.
 
-Example:
-```
-Add-Expense -n "Birthday items" -a 90.40
-
-Name            : Birthday items
-Date and Time   : 01 Jan 2022 23:59
-Amount          : 90.40
-Currency        : SGD
-```
-
 <br>
-<hr>
-<br>
-
-##### Adding double quotes
-
-Argument values with a double quote can be escaped by prepending an additional double quote.
 
 Example:
 ```
@@ -151,7 +157,7 @@ Amount          : 1333.37
 Currency        : SGD
 
 The expense was added successfully.
-``` 
+```
 
 <br>
 <hr>
@@ -161,13 +167,19 @@ The expense was added successfully.
 
 Argument values cannot start and end with escaped double quotes.
 
+<br>
+
 Example:
 ```
 Add-Expense -n """Lunch""" -a 13.37
-```
-<br>
 
-[Back to Sub-Contents](#how-to-use-the-user-guide)
+Name            : Lunch
+Date and Time   : 07 Nov 2022 18:58
+Amount          : 13.37
+Currency        : SGD
+
+The expense was added successfully.
+``` 
 
 <br>
 <hr>
@@ -177,9 +189,13 @@ Add-Expense -n """Lunch""" -a 13.37
 
 Argument values cannot be the same as argument options.
 
+<br>
+
 Example:
 ```
 Add-Expense -n "-n" -a 13.37
+
+ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 ```
 <br>
 
@@ -188,7 +204,6 @@ Add-Expense -n "-n" -a 13.37
 <br>
 <br>
 
-
 ## Quick Start
 
 ### Sub-Contents
@@ -196,6 +211,7 @@ Add-Expense -n "-n" -a 13.37
 * [Installation requirements](#installation-requirements)
 * [How to run MoneyGoWhere](#how-to-run-moneygowhere)
 * [Basic commands](#basic-commands)
+* [Back to Contents](#contents)
 
 <br>
 <hr>
@@ -207,6 +223,10 @@ Add-Expense -n "-n" -a 13.37
     1. Execute the command ```java --version``` in your terminal window.
     2. Verify that the version of Java installed is ```Java 11```.
 2. Ensure that you have write permissions for the directory in which you are executing the program.
+
+<br>
+
+[Back to Sub-Contents](#quick-start)
 
 <br>
 <hr>
@@ -265,8 +285,8 @@ Your MoneyGoWhere? Let me help you track it.
 #### On Linux OS
 
 1. Navigate to the **terminal** by locating it your **launcher** or by searching it in **Activities** at the top left of the screen.
-2. Execute the command  `java -jar MoneyGoWhere.jar`
-3. When successfully run, MoneyGoWhere should display the following message:
+3. Execute the command  `java -jar MoneyGoWhere.jar`
+4. When successfully run, MoneyGoWhere should display the following message:
 
 ```
   __  __                         _____   __          ___                   
@@ -282,20 +302,24 @@ Your MoneyGoWhere? Let me help you track it.
 ```
 
 <br>
+
+[Back to Sub-Contents](#quick-start)
+
+<br>
 <hr>
 <br>
 
 ### Basic commands
 
-| Command               | Syntax                                                                                                                        |
-|:----------------------|:------------------------------------------------------------------------------------------------------------------------------|
-| Add expense           | `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]` |
-| View expense(s)       | `View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]`                                                     |
-| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE OF PAYMENT]`        |
-| Add income            | `Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                          |
-| Add target            | `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                        |
-| View command list     | `help`                                                                                                                        |
-| Exit                  | `bye`                                                                                                                         |
+| Command               | Syntax                                                                                                                                              |
+|:----------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Add expense           | `Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]` |
+| View expense(s)       | `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`                                                                                           |
+| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]`                              |
+| Add income            | `Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                                                |
+| Add target            | `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                              |
+| View command list     | `Help`                                                                                                                                              |
+| Exit                  | `Bye`                                                                                                                                               |
 
 <br>
 
@@ -375,11 +399,10 @@ Adds a new expense to the list of expenses.
 
 <br>
 
-Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
+Syntax: Syntax: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE-OF-PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
-> * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 
@@ -412,6 +435,10 @@ The expense was added successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-expenses)
+
+<br>
 <hr>
 <br>
 
@@ -422,9 +449,9 @@ Displays past expenses you have added.
 
 Syntax: `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
-> * `CATEGORY` and `NAME` are text strings. 
+> * `CATEGORY` and `NAME` are text strings.
 > * If any of the optional arguments are provided, MoneyGoWhere will only display the specified expense(s).
 
 <br>
@@ -441,12 +468,14 @@ Amount          : 2999.90
 Remarks         : Submit invoice to finance
 Currency        : SGD
 Mode of Payment : Card
+
 ---- EXPENSE INDEX 1 ----
 Name            : Flash Drive
 Date and Time   : 07 Nov 2022 17:10
 Amount          : 28.00
 Category        : Work Expenses
 Currency        : USD
+Mode of Payment : PayLah
 Mode of Payment : Card
 ```
 ```
@@ -462,6 +491,10 @@ Mode of Payment : Card
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-expenses)
+
+<br>
 <hr>
 <br>
 
@@ -472,7 +505,7 @@ Deletes an expense from the list of expenses.
 
 Syntax: `Delete-Expense -e EXPENSE-INDEX`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 
 <br>
@@ -485,6 +518,10 @@ The expense was deleted successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-expenses)
+
+<br>
 <hr>
 <br>
 
@@ -495,7 +532,7 @@ Edits an existing expense in the list of expenses.
 
 Syntax: `Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d DATE-TIME] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY`, `REMARKS` and `MODE-OF-PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
@@ -536,6 +573,10 @@ The expense was edited successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-expenses)
+
+<br>
 <hr>
 <br>
 
@@ -543,7 +584,7 @@ The expense was edited successfully.
 Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
 descending order.
 
-{: .tips }
+> ℹ️ Tips
 > 1. By default, expenses are sorted in alphabetical order, from A to Z. Expenses are sorted **automatically** whenever a new expense is added, or if an existing expense is edited.
 > 2. The nature of this feature could cause the indexes of the expenses to change while running MoneyGoWhere. Please use `View-Expense` to get the most updated indexes of the expenses.
 
@@ -551,7 +592,7 @@ descending order.
 
 Syntax: `Sort-Expense -t TYPE -o ORDER`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `TYPE` is a text string. It can be either `alphabetical`, `amount`, `date` or `currency`.
 > * `ORDER` is a text string. It can be either `ascending` or `descending`.
 
@@ -585,6 +626,10 @@ Your expenses have been sorted successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-expenses)
+
+<br>
 <hr>
 <br>
 
@@ -593,10 +638,10 @@ Converts the currency of an expense from the list of expenses.
 
 <br>
 
-Syntax: `Convert-Currency -e EXPENSE_NUMBER -x CURRENCY [-r RATE]`
+Syntax: `Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]`
 
-{: .notes }
-> * `EXPENSE_NUMBER` is an integer value. This value should be equal to or greater than 0.
+> ⚠️ Syntax Notes
+> * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `CURRENCY` is a text string. It must be a valid currency code.
 > * `RATE` is a decimal value. This value should be greater than 0. This rate should be the rate to convert the expense amount from the old currency to the new currency.
 
@@ -606,15 +651,14 @@ Example of usage:
 ```
 Convert-Currency -e 1 -x MYR -r 1.35
 
-Name            : VPN subscription
-Date and Time   : 08 Aug 2022 23:59
-Description     : Monthly payment
-Amount          : 161.983800
-Category        : Work expenses
-Remarks         : Remarks here
+Name            : Flash Drive
+Date and Time   : 07 Nov 2022 15:10
+Description     : Development Flash Drive
+Amount          : 35.10
+Category        : Work Expenses
+Remarks         : Submit invoice to finance
 Currency        : MYR
-Mode of Payment : PayLah
-
+Mode of Payment : Card
 
 The expense's currency was changed successfully.
 ```
@@ -647,7 +691,7 @@ Adds a recurring payment to the list of recurring payments.
 
 Syntax: `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `NAME`, `DESCRIPTION`, `CATEGORY` and `MODE_OF_PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
@@ -681,6 +725,10 @@ The recurring payment was added successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-recurring-payments)
+
+<br>
 <hr>
 <br>
 
@@ -691,7 +739,7 @@ Displays the past recurring payments you have added.
 
 Syntax: `View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `RECURRINGPAYMENT-INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 <br>
@@ -705,6 +753,7 @@ Name            : Mobile Plan 1
 Interval (Days) : 30
 Amount          : 20.00
 Currency        : SGD
+
 ---- RECURRING PAYMENT INDEX 1 ----
 Name            : Mobile Plan 2
 Interval (Days) : 30
@@ -713,8 +762,8 @@ Amount          : 20.00
 Category        : Bills
 Currency        : SGD
 Mode of Payment : Card
-
 ```
+
 ```
 View-RecurringPayment -r 1
 
@@ -729,6 +778,10 @@ Mode of Payment : Card
 ````
 
 <br>
+
+[Back to Sub-Contents](#managing-your-recurring-payments)
+
+<br>
 <hr>
 <br>
 
@@ -739,7 +792,7 @@ Deletes a recurring payment from the list of recurring payments.
 
 Syntax: `Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `RECURRINGPAYMENT-INDEX` is an integer value. This value should be equal to or greater than 0.
 
 <br>
@@ -752,6 +805,10 @@ The recurring payment was deleted successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-recurring-payments)
+
+<br>
 <hr>
 <br>
 
@@ -762,8 +819,8 @@ Edits a recurring payment in the list of recurring payments.
 
 Syntax: `Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
-{: .notes }
-> * `RECURRING_PAYMENT_INDEX`  is an integer value. This value should be equal to or greater than 0.
+> ⚠️ Syntax Notes
+> * `RECURRINGPAYMENT-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `NAME`, `DESCRIPTION`, `CATEGORY` and `MODE-OF-PAYMENT` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `INTERVAL` is an integer value. Set this value to the estimated number of days between your recurring payments.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
@@ -773,7 +830,7 @@ Syntax: `Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL]
 
 Examples of usage:
 ```
-edit-recurringpayment -r 0 -a 18
+Edit-RecurringPayment -r 0 -a 18.00
 
 ---- RECURRING PAYMENT INDEX 0 ----
 Name            : Mobile Plan 1
@@ -784,7 +841,7 @@ Currency        : SGD
 The recurring payment was edited successfully.
 ```
 ```
-edit-recurringpayment -r 0 -n "Mobile Plan 2" -i 30 -t "Monthly payment for my 2nd mobile phone" -a 18.00 -c "Bills" -x SGD -p Card
+Edit-RecurringPayment -r 0 -n "Mobile Plan 2" -i 30 -t "Monthly payment for my 2nd mobile phone" -a 18.00 -c "Bills" -x SGD -p Card
 
 ---- RECURRING PAYMENT INDEX 0 ----
 Name            : Mobile Plan 2
@@ -799,6 +856,10 @@ The recurring payment was edited successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-recurring-payments)
+
+<br>
 <hr>
 <br>
 
@@ -809,15 +870,15 @@ Adds an expense based on an existing recurring payment.
 
 Syntax: `Pay-RecurringPayment -r RECURRING_PAYMENT_INDEX [-d DATE-TIME]`
 
-{: .notes }
-> * `RECURRING_PAYMENT_INDEX`  is an integer value. This value should be equal to or greater than 0.
+> ⚠️ Syntax Notes
+> * `RECURRING_PAYMENT_INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `DATE-TIME` is a text string in the format `"dd/MM/yyyy HHmm"`. If this value is not provided, MoneyGoWhere will save the current date and time for you.
 
 <br>
 
 Example of usage:
 ```
-pay-recurringpayment -r 1
+Pay-RecurringPayment -r 1
 
 Name            : Mobile Plan 2
 Date and Time   : 07 Nov 2022 17:50
@@ -857,7 +918,7 @@ Adds a new income to the list of incomes.
 
 Syntax: `Add-Income -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -886,6 +947,10 @@ The income was added successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-incomes)
+
+<br>
 <hr>
 <br>
 
@@ -894,10 +959,10 @@ Displays past incomes you have added.
 
 <br>
 
-Syntax: `View-Income [-e INCOME_NUMBER]`
+Syntax: `View-Income [-e INCOME-INDEX]`
 
-{: .notes }
-> * `INCOME_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `INCOME-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 <br>
@@ -927,6 +992,10 @@ Amount        : 500.00
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-incomes)
+
+<br>
 <hr>
 <br>
 
@@ -935,10 +1004,10 @@ Deletes an income from the list of incomes.
 
 <br>
 
-Syntax: `Delete-Income -e INCOME_NUMBER`
+Syntax: `Delete-Income -e INCOME-INDEX`
 
-{: .notes }
-> * `INCOME_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `INCOME-INDEX` is an integer value.  This value should be equal to or greater than 0.
 
 <br>
 
@@ -958,10 +1027,10 @@ Edits an existing income in the list of incomes.
 
 <br>
 
-Syntax: `Edit-Income -e INCOME_NUMBER [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+Syntax: `Edit-Income -e INCOME-INDEX [-n NAME] [-a AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
 
-{: .notes }
-> * `INCOME_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `INCOME-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` is a decimal value. The value should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -1019,7 +1088,7 @@ Adds a new target to the list of targets.
 
 Syntax: `Add-Target -n NAME -a AMOUNT -c CURRENT_AMOUNT [-d DATE_TIME] [-t DESCRIPTION]`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.</li>
 > * `AMOUNT` and `CURRENT_AMOUNT` are decimal value. The values should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -1051,6 +1120,10 @@ The target was added successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-targets)
+
+<br>
 <hr>
 <br>
 
@@ -1059,10 +1132,10 @@ Displays past targets you have added.
 
 <br>
 
-Syntax: `View-Target [-e TARGET_NUMBER]`
+Syntax: `View-Target [-e TARGET-INDEX]`
 
-{: .notes }
-> * `TARGET_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `TARGET-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * If this argument is provided, MoneyGoWhere will only display the specified expense.
 
 <br>
@@ -1095,6 +1168,10 @@ Current Amount: 1500.00
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-targets)
+
+<br>
 <hr>
 <br>
 
@@ -1103,10 +1180,10 @@ Deletes a target from the list of targets.
 
 <br>
 
-Syntax: `Delete-Target -e TARGET_NUMBER`
+Syntax: `Delete-Target -e TARGET-INDEX`
 
-{: .notes }
-> * `TARGET_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `TARGET-INDEX` is an integer value. This value should be equal to or greater than 0.
 
 <br>
 
@@ -1118,6 +1195,10 @@ The target was deleted successfully.
 ```
 
 <br>
+
+[Back to Sub-Contents](#managing-your-targets)
+
+<br>
 <hr>
 <br>
 
@@ -1126,10 +1207,10 @@ Edits an existing target in the list of targets.
 
 <br>
 
-Syntax: `Edit-Target -e TARGET_NUMBER [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
+Syntax: `Edit-Target -e TARGET-INDEX [-n NAME] [-a AMOUNT] [-c CURRENT_AMOUNT] [-d DATE_TIME] [-t DESCRIPTION]`
 
-{: .notes }
-> * `TARGET_NUMBER` is an integer value.
+> ⚠️ Syntax Notes
+> * `TARGET-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `NAME` and `DESCRIPTION` are text strings. You may use spaces within the text if you wrap the text with double quotes.
 > * `AMOUNT` and `CURRENT_AMOUNT` is a decimal value. The values should be greater than 0.
 > * `DATE_TIME` is a text string in the format `"dd/MM/yyyy HHmm"`.
@@ -1186,7 +1267,7 @@ Merges save file from an external source given path to the .xml save file
 
 Syntax: `Merge-File -p PATH_STRING`
 
-{: .notes }
+> ⚠️ Syntax Notes
 > * `PATH_STRING` is text string. If your path contains spaces, you would need to wrap the text with double quotes.
 
 <br>
@@ -1225,13 +1306,14 @@ A compilation of frequently asked questions that can help you clarify common mis
 
 <br>
 
-{: .question }
-> {: .opaque }
-> How do I transfer my data to another computer?
-> <div markdown="block">
-> {: .answer }
-> As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the `MoneyGoWhere.jar` file. To merge the copied file, open the **Memory** folder and transfer `MoneyGoWhereData.xml`** to another computer. Then, run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
-> </div>
+> 
+> ❓ How do I transfer my data to another computer?
+> 
+> > 🔎 As you enter data into MoneyGoWhere, it creates a **Memory** folder in the same directory as the `MoneyGoWhere.jar` file. To merge the copied file, open the **Memory** folder and transfer `MoneyGoWhereData.xml`** to another computer. Then, run the [`Merge-File`](#merging-a-data-file-merge-file) command to merge the copied file.
+
+<br>
+
+[Back to Contents](#contents)
 
 <br>
 <br>
@@ -1244,10 +1326,10 @@ A list of all valid commands.
 
 | Command          | Syntax                                                                                                                                                    |
 |:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Add expense      | `Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`                       |
-| View expenses    | `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`                                                                                                 |
+| Add expense      | `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`                             |
+| View expenses    | `View-Expense [-e EXPENSE-INDEX] [-c EXPENSE-CATEGORY] [-n EXPENSE-NAME]`                                                                                 |
 | Delete expense   | `Delete-Expense -e EXPENSE-INDEX`                                                                                                                         |
-| Edit expense     | `Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]` |
+| Edit expense     | `Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]` |
 | Sort expense     | `Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending`                                                                               |
 | Convert currency | `Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]`                                                                                                 |
 

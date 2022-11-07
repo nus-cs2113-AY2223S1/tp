@@ -627,7 +627,6 @@ public class ConsoleInterface {
             expense.setModeOfPayment(consoleCommandEditExpense.getModeOfPayment());
         }
 
-
         try {
             expenseManager.editExpense(expenseIndex, expense);
         } catch (ExpenseManagerExpenseNotFoundException exception) {
@@ -941,6 +940,15 @@ public class ConsoleInterface {
 
     //@@author xzynos
     private void runCommandAddRecurringPayment(ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment) {
+        try {
+            currencyManager.hasCurrency(consoleCommandAddRecurringPayment.getCurrency());
+        } catch (CurrencyInvalidException
+                 | CurrencyRatesNotFoundException exception) {
+            printErrorMessage(exception.getMessage());
+
+            return;
+        }
+
         RecurringPayment recurringPayment = new RecurringPayment(
                 consoleCommandAddRecurringPayment.getName(),
                 consoleCommandAddRecurringPayment.getInterval(),
@@ -1064,7 +1072,17 @@ public class ConsoleInterface {
             recurringPayment.setCategory(consoleCommandEditRecurringPayment.getCategory());
         }
         if (consoleCommandEditRecurringPayment.isCurrencySet()) {
-            recurringPayment.setCurrency(consoleCommandEditRecurringPayment.getCurrency());
+            String currency = consoleCommandEditRecurringPayment.getCurrency().toUpperCase();
+
+            try {
+                currencyManager.hasCurrency(currency);
+            } catch (CurrencyInvalidException | CurrencyRatesNotFoundException exception) {
+                printErrorMessage(exception.getMessage());
+
+                return;
+            }
+
+            recurringPayment.setCurrency(currency);
         }
         if (consoleCommandEditRecurringPayment.isModeOfPaymentSet()) {
             recurringPayment.setModeOfPayment(consoleCommandEditRecurringPayment.getModeOfPayment());
