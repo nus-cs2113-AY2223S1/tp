@@ -58,16 +58,16 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 - Opened pull request from team repo to module repo
 - Carried some Smoke-test on the deliverable
 - Set up category tags to issues
-- Fixed bugs related to employee received in the PE-D
+- Fixed bugs related to employee received in the Practical Exam Dry Run
 
 **Mentoring contributions**
 
-- Helped team members to fix format errors checked by Gradle
+- Helped team members to fix format errors checked by Gradle (which could be proven by any team member)
 
 **Contributions beyond the project team**
 
 - Reviewed the pull requests of another team: [CS2113-T17-3](https://github.com/nus-cs2113-AY2223S1/tp/pull/10)
-- Reported more than 10 bugs in the PE-D: [CS2113T-W11-1](https://github.com/nvknow/ped/issues)
+- Reported more than 10 bugs in the Practical Exam Dry Run: [CS2113T-W11-1](https://github.com/nvknow/ped/issues)
 
   
 
