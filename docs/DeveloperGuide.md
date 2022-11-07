@@ -374,9 +374,7 @@ using the `setFlightNum(newFlightNum)` method.
 7. Finally, `execute(passengers, lineInput)` method is called from SkyControl to reflect the changes in flight number
 for the respective passengers as well. 
 
----  
-
-<div style="page-break-after: always;"></div>  
+---
 
 ### Delay a flight feature
 In the event of a flight not being able to depart on time and needs to be delayed,
@@ -452,8 +450,6 @@ track of constant changes in flight scheduling and the relevant passenger detail
 | v2.0    | AOM      | save the flight and passenger details that have been entered      | still access them after closing and reopening the program                       |
 | v2.1    | AOM      | automatically sync up passenger details with flight details       | prevent any error in input between passenger and flight detail for same details |
 
-<div style="page-break-after: always;"></div>  
-
 ## Non-Functional Requirements
 
 1. User should work on Windows, Linux or OS-X as long as `Java-11` or above has been installed.
@@ -464,7 +460,10 @@ track of constant changes in flight scheduling and the relevant passenger detail
 ## Glossary
 
 * *AOM* - Airport Operations Manager (A person responsible for scheduling and directing airport operations.)
-* *v1.0* - Version 1.0
+* *v1.0* - Version 1.0  
+
+<div style="page-break-after: always;"></div>  
+  
 
 ## Instructions for manual testing
 
@@ -500,8 +499,6 @@ Adding a new flight can be done using the `flight add fn/FLIGHT_NUMBER a/AIRLINE
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     The system is unable to read your command, please try again.
     ```
-
-<div style="page-break-after: always;"></div>  
 
 3. Add a flight with invalid details. 
 SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check in numbers.
