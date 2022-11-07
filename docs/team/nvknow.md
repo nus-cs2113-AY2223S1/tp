@@ -4,7 +4,7 @@
 
 Hi, I am Cao Yikai, a year 3 student majoring in Industrial Engineering and minoring in Statistics.
 
-Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI) developed by a team of five students following the course requirements of CS2113 within six weekss. PCMS is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
+Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI) developed by a team of five students following the course requirements of CS2113 within six weeks. PCMS is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
 
 ### Summary of Contributions
 
