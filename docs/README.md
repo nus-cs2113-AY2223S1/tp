@@ -1,4 +1,5 @@
 # parKING
+![Home screen image](Ui.png)
 
 Welcome to our humble project supervised by National University of Singapore's [School of Computing](https://www.comp.nus.edu.sg/).
 This project is part of the requirement of an NUS module CS2113 where students are to develop
