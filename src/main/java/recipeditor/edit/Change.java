@@ -34,35 +34,35 @@ public class Change extends EditModeCommand {
             StringBuilder newInput = new StringBuilder();
 
             switch (ingredientFlag) {
-                case INGREDIENT:
-                    for (int i = START_LOCATION; i < parsedCommand.length; i++) {
-                        newInput.append(parsedCommand[i]).append(" ");
-                    }
-                    int indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
-                    Ingredient newIngredient = Ingredient.parsedIngredients(newInput.toString().trim());
-                    recipe.setIngredient(indexToChange, newIngredient);
-                    return recipe;
-                case STEP:
-                    for (int i = START_LOCATION; i < parsedCommand.length; i++) {
-                        newInput.append(parsedCommand[i]).append(" ");
-                    }
-                    indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
-                    recipe.setStep(indexToChange, newInput.toString().trim());
-                    return recipe;
-                case TITLE:
-                    for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
-                        newInput.append(parsedCommand[i]).append(" ");
-                    }
-                    recipe.setTitle(newInput.toString().trim());
-                    return recipe;
-                case DESCRIPTION:
-                    for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
-                        newInput.append(parsedCommand[i]).append(" ");
-                    }
-                    recipe.setDescription(newInput.toString().trim());
-                    return recipe;
-                default:
-                    throw new InvalidFlagException();
+            case INGREDIENT:
+                for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                    newInput.append(parsedCommand[i]).append(" ");
+                }
+                int indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+                Ingredient newIngredient = Ingredient.parsedIngredients(newInput.toString().trim());
+                recipe.setIngredient(indexToChange, newIngredient);
+                return recipe;
+            case STEP:
+                for (int i = START_LOCATION; i < parsedCommand.length; i++) {
+                    newInput.append(parsedCommand[i]).append(" ");
+                }
+                indexToChange = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+                recipe.setStep(indexToChange, newInput.toString().trim());
+                return recipe;
+            case TITLE:
+                for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
+                    newInput.append(parsedCommand[i]).append(" ");
+                }
+                recipe.setTitle(newInput.toString().trim());
+                return recipe;
+            case DESCRIPTION:
+                for (int i = INDEX_LOCATION; i < parsedCommand.length; i++) {
+                    newInput.append(parsedCommand[i]).append(" ");
+                }
+                recipe.setDescription(newInput.toString().trim());
+                return recipe;
+            default:
+                throw new InvalidFlagException();
             }
         } catch (NumberFormatException n) {
             throw new NumberFormatException("Invalid number format");

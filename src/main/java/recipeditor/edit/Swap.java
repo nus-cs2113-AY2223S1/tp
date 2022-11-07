@@ -31,26 +31,26 @@ public class Swap extends EditModeCommand {
             int index1 = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
             int index2 = Integer.parseInt(parsedCommand[START_LOCATION]) - 1;
             switch (ingredientFlag) {
-                case INGREDIENT:
-                    try {
-                        Ui.showMessage("Swap \"" + recipe.getIngredient(index1).getName()
-                                + "\" and \"" + recipe.getIngredient(index2).getName() + "\"");
-                        recipe.swapIngredients(index1, index2);
-                        return recipe;
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new IndexOutOfBoundsException("Index out of bound of number of ingredients.");
-                    }
-                case STEP:
-                    try {
-                        Ui.showMessage("Swap \"" + recipe.getStep(index1)
-                                + "\" and \"" + recipe.getStep(index2) + "\"");
-                        recipe.swapSteps(index1, index2);
-                        return recipe;
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new IndexOutOfBoundsException("Index out of bound of number of steps.");
-                    }
-                default:
-                    throw new InvalidFlagException();
+            case INGREDIENT:
+                try {
+                    Ui.showMessage("Swap \"" + recipe.getIngredient(index1).getName()
+                            + "\" and \"" + recipe.getIngredient(index2).getName() + "\"");
+                    recipe.swapIngredients(index1, index2);
+                    return recipe;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new IndexOutOfBoundsException("Index out of bound of number of ingredients.");
+                }
+            case STEP:
+                try {
+                    Ui.showMessage("Swap \"" + recipe.getStep(index1)
+                            + "\" and \"" + recipe.getStep(index2) + "\"");
+                    recipe.swapSteps(index1, index2);
+                    return recipe;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new IndexOutOfBoundsException("Index out of bound of number of steps.");
+                }
+            default:
+                throw new InvalidFlagException();
             }
         } catch (NumberFormatException n) {
             throw new NumberFormatException("Invalid number format");
