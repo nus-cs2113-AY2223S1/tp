@@ -143,7 +143,7 @@ public class Recipe {
                 + title + "\n\n" + "DESCRIPTION:\n"
                 + description.trim() + "\n\n" + "INGREDIENTS: "
                 + "\n" + getIngredientAttributesFormatted() + "\n" + "STEPS: "
-                + "\n" + getStepAttributesFormatted() + "\n\n";
+                + "\n" + getStepAttributesFormatted();
         logger.setLevel(Level.WARNING);
         logger.log(Level.INFO, "Get attributes of " + title);
         return recipeAttributesStringFormatted;

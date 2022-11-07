@@ -15,7 +15,9 @@ public class FindCommand extends Command {
 
     public static final String CORRECT_FORMAT = "The correct format should be " + "'" + COMMAND_SYNTAX + "'."
             + FLAG_SYNTAX;
-    public static final String INCORRECT_FLAG_MESSGE = "Incorrect flag!\n";
+    public static final String INCORRECT_FLAG_MESSAGE = "Incorrect flag!\n";
+    private static final int START_INDEX = 0;
+    private static final int ACCOUNT_ONE_BASED_INDEXING = 1;
     public String findInput;
     private FlagType flag;
 
@@ -47,11 +49,11 @@ public class FindCommand extends Command {
                 foundRecipeList = RecipeList.findRecipeTitlesFromIngredientName(findInput);
                 break;
             default:
-                return new CommandResult(INCORRECT_FLAG_MESSGE + FindCommand.FLAG_SYNTAX);
+                return new CommandResult(INCORRECT_FLAG_MESSAGE + FindCommand.FLAG_SYNTAX);
             }
             StringBuilder output = new StringBuilder();
-            for (int i = 0; i < foundRecipeList.size(); i++) {
-                output.append(String.format("%n%d. %s", i + 1, foundRecipeList.get(i)));
+            for (int i = START_INDEX; i < foundRecipeList.size(); i++) {
+                output.append(String.format("%n%d. %s", i + ACCOUNT_ONE_BASED_INDEXING, foundRecipeList.get(i)));
             }
             return new CommandResult(output.toString());
         } catch (NullPointerException e) {

@@ -9,6 +9,9 @@ import recipeditor.ui.Ui;
 
 public class Swap extends EditModeCommand {
 
+    private static final int INDEX_LOCATION = 4;
+    private static final int START_LOCATION = 5;
+
     public Swap(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
         super(ingredientFlag, parsedCommand, recipe);
     }
@@ -22,8 +25,8 @@ public class Swap extends EditModeCommand {
      */
     @Override
     public Recipe execute() throws InvalidFlagException, IndexOutOfBoundsException {
-        int index1 = Integer.parseInt(parsedCommand[4]) - 1;
-        int index2 = Integer.parseInt(parsedCommand[5]) - 1;
+        int index1 = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+        int index2 = Integer.parseInt(parsedCommand[START_LOCATION]) - 1;
         switch (ingredientFlag) {
         case INGREDIENT:
             try {

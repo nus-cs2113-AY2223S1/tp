@@ -19,6 +19,7 @@ import recipeditor.ui.Ui;
 
 public class Storage {
     public static final String LOG_FILE = "./RecipeData/App/Log.txt";
+    public static final String FORWARD_SLASH_DIVIDER = "/";
     public static final String TEMPLATE_FILE_PATH = "./RecipeData/App/Template.txt";
     public static final String TEMPORARY_FILE_PATH = "./RecipeData/App/TemporaryFile.txt";
     public static final String RECIPES_FOLDER_PATH = "./RecipeData/Recipes";
@@ -92,7 +93,7 @@ public class Storage {
      * @param recipeTitleToDelete recipe title of file to be deleted
      */
     public static void deleteRecipeFile(String recipeTitleToDelete) {
-        String recipeFilePath = RECIPES_FOLDER_PATH + "/" + recipeTitleToDelete.stripTrailing();
+        String recipeFilePath = RECIPES_FOLDER_PATH + FORWARD_SLASH_DIVIDER + recipeTitleToDelete.stripTrailing();
         try {
             File file = new File(recipeFilePath);
             if (file.delete()) {
@@ -144,7 +145,7 @@ public class Storage {
      * @param title recipe title of file to change to file path
      */
     public static String titleToFilePath(String title) {
-        return RECIPES_FOLDER_PATH + "/" + title + "/";
+        return RECIPES_FOLDER_PATH + FORWARD_SLASH_DIVIDER + title + FORWARD_SLASH_DIVIDER;
     }
 
     /**

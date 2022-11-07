@@ -12,7 +12,8 @@ public class Ui {
     public static final String COMMAND = "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
     private static final String EXIT = "Program exiting";
     private static final String PROMPT = ">>> ";
-
+    public static final String SPACE_DIVIDER = " ";
+    public static final String EMPTY_STRING = "";
     private static final String LOGO = ",---.          o     ,---.    |o|\n"
             + "|---',---.,---..,---.|--- ,---|.|--- ,---.,---.\n"
             + "|  \\ |---'|    ||   ||    |   |||    |   ||\n"
@@ -59,7 +60,7 @@ public class Ui {
      */
     public static void showMessageInline(String... messages) {
         for (String m : messages) {
-            System.out.print(m + " ");
+            System.out.print(m + SPACE_DIVIDER);
         }
         System.out.println();
     }
