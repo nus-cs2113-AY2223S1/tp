@@ -34,6 +34,7 @@ public class Parser {
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
             "Wrong command format. Missing title or index from input.";
     private static final String INVALID_VIEW_COMMAND_MESSAGE = "Invalid view command.";
+    private static final String INVALID_DELETE_COMMAND_MESSAGE = "Invalid delete command.";
     private static final int COMMAND_INDEX = 0;
 
     private static final int COMMAND_LENGTH = 1;
@@ -142,7 +143,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(parsed[2] + InvalidCommand.INVALID_INDEX_MESSAGE);
+            Ui.showMessage(INVALID_DELETE_COMMAND_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {

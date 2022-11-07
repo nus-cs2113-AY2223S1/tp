@@ -1,9 +1,11 @@
 # RecipEditor
+
 ## Developer Guide
+
 The aim of this guide is to help readers understand how the system and components of RecipEditor
 is designed, implemented and tested. This developer guide also serves to help
 developers to understand the architecture of RecipEditor and some design considerations.
-Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-CS2113-T18-2/tp/releases)).
+Click to view the latest release of [RecipEditor](https://github.com/AY2223S1-CS2113-T18-2/tp/releases).
 
 ## Content page
 
@@ -40,8 +42,12 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 - The design and structure of our User Guide and Developer Guide is referenced from AddressBook-Level3 (AB3)
     - [AB3 UG](https://se-education.org/addressbook-level3/UserGuide.html)
     - [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
+
 ### External Library
-- [Apache Commons Lang 3.0](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0): for Utilities to handle String
+
+- [Apache Commons Lang 3.0](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0): for Utilities to
+  handle String
+
 ## Design
 
 ### Architecture
@@ -78,6 +84,8 @@ the `Ui` and the `Parser`
 
 - The section below gives detailed description of the classes in the various components
 
+[⏫ Back to content page](#content-page)
+
 ### Ui Component
 
 The UI component is responsible for all user interfaces of the application.
@@ -95,6 +103,8 @@ The UI component is responsible for all user interfaces of the application.
 
 - See below
 
+[⏫ Back to content page](#content-page)
+
 #### GUI Component
 
 <p align="center" width="100%">
@@ -110,6 +120,8 @@ The GUI component consists of 2 main classes: `Editor` and `GuiWorkFlow`
   and GUI
 - Check [GUI Workfow](#gui-workflow), for the implementation
 
+[⏫ Back to content page](#content-page)
+
 ### Recipe Component
 
 The recipe module encapsulates the array, recipe and ingredient objects.
@@ -118,26 +130,35 @@ The recipe module encapsulates the array, recipe and ingredient objects.
   <img width="100%" src="images/ClassDiagrams/RecipeModule.png" alt="Recipe Component"/>
 </p>
 
-- Methods are omitted to avoid clutter
 
-**Class:** `Ingredient.java`
+**API:** `Ingredient.java`
 
-- Stores the name, amount and unit of recipes
+Stores the name, amount and unit of recipes. Smallest class in the module.
 
-**Class:** `Recipe.java`
+**API:** `Recipe.java`
 
+`Recipe` calls `Ingredient` to add, edit or delete ingredients. It contains methods to parse a recipe,
+convert a recipe into printable or saveable format and perform operations on `ingredient` and `step` ArrayList objects
+which are instantiated whenever a `Recipe` object is created.
 - has private attributes as shown
 - has get and set methods on the attributes
 - has methods to convert a recipe into printable or saveable format and perform operations
 
-**Class:** `RecipeList.java`
 
+**API:** `RecipeList.java`
+
+`RecipeList` calls `Recipe` to add, edit or delete recipes. It consists of two ArrayList objects (`recipes` to store
+recipes and `recipeTitles` to store titles). It contains methods to count the number of existing recipes,
+search for recipes based on the given parameter and save edited recipe into `Storage`.
 - Consists of 2 **important arrays** that keep track of the added recipes
     - `RecipeList.recipes`: store the recipe
     - `RecipeList.recipeTitles`: store the recipe titles
         - This is necessary because it separately keeps track of valid titles from `AllRecipes.txt`
         - This is due to the fact that the recipe files might be tampered
 - has methods to do various useful operation on the `RecipeList.recipes` and `RecipeList.recipeTitles`
+
+
+[⏫ Back to content page](#content-page)
 
 ### Storage Component
 
@@ -167,6 +188,8 @@ The storage component allows data to be read from and saved to a storage file.
     3. `Template.txt`: template file for adding recipe
     4. `TemporaryFile.txt`: for the [GUI Workflow](#gui-workflow)
 
+[⏫ Back to content page](#content-page)
+
 ### Parser Component
 
 <p align="center" width="100%">
@@ -189,6 +212,8 @@ The storage component allows data to be read from and saved to a storage file.
 
 - Parse recipe files content to a valid `Recipe`
 - Used in [GUI Workflow](#gui-workflow) and [Data on Startup and Exit](#data-on-startup-and-exit)
+
+[⏫ Back to content page](#content-page)
 
 ### Command Component
 
@@ -230,6 +255,9 @@ The storage component allows data to be read from and saved to a storage file.
     - `ParseException.java`
     - `ParseFileException.java`
     - `RecipeNotFoundException.java`
+
+
+[⏫ Back to content page](#content-page)
 
 ## Implementation
 
@@ -277,6 +305,8 @@ Before exiting, the program will
 - Generate the recipe files from RecipeList Model
 
 This is to prevent manual tampering of the data that might affect the data in the next run
+
+[⏫ Back to content page](#content-page)
 
 ### Parsing of Commands
 
@@ -370,6 +400,8 @@ This is to prevent manual tampering of the data that might affect the data in th
 
 - If the command word is none of the above, an instance of `InvalidCommand` will be returned to `Parser`.
 
+[⏫ Back to content page](#content-page)
+
 ### Add Recipe
 
 - **Activation bar is ommitted to avoid clutter**
@@ -387,6 +419,8 @@ This is to prevent manual tampering of the data that might affect the data in th
     - The recipe title is added to `AllRecipes.txt` file
     - A recipe file will be saved to the FileDirectory
     - A `CommandResult` instance is returned with a successful message
+
+[⏫ Back to content page](#content-page)
 
 ### GUI Workflow
 
@@ -428,6 +462,8 @@ This is to prevent manual tampering of the data that might affect the data in th
         - if no (recipe remains invalid)
             - exit the loop and set `isValid = False`
 
+[⏫ Back to content page](#content-page)
+
 ### Parse Text to Recipe
 
 - The parsing of is solely handled by `RecipeFileParser` Class with little interaction with other classes. Hence **there
@@ -467,6 +503,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 7. Check if the recipe has empty fields
     - Because the blank lines are disregarded but considered valid
 
+[⏫ Back to content page](#content-page)
 
 ### Edit an Existing Recipe
 
@@ -523,6 +560,11 @@ This is to prevent manual tampering of the data that might affect the data in th
 <p align="center" width="100%">
   <img width="100%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
 </p>
+The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+whether the GUI or CLI should be called through the number of arguments passed by the user.
+
+
+[⏫ Back to content page](#content-page)
 
 ### Find Recipe
 
@@ -541,6 +583,8 @@ This is to prevent manual tampering of the data that might affect the data in th
 - If the given `title` or `ingredient` is invalid
     - A `CommandResult` containing failure is returned from `execute()`.
 
+[⏫ Back to content page](#content-page)
+
 ### View Recipe
 
 <p align="center" width="100%">
@@ -558,6 +602,8 @@ This is to prevent manual tampering of the data that might affect the data in th
     - An `IndexOutofBoundException` is thrown when `RecipeList.getRecipe(index)`.
     - It is catched. `Ui` will show message on the total number of recipes in list.
     - A `CommandResult` containing failure in viewing the specified `recipe` returned from `execute()`.
+
+[⏫ Back to content page](#content-page)
 
 ### Delete Recipe
 
@@ -578,10 +624,14 @@ This is to prevent manual tampering of the data that might affect the data in th
     - It is catched. `Ui` will show message on the total number of recipes in list.
     - A `CommandResult` containing failure in deleting the specified `recipe` returned from `execute()`.
 
+[⏫ Back to content page](#content-page)
+
 ### Other
 
 - `HelpCommand`, `ListCommand`, `ExitCommand` are simple and self-explanatory in the code. Hence no elaboration will be
   made
+
+[⏫ Back to content page](#content-page)
 
 ## Product scope
 
@@ -612,6 +662,8 @@ quickly.
 | v2.0    | user     | show detailed recipe that I specified         | view detailed recipe (name, description, ingredients and steps) of the one that I am interested             |
 | v2.0    | new user | view the list of available commands           | use the appropriate command according to my needs                                                           |
 
+[⏫ Back to content page](#content-page)
+
 ## Non-functional Requirements
 
 1. Should work on any OS as long as it has Java 11 or above installed on their PC.
@@ -628,14 +680,18 @@ quickly.
 - `./RecipeData/App`: Directory path to store files that are not related to recipe
 - `./RecipeData/Recipes`: Directory path to store recipe files
 
+
+[⏫ Back to content page](#content-page)
+
 ## Instructions for manual testing
 
 ### Setup
 
 1. Follow the instruction in the User Guide to setup the program
-2. For sample recipes, download and unzip `ManualTestData.rar`. There are
-   - `Recipes` folder
-   - `AllRecipes.txt` file
+2. For sample recipes, download and unzip `ManualTestData.rar`
+   from [Release](https://github.com/AY2223S1-CS2113-T18-2/tp/releases). There are
+    - `Recipes` folder
+    - `AllRecipes.txt` file
 3. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
 4. This gives you 3 sample recipes so you don't have to manually add recipes all the time
 5. Run the program, it should load and recognize the 3 recipes
@@ -707,6 +763,7 @@ quickly.
 - **`.` in step description**:
     - Expected outcome: allowed because a step can have multiple sentences
 
+[⏫ Back to content page](#content-page)
 ### Storage: Tampering the data
 
 - Tamper the data to test if the program can recover gracefully
@@ -756,6 +813,8 @@ quickly.
 - **Tamper the recipe file (unparseable recipe)**
     - The program will not load the recipe
 
+
+[⏫ Back to content page](#content-page)
 
 
 

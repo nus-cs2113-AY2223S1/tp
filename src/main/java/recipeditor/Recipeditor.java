@@ -48,7 +48,12 @@ public class Recipeditor {
     }
 
     private static CommandResult executeCommand(Command command) {
-        CommandResult result = command.execute();
-        return result;
+        try {
+            CommandResult result = command.execute();
+            return result;
+        } catch (Exception e) {
+            Ui.showMessage(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }

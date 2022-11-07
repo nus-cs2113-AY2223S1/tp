@@ -1,6 +1,7 @@
 @startuml
 skinparam Style strictuml
-Abstract Class Command {
+
+abstract class "{Command}" as Command {
     -{static} commandType : String
     +{static} String : getCommandType()
     +{static} Boolean : isExit()
