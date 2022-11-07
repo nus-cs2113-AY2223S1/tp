@@ -126,7 +126,7 @@ class DukeTest {
     }
 
     @Test
-    void testClearforSemester() throws InvalidInputContentException {
+    void testClearForSemester() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Clear for an individual semester");
 
         //add the modules
@@ -157,7 +157,7 @@ class DukeTest {
     }
 
     @Test
-    void testClearforAll() throws InvalidInputContentException {
+    void testClearForAll() throws InvalidInputContentException {
         System.out.println("Running JUnit Test for Clear for all");
 
         //add the modules
@@ -333,11 +333,11 @@ class DukeTest {
         Check check = new Check("NOC");
 
         // Check initial NOC eligibility
-        boolean initialCheckNOCSem = check.checkNOCSem();
+        boolean initialCheckNOCSem = check.checkNocSem();
         assertFalse(initialCheckNOCSem);
-        boolean initialCheckNOCMc = check.checkNOCMc();
+        boolean initialCheckNOCMc = check.checkNocMc();
         assertFalse(initialCheckNOCMc);
-        boolean initialCheckNOC = check.checkNOC();
+        boolean initialCheckNOC = check.checkNoc();
         assertFalse(initialCheckNOC);
 
         ArrayList<String> inputArray = new ArrayList<>();
@@ -372,11 +372,11 @@ class DukeTest {
         }
 
         // check final NOC eligibility
-        boolean finalCheckNOCSem = check.checkNOCSem();
+        boolean finalCheckNOCSem = check.checkNocSem();
         assertTrue(finalCheckNOCSem);
-        boolean finalCheckNOCMc = check.checkNOCMc();
+        boolean finalCheckNOCMc = check.checkNocMc();
         assertTrue(finalCheckNOCMc);
-        boolean finalCheckNOC = check.checkNOC();
+        boolean finalCheckNOC = check.checkNoc();
         assertTrue(finalCheckNOC);
 
         ModuleList.modules.clear();
@@ -392,11 +392,11 @@ class DukeTest {
         Check check = new Check("SEP");
 
         // Check initial NOC eligibility
-        boolean initialCheckSEPSem = check.checkSEPSem();
+        boolean initialCheckSEPSem = check.checkSepSem();
         assertFalse(initialCheckSEPSem);
-        boolean initialCheckSEPCAP = check.checkSEPCAP();
+        boolean initialCheckSEPCAP = check.checkSepCap();
         assertFalse(initialCheckSEPCAP);
-        boolean initialCheckSEP = check.checkSEP();
+        boolean initialCheckSEP = check.checkSep();
         assertFalse(initialCheckSEP);
 
         ArrayList<String> inputArray = new ArrayList<>();
@@ -431,11 +431,11 @@ class DukeTest {
         }
 
         // check final NOC eligibility
-        boolean finalCheckSEPSem = check.checkSEPSem();
+        boolean finalCheckSEPSem = check.checkSepSem();
         assertTrue(finalCheckSEPSem);
-        boolean finalCheckSEPCAP = check.checkSEPCAP();
+        boolean finalCheckSEPCAP = check.checkSepCap();
         assertTrue(finalCheckSEPCAP);
-        boolean finalCheckSEP = check.checkSEP();
+        boolean finalCheckSEP = check.checkSep();
         assertTrue(finalCheckSEP);
 
         ModuleList.modules.clear();

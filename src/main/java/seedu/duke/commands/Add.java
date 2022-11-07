@@ -21,13 +21,14 @@ public class Add extends Command {
     private Module mod;
 
     /**
-     * Contructor of Add class to initialize an object of class Add.
+     * Constructor of Add class to initialize an object of class Add.
      * @param input the input message to be used to initialize the variables
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      * @throws InvalidOverallInputException exception to be thrown if any issues with the input
      */
-    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+    public Add(String input) throws InvalidInputFormatException, InvalidInputContentException,
+            InvalidOverallInputException {
         checkFormat(input);
         int[] indexes = positions(input);
         checkContent(input, indexes);
@@ -55,11 +56,11 @@ public class Add extends Command {
     }
 
     /**
-     * Method to check for any exception caught due to input (Course, semester, MC, Grade) issues
-     * @param course Course taken. Format: String
-     * @param semester Semester taken. Format: String
-     * @param mcString MC in string format. Format: String
-     * @param grade Grade received for the module. Format: String
+     * Method to check for any exception caught due to input (Course, semester, MC, Grade) issues.
+     * @param course Course taken.
+     * @param semester Semester taken.
+     * @param mcString MC in string format.
+     * @param grade Grade received for the module.
      * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
     private void checkOverallExceptionForAdd(String course, String semester,
@@ -101,10 +102,10 @@ public class Add extends Command {
     }
 
     /**
-     * Function to extract content from startIndex to endIndex out of input
-     * @param input The input from which the content needs to be extracted. Format: String
-     * @param startIndex The starting index. Format: int
-     * @param endIndex The ending index. Format: int
+     * Function to extract content from startIndex to endIndex out of input.
+     * @param input The input from which the content needs to be extracted.
+     * @param startIndex The starting index.
+     * @param endIndex The ending index.
      * @return a string which is a substring (extracted) of input.
      */
     private String extractingContent(String input, int startIndex, int endIndex) {
@@ -116,11 +117,10 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if the format of input is correct or not
-     * @param input input entered by user. Format: String
+     * Function to check if the format of input is correct or not.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception thrown if format of input is incorrect
      */
-
     public void checkFormat(String input) throws InvalidInputFormatException {
         boolean isRight;
         isRight = InvalidInputFormatException.checkMod(input);
@@ -134,8 +134,8 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check format of input
-     * @param isRight whether it is in correct format. Format: boolean
+     * Function to check format of input.
+     * @param isRight whether it is in correct format.
      * @throws InvalidInputFormatException exception thrown if content of input has issues
      */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
@@ -145,9 +145,10 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if content entered by user is empty or not
-     * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
+     * Function to check if content entered by user is empty or not.
+     * @param input input entered by user.
+     * @param idx a collection of indexes where the details should be present.
+     *            If these are empty, an exception should be thrown.
      * @throws InvalidInputContentException exception thrown if content of input is empty
      */
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
@@ -163,8 +164,8 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check content of input
-     * @param isSame whether it is same or not. Format: boolean
+     * Function to check content of input.
+     * @param isSame whether it is same or not.
      * @throws InvalidInputContentException exception thrown if content has issues
      */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
@@ -174,9 +175,9 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if course input entered by user is correct format
-     * Course input must be below 10 characters and have both letters and numbers
-     * @param course input entered by user. Format: String
+     * Function to check if course input entered by user is correct format.
+     * Course input must be below 10 characters and have both letters and numbers.
+     * @param course input entered by user.
      * @throws InvalidCourseException exception thrown when course input is invalid
      */
     public static void checkCourse(String course) throws InvalidCourseException {
@@ -190,8 +191,8 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if mc String input is in correct format
-     * @param mcString MC in string format. Format: String
+     * Function to check if mc String input is in correct format.
+     * @param mcString MC in string format.
      * @throws InvalidMcException exception thrown when mc String input is in incorrect format
      */
     public static void checkMcString(String mcString) throws InvalidMcException {
@@ -205,12 +206,12 @@ public class Add extends Command {
 
 
     /**
-     * Function to check if semester input is in correct format
-     * @param semester semester in string format. Format: String
+     * Function to check if semester input is in correct format.
+     * @param semester semester in string format.
      * @throws InvalidSemesterException exception thrown when semester input is in incorrect format
      */
     public static void checkYear(String semester) throws InvalidSemesterException {
-        if(invalidFormat(semester)) {
+        if (invalidFormat(semester)) {
             throw new InvalidSemesterException();
         }
         if (invalidYearNumber(semester) || invalidSemesterNumber(semester)) {
@@ -219,8 +220,8 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if mc input is in correct format
-     * @param mcs mcs in Integer format. Format: Integer
+     * Function to check if mc input is in correct format.
+     * @param mcs mcs in Integer format.
      * @throws InvalidMcException exception thrown when mc input is in incorrect format
      */
     public static void checkMc(int mcs) throws InvalidMcException {
@@ -230,8 +231,8 @@ public class Add extends Command {
     }
 
     /**
-     * Function to check if grade input is in correct format
-     * @param grade grade in string format. Format: String
+     * Function to check if grade input is in correct format.
+     * @param grade grade in string format.
      * @throws InvalidGradeException exception thrown when grade input is in incorrect format
      */
     public static void checkGrade(String grade) throws InvalidGradeException {
@@ -244,8 +245,8 @@ public class Add extends Command {
     }
 
     /**
-     * function to return the positions of the details in input
-     * @param input the input given by user. Format: String
+     * function to return the positions of the details in input.
+     * @param input the input given by user.
      * @return an integer array containing the positions of the details given by user
      */
     public int[] positions(String input) {

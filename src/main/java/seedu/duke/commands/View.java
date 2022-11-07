@@ -14,13 +14,14 @@ public class View extends Command {
     private String semester;
 
     /**
-     * Constructor to initialize an object of View class
-     * @param input input entered by user. Format: String
+     * Constructor to initialize an object of View class.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      * @throws InvalidOverallInputException exception thrown if the overall input is wrong
      */
-    public View(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+    public View(String input) throws InvalidInputFormatException, InvalidInputContentException,
+            InvalidOverallInputException {
         input = input.trim();
         if (input.equals("all")) {
             this.semester = "all";
@@ -35,8 +36,8 @@ public class View extends Command {
     }
 
     /**
-     * function to find the semester from input for which the modules need to be viewed
-     * @param input input entered by user. Format: String
+     * Function to find the semester from input for which the modules need to be viewed.
+     * @param input input entered by user.
      * @param indexes An array of indexes which specify the positions at which details are present in the input
      */
     private void setSem(String input, int[] indexes) {
@@ -48,8 +49,8 @@ public class View extends Command {
     }
 
     /**
-     * Function to check if the format of input is correct or not
-     * @param input input entered by user. Format: String
+     * Function to check if the format of input is correct or not.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception thrown if format of input is incorrect
      */
     public void checkFormat(String input) throws InvalidInputFormatException {
@@ -59,8 +60,8 @@ public class View extends Command {
     }
 
     /**
-     * Function to check format of input
-     * @param isRight whether it is in correct format. Format: boolean
+     * Function to check format of input.
+     * @param isRight whether it is in correct format.
      * @throws InvalidInputFormatException exception thrown if content of input has issues
      */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
@@ -70,9 +71,10 @@ public class View extends Command {
     }
 
     /**
-     * Function to check if content entered by user is empty or not
-     * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
+     * Function to check if content entered by user is empty or not.
+     * @param input input entered by user.
+     * @param idx a collection of indexes where the details should be present.
+     *            If these are empty, an exception should be thrown.
      * @throws InvalidInputContentException exception thrown if content of input is empty
      */
     public void checkContent(String input, int[] idx) throws InvalidInputContentException {
@@ -82,8 +84,8 @@ public class View extends Command {
     }
 
     /**
-     * Function to check content of input
-     * @param isSame whether it is same or not. Format: boolean
+     * Function to check content of input.
+     * @param isSame whether it is same or not.
      * @throws InvalidInputContentException exception thrown if content has issues
      */
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
@@ -93,8 +95,8 @@ public class View extends Command {
     }
 
     /**
-     * function to return the positions of the details in input
-     * @param input the input given by user. Format: String
+     * Function to return the positions of the details in input.
+     * @param input the input given by user.
      * @return an integer array containing the positions of the details given by user
      */
     public int[] positions(String input) {
@@ -105,8 +107,8 @@ public class View extends Command {
     }
 
     /**
-     * Method to check for any exception caught due to input (semester) format issues
-     * @param semester Semester taken. Format: String
+     * Method to check for any exception caught due to input (semester) format issues.
+     * @param semester Semester taken.
      * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
     private void checkOverallExceptionForView(String semester) throws InvalidOverallInputException {
@@ -126,8 +128,8 @@ public class View extends Command {
     }
 
     /**
-     * checks if year is valid or not
-     * @param semester contains the semester given by the user that needs to be checked. Format: String
+     * Checks if year is valid or not.
+     * @param semester contains the semester given by the user that needs to be checked.
      * @throws InvalidSemesterException exception thrown if the year entered by user is invalid
      */
     public void checkYear(String semester) throws InvalidSemesterException {

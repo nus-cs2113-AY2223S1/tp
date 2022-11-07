@@ -16,9 +16,9 @@ public class Storage {
     }
 
     /**
-     * Function to format the text before writing to file
+     * Function to format the text before writing to file.
      * @param module module which has to be formatted.
-     * @return Returns a text with formatted content from module. Format: String
+     * @return Returns a text with formatted content from module.
      */
     public String formatText(Module module) {
         String course = module.getCourse();
@@ -29,7 +29,7 @@ public class Storage {
     }
 
     /**
-     * Function to load data from the file
+     * Function to load data from the file.
      * @return returns Scanner object with data loaded from file
      * @throws FileNotFoundException Exception thrown when the file does not exist
      */
@@ -43,7 +43,7 @@ public class Storage {
     }
 
     /**
-     * Function to save the entire list of modules into the data file
+     * Function to save the entire list of modules into the data file.
      */
     public void save() {
         try {

@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Check;
-import seedu.duke.design.ASCIIArtGenerator;
+import seedu.duke.design.AsciiArtGenerator;
 import seedu.duke.exceptions.InvalidInputContentException;
 
 import java.text.DecimalFormat;
@@ -34,11 +34,11 @@ public class UI {
     }
 
     /**
-     * Message to be printed in the beginning;
+     * Message to be printed in the beginning.
      */
-    public static void helloMessage() throws Exception {
+    public static void helloMessage() {
         printSeparationLine();
-        ASCIIArtGenerator.printTextArt("PlanIT!", ASCIIArtGenerator.ART_SIZE_MEDIUM);
+        AsciiArtGenerator.printTextArt("PlanIT!", AsciiArtGenerator.ART_SIZE_MEDIUM);
         printSeparationLine();
         System.out.println("Welcome to PlanIT!");
         System.out.println("Start planning out your 4 years in NUS with us :)");
@@ -48,7 +48,7 @@ public class UI {
     }
 
     /**
-     * Message to be printed in the end
+     * Message to be printed in the end.
      */
     public static void endMessage() {
         System.out.println("Thank you for using PlanIT!");
@@ -56,7 +56,7 @@ public class UI {
     }
 
     /**
-     * Message to be printed after adding a module
+     * Message to be printed after adding a module.
      */
     public static void addMessage(String modCode, String semester, String grade) {
         System.out.print(modCode + " has been added to " + semester);
@@ -68,7 +68,7 @@ public class UI {
     }
 
     /**
-     * Message to be printed if an already existing module is being added
+     * Message to be printed if an already existing module is being added.
      * @param modCode the module which is being repeated
      */
     public static void repetitionMessage(String modCode) {
@@ -77,7 +77,7 @@ public class UI {
     }
 
     /**
-     * Function to print message after deleting a mod
+     * Function to print message after deleting a mod.
      * @param modCode the module which has been deleted
      */
     public static void deleteMessage(String modCode) {
@@ -85,7 +85,7 @@ public class UI {
     }
 
     /**
-     * Message to be printed if a module which is trying to be deleted is not found in plan
+     * Message to be printed if a module which is trying to be deleted is not found in plan.
      * @param modCode the module which is to be deleted
      */
     public static void notFoundDeletionMessage(String modCode) {
@@ -94,8 +94,8 @@ public class UI {
     }
 
     /**
-     * Message to be printed if a semester which is trying to be deleted is not found in plan
-     * @param semester : the semester in which all modules are to be deleted
+     * Message to be printed if a semester which is trying to be deleted is not found in plan.
+     * @param semester the semester in which all modules are to be deleted
      */
     public static void notFoundClearMessage(String semester) {
         System.out.println("No modules found in " + semester + "!");
@@ -103,21 +103,22 @@ public class UI {
     }
 
     /**
-     * Message to be printed when all modules have been successfully cleared from plan
+     * Message to be printed when all modules have been successfully cleared from plan.
      */
     public static void allClearedMessage() {
         System.out.println("Successfully cleared all modules in your plan!");
     }
 
     /**
-     * Message to be printed when modules from a semester have been successfully cleared from plan
+     * Message to be printed when modules from a semester have been successfully cleared from plan.
+     * @param semester the semester cleared
      */
     public static void semesterClearedMessage(String semester) {
         System.out.println("Successfully cleared all modules for " + semester + ".");
     }
 
     /**
-     * Message to be printed when there is no modules found in plan
+     * Message to be printed when there is no modules found in plan.
      */
     public static void noModulesFoundMessage() {
         System.out.println("0 modules found in your plan!");
@@ -129,7 +130,7 @@ public class UI {
     }
 
     /**
-     * Function to print a list of modules in a particular semester
+     * Function to print a list of modules in a particular semester.
      * @param modules Collection of modules to be printed
      * @param semester Semester for which the modules need to be printed
      */
@@ -143,7 +144,7 @@ public class UI {
     }
 
     /**
-     * Function to print a message if there are no modules in a particular semester
+     * Function to print a message if there are no modules in a particular semester.
      * @param semester Semester for which the modules need to be printed
      */
     public static void emptyListMessage(String semester) {
@@ -151,7 +152,7 @@ public class UI {
     }
 
     /**
-     * Function to print message when number of mcs needs to be displayed
+     * Function to print message when number of mcs needs to be displayed.
      * @param semester Semester for which number of mcs have been calculated
      * @param mcs number of mcs calculated
      */
@@ -208,8 +209,8 @@ public class UI {
         System.out.println("* Total S/U MCs : " + moduleList.totalSuMcs() + "\n");
         System.out.println("* Cumulative Average Point (CAP) : " + df.format(moduleList.calculateCap()) + "\n");
         System.out.println("* MCs Needed needed for graduation : " + moduleList.mcsForGraduation() + "\n");
-        System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNOC() ? "Yes" : "No"));
-        System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSEP() ? "Yes" : "No"));
+        System.out.println("* Eligibility for NOC : " + (new Check("NOC").checkNoc() ? "Yes" : "No"));
+        System.out.println("* Eligibility for SEP : " + (new Check("SEP").checkSep() ? "Yes" : "No"));
 
     }
 

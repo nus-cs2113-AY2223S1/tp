@@ -7,8 +7,8 @@ public class Find extends Command {
     private final String keyword;
 
     /**
-     * Constructor to create an object of the Find Command class
-     * @param input the keyword inputted by the user. Format: String
+     * Constructor to create an object of the Find Command class.
+     * @param input the keyword inputted by the user.
      * @throws InvalidInputContentException if the user does not add a keyword
      */
     public Find(String input) throws InvalidInputContentException {
@@ -17,8 +17,8 @@ public class Find extends Command {
     }
 
     /**
-     * function to check if input content is empty or not
-     * @param input input entered by user. Format: String
+     * Function to check if input content is empty or not.
+     * @param input input entered by user.
      * @throws InvalidInputContentException exception thrown if input content is empty
      */
     public void checkContent(String input) throws InvalidInputContentException {

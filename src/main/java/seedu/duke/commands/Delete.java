@@ -8,8 +8,8 @@ public class Delete extends Command {
     private String modCode;
 
     /**
-     * Constructor to initialize an object of Delete class
-     * @param input input entered by user. Format: String
+     * Constructor to initialize an object of Delete class.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
      */
@@ -21,8 +21,8 @@ public class Delete extends Command {
     }
 
     /**
-     * function to find the module code which needs to be deleted
-     * @param input input entered by user. Format: String
+     * Function to find the module code which needs to be deleted.
+     * @param input input entered by user.
      * @param indexes An array of indexes at which details of the module code is present in the input
      */
     private void setModCode(String input, int[] indexes) {
@@ -34,8 +34,8 @@ public class Delete extends Command {
     }
 
     /**
-     * check of format of input for delete command is correct or not
-     * @param input input entered by user. Format: String
+     * Check of format of input for delete command is correct or not.
+     * @param input input entered by user.
      * @throws InvalidInputFormatException Exception thrown if format of input for delete command is incorrect
      */
     public void checkFormat(String input) throws InvalidInputFormatException {
@@ -45,8 +45,8 @@ public class Delete extends Command {
     }
 
     /**
-     * Function to check format of input
-     * @param isRight whether it is in correct format. Format: boolean
+     * Function to check format of input.
+     * @param isRight whether it is in correct format.
      * @throws InvalidInputFormatException exception thrown if content of input has issues
      */
     public void checkFormatException(boolean isRight) throws InvalidInputFormatException {
@@ -56,9 +56,10 @@ public class Delete extends Command {
     }
 
     /**
-     * function to check if input content is empty or not
-     * @param input input entered by user. Format: String
-     * @param idx a collection of indexes where the details should be present. If these are empty, an exception should be thrown
+     * Function to check if input content is empty or not.
+     * @param input input entered by user.
+     * @param idx a collection of indexes where the details should be present.
+     *            If these are empty, an exception should be thrown.
      * @throws InvalidInputContentException exception thrown if input content is empty
      */
 
@@ -69,11 +70,10 @@ public class Delete extends Command {
     }
 
     /**
-     * throws an exception if found
-     * @param isSame true if exception is to be thrown. False if not. Format: boolean
+     * Throws an exception if found.
+     * @param isSame true if exception is to be thrown. False if not.
      * @throws InvalidInputContentException exception to be thrown if parameter is true.
      */
-
     public void checkContentException(boolean isSame) throws InvalidInputContentException {
         if (isSame) {
             throw new InvalidInputContentException();
@@ -81,8 +81,8 @@ public class Delete extends Command {
     }
 
     /**
-     * function to find the indexes of the details given in input command
-     * @param input input entered by user. Format: String
+     * Function to find the indexes of the details given in input command.
+     * @param input input entered by user.
      * @return an array of indexes at which the details are present in the input string
      */
     public int[] positions(String input) {
