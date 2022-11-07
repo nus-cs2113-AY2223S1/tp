@@ -31,9 +31,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
   - What it does: when an appointment is processed, the built-in index of the related pet is increased, indicating a better status.
   - Justification: achieved the process of improving the condition of the pets by completing appointments, which is the core goal for the pet clinic.
 - Added exception handling to EmployeeParser and ServiceParser
-- Improved the index of Pet
-- Improved the interface of Duke to be more OOP
-- Improved the overall output information
+- Improved the index of Pet, the overall output information and the interface of Duke to be more OOP
 - Fixed all the format errors in v1.0 checked by Gradle
 
 **Contributions to the UG**
