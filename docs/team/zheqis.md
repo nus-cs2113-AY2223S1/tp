@@ -2,12 +2,15 @@
 
 ### Overview
 
+Hi, I am Shen Zheqi, a year 3 student majoring in Computing and Software Systems.
+
+Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI) developed by a team of five students following the course requirements of CS2113 within six weeks. PCMS is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
 
 #### Summary of Contributions
 
 ##### **Code contributed**
 
-[RepoSense Report] // weblink
+[RepoSense Report](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=zheqi&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=zheqis12138&tabRepo=AY2223S1-CS2113-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 - Design and Implemented the attributes and method of Pet and PetList class
 - Implemented all commands related to pet
