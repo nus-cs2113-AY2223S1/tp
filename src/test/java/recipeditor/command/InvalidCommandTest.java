@@ -7,9 +7,10 @@ import org.junit.jupiter.api.Test;
 public class InvalidCommandTest {
 
     @Test
-    public void defaultInvalidCommand_success() {
+    public void invalidCommand_executeInvalidCommand_invalidMessage() {
         String actual = new InvalidCommand(InvalidCommand.INVALID_MESSAGE).execute().getMessage();
-        String expected = InvalidCommand.INVALID_MESSAGE;
+        String expected = "This is not a valid command! " + "Try /help <command type>"
+                + " to view the correct syntax." + "\n" + "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
         assertEquals(actual, expected);
     }
 }

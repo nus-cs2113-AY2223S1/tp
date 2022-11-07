@@ -1,5 +1,6 @@
 package recipeditor.edit;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import recipeditor.command.InvalidCommand;
@@ -108,6 +109,13 @@ public class DeleteTest {
         } catch (Exception e) {
             assert false;
         }
+    }
+
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle(TEST_RECIPE_TITLE);
+        Storage.deleteRecipeFile(TEST_RECIPE_TITLE);
+        Storage.rewriteRecipeListToFile();
     }
 
 }

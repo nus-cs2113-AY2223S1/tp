@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ExitCommandTest {
 
     @Test
-    public void isExitShouldWork() {
+    public void exitCommand_withinOtherCommand_programNotExitted() {
         Command command = new ViewCommand(0);
         assertFalse(ExitCommand.isExit(command));
     }

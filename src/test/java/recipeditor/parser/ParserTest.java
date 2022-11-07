@@ -14,6 +14,7 @@ import recipeditor.command.FindCommand;
 import recipeditor.command.InvalidCommand;
 import recipeditor.command.ListCommand;
 import recipeditor.command.ViewCommand;
+import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
@@ -282,10 +283,11 @@ class ParserTest {
     }
 
     @Test
-    public void viewCommand_byTitle_success() {
+    public void viewCommand_byTitle_success() throws RecipeNotFoundException {
         String input = "/view -t " + TEST_RECIPE_TITLE;
         Command viewCommand = Parser.parseCommand(input);
-        String expected = RecipeList.getRecipe(0).getRecipeAttributesFormatted();
+        int recipeIndex = RecipeList.getRecipeIndexFromTitle(TEST_RECIPE_TITLE);
+        String expected = RecipeList.getRecipe(recipeIndex).getRecipeAttributesFormatted();
         String commandExecutedResult = viewCommand.execute().getMessage();
         assertEquals(expected, commandExecutedResult);
         assertEquals(ViewCommand.class, Parser.parseCommand(input).getClass());
