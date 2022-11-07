@@ -18,24 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
 
     @Test
-    void generateCorrectTemplateFile_validTemplateFilePath_templateContent() throws IOException {
-        String templateFileContent = "# TITLE \n"
-                + "Example Title\n"
-                + "\n"
-                + "# DESCRIPTION\n"
-                + "Example Description\n"
-                + "\n"
-                + "# INGREDIENTS  INDEX. INGREDIENT_NAME / AMOUNT / UNIT \n"
-                + "1. Example ingredient / 1.2 / example unit \n"
-                + "\n"
-                + "# STEPS INDEX. DESCRIPTION\n"
-                + "1. Example step \n";
-        Storage.generateTemplateFile();
-        String actualContent = Files.readString(Path.of(Storage.TEMPLATE_FILE_PATH));
-        assertEquals(actualContent,templateFileContent);
-    }
-
-    @Test
     void createFolder_validFolderPathString_folderCreation() {
         String folderPathString = "./testFolder";
         Storage.createFolder(folderPathString);
