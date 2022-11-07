@@ -28,17 +28,11 @@ broken down into documentation, functional and test code.
 * Users are able to add and delete comments in regard to a particular module he/she wants to map.
 * **Notable PRs**: [#180](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/180), [#185](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/185)
 
-#### Setup Script
-* Added a setup script to automatically download data and store in the right folder during execution
-* **Notable PRs**: [#170](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/170)
-
-#### Integrated TimetableManager Class into UserUniversityListManager class
-* Successfully refactored it into UserUniversityListManager class to remove possible bugs. 
-* **Notable PRs**: [#176](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/176)
-
 #### PED Bugs
 * Got rid of bugs found in the module's Practical Exam Dry Run (PED).
-* **Notable PRs**: [#178](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/178), [#191](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/191), [#192](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/192)
+* Added a setup script to automatically download data and store in the right folder during execution under [#170](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/170).
+* Successfully refactored TimetableManager into UserUniversityListManager class to enforce cardinality constraints and remove possible bugs under [#176](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/176).
+* **Other Notable PRs**: [#178](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/178), [#191](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/191), [#192](https://github.com/AY2223S1-CS2113-W13-2/tp/pull/192)
 
 ### Contributions to the User Guide UG
 * Documented majority of the functions including `VIEW`, `ADD`, `FAVOURITE`, `CREATE`, `DELETE`.
