@@ -16,7 +16,7 @@ public class TimetableDict {
     }
 
     /**
-     * Adds lesson to timetableDict
+     * Adds lesson to timetableDict.
      * @param newLesson The lesson to be added into timetable
      */
     public void addLesson(Lesson newLesson) {
@@ -44,7 +44,7 @@ public class TimetableDict {
     }
 
     /**
-     * Adds all lessons in a class to timetableDict
+     * Adds all lessons in a class to timetableDict.
      * In this case, a "class" refers to all lessons in the same module that share a common classNumber
      * Classes comes in the form of a list of lessons
      * 
@@ -77,7 +77,7 @@ public class TimetableDict {
     }
 
     /**
-     * Deletes given lesson from timetableDict
+     * Deletes given lesson from timetableDict.
      * 
      * @param oldLesson The lesson to be removed from the timetableDict
      */
@@ -106,7 +106,7 @@ public class TimetableDict {
     }
 
     /**
-     * Deletes all lessons of the module from timetableDict
+     * Deletes all lessons of the module from timetableDict.
      * 
      * @param module The module of which all lessons are to be removed from timetableDict
      */
@@ -128,7 +128,7 @@ public class TimetableDict {
     }
 
     /**
-     * Accessor used to access the dictionary in timetableDict
+     * Accessor used to access the dictionary in timetableDict.
      * 
      * @return Timetable in dictionary form
      */
@@ -137,7 +137,7 @@ public class TimetableDict {
     }
 
     /**
-     * Sets up an empty timetableDict
+     * Sets up an empty timetableDict.
      */
     public void init() {
         for (int i = 0; i < 5; i++) {
@@ -169,7 +169,7 @@ public class TimetableDict {
     }
 
     /**
-     * Fills a given day entry in timetableDict with null Lesson entries
+     * Fills a given day entry in timetableDict with null Lesson entries.
      */
     private void fillDay(LinkedHashMap<String, Lesson> day) {
         int hourInt = 800;
@@ -186,14 +186,16 @@ public class TimetableDict {
     }
 
     /**
-     * Allocates all lessons that have yet to be set in a way that ensures minimal timetable clashes
-     * If there are modules that were unable to be allocated due to timetable clashes, a message listing the unallocated lessons is returned. If all
-     * lessons were successfully allocated, a message indicating a successful allocation is returned
+     * Allocates all lessons that have yet to be set in a way that ensures minimal timetable clashes.
+     * If there are modules that were unable to be allocated due to timetable clashes, a message listing
+     * the unallocated lessons is returned. If all
+     * lessons were successfully allocated, a message indicating a successful allocation is returned.
      * 
      * @return Successful/Unsuccessful allocation message
      */
     public String allocateModules() {
-        String resultString = "Sorry these modules have too many lessons for us to check, please manually allocate them before trying again:\n";
+        String resultString = "Sorry these modules have too many lessons for us to check, please manually"
+                                + "allocate them before trying again:\n";
 
         
         List<Module> listOfModules = Timetable.getListOfModules();
