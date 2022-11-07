@@ -63,7 +63,7 @@ The rest of the app consists of five components.
   also holds the data of the App in memory
 - [Storage](#storage-component) : Reads data from, and writes data to the hard disk
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
 
 **How the architecture components interact with each other**
 
@@ -88,7 +88,7 @@ The `Ui` component consists of:
   for printing to the user.
   It also contains methods which return strings to be printed to the user.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
 
 ### Parser component
 
