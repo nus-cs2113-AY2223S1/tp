@@ -73,6 +73,12 @@ public class FlightInfo {
         this.gateNum = newGateNum;
     }
 
+    /**
+     * Converts the flight information in the list of flights to a particular format for ease of storage
+     * and visibility.
+     *
+     * @return flightDetails a formatted String to be inserted into the data file
+     */
     public String convertToFileFormat() {
         String flightDetails = (this.flightNum + "|" + this.airline + "|" + this.destination
                 + "|" + this.departureTime + "|" + this.gateNum + "|" + this.checkLn + "\n");
