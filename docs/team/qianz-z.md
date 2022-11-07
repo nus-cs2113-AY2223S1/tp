@@ -81,9 +81,9 @@ The following sections summarise what I have contributed to the project.
 - Created labels with relevant description, and milestones with due date
 - Created issues and user stories for `v1.0`, `v2.0`
 - Updated and resolved PE-D issues to team for `v2.1`
-  ([#107](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/107),
+  ([#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90),
   [#104](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/104),
-  [#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90))
+  [#107](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/107))
 - Helped to find bugs and assign these new issues
   ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149),
   [#170](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/170),
