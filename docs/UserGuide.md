@@ -626,7 +626,7 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 
 * Add Property: `add -property n/NAME a/ADDRESS p/PRICE t/TYPE`
-* Delete Property: `delete -property ip/PROPERTY_INDEX`
+* Delete Property: `delete -property i/PROPERTY_INDEX`
 * List Properties: `list -property`
 * List Property Addresses: `list -property a/`
 * List Property Owner Names : `list -property n/`
@@ -638,14 +638,14 @@ during the next run of the program. This is done so to **prevent overcrowding** 
 
 
 * Add Client: `add -client n/NAME c/CONTACT_NUMBER e/EMAIL b/BUDGET_MONTH`
-* Delete Client: `delete -client ic/CLIENT_INDEX`
+* Delete Client: `delete -client i/CLIENT_INDEX`
 * List Clients: `list -client`
 * List Client Names: `list -client n/`
 * List Client Contact Numbers: `list -client c/`
 * List Client Budgets: `list -client b/`
 * List Client Emails: `list -client e/`
 * List Client Short: `list -client -short`
-* Check Client: `check -client ic/CLIENT_INDEX`
+* Check Client: `check -client i/CLIENT_INDEX`
 * Find Client: `find -client f/QUERY_TEXT`
 
 

@@ -14,7 +14,7 @@ activate CommandDeleteClient COMMAND_COLOR
 
 CommandDeleteClient -> ClientList : deleteClient(clientIndex:int)
 activate ClientList CLIENT_LIST_COLOR
-return deletedClient
+return deletedClient:Client
 
 CommandDeleteClient -> Ui : showClientDeletedConfirmationMessage(deletedClient:Client)
 activate Ui UI_COLOR
@@ -34,6 +34,8 @@ return
 
 CommandDeleteClient -> Storage : updatePair()
 activate Storage STORAGE_COLOR
+return
+
 return
 
 @enduml
