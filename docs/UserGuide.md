@@ -206,8 +206,8 @@ Example:
 Add-Expense -n "-n" -a 13.37
 
 ERROR: The arguments entered are invalid.
-SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY]
-[-p MODE-OF-PAYMENT]
+SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY]
+[-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 ```
 <br>
 
@@ -970,6 +970,8 @@ The recurring payment was added as an expense successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an income: `Add-Income`
 Adds a new income to the list of incomes.
