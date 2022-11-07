@@ -1,0 +1,105 @@
+@startuml
+skinparam Style strictuml
+autonumber
+
+participant ":Parser" as parser
+participant ":GuiWorkFlow" as gui
+participant ":Editor" as editor
+participant ":Storage" as store
+participant ":RecipeFileParser" as recipeparse
+database FileDirectory
+
+
+
+alt parseAddCommand
+parser -> gui: GuiWorkFlow(TEMPLATE_FILE_PATH)
+else parseEditCommand
+parser -> gui: GuiWorkFlow(RecipePath)
+end
+
+gui -> gui: getMode(path)
+
+alt path = TEMPLATE_FILE_PATH
+    gui --> gui: mode = Mode.ADD
+else
+    gui --> gui: mode = Mode.EDIT
+end
+
+gui -> editor: Editor().enterEditor(path)
+editor -> store: loadFileContent(path)
+store -> FileDirectory: via Scanner
+FileDirectory --> store: content of file with <path>
+store --> editor: load to GUI textArea
+destroy store
+
+ref over editor
+User interact with the GUI
+end
+editor -> FileDirectory: save to `TemporaryFile.txt`
+editor --> gui: return saveToTemp
+destroy editor
+ref over gui
+shouldExitLoop = !saveToTemp
+(If the user press save in GUI, saveToTemp = True, enter loop))
+end
+alt saveToTemp = False
+ref over gui
+isValid = False
+end
+
+else saveToTemp = True
+loop !shouldExitLoop
+gui -> store: loadFileContent(TEMPORARY_FILE)
+store -> FileDirectory: via Scanner
+FileDirectory --> store: content of `TemporaryFile.txt`
+store --> gui: content of `TemporaryFile.txt`
+gui -> recipeparse: parseTextToRecipe(content)
+ref over recipeparse
+    parseTextToRecipe
+end
+recipeparse --> gui: return a valid recipe or throw ParseException
+destroy recipeparse
+
+alt mode = Mode.ADD
+gui -> gui: checkDuplicateTitle()
+end
+alt valid recipe
+ref over gui
+shouldExitLoop = True, isValid = True
+end
+else ParseException
+gui -> gui: yesNoLoop(FIX_THE_RECIPE_Y_N)
+alt yes
+gui -> editor: Editor().enterEditor(TEMPORARY_FILE)
+
+editor -> store: loadFileContent(TEMPORARY_FILE)
+store -> FileDirectory: via Scanner
+FileDirectory --> store: content of `TemporaryFile.txt`
+store --> editor: load to GUI textArea
+destroy store
+ref over editor
+User interact with the GUI
+end
+editor -> FileDirectory: save to `TemporaryFile.txt`
+
+editor --> gui: return saveToTemp
+destroy editor
+
+ref over gui
+shouldExitLoop = !saveToTemp
+(If user press save in GUI, re-enter the loop)
+end
+else no
+ref over gui
+shouldExitLoop = True, isValid = False
+end
+end
+
+end
+
+end loop
+
+
+end
+
+@enduml

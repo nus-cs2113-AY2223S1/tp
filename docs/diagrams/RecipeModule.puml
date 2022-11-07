@@ -1,0 +1,38 @@
+@startuml
+skinparam Style strictuml
+
+
+'hide class fields
+'hide class methods
+
+package recipe as rep{
+    class RecipeList
+    class Recipe
+    class Ingredient
+}
+
+class RecipeList{
++ recipes: ArrayList<Recipe>
++ recipeTitles: ArrayList<Recipe>
+}
+
+class Recipe {
+-title: String
+-description: String
+-ingredients: ArrayList<Ingredient>
+-steps:ArrayList<String>
+}
+class Ingredient{
+-name:String
+-amount: double
+-unit: String
+}
+
+
+RecipeList *.-right- "*"Recipe
+Recipe *-right- "1"Ingredient
+
+
+note top of rep: methods are omitted to avoid clutter
+
+@enduml

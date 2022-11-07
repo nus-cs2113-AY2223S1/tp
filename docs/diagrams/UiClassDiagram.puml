@@ -1,0 +1,22 @@
+@startuml
+skinparam Style strictuml
+hide class fields
+hide class methods
+
+class Recipe
+
+package Ui {
+class Ui
+class Editor
+class GuiWorkFlow
+}
+
+class Storage
+class Main
+Main .-> Ui
+Ui ..> CommandResult: show >
+GuiWorkFlow -> Editor
+GuiWorkFlow .-> Recipe: get, set >
+Editor .down-> Storage: save file using >
+
+@enduml

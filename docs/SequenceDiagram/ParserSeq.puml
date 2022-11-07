@@ -1,0 +1,193 @@
+@startuml
+skinparam Style strictuml
+'skinparam SequenceMessageAlignment center
+autonumber
+
+participant ":Parser" as Parser
+participant ":Storage" as Storage
+participant ":InvalidCommand" as InvalidCommand
+participant ":Addcommand" as AddCommand
+participant ":EditCommand" as EditCommand
+participant ":ListCommand" as List
+participant ":ExitCommand" as Exit
+participant ":ViewCommand" as ViewCommand
+participant ":DeleteCommand" as DeleteCommand
+participant ":FindCommand" as FindCommand
+participant ":HelpCommand" as HelpCommand
+
+
+
+participant ":InvalidCommand" as InvalidCommand
+
+-> Parser: parseCommand(input)
+
+alt AddCommand
+
+    Parser -> Parser: parseAddCommand()
+    alt valid
+    create AddCommand
+    ref over Parser: GuiWorkFlow
+    Parser -> AddCommand: <<create>>
+    activate AddCommand
+    AddCommand --> Parser:
+    destroy AddCommand
+    deactivate AddCommand
+    else  templateFileNotFoundException
+    Parser -> Storage:
+    Storage -> Storage: generateFile()
+    Storage --> Parser
+    create InvalidCommand
+    Parser -> InvalidCommand: template file missing
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
+    end
+
+else EditCommand
+
+    Parser -> Parser: parseEditCommand()
+    alt Edit in Gui
+        ref over Parser: GuiWorkFlow
+        create EditCommand
+        Parser -> EditCommand: create EditCommand for Gui edit
+        activate EditCommand
+        EditCommand --> Parser:
+         destroy EditCommand
+
+        deactivate EditCommand
+    else FileNotFoundException | IndexOutOfBoundException | NumberFormatException
+        create InvalidCommand
+        Parser -> InvalidCommand: Exceptions
+        activate InvalidCommand
+        InvalidCommand --> Parser:
+        destroy InvalidCommand
+        deactivate InvalidCommand
+    end
+
+    alt Edit in CLI
+        ref over Parser: FlagParser.getFlags
+        create EditCommand
+        Parser -> EditCommand: create EditCommand for CLI edit
+        activate EditCommand
+        EditCommand --> Parser
+        destroy EditCommand
+        deactivate EditCommand
+    else IndexOutOfBoundException | NumberFormatException | MissingFlagException
+        create InvalidCommand
+        Parser -> InvalidCommand: Exceptions
+        activate InvalidCommand
+        InvalidCommand --> Parser:
+        destroy InvalidCommand
+        deactivate InvalidCommand
+    end
+
+else ListCommand
+    create List
+    Parser -> List:<<create>>
+    activate List
+    List -> Parser: ListCommand
+    destroy List
+    deactivate List
+else ExitCommand
+    create Exit
+    Parser -> Exit: <<create>>
+    activate Exit
+    Exit --> Parser: ExitCommand
+    destroy Exit
+    deactivate Exit
+else ViewCommand
+
+    alt view by index
+        create ViewCommand
+        Parser -> ViewCommand: create ViewCommand by index
+        activate ViewCommand
+        ViewCommand --> Parser
+        destroy ViewCommand
+        deactivate ViewCommand
+    else view by title
+        create ViewCommand
+        Parser -> ViewCommand: create ViewCommand by title
+        activate ViewCommand
+        ViewCommand --> Parser
+        destroy ViewCommand
+        deactivate ViewCommand
+    else InvalidFlagException | MissingFlagException | IndexOutOfBoundException | NumberFormatException | AssertionError
+        create InvalidCommand
+        Parser -> InvalidCommand: Exceptions
+        activate InvalidCommand
+        InvalidCommand --> Parser
+        destroy InvalidCommand
+        deactivate InvalidCommand
+    end
+
+else DeleteCommand
+
+    alt delete by index
+        create DeleteCommand
+        Parser -> DeleteCommand: create DeleteCommand by index
+        activate DeleteCommand
+        DeleteCommand --> Parser
+        destroy DeleteCommand
+        deactivate DeleteCommand
+    else delete by title
+        create DeleteCommand
+        Parser -> DeleteCommand: create DeleteCommand by title
+        activate DeleteCommand
+        DeleteCommand --> Parser
+        destroy DeleteCommand
+        deactivate DeleteCommand
+    else InvalidFlagException | MissingFlagException | IndexOutOfBoundException | NumberFormatException | AssertionError
+    create InvalidCommand
+    Parser -> InvalidCommand: Exceptions
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
+    end
+
+else FindCommand
+    alt valid
+        ref over Parser: FlagParser.getFlags
+        create FindCommand
+        Parser -> FindCommand: <<create>>
+        activate FindCommand
+        FindCommand --> Parser:
+        destroy FindCommand
+        deactivate FindCommand
+    else too short for FindCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: FindCommand format
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
+    end
+
+else HelpCommand
+
+    alt valid
+         create HelpCommand
+         Parser -> HelpCommand: <<create>>
+         activate HelpCommand
+         HelpCommand --> Parser:
+         destroy HelpCommand
+         deactivate HelpCommand
+    else too short or long for HelpCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: HelpCommand format
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
+    end
+
+else InvalidCommand
+    create InvalidCommand
+    Parser -> InvalidCommand: <<create>>
+    activate InvalidCommand
+    InvalidCommand --> Parser
+    destroy InvalidCommand
+    deactivate InvalidCommand
+end
+@enduml

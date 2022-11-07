@@ -1,0 +1,59 @@
+@startuml
+skinparam Style strictuml
+autonumber
+
+participant ":Recipeditor" as Recipeditor
+participant ":Parser" as Parser
+participant "GuiWorkFlow" as GuiWorkFlow
+participant ":EditCommand" as EditCommand
+participant ":EditModeCommand" as EditModeCommand
+participant ":RecipeList" as RecipeList
+
+database Storage
+
+Recipeditor -> Parser: parseEditCommand()
+create Parser
+
+alt GUI
+create GuiWorkFlow
+Parser -> GuiWorkFlow: GuiWorkFlow(recipe_file_path)
+ref over GuiWorkFlow
+GuiWorkFlow
+end
+GuiWorkFlow --> Parser
+create EditCommand
+Parser -> EditCommand: new EditCommand()
+EditCommand -> RecipeList: editRecipe()
+RecipeList --> EditCommand
+EditCommand -> Storage: saveRecipe()
+EditCommand --> Parser
+EditCommand --> Recipeditor
+destroy EditCommand
+else CLI
+Parser -> EditCommand: new EditCommand()
+create EditModeCommand
+alt ADD
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else DELETE
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else SWAP
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+else CHANGE
+EditCommand -> EditModeCommand: <<create>>
+EditModeCommand -> EditCommand: execute()
+destroy EditModeCommand
+end
+EditCommand -> RecipeList: editRecipe()
+EditCommand -> Storage: saveRecipe()
+EditCommand --> Parser
+EditCommand --> Recipeditor
+destroy EditCommand
+end
+
+@enduml

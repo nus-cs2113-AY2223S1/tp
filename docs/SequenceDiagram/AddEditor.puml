@@ -1,0 +1,41 @@
+@startuml
+skinparam Style strictuml
+participant ":Recipeditor" as Main
+participant ":Parser" as Parser
+participant ":GuiWorkFlow" as GuiWorkFlow
+participant ":AddCommand" as AddCommand
+participant ":RecipeList" as RecipeList
+participant ":Storage" as Storage
+database FileDirectory
+
+Main-> Parser: parseCommand()
+
+alt Add Command
+create GuiWorkFlow
+Parser -> GuiWorkFlow: GuiWorkFlow(TEMPLATE_FILE)
+ref over GuiWorkFlow
+GUI WorkFlow
+end
+Parser -> GuiWorkFlow: getValid() && getRecipe()
+GuiWorkFlow --> Parser: return isValid, return recipe
+
+create AddCommand
+Parser -> AddCommand: new AddCommand (validity, recipe)
+AddCommand --> Parser:
+Parser -> Main : AddCommand
+destroy GuiWorkFlow
+end
+Main -> AddCommand: execute()
+alt valid
+    AddCommand -> RecipeList: addRecipe()
+    RecipeList -> Storage: rewriteRecipeListToStorage()
+    Storage -> FileDirectory: save `AllRecipe.txt`
+    AddCommand -> Storage: saveRecipe(recipe,path)
+    Storage -> FileDirectory: save recipe file
+    AddCommand -> Main: return CommandResult with successful message
+else invalid
+    AddCommand -> Main: return CommandResult with failed message
+end
+destroy AddCommand
+
+@enduml

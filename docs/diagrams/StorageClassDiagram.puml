@@ -1,0 +1,48 @@
+@startuml
+skinparam Style strictuml
+allowmixing
+
+
+
+package "storage" as st{
+class Storage
+}
+hide class fields
+hide class methods
+
+package recipe {
+class RecipeList
+class Recipe
+class Ingredient
+}
+
+
+
+package parser {
+class RecipeFileParser
+class TitleFileParser
+}
+
+database FileDirectory
+
+class ParseFileException
+
+Storage .down-> Recipe
+Storage .down-> Ingredient
+Storage .down-> RecipeList
+Storage <.up.> RecipeFileParser
+Storage <.up.> TitleFileParser
+Storage .left-> ParseFileException
+
+Recipe "1" *-l-> "*" Ingredient
+RecipeList "1" *-l-> "*"  Recipe
+
+
+Storage .right..> FileDirectory: recipe files
+Storage .> FileDirectory: `AllRecipes.txt`
+Storage .> FileDirectory: `Template.txt`
+Storage .> FileDirectory: `TemporaryFile.txt`
+
+note "not supposed to be in a \nstrict class diagram but helpful" as N1
+FileDirectory .r- N1
+@enduml
