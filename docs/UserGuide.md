@@ -30,6 +30,7 @@ It aims to provide an ease of access to the manager, to access the relevant flig
 through a CLI which is faster than a Graphical User Interface (GUI).
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Getting Started
 
@@ -77,6 +78,7 @@ Thank you, come again! :)
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## SkyControl's Features
 
@@ -114,6 +116,7 @@ Passenger IVAN THENG of SQ832 17D has been added.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delete a passenger detail: `passenger delete`
 
@@ -151,6 +154,7 @@ detail have been input incorrectly.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Display passenger detail logbook: `passenger list`
 
@@ -215,6 +219,7 @@ Flight added!
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delete a flight detail: `flight delete`
 
@@ -271,6 +276,7 @@ Departure time of flight SQ832 is delayed from 1600 to 1700.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Modify flight attributes: `modify`
 
@@ -362,6 +368,7 @@ _If flight details logbook is empty_.
 | `delay`                | `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`                                                               | `delay KE632 dt/2100`                                                |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Frequently Asked Questions
 
