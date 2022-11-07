@@ -1,32 +1,43 @@
 # Developer Guide
 
 ## Contents
+<!-- TOC -->
+* [Developer Guide](#developer-guide)
+  * [Contents](#contents)
+  * [1 Acknowledgements](#1-acknowledgements)
+  * [2 Design](#2-design)
+    * [2.1 Architecture Level](#21-architecture-level)
+      * [2.1.1 Main Components of the Architecture](#211-main-components-of-the-architecture)
+    * [2.2 Model Component](#22-model-component)
+    * [2.3 API Component](#23-api-component)
+    * [2.4 Storage Component](#24-storage-component)
+    * [2.5 UI Component](#25-ui-component)
+    * [2.6 Logic Component](#26-logic-component)
+    * [2.7 Common Component](#27-common-component)
+  * [3 Implementation](#3-implementation)
+    * [3.1 Favourite / Unfavourite feature](#31-favourite--unfavourite-feature)
+      * [3.1.1 Design Considerations](#311-design-considerations)
+    * [3.2 Update Data from LTA API Feature](#32-update-data-from-lta-api-feature)
+    * [3.2.1 Design Considerations](#321-design-considerations)
+    * [3.2.2 Limitations of the LTA API](#322-limitations-of-the-lta-api)
+    * [3.3 Updating CarparkList with JSON file from API](#33-updating-carparklist-with-json-file-from-api)
+      * [3.3.1 Loading CarparkList from text file](#331-loading-carparklist-from-text-file)
+        * [3.3.1.1 Design Considerations](#3311-design-considerations)
+      * [3.3.2 Loading CarparkList from JSON file](#332-loading-carparklist-from-json-file)
+      * [3.3.3 Writing to text file](#333-writing-to-text-file)
+    * [3.4 The `filter` command](#34-the-filter-command)
+    * [3.5 Jansi formatting](#35-jansi-formatting)
+    * [3.6 Exception Handling](#36-exception-handling)
+* [Appendix](#appendix)
+  * [Appendix A:  Product scope](#appendix-a-product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+  * [Appendix B: User Stories](#appendix-b-user-stories)
+  * [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+  * [Appendix D: Glossary](#appendix-d--glossary)
+  * [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
+<!-- TOC -->
 
-- [1 Acknowledgments](#1-acknowledgements) 
-- [2 Design](#2-design)
-  - [2.1 Architecture Level](#21-architecture-level)
-    - [2.1.1 Main Components of the Architecture](#211-main-components-of-the-architecture)
-  - [2.2 Model Component](#22-model-component)
-  - [2.3 API Component](#23-api-component)
-  - [2.4 Storage Component](#24-storage-component)
-    - [2.4.1 FileWriter](#241-filewriter)
-    - [2.4.3 FileLoader](#242-fileloader)
-  - [2.5 UI Component](#25-ui-component)
-  - [2.6 Logic Component](#26-logic-component)
-  - [2.7 Common Component](#27-common-component)
-- [3 Implementation](#3-implementation)
-  - [3.1 Favourite / Unfavourite Feature](#31-favourite--unfavourite-feature)
-    - [3.1.1 Design Considerations](#311-design-considerations)
-  - [3.2 Update Data from LTA API Feature](#32-update-data-from-lta-api-feature)
-    - [3.2.1 Design Consideration](#321-design-considerations)
-    - [3.2.2 Limitations of the LTA API](#322-limitations-of-the-lta-api)
-- [4 Project Scope](#4-product-scope)
-  - [4.1 Target user profile](#41-target-user-profile)
-  - [4.2 Value Proposition](#42-value-proposition)
-- [5 User Stories](#5-user-stories)
-- [6 Non-Functional Requirements](#6-non-functional-requirements)
-- [7 Glossary](#7-glossary)
-- [8 Instructions for Manual Testing](#8-instructions-for-manual-testing)
 
 ## 1 Acknowledgements
 Our project uses external libraries and services from:
@@ -458,8 +469,9 @@ Some exceptions to the method is `InvalidFormatException` and `NoFileFoundExcept
 problem, are wide enough in scope for messages to vary wildly depending on the nature of the file exception or the invalid format.
 
 
-## 4 Product scope
-### 4.1 Target user profile
+# Appendix
+## Appendix A:  Product scope
+###  Target user profile
 
 The target user that we have in mind is a driver who needs to find a carpark slot and wants to find the carpark 
 information so he knows where he can park. We want to make the data from LTA easier to read for users who are able to 
@@ -469,33 +481,51 @@ does not require any internet connection to use if users want to search carpark 
 
 
 
-### 4.2 Value proposition
+### Value proposition
 
 parKING is a desktop app that helps Singaporean drivers find and filter out carpark information easily, and is optimized
 for use via a Command Line Interface (CLI).
 
 
-## 5 User Stories
+## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                                                  | So that I can ...                                        |
-|---------|------|----------------------------------------------------------------|----------------------------------------------------------|
-| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | I know where I can park                                  |
-| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Access a list of available carparks on the app offline   |
-| v2.0    |Driver| Be able to save favourites                                     | I can monitor carparks important to me                   |
-| v2.0    |Driver| Import my favourite carparks                                   | Import saved settings/preferences                        |
-| v2.0    |Driver| Filter the carparks I want based on their address              | I can search for carparks without knowing the carpark Id |
-| v2.1    |Driver| Search for carparks I want based on carpark ID                 | I can search for carparks with a specific code           |
-| v2.1    |Driver| Have my carpark information be colour coordinated              | I can look at carpark information with ease              |
+| Version | As a ... | I want to ...                                                  | So that I can ...                                           |
+|---------|------|----------------------------------------------------------------|-------------------------------------------------------------|
+| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | Know where I can park                                       |
+| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Estimate where I can park based on last updated information |
+| v2.0    |Driver| Be able to save favourites                                     | Monitor carparks important to me                            |
+| v2.0    |Driver| Import my favourite carparks                                   | Use my saved settings/preferences across different devices  |
+| v2.0    |Driver| Filter the carparks based on their address                     | Search for carparks without knowing the carpark Id          |
+| v2.1    |Driver| Search for carparks based on carpark ID                 | Search for carparks without knowing the carpark address     |
+| v2.1    |Driver| Have my carpark information be colour coordinated              | Look at carpark information with ease                       |
 
 
-## 6 Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## 7 Glossary
+## Appendix D: Glossary
 
 * *glossary item* - Definition
 
-## 8 Instructions for manual testing
+## Appendix E: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+The following command(s) do not take any arguments:
+- `list`
+- `help`
+- `exit`
+- `update`
+
+The following command(s) take only 1 argument:
+- `find`
+- `auth`
+- `favourite`
+
+The following command(s) take in more than 1 argument:
+- `filter`
+- `filter -id`
+- `filter -address`
+
+Users can test both Favourite.txt and CarparkList.txt to modify the data being passed to the program.
+
+Refer to the User Guide for accurate information regarding the valid and invalid inputs. Users can try giving carpark IDs or addresses that do not exist.
