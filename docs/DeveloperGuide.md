@@ -35,7 +35,7 @@
 * The style of document for the developer guide is inspired by the DG of
   [AY2122S1-CS2113T-T10-3](https://github.com/AY2122S1-CS2113T-T10-3/tp/blob/master/docs/DeveloperGuide.md#purpose-of-this-guide)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
 
 ## Design
 
@@ -63,7 +63,8 @@ The rest of the app consists of five components.
   also holds the data of the App in memory
 - [Storage](#storage-component) : Reads data from, and writes data to the hard disk
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
+  
 
 **How the architecture components interact with each other**
 
@@ -88,7 +89,7 @@ The `Ui` component consists of:
   for printing to the user.
   It also contains methods which return strings to be printed to the user.
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
 
 ### Parser component
 
@@ -143,7 +144,8 @@ Below is a partial class diagram that shows an overview of the `OperationList` c
 
 ![OperationList-class-diagram](ug-diagrams/images/OperationList%20Class%20Diagram.jpg)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
+
 
 The various methods implemented to ensure the operations are done correctly are not included to
 maintain simplicity.
@@ -205,7 +207,9 @@ The following sequence diagrams to showcase the list of commands,
 7. [Delay a flight feature](#delay-a-flight-feature)
 8. [List flights feature](#list-flights-feature)
 
----
+---  
+
+<div style="page-break-after: always;"></div>  
 
 ### Add a passenger feature
 
@@ -214,8 +218,6 @@ The command Add a passenger adds passenger details of a particular passenger to 
 **Sequence Diagram**
 
 ![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
-
-<div style="page-break-after: always;"></div>
 
 1. SkyControl first retrieves the parameters `departureTime` and `gateNumber` from the respective flight detail
    in FlightList and appends the details to the lineInput.
@@ -230,6 +232,7 @@ The command Add a passenger adds passenger details of a particular passenger to 
    has been added to the list successfully.
 
 ---
+<div style="page-break-after: always;"></div>  
 
 ### Delete a passenger feature
 
@@ -246,8 +249,6 @@ Furthermore, `DeletePassengerCommand` implements the following operation:
 
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
-<div style="page-break-after: always;"></div>
-
 When `Parser` verifies that the command is an entity `passenger` and `delete` operation,
 `DeletePassengerCommend` is instantiated.
 
@@ -257,7 +258,8 @@ When `Parser` verifies that the command is an entity `passenger` and `delete` op
 3. If passenger is found, delete object `passenger` from `passengers`. ELse, return without deletion.
 4. The sequence diagram above assumes that a valid passenger is present in the passenger list to be deleted.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### List passengers feature
 
@@ -284,7 +286,8 @@ When `Parser` verifies that the command is an entity `passenger` and `list` oper
 3. If `passengers` is empty, prints empty table, else prints respective passenger details in table form.
 4. The sequence diagram assumes that a passenger detail is present in the list to be deleted. 
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Add a flight feature
 
@@ -303,7 +306,7 @@ If it is, it will not continue to make any changes to the flight logbook.
 4. The `FlightInfo` is then instantiated using the details retrieved from the previous step. And the flight Object can then be added to the flight array list.
 5. Finally,`showFlightAddedMessage()` in the UI class prints a message to inform the user that they have added the flight.
 
----
+---  
 
 ### Delete a flight feature
 
@@ -340,7 +343,8 @@ create an instantiation of `DeleteFlightCommand`.
 5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
 the information of the passengers which contain the flight number that has been successfully removed.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Modify flight features
 There are 2 modify features:
@@ -371,7 +375,6 @@ for the respective passengers as well.
 
 ---
 
-
 ### Delay a flight feature
 In the event of a flight not being able to depart on time and needs to be delayed,
 the `flight delay` command allows AOM to delay the departure time of an existing flight.
@@ -391,7 +394,8 @@ no delay changes will be made.
 5. Using the information retrieved, `setDepartureTime(newDepartureTime)` appends the flight records and change the departure time.
 6. Finally, `showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime` informs the user the flight delay has been saved.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### List flights feature
 
@@ -407,6 +411,8 @@ When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is i
    OperationList is empty.
 3. If the `numOfFlights == 0`, an empty table is printed. Else, it would print the respective flight details in a table
    form.
+
+<div style="page-break-after: always;"></div>  
 
 ## Product scope
 
@@ -453,7 +459,10 @@ track of constant changes in flight scheduling and the relevant passenger detail
 ## Glossary
 
 * *AOM* - Airport Operations Manager (A person responsible for scheduling and directing airport operations.)
-* *v1.0* - Version 1.0
+* *v1.0* - Version 1.0  
+
+<div style="page-break-after: always;"></div>  
+  
 
 ## Instructions for manual testing
 
@@ -569,7 +578,7 @@ Both values have to follow the format specified in our table of parameters.
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Stop! Please enter a valid departure time for flight SQ654. 
     Time must be later than 2100.
-    ````
+    ````  
 
 ### Add a passenger
 1. Adding a passenger to an existing flight with all details filled in correctly.
@@ -588,7 +597,10 @@ the list first before being able to add a passenger of the existing flight numbe
    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Stop! The input passenger detail does not have a flight number that exist yet.
     Flight detail of the specific flight number should input first.
-   ```
+   ```  
+
+<div style="page-break-after: always;"></div>  
+ 
 ### Delete a passenger
 1. Deleting an existing passenger with all details filled in correctly.
    1. Test Case: `passenger delete n/Ivan Theng fn/sq654 sn/17d`
@@ -610,7 +622,7 @@ the list first before being able to add a passenger of the existing flight numbe
     as he/she is not found in the passenger list or his/her
     detail have been input incorrectly.
    ```
-
+   
 ### Automated setting for boarding time
 
 - Automated boarding time of 45minutes earlier than departure time placement
@@ -624,7 +636,9 @@ the list first before being able to add a passenger of the existing flight numbe
     1. Prerequisites: Existing flight details and passenger details of that particular flight should be present.
     2. Test case: `delay KE632 dt/2100` then `passenger list`
        Expected: The passenger's boarding time would automatically change to 45 minutes earlier of
-       the tracked delayed departure time.
+       the tracked delayed departure time.  
+
+<div style="page-break-after: always;"></div>  
 
 ### Listing Flights and Passengers
 The list command has 2 variations:
