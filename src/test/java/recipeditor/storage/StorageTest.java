@@ -1,9 +1,7 @@
 package recipeditor.storage;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 
 import java.io.File;
@@ -18,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
+
     @Test
     void createFolder_validFolderPathString_folderCreation() {
         String folderPathString = "./testFolder";

@@ -7,7 +7,6 @@ import recipeditor.command.CommandResult;
 
 public class Ui {
 
-    public static final String DIVIDER = "____________________________________________________________";
     private static final String START = "Program starting!";
     public static final String COMMAND = "Available commands: /add, /list, /view, /edit, /find, /delete, /exit, /help";
     private static final String EXIT = "Program exiting";

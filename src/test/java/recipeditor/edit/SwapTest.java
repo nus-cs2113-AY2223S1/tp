@@ -1,6 +1,8 @@
 package recipeditor.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import recipeditor.exception.InvalidFlagException;
@@ -8,6 +10,7 @@ import recipeditor.exception.ParseException;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
+import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
 
 public class SwapTest {
@@ -37,6 +40,7 @@ public class SwapTest {
         EditModeCommand ed = new Swap(FlagType.STEP, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (IndexOutOfBoundsException i) {
             assert true;
         } catch (Exception i) {
@@ -58,10 +62,18 @@ public class SwapTest {
         EditModeCommand ed = new Swap(FlagType.INGREDIENT, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (IndexOutOfBoundsException i) {
             assert true;
         } catch (Exception i) {
             assert false;
         }
+    }
+
+    @AfterAll
+    static void tearDown() {
+        RecipeList.deleteRecipeFromTitle("title");
+        Storage.deleteRecipeFile("title");
+        Storage.rewriteRecipeListToFile();
     }
 }

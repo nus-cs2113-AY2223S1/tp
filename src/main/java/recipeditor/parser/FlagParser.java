@@ -1,5 +1,6 @@
 package recipeditor.parser;
 
+import recipeditor.command.EditCommand;
 import recipeditor.exception.ExcessFlagsException;
 
 import static recipeditor.parser.FlagType.NULL;
@@ -12,9 +13,11 @@ import static recipeditor.parser.FlagType.INGREDIENT;
 import static recipeditor.parser.FlagType.STEP;
 import static recipeditor.parser.FlagType.TITLE;
 import static recipeditor.parser.FlagType.DESCRIPTION;
+
 import recipeditor.command.CommandResult;
 import recipeditor.command.FindCommand;
 import recipeditor.exception.InvalidFlagException;
+import recipeditor.ui.Ui;
 
 public class FlagParser {
 
@@ -29,6 +32,10 @@ public class FlagParser {
     private static final String TITLE_FLAG = FLAG_INITIAL + "t";
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
+    private static final String COMMAND_TYPE = "/edit";
+    private static int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
+    private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
+    private static final int FLAG_POSITION_OTHER_COMMAND = 2;
     private static final int STARTING_COUNT = 0;
     private static final int COMMAND_FLAG_INDEX = 0;
     private static final int RECIPE_FLAG_INDEX = 1;
@@ -44,9 +51,29 @@ public class FlagParser {
      */
     public static FlagType[] getFlags(String[] parsedCommand) throws ExcessFlagsException, InvalidFlagException {
         FlagType[] flags = {NULL, NULL};
+        String commandWord = parsedCommand[0];
         int recipeFlagCount = STARTING_COUNT;
         int commandFlagCount = STARTING_COUNT;
+
+        STRINGS_UNTIL_FLAG_EDIT_COMMAND = getLastFlagIndex(parsedCommand) + 1;
+
+        int index = 0;
         for (String s : parsedCommand) {
+            index++;
+
+            if (commandWord.equals(COMMAND_TYPE)) {
+                if (index > STRINGS_UNTIL_FLAG_EDIT_COMMAND) {
+                    break;
+                }
+                if (index <= STRINGS_BEFORE_FLAG_EDIT_COMMAND) {
+                    continue;
+                }
+            } else {
+                if (index != FLAG_POSITION_OTHER_COMMAND) {
+                    continue;
+                }
+            }
+
             if (s.contains(DASH_DIVIDER)) {
                 switch (s) {
                 case ADD_FLAG:
@@ -90,6 +117,7 @@ public class FlagParser {
                 }
             }
         }
+
         if (recipeFlagCount > MAX_NUMBER_OF_RECIPE_FLAGS) {
             throw new ExcessFlagsException("recipe");
         }
@@ -113,5 +141,22 @@ public class FlagParser {
             break;
         }
         return flag;
+    }
+
+    public static int getLastFlagIndex(String[] parsedCommand) {
+        int lastIndex = -1;
+        for (int i = 0; i < parsedCommand.length; i++) {
+            if (parsedCommand[i].contains("-")) {
+                switch (parsedCommand[i]) {
+                case INDEX_FLAG: case ADD_FLAG: case DELETE_FLAG: case SWAP_FLAG: case CHANGE_FLAG:
+                case INGREDIENT_FLAG: case STEP_FLAG: case TITLE_FLAG: case DESCRIPTION_FLAG:
+                    lastIndex = i;
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        return lastIndex;
     }
 }

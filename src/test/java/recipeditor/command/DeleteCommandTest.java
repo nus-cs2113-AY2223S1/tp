@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class DeleteCommandTest {
 
     @Test
-    public void deleteCommand_indexOutOfRange() {
+    public void deleteCommand_indexOutOfRangeInput_errorMessage() {
         DeleteCommand deleteCommand = new DeleteCommand(0);
         String expected = "Delete recipe index out of bound.";
         String actual = deleteCommand.execute().getMessage();
