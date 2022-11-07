@@ -2,7 +2,7 @@
 Hi, I am HE Jinwen, a year 3 Dual degree program (computer science + Finance) student.
 
 Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI) developed by a team of five students 
-following the course requirements of CS2113 within six weekss. PCMS is a desktop application that helps a clinic 
+following the course requirements of CS2113 within six weeks. PCMS is a desktop application that helps a clinic 
 reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
 
 ## Summary of Contributions
@@ -20,19 +20,25 @@ reception to record appointments, assign tasks, and manage data of pets/services
 
 ### Contributions to the UG: 
 - wrote the introduction, quick start, features (Except from task finish), and command summary
-
+- update UG after changes in program were made.
 ### Contributions to the DG: 
 - drew employee view, appointment view, pet view, task view, service view uml diagram.
 
 ## Contributions to team-based tasks
-actively fix issues reported in PE-D. Even though the issues may not concern with the section I am responsible for 
-which are parsers.
+- actively fix issues reported in PE-D, including the case when the issues may not concern with the section I am responsible for.
 Continually update UG according to changes made to the program.
+- TP testing
 
 ### Review/mentoring contributions: 
-[CS2113-W13-2](https://github.com/nus-cs2113-AY2223S1/tp/pull/6)
+Helped to fix bugs from sections other teammates are responsible for
 
 
 ### Contributions beyond the project team:
 TP reviewed
 [CS2113-T17-3](https://github.com/sylviahe171/ped/issues)
+
+DG reviewed
+[CS2113-W13-2](https://github.com/nus-cs2113-AY2223S1/tp/pull/6)
+
+IP reviewed
+[Kohnh's IP](https://github.com/nus-cs2113-AY2223S1/ip/pull/33)
