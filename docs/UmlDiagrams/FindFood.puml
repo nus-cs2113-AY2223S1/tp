@@ -1,23 +1,35 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
-autoactivate on
+autoActivate on
 
-activate findCommand
-group findFood
-    findCommand -> findCommand: findFood(argumentList: String, slashesCount: Int)
-    findCommand -> findCommand: getFilteredFoodList(argumentList)
-    return filteredFoodList : ArrayList<Food>
-    alt filteredFoodList.size() = 0
-    findCommand -> Ui : output(FOOD_NOT_FOUND: String)
+box Logic LOGIC_COLOR_T1
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant "tableFrame:FoodTable" as FoodTable UI_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+end box
+
+[-> FindCommand : execute()
+FindCommand -> FindCommand : findFood(argumentList: String[], slashesCount: int)
+FindCommand -> FindCommand: getFilteredFoodList(argumentList: String[])
+return filteredFoodList: ArrayList<Food>
+
+
+alt filteredFoodList.size() = 0
+    FindCommand -> Ui: output(FOOD_NOT_FOUND: String)
     return
-    else filteredFoodList.size() != 0
-    findCommand -> tableFrame **: new FoodTable();
-    findCommand -> tableFrame: getFoodTable();
-    return table: ArrayList<String>
-    findCommand -> Ui: ouptut(table)
-    return
-
+else filteredFoodList.size() != 0
+create FoodTable
+FindCommand -> FoodTable : new FoodTable(filteredFoodList: ArrayList<Food> , weightAndFatList: ArrayList<WeightAndFat>, exerciseArrayList: ArrayList<Exercise>, recordArrayList: ArrayList<Record>, FOOD_FOUND: String)
+return tableFrame: FoodTable
+FindCommand -> FoodTable: getFoodTable()
+return table: ArrayList<String>
+FindCommand -> Ui: printTable(table: ArrayList<String>)
+return
 end
-deactivate findCommand
+
+destroy FindCommand
 @enduml
