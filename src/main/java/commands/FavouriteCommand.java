@@ -1,7 +1,11 @@
 package commands;
 
 import exceptions.DukeException;
-import seedu.duke.*;
+import seedu.duke.Media;
+import seedu.duke.Movie;
+import seedu.duke.ReviewList;
+import seedu.duke.TvShow;
+import seedu.duke.Ui;
 
 public class FavouriteCommand extends Commands {
     String[] userInput;
