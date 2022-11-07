@@ -24,5 +24,5 @@ public abstract class EditModeCommand {
     }
 
 
-    public abstract Recipe execute() throws InvalidFlagException, ParseException;
+    public abstract Recipe execute() throws InvalidFlagException, ParseException, IndexOutOfBoundsException;
 }

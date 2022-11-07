@@ -31,7 +31,7 @@ public class Parser {
     private static final String INDEX_OUT_OF_BOUND_MESSAGE =
             "Index is not present in the list.";
     private static final String WRONG_COMMAND_FORMAT_MESSAGE =
-            "Wrong command format.";
+            "Wrong command format. Missing title or index from input.";
     private static final int COMMAND_INDEX = 0;
 
     private static final int COMMAND_LENGTH = 1;
@@ -46,7 +46,8 @@ public class Parser {
     private static final int EDIT_COMMAND_RECIPE_INDEX = 1;
     private static final int ACCOUNT_ZERO_INDEXING = -1;
     private static final int REMOVE_LAST_CHAR_INDEX = -1;
-
+    private static final int DELETE_COMMAND_LENGTH = 3;
+    private static final int VIEW_COMMAND_LENGTH = 3;
 
     /**
      * Parse the input command and returns respective executable command.
@@ -75,10 +76,16 @@ public class Parser {
             }
             return new ExitCommand();
         case DeleteCommand.COMMAND_TYPE:
+            if (parsed.length < DELETE_COMMAND_LENGTH) {
+                return parseHelpCommand(DeleteCommand.COMMAND_NAME);
+            }
             return parseDeleteCommand(parsed);
         case EditCommand.COMMAND_TYPE:
             return parseEditCommand(parsed);
         case ViewCommand.COMMAND_TYPE:
+            if (parsed.length < VIEW_COMMAND_LENGTH) {
+                return parseHelpCommand(ViewCommand.COMMAND_NAME);
+            }
             return parseViewCommand(parsed);
         case FindCommand.COMMAND_TYPE:
             return parseFindCommand(parsed);
@@ -175,7 +182,7 @@ public class Parser {
         } catch (AssertionError e) {
             Ui.showMessage(INDEX_OUT_OF_BOUND_MESSAGE);
         }
-        return new InvalidCommand(ViewCommand.COMMAND_SYNTAX);
+        return new InvalidCommand(ViewCommand.CORRECT_FORMAT);
     }
 
     private static Command parseEditCommand(String[] parsed) {
@@ -230,8 +237,10 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 Ui.showMessage(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
                 return new InvalidCommand(InvalidCommand.RECIPE_INDEX_OUT_OF_RANGE_MESSAGE);
+            } catch (InvalidFlagException e) {
+                return new InvalidCommand(e.getMessage());
             } catch (Exception e) {
-                return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
+                return new InvalidCommand(e.getMessage());
             }
         }
         return new InvalidCommand(EditCommand.COMMAND_SYNTAX);
