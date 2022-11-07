@@ -178,7 +178,9 @@ This section would focus on explaining the application flow and the specifics on
 **List of Commands**
 
 The following sequence diagrams to showcase the list of commands,
-parser() method will not be reflected in order to improve readability.
+> ⚠️**NOTE FOR ALL SEQUENCE DIAGRAM**  
+> - Exceptions are omitted for readability.
+> - parser() method will not be reflected in order to improve readability.
 
 1. [Add a passenger feature](#add-a-passenger-feature)
 2. [Delete a passenger feature](#delete-a-passenger-feature)
@@ -195,20 +197,9 @@ parser() method will not be reflected in order to improve readability.
 
 The command Add a passenger adds passenger details of a particular passenger to the passenger list.
 
-**Overview of relevant classes**
-
-> ⚠️**NOTE:** Minimal representation of structure of `AddPassengerCommand`
-
-![class diagram](ug-diagrams/images/passengerAddCmdClassDiagram.jpg)
-
-When the main class `SkyControl` receives a user input, it parses the input with the
-help of the `Parser` class which then forwards the input to the `PassengerParser` class accordingly.
-The `PassengerParser` retrieves the command `AddPassengerCommand` and returns it to `SkyControl` where
-further methods will be triggered as explained below.
-
 **Sequence Diagram**
 
-> ⚠️**NOTE:** Exceptions are omitted for readability.
+
 
 ![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
 
@@ -235,33 +226,9 @@ The abstract `Command` extends a `Parser` which holds and validates the User inp
 Furthermore, `DeletePassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
-  to execute the delete operation that should remove a passenger from the logbook
-
-The class diagram as depicted below shows the behaviour of the passenger delete operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger delete` command for easier readability.
-
-
-Part 1:
-
-* The valid `passenger delete` command is passed as a `String lineInput` into the function `parse` to valid
-  the type of command that needs to be executed.
-* Once validated, a new Command called `DeletePassengerCommand` should be instantiated.
-
-![class diagram](ug-diagrams/images/passengerdltcmdClassDiagram_0.jpg)
-
-Part 2:
-
-* `DeletePassengerCommand` would then call `execute(passengers, lineInput)`,
-  associating itself with PassengerList to obtain the existing `ArrayList<FlightInfo> passengers`.
-* From there, `deleteOperation` method would run within method `execute` and terminate only when there is no such
-  passenger
-  found or when a passenger is removed.
-
-![class diagram](ug-diagrams/images/passengerdltcmdClassDiagram_1.jpg)
+  to execute the delete operation that should remove a passenger from the logbook.
 
 **Sequence diagram**
-
-> ⚠️**NOTE:** Exceptions are omitted for readability.
 
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
@@ -272,6 +239,7 @@ When `Parser` verifies that the command is an entity `passenger` and `delete` op
    which in turn would call on `deleteOperation(passengerDetail)` in `PassengerList` class.
 2. Within `deleteOperation(passengerDetail)`, it would loop the arraylist `passengers` obtained from `OperationList`.
 3. If passenger is found, delete object `passenger` from `passengers`. ELse, return without deletion.
+4. The sequence diagram above assumes that a valid passenger is present in the passenger list to be deleted.
 
 ---
 
@@ -285,26 +253,6 @@ Furthermore, `ListPassengerCommand` implements the following operation:
 
 * `execute(OperationList passengers, String lineInput)` &#8594; An override method inherited from `command`
   to execute the list operation that should list out all the passengers from the logbook.
- 
-The class diagram as depicted below shows the behaviour of the passenger list operation explained in two parts.  
-This scenario assumes that the manager have input a valid `passenger list` command for easier readability.
-
-Part 1:
-
-* The valid `passenger list` command is passed as a `String lineInput` into the function `parse` to valid
-  the type of command that needs to be executed.
-* Once validated, a new Command called `ListPassengerCommand` should be instantiated.
-
-![class diagram](ug-diagrams/images/passengerListcmdClassDiagram_0.jpg)
-
-Part 2:
-
-* `ListPassengerCommand` would then call `execute(passengers, lineInput)`,
-  associating itself with PassengerList to obtain the existing `ArrayList<FlightInfo> passengers`.
-* From there, `listOperation` method would run within method `execute` and
-  prints out all `passengers` details on a table format.
-
-![class diagram](ug-diagrams/images/passengerListcmdClassDiagram_1.jpg)
 
 **Sequence diagram**
 
@@ -327,8 +275,6 @@ When `Parser` verifies that the command is an entity `passenger` and `list` oper
 The Add a flight function adds a flight with its corresponding details to the flight logbook.
 
 **Sequence Diagram**
-
-> ⚠️**NOTE:** Exceptions are omitted for readability.
 
 ![sequence diagram](ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
 
