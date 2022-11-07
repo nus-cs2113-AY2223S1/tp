@@ -12,19 +12,19 @@ Given below are my contributions to the project:
   * Justification: The overall executor needs to handle the set-up actions such as the creating of a file and
   reading in saved data, and then executing the main funtions of the program.
   * Highlights: The OOP model has been well-followed to make the structure of the program simple and intuitive. The
-  driver code was written such that the instantiation of the Duke object instantiates the various helper classes (Parser, storage, Ui, ReviewList), allowing the smaller details to be abstracted away, resulting in clean concise and very readable
+  driver code was written such that the instantiation of the Duke object instantiates the various helper classes (Parser, storage, Ui, ReviewList), allowing the smaller details to be abstracted away, resulting in clean, concise and readable
   driver code.
 
 * **New Feature**: Parser
   * What it does: This feature resolves the user input into a command to execute.
   * Justification: The parser class is vital to the program, as it is responsible for proessing the user's string input
   and triggering the appropriate function. By having a Parser as a dedicated feature, the resolution of user input can be compartmentalised into a specific class, keeping the main code clean.
-  * Highlights: The parser first splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain the arguments for the particular command by further splitting user input. Specific keywords strings check for the presence of arguments. The final manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand keeping a separation of concerns.
+  * Highlights: The parser first splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain the arguments for the particular command by further splitting user input. The final manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), keeping a separation of concerns.
 
 * **New Feature**: Storage
   * What it does: This feature ensures the user's information can be saved into local storage and retrieved
   every time the program is run.
-  * Justification: Storage is vital for the persistence of data. This ensures the user does not have to remember the information.
+  * Justification: Storage is vital for the persistence of data, ensuring a user does not have to rely on memory.
   * Highlights: The Storage class includes validation while reading in the input from the file to make sure it is corectly 
   formatted. The storage class checks for the existence of a file at the specified path and makes the approriate file if it does not exist.
 
@@ -45,7 +45,7 @@ Given below are my contributions to the project:
 * **Enhancements to existing features**:
   * Wrote JUnit test cases for Storage, Parser, UI, and Movie. Brought the unit tests to 70% coverage for Parser for v2.0.
   * Researched and implemented how to direct logging information from the console to a log file. [Reference Youtube video](https://www.youtube.com/watch?v=W0_Man88Z3Q) [PR #115](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/115)
-  * Enhanced the add feature to ensure that entries with duplicate names would be rejected if attempted. This ensures that the total count of items is accurate and reduces redundant information when sorting.
+  * Enhanced the add feature to ensure that entries with duplicate names would be rejected if attempted. This reduces redundant information when sorting and listing.
   * Figured out a platform-independent solution for JUnit tests compare against CLI output (Generally, line separators cause issues). [Stackoverflow link referenced](https://stackoverflow.com/questions/41674408/java-test-system-output-including-new-lines-with-assertequals)  
 
 * **Documentation**:
