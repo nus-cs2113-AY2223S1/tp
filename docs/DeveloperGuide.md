@@ -1,5 +1,5 @@
-# Developer Guide
-
+# RecipEditor
+## Developer Guide
 The aim of this guide is to help readers understand how the system and components of RecipEditor
 is designed, implemented and tested. This developer guide also serves to help
 developers to understand the architecture of RecipEditor and some design considerations.
