@@ -63,7 +63,7 @@ public class Parser {
     }
 
     /**
-     * Parse the user input and perform the correct actions on PatientList, then return the next SubMenuState
+     * Parse the user input and perform the correct actions on PatientList, then return the next SubMenuState.
      * @param input is a String given by user
      * @return `SubMenuState` enum
      */
@@ -111,7 +111,7 @@ public class Parser {
     }
 
     /**
-     * Parse the user input and perform the correct actions on VisitList, then return the next SubMenuState
+     * Parse the user input and perform the correct actions on VisitList, then return the next SubMenuState.
      * @param input is a String given by user
      * @return `SubMenuState` enum
      */
@@ -174,7 +174,7 @@ public class Parser {
 
 
     /**
-     * Parse the user input and perform the correct actions on PrescriptionList, then return the next SubMenuState
+     * Parse the user input and perform the correct actions on PrescriptionList, then return the next SubMenuState.
      * @param input is a String given by user
      * @return `SubMenuState` enum
      */
