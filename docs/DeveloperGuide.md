@@ -1,4 +1,4 @@
-# MoneyGoWhere: Developer Guide
+# Developer Guide
 
 <p align="center"><img alt="icon" width="256" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 
@@ -469,6 +469,8 @@ The Storage component consists of the classes `LocalStorageConfigurations`, `Loc
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### API Component
 
 The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`.
@@ -494,6 +496,8 @@ When `CurrencyApiManager#getCurrencyApi()` is invoked to retrieve the list of cu
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Logger Component
 
@@ -539,6 +543,8 @@ The Logger component consists of the classes `LocalLoggerFormatter` and `LocalLo
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Loading data from file
 
@@ -615,6 +621,8 @@ The `Merge-File` command merges data from an external data file with the existin
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Printing an expense
 
