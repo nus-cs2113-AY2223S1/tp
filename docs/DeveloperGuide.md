@@ -152,6 +152,7 @@ The first section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 <p align="center">
     <img src="./diagrams/CommandAddParserRelatedClassesDiagram.png">
+    <br/>
     Command Add Parser Related Classes Diagram
 </p>
 
@@ -191,6 +192,7 @@ The following is a simple class diagram of the three classes:
 
 <p align="center">
     <img src="./diagrams/CommandAddRelatedClassesDiagram.png">
+    <br/>
     Command Add Related Classes Diagram
 </p>
 
