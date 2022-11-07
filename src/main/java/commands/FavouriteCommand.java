@@ -30,7 +30,7 @@ public class FavouriteCommand extends Commands {
         Media media;
         int current = 0;
 
-        if (!userInput[1].equals("list")) {
+        if (!userInput[1].equals("list") && userInput.length == 3) {
             try {
                 String index = userInput[2];
                 int favouriteIndex = Integer.parseInt(index);
@@ -70,7 +70,7 @@ public class FavouriteCommand extends Commands {
             }
 
             return "Unable to find item for specified type and index";
-        } else {
+        } else if (userInput[1].equals("list") && userInput.length == 2) {
             ReviewList favouritesList = new ReviewList();
             int count = 0;
 
@@ -92,6 +92,13 @@ public class FavouriteCommand extends Commands {
             Commands listHelper = new ListCommand(favouritesList);
             output += listHelper.execute();
             return output;
+        } else {
+            try {
+                throw new DukeException();
+            } catch (DukeException e) {
+                Ui.print("Incomplete or wrongly formatted command, try again.");
+            }
         }
+        return output;
     }
 }
