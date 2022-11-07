@@ -418,16 +418,16 @@ public class Parser {
     }
 
     private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
-        String reason = matcher.group(4);
         String date = matcher.group(2);
         checkDateForVisit(date);
         checkTime(matcher.group(3));
         checkBirthDateVisitDate(date, patientId);
+        String reason = matcher.group(4);
         if (reason == null || reason.isEmpty()) {
-            visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
+            visitList.addVisit(ui, patientId, date, matcher.group(3));
             storage.saveVisitData(visitList);
         } else {
-            visitList.addVisit(ui, patientId, matcher.group(2),
+            visitList.addVisit(ui, patientId, date,
                     matcher.group(3), matcher.group(4));
             storage.saveVisitData(visitList);
         }
