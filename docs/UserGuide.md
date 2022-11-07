@@ -179,7 +179,7 @@ Usage:
 Output:
 ```
 Your list has been sorted by rating
----Here are the reviews in your list---
+---Here are the reviews---
 
 Movies:
 1. [Movie]  avengers  Rating: 99.0  Genre: action  Date watched: 30-01-2020
@@ -198,17 +198,30 @@ Searches your review list to find movies whose **titles** contain the given keyw
 - `<keyword>` must be a string.
 - The search is case-sensitive e.g. `Inception` will not match `inception`
 - All arguments are compulsory for successful execution of command.
+- You may find with one or multiple words.
 
-Usage: `find inc`
+Usage (1): `find inc`
 
 Output:
 ```
----Here are the reviews that match the keyword---
+---Here are the reviews---
 
 Movies:
 1. [Movie]  inception  Rating: 95.0  Genre: thriller  Date watched: 10-01-2020
 
 TV Shows:
+```
+
+Usage (2): `find game of`
+
+Output:
+```
+---Here are the reviews---
+
+Movies:
+
+TV Shows:
+1. [TV Show]  game of thrones  Rating: 5.0  Genre: fantasy  Date watched:  02-02-2022   Site: hbo
 ```
 
 ### Mark favourite reviews: 'favourite'
@@ -241,7 +254,7 @@ Displays the items in your review list that have been marked as favourite.
 Output:
 ```
 You have 5 favourites in total.
----Here are the reviews in your list---
+---Here are the reviews---
 
 Movies:
 1. [Movie]  avengers  Rating: 99.0  Genre: action  Date watched: 30-01-2020
