@@ -11,13 +11,13 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 [RepoSense Report](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=nvknow&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=nvknow&tabRepo=AY2223S1-CS2113-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 - Implemented the attributes and functions of Employee and EmployeeList
-  - What it does: add an employee into the employee list, remove an employee in the employee list, view the employees in the employee list, etc.
+  - What it does: add an employee into the employee list, remove an employee in the employee list, view the employees, etc.
   - Justification: an employee is the one who operate each task, which is crucial in the management system.
 - Implemented the attributes and functions of Service and ServiceList
-  - What it does: add a service into the service list, remove a service in the service list, view the services in the service list, etc.
+  - What it does: add a service into the service list, remove a service in the service list, view the services, etc.
   - Justification: a service is attached to each appointment and used to improve the status of the pet, which is the service goal of the clinic.
 - Implemented the attributes and functions of Ui
-  - What it does: show logo and welcome messages to the user, read the user's command and show error messages when receiving a wrong input.
+  - What it does: show logo and welcome messages to the user, read the user's command and show error messages.
 - Implemented the tests of Employee and EmployeeList
 
 **Enhancements implemented**
