@@ -45,7 +45,8 @@ public class ModuleList {
     /**
      * Function to add a module to the moduleList if it does not already exist.
      * @param mod The module to be added to the list
-     * @param isFromFile to check if the add command came from a module previously loaded in file. This decides whether to display add message or not
+     * @param isFromFile to check if the add command came from a module previously loaded in file.
+     *                   This decides whether to display add message or not
      */
     public void add(Module mod, boolean isFromFile) {
         boolean isRepeat = checkRepetition(mod);

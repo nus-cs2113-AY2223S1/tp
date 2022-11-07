@@ -18,8 +18,10 @@ public class Clear extends Command {
      * @param input input entered by user.
      * @throws InvalidInputFormatException exception which is thrown if the format of the input is wrong
      * @throws InvalidInputContentException exception to be thrown if the input content is empty
+     * @throws InvalidOverallInputException exception to be thrown if any issues with any of the input
      */
-    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
+    public Clear(String input) throws InvalidInputFormatException, InvalidInputContentException,
+            InvalidOverallInputException {
         input = input.trim();
         if (input.equals("all")) {
             this.semester = "all";

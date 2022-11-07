@@ -75,7 +75,7 @@ public class Parser {
      * @throws InvalidInputContentException Exception thrown when the input content is invalid.
      */
     public static Command specificCase(String commandWord, String input) throws InvalidCommandWordException,
-            InvalidInputFormatException, InvalidInputContentException, InvalidMcException, InvalidGradeException, InvalidSemesterException, InvalidOverallInputException {
+            InvalidInputFormatException, InvalidInputContentException, InvalidOverallInputException {
         switch (commandWord) {
         case "add":
             return new Add(input);
