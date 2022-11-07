@@ -240,6 +240,13 @@ public class FlightList extends OperationList {
         checkIn = flight.getCheckLn();
     }
 
+    /**
+     * Retrieves the FlightInfo object using flight number and temporarily removes it from the flight list.
+     *
+     * @param flightNum Flight number of flight being modified.
+     * @return FlightInfo object which is being modified
+     * @throws SkyControlException If the flight number is not found in flight list
+     */
     private static FlightInfo findFlightInfo(String flightNum) throws SkyControlException {
         FlightInfo modifiedFlight = null;
         for (FlightInfo flight : flights) {
@@ -257,6 +264,12 @@ public class FlightList extends OperationList {
         }
     }
 
+    /**
+     * Checks if the modified flight details produce any discrepancies or format errors.
+     *
+     * @param flight FlightInfo object of modified flight.
+     * @throws SkyControlException If the new FlightInfo object does not follow the correct format for parameters.
+     */
     private void validateModificationDetails(FlightInfo flight) throws SkyControlException {
         try {
             validateDetailFormat();

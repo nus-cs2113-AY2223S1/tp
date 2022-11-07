@@ -32,9 +32,6 @@ public class SkyControl {
     private Storage storage;
     private PassengerInfo passengerInfo;
 
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
     public SkyControl() {
         ui = new Ui();
         passengers = new PassengerList();
@@ -186,6 +183,19 @@ public class SkyControl {
     }
 
     //@@author shengiv
+
+    /**
+     * For passenger add feature, retrieves flight details for the passenger based on the flight number of the
+     * passenger. Synchronises passenger details with flight details.
+     *
+     * @param lineInput Manager's command line input.
+     * @param command Command object for the particular user input.
+     * @return passengerAddInput which is a String object consisting of lineInput from the user
+     *         and flight details for the passenger retrieved from flight list.
+     * @throws SkyControlException If there is incorrect input.
+     * @throws SyncException If there does not exist a FlightInfo object with the specified
+     *         flight number for the passenger.
+     */
     private String syncFlightDetail(String lineInput, Command command) throws SkyControlException, SyncException {
         command.checkFlightDetailSync(flights, passengers, lineInput);
         String passengerAddInput;
@@ -265,6 +275,9 @@ public class SkyControl {
     }
 
     //@@author shengiv
+    /**
+     * Main entry-point for the java.duke.SkyControl application.
+     */
     public static void main(String[] args) {
         new SkyControl().run();
     }

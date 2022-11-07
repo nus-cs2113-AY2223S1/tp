@@ -111,13 +111,13 @@ public class Parser {
         isList = operation.equalsIgnoreCase("list");
     }
 
+    //@@author shengiv
     public static boolean isPassengerEntity(String lineInput) throws SkyControlException {
         getEntity(lineInput);
         isPassengerEntity = entity.equalsIgnoreCase(PASSENGER_ENTITY);
         return isPassengerEntity;
     }
 
-    //@@author shengiv
     public static boolean isFlightEntity(String lineInput) throws SkyControlException {
         getEntity(lineInput);
         isFlightEntity = entity.equalsIgnoreCase(FLIGHT_ENTITY);
@@ -178,14 +178,13 @@ public class Parser {
         return isDelete;
     }
 
-    //@@author ivanthengwr
-    private static void checkBlankOperation(String lineInput) {
-        boolean isNotBye = !lineInput.contains(EXIT_ENTITY);
-        if (inputWords.length == ONE_WORD && isNotBye) {
-            isBlankOperation = true;
-        }
-    }
-
+    /**
+     * Checks what the operation is and retrieves only the passenger details from the String lineInput.
+     *
+     * @param lineInput user input from the CLI.
+     * @return passengerDetail User input where the command is removed and only passenger details are present.
+     * @throws SkyControlException If the operation name is not specified in the user input.
+     */
     public static String getPassengerDetail(String lineInput) throws SkyControlException {
         Parser.getInputWords(lineInput);
         Parser.checkOperation(inputWords);
@@ -200,6 +199,14 @@ public class Parser {
             throw new SkyControlException(ui.getOperationError());
         }
         return passengerDetail;
+    }
+
+    //@@author ivanthengwr
+    private static void checkBlankOperation(String lineInput) {
+        boolean isNotBye = !lineInput.contains(EXIT_ENTITY);
+        if (inputWords.length == ONE_WORD && isNotBye) {
+            isBlankOperation = true;
+        }
     }
 
     private static void checkDeleteOperationDetail(String lineInput) throws SkyControlException {

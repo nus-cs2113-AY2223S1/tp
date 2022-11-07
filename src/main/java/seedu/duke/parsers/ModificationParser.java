@@ -6,6 +6,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.flightcommand.ModifyGateNumCommand;
 import seedu.duke.exceptions.SkyControlException;
 
+/**
+ * Parses user input for commands involving modification of existing details.
+ */
 public class ModificationParser extends Parser {
 
     protected static boolean isFlightNumber;
@@ -17,6 +20,13 @@ public class ModificationParser extends Parser {
     protected static final int INPUT_WORDS_LENGTH = 3;
     protected static final int DETAIL_NUMBER = 2;
 
+    /**
+     * Parses the array of inputWords and checks which command to be returned based on user input.
+     *
+     * @param inputWords User input in the form of an array of words.
+     * @return command modification command specified by the user.
+     * @throws SkyControlException If incorrect modify message is input into CLI
+     */
     public static Command parse(String[] inputWords) throws SkyControlException {
         checkInputWords(inputWords);
         checkDetailToBeModified(inputWords);
@@ -34,6 +44,13 @@ public class ModificationParser extends Parser {
         return command;
     }
 
+    /**
+     * Checks which detail is being modified and stores the values in boolean objects
+     * to specify the attribute being modified.
+     *
+     * @param inputWords User input in the form of an array of words.
+     * @throws SkyControlException If incorrect input is entered for modify
+     */
     private static void checkDetailToBeModified(String[] inputWords) throws SkyControlException {
         String modifiedDetail = inputWords[DETAIL_NUMBER];
         String delimiter = getDelimiter(modifiedDetail);

@@ -33,6 +33,16 @@ public abstract class OperationList {
         executeCheck(flightsThatExist);
     }
 
+    /**
+     * Uses the passengerDetail String to retrieve flight number of the passenger. Then the departure
+     * time is retrieved for that particular flight from the flight list.
+     *
+     * @param flights Existing list of flights.
+     * @param passengerDetail User input where the command is removed and only passenger details are present.
+     * @return departure time of passenger.
+     * @throws SkyControlException If there are any errors retrieving flight number from passengerDetail or if
+     *         flight number is invalid.
+     */
     public static String getPassengerDepartureTime(OperationList flights,
                                                    String passengerDetail) throws SkyControlException {
         String departureTime = null;

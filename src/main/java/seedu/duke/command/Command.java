@@ -5,15 +5,29 @@ import seedu.duke.exceptions.SyncException;
 import seedu.duke.operationlist.OperationList;
 import seedu.duke.ui.Ui;
 
+/** Command superclass for al the possible commands in SkyControl. */
 public abstract class Command {
     public static final int START_INDEX = 3;
     protected static Ui ui = new Ui();
     protected static final int DETAIL_INDEX = 1;
 
+    /**
+     * Retrieves flight number from user input for the modify commands.
+     *
+     * @param inputWords array of words consisting of user input.
+     * @return flight number from the input words.
+     */
     public static String getFlightNumFromModifyCmd(String[] inputWords) {
         return inputWords[DETAIL_INDEX].toUpperCase();
     }
 
+    /**
+     * Retrieves the new value for the flight detail that is being modified
+     * i.e. gateNumber for ModifyGateNumCommand.
+     *
+     * @param inputWords array of words consisting of user input.
+     * @return the new value for the flight attribute that is being modified.
+     */
     public static String getModifiedDetail(String[] inputWords) {
         return inputWords[2].substring(START_INDEX).toUpperCase();
     }
