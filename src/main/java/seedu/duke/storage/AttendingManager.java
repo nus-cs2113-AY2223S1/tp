@@ -13,6 +13,9 @@ import seedu.duke.module.Module;
 import seedu.duke.module.lessons.Lesson;
 import seedu.duke.timetable.Timetable;
 
+/**
+ * Class for managing the AttendingData data file.
+ */
 public class AttendingManager {
     private static ArrayList<String> attendingDataList = new ArrayList<>();
     private static String dataDirectoryPath;
@@ -61,7 +64,7 @@ public class AttendingManager {
     }
 
     /*
-     * 
+     * Saves all attending information into data list.
      */
     public static void saveAttendingIntoDataList() {
         attendingDataList.clear();
@@ -164,8 +167,13 @@ public class AttendingManager {
         }
     }
 
+    /**
+     * Deletes all data in attending save file.
+     *
+     * @param dataDirectoryPath Directory path to the file to be cleared.
+     */
     public static void deleteDataFile(String dataDirectoryPath) {
-        File data = new File(dataDirectoryPath + " \"/ModuleData.txt\"");
+        File data = new File(dataDirectoryPath + " \"/AttendingData.txt\"");
         data.delete();
     }
 }

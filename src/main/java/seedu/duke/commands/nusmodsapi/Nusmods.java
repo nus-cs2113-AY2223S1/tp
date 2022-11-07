@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+
+/**
+ * Class for managing all API related operations and JsonNode object parsing.
+ */
 public class Nusmods {
 
     private final String baseUri = "https://api.nusmods.com/v2/2022-2023/modules/";
@@ -56,11 +60,19 @@ public class Nusmods {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
+    /**
+     * Gets the module info required based on module code input.
+     *
+     * @param moduleCode Code of the particular module.
+     * @return A string array with the retrieved information on the module.
+     * @throws IOException If API call fails.
+     * @throws InterruptedException If retrieval of information is interrupted.
+     */
     public String[] getModuleInfo(String moduleCode) throws IOException, InterruptedException {
         while (true) {
             HttpResponse<String> response = getResponse(moduleCode);
             if (response.statusCode() != 200) {
-                System.out.println("Module not found, please try again.");
+                UI.printResponse("Module not found, please try again.");
                 moduleCode = UI.getModuleCodeFromUser();
             } else {
                 lgr.info("api call successful, module exists");
@@ -79,6 +91,21 @@ public class Nusmods {
         return info;
     }
 
+    /**
+     * Gets the lesson information of a particular module for adding to the timetable.
+     *
+     * @param currentSemester The semester of the timetable indicated by the user at program start up.
+     * @param info Other required basic information for the module which is modified in the method.
+     * @param moduleCode The code of the module to be added.
+     *
+     * @return A list of lessons pertaining to the queried module based on module code given.
+     *
+     * @throws IOException If API call fails.
+     * @throws InterruptedException If retrieval of information is interrupted.
+     * @throws Exceptions.InvalidSemException If module does not exist in the given semester.
+     * @throws Exceptions.InvalidModuleCodeException If the module code cannot be found or is invalid.
+     * @throws Exceptions.InvalidDayException If module has lessons that falls on weekends.
+     */
     public List<Lesson> addModuleInfo(String currentSemester, String[] info, String moduleCode)
             throws IOException, InterruptedException, Exceptions.InvalidSemException,
             Exceptions.InvalidModuleCodeException, Exceptions.InvalidDayException {

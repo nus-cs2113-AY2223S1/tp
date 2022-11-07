@@ -2,13 +2,13 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
-participant ":CommandAddModule" as CommandAddModule LOGIC_COLOR
+participant "<color: red><<class>></color>\nCommandAddModule" as CommandAddModule LOGIC_COLOR
 participant ":Nusmods" as Nusmods LOGIC_COLOR
-participant ":Timetable" as Timetable LOGIC_COLOR
+participant "<color: red><<class>></color>\nTimetable" as Timetable LOGIC_COLOR
 end box
 
 box API MODEL_COLOR_T1
-participant ":NUSmods API" as Api MODEL_COLOR
+participant "NusMods API" as Api MODEL_COLOR
 end box
 
 [-> CommandAddModule : addModule(:String)

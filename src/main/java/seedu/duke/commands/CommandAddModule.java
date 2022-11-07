@@ -12,14 +12,30 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+/**
+ * Command class for managing the process of adding new module to timetable.
+ */
 public class CommandAddModule {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Begins the process of adding module to the timetable.
+     *
+     * @param currentSemester The semester of the timetable indicated by the user at program start up.
+     * @return A response string to be printed by UI class to the user.
+     */
     public static  String addModule(String currentSemester) {
         String moduleCode = UI.getModuleCodeFromUser();
         return runAddModuleProcedure(currentSemester, moduleCode);
     }
 
+    /**
+     * Begins the process of adding module to the timetable after code has been parsed.
+     *
+     * @param currentSemester The semester of the timetable indicated by the user at program start up.
+     * @param moduleCode The code of the module to be added.
+     * @return A response string for the success or failure of the operation.
+     */
     public static String runAddModuleProcedure(String currentSemester, String moduleCode) {
         Nusmods mod = new Nusmods();
 
@@ -49,10 +65,17 @@ public class CommandAddModule {
         if (isAlreadyInTimetable(info[0])) {
             return "Module " + info[0] + " : " + info[1] + " is already in your timetable!\n";
         }
+
         Timetable.addNewModule(info[0], info[1], lessons);
         return "Successfully added new module: " + info[0] + " : " + info[1] + '\n';
     }
 
+    /**
+     * Checks if a module is already in the timetable.
+     *
+     * @param code Code of the module to be checked.
+     * @return True if module already exists in timetable, false otherwise.
+     */
     private static boolean isAlreadyInTimetable(String code) {
         List<Module> currentList = Timetable.getListOfModules();
         for (Module module : currentList) {

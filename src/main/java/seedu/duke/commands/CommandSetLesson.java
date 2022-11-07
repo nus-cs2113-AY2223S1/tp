@@ -8,9 +8,17 @@ import seedu.duke.timetable.Timetable;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+/**
+ * Command class for managing the process of setting lessons for a particular module.
+ */
 public class CommandSetLesson {
     private static final Logger lgr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
+    /**
+     * Starts the process of bringing the user through the lesson setting procedure.
+     *
+     * @return A response string to be printed by UI class to the user.
+     */
     public static String setLesson() {
         if (Timetable.getNumberOfSettableLessons() == 0) {
             return "No modules available for lessons to be set.";
@@ -28,6 +36,12 @@ public class CommandSetLesson {
         return runSetProcedure(Integer.parseInt(indexToSet) - 1);
     }
 
+    /**
+     * Gets the lesson the user is attending and wants to set, and sets it.
+     *
+     * @param indexForModule Index number of the module in the list which the user wants to set lesson for.
+     * @return A response string to the user.
+     */
     private static String runSetProcedure(int indexForModule) {
 
         //gets
@@ -46,8 +60,7 @@ public class CommandSetLesson {
                 Integer.parseInt(indexForLesson) - 1);
 
         try {
-            ArrayList<Lesson> newLessons = getPreferredLesson(indexForModule,
-                    Integer.parseInt(indexForLesson) - 1, targetLessonType);
+            ArrayList<Lesson> newLessons = getPreferredLesson(indexForModule, targetLessonType);
             replaceAttendingLesson(newLessons, indexForModule, targetLessonType);
         } catch (Exceptions.InvalidTimeslotException e) {
             return "Invalid Timeslot Index!";
@@ -60,7 +73,15 @@ public class CommandSetLesson {
         Timetable.replaceSettableLesson(newLessons, indexForModule, moduleType);
     }
 
-    private static ArrayList<Lesson> getPreferredLesson(int indexForModule, int i, String targetLessonType)
+    /**
+     * Allows the user to choose their preferred lesson timeslot and returns list of lessons.
+     *
+     * @param indexForModule Index number of the module in the list which the user wants to set lesson for.
+     * @param targetLessonType The type of the lesson they want to set.
+     * @return A list of the new lessons for the user.
+     * @throws Exceptions.InvalidTimeslotException If the timeslot selected by the user is not a valid one.
+     */
+    private static ArrayList<Lesson> getPreferredLesson(int indexForModule, String targetLessonType)
             throws Exceptions.InvalidTimeslotException {
 
         int numberOfReplacements = Timetable.getSettableNumberOfPossibleReplacements(indexForModule, targetLessonType);
