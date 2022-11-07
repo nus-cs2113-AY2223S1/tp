@@ -277,21 +277,37 @@ Step 1. The user launches the application.
 
 Step 2. The user executes `pet add n/Taro s/cat h/1` command to register a cat named ‘Taro’, with a healthy status.
 
-Step 3. The user executes `pet remove i/2001` command to remove the second pet in the system.
+Step 3. The user executes `pet remove i/2` command to remove the second pet in the system.
 
 Step 4. The user executes `view pet` to display all pets in the pet manage system.
 
 
-The following sequence diagram shows how the view operation works:
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png)
-
-The following sequence diagram shows how the status operation works:
-
+The following sequence diagram shows how the add pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png)
+The following sequence diagram shows how the remove pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
+The following sequence diagram shows how the view pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
 ---
 
+
+### Design Considerations:
+
+**Aspect: How to represent the status of pets:**
+
+- Alternative 1 (current choice):
+
+  Uses java enum to make the pet status more readable and formatted.
+
+  - Pros: easy to regulate the status of each pet and easier to change the pet status.
+  - Cons: harder to extend more status.
+
+- Alternative 2:
+
+  Uses hard code string for status.
+
+  - Pros: More easy, and pet status can have a wide range.
+  - Cons: hard to read and maintain, not stable, may cause misunderstanding due to typo.
 
 ### Service Management Feature
 

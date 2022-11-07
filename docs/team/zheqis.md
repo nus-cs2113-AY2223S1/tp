@@ -33,3 +33,16 @@
 - Added the uml for AddPetCommand, RemovePetCommand and ViewPetCommand
 
 **Contributions to team-based tasks**
+
+- Acted as team leader in the final stage of the project.
+- Decided weekly meeting time and task allocation at the final stage of the project.
+- Responsible to wrap up and polish the final product.
+- Responsible for the overall test of the project.
+
+**Mentoring contributions**
+
+- Help team members with their code test set up and issues with respect to test.
+
+**Contributions beyond the project team**
+
+- Reviewed code from other teams and gave them feedback.
