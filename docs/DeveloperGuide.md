@@ -83,40 +83,6 @@ data continues to load.
 Data is saved by calling the save methods for the different data types, which return Strings in the same format
 as the user input.
 
-### Class Diagrams
-
-**Biometrics component:**  
-The Biometrics component stores information about the user's biometrics and holds a reference
-to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
-WeightAndFatList is separated from Biometrics for better abstraction and cohesion.  
-Weight and fat records are associated with a date, and the WeightAndFatList class
-stores records in descending order of date for viewing purposes.
-![](UmlDiagrams/Biometrics.png)
-
-**Food component:**
-
-Food and FoodList are two classes implemented for storing user's food consumption.
-The interaction between the Food, FoodList class and Command classes(Addcommand, RemoveCommand,
-FindCommand and ViewCommand). Only food related details(i.e. methods and attributes) are added in the
-diagram below for readability.  
-![Food.png](UmlDiagrams/Food.png)
-
-\
-[Proposed] Food records will be associated with a date, and the FoodList class
-stores records in descending order of date for viewing purposes.
-
-**CardioExercise/StrengthExercise and ExerciseList components:**
-
-CardioExercise/StrengthExercise and ExerciseList are classes to store user's cardio/strength training exercises.
-Both CardioExercise and StrengthExercise inherit from Exercise and work similarly.
-CardioExercise/StrengthExcises are added, removed, found , mark done, mark undone and viewed from the ExerciseList with
-the use
-of AddCommand, RemoveCommand, FindCommand, MarkCommand and ViewCommand.\
-ExerciseList stores Exercise objects in two Arraylist based on the status of the exercise to save the time needed to
-filter exercise based on its status when user want to view the exercises based on its status.
-
-[Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
-date for viewing purposes.
 
 ## Implementation
 
