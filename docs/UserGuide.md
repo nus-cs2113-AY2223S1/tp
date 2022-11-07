@@ -148,13 +148,13 @@ Example of usage:
 ```auth status```
 
 **Output**
-1. If user has input his personal API key and is authenticated
+- If user has input his personal API key, and is authenticated
 
 ```
 You have authenticated your API key successfully. API key stored in the local file is ********
 ```
 
-2. If user has not input his personal API key and/or is not authenticated
+- If user has not input his personal API key, and/or is not authenticated
 
 ```
 You have not authenticated your personal API key. Currently you have access to the API but you are using our default key!
