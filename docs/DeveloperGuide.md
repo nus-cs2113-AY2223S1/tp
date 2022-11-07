@@ -288,8 +288,6 @@ The following sequence diagram shows how the remove pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
 The following sequence diagram shows how the view pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
----
-
 
 ### Design Considerations:
 
@@ -308,6 +306,7 @@ The following sequence diagram shows how the view pet operation works:
 
   - Pros: More easy, and pet status can have a wide range.
   - Cons: hard to read and maintain, not stable, may cause misunderstanding due to typo.
+---
 
 ### Service Management Feature
 
