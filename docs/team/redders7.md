@@ -30,7 +30,7 @@ with the storage function and preventing users from properly saving their lists.
   * Credits: [Shao Yong's iP](https://redders7.github.io/ip/)
 
 
-**New Feature**: Parsing of user input
+**New Feature**: Parsing of user input (Parser class)
   * What it does: Parses the user input and determines if a valid command was issued. The rest of the input is then parsed
 based on the command issued.
   * Justification: This feature enables the application to determine the type of command issued, and throw a 
@@ -44,8 +44,7 @@ handling invalid inputs and dealing with edge cases where specific user inputs c
 
 **Contributions to team-based tasks**:
   * Transferred code to new repository due to issue with old repository (PR [\#1](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/1))
-  * Maintained issue tracker, closing completed issues.
-  * Added assignees, labels and milestones to issues.
+  * Maintained issue tracker.
   * Set up the team's User Guide and Developer Guide.
   * Reviewed and merged teammates' PRs.
 

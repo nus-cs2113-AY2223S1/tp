@@ -7,10 +7,10 @@
   - [Adding a movie or TV show: `add`](#adding-a-movie-or-tv-show-add)
   - [Displaying reviews: `list`](#displaying-reviews-list)
   - [Deleting a review: `delete`](#deleting-a-review-delete)
-  - [Clearing all reviews" `clear`](#clearing-all-reviews-clear)
+  - [Clearing all reviews: `clear`](#clearing-all-reviews-clear)
   - [Sorting reviews: `sort`](#sorting-reviews-sort)
   - [Finding reviews: `find`](#finding-reviews-find)
-  - [Favouriting reviews: `favourite`](#favouriting-reviews-favourite)
+  - [Mark favourite reviews: `favourite`](#favouriting-reviews-favourite)
   - [Listing favourite reviews: `favourite list`](#listing-favourite-reviews-favourite-list)
   - [Exiting the program: `bye`](#exiting-the-program-bye)
 - [Command Summary](#command-summary)
@@ -31,11 +31,11 @@ one-stop movie review companion.
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11 or above installed on your machine.
 2. Download the latest version of `myReviews` from [here](https://github.com/AY2223S1-CS2113-T18-1b/tp/releases).
 3. Copy the jar file into the folder you want to store your reviews.
 4. Open terminal application and change directory to the above folder.
-5. Run the jar file by entering java -jar tp.jar into the terminal.
+5. Run the jar file by entering `java -jar myReviews.jar` into the terminal.
 6. myReviews will display a greeting message. Enter a command and press Enter to execute it.
 
 ## Features 
@@ -57,16 +57,18 @@ The following features are supported by myReviews.
 > - Your saved review list will be saved in a file called `stored.txt`.
 > - Removing parameters from this file might result in a corrupted file, and your list will be deleted should there be
 > missing parameters when the app is launched.
+
 ## Commands
 ### Adding a movie or TV show: `add`
 Adds a new movie or TV show review to your list.
 
-**Note:** 
-Title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
-Entries with duplicate title names (case sensitive) are not allowed within the same media type. In other words,
-If the ReviewList contains the Movie "avengers", attempting to add new Movie "avengers" will not be allowed,
-however a TvShow called "avengers" will be allowed. A Movie "Avengers" (with different case) 
-is taken as a different Movie and will be accepted.
+> Note:
+> 
+>Title, genre, and site must not include "/" delimiter in input so that command can be correctly parsed.
+Entries with duplicate title names (case sensitive) are not allowed within the same media type. 
+>
+> Example: If your current list contains the Movie "avengers", attempting to add new Movie "avengers" will not be allowed.
+> However, adding a Movie titled "Avengers" (with capitalised 'A') is taken as a different Movie and will be accepted.
 
 **Format**: 
 
@@ -77,7 +79,7 @@ is taken as a different Movie and will be accepted.
 - `<title>`, `<genre>` and `<location>` must be strings.
 - `<rating>` must be an integer value from 0 to 100.
 - `<dateWatched>` must have passed and be given in the following format: dd-MM-YYYY.
-- All arguments are compulsory
+- All arguments are compulsory.
 
 Usage: 
 
@@ -158,10 +160,10 @@ Sorts your review list according to a given field.
 
 **Format**: `sort <field>`
 
-- `<field>` must be one of the following strings: 'rating', 'title', 'date' or 'genre'
+- `<field>` must be one of the following strings: 'rating', 'title', 'date' or 'genre'.
 - Sorting the review list by 'rating' or 'date' returns the reviews in descending order i.e. from the highest rating to 
-the lowest rating and from the most recent to the least recent
-- Sorting by 'title' or 'genre' returns the reviews in case-sensitive ascending order i.e. from 'A' to 'z'
+the lowest rating and from the most recent to the least recent.
+- Sorting by 'title' or 'genre' returns the reviews in case-sensitive ascending order i.e. from 'A' to 'Z'.
 - All arguments are compulsory for successful execution of command.
 
 Usage:
@@ -209,7 +211,7 @@ Movies:
 TV Shows:
 ```
 
-### Favouriting reviews: 'favourite'
+### Mark favourite reviews: 'favourite'
 Lets you mark items you find particularly notable or want to watch again for easier reference.
 
 **Format**: `favourite <type> <index>`
