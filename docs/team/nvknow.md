@@ -26,11 +26,13 @@
 **Contributions to the UG**
 
 - Added the instructions of Finish Task
+- Updated workflow
 
 **Contributions to the DG**
 
 - Added Employee management feature and its Design considerations
 - Added the UML diagram of Employee Management
+- Added User Stories of v1.0 and v2.0
 
 **Contributions to team-based tasks**
 
@@ -47,6 +49,8 @@
 - Release management
 
 - Opened pull request from team repo to module repo
+
+- Carried some Some-test on the deliverable
 
 **Mentoring contributions**
 
