@@ -17,7 +17,6 @@ FindCommand -> FindCommand : findFood(argumentList: String[], slashesCount: int)
 FindCommand -> FindCommand: getFilteredFoodList(argumentList: String[])
 return filteredFoodList: ArrayList<Food>
 
-
 alt filteredFoodList.size() = 0
     FindCommand -> Ui: output(FOOD_NOT_FOUND: String)
     return

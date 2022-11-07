@@ -57,16 +57,13 @@ public class ViewCommand extends Command {
     public static final int EMPTY_LIST = 0;
     public static final String TO_BE_DONE_MESSAGE = " to be done: ";
     public static final String EXERCISE_COMPLETED_MESSAGE = " completed: ";
-<<<<<<< HEAD
     public static final String CALORIES_NOT_FOUND = "No matching calories entry found";
     public static final String CALORIES_FOUND = "Here are the matching calorie entries in your list:";
     private static final String BIOMETRICS_NOT_SET = "Your biometrics are not set yet!";
-=======
     public static final String INVALID_VIEW_ALL_COMMAND = "Invalid view all command";
     public static final String INVALID_VIEW_FOOD_COMMAND = "Invalid view food command";
     public static final String FOOD_TABLE_CAPTION = "Food Records";
     public static final String ALL_RECORDS_TABLE_CAPTION = "All Records";
->>>>>>> b729cb710e4030c148b61acbe614d270752cb4b1
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;

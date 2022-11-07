@@ -1,37 +1,36 @@
 @startuml
 !include style.puml
 
-autoActivate on
-
 box Logic LOGIC_COLOR_T1
-participant ":FindCommand" as findCommand LOGIC_COLOR
-participant "<<class>>\nParser" as parser LOGIC_COLOR
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant "<<class>>\nParser" as Parser LOGIC_COLOR
 end box
 
-[-> findCommand: execute()
-findCommand -> parser: getArgumentsCount(arguments: String)
+[-> FindCommand: execute()
+activate FindCommand
+FindCommand -> Parser++: getArgumentsCount(arguments: String)
 return slashesCount: int
 
-findCommand -> parser: getArgumentList(arguments: String)
+FindCommand -> Parser++: getArgumentList(arguments: String)
 return argumentList: String[]
 
-findCommand -> parser: getClassType(argumentList: String[])
+FindCommand -> Parser++: getClassType(argumentList: String[])
 return findType: String
 
 alt food
-
+    ref over FindCommand: FindFood
 else strength
-
+    ref over FindCommand: FindStrengthExercise
 else cardio
-
-else date_f
-
+    ref over FindCommand: FindCardioExercise
 else calories
-
-else invalid findType
-
+    ref over FindCommand: FindCalories
+else invalidType
+    ref over FindCommand: handleInvalidFindType
 end
 return
 
-destroy findCommand
+FindCommand -[hidden]-> Parser
+
+destroy FindCommand
 @enduml

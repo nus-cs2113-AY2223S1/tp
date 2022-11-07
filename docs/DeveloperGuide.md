@@ -84,7 +84,6 @@ Data is saved by calling the save methods for the different data types, which re
 as the user input.
 
 
-
 **UI component**
 
 The API of this component is specified in UI package.
@@ -134,16 +133,19 @@ message.
 #### Adding food record
 
 ![](UmlDiagrams/AddFood.png)
-
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
 object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
 user, followed by success message.
 
 #### Adding strength exercise
 
-*
-
 ![](UmlDiagrams/AddStrengthExercise.png)
+
+The addStrengthExercise method is being called to add strength exercise. First, validateAddStrengthExerciseCommand is
+called by addStrengthExercise to validate the correctness of the input for add strength. Then,
+executeAddStrengthExercise will be called to create a strength exercise, add to the exercise list, mark it done if it
+being marked as done during loading. Then, the exercise is converted to string and display to the user, followed by the
+success add message.
 
 ### Mark Feature
 
