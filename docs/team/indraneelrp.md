@@ -11,15 +11,13 @@ Given below are my contributions to the project:
   * What it does: This feature handles the overall run of duke. 
   * Justification: The overall executor needs to handle the set-up actions such as the creating of a file and
   reading in saved data, and then executing the main funtions of the program.
-  * Highlights: The OOP model has been well-followed to make the structure of the program simple and intuitive. The
-  driver code was written such that the instantiation of the Duke object instantiates the various helper classes (Parser, storage, Ui, ReviewList), allowing the smaller details to be abstracted away, resulting in clean, concise and readable
-  driver code.
+  * Highlights: The OOP model has been well-followed to make the structure of the program simple and intuitive. The driver code was written such that the instantiation of the Duke object instantiates the various helper classes (Parser, storage, Ui, ReviewList), allowing their implementation to be abstracted away, resulting in clean, concise and readable code.
 
 * **New Feature**: Parser
   * What it does: This feature resolves the user input into a command to execute.
   * Justification: The parser class is vital to the program, as it is responsible for proessing the user's string input
   and triggering the appropriate function. By having a Parser as a dedicated feature, the resolution of user input can be compartmentalised into a specific class, keeping the main code clean.
-  * Highlights: The parser first splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain the arguments for the particular command by further splitting user input. The final manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), keeping a separation of concerns.
+  * Highlights: The parser first splits the user's input string into the various words. This resolves the first word of a command, triggering the specific execute function via a switch-case block. Respective functions, where needed, obtain the arguments for a particular command by further splitting user input. The final manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), keeping a separation of concerns.
 
 * **New Feature**: Storage
   * What it does: This feature ensures the user's information can be saved into local storage and retrieved
@@ -57,5 +55,4 @@ Given below are my contributions to the project:
     * Added implementation details for them.
 
 * **Community**:
-  * PRs reviewed:
-    * [tP #W12](https://github.com/AY2223S1-CS2113-W12-1/tp), [iP #39](https://github.com/nus-cs2113-AY2223S1/ip/pull/39/files), [iP #26](https://github.com/nus-cs2113-AY2223S1/ip/pull/26), [PED bugs](https://github.com/indraneelrp/ped/issues)
+  * PRs reviewed and bugs found: [tP #W12](https://github.com/AY2223S1-CS2113-W12-1/tp), [iP #39](https://github.com/nus-cs2113-AY2223S1/ip/pull/39/files), [iP #26](https://github.com/nus-cs2113-AY2223S1/ip/pull/26), [PED bugs](https://github.com/indraneelrp/ped/issues)
