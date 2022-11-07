@@ -17,6 +17,7 @@ Given below are my contributions to the project.
       3. Removes the need to check for mismatch address and unit type of property (e.g. Unit type is HDB flats but address does not have unit level/number).
     - Challenges: Extensive research was conducted on all possible Singapore address format as well as existing types of housing (unit type of property) approved by the Singapore government for rental. It was challenging to convert the large amount of research information into working algorithms in the application. This is especially true when considering all possible variations of Singapore address format. 
 
+<div style="page-break-after: always;"></div>
 
 -  **New feature**: Added the ability to add new client (Person who wants to rent property)
     - What it does: Adds a new client to client list along with Singapore contact number and basic email validation.
@@ -34,16 +35,18 @@ Given below are my contributions to the project.
 
 
 - **Enhancement to existing features**:
-    - Added testing for add features (To be implemented)
+    - Added testing for add features
 
 
 - **Documentation**:
     - User Guide:
-      * Added comprehensive guide for features `add -client` and `add -property` [#134](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/134)
+      * Added comprehensive guide for features `add -client` and `add -property` [#134](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/134), [#258](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/258)
 
     - Developer Guide:
         * Added comprehensive explanation for the implementation of add features [#107](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/107)
         * Added class and sequence diagrams for add features [#222](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/222)
+        * Added manual testing instructions for add client and property [#268](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/268)
+        * Added glossary [#270](https://github.com/AY2223S1-CS2113-F11-1/tp/pull/270)
 
 
 - **Community**:

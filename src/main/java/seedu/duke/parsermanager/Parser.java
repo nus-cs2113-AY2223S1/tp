@@ -2,7 +2,6 @@ package seedu.duke.parsermanager;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
-import seedu.duke.exception.EmptyDetailException;
 import seedu.duke.exception.NotIntegerException;
 
 import java.util.ArrayList;
@@ -14,20 +13,6 @@ public abstract class Parser {
     protected static final int FLAG_ABSENT_RETURN_VALUE = -1;
 
     public abstract Command parseCommand() throws DukeException;
-
-    /**
-     *  Will be removed after everyone has created local checkForEmptyDetails method
-     *  (e.g. checkForDeleteClientDetails, checkForPairDetails, etc)
-     *  Local method will call common method isEmptyString() (below) and throw local exceptions
-     *  (e.g. EmptyDeleteClientDetailException, EmptyPairDetailException, etc)
-     */
-
-    protected void checkForEmptyDetails(String commandDetail) throws EmptyDetailException {
-        boolean isEmptyDetail = isEmptyString(commandDetail);
-        if (isEmptyDetail) {
-            throw new EmptyDetailException(EXCEPTION);
-        }
-    }
 
     public boolean isEmptyString(String commandDetail) {
         return commandDetail.trim().isEmpty();
