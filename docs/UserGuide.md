@@ -11,6 +11,7 @@
     * [Add a flight detail: `flight add`](#add-a-flight-detail-flight-add)
     * [Delete a flight detail: `flight delete`](#delete-a-flight-detail-flight-delete)
     * [Delay a flight: `delay`](#delay-a-flight-delay)
+    * [Modify flight attributes: `modify`](#modify-flight-attributes-modify)
     * [Display flight detail logbook: `flight list`](#display-flight-detail-logbook-flight-list)
     * [Command Summary](#command-summary)
 * [Frequently Asked Questions](#frequently-asked-questions)
