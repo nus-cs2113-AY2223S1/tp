@@ -1,8 +1,8 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
 import seedu.duke.records.Record;
@@ -19,17 +19,14 @@ import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.AllRecordsTable;
 import seedu.duke.ui.CaloriesTable;
-import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.Ui;
-
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-
-import static seedu.duke.logic.command.FindCommand.CALORIES_NOT_FOUND;
 
 public class ViewCommand extends Command {
 
@@ -137,8 +134,8 @@ public class ViewCommand extends Command {
 
     /**
      * To view the calories entries of the users based on dates.
-     * @param argumentList an array of inputs from the user
      *
+     * @param argumentList an array of inputs from the user
      * @throws IllegalValueException biometrics are not set or if date is invalid
      */
     private void viewCalories(String[] argumentList) throws IllegalValueException {
@@ -158,7 +155,7 @@ public class ViewCommand extends Command {
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
         calculator.setIdealMaintenanceCalories();
-        calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
+        calculator.setBmi(biometrics.getWeight(), biometrics.getHeight());
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
         ArrayList<Food> foodArrayList = foodList.getFoodList();
@@ -218,7 +215,7 @@ public class ViewCommand extends Command {
         } else {
             CaloriesTable tableFrame = new CaloriesTable(
                     foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, caloriesList,
-                CALORIES_FOUND + caloriesList.size());
+                    CALORIES_FOUND + caloriesList.size());
             ArrayList<String> table = tableFrame.getCaloriesTable();
             ui.printTable(table);
         }
@@ -226,7 +223,6 @@ public class ViewCommand extends Command {
 
     /**
      * To view maintenance calories of the user and thus corresponding activity status.
-     *
      */
     private void viewMaintenanceCalories() {
 
@@ -258,14 +254,13 @@ public class ViewCommand extends Command {
      * Prints out all food records from the record list in a table.
      *
      * @param argumentList a string array storing the user's input
-     *
      * @throws IllegalValueException if viewing all records fails.
      */
     private void viewAll(String[] argumentList) throws IllegalValueException {
         handleInvalidViewAllCommand(argumentList);
         AllRecordsTable tableFrame = new AllRecordsTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-            ALL_RECORDS_TABLE_CAPTION + recordArrayList.size());
+                ALL_RECORDS_TABLE_CAPTION + recordArrayList.size());
         ArrayList<String> table = tableFrame.getAllRecordsTable();
         ui.printTable(table);
     }
@@ -284,14 +279,13 @@ public class ViewCommand extends Command {
      * Prints out all food records from the food list in a table.
      *
      * @param argumentList a string array storing the user's input
-     *
      * @throws IllegalValueException if viewing food records fails.
      */
     private void viewFood(String[] argumentList) throws IllegalValueException {
         handleInvalidViewFoodCommand(argumentList);
         FoodTable tableFrame = new FoodTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-            FOOD_TABLE_CAPTION + foodArrayList.size());
+                FOOD_TABLE_CAPTION + foodArrayList.size());
         ArrayList<String> table = tableFrame.getFoodTable();
         ui.printTable(table);
     }
@@ -300,7 +294,6 @@ public class ViewCommand extends Command {
      * Checks if the view food command is parsed in correctly.
      *
      * @param argumentList a string array storing the user's input
-     *
      * @throws IllegalValueException if the argumentList is not of correct length
      */
     private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
@@ -313,7 +306,6 @@ public class ViewCommand extends Command {
      * Checks if the view all command is parsed in correctly.
      *
      * @param argumentList a string array storing the user's input
-     *
      * @throws IllegalValueException if the argumentList is not of correct length
      */
     private static void handleInvalidViewAllCommand(String[] argumentList) throws IllegalValueException {
@@ -324,6 +316,7 @@ public class ViewCommand extends Command {
 
     /**
      * To handle an invalid view command.
+     *
      * @throws IllegalValueException invalid view calories command if the calories input is not 1.
      */
     private static void handleInvalidViewCaloriesCommand(String[] argumentList) throws IllegalValueException {
@@ -332,6 +325,13 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * Views strength exercise.
+     *
+     * @param argumentList Input for the command
+     * @param slashesCount Number of slashes for the command
+     * @throws IllegalValueException If the command is invalid
+     */
     private void viewStrengthExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
@@ -342,6 +342,12 @@ public class ViewCommand extends Command {
         ui.printTable(exerciseTable.getExerciseTable());
     }
 
+    /**
+     * Gets the strength exercise list by command type.
+     *
+     * @param argumentList Input for the command
+     * @return ArrayList of exercise
+     */
     private ArrayList<Exercise> getStrengthExerciseArrayListByCommand(String[] argumentList) {
         if (isViewingCurrentList(argumentList)) {
             return (ArrayList<Exercise>) exerciseList.getCurrentExerciseList()
@@ -351,6 +357,13 @@ public class ViewCommand extends Command {
                 .stream().filter(StrengthExercise.class::isInstance).collect(Collectors.toList());
     }
 
+    /**
+     * Displays the exercise.
+     *
+     * @param argumentList Inputs for the command
+     * @param slashesCount Number of slashes
+     * @throws IllegalValueException If the command is invalid
+     */
     private void viewCardioExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> cardioExerciseArrayList = getCardioExerciseArrayListByCommand(argumentList);
@@ -369,7 +382,13 @@ public class ViewCommand extends Command {
                 .stream().filter(CardioExercise.class::isInstance).collect(Collectors.toList());
     }
 
-
+    /**
+     * Displays all the exercise.
+     *
+     * @param argumentList Input for the command
+     * @param slashesCount Number of slashes in the command
+     * @throws IllegalValueException If the command is invalid
+     */
     private void viewExercise(String[] argumentList, int slashesCount) throws IllegalValueException {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
@@ -380,6 +399,15 @@ public class ViewCommand extends Command {
         ui.printTable(table);
 
     }
+
+    /**
+     * Gets the caption for the exercise.
+     *
+     * @param size         Size of the array list
+     * @param argumentList Input for the command
+     * @param caption      Caption for each command
+     * @return Caption to be displayed
+     */
 
     private String getExerciseListCaption(int size, String[] argumentList, String caption) {
         if (isViewingCurrentList(argumentList)) {

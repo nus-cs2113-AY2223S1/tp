@@ -41,8 +41,8 @@ Given below is an overview of main components and how they interact with each ot
 
 * Stores the exception classes for the app.
 
-
 ### Logic component
+
 Here's a class diagram of the logic component.
 ![Logic.png](UmlDiagrams/Logic.png)
 
@@ -88,7 +88,6 @@ data continues to load.
 Data is saved by calling the save methods for the different data types, which return Strings in the same format
 as the user input.
 
-
 **UI component**
 
 The API of this component is specified in UI package.
@@ -98,12 +97,11 @@ The API of this component is specified in UI package.
 The UI consists of a TableFrame.
 Parts such as FoodTable, ExerciseTable, CaloriesTable, AllRecordsTable inherit from the TableFrame class.
 
-
 The UI component,
+
 * executes user commands from the logic component.
 * listens for changes to records data so that the UI can be updated with the modified data.
 * keeps a reference to the logic component, because the UI relies on the logic to execute commands.
-
 
 ## Implementation
 
@@ -137,8 +135,13 @@ be converted to string, and prints with a success message to inform the user.
 
 ![](UmlDiagrams/AddFood.png)
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
+<<<<<<< HEAD
+object is being created. Food is then added to the FoodList. If is display,food is converted to string and output to
+user, followed by success message.
+=======
 object is being created. Food is then added to the FoodList. If display is set to true, food is converted to string and
 prints with a success message to inform the user.
+>>>>>>> master
 
 #### Adding strength exercise
 
@@ -192,29 +195,35 @@ Component.
 
 The interactions for finding other types of records are similar.
 
+<<<<<<< HEAD
+=======
+
 ### View Feature
 
-There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
-The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view command
-The following sequence diagram shows how the view operation works:
+> > > > > > > master
+> > > > > > > There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
+> > > > > > > The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view
+> > > > > > > command
+> > > > > > > The following sequence diagram shows how the view operation works:
 
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
-
 The following sequence diagram shows how the view operation works after `view biometrics` is executed.
 
-The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be displayed.
+The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be
+displayed.
 
 Viewing biometrics
 
 ![](UmlDiagrams/ViewBiometrics.png)
 
-
 The following sequence diagram shows how the view operation works after `view calories` is executed.
 
-The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be displayed.
-The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the CompletedExerciseList and
+The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be
+displayed.
+The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the
+CompletedExerciseList and
 the net calories can then be calculated from the two, according to a date.
 
 These values are stored in a Calories object and output by a CaloriesList by calling ui.
@@ -225,12 +234,14 @@ Viewing calories
 
 The following sequence diagram shows how the view operation works after `view all` is executed.
 
-Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from RecordList and these data are output by outputAllRecords.
+Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from
+RecordList and these data are output by outputAllRecords.
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
 
-### Removing records  
+### Removing records
+
 The sequence diagrams below represent the interactions when a user removes a record.  
 ![](UmlDiagrams/Remove.png)  
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
@@ -264,25 +275,27 @@ to better understand their journey and progress towards their fitness goals.
 
 ## User Stories
 
-
-| Version | As a ...         | I want to ...                                | So that I can ...                                      |
-|---------|------------------|----------------------------------------------|--------------------------------------------------------|
-| v1.0    | new user         | see usage instructions                       | refer to them when I forget how to use the application |
-| v1.0    | user             | add my food consumption                      | to keep track of my food consumptions over time        |
-| v1.0    | user             | view my food consumption                     | to see my record of food consumptions                  |
-| v1.0    | new user         | add any exercises                            | can keep track of all my exercises to be done          |
-| v1.0    | long term user   | view my remaining exercises                  | so that I can know what are the exercise to be done.   |
-| v1.0    | long term user   | view my completed exercises                  | so that I can plan for the next workout                |
-| v2.0    | user             | have my records saved                        | see my past records                                    |
-| v2.0    | long term user   | record my weight and fat over time           | see how I am progressing in my fitness journey         |
-| v2.0    | long term user   | find certain food consumption                | to see my consumption of certain food over time        |
-| v2.0    | user             | remove a record                              | rectify incorrect entries                              |
-| v2.0    | long term user   | have my records displayed by descending date | see the most relevant records easily                   |
-| v2.0    | new user         | set my biometrics                            | receive personalised recommendations                   |
-| v2.1    | fitness beginner | receive calorie recommendations              | set a target to hit every day                          |
-| v2.1    | long term user   | check my overall calorie usage               | monitor my daily calorie intake and burn over time     |
-| v2.1    | user             | find my calorie usage by date                | monitor my overall calorie usage on a certain date     |
-
+| Version | As a ...              | I want to ...                                                                       | So that I can ...                                                  |
+|---------|-----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| v1.0    | new user              | see usage instructions                                                              | refer to them when I forget how to use the application             |
+| v1.0    | user                  | add my food consumption                                                             | to keep track of my food consumptions over time                    |
+| v1.0    | user                  | view my food consumption                                                            | to see my record of food consumptions                              |
+| v1.0    | new user              | add any exercises                                                                   | can keep track of all my exercises to be done                      |
+| v1.0    | long term user        | mark my exercise done                                                               | so that I track my progress over time.                             |
+| v1.0    | long term user        | view my remaining exercises                                                         | so that I can know what are the exercise to be done.               |
+| v1.0    | long term user        | view my completed exercises                                                         | so that I can plan for the next workout                            |
+| v2.0    | user                  | have my records saved                                                               | see my past records                                                |
+| v2.0    | long term user        | record my weight and fat over time                                                  | see how I am progressing in my fitness journey                     |
+| v2.0    | long term user        | find certain food consumption                                                       | to see my consumption of certain food over time                    |
+| v2.0    | user                  | remove a record                                                                     | rectify incorrect entries                                          |
+| v2.0    | long term user        | have my records displayed by descending date                                        | see the most relevant records easily                               |
+| v2.0    | new user              | set my biometrics                                                                   | receive personalised recommendations                               |
+| v2.0    | gym user              | record weight, set and reps for the exercise                                        | so that I reference the intensity for next work out                |
+| v2.0    | fitness enthusiastic  | estimate my calories for the workout based the time and intensity of the workout    | so that I can use it to estimate calories intake based on my goals |
+| v2.0    | long term user        | find strength exercise based on the name                                            | so that I can view my progress for that exercise over time         |
+| v2.1    | fitness beginner      | receive calorie recommendations                                                     | set a target to hit every day                                      |
+| v2.1    | long term user        | check my overall calorie usage                                                      | monitor my daily calorie intake and burn over time                 |
+| v2.1    | user                  | find my calorie usage by date                                                       | monitor my overall calorie usage on a certain date                 |
 
 ## Non-Functional Requirements
 
@@ -298,15 +311,16 @@ to better understand their journey and progress towards their fitness goals.
 * *fat* - fat and fat percentage are used interchangeably to improve consistency in variable names
 
 ## Instructions for manual testing
+
 Given below are instructions to test the app manually. Please utilize these instructions as a starting point for your
 testing.
 
 ### Launch and Shutdown
 
 * Initial launch
-  * Download the jar file and copy into an empty folder
-  * Open your terminal and redirect it to the folder that you previously downloaded the jar file into
-  * Please type in "java -jar tp.jar" and press "Enter" to run the file. (Expected: A data.txt file will be created).
+    * Download the jar file and copy into an empty folder
+    * Open your terminal and redirect it to the folder that you previously downloaded the jar file into
+    * Please type in "java -jar tp.jar" and press "Enter" to run the file. (Expected: A data.txt file will be created).
 
 Saving window preferences
 
@@ -315,9 +329,8 @@ Resize the window to an optimum size. Move the window to a different location. C
 Re-launch the app by double-clicking the jar file.
 Expected: The most recent window size and location is retained.
 
-{ more test cases …​ }
-
 ### Adding a food record
+
 Adding a food record
 
 Test case: `add food /ice cream /300`
@@ -328,12 +341,40 @@ Test case: `add food /dummy /dummy`
 
 Expected: No food is added. Error details shown in the status message.
 
-Other incorrect remove commands to try: `add food`, `add food /x`, `...` (where x is larger than the 10000)
+Other incorrect add food commands to try: `add food`, `add food /x`, `...` (where x is larger than the 10000)
 Expected: Similar to previous.
 
-{ more test cases …​ }
+### Adding a strength exercise
+
+Adding a strength exercise
+
+Test case: `add strength /press /5 /5 /5 /01-11-2022`
+
+Expected: press is added to the exercise list. Details of the added exercise are shown in the status message.
+
+Test case: `add strength / /5 /dummy /5 /01-11-2022`
+
+Expected: No strength exercise is added. Error message shown in the status message
+
+### Mark exercise
+
+Mark exercise in the exercise list as done or done.
+
+Prerequisites:
+List all exercises using the view exercise command for mark done.
+List all completed exercises using the view exercise /done command
+Ensure index is not out of range for each exercise list.
+
+Test case: `mark done /1`
+
+Expected: First exercise in the current exercise is mark as done
+
+Test case: `mark undone /1`
+
+Expected: First exercise in the completed exercise is mark as undone
 
 ### Removing an exercise record
+
 Removing an exercise record while all exercise records are being shown
 
 Prerequisites: List all exercises using the view exercise command. Multiple exercises in the list.
@@ -349,8 +390,13 @@ Expected: No exercise is deleted. Error details shown in the status message.
 Other incorrect remove commands to try: `remove exercise`, `remove exercise /x`, `...` (where x is less than 0)
 Expected: Similar to previous.
 
-{ more test cases …​ }
+### Saving data
 
-Saving data
-Dealing with missing/corrupted data files
+Data will be saved ./data.txt after exiting the programme
 
+### Dealing with missing/corrupted data files
+
+Delete the ./data.txt file for corrupted data and restart the programme.
+
+
+  
