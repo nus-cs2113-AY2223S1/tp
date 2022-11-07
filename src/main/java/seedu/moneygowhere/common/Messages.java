@@ -903,7 +903,13 @@ public class Messages {
             + " "
             + ConsoleParserConfigurations
             .COMMAND_PAY_RECURRING_PAYMENT_ARG_RECURRING_PAYMENT_INDEX_LONG
-            .toUpperCase();
+            .toUpperCase()
+            + " [-"
+            + ConsoleParserConfigurations
+            .COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME
+            + " "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + "]";
     public static final String CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_SYNTAX = ""
             + "SYNTAX: "
             + CONSOLE_COMMAND_PAY_RECURRING_PAYMENT_FORMAT;

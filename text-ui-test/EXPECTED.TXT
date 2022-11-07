@@ -26,7 +26,7 @@ Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t 
 View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
 Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
 Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]
-Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
+Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX [-d dd/MM/yyyy HHmm]
 
 ---- INCOME RELATED COMMANDS ----
 Add an income: Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
