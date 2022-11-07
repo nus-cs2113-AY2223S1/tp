@@ -18,7 +18,7 @@ end box
 activate AddCommand
 group sd AddWeightAndFat
     AddCommand -> AddCommand++: addWeightAndFat(argumentList: String[])
-    alt date provided
+    opt date provided
         AddCommand -> Parser++: parseDate(date: String)
         return date: LocalDate
     end
