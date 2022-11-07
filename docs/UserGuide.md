@@ -971,8 +971,6 @@ The recurring payment was added as an expense successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Adding an income: `Add-Income`
 Adds a new income to the list of incomes.
 
