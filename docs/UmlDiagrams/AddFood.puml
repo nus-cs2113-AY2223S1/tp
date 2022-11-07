@@ -15,7 +15,6 @@ participant ":FoodList" as FoodList RECORD_COLOR
 participant ":Food" as food RECORD_COLOR
 end box
 
-
 group sd addFood
 activate addCommand
     addCommand -> addCommand: addFood(argumentList: String[], argumentsCount: int)
