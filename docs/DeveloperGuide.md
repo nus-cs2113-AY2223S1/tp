@@ -622,8 +622,7 @@ the list first before being able to add a passenger of the existing flight numbe
     as he/she is not found in the passenger list or his/her
     detail have been input incorrectly.
    ```  
-<div style="page-break-after: always;"></div>  
-
+   
 ### Automated setting for boarding time
 
 - Automated boarding time of 45minutes earlier than departure time placement
