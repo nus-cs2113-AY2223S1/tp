@@ -621,7 +621,7 @@ the list first before being able to add a passenger of the existing flight numbe
     The system is unable to delete the specified passenger
     as he/she is not found in the passenger list or his/her
     detail have been input incorrectly.
-   ```  
+   ```
    
 ### Automated setting for boarding time
 
