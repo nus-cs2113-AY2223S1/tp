@@ -128,19 +128,17 @@ be called.
 
 ![](UmlDiagrams/AddWeightAndFat.png)
 
-When the add command type is WeightAndFat, AddWeightAndFat method will be called. Date will be initialised to current
-date.If date is provided in the input, parseDate method in Parser will be called
-and update the date parameter.
-*WeightAndFat object will then be created and added to the WeightAndFatList If is display to the user,weightAndFat will
-be converted to string, print to the user and then follow by success
-message.
+When the add command type is WeightAndFat, addWeightAndFat method will be called. If date is provided in the input, 
+parseDate method in Parser will be called, otherwise date is initialised to current date.
+WeightAndFat object will then be created and added to the WeightAndFatList. If display is set to true, weightAndFat will
+be converted to string, and prints with a success message to inform the user.
 
 #### Adding food record
 
 ![](UmlDiagrams/AddFood.png)
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
-object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
-user, followed by success message.
+object is being created. Food is then added to the FoodList. If display is set to true, food is converted to string and
+prints with a success message to inform the user.
 
 #### Adding strength exercise
 
@@ -237,7 +235,7 @@ The sequence diagrams below represent the interactions when a user removes a rec
 ![](UmlDiagrams/Remove.png)  
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
-removeCommand to be printed on the ui.
+removeCommand to be printed on the ui.  
 ![](UmlDiagrams/RemoveWeight.png)  
 The interactions for removing other types of records are similar.
 
