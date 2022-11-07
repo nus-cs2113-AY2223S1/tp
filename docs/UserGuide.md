@@ -395,8 +395,6 @@ Merging a file: Merge-File -p PATH-STRING
 <br>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ## Managing your expenses
 
 ### Sub-Contents
@@ -545,8 +543,6 @@ Mode of Payment : Card
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting an expense: `Delete-Expense`
 Deletes an expense from the list of expenses.
@@ -874,8 +870,6 @@ The recurring payment was deleted successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Editing a recurring payment: `Edit-RecurringPayment`
 Edits a recurring payment in the list of recurring payments.
 
@@ -926,8 +920,6 @@ The recurring payment was edited successfully.
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Paying a recurring payment: `Pay-RecurringPayment`
 Adds an expense based on an existing recurring payment.
@@ -1366,8 +1358,6 @@ Example of usage:
 
 <br>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ## Exiting the application: `Bye`
 
