@@ -322,15 +322,16 @@ The value proposition of the product lies in its ability to aid the management a
 
 ### 6. User Stories
 
-| Version | As a ...     | I want to ...                                                  | So that I can ...                                             |
-|---------|--------------|----------------------------------------------------------------|---------------------------------------------------------------|
-| v1.0    | NUS Student  | See all the timings of the tutorials/lectures I am involved in | Plan my work schedule conveniently                            |
-| v1.0    | NUS Student  | View the details of any module                                 | Get an overview of what the module is about                   |
-| v1.0    | NUS Student  | Keep track of the modules I want to take                       | Better plan out my schedule                                   |
-| v1.0    | NUS Student  | Remove the modules I do not wish to take                       | Keep only the modules that I am interested in                 |
-| v1.0    | NUS Student  | Plan my schedule for the semester                              | Better prepare myself for the semester                        |
-| v1.0    | NUS Student  | Preserve my timetable information across program runs          | Plan my timetable once and never have to worry about it again |
-| v2.0    | user         | find a to-do item by name                                      | locate a to-do without having to go through the entire list   |
+| Version | As a ...    | I want to ...                                                  | So that I can ...                                             |
+|---------|-------------|----------------------------------------------------------------|---------------------------------------------------------------|
+| v1.0    | NUS Student | See all the timings of the tutorials/lectures I am involved in | Plan my work schedule conveniently                            |
+| v1.0    | NUS Student | View the details of any module                                 | Get an overview of what the module is about                   |
+| v1.0    | NUS Student | Keep track of the modules I want to take                       | Better plan out my schedule                                   |
+| v1.0    | NUS Student | Remove the modules I do not wish to take                       | Keep only the modules that I am interested in                 |
+| v1.0    | NUS Student | Plan my schedule for the semester                              | Better prepare myself for the semester                        |
+| v1.0    | NUS Student | Preserve my timetable information across program runs          | Plan my timetable once and never have to worry about it again |
+| v2.0    | NUS Student | Have a visual display of my timetable                          | Can better visualise my schedule                              |
+| v2.0    | NUS Student | Have someone plan my schedule for me                           | Avoid the hassle of planning my schedule                      |
 
 ### 7. Non-Functional Requirements
 
