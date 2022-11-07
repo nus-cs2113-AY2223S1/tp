@@ -33,12 +33,12 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the features add, remove, find and view food, and view all.
     * Developer Guide:
-        * Explained the food component through class diagrams.
-        * Added details of add food and view all features through sequence diagrams.
+        * Added a class diagram for logic component
+        * Added sequence diagram for find and mark feature
+        * Added user stories for add, find, remove and view food
 
 * **Review/mentoring contributions**:
   * Provided non-trivial review comments and helped debug on their features.
-
 
 * **Contributions to team-based tasks**:
     * Equal share of workflow processes on GitHub (review PRs, creating issues)
