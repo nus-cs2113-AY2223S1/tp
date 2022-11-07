@@ -402,7 +402,7 @@ Another problem we found is that LTA does not do its own data validation. Thus, 
 carparks having a negative number of available lots. This is a big problem as from the user's perspective
 it may be seen that our program is at fault. 
 
-Due to such bug discoveries, we made our `carparkList` parser much more robust, and it now does data
+Due to such bug discoveries, we made our `CarparkList` parser much more robust, and it now does data
 validation internally to ensure no such data is presented to the user.
 
 ### 3.4 Updating CarparkList with JSON file from API 
