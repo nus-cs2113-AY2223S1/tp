@@ -11,9 +11,11 @@ public class CardioExercise extends Exercise {
     }
 
 
+
     public double getDistance() {
         return distance;
     }
+
 
     @Override
     public String saveExercise() {

@@ -15,13 +15,13 @@ participant ":FoodList" as FoodList RECORD_COLOR
 participant ":Food" as food RECORD_COLOR
 end box
 
-
 group sd addFood
 activate addCommand
     addCommand -> addCommand: addFood(argumentList: String[], argumentsCount: int)
-    addCommand -> food **: new(foodDescription: String, calories: int, date: LocalDate)
-    addCommand -> FoodList: addFood(food: Food)
+    create food
+    addCommand -> food : new(foodDescription: String, calories: int, date: LocalDate)
     return food: Food
+    addCommand -> FoodList: addFood(food: Food)
     opt display
         addCommand -> food: toString()
         return foodString: String

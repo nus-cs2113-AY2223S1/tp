@@ -1,0 +1,34 @@
+
+
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor UI_COLOR
+skinparam classBackgroundColor UI_COLOR
+
+package UI <<Rectangle>>{
+Class Ui
+Class TableFrame
+Class FoodTable
+Class ExerciseTable
+Class CaloriesTable
+Class AllRecordsTable
+}
+
+package records <<Rectangle>> {
+}
+
+package logic <<Rectangle>> {
+}
+
+Ui .down.> TableFrame
+
+TableFrame .right.> records
+Ui <-up- logic
+
+CaloriesTable -up-|> TableFrame
+FoodTable -up-|> TableFrame
+ExerciseTable -up-|> TableFrame
+AllRecordsTable -up-|> TableFrame
+
+@enduml

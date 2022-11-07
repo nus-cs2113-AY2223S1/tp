@@ -1,11 +1,16 @@
 @startuml
+!include style.puml
 'https://plantuml.com/sequence-diagram
 
-autoactivate on
+autoActivate on
 
 'Duke -> ui: input()
 'User --> ui: user input
 'Duke <-- ui: user input
+box Logic LOGIC_COLOR_T1
+participant ":ViewCommand" as viewCommand LOGIC_COLOR
+participant "<<class>>\nParser" as parser LOGIC_COLOR
+end box
 
 -> viewCommand: execute()
 viewCommand -> parser: getArgumentList(arguments: String)
@@ -35,5 +40,8 @@ else all
 else invalid viewType
 
 end
+return
+
+destroy viewCommand
 
 @enduml

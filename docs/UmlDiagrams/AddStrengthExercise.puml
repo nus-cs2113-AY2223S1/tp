@@ -2,13 +2,49 @@
 'https://plantuml.com/sequence-diagram
 
 !include style.puml
+autoactivate on
+
 box Logic LOGIC_COLOR_T1
 participant ":AddCommand" as addCommand LOGIC_COLOR
 end box
 box Record RECORD_COLOR_T1
-participant ":ExerciseList" as WeightAndFatList RECORD_COLOR
-participant ":Exercise" as WeightAndFat RECORD_COLOR
+participant ":ExerciseList" as exerciseList RECORD_COLOR
+participant ":Exercise" as exercise RECORD_COLOR
+end box
+box Ui UI_COLOR_T1
+participant ":Ui" as Ui UI_COLOR
 end box
 
+group sd addStrength
+activate addCommand
+addCommand -> addCommand++:addStrengthExercise(argumentList: String[], slashesCount: int)
+addCommand -> addCommand++:validateAddStrengthExerciseCommand(argumentList: String[], slashesCount: int)
+return
+addCommand -> addCommand++:executeAddStrengthExercise(argumentList: String[])
+addCommand -> addCommand++:createStrengthExercise((argumentList: String[])
+create exercise
+addCommand -> exercise : new(description: string, weight: int, set: int, repetition:int , date: LocalDate)
+return exercise: Exercise
+return exercise: Exercise
+addCommand -> exerciseList++ : addExercise(exercise: Exercise)
+return
+addCommand -> addCommand:markDoneForLoading((argumentList: String[])
+opt mark done
+addCommand -> exerciseList:markDone(index: int, time: double, calories: int)
+return
+end
+return
+addCommand -> addCommand:outputAddingMessage(exercise: Exercise)
+opt to display
+addCommand -> exercise:toString()
+return exerciseString: string
+addCommand -> Ui:output(exerciseString: string)
+return
+addCommand -> Ui:output(ADD_STRENGTH_SUCCESS_MESSAGE: string)
+return
+end
+return
+return
+return
 
 @enduml
