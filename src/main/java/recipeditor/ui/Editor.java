@@ -128,6 +128,7 @@ public class Editor extends JFrame implements ActionListener {
      */
     public boolean enterEditor(String path) throws FileNotFoundException {
         Ui.showMessage("Please edit in the GUI editor!");
+        logger.setLevel(Level.WARNING);
         try {
             loadFileToTextArea(path);
             waitForChangeOfState();
