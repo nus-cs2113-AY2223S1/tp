@@ -5,7 +5,6 @@ skinparam classAttributeIconSize 0
 class BuildManager {
     -builds: HashMap<String, Build>
 
-    +BuildManager()
     +addBuild(): void
     +deleteBuild(): void
     +getBuild(): Build

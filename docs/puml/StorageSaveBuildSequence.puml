@@ -2,9 +2,9 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
-Participant "Ui" as Ui #Aqua
-Participant "Parser" as parser #AquaMarine
-Participant "Storage" as Storage #Yellow
+Participant ":Ui" as Ui #Aqua
+Participant ":Parser" as parser #AquaMarine
+Participant ":Storage" as Storage #Yellow
 
 activate Ui #Aqua
 Ui -> Ui: readline()
@@ -37,7 +37,7 @@ end
 return
 return
 
-deactivate Ui
+return
 
 
 

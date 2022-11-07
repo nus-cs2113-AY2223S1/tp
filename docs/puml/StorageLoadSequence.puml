@@ -4,14 +4,14 @@
 autonumber
 
 Actor User
-Participant "ComputerComponentChooser" as ComputerComponentChooser #AquaMarine
-Participant "Storage" as Storage #Orange
-Participant "BuildManager" as BuildManager #LightBlue
-Participant "DuplicateBuildException" as DuplicateBuildException #LightGreen
-Participant "FileNotFoundException" as FileNotFoundException #Yellow
-Participant "CPU" as CPU #Pink
-Participant "GPU" as GPU #red
-Participant "Motherboard" as Motherboard #Brown
+Participant ":ComputerComponentChooser" as ComputerComponentChooser #AquaMarine
+Participant ":Storage" as Storage #Orange
+Participant ":BuildManager" as BuildManager #LightBlue
+Participant ":DuplicateBuildException" as DuplicateBuildException #LightGreen
+Participant ":FileNotFoundException" as FileNotFoundException #Yellow
+Participant ":CPU" as CPU #Pink
+Participant ":GPU" as GPU #red
+Participant ":Motherboard" as Motherboard #Brown
 
 activate ComputerComponentChooser #AquaMarine
 User -> ComputerComponentChooser: run()

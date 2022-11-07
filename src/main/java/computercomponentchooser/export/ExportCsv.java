@@ -17,12 +17,12 @@ public class ExportCsv implements Export {
     /**
      * The file directory that the files are stored in.
      */
-    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_DIRECTORY = "data/export";
 
     /**
      * The file name of the CSV file that contains the builds.
      */
-    private static String EXPORT_CSV_FILE_PATH = "data/exportAllBuildsCSV.csv";
+    private static String EXPORT_CSV_FILE_PATH = "data/export/exportAllBuildsCSV.csv";
 
     private final BuildManager buildManager;
 

@@ -6,6 +6,7 @@ import computercomponentchooser.exceptions.UnknownCommandException;
 import computercomponentchooser.exceptions.UnlistedBuildException;
 import computercomponentchooser.exceptions.NegativeNumberException;
 import computercomponentchooser.exceptions.InvalidBuildException;
+import computercomponentchooser.exceptions.NameSlashException;
 import computercomponentchooser.export.ExportCsv;
 import computercomponentchooser.export.ExportText;
 
@@ -120,13 +121,15 @@ public class Parser {
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException | DuplicateBuildException | UnlistedBuildException | IOException
-                 | NegativeNumberException | BlankStringException | InvalidBuildException e) {
+                 | NameSlashException | BlankStringException | InvalidBuildException e) {
             Ui.printLine();
             System.out.println(e.getMessage());
             Ui.printLine();
         } catch (NumberFormatException e) {
-            Ui.printLine();
             System.out.println("Please enter a valid number.");
+            Ui.printLine();
+        } catch (NegativeNumberException e) {
+            System.out.println(e.getMessage());
             Ui.printLine();
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printLine();
@@ -191,7 +194,7 @@ public class Parser {
      * @throws BlankStringException If the build name is blank.
      */
     private void mainParseAdd(String line) throws DuplicateBuildException, BlankStringException,
-            InvalidBuildException {
+            InvalidBuildException, NameSlashException {
         String name;
         name = getParameter(line, NAME_PARAMETER);
         if (name.isBlank()) {
@@ -199,6 +202,9 @@ public class Parser {
         }
         if (name.equalsIgnoreCase("AllSavedBuilds")) {
             throw new InvalidBuildException();
+        }
+        if (name.contains("/")) {
+            throw new NameSlashException();
         }
         Build newBuild = new Build(name);
         buildManager.addBuild(newBuild);
@@ -224,6 +230,11 @@ public class Parser {
         Ui.printLine();
         if (!buildManager.doesBuildExist(name)) {
             throw new UnlistedBuildException();
+        }
+        if (buildManager.getBuild(name).getAllComponents().size() == 0) {
+            System.out.println("You have no components in this build.");
+            Ui.printLine();
+            return;
         }
         System.out.print(buildManager.getBuild(name).toString());
         Ui.printLine();

@@ -17,13 +17,12 @@ public class ExportText implements Export {
     /**
      * The file directory that the files are stored in.
      */
-    private static final String FILE_DIRECTORY = "data";
+    private static final String FILE_DIRECTORY = "data/export";
 
     /**
      * The file name of the text file that contains all the builds.
      */
-    private static String EXPORT_TEXT_FILE_PATH = "data/exportAllBuildsText.txt";
-    private static String COMPONENT_FILE_PATH;
+    private static String EXPORT_TEXT_FILE_PATH = "data/export/exportAllBuildsText.txt";
 
     private final BuildManager buildManager;
 
@@ -55,7 +54,7 @@ public class ExportText implements Export {
         for (Build build : buildManager.getBuilds().values()) {
             fileWriter.write("____________________________________________________________\n");
             fileWriter.write("Info: \n" + build.getBuildInfo() + "\n");
-            fileWriter.write("Components list: \n" + build.toString());
+            fileWriter.write("Components list: \n" + build);
             fileWriter.write("____________________________________________________________");
         }
         fileWriter.close();
@@ -73,7 +72,7 @@ public class ExportText implements Export {
         if (!Files.exists(fileDirectory)) {
             Files.createDirectory(fileDirectory);
         }
-        String fileName = "data/export_" + build.getName() + ".txt";
+        String fileName = "data/export/export_" + build.getName() + ".txt";
         Path file = Paths.get(fileName);
         if (!Files.exists(file)) {
             Files.createFile(file);
@@ -81,7 +80,7 @@ public class ExportText implements Export {
         FileWriter fileWriter = new FileWriter(fileName);
         fileWriter.write("____________________________________________________________\n");
         fileWriter.write("Info: \n" + build.getBuildInfo() + "\n");
-        fileWriter.write("Components list: \n" + build.toString());
+        fileWriter.write("Components list: \n" + build);
         fileWriter.write("____________________________________________________________");
         fileWriter.close();
     }

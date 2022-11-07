@@ -44,13 +44,13 @@ Once the `main()` method of ComputerComponentChooser is called, instances for th
 
 ![](/images/BuildManager.png)
 
-The builds are managed by the `BuildManager` class. It contains a list of builds in a `HashMap`. The class also contains
+The builds are managed by the `BuildManager` class. It contains a list of builds in a `hashmap`. The class also contains
 methods to find and filter builds based on user requirements. The `BuildManager` class is a singleton class, meaning that
 there is only one instance of the class in the program. This is to ensure that there is only one list of builds in the
 program. 
 
-In our application, `BuildManager` is a class object that contains a HashMap of builds. The `HashMap` is used to store the
-builds in the program. The key of the `HashMap` is the name of the build, and the value is the build object.
+In our application, `BuildManager` is a class object that contains a hashmap of builds. The `hashmap` is used to store the
+builds in the program. The key of the `hashmap` is the name of the build, and the value is the build object.
 
 The `BuildManager` class is responsible for the following operations:
 - Add a build to the list of builds
@@ -96,7 +96,7 @@ The `mainParseList()` method will then print the list of builds. If you have no 
 telling you "You have no builds".
 
 The following sequence diagram shows how the list operation works:
-![](/images/BuildManagerListBuildSequence.png)
+![](/images/BuildManagerListSequence.png)
 
 ##### Finding Builds
 
@@ -112,7 +112,7 @@ If there are no builds that contain the search term, the method will print a mes
 meet specifications found."
 
 The following sequence diagram shows how the find operation works:
-![](/images/BuildManagerFindBuildSequence.png)
+![](/images/BuildManagerFindSequence.png)
 
 ##### Filtering Builds
 
@@ -227,7 +227,7 @@ In addition to the getters and setters for each of the class fields, the classes
 
   ![](/images/Storage.png)
 
-  Note: Some methods are being left out to show the core functionality of the storage class.
+  __Note__: Some methods are being left out to show the core functionality of the storage class.
 
   Storage is used for loading and saving the user's builds. The user can save their builds to a text file and load them 
   from a text file. 
@@ -254,7 +254,8 @@ In addition to the getters and setters for each of the class fields, the classes
   creates a `Build` object for each build name in the text file. If there are duplicate build names in the text file or the text file does not exist,
   respective error messages will be printed out. The `loadComponent()` method is called for each build name in the text file. The `loadComponent()` method
   reads the text file with the path `COMPONENT_FILE_PATH` and creates a `Component` object for each component in the text file. These `Component` objects
-  are then added to the `Build` object. If the text file does not exist, an error message will be printed out.
+  are then added to the `Build` object. If the text file does not exist, an error message will be printed out. The diagram only shows the loading of 3 
+  components, but the `loadComponent()` method works the same for the other components that are not mentioned.
 
 #### Save
 
@@ -272,7 +273,7 @@ In addition to the getters and setters for each of the class fields, the classes
   ![](images/StorageSaveComponentSequence.png)
 
   Similar to the saving of build, when the user adds a new component, it will be read by the `readline()` method, but it will be passed 
-  to the `parseAdd()` method in `EditParser` class instead. If the input parameters are empty or number of parameters that are being inputted exceed the required
+  to the `parseAdd()` method in `EditParser` class instead. If the input parameters are empty or number of parameters that are being inputted is less than the required
   number of parameters, `BlankStringException` and `ArrayIndexOutOfBoundException` will be thrown respectively. Otherwise, the `saveComponent()` method will be called.
   The `saveComponent()` method writes the components of the build into the text file with the path `COMPONENT_FILE_PATH`. 
   If the file directory does not exist, `createFileDirectory()` will be called to create the file directory.
@@ -284,14 +285,14 @@ In addition to the getters and setters for each of the class fields, the classes
 ### Export
 
 In our application export is a utility class. The user can export all builds or a specific build to a text file. The user can also export
-all builds to a CSV file. The exported files are stored in the `data` folder.
+all builds to a CSV file. The exported files are stored in the `data/export` folder.
 
 ![](/images/Export.png)
 
 As shown in the sequence diagram above, export is an interface that has two classes that implements it. The `ExportText`
 class and the `ExportCsv` class:
 
-+ `ExportText` class: This class has a `exportBuild()` method that takes in a `Build` object and export the information
++ `ExportText` class: This class has a `exportBuildText()` method that takes in a `Build` object and export the information
 and components of the build to a text file that is named after the build name prefixed with `build_`. The `exportAllBuildsText()`
 method takes in a `BuildManager` object and export the information and components list of all the builds in the `BuildManager` 
 object to a text file that is named `exportAllBuildsText.txt`.
@@ -326,7 +327,7 @@ from that version onwards.
  | v1.0    | user     | add a new build            | refer to when I want to track my build                      |
 | v1.0    | user     | list all builds            | get a list of all builds in one place                       |
 | v1.0    | user     | delete a build             | remove builds that I do not need anymore                    |
-| v2.0    | user     | find a to-do item by name  | locate a to-do without having to go through the entire list |
+| v2.0    | user     | find a build by name       | locate a build without having to go through the entire list |
 | v2.0    | user     | add a component to a build | refer to when I want to track a component in my build       |
 | v2.0    | user     | list all components        | get a list of all components of a build in one place        |
 | v2.0    | user     | delete a component         | remove components that I do need anymore                    |
@@ -335,7 +336,6 @@ from that version onwards.
 | v2.0    | user     | info                       | view the relevant information about a build                 | 
  | v2.0    | user     | export a build             | export a build to a text file                               |
  | v2.0    | user     | export a build             | export a build to a csv file                                |
- | v2.0    | user     | find a build               | locate a build without having to go through the entire list |
  | v2.0    | user     | filter builds              | find all builds that are within a certain price range       |
 | v2.0    | user     | filter builds              | find all builds that are within a certain power range       |
 | v2.0    | user     | filter builds              | find all builds that are compatible                         |
@@ -357,31 +357,31 @@ Product should work on any mainstream OS as long as it has Java 11 or above inst
 | motherboard | The main circuit board within a computer that the other components plug into to create a whole.        |
 | powersupply | A power supply is a hardware component that supplies power to the computer.                            |
 | case        | A case is a housing for the computer's components.                                                     |
-| cooler      | A cooler is a device that removes heat from a computer's components.                                   |
+| cooler      | A cooler is a device that removes heat from the cpu.                                                   |
 | monitor     | A monitor is a display device that is used to display information.                                     |
 | other       | Any other components that are not currently represented in the application. <br/> E.g. Keyboard, Mouse |
 
 #### PC parts parameters
 
-| Parameter      | Examples                                                        |
-|----------------|-----------------------------------------------------------------|
-| Name           | Name of the component <br/> E.g. `Intel 10990x`                 |
-| Price          | Price of the component <br/> E.g. `1000`                        |
-| Power          | Power consumption of the component <br/> E.g. `80`              |
-| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`    |
-| Clock          | Clock speed in GHz <br/> E.g. `3.8`                             |
-| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                         |
-| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                              |
-| MemorySlots    | Number of Memory slots <br/> E.g. `4`                           |
-| FormFactor     | Formfactor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
-| MemorySize     | Memory size in GB <br/> E.g. `16`                               |
-| Drivesize      | Storage size in GB <br/> E.g. `1000`                            |
-| DriveType      | Storage type <br/> E.g. `HDD` , `SDD`                           |
-| FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                              |
-| NoiseLevel     | Noise level in dB <br/> E.g. `50`                               |
-| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                             |
-| ResponseTime   | Response Time in ms <br/> E.g. `1`                              |
-| Resolution     | Resolution in pixels <br/> E.g. `4000`                          |
+| Parameter      | Examples                                                         |
+|----------------|------------------------------------------------------------------|
+| Name           | Name of the component <br/> E.g. `Intel 10990x`                  |
+| Price          | Price of the component <br/> E.g. `1000`                         |
+| Power          | Power consumption of the component <br/> E.g. `80`               |
+| Socket         | Socket type of the component <br/> E.g. `lga1511`, `lga1200`     |
+| Clock          | Clock speed in GHz <br/> E.g. `3.8`                              |
+| ExpansionSlots | Number of Expansion slots <br/> E.g.`3`                          |
+| GpuSlots       | Number of Gpu slots <br/> E.g. `2`                               |
+| MemorySlots    | Number of Memory slots <br/> E.g. `4`                            |
+| FormFactor     | Form factor of case/motherboard <br/> E.g. `ATX`, `Mini-ITX` etc |
+| MemorySize     | Memory size in GB <br/> E.g. `16`                                |
+| Drivesize      | Storage size in GB <br/> E.g. `1000`                             |
+| DriveType      | Storage type <br/> E.g. `HDD` , `SSD`                            |
+| FanSpeed       | Fan speed in RPM <br/> E.g. `2000`                               |
+| NoiseLevel     | Noise level in dB <br/> E.g. `50`                                |
+| RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                              |
+| ResponseTime   | Response Time in ms <br/> E.g. `1`                               |
+| Resolution     | Resolution in pixels <br/> E.g. `4000`                           |
 
 ## Instructions for Manual Testing
 
@@ -470,13 +470,13 @@ ____________________________________________________________
        1. Expected: All builds that are compatible will be displayed.
 9. Exporting all builds to text file.
    1. Test case: `export`
-       1. Expected: All builds are exported to text file located in data folder
+       1. Expected: All builds are exported to text file located in data/export folder
        which will contain the name of the build, its components and relevant information.
 10. Exporting all builds to a CSV file.
     1. Test case: `exportCSV`
-        1. Expected: All builds are exported to CSV file located in data folder
+        1. Expected: All builds are exported to CSV file located in data/export folder
         which will contain the name of the build, its components and relevant information.
-    2. Test case: `exportCSV` when there are builds but they contain no components.
+    2. Test case: `exportCSV` when there are builds, but they contain no components.
         1. Expected: The CSV file will be empty as the rows are dependent on the components of all the builds
         while the build names are columns in that they exist as a field for each component row.
 11. Editing a build.
@@ -526,7 +526,7 @@ in Build Editing mode.
         1. Expected: Information regarding the build is displayed.
 7.  Exporting the build.
     1. Test case: `export`
-        1. Expected: The build is exported to text file located in data folder
+        1. Expected: The build is exported to text file located in data/export folder
         which will contain the name of the build, its components and relevant information.
 8.  Returning to Build Management mode.
     1. Test case: `back`

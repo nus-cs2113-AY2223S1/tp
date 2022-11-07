@@ -3,9 +3,9 @@
 
 autonumber
 
-Participant "Ui" as Ui #Aqua
-Participant "EditParser" as EditParser #AquaMarine
-Participant "Storage" as Storage #Yellow
+Participant ":Ui" as Ui #Aqua
+Participant ":EditParser" as EditParser #AquaMarine
+Participant ":Storage" as Storage #Yellow
 
 
 activate Ui #Aqua
@@ -39,6 +39,6 @@ return
 return
 return
 
-deactivate Ui
+return
 
 @enduml
