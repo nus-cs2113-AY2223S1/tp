@@ -1,4 +1,4 @@
-## zheqis - Project Portfolio Page
+## Shen Zheqi - Project Portfolio Page
 
 ### Overview
 
