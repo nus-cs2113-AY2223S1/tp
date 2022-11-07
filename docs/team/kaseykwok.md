@@ -17,7 +17,7 @@ and Prescription menu)
   the overall structure of the program.
 * **Code contributed**: [RepoSense link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=kaseykwok&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 * **Project management**:
-  * Managed releases `v1.0` and `v2.0` on GitHub, including their corresponding milestones.
+  * Managed releases `v1.0`, `v2.0` and `v2.1` on GitHub, including their corresponding milestones.
   * Protected the `master` branch of the team repo with mandatory status checks to pass before merging so that the CIs
   must pass for the branch.
   * Created issues and assigned issues to the team member.
@@ -32,6 +32,7 @@ and Prescription menu)
     * Added documentation for all prescription manipulation commands.
     * Added documentation for the `help` and `exit` command.
     * Did cosmetic tweaks to structure the user guide and the table of content.
+    * Added the TOC.
   * Developer Guide
     * Added design and implementation details for the architecture and the main component, including architecture, 
     object and sequence diagrams.
@@ -39,6 +40,8 @@ and Prescription menu)
     * Added implementation details for 4 main commands in Prescription menu, with their respective sequence diagrams.
     * Added instruction for manual testing section's launch and shutdown, navigation and prescription menu tests.
     * Restructured the DG to have a similar structure with AB3-AddressBook.
+    * Did final check for the DG.
+    * Added the TOC.
 * **Community**:
   * PRs reviewed (within team): [#34](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/34),
   [#35](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/35),
@@ -57,3 +60,4 @@ and Prescription menu)
   [#235](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/235),
   [#242](https://github.com/AY2223S1-CS2113-F11-4/tp/pull/242)
   * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2113-AY2223S1/forum/issues/20))
+  * Assisted other team members to fix bugs they encountered
