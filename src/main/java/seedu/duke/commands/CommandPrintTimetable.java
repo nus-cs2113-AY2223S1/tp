@@ -172,6 +172,8 @@ public class CommandPrintTimetable {
 
     private static void setTable() {
         timeTable = new String[TIMETABLE_HEIGHT][TIMETABLE_WIDTH];
+        clashModCodeList = new ArrayList<>();
+        // initialized here to make sure clashModCodeList updates everytime print command is called
     }
 
 
@@ -271,7 +273,6 @@ public class CommandPrintTimetable {
 
             Integer columnIndex = getDayColumnIndex(day);
             Integer thisSlotRowIndex = modStartSlot + ROW_DIFFERENCE;
-            //boolean thisSlotWritten = checkSlotWritten(thisSlotRowIndex, columnIndex);
             boolean nextSlotWritten = checkSlotWritten(thisSlotRowIndex + 1, columnIndex);
 
             if (!nextSlotWritten) {
@@ -347,10 +348,6 @@ public class CommandPrintTimetable {
             // if clash exists, pre-write timetable with "X"
             ArrayList<Integer[]> clashSlotList = getDailyClashSlot(day);
 
-
-
-
-
             for (Integer[] slot : clashSlotList) {
                 Integer clashStartIndex = slot[0];
                 Integer clashEndIndex = slot[1];
@@ -366,10 +363,14 @@ public class CommandPrintTimetable {
     }
 
     private static void writeClashSlot(int day, Integer clashStartIndex, Integer clashEndIndex) {
-        for (int l = clashStartIndex; l < clashEndIndex + 1; l++) {
-            // write the end with X for now
-            String stringToWrite = "X".repeat(COLUMN_WIDTH - 1);
-            write(stringToWrite,l + ROW_DIFFERENCE,getDayColumnIndex(day));
+        try {
+            for (int l = clashStartIndex; l < clashEndIndex + 1; l++) {
+                // write the end with X for now
+                String stringToWrite = "X".repeat(COLUMN_WIDTH - 1);
+                write(stringToWrite, l + ROW_DIFFERENCE, getDayColumnIndex(day));
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            UI.printResponse("index out of bounds when writing clashed lessons");
         }
     }
 
