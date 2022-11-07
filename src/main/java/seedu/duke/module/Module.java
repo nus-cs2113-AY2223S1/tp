@@ -259,7 +259,7 @@ public class Module {
 
     public ArrayList<Lesson> getReplacement(String targetType, int index) {
         assert index >= 0 : "index should be within range";
-        assert index < lessonList.size() : "index should be within range";
+        assert index <= lessonMap.get(targetType).size() : "index should be within range";
 
         int counter = 0;
         for (ArrayList<Lesson> oneClass : lessonMap.get(targetType).values()) {
