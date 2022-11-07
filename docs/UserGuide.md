@@ -57,7 +57,8 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
     * [Additional Syntax](#additional-syntax)
         * [Adding spaces](#adding-spaces)
         * [Adding double quotes](#adding-double-quotes)
-        * [Restriction on adding hyphens](#restriction-on-adding-hyphens)
+        * [Limitation on adding double quotes](#limitation-on-adding-double-quotes)
+        * [Limitation on adding hyphens](#limitation-on-adding-hyphens)
 * [Back to Contents](#contents)
 
 <br>
@@ -94,21 +95,22 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 
 When inputting arguments:
 * The absence of square brackets denotes **mandatory** arguments.
-* Square brackets denote **optional** arguments.
+* The square brackets denote **optional** arguments.
+* The presence of invalid or extra arguments will be ignored by MoneyGoWhere.
 
 <br>
 
-Example: `Add-Expense -n NAME -a AMOUNT [-d DATE_TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE OF PAYMENT]`
+Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
 {: .invalid }
-> `Add-Expense -n Subscription`
+> `Add-Expense -n Lunch`
 >
 > `Add-Expense -a 13.37`
 
 {: .valid }
-> `Add-Expense -n Subscription -a 13.37`
+> `Add-Expense -n Lunch -a 13.37`
 >
-> `Add-Expense -n "Cloud subscription" -a 13.37 -d "01/01/2022 2359"`
+> `Add-Expense -n Lunch -a 13.37 -x SGD -p Card`
 
 <br>
 <hr>
@@ -141,25 +143,43 @@ Argument values with a double quote can be escaped by prepending an additional d
 
 Example:
 ```
-Add-Expense -n """Stuff""" -a 65.77
+Add-Expense -n "Lunch at ""Marina Bay Sands""" -a 1333.37
 
-Name            : Stuff
-Date and Time   : 1 Jan 2022 23:59
-Amount          : 65.77
+Name            : Lunch at "Marina Bay Sands"
+Date and Time   : 07 Nov 2022 12:15
+Amount          : 1333.37
 Currency        : SGD
+
+The expense was added successfully.
 ``` 
 
 <br>
 <hr>
 <br>
 
-##### Restriction on adding hyphens
+##### Limitation on adding double quotes
 
-Argument values cannot start with a hyphen.
+Argument values cannot start and end with escaped double quotes.
 
 Example:
 ```
-Add-Expense -n "-Phone Bill" -a -500.00
+Add-Expense -n """Lunch""" -a 13.37
+```
+<br>
+
+[Back to Sub-Contents](#how-to-use-the-user-guide)
+
+<br>
+<hr>
+<br>
+
+##### Limitation on adding hyphens
+
+Argument values cannot be the same as argument options.
+
+Example:
+```
+Add-Expense -n "-n" -a 13.37
 ```
 <br>
 
@@ -167,6 +187,7 @@ Add-Expense -n "-Phone Bill" -a -500.00
 
 <br>
 <br>
+
 
 ## Quick Start
 
