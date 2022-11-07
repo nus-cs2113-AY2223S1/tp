@@ -330,13 +330,13 @@ If users want a more restrictive `filter`, they most likely already know what th
 Before going deep into how the data is fetched from the LTA API, we will run through how the `Api` component of data fetching works.
 
 1. The initialisation of the class will make an instance of the `Storage`, `HttpClient` and `Ui` class.
-2. If the program just started, the `Parking` class will call the `loadApiKey` method.
+2. If the program just started, the `Parking` class will call the `loadApiKey()` method.
     - If no file called `secret.txt` is found, file will be created.
     - If the file is empty, the default key will be loaded to the `Api` instance (but not written to the local file).
 3. To get a certain data set from the API Service,
-    - Call `asyncExecuteRequest` method to construct the HTTP request packet header and send the request
+    - Call `asyncExecuteRequest()` method to construct the HTTP request packet header and send the request
       asynchronously.
-    - Call `fetchData` method to get response immediately from the API.
+    - Call `fetchData()` method to get response immediately from the API.
         - This method will also validate the response from the API by identifying the response code.
         - Unless the code is `401 Unauthorised Access` (due to invalid API key), the method will try to fetch data
           at most 5 times.
@@ -344,7 +344,7 @@ Before going deep into how the data is fetched from the LTA API, we will run thr
 Since each API call only returns 500 entries per fetch, we need to make multiple API calls. Thus, there is another method
 that handles the API calls all at once. The process is still similar.
 1. Same step 1 and 2 above.
-2. Call `syncFetchData` method, which calls both the `asyncExecuteRequest` and `fetchData` five times (LTA has less
+2. Call `syncFetchData()` method, which calls both the `asyncExecuteRequest()` and `fetchData()` five times (LTA has less
    than 2500 Parking lot data)
     - This method makes all 5 requests asynchronously and receives the response in sequence.
     - The method will concatenate the data together.
@@ -402,7 +402,7 @@ Another problem we found is that LTA does not do its own data validation. Thus, 
 carparks having a negative number of available lots. This is a big problem as from the user's perspective
 it may be seen that our program is at fault. 
 
-Due to such bug discoveries, we made our `carparkList` parser much more robust, and it now does data
+Due to such bug discoveries, we made our `CarparkList` parser much more robust, and it now does data
 validation internally to ensure no such data is presented to the user.
 
 ### 3.4 Updating CarparkList with JSON file from API 
@@ -523,15 +523,15 @@ for use via a Command Line Interface (CLI).
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                                                  | So that I can ...                                                   |
-|---------|------|----------------------------------------------------------------|---------------------------------------------------------------------|
-| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | Know where I can park                                               |
-| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Estimate where I can park based on last updated information offline |
-| v2.0    |Driver| Be able to save favourites                                     | Monitor carparks important to me                                    |
-| v2.0    |Driver| Import my favourite carparks                                   | Use my saved settings/preferences across different devices          |
-| v2.0    |Driver| Filter the carparks based on their address                     | Search for carparks without knowing the carpark Id                  |
-| v2.1    |Driver| Search for carparks based on carpark ID                 | Search for carparks without knowing the carpark address             |
-| v2.1    |Driver| Have my carpark information be colour coordinated              | Look at carpark information with ease                               |
+| Version | As a ... | I want to ...                                                         | So that I can ...                                                   |
+|---------|------|-----------------------------------------------------------------------|---------------------------------------------------------------------|
+| v1.0    |Driver| Search lot availability by a unique carpark ID for a specific carpark | Know where I can park                                               |
+| v1.0    |User with no internet| Access a list of available carparks on the app offline                | Estimate where I can park based on last updated information offline |
+| v2.0    |Driver| Be able to save favourites                                            | Monitor carparks important to me                                    |
+| v2.0    |Driver| Import my favourite carparks                                          | Use my saved settings/preferences across different devices          |
+| v2.0    |Driver| Filter the carparks based on their address                            | Search for carparks without knowing the carpark ID                  |
+| v2.1    |Driver| Search for carparks based on carpark ID                               | Search for carparks without knowing the carpark address             |
+| v2.1    |Driver| Have my carpark information be colour coordinated                     | Look at carpark information with ease                               |
 
 
 ## Appendix C: Non-Functional Requirements
@@ -565,7 +565,8 @@ Input:
 Output:
 
 ```
-There were unrecognized arguments after the `help` command. Please try the `help` command again by itself.
+There were unrecognized arguments after the `help` command. Please try the 
+`help` command again by itself.
 ```
 
 The following command(s) take only 1 argument:
@@ -582,7 +583,8 @@ Output:
 
 ```
 Empty argument. Valid command(s):
-`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark based on carpark ID.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the 
+specific queried carpark based on carpark ID.
 ```
 
 Providing too many arguments will result in an error message, for example:
@@ -596,7 +598,8 @@ Output:
 ```
 This command only takes exactly 1 argument(s). Valid command(s): 
 `auth API_KEY` or `a API_KEY` 	: To authenticate your personal API key.
-`auth default` or `a default` 	: To authenticate using the default key provided by parKING.
+`auth default` or `a default` 	: To authenticate using the default key 
+provided by parKING.
 `auth status` or `a status` 	: To get the authentication status.
 ```
 
@@ -632,7 +635,8 @@ Input:
 Output:
 
 ```
-This command with the `list` argument cannot take any additional arguments. Valid commands(s): 
+This command with the `list` argument cannot take any additional 
+arguments. Valid commands(s): 
 `favourite list` or `fav list` 	: To get the list of favourited carparks.
 `favourite CARPARK_ID` or `fav CARPARK_ID` 	: Favourite carpark by its ID.
 ```
