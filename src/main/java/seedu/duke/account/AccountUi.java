@@ -109,9 +109,9 @@ public class AccountUi {
                 + INDENTATION + "1) help" + "\n" + INDENTATION
                 + "2) balance" + "\n" + INDENTATION + "3) details" + "\n" +  INDENTATION
                 + "4) deposit <abbreviation> <amount>" +  "\n" + INDENTATION + "5) withdraw <amount>/ <abbreviation> <amount>"
-                +  "\n" + INDENTATION + "6) delete account" +  "\n" + INDENTATION + "7) exit"
-                +  "\n" + INDENTATION + "8) list" +  "\n" + INDENTATION + "9) transfer <username> <amount> <abbreviaton>"
-                +  "\n" + INDENTATION + "10) currencies" + "\n" + INDENTATION + "10) account history";
+                +  "\n"  + INDENTATION + "6) logout"
+                +  "\n" + INDENTATION + "7) list" +  "\n" + INDENTATION + "8) transfer <username> <amount> <abbreviaton>"
+                +  "\n" + INDENTATION + "9) currencies" + "\n" + INDENTATION + "10) account history";
         BasicUi.showStandardOutput(INDENTATION + MESSAGE);
     }
 

@@ -178,35 +178,53 @@ public class Account {
         while(!isExit){
             String in = InputManager.receiveInputLine().toLowerCase();
             try{
+                boolean isCorrectPass;
                 switch (in) {
-                    case "change default currency": {
+                    case "change default currency":
                         AccountUi.reenterPassword();
-                        boolean isCorrectPass = false;
+                        isCorrectPass = false;
                         while (!isCorrectPass) {
-                            if (wallet.getPassWord().equals(InputManager.receiveInputLine())) {
-                                System.out.print("Enter the currency you would like to change your default to: ");
-                                try {
-                                    String tempCurr = InputManager.receiveInputLine();
-                                    setDefaultCurrency(tempCurr);
-                                    System.out.println("Please enter exit to leave the help menu or enter another help command.");
-                                } catch (FinanceException e) {
-                                    e.handleException();
+                            String pass = InputManager.receiveInputLine();
+                            if (wallet.getPassWord().equals(pass)) {
+                                boolean isCurrValid = false;
+                                while (!isCurrValid) {
+                                    try {
+                                        System.out.print("Enter the abbreviation of currency you would like to change your default to: ");
+                                        String tempCurr = InputManager.receiveInputLine();
+                                        if (tempCurr.equals("exit")) {
+                                            System.out.println("Exiting, your default currency has not been changed.");
+                                            isCurrValid = true;
+                                        }
+                                        else {
+                                            CurrencyList.findCurrencyByAbbrName(tempCurr);
+                                            setDefaultCurrency(tempCurr);
+                                            System.out.println("Please enter exit to leave the help menu or enter another help command.");
+                                        }
+                                    }
+                                    catch(FinanceException e){
+                                        e.handleException();
+                                    }
                                 }
                                 isCorrectPass = true;
-                            } else {
+                            }
+                            else if(pass.equalsIgnoreCase("exit")){
+                                isCorrectPass = true;
+                                System.out.println("Exiting, your default currency has not been changed.");
+                            }
+                            else {
                                 System.out.println("Incorrect password, please try again.\nPassword:");
                             }
                         }
                         break;
-                    }
                     case "exit":
                         isExit = true;
                         break;
-                    case "change password": {
+                    case "change password":
                         AccountUi.reenterPassword();
-                        boolean isCorrectPass = false;
+                        isCorrectPass = false;
                         while (!isCorrectPass) {
-                            if (wallet.getPassWord().equals(InputManager.receiveInputLine())) {
+                            String pass = InputManager.receiveInputLine();
+                            if (wallet.getPassWord().equals(pass)) {
                                 String tempPass;
                                 boolean isPassValid = false;
                                 while(!isPassValid){
@@ -217,6 +235,7 @@ public class Account {
                                     }
                                     else if(tempPass.equals("exit")){
                                         System.out.println("Exiting, your password has not been changed.");
+                                        isPassValid = true;
                                     }
                                     else if(tempPass.length() < 8){
                                         System.out.println("Password is not strong enough, please make it more than 8 characters");
@@ -231,17 +250,21 @@ public class Account {
 
                                 isCorrectPass = true;
                             }
+                            else if(pass.equalsIgnoreCase("exit")){
+                                System.out.println("Exiting, your password has not been changed.");
+                                isCorrectPass = true;
+                            }
                             else {
                                 System.out.print("Incorrect password, please try again.\nPassword:");
                             }
                         }
                         break;
-                    }
-                    case "change username": {
+                    case "change username":
                         AccountUi.reenterPassword();
-                        boolean isCorrectPass = false;
+                        isCorrectPass = false;
                         while (!isCorrectPass) {
-                            if (wallet.getPassWord().equals(InputManager.receiveInputLine())) {
+                            String pass = InputManager.receiveInputLine();
+                            if (wallet.getPassWord().equals(pass)) {
                                 System.out.println("New username: ");
                                 List<String> existingUsernames;
                                 try {
@@ -271,14 +294,32 @@ public class Account {
                                 }
                                 isCorrectPass = true;
                             }
+                            else if(pass.equalsIgnoreCase("exit")){
+                                System.out.println("Exiting, your username has not been changed.");
+                                isCorrectPass = true;
+                            }
                             else {
                                 System.out.println("Incorrect password, please try again.\nPassword:");
                             }
                         }
                         break;
-                    }
                     case "delete account":
-                        return DeleteCommand.handleDelete(wallet);
+                        isCorrectPass = false;
+                        AccountUi.reenterPassword();
+                        while(!isCorrectPass){
+                            String pass = InputManager.receiveInputLine();
+                            if(wallet.getPassWord().equals(pass)){
+                                return DeleteCommand.handleDelete(wallet);
+                            }
+                            else if(pass.equalsIgnoreCase("exit")){
+                                System.out.println("Exiting, your account has not been deleted.");
+                                isCorrectPass = true;
+                            }
+                            else {
+                                System.out.print("Incorrect password, please try again.\nPassword:");
+                            }
+                        }
+
                     default:
                         throw new FinanceException(ExceptionCollection.COMMAND_TYPE_EXCEPTION);
                 }
