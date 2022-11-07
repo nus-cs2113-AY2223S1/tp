@@ -220,6 +220,7 @@ Flight added!
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delete a flight detail: `flight delete`
 
