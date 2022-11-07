@@ -1,6 +1,6 @@
 # Aaron Chan's Personal Portfolio Page
 
-## Project: Timetabler
+### Project: Timetabler
 Timetabler is a desktop timetable planning application used by students of NUS to plan their NUS modules for either Semester 1 or 2. The user interacts with it using CLI. It is written in Java.
 
 Given below are my contributions to the project.
