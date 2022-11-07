@@ -198,6 +198,7 @@ _If passenger details logbook is empty_.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Add a flight detail: `flight add`
 
@@ -219,7 +220,6 @@ Flight added!
 ```
 
 ---
-<div style="page-break-after: always;"></div>
 
 ## Delete a flight detail: `flight delete`
 
@@ -251,6 +251,7 @@ FLIGHT SQ832 NOT FOUND.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delay a flight: `delay`
 
@@ -312,6 +313,7 @@ Gate number of flight SQ654 is updated to 08.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Display flight detail logbook: `flight list`
 
@@ -352,6 +354,7 @@ _If flight details logbook is empty_.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
