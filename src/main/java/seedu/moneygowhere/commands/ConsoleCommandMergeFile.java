@@ -5,10 +5,10 @@ package seedu.moneygowhere.commands;
 /**
  * Stores the command Merge-File and its arguments.
  */
-public class ConsoleCommandMergeExternalFile extends ConsoleCommand {
+public class ConsoleCommandMergeFile extends ConsoleCommand {
     private String filePath;
 
-    public ConsoleCommandMergeExternalFile(String filePath) {
+    public ConsoleCommandMergeFile(String filePath) {
         this.filePath = filePath;
     }
 

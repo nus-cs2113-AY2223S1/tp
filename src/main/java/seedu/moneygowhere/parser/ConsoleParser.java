@@ -23,7 +23,7 @@ import seedu.moneygowhere.commands.ConsoleCommandEditIncome;
 import seedu.moneygowhere.commands.ConsoleCommandEditRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandEditTarget;
 import seedu.moneygowhere.commands.ConsoleCommandHelp;
-import seedu.moneygowhere.commands.ConsoleCommandMergeExternalFile;
+import seedu.moneygowhere.commands.ConsoleCommandMergeFile;
 import seedu.moneygowhere.commands.ConsoleCommandPayRecurringPayment;
 import seedu.moneygowhere.commands.ConsoleCommandSortExpense;
 import seedu.moneygowhere.commands.ConsoleCommandViewExpense;
@@ -45,7 +45,7 @@ import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditExpenseInval
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditIncomeInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandEditTargetInvalidException;
-import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeExternalFileInvalidException;
+import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandMergeFileInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandNotFoundException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandPayRecurringPaymentInvalidException;
 import seedu.moneygowhere.exceptions.parser.ConsoleParserCommandSortExpenseInvalidException;
@@ -64,9 +64,9 @@ import java.util.List;
 //@@author xzynos
 
 /**
- * Provide functions to parse inputs read from standard input.
+ * Provides functions to parse inputs read from standard input.
  */
-@SuppressWarnings("ReplaceNullCheck")
+@SuppressWarnings({"ReplaceNullCheck", "UnnecessaryLocalVariable"})
 public class ConsoleParser {
     //@@author xzynos
 
@@ -189,6 +189,34 @@ public class ConsoleParser {
             int recurringPaymentIndex = Integer.parseInt(recurringPaymentIndexStr);
 
             return recurringPaymentIndex < 0;
+        } catch (NumberFormatException exception) {
+            return true;
+        }
+    }
+
+    private static boolean isIncomeIndexArgumentInvalid(String incomeIndexStr) {
+        if (incomeIndexStr == null) {
+            return true;
+        }
+
+        try {
+            int incomeIndex = Integer.parseInt(incomeIndexStr);
+
+            return incomeIndex < 0;
+        } catch (NumberFormatException exception) {
+            return true;
+        }
+    }
+
+    private static boolean isTargetIndexArgumentInvalid(String targetIndexStr) {
+        if (targetIndexStr == null) {
+            return true;
+        }
+
+        try {
+            int targetIndex = Integer.parseInt(targetIndexStr);
+
+            return targetIndex < 0;
         } catch (NumberFormatException exception) {
             return true;
         }
@@ -344,9 +372,11 @@ public class ConsoleParser {
             ConsoleCommandAddExpense consoleCommandAddExpense
     ) {
         BigDecimal amount = consoleCommandAddExpense.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandAddExpense.setAmount(amountNormalized);
+            consoleCommandAddExpense.setAmount(amountNormalized);
+        }
 
         LocalDateTime dateTime = consoleCommandAddExpense.getDateTime();
         LocalDateTime dateTimeNormalized;
@@ -1000,9 +1030,13 @@ public class ConsoleParser {
             throw new ConsoleParserCommandConvertCurrencyInvalidException();
         }
 
+        if (isExpenseIndexArgumentInvalid(expenseIndexStr)) {
+            throw new ConsoleParserCommandConvertCurrencyInvalidException();
+        }
+
         if (rateStr != null) {
             BigDecimal rate = new BigDecimal(rateStr);
-            if (rate.compareTo(BigDecimal.ZERO) != 1) {
+            if (rate.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new ConsoleParserCommandConvertCurrencyInvalidException();
             }
         }
@@ -1222,15 +1256,19 @@ public class ConsoleParser {
     ) {
         BigDecimal amount = consoleCommandAddTarget.getAmount();
 
-        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
 
-        consoleCommandAddTarget.setAmount(truncatedAmount);
+            consoleCommandAddTarget.setAmount(truncatedAmount);
+        }
 
         BigDecimal currentAmount = consoleCommandAddTarget.getCurrentAmount();
 
-        BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
+        if (currentAmount != null) {
+            BigDecimal truncatedCurrentAmount = currentAmount.stripTrailingZeros();
 
-        consoleCommandAddTarget.setCurrentAmount(truncatedCurrentAmount);
+            consoleCommandAddTarget.setCurrentAmount(truncatedCurrentAmount);
+        }
 
         return consoleCommandAddTarget;
     }
@@ -1285,7 +1323,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandViewTargetInvalidException(exception);
+            throw new ConsoleParserCommandViewTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID
+            );
         }
     }
 
@@ -1296,18 +1336,10 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
-
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandViewTargetInvalidException(exception);
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandViewTargetInvalidException();
-            }
+        if (targetIndexStr != null && isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandViewTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1348,7 +1380,7 @@ public class ConsoleParser {
             return consoleCommandViewTarget;
         } catch (ConsoleParserCommandViewTargetInvalidException exception) {
             throw new ConsoleParserCommandViewTargetInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_TARGET_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1374,7 +1406,10 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_INVALID,
+                    exception
+            );
         }
     }
 
@@ -1382,21 +1417,19 @@ public class ConsoleParser {
     private static void validateCommandDeleteTargetValues(CommandLine commandLine) throws
             ConsoleParserCommandDeleteTargetInvalidException {
         String targetIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_DELETE_EXPENSE_ARG_EXPENSE_INDEX_LONG
+                ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
+        if (targetIndexStr == null) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID
+            );
+        }
 
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandDeleteTargetInvalidException(exception);
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandDeleteTargetInvalidException();
-            }
+        if (isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandDeleteTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1407,12 +1440,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        int targetIndex;
-        if (targetIndexStr == null) {
-            targetIndex = -1;
-        } else {
-            targetIndex = Integer.parseInt(targetIndexStr);
-        }
+        int targetIndex = Integer.parseInt(targetIndexStr);
 
         return new ConsoleCommandDeleteTarget(targetIndex);
     }
@@ -1435,7 +1463,7 @@ public class ConsoleParser {
             return consoleCommandDeleteTarget;
         } catch (ConsoleParserCommandDeleteTargetInvalidException exception) {
             throw new ConsoleParserCommandDeleteTargetInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_EXPENSE_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1532,22 +1560,16 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
         );
 
-        if (targetIndexStr != null) {
-            int targetIndex;
+        if (targetIndexStr == null) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID
+            );
+        }
 
-            try {
-                targetIndex = Integer.parseInt(targetIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
-                );
-            }
-
-            if (targetIndex < 0) {
-                throw new ConsoleParserCommandEditTargetInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_INVALID
-                );
-            }
+        if (isTargetIndexArgumentInvalid(targetIndexStr)) {
+            throw new ConsoleParserCommandEditTargetInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_INVALID
+            );
         }
     }
 
@@ -1558,12 +1580,21 @@ public class ConsoleParser {
             String targetIndexStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG
             );
-            String name = commandLine.getOptionValue(
-                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
-            );
+
             String dateTimeStr = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG
             );
+
+            LocalDateTime dateTime;
+            if (dateTimeStr == null) {
+                dateTime = null;
+            } else {
+                dateTime = LocalDateTime.parse(
+                        dateTimeStr,
+                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
+                );
+            }
+
             String description = commandLine.getOptionValue(
                     ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DESCRIPTION_LONG
             );
@@ -1576,25 +1607,23 @@ public class ConsoleParser {
 
             int targetIndex = Integer.parseInt(targetIndexStr);
 
-            LocalDateTime dateTime;
-            if (dateTimeStr == null) {
-                dateTime = null;
-            } else {
-                dateTime = LocalDateTime.parse(
-                        dateTimeStr,
-                        DateTimeFormatter.ofPattern(Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT)
-                );
-            }
-
             BigDecimal amount;
-            BigDecimal currentAmount;
-            if (amountStr == null || currentAmountStr == null) {
+            if (amountStr == null) {
                 amount = null;
-                currentAmount = null;
             } else {
                 amount = new BigDecimal(amountStr);
+            }
+
+            BigDecimal currentAmount;
+            if (currentAmountStr == null) {
+                currentAmount = null;
+            } else {
                 currentAmount = new BigDecimal(currentAmountStr);
             }
+
+            String name = commandLine.getOptionValue(
+                    ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG
+            );
 
             return new ConsoleCommandEditTarget(
                     targetIndex,
@@ -1777,9 +1806,11 @@ public class ConsoleParser {
     ) {
         BigDecimal amount = consoleCommandAddIncome.getAmount();
 
-        BigDecimal truncatedAmount = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal truncatedAmount = amount.stripTrailingZeros();
 
-        consoleCommandAddIncome.setAmount(truncatedAmount);
+            consoleCommandAddIncome.setAmount(truncatedAmount);
+        }
 
         return consoleCommandAddIncome;
     }
@@ -1834,7 +1865,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandViewIncomeInvalidException(exception);
+            throw new ConsoleParserCommandViewIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID
+            );
         }
     }
 
@@ -1845,18 +1878,10 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_LONG
         );
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
-
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandViewIncomeInvalidException(exception);
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandViewIncomeInvalidException();
-            }
+        if (incomeIndexStr != null && isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandViewIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
     }
 
@@ -1897,7 +1922,7 @@ public class ConsoleParser {
             return consoleCommandViewIncome;
         } catch (ConsoleParserCommandViewIncomeInvalidException exception) {
             throw new ConsoleParserCommandViewIncomeInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_VIEW_INCOME_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -1923,7 +1948,9 @@ public class ConsoleParser {
 
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandDeleteIncomeInvalidException(exception);
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID
+            );
         }
     }
 
@@ -1934,18 +1961,16 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_LONG
         );
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
+        if (incomeIndexStr == null) {
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID
+            );
+        }
 
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandDeleteIncomeInvalidException(exception);
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandDeleteIncomeInvalidException();
-            }
+        if (isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandDeleteIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
     }
 
@@ -1957,11 +1982,7 @@ public class ConsoleParser {
         );
 
         int incomeIndex;
-        if (incomeIndexStr == null) {
-            incomeIndex = -1;
-        } else {
-            incomeIndex = Integer.parseInt(incomeIndexStr);
-        }
+        incomeIndex = Integer.parseInt(incomeIndexStr);
 
         return new ConsoleCommandDeleteIncome(incomeIndex);
     }
@@ -1984,7 +2005,7 @@ public class ConsoleParser {
             return consoleCommandDeleteIncome;
         } catch (ConsoleParserCommandDeleteIncomeInvalidException exception) {
             throw new ConsoleParserCommandDeleteIncomeInvalidException(
-                    Messages.CONSOLE_ERROR_COMMAND_DELETE_INCOME_INVALID,
+                    exception.getMessage(),
                     exception
             );
         }
@@ -2030,12 +2051,6 @@ public class ConsoleParser {
         String name = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG
         );
-        String incomeIndexStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
-        );
-        String amountStr = commandLine.getOptionValue(
-                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
-        );
 
         if (name != null && name.isBlank()) {
             throw new ConsoleParserCommandEditIncomeInvalidException(
@@ -2043,23 +2058,25 @@ public class ConsoleParser {
             );
         }
 
-        if (incomeIndexStr != null) {
-            int incomeIndex;
+        String incomeIndexStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG
+        );
 
-            try {
-                incomeIndex = Integer.parseInt(incomeIndexStr);
-            } catch (NumberFormatException exception) {
-                throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
-                );
-            }
-
-            if (incomeIndex < 0) {
-                throw new ConsoleParserCommandEditIncomeInvalidException(
-                        Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_INVALID
-                );
-            }
+        if (incomeIndexStr == null) {
+            throw new ConsoleParserCommandEditIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID
+            );
         }
+
+        if (isIncomeIndexArgumentInvalid(incomeIndexStr)) {
+            throw new ConsoleParserCommandEditIncomeInvalidException(
+                    Messages.CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_INVALID
+            );
+        }
+
+        String amountStr = commandLine.getOptionValue(
+                ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG
+        );
 
         if (amountStr != null) {
             try {
@@ -2299,9 +2316,11 @@ public class ConsoleParser {
             ConsoleCommandAddRecurringPayment consoleCommandAddRecurringPayment
     ) {
         BigDecimal amount = consoleCommandAddRecurringPayment.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandAddRecurringPayment.setAmount(amountNormalized);
+            consoleCommandAddRecurringPayment.setAmount(amountNormalized);
+        }
 
         String currency = consoleCommandAddRecurringPayment.getCurrency();
         String currencyNormalized;
@@ -2724,9 +2743,11 @@ public class ConsoleParser {
             ConsoleCommandEditRecurringPayment consoleCommandEditRecurringPayment
     ) {
         BigDecimal amount = consoleCommandEditRecurringPayment.getAmount();
-        BigDecimal amountNormalized = amount.stripTrailingZeros();
+        if (amount != null) {
+            BigDecimal amountNormalized = amount.stripTrailingZeros();
 
-        consoleCommandEditRecurringPayment.setAmount(amountNormalized);
+            consoleCommandEditRecurringPayment.setAmount(amountNormalized);
+        }
 
         return consoleCommandEditRecurringPayment;
     }
@@ -2804,7 +2825,7 @@ public class ConsoleParser {
                 ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_LONG
         );
 
-        if (isDateTimeArgumentInvalid(dateTimeStr)) {
+        if (dateTimeStr != null && isDateTimeArgumentInvalid(dateTimeStr)) {
             throw new ConsoleParserCommandPayRecurringPaymentInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_PAY_RECURRING_PAYMENT_ARG_DATE_TIME_INVALID
             );
@@ -2890,7 +2911,7 @@ public class ConsoleParser {
 
     //region Defines functions to parse command Merge-File
     //@@author LokQiJun
-    private static void validateCommandMergeExternalFileOptions(Options options) {
+    private static void validateCommandMergeFileOptions(Options options) {
         boolean hasAllCliOptions = options.hasLongOption(
                 ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG);
 
@@ -2899,67 +2920,67 @@ public class ConsoleParser {
     }
 
     //@@author LokQiJun
-    private static CommandLine parseCommandMergeExternalFileArguments(Options options, String arguments) throws
-            ConsoleParserCommandMergeExternalFileInvalidException {
+    private static CommandLine parseCommandMergeFileArguments(Options options, String arguments) throws
+            ConsoleParserCommandMergeFileInvalidException {
         try {
             CommandLine commandline = parseCommandArguments(options, arguments);
             return commandline;
         } catch (ParseException exception) {
-            throw new ConsoleParserCommandMergeExternalFileInvalidException(exception);
+            throw new ConsoleParserCommandMergeFileInvalidException(exception);
         }
     }
 
     //@@author LokQiJun
-    private static void validateCommandMergeExternalFileValues(CommandLine commandLine) throws
-            ConsoleParserCommandMergeExternalFileInvalidException {
+    private static void validateCommandMergeFileValues(CommandLine commandLine) throws
+            ConsoleParserCommandMergeFileInvalidException {
         String mergeFilePathString = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG
         );
 
         if (mergeFilePathString != null) {
             if (!mergeFilePathString.contains(".xml")) {
-                throw new ConsoleParserCommandMergeExternalFileInvalidException();
+                throw new ConsoleParserCommandMergeFileInvalidException();
             }
         }
     }
 
     //@@author LokQiJun
-    private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFileValues(
+    private static ConsoleCommandMergeFile parseCommandMergeFileValues(
             CommandLine commandLine) {
         String filePath = commandLine.getOptionValue(
                 ConsoleParserConfigurations.COMMAND_MERGE_FILE_ARG_MERGE_FILE_PATH_LONG
         );
-        return new ConsoleCommandMergeExternalFile(filePath);
+        return new ConsoleCommandMergeFile(filePath);
     }
 
     //@@author LokQiJun
-    private static ConsoleCommandMergeExternalFile normalizeCommandMergeExternalFileValues(
-            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile
+    private static ConsoleCommandMergeFile normalizeCommandMergeFileValues(
+            ConsoleCommandMergeFile consoleCommandMergeFile
     ) {
-        return consoleCommandMergeExternalFile;
+        return consoleCommandMergeFile;
     }
 
     //@@author LokQiJun
-    private static ConsoleCommandMergeExternalFile parseCommandMergeExternalFile(String arguments) throws
-            ConsoleParserCommandMergeExternalFileInvalidException {
+    private static ConsoleCommandMergeFile parseCommandMergeFile(String arguments) throws
+            ConsoleParserCommandMergeFileInvalidException {
         try {
-            Options options = ConsoleParserConfigurations.getCommandMergeExternalFileOptions();
+            Options options = ConsoleParserConfigurations.getCommandMergeFileOptions();
 
-            validateCommandMergeExternalFileOptions(options);
+            validateCommandMergeFileOptions(options);
 
-            CommandLine commandLine = parseCommandMergeExternalFileArguments(options, arguments);
+            CommandLine commandLine = parseCommandMergeFileArguments(options, arguments);
 
-            validateCommandMergeExternalFileValues(commandLine);
+            validateCommandMergeFileValues(commandLine);
 
-            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFile
-                    = parseCommandMergeExternalFileValues(commandLine);
+            ConsoleCommandMergeFile consoleCommandMergeFile
+                    = parseCommandMergeFileValues(commandLine);
 
-            ConsoleCommandMergeExternalFile consoleCommandMergeExternalFileNormalized
-                    = normalizeCommandMergeExternalFileValues(consoleCommandMergeExternalFile);
+            ConsoleCommandMergeFile consoleCommandMergeFileNormalized
+                    = normalizeCommandMergeFileValues(consoleCommandMergeFile);
 
-            return consoleCommandMergeExternalFileNormalized;
-        } catch (ConsoleParserCommandMergeExternalFileInvalidException exception) {
-            throw new ConsoleParserCommandMergeExternalFileInvalidException(
+            return consoleCommandMergeFileNormalized;
+        } catch (ConsoleParserCommandMergeFileInvalidException exception) {
+            throw new ConsoleParserCommandMergeFileInvalidException(
                     Messages.CONSOLE_ERROR_COMMAND_MERGE_FILE_INVALID,
                     exception
             );
@@ -3023,7 +3044,7 @@ public class ConsoleParser {
      *                                                                    invalid.
      * @throws ConsoleParserCommandPayRecurringPaymentInvalidException    If the command Pay-RecurringPayment is
      *                                                                    invalid.
-     * @throws ConsoleParserCommandMergeExternalFileInvalidException      If the command Merge-File is invalid.
+     * @throws ConsoleParserCommandMergeFileInvalidException              If the command Merge-File is invalid.
      */
     public static ConsoleCommand parse(String consoleInput) throws
             ConsoleParserCommandNotFoundException,
@@ -3046,7 +3067,7 @@ public class ConsoleParser {
             ConsoleParserCommandDeleteRecurringPaymentInvalidException,
             ConsoleParserCommandEditRecurringPaymentInvalidException,
             ConsoleParserCommandPayRecurringPaymentInvalidException,
-            ConsoleParserCommandMergeExternalFileInvalidException {
+            ConsoleParserCommandMergeFileInvalidException {
         String command = getConsoleCommand(consoleInput);
         String arguments = getConsoleCommandArguments(consoleInput);
 
@@ -3093,7 +3114,7 @@ public class ConsoleParser {
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_PAY_RECURRING_PAYMENT)) {
             return parseCommandPayRecurringPayment(arguments);
         } else if (command.equalsIgnoreCase(ConsoleParserConfigurations.COMMAND_MERGE_FILE)) {
-            return parseCommandMergeExternalFile(arguments);
+            return parseCommandMergeFile(arguments);
         } else {
             throw new ConsoleParserCommandNotFoundException(Messages.CONSOLE_ERROR_COMMAND_NOT_FOUND);
         }

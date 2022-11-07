@@ -1,0 +1,58 @@
+@startuml
+!include Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd load data
+Participant "consoleInterface\n:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "incomeManager\n:IncomeManager" as incomeManager DATA_COLOR_2
+Participant "recurringPaymentManager\n:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_3
+Participant "targetManager\n:TargetManager" as targetManager DATA_COLOR_4
+
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : runLocalStorageLoadToFile()
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lloadFromFile(\n\tsavedExpenses:ArrayList<Expense>,\n\tsortCommandSetting:ConsoleCommandSortExpense,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedIncomes:ArrayList<Income>,\n\tsavedTargets:ArrayList<Target>\n)
+activate LocalStorage STORAGE_COLOR_1
+
+LocalStorage --[STORAGE_COLOR_1]> consoleInterface : sortCommandSetting:ConsoleCommandSortExpense
+deactivate LocalStorage
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lsetExpenses(\n\tsavedExpense\n\t:ArrayList<Expense>\n)
+activate expenseManager DATA_COLOR_1
+
+expenseManager --[DATA_COLOR_1]> consoleInterface
+deactivate expenseManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : \lupdateSortCommandSetting(\n\tsortCommandSetting\n\t:ConsoleCommandSortExpense\n)
+activate expenseManager DATA_COLOR_1
+
+expenseManager --[DATA_COLOR_1]> consoleInterface
+deactivate expenseManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : setRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayment>)
+activate recurringPaymentManager DATA_COLOR_3
+
+recurringPaymentManager --[DATA_COLOR_3]> consoleInterface
+deactivate recurringPaymentManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : setIncomes(savedIncomes:ArrayList<Income>)
+activate incomeManager DATA_COLOR_2
+
+incomeManager --[DATA_COLOR_2]> consoleInterface
+deactivate incomeManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : setTargets(savedTargets:ArrayList<Target>)
+activate targetManager DATA_COLOR_4
+
+targetManager --[DATA_COLOR_4]> consoleInterface
+deactivate targetManager
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+deactivate consoleInterface
+@enduml

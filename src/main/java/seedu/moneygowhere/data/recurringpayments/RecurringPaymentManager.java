@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.recurringpayments;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.recurringpayment.RecurringPaymentManagerRecurringPaymentNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -74,4 +73,13 @@ public class RecurringPaymentManager {
             );
         }
     }
+
+    public void updateRecurringPayments(ArrayList<RecurringPayment> newRecurringPayments) {
+        for (RecurringPayment newRecurringPayment : newRecurringPayments) {
+            if (!hasRecurringPayment(newRecurringPayment)) {
+                this.recurringPayments.add(newRecurringPayment);
+            }
+        }
+    }
+
 }

@@ -13,7 +13,6 @@ import seedu.moneygowhere.data.income.Income;
 import seedu.moneygowhere.data.recurringpayments.RecurringPayment;
 import seedu.moneygowhere.data.target.Target;
 import seedu.moneygowhere.exceptions.storage.LocalStorageLoadDataException;
-import seedu.moneygowhere.parser.ConsoleParserConfigurations;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +26,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -98,7 +96,7 @@ public class LocalStorage {
      * and add them to the arraylist that stores the corresponding objects. Sort the current arraylist afterwards based
      * on saved configuration.
      */
-    public static void loadFromFile(
+    public static ConsoleCommandSortExpense loadFromFile(
             ArrayList<Expense> savedExpenses,
             ConsoleCommandSortExpense sortCommandSetting,
             ArrayList<RecurringPayment> savedRecurringPayments,
@@ -164,7 +162,10 @@ public class LocalStorage {
                     savedIncomes.add(loadIncome);
                 }
             }
+
             System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+
+            return sortCommandSetting;
         } catch (FileNotFoundException e) {
             initialiseFile();
             System.out.println(Messages.LOCAL_STORAGE_ERROR_NO_LOAD_FILE);
@@ -188,6 +189,7 @@ public class LocalStorage {
                         + (itr + 1));
             }
         }
+        return null;
     }
 
     /**
@@ -571,7 +573,7 @@ public class LocalStorage {
     }
 
     private static void parseRecurringPaymentToXml(Document doc, Element rootElement,
-                                            ArrayList<RecurringPayment> savedRecurringPayments) {
+                                                   ArrayList<RecurringPayment> savedRecurringPayments) {
         int index = 1;
         for (RecurringPayment recurringPayment : savedRecurringPayments) {
             Element recurringPaymentElement = doc.createElement(XML_RECURRING_PAYMENT_ELEMENT);

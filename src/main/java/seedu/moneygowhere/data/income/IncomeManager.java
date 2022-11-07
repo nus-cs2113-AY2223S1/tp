@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.income;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.income.IncomeManagerIncomeNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ public class IncomeManager {
 
     //@@author LokQiJun
     public void setIncomes(ArrayList<Income> savedIncomes) {
-        this.incomes = new ArrayList<Income>(savedIncomes);
+        this.incomes = new ArrayList<>(savedIncomes);
     }
 
     public void deleteIncome(int incomeIndex)
@@ -58,7 +57,15 @@ public class IncomeManager {
         }
     }
 
-    public void updateIncomes(ArrayList<Income> incomes) {
-        this.incomes = incomes;
+    public boolean hasIncome(Income income) {
+        return incomes.contains(income);
+    }
+
+    public void updateIncomes(ArrayList<Income> newIncomes) {
+        for (Income newIncome : newIncomes) {
+            if (!hasIncome(newIncome)) {
+                this.incomes.add(newIncome);
+            }
+        }
     }
 }

@@ -2,7 +2,6 @@ package seedu.moneygowhere.data.target;
 
 import seedu.moneygowhere.common.Messages;
 import seedu.moneygowhere.exceptions.data.target.TargetManagerTargetNotFoundException;
-import seedu.moneygowhere.storage.LocalStorage;
 
 import java.util.ArrayList;
 
@@ -37,7 +36,7 @@ public class TargetManager {
 
     //@@author LokQiJun
     public void setTargets(ArrayList<Target> savedTargets) {
-        this.targets = new ArrayList<Target>(savedTargets);
+        this.targets = new ArrayList<>(savedTargets);
     }
 
     public void deleteTarget(int targetIndex)
@@ -58,7 +57,15 @@ public class TargetManager {
         }
     }
 
-    public void updateTargets(ArrayList<Target> targets) {
-        this.targets = targets;
+    public boolean hasTarget(Target target) {
+        return targets.contains(target);
+    }
+
+    public void updateTargets(ArrayList<Target> newTargets) {
+        for (Target newTarget : newTargets) {
+            if (!hasTarget(newTarget)) {
+                this.targets.add(newTarget);
+            }
+        }
     }
 }

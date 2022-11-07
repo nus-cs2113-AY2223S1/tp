@@ -1,0 +1,56 @@
+@startuml
+!include Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface\n:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "incomeManager\n:IncomeManager" as incomeManager DATA_COLOR_2
+Participant "recurringPaymentManager\n:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_3
+Participant "targetManager\n:TargetManager" as targetManager DATA_COLOR_4
+
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandMergeFile(\n\tconsoleCommandMergeFile:ConsoleCommandMergeFile\n)
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> LocalStorage : \lloadFromExternalFile(\n\tfilePath:String,\n\tsavedExpenses:ArrayList<Expense>,\n\tsavedRecurringPayments:ArrayList<RecurringPayment>,\n\tsavedIncomes:ArrayList<Income>,\n\tsavedTargets:ArrayList<Target>\n)
+activate LocalStorage STORAGE_COLOR_1
+
+LocalStorage --[STORAGE_COLOR_1]> consoleInterface
+deactivate LocalStorage
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : updateExpenses(savedExpense:ArrayList<Expense>)
+activate expenseManager DATA_COLOR_1
+
+expenseManager --[DATA_COLOR_1]> consoleInterface
+deactivate expenseManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : updateRecurringPayments(savedRecurringPayments:ArrayList<RecurringPayment>)
+activate recurringPaymentManager DATA_COLOR_3
+
+recurringPaymentManager --[DATA_COLOR_3]> consoleInterface
+deactivate recurringPaymentManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> incomeManager : updateIncomes(savedIncomes:ArrayList<Income>)
+activate incomeManager DATA_COLOR_2
+
+incomeManager --[DATA_COLOR_2]> consoleInterface
+deactivate incomeManager
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> targetManager : updateTargets(savedTargets:ArrayList<Target>)
+activate targetManager DATA_COLOR_4
+
+targetManager --[DATA_COLOR_4]> consoleInterface
+deactivate targetManager
+
+    ref over consoleInterface, LocalStorage
+        save data
+    end ref
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+
+
+deactivate consoleInterface
+@enduml

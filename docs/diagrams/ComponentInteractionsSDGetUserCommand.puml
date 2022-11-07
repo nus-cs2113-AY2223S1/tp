@@ -1,13 +1,14 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam noteTextAlignment left
 
-mainframe sd Get User Command
+mainframe sd get user command
 Actor User USER_COLOR
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
 Participant ":Parser" as Parser PARSER_COLOR_1
-Participant ":ConsoleCommandAddExpense" as ConsoleCommandAddExpense PARSER_COLOR_1
+Participant ":Logger" as Logger LOGGER_COLOR_1
+Participant ":ConsoleCommandAddExpense" as ConsoleCommandAddExpense DATA_COLOR_1
 
 activate UserInterface USER_INTERFACE_COLOR_1
 
@@ -27,14 +28,20 @@ end note
 UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface : consoleInput:String
 deactivate UserInterface
 
+UserInterface -[USER_INTERFACE_COLOR_1]> Logger : logCommand(consoleInput:String)
+activate Logger LOGGER_COLOR_1
+
+Logger --[LOGGER_COLOR_1]> UserInterface
+deactivate Logger
+
 UserInterface -[USER_INTERFACE_COLOR_1]> Parser : parse(consoleInput:String)
 activate Parser PARSER_COLOR_1
 
 create ConsoleCommandAddExpense
-Parser -[PARSER_COLOR_1]> ConsoleCommandAddExpense
-activate ConsoleCommandAddExpense PARSER_COLOR_1
+Parser -[PARSER_COLOR_1]> ConsoleCommandAddExpense : create
+activate ConsoleCommandAddExpense DATA_COLOR_1
 
-ConsoleCommandAddExpense --[PARSER_COLOR_1]> Parser
+ConsoleCommandAddExpense --[DATA_COLOR_1]> Parser
 deactivate ConsoleCommandAddExpense
 
 Parser --[PARSER_COLOR_1]> UserInterface : consoleCommand:ConsoleCommandAddExpense

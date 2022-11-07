@@ -1,10 +1,11 @@
 @startuml
-!include https://raw.githubusercontent.com/xzynos/tp/branch-Webpage/docs/diagrams/Styles.puml
+!include Styles.puml
 
 skinparam noteTextAlignment left
 
-mainframe sd Printing an Expense
+mainframe sd printing an expense
 Participant ":UserInterface" as UserInterface USER_INTERFACE_COLOR_1
+Participant ":Logger" as Logger LOGGER_COLOR_1
 
 activate UserInterface USER_INTERFACE_COLOR_1
 
@@ -16,6 +17,12 @@ deactivate UserInterface
 
 UserInterface -[USER_INTERFACE_COLOR_1]> UserInterface : printInformationalMessage(expenseStr:String)
 activate UserInterface USER_INTERFACE_COLOR_1
+
+UserInterface -[USER_INTERFACE_COLOR_1]> Logger : logInformationalMessage(expenseStr:String)
+activate Logger LOGGER_COLOR_1
+
+Logger --[LOGGER_COLOR_1]> UserInterface
+deactivate Logger
 
 UserInterface --[USER_INTERFACE_COLOR_1]> UserInterface
 deactivate UserInterface
