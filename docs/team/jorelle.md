@@ -20,18 +20,25 @@ and transactions via a Command Line Interface.
     + Item-related features:
       + Find items by keyword `find-items`
     + Wrote base class for Ui
-    + Testing: Wrote some Item and ItemList related tests.
+    + Testing: Wrote automated testing scripts for Item and ItemList related tests.
     + DukeException: Contributed to some exception classes and ExceptionMessages.
 + **User Guide contributions:**
-    + Wrote guide for all of the above features
+    + Wrote guide for
+        + `view-user-borrow-tx`
+        + `view-user-lend-tx`
+        + `view-user-gain`
+        + `view-user-loss`
+        + `find users`
+        + `find-items`
 + **Developer Guide contributions:**
     + Contributed to the Implementation subsection for all of the above features. Below are some diagrams drawn:
   ![](../images/ViewBorrowTxByUser.png)
     + Contributed to User Stories
-    + Contributed to User Profile
+    + Contributed to Target User Profile for Upcycle
 + **Team tasks contributions:**
     + Reviewed teammates' PR.
-    + Completed tasks and milestones before the deadline.
+        + For example, the initial name for the 'help' command was 'list-all-commands', which I thought could be confusing for the user, and hence I recommended a naming change.  
+    + Completed tasks and milestones before the deadline, consistently each week.
 + **Community contributions:**
     + Reviewed peers' DG
     + Reported bugs/flaws in peers' tp for PED
