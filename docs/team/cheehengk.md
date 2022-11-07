@@ -54,7 +54,9 @@ Given below are my contributions to the project.
   * Set-up milestones and labels used for the project.
 
 ---
+
 * **Documentation**:
+
   * User Guide
     - Most major features and structure of the document.
   * Developer Guide
