@@ -22,22 +22,22 @@ public abstract class CommonData {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     // Command format
-    public static final String AUTH_FORMAT = "`auth API_KEY` or `a API_KEY` \t: to authenticate your personal API key."
-            + "\n`auth default` or `a default` \t: to authenticate using the default key provided by parKING."
-            + "\n`auth status` or `a status` \t: to get the authentication status.";
+    public static final String AUTH_FORMAT = "`auth API_KEY` or `a API_KEY` \t: To authenticate your personal API key."
+            + "\n`auth default` or `a default` \t: To authenticate using the default key provided by parKING."
+            + "\n`auth status` or `a status` \t: To get the authentication status.";
     public static final String FAVOURITE_FORMAT = "`favourite list` or `fav list` "
-            + "\t: to get the list of favourited carparks.\n`favourite CARPARK_ID` or `fav CARPARK_ID` "
-            + "\t: favourite carpark by its ID.";
+            + "\t: To get the list of favourited carparks.\n`favourite CARPARK_ID` or `fav CARPARK_ID` "
+            + "\t: Favourite carpark by its ID.";
     public static final String UNFAVOURITE_FORMAT = "`unfavourite CARPARK_ID` or `ufav CARPARK_ID` "
-            + "\t: unfavourite carpark by its ID.";
+            + "\t: Unfavourite carpark by its ID.";
     public static final String FIND_FORMAT = "`find CARPARK_ID` or `fin CARPARK_ID` "
-            + "\t: Display information about the specific queried carpark.";
+            + "\t: Display information about the specific queried carpark based on carpark ID.";
     public static final String FILTER_FORMAT = "`filter QUERY` or `fil QUERY`"
             + "\t: Filter carparks based on Carpark information.";
     public static final String FILTER_ADDRESS_FORMAT = "`filter -address QUERY` or `fil -add QUERY` "
             + "\t: Filter carparks based on its Carpark address.";
     public static final String FILTER_ID_FORMAT = "`filter -id QUERY` or `fil -id QUERY` "
-            + "\t: Filter carparks based on its Carpark Id.";
+            + "\t: Filter carparks based on its Carpark ID.";
     public static final String UPDATE_FORMAT = "`update` or `u` \t: To fetch the latest data from LTA.";
     public static final String LIST_FORMAT = "`list` or `l` \t: List the carparks and its details.";
     public static final String EXIT_FORMAT = "`exit` or `e` \t: To quit parKING.";
