@@ -65,6 +65,7 @@ Given below are my contributions to the project.
     - List module feature
     - Storage
     - Other formatting and documentation
+
 ---
 * **Community**:
   * PR(s) reviewed (with non-trivial review comments): example - [\#24](https://github.com/AY2223S1-CS2113-T17-3/tp/pull/24)
