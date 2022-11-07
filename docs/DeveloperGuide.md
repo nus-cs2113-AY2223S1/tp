@@ -445,9 +445,12 @@ Given below are instructions to test the app manually.
 1. Go to Patient menu and return to main
    1. Input `1`. The patient menu should be shown.
    2. Input `main`. The main menu should be shown again.
-2. Go to Visit menu and exit the program
+2. Go to Visit menu and return to main
    1. Input `2`. The visit menu should be shown.
-   2. Input `bye`. The app should end with a greeting.
+   2. Input `main`. The main menu should be shown again.
+3. Go to Prescription menu and exit the program
+    1. Input `3`. The prescription menu should be shown.
+    2. Input `bye`. The app should end with a greeting.
 
 #### Loading sample data
 To load sample data, please reference the following formats:
@@ -462,32 +465,58 @@ To load sample data, please reference the following formats:
 <br>Example: `T1 | penicillin | 1 tablet | every 3 days | T`
 
 #### Patient menu tests
+Please navigate to patient menu by inputting `1` in the main menu before testing the features below.
 
 ##### Adding a new patient
+Please ensure that a patient with ID `T1` doesn't exist before testing this feature, and there is no patient with ID `T2`.
+
+1. Add a valid patient
+    1. Input `add n/Johnny Depp g/M d/08-09-1965 i/T1`.
+    2. The patient should be added successfully with the patient details printed
+2. Add repeated patient
+    1. Input `add n/Elizabeth Swann g/F d/09-11-1975 i/T1`.
+    2. This addition should be rejected, saying the patient ID is already taken
+3. Add patient with invalid format
+    1. Input `add n/Will Turner g/M d/11-12-1972 i/T2`.
+    2. The addition should be rejected with hints of the correct input format for adding patient.
 
 ##### Viewing all patients
 
+1. View patients when there are patients
+    1. Input `viewall`.
+    2. All patients that are saved in the `patient.txt` file should be listed.
+2. View patients when there are no patients
+    1. Clear the `patient.txt` file manually if it is not empty.
+    2. Input `viewall`.
+    3. There should be a message stating that there is no patients in the system.
+
 ##### Retrieving a patient’s records
 
+1. Retrieve a patient with correct format
+    1. Input `retrieve i/T1`.
+   2. The patient should be retrieved successfully with the patient details printed
+2. Retrieve a patient that doesn't exist
+    1. Input `retrieve i/T2`.
+    2. The addition should be rejected with an error message stating that the patient ID doesn't exist
+3. Retrieve a patient with incorrect format
+    1. Input `retrieve T1`.
+    2. The addition should be rejected with an error message stating that the input is incorrectly formatted
+   
 ##### Modifying the details of a patient
 
+1. Edit a patient that doesn't exist
+    1. Input `edit i/T2 n/Will Turner`.
+    2. The addition should be rejected with an error message stating that the patient ID doesn't exist
+2. Edit a patient with incorrect format
+    1. Input `edit i/T1 d/Will Turner`.
+    2. The addition should be rejected with an error message stating that the input for date of birth is wrong
+   
 ##### Viewing the commands in Patient menu
 
-#### Visit menu tests
-
-##### Adding a visit
-
-##### Adding/editing a reason for existing visit
-
-##### Deleting a reason for existing visit
-
-##### Viewing all visits
-
-##### Viewing a patient’s visits
-
-##### Viewing a specific visit
-
-##### Viewing the commands in the Visit menu
+1. Input `help`
+   1. All commands supported in the Prescription menu should be shown.
+2. Input a command that doesn't exist, i.e. `find`
+    1. All commands supported in the Prescription menu should be shown.
 
 #### Prescription menu tests
 Please navigate to prescription menu by inputting `3` in the main menu before testing the features below.
@@ -579,4 +608,9 @@ Please ensure that a patient with ID `T1` and `T2` exists before testing this fe
 ##### Viewing the commands in the Prescription menu
 
 1. Input `help`
-2. All commands supported in the Prescription menu should be shown.
+   1. All commands supported in the Prescription menu should be shown.
+2. Input a command that doesn't exist, i.e. `find`
+    1. All commands supported in the Prescription menu should be shown.
+
+#### Visit menu tests
+Please follow the same format as Patient, but also include testing for `viewPatient` and `viewVisit`
