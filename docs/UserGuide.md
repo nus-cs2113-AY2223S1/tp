@@ -286,8 +286,8 @@ Your MoneyGoWhere? Let me help you track it.
 #### On Linux OS
 
 1. Navigate to the **terminal** by locating it your **launcher** or by searching it in **Activities** at the top left of the screen.
-3. Execute the command  `java -jar MoneyGoWhere.jar`
-4. When successfully run, MoneyGoWhere should display the following message:
+2. Execute the command  `java -jar MoneyGoWhere.jar`
+3. When successfully run, MoneyGoWhere should display the following message:
 
 ```
   __  __                         _____   __          ___                   
@@ -312,15 +312,15 @@ Your MoneyGoWhere? Let me help you track it.
 
 ### Basic commands
 
-| Command               | Syntax                                                                                                                                              |
-|:----------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Add expense           | `Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]` |
-| View expense(s)       | `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`                                                                                           |
-| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]`                              |
-| Add income            | `Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                                                |
-| Add target            | `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                              |
-| View command list     | `Help`                                                                                                                                              |
-| Exit                  | `Bye`                                                                                                                                               |
+| Command               | Syntax                                                                                                                              |
+|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------|
+| Add expense           | `Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]` |
+| View expense(s)       | `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`                                                                           |
+| Add recurring payment | `Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]`              |
+| Add income            | `Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                                                |
+| Add target            | `Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]`                                              |
+| View command list     | `Help`                                                                                                                              |
+| Exit                  | `Bye`                                                                                                                               |
 
 <br>
 
@@ -331,14 +331,14 @@ Your MoneyGoWhere? Let me help you track it.
 
 ## Features
 
-### Listing all available commands: `help`
+### Listing all available commands: `Help`
 Lists all valid commands for MoneyGoWhere.
 
-Syntax: `help`
+Syntax: `Help`
 
 Example of usage:
 
-`help`
+`Help`
 
 _If you would like a more user-friendly view of all available commands, please refer to the [Command Summary](#command-summary) at the end of the guide._
 
@@ -453,11 +453,13 @@ Syntax: `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`
 > ⚠️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `CATEGORY` and `NAME` are text strings.
+> * `CATEGORY` should be entered using its full name.
 > * If any of the optional arguments are provided, MoneyGoWhere will only display the specified expense(s).
 
 <br>
 
 Examples of usage:
+#### Viewing all expenses
 ```
 View-Expense
 
@@ -469,7 +471,6 @@ Amount          : 2999.90
 Remarks         : Submit invoice to finance
 Currency        : SGD
 Mode of Payment : Card
-
 ---- EXPENSE INDEX 1 ----
 Name            : Flash Drive
 Date and Time   : 07 Nov 2022 17:10
@@ -479,6 +480,7 @@ Currency        : USD
 Mode of Payment : PayLah
 Mode of Payment : Card
 ```
+#### Viewing expenses by expense index
 ```
 View-Expense -e 1
 
@@ -488,6 +490,31 @@ Date and Time   : 07 Nov 2022 17:10
 Amount          : 28.00
 Category        : Work Expenses
 Currency        : USD
+Mode of Payment : Card
+```
+#### Viewing expenses by category
+```
+View-Expense -c "Work Expenses"
+
+---- EXPENSE INDEX 0 ----
+Name            : Flash Drive
+Date and Time   : 07 Nov 2022 17:10
+Amount          : 28.00
+Category        : Work Expenses
+Currency        : USD
+Mode of Payment : Card
+```
+#### Viewing expenses containing specified keyword in name
+```
+View-Expense -n "Work"
+
+---- EXPENSE INDEX 0 ----
+Name            : Work Laptop
+Date and Time   : 01 Jan 2022 12:00
+Description     : Development Laptop
+Amount          : 2999.90
+Remarks         : Submit invoice to finance
+Currency        : SGD
 Mode of Payment : Card
 ```
 
@@ -741,7 +768,9 @@ Displays the past recurring payments you have added.
 Syntax: `View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `RECURRINGPAYMENT-INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
+> * `RECURRINGPAYMENT-INDEX` is an integer value. 
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 <br>
 
@@ -903,7 +932,7 @@ The recurring payment was added as an expense successfully.
 
 ## Sub-Contents
 * [Adding an income](#adding-an-income-add-income): `Add-Income`
-* [Viewing income](#viewing-incomes-view-income): `View-Income`
+* [Viewing income(s)](#viewing-incomes-view-income): `View-Income`
 * [Deleting an income](#deleting-an-income-delete-income): `Delete-Income`
 * [Editing an income](#editing-an-income-edit-income): `Edit-Income`
 * [Back to Contents](#contents)
@@ -963,12 +992,15 @@ Displays past incomes you have added.
 Syntax: `View-Income [-e INCOME-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `INCOME-INDEX` is an integer value. This value should be equal to or greater than 0.
-> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+> * `INCOME-INDEX` is an integer value.
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified income.
 
 <br>
 
 Examples of usage:
+
+#### Viewing all incomes
 ```
 View-Income
 
@@ -982,6 +1014,7 @@ Date and Time : 01 Feb 2022 23:59
 Description   : Investment payouts
 Amount        : 500.00
 ```
+#### Viewing incomes by income index
 ```
 View-Income -e 1
 
@@ -1136,12 +1169,15 @@ Displays past targets you have added.
 Syntax: `View-Target [-e TARGET-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `TARGET-INDEX` is an integer value. This value should be equal to or greater than 0.
-> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+> * `TARGET-INDEX` is an integer value.
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified target.
 
 <br>
 
 Examples of usage:
+
+#### Viewing all targets
 ```
 View-Target
 
@@ -1157,6 +1193,7 @@ Description   : Money spent on food
 Amount        : 1000.00
 Current Amount: 1500.00
 ```
+#### Viewing targets by target index
 ```
 View-Target -e 1
 
