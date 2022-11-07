@@ -9,8 +9,6 @@ import java.util.logging.Logger;
 
 public class RecipeFileParser {
 
-    private static final Logger logger = Logger.getLogger(RecipeFileParser.class.getName());
-
     public static final String TITLE_ONE_LINE = "TITLE should be a single line and less than 255 characters";
     public static final String TITLE_ERROR_ALPHANUMERIC = "TITLE contains characters that are not alphanumeric "
             + "(except whitespace)";
@@ -36,13 +34,15 @@ public class RecipeFileParser {
     public static final String WRONG_HEADING = "Cannot parse HEADING! Please follow the template and don't use # in "
             + "content";
     public static final String EMPTY = "There is an empty field. The recipe is not valid";
-    private static final String HASHTAG = "Don't use # in the content if it is not a heading";
     private static final String TITLE_STRING = "title";
     private static final String DESCRIPTION_STRING = "description";
     private static final String INGREDIENTS_STRING = "ingredients";
     private static final String STEPS_STRING = "steps";
     private static final String HASH_DIVIDER = "#";
-
+    private static final int START_INDEX = 0;
+    private static final int AMOUNT_INDEX = 1;
+    private static final int UNIT_INDEX = 2;
+    private static final int CORRECT_LENGTH = 3;
 
     Recipe recipe = new Recipe();
     LineType lineType;
@@ -69,7 +69,7 @@ public class RecipeFileParser {
     public Recipe parseTextToRecipe(String text) throws ParseFileException {
         parsedLine = text.split("\n");
         // Go down line by line
-        for (int i = 0; i < parsedLine.length; i++) {
+        for (int i = START_INDEX; i < parsedLine.length; i++) {
             line = parsedLine[i];
             lineType = checkLineType(line, stageCounter);
             parsingSequence();
@@ -155,7 +155,7 @@ public class RecipeFileParser {
         String trimmedLine = line.trim();
         if (trimmedLine.contains(HASH_DIVIDER)) {
             String[] parsedWords = trimmedLine.replace(HASH_DIVIDER, Ui.SPACE_DIVIDER).trim().split(Ui.SPACE_DIVIDER);
-            switch (parsedWords[0].toLowerCase()) {
+            switch (parsedWords[START_INDEX].toLowerCase()) {
             case TITLE_STRING:
                 incrementStageCounterAt(stageCounter, 0);
                 return LineType.TITLE;
@@ -207,14 +207,13 @@ public class RecipeFileParser {
     private Ingredient parsedIngredient(String line, int index) throws ParseFileException {
 
         String[] parsedSlashed = line.split("/");
-        String[] parsedDot = parsedSlashed[0].split("\\.");
+        String[] parsedDot = parsedSlashed[START_INDEX].split("\\.");
 
-
-        if (parsedSlashed.length != 3) {
+        if (parsedSlashed.length != CORRECT_LENGTH) {
             throw new ParseFileException(INGREDIENT_ERROR_FORMAT);
         }
 
-        int lineIndex = ingredientParsedIndex(parsedDot[0]);
+        int lineIndex = ingredientParsedIndex(parsedDot[START_INDEX]);
         if (isNotPositive(lineIndex)) {
             throw new ParseFileException(INGREDIENT_ERROR_INDEX);
         }
@@ -222,16 +221,16 @@ public class RecipeFileParser {
             throw new ParseFileException(INGREDIENT_ERROR_INDEX_INCREMENT);
         }
 
-        String name = parsedSlashed[0].replace(String.format("%d.",lineIndex),"");
-        Double amount = ingredientParsedAmount(parsedSlashed[1]);
-        String unit = parsedSlashed[2];
+        String name = parsedSlashed[START_INDEX].replace(String.format("%d.",lineIndex), Ui.EMPTY_STRING);
+        Double amount = ingredientParsedAmount(parsedSlashed[AMOUNT_INDEX]);
+        String unit = parsedSlashed[UNIT_INDEX];
         return new Ingredient(name, amount, unit);
     }
 
     private String parsedStep(String line, int index) throws ParseFileException {
         String[] parsed = line.split("\\.");
 
-        int lineIndex = stepParseIndex(parsed[0]);
+        int lineIndex = stepParseIndex(parsed[START_INDEX]);
 
         if (isNotPositive(lineIndex)) {
             throw new ParseFileException(STEP_ERROR_INDEX);
@@ -240,7 +239,7 @@ public class RecipeFileParser {
             throw new ParseFileException(STEP_ERROR_INDEX_INCREMENT);
         }
 
-        return line.replace(String.format("%d.", lineIndex),"").trim();
+        return line.replace(String.format("%d.", lineIndex), Ui.EMPTY_STRING).trim();
     }
 
 
