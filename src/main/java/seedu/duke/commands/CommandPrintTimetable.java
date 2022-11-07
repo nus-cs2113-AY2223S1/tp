@@ -54,7 +54,7 @@ public class CommandPrintTimetable {
 
     /**
      * Initialize list of lesson data type
-     * and list of empty slot list, a pair of integers
+     * and list of empty slot list, a pair of integers.
      *
      */
     private static void initializeRawTimeTable() {
@@ -142,7 +142,7 @@ public class CommandPrintTimetable {
 
     /**
      * Convert 24-hour data from nusMODS to integer of slots for use of
-     * lesson data structure in printTimetable method
+     * lesson data structure in printTimetable method.
      *
      * @param day Day of the week.
      * @param startTime Starting time of the lesson.
