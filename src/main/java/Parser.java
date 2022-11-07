@@ -333,7 +333,7 @@ public class Parser {
         }
     }
 
-    private void checkDate(int day, int month, String date) throws OneDocException {
+    private static void checkDate(int day, int month, String date) throws OneDocException {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu", Locale.US)
                     .withResolverStyle(ResolverStyle.STRICT);
@@ -348,7 +348,7 @@ public class Parser {
         }
     }
 
-    private void checkDateForVisit(String date) throws OneDocException {
+    private static void checkDateForVisit(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             checkDate(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),date);
@@ -361,7 +361,7 @@ public class Parser {
         }
     }
 
-    private void checkBirthDate(String date) throws OneDocException {
+    private static void checkBirthDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             int day = Integer.parseInt(dateSplit[0]);
@@ -378,7 +378,7 @@ public class Parser {
     }
 
 
-    private void checkTime(String time) throws OneDocException {
+    private static void checkTime(String time) throws OneDocException {
         try {
             String[] timeSplit = time.split(":");
             int hour = Integer.parseInt(timeSplit[0]);
@@ -617,6 +617,11 @@ public class Parser {
         if (!inputs[2].equals("M") && !inputs[2].equals("F")) {
             return false;
         }
+        try {
+            checkBirthDate(inputs[1]);
+        } catch (OneDocException e) {
+            return false;
+        }
         return !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[3].isEmpty();
     }
 
@@ -628,6 +633,16 @@ public class Parser {
             return false;
         }
         if (inputs[0].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        try {
+            checkDateForVisit(inputs[2]);
+        } catch (OneDocException e) {
+            return false;
+        }
+        try {
+            checkTime(inputs[3]);
+        } catch (OneDocException e) {
             return false;
         }
         return patientList.containsPatientID(inputs[0]);
