@@ -2,7 +2,7 @@
 
 Property Rental Manager (PRM) is a desktop application that helps property agents manage, filter and monitor single 
 owner rental units for appropriate tenants. This application uses Command Line Interface (CLI) and is able to display 
-information quickly with minimal latency.
+information quickly with minimal latency.  Also, the application is tailored to Singapore context.
 
 * [Quick Start](#quick-start)
 * [Features](#features)
