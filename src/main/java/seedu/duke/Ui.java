@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class Ui {
+    //@@author indraneelrp
     private static Logger logger = Logger.getLogger("DukeLogger");
     final String exitTrigger = "bye";
     protected boolean isExit;
@@ -38,7 +39,6 @@ public class Ui {
     }
 
     //@@author naz019
-
     /**
      * Prints the specified input to user.
      * @param toPrint input to print.

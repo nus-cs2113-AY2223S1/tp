@@ -26,6 +26,9 @@ public class Duke {
         storage = new Storage(filepath, folderpath);
     }
 
+    /**
+     * Runs the main sequence of the Duke program.
+     */
     public void run() {
         //@@author indraneelrp
         setupLogger();
@@ -42,6 +45,9 @@ public class Duke {
         ui.printExitGreeting();
     }
 
+    /**.
+     * Sets up the logger so that logger information will be directed to a log file
+     */
     private static void setupLogger() {
         LogManager.getLogManager().reset();
         lg.setLevel(Level.ALL);
