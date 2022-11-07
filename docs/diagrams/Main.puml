@@ -12,7 +12,6 @@ Class Recipeditor
 Class Parser
 Class Storage
 Class Ui
-'Class AddMode
 
 Recipeditor ..> Ui : > execute
 Recipeditor ..> Parser : > execute

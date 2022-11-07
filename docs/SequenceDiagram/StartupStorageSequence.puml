@@ -50,28 +50,34 @@ FileDirectory --> store: return content of `AllRecipes.txt`
 store -> titleparse: parseTitleFileToRecipeTitles(content)
 loop line of `AllRecipes.txt`
     alt line is blank || not alphanumerical || >255 characters
-    else no recipe file with that title
+    ref over titleparse
+    continue
+    end
+    end alt
+    alt no recipe file with that title
     titleparse -> store: checkIfFileExists()
     store -> FileDirectory: check file existence
-    else
-    titleparse -> recipelist: addRecipeTitle(line)
+    ref over titleparse
+    continue
+    end
     end alt
-end loop
-destroy titleparse
 
-recipeditor -> store: loadRecipesToRecipeList()
-
-loop String recipeTitle : RecipeList.iterateRecipeTitles()
-store -> store: loadFileContent(recipeFilePath)
+titleparse -> store: loadFileContent(recipeFilePath)
 store -> FileDirectory: via Scanner
 FileDirectory --> store: return content of recipeFilePath
-store -> recipeparse: parseTextToRecipe(content)
+store --> titleparse: return content of recipeFilePath
+titleparse -> recipeparse: parseTextToRecipe(content)
     ref over recipeparse
         Parse Text to Recipe
     end
-recipeparse --> store: return addedRecipe
-store -> recipelist: addRecipe(addedRecipe)
+recipeparse --> titleparse: return addedRecipe
+titleparse -> recipelist: addRecipe(addedRecipe)
+    titleparse -> recipelist: addRecipeTitle(line)
+
+
 end loop
+destroy titleparse
+
 
 
 

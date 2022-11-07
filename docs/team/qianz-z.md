@@ -29,6 +29,7 @@ The following sections summarise what I have contributed to the project.
   the users previously saved.
 - Pull requests: [#73](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/73)
 
+<div style="page-break-after: always;"></div>
 
 #### **New Feature**: Find relevant Recipes according to user's input of recipe title or ingredient name
 - What it does:
@@ -81,20 +82,22 @@ The following sections summarise what I have contributed to the project.
 - Created labels with relevant description, and milestones with due date
 - Created issues and user stories for `v1.0`, `v2.0`
 - Updated and resolved PE-D issues to team for `v2.1`
-  ([#107](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/107),
+  ([#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90),
   [#104](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/104),
-  [#90](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/90))
-- Helped to find bugs and assign new issues to address bugs
-  ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149)),
-  ([#170](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/170)),
-  ([#171](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/171))
-- Helped to review, give comments, approve and merge Github pull requests. ([#168](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/168))
+  [#107](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/107))
+- Helped to find bugs and assign these new issues
+  ([#149](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/149),
+  [#170](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/170),
+  [#171](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/171))
+- Helped to find bugs and solve them ([#176](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/176) to [#180](https://github.com/AY2223S1-CS2113-T18-2/tp/issues/180))
+- Helped to review with non-trivial comments on teammate's Github pull requests. ([#168](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/168), [#172](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/172), [#190](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/190))
+- Initiation of weekly meeting (both physical and online)
 
 ### **Enhancements To Existing Features**:
 
 #### **Built the skeleton code for Command classes**
 To start off the project, we needed a base structure to build on for parsing and execution of commands.
-I set up the abstract `Command` class and the initial few `XYZCommand` classes for v1.0 to provide the
+I set up the abstract `Command` class and the initial few `Command` classes for v1.0 to provide the
 structure for the rest of the team to build on.
 ([#1](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/1))
 
@@ -111,9 +114,13 @@ recipe. This helps to make the editing, deletion and finding of recipes easier.
   - Added description of command, format, code example and important notes to all commands. ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
   - Update Data Management section and Command Summary ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
   - Added shortcuts back to content page after every major section for easier navigation. (([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132)))
+  - Updated the User Guide as the code updates
 - Developer Guide:
-  - Created the architecture diagram ()
+  - Created the architecture diagram ([#173](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/173))
   - Added documentation and class diagram for the [_`Storage` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#storage-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Standardised styling for PlantUML diagrams
-  - Standardised the styling.
+  - Standardised the styling
+
+#### **Community**:
+- Reporting of bugs and giving suggestions to other groups during [PE-D](https://github.com/qianz-z/ped/issues)

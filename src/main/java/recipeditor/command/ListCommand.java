@@ -6,11 +6,11 @@ import recipeditor.ui.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_TYPE = "/list";
-    private static final String COMMAND_SYNTAX = "/list";
+    public static final String COMMAND_NAME = "list";
     private static final String COMMAND_FUNCTION = "Show a list of all recipe titles in recipeditor.";
 
     public ListCommand() {
-        super(COMMAND_SYNTAX, COMMAND_FUNCTION);
+        super(COMMAND_TYPE, COMMAND_FUNCTION);
     }
 
     /**

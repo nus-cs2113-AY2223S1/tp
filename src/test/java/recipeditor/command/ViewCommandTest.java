@@ -75,7 +75,7 @@ class ViewCommandTest {
         int index = RecipeList.getRecipeIndexFromTitle(testTitle) + 1;
         String input = "/view -id " + index;
         String expected = "TITLE:\n" + "Test Title for View Command\n" + "\n" + "DESCRIPTION:\n" + "\n" + "\n"
-                + "INGREDIENTS: \n" + "\n" + "STEPS: \n" + "\n" + "\n";
+                + "INGREDIENTS: \n" + "\n" + "STEPS: \n";
         Command commandExecuted = Parser.parseCommand(input);
         CommandResult commandExecutedResult = commandExecuted.execute();
         assertEquals(expected, commandExecutedResult.getMessage());
