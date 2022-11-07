@@ -314,12 +314,9 @@ testing.
     * Open your terminal and redirect it to the folder that you previously downloaded the jar file into
     * Please type in "java -jar tp.jar" and press "Enter" to run the file. (Expected: A data.txt file will be created).
 
-Saving window preferences
-
-Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-Re-launch the app by double-clicking the jar file.
-Expected: The most recent window size and location is retained.
+* Shutdown
+  * Please type in "exit" and press "Enter" to exit the program. (Expected: A data.txt file will be saved with all the
+  latest record infos).
 
 ### Adding a food record
 
