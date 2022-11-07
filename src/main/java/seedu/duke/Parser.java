@@ -33,6 +33,7 @@ public class Parser {
         case COMMAND_SET:
             return CommandSetLesson.setLesson();
         case COMMAND_PRINT:
+            // Timetable.timetableDict.print();
             return CommandPrintTimetable.viewTimetable();
         case COMMAND_ALLOCATE:
             return Timetable.allocateModules();

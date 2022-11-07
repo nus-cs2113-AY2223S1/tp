@@ -101,8 +101,13 @@ public class Module {
             if (!entry.containsKey(lessonType)) {
                 entry.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
             }
-            if (lessonMap.get(lessonType).size() == 1) {
+            if (lessonMap.get(lessonType).size() == 1) { //only one class
+                String classNumber = "";
+                for (String currClassNumber : lessonMap.get(lessonType).keySet()) {
+                    classNumber = currClassNumber;
+                }
                 entry.replace(lessonType, new LinkedHashMap<>(lessonMap.get(lessonType)));
+                Timetable.timetableDict.addClass(lessonMap.get(lessonType).get(classNumber));
             } else {
                 int numOfClasses = 0;
                 for (ArrayList<Lesson> numberedClass : new ArrayList<>(lessonMap.get(lessonType).values())) {
@@ -272,6 +277,13 @@ public class Module {
 
     public void replaceAllAttending(LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> loadedLessons) {
         this.attendingMap = loadedLessons;
+        for (String lessonType : loadedLessons.keySet()) {
+            LinkedHashMap<String, ArrayList<Lesson>> classes = loadedLessons.get(lessonType);
+            for (String classNumber : classes.keySet()) {
+                List<Lesson> currClass = loadedLessons.get(lessonType).get(classNumber);
+                Timetable.timetableDict.addClass(currClass);
+            }
+        }
         this.attendingList = getAttendingInListForm();
     }
 

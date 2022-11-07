@@ -194,8 +194,8 @@ public class TimetableDict {
      * @return Successful/Unsuccessful allocation message
      */
     public String allocateModules() {
-        String resultString = "Sorry these modules have too many lessons for us to check, please manually "
-                                + "allocate them before trying again:\n";
+        String resultString = "Sorry these modules have too many lessons for us to check, please manually"
+                                + " allocate them before trying again:\n";
 
         
         List<Module> listOfModules = Timetable.getListOfModules();
@@ -450,5 +450,19 @@ public class TimetableDict {
         List<List<List<Lesson>>> result = generateLessonPermutations(numOfClassesPerType, 
                                                 lessonTypes, numOfPermutations, module);
         return result;
+    }
+
+    //For debugging
+    public void print() {
+        for (String day : timetable.keySet()) {
+            System.out.println(day + ":");
+            for (String time : timetable.get(day).keySet()) {
+                if (timetable.get(day).get(time) == null) {
+                    System.out.println("_______");
+                    continue;
+                }
+                System.out.println(time + ": " + timetable.get(day).get(time).getModuleCode());
+            }
+        }
     }
 }

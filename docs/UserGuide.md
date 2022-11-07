@@ -156,16 +156,34 @@ Successfully deleted module!
 ###  <span style="color:orange ">Auto-allocating all modules: `allocate`</span>
 Command used to initiate the process of automatically allocating modules.
 
-* Modules are allocated in the order they were added / listed as per the command `list`.
+* Modules that have a large number of possible lesson permutations are not supported and the `allocate` command will return
+a string telling the user to manually set those lessons before running the command again.
 * In the case where it is impossible to have a permutation of lessons such that there is no clash, the user will be notified and the lessons will not be allocated.
 * Users can still choose to manually set the modules to clash with the command `set`.
+* Lessons which have already been set by the user or automatically set due to it being a fixed lesson will not be altered. Hence, if a user manually sets a clash,
+the `allocation` command will not resolve such clashes.
+* As the number of permutations that the program has to consider can be very large, some time may be needed for the program to run.
+If no error messages are shown, the program is still running as expected.
 
-**Example of Usage:**
-input: `allocate`
-
+**Example of Usage:** input: `allocate`
+* Successful allocation with no clashes:
 ```
 All your mods have been successfully allocated!
 ```
+
+* Allocation with some clashes:
+```
+Sorry we were unable to allocate timings for these modules due to timetable clashes:
+CDE2000 (Tutorial)
+Please rearrange some of your modules and try again!
+```
+
+* Modules has too many possible lessons:
+```
+Sorry these modules have too many lessons for us to check, please manually allocate them before trying again:
+MA2001 (Linear Algebra I)
+```
+
 ---
 ###  <span style="color:orange ">Printing the timetable: `print`</span>
 Command used to produce a timetable for a straightforward view.
