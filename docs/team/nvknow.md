@@ -52,7 +52,6 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 - Serving as a team leader
 - Deciding on weekly meetings and task assignments
 - Maintaining the issue tracker
-  ![image-20221106145033594](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221106145033594.png)
 - Maintaining the milestone
 - Release management
 - Opened pull request from team repo to module repo
@@ -64,8 +63,8 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 **Contributions beyond the project team**
 
-- Reviewed the pull requests of another team
-  ![review](D:\Junior1\CS2113\PPP graphs\review.jpg)
+- Reviewed the pull requests of another team: [CS2113-T17-3](https://github.com/nus-cs2113-AY2223S1/tp/pull/10)
+- Reported more than 10 bugs in the PE-D Dry Run: [CS2113T-W11-1](https://github.com/nvknow/ped/issues)
 
   
 
