@@ -23,13 +23,13 @@
         * [Checking compatibility](#checking-compatibility-check)
         * [Information about a build](#information-about-a-build-info)
         * [Exporting a build](#exporting-a-build-export)
-        * [Exiting edit mode](#exiting-build-editing-mode-back)
+        * [Exiting Build Editing Mode](#exiting-build-editing-mode-back)
     * [Storage](#storage)
     * [Export](#export)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
-    * [Main Mode Summary](#build-management-mode-summary)
-    * [Edit Mode Summary](#build-editing-mode-summary)
+    * [Build Management Mode Summary](#build-management-mode-summary)
+    * [Build Editing Mode Summary](#build-editing-mode-summary)
 * [Glossary](#glossary)
     * [PC Component Parameters Glossary](#pc-component-parameters-glossary)
 
@@ -240,6 +240,7 @@ ____________________________________________________________
 No builds that meet specifications found.
 ____________________________________________________________
 ```
+
 ```
 ____________________________________________________________
 filter/price/3000/4000
