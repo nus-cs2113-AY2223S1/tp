@@ -203,6 +203,7 @@ Possible Error:
 
 1. Wrong module format:
     - The module code must be an exact match (CS2030 instead of cs203) else nothing will be added.
+   
    ```
    Sem [1] >> add cs203
    --------------------------------------------------------------------------------
@@ -219,6 +220,7 @@ Possible Error:
 
 2. More than one module:
     - Currently, YAMOM only support adding one module at a time.
+   
    ```
    Sem [1] >> add CS1231 CS2101
    --------------------------------------------------------------------------------
