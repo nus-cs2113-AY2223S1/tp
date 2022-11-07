@@ -16,21 +16,22 @@ Command Line Interface (CLI) and is able to display information quickly with min
 3. service add d/haircut
 4. service view
 5. employee add n/chris
-6. appointment add s/haircut p/2001 d/2022-12-29
-7. appointment view
-8. task add i/3001 e/1001 d/prepare hot water
-9. task add i/3001 e/1001 d/wash hair
-10. task view
-11. employee add n/sally
-12. task reassign i/4001 e/1002
-13. task finish i/4001
-14. task finish i/4002
-15. task view
-16. appointment view
-17. pet view
-18. appointment remove i/3001
-19. pet remove i/2001
-20. bye
+6. employee view
+7. appointment add s/haircut p/2001 d/2022-12-29
+8. appointment view
+9. task add i/3001 e/1001 d/prepare hot water
+10. task add i/3001 e/1001 d/wash hair
+11. task view
+12. employee add n/sally
+13. task reassign i/4001 e/1002
+14. task finish i/4001
+15. task finish i/4002
+16. task view
+17. appointment view
+18. pet view
+19. appointment remove i/3001
+20. pet remove i/2001
+21. bye
 
 
 ## Features 
