@@ -162,7 +162,9 @@ public class LocalStorage {
                     savedIncomes.add(loadIncome);
                 }
             }
+
             System.out.println(Messages.LOCAL_STORAGE_MESSAGE_LOAD_SUCCESS);
+
             return sortCommandSetting;
         } catch (FileNotFoundException e) {
             initialiseFile();
