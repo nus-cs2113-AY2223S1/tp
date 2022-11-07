@@ -4,6 +4,9 @@
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
 <br>
 
+<div style="page-break-after: always;"></div>
+
+
 ## Contents
 * [Introduction](#introduction)
 * [How to use the User Guide](#how-to-use-the-user-guide)
@@ -68,6 +71,8 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Understanding symbols used in the User Guide
 
 <br>
@@ -104,6 +109,8 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Understanding the Command Syntax
 
 <br>
@@ -120,6 +127,7 @@ When inputting arguments:
 Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
 > ❌ Invalid Input
+> 
 > `Add-Expense -n Lunch`
 >
 > `Add-Expense -a 13.37`
@@ -137,6 +145,8 @@ Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATE
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Additional Syntax
 
@@ -195,7 +205,9 @@ Example:
 ```
 Add-Expense -n "-n" -a 13.37
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
+ERROR: The arguments entered are invalid.
+SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY]
+[-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 ```
 <br>
 
@@ -203,6 +215,8 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT 
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -231,6 +245,8 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT 
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### How to run MoneyGoWhere
 
@@ -309,6 +325,8 @@ Your MoneyGoWhere? Let me help you track it.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Basic commands
 
 | Command               | Syntax                                                                                                                              |
@@ -327,6 +345,8 @@ Your MoneyGoWhere? Let me help you track it.
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -392,6 +412,7 @@ Merging a file: Merge-File -p PATH-STRING
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
 
 ### Adding an expense: `Add-Expense`
 
@@ -452,9 +473,9 @@ Syntax: `View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]`
 > ⚠️ Syntax Notes
 > * `EXPENSE-INDEX` is an integer value. This value should be equal to or greater than 0.
 > * `CATEGORY` and `NAME` are text strings.
-> * Please enter the full name of the specified category.
-> * If any of the optional arguments are provided, MoneyGoWhere will only display the specified expense(s).
-> * Please enter one argument at a time.
+> * `CATEGORY` should be entered using its full name.
+> * The optional arguments can only be used one at a time.
+
 <br>
 
 Examples of usage:
@@ -470,7 +491,6 @@ Amount          : 2999.90
 Remarks         : Submit invoice to finance
 Currency        : SGD
 Mode of Payment : Card
-
 ---- EXPENSE INDEX 1 ----
 Name            : Flash Drive
 Date and Time   : 07 Nov 2022 17:10
@@ -480,8 +500,9 @@ Currency        : USD
 Mode of Payment : PayLah
 Mode of Payment : Card
 ```
-#### Viewing expenses by specified expense index
-```
+
+#### Viewing expenses by expense index
+
 View-Expense -e 1
 
 ---- EXPENSE INDEX 1 ----
@@ -492,8 +513,9 @@ Category        : Work Expenses
 Currency        : USD
 Mode of Payment : Card
 ```
-#### Viewing expenses by specified category
-```
+
+#### Viewing expenses by category
+
 View-Expense -c "Work Expenses"
 
 ---- EXPENSE INDEX 0 ----
@@ -553,6 +575,8 @@ The expense was deleted successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an expense: `Edit-Expense`
 Edits an existing expense in the list of expenses.
 
@@ -608,6 +632,8 @@ The expense was edited successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting expenses: `Sort-Expense`
 Sorts the list of expenses according to an alphabetical, amount, date or currency order. It can be sorted in both ascending and
 descending order.
@@ -661,6 +687,8 @@ Your expenses have been sorted successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Converting the currency of an expense: `Convert-Currency`
 Converts the currency of an expense from the list of expenses.
 
@@ -698,6 +726,8 @@ The expense's currency was changed successfully.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Managing your recurring payments
 
 ## Sub-Contents
@@ -711,6 +741,8 @@ The expense's currency was changed successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a recurring payment: `Add-RecurringPayment`
 Adds a recurring payment to the list of recurring payments.
@@ -768,7 +800,9 @@ Displays the past recurring payments you have added.
 Syntax: `View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `RECURRINGPAYMENT-INDEX` is an integer value. If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
+> * `RECURRINGPAYMENT-INDEX` is an integer value. 
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified recurring payment.
 
 <br>
 
@@ -930,7 +964,7 @@ The recurring payment was added as an expense successfully.
 
 ## Sub-Contents
 * [Adding an income](#adding-an-income-add-income): `Add-Income`
-* [Viewing income](#viewing-incomes-view-income): `View-Income`
+* [Viewing income(s)](#viewing-incomes-view-income): `View-Income`
 * [Deleting an income](#deleting-an-income-delete-income): `Delete-Income`
 * [Editing an income](#editing-an-income-edit-income): `Edit-Income`
 * [Back to Contents](#contents)
@@ -938,6 +972,8 @@ The recurring payment was added as an expense successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an income: `Add-Income`
 Adds a new income to the list of incomes.
@@ -990,12 +1026,14 @@ Displays past incomes you have added.
 Syntax: `View-Income [-e INCOME-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `INCOME-INDEX` is an integer value. This value should be equal to or greater than 0.
-> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+> * `INCOME-INDEX` is an integer value.
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified income.
 
 <br>
 
 Examples of usage:
+
 #### Viewing all incomes
 ```
 View-Income
@@ -1010,7 +1048,9 @@ Date and Time : 01 Feb 2022 23:59
 Description   : Investment payouts
 Amount        : 500.00
 ```
-#### Viewing incomes by specified income index
+
+#### Viewing incomes by income index
+
 ```
 View-Income -e 1
 
@@ -1111,6 +1151,8 @@ The income was edited successfully.
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a target: `Add-Target`
 Adds a new target to the list of targets.
 
@@ -1165,12 +1207,14 @@ Displays past targets you have added.
 Syntax: `View-Target [-e TARGET-INDEX]`
 
 > ⚠️ Syntax Notes
-> * `TARGET-INDEX` is an integer value. This value should be equal to or greater than 0.
-> * If this argument is provided, MoneyGoWhere will only display the specified expense.
+> * `TARGET-INDEX` is an integer value.
+>   * This value should be equal to or greater than 0.
+>   * If this argument is provided, MoneyGoWhere will only display the specified target.
 
 <br>
 
 Examples of usage:
+
 #### Viewing all targets
 ```
 View-Target
@@ -1187,7 +1231,9 @@ Description   : Money spent on food
 Amount        : 1000.00
 Current Amount: 1500.00
 ```
-#### Viewing targets by specified target index
+
+#### Viewing targets by target index
+
 ```
 View-Target -e 1
 
@@ -1233,6 +1279,8 @@ The target was deleted successfully.
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a target: `Edit-Target`
 Edits an existing target in the list of targets.
@@ -1315,15 +1363,15 @@ Example of usage:
 <br>
 <br>
 
-## Exiting the application: `bye`
+## Exiting the application: `Bye`
 
 Exits MoneyGoWhere.
 
-Syntax: `bye`
+Syntax: `Bye`
 
 Example of usage:
 
-`bye`
+`Bye`
 
 <br>
 
@@ -1349,6 +1397,8 @@ A compilation of frequently asked questions that can help you clarify common mis
 
 <br>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
