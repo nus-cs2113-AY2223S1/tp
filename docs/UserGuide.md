@@ -120,6 +120,7 @@ When inputting arguments:
 Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
 > ❌ Invalid Input
+> 
 > `Add-Expense -n Lunch`
 >
 > `Add-Expense -a 13.37`

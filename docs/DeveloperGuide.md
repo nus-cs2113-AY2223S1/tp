@@ -259,8 +259,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 
 <br>
 
-1. `UserInterface` calls the corresponding convert object function based on the data object's class.\
-   In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
+1. `UserInterface` calls the corresponding convert object function based on the data object's class.
+   1. In the example above, `UserInterface` calls `UserInterface#convertExpenseToConsoleString()` to convert the expense object into a formatted string.
 2. `UserInterface` calls `UserInterface#printInformationalMessage()` to print the formatted string.
 3. `UserInterface#printInformationalMessage()` calls `System.out.println()` to print the formatted string to a standard out.
 4. `UserInterface#printInformationalMessage()` calls `Logger#logInformationalMessage()` to log the formatted string to a log file.
@@ -324,10 +324,11 @@ The Exceptions component consists of various exception classes which inherits fr
 
 <br>
 
-The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.\
-For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
-Do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package to view the full list of exceptions.
+The exceptions are thrown and handled by the program depending on the conditions outlined in their Javadoc comments.
 
+For example, `ConsoleParserCommandAddExpenseInvalidException` is thrown when an error is encountered while parsing the command.
+
+To view the full list of exceptions, do refer to the [exceptions](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/exceptions) package.
 <br>
 
 [Back to Sub-Contents](#design)
@@ -413,7 +414,7 @@ For example, supplying the command string `Add-Expense -n Expense -a 7.80` to `C
 
 <br>
 
-*To view the full list of console command subclasses, do refer to the [commands package](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands).*
+*To view the full list of console command subclasses, do refer to the [commands](https://github.com/AY2223S1-CS2113T-W11-1/tp/tree/master/src/main/java/seedu/moneygowhere/commands) package.*
 
 <br>
 
@@ -483,7 +484,7 @@ The API component consists of the classes `CurrencyApiManager` and `CurrencyApi`
 
 The `CurrencyApiManager` class calls functions in `CurrencyApi`.
 
-The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a HashMap of exchange rates.\
+The `CurrencyApi` class contains functions that fetches data from the API and loads that data into a HashMap of exchange rates.
 
 <br>
 
