@@ -34,7 +34,9 @@ Given below are my contributions to the project.
 
 * Documentation:
     * User Guide:
-        * Added documentation for the features mark and view exercise, add and find strength exercise.
+        * Added documentation for the features mark and view exercise, add and find strength
+          exercise.
+      <div style="page-break-after: always;"></div>
     * Developer Guide:
         * Added architecture diagram
         * Added sequence diagram for add feature
