@@ -205,7 +205,8 @@ Example:
 ```
 Add-Expense -n "-n" -a 13.37
 
-ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
+ERROR: The arguments entered are invalid.
+SYNTAX: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
 ```
 <br>
 
