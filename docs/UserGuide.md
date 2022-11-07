@@ -277,7 +277,7 @@ Format: `/list`
 Example:
 ```
 /list
-
+There are 3 recipes in the recipe list
 1. Apple Crumble
 2. Gyoza
 3. Nasi Briyani
@@ -319,6 +319,7 @@ Recipe Steps:
 4. Once the water has reached a rolling boil, add the dry pasta, and cook, uncovered, at a rolling boil.
 5. Add the beaten egg mixture.
 6. Pour the mixture over the pasta.
+
 ```
 [⏫ Back to content page](#content-page)
 
@@ -360,7 +361,7 @@ Example:
 ```
 /help find
 
-Syntax: /find <ingredient/title>
+Syntax: /find -<flag> <recipe title/ingredient name>
 Description: For the given ingredient or title, find recipes which contains it.
 ```
 
