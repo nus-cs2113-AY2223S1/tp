@@ -194,7 +194,7 @@ public class TimetableDict {
      * @return Successful/Unsuccessful allocation message
      */
     public String allocateModules() {
-        String resultString = "Sorry these modules have too many lessons for us to check, please manually"
+        String resultString = "Sorry these modules have too many lessons for us to check, please manually "
                                 + "allocate them before trying again:\n";
 
         

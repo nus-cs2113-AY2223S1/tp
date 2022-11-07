@@ -1,9 +1,6 @@
----
-layout: page
-title: Chee Heng's Project Portfolio Page
----
+# Koh Chee Heng's Personal Portfolio Page
 
-### Project: AddressBook Level 3
+### Project: Timetabler
 
 Timetabler is a desktop timetable planning application used by students of NUS to plan their NUS modules for either Semester 1 or 2. The user interacts with it using CLI. It is written in Java.
 
