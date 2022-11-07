@@ -108,6 +108,8 @@ Your MoneyGoWhere? Let me help you track it.
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Software Architecture
 The software architecture diagram below describes the program's design and the interaction between components.
 
@@ -123,8 +125,6 @@ The software architecture diagram below describes the program's design and the i
 <br>
 
 <div style="page-break-after: always;"></div>
-
-
 
 ### Core Components
 
@@ -165,6 +165,8 @@ The software architecture diagram below describes the program's design and the i
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### General Interaction of Components
 To illustrate how the components interact with each other as a whole, we will use the following example where:
@@ -228,9 +230,11 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <hr>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ##### Getting user commands
 
-[ComponentInteractionsSDGetUserCommand](images/ComponentInteractionsSDGetUserCommand.png)
+![ComponentInteractionsSDGetUserCommand](images/ComponentInteractionsSDGetUserCommand.png)
 
 *A reference diagram showing the interactions between the UI, Parser and Logger components when the user's input is retrieved.*
 
@@ -242,6 +246,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ##### Printing the output from a command
 
@@ -260,6 +266,8 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 <hr>
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ##### Saving data
 
