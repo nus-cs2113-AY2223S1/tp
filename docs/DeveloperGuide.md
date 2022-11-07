@@ -231,7 +231,7 @@ The command Add a passenger adds passenger details of a particular passenger to 
 6. `Ui` class level method `showAddedPassenger(PassengerInfo passenger)` is used to display to the user that passenger
    has been added to the list successfully.
 
----  
+---
 <div style="page-break-after: always;"></div>  
 
 ### Delete a passenger feature
@@ -306,7 +306,8 @@ If it is, it will not continue to make any changes to the flight logbook.
 4. The `FlightInfo` is then instantiated using the details retrieved from the previous step. And the flight Object can then be added to the flight array list.
 5. Finally,`showFlightAddedMessage()` in the UI class prints a message to inform the user that they have added the flight.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Delete a flight feature
 
@@ -343,7 +344,8 @@ create an instantiation of `DeleteFlightCommand`.
 5. `deletePassengersOnSameFlightNumber(flightNumber)` will also run in `deleteOperation(lineInput)` to find and delete
 the information of the passengers which contain the flight number that has been successfully removed.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Modify flight features
 There are 2 modify features:
@@ -372,8 +374,8 @@ using the `setFlightNum(newFlightNum)` method.
 7. Finally, `execute(passengers, lineInput)` method is called from SkyControl to reflect the changes in flight number
 for the respective passengers as well. 
 
----
-
+---  
+<div style="page-break-after: always;"></div>  
 
 ### Delay a flight feature
 In the event of a flight not being able to depart on time and needs to be delayed,
@@ -394,7 +396,8 @@ no delay changes will be made.
 5. Using the information retrieved, `setDepartureTime(newDepartureTime)` appends the flight records and change the departure time.
 6. Finally, `showUpdatedDepartureTime(flightNum, oldDepartureTime, newDepartureTime` informs the user the flight delay has been saved.
 
----
+---  
+<div style="page-break-after: always;"></div>  
 
 ### List flights feature
 
@@ -410,6 +413,8 @@ When the `Parser` recognizes the `flight list` command, `ListFlightCommand` is i
    OperationList is empty.
 3. If the `numOfFlights == 0`, an empty table is printed. Else, it would print the respective flight details in a table
    form.
+
+<div style="page-break-after: always;"></div>  
 
 ## Product scope
 
@@ -445,6 +450,8 @@ track of constant changes in flight scheduling and the relevant passenger detail
 | v2.0    | AOM      | include a delay in departure/arrival time for flights             | accommodate for any delays in the flights                                       |
 | v2.0    | AOM      | save the flight and passenger details that have been entered      | still access them after closing and reopening the program                       |
 | v2.1    | AOM      | automatically sync up passenger details with flight details       | prevent any error in input between passenger and flight detail for same details |
+
+<div style="page-break-after: always;"></div>  
 
 ## Non-Functional Requirements
 
@@ -492,6 +499,8 @@ Adding a new flight can be done using the `flight add fn/FLIGHT_NUMBER a/AIRLINE
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     The system is unable to read your command, please try again.
     ```
+
+<div style="page-break-after: always;"></div>  
 
 3. Add a flight with invalid details. 
 SkyControl checks for valid, flight numbers, 24HR timing, gate numbers and check in numbers.
