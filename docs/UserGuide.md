@@ -31,6 +31,7 @@ It aims to provide an ease of access to the manager, to access the relevant flig
 through a CLI which is faster than a Graphical User Interface (GUI).
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Getting Started
 
@@ -78,6 +79,7 @@ Thank you, come again! :)
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## SkyControl's Features
 
@@ -115,6 +117,7 @@ Passenger IVAN THENG of SQ832 17D has been added.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delete a passenger detail: `passenger delete`
 
@@ -152,6 +155,7 @@ detail have been input incorrectly.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Display passenger detail logbook: `passenger list`
 
@@ -195,6 +199,7 @@ _If passenger details logbook is empty_.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Add a flight detail: `flight add`
 
@@ -216,6 +221,7 @@ Flight added!
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delete a flight detail: `flight delete`
 
@@ -247,6 +253,7 @@ FLIGHT SQ832 NOT FOUND.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Delay a flight: `delay`
 
@@ -272,6 +279,7 @@ Departure time of flight SQ832 is delayed from 1600 to 1700.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Modify flight attributes: `modify`
 
@@ -307,6 +315,7 @@ Gate number of flight SQ654 is updated to 08.
 ````
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Display flight detail logbook: `flight list`
 
@@ -347,6 +356,7 @@ _If flight details logbook is empty_.
 ```
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
@@ -363,6 +373,7 @@ _If flight details logbook is empty_.
 | `delay`                | `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`                                                               | `delay KE632 dt/2100`                                                |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## Frequently Asked Questions
 
