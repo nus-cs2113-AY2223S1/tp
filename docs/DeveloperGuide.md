@@ -87,7 +87,7 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 The following sequence diagram shows how the add appointment operation works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RmoveAppointment.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RmoveAppointment.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png)
 
 ### Design Considerations
 **Aspect: How addAppointment executes:**
