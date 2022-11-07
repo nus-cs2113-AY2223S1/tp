@@ -19,14 +19,26 @@ public class Calories {
         this.message = message;
     }
 
+    /**
+     * To get the calories consumed.
+     * @return the calories consumed
+     */
     public int getCaloriesConsumed() {
         return this.caloriesConsumed;
     }
 
+    /**
+     * To get the calories burnt.
+     * @return the calories burnt
+     */
     public int getCaloriesBurnt() {
         return this.caloriesBurnt;
     }
 
+    /**
+     * To get the net calories.
+     * @return the net calories
+     */
     public int getNetCalories() {
         return this.netCalories;
     }
