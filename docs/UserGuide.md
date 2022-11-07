@@ -151,13 +151,15 @@ Example of usage:
 - If user has input his personal API key, and is authenticated
 
 ```
-You have authenticated your API key successfully. API key stored in the local file is ********
+You have authenticated your API key successfully. API key stored in the local file 
+is ********
 ```
 
 - If user has not input his personal API key, and/or is not authenticated
 
 ```
-You have not authenticated your personal API key. Currently you have access to the API but you are using our default key!
+You have not authenticated your personal API key. Currently you have access to the 
+API but you are using our default key!
 ```
 
 ### Find number of lots by carpark ID
@@ -443,18 +445,22 @@ Example of usage:
 
 **Output**
 ```
-Here are the list of available commands to use! Refer to the user guide at https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
+Here are the list of available commands to use! Refer to the user guide at 
+https://ay2223s1-cs2113-t17-4.github.io/tp/UserGuide.html for more information.
 `help` or `h` 	: To display all possible commands.
 `exit` or `e` 	: To quit parKING.
 `list` or `l` 	: List the carparks and its details.
 `auth API_KEY` or `a API_KEY` 	: To authenticate your personal API key.
-`auth default` or `a default` 	: To authenticate using the default key provided by parKING.
+`auth default` or `a default` 	: To authenticate using the default key provided by 
+parKING.
 `auth status` or `a status` 	: To get the authentication status.
 `update` or `u` 	: To fetch the latest data from LTA.
 `filter QUERY` or `fil QUERY`	: Filter carparks based on Carpark information.
-`filter -address QUERY` or `fil -add QUERY` 	: Filter carparks based on its Carpark address.
+`filter -address QUERY` or `fil -add QUERY` 	: Filter carparks based on its Carpark 
+address.
 `filter -id QUERY` or `fil -id QUERY` 	: Filter carparks based on its Carpark ID.
-`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried carpark based on carpark ID.
+`find CARPARK_ID` or `fin CARPARK_ID` 	: Display information about the specific queried 
+carpark based on carpark ID.
 `favourite list` or `fav list` 	: To get the list of favourited carparks.
 `favourite CARPARK_ID` or `fav CARPARK_ID` 	: Favourite carpark by its ID.
 `unfavourite CARPARK_ID` or `ufav CARPARK_ID` 	: Unfavourite carpark by its ID.
@@ -551,7 +557,8 @@ the program is running will result in your changes being overwritten.
 
 Format of one row in the `carparkList.txt` file is shown below:
 ```
-1 || Marina || Suntec City || 1.29375 103.85718 || 1051 || 1051 0 0 || false || LTA || 04-11-2022 19:28:10 
+1 || Marina || Suntec City || 1.29375 103.85718 || 1051 || 1051 0 0 || false || LTA || 
+04-11-2022 19:28:10 
 ```
 - Each row must be separated by a linebreak.
 - Each field of data is separated by the double pipes delimiter `||`.
