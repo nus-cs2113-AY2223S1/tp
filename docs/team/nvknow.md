@@ -28,6 +28,7 @@
 **Contributions to the UG**
 
 - Added the instructions of Finish Task
+- Added Setting Up and Getting Started
 - Updated workflow
 - Fixed some formatting issues
 
@@ -39,6 +40,9 @@
 - Added the UML diagram of Appointment Add
 - Added the UML diagram of Service Add
 - Added User Stories of v1.0 and v2.0
+- Added Setting Up and Getting Started
+- Added Non-Functional Requirements
+- Reorganized the structure and catalog
 
 **Contributions to team-based tasks**
 
