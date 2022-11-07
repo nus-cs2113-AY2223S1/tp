@@ -29,6 +29,7 @@ number of available lots of all favourited carparks immediately with one command
     - Added documentation for the `Ui` Component [#103](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/103).
     - Created class diagram in PlantUML for `favourite` command [#87](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/87).
     - Created sequence diagram in PlantUML for `favourite` command [#103](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/103).
+    - Added Non-Functional Requirements [#231](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/231).
 - **Team-based Tasks**:
   - Final clean up of JavaDoc comments and unused methods for all classes [#226](https://github.com/AY2223S1-CS2113-T17-4/tp/pull/226).
   - Creating and managing GitHub issues.
