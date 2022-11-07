@@ -54,7 +54,9 @@ Given below are my contributions to the project.
   * Set-up milestones and labels used for the project.
 
 ---
+
 * **Documentation**:
+
   * User Guide
     - Most major features and structure of the document.
   * Developer Guide
@@ -63,6 +65,7 @@ Given below are my contributions to the project.
     - List module feature
     - Storage
     - Other formatting and documentation
+
 ---
 * **Community**:
   * PR(s) reviewed (with non-trivial review comments): example - [\#24](https://github.com/AY2223S1-CS2113-T17-3/tp/pull/24)

@@ -68,6 +68,8 @@ Here are your modules:
      [Laboratory] Undetermined Day   Undetermined Time - Undetermined Time   Weeks: NA
 ```
 ---
+<div style="page-break-after: always;"></div>
+
 ###  <span style="color:orange ">Finding information on a module: `info`</span>
 Command used to see information on a module.
 
@@ -102,6 +104,9 @@ input: `set`
 Which module would you like to set lessons for? Enter corresponding valid index
 1. CS2040C : Data Structures and Algorithms
 ```
+
+<div style="page-break-after: always;"></div>
+
 input: `1`
 ```
 Which lesson type do you want to set? Enter corresponding valid index
@@ -132,6 +137,9 @@ input: `1`
 Successfully set your lesson!
 ```
 ---
+
+<div style="page-break-after: always;"></div>
+
 ###  <span style="color:orange ">Deleting a module: `delete`</span>
 Command used to initiate the process of deleting a new module.
 
@@ -193,6 +201,10 @@ Command used to produce a timetable for a straightforward view.
 * Only lessons which are correctly set will be reflected in the timetable.
 * Clashes are indicated with `XXXXXX` in place of the module code. At the end of the timetable, clashed modules will be listed out, if any.
   Alternatively, you may use `list` command to find the clash and deconflict with `set` feature.
+
+
+<div style="page-break-after: always;"></div>
+
 
 **Example of Usage:**
 input: `print`
@@ -266,6 +278,7 @@ input: `quit`
 **A**: Copy all data files `Sem1Data` or / and `Sem2Data` together with the jar file to the new computer, in the same directory.
 
 ##  <span style="color:orange ">Feature Summary</span>
+
 | Feature                            |   Input    |
 |------------------------------------|:----------:|
 | adding a module                    |   `add`    |
@@ -277,6 +290,8 @@ input: `quit`
 | printing the timetable             |  `print`   |
 | exiting the program                |   `quit`   |
 
+
+<div style="page-break-after: always;"></div>
 
 ## <span style="color:orange ">Appendix</span>
 
