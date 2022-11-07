@@ -589,7 +589,7 @@ However, this would increase coupling of business logic and reduce the reusabili
 
 #### 3.5.1 UI Component
 
-![UI Class](images/Ui.png)
+![UI Class](images/UiClass.png)
 
 The <code>UI</code> component can:
 
