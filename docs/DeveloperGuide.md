@@ -721,6 +721,9 @@ Here are the negative test cases you can test:
          - `view-user-gain /u tate`
    - Invalid `find-user` commands:
       - Missing keyword: `find-user /k`
+   - Invalid `view-borrow-tx-by-user`/`view-lend-tx-by-user` commands:
+      - Invalid username: `view-borrow-tx-by-user /u tate` (tate does not exist)
+      - Invalid username: `view-lend-tx-by-user /u tate` (tate does not exist)
 - **Invalid Item-related feature:**
    - Invalid `item` commands:
       - Missing item prefix: `item`
@@ -758,6 +761,3 @@ Here are the negative test cases you can test:
    - Invalid `update-tx` commands:
       - Invalid transaction ID: `update-tx /t 1234567 /d 3` (ID 1234567 does not exist)
       - Invalid duration: `update-tx /t 99995bb2 /d -5`
-  - Invalid `view-borrow-tx-by-user`/`view-lend-tx-by-user` commands:
-      - Invalid username: `view-borrow-tx-by-user /u tate` (tate does not exist)
-      - Invalid username: `view-lend-tx-by-user /u tate` (tate does not exist)
