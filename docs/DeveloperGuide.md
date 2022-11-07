@@ -7,7 +7,9 @@
 * [User Stories](#user-stories)
 * [Implementation](#Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
+  * [Appointment Manage Feature](#Appointment-Manage-Feature)
   * [Appointment Status Feature](#Appointment-Status-Feature)
+  * [Appointment Date Feature](#Appointment-Date-Feature)
   * [Employee Management Feature](#Employee-Management-Feature)
   * [Pet Management Feature](#Pet-Management-Feature)
   * [Service Management Feature](#Service-Management-Feature)
@@ -69,7 +71,7 @@ The proposed task allocation mechanism is facilitated by `Appointment` , `TaskLi
 - `TaskList#addTask()` —  Creates task to be performed for an existing appointment and allocates to an employee.
 - `TaskList#reassignTask()` — Reassigns a task from one employee to another.
 - `Appointment#addTaskToAppointment()` —  Attach a task to an appointment when task is created.
-- `Employee#addTaskToEmployee()` — Add to the tasklist of individual employees when task is assigned to him or her.
+- `Employee#addTaskToEmployee()` — Add to the taskList of individual employees when task is assigned to him or her.
 - `Employee#viewEmployeeTasks()` — Prints the list of tasks assigned to a particular employee
 
 
@@ -97,8 +99,6 @@ Step 4. The user then executes the command `employee task i/1002` to view the ta
 
   - Pros: Simple, not complex
   - Cons: Need validate the new employee id to be assigned to, so the task will not be removed from the original employee and then fail to be added to the new employee.
-
-*{more aspects and alternatives to be added}*
 
 ------
 
@@ -209,21 +209,22 @@ The proposed appointment feature is facilitated by the `appointment` class and t
   use `String` type.
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
+---
+  
 
 ### Employee management Feature
 
 ### Implementation
 
-The proposed employee management mechanism is facilitated by `Employee` , `EmployeeList`, `Storage`. It implements the following operations:
+The proposed employee management mechanism is facilitated by `Employee` , `EmployeeList`. It implements the following operations:
 
 - `EmployeeList#addEmployee()` — Adds an employee to the employee list.
 - `EmployeeList#listEmployee()` — Views all the employees in the employee list.
 - `EmployeeList#removeEmployee()` — Removes an employee in the employee list.
-- `Storage#loadEmployee()` —  Storage stores the list of current employees into a file and this function loads it when application starts.
 
 Given below is an example usage scenario and how the employee management mechanism behaves at each step.
 
-Step 1. The user launches the application and there are already pre-existing employees loaded. `EmployeeList` initializes and loads from `Storage` the existing employees.
+Step 1. The user launches the application.
 
 Step 2. The user executes `employee add n/Mozart` command to add an employee named Mozart. This updates `EmployeeList` with the employee.
 
@@ -257,12 +258,14 @@ The following sequence diagram shows how the employee management works:
 
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
+---
+  
 
 ### Pet Management Feature
 
 ### Implementation
 
-The proposed appointment feature is facilitated by the pet package. It implements the following methods to help the head nurse manage pets.
+The proposed pet feature is facilitated by the `pet` package. It implements the following methods to help the head nurse manage pets.
 
 - `AddPetCommand#execute()` —  Register a new pet into the pet management system.
 - `RemovePetStatus#execute()` —  Remove a pet from the pet management system.
@@ -270,7 +273,7 @@ The proposed appointment feature is facilitated by the pet package. It implement
 
 Given below is an example usage scenario and how the Pet management mechanism behaves at each step.
 
-Step 1. The user launches the application and there are already pre-existing pet registered.
+Step 1. The user launches the application.
 
 Step 2. The user executes `pet add n/Taro s/cat h/1` command to register a cat named ‘Taro’, with a healthy status.
 
@@ -285,6 +288,8 @@ The following sequence diagram shows how the remove pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
 The following sequence diagram shows how the view pet operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
+---
+
 
 ### Design Considerations:
 
@@ -313,13 +318,12 @@ The proposed service management mechanism is facilitated by`ServiceList`, `Servi
 - `ServiceList#addService()` — Adds a service to the service list.
 - `ServiceList#listService()` — Views all the services in the service list.
 - `ServiceList#removeService()` — Removes a service in the service list.
-- `Service#loadService()` —  Storage stores the list of current services into a file and this function loads it when application starts.
 
 Given below is an example usage scenario and how the service management mechanism behaves at each step.
 
-Step 1. The user launches the application and there are already pre-existing services loaded. `ServiceList` initializes and loads from `Storage` the existing services.
+Step 1. The user launches the application.
 
-Step 2. The user executes `service add d/Haircut` command to add a service with description 'd\Haircut'. This inserts a new service object into `ServiceList`.
+Step 2. The user executes `service add d/Haircut` command to add a service with description `Haircut`. This inserts a new service object into `ServiceList`.
 
 Step 3. The user executes `service view` command to view the current services.
 
@@ -362,8 +366,10 @@ The following sequence diagram shows how the service management works
   1. The service only has one attribute which is the description. 
   So can not attach more attributes to it.
   2. Less oop.
+---
+  
 
 ## Non-Functional Requirements
 
-1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
+1. Should work on any Windows, Linux and macOS that has Java `11` or above installed.
 2. Should not require users to have prior programming experience.
