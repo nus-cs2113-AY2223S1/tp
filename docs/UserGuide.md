@@ -44,6 +44,9 @@ medicine information via Command Line Interface.
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `OneDoc` from [here](https://github.com/AY2223S1-CS2113-F11-4/tp/releases/tag/v2.1).
+3. Move `tp.jar` into an empty folder.
+4. Open the command prompt / terminal and change working directory to the folder.
+5. Run the jar file by input `java -jar tp.jar` into the command line. The app should start running.
 
 ## Features
 
