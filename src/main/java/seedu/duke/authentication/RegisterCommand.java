@@ -22,14 +22,15 @@ public class RegisterCommand {
         String[] userInputs = InputManager.receiveValidRegisterInputs(existingUsernames);
         String username = userInputs[0];
         String passWord = userInputs[1];
+        if(username.equals("exit")){
+            throw new FinanceException(ExceptionCollection.INVALID_USERNAME);
+        }
         try {
             UserNameFileWorkings.writeToUserNames(username);
         } catch (IOException e) {
             throw new FinanceException(ExceptionCollection.USERFILE_WRITE_EXCEPTION);
         }
-        if(username.equals("exit")){
-            throw new FinanceException(ExceptionCollection.INVALID_USERNAME);
-        }
+
         Wallet newWallet = new Wallet(username, passWord);
         try {
             WalletFile.createNewWallet(newWallet);

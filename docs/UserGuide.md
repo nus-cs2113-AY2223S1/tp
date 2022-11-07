@@ -1,5 +1,41 @@
 # User Guide
 
+## Contents
+* [Introduction](#introduction)
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Lock Screen Commands](#lock-screen-commands)
+    * [Registering a New Account](#registering-a-new-wallet-register)
+    * [Log In to an Existing Account](#logging-into-an-existing-wallet-login)
+    * [Currency Manager](#currencies-section-currencies)
+    * [Add a new Personal Currency](#add-a-new-personal-currency-to-the-list-of-currencies-new_currency)
+    * [Remove a Personal Currency](#removing-your-personal-currency-remove)
+    * [Exit the program](#exit-program-at-login-screen-bye)
+  * [Currency Manager](#currencies-section-currencies)
+    * [Information about a currency](#currency-information-info)
+    * [Conversion between currencies](#conversion-between-two-currencies-conversion)
+    * [List information about all available currencies](#listing-currencies-list)
+    * [Exit Currency Manager](#exit-currency-manger-exit)
+  * [Account Commands](#account-commands)
+    * [Get account balance](#getting-balance-balance)
+    * [Get account details](#getting-details-details)
+    * [Deposit money into account](#depositing-money-to-your-account-deposit)
+    * [Withdraw money from account](#withdrawing-money-from-your-account-withdraw)
+    * [Convert Money from one currency to another](#convert-money-convert)
+    * [Convert all the money into one currency](#convert-all-money-convert-all)
+    * [Transfer money into another account](#transferring-currencies-transfer)
+    * [Listing the names of the available commands](#listing-commands-list)
+    * [Get information about the commands entered in the current session](#current-session-account-history-account-history)
+    * [Enter the Help Center](#help-center-help)
+    * [Logout](#log-out-logout-log-out)
+  * [Help Center](#help-center-help)
+    * [Change default currency](#change-accounts-default-currency-change-default-currency)
+    * [Change account username](#change-account-username-change-username)
+    * [Change account password](#change-account-password-change-password)
+    * [Delete Account](#delete-account-delete-account)
+    * [Exit Help Center](#exit-help-center-exit)
+
+
 ## Introduction
 
 Stores all the forex rates in one place and allows the user to store different types of currency within one “bank” account/wallet.
@@ -12,7 +48,7 @@ Stores all the forex rates in one place and allows the user to store different t
 
 ## Features 
 
-
+### Lock Screen Commands
 
 ### Registering a new wallet: `register`
 Registers a new wallet for you
@@ -50,7 +86,7 @@ Example of usage:
   
   
 
-### Adding a new personal currency to the list of currencies: `new_currency`
+### Add a New Personal Currency to the list of currencies: `new_currency`
 Adds your currency to the list of currencies so that you could track that one as well
 
 Format: 
@@ -86,36 +122,74 @@ Example of usage:
 
 `OK, which currency would you like to remove? Enter the abbreviation of that currency: btc`
 
-  
-### Help center: `help`
-Helps you deal with settings, such as changing your password, username, or default currency or deleting your account.
+### Exit Program at Login Screen: `bye`
+Exit from the Curency Manager Interface
 
-Format: 
-  1. `help`
-  2. `change default currency` , `change password`, `change username`, `delete account`, `exit`
-  
-#You have to be logged into an account to do that and in the help centre as marked by command on line 1
+Format:
+1. `bye`
 
-Example of usage: 
+Example of usage:
+`bye`
 
-  1. `change default currency`
-  2. `current password: password123`
-  3. `Enter the currency you would like to change your default to: eur`
-  
-  1. `change password`
-  2. `current password: password123`
-  3. `Enter the currency you would like to change your default to: eur`
-  
-  1. `change username`
-  2. `current password: password123`
-  3. `New username: testing1`
-  
-  1. `delete account`
-  2. `y`
-3. `exit`
-  
-  
-  
+### Currencies section: `currencies`
+Get to the currencies section
+
+#### Can be called inside or outside your wallet
+
+Format:
+1. `currencies`
+
+
+Example of usage:
+
+`currencies`
+
+
+### Currency information: `info`
+Get information about a certain currency
+
+Format:
+1. `info <abbreviation>`
+
+
+Example of usage:
+`info sgd`
+
+
+### Conversion between two Currencies: `conversion`
+Get information about a certain currency
+
+Use the first example when inside your account to get the conversion from the given currency to your default currency
+
+Format:
+1. `conversion <abbreviation>`
+2. `conversion <abbreviation> <abbreviation>`
+
+Example of usage:
+`conversion sgd`
+`conversion sgd usd`
+
+### Listing currencies: `list`
+Lists a detailed view of all the currencies that are available to use
+
+Format:
+1. `list`
+
+
+Example of usage:
+
+`list`
+
+### Exit Currency Manger: `exit`
+Exit from the currency center
+
+Format:
+1. `exit`
+
+Example of usage:
+`exit`
+
+### Account Commands
   
 ### Getting balance: `balance`
 Gets you your current wallet balance
@@ -199,8 +273,8 @@ Example of usage:
 
 In the example above, the command means converting all the money in the wallet to SGD
 
-### Listing currencies: `list`
-Lists a detailed view of all the currencies that are available
+### Listing commands: `list`
+Lists a detailed view of all the commands that are available to use
 
 Format: 
   1. `list`
@@ -220,57 +294,23 @@ Format:
   
 #You need to be logged into your account
 
-Example of usage: 
+Example of Usage: 
 
 `transfer testing2 100 sgd`
-  
- 
-### Currencies section: `currencies`
-Get to the currencies section
 
-#Can be called inside or outside your wallet
+### Current session account history: `account history`
+Print out the list of commands you have entered within this current instance of accessing your account
 
-Format: 
-  1. `currencies`
-  
+Format: `account history`
 
-Example of usage: 
+Example of Usage: `account history`
 
-`currencies`
-  
-  
-### Currency information: `info`
-Get information about a certain currency
+#### testing logged in at 2022-11-07 13:58:28
 
-Format: 
-  1. `info <abbreviation>`
-  
+#### balance
 
-Example of usage: 
-`info sgd`
 
-  
-### Conversion: `conversion`
-Get information about a certain currency
 
-Use number 1 when inside your account to get the conversion from the given currency to your default currency
-
-Format: 
-  1. `conversion <abbreviation>`
-  2. `conversion <abbreviation> <abbreviation>`
-
-Example of usage: 
-`conversion sgd`
-`conversion sgd usd`
-
-### Exit: `exit`
-Exit from the currency center
-
-Format:
-1. `exit`
-
-Example of usage:
-`exit`
 
 ### Log Out: `logout/ log out`
 Log out of your account
@@ -280,6 +320,95 @@ Format:
 2. `log out`
 
 Log out of your account and get back to the home screen
+
+
+### Help center: `help`
+Helps you deal with account settings, such as changing your password, username, or default currency or deleting your account.
+#### For all of the commands within the help center you can cancel changing by typing exit whenever prompted
+Format:
+1. `help`
+
+Example of usage:
+
+1. `help`
+
+### Change accounts default currency: `change default currency`
+Request the help center to assist with changing your default currency. Enter the new currency you want to change to as it's abbreviation.
+
+Format:
+1. `change default currency`
+2. `Please re-enter your password to make this change`
+3. `Password: <password>`
+4. `Enter the currency you would like to change your default to: <currency>`
+5. `Your default currency has been set from <currency> to <currency>`
+
+Example of Usage:
+1. `change default currency`
+2. `Please re-enter your password to make this change`
+3. `Password: password123`
+4. `Enter the currency you would like to change your default to: euro`
+5. `Your default currency has been set from usd to euro`
+
+### Change account username: `change username`
+Request the help center to assist with changing your username
+
+Format:
+1. `change username`
+2. `Please re-enter your password to make this change`
+3. `Password: <password>`
+4. `New username: <username>`
+5. `Your username has been successfully changed`
+
+Example of Usage:
+1. `change username`
+2. `Please re-enter your password to make this change`
+3. `Password: password123`
+4. `New username: testing1`
+5. `Your username has been successfully changed`
+
+### Change account password: `change password`
+Request the help center to assist with changing your default currency
+
+Format:
+1. `change password`
+2. `Please re-enter your password to make this change`
+3. `Password: <password>`
+4. `New Password: <password>`
+5. `Your passwrod has been successfully changed`
+
+Example of Usage:
+1. `change password`
+2. `Please re-enter your password to make this change`
+3. `Password: password123`
+4. `New Password: 12345678`
+5. `Your passwrod has been successfully changed`
+
+### Delete account: 'delete account'
+Request to delete your account
+
+Format:
+1. `delete account`
+2. `Please re-enter your password to make this change`
+3. `Password: <password>`
+4. `Your wallet username: <username>`
+5. `Are you sure to delete your wallet? Your wallet can't be retrieved and you will automatically logout.`
+6. `Please enter Y or yes to proceed. Any other input will cancel the deletion operation.`
+7. `Y/yes`
+
+Example of Usage:
+1. `delete account`
+2. `Please re-enter your password to make this change`
+3. `Password: 12345678`
+4. `Your wallet username: testing1`
+5. `Are you sure to delete your wallet? Your wallet can't be retrieved and you will automatically logout.`
+6. `Please enter Y or yes to proceed. Any other input will cancel the deletion operation.`
+7. `Y`
+
+### Exit help center: `exit`
+Exit the help center
+Format: `exit`
+
+Example of Usage: `exit`
   
 ## FAQ
 **Q**: How do I transfer my data to another computer? 

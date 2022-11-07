@@ -93,6 +93,7 @@ public class UserNameFileWorkings {
         File f = new File(filePath + "/usernames.txt");
         FileWriter fw = new FileWriter(f, true); // create a FileWriter in append mode
         fw.write(userName);
+        System.out.println(userName);
         fw.write(System.lineSeparator());
         fw.close();
     }
