@@ -108,7 +108,8 @@ The proposed appointment feature is facilitated by the appointment package. The 
 Given below is an example usage scenario and how the Appointment mechanism behaves at each step.
 //TODO add appointment status DG
 
-The following sequence diagram summarizes what happens when a user executes a new command:
+> The following sequence diagram shows how the add appointment operation works:
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
 
 ### Design considerations:
 
