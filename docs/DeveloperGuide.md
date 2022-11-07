@@ -633,10 +633,12 @@ quickly.
 ### Setup
 
 1. Follow the instruction in the User Guide to setup the program
-2. For sample recipes, download and unzip
-2. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
-3. This gives you 3 sample recipes so you don't have to manually add recipes all the time
-4. Run the program, it should load and recognize the 3 recipes
+2. For sample recipes, download and unzip `ManualTestData.rar`. There are
+   - `Recipes` folder
+   - `AllRecipes.txt` file
+3. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
+4. This gives you 3 sample recipes so you don't have to manually add recipes all the time
+5. Run the program, it should load and recognize the 3 recipes
 
 ### Parsing  from Text to Recipe using Add or Edit GUI
 
