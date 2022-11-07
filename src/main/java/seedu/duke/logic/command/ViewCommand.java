@@ -58,12 +58,12 @@ public class ViewCommand extends Command {
     public static final String TO_BE_DONE_MESSAGE = " to be done: ";
     public static final String EXERCISE_COMPLETED_MESSAGE = " completed: ";
     public static final String CALORIES_NOT_FOUND = "No matching calories entry found";
-    public static final String CALORIES_FOUND = "Here are the matching calorie entries in your list:";
+    public static final String CALORIES_FOUND = "Calories Records: ";
     private static final String BIOMETRICS_NOT_SET = "Your biometrics are not set yet!";
     public static final String INVALID_VIEW_ALL_COMMAND = "Invalid view all command";
     public static final String INVALID_VIEW_FOOD_COMMAND = "Invalid view food command";
-    public static final String FOOD_TABLE_CAPTION = "Food Records";
-    public static final String ALL_RECORDS_TABLE_CAPTION = "All Records";
+    public static final String FOOD_TABLE_CAPTION = "Food Records: ";
+    public static final String ALL_RECORDS_TABLE_CAPTION = "All Records: ";
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;
@@ -217,7 +217,8 @@ public class ViewCommand extends Command {
             ui.output(CALORIES_NOT_FOUND);
         } else {
             CaloriesTable tableFrame = new CaloriesTable(
-                    foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, caloriesList, CALORIES_FOUND);
+                    foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, caloriesList,
+                CALORIES_FOUND + caloriesList.size());
             ArrayList<String> table = tableFrame.getCaloriesTable();
             ui.printTable(table);
         }
@@ -264,7 +265,7 @@ public class ViewCommand extends Command {
         handleInvalidViewAllCommand(argumentList);
         AllRecordsTable tableFrame = new AllRecordsTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-            ALL_RECORDS_TABLE_CAPTION);
+            ALL_RECORDS_TABLE_CAPTION + recordArrayList.size());
         ArrayList<String> table = tableFrame.getAllRecordsTable();
         ui.printTable(table);
     }
@@ -290,7 +291,7 @@ public class ViewCommand extends Command {
         handleInvalidViewFoodCommand(argumentList);
         FoodTable tableFrame = new FoodTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-            FOOD_TABLE_CAPTION);
+            FOOD_TABLE_CAPTION + foodArrayList.size());
         ArrayList<String> table = tableFrame.getFoodTable();
         ui.printTable(table);
     }

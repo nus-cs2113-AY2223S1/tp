@@ -87,6 +87,7 @@ Expected outcome:
 All daily historical records of the user are displayed.
 
 ```
+All Records: 8
 -----------------------------------------------------------------------------------------------------------
            | Weight&Fat              | Food                                                      | Exercise
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,6 +116,7 @@ Example of usage: `view calories`
 Expected outcome: The total calorie consumption/burn and net surplus/deficit of the user will be displayed by date
 
 ```
+Calories Records: 2
 --------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------
 Date       | Calories Consumed | Calories Burnt | Net Calories | Status                             | 
@@ -549,10 +551,8 @@ Add user's food consumption in TracknFit
 
 Format: `add food /{description} /{calories} [/{date}]`
 
-* description needs to be a string
-* calories should be positive integer inputs in the units of kcal
-* date is an optional parameter. If user does not input a specific date,
-  the program will automatically fill it with today's date
+* calories should be positive integer inputs in the units of kcal and must not exceed 10000kcal
+* If user does not input a specific date, the program will automatically fill it with today's date
 
 Example of usage:
 
@@ -601,6 +601,7 @@ Expected outcome:
 All historical records of the food consumed are displayed.
 
 ```
+Food Records: 5
 ---------------------------------------------------------------------------------
 Index | Description                                    | Calories | Date       | 
 ---------------------------------------------------------------------------------
@@ -618,6 +619,8 @@ Index | Description                                    | Calories | Date       |
 Remove a specified record from food list in TracknFit
 
 Format: `remove food /{index}`
+
+- index must be within the limit of the list displayed.
 
 Example of usage:
 `remove food /1`
@@ -656,6 +659,17 @@ Index | Description  | Calories | Date       |
 1     | laksa        | 400      | 04-11-2022 | 
 
 --------------------------------------------------------------------------------
+```
+
+Example of usage: 
+`find food /x`
+
+Expected outcome: No matching found message displayed
+
+```
+-------------------------------------------------------------------------------
+No matching food found
+-------------------------------------------------------------------------------
 ```
 
 ## FAQ
