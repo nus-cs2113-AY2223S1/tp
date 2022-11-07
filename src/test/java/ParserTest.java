@@ -87,14 +87,14 @@ public class ParserTest {
     @Test
     public void checkVisitParserCommands() {
 
-        p.visitParser("add i/400TXF d/08-11-2001 t/08:00 r/checkup");
+        p.visitParser("add i/400TXF d/08-11-2020 t/08:00 r/checkup");
 
         //Assert that a visit isn't added because the patient doesn't exist
         assertEquals(0, visitList.getTotalVisits());
 
         //ADD COMMAND
         p.patientParser("add n/Ria g/F d/08-11-2001 i/400TXF");
-        SubMenuState add = p.visitParser("add i/400TXF d/08-11-2001 t/08:00 r/checkup");
+        SubMenuState add = p.visitParser("add i/400TXF d/08-11-2020 t/08:00 r/checkup");
         assertEquals(add, SubMenuState.IN_SUB_MENU);
         assertEquals(1, visitList.getTotalVisits());
 
@@ -200,7 +200,7 @@ public class ParserTest {
         assertEquals(1, patientList.getTotalNumberofPatients());
 
         //extra spaces
-        p.visitParser("add i/ 4005    d/ 08-11-2001 t/   08:00 r/new thing");
+        p.visitParser("add i/ 4005    d/ 08-11-2020 t/   08:00 r/new thing");
         //assertEquals(1, patientList.getTotalNumberofPatients());
         assertFalse(visitList.isEmpty());
 
