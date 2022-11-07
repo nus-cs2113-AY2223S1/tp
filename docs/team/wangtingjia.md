@@ -8,8 +8,6 @@ creating and maintaining lists for them and also favouriting selected ones for e
 
 ## Summary of contributions
 
-### 
-
 [Code contributions](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=wangtingjia&breakdown=true)
 broken down into documentation, functional and test code.
 
