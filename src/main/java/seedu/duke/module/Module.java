@@ -364,7 +364,7 @@ public class Module {
         LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> uniqueData
                 = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
         List<List<List<String>>> classInfoList = new ArrayList<>();
-        System.out.println("POPULATING UNIQUE DATA: " + moduleCode);
+        // System.out.println("POPULATING UNIQUE DATA: " + moduleCode);
         for (String lessonType : lessonMap.keySet()) {
             uniqueData.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
             for (String classNumber : lessonMap.get(lessonType).keySet()) {
@@ -373,7 +373,7 @@ public class Module {
                 if (classInfoList.contains(currClassInfo)) {
                     continue;
                 } else {
-                    System.out.println("currClassInfo: " + currClassInfo.toString() + " added");
+                    // System.out.println("currClassInfo: " + currClassInfo.toString() + " added");
                     classInfoList.add(currClassInfo);
                     uniqueData.get(lessonType).put(classNumber, currClass);
                 }

@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":Parser" as Parser LOGIC_COLOR
+participant ":Timetable" as Timetable LOGIC_COLOR
+participant "timetableDict:TimetableDict" as timetableDict LOGIC_COLOR
+end box
+
+[-> Parser : parseCommand(:String, :String)
+activate Parser
+    Parser -> Timetable : allocateModules()
+
+    activate Timetable
+        Timetable -> timetableDict : allocateModules()
+
+        activate timetableDict
+            timetableDict -> Timetable : getListOfModules()
+            activate Timetable
+                Timetable --> timetableDict : listOfModules
+            deactivate Timetable
+            alt size of module list is zero
+                timetableDict --> Timetable : noModuleResponse:String
+            end
+
+            timetableDict -> timetableDict : getPermutationsByMod()
+            activate timetableDict
+                timetableDict --> timetableDict : permutationsByMod:List<List<List<List<Lesson>>>>
+            deactivate timetableDict
+
+            timetableDict -> timetableDict : getTotalNumberOfPermutations()
+            activate timetableDict
+                timetableDict --> timetableDict : numOfPermutations:int
+            deactivate timetableDict
+
+            timetableDict -> timetableDict : getAllPermutations()
+            activate timetableDict
+                timetableDict --> timetableDict : allPermutations:List<List<List<Lesson>>>
+            deactivate timetableDict
+
+            timetableDict -> timetableDict : getPermutationWithLeastClashes()
+            activate timetableDict
+                timetableDict --> timetableDict : permutationWithLeastClashes:List<List<Lesson>>
+            deactivate timetableDict
+            alt no unallocated lessons
+                timetableDict --> Timetable : successfulAllocationResponse:String
+            else
+                timetableDict --> Timetable : unsuccessfulAllocationResponse:String
+            end
+        deactivate timetableDict
+    Timetable --> Parser : allocateModuleResponse:String
+deactivate Parser
+[<-- Parser : allocateModuleResponse
+
+@enduml

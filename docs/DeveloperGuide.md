@@ -94,6 +94,15 @@ The ***Sequence Diagram*** above is a simplified depiction of how new modules ar
 ---
 
 #### 4.3. Auto-allocating lessons
+<img src="images/allocateModules.png" width="580" />
+
+The sequence diagram above is a simplified illustration of how lessons are allocated. The allocation algorithm computes
+all possible permutations of lesson combinations and allocated lessons in a way that minimizes clashes.
+
+**Design Decisions:**
+* The algorithm involved in allocating lessons relies heavily on the ability to check if lessons clash with each other at any point in time. Thus, the allocation algorithm is implemented in the timetableDict to allow easy
+access to lessons at any point in the timetable.
+* ... unfinished
 
 ---
 
@@ -113,7 +122,7 @@ Above is the sequence diagram for the listing of modules in the timetable. A few
         list = new StringBuilder("Here are your modules:\n");
     }
     ```
-* Each module is an object of class Module and has the `getModuleDetails` method which returns a String whihc includes all the required details for the list feature. This method is also reused in other features of the application.
+* Each module is an object of class Module and has the `getModuleDetails` method which returns a String which includes all the required details for the list feature. This method is also reused in other features of the application.
 
 ---
 
