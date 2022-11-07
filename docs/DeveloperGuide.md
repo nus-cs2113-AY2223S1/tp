@@ -115,9 +115,7 @@ The proposed appointment feature is facilitated by the `appointment`, `service`,
 Given below is an example usage scenario and how the appointment management behaves at each step.
 
 Step 1. The user launches the application. The user executes `appointment add s/bath p/2001 d/2022-12-12` command which calls `AppointmentList#addAppointment()`. 
-To create an appointment with bath service for pet with id = 2001, scheduled on date 2022-12-12, inside it:
-
-- Lastly, after all checking, creates the corresponding appointment and adds it into appointment list.
+To create an appointment with bath service for pet with id = 2001, scheduled on date 2022-12-12, after all checking, creates the corresponding appointment and adds it into appointment list.
 
 Step 2. The user executes `appointment view` command to view all the current appointments for the clinic. The command calls `AppointmentList#listAppointment()` to display all existing appointments details.
 
@@ -140,6 +138,19 @@ To relate appointment with existing service, pet and valid date, check all three
 
   - Pros: Easy to understand.
   - Cons: An invalid appointment may not be added to the appointment list but will consume an appointment id, which causes the valid id not contiguous.
+
+**Aspect: How to reschedule appointments:**
+
+Alternative 1 (current choice):  
+Delete the old appointment and then creating a new one.
+- Pros: Easy to implement, no extra function needs to be added.
+- Cons: Have to destruct and construct even if only one attribute needs to be changed.
+
+Alternative 2:  
+Add a new feature called `rescheduleAppointment`.
+- Pros: Less overhead when rescheduling the appointment.
+- Cons: Harder to implement.
+
 
 ### Appointment Status Feature
 
@@ -171,6 +182,31 @@ use enumeration class.
 
 - Alternative 2:  
 use hard-code integer or string.
+  - Pros: Low cost of constructing a status.
+  - Cons: Hard to read. And have to recode if status changes much.
+
+### Appointment Date Feature
+
+### Implementation
+
+The proposed appointment feature is facilitated by the `appointment` class and the formatter from `SimpleDateFormat`. The following methods in the package works together to filter appointment date input:
+
+- `Appointment#formatter` — A simple date formatter which allows tailored date format `yyyy-MM-dd`.
+- `Appointment#checkFormattedDate()` — Check if the given date is valid for an appointment, which:
+  - First, use the `Parser` from `SimpleDateFormat` to examine the format with valid year, month and day value.
+  - Secondly, check if the formatted date is too old , i.e. before the using day, since a new appointment should be scheduled in the future.
+
+### Design Considerations:
+
+**Aspect: How status feature represents:**
+
+- Alternative 1 (current choice):   
+  use `Date` type.
+  - Pros: Give every status a human-readable name. And it's easy to extend for more status.
+  - Cons: Add more overhead to create another class.
+
+- Alternative 2:  
+  use `String` type.
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
 
