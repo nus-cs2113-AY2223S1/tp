@@ -54,7 +54,7 @@ Given below are my contributions to the project:
 
 * **Documentation**:
     * User Guide:
-        * Full responsibility of managing the User Guide from scratch for commands (Pull Request(s): [#45](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/45), [#159](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/159))
+      * Full responsibility of managing the User Guide from scratch for commands (Pull Request(s): [#45](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/45), [#159](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/159))
     * Developer Guide:
       * Addition of 'View' Feature Sequence Diagram and write up (Pull Request(s): [#33](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/33))
       * Review of sequence diagrams in DG
