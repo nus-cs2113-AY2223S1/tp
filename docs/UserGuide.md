@@ -13,9 +13,8 @@ Timetabler is a **desktop app** that allows **NUS students** taking official NUS
 4. Open a command window or terminal for mac in that folder.
 5. Run the command `java -jar tp.jar` in the same folder.
 6. You will be prompted to enter the `semester` (1 or 2) you are planning for when the program first starts.
-7. Note that you should not modify the files created by the program unless you are certain of what you are doing. In 
-the event that the files have been incorrectly modified, see the 
-[appendix](#span-stylecolororange-dealing-with-corrupted-files--loss-of-internet-connection-on-startupspan) for help.
+7. Note that you should not modify the files created by the program unless you are certain of what you are doing. In
+   the event that the files have been incorrectly modified, see the Appendix below for help.
 
 
 ##  <span style="color:orange ">Features</span>
@@ -55,7 +54,7 @@ Command used to list out all modules added to user's timetable.
 
 * For example: 2 Lecture slots means that students are expected to attend 2 different lecture slots.
 
-* Note that certain lessons are fixed and will be displayed without any
+* Note that certain lessons are fixed and will be displayed without the need to `set` or `allocate` them.
 
 **Example of Usage:**
 input: `list`
@@ -174,7 +173,7 @@ Command used to produce a timetable for a straightforward view.
 * Legend and other things to take note of will be printed below the timetable.
 * Only lessons which are correctly set will be reflected in the timetable.
 * Clashes are indicated with `XXXXXX` in place of the module code. At the end of the timetable, clashed modules will be listed out, if any.
-Alternatively, you may use `list` command to find the clash and deconflict with `set` feature.
+  Alternatively, you may use `list` command to find the clash and deconflict with `set` feature.
 
 **Example of Usage:**
 input: `print`
@@ -244,7 +243,7 @@ input: `quit`
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy all data files `Sem1DataDirectory` or / and `Sem2DataDirectory` together with the jar file to the new computer, in the same directory.
+**A**: Copy all data files `Sem1Data` or / and `Sem2Data` together with the jar file to the new computer, in the same directory.
 
 ##  <span style="color:orange ">Feature Summary</span>
 | Feature                            |   Input    |
@@ -259,7 +258,7 @@ input: `quit`
 | exiting the program                |   `quit`   |
 
 
-##  <span style="color:orange ">Appendix</span>
+## <span style="color:orange ">Appendix</span>
 
 ###  <span style="color:orange ">Dealing with corrupted files / loss of internet connection on startup</span>
 
@@ -280,3 +279,4 @@ program in a clean state.
 
 Entering `1` will exit the program without deleting the saved files, allowing you try to run the program again.
 
+**Note**: Although a data corruption protocol exists, it is beyond the scope of the product for users to illegally tamper with the files.
