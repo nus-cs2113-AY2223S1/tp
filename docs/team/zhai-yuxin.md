@@ -10,8 +10,8 @@ They can also check if they are eligible for NOC or SEP using this application.
 Code contributed: [code dashboard](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=zhai-yuxin&breakdown=true&sort=groupTitle&sortWithin=title&since=2022-09-16&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 Enhancement implemented:
-- Initial implementation of 'help' and 'view all' features ([#47](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/47), [#141](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/141))
-- Part of add, view, check, delete, find features ([#48](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/48), [#51](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/51))
+- Full implementation of 'help' and 'view all' features ([#47](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/47), [#141](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/141))
+- Partial implementation of add, view, check, delete, find, exit features ([#48](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/48), [#51](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/51))
 - Addition of exceptions (invalidCommandWord, invalidFormat and invalidContent), tests, java documentations ([#10](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/10),
 [#13](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/13), [#14](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/14), [#15](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/15), 
 [#16](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/16))
@@ -20,6 +20,7 @@ Enhancement implemented:
 - Resolving bugs ([#119](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/119), [#121](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/121), [#122](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/122), 
 [#132](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/132), [#168](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/168), [#170](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/170), 
 [#171](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/171))
+- Correcting the failing issues under checks for pull request ([#183](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/183))
 
 Contributions to UG: 
 - Introduction ([#171](https://github.com/AY2223S1-CS2113-T17-2/tp/pull/171))
