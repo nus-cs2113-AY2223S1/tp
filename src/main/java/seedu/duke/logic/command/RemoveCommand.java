@@ -12,6 +12,10 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 public class RemoveCommand extends Command {
+    public static final String REMOVE_FOOD_SUCCESS_MSG = " This food has been deleted from the food list successfully";
+    public static final String FOOD = "food";
+    public static final String EXERCISE = "exercise";
+    public static final String WEIGHT = "weight";
     private Ui ui;
     private FoodList foodList;
     private String arguments;
@@ -28,6 +32,13 @@ public class RemoveCommand extends Command {
         this.arguments = arguments;
     }
 
+
+    /**
+     * Determines and invoke the correct type of remove function by checking user's input.
+     *
+     * @throws IllegalValueException if the user input for remove type does not exist or if the number of arguments are
+     * not as expected.
+     */
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
@@ -39,13 +50,13 @@ public class RemoveCommand extends Command {
             int index = Integer.parseInt(argumentList[1]);
             String removeType = argumentList[0];
             switch (removeType) {
-            case ("food"):
+            case FOOD:
                 removeFood(argumentList, slashesCount);
                 break;
-            case ("exercise"):
+            case EXERCISE:
                 removeExercise(argumentList, slashesCount);
                 break;
-            case ("weight"):
+            case WEIGHT:
                 removeWeight(index);
                 break;
             default:
@@ -82,6 +93,15 @@ public class RemoveCommand extends Command {
         ui.output("Invalid remove command");
     }
 
+
+    /**
+     * Deletes the food record at the specified index from the foodList.
+     *
+     * @param argumentList a string array storing the user's input
+     * @param slashesCount the number of arguments that the user has parsed in based on '/'.
+     *
+     * @throws IllegalValueException if removing food fails.
+     */
     private void removeFood(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_REMOVE_FOOD_COMMAND,
                 arguments.charAt(arguments.length() - 1));
@@ -91,7 +111,7 @@ public class RemoveCommand extends Command {
             if (index <= 0 || index > foodList.getFoodListSize()) {
                 throw new IllegalValueException(INVALID_REMOVE_FOOD_COMMAND);
             }
-            ui.output(" This food has been deleted from the food list successfully");
+            ui.output(REMOVE_FOOD_SUCCESS_MSG);
             ui.output(foodList.getFood(index - 1).toString());
             int initialFoodListSize = foodList.getFoodListSize();
             foodList.removeFood(index - 1);

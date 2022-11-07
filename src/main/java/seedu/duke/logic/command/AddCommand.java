@@ -21,6 +21,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Adds a new record to relevant list
+ */
 public class AddCommand extends Command {
     public static final String INVALID_LOADING_STRENGTH_MESSAGE = "Unable to load strength exercise";
     public static final int STRENGTH_EXERCISE_REPETITION_INDEX = 4;
@@ -41,12 +44,20 @@ public class AddCommand extends Command {
     public static final String ADD_STRENGTH_SUCCESS_MESSAGE = " This strength exercise is added "
             + "to the exercise list successfully";
     public static final String ADD_STRENGTH_ERROR_MESSAGE = "Weight, set and repetition must be integer";
+
+    public static final String ADD_FOOD_ERROR_MESSAGE = "calories must be integer";
     public static final String ASSERT_ADD_STRENGTH_FAILURE_MESSAGE = "Exercise not added properly";
     public static final String FOOD = "food";
     public static final String STRENGTH = "strength";
     public static final String CARDIO = "cardio";
     public static final String WEIGHT = "weight";
     public static final int CARDIO_LOADING_INPUT_COUNT = 7;
+    public static final String ADD_FOOD_SUCCESS_MESSAGE = "This food is added to the food list successfully";
+    public static final String INVALID_FOOD_DESCRIPTION_INPUTS = "Please provide valid food description inputs!";
+    public static final String NEGATIVE_CALORIES_ERROR_MESSAGE = "Calories inputs need to be positive integer values!";
+    public static final String CALORIES_LIMIT_EXCEEDED = "It is impossible to have consumed more than 10000 kcal in a day!";
+    public static final String INVALID_DATE_FORMAT = "Date should be in the format dd-mm-yyyy";
+    public static final String INVALID_ADD_COMMAND = "Invalid add command";
     private final boolean isMarkDone;
     private Ui ui;
     private String arguments;
@@ -71,6 +82,11 @@ public class AddCommand extends Command {
         this.isMarkDone = isMarkDone;
     }
 
+    /**
+     * Determines and invoke the correct type of add function by checking user's input.
+     *
+     * @throws IllegalValueException if the user input for add type does not exist.
+     */
     @Override
     public void execute() throws IllegalValueException {
         int slashesCount = Parser.getArgumentsCount(arguments);
@@ -205,9 +221,17 @@ public class AddCommand extends Command {
 
 
     private void handleInvalidAddType() throws IllegalValueException {
-        throw new IllegalValueException("Invalid add command");
+        throw new IllegalValueException(INVALID_ADD_COMMAND);
     }
 
+    /**
+     * Adds a new food record to the foodList.
+     *
+     * @param argumentList a string array storing the user's input
+     * @param argumentsCount the number of arguments that the user has parsed in based on '/'.
+     *
+     * @throws IllegalValueException if adding food fails.
+     */
 
     private void addFood(String[] argumentList, int argumentsCount) throws IllegalValueException {
         try {
@@ -219,19 +243,20 @@ public class AddCommand extends Command {
             } else {
                 date = LocalDate.now();
             }
-            String description = extractFoodName(argumentList[1]);
-            int calories = extractCalories(argumentList[2]);
+            String description = validateFoodName(argumentList[1]);
+            int calories = validateCalories(argumentList[2]);
             food = new Food(description, calories, date);
             foodList.addFood(food);
             assert foodList.getFood(foodList.getFoodListSize() - 1).equals(food) : "Food added properly";
             if (toDisplay) {
                 ui.output(food.toString());
-                ui.output(" This food is added to the food list successfully");
+                ui.output(ADD_FOOD_SUCCESS_MESSAGE);
             }
         } catch (NumberFormatException e) {
+            LOGGER.log(Level.WARNING, ADD_FOOD_ERROR_MESSAGE, e);
             throw new IllegalValueException(INVALID_FOOD_INPUT);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Date should be in the format dd-mm-yyyy");
+            throw new IllegalValueException(INVALID_DATE_FORMAT);
         }
     }
 
@@ -259,20 +284,32 @@ public class AddCommand extends Command {
         }
     }
 
-    private String extractFoodName(String input) throws IllegalValueException {
+    /**
+     * Checks if the food description is valid
+     *
+     * @param input the food description based on user's input
+     *
+     */
+    private String validateFoodName(String input) throws IllegalValueException {
         if (Arrays.asList(invalidFoodNames).contains(input)) {
-            throw new IllegalValueException("Please provide valid food description inputs!");
+            throw new IllegalValueException(INVALID_FOOD_DESCRIPTION_INPUTS);
         }
         return input;
     }
 
-    private int extractCalories(String input) throws IllegalValueException {
+    /**
+     * Checks if the calories is valid
+     *
+     * @param input the calories inputted by user
+     *
+     */
+    private int validateCalories(String input) throws IllegalValueException {
         int calories = Integer.parseInt(input);
         if (calories <= 0) {
-            throw new IllegalValueException("Calories inputs need to be positive integer values!");
+            throw new IllegalValueException(NEGATIVE_CALORIES_ERROR_MESSAGE);
         }
         if (calories > 10000) {
-            throw new IllegalValueException("It is impossible to have consumed more than 10000 kcal in a day!");
+            throw new IllegalValueException(CALORIES_LIMIT_EXCEEDED);
         }
         return calories;
     }

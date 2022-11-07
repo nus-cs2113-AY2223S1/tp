@@ -9,6 +9,9 @@ participant "<<class>>\nParser" as parser LOGIC_COLOR
 end box
 
 [-> findCommand: execute()
+findCommand -> parser: getArgumentsCount(arguments: String)
+return slashesCount: int
+
 findCommand -> parser: getArgumentList(arguments: String)
 return argumentList: String[]
 

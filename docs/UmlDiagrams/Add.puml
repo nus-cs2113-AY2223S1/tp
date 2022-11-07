@@ -11,7 +11,7 @@ end box
 
 [-> AddCommand : execute
 activate AddCommand
-AddCommand -> Parser++: getArgumentsCount((argumentList: String[]):
+AddCommand -> Parser++: getArgumentsCount(argumentList: String[]):
 return slashesCount: int
 AddCommand -> Parser++: getClassType(argumentList: String[])
 return addType: String
