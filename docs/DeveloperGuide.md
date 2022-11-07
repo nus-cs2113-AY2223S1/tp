@@ -37,9 +37,9 @@ The program will first make use of the save file and database file to populate i
 
 ### Database
 
-The database reads in SEP module data from `data.csv` and stores the useful data into an ArrayList of module mappings and universities.
+The database reads SEP module data from `data.csv` and stores the useful data into an ArrayList of module mappings and universities.
 
-Upon starting easySEP, the DatabaseStorage will load each line from `data.csv`, parse the line using DatabaseParser, and store the data into the Database.
+Upon starting easySEP, the DatabaseStorage will load each line from `data.csv`, parse the line using DatabaseParser, and store the data in the Database.
 
 Relevant exceptions are thrown when there are unexpected scenarios. For instance, if `data.csv` cannot be found at the given file path, a FileNotFoundException is thrown.
 
@@ -49,7 +49,7 @@ The following diagram illustrates the relationships between the three main datab
 
 ![Database Class Diagram](./images/Database_Class.png)
 
-The following diagram illustrates the flow of the program, from the initial loadDatabase call to the eventual completion of updating the entire database.
+The following diagram illustrates the flow of the program, from the initial `loadDatabase` call to the eventual completion of updating the entire database.
 
 ![Database Sequence Diagram](./images/Database_Sequence.png)
 
@@ -57,41 +57,41 @@ The following diagram illustrates the flow of the program, from the initial load
 
 User storage refers to saving and loading the necessary user information into text files. It mainly involves two classes, UserStorage and UserStorageParser.
 UserStorage handles extracting and storing information from the various text files while UserStorageParser handles the exchange of information between String and UserUniversityListManager formats.
-Saving of user information into text file occurs when user inputs an add/delete/create command. Loading of user information from text files occurs at the start of the program.
+Saving user information into a text file occurs when the user inputs an add/delete/create command. Loading of user information from text files occurs at the start of the program.
 
 Based on the user's saved university lists, user storage will save each university list's information in a separate text file.
-Each text file is named after the partner university (ie. `Boston University.txt`) and will contain the user's favourites, saved modules, timetable information.
+Each text file is named after the partner university (ie. `Boston University.txt`) and will contain the user's favourites, saved modules, and timetable information.
 An example of a text file will look like [this](https://github.com/AY2223S1-CS2113-W13-2/tp/blob/master/docs/Example%20University.txt).
 
 Here is how the information is stored:
 
 - First line contains 'T' indicated this list is favourited by the user, and 'F' otherwise.
 - From second line to '#', each line contains a partner university's module code and a comment if it was added to the module, which is separated by ';'.
-- From '#' to end of file, each line contains a partner university's module code, lesson day, start time and end time, which are separated by ';'.
+- From '#' to the end of the file, each line contains a partner university's module code, lesson day, start time and end time, which are separated by ';'.
 - Every line is separated by '%'.
 
 Only the partner university's module code is stored to prevent storing excessive information, avoiding potential tampering or corrupting of information.
 To retrieve the other information (ie. partner university's module title, NUS module code, NUS module title etc.), UserStorageParser will call Database to get the relevant information.
 
-Upon starting easySEP, UserStorage will first load its private `HashMap` called filePaths, which stores all mappings of university name to the corresponding file path.
+Upon starting easySEP, UserStorage will first load its private `HashMap` called `filePaths`, which stores all mappings of the university name to the corresponding file path.
 UserStorage will also extract all valid information from the text files into a `String` and convert them into a UserUniversityListManager to be used in the main Duke class.
 
 InvalidUserStorageFileException is thrown when there are unexpected scenarios. Such instances include
 
 - File name not found in database
-- Module code not found in corresponding university in database
+- Module code not found in the corresponding university in database
 - Incorrect number of fields of information
-- Module code exists in timetable portion but missing in saved modules portion
+- Module code exists in the timetable portion but missing in the saved modules portion
 - Invalid day or time for lessons
 
 During these situations, the corresponding text file for the university will be deleted, and an error message will inform the user of the invalid file format and deletion.
 
 During the duration of the program, whenever the user decides to alter the data corresponding to UserUniversityListManager
-(ie. add / delete universities or modules, or create new university list), UserStorageParser class will update the affected university's text file accordingly.
+(ie. add / delete universities or modules, or create a new university list), UserStorageParser class will update the affected university's text file accordingly.
 This is achieved by converting UserUniversityListManager into a `String`, before saving it in the text file.
 
 Initially, user storage was designed to store all information into a single text file, including module codes, module titles and module credits.
-After the implementation of [timetable](#timetable), information was stored into two text files, one for saved modules and the other for timetable information.
+After the implementation of [timetable](#timetable), information was stored in two text files, one for saved modules and the other for timetable information.
 However, to recover as much information as possible in the event of file corruption, the current iteration stores every university's information in separate text files, and minimal information is stored.
 For future versions, more can be done to detect corrupted information and recover uncorrupted information.
 
@@ -126,7 +126,7 @@ In chronological order, the following diagrams illustrate the flow of the progra
 
 ### Delete History
 
-To help users recall the modules that they had recently deleted, the Delete History feature allows them to view up to 5 most
+To help users recall the modules that they had recently deleted, the Delete History feature allows them to view up to the 5 most
 recently deleted module mappings. This can help them to add the module mappings back to the lists without having to search for the specific
 module code again.
 
@@ -148,7 +148,7 @@ The following diagram illustrates the flow of the program, when a user deletes a
 The Ui class is the cornerstone of the Duke program to facilitate interaction with the user. It is used to scan and collect user input, print error messages to the user upon invalid input commands,
 and display the appropriate acknowledgements or required information based on the user's command.
 
-The following diagram illustrates the methods within the Ui class that can be invoked by the other classes in Duke for the purpose of user interaction.
+The following diagram illustrates the methods within the Ui class that can be invoked by the other classes in Duke for user interaction.
 
 ![Ui Class Diagram](./images/Ui_Class.png)
 
@@ -195,7 +195,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 #### Delete Command
 
-A delete command can be used to delete a lesson from the timetable, delete a module mapping from the user university list or delete an entire user created university list.
+A delete command can be used to delete a lesson from the timetable, delete a module mapping from the user university list or delete an entire user-created university list.
 
 The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a delete command.
 
@@ -203,7 +203,7 @@ The following sequence diagram illustrates the relationship between the respecti
 
 #### View Command
 
-A view command can be used to view all user created university lists, view user's delete history, view user's selected university list or view all the user's created university lists' timetables.
+A view command can be used to view all user-created university lists, view the user's delete history, view the user's selected university list or view all the user's created university lists' timetables.
 
 The following sequence diagram illustrates the relationship between the respective classes involved in the creation and execution of a view command.
 
@@ -242,12 +242,12 @@ The following sequence diagram illustrates the flow of the program to read in th
 #### UserModuleMapping
 
 The UserModuleMapping class aims to bridge 2 modules (one from NUS and one from a Partner University). It is initialized by a constructor
-requiring the module code, title, and university name for both NUS and partner university. This aims to simulate a real life example of users
+requiring the module code, title, and university name for both NUS and partner university. This aims to simulate a real-life example of users
 mapping an NUS module to a foreign university's.
 
 #### UserModuleMappingList
 
-The UserModuleMappingList class consists of stores a list of UserModuleMapping in an ArrayList. Users are able to add new modules using the `addModule`
+The UserModuleMappingList class consists of stores a list of UserModuleMapping in an ArrayList. Users can add new modules using the `addModule`
 function, search for matching modules using `findModuleByCode` and delete modules using `deleteModule`. Additionally, users are also able to search
 for modules using keywords to filter out the modules currently stored that are related using `findModuleByTitle`
 
@@ -255,7 +255,7 @@ The following class diagram illustrates the relationship between UserModuleMappi
 
 ![UserModuleMappingList Diagram](./images/UserModuleMapping_Class.png)
 
-The following sequence diagram helps explain the key steps behind adding and deleting of modules in the UserModuleMappingList class
+The following sequence diagram helps explain the key steps behind adding and deleting modules in the UserModuleMappingList class
 
 ![UserModuleMappingList_Sequence](./images/UserModuleMapping_Sequence.png)
 
@@ -265,18 +265,18 @@ The following sequence diagram helps explain the key steps behind adding and del
 
 The UserUniversityList class stores 2 important things the `universityName` and a list of UserModuleMapping under `myModules`
 Each list is identified using the universityName. Users can only create 1 list for each partner university and this is managed by the
-UserUniversityListManager in 1.8.2. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
+UserUniversityListManager. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
 to help users manage multiple lists and note down their favourites
 
 #### UserUniversityListManager
 
 The UserUniversityListManager manages a hashmap of lists, with the `universityName` as the key. This prevents duplicates and unnecessary space
 wastage. HashMap is also an efficient data structure to obtain the UserUniversityList as the value in constant time. The UserUniversityListManager
-has the notable functions `addModule` and `deleteModule` which allows users to add and delete module in a specific list. It also has the `addFavourite`
+has the notable functions `addModule` and `deleteModule` which allows users to add and delete a module in a specific list. It also has the `addFavourite`
 and `deleteFavourite` function which helps the users to organise their lists.
 
 Additionally, the UserUniversityListManager also has a `timetableManager`, for users to add lessons and plan out their timetables at partner universities.
-They are able to plan for any potential timetable clashes. Users are only able to add / delete lesson times from existing Partner University lists. 
+They can plan for any potential timetable clashes. Users are only able to add / delete lesson times from existing Partner University lists. 
 
 The following class diagram illustrates the relationship between UserUniversityListManager and UserUniversityList as well as other relevant classes.
 
@@ -301,7 +301,7 @@ NUS SoC undergraduates intending to embark on a Student Exchange Programme
 - Users can create university lists for their desired partner universities, add modules, delete modules and delete lists.
 - Users can create timetables, add class timings and plan out their schedules at desired partner universities.
 - Users can save their current university lists after exiting the app and load it again next time.
-- Users can favorite their top university picks.
+- Users can favourite their top university picks.
 
 #### Problem Addressed
 

@@ -11,7 +11,7 @@
 #### 3.1 [Add Command](#add-command-add)
 
 3.11 [Add Command for Module Mapping](#1-add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
-3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-notenote_with_spaces)\
+3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-noteinput))\
 3.13 [Add Command for Lessons](#3-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
 
 #### 3.2 [Create Command](#create-command-create-uuniversity_name)
@@ -37,7 +37,7 @@
 
 3.71 [List Command for all Universities](#1-list-command-for-all-universities-list-universities)\
 3.72 [List Command for all Modules](#2-list-command-for-all-modules--list-modules)\
-3.73 [List Command filtered by module](#3-list-command-filtered-by-module-list-mmodulecode)\
+3.73 [List Command filtered by module](#3-list-command-filtered-by-module-list-mmodule_code)\
 3.74 [List Command filtered by university](#4-list-command-filtered-by-university-name-list-uuniversity_name)
 
 #### 3.8 [View Command](#view-command-view)
@@ -110,14 +110,15 @@ NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western Univers
 ____________________________________________________________________________
 ```
 
-#### 2. Add Command for comments for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
+#### 2. Add Command for comments for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{input}`
 
 Adds/Updates a (previous) note for the input Partner University module code in the input university list.
 
 > <span style="color: #FFA500;">**IMPORTANT**</span>: 
+>  - The curly brackets {} is necessary for the note, refer to example below
 >  - Can only add a note after creating the university list for the input {UNIVERSITY_NAME} and adding the corresponding module {MODULE_CODE} to the list
 >  - Only the latest comment will be stored. 
->  - Comment should not contain any invalid characters such as `/`, `{`, `_`, `%`
+>  - Comment should not contain any invalid characters such as `/`, `{`, `_`, `%`, `;`, `#`
 
 Example input:
 
@@ -311,10 +312,10 @@ No current modules saved
 ____________________________________________________________________________
 ```
 
-#### 2. Favourite Command for adding a list to favourites : `/favourite add/UNIVERSITY_NAME`
+#### 2. Favourite Command for adding a list to favourites : `/favourite add/{UNIVERSITY_NAME}`
 
 Adds a list of module mappings for a particular partner university into favourites. This list of module mappings for the partner university
-must already be created beforehand in order to be added into favourites.
+must already be created beforehand to be added to favourites.
 
 Example of usage:
 
@@ -331,10 +332,10 @@ Boston University to your favourite lists
 ____________________________________________________________________________
 ```
 
-#### 3. Favourite Command for deleting a list from favourites : `/favourite del/UNIVERSITY_NAME`
+#### 3. Favourite Command for deleting a list from favourites: `/favourite del/{UNIVERSITY_NAME}`
 
 Deletes a list of module mappings for a particular partner university from favourites. This list of module mappings for the partner university
-must already be marked as favourite beforehand in order to be deleted from favourites.
+must already be marked as favourite beforehand to be deleted from favourites.
 
 Example of usage:
 
@@ -413,7 +414,7 @@ We have incorporated 4 types of list commands.
 
 #### 1. List Command for all universities: `/list UNIVERSITIES`
 
-Displays all universities with module mappings available in database.
+Displays all universities with module mappings available in the database.
 
 Example of usage:
 
@@ -449,7 +450,7 @@ ____________________________________________________________________________
 
 ```
 
-#### 2. List Command for all modules : `/list MODULES`
+#### 2. List Command for all modules: `/list MODULES`
 
 Displays all existing university modules mappings that are approved in the following format:
 
@@ -487,9 +488,9 @@ The eligible module mappings are:
 ____________________________________________________________________________
 ```
 
-#### 3. List Command filtered by module: `/list m/MODULECODE`
+#### 3. List Command filtered by module: `/list m/{MODULE_CODE}`
 
-List all module mappings for NUS MODULECODE in database.
+List all module mappings for NUS MODULECODE in the database.
 
 Example of usage:
 
@@ -507,9 +508,9 @@ The eligible module mappings are:
 ____________________________________________________________________________
 ```
 
-#### 4. List Command filtered by university name: `/list u/UNIVERSITY_NAME`
+#### 4. List Command filtered by university name: `/list u/{UNIVERSITY_NAME}`
 
-List all module mappings offered by UNIVERSITY in database.
+List all module mappings offered by UNIVERSITY in the database.
 
 Example of usage:
 
@@ -537,7 +538,7 @@ We have incorporated 4 types of view commands.
 
 #### 1. View Command for all user university lists: `/view LISTS`
 
-Displays all university lists created by user and the corresponding modules for each university.
+Displays all university lists created by the user and the corresponding modules for each university.
 
 Example Input:
 
@@ -559,7 +560,7 @@ No current modules saved
 
 #### 2. View Command for user's input university: `/view u/{UNIVERSITY_NAME}`
 
-Displays all modules and timetable for the input university.
+Displays all modules and timetables for the input university.
 
 Example Input:
 
@@ -591,7 +592,7 @@ ____________________________________________________________________________
 
 #### 3. View Command for all timetables created by user: `/view TIMETABLES`
 
-Displays all timetables for list of universities created by user.
+Displays all timetables for the list of universities created by the user.
 
 Example Input:
 
@@ -629,7 +630,7 @@ ____________________________________________________________________________
 
 #### 4. View Command for delete history: `/view DELETE_HISTORY`
 
-Displays up to 5 module mappings that user recently deleted, ordered from most recently deleted
+Displays up to 5 module mappings that the user recently deleted, ordered from the most recently deleted
 to least recently deleted.
 
 Example Input:
@@ -675,4 +676,4 @@ ____________________________________________________________________________
 | view      | `/view DELETE_HISTORY`                                                                         | Displays up to 5 modules that user recently deleted, ordered from most recently deleted to least recently deleted                                                                                                                                           |
 
 Note: Words in curly brackets are parameters that you should input as a user\
-Note: There should not be spaces in parameters, replace with underscore instead
+Note: There should not be spaces in parameters, replace with an underscore instead
