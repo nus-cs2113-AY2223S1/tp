@@ -578,8 +578,7 @@ Both values have to follow the format specified in our table of parameters.
     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Stop! Please enter a valid departure time for flight SQ654. 
     Time must be later than 2100.
-    ````
-<div style="page-break-after: always;"></div>  
+    ````  
 
 ### Add a passenger
 1. Adding a passenger to an existing flight with all details filled in correctly.
@@ -599,7 +598,9 @@ the list first before being able to add a passenger of the existing flight numbe
     Stop! The input passenger detail does not have a flight number that exist yet.
     Flight detail of the specific flight number should input first.
    ```  
-   
+
+<div style="page-break-after: always;"></div>  
+ 
 ### Delete a passenger
 1. Deleting an existing passenger with all details filled in correctly.
    1. Test Case: `passenger delete n/Ivan Theng fn/sq654 sn/17d`
