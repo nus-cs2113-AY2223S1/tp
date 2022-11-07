@@ -10,18 +10,16 @@ import seedu.parser.search.Sentence;
  * Upon execution, it prints out all the carparks that contain the search keyword.
  */
 public class FilterCommand extends Command {
-
     public static final String COMMAND_WORD = "filter";
     public static final String COMMAND_WORD_SHORT = "fil";
     private final CarparkList carparkList;
-
     private final Sentence searchQuery;
 
     /**
-     * Constructor for SearchCommand
+     * Constructor for SearchCommand.
      *
-     * @param carparkList carpark list of current api
-     * @param searchQuery argument for the search command
+     * @param carparkList carpark list of current api.
+     * @param searchQuery argument for the search command.
      */
     public FilterCommand(CarparkList carparkList, Sentence searchQuery) {
         this.searchQuery = searchQuery;
@@ -40,6 +38,11 @@ public class FilterCommand extends Command {
         return carparkList.filterByAllStrings(searchQuery);
     }
 
+    /**
+     * Executes FilterCommand.
+     *
+     * @return CommandResult of FilterCommand.
+     */
     @Override
     public CommandResult execute() {
         try {
@@ -53,6 +56,5 @@ public class FilterCommand extends Command {
             carparkList.resetBoldForAllCarparks();
             return new CommandResult(e.getMessage(), CommandStatus.FAIL);
         }
-
     }
 }

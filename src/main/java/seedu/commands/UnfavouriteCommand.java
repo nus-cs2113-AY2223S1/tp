@@ -19,10 +19,11 @@ public class UnfavouriteCommand extends Command {
     private final Favourite favourite;
 
     /**
-     * Constructor for UnfavouriteCommand
+     * Constructor for UnfavouriteCommand.
      *
-     * @param argument argument for the UnfavouriteCommand
-     * @param favourite favourite class
+     * @param argument argument for UnfavouriteCommand.
+     * @param favourite favourite class.
+     * @parm carparkList CarparkList that contains carpark related information.
      */
     public UnfavouriteCommand(String argument, Favourite favourite, CarparkList carparkList) {
         this.argument = argument;
@@ -31,9 +32,9 @@ public class UnfavouriteCommand extends Command {
     }
 
     /**
-     * Executes the UnfovouriteCommand
+     * Executes the UnfovouriteCommand.
      *
-     * @return Command result of UnfavouriteCommand
+     * @return CommandResult of UnfavouriteCommand.
      */
     public CommandResult execute() {
         try {
@@ -81,7 +82,7 @@ public class UnfavouriteCommand extends Command {
     /**
      * Remove carparks from the favourite list.
      *
-     * @param carparkId Carpark IDs to remove.
+     * @param carparkId carpark IDs to remove.
      * @throws FileWriteException If unable to write to favourite.txt file.
      * @throws NoCarparkFoundException If carpark ID is not in favourites.
      */

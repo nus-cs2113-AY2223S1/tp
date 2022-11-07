@@ -10,23 +10,21 @@ import seedu.exception.EmptyResponseException;
 import seedu.exception.FileWriteException;
 import seedu.exception.UnauthorisedAccessApiException;
 
-
 /**
- * Represents AuthCommand to authenticate user input api key
+ * Represents AuthCommand to authenticate user input api key.
  */
 public class AuthCommand extends Command {
     public static final String COMMAND_WORD = "auth";
     public static final String COMMAND_WORD_SHORT = "a";
     public static final int NUMBER_OF_ARGUMENTS = 1;
-
     private final String apiKey;
     private final Api api;
 
     /**
-     * Constructor for AuthCommand
+     * Constructor for AuthCommand.
      *
-     * @param api authenticated api
-     * @param apiKey apiKey to be authenticated
+     * @param api authenticated api.
+     * @param apiKey apiKey to be authenticated.
      */
     public AuthCommand(Api api, String apiKey) {
         this.api = api;
@@ -34,9 +32,9 @@ public class AuthCommand extends Command {
     }
 
     /**
-     * Executes the AuthCommand
+     * Executes AuthCommand.
      *
-     * @return the command result of AuthCommand
+     * @return CommandResult of AuthCommand.
      */
     @Override
     public CommandResult execute() {
@@ -61,10 +59,10 @@ public class AuthCommand extends Command {
     }
 
     /**
-     * To save the user input api key into secret.txt file
+     * To save the user input api key into secret.txt file.
      *
-     * @param apiKey user input api key
-     * @throws FileWriteException Throws this error when the program is unable to write to secret.txt
+     * @param apiKey user input api key.
+     * @throws FileWriteException Throws this error when the program is unable to write to secret.txt.
      */
     private void saveApiKey(String apiKey) throws FileWriteException {
         try {

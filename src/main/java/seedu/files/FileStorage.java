@@ -25,10 +25,10 @@ public class FileStorage {
     private final Ui ui;
 
     /**
-     * TODO: Javadoc comment.
+     * Constructor for FileStorage class.
      *
-     * @param directory
-     * @param file
+     * @param directory path to directory.
+     * @param file path to file.
      */
     public FileStorage(String directory, String file) {
         directoryPath = directory;
@@ -38,6 +38,9 @@ public class FileStorage {
         checkFileExists();
     }
 
+    /**
+     * Checks if the file exists.
+     */
     private void checkFileExists() {
         if (file.exists()) {
             return;
@@ -52,10 +55,10 @@ public class FileStorage {
     }
 
     /**
-     * Writes data to a txt file in plain text.
+     * Writes data to a .txt file in plain text.
      *
      * @param data data to be written.
-     * @throws FileWriteException If the file cannot be written to.
+     * @throws FileWriteException If unable to write to file.
      */
     public void writeDataToFile(String data) throws FileWriteException {
         try {
@@ -70,6 +73,8 @@ public class FileStorage {
 
     /**
      * Copies backup from the internal .jar to an external directory.
+     *
+     * @throws FileWriteException If unable to write to file.
      */
     //@@author GOXR3PLUS-reused
     // Reused from
@@ -90,8 +95,9 @@ public class FileStorage {
 
     /**
      * Saves a {@link CarparkList} object to a text file.
+     *
      * @param carparkList CarparkList object to be saved.
-     * @throws FileWriteException If there is an issue with writing to the file.
+     * @throws FileWriteException If unable to write to file.
      */
     public static void saveCarparkList(CarparkList carparkList) throws FileWriteException {
         FileStorage fileStorage = new FileStorage(CommonFiles.CARPARK_LIST_DIRECTORY, CommonFiles.CARPARK_LIST_FILE);

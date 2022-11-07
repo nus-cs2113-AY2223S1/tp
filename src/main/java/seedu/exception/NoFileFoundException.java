@@ -4,7 +4,6 @@ package seedu.exception;
  * Exception for when no file was found.
  */
 public class NoFileFoundException extends ParkingException {
-
     private final String message;
 
     /**
@@ -18,7 +17,9 @@ public class NoFileFoundException extends ParkingException {
     }
 
     /**
-     * Message to be returned.
+     * Returns a message.
+     *
+     * @return Message.
      */
     @Override
     public String getMessage() {

@@ -4,7 +4,6 @@ package seedu.exception;
  * Exception for unknown response code from API response.
  */
 public class UnknownResponseApiException extends ApiServerResponseErrorException {
-
     private final int responseCode;
     /**
      * Constructor for exception.
@@ -17,9 +16,9 @@ public class UnknownResponseApiException extends ApiServerResponseErrorException
     }
 
     /**
-     * Message to be returned depending on the command.
+     * Returns a message depending on the command.
      *
-     * @return message string
+     * @return Message.
      */
     @Override
     public String getMessage() {

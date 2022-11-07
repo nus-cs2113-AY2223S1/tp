@@ -12,7 +12,9 @@ public class EmptyResponseException extends ParkingException {
     }
 
     /**
-     * Return message string.
+     * Return a message saying no response was received.
+     *
+     * @return Message.
      */
     @Override
     public String getMessage() {

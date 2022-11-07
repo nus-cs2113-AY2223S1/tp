@@ -14,7 +14,7 @@ public class NoCarparkFoundException extends ParkingException {
     /**
      * Returns a message saying no carpark was found.
      *
-     * @return Formatted string.
+     * @return Message.
      */
     @Override
     public String getMessage() {

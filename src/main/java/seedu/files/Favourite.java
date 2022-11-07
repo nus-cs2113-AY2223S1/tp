@@ -37,7 +37,9 @@ public class Favourite {
     /**
      * Reads in data from favourite.txt file and saves it to this object.
      *
+     * @param carparkList CarparkList containing information about carparks.
      * @throws NoFileFoundException If no file found.
+     * @throws FileWriteException If unable to write to file.
      */
     public void updateFavouriteList(CarparkList carparkList) throws NoFileFoundException, FileWriteException {
         String content = FileReader.readStringFromTxt(file, directory, true).trim();
@@ -63,10 +65,10 @@ public class Favourite {
 
     /**
      * Makes sure all items in the array are valid items within the {@link CarparkList} class.
-     * @param carparkList the carpark list to check against.
-     * @param idArray the array with IDs to check validity
      *
-     * @return true if all items were valid, false if some invalid items were found.
+     * @param carparkList CarparkList to check against.
+     * @param idArray the array with IDs to check validity.
+     * @return True if all items were valid, false if some invalid items were found.
      */
     public boolean ensureValidity(CarparkList carparkList, ArrayList<String> idArray) {
         favouriteList = new ArrayList<>(idArray);
@@ -100,10 +102,22 @@ public class Favourite {
         fileStorage.writeDataToFile(content.toString());
     }
 
+    /**
+     * Getter method to retrieve favourite list.
+     *
+     * @return Favourite list.
+     */
     public static ArrayList<String> getFavouriteList() {
         return favouriteList;
     }
 
+    /**
+     * Returns favourite list as a String.
+     *
+     * @param carparkList CarparkList containing information about carparks.
+     * @return String of carparks in favourite list.
+     * @throws NoCarparkFoundException If carpark in favourite list is not found in CarparkList.
+     */
     public String getFavouriteListString(CarparkList carparkList) throws NoCarparkFoundException {
         StringBuilder content = new StringBuilder();
         for (String id : favouriteList) {

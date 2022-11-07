@@ -17,8 +17,11 @@ import seedu.exception.ParkingException;
  */
 public class Ui {
     private static final String SEPARATOR_STRING = "===========================================";
-
     private Scanner in;
+
+    /**
+     * Constructor for the Ui class.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
     }
@@ -31,10 +34,15 @@ public class Ui {
     public static void println(String line) {
         System.out.println(line);
     }
+
+    /**
+     * Print string to command line with new line.
+     *
+     * @param line Ansi to print.
+     */
     public static void println(Ansi line) {
         System.out.println(line);
     }
-
 
     /**
      * Print string to command line without new line.
@@ -45,6 +53,11 @@ public class Ui {
         System.out.print(line);
     }
 
+    /**
+     * Print string to command line without new line.
+     *
+     * @param line Ansi to print.
+     */
     public static void print(Ansi line) {
         System.out.print(line);
     }
@@ -52,7 +65,7 @@ public class Ui {
     /**
      * Print string in GREEN colour.
      *
-     * @param line String to print
+     * @param line String to print.
      * @param isNewLine if true, print newline.
      */
     public static void printGreen(String line, boolean isNewLine) {
@@ -68,7 +81,7 @@ public class Ui {
     /**
      * Print string in RED colour.
      *
-     * @param line String to print
+     * @param line String to print.
      * @param isNewLine if true, print newline.
      */
     public static void printRed(String line, boolean isNewLine) {
@@ -84,7 +97,7 @@ public class Ui {
     /**
      * Print string to render.
      *
-     * @param line String to print
+     * @param line String to print.
      * @param isNewLine if true, print newline.
      */
     public static void printRenderedString(String line, boolean isNewLine) {
@@ -116,11 +129,12 @@ public class Ui {
         print("\nEnter a command: ");
         return getLine();
     }
+    //@@author
 
     /**
      * Prints ASCII art of a car and parKING logo.
      */
-    //@@author eehongchan-reused
+    //@@author MaxStrandberg-reused
     //Reused from https://www.asciiart.eu/vehicles/cars and http://patorjk.com/software/taag/
     // with minor modifications
     private void showLogo() {
@@ -147,7 +161,7 @@ public class Ui {
      * Shows the result of a command execution to the user.
      * Includes additional formatting of the results of different commands.
      *
-     * @param result Command result
+     * @param result CommandResult.
      */
     public void printResult(CommandResult result) {
         switch (result.getStatus()) {
@@ -167,7 +181,7 @@ public class Ui {
     /**
      * Print exception message.
      *
-     * @param e {@link ParkingException} exception
+     * @param e {@link ParkingException} exception.
      */
     public static void printError(ParkingException e) {
         printRed(e.getMessage(), true);
@@ -224,6 +238,12 @@ public class Ui {
         assert in != null : "Invalid Scanner object! Scanner object cannot be null!";
         this.in = in;
     }
+
+    /**
+     * Returns a separator string.
+     *
+     * @return Separator string.
+     */
     public static String getSeparatorString() {
         return SEPARATOR_STRING;
     }

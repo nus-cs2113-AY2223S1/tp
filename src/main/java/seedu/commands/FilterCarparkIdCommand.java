@@ -10,25 +10,27 @@ import seedu.parser.search.Sentence;
  * Upon execution, it prints out all the carparks that contain the search keyword.
  */
 public class FilterCarparkIdCommand extends Command {
-
     public static final String COMMAND_WORD = "filter -id";
     public static final String COMMAND_WORD_SHORT = "fil -id";
     private final CarparkList carparkList;
-
     private final Sentence searchQuery;
 
     /**
-     * Constructor for SearchCommand
+     * Constructor for SearchCommand.
      *
-     * @param carparkList carpark list of current api
-     * @param searchQuery argument for the search command
+     * @param carparkList carpark list of current api.
+     * @param searchQuery argument for the search command.
      */
     public FilterCarparkIdCommand(CarparkList carparkList, Sentence searchQuery) {
         this.searchQuery = searchQuery;
         this.carparkList = carparkList;
     }
 
-
+    /**
+     * Executes FilterCarparkIdCommand.
+     *
+     * @return CommandResult of FilterCarparkIdCommand.
+     */
     @Override
     public CommandResult execute() {
         try {

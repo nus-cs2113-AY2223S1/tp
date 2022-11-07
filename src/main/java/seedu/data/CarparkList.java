@@ -24,14 +24,14 @@ public class CarparkList {
     public final HashMap<String, Carpark> carparkHashMap = new HashMap<String, Carpark>();
     private List<Carpark> carparks;
 
-
     /**
      * Constructor for the {@link CarparkList} class. Loads from a {@link Path} object
      * that points to a {@code .json} file.
      *
-     * @param filepath       Filepath to load from.
+     * @param filepath Filepath to load from.
      * @param filepathBackup Backup filepath to load from.
      * @throws NoFileFoundException If no valid file is found in either location.
+     * @throws FileWriteException If unable to write to backup file.
      */
     public CarparkList(Path filepath, Path filepathBackup) throws NoFileFoundException, FileWriteException {
         carparks = FileReader.loadLtaJson(filepath, filepathBackup);
@@ -54,7 +54,9 @@ public class CarparkList {
     /**
      * Constructor for the {@link CarparkList} class. Initializes an object from a
      * save expressed in a string.
-     * @param saveStringFull A string that is a save of the entire List of {@link Carpark} objects.
+     * @param saveStringFull a string that is a save of the entire List of {@link Carpark} objects.
+     * @throws InvalidFormatException If save string is empty.
+     * @throws DuplicateCarparkIdException If carpark ID is already added.
      */
     public CarparkList(String saveStringFull) throws InvalidFormatException, DuplicateCarparkIdException {
         carparks = new ArrayList<>();
@@ -87,6 +89,9 @@ public class CarparkList {
         sortCarparksById();
     }
 
+    /**
+     * Sort carparks by carpark ID.
+     */
     private void sortCarparksById() {
         carparks.sort(Carpark::compareTo);
     }
@@ -94,9 +99,9 @@ public class CarparkList {
     /**
      * Finds carpark based on an exact string (case-insensitive) for the carpark ID.
      *
-     * @param searchString string that should be matched to
-     * @return returns the carpark with this unique ID
-     * @throws NoCarparkFoundException If no carpark was found
+     * @param searchString String that should be matched to.
+     * @return Carpark with this unique ID.
+     * @throws NoCarparkFoundException If no carpark was found.
      */
     public Carpark findCarpark(String searchString) throws NoCarparkFoundException {
         if (carparkHashMap.get(searchString.toLowerCase()) == null) {
@@ -109,13 +114,18 @@ public class CarparkList {
     /**
      * Checks if carpark ID exists in carpark list.
      *
-     * @param searchString Carpark ID to search for.
-     * @return Returns true if carpark ID exists, false otherwise.
+     * @param searchString carpark ID to search for.
+     * @return True if carpark ID exists, false otherwise.
      */
     public boolean isCarparkValid(String searchString) {
         return carparkHashMap.get(searchString.toLowerCase()) != null;
     }
 
+    /**
+     * Returns a String of all carparks and their brief information.
+     *
+     * @return String of all carparks and their brief information.
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -160,6 +170,14 @@ public class CarparkList {
         return new CarparkFilteredList(new ArrayList<>(carparkListBuffer));
     }
 
+    /**
+     * Filter {@link CarparkList#carparks} with a substring, returning only Carparks with their
+     * development sentence containing the substring.
+     *
+     * @param carparkList {@link CarparkList#carparks} to be searched and filtered from.
+     * @param wordString substring to be searched for.
+     * @return Filtered {@link CarparkList} object.
+     */
     private HashSet<Carpark> filterBySubstring(HashSet<Carpark> carparkList, String wordString) {
         HashSet<Carpark> bufferList = new HashSet<>();
         for (Carpark carpark : carparkList) {
@@ -191,8 +209,7 @@ public class CarparkList {
     }
 
     /**
-     * Combines multiple {@link Carpark} objects that have the same {@link Carpark#carparkId} value, and groups them
-     * based on lot type.
+     * Combines multiple {@link Carpark} objects that have the same carpark ID, and groups them based on lot type.
      */
     public void combineByLotType() {
         for (Carpark carpark : carparks) {
@@ -213,7 +230,7 @@ public class CarparkList {
     }
 
     /**
-     * Resets the {@link Word#isBold} attribute in all {@link Carpark} objects to false.
+     * Resets the isBold attribute in all {@link Carpark} objects to false.
      */
     public void resetBoldForAllCarparks() {
         for (Carpark carpark : carparks) {
@@ -221,6 +238,11 @@ public class CarparkList {
         }
     }
 
+    /**
+     * Returns a String of formatted Strings of carparks for saving.
+     *
+     * @return String of formatted Strings of carparks for saving.
+     */
     public String getSaveString() {
         StringBuilder bufferString = new StringBuilder();
         for (Carpark carpark : carparks) {
