@@ -147,6 +147,7 @@ public class ParameterParser {
      * @throws GlobalMissingTagException If there is a missing mandatory tag.
      */
     public static void checkMandatoryTagsExist(Command command, String[] splits) throws GlobalMissingTagException {
+        parserLogger.setLevel(Level.SEVERE);
         String[] tags = command.getMandatoryTags();
         for (String tag : tags) {
             boolean found = findMatchingTagAmongInputs(tag, splits);
@@ -168,6 +169,7 @@ public class ParameterParser {
      */
     public static void checkUnsupportedTagsNotExist(Command command, String[] splits)
             throws GlobalUnsupportedTagException {
+        parserLogger.setLevel(Level.SEVERE);
         String[] mandatoryTags = command.getMandatoryTags();
         String[] optionalTags = command.getOptionalTags();
 
@@ -198,6 +200,7 @@ public class ParameterParser {
      * @throws GlobalDuplicateTagException If there is an extra of the same tag.
      */
     public static void checkDuplicateTagsNotExist(String[] splits) throws GlobalDuplicateTagException {
+        parserLogger.setLevel(Level.SEVERE);
         HashMap<String, Integer> tagOccurenceMap = new HashMap<>();
         for (String split : splits) {
             assert split.length() >= MINIMUM_TAG_LENGTH : "The function argument splits has more length than expected";
@@ -222,6 +225,7 @@ public class ParameterParser {
      * @throws GlobalEmptyParameterException If there exists a tag without parameter.
      */
     public static void checkParameterNotEmpty(String[] splits) throws GlobalEmptyParameterException {
+        parserLogger.setLevel(Level.SEVERE);
         for (String split : splits) {
             if (split.length() == 2) {
                 parserLogger.log(Level.WARNING, "An empty parameter error is caught for the "
@@ -307,6 +311,7 @@ public class ParameterParser {
      * @throws MoolahException If an error is found when the parameter is parsed.
      */
     private static void setParameter(Command command, String tag, String parameter) throws MoolahException {
+        parserLogger.setLevel(Level.SEVERE);
         switch (tag) {
         case COMMAND_TAG_TRANSACTION_TYPE:
             if (command instanceof ListCommand) {
@@ -373,6 +378,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidTypeException If the transaction type provided is not supported.
      */
     public static String parseTypeTagForListing(String parameter) throws InputTransactionInvalidTypeException {
+        parserLogger.setLevel(Level.SEVERE);
         switch (parameter) {
         case "expense":
             return CLASS_TYPE_EXPENSE;
@@ -395,6 +401,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidTypeException If the transaction type provided is not supported.
      */
     public static String parseTypeTagForAdding(String parameter) throws InputTransactionInvalidTypeException {
+        parserLogger.setLevel(Level.SEVERE);
         boolean isExpense = parameter.equals(Expense.TRANSACTION_NAME);
         boolean isIncome = parameter.equals(Income.TRANSACTION_NAME);
 
@@ -417,6 +424,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidCategoryException If the category provided contains numeric or symbols.
      */
     public static String parseCategoryTag(String parameter) throws InputTransactionInvalidCategoryException {
+        parserLogger.setLevel(Level.SEVERE);
         Pattern specialSymbols = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Matcher hasSpecialSymbols = specialSymbols.matcher(parameter);
         if (containNumeric(parameter) || hasSpecialSymbols.find()) {
@@ -435,6 +443,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidAmountException If the transaction amount given is not a valid accepted integer.
      */
     private static int parseAmountTag(String parameter) throws MoolahException {
+        parserLogger.setLevel(Level.SEVERE);
         try {
 
             //Checks if parameter is non-numerical or negative values.
@@ -469,6 +478,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidDateException If the format of the transaction date provided is incorrect.
      */
     public static LocalDate parseDateTag(String parameter) throws InputTransactionInvalidDateException {
+        parserLogger.setLevel(Level.SEVERE);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_INPUT_PATTERN.toString());
             LocalDate date = LocalDate.parse(parameter, formatter.withResolverStyle(ResolverStyle.STRICT));
@@ -490,6 +500,7 @@ public class ParameterParser {
      * @throws MoolahException If the entry number provided is not parsable into integer.
      */
     public static int parseEntryTag(String parameter) throws MoolahException {
+        parserLogger.setLevel(Level.SEVERE);
         int index;
         //@@chinhan99
         if (containAlphabet(parameter)) { // Checks if parameter contains alphabets
@@ -526,6 +537,7 @@ public class ParameterParser {
      * @throws HelpUnknownOptionException If the help option parameter selected is not 'detailed'.
      */
     public static boolean parseHelpOptionTag(String parameter) throws HelpUnknownOptionException {
+        parserLogger.setLevel(Level.SEVERE);
         assert parameter != null : "The function argument passed must not be null!";
         boolean isValidHelpOption = parameter.equalsIgnoreCase("detailed");
         if (isValidHelpOption) {
@@ -573,6 +585,7 @@ public class ParameterParser {
      * @throws InputTransactionInvalidAmountException If the transaction amount given does not meet the 4 requirements.
      */
     public static long parseBudgetTag(String parameter) throws MoolahException {
+        parserLogger.setLevel(Level.SEVERE);
         long newBudget;
         if (containAlphabet(parameter) || containSymbol(parameter)) {
             throw new InputBudgetInvalidAmountException();
@@ -607,6 +620,7 @@ public class ParameterParser {
      * @throws StatsInvalidTypeException If the statistic type given is not supported.
      */
     public static String parseStatsTypeTag(String parameter) throws StatsInvalidTypeException {
+        parserLogger.setLevel(Level.SEVERE);
         switch (parameter) {
         case CATEGORICAL_SAVINGS:
             return CATEGORICAL_SAVINGS;
@@ -625,6 +639,7 @@ public class ParameterParser {
 
     public static int parseMonthTag(String parameter) throws GlobalInvalidMonthException,
             GlobalNumberNotNumericException {
+        parserLogger.setLevel(Level.SEVERE);
         int month;
         try {
             month = Integer.parseInt(parameter);
@@ -644,6 +659,7 @@ public class ParameterParser {
 
     public static int parseYearTag(String parameter) throws GlobalInvalidYearException,
             GlobalNumberNotNumericException {
+        parserLogger.setLevel(Level.SEVERE);
         int year;
         try {
             year = Integer.parseInt(parameter);
@@ -661,6 +677,7 @@ public class ParameterParser {
     }
 
     public static String parsePeriodTag(String parameter) throws GlobalInvalidPeriodException {
+        parserLogger.setLevel(Level.SEVERE);
         String period;
         switch (parameter) {
         case DAYS:
@@ -677,6 +694,7 @@ public class ParameterParser {
     }
 
     public static int parseNumberTag(String parameter) throws MoolahException {
+        parserLogger.setLevel(Level.SEVERE);
         int statsNumber;
         try {
             statsNumber = Integer.parseInt(parameter);

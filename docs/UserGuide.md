@@ -525,30 +525,33 @@ stats s/time_insights p/PERIOD n/NUMBER
 **Examples:**
 
 - `stats s/time_insights y/2022`
-- `stats s/time_insights y/2022 m/10`
+- `stats s/time_insights y/2022 m/11`
 - `stats s/time_insights p/weeks n/3`
 - `stats s/time_insights p/months n/12`
 
 **Expected Output:**
 
-Viewing the Financial Insights for 2022
+Viewing the Financial Insights for November 2022
 
 ```
 stats s/time_insights y/2022
 ____________________________________________________________
 Here are the categorical savings and expenditure summary for
-Year: 2022
+Year: 2022, Month: 11
 
 -----Categorical Savings-----
-[transport] -$10001
-[salary] $2000
-[food] -$20
+[salary] $3040
+[food] -$100
 
 -----Expenditure Summary-----
-Income: $2000
-Expense: $10021
-Savings: $-8021
+Income: $3040
+Expense: $100
+Savings: $2940
+Budget: $1000
+Spending Habit: Wow, keep up the good work. You saved at least two-third of your income.
+In terms of monthly budget, you have kept yourself well within the budget!
 ____________________________________________________________
+
 ```
 
 Viewing the Financial Insights for the Last 3 Weeks
@@ -614,7 +617,14 @@ Our program comes with a storage feature to ensure user data gets saved each tim
 If you are accessing Moolah Manager via our JAR file release, the storage file, **duke.txt** would be newly created in a newly created **data** folder in your current directory.
 
 In duke.txt, the monthly budget value would be stored on the 1st line, with the different transaction entries on subsequent lines.
-We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program.  
+When Moolah Manager is started, the program will attempt to store the budget and transaction values locally into the program.
+
+If the duke.txt  data is in **incorrectly formatted** when Moolah Manager is started, none of the data would be stored into the program. 
+An error message would be shown to inform users of the corrupted data and recommend editing the entries correctly. 
+Suppose users want to continue with the program in the current state without updating the corrupted duke.txt data, 
+they can enter any command which would add or alter the budget / transaction values which promptly **overwrites** the duke.txt data.
+
+We **DO NOT** recommend editing duke.txt unless you are familiar with the storage syntax of the program to **prevent lose of data**.  
 
 _Written by: Yong Chin Han_
 
