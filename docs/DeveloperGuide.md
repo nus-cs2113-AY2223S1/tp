@@ -1,8 +1,5 @@
 # Pet Clinic Manager - Developer Guide
 * [Setting Up and Getting Started](#setting-up-and-getting-started)
-* [Product Scope](#product-scope)
-  * [Target User Profile](#target-user-profile)
-  * [Value Proposition](#value-proposition)
 * [Design and Implementation](#Design-and-Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
   * [Appointment Manage Feature](#Appointment-Manage-Feature)
@@ -11,6 +8,9 @@
   * [Employee Management Feature](#Employee-Management-Feature)
   * [Pet Management Feature](#Pet-Management-Feature)
   * [Service Management Feature](#Service-Management-Feature)
+* [Appendix A Product Scope](#Appendix-A-Product-Scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
 * [Appendix B User Stories](#Appendix-B-User-Stories)
 * [Appendix C Non-Functional Requirements](#Appendix-C-Non-Functional-Requirements)
 
@@ -20,19 +20,6 @@
 2. Download the latest version of `tp.main.jar` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp/releases).
 3. Put the JAR file into a folder you would like to use.
 4. Open the command line in that folder and run the command `java -jar [filename].jar`.
-
-## Product scope
-
-### Target User Profile
-
-This application is for Head Nurses of Pet Clinics to manage the appointments of the clinic, manage employees and allocate tasks to be done by each employee.
-
-### Value Proposition
-
-The head nurse can now:
-- have an upcoming schedule of all appointments of the clinic in one place.
-- have an overview of all employees in the clinic and the ability to manage them.
-- create and assign tasks to be performed.
 
 ## Design and Implementation
 
@@ -341,6 +328,18 @@ The following sequence diagram shows how the service management works
   2. Less oop.
 ---
   
+## Appendix A: Product scope
+
+### Target User Profile
+
+This application is for Head Nurses of Pet Clinics to manage the appointments of the clinic, manage employees and allocate tasks to be done by each employee.
+
+### Value Proposition
+
+The head nurse can now:
+- have an upcoming schedule of all appointments of the clinic in one place.
+- have an overview of all employees in the clinic and the ability to manage them.
+- create and assign tasks to be performed.
 
 ## Appendix B: User Stories
 
