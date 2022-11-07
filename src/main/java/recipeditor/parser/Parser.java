@@ -133,7 +133,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException i) {
             Ui.showMessage(WRONG_COMMAND_FORMAT_MESSAGE);
         } catch (NumberFormatException n) {
-            Ui.showMessage(InvalidCommand.INVALID_INDEX_MESSAGE);
+            Ui.showMessage(parsed[2] + InvalidCommand.INVALID_INDEX_MESSAGE);
         } catch (Exception e) {
             Ui.showMessage(e.getMessage());
         } catch (AssertionError e) {
