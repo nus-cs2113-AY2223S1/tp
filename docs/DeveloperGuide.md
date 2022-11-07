@@ -489,15 +489,15 @@ for use via a Command Line Interface (CLI).
 
 ## Appendix B: User Stories
 
-| Version | As a ... | I want to ...                                                  | So that I can ...                                           |
-|---------|------|----------------------------------------------------------------|-------------------------------------------------------------|
-| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | Know where I can park                                       |
-| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Estimate where I can park based on last updated information |
-| v2.0    |Driver| Be able to save favourites                                     | Monitor carparks important to me                            |
-| v2.0    |Driver| Import my favourite carparks                                   | Use my saved settings/preferences across different devices  |
-| v2.0    |Driver| Filter the carparks based on their address                     | Search for carparks without knowing the carpark Id          |
-| v2.1    |Driver| Search for carparks based on carpark ID                 | Search for carparks without knowing the carpark address     |
-| v2.1    |Driver| Have my carpark information be colour coordinated              | Look at carpark information with ease                       |
+| Version | As a ... | I want to ...                                                  | So that I can ...                                                   |
+|---------|------|----------------------------------------------------------------|---------------------------------------------------------------------|
+| v1.0    |Driver| Search lot availability by 5 digit code for a specific carpark | Know where I can park                                               |
+| v1.0    |User with no internet| Access a list of available carparks on the app offline         | Estimate where I can park based on last updated information offline |
+| v2.0    |Driver| Be able to save favourites                                     | Monitor carparks important to me                                    |
+| v2.0    |Driver| Import my favourite carparks                                   | Use my saved settings/preferences across different devices          |
+| v2.0    |Driver| Filter the carparks based on their address                     | Search for carparks without knowing the carpark Id                  |
+| v2.1    |Driver| Search for carparks based on carpark ID                 | Search for carparks without knowing the carpark address             |
+| v2.1    |Driver| Have my carpark information be colour coordinated              | Look at carpark information with ease                               |
 
 
 ## Appendix C: Non-Functional Requirements
