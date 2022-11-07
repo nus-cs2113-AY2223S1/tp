@@ -106,7 +106,7 @@ empty input.
   - Locations: InputManager.java
 
 
-### Code contributed [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=AY2223S1-CS2113-W13-1%2Ftp%5Bmaster%5D&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=Markusteim&tabRepo=AY2223S1-CS2113-W13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
+### Code contributed [RepoSense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=zoom&zA=AmethystQ&zR=AY2223S1-CS2113-W13-1%2Ftp%5Bmaster%5D&zACS=185.5609756097561&zS=2022-09-16&zFS=&zU=2022-11-07&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 ### Enhancements to existing features
   -  Separate the code and arrange some of them into packages
