@@ -20,13 +20,6 @@ public class Ui {
             + "                |";
 
     /**
-     * Prints divider (dash lines) on the console.
-     */
-    public static void showDivider() {
-        showMessage(DIVIDER);
-    }
-
-    /**
      * Prints RecipEditor logo, starting message and list of available commands on the console.
      */
     public static void showGreeting() {
@@ -89,3 +82,4 @@ public class Ui {
     }
 
 }
+
