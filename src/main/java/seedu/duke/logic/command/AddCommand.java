@@ -113,7 +113,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds strength exercise
+     * Adds strength exercise.
      *
      * @param argumentList Input for the command
      * @param slashesCount Number of slash in the input
@@ -125,7 +125,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes add strength command
+     * Executes add strength command.
      *
      * @param argumentList Input for the command
      * @throws IllegalValueException If the command is invalid
@@ -145,7 +145,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Outputs success adding message
+     * Outputs success adding message.
      *
      * @param exercise Exercise to be converted to string
      */
@@ -158,7 +158,7 @@ public class AddCommand extends Command {
 
 
     /**
-     * Checks and executes mark done for exercise already done
+     * Checks and executes mark done for exercise already done.
      *
      * @param argumentList Inputs for the command
      * @throws IllegalValueException If there is error in data from loading txt
@@ -172,7 +172,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Creates strength exercise
+     * Creates strength exercise.
      *
      * @param argumentList Input for the command
      * @return Strength exercise
@@ -194,7 +194,7 @@ public class AddCommand extends Command {
 
 
     /**
-     * Gets the date for the add command
+     * Gets the date for the add command.
      *
      * @param argumentList  Input for the command
      * @param maximumLength Maximum length for the input
@@ -212,7 +212,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Validates the add strength command
+     * Validates the add strength command.
      *
      * @param argumentList Input from the user
      * @param slashesCount Number of slashes in the input
