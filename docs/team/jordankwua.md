@@ -28,7 +28,7 @@ It was tedious to make it such that the storage combined both flight and passeng
 
 - ### Enhancements to existing features:
   + Added more exceptions to make the code for flight information more defensive (Pull Requests [#21](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/21),
-  [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/96))
+  [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/97))
 - ### Project Management:
   + Managed releases `v1.0`, `v2.0` and `v2.1` (3 [releases](https://github.com/AY2223S1-CS2113-T17-1/tp/releases)) on GitHub
 
@@ -37,9 +37,9 @@ It was tedious to make it such that the storage combined both flight and passeng
     (Pull Request [#55](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/55))
 - ### Contributions to DG:
   + Added the description for `Architecture` and the various components under `Architecture`, added the Architecture diagram
-and various UML diagrams under these components (Pull Request [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/96))
+and various UML diagrams under these components (Pull Request [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/97))
   + Added the `delete a flight` feature and relevant diagrams (Pull Request [#43](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/43))
-  + Added the target user profile, value proposition and user stories under product scope (Pull Request [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/96))
+  + Added the target user profile, value proposition and user stories under product scope (Pull Request [#97](https://github.com/AY2223S1-CS2113-T17-1/tp/pull/97))
 - ### Contributions to team-based tasks
   + Set up the GitHub team and repository
 - ### Team contributions
