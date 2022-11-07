@@ -151,14 +151,10 @@ The first section is facilitated by the following classes:
 
 The following is a simple class diagram of the three classes:
 <p align="center">
-
-![](diagrams/CommandAddParserRelatedClassesDiagram.png)
-
+    <img src="./diagrams/CommandAddParserRelatedClassesDiagram.png">
+    Command Add Parser Related Classes Diagram
 </p>
 
-<p align="center">
-Command Add Parser Related Classes Diagram
-</p>
 
 As shown above, both `CommandAddClientParser` and `CommandAddPropertyParser` classes have a similar core method called `parseCommand()` which is responsible for client or property detail extraction and validation. The rest of the methods in both classes are sub-methods of the `parseCommand()` method.
 
@@ -194,14 +190,10 @@ The second section is facilitated by the following classes:
 The following is a simple class diagram of the three classes:
 
 <p align="center">
-
-![Command Add Related Classes Diagram](diagrams/CommandAddRelatedClassesDiagram.png)
-
+    <img src="./diagrams/CommandAddRelatedClassesDiagram.png">
+    Command Add Related Classes Diagram
 </p>
 
-<p align="center">
-Command Add Related Classes Diagram
-</p>
 
 
 As shown above, both `CommandAddClient` and `CommandAddProperty` classes have a similar core method called `execute(...)` which is responsible for the new client or property addition into their respective lists.
