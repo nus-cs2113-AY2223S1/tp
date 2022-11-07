@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+
+[-> AddCommand : execute
+activate AddCommand
+AddCommand -> Parser++: getArgumentsCount(arguments: String)
+return slashesCount: int
+
+AddCommand -> Parser++: getArgumentList(arguments: String)
+return argumentList: String[]
+
+AddCommand -> Parser++: getClassType(argumentList: String[])
+return addType: String
+
+alt food
+    ref over AddCommand: addFood
+else strength
+    ref over AddCommand: addStrengthExercise
+else cardio
+
+else weight
+    ref over AddCommand: addWeightAndFat
+else invalidType
+    ref over AddCommand: handleInvalidAddType
+end
+return
+AddCommand -[hidden]-> Parser
+destroy AddCommand
+@enduml

@@ -1,21 +1,100 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.logic.exception.DukeException;
+import seedu.duke.logic.exception.IllegalValueException;
+import seedu.duke.logic.Parser;
+import seedu.duke.logic.command.Command;
+import seedu.duke.logic.command.GreetCommand;
+import seedu.duke.logic.command.LoadCommand;
+import seedu.duke.logic.command.SaveCommand;
+import seedu.duke.records.RecordList;
+import seedu.duke.records.biometrics.Biometrics;
+import seedu.duke.records.exercise.ExerciseList;
+import seedu.duke.records.food.FoodList;
+import seedu.duke.storage.Storage;
+import seedu.duke.storage.TrackNFitLogger;
+import seedu.duke.ui.Ui;
+
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    private static Ui ui;
+    private static Storage storage;
+    private static Biometrics biometrics;
+
+    private static ExerciseList exerciseList;
+
+    private static FoodList foodList;
+
+    private static RecordList recordList;
+    public static boolean isProgramFinished = false;
+    private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        biometrics = new Biometrics();
+        exerciseList = new ExerciseList();
+        foodList = new FoodList();
+        recordList = new RecordList();
+    }
+
+    private static void startDuke() {
+        new Duke();
+        Command greetCommand = new GreetCommand();
+        try {
+            greetCommand.execute();
+        } catch (IllegalValueException e) {
+            ui.output(e.getMessage());
+        }
+        ui.line();
+        try {
+            TrackNFitLogger.setUp();
+            Command loadCommand = new LoadCommand();
+            loadCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+            loadCommand.execute();
+        } catch (IllegalValueException | IOException e) {
+            ui.output(e.getMessage());
+        }
+        ui.line();
+    }
+
+    private static void stopDuke() {
+        try {
+            Command saveCommand = new SaveCommand();
+            saveCommand.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+            saveCommand.execute();
+        } catch (IllegalValueException e) {
+            ui.output(e.getMessage());
+        } finally {
+            ui.line();
+            LOGGER.info("Stopping duke");
+        }
+    }
+
+    public static void main(String[] args) {
+        //Solution below adapted from  https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/Main.java
+        startDuke();
+
+        while (!isProgramFinished) {
+            try {
+                String input = ui.input();
+                ui.line();
+                Command command = Parser.parse(input);
+                command.setData(ui, storage, biometrics, exerciseList, foodList, recordList);
+                command.execute();
+            } catch (DukeException e) {
+                ui.output(e.getMessage());
+            } finally {
+                ui.line();
+            }
+        }
+
+        stopDuke();
     }
 }

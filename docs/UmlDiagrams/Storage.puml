@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage {
+Class Storage
+Class DataLoader
+Class DataSaver
+Class AddCommand
+Class SetCommand
+Class Biometrics
+Class WeightAndFat
+Class Exercise
+Class Food
+Class Ui
+}
+
+package Logic {
+Class LoadCommand
+Class SaveCommand
+}
+
+LoadCommand --> "1"Storage
+SaveCommand --> "1"Storage
+Storage ..> DataLoader: uses >
+Storage ..> DataSaver: uses >
+DataLoader ..> Ui: prints using >
+DataLoader ..> AddCommand: creates & executes >
+DataLoader ..> SetCommand: creates & executes >
+DataSaver ..> Biometrics: gets data from >
+DataSaver ..> WeightAndFat: gets data from >
+DataSaver ..> Exercise: gets data from >
+DataSaver ..> Food: gets data from >
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoActivate on
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":ViewCommand" as viewCommand LOGIC_COLOR
+participant "<<class>>\nParser" as Parser LOGIC_COLOR
+end box
+
+box Records RECORD_COLOR_T1
+
+participant ":foodList" as foodList LOGIC_COLOR
+participant ":exerciseList" as exerciseList LOGIC_COLOR
+participant ":Calories" as Calories LOGIC_COLOR
+participant ":CaloriesList" as CaloriesList LOGIC_COLOR
+participant ":calculator" as calculator LOGIC_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant "ui:Ui" as ui UI_COLOR
+end box
+
+[-> viewCommand : execute()
+    viewCommand -> viewCommand: viewCalories(argumentList)
+
+    viewCommand -> foodList: getFoodList()
+    return foodArrayList: ArrayList<Food>
+    viewCommand -> exerciseList: getCompletedExerciseList()
+    return completedExerciseArrayList: ArrayList<Exercise>
+    viewCommand -> calculator **: new(gender: String, weight: int, height: int, age: int, activitylevel: int)
+    viewCommand -> calculator: calculateTotalCaloriesBurnt(completedExerciseArrayList: ArrayList<Exercise>,String date)
+    return inputCaloriesBurntEntry: int
+    viewCommand -> calculator: calculateTotalCaloriesConsumed(foodArrayList: ArrayList<Food>,String date)
+    return inputCaloriesConsumedEntry: int
+    viewCommand -> calculator: calculateNetCalories(completedExerciseArrayList: ArrayList<Exercise>,foodArrayList: ArrayList<Food>, String date)
+    return inputNetCaloriesEntry : int
+    viewCommand -> calculator: calorieMessage()
+    return message : String
+    viewCommand -> Calories : new(inputCaloriesConsumedEntry: int, inputCaloriesBurntEntry: int, inputNetCaloriesEntry,: int, localdate: LocalDate, message: String)
+    return caloriesInput :Calories
+    viewCommand -> CaloriesList : addCalories(inputCalories:Calories)
+    viewCommand -> tableFrame : getCaloriesTable()
+    return table : ArrayList<String>
+    viewCommand -> ui: printTable(table)
+    ui -> ui: output(row)
+
+
+destroy viewCommand
+
+@enduml

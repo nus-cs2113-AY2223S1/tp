@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+
+class AddCommand {
+-arguments: String
++execute(): void
+-addWeightAndFat(argumentList: String[]): void
+}
+class SetCommand {
+-arguments: String
++execute(): void
+-setBiometrics(argumentList: String[]): void
+}
+class RemoveCommand {
+-arguments: String
++execute(): void
+-removeWeight(index: int): void
+}
+class ViewCommand {
+-arguments: String
++execute(): void
+-viewBiometrics(): void
+-viewWeight(): void
+}
+class Biometrics {
+-age: int
+-gender: String
+-height: int
+-activityLevel: int
++setBiometrics(age: int, gender: String, height: int, activityLevel: int): void
++toString(): String
++saveBiometrics(): String
+}
+class WeightAndFat {
+-weight: int
+-fat: int
+-date: LocalDate
++toString(): String
++saveWeightAndFat(): String
+}
+class WeightAndFatList {
++addWeightAndFat(weightAndFat: WeightAndFat): void
++getMostRecent(): WeightAndFat
++removeWeightAndFat(index: int): WeightAndFat
+}
+
+
+AddCommand --> "1"Biometrics
+SetCommand --> "1"Biometrics
+RemoveCommand --> "1"Biometrics
+ViewCommand --> "1"Biometrics
+Biometrics --> "1"WeightAndFatList
+WeightAndFatList *-> "*"WeightAndFat : ArrayList of >
+
+@enduml

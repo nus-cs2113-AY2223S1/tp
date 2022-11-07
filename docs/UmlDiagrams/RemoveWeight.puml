@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+autoactivate on
+
+box Logic LOGIC_COLOR_T1
+participant ":RemoveCommand" as removeCommand LOGIC_COLOR
+end box
+
+box Record RECORD_COLOR_T1
+participant ":WeightAndFat" as weightAndFat RECORD_COLOR
+participant ":WeightAndFatList" as weightAndFatList RECORD_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant ":Ui" as ui UI_COLOR
+end box
+
+activate removeCommand
+group removeWeight
+    removeCommand -> removeCommand: removeWeight(index: int)
+    removeCommand -> weightAndFatList: removeWeightAndFat(index: int)
+        weightAndFatList -> weightAndFatList: remove(index: int)
+        return deletedWeightAndFat: WeightAndFat
+    return deletedWeightAndFat: WeightAndFat
+    removeCommand -> ui: output(successMessage: String)
+    return
+    removeCommand -> weightAndFat: toString(deletedWeightAndFat: WeightAndFat)
+    return weightAndFatString: String
+    removeCommand -> ui: output(weightAndFatString: String)
+    return
+    return
+
+end
+
+deactivate removeCommand
+
+@enduml

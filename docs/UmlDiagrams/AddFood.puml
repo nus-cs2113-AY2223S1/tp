@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+!include style.puml
+box Logic LOGIC_COLOR_T1
+participant ":AddCommand" as addCommand LOGIC_COLOR
+end box
+box Ui UI_COLOR_T1
+participant ":Ui" as ui UI_COLOR
+end box
+box Record RECORD_COLOR_T1
+participant ":FoodList" as FoodList RECORD_COLOR
+participant ":Food" as food RECORD_COLOR
+end box
+
+group sd addFood
+activate addCommand
+    addCommand -> addCommand: addFood(argumentList: String[], argumentsCount: int)
+    create food
+    addCommand -> food : new(foodDescription: String, calories: int, date: LocalDate)
+    return food: Food
+    addCommand -> FoodList: addFood(food: Food)
+    opt display
+        addCommand -> food: toString()
+        return foodString: String
+        addCommand -> ui: output(foodString: String)
+        return
+        addCommand -> ui: output(success message: String)
+        return
+    end
+    return
+end
+@enduml

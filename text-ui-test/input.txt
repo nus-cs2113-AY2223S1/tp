@@ -1,1 +1,33 @@
-James Gosling
+ding Dong
+help
+view biometrics
+set biometrics /10 /male /149 /2
+set bio /29 /others /295 /3
+view biometrics
+set biometrics /12 /female /0 /2
+view biometrics
+add strength /squat /3 /10 /100 /17-11-2000
+add strength /bench /3 /10 /20 /18-11-2000
+add strength /deadlift /3 /12 /15 /19-11-2000
+view exercise
+view strength
+view exercise /done
+view strength /done
+view exer
+view exercise /do
+view strength /do
+view exercise donea
+view strength donea
+add strength /press /5 /5 /200 /20-11-2000
+add strength /press /3 /12 /20 /21-11-2000
+mark done /2
+mark done /5
+view exercise /done
+view strength /done
+view exercise
+view strength
+mark undone /3
+view exercise /done
+view strength /done
+mark done /1
+exit

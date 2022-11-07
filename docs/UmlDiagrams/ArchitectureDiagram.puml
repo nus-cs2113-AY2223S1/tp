@@ -1,0 +1,18 @@
+@startuml
+skinparam componentStyle rectangle
+
+component {
+ [Ui] -right-> [Records]
+ [Logic] -down->[Storage]
+ [Logic] -down-> [Records]
+ [Duke] --> [Ui]
+ [Duke] --> [Logic]
+ [Duke] --> [Storage]
+ [Duke] -up-> [Records]
+ [Duke] -down-> [Exception]
+}
+[Storage] -up-> [Records]
+[Storage] .right.> [File]
+[User] ..> Ui
+
+@enduml
