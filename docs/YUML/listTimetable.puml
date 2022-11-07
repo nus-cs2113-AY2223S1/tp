@@ -1,8 +1,8 @@
 @startuml
 !include style.puml
 
-participant ":Parser" as Parser LOGIC_COLOR
-participant ":Timetable" as Timetable LOGIC_COLOR
+participant "<color: red><<class>></color>\nParser" as Parser LOGIC_COLOR
+participant "<color: red><<class>></color>\nTimetable" as Timetable LOGIC_COLOR
 participant "module:Module" as Module LOGIC_COLOR
 
 [-> Parser : parseCommand(:String, :String)

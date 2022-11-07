@@ -7,6 +7,9 @@ import seedu.duke.commands.CommandAddModule;
 import seedu.duke.commands.CommandSetLesson;
 import seedu.duke.timetable.Timetable;
 
+/**
+ * Class for parsing commands to start any feature operations.
+ */
 public class Parser {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_LIST = "list";
@@ -18,6 +21,13 @@ public class Parser {
     private static final String COMMAND_ALLOCATE = "allocate";
 
 
+    /**
+     * Parses the command and initiates the command if the entry is valid and recognised.
+     *
+     * @param command Input from user as a command on what the program should do.
+     * @param currentSemester The semester of the timetable indicated by the user at program start up.
+     * @return A response string for the success or failure of the operation.
+     */
     public static String parseCommand(String command, String currentSemester) {
         switch (command) {
         case COMMAND_ADD:
