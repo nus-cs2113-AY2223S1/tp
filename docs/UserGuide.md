@@ -270,6 +270,7 @@ input: `quit`
 **A**: Copy all data files `Sem1Data` or / and `Sem2Data` together with the jar file to the new computer, in the same directory.
 
 ##  <span style="color:orange ">Feature Summary</span>
+
 | Feature                            |   Input    |
 |------------------------------------|:----------:|
 | adding a module                    |   `add`    |
@@ -281,6 +282,8 @@ input: `quit`
 | printing the timetable             |  `print`   |
 | exiting the program                |   `quit`   |
 
+
+<div style="page-break-after: always;"></div>
 
 ## <span style="color:orange ">Appendix</span>
 
