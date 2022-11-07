@@ -32,16 +32,16 @@ public class StorageTest {
             path1 = tempDir.resolve("testfile1.txt");
         } catch (InvalidPathException ipe) {
             System.err.println(
-                    "error creating temporary test file in " +
-                            this.getClass().getSimpleName());
+                    "error creating temporary test file in "
+                            + this.getClass().getSimpleName());
         }
 
         file1 = path1.toFile();
     }
 
     private void modifiedInsertFlightsIntoFile() throws IOException {
-        flights.add(new FlightInfo("SQ832", "SINGAPORE AIRLINES", "BANGKOK", "1600"
-                , "05", "03-03"));
+        flights.add(new FlightInfo("SQ832", "SINGAPORE AIRLINES", "BANGKOK",
+                "1600", "05", "03-03"));
         FileWriter fw = new FileWriter(file1);
         for (int i = 0; i < flights.size(); i++) {
             String formattedString = flights.get(i).convertToFileFormat();
