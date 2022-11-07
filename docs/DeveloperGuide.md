@@ -517,7 +517,7 @@ Using the command `find k/KEYWORD`, the criteria for retrieving the matching tra
 compared with the description of each transaction object.
 
 Figure 17 below is a class diagram for the `Find` command class and its associations with other classes that contribute to the listing of filtered
-transactions. Some methods and variables have been ommitted from the class diagram for simplicity.
+transactions. Some methods and variables have been omitted from the class diagram for simplicity.
 
 <p align="center">
     <img src="images/FindCommandClassDiagram.png" width="80%">
