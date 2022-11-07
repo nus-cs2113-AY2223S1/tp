@@ -9,8 +9,6 @@
   - [2.2 Model Component](#22-model-component)
   - [2.3 API Component](#23-api-component)
   - [2.4 Storage Component](#24-storage-component)
-    - [2.4.1 FileWriter](#241-filewriter)
-    - [2.4.3 FileLoader](#242-fileloader)
   - [2.5 UI Component](#25-ui-component)
   - [2.6 Logic Component](#26-logic-component)
   - [2.7 Common Component](#27-common-component)
@@ -18,7 +16,7 @@
   - [3.1 Favourite / Unfavourite Feature](#31-favourite--unfavourite-feature)
     - [3.1.1 Design Considerations](#311-design-considerations)
   - [3.2 Update Data from LTA API Feature](#32-update-data-from-lta-api-feature)
-    - [3.2.1 Design Consideration](#321-design-considerations)
+    - [3.2.1 Design Considerations](#321-design-considerations)
     - [3.2.2 Limitations of the LTA API](#322-limitations-of-the-lta-api)
 - [4 Project Scope](#4-product-scope)
   - [4.1 Target user profile](#41-target-user-profile)
@@ -49,11 +47,11 @@ User input is passed to the Command class, which then calls the Parser to parse 
 Each command subclass handles its own execution.
 
 ![Architecture Sequence Diagram](images/ArchSequenceDiagram.png)
+
 Below are the main subcomponents that Parking and the command subclass delegate work to:
 * `Ui`: Deals with user interaction, such as reading input and printing output.
 * `CommandResult`: Returns the results of the command instructed.
 * `Parser`: Takes in the user input string to determine what is the command the user has instructed the program to do.
-
 
 ### 2.2 Model Component
 ![Model Class Diagram](images/ModelClassDiagram.png)
@@ -66,7 +64,7 @@ This component:
 * Stores all carpark data (all `Carpark` objects), contained in a `CarparkList` object.
 * Stores filtered carpark data to be used in other components (in `CarparkFilteredList`).
 * Contains methods for selecting a `Carpark` object based on a unique code (for the `find` command) as well
-as filtering by a substring or set of substrings (`search` command).
+as filtering by a substring or set of substrings (`filter` command).
 * Is independent of other components except the API component, which is used to generate it.
 * Group objects with the same code by enum `LotType` (Car, Motorcycle, Heavy Vehicle) and places them in a HashMap 
 for easy access. For example: Three `Carpark` objects may have the same unique carpark code as they are the same 
@@ -74,7 +72,8 @@ carpark, but contain available lot information for different types of lot. These
 one object with the HashMap `allAvailableLots` containing a breakdown of lots by type.
 
 Note: The `Carpark` class contain many getters, setters and annotations to be used with the `jackson` module. 
-See [`FileLoader`](#FileLoader) for more information.
+These may seem like they are unused in an IDE, but their presence is crucial for the parsing of the JSON files.
+Please do not remove these unless absolutely necessary.
 
 ### 2.3 API Component
 ![API Class Diagram](images/ApiClassDiagram.png)
@@ -134,7 +133,7 @@ It implements the following main functions:
 - `printResult()` - Shows the result of a command execution to the user. Includes additional formatting of the results of 
 different commands.
 - `printError()` - Print exception message.
-- `changeScanner()` - Changes the scanner for the Ui object. To be used for JUnit testing.
+- `changeScanner()` - Changes the scanner for the `Ui` object. To be used for JUnit testing.
 - `getSeparatorString()` - Returns a separator string.
 
 ### 2.6 Logic Component
@@ -144,7 +143,7 @@ How the parsing works:
 for the specific command name eg. `FindCommandParser`) which uses the other classes to parse the user command and
 create an `ABCCommand` object (eg. `FindCommand`), which the `Parser` returns back as a `Command` object.
 
-* All `ABCCommandParser` classes (eg. `FindCommandParser`, ``SearchCommandParser` etc) inherit from the `Parser` 
+* All `ABCCommandParser` classes (eg. `FindCommandParser`, `FilterCommandParser` etc) inherit from the `Parser` 
 interface so that they can be treated similarly where possible.
 
 How the command works:
@@ -265,11 +264,11 @@ The following sequence diagrams shows how a favourite / unfavourite command work
 
 **Aspect: Format of input after `favourite` or `unfavourite` command**
 - **Alternative 1 (current choice):** Carpark ID
-    - Pros: More direct, do not need to search before favouriting
-    - Cons: User has to either memorise the carpark ID they want to favourite, or search and type in the whole carparkID
-- **Alternative 2:** Index of search result
-    - Pros: Less time needed to favourite after a search result, do not need to key in entire carpark ID again
-    - Cons: Need to search before favouriting, even if user already knows the exact carpark ID
+    - Pros: More direct, do not need to filter before favouriting
+    - Cons: User has to either memorise the carpark ID they want to favourite, or filter and type in the whole carparkID
+- **Alternative 2:** Index of filter result
+    - Pros: Less time needed to favourite after a filter result, do not need to key in entire carpark ID again
+    - Cons: Need to filter before favouriting, even if user already knows the exact carpark ID
 
 
 
@@ -391,7 +390,7 @@ program, if the new CarparkList only has 500 objects, some objects in the `Favou
 a large portion of carpark information will not be available at all.
 
 As such, we elected to use the backup JSON as a base as a verifiable comprehensive sampling of carparks, so no information
-will be invalid and users can still filter and search for these carparks that might be unable if the freshly fetched API was used.
+will be invalid and users can still use `filter` and search for these carparks that might be unable if the freshly fetched API was used.
 To allow users to work around this, we have a "Last Updated" field in the detail view to allow users to see if the carpark
 has been just updated or was not updated by the API call.
 
