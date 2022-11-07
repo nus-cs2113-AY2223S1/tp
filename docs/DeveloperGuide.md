@@ -6,7 +6,7 @@
 
 * [User Stories](#user-stories)
 * [Implementation](#Implementation)
-  * [Appointment Task-Employee Allocation Feature](#Appointment Task-Employee Allocation Feature)
+  * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
   * [Appointment Status Feature](#Appointment Status Feature)
   * [Employee Management Feature](#Employee Management Feature)
   * [Pet Management Feature](#Pet Management Feature)
