@@ -6,14 +6,21 @@
 The `Ui` class handles user input and basic output messages. It can
 * Read user input
 * Output various messages to the user
+When instantiated, the Ui class holds a protected attribute called isExit, which is a flag for whether the conditions for
+termination of the program have been met. In other words, this tracks whether the command entered by the user is the 
+termination command. The functions in the Ui class help greet the user, get continuous input, and print output to the user.
 
 ![img.png](imgs/UiClass.png)
 
 ### Storage Class
-The `Storage` class handles the storing and retrieval of users' information. When the program is first
-started, the program checks for whether there is a file from which to extract the saved information.
-If there is not, a new file and folder will be created. The saved information is then loaded in to the reviewList
-which the user can maniuplate. Upon exit, all the user's information and attributes are saved into local storage on the txt file.
+The `Storage` class handles the storing and retrieval of users' information. The storage class is instantiated with a
+filepath and folderpath string, which represents where the stored.txt file will be created in the /data folder.
+The Storage class is instantiated in the Duke constructor. The main program of Duke calls the function from the storage class
+whose purpose is to check whether a file exists at the specified path and make the file if there is none. The main function
+also calls the loadMedia function from the Storage class, which retrieves the past stored data so that it can be mainpulated 
+by the user.The saved information is then loaded in to the reviewList object which the user maniuplates. 
+After every command entered by the user, the storage txt file is updated via the function updateFile. Keeping the file updated after every user command ensures minimal data loss in the case of a non-graceful exit of the program. Moreover, the function loadMedia performs some basic checks to ensure that the format of the lineInput being read in is valid. This minimises
+ungraceful termination in case of tampering of the text file.
 
 ![img.png](imgs/StorageClass.png)
 
