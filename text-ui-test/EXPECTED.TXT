@@ -90,7 +90,8 @@ Parameters information:
 - TYPE: The type of transaction. It should either be "expense" or "income".
 - CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
 - AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
-- DESCRIPTION: More information regarding the transaction. It is any word without any spacing.
+- DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
+- DESCRIPTION: More information regarding the transaction. It can be any word without any spacing.
 
 Command Word: LIST
 List all or some transactions based on selection by the ascending order of date of transaction.
@@ -116,7 +117,7 @@ Command Word: FIND
 Find a specific or multiple transactions based on any keyword that have been specified.
 Usage: find k/KEYWORD
 Parameters information:
-- KEYWORD: A case-insensitive word that matches the partial or the full description of a transaction entry. It is any word without any spacing.
+- KEYWORD: A case-insensitive word that matches the partial or the full description of a transaction entry. It can be any word without any spacing.
 
 Command Word: STATS
 View financial insights such as categorical savings and periodic expenditure based on the transaction entries in the application.
@@ -143,7 +144,7 @@ Parameters information:
 - CATEGORY: A category for the transaction. It can be any word without numeral, symbol or spacing.
 - AMOUNT: The amount for the transaction. It is a positive whole number ranging from 1 to 10000000 (Ten Million).
 - DATE: The date when the transaction took place on. It must be in ddMMyyyy format, e.g. 29102022.
-- DESCRIPTION: More information regarding the transaction. It is any word without any spacing.
+- DESCRIPTION: More information regarding the transaction. It can be any word without any spacing.
 
 Command Word: DELETE
 Delete a transaction entry from the unfiltered list of transactions.
