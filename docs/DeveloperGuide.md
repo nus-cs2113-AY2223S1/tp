@@ -83,7 +83,7 @@ the `Ui` and the `Parser`
 The UI component is responsible for all user interfaces of the application.
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
+  <img width="60%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
 </p>
 
 **Class:** `Ui.java`,
@@ -142,7 +142,7 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ### Storage Component
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
 </p>
 The storage component allows data to be read from and saved to a storage file.
 
@@ -193,7 +193,7 @@ The storage component allows data to be read from and saved to a storage file.
 ### Command Component
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/Command.png" alt="Command Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/Command.png" alt="Command Class Diagram"/>
 </p>
 
 - The command component has classes that extend `Command`, identified from user input for the software to carry out
@@ -485,7 +485,7 @@ This is to prevent manual tampering of the data that might affect the data in th
       `RecipeList` class
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/EditCommand.png" alt="Edit Component Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/EditCommand.png" alt="Edit Component Diagram"/>
 </p>
 
 - The edit component consists of three parts:
@@ -526,7 +526,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### Find Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Find.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/Find.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands), `FindCommand` is given the `title` or `ingredient` to
@@ -543,7 +543,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### View Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/View.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/View.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands),`ViewCommad` is given the `index` or `title` of `recipe`
@@ -561,7 +561,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### Delete Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Delete.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/Delete.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands), `DeleteCommad` is given the `index` or `title`
@@ -717,8 +717,9 @@ quickly.
 
 - **Delete recipe files then `/edit`**
     - Deleting the data files can only be done if the files are newly created during the same run of the program.
-    - If the file is loaded by the program, you cannot delete because JDK is using them.<p align="center" width="100%">
-      <img width="80%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
+    - If the file is loaded by the program, you cannot delete because JDK is using them.
+        <p align="center" width="100%">
+      <img width="50%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
     - Expected outcome:
       ```
       Please edit in the GUI editor!
