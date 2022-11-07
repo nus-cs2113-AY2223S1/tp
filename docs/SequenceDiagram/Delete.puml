@@ -1,0 +1,32 @@
+@startuml
+skinparam Style strictuml
+autonumber
+participant ":Recipeditor" as recipeditor
+participant ":DeleteCommand" as view
+participant ":RecipeList" as recipelist
+participant ":Storage" as store
+database FileDirectory
+
+ref over view
+When parsing Delete Command
+- if user gives index, get recipeTitle
+- else user gives recipeTitle
+end
+recipeditor-> view: execute()
+alt valid index or recipeTitle
+view -> recipelist: deleteRecipeFromTitle(recipeTitle)
+recipelist --> view:
+view -> store: deleteRecipeFile(recipeTitle)
+store -> FileDirectory: delete recipe file
+store --> view:
+view -> store: rewriteRecipeListToFile()
+store -> FileDirectory: rewrite `AllRecipes.txt`
+store --> view:
+
+
+view --> recipeditor: return CommandResult
+
+else invalid index or recipeTitle
+view --> recipeditor: return CommandResult for invalid
+end alt
+@enduml

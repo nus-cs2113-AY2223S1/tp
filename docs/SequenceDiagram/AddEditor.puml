@@ -14,7 +14,7 @@ alt Add Command
 create GuiWorkFlow
 Parser -> GuiWorkFlow: GuiWorkFlow(TEMPLATE_FILE)
 ref over GuiWorkFlow
-GUI Sequence Diagram
+GUI WorkFlow
 end
 Parser -> GuiWorkFlow: getValid() && getRecipe()
 GuiWorkFlow --> Parser: return isValid, return recipe

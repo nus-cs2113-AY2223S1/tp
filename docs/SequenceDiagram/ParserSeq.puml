@@ -19,7 +19,7 @@ participant ":HelpCommand" as HelpCommand
 
 participant ":InvalidCommand" as InvalidCommand
 
-Parser -> Parser: parseCommand(input)
+-> Parser: parseCommand(input)
 
 alt AddCommand
 

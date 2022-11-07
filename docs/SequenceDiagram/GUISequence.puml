@@ -35,7 +35,7 @@ destroy store
 ref over editor
 User interact with the GUI
 end
-editor -> FileDirectory: save to `Temporary.txt`
+editor -> FileDirectory: save to `TemporaryFile.txt`
 editor --> gui: return saveToTemp
 destroy editor
 ref over gui
@@ -51,8 +51,8 @@ else saveToTemp = True
 loop !shouldExitLoop
 gui -> store: loadFileContent(TEMPORARY_FILE)
 store -> FileDirectory: via Scanner
-FileDirectory --> store: content of `Temporary.txt`
-store --> gui: content of `Temporary.txt`
+FileDirectory --> store: content of `TemporaryFile.txt`
+store --> gui: content of `TemporaryFile.txt`
 gui -> recipeparse: parseTextToRecipe(content)
 ref over recipeparse
     parseTextToRecipe
@@ -74,13 +74,13 @@ gui -> editor: Editor().enterEditor(TEMPORARY_FILE)
 
 editor -> store: loadFileContent(TEMPORARY_FILE)
 store -> FileDirectory: via Scanner
-FileDirectory --> store: content of `Temporary.txt`
+FileDirectory --> store: content of `TemporaryFile.txt`
 store --> editor: load to GUI textArea
 destroy store
 ref over editor
 User interact with the GUI
 end
-editor -> FileDirectory: save to `Temporary.txt`
+editor -> FileDirectory: save to `TemporaryFile.txt`
 
 editor --> gui: return saveToTemp
 destroy editor
