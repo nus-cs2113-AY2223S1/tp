@@ -34,7 +34,6 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 - Added more diverse status to Pet
   - What it does: set built-in integer index of the pet. The higher the index, the better the condition of a pet. Each integer represents a specific status.
-  - Justification: can be explained together by the justification of the next feature.
 
 - Added the function of improving the status of a pet when an appointment is processed
   - What it does: when an appointment is processed, the built-in index of the related pet is increased, indicating a better status.
@@ -57,9 +56,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 **Contributions to the DG**
 
 - Added Employee management feature and its Design considerations
-- Added the UML diagram of Employee Add
-- Added the UML diagram of Appointment Add
-- Added the UML diagram of Service Add
+- Added the UML diagram of Employee Add, Appointment Add, Service Add
 - Added User Stories of v1.0 and v2.0
 - Added Setting Up and Getting Started
 - Added Non-Functional Requirements
@@ -80,13 +77,9 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 
 **Mentoring contributions**
 
-- Helped team members to initiate the check of Gradle
-- Helped team members to fix format errors checked by Gradle (which could be proven by any team member)
+- Helped team members to initiate the check of Gradle and fix format errors checked by Gradle (which could be proven by any team member)
 
 **Contributions beyond the project team**
 
 - Reviewed the pull requests of another team: [CS2113-T17-3](https://github.com/nus-cs2113-AY2223S1/tp/pull/10)
 - Reported more than 10 bugs in the Practical Exam Dry Run: [CS2113T-W11-1](https://github.com/nvknow/ped/issues)
-
-  
-
