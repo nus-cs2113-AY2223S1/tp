@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.SortedMap;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
@@ -382,10 +384,10 @@ public class TransactionList {
      * @param monthlyExpenditure A hashmap containing all month-expenditure pair for total expenditure and savings.
      * @return A hashmap containing all month-expenditure pair for total expenditure and savings.
      */
-    public HashMap<String, int[]> processMonthlyExpenditure(HashMap<String, int[]> monthlyExpenditure) {
+    public SortedMap<LocalDate, int[]> processMonthlyExpenditure(SortedMap<LocalDate, int[]> monthlyExpenditure) {
         for (Transaction transaction : transactions) {
             // Month of date will be used as a key for the hashmap
-            String date = transaction.getDate().format(DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString()));
+            LocalDate date = transaction.getDate().withDayOfMonth(ONE_DAY);
 
             // Checks whether transaction is Income or Expense and places in respective amount type
             int income = NO_AMOUNT_VALUE;
@@ -445,13 +447,14 @@ public class TransactionList {
      */
     public String listMonthlyExpenditure() {
         String monthlyExpenditureList = "";
-        HashMap<String, int[]> monthlyExpenditure = new HashMap<>();
+        SortedMap<LocalDate, int[]> monthlyExpenditure = new TreeMap<>();
         // Adds each amount from transactions list to the month and year in monthly expenditure hashmap
         monthlyExpenditure = processMonthlyExpenditure(monthlyExpenditure);
 
         // Formats every entry in the hashmap into a monthly expenditure list
-        for (HashMap.Entry<String, int[]> entry : monthlyExpenditure.entrySet()) {
-            monthlyExpenditureList += String.format("%s%s%s%s", PREFIX_CATEGORY, entry.getKey(), POSTFIX_CATEGORY,
+        for (SortedMap.Entry<LocalDate, int[]> entry : monthlyExpenditure.entrySet()) {
+            monthlyExpenditureList += String.format("%s%s%s%s", PREFIX_CATEGORY,
+                    entry.getKey().format(DateTimeFormatter.ofPattern(DATE_MONTH_PATTERN.toString())), POSTFIX_CATEGORY,
                     LINE_SEPARATOR);
 
             // Puts income, expense, savings values into monthly expenditure list

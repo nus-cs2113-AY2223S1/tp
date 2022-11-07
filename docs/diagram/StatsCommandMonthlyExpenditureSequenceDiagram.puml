@@ -10,7 +10,7 @@ command -> transactions:listMonthlyExpenditure\n(timeTransactions)
 activate transactions
 transactions -> transactions:processMonthlyExpenditure\n(monthlyExpenditure)
 activate transactions
-return monthlyExpenditure:HashMap<String, int[]>
+return monthlyExpenditure:HashMap<LocalDate, int[]>
 loop
     transactions -> transactions:getSpendingHabitComment(income, savings)
     activate transactions
