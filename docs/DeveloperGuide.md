@@ -5,7 +5,7 @@
 The aim of this guide is to help readers understand how the system and components of RecipEditor
 is designed, implemented and tested. This developer guide also serves to help
 developers to understand the architecture of RecipEditor and some design considerations.
-Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-CS2113-T18-2/tp/releases).
+Click to view the latest release of [RecipEditor](https://github.com/AY2223S1-CS2113-T18-2/tp/releases).
 
 ## Content page
 

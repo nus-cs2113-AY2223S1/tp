@@ -31,9 +31,8 @@ class Parser{
 }
 
 
-
 package command {
-Abstract Command {
+abstract "{Command}" as Command {
     +commandResult:execute()
 }
 Class AddCommand
