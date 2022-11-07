@@ -97,29 +97,20 @@ Step 4. The user then executes the command `employee task i/1002` to view the ta
 
 ------
 
-### [Proposed] Appointment Status & History feature
+### Appointment Status feature
 
-### Proposed Implementation
+### Implementation
 
 The proposed appointment feature is facilitated by the appointment package. The following classes in the package works together to allow users to manage their appointments.
 
 - `AppointmentList#setStatus()` — Sets the status of an appointment.
-- `AppointmentHistory#viewHistory` — Lists the list of expired appointments for users to refer.
-- `Storage#loadAppointment` —  Storage stores the list of current appointments into a file and this function loads it when application starts.
 
 Given below is an example usage scenario and how the Appointment mechanism behaves at each step.
+//TODO add appointment status DG
 
-Step 1. The user launches the application and there are already pre-existing appointments loaded. `AppointmentList` and `AppointmentHistory` initialises and loads from `Storage` the existing appointments.
+> The following sequence diagram shows how the add appointment operation works:
 
-Step 2. The user executes `appointment add s/TRIM p/DOGGO d/20-10-2022` command to add an appointment for trimming service for ‘DOGGO’ on 20-10-2022. This updates `AppointmentList` with the appointment.
-
-Step 3. The user executes `appointment status i/2 s/COMPLETED` command to update the status of the above appointment to completed. This removes the appointment from `AppointmentList` and adds the appointment to `AppointmentHistory`.
-
-Step 4. The user executes `appointment history` command to view the list of expired appointment. This will display the list of appointments that has already been completed by the clinic. Then, the user ends with application with `bye` command, the current state of `AppointmentList` and `AppointmentHistory` will be stored in a file through `Storage` .
-
-The following sequence diagram summarizes what happens when a user executes a new command:
-
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
 
 ### Design considerations:
 
@@ -130,10 +121,9 @@ The following sequence diagram summarizes what happens when a user executes a ne
 
 - Alternative 2:
 
+### Employee management feature
 
-### [Proposed] Employee management feature
-
-### Proposed Implementation
+### Implementation
 
 The proposed employee management mechanism is facilitated by `Employee` , `EmployeeList`, `Storage`. It implements the following operations:
 
@@ -158,6 +148,8 @@ The following sequence diagram shows how the employee management works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
 
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png)
+
 
 ### Design considerations:
 
@@ -177,9 +169,9 @@ The following sequence diagram shows how the employee management works:
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
 
-### [Proposed] Pet management feature
+### Pet management feature
 
-### Proposed Implementation
+### Implementation
 
 The proposed appointment feature is facilitated by the pet package. It implement the following methods to help the head nurse manage pets.
 
@@ -197,13 +189,19 @@ Step 3. The user executes `pet remove 2/index` command to remove the second pet 
 
 Step 4. The user executes `view pet` to display all pets in the pet manage system.
 
+
 The following sequence diagram shows how the view operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/PetView.png)
 
+The following sequence diagram shows how the status operation works:
 
-### [Proposed] Service management feature
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
 
-### Proposed Implementation
+### Service management feature
+
+### Implementation
 
 The proposed service management mechanism is facilitated by`ServiceList`, `Service`. It implements the following operations:
 
@@ -227,6 +225,8 @@ The following sequence diagram shows how the service management works
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png)
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
+
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
 
 ### Design considerations:
 

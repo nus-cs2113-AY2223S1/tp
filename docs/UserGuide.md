@@ -14,22 +14,23 @@ Command Line Interface (CLI) and is able to display information quickly with min
 1. pet add n/Eliza s/cat h/0
 2. pet view
 3. service add d/haircut
-4. employee add n/chris
-5. appointment add s/haircut p/2001 d/2022-12-29
-6. appointment view
-7. task add i/3001 e/1001 d/prepare hot water
-8. task add i/3001 e/1001 d/wash hair
-9. task view
-10. employee add n/sally
-11. task reassign i/4001 e/1002
-12. task finish i/4001
-13. task finish i/4002
-14. task view
-15. appointment view
-16. pet view
-17. appointment remove i/3001
-18. pet remove i/2001
-19. bye
+4. service view
+5. employee add n/chris
+6. appointment add s/haircut p/2001 d/2022-12-29
+7. appointment view
+8. task add i/3001 e/1001 d/prepare hot water
+9. task add i/3001 e/1001 d/wash hair
+10. task view
+11. employee add n/sally
+12. task reassign i/4001 e/1002
+13. task finish i/4001
+14. task finish i/4002
+15. task view
+16. appointment view
+17. pet view
+18. appointment remove i/3001
+19. pet remove i/2001
+20. bye
 
 
 ## Features 
@@ -186,8 +187,7 @@ Base on the value of health, 1 out of 10 different status of pets will be genera
 
 * `HEALTH = 1`: happy / boring / sleepy / energetic / fantastic
 * `HEALTH = 0`: exhausted / painful / injured / bleeding / dying
-* The random `HEALTH` status assigned is for fun. Whether is the pet happy or sleepy is not important. Whether the
-* health state is 1 or 0 is important.
+* The random `HEALTH` status assigned is for fun. Whether is the pet happy or sleepy is not important. Whether the health state is 1 or 0 is important.
 
 Format: `pet add n/NAME s/SPECIES h/HEALTH`
 * The `NAME` is the name of the pet
