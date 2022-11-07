@@ -37,11 +37,11 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Acknowledgements
 
-- We do not use any external libraries
 - The design and structure of our User Guide and Developer Guide is referenced from AddressBook-Level3 (AB3)
     - [AB3 UG](https://se-education.org/addressbook-level3/UserGuide.html)
     - [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
-
+### External Library
+- [Apache Commons Lang 3.0](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0): for Utilities to handle String
 ## Design
 
 ### Architecture
