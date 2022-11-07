@@ -17,15 +17,19 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
-import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.AllRecordsTable;
+import seedu.duke.ui.CaloriesTable;
+import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.Ui;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import static seedu.duke.logic.command.FindCommand.CALORIES_NOT_FOUND;
 
 public class ViewCommand extends Command {
 
@@ -50,8 +54,12 @@ public class ViewCommand extends Command {
     public static final int MINIMUM_VIEW_EXERCISE_SLASH_COUNT = 0;
     public static final int MAXIMUM_VIEW_EXERCISE_SLASH_COUNT = 1;
     public static final int INDEX_FOR_DONE = 1;
+    public static final int EMPTY_LIST = 0;
     public static final String TO_BE_DONE_MESSAGE = " to be done: ";
     public static final String EXERCISE_COMPLETED_MESSAGE = " completed: ";
+    public static final String CALORIES_NOT_FOUND = "No matching calories entry found";
+    public static final String CALORIES_FOUND = "Here are the matching calorie entries in your list:";
+    private static final String BIOMETRICS_NOT_SET = "Your biometrics are not set yet!";
     public static final String INVALID_VIEW_ALL_COMMAND = "Invalid view all command";
     public static final String INVALID_VIEW_FOOD_COMMAND = "Invalid view food command";
     public static final String FOOD_TABLE_CAPTION = "Food Records: ";
@@ -127,9 +135,14 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * To view the calories entries of the users based on dates.
+     * @param argumentList an array of inputs from the user
+     *
+     * @throws IllegalValueException biometrics are not set or if date is invalid
+     */
     private void viewCalories(String[] argumentList) throws IllegalValueException {
         handleInvalidViewCaloriesCommand(argumentList);
-        ArrayList<Food> foodArrayList = foodList.getFoodList();
         ArrayList<Integer> caloriesConsumed = new ArrayList<Integer>();
         ArrayList<Integer> caloriesBurnt = new ArrayList<Integer>();
         ArrayList<Integer> netCalories = new ArrayList<Integer>();
@@ -144,8 +157,11 @@ public class ViewCommand extends Command {
         CaloriesList calList = new CaloriesList();
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
+        calculator.setIdealMaintenanceCalories();
+        calculator.setBmi(biometrics.getWeight(),biometrics.getHeight());
         calculator.setHealthyCalorieDeficit();
         calculator.setHealthyCalorieSurplus();
+        ArrayList<Food> foodArrayList = foodList.getFoodList();
         for (Food f : foodArrayList) {
             newCaloriesConsumedEntry = calculator.calculateTotalCaloriesConsumed(foodArrayList, f.getDateString());
             if (!datesConsumption.contains(f.getDateString())) {
@@ -175,6 +191,7 @@ public class ViewCommand extends Command {
             }
         }
         for (String d : datesNetCalories) {
+            String message;
             if (datesConsumption.indexOf(d) != -1) {
                 inputCaloriesConsumedEntry = caloriesConsumed.get(datesConsumption.indexOf(d));
             }
@@ -184,7 +201,11 @@ public class ViewCommand extends Command {
             if (datesNetCalories.indexOf(d) != -1) {
                 inputNetCaloriesEntry = netCalories.get(datesNetCalories.indexOf(d));
             }
-            String message = calculator.calorieMessage(inputNetCaloriesEntry);
+            if (calculator.getBmi() == 0) {
+                message = BIOMETRICS_NOT_SET;
+            } else {
+                message = calculator.calorieMessage(inputNetCaloriesEntry);
+            }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate localdate = LocalDate.parse(d, formatter);
             Calories caloriesInput = new Calories(inputCaloriesConsumedEntry,
@@ -192,9 +213,20 @@ public class ViewCommand extends Command {
             calList.addCalories(caloriesInput);
         }
         ArrayList<Calories> caloriesList = calList.getCaloriesList();
-        ui.outputCalories(caloriesList);
+        if (caloriesList.size() == EMPTY_LIST) {
+            ui.output(CALORIES_NOT_FOUND);
+        } else {
+            CaloriesTable tableFrame = new CaloriesTable(
+                    foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, caloriesList, CALORIES_FOUND);
+            ArrayList<String> table = tableFrame.getCaloriesTable();
+            ui.printTable(table);
+        }
     }
 
+    /**
+     * To view maintenance calories of the user and thus corresponding activity status.
+     *
+     */
     private void viewMaintenanceCalories() {
 
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
@@ -204,6 +236,9 @@ public class ViewCommand extends Command {
         ui.output("Thus your maintenance calories is " + calculator.getIdealMaintenanceCalories());
     }
 
+    /**
+     * To calculate the bmi of ths user and corresponding bmi status.
+     */
     private void viewBmi() {
         Calculator calculator = new Calculator(biometrics.getGender(), biometrics.getWeight(),
                 biometrics.getHeight(), biometrics.getAge(), biometrics.getActivityLevel());
@@ -286,6 +321,10 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * To handle an invalid view command.
+     * @throws IllegalValueException invalid view calories command if the calories input is not 1.
+     */
     private static void handleInvalidViewCaloriesCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 1) {
             throw new IllegalValueException("Invalid view calories command");

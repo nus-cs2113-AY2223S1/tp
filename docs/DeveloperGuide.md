@@ -84,6 +84,22 @@ Data is saved by calling the save methods for the different data types, which re
 as the user input.
 
 
+**UI component**
+
+The API of this component is specified in UI package.
+
+![](UmlDiagrams/UI.png)
+
+The UI consists of a TableFrame.
+Parts such as FoodTable, ExerciseTable, CaloriesTable, AllRecordsTable inherit from the TableFrame class.
+
+
+The UI component,
+* executes user commands from the logic component.
+* listens for changes to records data so that the UI can be updated with the modified data.
+* keeps a reference to the logic component, because the UI relies on the logic to execute commands.
+
+
 ## Implementation
 
 ### Add Feature
@@ -117,16 +133,19 @@ message.
 #### Adding food record
 
 ![](UmlDiagrams/AddFood.png)
-
 AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
 object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
 user, followed by success message.
 
 #### Adding strength exercise
 
-*
-
 ![](UmlDiagrams/AddStrengthExercise.png)
+
+The addStrengthExercise method is being called to add strength exercise. First, validateAddStrengthExerciseCommand is
+called by addStrengthExercise to validate the correctness of the input for add strength. Then,
+executeAddStrengthExercise will be called to create a strength exercise, add to the exercise list, mark it done if it
+being marked as done during loading. Then, the exercise is converted to string and display to the user, followed by the
+success add message.
 
 ### Mark Feature
 
@@ -152,9 +171,16 @@ message regarding the information of the exercise that is marked "undone" will b
 ### Find Feature
 
 Finding a record
+
 The sequence diagrams below represent the interactions when a user find a record.
+
 ![Find.png](UmlDiagrams/Find.png)
 
+In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
+As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
+removeCommand to be printed on the ui.
+![](UmlDiagrams/RemoveWeight.png)  
+The interactions for removing other types of records are similar.
 The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
 First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
 number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
@@ -170,14 +196,42 @@ Component.
 
 The interactions for finding other types of records are similar.
 
+
+
+
+
+There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
+The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view command
+The following sequence diagram shows how the view operation works:
+
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
-Viewing biometrics  
+
+The following sequence diagram shows how the view operation works after `view biometrics` is executed.
+
+The most recent weight and fat records are retrieved. Then, the most recently set biometrics of the user will be displayed.
+
+Viewing biometrics
+
 ![](UmlDiagrams/ViewBiometrics.png)
 
-Viewing calories  
+
+The following sequence diagram shows how the view operation works after `view calories` is executed.
+
+The calorie consumption, calorie burnt and net calories as well as a message with the corresponding date will be displayed.
+The calorie consumption is accumulated from the food list, the calorie burnt is accumulated from the CompletedExerciseList and
+the net calories can then be calculated from the two, according to a date.
+
+These values are stored in a Calories object and output by a CaloriesList by calling ui.
+
+Viewing calories
+
 ![ViewCalories.png](UmlDiagrams/ViewCalories.png)
+
+The following sequence diagram shows how the view operation works after `view all` is executed.
+
+Food records are retrieved from FoodList, exercises are retrieved from ExerciseList and records are retrieved from RecordList and these data are output by outputAllRecords.
 
 Viewing all historical records sorted by date  
 ![ViewAll.png](UmlDiagrams/ViewAll.png)
@@ -230,7 +284,9 @@ to better understand their journey and progress towards their fitness goals.
 | v2.0    | user           | find a to-do item by name         | locate a to-do without having to go through the entire list |
 | v2.0    | long term user | save my food consumptions         | to keep a record of all my food data over time              |
 | v2.0    | long term user | find certain food consumption     | to see my consumption of certain food over time             |
-| v2.0    | long term user | save my strength/cardio trainings | monitor my strength/cardio progress over the time           |
+| v2.0    | long term user | save my strength/cardio trainings | monitor my strength/cardio progress over time               |
+| v2.1    | long term user | check my overall calorie usage    | monitor my daily calorie intake and burn over time          |
+| v2.1    | user           | find my calorie usage by date     | monitor my overall calorie usage on a certain date          |
 | v2.1    | new user       | set my biometrics                 | receive personalised recommendations                        |
 
 ## Non-Functional Requirements
