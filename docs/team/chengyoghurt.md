@@ -13,9 +13,9 @@ Basically responsible for functions related to appointment.
 [RepoSense Report](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=ChengYoghurt&tabRepo=AY2223S1-CS2113-F11-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)  
 
 
-###Enhancements implemented
+### Enhancements implemented
 
-####addAppointment
+#### addAppointment
 What it does:
 - Add an appointment to the list.
 - It relates to a clinic service and a pet, with a valid date.
@@ -27,25 +27,25 @@ Highlights:
 - This enhancement was the basis for further task management, as every task is created according to an existing appointment.
 - It also interacts with class `service` and `pet` to provide user, i.e. the head nurse, with more detailed information on an appointment. 
 
-####removeAppointment
+#### removeAppointment
 What it does:
 - Remove an existing appointment from the list.
 
 Justification:
 - Since appointment is one of the *composition* of task, after removing one appointment leads all related tasks been removed automatically.
 
-####listAppointment
+#### listAppointment
 What it does:
 - Show the detailed info of all appointments from the list.
 
-####findAppointment
+#### findAppointment
 What it does:
 - Find the appointment with given id from the list.
 
 Justification:
 - It's not an API open for user, just serving as a helping function.
 
-####updateAppointmentStatus
+#### updateAppointmentStatus
 What it does:
 - Update the appointment status at specific time. 
 
@@ -58,7 +58,7 @@ Justification:
 Highlights:
 - This enhancement helps the appointment status to be updated without manually settings, as it is automatically called every time after executing `addTask` or finishing one `Task`.
 
-####checkFormattedDate
+#### checkFormattedDate
 What it does:
 - Check the given string before setting it as the `date` of one appointment.
 - Given string must have format of `yyyy-MM-dd`.
