@@ -56,8 +56,8 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 - Maintained the milestones
 - Release management
 - Opened pull request from team repo to module repo
-- Carried some Smoke-test on the deliverable
-- Set up category tags to issues
+- Carried some smoke-test on the deliverable
+- Set up category tags of issues and bugs received in the Practical Exam Dry Run
 - Fixed bugs related to employee received in the Practical Exam Dry Run
 
 **Mentoring contributions**
