@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import seedu.data.Carpark;
 import seedu.data.CarparkList;
+import seedu.data.Favourite;
 import seedu.exception.DuplicateCarparkException;
 import seedu.exception.FileWriteException;
 import seedu.exception.NoCarparkFoundException;
 import seedu.exception.NoFileFoundException;
-import seedu.files.Favourite;
 import seedu.ui.Ui;
 
 /**
