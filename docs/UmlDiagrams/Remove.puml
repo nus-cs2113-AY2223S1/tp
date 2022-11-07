@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+
+-> removeCommand: execute()
+    removeCommand -> Parser: getArgumentList()
+    return argumentList: String[]
+    removeCommand -> "Integer": parseInt(argumentList[1]: String)
+    return index: int
+    alt food
+
+    else exercise
+
+    else weight
+        ref over removeCommand: removeWeight
+    end
+return
+
+@enduml

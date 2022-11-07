@@ -4,16 +4,25 @@
 autoactivate on
 
 activate viewCommand
+group viewBiometrics
     viewCommand -> viewCommand: viewBiometrics()
     viewCommand -> biometrics: toString()
     opt at least one weight and fat record
         biometrics -> weightAndFatList: getMostRecent()
         return mostRecentRecord: WeightAndFat
+        biometrics -> weightAndFat: getWeight()
+        return weight: int
+        biometrics -> weightAndFat: getFat()
+        return fat: int
     end
 
     return biometrics: String
     viewCommand -> ui: output(biometrics: String)
     return
 return
+
+end
+
+deactivate viewCommand
 
 @enduml

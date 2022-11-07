@@ -5,6 +5,7 @@ autoactivate on
 
 
 activate addCommand
+group addWeightAndFat
     addCommand -> addCommand: addWeightAndFat(argumentList: String[])
     opt date provided
         addCommand -> Parser: parseDate(date: String)
@@ -23,6 +24,11 @@ activate addCommand
         addCommand -> ui: output(successMessage: String)
         return
     end
+
 return
+
+end
+
+deactivate addCommand
 
 @enduml

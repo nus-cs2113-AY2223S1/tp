@@ -3,10 +3,6 @@
 
 autoactivate on
 
-'Duke -> ui: input()
-'User --> ui: user input
-'Duke <-- ui: user input
-
 
 -> addCommand: execute()
 addCommand -> parser: getArgumentList(arguments: String)
@@ -24,5 +20,7 @@ else weight
     ref over addCommand: addWeightAndFat
 
 end
+
+return
 
 @enduml

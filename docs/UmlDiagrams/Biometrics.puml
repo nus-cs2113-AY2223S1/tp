@@ -18,6 +18,12 @@ class RemoveCommand {
 +execute(): void
 -removeWeight(index: int): void
 }
+class ViewCommand {
+-arguments: String
++execute(): void
+-viewBiometrics(): void
+-viewWeight(): void
+}
 class Biometrics {
 -age: int
 -gender: String
@@ -44,6 +50,7 @@ class WeightAndFatList {
 AddCommand --> "1"Biometrics
 SetCommand --> "1"Biometrics
 RemoveCommand --> "1"Biometrics
+ViewCommand --> "1"Biometrics
 Biometrics --> "1"WeightAndFatList
 WeightAndFatList *-> "*"WeightAndFat : ArrayList of >
 
