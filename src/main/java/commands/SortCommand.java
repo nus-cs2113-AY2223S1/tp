@@ -48,8 +48,8 @@ public class SortCommand extends Commands {
                 break;
 
             default:
-                output = "Invalid sort field given. Choose any of the following sorting fields: 'rating', 'title', 'genre' "
-                        + "or 'date'.";
+                output = "Invalid sort field given. Choose any of the following sorting fields: 'rating', 'title', "
+                        + "'genre' or 'date'.";
 
                 return output;
             }
