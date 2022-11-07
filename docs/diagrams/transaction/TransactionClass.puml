@@ -1,0 +1,73 @@
+@startuml
+title Transaction Diagram
+
+skinparam classAttributeIconSize 0
+hide footbox
+hide circle
+
+class Transaction {
+    - transactionId: String
+    - itemName: String
+    - itemId: String
+    - lender: String
+    - borrower: String
+    - duration: Integer
+    - createdAt: LocalDate
+    - returnedAt: LocalDate
+    - moneyTransacted: double
+
+    + Transaction(String, String, String, int, LocalDate, double)
+    + Transaction(String, String, String, String, int, LocalDate, double)
+    + checkOverlapToAddTx(Transaction): boolean
+    + checkOverlapToUpdateTx(Transaction): boolean
+    + getReturnDate(): LocalDate
+    + isFinished(): boolean
+    + convertTransactionToFileFormat(): String
+    + update(int, double): Transaction
+    + toString(): String
+}
+
+class TransactionList {
+    + TransactionList()
+    + TransactionList(ArrayList<Transaction>)
+    + addTransaction(Transaction): void
+    + updateTransaction(String, int, double): Transaction
+    + getBorrowTransactionsByUser(String): TransactionList
+    + getTotalMoneyTransacted(): double
+    + deleteTransaction(String): void
+    + getTransactionById(String): Transaction
+    + hasThisBorrower(String): boolean
+    + hasThisItemBeingBorrowed(String): boolean
+    + checkOldTransactionsOverlapWithUpdated(Transaction): void
+    + checkOldTransactionsOverlapWithNew(Transaction): void
+    + convertTransactionListToFileFormat(): String
+    + toString(): String
+}
+
+class TransactionStorage {
+    {static} - SEPARATOR: String
+    - transactionFilePath: String
+    + TransactionStorage(String)
+    + loadData(): ArrayList<Transaction>
+    + writeData(TransactionList): void
+    + handleTransactionLine(String[]): Transaction
+}
+
+class IdGenerator {
+    {static} + generateId(): String
+}
+
+abstract class "{abstract}\nStorage" {
+}
+
+class DateParser {
+    {static} + formatDateToString(LocalDate): String
+}
+
+TransactionStorage .> TransactionList : > loads and writes
+TransactionList *--> "*" Transaction: transactionList
+Transaction ..> IdGenerator
+Transaction .left..> DateParser
+"{abstract}\nStorage" <|-- TransactionStorage
+
+@enduml

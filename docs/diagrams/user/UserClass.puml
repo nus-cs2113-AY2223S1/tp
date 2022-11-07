@@ -1,0 +1,49 @@
+@startuml
+title User Diagram
+
+skinparam classAttributeIconSize 0
+hide footbox
+hide circle
+
+class User {
+    - name: String
+    - age: String
+    - contactNumber: String
+
+    + User(String, String, String)
+    + getName(): String
+    + convertUserToFileFormat(): String
+    + toString(): String
+}
+
+class UserList {
+    + UserList()
+    + UserList(ArrayList<User>)
+    + getSize(): int
+    + getUser(): User
+    + addUser(User): void
+    + deleteUser(String): void
+    + getUserById(String): User
+    + getUsersByKeyword(String): UserList
+    + listUser(): String
+    + convertUserListToFileFormat(): String
+    + toString(): String
+}
+
+class UserStorage {
+    {static} - SEPARATOR: String
+    - userFilePath: String
+    + UserStorage(String)
+    + loadData(): ArrayList<User>
+    + writeData(UserList): void
+    + handleUserLine(String[]): User
+}
+
+abstract class "{abstract}\nStorage" {
+}
+
+UserStorage .> UserList : > loads and writes
+UserList *--> "*" User: UserList
+"{abstract}\nStorage" <|-- UserStorage
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+hide footbox
+
+Actor User
+"User" -> ":Duke": "find-tx..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewTransactionByStatusCommand"**: new
+activate ":ViewTransactionByStatusCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewTransactionByStatusCommand" : executeCommand()
+activate ":ViewTransactionByStatusCommand"
+":ViewTransactionByStatusCommand" -> ":ViewTransactionByStatusCommand": getArgs()
+activate ":ViewTransactionByStatusCommand"
+return args
+    ":ViewTransactionByStatusCommand" -> ":TransactionList": getTransactionsByStatus()
+    activate ":TransactionList"
+alt Argument is valid (finished/unfinished)
+    alt finished
+        ":TransactionList" -> ":TransactionList": getFinishedTransactions()
+        activate ":TransactionList"
+        return transactionsToView
+    else unfinished
+        ":TransactionList" -> ":TransactionList": getUnfinishedTransactions()
+        activate ":TransactionList"
+        return transactionsToView
+    end
+    ":TransactionList" --> ":ViewTransactionByStatusCommand":
+    deactivate ":TransactionList"
+
+    ":ViewTransactionByStatusCommand" -> "<<class>>\nUi": viewTransactionMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":TransactionList"
+else Argument is invalid
+    ":ViewTransactionByStatusCommand" -> ":DukeException"** : new
+    destroy ":ViewTransactionByStatusCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":ViewTransactionByStatusCommand"
+
+@enduml

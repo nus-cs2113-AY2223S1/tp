@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Actor User
+"User" -> ":Duke": "view-borrow..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewBorrowTxCommand"**: new
+activate ":ViewBorrowTxCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewBorrowTxCommand" : executeCommand()
+activate ":ViewBorrowTxCommand"
+":ViewBorrowTxCommand" -> ":ViewBorrowTxCommand" : getArgs
+activate ":ViewBorrowTxCommand"
+":ViewBorrowTxCommand" -> ":TxList" : getBorrowTxByUser(user)
+deactivate ":ViewBorrowTxCommand"
+activate ":TxList"
+":TxList" -> ":TxList" : new TxList()
+activate ":TxList"
+    loop until all items checked
+        opt (given user is borrower in transaction)
+            ":TxList" -> ":TxList" : addTx()
+        end
+    end
+deactivate ":TxList"
+":TxList" --> ":ViewBorrowTxCommand"
+deactivate ":TxList"
+":ViewBorrowTxCommand" -> "Ui": printResponse();
+deactivate ":ViewBorrowTxCommand"
+Ui --> User:
+
+
+@enduml

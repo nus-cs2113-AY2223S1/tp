@@ -1,0 +1,41 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+interface "<<interface>>\nCommandInterface" {
+ +boolean executeCommand()
+}
+abstract class "{abstract}\nCommand"
+class UserCommand {
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
+}
+class TransactionCommand {
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
+}
+class ItemCommand {
+ - userList: UserList
+ - itemList: ItemList
+ - transactionList: TransactionList
+ + executeCommand(): boolean
+}
+class HelpCommand {
+ + executeCommand(): boolean
+}
+class ExitCommand {
+ + executeCommand(): boolean
+}
+
+"<<interface>>\nCommandInterface" <|.. "{abstract}\nCommand"
+"{abstract}\nCommand" <|-- UserCommand
+"{abstract}\nCommand" <|-- TransactionCommand
+"{abstract}\nCommand" <|-- ItemCommand
+"{abstract}\nCommand" <|-- HelpCommand
+"{abstract}\nCommand" <|-- ExitCommand
+
+@enduml

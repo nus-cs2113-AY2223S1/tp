@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'class UserList
+'class TransactionList
+class Storage{
+    TransactionList
+    UserList
+}
+
+class Parser
+class Command
+
+
+
+Command <|-- Parser
+Parser <|-- Ui
+Ui <|-- Command
+Storage <|-- Command
+Command <|-- Storage
+
+
+@enduml

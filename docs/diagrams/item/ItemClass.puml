@@ -1,0 +1,64 @@
+@startuml
+title Item Diagram
+
+skinparam classAttributeIconSize 0
+hide footbox
+hide circle
+
+class Item {
+    - itemId: String
+    - itemName: String
+    - ownerId: String
+    - pricePerDay: double
+    - category: Category
+
+    + getOwnerId(): String
+    + getName(): String
+    + getPricePerDay(): Double
+    + getCategory(): Category
+    + updatePrice(double): Item
+    + isAvailable(TransactionList): boolean
+
+}
+
+class ItemList {
+    + addItem(item): void
+    + updateItemPrice(String, double): Item
+    + deleteItem(String, TransactionList) : void
+    + getItemById(String): Item
+    + getItemByName(String): Item
+    + getItemsByKeyword(String): ItemList
+    + getListSize(): int
+}
+
+class ItemStorage {
+    + loadData(): ArrayList<Item>
+    + writeData(itemList): void
+    + makeItemDir(ItemList): void
+    + hasItemFile(): boolean
+}
+
+class IdGenerator {
+    {static} + generateId(): String
+}
+
+abstract class "{abstract}\nStorage" {
+}
+
+class Category {
+    {static} + mapCategory(int): category
+}
+
+class TransactionList {
+    {static} -transactionList: ArrayList<Transaction>
+}
+
+ItemStorage .> ItemList : > loads and writes
+ItemList *--> "0..*" Item: ItemList
+Item ..> IdGenerator
+Item ..> TransactionList
+ItemList ..> TransactionList
+Item ..> Category
+"{abstract}\nStorage" <|-- ItemStorage
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "add-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":AddItemCommand"**: new
+activate ":AddItemCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":AddItemCommand" : executeCommand()
+activate ":AddItemCommand"
+":AddItemCommand" -> ":AddItemCommand": getArgsAddItemCmd()
+activate ":AddItemCommand"
+return args
+opt args are valid
+    ":AddItemCommand" -> ":Item"**: new Item()
+    activate ":Item"
+    ":Item" --> ":AddItemCommand"
+    deactivate ":Item"
+    ":AddItemCommand" -> ":ItemList": addItem()
+    activate ":ItemList"
+    ":AddItemCommand" -> "<<class>>\nUi": addItemMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate ":ItemList"
+    deactivate "<<class>>\nUi"
+    deactivate ":Item"
+":AddItemCommand" --> ":Duke"
+destroy ":AddItemCommand"
+end
+
+@enduml

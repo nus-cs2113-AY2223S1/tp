@@ -1,0 +1,44 @@
+@startuml
+hide footbox
+
+Actor Item
+"Item" -> ":Duke": "view-item..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ViewItemCommand"**: new
+activate ":ViewItemCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+
+":Duke" -> ":ViewItemCommand" : executeCommand()
+activate ":ViewItemCommand"
+":ViewItemCommand" -> ":ViewItemCommand": getArgsViewItemCmd()
+activate ":ViewItemCommand"
+return args
+    ":ViewItemCommand" -> ":ItemList": getItemById()
+    activate ":ItemList"
+alt Item is valid
+    ":ItemList" --> ":ViewItemCommand":
+    deactivate ":ItemList"
+
+    ":ViewItemCommand" -> "<<class>>\nUi": viewItemMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate "<<class>>\nUi"
+    deactivate ":ItemList"
+else Item is invalid
+    ":ViewItemCommand" -> ":DukeException"** : new
+    destroy ":ViewItemCommand"
+    activate ":DukeException"
+    ":DukeException" --> ":Duke"
+    destroy ":DukeException"
+    ":Duke" -> "<<class>>\nUi" : print error
+    activate "<<class>>\nUi"
+    "<<class>>\nUi" --> ":Duke" : error message
+    deactivate "<<class>>\nUi"
+end
+deactivate ":ViewItemCommand"
+
+@enduml

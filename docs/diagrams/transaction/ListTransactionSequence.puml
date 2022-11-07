@@ -1,0 +1,22 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "list-transactions"
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":ListTransactionsCommand"**: new
+activate ":ListTransactionsCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":ListTransactionsCommand" : executeCommand()
+activate ":ListTransactionsCommand"
+":ListTransactionsCommand" -> ":TransactionList" : toString()
+activate ":TransactionList"
+return
+":ListTransactionsCommand" -> "<<class>>\nUI" : printResponse()
+return isLastCommand
+deactivate ":ListTransactionsCommand"
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+Actor User
+"User" -> ":Duke": "add-user..."
+activate ":Duke"
+":Duke" -> ":CommandParser": createCommand()
+activate ":CommandParser"
+":CommandParser" -> ":AddUserCommand" **: new
+activate ":AddUserCommand"
+return
+":CommandParser" --> ":Duke"
+deactivate
+":Duke" -> ":AddUserCommand" : executeCommand()
+activate ":AddUserCommand"
+":AddUserCommand" -> ":AddUserCommand": getArgsAddUserCmd()
+activate ":AddUserCommand"
+return args
+opt args are valid
+    ":AddUserCommand" -> ":User"**: new User()
+    activate ":User"
+    ":User" --> ":AddUserCommand"
+    ":AddUserCommand" -> ":UserList": addUser()
+    activate ":UserList"
+    ":AddUserCommand" -> "<<class>>\nUi": addUserMessage()
+    activate "<<class>>\nUi"
+    return
+    deactivate ":UserList"
+    deactivate "<<class>>\nUi"
+    deactivate ":User"
+    ":AddUserCommand" --> ":Duke"
+    destroy ":AddUserCommand"
+end
+
+@enduml
