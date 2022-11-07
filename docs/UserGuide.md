@@ -11,7 +11,7 @@ Timetabler is a **desktop app** that allows **NUS students** taking official NUS
 2. Down the latest version of `tp` from [here](https://github.com/AY2223S1-CS2113-T17-3/tp/releases/).
 3. Copy the jar file into an empty folder.
 4. Open a command window or terminal for mac in that folder.
-5. Run the command `java -jar [CS2113-T17-3][Timetabler].jar` in the same folder.
+5. Run the command `java -jar \[CS2113-T17-3\]\[Timetabler\].jar` in the same folder.
 6. You will be prompted to enter the `semester` (1 or 2) you are planning for when the program first starts.
 7. Note that you should not modify the files created by the program unless you are certain of what you are doing. In
    the event that the files have been incorrectly modified, see the Appendix below for help.
