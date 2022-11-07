@@ -200,8 +200,8 @@ public class UserList {
      *
      * @param args The array containing arguments.
      * @throws ContactNumberInvalidException If contact is invalid
-     * @throws DuplicateException If there are duplicate names or contacts
-     * @throws InvalidUserException If user is invalid
+     * @throws DuplicateException            If there are duplicate names or contacts
+     * @throws InvalidUserException          If user is invalid
      */
     public void checkValidArgsForUser(String[] args)
             throws ContactNumberInvalidException, DuplicateException, InvalidUserException {
@@ -214,7 +214,7 @@ public class UserList {
     /**
      * Checks if a borrower is valid or not.
      *
-     * @param args The array of input args
+     * @param args     The array of input args
      * @param itemList The main item list
      * @throws InvalidUserException  If the user borrows him/herself
      * @throws ItemNotFoundException If the item cannot be found
