@@ -2,6 +2,7 @@ package recipeditor.edit;
 
 import recipeditor.exception.InvalidFlagException;
 import recipeditor.exception.ParseException;
+import recipeditor.parser.FlagParser;
 import recipeditor.parser.FlagType;
 import recipeditor.recipe.Ingredient;
 import recipeditor.recipe.Recipe;
@@ -10,11 +11,13 @@ public class Change extends EditModeCommand {
     private static final String CHANGE_1 = "Enter your changes: ";
     private static final String CHANGE_2 = "Ingredient format: <ingredient name> / <amount_in_float> / <unit>. "
             + "Step format: <step> ";
-    private static final int INDEX_LOCATION = 4;
-    private static final int START_LOCATION = 5;
+    private static int INDEX_LOCATION = 4;
+    private static int START_LOCATION = 5;
 
     public Change(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
         super(ingredientFlag, parsedCommand, recipe);
+        INDEX_LOCATION = FlagParser.getLastFlagIndex(parsedCommand) + 1;
+        START_LOCATION = INDEX_LOCATION + 1;
     }
 
     /**

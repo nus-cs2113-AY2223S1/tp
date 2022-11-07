@@ -23,7 +23,7 @@ editing things using GUI
 - Highlights:
   - Added some edit formats
 
-#### **Code Contributed**: [Reposense Link]()
+#### **Code Contributed**: [Reposense Link](https://nus-cs2113-ay2223s1.github.io/tp-dashboard/?search=snuckerzlol&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2022-09-16&tabOpen=true&tabType=authorship&tabAuthor=snuckerzlol&tabRepo=AY2223S1-CS2113-T18-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 
 #### **Project Management**:

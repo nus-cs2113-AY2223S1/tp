@@ -9,11 +9,13 @@ import recipeditor.ui.Ui;
 
 public class Swap extends EditModeCommand {
 
-    private static final int INDEX_LOCATION = 4;
-    private static final int START_LOCATION = 5;
+    private static int INDEX_LOCATION = 4;
+    private static int START_LOCATION = 5;
 
     public Swap(FlagType ingredientFlag, String[] parsedCommand, Recipe recipe) {
         super(ingredientFlag, parsedCommand, recipe);
+        INDEX_LOCATION = FlagParser.getLastFlagIndex(parsedCommand) + 1;
+        START_LOCATION = INDEX_LOCATION + 1;
     }
 
     /**
