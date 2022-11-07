@@ -383,14 +383,14 @@ Program exiting
 
 ## Storage
 
-The data files are stored at _"./RecipeData"_ directory.
+The data files are stored at `./RecipeData` directory.
 
-The template file and other miscellaneous files are stored at _"./RecipeData/App"_ directory.
+The template file and other miscellaneous files are stored at `./RecipeData/App` directory.
 
-The recipe data files are stored at _"./RecipeData/Recipes"_ directory.
+The individual recipe data files are stored at `./RecipeData/Recipes` directory.
 
 There are 2 types of recipe data files to store recipes:
-- **Overall File (OF)**: Keeps track of the recipe titles. User can open this file to have a birds-eye-view
+- **Overall File (OF)**: Keeps track of the recipe titles previously added to the recipe list. User can open this file to have a birds-eye-view
 at all the recipes that is currently in the recipe list.
 - **Individual Recipe File (IRF)**: The details of each recipe is saved as an individual file that is named
 after the recipe title. User can open the individual recipe file to look at the full details of the recipe.
