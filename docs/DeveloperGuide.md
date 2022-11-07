@@ -26,7 +26,12 @@ This section describes the development tools used in the creation of Currency Ma
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Target user: Someone who works with many types of currencies, is interested in the forex market, or is interested in having a completely online wallet for tracking the money in the account.
+
+Value proposition: User who has a wallet which can have multiple currencies and can change them from one currency to another, essentially a bank account manager, where user can also withdraw and add money to the account. If they are trying to withdraw more money than they have in one currency we give them the option of exchange some from another currency (e.g trying to withdraw 100 SGD, but only have 80 SGD, we would tell them they can convert 14.34 EUR to match the remaining 20 SGD). They can give out requests to convert either one, select amount of currencies or all of the currencies they have to one specific currency. 
+
+Problem Addressed: Stores all of the forex rates in one place and allows the user to store many different types of currency within one “bank” account/wallet.
+
 
 ## Design & implementation
 
@@ -130,14 +135,7 @@ User who has a wallet which can have multiple currencies and can change them fro
 |v2.0|User|add a new personal currency|use that with my other transactions and keep track of it|
 |v2.0|User|remove my personal currency|I can remove once it's outdated or not needed anymore|
 
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+There is no sample data required for testing this product. We will have exchange rates between currencies taken from an exchange rate API and the informatino about each accout is stored in a folder on your computer itself.
+Simply follow the steps within the User Guide to proceed with testing, register, login, and enter commands within the account.
