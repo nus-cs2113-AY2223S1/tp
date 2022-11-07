@@ -265,7 +265,7 @@ The following sequence diagram helps explain the key steps behind adding and del
 
 The UserUniversityList class stores 2 important things the `universityName` and a list of UserModuleMapping under `myModules`
 Each list is identified using the universityName. Users can only create 1 list for each partner university and this is managed by the
-UserUniversityListManager in 1.8.2. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
+UserUniversityListManager. A notable function in UserUniversityList is `setFavourite` which will be used in the favourite function
 to help users manage multiple lists and note down their favourites
 
 #### UserUniversityListManager
