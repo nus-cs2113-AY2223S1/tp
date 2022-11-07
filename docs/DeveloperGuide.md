@@ -11,7 +11,7 @@
   * [Employee Management Feature](#Employee-Management-Feature)
   * [Pet Management Feature](#Pet-Management-Feature)
   * [Service Management Feature](#Service-Management-Feature)
-* [Appendix B: User Stories](#Appendix-B:-user-stories)
+* [Appendix B: User Stories](#Appendix-B:-User-Stories)
 * [Appendix C: Non-Functional Requirements](#Appendix-C:-Non-Functional-Requirements)
 
 ## Setting Up and Getting Started
