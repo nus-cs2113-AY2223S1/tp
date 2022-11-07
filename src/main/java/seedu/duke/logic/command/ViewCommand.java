@@ -218,7 +218,7 @@ public class ViewCommand extends Command {
         } else {
             CaloriesTable tableFrame = new CaloriesTable(
                     foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList, caloriesList,
-              CALORIES_FOUND + caloriesList.size());
+                CALORIES_FOUND + caloriesList.size());
             ArrayList<String> table = tableFrame.getCaloriesTable();
             ui.printTable(table);
         }
