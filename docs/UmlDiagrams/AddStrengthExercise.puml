@@ -6,8 +6,6 @@ autoactivate on
 
 activate AddCommand
 -->AddCommand++:execute()
-AddCommand -> Parser++:getArgumentList(Arguments: string)
-return argumentList: String[]
 AddCommand -> Parser++:getClassType((argumentList: String[]))
 return addType: String
 AddCommand -> AddCommand++:addStrengthExercise((argumentList: String[]))

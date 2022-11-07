@@ -1,6 +1,13 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+!include style.puml
+box Logic LOGIC_COLOR_T1
+participant ":Duke" as Duke
+participant ":AddCommand" as AddCommand LOGIC_COLOR
+participant "<<Class>>\nParser" as Parser LOGIC_COLOR
+participant ":WeightAndFatList" as WeightAndFatList LOGIC_COLOR
+
 autoactivate on
 
 

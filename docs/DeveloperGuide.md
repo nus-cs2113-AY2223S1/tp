@@ -30,20 +30,20 @@ Here's a class diagram of the logic component.
 ![Logic.png](UmlDiagrams/Logic.png)
 
 How the logic component works:
-* After taking in the input from the user, it is parsed to the Parser class of the Logic component 
-to interpret the user's command.
-* This results in a Command object (more precisely, an object of one of its subclasses 
-e.g., AddCommand), which would then be executed by Duke.
-* The command can communicate with the Records when it is executed (e.g. adding a new food record or finding an
-exercise record). 
-* The command can also communicate with the Storage Component when it is executed (e.g. saving and loading records).
-* Additionally, the command also communicates with Ui Component to display the results of the execution back to the 
-user.
-* The command is validated by the Validator class to handle user's input accurately and prevent bad commands from being
-executed.
-* Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses, 
-e.g. Duke Exception) is thrown.
 
+* After taking in the input from the user, it is parsed to the Parser class of the Logic component
+  to interpret the user's command.
+* This results in a Command object (more precisely, an object of one of its subclasses
+  e.g., AddCommand), which would then be executed by Duke.
+* The command can communicate with the Records when it is executed (e.g. adding a new food record or finding an
+  exercise record).
+* The command can also communicate with the Storage Component when it is executed (e.g. saving and loading records).
+* Additionally, the command also communicates with Ui Component to display the results of the execution back to the
+  user.
+* The command is validated by the Validator class to handle user's input accurately and prevent bad commands from being
+  executed.
+* Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses,
+  e.g. Duke Exception) is thrown.
 
 `Records:`
 
@@ -60,6 +60,7 @@ e.g. Duke Exception) is thrown.
 ### Record component
 
 ![](UmlDiagrams/Records.png)
+
 The record component,
 
 * calls by logic components
@@ -67,6 +68,8 @@ The record component,
 * stores the food list data, all `Food` objects
 * stores the biometrics data, in `Biometrics` object.
 * stores wight and fat list data, all `WeightAndFat` objects.
+* calculates calories for the calories object based on biometrics, exercise and food data to be store in the calories
+  list
 
 ### Storage component
 
@@ -112,17 +115,25 @@ of AddCommand, RemoveCommand, FindCommand, MarkCommand and ViewCommand.\
 ExerciseList stores Exercise objects in two Arraylist based on the status of the exercise to save the time needed to
 filter exercise based on its status when user want to view the exercises based on its status.
 
-![](UmlDiagrams/StrengthExercise.png)
-
 [Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
 date for viewing purposes.
 
 ## Implementation
 
-### Sequence diagrams
+### Add Feature
 
-Adding a new record  
+The add feature in TracknFit is split to 4 main components, food, strength, cardio and weight. After the object of the
+respective class is created, it will be added to the respective list based on the add command input from the user.
+
+We will use the sequence diagrams below to show how the add operation works.
+
+Adding a new record
 ![](UmlDiagrams/Add.png)
+The Duke will call execute() for the AddCommand object after the Parser class parsed the input is an add command. First,
+the number of slashes in the input is deterined by calling Parser.getArgumentsCount(argumentList) for input validation.
+The
+execute() will then proceed to call Parser.getArgumentList to split the inputs into parameters. Parser.gtClassType()
+will be called to obtain the type of addCommand. Respective type of add command will then be called.
 
 Adding weight and fat record  
 ![](UmlDiagrams/AddWeightAndFat.png)
@@ -165,7 +176,7 @@ In the case that user removes a weight and fat record, the removeWeight method i
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
 removeCommand to be printed on the ui.
 ![](UmlDiagrams/RemoveWeight.png)  
-The interactions for removing other types of records are similar.  
+The interactions for removing other types of records are similar.
 
 ### Design considerations
 
