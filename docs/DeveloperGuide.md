@@ -8,24 +8,24 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 ## Content page
 
 - [Design](#design)
-    - [Architecture](#architecture) - Qian Hui
-    - [Ui Component](#ui-component) - Qian Hui
-    - [Parser Component](#parser-component) - Bian Rui
-    - [Storage Component](#storage-component) - Qian Hui
-    - [Command Component](#command-component) Bian Rui
-    - [Recipe Component](#recipe-module) - William
-    - [Edit CLI Component](#edit-component) - William
-    - [GUI Component](#gui-component) - Huy
+    - [Architecture](#architecture)
+    - [Ui Component](#ui-component)
+        - [GUI Component](#gui-component)
+    - [Recipe Component](#recipe-component)
+    - [Storage Component](#storage-component)
+    - [Parser Component](#parser-component)
+    - [Command Component](#command-component)
+    - [Exception Component](#exception-component)
 - [Implementation](#implementation)
-    - [Data on Startup and Exit](#data-on-startup-and-exit) - Huy
-    - [Parsing of Commands](#parsing-of-commands) - Bian Rui
-    - [Add Recipe](#add-recipe) - Huy
-    - [GUI WorkFlow](#gui-workflow) - Huy
-    - [Parse Text to Recipe](#parse-text-to-recipe) - Huy
-    - [Edit an Existing Recipe](#edit-an-existing-recipe) - William
-    - [Find Recipe](#find-recipe) - Qian Hui
-    - [View Recipe](#view-recipe) - Bian Rui
-    - [Delete Recipe](#delete-recipe) - Bian Rui
+    - [Data on Startup and Exit](#data-on-startup-and-exit)
+    - [Parsing of Commands](#parsing-of-commands)
+    - [Add Recipe](#add-recipe)
+    - [GUI Workflow](#gui-workflow)
+    - [Parse Text to Recipe](#parse-text-to-recipe)
+    - [Edit an Existing Recipe](#edit-an-existing-recipe)
+    - [Find Recipe](#find-recipe)
+    - [View Recipe](#view-recipe)
+    - [Delete Recipe](#delete-recipe)
 - [Product Scope](#product-scope)
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
@@ -36,10 +36,10 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Acknowledgements
 
-### External Libraries
-
-- org.apache.commons:commons-lang3:3.0 [link](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0)
-- org.apiguardian:apiguardian-api:1.1.0 [link](https://mvnrepository.com/artifact/org.apiguardian/apiguardian-api)
+- We do not use any external libraries
+- The design and structure of our User Guide and Developer Guide is referenced from AddressBook-Level3 (AB3)
+    - [AB3 UG](https://se-education.org/addressbook-level3/UserGuide.html)
+    - [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
 
 ## Design
 
@@ -49,45 +49,33 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
   <img width="40%" src="images/Architecture.png" alt="Storage Class Diagram"/>
 </p>
 
-`Recipeditor` calls to various class a perform all the tasks assigned by the user.
+- The components are grouped into these **packages** because of their functionality
 
-- `Ui`: handles interactions with users, including printing messages and reading of inputs
-- `Storage`: manages the storage of the list of recipes by reading and writing data
-- `Command`: command executor to instruct what task to perform
-- `Parser`: interprets the user input into different commands
-- `Recipe`: main entrypoint of the program.
-- `Exception`: exceptions thrown by the program.
+#### Components (as packages)
 
-#### Happy user workflow
+`main` or `RecipEditor` (in some part of the DG) is the main running program, acting as the intermediary between
+the `Ui` and the `Parser`
 
-Here is an example happy user workflow and a brief explanation of the working of the program
+- `ui`: handles interactions with users, including printing messages and reading of inputs
+- `storage`: manages the storage of the list of recipes by reading and writing data to the File Directory
+- `command`: command executor to instruct what task to perform
+- `parser`: interprets the user input into different commands
+- `recipe`: Contains classes that keep track of Recipes being used when the program is running (or Model)
+- `exception`: exceptions thrown by the program.
 
-1. Start the program
-    - If the RecipeData folder does not exist, create them
-    - Check `AllRecipes.txt` for recipe titles and add to `RecipeList.recipeTitle`
-    - Check the recipe files with the title (added above), parse and add to `RecipeList.recipes`
-2. Commands
-    - `/add` [Add](#)
-        - Call [GUI Workflow](#)
-        - Call `Storage` to delete, overwrite recipe files
-        - Call `RecipeList` to change `RecipeList.recipeTitle` and `RecipeList.recipes`
-    - `/edit`[Edit](#)
-        - CLI:
-        - GUI: [GUI Workflow](#)
-        - Call `Storage` to delete, overwrite recipe files
-        - Call `RecipeList` to change `RecipeList.recipeTitle` and `RecipeList.recipes`
-    - `/list` [List](#)
-        - Access `RecipeList`
-    - `/view` [View](#)
-        - Call `RecipeList`
-    - `/find` [Find](#)
-        - Call `RecipeList`
-    - `/delete` [Delete](#)
-        - Call `RecipeList` to change `RecipeList.recipeTitle` and `RecipeList.recipes`
-        - Call `Storage` to delete
-3. Exit
-    - Generate `AllRecipes.txt` from `RecipeList.recipeTitle` for the next run
-    - Overwrite recipe files from `RecipeList.recipes`
+#### General interaction between the components
+
+<p align="center" width="100%">
+  <img width="100%" src="images/SequenceDiagram/ArchitectureSequence.png" alt="Storage Class Diagram"/>
+</p>
+
+- Here is the general interaction between the components.
+    - `Parser` parsed correct command from the user input
+    - `Command` will affect change in the `Recipe` Model
+        - Add and Edit command will also utilize GUI as shown here. [Add Recipe](#add-recipe)
+    - `Command` will trigger `Storage` to save the `Recipe` Model to the File Directory
+
+- The section below gives detailed description of the classes in the various components
 
 ### Ui Component
 
@@ -97,180 +85,151 @@ The UI component is responsible for all user interfaces of the application.
   <img width="80%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
 </p>
 
-**API:** `Ui.java`
+**Class:** `Ui.java`,
 
-1. `Ui` takes `CommandResult` as a parameter to show the output message after a command is completed.
-2. `AddMode` calls `Recipe` to add new recipe into the list.
-3. `AddMode` calls `Ingredient` to parse ingredients according to its name, amount and unit.
-4. `Editor` takes `Storage` as a parameter to access the temporary file path, where the recipe will be
-   temporarily stored at.
+- Handle the CLI user interface with the user
+- `Ui` takes `CommandResult` as a parameter to show the output message after a command is completed.
 
-### Parser Component
+**Class:** `GuiWorkFlow.java`, `Editor.java`
 
-Parser class parses user input to various `command`. It parses user's input into commands through
-respective parsing functions.
+- See below
+
+#### GUI Component
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/ParserClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/GUIComponent.png" alt="GUI Component"/>
 </p>
 
-**API:** `Parser.java`
 
-`parseCommand` will takes in the user input for parsing, and call respective parsing functions
-after identifying the type of `command`. Then a `command` will be returned as the result of parsing.
+The GUI component consists of 2 main classes: `Editor` and `GuiWorkFlow`
 
-### Storage Component
-
-The storage component allows data to be read from and saved to a storage file.
-
-<p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
-</p>
-
-**API:** `Storage.java`
-
-1. `Storage` calls `Recipe` when saving data from `RecipeList` to an external storage file.
-2. `Storage` calls `RecipeList` when loading recipe data from external storage file to.
-3. `Storage` calls `Ui` to show relevant messages to the user.
-4. `Storage` calls `ParserFileException` when there is an error in parsing recipe file content.
-5. `Storage` uses a method in `RecipeFileParser` to parse the content in the individual recipe text file
-   into recipe.
-6. `Storage` uses a method in `TitleFileParser` to parse the title of the text file into recipe title.
-
-The external storage file contains:
-
-1. Individual Recipe Text File
-    - Recipe Name
-    - Recipe Description
-    - Recipe Ingredients (name, amount, unit)
-    - Recipe Steps
-
-2. All Recipe Text File - that contains the recipe title of all the recipes in the list.
-
-### Command Component
-
-The command component features a list of commands falls under `Command`,
-identified from user input for the software to carry out certain tasks.
-A `CommandResult` is returned from `execute()` method call of each `Command`.
-The `CommandResult` consists of a single error message in `String`.
-
-<p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/CommandClassDiagram.png" alt="Storage Class Diagram"/>
-</p>
-
-Each subclass of `Command` has their own attributes and `CommandResult`
-from `Execute` method, allowing them to perform respective tasks.
-
-All types of`Command`and their functionalities are explained below:
-
-`AddCommand`: Add a valid `Recipe` to `RecipeList`, otherwise shows error message
-for `invalid Recipe`
-
-`DeleteCommand`: Remove an existing `Recipe` at a valid index from `RecipeList`,
-otherwise show error message on `index out of bound`
-
-`ExitCommand`: Deliver a `CommandResult` to terminate software run.
-
-`InvalidCommand`: Deliver a `CommandResult` of invalid command
-
-`ListCommand`: Print all formatted `Recipe` in `RecipeList` to screen
-
-`ViewCommand`: View an existing `Recipe` at a valid index from `RecipeList`,
-otherwise show error message on `index out of bound`
+- `Editor` extends `Jframe` and implements `ActionListener`: This is the class that brings up the GUI (using **JavaFx UI
+  framework**)
+- `GUIWorkFlow` is the class that call `Editor`: This class have various methods that handle the transition between CLI
+  and GUI
+- Check [GUI Workfow](#gui-workflow), for the implementation
 
 ### Recipe Component
 
 The recipe module encapsulates the array, recipe and ingredient objects.
 
 <p align="center" width="100%">
-  <img width="50%" src="images/ClassDiagrams/RecipeClassDiagram.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/ClassDiagrams/RecipeModule.png" alt="Recipe Component"/>
 </p>
 
-**API:** `Ingredient.java`
+- Methods are omitted to avoid clutter
 
-Stores the name, amount and unit of recipes. Smallest class in the module.
+**Class:** `Ingredient.java`
 
-**API:** `Recipe.java`
+- Stores the name, amount and unit of recipes
 
-`Recipe` calls `Ingredient` to add, edit or delete ingredients. It contains methods to parse a recipe, 
-convert a recipe into printable or saveable format and perform operations on `ingredient` and `step` ArrayList objects
-which are instantiated whenever a `Recipe` object is created.
+**Class:** `Recipe.java`
 
-**API:** `RecipeList.java`
+- has private attributes as shown
+- has get and set methods on the attributes
+- has methods to convert a recipe into printable or saveable format and perform operations
 
-`RecipeList` calls `Recipe` to add, edit or delete recipes. It consists of two ArrayList objects (`recipes` to store 
-recipes and `recipeTitles` to store titles). It contains methods to count the number of existing recipes, 
-search for recipes based on the given parameter and save edited recipe into `Storage`.
+**Class:** `RecipeList.java`
 
-### Edit CLI Component
+- Consists of 2 **important arrays** that keep track of the added recipes
+    - `RecipeList.recipes`: store the recipe
+    - `RecipeList.recipeTitles`: store the recipe titles
+        - This is necessary because it separately keeps track of valid titles from `AllRecipes.txt`
+        - This is due to the fact that the recipe files might be tampered
+- has methods to do various useful operation on the `RecipeList.recipes` and `RecipeList.recipeTitles`
+
+### Storage Component
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/EditClassDiagram.png" alt="Edit Module Diagram"/>
+  <img width="100%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
 </p>
+The storage component allows data to be read from and saved to a storage file.
 
-The edit component consists of three parts:
+**Class:** `Storage.java`
 
+1. `Storage` calls `Recipe` when saving data from `RecipeList` to an external storage file.
+2. `Storage` calls `RecipeList` when loading recipe data from external storage file to.
+3. `Storage` calls `ParserFileException` when there is an error in parsing recipe file content.
+4. `Storage` uses a method in `RecipeFileParser` to parse the content in the recipe file content.
+    - [Parse Text to Recipe](#parse-text-to-recipe)
+5. `Storage` uses a method in `TitleFileParser` to parse `AllRecipes.txt`.
+    - [Data on Startup and Exit](#data-on-startup-and-exit)
 
-- **Parser**
-    - Parses the user input, instantiates `EditCommand` and `GUIWorkFlow`, switches between different flags
-- **EditModeCommand**
-    - Handles the edit functions that falls under `EditModeCommand` (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
-- **EditCommand**
+- Important files in the File Directory
+    1. Individual Recipe Text File
+        - Recipe Name
+        - Recipe Description
+        - Recipe Ingredients (name, amount, unit)
+        - Recipe Steps
 
-    - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
-      CLI, saves the edited recipe to `Storage`
+    2. `AllRecipes.txt`: contains the recipe title of all the recipes
+    3. `Template.txt`: template file for adding recipe
+    4. `Temporary.txt`: for the [GUI Workflow](#gui-workflow)
 
-#### Parser
-
-The `FlagParser` contains several functions to extract flags from the user input in the FlagType format. It is used to
-instantiate the necessary EditModeCommand.
-
-`GuiWorkFlow` bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
-
-#### EditModeCommand
-
-An abstract class instantiated by `EditCommand` in CLI mode. It takes in the old recipe and, once executed,
-returns a new recipe which will be saved to Storage.
-
-#### EditCommand
-
-Handles the branching of commands, once executed it will save the new recipe to Storage or returns an error.
-
-The following illustrates the work sequence to edit a recipe.
+### Parser Component
 
 <p align="center" width="100%">
-  <img width="80%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
+  <img width="100%" src="images/ClassDiagrams/Parser.png" alt="Parser Class Diagram"/>
 </p>
-The user first call the edit command from the `Main` class which will then be passed to the `Parser` class. It decides
-whether the GUI or CLI should be called through the number of arguments passed by the user.
 
-#### GUI Edit
-Called if the user provides exacty two parameters.
-- GUI window is called by `GuiWorkFlow`
-- After the GUI edit has finished, `EditCommand` is instantiated and the new recipe is saved to `Storage` through the
-  `RecipeList` class
+**Class:** `Parser.java`
 
-#### CLI Edit
-Called if the user provides more than two parameters.
-- `EditCommand` is instantiated with the corresponding flags parsed from the arguments provided by the user
-- Depending on the flags passed, it instantiates the abstract class `EditModeCommand` using different constructors
-  (`Add`, `Delete`, `Swap`, `Change`)
-- Once it has been executed, it returns the new edited `Recipe`, which will be saved to `Storage` through the 
-`RecipeList` class
+- Parser class parses user input to various `Command`. It parses user's input into commands through
+  respective parsing functions.
+- `parseCommand` will takes in the user input for parsing, and call respective parsing functions
+  after identifying the type of `Command`. Then a `Command` will be returned as the result of parsing.
 
-### GUI Component
+**Class:** `TitleFileParser.java`
+
+- Parse `AllRecipes.txt` file into recipe titles to store in `RecipeList.recipeTitles`
+- Used in [Data on Startup and Exit](#data-on-startup-and-exit)
+
+**Class:** `RecipeFileParser.java`
+
+- Parse recipe files content to a valid `Recipe`
+- Used in [GUI Workflow](#gui-workflow) and [Data on Startup and Exit](#data-on-startup-and-exit)
+
+### Command Component
+
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/GUIComponent.png" alt="GUI Component"/>
+  <img width="100%" src="images/ClassDiagrams/Command.png" alt="Command Class Diagram"/>
 </p>
 
-The GUI component consists of 2 main classes: `Editor` and `GuiWorkFlow`
 
-- `Editor` extends `Jframe` and implements `ActionListener`: This is the class that brings up the GUI
-- `GUIWorkFlow` is the class that call `Editor`: This class have various methods that handle the transition between CLI
-  and GUI
-- Check [GUI WorkFlow](#gui-workflow), for the implementation
+- The command component has classes that extend `Command`, identified from user input for the software to carry out
+  certain tasks.
+  A `CommandResult` is returned from `execute()` method call of each `Command`.
+  The `CommandResult` consists of a single error message in `String`.
 
+- Each subclass of `Command` has their own attributes and `CommandResult`
+from `Execute` method, allowing them to perform respective tasks.
+
+- All types of`Command`and their functionalities are explained below:
+
+- `AddCommand`: Add a valid `Recipe` to `RecipeList`, otherwise shows error message
+for `invalid Recipe`
+
+- `DeleteCommand`: Remove an existing `Recipe` at a valid index from `RecipeList`,
+otherwise show error message on `index out of bound`
+
+- `ExitCommand`: Deliver a `CommandResult` to terminate software run.
+
+- `InvalidCommand`: Deliver a `CommandResult` of invalid command
+
+- `ListCommand`: Print all formatted `Recipe` in `RecipeList` to screen
+
+- `ViewCommand`: View an existing `Recipe` at a valid index from `RecipeList`,
+otherwise show error message on `index out of bound`
+
+### Exception Component
+- Contains exception classes that extend `Exception` for program specific exceptions
+  - `ExcessFlagsException.java`
+  - `InvalidFlagException.java`
+  - `MissingFlagException.java`
+  - `ParseException.java`
+  - `ParseFileException.java`
+  - `RecipeNotFoundException.java`
 ## Implementation
 
 ### Data on Startup and Exit
@@ -290,7 +249,7 @@ When the program starts, it will
     - Create `AllRecipes.txt` file to keep track of the recipe titles
     - Create `Template.txt` file for Add Command
 - Subsequent run
-    - Read the recipe titles from `Tempate.txt` line by line
+    - Read the recipe titles from `Tempate.txt` line by line by `TitleFileParser`
     - **Check for the validity** of the titles
         - Title is not blank
         - Title is alphanumeric
@@ -301,9 +260,8 @@ When the program starts, it will
           Check [Parse Text to Recipe](#parse-text-to-recipe)
         - If the recipe title in the file content is different from the recipe file name, use the file name
     - Only when the parsing is correct
-      - Load recipe into ArrayList `RecipeList.recipes`
-      - Load recipe title into ArrayList `RecipeList.recipeTitles`
-
+        - Load recipe into ArrayList `RecipeList.recipes`
+        - Load recipe title into ArrayList `RecipeList.recipeTitles`
 
 #### Exit
 
@@ -321,104 +279,107 @@ This is to prevent manual tampering of the data that might affect the data in th
 
 ### Parsing of Commands
 
-The following sequence diagram shows the usage of relevant classes and methods when trying to parse
-an arbitrary input into an executable `command` by software.
+- The following sequence diagram shows the usage of relevant classes and methods when trying to parse
+an input
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Parser.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/Parser.png" alt="Parser Diagram"/>
 </p>
 
-Step 1:
-A user input will be parsed into `parser` and checked for the command word by `parseCommand`.
+- Step 1:
+  A user input will be parsed into `parser` and checked for the command word by `parseCommand`.
 
-Step 2.1:
-If command word is `/add`, `parseAddCommand()` will be called by `Parser`. If the input is a valid `AddCommand`,
-an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned.
+- Step 2.1:
+  If command word is `/add`, `parseAddCommand()` will be called by `Parser`. If the input is a valid `AddCommand`,
+  an instance of `AddCommand` to instruct entering `GuiWorkFlow` will be returned.
 
-Step 2.2:
-If `templateFileMissingException` occurs,`Parser` will call `generateFile()` in `Storage` to create
-the template file. An `InvalidCommand`containing this exception will be returned.
+- Step 2.2:
+  If `templateFileMissingException` occurs,`Parser` will call `generateFile()` in `Storage` to create
+  the template file. An `InvalidCommand`containing this exception will be returned.
 
-Step 3.1:
-If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a
-valid `EditCommand`
-to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned.
+- Step 3.1:
+  If command word is `/edit`, `parseEditCommand()` will be called by `Parser`. If the command input is a
+  valid `EditCommand`
+  to edit in Gui, an instance of `EditCommand` to instruct entering `GuiWorkFlow` will be returned.
 
-Step 3.1.1:
-If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
-or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
-be returned.
+- Step 3.1.1:
+  If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
+  or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
+  be returned.
 
-Step 3.2:
-If the command input is a valid `EditCommand` to edit in CLI, an instance of `EditCommand` to interpret user
-input into changes made to `recipe` is returned.
+- Step 3.2:
+  If the command input is a valid `EditCommand` to edit in CLI, an instance of `EditCommand` to interpret user
+  input into changes made to `recipe` is returned.
 
-Step 3.2.2:
-If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
-or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
-be returned.
+- Step 3.2.2:
+  If the command is invalid, one of the `Exception` among `IndexOutOfBoundException`, `NumberFormatException`
+  or `FileNotFoundException` occurs. An `InvalidCommand` containing the respective `Exception` message will
+  be returned.
 
-Step 4:
-If the command word is `/list`, an instance of `ListCommand` will be returned to `Parser`.
+- Step 4:
+  If the command word is `/list`, an instance of `ListCommand` will be returned to `Parser`.
 
-Step 5:
-If the command word is `/exit`, an instance of `ExitCommand` will be returned to `Parser`.
+- Step 5:
+  If the command word is `/exit`, an instance of `ExitCommand` will be returned to `Parser`.
 
-Step 6.1:
-If the command word is `/view`, `Parser` will call `parseViewCommand()` from itself. If the command views
-`recipe` by index, a `ViewCommand` that instructs showing `recipe` at the given index will be returned
-to `Parser`.
+- Step 6.1:
+  If the command word is `/view`, `Parser` will call `parseViewCommand()` from itself. If the command views
+  `recipe` by index, a `ViewCommand` that instructs showing `recipe` at the given index will be returned
+  to `Parser`.
 
-Step 6.2:
-If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given
-title will be returned to `Parser`.
+- Step 6.2:
+  If the command views `recipe` by title, a `ViewCommand` that instructs showing `recipe` of the given
+  title will be returned to `Parser`.
 
-Step 6.3:
-If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
-and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
-information on the respective `Exception` or `Error` will be returned to `Parser`.
+- Step 6.3:
+  If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+  and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
+  information on the respective `Exception` or `Error` will be returned to `Parser`.
 
-Step 7.1:
-If the command word is `/delete`, `Parser` will call `parseDeleteCommand()` from itself. If the command deletes
-`recipe` by index, a `DeleteCommand` that instructs deleting `recipe` at the given index will be returned
-to `Parser`.
+- Step 7.1:
+  If the command word is `/delete`, `Parser` will call `parseDeleteCommand()` from itself. If the command deletes
+  `recipe` by index, a `DeleteCommand` that instructs deleting `recipe` at the given index will be returned
+  to `Parser`.
 
-Step 7.2:
-If the command deletes `recipe` by title, a `DeleteCommand` that instructs deleting `recipe` of the given
-title will be returned to `Parser`.
+- Step 7.2:
+  If the command deletes `recipe` by title, a `DeleteCommand` that instructs deleting `recipe` of the given
+  title will be returned to `Parser`.
 
-Step 7.3:
-If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
-and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
-information on the respective `Exception` or `Error` will be returned to `Parser`.
+- Step 7.3:
+  If one of the `Exception` among `MissingFlagException`, `InvalidFlagException`, `IndexOutOfBoundException`
+  and `NumberFormatException` or `AssertionError` occurs, an instance of `InvalidCommand` containing
+  information on the respective `Exception` or `Error` will be returned to `Parser`.
 
-Step 8.1:
-If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid
-`FindCommand`, an instance containing the respective `flag` and other input information will be returned to
-`Parser`.
+- Step 8.1:
+  If the command word is `/find`, `Parser` will call `parseFindCommand()` from itself. If the input is a valid
+  `FindCommand`, an instance containing the respective `flag` and other input information will be returned to
+  `Parser`.
 
-Step 8.2:
-If the input is shorter than the expected length of a `FindCommand` input, an instance of `InvalidCommand` containing
-information on the correct format for `FindCommand` input will be returned to `Parser`.
+- Step 8.2:
+  If the input is shorter than the expected length of a `FindCommand` input, an instance of `InvalidCommand` containing
+  information on the correct format for `FindCommand` input will be returned to `Parser`.
 
-Step 9.1:
-If the command word is `/help`, `Parser` will call `parseHelpCommand()` from itself. If the input is a valid
-`HelpCommand`, an instance containing input information will be returned to `Parser`.
+- Step 9.1:
+  If the command word is `/help`, `Parser` will call `parseHelpCommand()` from itself. If the input is a valid
+  `HelpCommand`, an instance containing input information will be returned to `Parser`.
 
-Step 9.2:
-If the input is not of the same length as the expected length of a `HelpCommand` input, an instance of `InvalidCommand`
-containing information on the correct format for `HelpCommand` input will be returned to `Parser`.
+- Step 9.2:
+  If the input is not of the same length as the expected length of a `HelpCommand` input, an instance
+  of `InvalidCommand`
+  containing information on the correct format for `HelpCommand` input will be returned to `Parser`.
 
-Step 10:
-If the command word is none of the above, an instance of `InvalidCommand` will be returned to `Parser`.
+- Step 10:
+  If the command word is none of the above, an instance of `InvalidCommand` will be returned to `Parser`.
 
 ### Add Recipe
 
+- **Activation bar is ommitted to avoid clutter**
+
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/AddEditor.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/AddEditor.png" alt="Add Editor Diagram"/>
 </p>
 
 - When the `Parser` parsed the AddCommand, an instance of `GuiWorkFlow` will be created
-- The internal working of `GuiWorkFlow` is elaborated in [GUI WorkFlow](#gui-workflow)
+- The internal working of `GuiWorkFlow` is elaborated in [GUI Workflow](#gui-workflow)
 - `Parser` will call `getValid()` and `getRecipe()` from the `GuiWorkFlow`
     - After the user interact with the GUI, if the text the user provides is a valid recipe, the Add command will be
       valid
@@ -427,10 +388,12 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
     - A recipe file will be saved to the FileDirectory
     - A `CommandResult` instance is returned with a successful message
 
-### GUI WorkFlow
+### GUI Workflow
+- Below is the sequence diagram of the GUI Workflow
+  - Activation bar is ommitted to avoid clutter
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/GUISequence.png" alt="Recipe Module Diagram"/>
+  <img width="100%" src="images/SequenceDiagram/GUISequence.png" alt="GUI Sequence Diagram"/>
 </p>
 
 1. GUI is only triggered by Add and Edit command
@@ -466,8 +429,8 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 
 ### Parse Text to Recipe
 
-- The parsing of is solely handled by `RecipeFileParser` with little interaction with other classes. Hence there will be
-  no diagram.
+- The parsing of is solely handled by `RecipeFileParser` Class with little interaction with other classes. Hence **there
+  will be no diagram**.
 - The parser has variables and counter to keep track of the parsing process
     - `lineType`:`TITLE`, `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
     - `stage`: `TITLE_START`, `TITLE`, `TITLE_END`,  `DESCRIPTION`, `INGREDIENT`, `STEP`, `NORMAL`
@@ -475,42 +438,89 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
     - `ingredientIndex`: keep track of the increment of INGREDIENT index
     - `stepIndex`: keep track of the correct increment of STEP index
 
-- Go through the text line by line
-- Detect whether the line is a Heading (denoted by `#`) and assign the `lineType` for that line
+1. Go through the text line by line
+2. Detect whether the line is a Heading (denoted by `#`) and assign the `lineType` for that line
     - if `lineType` is a heading, assign `stage` appropriately, and increment `stageCounter`
     - else, the `lineType` is `NORMAL`
-- Parsing of line with `NORMAL` type is dependent on the `stage`
+3. Parsing of line with `NORMAL` type is dependent on the `stage`
     - If the line is blank, it does not affect the parsing
-- For `TITLE`:
-    - Perform validity check as the recipe title is a text file
-        - Alphanumerical
-        - less than 255 character
-- For `DESCRIPTION`:
-    - Allow all characters, including blank lines
-    - Blank lines will be recorded to give the user some freedom in describing the recipe
-- For `INGREDIENT`:
-    - Check for the appropriate format `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
-        - Positive integer index
-        - Positive double amount
-    - Check for the correct index increment based on `ingredientIndex`
-- For `STEP`
-    - Check for the appropriate format `INDEX. STEP_DESCRIPTION`
-        - Positive integer index
-    - Check for the correct index increment based on `stepIndex`
-
-- Check if the correct number of Heading occurrence is correct
-- Because of the `stage`, Headings are **parseable** in different order (but highly discouraged)
-- Check if the recipe is empty
-    - Because the blank lines are disregarded
+4. Different `stage`
+   - For `TITLE`:
+       - Perform validity check as the recipe title is a text file
+           - Alphanumerical
+           - less than 255 character
+   - For `DESCRIPTION`:
+       - Allow all characters, including blank lines
+       - Blank lines will be recorded to give the user some freedom in describing the recipe
+   - For `INGREDIENT`:
+       - Check for the appropriate format `INDEX. INGREDIENT_NAME / AMOUNT / UNIT`
+           - Positive integer index
+           - Positive double amount
+       - Check for the correct index increment based on `ingredientIndex`
+   - For `STEP`
+       - Check for the appropriate format `INDEX. STEP_DESCRIPTION`
+           - Positive integer index
+       - Check for the correct index increment based on `stepIndex`
+5. Check if the correct number of Heading occurrence is correct
+6. Because of the `stage`, Headings are **parseable** in different order (but highly discouraged)
+7. Check if the recipe has empty fields
+    - Because the blank lines are disregarded but considered valid
 
 ### Edit an Existing Recipe
 
 #### GUI
 
+- Called if the user provides `/edit index`
 - The workflow is similar to [Add Recipe](#add-recipe), check [GUI WorkFlow](#gui-workflow)
 - Instead of loading `Template.txt`, the recipe file with the title name corresponding to the index will be loaded
 
 #### CLI
+- Called if the user provides more than two parameters.
+    - `EditCommand` is instantiated with the corresponding flags parsed from the arguments provided by the user
+    - Depending on the flags passed, it instantiates the abstract class `EditModeCommand` using different constructors
+      (`Add`, `Delete`, `Swap`, `Change`)
+    - Once it has been executed, it returns the new edited `Recipe`, which will be saved to `Storage` through the
+      `RecipeList` class
+
+<p align="center" width="100%">
+  <img width="100%" src="images/ClassDiagrams/EditCommand.png" alt="Edit Component Diagram"/>
+</p>
+
+
+- The edit component consists of three parts:
+
+- **Parser**
+    - Parses the user input, instantiates `EditCommand` and `GUIWorkFlow`, switches between different flags
+- **EditModeCommand**
+    - Handles the edit functions that falls under `EditModeCommand` (`Add`, `Swap`, `Change`, `Delete`, `Invalid`)
+- **EditCommand**
+
+    - Instantiated by parser whenever `/edit` is called, instantiates the flag parser, switches the flow between GUI and
+      CLI, saves the edited recipe to `Storage`
+
+##### Parser
+
+- The `FlagParser` contains several functions to extract flags from the user input in the FlagType format. It is used to
+instantiate the necessary EditModeCommand.
+
+- `GuiWorkFlow` bypasses this parsing step since there is nothing to be parsed (given that only the index is provided).
+
+##### EditModeCommand
+
+- An abstract class instantiated by `EditCommand` in CLI mode. It takes in the old recipe and, once executed,
+returns a new recipe which will be saved to Storage.
+
+##### EditCommand
+
+- Handles the branching of commands, once executed it will save the new recipe to Storage or returns an error.
+
+##### Sequence  Diagram
+- The following illustrates the work sequence to edit a recipe.
+
+<p align="center" width="100%">
+  <img width="100%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
+</p>
+
 
 ### Find Recipe
 
@@ -522,9 +532,9 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 
 - `ViewCommad` can be constructed from the `index` or `title` of `recipe` to view.
 - When constructing `ViewCommand`from `title`, the constructor will store the `index` of `recipe` of given `title`.
-  If `title` of `recipe` is not found in `RecipeList`, constructor will throw a `RecipeNotFoundException` to the 
-class calling this constructor, and no valid `ViewCommand` will be generated from that. This ensures constructing 
-`ViewCommand` from `title` always contains valid `index` to inspect from the `RecipeList`.
+  If `title` of `recipe` is not found in `RecipeList`, constructor will throw a `RecipeNotFoundException` to the
+  class calling this constructor, and no valid `ViewCommand` will be generated from that. This ensures constructing
+  `ViewCommand` from `title` always contains valid `index` to inspect from the `RecipeList`.
 - If the given `index` is within the range of `RecipeList`:
     - The stored `recipe` file is found by calling `RecipeList.getRecipe(index)`.
     - The `recipe` information is formatted by calling `recipe.getRecipeAttributesFormatted()`.
@@ -534,23 +544,24 @@ class calling this constructor, and no valid `ViewCommand` will be generated fro
     - It is catched. `Ui` will show message on the total number of recipes in list.
     - A `CommandResult` containing failure in viewing the specified `recipe` returned from `execute()`.
 
-
 ### Delete Recipe
 
-- `DeleteCommad` can be constructed from the `index` or `title` of `recipe` to delete. 
+- `DeleteCommad` can be constructed from the `index` or `title` of `recipe` to delete.
 - When constructing `DeleteCommand`from `index`, the constructor will store the `title` of `recipe` at given `index`.
-If `index` is not in the range of `recipe` in `RecipeList`, constructor will assign a `NULL` value to `title` of `recipe`
-to delete from. This will cause `execute()` of this `DeleteCommand` to always fail in deleting the specified
-unexisting `recipe`.
+  If `index` is not in the range of `recipe` in `RecipeList`, constructor will assign a `NULL` value to `title`
+  of `recipe`
+  to delete from. This will cause `execute()` of this `DeleteCommand` to always fail in deleting the specified
+  unexisting `recipe`.
 - If the `recipe` of given `title` exist in the `RecipeList`:
-  - The stored `recipe` file is deleted by calling `Storage.deleteRecipeFile(title)`.
-  - The list of titles of all `recipe` is updated to remove the `title` of the deleted `recipe` by calling
-    `Storage.rewriteRecipeListToFile(title)`.
-  - A `CommandReseult` containing message of successful delete of `recipe` of given `title` is returned from `execute()`.
+    - The stored `recipe` file is deleted by calling `Storage.deleteRecipeFile(title)`.
+    - The list of titles of all `recipe` is updated to remove the `title` of the deleted `recipe` by calling
+      `Storage.rewriteRecipeListToFile(title)`.
+    - A `CommandReseult` containing message of successful delete of `recipe` of given `title` is returned
+      from `execute()`.
 - If the `recipe` of given `title` does not exis in the `RecipeList`:
-  - An `Exception` is thrown when calling `Storage.deleteRecipeFile()`.
-  - It is catched. `Ui` will show message on the total number of recipes in list.
-  - A `CommandResult` containing failure in deleting the specified `recipe` returned from `execute()`.
+    - An `Exception` is thrown when calling `Storage.deleteRecipeFile()`.
+    - It is catched. `Ui` will show message on the total number of recipes in list.
+    - A `CommandResult` containing failure in deleting the specified `recipe` returned from `execute()`.
 
 ## Product scope
 
@@ -583,13 +594,27 @@ quickly.
 
 ## Non-functional Requirement
 
-- Work on all popular Operating System: Windows, Mac, Linux
+1. Should work on any OS as long as it has Java 11 or above installed on their PC.
+2. Should be able to hold up to 1000 recipes without a slowdown of performance.
+3. Any user who can type >55 words per minute would be able to accomplish these tasks
+   faster than if they used a mouse to navigate.
 
 ## Glossary
-
+- `Main` or `RecipEditor`: refers to the main class that the program starts
+- `Template.txt`: Template file generated for adding recipe
+- `Temporary.txt`: Temporary file generated for the GUI Workflow
+- `AllRecipes.txt`: File that contains recipe titles
+- `./RecipeData/App`: Directory path to store files that are not related to recipe
+- `./RecipeData/Recipes`: Directory path to store recipe files
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Setup
+
+1. Follow the instruction in the User Guide to setup the program
+2. For sample recipes, download and unzip
+2. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
+3. This gives you 3 sample recipes so you don't have to manually add recipes all the time
+4. Run the program, it should load and recognize the 3 recipes
 
 ### Parsing  from Text to Recipe using Add or Edit GUI
 
@@ -705,19 +730,9 @@ quickly.
     - The program will load the recipe with the tampered content
 - **Tamper the recipe file (unparseable recipe)**
     - The program will not load the recipe
-    - Recipes folder: with 3 sample recipes
-    - `AllRecipes.txt` with 3 sample recipe titles
 
-## Non-Functional Requirements
 
-1. Should work on any OS as long as it has Java 11 or above installed on their PC.
-2. Should be able to hold up to 1000 recipes without a slowdown of performance.
-3. Any user that is comfortable with typing of speeds >55 words per minute would be able to accomplish these tasks
-   faster than if they used a mouse to navigate.
-4. Run the program for the first time, so that the program generates the `RecipeData` folder and `/exit` the program
-5. Copy the folder and file in 3. to `RecipeData`, overwriting existing files
-6. This gives you 3 sample recipes so you don't have to manually add recipes all the time
-7. Run the program, it should load and recognize the 3 recipes
+
 
 
 

@@ -1,27 +1,22 @@
 @startuml
+skinparam Style strictuml
 hide class fields
 hide class methods
 
-package Recipe {
-class RecipeList
 class Recipe
-class Ingredient
-}
 
 package Ui {
 class Ui
-class AddMode
 class Editor
+class GuiWorkFlow
 }
 
 class Storage
-
-Ui ..> CommandResult
-
-AddMode --> Recipe
-AddMode --> Ingredient
-RecipeList "1" *-right-> "*" Recipe
-Recipe "1" *-right-> "*" Ingredient
-Editor .down-> Storage
+class Main
+Main .-> Ui
+Ui ..> CommandResult: show >
+GuiWorkFlow -> Editor
+GuiWorkFlow .-> Recipe: get, set >
+Editor .down-> Storage: save file using >
 
 @enduml

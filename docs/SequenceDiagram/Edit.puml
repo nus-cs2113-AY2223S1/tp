@@ -1,20 +1,33 @@
 @startuml
-
 skinparam Style strictuml
-actor user
+autonumber
+
+participant Recipeditor
+participant Parser
+participant GuiWorkFlow
+participant EditCommand
+participant EditModeCommand
+participant RecipeList
+
 database Storage
 
-user -> Main : Edit Recipe
-Main -> Parser: parseCommand()
+Recipeditor -> Parser: parseEditCommand()
 create Parser
 
 alt GUI
 create GuiWorkFlow
-Parser -> GuiWorkFlow: <<create>>
+Parser -> GuiWorkFlow: GuiWorkFlow(recipe_file_path)
+ref over GuiWorkFlow
+GuiWorkFlow
+end
+GuiWorkFlow --> Parser
 create EditCommand
-GuiWorkFlow -> EditCommand: new EditCommand()
+Parser -> EditCommand: new EditCommand()
 EditCommand -> RecipeList: editRecipe()
-RecipeList -> Storage: saveRecipe()
+RecipeList --> EditCommand
+EditCommand -> Storage: saveRecipe()
+EditCommand --> Parser
+EditCommand --> Recipeditor
 destroy EditCommand
 else CLI
 Parser -> EditCommand: new EditCommand()
@@ -38,6 +51,8 @@ destroy EditModeCommand
 end
 EditCommand -> RecipeList: editRecipe()
 EditCommand -> Storage: saveRecipe()
+EditCommand --> Parser
+EditCommand --> Recipeditor
 destroy EditCommand
 end
 
