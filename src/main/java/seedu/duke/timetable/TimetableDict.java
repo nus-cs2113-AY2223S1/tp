@@ -195,7 +195,7 @@ public class TimetableDict {
      */
     public String allocateModules() {
         String resultString = "Sorry these modules have too many lessons for us to check, please manually"
-                                + "allocate them before trying again:\n";
+                                + " allocate them before trying again:\n";
 
         
         List<Module> listOfModules = Timetable.getListOfModules();
