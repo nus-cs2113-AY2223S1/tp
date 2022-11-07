@@ -10,8 +10,10 @@ public class ServiceList {
 
     public static void listService() {
         System.out.println("Here are the services in your service list:");
+        int counter = 0;
         for (Service service : services) {
-            System.out.print(service.getServiceId() + ". ");
+            counter += 1;
+            System.out.print(counter + ".\tID:" + service.getServiceId() + " \t");
             System.out.println(service.getServiceDescription());
         }
     }
