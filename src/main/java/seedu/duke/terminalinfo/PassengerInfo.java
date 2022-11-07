@@ -5,6 +5,9 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Date;
 
+/**
+ * Records the details of a single passenger in the passenger list.
+ */
 public class PassengerInfo {
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
     private static Date date = new Date();

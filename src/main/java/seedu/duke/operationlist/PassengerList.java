@@ -232,6 +232,13 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
+    /**
+     * Validates the format for passenger list before adding the passenger info to passenger list
+     * and displaying the information in the CLI.
+     *
+     * @param passengerDetail User input where the command is removed and only passenger details are present.
+     * @throws SkyControlException If format of the passenger details are not valid.
+     */
     @Override
     public void addOperation(String passengerDetail) throws SkyControlException {
         setIsAdd();
@@ -285,6 +292,12 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
+
+    /**
+     * Checks if there is another passenger occupying the same seat number on the same flight.
+     *
+     * @throws SkyControlException If there is a duplicate passenger in the passenger list
+     */
     private void checkPassengerDuplicate() throws SkyControlException {
         for (int i = 0; i < numOfPassengers; i++) {
             validatePassenger(i);
@@ -294,6 +307,13 @@ public class PassengerList extends OperationList {
         }
     }
 
+    /**
+     * Iterates through the passenger list and replaces the old flight number with the new flight number
+     * for passengers on that particular flight.
+     *
+     * @param flightNum Previous flight number
+     * @param newFlightNum Revised flight number as a result of modify command
+     */
     private void modifyPassengersFlightNum(String flightNum, String newFlightNum) {
         getNumberOfPassengers();
         for (int i = 0; i < numOfPassengers; i++) {
@@ -304,6 +324,13 @@ public class PassengerList extends OperationList {
         }
     }
 
+    /**
+     * Iterates through the passenger list and replaces the old gate number with the new gate number
+     * for passengers on that particular flight.
+     *
+     * @param flightNum Flight number of the flight being modified.
+     * @param newGateNum New gate number that will replace the old gate number.
+     */
     private void modifyPassengersGateNum(String flightNum, String newGateNum) {
         getNumberOfPassengers();
         for (int i = 0; i < numOfPassengers; i++) {
@@ -397,6 +424,12 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
+
+    /**
+     * Retrieves the attributes of the passenger with the given index in the passenger list.
+     *
+     * @param index Index of passenger in passenger list
+     */
     private void iteratePassengerDetail(int index) {
         getNumberOfPassengers();
         assert index < numOfPassengers;
@@ -481,6 +514,15 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
+    /**
+     * Given an input string, returns the substring based on the 2 given delimiters.
+     *
+     * @param inputString Initial string from which substring is retrieved.
+     * @param startDelimiter delimiter denoting start of substring.
+     * @param endDelimiter delimiter denoting end of substring.
+     * @return outputString which is the substring between delimiters.
+     * @throws SkyControlException If the delimiters are incorrect or not found in the inputString
+     */
     private static String getSubstringBetweenDelimiters(String inputString, String startDelimiter, String endDelimiter)
             throws SkyControlException {
         int indexOfStartDelimiter = inputString.indexOf(startDelimiter);
@@ -556,6 +598,13 @@ public class PassengerList extends OperationList {
     }
 
     //@@author shengiv
+
+    /**
+     * Checks whether the passenger being added is a duplicate passenger whose seat is already occupied on the flight.
+     *
+     * @param index Index of passenger in passenger list.
+     * @return isPassengerDuplicate which is a boolean denoting whether the passenger's seat is already occupied.
+     */
     private boolean isPassengerDuplicate(int index) {
         boolean isPassengerDuplicate;
         isPassengerDuplicate = isFlightNumberPresent(index)
