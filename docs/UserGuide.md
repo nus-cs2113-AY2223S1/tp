@@ -11,7 +11,8 @@
 #### 3.1 [Add Command](#add-command-add)
 
 3.11 [Add Command for Module Mapping](#1-add-command-for-module-mapping-add-uuniversity_name-mmodule_code)\
-3.12 [Add Command for Lessons](#2-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
+3.12 [Add Command for Comments](#2-add-command-for-comments-for-module-mapping-add-uuniversity_name-mmodule_code-notenote_with_spaces)
+3.13 [Add Command for Lessons](#3-add-command-for-lesson-add-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
 
 #### 3.2 [Create Command](#create-command-create-uuniversity_name)
 
@@ -20,6 +21,7 @@
 3.31 [Delete Command for Universities](#1-delete-command-for-universities-delete-uuniversity_name)\
 3.32 [Delete Command for Modules](#2-delete-command-for-modules-delete-uuniversity_name-mmodule_code)\
 3.33 [Delete Command for Lessons](#3-delete-command-for-lessons-delete-uuniversity_name-mmodule_code-dday_of_the_week-ststart_time-enend_time)
+3.34 [Delete Command for Comments](#4-delete-command-for-comments-delete-uuniversity_name-mmodule_code-note)
 
 #### 3.4 [Exit Command](#exit-command-exit)
 
@@ -108,7 +110,7 @@ NUS: CS4243 Comp Vision & Pattern Recogntn | Partner University: Western Univers
 ____________________________________________________________________________
 ```
 
-#### 2. Add comments for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
+#### 2. Add Command for comments for Module Mapping: `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{{NOTE_WITH_SPACES}}`
 
 Adds/Updates a (previous) note for the input Partner University module code in the input university list.
 
@@ -299,7 +301,7 @@ Example of usage:
 /favourite VIEW
 ```
 
-Expected Output:
+Possible Expected Output:
 
 ```
 ____________________________________________________________________________
@@ -543,7 +545,7 @@ Example Input:
 /view LISTS
 ```
 
-Expected Output:
+Possible Expected Output:
 
 ```
 Western University
@@ -565,7 +567,7 @@ Example Input:
 /view u/Western_University
 ```
 
-Expected Output:
+Possible Expected Output:
 
 ```
 Western University
@@ -597,7 +599,7 @@ Example Input:
 /view TIMETABLES
 ```
 
-Expected Output:
+Possible Expected Output:
 
 ```
 ____________________________________________________________________________
@@ -636,7 +638,7 @@ Example Input:
 /view DELETE_HISTORY
 ```
 
-Expected Output:
+Possible Expected Output:
 
 ```
 ____________________________________________________________________________
@@ -648,28 +650,29 @@ ____________________________________________________________________________
 
 ## Command Summary
 
-| Command   | Format                                                                                          | Purpose                                                                                                                                                                                                                                                     |
-| --------- |-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`                                                      | Adds input Partner University module code to input university list                                                                                                                                                                                          |
-| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`    | Adds a lesson for the input module code to the timetable for the input university with input start time and end time on the input day of the week                                                                                                           |
-| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{input}`                                         | Adds input comment to the corresponding module code & university                                                                                                                                                                                            |
-| create    | `/create u/{UNIVERSITY_NAME}`                                                                   | Creates an empty module list for the input university                                                                                                                                                                                                       |
-| delete    | `/delete u/{UNIVERSITY_NAME}`                                                                   | Deletes input university list                                                                                                                                                                                                                               |
-| delete    | `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}`                                                   | Deletes input module from the university list                                                                                                                                                                                                               |
-| delete    | `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}` | Deletes input lesson from the university's timetable                                                                                                                                                                                                        |
-| exit      | `/exit`                                                                                         | Terminates the program                                                                                                                                                                                                                                      |
-| favourite | `/favourite add/{UNIVERSITY_NAME}`                                                              | Adds a university list to the user's favourites                                                                                                                                                                                                             |
-| favourite | `/favourite del/{UNIVERSITY_NAME}`                                                              | Deletes a university list from the user's favourites                                                                                                                                                                                                        |
-| favourite | `/favourite VIEW`                                                                               | Displays the user's favourite university lists                                                                                                                                                                                                              |
-| help      | `/help`                                                                                         | Displays eligible user commands for the program                                                                                                                                                                                                             |
-| list      | `/list MODULES`                                                                                 | Lists all existing university modules mappings that are approved in the format: [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS     |
-| list      | `/list UNIVERSITIES`                                                                            | Lists all universities with module mappings available in database                                                                                                                                                                                           |
-| list      | `/list m/{MODULE_CODE}`                                                                         | List all module mappings for input NUS module code in database                                                                                                                                                                                              |
-| list      | `/list u/{UNIVERSITY_NAME}`                                                                     | List all module mappings offered by input university in database                                                                                                                                                                                            |
-| view      | `/view LISTS`                                                                                   | Displays all existing university lists that have been created by the user                                                                                                                                                                                   |
-| view      | `/view u/{UNIVERSITY_NAME}`                                                                     | Displays all the modules that have been added to the user's input university's list in the format: [Home University Module Code] [Home University Module Title] [Partner University Module Code] [Partner University Module Title] [Equivalent NUS Credits] |
-| view      | `/view TIMETABLES`                                                                              | Displays all timetables for list of universities created by user                                                                                                                                                                                            |
-| view      | `/view DELETE_HISTORY`                                                                          | Displays up to 5 modules that user recently deleted, ordered from most recently deleted to least recently deleted                                                                                                                                           |
+| Command   | Format                                                                                         | Purpose                                                                                                                                                                                                                                                     |
+|-----------|------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE}`                                                     | Adds input Partner University module code to input university list                                                                                                                                                                                          |
+| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`   | Adds a lesson for the input module code to the timetable for the input university with input start time and end time on the input day of the week                                                                                                           |
+| add       | `/add u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/{input}`                                        | Adds input comment to the corresponding module code & university                                                                                                                                                                                            |
+| create    | `/create u/{UNIVERSITY_NAME}`                                                                  | Creates an empty module list for the input university                                                                                                                                                                                                       |
+| delete    | `/delete u/{UNIVERSITY_NAME}`                                                                  | Deletes input university list                                                                                                                                                                                                                               |
+| delete    | `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE}`                                                  | Deletes input module from the university list                                                                                                                                                                                                               |
+| delete    | `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE} d/{DAY_OF_THE_WEEK} st/{START_TIME} en/{END_TIME}`| Deletes input lesson from the university's timetable                                                                                                                                                                                                        |
+| delete    | `/delete u/{UNIVERSITY_NAME} m/{MODULE_CODE} note/`                                            | Deletes comments for corresponding university & module code                                                                                                                                                                                                 |
+| exit      | `/exit`                                                                                        | Terminates the program                                                                                                                                                                                                                                      |
+| favourite | `/favourite add/{UNIVERSITY_NAME}`                                                             | Adds a university list to the user's favourites                                                                                                                                                                                                             |
+| favourite | `/favourite del/{UNIVERSITY_NAME}`                                                             | Deletes a university list from the user's favourites                                                                                                                                                                                                        |
+| favourite | `/favourite VIEW`                                                                              | Displays the user's favourite university lists                                                                                                                                                                                                              |
+| help      | `/help`                                                                                        | Displays eligible user commands for the program                                                                                                                                                                                                             |
+| list      | `/list MODULES`                                                                                | Lists all existing university modules mappings that are approved in the format: [Partner University Module Code] [Partner University Module Title] [Partner University Module Credits] [NUS Module Code] [NUS Module Title] [NUS Module Credits] in NUS     |
+| list      | `/list UNIVERSITIES`                                                                           | Lists all universities with module mappings available in database                                                                                                                                                                                           |
+| list      | `/list m/{MODULE_CODE}`                                                                        | List all module mappings for input NUS module code in database                                                                                                                                                                                              |
+| list      | `/list u/{UNIVERSITY_NAME}`                                                                    | List all module mappings offered by input university in database                                                                                                                                                                                            |
+| view      | `/view LISTS`                                                                                  | Displays all existing university lists that have been created by the user                                                                                                                                                                                   |
+| view      | `/view u/{UNIVERSITY_NAME}`                                                                    | Displays all the modules that have been added to the user's input university's list in the format: [Home University Module Code] [Home University Module Title] [Partner University Module Code] [Partner University Module Title] [Equivalent NUS Credits] |
+| view      | `/view TIMETABLES`                                                                             | Displays all timetables for list of universities created by user                                                                                                                                                                                            |
+| view      | `/view DELETE_HISTORY`                                                                         | Displays up to 5 modules that user recently deleted, ordered from most recently deleted to least recently deleted                                                                                                                                           |
 
 Note: Words in curly brackets are parameters that you should input as a user\
 Note: There should not be spaces in parameters, replace with underscore instead
