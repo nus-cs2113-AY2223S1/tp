@@ -126,13 +126,6 @@ public class Messages {
     //endregion
 
     //@@author jeyvia
-    //region Defines shared messages for console commands
-    public static final String CONSOLE_ERROR_COMMAND_INVALID_AMOUNT = ""
-            + "Amount entered is invalid. Please enter an amount greater than 0.";
-
-    //endregion
-
-    //@@author jeyvia
     //region Defines messages for console command Help
     public static final String CONSOLE_COMMAND_HELP_ADD_EXPENSE = "Add an expense: ";
     public static final String CONSOLE_COMMAND_HELP_VIEW_EXPENSE = "View your expenses: ";
@@ -442,6 +435,26 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_TARGET_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_CURRENT_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_TARGET_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_TARGET_DUPLICATE_TARGET = ""
+            + "The target already exists.";
 
     //endregion
 
@@ -533,6 +546,26 @@ public class Messages {
             + "The argument "
             + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_TARGET_INDEX_LONG.toUpperCase()
             + " must be an integer greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_TARGET_ARG_CURRENT_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_TARGET_DUPLICATE_TARGET = ""
+            + "The target already exists.";
 
     //endregion
 
@@ -565,6 +598,22 @@ public class Messages {
     public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_INVALID = ""
             + "The arguments entered are invalid. "
             + CONSOLE_COMMAND_ADD_INCOME_SYNTAX;
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_ADD_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_ADD_INCOME_DUPLICATE_INCOME = ""
+            + "The income already exists.";
 
     //endregion
 
@@ -652,7 +701,22 @@ public class Messages {
             + "The argument "
             + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_INCOME_INDEX_LONG.toUpperCase()
             + " must be an integer greater than or equals to 0.";
-
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_NAME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_NAME_LONG.toUpperCase()
+            + " must not be blank.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_DATE_TIME_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_DATE_TIME_LONG.toUpperCase()
+            + " must be a valid date in the format "
+            + Configurations.CONSOLE_INTERFACE_DATE_TIME_INPUT_FORMAT
+            + ".";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_ARG_AMOUNT_INVALID = ""
+            + "The argument "
+            + ConsoleParserConfigurations.COMMAND_EDIT_INCOME_ARG_AMOUNT_LONG.toUpperCase()
+            + " must be a decimal greater than or equals to 0.";
+    public static final String CONSOLE_ERROR_COMMAND_EDIT_INCOME_DUPLICATE_INCOME = ""
+            + "The income already exists.";
 
     //endregion
 

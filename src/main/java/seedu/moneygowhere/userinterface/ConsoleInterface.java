@@ -78,7 +78,7 @@ import java.util.Scanner;
 //@@author xzynos
 
 /**
- * Provide functions to interface with the user via standard input and standard output.
+ * Provides functions to interface with the user via standard input and standard output.
  */
 @SuppressWarnings({"unused", "FieldMayBeFinal"})
 public class ConsoleInterface {

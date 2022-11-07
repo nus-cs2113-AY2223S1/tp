@@ -110,7 +110,7 @@ ERROR: The arguments entered are invalid. SYNTAX: Add-Expense -n NAME -a AMOUNT 
 ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
 
 
-ERROR: The argument DATETIME must be a valid date in the format dd/MM/yyyy HHmm.
+ERROR: The argument DATE-TIME must be a valid date in the format dd/MM/yyyy HHmm.
 
 
 ---- EXPENSE INDEX 0 ----
@@ -357,7 +357,7 @@ ERROR: The argument EXPENSE-INDEX must be an integer greater than or equals to 0
 ERROR: The argument AMOUNT must be a decimal greater than or equals to 0.
 
 
-ERROR: The argument DATETIME must be a valid date in the format dd/MM/yyyy HHmm.
+ERROR: The argument DATE-TIME must be a valid date in the format dd/MM/yyyy HHmm.
 
 
 ERROR: The expense is not found.
