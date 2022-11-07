@@ -1,20 +1,47 @@
-@startuml
-'https://plantuml.com/sequence-diagram
+'@startuml
 
--> MarkCommand++:execute()
-MarkCommand -> MarkCommand++:markExercise(argumentList: String[])
+
+@startuml
+!include style.puml
+
+autoActivate on
+
+box Logic LOGIC_COLOR_T1
+participant ":MarkCommand" as MarkCommand LOGIC_COLOR
+participant "<<class>>\nParser" as parser LOGIC_COLOR
+end box
+
+box Records RECORD_COLOR_T1
+participant ":Calculator" as Calculator LOGIC_COLOR
+participant ":ExerciseList" as ExerciseList LOGIC_COLOR
+end box
+
+box Ui UI_COLOR_T1
+participant "ui:Ui" as Ui UI_COLOR
+end box
+
+[-> MarkCommand : execute()
+MarkCommand -> parser: getArgumentsCount(arguments: String)
+return slashesCount: int
+MarkCommand -> parser: getArgumentList(arguments: String)
+return argumentList: String[]
+
+MarkCommand -> MarkCommand : markExercise(argumentList: String[], slashesCount: int)
+
 alt done
-MarkCommand -> Calculator++:calculateExerciseCalories(biometrics: Biometrics, time: double, met: double)
+MarkCommand -> Calculator : calculateExerciseCalories(biometrics: Biometrics, time: double, met: double)
 return calories: int
-MarkCommand -> ExerciseList++:markDone(index: int, time: double, calories: int)
+MarkCommand -> ExerciseList: markDone(index: int, time: double, calories: int)
 return
-MarkCommand -> Ui++:output(markDoneMessage: String)
+MarkCommand -> Ui:output(markDoneMessage: String)
 return
 else undone
-MarkCommand -> ExerciseList++:markUndone(index: int)
+MarkCommand -> ExerciseList : markUndone(index: int)
 return
-MarkCommand -> Ui++:output(markUnDoneMessage: String)
+MarkCommand -> Ui : output(markUnDoneMessage: String)
 return
+
 end
 
+destroy MarkCommand
 @enduml

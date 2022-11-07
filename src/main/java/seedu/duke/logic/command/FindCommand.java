@@ -17,7 +17,13 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+<<<<<<< HEAD
 import seedu.duke.ui.*;
+=======
+import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.FoodTable;
+import seedu.duke.ui.Ui;
+>>>>>>> b729cb710e4030c148b61acbe614d270752cb4b1
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -31,9 +37,9 @@ public class FindCommand extends Command {
     public static final String STRENGTH_EXERCISE_FOUND = "Here are the matching strength exercises in your list:";
     public static final String CARDIO_EXERCISE_FOUND = "Here are the matching cardio exercises in your list:";
     public static final String CARDIO_EXERCISE_NOT_FOUND = "No matching cardio exercise found";
-    public static final String FOOD_NOT_FOUND = "No matching food found";
+    public static final String FOOD_NOT_FOUND_MSG = "No matching food found";
 
-    public static final String FOOD_FOUND = "Here are the matching food in your food list:";
+    public static final String FOOD_FOUND_MSG = "Here are the matching food in your food list:";
     public static final String INVALID_FIND_STRENGTH_COMMAND = "Invalid find strength command";
     public static final String INVALID_FIND_CARDIO_COMMAND = "Invalid find cardio command";
     public static final String INVALID_FIND_FOOD_COMMAND = "Invalid find food command";
@@ -65,6 +71,11 @@ public class FindCommand extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * Determines and invoke the correct type of find function by checking user's input.
+     *
+     * @throws IllegalValueException if the user input for find type does not exist.
+     */
     @Override
     public void execute() throws IllegalValueException {
         weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
@@ -125,17 +136,6 @@ public class FindCommand extends Command {
         }
     }
 
-    private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
-        if (argumentList.length != 2) {
-            throw new IllegalValueException("Invalid find date command");
-        }
-        try {
-            LocalDate.parse(argumentList[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        } catch (DateTimeException e) {
-            throw new IllegalValueException("Date is in the wrong format. Please follow the dd-MM-yyyy format");
-        }
-    }
-
 
     private void findCardio(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_CARDIO_COMMAND,
@@ -167,6 +167,14 @@ public class FindCommand extends Command {
         }
     }
 
+    /**
+     * Prints out matching food records from the food list in a table.
+     *
+     * @param argumentList a string array storing the user's input
+     * @param slashesCount the number of parameters that the user has parsed in based on '/'
+     *
+     * @throws IllegalValueException if finding food fails.
+     */
     private void findFood(String[] argumentList, int slashesCount) throws IllegalValueException {
         Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_FOOD_COMMAND,
                 arguments.charAt(arguments.length() - 1));
@@ -174,22 +182,34 @@ public class FindCommand extends Command {
         ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
 
         if (filteredFoodList.size() == EMPTY_LIST) {
-            ui.output(FOOD_NOT_FOUND);
+            ui.output(FOOD_NOT_FOUND_MSG);
         } else {
             FoodTable tableFrame = new FoodTable(
-                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND);
+                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND_MSG);
             ArrayList<String> table = tableFrame.getFoodTable();
             ui.printTable(table);
         }
     }
 
-
+    /**
+     * Checks if the find food command is parsed in correctly.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     * @throws IllegalValueException if the argumentList is not of correct length
+     */
     private static void handleInvalidFindFoodCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 2) {
-            throw new IllegalValueException("Invalid find food command");
+            throw new IllegalValueException(INVALID_FIND_FOOD_COMMAND);
         }
     }
 
+    /**
+     * Extract matching food records from the food list based on the description name.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     */
     private ArrayList<Food> getFilteredFoodList(String[] argumentList) {
         ArrayList<Food> filteredFoodList = (ArrayList<Food>) foodList.getFoodList()
                 .stream().filter(Food.class::isInstance)

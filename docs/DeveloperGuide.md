@@ -30,20 +30,20 @@ Here's a class diagram of the logic component.
 ![Logic.png](UmlDiagrams/Logic.png)
 
 How the logic component works:
-* After taking in the input from the user, it is parsed to the Parser class of the Logic component 
-to interpret the user's command.
-* This results in a Command object (more precisely, an object of one of its subclasses 
-e.g., AddCommand), which would then be executed by Duke.
-* The command can communicate with the Records when it is executed (e.g. adding a new food record or finding an
-exercise record). 
-* The command can also communicate with the Storage Component when it is executed (e.g. saving and loading records).
-* Additionally, the command also communicates with Ui Component to display the results of the execution back to the 
-user.
-* The command is validated by the Validator class to handle user's input accurately and prevent bad commands from being
-executed.
-* Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses, 
-e.g. Duke Exception) is thrown.
 
+* After taking in the input from the user, it is parsed to the Parser class of the Logic component
+  to interpret the user's command.
+* This results in a Command object (more precisely, an object of one of its subclasses
+  e.g., AddCommand), which would then be executed by Duke.
+* The command can communicate with the Records when it is executed (e.g. adding a new food record or finding an
+  exercise record).
+* The command can also communicate with the Storage Component when it is executed (e.g. saving and loading records).
+* Additionally, the command also communicates with Ui Component to display the results of the execution back to the
+  user.
+* The command is validated by the Validator class to handle user's input accurately and prevent bad commands from being
+  executed.
+* Finally, in case of command execution failures, Exception Object (more precisely, an object of one of its subclasses,
+  e.g. Duke Exception) is thrown.
 
 `Records:`
 
@@ -60,6 +60,7 @@ e.g. Duke Exception) is thrown.
 ### Record component
 
 ![](UmlDiagrams/Records.png)
+
 The record component,
 
 * calls by logic components
@@ -67,6 +68,8 @@ The record component,
 * stores the food list data, all `Food` objects
 * stores the biometrics data, in `Biometrics` object.
 * stores wight and fat list data, all `WeightAndFat` objects.
+* calculates calories for the calories object based on biometrics, exercise and food data to be store in the calories
+  list
 
 ### Storage component
 
@@ -80,42 +83,6 @@ data continues to load.
 Data is saved by calling the save methods for the different data types, which return Strings in the same format
 as the user input.
 
-### Class Diagrams
-
-**Biometrics component:**  
-The Biometrics component stores information about the user's biometrics and holds a reference
-to an ArrayList of the user's weight and fat records under WeightAndFatList class.  
-WeightAndFatList is separated from Biometrics for better abstraction and cohesion.  
-Weight and fat records are associated with a date, and the WeightAndFatList class
-stores records in descending order of date for viewing purposes.
-![](UmlDiagrams/Biometrics.png)
-
-**Food component:**
-
-Food and FoodList are two classes implemented for storing user's food consumption.
-The interaction between the Food, FoodList class and Command classes(Addcommand, RemoveCommand,
-FindCommand and ViewCommand). Only food related details(i.e. methods and attributes) are added in the
-diagram below for readability.  
-![Food.png](UmlDiagrams/Food.png)
-
-\
-[Proposed] Food records will be associated with a date, and the FoodList class
-stores records in descending order of date for viewing purposes.
-
-**CardioExercise/StrengthExercise and ExerciseList components:**
-
-CardioExercise/StrengthExercise and ExerciseList are classes to store user's cardio/strength training exercises.
-Both CardioExercise and StrengthExercise inherit from Exercise and work similarly.
-CardioExercise/StrengthExcises are added, removed, found , mark done, mark undone and viewed from the ExerciseList with
-the use
-of AddCommand, RemoveCommand, FindCommand, MarkCommand and ViewCommand.\
-ExerciseList stores Exercise objects in two Arraylist based on the status of the exercise to save the time needed to
-filter exercise based on its status when user want to view the exercises based on its status.
-
-![](UmlDiagrams/StrengthExercise.png)
-
-[Proposed] StrengthExercise will be associated with a date, and the exercises will be displayed in descending order of
-date for viewing purposes.
 
 
 **UI component**
@@ -136,33 +103,98 @@ The UI component,
 
 ## Implementation
 
-### Sequence diagrams
+### Add Feature
 
-Adding a new record  
+The add feature in TracknFit is split to 4 main components, food, strength, cardio and weight. After the object of the
+respective class is created, it will be added to the respective list based on the add command input from the user.
+
+We will use the sequence diagrams below to show how the add operation works.
+
+#### Adding a new record
+
 ![](UmlDiagrams/Add.png)
 
-Adding weight and fat record  
+The Duke will call execute() for the AddCommand object after the Parser class parsed the input is an add command. The
+number of slashes in the input is determined by calling Parser.getArgumentsCount(argumentList) for input validation. The
+execute() will then proceed to call Parser.getArgumentList to split the inputs into parameters. Parser.gtClassType()
+will be called to obtain the type of addCommand. Specific type of add command will then
+be called.
+
+#### Adding weight and fat record
+
 ![](UmlDiagrams/AddWeightAndFat.png)
 
-Adding food record  
-![AddFood.png](UmlDiagrams/AddFood.png)
+When the add command type is WeightAndFat, AddWeightAndFat method will be called. Date will be initialised to current
+date.If date is provided in the input, parseDate method in Parser will be called
+and update the date parameter.
+*WeightAndFat object will then be created and added to the WeightAndFatList If is display to the user,weightAndFat will
+be converted to string, print to the user and then follow by success
+message.
 
-Adding strength exercise  
+#### Adding food record
+
+![](UmlDiagrams/AddFood.png)
+
+AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
+object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
+user, followed by success message.
+
+#### Adding strength exercise
+
+*
+
 ![](UmlDiagrams/AddStrengthExercise.png)
 
-Marking exercise  
+### Mark Feature
+
+Marking exercise
+The sequence diagrams below represent the interactions when a user marks an exercise record as done or undone.
+
 ![](UmlDiagrams/MarkExercise.png)
+
+The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a mark command.
+First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
+number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
+parameters. Then, markExercise(argumentList, slashesCount) will be called to obtain the type of markCommand for
+that correct type of mark command to be executed.
+
+If the mark command type is of "done", the calories burnt via the exercise would be determined by executing
+calculateExerciseCalories(biometrics, time, met). Then, the exercise at the given index would be mark done and
+a corresponding message regarding the information of the exercise that is marked "done" will be printed via the Ui
+Component.
+
+If the mark command type is of "undone", then the exercise would be mark undone at the given index and a corresponding
+message regarding the information of the exercise that is marked "undone" will be printed via the Ui Component.
+
+### Find Feature
 
 Finding a record
 The sequence diagrams below represent the interactions when a user find a record.
 ![Find.png](UmlDiagrams/Find.png)
 
+<<<<<<< HEAD
 
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
 removeCommand to be printed on the ui.
 ![](UmlDiagrams/RemoveWeight.png)  
 The interactions for removing other types of records are similar.
+=======
+The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
+First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
+number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
+parameters. Finally, Parser.getClassType() will be called to obtain the type of findCommand for that correct type of
+find command to be executed.
+
+![](UmlDiagrams/FindFood.png)  
+In the case that user finds a food record, the findFood method in findCommand is executed, which will then execute
+getFilteredFoodList(argumentList) to get arrayList of food records which contain the keyword that the user has parsed
+in. If the filtered list is empty, a "Food not found" message is printed via the Ui Component. However, if the filtered
+list is not empty, a table is created and filled with the data from the list. The table is then printed via the Ui
+Component.
+
+The interactions for finding other types of records are similar.
+>>>>>>> b729cb710e4030c148b61acbe614d270752cb4b1
 
 
 
@@ -201,7 +233,7 @@ In the case that user removes a weight and fat record, the removeWeight method i
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
 removeCommand to be printed on the ui.
 ![](UmlDiagrams/RemoveWeight.png)  
-The interactions for removing other types of records are similar.  
+The interactions for removing other types of records are similar.
 
 ### Design considerations
 

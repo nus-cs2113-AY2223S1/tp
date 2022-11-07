@@ -21,6 +21,8 @@ import java.util.Comparator;
 
 public class DateCommand extends Command {
 
+    public static final String DATE_FORMAT = "dd-MM-yyyy";
+
     public static void sortDateForExercise(ArrayList<Exercise> list) {
         Collections.sort(list, new Comparator<Exercise>() {
             /**
@@ -30,9 +32,9 @@ public class DateCommand extends Command {
              */
             public int compare(Exercise e1, Exercise e2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(e1.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(e2.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 return o2Date.compareTo(o1Date);
             }
         });
@@ -47,35 +49,47 @@ public class DateCommand extends Command {
              */
             public int compare(Calories c1, Calories c2) {
                 LocalDate o1Date = LocalDate.parse(Parser.getDateNoDateTracker(c1.getDate()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 LocalDate o2Date = LocalDate.parse(Parser.getDateNoDateTracker(c2.getDate()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 return o2Date.compareTo(o1Date);
             }
         });
     }
 
+    /**
+     * Sorts the food array list in descending order of date.
+     *
+     * @param foodArrayList the arraylist that stores all the food records.
+     *
+     */
     public static void sortDateForFood(ArrayList<Food> foodArrayList) {
         Collections.sort(foodArrayList, new Comparator<Food>() {
             @Override
             public int compare(Food f1, Food f2) {
                 LocalDate f1Date = LocalDate.parse(Parser.getDateNoDateTracker(f1.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 LocalDate f2Date = LocalDate.parse(Parser.getDateNoDateTracker(f2.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 return f2Date.compareTo(f1Date);
             }
         });
     }
 
+    /**
+     * Sorts the record array list in descending order of date.
+     *
+     * @param recordArrayList the arraylist that stores all the records(Weight and Fat, Food, and Exercises).
+     *
+     */
     public static void sortDateForAll(ArrayList<Record> recordArrayList) {
         Collections.sort(recordArrayList, new Comparator<Record>() {
             @Override
             public int compare(Record r1, Record r2) {
                 LocalDate r1Date = LocalDate.parse(Parser.getDateNoDateTracker(r1.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 LocalDate r2Date = LocalDate.parse(Parser.getDateNoDateTracker(r2.getDateString()),
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        DateTimeFormatter.ofPattern(DATE_FORMAT));
                 return r2Date.compareTo(r1Date);
             }
         });

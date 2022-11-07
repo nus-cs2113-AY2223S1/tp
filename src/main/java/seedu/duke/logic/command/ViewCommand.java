@@ -52,9 +52,16 @@ public class ViewCommand extends Command {
     public static final int EMPTY_LIST = 0;
     public static final String TO_BE_DONE_MESSAGE = " to be done: ";
     public static final String EXERCISE_COMPLETED_MESSAGE = " completed: ";
+<<<<<<< HEAD
     public static final String CALORIES_NOT_FOUND = "No matching calories entry found";
     public static final String CALORIES_FOUND = "Here are the matching calorie entries in your list:";
     private static final String BIOMETRICS_NOT_SET = "Your biometrics are not set yet!";
+=======
+    public static final String INVALID_VIEW_ALL_COMMAND = "Invalid view all command";
+    public static final String INVALID_VIEW_FOOD_COMMAND = "Invalid view food command";
+    public static final String FOOD_TABLE_CAPTION = "Food Records";
+    public static final String ALL_RECORDS_TABLE_CAPTION = "All Records";
+>>>>>>> b729cb710e4030c148b61acbe614d270752cb4b1
     private Ui ui;
     private Biometrics biometrics;
     private String arguments;
@@ -72,6 +79,11 @@ public class ViewCommand extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * Determines and invoke the correct type of view function by checking user's input.
+     *
+     * @throws IllegalValueException if the user input for view type does not exist.
+     */
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
@@ -225,11 +237,19 @@ public class ViewCommand extends Command {
         throw new IllegalValueException(INVALID_VIEW_COMMAND_MESSAGE);
     }
 
+
+    /**
+     * Prints out all food records from the record list in a table.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     * @throws IllegalValueException if viewing all records fails.
+     */
     private void viewAll(String[] argumentList) throws IllegalValueException {
         handleInvalidViewAllCommand(argumentList);
         AllRecordsTable tableFrame = new AllRecordsTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-                "All Records");
+            ALL_RECORDS_TABLE_CAPTION);
         ArrayList<String> table = tableFrame.getAllRecordsTable();
         ui.printTable(table);
     }
@@ -244,24 +264,45 @@ public class ViewCommand extends Command {
         ui.outputWeightList(weightAndFatList);
     }
 
+    /**
+     * Prints out all food records from the food list in a table.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     * @throws IllegalValueException if viewing food records fails.
+     */
     private void viewFood(String[] argumentList) throws IllegalValueException {
         handleInvalidViewFoodCommand(argumentList);
         FoodTable tableFrame = new FoodTable(
                 foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
-                "Food Records");
+            FOOD_TABLE_CAPTION);
         ArrayList<String> table = tableFrame.getFoodTable();
         ui.printTable(table);
     }
 
+    /**
+     * Checks if the view food command is parsed in correctly.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     * @throws IllegalValueException if the argumentList is not of correct length
+     */
     private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 1) {
-            throw new IllegalValueException("Invalid view food command");
+            throw new IllegalValueException(INVALID_VIEW_FOOD_COMMAND);
         }
     }
 
+    /**
+     * Checks if the view all command is parsed in correctly.
+     *
+     * @param argumentList a string array storing the user's input
+     *
+     * @throws IllegalValueException if the argumentList is not of correct length
+     */
     private static void handleInvalidViewAllCommand(String[] argumentList) throws IllegalValueException {
         if (argumentList.length != 1) {
-            throw new IllegalValueException("Invalid view all command");
+            throw new IllegalValueException(INVALID_VIEW_ALL_COMMAND);
         }
     }
 
