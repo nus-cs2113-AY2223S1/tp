@@ -1,5 +1,5 @@
-# Developer Guide
-
+# RecipEditor
+## Developer Guide
 The aim of this guide is to help readers understand how the system and components of RecipEditor
 is designed, implemented and tested. This developer guide also serves to help
 developers to understand the architecture of RecipEditor and some design considerations.
@@ -37,11 +37,11 @@ Click to view the latest release of [RecipEditor]((https://github.com/AY2223S1-C
 
 ## Acknowledgements
 
-- We do not use any external libraries
 - The design and structure of our User Guide and Developer Guide is referenced from AddressBook-Level3 (AB3)
     - [AB3 UG](https://se-education.org/addressbook-level3/UserGuide.html)
     - [AB3 DG](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
-
+### External Library
+- [Apache Commons Lang 3.0](https://mvnrepository.com/artifact/org.apache.commons/commons-lang3/3.0): for Utilities to handle String
 ## Design
 
 ### Architecture
@@ -83,7 +83,7 @@ the `Ui` and the `Parser`
 The UI component is responsible for all user interfaces of the application.
 
 <p align="center" width="100%">
-  <img width="80%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
+  <img width="60%" src="images/ClassDiagrams/UiClassDiagram.png" alt="Ui Class Diagram"/>
 </p>
 
 **Class:** `Ui.java`,
@@ -142,7 +142,7 @@ The recipe module encapsulates the array, recipe and ingredient objects.
 ### Storage Component
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/StorageClassDiagram.png" alt="Storage Class Diagram"/>
 </p>
 The storage component allows data to be read from and saved to a storage file.
 
@@ -193,7 +193,7 @@ The storage component allows data to be read from and saved to a storage file.
 ### Command Component
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/Command.png" alt="Command Class Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/Command.png" alt="Command Class Diagram"/>
 </p>
 
 - The command component has classes that extend `Command`, identified from user input for the software to carry out
@@ -486,7 +486,7 @@ This is to prevent manual tampering of the data that might affect the data in th
       `RecipeList` class
 
 <p align="center" width="100%">
-  <img width="100%" src="images/ClassDiagrams/EditCommand.png" alt="Edit Component Diagram"/>
+  <img width="80%" src="images/ClassDiagrams/EditCommand.png" alt="Edit Component Diagram"/>
 </p>
 
 - The edit component consists of three parts:
@@ -527,7 +527,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### Find Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Find.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/Find.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands), `FindCommand` is given the `title` or `ingredient` to
@@ -544,7 +544,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### View Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/View.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/View.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands),`ViewCommad` is given the `index` or `title` of `recipe`
@@ -562,7 +562,7 @@ This is to prevent manual tampering of the data that might affect the data in th
 ### Delete Recipe
 
 <p align="center" width="100%">
-  <img width="100%" src="images/SequenceDiagram/Delete.png" alt="Find Sequence Diagram"/>
+  <img width="80%" src="images/SequenceDiagram/Delete.png" alt="Find Sequence Diagram"/>
 </p>
 
 - After parsing in [Parsing of Commands](#parsing-of-commands), `DeleteCommad` is given the `index` or `title`
@@ -633,10 +633,12 @@ quickly.
 ### Setup
 
 1. Follow the instruction in the User Guide to setup the program
-2. For sample recipes, download and unzip
-2. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
-3. This gives you 3 sample recipes so you don't have to manually add recipes all the time
-4. Run the program, it should load and recognize the 3 recipes
+2. For sample recipes, download and unzip `ManualTestData.rar`. There are
+   - `Recipes` folder
+   - `AllRecipes.txt` file
+3. Copy the folder and file in 2. to `RecipeData` folder, overwriting existing files
+4. This gives you 3 sample recipes so you don't have to manually add recipes all the time
+5. Run the program, it should load and recognize the 3 recipes
 
 ### Parsing  from Text to Recipe using Add or Edit GUI
 
@@ -718,8 +720,9 @@ quickly.
 
 - **Delete recipe files then `/edit`**
     - Deleting the data files can only be done if the files are newly created during the same run of the program.
-    - If the file is loaded by the program, you cannot delete because JDK is using them.<p align="center" width="100%">
-      <img width="80%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
+    - If the file is loaded by the program, you cannot delete because JDK is using them.
+        <p align="center" width="100%">
+      <img width="50%" src="images/DeveloperGuide/JDKUsing.png" alt="Recipe Module Diagram"/></p>
     - Expected outcome:
       ```
       Please edit in the GUI editor!
