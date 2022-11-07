@@ -306,7 +306,7 @@ If it is, it will not continue to make any changes to the flight logbook.
 4. The `FlightInfo` is then instantiated using the details retrieved from the previous step. And the flight Object can then be added to the flight array list.
 5. Finally,`showFlightAddedMessage()` in the UI class prints a message to inform the user that they have added the flight.
 
----
+---  
 
 ### Delete a flight feature
 
