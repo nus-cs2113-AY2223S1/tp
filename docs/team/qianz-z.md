@@ -113,8 +113,9 @@ recipe. This helps to make the editing, deletion and finding of recipes easier.
   - Added description of command, format, code example and important notes to all commands. ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
   - Update Data Management section and Command Summary ([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132))
   - Added shortcuts back to content page after every major section for easier navigation. (([#132](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/132)))
+  - Updated the User Guide as the code updates
 - Developer Guide:
-  - Created the architecture diagram ()
+  - Created the architecture diagram ([#173](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/173))
   - Added documentation and class diagram for the [_`Storage` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#storage-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Added documentation and class diagram for the [_`Ui` component_](https://github.com/AY2223S1-CS2113-T18-2/tp/blob/master/docs/DeveloperGuide.md#ui-component) ([#56](https://github.com/AY2223S1-CS2113-T18-2/tp/pull/56))
   - Standardised styling for PlantUML diagrams
