@@ -185,8 +185,9 @@ parser() method will not be reflected in order to improve readability.
 3. [List passengers feature](#list-passengers-feature)
 4. [Add a flight feature](#add-a-flight-feature)
 5. [Delete a flight feature](#delete-a-flight-feature)
-6. [Delay a flight feature](#delay-a-flight-feature)
-7. [List flights feature](#list-flights-feature)
+6. [Modify flight features](#modify-flight-features)
+7. [Delay a flight feature](#delay-a-flight-feature)
+8. [List flights feature](#list-flights-feature)
 
 ---
 
@@ -196,25 +197,25 @@ The command Add a passenger adds passenger details of a particular passenger to 
 
 **Overview of relevant classes**
 
-**_NOTE:_** Minimal representation of structure of `AddPassengerCommand`
+> ⚠️**NOTE:** Minimal representation of structure of `AddPassengerCommand`
 
 ![class diagram](ug-diagrams/images/passengerAddCmdClassDiagram.jpg)
 
 When the main class `SkyControl` receives a user input, it parses the input with the
-help of the `Parser` class which then forwards the input to the `Passenger Parser` class accordingly.
-The `Passenger Parser` retrieves the command `AddPassengerCommand` and returns it to `SkyControl` where
+help of the `Parser` class which then forwards the input to the `PassengerParser` class accordingly.
+The `PassengerParser` retrieves the command `AddPassengerCommand` and returns it to `SkyControl` where
 further methods will be triggered as explained below.
 
 **Sequence Diagram**
 
-**_NOTE:_** Exceptions are omitted for readability.
+> ⚠️**NOTE:** Exceptions are omitted for readability.
 
 ![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
 
-1. Once the `AddPassengerCommand` is instantiated, the `execute` method is called from the `SkyControl`
+1. SkyControl first retrieves the parameters `departureTime` and `gateNumber` from the respective flight detail
+   in FlightList and appends the details to the lineInput.
+2. Once the `AddPassengerCommand` is instantiated, the `execute` method is called from the `SkyControl`
    class with passenger list and user input as method parameters.
-2. Within `AddPassengerCommand` the method `getPassengerDetail(String lineInput)` is called to extract the String
-   consisting of passenger details from the line input.
 3. `AddPassengerCommand` then calls the method `addOperation(String passengerDetail)` within the `PassengerList` class.
 4. `getPassengerDetails(String passengerDetail)` method then extracts each of the passenger detail into an attribute in
    the `PassengerList` class
@@ -260,11 +261,11 @@ Part 2:
 
 **Sequence diagram**
 
-**_NOTE:_** Exceptions are omitted for readability.
+> ⚠️**NOTE:** Exceptions are omitted for readability.
 
 ![sequence diagram](ug-diagrams/images/passengerDeleteCmdSeqDiagram.jpg)
 
-When `paser` verifies that the command is an entity `passenger` and `delete` operation,
+When `Parser` verifies that the command is an entity `passenger` and `delete` operation,
 `DeletePassengerCommend` is instantiated.
 
 1. `execute(passenger, lineInput)` will run within `DeletePassengerCommend`
@@ -309,7 +310,7 @@ Part 2:
 
 ![sequence diagram](ug-diagrams/images/passengerListcmdSeqDiagram.jpg)
 
-When `paser` verifies that the command is an entity `passenger` and `list` operation,
+When `Parser` verifies that the command is an entity `passenger` and `list` operation,
 `ListPassengerCommend` is instantiated.
 
 1. `execute(passenger, lineInput)` will run within `ListPassengerCommend`
@@ -327,7 +328,7 @@ The Add a flight function adds a flight with its corresponding details to the fl
 
 **Sequence Diagram**
 
-**_NOTE:_** Exceptions are omitted for readability.
+> ⚠️**NOTE:** Exceptions are omitted for readability.
 
 ![sequence diagram](ug-diagrams/images/flightAddCmdSeqDiagram.jpg)
 
@@ -379,9 +380,39 @@ the information of the passengers which contain the flight number that has been 
 
 ---
 
+### Modify flight features
+There are 2 modify features:
+* `ModifyFlightNumCommand` - Allows the Airport Operations Manager(AOM) to modify the flight number of an existing flight
+in the flight list. The changes will be reflected in the passenger list as well for passengers on that flight.
+* `ModifyGateNumCommand` - Allows the AOM to modify the gate number of a particular flight and changes will be
+reflected for the passengers, similar to `ModifyFlightNumCommand`.
+> ⚠️**NOTE:** Since the two features have the same code structure, we will only be going through the implementation
+of `ModifyFlightNumCommand` to avoid repetition.
+
+**Sequence Diagram**
+
+![sequence diagram](ug-diagrams/images/modifyFlightCmdSeqDiagram.jpg)
+
+1. The `ModifyFlightNumCommand` class is instantiated in SkyControl by the `Parser` classes.
+2. `execute(passengers, lineInput)` is then called from SkyControl. Then, `ModifyFlightNumCommand` extracts the 
+existing flight number and new flight number parameters from the lineInput before
+calling the `modifyFlightNum(flightNum, newFlightNum)` method in FlightList.
+3. In `FlightList`, if the input parameters are incorrect, a relevant exception is raised and the command terminates.
+4. If the input parameters are correct, the `findFlightInfo(flightNum)` and `getFlightAttributes(flight)` methods are
+called. The former retrieves the FlightInfo object while the latter 
+extracts the flight attributes of the FlightInfo object.
+5. After the FlightInfo object is retrieved, the new flight number is set 
+using the `setFlightNum(newFlightNum)` method.
+6. The changes are reflected in the CLI using the `Ui` class.
+7. Finally, `execute(passengers, lineInput)` method is called from SkyControl to reflect the changes in flight number
+for the respective passengers as well. 
+
+---
+
+
 ### Delay a flight feature
 In the event of a flight not being able to depart on time and needs to be delayed,
-the `flight delay` command allows the AOM to delay the departure time of an existing flight.
+the `flight delay` command allows AOM to delay the departure time of an existing flight.
 
 **Sequence Diagram**
 

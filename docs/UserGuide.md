@@ -87,7 +87,7 @@ Thank you, come again! :)
 + Words in `UPPER_CASE` represent a single or multiple parameters for the command.
   i.e. `flight add FLIGHT_DETAIL`
 
-**NOTE:** The exact format to be followed for each parameter can be found in the
+> ⚠️**NOTE:** The exact format to be followed for each parameter can be found in the
 [FAQ](#frequently-asked-questions) section.
 
 ---
@@ -253,7 +253,7 @@ FLIGHT SQ832 NOT FOUND.
 this delay function allows the user to indicate a new departure time for the flight while making sure
 the gate number is still available at the new departure time.
 
-**NOTE**: New Departure time should be later than the existing departure time.
+> ⚠️**NOTE**: New Departure time should be later than the existing departure time.
 
 **Usage**: `delay FLIGHT_NUMBER dt/NEW_DEPARTURE_TIME`
 
@@ -278,7 +278,7 @@ Departure time of flight SQ832 is delayed from 1600 to 1700.
 a specified flight in the flight list. The changes in the flight list are also
 propagated to the passenger list as well.
 
-**NOTE:** The flight detail cannot be modified if the new flight number/gate number already exists in the flight list.
+> ⚠️**NOTE:** The flight detail cannot be modified if the new flight number/gate number already exists in the flight list.
 
 **Usage** :
 
