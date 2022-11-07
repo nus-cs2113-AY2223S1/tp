@@ -35,9 +35,6 @@ public class Parser {
         + "command(s): \n";
     private static final String TOO_MANY_DASHED_ARGS_HEADER = "This command only takes exactly %s dashed argument(s)."
             + " Valid command(s):\n";
-    private static final String INVALID_DASHED_ARGUMENT = "The dashed argument `-%s` is not recognised. Valid "
-            + "format:\n";
-
     private CarparkList carparkList;
     private Api api;
     private Favourite favourite;
@@ -45,10 +42,11 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param input       full user input string
-     * @param api         api of the carpark data
-     * @param carparkList carpark List
-     * @return the command based on user input
+     * @param input full user input string.
+     * @param api api of the carpark data.
+     * @param carparkList CarparkList containing information about carparks.
+     * @param favourite Favourite object.
+     * @return Command based on user input.
      */
     public Command parseCommand(String input, Api api, CarparkList carparkList, Favourite favourite) {
         this.api = api;
@@ -114,8 +112,8 @@ public class Parser {
     /**
      * To check that user does not input in any parameters for ExitCommand.
      *
-     * @param arguments arguments that may be given by the user after the command word
-     * @return Command to be carried out
+     * @param arguments arguments that may be given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareExit(String arguments) {
         try {
@@ -131,8 +129,8 @@ public class Parser {
     /**
      * To prepare the arguments to be taken in for Auth Command.
      *
-     * @param arguments arguments given by the user after the command word
-     * @return command to be carried out
+     * @param arguments arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareAuth(String arguments) {
         if (arguments.isEmpty()) {
@@ -149,8 +147,8 @@ public class Parser {
     /**
      * To prepare the arguments to be taken in for Favourite Command.
      *
-     * @param arguments arguments given by the user after the command word
-     * @return command to be carried out
+     * @param arguments arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareFavourite(String arguments) {
         if (arguments.isEmpty()) {
@@ -165,10 +163,10 @@ public class Parser {
     }
 
     /**
-     * To prepare the arguments to be taken in for unfavourite Command.
+     * To prepare the arguments to be taken in for Unfavourite Command.
      *
-     * @param arguments arguments given by the user after the command word
-     * @return command to be carried out
+     * @param arguments arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareUnfavourite(String arguments) {
         if (arguments.isEmpty()) {
@@ -181,8 +179,8 @@ public class Parser {
     /**
      * To prepare the arguments to be taken in for Find Command.
      *
-     * @param arguments arguments given by the user after the command word
-     * @return command to be carried out
+     * @param arguments arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareFind(String arguments) {
         if (arguments.isEmpty()) {
@@ -199,8 +197,8 @@ public class Parser {
     /**
      * To check that user does not input in any parameters for ListCommand.
      *
-     * @param arguments arguments that may be given by the user after the command word
-     * @return Command to be carried out
+     * @param arguments arguments that may be given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareList(String arguments) {
         try {
@@ -213,6 +211,13 @@ public class Parser {
         }
     }
 
+    /**
+     * To prepare the arguments to be taken in for Filter Command.
+     *
+     * @param argsList list of possible arguments.
+     * @param arguments arguments given by the user after the command word.
+     * @return Command to be carried out.
+     */
     private Command prepareFilter(Argument argsList, String arguments) {
         String dashedCommand;
         Sentence actualArgument = argsList.getArguments();
@@ -256,20 +261,20 @@ public class Parser {
     }
 
     /**
-     * To prepare the arguments to be taken in for Search Command.
+     * To prepare the arguments to be taken in for FilterAddress Command.
      *
-     * @param searchQuery arguments given by the user after the command word
-     * @return command to be carried out
+     * @param searchQuery arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareFilterAddress(Sentence searchQuery) {
         return new FilterAddressCommand(carparkList, searchQuery);
     }
 
     /**
-     * To prepare the arguments to be taken in for Search Command.
+     * To prepare the arguments to be taken in for FilterCarparkId Command.
      *
-     * @param searchQuery arguments given by the user after the command word
-     * @return command to be carried out
+     * @param searchQuery arguments given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareFilterCarparkId(Sentence searchQuery) {
         return new FilterCarparkIdCommand(carparkList, searchQuery);
@@ -278,8 +283,8 @@ public class Parser {
     /**
      * To check that user does not input in any parameters for UpdateCommand.
      *
-     * @param arguments arguments that may be given by the user after the command word
-     * @return Command to be carried out
+     * @param arguments arguments that may be given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareUpdate(String arguments) {
         try {
@@ -295,8 +300,8 @@ public class Parser {
     /**
      * To check that user does not input in any parameters for HelpCommand.
      *
-     * @param arguments arguments that may be given by the user after the command word
-     * @return Command to be carried out
+     * @param arguments arguments that may be given by the user after the command word.
+     * @return Command to be carried out.
      */
     private Command prepareHelp(String arguments) {
         try {
@@ -312,15 +317,11 @@ public class Parser {
     /**
      * Returns number of arguments separated by a space.
      *
-     * @param input input string to check
-     * @return return the number of space-separated words
+     * @param input input string to check.
+     * @return Number of space-separated words.
      */
     public int numberOfArguments(String input) {
         String[] words = input.trim().split("\\s+");
         return words.length;
-    }
-
-    public static String[] splitCommandArgument(String input) {
-        return input.split("\\s+", 2);
     }
 }

@@ -4,13 +4,12 @@ package seedu.exception;
  * Exception for when no file was found.
  */
 public class InvalidFormatException extends ParkingException {
-
     private final String message;
 
     /**
      * Constructor for the exception.
      *
-     * @param message Message to be printed.
+     * @param message message to be printed.
      */
     public InvalidFormatException(String message) {
         super();
@@ -18,7 +17,9 @@ public class InvalidFormatException extends ParkingException {
     }
 
     /**
-     * Message to be returned.
+     * Returns a message.
+     *
+     * @return Message.
      */
     @Override
     public String getMessage() {

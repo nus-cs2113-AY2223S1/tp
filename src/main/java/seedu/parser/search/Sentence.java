@@ -42,12 +42,17 @@ public class Sentence {
     }
 
     /**
-     * Constructor for an empty {@link Sentence} object. but for a list of words.
+     * Constructor for an empty {@link Sentence} object, but for a list of words.
      */
     public Sentence() {
         textString = "";
     }
 
+    /**
+     * Returns a String of words in Sentence.
+     *
+     * @return String of words in Sentence.
+     */
     @Override
     public String toString() {
         StringBuilder outputString = new StringBuilder();
@@ -59,20 +64,29 @@ public class Sentence {
         return outputString.toString().trim();
     }
 
+    /**
+     * Getter method to retrieve words.
+     *
+     * @return Words.
+     */
     public List<Word> getWords() {
         return words;
     }
 
+    /**
+     * Returns number of words.
+     *
+     * @return Number of words.
+     */
     public int getWordCount() {
         return words.size();
     }
 
-
     /**
      * Keeps track of which delimiter is at which point for reconstruction of string later.
      *
-     * @param input input string
-     * @return split array of input
+     * @param input input string.
+     * @return Split array of input.
      */
     private String[] splitAndExtractDelimiters(String input) {
         String[] wordStrings = input.split("[ /,-]");

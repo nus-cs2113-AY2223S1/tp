@@ -1,7 +1,7 @@
 package seedu.exception;
 
 /**
- * Represents the exception thrown when the command input is invalid.
+ * Exception for when the command input is invalid.
  */
 public class InvalidCommandException extends ParkingException {
     /**
@@ -14,7 +14,7 @@ public class InvalidCommandException extends ParkingException {
     /**
      * Returns a message saying there is no such command.
      *
-     * @return Formatted string.
+     * @return Message.
      */
     @Override
     public String getMessage() {

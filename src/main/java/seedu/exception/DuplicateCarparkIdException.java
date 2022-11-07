@@ -1,13 +1,15 @@
 package seedu.exception;
 
 /**
- * Exception for when no carpark is found.
+ * Exception for when a carpark ID is already in a list.
  */
 public class DuplicateCarparkIdException extends ParkingException {
     private final String filePath;
 
     /**
      * Constructor for the exception.
+     *
+     * @param filePath path to file.
      */
     public DuplicateCarparkIdException(String filePath) {
         super();

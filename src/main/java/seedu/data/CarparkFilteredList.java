@@ -21,7 +21,7 @@ public class CarparkFilteredList extends CarparkList {
     /**
      * Gets a formatted string for use with the {@link FilterAddressCommand Filter} command.
      *
-     * @return Formatted string.
+     * @return Formatted String.
      */
     public String getSearchListString() {
         StringBuilder bufferString = new StringBuilder();

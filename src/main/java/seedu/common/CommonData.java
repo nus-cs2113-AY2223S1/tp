@@ -34,7 +34,6 @@ public abstract class CommonData {
             + "\t: Display information about the specific queried carpark.";
     public static final String FILTER_FORMAT = "`filter QUERY` or `fil QUERY`"
             + "\t: Filter carparks based on Carpark information.";
-
     public static final String FILTER_ADDRESS_FORMAT = "`filter -address QUERY` or `fil -add QUERY` "
             + "\t: Filter carparks based on its Carpark address.";
     public static final String FILTER_ID_FORMAT = "`filter -id QUERY` or `fil -id QUERY` "
@@ -43,5 +42,4 @@ public abstract class CommonData {
     public static final String LIST_FORMAT = "`list` or `l` \t: List the carparks and its details.";
     public static final String EXIT_FORMAT = "`exit` or `e` \t: To quit parKING.";
     public static final String HELP_FORMAT = "`help` or `h` \t: To display all possible commands.";
-
 }

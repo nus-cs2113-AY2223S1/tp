@@ -4,14 +4,17 @@ package seedu.exception;
  * Exception for response code 503 API response.
  */
 public class ServerNotReadyApiException extends ApiServerResponseErrorException {
+    /**
+     * Constructor for the exception.
+     */
     public ServerNotReadyApiException() {
         super();
     }
 
     /**
-     * Message to be returned depending on the command.
+     * Returns a message saying the server is unavailable.
      *
-     * @return message string
+     * @return Message.
      */
     @Override
     public String getMessage() {

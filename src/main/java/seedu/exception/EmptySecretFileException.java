@@ -9,7 +9,7 @@ public class EmptySecretFileException extends ParkingException {
     /**
      * Constructor for the exception.
      *
-     * @param directory String to be used for formatting purposes.
+     * @param directory path to directory of file.
      */
     public EmptySecretFileException(String directory) {
         super();
@@ -17,9 +17,9 @@ public class EmptySecretFileException extends ParkingException {
     }
 
     /**
-     * Create formatted message when API token file is empty.
+     * Returns a message saying API token file is empty.
      *
-     * @return Predefined message with filepath.
+     * @return Message.
      */
     @Override
     public String getMessage() {

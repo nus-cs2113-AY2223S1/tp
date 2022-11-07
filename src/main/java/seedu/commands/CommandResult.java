@@ -12,6 +12,7 @@ public class CommandResult {
      */
     public final String showToUser;
     public final CommandStatus status;
+
     /**
      * Result object to be run by the Ui class.
      *
@@ -26,7 +27,7 @@ public class CommandResult {
     /**
      * Result object to be run by the Ui class.
      *
-     * @param showToUser the string to output.
+     * @param showToUser the String to output.
      * @param status the status of the output.
      */
     public CommandResult(String showToUser, CommandStatus status) {
@@ -34,6 +35,11 @@ public class CommandResult {
         this.status = status;
     }
 
+    /**
+     * Getter method for status.
+     *
+     * @return Status.
+     */
     public final CommandStatus getStatus() {
         return status;
     }

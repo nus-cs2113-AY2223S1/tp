@@ -18,28 +18,26 @@ public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     public static final String COMMAND_WORD_SHORT = "fav";
     public static final int NUMBER_OF_ARGUMENTS = 1;
-    private static final String SEPARATOR_STRING = "===========================================";
     private final String argument;
     private final Favourite favourite;
-    private final Ui ui;
 
     /**
-     * Constructor for FavouriteCommand
+     * Constructor for FavouriteCommand.
      *
-     * @param argument argument for the FavouriteCommand
-     * @param favourite favourite class
+     * @param argument argument for the FavouriteCommand.
+     * @param favourite favourite class.
+     * @param carparkList list of carparks containing carpark information.
      */
     public FavouriteCommand(String argument, Favourite favourite, CarparkList carparkList) {
         this.argument = argument;
         this.favourite = favourite;
         this.carparkList = carparkList;
-        this.ui = new Ui();
     }
 
     /**
-     * Executes FavouriteCommand
+     * Executes FavouriteCommand.
      *
-     * @return CommandResult of FavouriteCommand
+     * @return CommandResult of FavouriteCommand.
      */
     @Override
     public CommandResult execute() {
@@ -100,10 +98,10 @@ public class FavouriteCommand extends Command {
     }
 
     /**
-     * Inserts carparks into the favourite list and writes it into the favouriteList.txt
+     * Inserts carparks into the favourite list and writes it into the favouriteList.txt.
      *
-     * @param carparkId Carpark IDs to favourite.
-     * @throws FileWriteException        If unable to write to favourite.txt file.
+     * @param carparkId carpark IDs to favourite.
+     * @throws FileWriteException If unable to write to favourite.txt file.
      * @throws DuplicateCarparkException If carpark ID is already in favourites.
      */
     public void setFavourite(ArrayList<String> carparkId) throws FileWriteException, DuplicateCarparkException {

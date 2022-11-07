@@ -19,6 +19,11 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String COMMAND_WORD_SHORT = "h";
 
+    /**
+     * Executes HelpCommand.
+     *
+     * @return CommandResult of HelpCommand.
+     */
     @Override
     public CommandResult execute() {
         String message = "Here are the list of available commands to use! "

@@ -30,7 +30,8 @@ public class UpdateCommand extends Command {
      * Updates the carpark list.
      *
      * @param api api that the programme has authenticated.
-     * @return updated carpark list
+     * @param carparkList CarparkList to be updated.
+     * @return Updated carpark list.
      */
     private String updateCarparkList(ApiInterface api, CarparkList carparkList) {
         try {
@@ -44,6 +45,11 @@ public class UpdateCommand extends Command {
         }
     }
 
+    /**
+     * Executes UpdateCommand.
+     *
+     * @return CommandResult of UpdateCommand.
+     */
     @Override
     public CommandResult execute() {
         String message = updateCarparkList(api, carparkList);

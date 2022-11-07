@@ -8,9 +8,9 @@ public class UnneededArgumentsException extends ParkingException {
     private final String command;
 
     /**
-     * Constructor for exception
+     * Constructor for exception.
      *
-     * @param command command string
+     * @param command command string.
      */
     public UnneededArgumentsException(String command) {
         super();
@@ -18,9 +18,9 @@ public class UnneededArgumentsException extends ParkingException {
     }
 
     /**
-     * Message to be returned depending on exception.
+     * Returns a message depending on the command.
      *
-     * @return message string
+     * @return Message.
      */
     @Override
     public String getMessage() {

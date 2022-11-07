@@ -45,7 +45,7 @@ public class Carpark implements Comparable<Carpark> {
     /**
      * Used to print the identifier for a carpark.
      *
-     * @return formatted string
+     * @return Formatted string.
      */
     @Override
     public String toString() {
@@ -61,6 +61,11 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Returns a String containing summary information about a carpark.
+     *
+     * @return Summary information about a carpark.
+     */
     public String getListViewString() {
         return String.format("CarparkID @|yellow,bold %s|@ at %s\n@|faint -->|@ @|yellow %s|@ "
                 + "available lots total",
@@ -68,6 +73,11 @@ public class Carpark implements Comparable<Carpark> {
             developmentSentence.toString(), availableLots);
     }
 
+    /**
+     * Returns a String containing detailed information about a carpark.
+     *
+     * @return Detailed information about a carpark.
+     */
     public String getDetailViewString() {
         String formatString = "Carpark code: %s\n"
             + "Favourited: %s\n"
@@ -83,6 +93,11 @@ public class Carpark implements Comparable<Carpark> {
         return bufferString;
     }
 
+    /**
+     * Returns a String describing the number of available lots for different classes of vehicles for a carpark.
+     *
+     * @return Number of available lots for different classes of vehicles for a carpark.
+     */
     private String getLotBreakdownString() {
         StringBuilder bufferString = new StringBuilder();
         List<LotType> lotTypes = new ArrayList<>();
@@ -96,6 +111,11 @@ public class Carpark implements Comparable<Carpark> {
         return bufferString.toString();
     }
 
+    /**
+     * Returns a String containing information of a carpark in the format to be saved.
+     *
+     * @return String containing information of a carpark in the format to be saved.
+     */
     public String getSaveString() {
         String saveStringFormat = "%s || %s || %s || %s || %s || %s || %s || %s || %s \n";
         String allAvailableLotsString = String.format("%s %s %s", allAvailableLots.get(LotType.CAR),
@@ -104,11 +124,22 @@ public class Carpark implements Comparable<Carpark> {
                 allAvailableLotsString, isFavourited, agency, lastUpdated.format(CommonData.DATE_TIME_FORMATTER));
     }
 
+    /**
+     * Getter method to retrieve carpark ID.
+     *
+     * @return Carpark ID.
+     */
     @JsonProperty("CarParkID")
     public String getCarparkId() {
         return carparkId;
     }
 
+    /**
+     * Setter method to set carpark ID.
+     *
+     * @param carparkId Carpark ID to set.
+     * @throws InvalidFormatException If format of carpark ID is incorrect.
+     */
     @JsonProperty("CarParkID")
     public void setCarparkId(String carparkId) throws InvalidFormatException {
         exceptIfBlank(carparkId);
@@ -116,6 +147,12 @@ public class Carpark implements Comparable<Carpark> {
         this.carparkId = carparkId;
     }
 
+    /**
+     * Checks if a carpark ID is valid.
+     *
+     * @param carparkId Carpark ID to be checked.
+     * @throws InvalidFormatException If format of carpark ID is incorrect.
+     */
     private void validateFormat(String carparkId) throws InvalidFormatException {
         Pattern carparkIdPattern = Pattern.compile("^[a-zA-Z]*[0-9]*[a-zA-Z]*$|^[0-9]$");
         Matcher carparkIdMatcher = carparkIdPattern.matcher(carparkId);
@@ -124,21 +161,42 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Getter method to retrieve area.
+     *
+     * @return Area.
+     */
     @JsonProperty("Area")
     public String getArea() {
         return area;
     }
 
+    /**
+     * Setter method to set area.
+     *
+     * @param area area to be set.
+     */
     @JsonProperty("Area")
     public void setArea(String area) {
         this.area = area;
     }
 
+    /**
+     * Getter method to retrieve development.
+     *
+     * @return Development.
+     */
     @JsonProperty("Development")
     public String getDevelopment() {
         return development;
     }
 
+    /**
+     * Setter method to set development.
+     *
+     * @param development development to be set.
+     * @throws InvalidFormatException If development is invalid.
+     */
     @JsonProperty("Development")
     public void setDevelopment(String development) throws InvalidFormatException {
         exceptIfBlank(development);
@@ -146,27 +204,55 @@ public class Carpark implements Comparable<Carpark> {
         developmentSentence = new Sentence(development);
     }
 
+    /**
+     * Getter method to retrieve location.
+     *
+     * @return Location.
+     */
     @JsonProperty("Location")
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Setter method to set location.
+     *
+     * @param location location.
+     */
     @JsonProperty("Location")
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Getter method to retrieve lot type.
+     *
+     * @return Lot type.
+     */
     @JsonProperty("LotType")
     public LotType getLotType() {
         return lotType;
     }
 
+    /**
+     * Setter method to set lot type.
+     *
+     * @param lotType lot type.
+     * @throws InvalidFormatException If lot type is invalid.
+     */
     @JsonProperty("LotType")
     public void setLotType(String lotType) throws InvalidFormatException {
         this.lotType = chooseLotType(lotType);
         allAvailableLots.put(this.lotType, this.availableLots);
     }
 
+    /**
+     * Parse a String to determine which lot type to return.
+     *
+     * @param lotTypeString String to parse.
+     * @return Lot type.
+     * @throws InvalidFormatException If String contains non-alphabetic characters.
+     */
     private LotType chooseLotType(String lotTypeString) throws InvalidFormatException {
         if (!lotTypeString.trim().matches("^[a-zA-Z]$")) {
             throw new InvalidFormatException("Lot type can only be alphabetic!");
@@ -180,11 +266,22 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Getter method retrieve available lots.
+     *
+     * @return Available lots.
+     */
     @JsonProperty("AvailableLots")
     public int getAvailableLots() {
         return availableLots;
     }
 
+    /**
+     * Setter method to set available lots.
+     *
+     * @param availableLots Available lots to set.
+     * @throws InvalidFormatException If available lots entered is not an integer.
+     */
     @JsonProperty("AvailableLots")
     public void setAvailableLots(String availableLots) throws InvalidFormatException {
         exceptIfBlank(availableLots);
@@ -203,6 +300,13 @@ public class Carpark implements Comparable<Carpark> {
         lastUpdated = LocalDateTime.now();
     }
 
+    /**
+     * Validates user input of available lots.
+     *
+     * @param value integer value of user input.
+     * @param compareString raw value of user input.
+     * @return True if user input is valid.
+     */
     private boolean validateAvailableLots(int value, String compareString) {
         if (!Integer.toString(value).equals(compareString)) {
             //is a float
@@ -215,20 +319,41 @@ public class Carpark implements Comparable<Carpark> {
         return true;
     }
 
+    /**
+     * Getter method to retrieve agency.
+     *
+     * @return Agency.
+     */
     @JsonProperty("Agency")
     public String getAgency() {
         return agency;
     }
 
+    /**
+     * Setter method to set agency.
+     *
+     * @param agency agency to be set.
+     */
     @JsonProperty("Agency")
     public void setAgency(String agency) {
         this.agency = agency;
     }
 
+    /**
+     * Setter method to set favourite.
+     *
+     * @param bool true to set as favourite, false to unfavourite.
+     */
     private void setFavourited(boolean bool) {
         isFavourited = bool;
     }
 
+    /**
+     * Setter method to set when the carpark was last updated.
+     *
+     * @param dateTimeString date and time when the carpark was last updated.
+     * @throws InvalidFormatException If dateTimeString is not a valid date and time.
+     */
     public void setLastUpdated(String dateTimeString) throws InvalidFormatException {
         try {
             lastUpdated = LocalDateTime.parse(dateTimeString, CommonData.DATE_TIME_FORMATTER);
@@ -252,14 +377,17 @@ public class Carpark implements Comparable<Carpark> {
      * Add a carpark lot type to the {@link Carpark#allAvailableLots} Hashmap object,
      * where the key is a {@link LotType} and the value is the number of lots.
      *
-     * @param lotType Type of lot
-     * @param numberOfLots Number of lots
+     * @param lotType Type of lot.
+     * @param numberOfLots Number of lots.
      */
     public void addCarparkLotType(LotType lotType, int numberOfLots) {
         allAvailableLots.put(lotType, numberOfLots);
         updateAvailableLotsTotal();
     }
 
+    /**
+     * Updates total number of available lots.
+     */
     private void updateAvailableLotsTotal() {
         int sum = 0;
         for (int lotNumber : allAvailableLots.values()) {
@@ -268,10 +396,21 @@ public class Carpark implements Comparable<Carpark> {
         availableLots = sum;
     }
 
+    /**
+     * Getter method to retrieve development.
+     *
+     * @return Development.
+     */
     public Sentence getDevelopmentSentence() {
         return developmentSentence;
     }
 
+    /**
+     * Setter method to set all available lots using a String.
+     *
+     * @param params number of lots to be set for each lot type.
+     * @throws InvalidFormatException If user input contains incorrect number of lot types, or contains non-integers.
+     */
     public void setAllAvailableLots(String params) throws InvalidFormatException {
         int carLots;
         int motorCycleLots;
@@ -296,12 +435,23 @@ public class Carpark implements Comparable<Carpark> {
         updateAvailableLotsTotal();
     }
 
+    /**
+     * Setter method to set all available lots using a HashMap.
+     *
+     * @param newAvailableLots Hashmap of available lots to be set.
+     */
     public void setAllAvailableLots(HashMap<LotType, Integer> newAvailableLots) {
         allAvailableLots = newAvailableLots;
         updateAvailableLotsTotal();
     }
 
-    private String[] validateNonNegative(String[] lots) throws InvalidFormatException {
+    /**
+     * Replaces all negative integers from a list of Strings to zero.
+     *
+     * @param lots list of Strings to validate.
+     * @return List of Strings that contains no negative integers.
+     */
+    private String[] validateNonNegative(String[] lots) {
         for (int i = 0; i < lots.length; ++i) {
             if (Integer.parseInt(lots[i]) < 0) {
                 lots[i] = "0";
@@ -310,6 +460,15 @@ public class Carpark implements Comparable<Carpark> {
         return lots;
     }
 
+    /**
+     * Verify that the number of lots matches the respective number of car, motorcycle and heavy vehicle lots.
+     *
+     * @param carLots number of car lots expected.
+     * @param motorCycleLots number of motorcycle lots expected.
+     * @param heavyVehicleLots number of heavy vehicle lots expected.
+     * @param lots lots to verify.
+     * @throws InvalidFormatException If lots are different from expected values.
+     */
     private static void validateLotNumbers(int carLots, int motorCycleLots, int heavyVehicleLots, String[] lots)
             throws InvalidFormatException {
         if (!Integer.toString(carLots).equals(lots[0]) && !Integer.toString(motorCycleLots).equals(lots[1])
@@ -318,6 +477,11 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Setter method to set favourite.
+     *
+     * @param setFavourite true to set as favourite, false to unfavourite.
+     */
     public void setFavourite(boolean setFavourite) {
         isFavourited = setFavourite;
     }
@@ -325,8 +489,10 @@ public class Carpark implements Comparable<Carpark> {
 
     /**
      * Static method to generate a {@link CarparkList} object from a save string.
-     * @param saveString string to be parsed
-     * @return generated object.
+     *
+     * @param saveString String to be parsed.
+     * @return Generated object.
+     * @throws InvalidFormatException If the number of parameters is incorrect.
      */
     public static Carpark parseCarpark(String saveString) throws InvalidFormatException {
         validateNumberOfParams(saveString);
@@ -345,6 +511,12 @@ public class Carpark implements Comparable<Carpark> {
         return parsedCarpark;
     }
 
+    /**
+     * Verify if the number of parameters in a save string is correct.
+     *
+     * @param saveString String to verify.
+     * @throws InvalidFormatException If the number of parameters is incorrect.
+     */
     private static void validateNumberOfParams(String saveString) throws InvalidFormatException {
         Pattern delimiterPattern = Pattern.compile("\\|\\|");
         Matcher patternMatcher = delimiterPattern.matcher(saveString);
@@ -358,11 +530,20 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Setter method to set last updated time to current time.
+     */
     public void updateTime() {
         lastUpdated = LocalDateTime.now();
     }
 
 
+    /**
+     * Remove leading and trailing whitespaces in all entries of an array.
+     *
+     * @param arr array to remove leading and trailing whitespaces.
+     * @return Array without leading and trailing whitespaces.
+     */
     private static String[] removeWhitespaces(String[] arr) {
         for (int i = 0; i < arr.length; ++i) {
             arr[i] = arr[i].trim();
@@ -370,13 +551,17 @@ public class Carpark implements Comparable<Carpark> {
         return arr;
     }
 
-
+    /**
+     * Getter method to retrieve all available lots.
+     *
+     * @return All available lots.
+     */
     public HashMap<LotType, Integer> getAllAvailableLots() {
         return allAvailableLots;
     }
 
     /**
-     * Compares this object with the specified object for order.  Returns a
+     * Compares this object with the specified object for order. Returns a
      * negative integer, zero, or a positive integer as this object is less
      * than, equal to, or greater than the specified object.
      *
@@ -410,9 +595,6 @@ public class Carpark implements Comparable<Carpark> {
      * @param o the object to be compared.
      * @return a negative integer, zero, or a positive integer as this object
      *      is less than, equal to, or greater than the specified object.
-     * @throws NullPointerException if the specified object is null
-     * @throws ClassCastException   if the specified object's type prevents it
-     *                              from being compared to this object.
      */
     @Override
     public int compareTo(@NotNull Carpark o) {
@@ -441,7 +623,8 @@ public class Carpark implements Comparable<Carpark> {
 
     /**
      * Gets the alphabet component of a carpark ID.
-     * @param string input string
+     *
+     * @param string input string.
      * @return String containing alphabet component.
      */
     private String getAlphabet(String string) {
@@ -451,7 +634,7 @@ public class Carpark implements Comparable<Carpark> {
     /**
      * Gets the numerical component of a carpark ID.
      *
-     * @param string input string
+     * @param string input string.
      * @return String containing alphabet component.
      */
     private int getNumbers(String string) {
@@ -462,6 +645,12 @@ public class Carpark implements Comparable<Carpark> {
         }
     }
 
+    /**
+     * Verify that user input is not blank.
+     *
+     * @param input user input.
+     * @throws InvalidFormatException If user input is blank.
+     */
     private void exceptIfBlank(String input) throws InvalidFormatException {
         if (input.isBlank()) {
             throw new InvalidFormatException("A field is empty! This should not be.");

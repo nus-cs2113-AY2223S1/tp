@@ -26,7 +26,6 @@ import seedu.files.FileReader;
 import seedu.files.FileStorage;
 import seedu.ui.Ui;
 
-
 /**
  * Class to fetch .json data from APIs and save that locally.
  */
@@ -89,8 +88,8 @@ public class Api implements ApiInterface {
     /**
      * Waits (for at most 1s) and receive response from API endpoint. It breaks the asynchronous part of the code.
      *
-     * @param index The index to get the response from the responseFutureList
-     * @return JSON string response from the API.
+     * @param index The index to get the response from the responseFutureList.
+     * @return JSON String response from the API.
      * @throws UnauthorisedAccessApiException if API key is invalid.
      * @throws ServerNotReadyApiException if Server request timeout.
      * @throws UnknownResponseApiException if response code is not handled properly.
@@ -116,7 +115,7 @@ public class Api implements ApiInterface {
      * Subroutine will repeat for a certain number of time and throws an exception if no response is received.
      *
      * @param index The index to get the response from.
-     * @return String The raw data from the API.
+     * @return The raw data String from the API.
      * @throws FileWriteException if data fails to write.
      * @throws EmptyResponseException if empty/invalid response received.
      * @throws UnauthorisedAccessApiException if access not granted.
@@ -195,7 +194,7 @@ public class Api implements ApiInterface {
      * Count the number of parking lot data received from LTA.
      *
      * @param data processed data set to count.
-     * @return number of parking lots.
+     * @return Number of parking lots.
      */
     public int countData(String data) {
         String[] individualData = data.trim().split("},\\{");
@@ -206,8 +205,8 @@ public class Api implements ApiInterface {
      * Check whether response code from API response is 200 OK, otherwise throw exception.
      *
      * @param responseCode Response code from API HTTP response header.
-     * @return true if response code is 200 OK.
-     * @throws UnauthorisedAccessApiException API key is invalid
+     * @return True if response code is 200 OK.
+     * @throws UnauthorisedAccessApiException API key is invalid.
      * @throws ServerNotReadyApiException if server request timeout.
      * @throws UnknownResponseApiException if received response code besides 200, 401 or 503.
      */
@@ -241,7 +240,7 @@ public class Api implements ApiInterface {
      * No data loading required afterwards.
      *
      * @param apiKeyInput API key to validate.
-     * @return true if authentication is successful.
+     * @return True if authentication is successful.
      */
     public boolean isApiValid(String apiKeyInput) {
         String originalApiKey = apiKey;
@@ -306,7 +305,7 @@ public class Api implements ApiInterface {
     /**
      * Returns the message corresponding to the authentication status.
      *
-     * @return formatted message for authentication status.
+     * @return Formatted message for authentication status.
      */
     public String getApiAuthStatusString() {
         String message;
@@ -336,6 +335,7 @@ public class Api implements ApiInterface {
 
     /**
      * Setter function for authStatus. Only for testing purposes.
+     *
      * @param status Authentication Status.
      */
 

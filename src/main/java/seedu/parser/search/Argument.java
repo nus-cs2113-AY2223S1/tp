@@ -40,19 +40,30 @@ public class Argument {
         }
     }
 
+    /**
+     * Getter method to retrieve dashed arguments.
+     *
+     * @return Dashed arguments.
+     */
     public ArrayList<String> getDashedArgs() {
         return dashedArgs;
     }
 
+    /**
+     * Getter method to retrieve arguments.
+     *
+     * @return Arguments.
+     */
     public Sentence getArguments() {
         return arguments;
     }
 
+    /**
+     * Returns number of dashed arguments.
+     *
+     * @return Number of dashed arguments.
+     */
     public int getDashedArgsCount() {
         return dashedArgs.size();
-    }
-
-    public int getNonDashedArgumentCount() {
-        return arguments.getWords().size();
     }
 }

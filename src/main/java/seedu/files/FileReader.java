@@ -23,15 +23,18 @@ import seedu.files.wrapper.LtaJsonWrapper;
 import seedu.ui.Ui;
 
 /**
- * Deals with reading from files
+ * Deals with reading from files.
  */
-public abstract class FileReader {
 
+public abstract class FileReader {
     /**
-     * Loads .json file as an ArrayList of {@link Carpark} class
+     * Loads .json file as an ArrayList of {@link Carpark} class.
      *
-     * @return list of all Carparks found
-     * @throws NoFileFoundException if a file was not found
+     * @param filepath path to file.
+     * @param filepathBackup path to backup file.
+     * @return List of all Carparks found.
+     * @throws NoFileFoundException If a file was not found.
+     * @throws FileWriteException If unable to write to file.
      */
     public static List<Carpark> loadLtaJson(Path filepath, Path filepathBackup)
             throws NoFileFoundException, FileWriteException {
@@ -52,7 +55,7 @@ public abstract class FileReader {
             Ui.println("No file was found, or invalid format at " + filepath + ". Trying the backup:");
             try {
                 List<Carpark> carparks = getCarparks(filepathBackup);
-                System.out.println("Backup load successful!");
+                Ui.println("Backup load successful!");
                 // Backup file timestamp
                 for (Carpark carpark : carparks) {
                     try {
@@ -75,10 +78,11 @@ public abstract class FileReader {
     }
 
     /**
-     * get carparks from Json file
-     * @param filepath file path of Json file
-     * @return List of carparks
-     * @throws IOException if an I/O error occurs reading from the stream
+     * Get carparks from .json file.
+     *
+     * @param filepath path to file.
+     * @return List of carparks.
+     * @throws IOException If an I/O error occurs reading from the stream.
      */
     private static List<Carpark> getCarparks(Path filepath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -89,13 +93,14 @@ public abstract class FileReader {
     }
 
     /**
-     * @param filePath File path.
-     * @param directoryPath Directory path.
-     * @param createDirectory if true and file does not exist, it will create.
-     * @return Data string in file.
+     * Read contents of file.
      *
-     * @throws NoFileFoundException When a file could not be found.
-     * @throws FileWriteException When there's an issue with writing to the file.
+     * @param filePath path to file.
+     * @param directoryPath path to directory.
+     * @param createDirectory create the directory if file does not exist.
+     * @return Data string in file.
+     * @throws NoFileFoundException If a file was not found.
+     * @throws FileWriteException If unable to write to file.
      */
     public static String readStringFromTxt(String filePath, String directoryPath, boolean createDirectory)
             throws NoFileFoundException, FileWriteException {
@@ -128,11 +133,12 @@ public abstract class FileReader {
 
     /**
      * Loads a {@link CarparkList} object from a given file and directory path.
-     * @param filePath File path.
-     * @param directoryPath Directory path.
+     *
+     * @param filePath path to file.
+     * @param directoryPath path to directory.
      * @return A properly generated CarparkList object.
-     * @throws FileWriteException If file cannot be written to.
-     * @throws NoFileFoundException If the directory cannot be found.
+     * @throws NoFileFoundException If a file was not found.
+     * @throws FileWriteException If unable to write to file.
      */
     public static CarparkList loadCarparkListFromTxt(String filePath, String directoryPath)
             throws FileWriteException, NoFileFoundException {

@@ -14,7 +14,7 @@ public class DuplicateCarparkException extends ParkingException {
     /**
      * Returns a message saying carpark was already in list.
      *
-     * @return Formatted string.
+     * @return Message.
      */
     @Override
     public String getMessage() {

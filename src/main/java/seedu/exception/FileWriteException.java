@@ -8,6 +8,8 @@ public class FileWriteException extends ParkingException {
 
     /**
      * Constructor for the exception.
+     *
+     * @param filePath path to file.
      */
     public FileWriteException(String filePath) {
         super();
@@ -17,7 +19,7 @@ public class FileWriteException extends ParkingException {
     /**
      * Returns a message prompting the user to check a filepath.
      *
-     * @return Formatted string.
+     * @return Message.
      */
     @Override
     public String getMessage() {
