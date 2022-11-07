@@ -32,7 +32,7 @@ public class FlagParser {
     private static final String TITLE_FLAG = FLAG_INITIAL + "t";
     private static final String DESCRIPTION_FLAG = FLAG_INITIAL + "d";
     private static final String INDEX_FLAG = FLAG_INITIAL + "id";
-    private static final String COMMAND_WORD_EDIT = "/edit";
+    private static final String COMMAND_TYPE = "/edit";
     private static final int STRINGS_UNTIL_FLAG_EDIT_COMMAND = 4;
     private static final int STRINGS_BEFORE_FLAG_EDIT_COMMAND = 2;
     private static final int FLAG_POSITION_OTHER_COMMAND = 2;
@@ -58,7 +58,7 @@ public class FlagParser {
         for (String s : parsedCommand) {
             index++;
 
-            if (commandWord.equals(COMMAND_WORD_EDIT)) {
+            if (commandWord.equals(COMMAND_TYPE)) {
                 if (index > STRINGS_UNTIL_FLAG_EDIT_COMMAND) {
                     break;
                 }
