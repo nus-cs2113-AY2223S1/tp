@@ -118,7 +118,8 @@ public abstract class OperationList {
 
     /**
      * This is a method to delay flight departure times.
-     * @param flightNum Number of flight to append
+     *
+     * @param flightNum        Number of flight to append
      * @param newDepartureTime new Departure Time after delay
      */
     public abstract void delayFlightDeparture(String flightNum, String newDepartureTime) throws SkyControlException;
