@@ -17,8 +17,10 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.ExerciseTable;
 import seedu.duke.ui.Ui;
+import seedu.duke.ui.FoodTable;
+import seedu.duke.ui.AllRecordsTable;
+import seedu.duke.ui.ExerciseTable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -43,6 +45,7 @@ public class ViewCommand extends Command {
     public static final String INVALID_VIEW_COMMAND_MESSAGE = "Invalid view command";
     public static final String BIOMETRICS_LABEL = "Biometrics:";
     public static final String STRENGTH_EXERCISES_CAPTION = "Strength exercises";
+    public static final String FOOD_LIST_CAPTION = "All Food Records:";
     public static final String EXERCISE_LIST_CAPTION = "Exercises";
     public static final int MINIMUM_VIEW_EXERCISE_SLASH_COUNT = 0;
     public static final int MAXIMUM_VIEW_EXERCISE_SLASH_COUNT = 1;
@@ -57,6 +60,10 @@ public class ViewCommand extends Command {
     private FoodList foodList;
     private RecordList recordList;
 
+    private ArrayList<WeightAndFat> weightAndFatList;
+    private ArrayList<Food> foodArrayList;
+    private ArrayList<Exercise> exerciseArrayList;
+    private ArrayList<Record> recordArrayList;
 
     public ViewCommand(String arguments) {
         this.arguments = arguments;
@@ -65,6 +72,13 @@ public class ViewCommand extends Command {
     @Override
     public void execute() throws IllegalValueException {
         String[] argumentList = Parser.getArgumentList(arguments);
+
+        weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
+        foodArrayList = foodList.getFoodList();
+        exerciseArrayList = getExerciseArrayListByCommand(argumentList);
+        recordArrayList = recordList.getRecordList(weightAndFatList,
+                foodArrayList, exerciseArrayList);
+
         String viewType = Parser.getClassType(argumentList);
         int slashesCount = Parser.getArgumentsCount(arguments);
         switch (viewType) {
@@ -196,12 +210,11 @@ public class ViewCommand extends Command {
 
     private void viewAll(String[] argumentList) throws IllegalValueException {
         handleInvalidViewAllCommand(argumentList);
-        ArrayList<WeightAndFat> weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
-        ArrayList<Food> foodArrayList = foodList.getFoodList();
-        ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
-        ArrayList<Record> recordArrayList = recordList.getRecordList(weightAndFatList,
-                foodArrayList, exerciseArrayList);
-        ui.outputAllRecords(recordArrayList, weightAndFatList, foodArrayList, exerciseArrayList);
+        AllRecordsTable tableFrame = new AllRecordsTable(
+                foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
+                "All Records");
+        ArrayList<String> table = tableFrame.getAllRecordsTable();
+        ui.printTable(table);
     }
 
     private void viewBiometrics() {
@@ -216,8 +229,11 @@ public class ViewCommand extends Command {
 
     private void viewFood(String[] argumentList) throws IllegalValueException {
         handleInvalidViewFoodCommand(argumentList);
-        ArrayList<Food> foodArrayList = foodList.getFoodList();
-        ui.outputFoodList(foodArrayList);
+        FoodTable tableFrame = new FoodTable(
+                foodArrayList, weightAndFatList, exerciseArrayList, recordArrayList,
+                "Food Records");
+        ArrayList<String> table = tableFrame.getFoodTable();
+        ui.printTable(table);
     }
 
     private static void handleInvalidViewFoodCommand(String[] argumentList) throws IllegalValueException {
@@ -243,7 +259,8 @@ public class ViewCommand extends Command {
         ArrayList<Exercise> strengthExerciseArrayList = getStrengthExerciseArrayListByCommand(argumentList);
         String caption = getExerciseListCaption(strengthExerciseArrayList.size(),
                 argumentList, STRENGTH_EXERCISES_CAPTION);
-        ExerciseTable exerciseTable = new ExerciseTable(strengthExerciseArrayList, caption);
+        ExerciseTable exerciseTable = new ExerciseTable(foodArrayList, weightAndFatList,
+                strengthExerciseArrayList, recordArrayList, caption);
         ui.printTable(exerciseTable.getExerciseTable());
     }
 
@@ -260,7 +277,8 @@ public class ViewCommand extends Command {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> cardioExerciseArrayList = getCardioExerciseArrayListByCommand(argumentList);
         String caption = getExerciseListCaption(cardioExerciseArrayList.size(), argumentList, "Cardio exercises");
-        ExerciseTable exerciseTable = new ExerciseTable(cardioExerciseArrayList, caption);
+        ExerciseTable exerciseTable = new ExerciseTable(foodArrayList, weightAndFatList,
+                cardioExerciseArrayList, recordArrayList, caption);
         ui.printTable(exerciseTable.getExerciseTable());
     }
 
@@ -278,7 +296,8 @@ public class ViewCommand extends Command {
         handleInvalidViewExerciseCommand(argumentList, slashesCount);
         ArrayList<Exercise> exerciseArrayList = getExerciseArrayListByCommand(argumentList);
         String caption = getExerciseListCaption(exerciseArrayList.size(), argumentList, EXERCISE_LIST_CAPTION);
-        ExerciseTable exerciseTable = new ExerciseTable(exerciseArrayList, caption);
+        ExerciseTable exerciseTable = new ExerciseTable(foodArrayList, weightAndFatList,
+                exerciseArrayList, recordArrayList, caption);
         ArrayList<String> table = exerciseTable.getExerciseTable();
         ui.printTable(table);
 

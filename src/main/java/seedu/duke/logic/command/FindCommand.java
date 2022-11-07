@@ -5,9 +5,11 @@ import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
 import seedu.duke.records.Calories;
 import seedu.duke.records.CaloriesList;
+import seedu.duke.records.Record;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.Calculator;
+import seedu.duke.records.biometrics.WeightAndFat;
 import seedu.duke.records.exercise.CardioExercise;
 import seedu.duke.records.exercise.Exercise;
 import seedu.duke.records.exercise.ExerciseList;
@@ -15,7 +17,9 @@ import seedu.duke.records.exercise.StrengthExercise;
 import seedu.duke.records.food.Food;
 import seedu.duke.records.food.FoodList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.AllRecordsTable;
 import seedu.duke.ui.ExerciseTable;
+import seedu.duke.ui.FoodTable;
 import seedu.duke.ui.Ui;
 
 import java.time.DateTimeException;
@@ -24,29 +28,39 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+
 public class FindCommand extends Command {
     public static final String STRENGTH_EXERCISE_NOT_FOUND = "No matching strength exercise found";
     public static final String STRENGTH_EXERCISE_FOUND = "Here are the matching strength exercises in your list:";
     public static final String CARDIO_EXERCISE_FOUND = "Here are the matching cardio exercises in your list:";
     public static final String CARDIO_EXERCISE_NOT_FOUND = "No matching cardio exercise found";
+    public static final String FOOD_NOT_FOUND = "No matching food found";
+
+    public static final String FOOD_FOUND = "Here are the matching food in your food list:";
     public static final String INVALID_FIND_STRENGTH_COMMAND = "Invalid find strength command";
     public static final String INVALID_FIND_CARDIO_COMMAND = "Invalid find cardio command";
+    public static final String INVALID_FIND_FOOD_COMMAND = "Invalid find food command";
     public static final String INVALID_FIND_DATE_COMMAND = "Invalid find date command";
 
     public static final int REQUIRED_COUNT = 1;
     public static final String STRENGTH = "strength";
     public static final String CARDIO = "cardio";
     public static final String FOOD = "food";
-    public static final String DATE_E = "date_e";
-    public static final String DATE_F = "date_f";
     public static final String CALORIES = "calories";
     public static final String INVALID_FIND_COMMAND_MESSAGE = "Invalid find command";
     public static final int EMPTY_LIST = 0;
     private String arguments;
     private ExerciseList exerciseList;
     private FoodList foodList;
+
+    private RecordList recordList;
     private Ui ui;
     private Biometrics biometrics;
+
+    private ArrayList<WeightAndFat> weightAndFatList;
+    private ArrayList<Food> foodArrayList;
+    private ArrayList<Exercise> exerciseArrayList;
+    private ArrayList<Record> recordArrayList;
 
     public FindCommand(String arguments) {
         this.arguments = arguments;
@@ -54,6 +68,12 @@ public class FindCommand extends Command {
 
     @Override
     public void execute() throws IllegalValueException {
+        weightAndFatList = biometrics.weightAndFatList.getWeightAndFatList();
+        foodArrayList = foodList.getFoodList();
+        exerciseArrayList = getFilteredCardioExerciseList(arguments);
+        recordArrayList = recordList.getRecordList(weightAndFatList,
+                foodArrayList, exerciseArrayList);
+
         int slashesCount = Parser.getArgumentsCount(arguments);
         String[] argumentList = Parser.getArgumentList(arguments);
         String findType = Parser.getClassType(argumentList);
@@ -66,9 +86,6 @@ public class FindCommand extends Command {
             break;
         case FOOD:
             findFood(argumentList, slashesCount);
-            break;
-        case DATE_F:
-            findDateFood(argumentList, slashesCount);
             break;
         case CALORIES:
             findCalories(argumentList, slashesCount);
@@ -100,14 +117,6 @@ public class FindCommand extends Command {
         caloriesList.addCalories(caloriesinput);
         ArrayList<Calories> clist = caloriesList.getCaloriesList();
         ui.outputCalories(clist);
-    }
-
-
-    private void findDateFood(String[] argumentList, int slashesCount) throws IllegalValueException {
-        handleInvalidFindDateCommand(argumentList);
-        ArrayList<Food> filteredFoodDateList = getFilteredFoodDateList(argumentList);
-        ui.output("", "Here are the food records in your list matching this date:");
-        ui.outputFoodList(filteredFoodDateList);
     }
 
     private void handleInvalidFindDateCommand(String[] argumentList) throws IllegalValueException {
@@ -146,16 +155,26 @@ public class FindCommand extends Command {
             ui.output(failureFeedback);
         } else {
             String caption = System.lineSeparator() + successFeedback;
-            ExerciseTable filterTable = new ExerciseTable(filteredExerciseList, caption);
+            ExerciseTable filterTable = new ExerciseTable(foodArrayList, weightAndFatList,
+                    filteredExerciseList, recordArrayList, caption);
             ui.printTable(filterTable.getExerciseTable());
         }
     }
 
     private void findFood(String[] argumentList, int slashesCount) throws IllegalValueException {
+        Validator.validateCommandInput(slashesCount, REQUIRED_COUNT, INVALID_FIND_FOOD_COMMAND,
+                arguments.charAt(arguments.length() - 1));
         handleInvalidFindFoodCommand(argumentList);
         ArrayList<Food> filteredFoodList = getFilteredFoodList(argumentList);
-        ui.output("Here are the matching food in your food list:");
-        ui.outputFoodList(filteredFoodList);
+
+        if (filteredFoodList.size() == EMPTY_LIST) {
+            ui.output(FOOD_NOT_FOUND);
+        } else {
+            FoodTable tableFrame = new FoodTable(
+                filteredFoodList, weightAndFatList, exerciseArrayList, recordArrayList, FOOD_FOUND);
+            ArrayList<String> table = tableFrame.getFoodTable();
+            ui.printTable(table);
+        }
     }
 
 
@@ -171,14 +190,6 @@ public class FindCommand extends Command {
                 .filter(f -> f.getFoodDescription().contains(argumentList[1]))
                 .collect(Collectors.toList());
         return filteredFoodList;
-    }
-
-    private ArrayList<Food> getFilteredFoodDateList(String[] argumentList) {
-        ArrayList<Food> filteredFoodDateList = (ArrayList<Food>) foodList.getFoodList()
-                .stream().filter(Food.class::isInstance)
-                .filter(f -> f.getDateString().contains(argumentList[1]))
-                .collect(Collectors.toList());
-        return filteredFoodDateList;
     }
 
 
@@ -239,5 +250,6 @@ public class FindCommand extends Command {
         this.biometrics = biometrics;
         this.exerciseList = exerciseList;
         this.foodList = foodList;
+        this.recordList = recordList;
     }
 }
