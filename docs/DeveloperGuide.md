@@ -421,7 +421,7 @@ The `EditCommand` inherits properties from the abstract `Command` class. The inh
 shown below.
 
 <p align="center">
-    <img src="images/EditCommandClassDiagram.png" width="50%">
+    <img src="images/EditCommandClassDiagram.png" width="80%">
     <br />
     <i>Figure 14: Class Diagram for Edit Command</i>
 </p>
@@ -553,7 +553,7 @@ The `DeleteCommand` inherits properties from the abstract `Command` class. The i
 shown below.
 
 <p align="center">
-    <img src="images/DeleteCommandClassDiagram.png" width = "50%">
+    <img src="images/DeleteCommandClassDiagram.png" width = "80%">
     <br />
     <i>Figure 19: Class Diagram for Delete Command</i>
 </p>
@@ -615,7 +615,7 @@ The `PurgeCommand` inherits properties from the abstract `Command` class. The in
 shown below.
 
 <p align="center">
-    <img src="images/PurgeCommandClassDiagram.png" width = "50%">
+    <img src="images/PurgeCommandClassDiagram.png" width = "80%">
     <br />
     <i>Figure 21: Class Diagram for Purge Command</i>
 </p>
@@ -832,7 +832,7 @@ The `ByeCommand` inherits properties from the abstract `Command'` class. The inh
 shown below.
 
 <p align="center">
-    <img src="images/ByeCommandClassDiagram.png" width = "50%">
+    <img src="images/ByeCommandClassDiagram.png" width = "80%">
     <br />
     <i>Figure 29: Class Diagram for Bye Command</i>
 </p>
