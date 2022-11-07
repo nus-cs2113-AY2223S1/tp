@@ -64,7 +64,7 @@ import java.util.List;
 //@@author xzynos
 
 /**
- * Provide functions to parse inputs read from standard input.
+ * Provides functions to parse inputs read from standard input.
  */
 @SuppressWarnings({"ReplaceNullCheck", "UnnecessaryLocalVariable"})
 public class ConsoleParser {
