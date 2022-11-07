@@ -130,26 +130,33 @@ The recipe module encapsulates the array, recipe and ingredient objects.
   <img width="100%" src="images/ClassDiagrams/RecipeModule.png" alt="Recipe Component"/>
 </p>
 
-- Methods are omitted to avoid clutter
 
-**Class:** `Ingredient.java`
+**API:** `Ingredient.java`
 
-- Stores the name, amount and unit of recipes
+Stores the name, amount and unit of recipes. Smallest class in the module.
 
-**Class:** `Recipe.java`
+**API:** `Recipe.java`
 
+`Recipe` calls `Ingredient` to add, edit or delete ingredients. It contains methods to parse a recipe,
+convert a recipe into printable or saveable format and perform operations on `ingredient` and `step` ArrayList objects
+which are instantiated whenever a `Recipe` object is created.
 - has private attributes as shown
 - has get and set methods on the attributes
 - has methods to convert a recipe into printable or saveable format and perform operations
 
-**Class:** `RecipeList.java`
 
+**API:** `RecipeList.java`
+
+`RecipeList` calls `Recipe` to add, edit or delete recipes. It consists of two ArrayList objects (`recipes` to store
+recipes and `recipeTitles` to store titles). It contains methods to count the number of existing recipes,
+search for recipes based on the given parameter and save edited recipe into `Storage`.
 - Consists of 2 **important arrays** that keep track of the added recipes
     - `RecipeList.recipes`: store the recipe
     - `RecipeList.recipeTitles`: store the recipe titles
         - This is necessary because it separately keeps track of valid titles from `AllRecipes.txt`
         - This is due to the fact that the recipe files might be tampered
 - has methods to do various useful operation on the `RecipeList.recipes` and `RecipeList.recipeTitles`
+
 
 [⏫ Back to content page](#content-page)
 
@@ -553,6 +560,9 @@ This is to prevent manual tampering of the data that might affect the data in th
 <p align="center" width="100%">
   <img width="100%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
 </p>
+The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+whether the GUI or CLI should be called through the number of arguments passed by the user.
+
 
 [⏫ Back to content page](#content-page)
 
