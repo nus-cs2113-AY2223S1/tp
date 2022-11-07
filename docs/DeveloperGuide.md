@@ -116,9 +116,7 @@ Given below is an example usage scenario and how the appointment management beha
 
 Step 1. The user launches the application. The user executes `appointment add s/bath p/2001 d/2022-12-12` command which calls `AppointmentList#addAppointment()`. 
 To create an appointment with bath service for pet with id = 2001, scheduled on date 2022-12-12, inside it:
-- First calls `Appointment#checkFormattedDate()` to check if the given date is valid.
-- Secondly calls `ServiceList#findService()` to check if the corresponding service with given description exists.
-- Thirdly calls `PetList#findPet()` to check if the corresponding pet with given id exists.
+
 - Lastly, after all checking, creates the corresponding appointment and adds it into appointment list.
 
 Step 2. The user executes `appointment view` command to view all the current appointments for the clinic. The command calls `AppointmentList#listAppointment()` to display all existing appointments details.
@@ -130,6 +128,18 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 The following sequence diagram shows how the add appointment operation works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
+
+### Design Considerations
+**Aspect: How addAppointment executes:**
+
+Alternative 1 (current choice):
+To relate appointment with existing service, pet and valid date, check all three attributes before adding an appointment to the appointment list:
+- First calls `Appointment#checkFormattedDate()` to check if the given date is valid.
+- Secondly calls `ServiceList#findService()` to check if the corresponding service with given description exists.
+- Thirdly calls `PetList#findPet()` to check if the corresponding pet with given id exists.
+
+  - Pros: Easy to understand.
+  - Cons: An invalid appointment may not be added to the appointment list but will consume an appointment id, which causes the valid id not contiguous.
 
 ### Appointment Status Feature
 
