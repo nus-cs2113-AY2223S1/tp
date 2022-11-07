@@ -375,6 +375,7 @@ using the `setFlightNum(newFlightNum)` method.
 for the respective passengers as well. 
 
 ---  
+
 <div style="page-break-after: always;"></div>  
 
 ### Delay a flight feature
