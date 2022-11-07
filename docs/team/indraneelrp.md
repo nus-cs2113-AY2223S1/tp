@@ -9,7 +9,7 @@ Given below are my contributions to the project:
 
 * **New Feature**: Driver code
   * What it does: This feature handles the overall run of duke. 
-  * Justification: The overall executor needs to handle the set-up actions such as the creating of a file or
+  * Justification: The overall executor needs to handle the set-up actions such as the creating of a file and
   reading in saved data, and then executing the main funtions of the program.
   * Highlights: The OOP model has been well-followed to make the structure of the program simple and intuitive. The
   driver code was written such that the instantiation of the Duke object instantiates the various helper classes (Parser, storage, Ui, ReviewList), allowing the smaller details to be abstracted away, resulting in clean concise and very readable
@@ -19,8 +19,8 @@ Given below are my contributions to the project:
   * What it does: This feature resolves the user input into a command to execute.
   * Justification: The parser class is vital to the program, as it is responsible for proessing the user's string input
   and triggering the appropriate function. By having a Parser as a dedicated feature, the resolution of user input can be compartmentalised into a specific class, keeping the main code clean.
-  * Highlights: The parser splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, the respective functions, where needed, obtain the arguments for the particular command by splitting the user input using "/". The presence of exact arguments are 
-  also determined by checking for the presence of specific keywords. Then, the manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), again to keep a separation of concerns.
+  * Highlights: The parser splits the user's input string using space " " as a delimiter. This resolves the first word of the command, triggering the specific execute function via the switch-case block. Then, respective functions, where needed, obtain 
+  the arguments for the particular command by further splitting user input. Specific keywords strings are used to check for arguments. Then, the manipulation of the ReviewList object is handed off to the Command classes (Eg AddCommand), again to keep a separation of concerns.
 
 * **New Feature**: Storage
   * What it does: This feature ensures the user's information can be saved into local storage and retrieved
@@ -41,12 +41,13 @@ Given below are my contributions to the project:
   * Closely followed and updated issue tracker, closing completed issues.
   * Added assignees, labels and milestones to issues.
   * Reviewed and merged teammates' PRs.
-  * Led discussion on how to structure the project in V1.0.
+  * Led discussion on how to structure the project in V1.0, especially for Parser. [Indraneel's iP](https://github.com/indraneelrp/ip)
 
 * **Enhancements to existing features**:
-  * Wrote JUnit test cases for Storage, Parser, UI, and Moivie. For the largest feature, Parser, brought the unit tests to 70% coverage for v2.0.
-  * Researched and implemented how to direct logging information from the console to a log file. Youtube video used as reference: https://www.youtube.com/watch?v=W0_Man88Z3Q.
+  * Wrote JUnit test cases for Storage, Parser, UI, and Movie. Brought the unit tests to 70% coverage for Parser for v2.0.
+  * Researched and implemented how to direct logging information from the console to a log file. [Reference Youtube video](https://www.youtube.com/watch?v=W0_Man88Z3Q) [PR #115](https://github.com/AY2223S1-CS2113-T18-1b/tp/pull/115)
   * Enhanced the add feature to ensure that entries with duplicate names would be rejected if attempted. This ensures that the total count of items is accurate and reduces redundant information when sorting.
+  * Figured out a platform-independent solution for JUnit tests compare against CLI output (Generally, line separators cause issues). [Stackoverflow link referenced](https://stackoverflow.com/questions/41674408/java-test-system-output-including-new-lines-with-assertequals)  
 
 * **Documentation**:
   * User guide:
@@ -59,6 +60,4 @@ Given below are my contributions to the project:
 
 * **Community**:
   * PRs reviewed:
-    * [tP #W12](https://github.com/AY2223S1-CS2113-W12-1/tp)
-    * [iP #39](https://github.com/nus-cs2113-AY2223S1/ip/pull/39/files)
-    * [iP #26](https://github.com/nus-cs2113-AY2223S1/ip/pull/26)
+    * [tP #W12](https://github.com/AY2223S1-CS2113-W12-1/tp), [iP #39](https://github.com/nus-cs2113-AY2223S1/ip/pull/39/files), [iP #26](https://github.com/nus-cs2113-AY2223S1/ip/pull/26), [PED bugs](https://github.com/indraneelrp/ped/issues)
