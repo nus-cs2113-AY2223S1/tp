@@ -141,7 +141,7 @@ public class FlagParser {
     }
 
     public static int getLastFlagIndex(String[] parsedCommand) {
-        int lastIndex = 0;
+        int lastIndex = -1;
         for (int i = 0; i < parsedCommand.length; i++) {
             if (parsedCommand[i].contains("-")) {
                 switch (parsedCommand[i]) {

@@ -24,18 +24,22 @@ public class Delete extends EditModeCommand {
      */
     @Override
     public Recipe execute() throws InvalidFlagException, IndexOutOfBoundsException {
-        int index = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
-        switch (ingredientFlag) {
-        case INGREDIENT:
-            Ui.showMessage("Delete \"" + recipe.getIngredient(index).getName() + "\"");
-            recipe.deleteIngredient(index);
-            return recipe;
-        case STEP:
-            Ui.showMessage("Delete \"" + recipe.getStep(index) + "\"");
-            recipe.deleteStep(index);
-            return recipe;
-        default:
-            throw new InvalidFlagException();
+        try {
+            int index = Integer.parseInt(parsedCommand[INDEX_LOCATION]) - 1;
+            switch (ingredientFlag) {
+                case INGREDIENT:
+                    Ui.showMessage("Delete \"" + recipe.getIngredient(index).getName() + "\"");
+                    recipe.deleteIngredient(index);
+                    return recipe;
+                case STEP:
+                    Ui.showMessage("Delete \"" + recipe.getStep(index) + "\"");
+                    recipe.deleteStep(index);
+                    return recipe;
+                default:
+                    throw new InvalidFlagException();
+            }
+        } catch (NumberFormatException n) {
+            throw new NumberFormatException("Invalid number format");
         }
     }
 }

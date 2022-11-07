@@ -44,6 +44,7 @@ public class AddTest {
         EditModeCommand ed = new Add(FlagType.TITLE, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (InvalidFlagException i) {
             assert true;
         } catch (Exception e) {
@@ -57,6 +58,7 @@ public class AddTest {
         EditModeCommand ed = new Add(FlagType.INGREDIENT, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (ParseException p) {
             assert true;
         } catch (Exception e) {
