@@ -2,6 +2,9 @@
 
 ### Overview
 
+Hi, I am Cao Yikai, a year 3 student majoring in Industrial Engineering and minoring in Statistics.
+
+Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI) developed by a team of five students following the course requirements of CS2113 within six weekss. PCMS is a desktop application that helps a clinic reception to record appointments, assign tasks, and manage data of pets/services/tasks/employees.
 
 #### Summary of Contributions
 
@@ -47,19 +50,12 @@
 **Contributions to team-based tasks**
 
 - Serving as a team leader
-
 - Deciding on weekly meetings and task assignments
-
 - Maintaining the issue tracker
-
   ![image-20221106145033594](C:\Users\13757\AppData\Roaming\Typora\typora-user-images\image-20221106145033594.png)
-
 - Maintaining the milestone
-
 - Release management
-
 - Opened pull request from team repo to module repo
-
 - Carried some Some-test on the deliverable
 
 **Mentoring contributions**
@@ -69,7 +65,6 @@
 **Contributions beyond the project team**
 
 - Reviewed the pull requests of another team
-
   ![review](D:\Junior1\CS2113\PPP graphs\review.jpg)
 
   
