@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * VisitList is a class that handles the array operations for Visit objects.
+ */
 public class VisitList {
     private final ArrayList<Visit> visitList;
 
@@ -10,6 +13,16 @@ public class VisitList {
     public ArrayList<Visit> getVisits() {
         return visitList;
     }
+    /**
+     * Adds a new visit to the list
+     * It will only be added if there is not an exact duplicate of this
+     visit present in the list with the same id, dateOfVisit and timeOfVisit.
+     * @param ui is the user interface of OneDoc
+     * @param id is a String of the patient's identification number
+     * @param dateOfVisit is a String of the date of visit
+     * @param timeOfVisit is a String of the time of visit
+     * @param reason is a String of the patient's reason for visit
+     */
 
     public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit, String reason) {
         assert id != null : "id should not be null";
@@ -37,6 +50,13 @@ public class VisitList {
         }
     }
 
+    /**
+     * Checks if the visit is a duplicate of another in the list of visits.
+     * @param id is a String of the patient's identification number
+     * @param dateOfVisit is a String of the date of visit
+     * @param timeOfVisit is a String of the time of visit
+     * @return a boolean whether it is a duplicate visit or not
+     */
     public boolean checkDuplicateVisit(String id, String dateOfVisit, String timeOfVisit) {
         for (int i = 0; i < getTotalVisits(); i++) {
             if (visitList.get(i).getId().equals(id)
@@ -53,6 +73,13 @@ public class VisitList {
         visitList.add(visit);
     }
 
+
+    /**
+     * Edits reason for an existing visit.
+     * @param ui is the user interface of OneDoc
+     * @param index is an integer, referring to the index of the visit in the overall list of visits
+     * @param reason is a String of the patient's reason for visit
+     */
     public void editReason(UI ui, int index, String reason) {
         assert reason != null : "reason should not be null, use deleteReason instead";
         if (index < 1 || index > getTotalVisits()) {
@@ -64,6 +91,11 @@ public class VisitList {
         }
     }
 
+    /**
+     * Deletes reason for an existing Visit in the list.
+     * @param ui is the user interface of OneDoc
+     * @param index is an integer, referring to the index of the visit in the overall list of visits
+     */
     public void deleteReason(UI ui, int index) {
         if (index < 1 || index > getTotalVisits()) {
             System.out.println("There is no such visit in the system with index " + index + "!");
@@ -84,6 +116,10 @@ public class VisitList {
         return visitList.size();
     }
 
+    /**
+     * Shows all the visits in the list of visits.
+     * @param ui is the user interface of OneDoc
+     */
     public void viewAll(UI ui) {
         if (isEmpty()) {
             System.out.println("There are no visits in the system right now!");
@@ -98,6 +134,11 @@ public class VisitList {
         ui.printLine();
     }
 
+    /**
+     * Shows all the visits belonging to a specific patient.
+     * @param ui is the user interface of OneDoc
+     * @param id is a String of the patient's identification number
+     */
     public void viewPatient(UI ui, String id) {
         if (isEmpty()) {
             System.out.println("There are no visits in the system right now!");
@@ -121,6 +162,11 @@ public class VisitList {
         ui.printLine();
     }
 
+    /**
+     * Shows a specific visit in the list of visits.
+     * @param ui is the user interface of OneDoc
+     * @param index is an integer, referring to the index of the visit in the overall list of visits
+     */
     public void viewVisit(UI ui, int index) {
         if (isEmpty()) {
             System.out.println("There are no visits in the system right now!");

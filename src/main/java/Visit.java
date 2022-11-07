@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+/**
+ * Visit is a class that represents a Visit object and specify what are the parameters a visit has.
+ */
 
 public class Visit {
     private String id;
