@@ -560,6 +560,9 @@ This is to prevent manual tampering of the data that might affect the data in th
 <p align="center" width="100%">
   <img width="100%" src="images/SequenceDiagram/Edit.png" alt="Edit Sequence Diagram"/>
 </p>
+The user first call the edit command from the Main class which will then be passed to the Parser class. It decides
+whether the GUI or CLI should be called through the number of arguments passed by the user.
+
 
 [⏫ Back to content page](#content-page)
 
