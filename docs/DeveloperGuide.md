@@ -1,5 +1,61 @@
 # Developer Guide
 
+## Table of Contents
+
+* [Acknowledgements](#acknowledgements)
+* [Quick Start](#quick-start)
+* [Design & implementation](#design--implementation)
+  * [Architecture](#architecture)
+    * [Main components of the architecture](#main-components-of-the-architecture)
+    * [Interaction between the architecture components](#interaction-between-the-architecture-components)
+  * [PatientList Component](#patientlist-component)
+    * [Important methods in `PatientList` class](#important-methods-in-patientlist-class)
+  * [VisitList Component](#visitlist-component)
+    * [Important methods in `VisitList` class](#important-methods-in-visitlist-class)
+    * [Adding a new visit](#adding-a-new-visit)
+  * [PrescriptionList component](#prescriptionlist-component)
+    * [Important Methods in `PrescriptionList` class](#important-methods-in-prescriptionlist-class)
+    * [Members in `Prescription` class](#members-in-prescription-class)
+    * [Adding a new prescription](#adding-a-new-prescription)
+    * [Viewing prescriptions](#viewing-prescriptions)
+    * [Editing a prescription](#editing-a-prescription)
+    * [Activating / Deactivating a prescription](#activating--deactivating-a-prescription)
+  * [Storage Component](#storage-component)
+    * [Important methods in the `Storage` class](#important-methods-in-the-storage-class)
+  * [UI Component](#ui-component)
+    * [Important methods in the `UI` class](#important-methods-in-the-ui-class)
+  * [Parser Component](#parser-component)
+    * [Important methods in the `Parser` class](#important-methods-in-the-parser-class)
+* [Appendix](#appendix)
+  * [Product scope](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+  * [User Stories](#user-stories)
+  * [Non-Functional Requirements](#non-functional-requirements)
+    * [Index Reference](#index-reference)
+  * [Glossary](#glossary)
+  * [Instructions for manual testing](#instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Navigating between main menu and sub menus](#navigating-between-main-menu-and-sub-menus)
+    * [Loading sample data](#loading-sample-data)
+    * [Patient menu tests](#patient-menu-tests)
+      * [Adding a new patient](#adding-a-new-patient)
+      * [Viewing all patients](#viewing-all-patients)
+      * [Retrieving a patient’s records](#retrieving-a-patients-records)
+      * [Modifying the details of a patient](#modifying-the-details-of-a-patient)
+      * [Viewing the commands in Patient menu](#viewing-the-commands-in-patient-menu)
+    * [Visit menu tests](#visit-menu-tests)
+      * [Viewing a patient's visits](#viewing-a-patients-visits)
+      * [Viewing a visit](#viewing-a-visit)
+    * [Prescription menu tests](#prescription-menu-tests)
+      * [Adding a new prescription](#adding-new-prescriptions)
+      * [Modifying a patient’s prescription](#modifying-a-patients-prescription)
+      * [Viewing list of all existing Prescriptions](#viewing-list-of-all-existing-prescriptions)
+      * [Viewing all prescriptions of a patient](#viewing-all-prescriptions-of-a-patient)
+      * [Viewing all active prescriptions of a patient](#viewing-all-active-prescriptions-of-a-patient)
+      * [Changing prescription status](#changing-prescription-status)
+      * [Viewing the commands in the Prescription menu](#viewing-the-commands-in-the-prescription-menu)
+ 
 ## Acknowledgements
 
 Parser class and its functions are adapted with inspiration from [Ria's IP](https://github.com/riavora/ip) and help
@@ -7,7 +63,55 @@ from [regex101](https://regex101.com/).
 
 Storage class and its functions are largely adapted from [Dhanish's IP](https://github.com/dhanish265/ip) on Duke.
 
+## Quick Start
+
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `OneDoc` from [here](https://github.com/AY2223S1-CS2113-F11-4/tp/releases/tag/v2.1).
+
 ## Design & implementation
+
+### Architecture
+
+![](images/ArchitectureDiagram.png)
+
+The architecture diagram above shows the high-level design of the application.
+
+Below is a quick overview of the main components and how each component interacts with one another.
+
+#### Main components of the architecture
+
+**`OneDoc`** is the main class of the application. It is responsible for
+* At app launch: Initializes the components in the correct sequence, connect them up with each other, load the storage
+data and start the main loop.
+
+The rest of the app consists of six components, with three of them having a similar nature.
+* **`UI`**: The user interface of the app.
+* **`Parser`**: Parses the user commands and initiates different action to the list.
+* **`XyzList`**: The lists for manipulating patients, visits and prescriptions. (Xyz is a placeholder for `Patient`, 
+`Visit` or `Prescription`) 
+* **`Storage`**: Reads data from and writes data to the hard disk.
+
+The object diagram below shows how are the instances of the components are connected on initialization.
+
+![](images/OneDocInitialObjectDiagram.png)
+
+#### Interaction between the architecture components 
+
+The following two sequence diagrams shows how the main flow of the app is navigating between main menu and the three sub
+menus. `OneDoc` component mainly interacts with `UI` and `Parser` components. (Xyz is a placeholder for `Patient`,
+`Visit` or `Prescription`. For example for `Patient`, the main menu state enum is `MainMenuState.PATIENT` and the parser
+function is `patientParser(input)`)
+
+<img align="top" src="images/OneDocSequenceDiagram.png">
+<img align="top" src="images/OneDocSubMenuRefSequenceDiagram.png">
+
+The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
+command `activate x/1` in the Prescription Sub Menu. 
+
+![](images/ArchitectureSequenceDiagram.png)
+
+Each of the main components defines its API in a class with the same name as the component. 
+The sections below give more details of each component.
 
 ### PatientList Component
 
@@ -33,7 +137,7 @@ ArrayList in PatientList. A final call to savePatientData rewrites the data file
 The above is a summary of the aforementioned process, omitting some commands in the code that has to do with Visits, Prescriptions and UI classes
 and related methods.
 
-#### Important methods in PatientList class
+#### Important methods in `PatientList` class
 * `addPatient` - this method takes in the aforementioned variables through UI class and parses them. If they are all valid, a new
 `Patient` is created and added to the list of `Patient`s in PatientList.
 * `findPatient` - this method takes in an `ID`, iterates through the list of Patients and compares the `ID` with the `ID` of each of the
@@ -68,7 +172,7 @@ as it is equivalent to deleting a reason, for which a user should use the `delet
 * `viewPatient` - This method iterates through the list of all visits, and prints the visit records that match the specified `id` of patient
 * `viewVisit` - This method iterates through the list of all visits, and prints the visit record that matches the specified `index` of the visit
 
-#### How adding a new `Visit` into the `VisitList` works
+#### Adding a new visit
 
 ![](images/VisitListAdd.png)
 
@@ -182,7 +286,7 @@ The class diagram summarises the functions of the `Storage` component at a glanc
 The `Storage` class has dependencies on the `Scanner` (used to read files) and `FileWriter` (used to write to files) classes.
 It also has a composition relationship with 3 `File` objects, that are used to store data.
 
-**Important methods in the `Storage` class:**
+#### Important methods in the `Storage` class
 
 * `loadData` - This method initializes the data file objects that are to be read from, and calls the relevant methods to
 load pre-existing data. Subsequently, it makes a call to relevant methods to rewrite the text files such that only valid
@@ -208,7 +312,7 @@ passing the `Patient` and `FileWriter` objects.
 * handles printing messages to the user
 * handles printing errors to the user
 
-**Important methods in the `UI` class:**
+#### Important methods in the `UI` class
 * `printWelcomeMessage` - prints logo and welcome message to the user when opening "OneDoc"
 * `printObject` - prints object - patient/visit/prescription and their corresponding index 
 * `printMessageAndObject` - prints object - patient/visit/prescription and their corresponding index, given message and object type
@@ -226,7 +330,7 @@ The `Parser` component,
 The `Parser` class has dependencies on the `Pattern` (used to create regular expression patterns) and `Matcher`
 (used to find regular expressions in Strings) classes.
 
-**Important methods in the `Parser` class:**
+#### Important methods in the `Parser` class
 
 * `mainMenuParser` - This method interprets the initial user input to identify the correct submenu, and return that 
 state to the UI
@@ -259,16 +363,16 @@ to be a Matcher for it.
 6. If there is an error, the specific relevant command is identified in this method, and the format guide is returned
 to the user.
 
-
-## Product scope
-### Target user profile
+## Appendix
+### Product scope
+#### Target user profile
 
 Our target user profile is a doctor in need of quick access to information about his/her patients, visits, and
 prescriptions. The doctor can quickly see all of the prescriptions that have been given, when a patient has visited, 
 what their reasons were, etc. through this interface. The doctor can also quickly update this before, during, or after
 each visit and prescription to ensure that it stays up to date and easy-to-use.
 
-### Value proposition
+#### Value proposition
 
 Doctors tend to use sticky notes or quick pieces of paper to jot down notes such as prescriptions, reason for visit, etc.
 This platform allows a doctor to quickly reference basic information about a patient, find their previous prescriptions
@@ -276,7 +380,7 @@ and visits, and look at the history to make a decision. A doctor can mark a pres
 a consistent history. Moreover, the only part of these records that a doctor can delete is a reason, ensuring continuity
 of information.
 
-## User Stories
+### User Stories
 
 | Version | As a ...    | I want to ...                                               | So that I can ...                                                                   |
 |---------|-------------|-------------------------------------------------------------|-------------------------------------------------------------------------------------|
@@ -298,7 +402,7 @@ of information.
 | v2.0    | doctor/user | change a prescription status to active                      | have on record that the patient is currently taking the prescription                |
 | v2.0    | doctor/user | change a prescription status to inactive                    | have on record that the patient is currently not taking the prescription            |
 
-## Non-Functional Requirements
+### Non-Functional Requirements
 
 * Should work on any mainstream OS as long as it has Java 11 or above installed.
 * A doctor with above-average typing speed for regular English text and numbers (i.e. not code or system commands)
@@ -308,21 +412,42 @@ sluggishness in performance for typical usage.
 * Data is unable to be deleted on the program (besides directly editing the data files), preventing malicious actors
 from deleting essential health records
 
-### Index Reference
+#### Index Reference
 
 We utilize both ID and index reference in this tP, which may look confusing at first.
 Indices for visit and prescription are unique when created, and can be found when adding, editing, or viewing
 a visit or prescription. If you want to find a visit, you can search for a patient's visits through viewPatient in the
 visit menu, and then use the given index of the visit you find to edit it. The same workflow applies for prescription.
 
-## Glossary
+### Glossary
 
 * *patient* - A single individual with a unique ID
 * *visit* - A single visit of one existing patient on a specific date and time
 * *prescription* - A single prescription of one existing patient, active based on in the patient is currently using it
 
-## Instructions for manual testing
+### Instructions for manual testing
+Given below are instructions to test the app manually.
 
+#### Launch and shutdown
+1. Initial launch
+   1. Download the jar file and move it into an empty folder.
+   2. Open the command prompt / terminal and change working directory to the folder.
+   3. Run the jar file by input `java -jar tp.jar` into the command line. The app should start running.
+2. Exit program
+   1. Input `bye`. The app should end with a greeting.
+
+#### Navigating between main menu and sub menus
+1. Go to Patient menu and return to main
+   1. Input `1`. The patient menu should be shown.
+   2. Input `main`. The main menu should be shown again.
+2. Go to Visit menu and return to main
+   1. Input `2`. The visit menu should be shown.
+   2. Input `main`. The main menu should be shown again.
+3. Go to Prescription menu and exit the program
+    1. Input `3`. The prescription menu should be shown.
+    2. Input `bye`. The app should end with a greeting.
+
+#### Loading sample data
 To load sample data, please reference the following formats:
 
 `patient.txt`: `Name | DOB | G | ID`
@@ -332,5 +457,183 @@ To load sample data, please reference the following formats:
 <br>Example: `T1 | checkup | 08-11-2022 | 08:00`
 
 `prescription.txt`: `ID | Name | Dosage | Time Interval | Active Status (T or F)`
-<br>Example: `T2 | penicillin | 1 tablet | every 3 days | T`
+<br>Example: `T1 | penicillin | 1 tablet | every 3 days | T`
 
+#### Patient menu tests
+Please navigate to patient menu by inputting `1` in the main menu before testing the features below.
+
+##### Adding a new patient
+Please ensure that a patient with ID `T1` doesn't exist before testing this feature, and there is no patient with ID `T2`.
+
+1. Add a valid patient
+    1. Input `add n/Johnny Depp g/M d/08-09-1965 i/T1`.
+    2. The patient should be added successfully with the patient details printed
+2. Add repeated patient
+    1. Input `add n/Elizabeth Swann g/F d/09-11-1975 i/T1`.
+    2. This addition should be rejected, saying the patient ID is already taken
+3. Add patient with invalid format
+    1. Input `add n/Will Turner g/M d/11-12-1972 i/T2`.
+    2. The addition should be rejected with hints of the correct input format for adding patient.
+
+##### Viewing all patients
+
+1. View patients when there are patients
+    1. Input `viewall`.
+    2. All patients that are saved in the `patient.txt` file should be listed.
+2. View patients when there are no patients
+    1. Clear the `patient.txt` file manually if it is not empty.
+    2. Input `viewall`.
+    3. There should be a message stating that there is no patients in the system.
+
+##### Retrieving a patient’s records
+
+1. Retrieve a patient with correct format
+    1. Input `retrieve i/T1`.
+   2. The patient should be retrieved successfully with the patient details printed
+2. Retrieve a patient that doesn't exist
+    1. Input `retrieve i/T2`.
+    2. The addition should be rejected with an error message stating that the patient ID doesn't exist
+3. Retrieve a patient with incorrect format
+    1. Input `retrieve T1`.
+    2. The addition should be rejected with an error message stating that the input is incorrectly formatted
+   
+##### Modifying the details of a patient
+
+1. Edit a patient that doesn't exist
+    1. Input `edit i/T2 n/Will Turner`.
+    2. The addition should be rejected with an error message stating that the patient ID doesn't exist
+2. Edit a patient with incorrect format
+    1. Input `edit i/T1 d/Will Turner`.
+    2. The addition should be rejected with an error message stating that the input for date of birth is wrong
+   
+##### Viewing the commands in Patient menu
+
+1. Input `help`
+   1. All commands supported in the Prescription menu should be shown.
+2. Input a command that doesn't exist, i.e. `find`
+    1. All commands supported in the Prescription menu should be shown.
+
+#### Visit menu tests
+Please follow the same format as Patient & Prescription for `add`, `edit`, `viewall`, etc.
+For `viewPatient` and `viewVisit` please read below.
+
+##### Viewing a patient's visits
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID
+`321`. Please add visits for patient `T1` and not for `T2`.
+
+1. View visits of a patient with existing visits
+    1. Input `viewPatient i/T1`
+    2. The  visits corresponding to patient `T1` should be listed.
+2. View visits of a patient with no existing visits
+    1. Input `viewPatient i/T2`
+    2. There should be a message stating that there is no visits from this patient in the system.
+3. View visits of non-existing patient
+    1. Input `viewPatient i/321`
+    2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Viewing a visit
+Please ensure that a patient with ID `T1` exists before testing this feature, and there is no patient with ID
+`321`. Please add at least two visits for patient `T1`, and there are no other visits in the system.
+
+1. View visits of a patient with existing visits
+    1. Input `viewPatient i/T1`
+    2. The visits corresponding to patient `T1` should be listed.
+    3. Input `viewVisit x/1`
+    4. The single visit should be displayed with an index of 1
+2. View visits that do not exist
+    1. Input `viewVisit x/5`
+    2. There should be a message stating that there is no visit with that index.
+
+#### Prescription menu tests
+Please navigate to prescription menu by inputting `3` in the main menu before testing the features below.
+
+##### Adding new prescriptions
+Please ensure that a patient with ID `T1` exists before testing this feature, and there is no patient with ID `321`.
+
+1. Add a valid prescription
+   1. Input `add i/T1 n/Problaxan d/10 mg t/take 15 minutes after every meal`. 
+   2. The prescription should be added successfully with the prescription details printed
+2. Add repeated prescription
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day`. 
+   2. Input `add i/T1 n/Panadol d/5 mg t/Once a day` once again.
+   3. The 2nd addition should be rejected, and the existing prescription with the same details should be shown.
+3. Add prescription for non-existing patient
+   1. Input `add i/321 n/Panadol d/5 mg t/Once a day`.
+   2. The addition should be rejected with an error message stating that the patient ID does not exist.
+4. Add prescription with invalid format
+   1. Input `add i/T1 n/Panadol d/A pill t/Once a day`.
+   2. The addition should be rejected with hints of the correct input format for adding prescription.
+
+##### Modifying a patient’s prescription
+
+1. Edit an existing prescription's medicine name
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   2. Input `edit x/<index> n/Problaxan` with the index shown when adding the prescription. (Index is the number next to
+   Prescription #)
+   3. The prescription's medicine name should be changed to `Problaxan` without changing all other attributes.
+2. Edit a non-existing prescription's medicine dosage
+   1. Input `edit x/0 d/19 mg`.
+   2. The modification should be rejected with a message stating the index number is out of range.
+3. Edit an existing prescription which the new version is a duplicate of another existing prescription
+   1. Input `add i/T1 n/Panadol d/5 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   2. Input `add i/T1 n/Panadol d/10 mg t/Once a day` if the record does not exist. Skip this if it is already there.
+   3. Input `edit x/<index> d/5 mg` with the index shown when adding the prescription with `10 mg` dosage. (Index is the
+   number next to Prescription #)
+   4. The modification should be rejected, and the existing prescription with the same details should be shown.
+
+##### Viewing list of all existing Prescriptions
+
+1. View prescriptions when there are prescriptions
+   1. Input `viewall`.
+   2. All prescriptions that are saved in the `prescription.txt` file should be listed.
+2. View prescriptions when there are no prescription
+   1. Clear the `prescription.txt` file manually if it is not empty.
+   2. Input `viewall`. 
+   3. There should be a message stating that there is no prescriptions in the system.
+
+##### Viewing all prescriptions of a patient
+
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID 
+`321`. Please add prescriptions for patient `T1` and not for `T2`.
+
+1. View prescriptions of a patient with existing prescriptions
+   1. Input `viewPatientPres i/T1`
+   2. The prescriptions corresponding to patient `T1` should be listed.
+2. View prescriptions of a patient with no existing prescriptions
+   1. Input `viewPatientPres i/T2`
+   2. There should be a message stating that there is no prescriptions from this patient in the system.
+3. View prescriptions of non-existing patient
+   1. Input `viewPatientPres i/321`
+   2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Viewing all active prescriptions of a patient
+
+Please ensure that a patient with ID `T1` and `T2` exists before testing this feature, and there is no patient with ID
+`321`. Please add prescriptions for patient `T1` and not for `T2`.
+
+1. View prescriptions of a patient with existing prescriptions
+   1. Input `viewActPatientPres i/T1`
+   2. The active prescriptions corresponding to patient `T1` should be listed.
+2. View prescriptions of a patient with no existing prescriptions
+   1. Input `viewActPatientPres i/T2`
+   2. There should be a message stating that there is no active prescriptions from this patient in the system.
+3. View prescriptions of non-existing patient
+   1. Input `viewActPatientPres i/321`
+   2. There should be a message stating that there is the patient ID is not existing in the app.
+
+##### Changing prescription status
+
+1. Activate existing prescription
+   1. Input `viewall` and check the index of the last prescription in the system. Please add 1 if there isn't any.
+   2. Input `activate x/<index>`, where the index is the one retrieved from Step 1.
+   3. The status of the prescription should be updated to `Active`.
+2. Deactivate non-existing prescription
+   1. Input `deactivate x/0`.
+   2. There should be a message stating the index number is out of range shown.
+
+##### Viewing the commands in the Prescription menu
+
+1. Input `help`
+   1. All commands supported in the Prescription menu should be shown.
+2. Input a command that doesn't exist, i.e. `find`
+    1. All commands supported in the Prescription menu should be shown.

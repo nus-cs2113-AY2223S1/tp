@@ -298,7 +298,7 @@ public class UI {
     public static final String ADD_PRESCRIPTION = "You have added a prescription!";
     public static final String EDIT_PRESCRIPTION = "You have edited the prescription!";
     public static final String DEACTIVATE_PRESCRIPTION = "Ok, I've deactivated the prescription below:";
-    public static final String ACTIVATE_PRESCRIPTION = "You have edited the prescription!";
+    public static final String ACTIVATE_PRESCRIPTION = "Ok, I've activated the prescription below:";
 
     // Prescription commands
     public static final String PRESCRIPTION_ADD = "\n* To add a prescription: add i/ID "

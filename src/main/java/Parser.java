@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -62,6 +63,11 @@ public class Parser {
         return input.equalsIgnoreCase(HELP_COMMAND);
     }
 
+    /**
+     * Parse the user input and perform the correct actions on PatientList, then return the next SubMenuState.
+     * @param input is a String given by user
+     * @return `SubMenuState` enum
+     */
     public SubMenuState patientParser(String input) {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
@@ -105,6 +111,11 @@ public class Parser {
         return SubMenuState.IN_SUB_MENU;
     }
 
+    /**
+     * Parse the user input and perform the correct actions on VisitList, then return the next SubMenuState.
+     * @param input is a String given by user
+     * @return `SubMenuState` enum
+     */
     public SubMenuState visitParser(String input) {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
@@ -163,6 +174,11 @@ public class Parser {
     }
 
 
+    /**
+     * Parse the user input and perform the correct actions on PrescriptionList, then return the next SubMenuState.
+     * @param input is a String given by user
+     * @return `SubMenuState` enum
+     */
     public SubMenuState prescriptionParser(String input) {
         if (shouldExit(input)) {
             return SubMenuState.EXIT;
@@ -229,7 +245,7 @@ public class Parser {
         return SubMenuState.IN_SUB_MENU;
     }
 
-    public void errorIfNoMatchPatient(Matcher matcher, String message) throws OneDocException {
+    private void errorIfNoMatchPatient(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
@@ -256,7 +272,7 @@ public class Parser {
         }
     }
 
-    public void errorIfNoMatchVisit(Matcher matcher, String message) throws OneDocException {
+    private void errorIfNoMatchVisit(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
@@ -289,7 +305,7 @@ public class Parser {
         }
     }
 
-    public void errorIfNoMatchPrescription(Matcher matcher, String message) throws OneDocException {
+    private void errorIfNoMatchPrescription(Matcher matcher, String message) throws OneDocException {
         if (matcher == null || !matcher.find()) {
             switch (message) {
             case ADD_COMMAND:
@@ -333,7 +349,7 @@ public class Parser {
         }
     }
 
-    private void checkDate(int day, int month, String date) throws OneDocException {
+    private static void checkDate(int day, int month, String date) throws OneDocException {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu", Locale.US)
                     .withResolverStyle(ResolverStyle.STRICT);
@@ -348,7 +364,7 @@ public class Parser {
         }
     }
 
-    private void checkDateForVisit(String date) throws OneDocException {
+    private static void checkDateForVisit(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             checkDate(Integer.parseInt(dateSplit[0]),Integer.parseInt(dateSplit[1]),date);
@@ -361,7 +377,7 @@ public class Parser {
         }
     }
 
-    private void checkBirthDate(String date) throws OneDocException {
+    private static void checkBirthDate(String date) throws OneDocException {
         try {
             String[] dateSplit = date.split("-");
             int day = Integer.parseInt(dateSplit[0]);
@@ -378,7 +394,7 @@ public class Parser {
     }
 
 
-    private void checkTime(String time) throws OneDocException {
+    private static void checkTime(String time) throws OneDocException {
         try {
             String[] timeSplit = time.split(":");
             int hour = Integer.parseInt(timeSplit[0]);
@@ -416,16 +432,32 @@ public class Parser {
     }
 
     private void parseAddVisit(Matcher matcher, String patientId) throws OneDocException {
-        String reason = matcher.group(4);
-        checkDateForVisit(matcher.group(2));
+        String date = matcher.group(2);
+        checkDateForVisit(date);
         checkTime(matcher.group(3));
+        checkBirthDateVisitDate(date, patientId);
+        String reason = matcher.group(4);
         if (reason == null || reason.isEmpty()) {
-            visitList.addVisit(ui, patientId, matcher.group(2), matcher.group(3));
+            visitList.addVisit(ui, patientId, date, matcher.group(3));
             storage.saveVisitData(visitList);
         } else {
-            visitList.addVisit(ui, patientId, matcher.group(2),
+            visitList.addVisit(ui, patientId, date,
                     matcher.group(3), matcher.group(4));
             storage.saveVisitData(visitList);
+        }
+    }
+
+    private void checkBirthDateVisitDate(String date, String patientId) throws OneDocException {
+        Patient patient = patientList.findPatient(patientId);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            if (!sdf.parse(patient.getBirthDate()).before(sdf.parse(date))) {
+                throw new OneDocException("This patient was born before this visit! Please use a different visit date");
+            }
+        } catch (OneDocException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new OneDocException("Unknown error with patient's birthdate and given visit date");
         }
     }
 
@@ -437,13 +469,13 @@ public class Parser {
         return patientAddPattern.matcher(input);
     }
 
-    private  Matcher patientRetrieveMatcher(String input) {
+    private Matcher patientRetrieveMatcher(String input) {
         Pattern patientRetrievePattern = Pattern.compile(
                 "^" + RETRIEVE_PATIENT_COMMAND + "\\s*i/" + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return patientRetrievePattern.matcher(input);
     }
 
-    private static Matcher patientEditMatcher(String input) {
+    private Matcher patientEditMatcher(String input) {
         Pattern patientEditPattern = Pattern.compile(
                 "^" + EDIT_COMMAND + "\\s*i/" + ID_REGEX + "(n|g|d)/\\s*([\\w-\\s]+)$",
                 Pattern.CASE_INSENSITIVE);
@@ -488,42 +520,42 @@ public class Parser {
         }
     }
 
-    private static Matcher addVisitMatcher(String input) {
+    private Matcher addVisitMatcher(String input) {
         Pattern addVisitPattern = Pattern.compile(
                 "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "d/" + DATE_REGEX + "t/" + TIME_REGEX
                         + OPTIONAL_REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return addVisitPattern.matcher(input);
     }
 
-    private static Matcher editVisitMatcher(String input) {
+    private Matcher editVisitMatcher(String input) {
         Pattern editVisitPattern = Pattern.compile(
                 "^" + EDIT_COMMAND + "\\s*x/" + INDEX_REGEX + "r/"
                         + REASON_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return editVisitPattern.matcher(input);
     }
 
-    private static Matcher deleteReasonMatcher(String input) {
+    private Matcher deleteReasonMatcher(String input) {
         Pattern deleteReasonPattern = Pattern.compile(
                 "^" + DELETE_REASON_COMMAND + "\\s*x/"
                         + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return deleteReasonPattern.matcher(input);
     }
 
-    private static Matcher viewVisitPatientMatcher(String input) {
+    private Matcher viewVisitPatientMatcher(String input) {
         Pattern viewVisitPatientPattern = Pattern.compile(
                 "^" + VIEW_PATIENT_COMMAND + "\\s*i/"
                         + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewVisitPatientPattern.matcher(input);
     }
 
-    private static Matcher viewOneVisitMatcher(String input) {
+    private Matcher viewOneVisitMatcher(String input) {
         Pattern viewOneVisitPattern = Pattern.compile(
                 "^" + VIEW_VISIT_COMMAND + "\\s*x/"
                         + INDEX_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewOneVisitPattern.matcher(input);
     }
 
-    private static Matcher addPrescriptionMatcher(String input) {
+    private Matcher addPrescriptionMatcher(String input) {
         Pattern addPrescriptionPattern = Pattern.compile(
                 "^" + ADD_COMMAND + "\\s*i/" + ID_REGEX + "n/" + PRESCRIPTION_NAME_REGEX
                         + "d/" + DOSAGE_REGEX + "t/" + TIME_INSTRUCTION_REGEX + "$",
@@ -531,35 +563,35 @@ public class Parser {
         return addPrescriptionPattern.matcher(input);
     }
 
-    private static Matcher editPrescriptionMatcher(String input) {
+    private Matcher editPrescriptionMatcher(String input) {
         Pattern editPrescriptionPattern = Pattern.compile(
                 "^" + EDIT_COMMAND + "\\s*x/"  + INDEX_REGEX + "(n|d|t)/\\s*(.+)$",
                 Pattern.CASE_INSENSITIVE);
         return editPrescriptionPattern.matcher(input);
     }
 
-    private static Matcher viewPrescriptionPatientMatcher(String input) {
+    private Matcher viewPrescriptionPatientMatcher(String input) {
         Pattern viewPrescriptionPatientPattern = Pattern.compile(
                 "^" + VIEW_PATIENT_PRES_COMMAND + "\\s*i/"
                         + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionPatientPattern.matcher(input);
     }
 
-    private static Matcher viewPrescriptionActiveMatcher(String input) {
+    private Matcher viewPrescriptionActiveMatcher(String input) {
         Pattern viewPrescriptionActivePattern = Pattern.compile(
                 "^" + VIEW_ACT_PATIENT_PRES_COMMAND + "\\s*i/"
                         + ID_REGEX + "$", Pattern.CASE_INSENSITIVE);
         return viewPrescriptionActivePattern.matcher(input);
     }
 
-    private static Matcher changePrescriptionActiveMatcher(String input) {
+    private Matcher changePrescriptionActiveMatcher(String input) {
         Pattern changePrescriptionActivePattern = Pattern.compile(
                 "^" + ACTIVATE_COMMAND + "\\s*x/" + INDEX_REGEX
                         + "$", Pattern.CASE_INSENSITIVE);
         return changePrescriptionActivePattern.matcher(input);
     }
 
-    private static Matcher changePrescriptionInactiveMatcher(String input) {
+    private Matcher changePrescriptionInactiveMatcher(String input) {
         Pattern changePrescriptionInactivePattern = Pattern.compile(
                 "^" + DEACTIVATE_COMMAND + "\\s*x/" + INDEX_REGEX
                         + "$", Pattern.CASE_INSENSITIVE);
@@ -617,6 +649,11 @@ public class Parser {
         if (!inputs[2].equals("M") && !inputs[2].equals("F")) {
             return false;
         }
+        try {
+            checkBirthDate(inputs[1]);
+        } catch (OneDocException e) {
+            return false;
+        }
         return !inputs[0].isEmpty() && !inputs[1].isEmpty() && !inputs[3].isEmpty();
     }
 
@@ -628,6 +665,16 @@ public class Parser {
             return false;
         }
         if (inputs[0].isEmpty() || inputs[2].isEmpty() || inputs[3].isEmpty()) {
+            return false;
+        }
+        try {
+            checkDateForVisit(inputs[2]);
+        } catch (OneDocException e) {
+            return false;
+        }
+        try {
+            checkTime(inputs[3]);
+        } catch (OneDocException e) {
             return false;
         }
         return patientList.containsPatientID(inputs[0]);

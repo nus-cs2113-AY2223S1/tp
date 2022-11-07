@@ -26,8 +26,8 @@
         - [Adding a new prescription: `add`](#adding-a-new-prescription-add)
         - [Modifying a patient’s prescription: `edit`](#modifying-a-patients-prescription-edit)
         - [Viewing list of all existing Prescriptions: `viewAll`](#viewing-list-of-all-existing-prescriptions-viewall)
-        - [Viewing all prescriptions of a patient:: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
-        - [Viewing all active prescriptions of a patient:: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
+        - [Viewing all prescriptions of a patient: `viewPatientPres`](#viewing-all-prescriptions-of-a-patient-viewpatientpres)
+        - [Viewing all active prescriptions of a patient: `viewActPatientPres`](#viewing-all-active-prescriptions-of-a-patient-viewactpatientpres)
         - [Changing prescription status to active: `activate`](#changing-prescription-status-to-active-activate)
         - [Changing prescription status to inactive: `deactivate`](#changing-prescription-status-to-inactive-deactivate)
         - [Viewing the commands in the Prescription menu: `help`](#viewing-the-commands-in-the-prescription-menu-help)
@@ -61,7 +61,13 @@ Expected Output:
 
 ```
 Hello welcome to
-ıllıllı OneDoc ıllıllı
+
+                        _
+                       | |
+  ___  _ __   ___    __| | ___   ___
+ / _ \| '_ \ / _ \  / _` |/ _ \ / __|
+| (_) | | | |  __/ | (_| | (_) | (__
+ \___/|_| |_|\___|  \__,_|\___/ \___|
 Please choose one of the following options:
 1 - Patients
 2 - Visits
@@ -241,17 +247,18 @@ Acceptable Formats:
 
 Example of usage:
 
-`add i/S123 d/30-02-2020 t/15:00 r/flu`
+`add i/400TXF d/30-05-2020 t/15:00`
 
 Expected Output:
 
 ```
 You have added a visit!
     ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
     Time: 15:00
-    Reason: flu
+    Reason: NIL
     ____________________________________________________________
 ```
 
@@ -261,22 +268,25 @@ Add/edit reason for an existing visit in the list of visits
 
 Format: `edit x/[index] r/[reason]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+  * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
+
 * `reason` can be in any alphabets, numbers and spaces, but cannot be left blank.
 
 Example of usage:
 
-`edit x/3 r/fever`
+`edit x/1 r/flu`
 
 Expected Output:
 
 ```
 You have edited reason for the visit. Here's the updated visit!
-        ____________________________________________________________
-        ID: S123
-        Date: 30-02-2020
-        Time: 15:00
-        Reason: fever
+    ____________________________________________________________
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
+    Time: 15:00
+    Reason: flu
     ____________________________________________________________
 ```
 
@@ -286,19 +296,21 @@ Add/edit reason for an existing visit in the list of visits
 
 Format: `deleteReason x/[index]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+    * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
 
 Example of usage:
 
-`deleteReason x/3`
+`deleteReason x/1`
 
 Expected Output:
 
 ```
 You have deleted the reason for the visit. Here's the updated visit!
     ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
     Time: 15:00
     Reason: NIL
     ____________________________________________________________
@@ -319,25 +331,18 @@ Expected Output:
 ```
 Here are the list of visits in the system:
     ____________________________________________________________
-    VisitIndex #1)
-    ID: T1
-    Date: 08-11-2022
-    Time: 08:00
-    Reason: checkup
-    ____________________________________________________________
-    VisitIndex #2)
-    ID: T2
-    Date: 08-15-2022
-    Time: 09:00
-    Reason: new medication
-    ____________________________________________________________
-    VisitIndex #3)
-    ID: S123
-    Date: 30-02-2020
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
     Time: 15:00
     Reason: NIL
     ____________________________________________________________
-
+    Visit #2
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
+    ____________________________________________________________
 ```
 
 #### Viewing a patient's visits: `viewPatient`
@@ -350,18 +355,24 @@ Format: `viewPatient i/[ID]`
 
 Example of usage:
 
-`viewPatient i/S123`
+`viewPatient i/400TXF`
 
 Expected Output:
 
 ```
-Here are the list of visits for Patient with ID: S123
+Here are the list of visits for Patient with ID: 400TXF
     ____________________________________________________________
-    VisitIndex #3)
-    ID: S123
-    Date: 30-02-2020
+    Visit #1
+    ID: 400TXF
+    Date: 30-05-2020
     Time: 15:00
     Reason: NIL
+    ____________________________________________________________
+    Visit #2
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
     ____________________________________________________________
 ```
 
@@ -371,21 +382,22 @@ Viewing a specific visit belonging to some patient.
 
 Format: `viewVisit x/[index]`
 
-* The `index` refers to the overall index of the visit (VisitIndex), in the list of visits
+* The `index` refers to the overall index (X) of the visit (Visit #X), in the list of visits
+    * This index (X) can be easily retrieved by looking at the number appended after each 'Visit #' in the first row of output, when viewing/adding/editing a visit.
 
 Example of usage:
 
-`viewVisit x/3`
+`viewVisit x/2`
 
 Expected Output:
 
 ```
-Here is the visit with VisitIndex 3:
+Here is Visit #2
     ____________________________________________________________
-    ID: S123
-    Date: 30-02-2020
-    Time: 15:00
-    Reason: NIL
+    ID: 400TXF
+    Date: 30-06-2020
+    Time: 14:00
+    Reason: fever
     ____________________________________________________________
 ```
 
