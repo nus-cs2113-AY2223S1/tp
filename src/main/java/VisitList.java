@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * VisitList is a class that handles the array operations for Visit objects
+ * VisitList is a class that handles the array operations for Visit objects.
  */
 public class VisitList {
     private final ArrayList<Visit> visitList;
@@ -15,13 +15,15 @@ public class VisitList {
     }
     /**
      * Adds a new visit to the list
-     * It will only be added if there is not an exact duplicate of this visit present in the list with the same id, dateOfVisit and timeOfVisit.
+     * It will only be added if there is not an exact duplicate of this
+     visit present in the list with the same id, dateOfVisit and timeOfVisit.
      * @param ui is the user interface of OneDoc
      * @param id is a String of the patient's identification number
      * @param dateOfVisit is a String of the date of visit
      * @param timeOfVisit is a String of the time of visit
      * @param reason is a String of the patient's reason for visit
      */
+
     public void addVisit(UI ui, String id, String dateOfVisit, String timeOfVisit, String reason) {
         assert id != null : "id should not be null";
         assert dateOfVisit != null : "date of visit should not be null";
@@ -49,7 +51,7 @@ public class VisitList {
     }
 
     /**
-     * Checks if the visit is a duplicate of another in the list of visits
+     * Checks if the visit is a duplicate of another in the list of visits.
      * @param id is a String of the patient's identification number
      * @param dateOfVisit is a String of the date of visit
      * @param timeOfVisit is a String of the time of visit
@@ -73,7 +75,7 @@ public class VisitList {
 
 
     /**
-     * Edits reason for an existing visit
+     * Edits reason for an existing visit.
      * @param ui is the user interface of OneDoc
      * @param index is an integer, referring to the index of the visit in the overall list of visits
      * @param reason is a String of the patient's reason for visit
@@ -90,7 +92,7 @@ public class VisitList {
     }
 
     /**
-     * Deletes reason for an existing Visit in the list
+     * Deletes reason for an existing Visit in the list.
      * @param ui is the user interface of OneDoc
      * @param index is an integer, referring to the index of the visit in the overall list of visits
      */
@@ -115,7 +117,7 @@ public class VisitList {
     }
 
     /**
-     * Shows all the visits in the list of visits
+     * Shows all the visits in the list of visits.
      * @param ui is the user interface of OneDoc
      */
     public void viewAll(UI ui) {
@@ -133,7 +135,7 @@ public class VisitList {
     }
 
     /**
-     * Shows all the visits belonging to a specific patient
+     * Shows all the visits belonging to a specific patient.
      * @param ui is the user interface of OneDoc
      * @param id is a String of the patient's identification number
      */
@@ -161,7 +163,7 @@ public class VisitList {
     }
 
     /**
-     * Shows a specific visit in the list of visits
+     * Shows a specific visit in the list of visits.
      * @param ui is the user interface of OneDoc
      * @param index is an integer, referring to the index of the visit in the overall list of visits
      */
