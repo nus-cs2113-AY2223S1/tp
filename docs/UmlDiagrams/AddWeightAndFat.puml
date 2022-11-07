@@ -3,39 +3,40 @@
 
 !include style.puml
 box Logic LOGIC_COLOR_T1
-participant ":Duke" as Duke
 participant ":AddCommand" as AddCommand LOGIC_COLOR
 participant "<<Class>>\nParser" as Parser LOGIC_COLOR
-participant ":WeightAndFatList" as WeightAndFatList LOGIC_COLOR
+end box
+box Ui UI_COLOR_T1
+participant ":Ui" as Ui UI_COLOR
+end box
+box Record RECORD_COLOR_T1
+participant ":WeightAndFatList" as WeightAndFatList RECORD_COLOR
+participant ":WeightAndFat" as WeightAndFat RECORD_COLOR
+end box
 
-autoactivate on
 
-
-activate addCommand
-group addWeightAndFat
-    addCommand -> addCommand: addWeightAndFat(argumentList: String[])
-    opt date provided
-        addCommand -> Parser: parseDate(date: String)
+activate AddCommand
+group sd AddWeightAndFat
+    AddCommand -> AddCommand++: addWeightAndFat(argumentList: String[])
+    alt date provided
+        AddCommand -> Parser++: parseDate(date: String)
         return date: LocalDate
     end
-    addCommand -> weightAndFat **: new
-    activate weightAndFat
-    addCommand <-- weightAndFat: weightAndFat: WeightAndFat
-    addCommand -> weightAndFatList: addWeightAndFat(weightAndFat: WeightAndFat)
+    AddCommand -> WeightAndFat **: new(weight: int, fat: int, date: LocalDate)
+    activate WeightAndFat
+    return weightAndFat: WeightAndFat
+    AddCommand -> WeightAndFatList++ : add((weightAndFat: WeightAndFat)
     return
     opt display
-        addCommand -> weightAndFat: toString()
+        AddCommand -> WeightAndFat++: toString()
         return weightAndFatString: String
-        addCommand -> ui: output(weightAndFatString: String)
+        AddCommand -> Ui++: output(weightAndFatString: String)
         return
-        addCommand -> ui: output(successMessage: String)
+        AddCommand -> Ui++: output(successMessage: String)
         return
     end
-
-return
-
+    return
 end
 
-deactivate addCommand
 
 @enduml

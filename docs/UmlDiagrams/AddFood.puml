@@ -3,16 +3,25 @@
 
 autoactivate on
 
+!include style.puml
+box Logic LOGIC_COLOR_T1
+participant ":AddCommand" as addCommand LOGIC_COLOR
+end box
+box Ui UI_COLOR_T1
+participant ":Ui" as ui UI_COLOR
+end box
+box Record RECORD_COLOR_T1
+participant ":FoodList" as FoodList RECORD_COLOR
+participant ":Food" as food RECORD_COLOR
+end box
 
+
+group sd addFood
 activate addCommand
-    addCommand -> addCommand: addFood(argumentList)
-    addCommand -> addCommand: extractFoodName(argumentList[1])
-    return foodDescription: String
-    addCommand -> addCommand: extractCalories(argumentList[2])
-    return calories: int
-    addCommand -> food **: new(foodDescription: String, calories: int)
+    addCommand -> addCommand: addFood(argumentList: String[], argumentsCount: int)
+    addCommand -> food **: new(foodDescription: String, calories: int, date: LocalDate)
     addCommand -> FoodList: addFood(food: Food)
-    return
+    return food: Food
     opt display
         addCommand -> food: toString()
         return foodString: String
@@ -21,6 +30,6 @@ activate addCommand
         addCommand -> ui: output(success message: String)
         return
     end
-return
-
+    return
+end
 @enduml

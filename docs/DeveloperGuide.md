@@ -93,24 +93,43 @@ respective class is created, it will be added to the respective list based on th
 
 We will use the sequence diagrams below to show how the add operation works.
 
-Adding a new record
-![](UmlDiagrams/Add.png)
-The Duke will call execute() for the AddCommand object after the Parser class parsed the input is an add command. First,
-the number of slashes in the input is deterined by calling Parser.getArgumentsCount(argumentList) for input validation.
-The
-execute() will then proceed to call Parser.getArgumentList to split the inputs into parameters. Parser.gtClassType()
-will be called to obtain the type of addCommand. Respective type of add command will then be called.
+#### Adding a new record
 
-Adding weight and fat record  
+![](UmlDiagrams/Add.png)
+
+The Duke will call execute() for the AddCommand object after the Parser class parsed the input is an add command. The
+number of slashes in the input is determined by calling Parser.getArgumentsCount(argumentList) for input validation. The
+execute() will then proceed to call Parser.getArgumentList to split the inputs into parameters. Parser.gtClassType()
+will be called to obtain the type of addCommand. Specific type of add command will then
+be called.
+
+#### Adding weight and fat record
+
 ![](UmlDiagrams/AddWeightAndFat.png)
 
-Adding food record  
-![AddFood.png](UmlDiagrams/AddFood.png)
+When the add command type is WeightAndFat, AddWeightAndFat method will be called. Date will be initialised to current
+date.If date is provided in the input, parseDate method in Parser will be called
+and update the date parameter.
+*WeightAndFat object will then be created and added to the WeightAndFatList If is display to the user,weightAndFat will
+be converted to string, print to the user and then follow by success
+message.
 
-Adding strength exercise  
+#### Adding food record
+
+![](UmlDiagrams/AddFood.png)
+
+AddFood method is being called to add food. After parameters from the user input is being parsed and verified, new Food
+object is being created. Food is then added to the FoodList. If is display,food is converted to string and ouput to
+user, followed by success message.
+
+#### Adding strength exercise
+
+*
+
 ![](UmlDiagrams/AddStrengthExercise.png)
 
 ### Mark Feature
+
 Marking exercise
 The sequence diagrams below represent the interactions when a user marks an exercise record as done or undone.
 
@@ -119,25 +138,26 @@ The sequence diagrams below represent the interactions when a user marks an exer
 The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a mark command.
 First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
 number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
-parameters. Then, markExercise(argumentList, slashesCount) will be called to obtain the type of markCommand for 
+parameters. Then, markExercise(argumentList, slashesCount) will be called to obtain the type of markCommand for
 that correct type of mark command to be executed.
 
 If the mark command type is of "done", the calories burnt via the exercise would be determined by executing
 calculateExerciseCalories(biometrics, time, met). Then, the exercise at the given index would be mark done and
-a corresponding message regarding the information of the exercise that is marked "done" will be printed via the Ui 
+a corresponding message regarding the information of the exercise that is marked "done" will be printed via the Ui
 Component.
 
-If the mark command type is of "undone", then the exercise would be mark undone at the given index and a corresponding 
+If the mark command type is of "undone", then the exercise would be mark undone at the given index and a corresponding
 message regarding the information of the exercise that is marked "undone" will be printed via the Ui Component.
 
 ### Find Feature
+
 Finding a record
 The sequence diagrams below represent the interactions when a user find a record.
 ![Find.png](UmlDiagrams/Find.png)
 
 The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
 First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
-number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing 
+number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
 parameters. Finally, Parser.getClassType() will be called to obtain the type of findCommand for that correct type of
 find command to be executed.
 
