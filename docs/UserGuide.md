@@ -35,7 +35,7 @@ permalink: /userguide/
 
 ## Introduction
 
-MoneyGoWhere is a financial planning application to help you manage your finances.
+MoneyGoWhere is a financial tracking application to help you manage your finances.
 
 Based on a Command Line Interface (CLI), you can add your `expenses`, `income` sources, spending `targets` and `recurring payments` to a trackable list that can be saved and accessed **anywhere, anytime**.
 
@@ -804,9 +804,9 @@ The recurring payment was added as an expense successfully.
 
 ## Sub-Contents
 * [Adding an income](#adding-an-income-add-income): `Add-Income`
-* [Viewing recurring payments](#viewing-incomes-view-income): `View-Income`
-* [Deleting recurring payments](#deleting-an-income-delete-income): `Delete-Income`
-* [Editing recurring payments](#editing-an-income-edit-income): `Edit-Income`
+* [Viewing income](#viewing-incomes-view-income): `View-Income`
+* [Deleting an income](#deleting-an-income-delete-income): `Delete-Income`
+* [Editing an income](#editing-an-income-edit-income): `Edit-Income`
 * [Back to Contents](#contents)
 
 <br>
