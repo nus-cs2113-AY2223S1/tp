@@ -23,7 +23,7 @@ public class RecipeFileParser {
     public static final String INGREDIENT_ERROR_INDEX = "INGREDIENT index must be a positive integer!";
 
     public static final String INGREDIENT_ERROR_AMOUNT = "INGREDIENT amount should be a positive rational number! "
-            + "Please indicate fraction in number as well.\nExample: 12, 0.1, 0.5 (for half)";
+            + "Please indicate fraction in decimal as well.\nExample: 12, 0.1, 0.5 (for half)";
 
     public static final String INGREDIENT_ERROR_INDEX_INCREMENT = "INGREDIENT index increment is incorrect! "
         + "Index starts from 1";
