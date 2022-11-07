@@ -195,8 +195,6 @@ The expense was added successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ##### Limitation on adding hyphens
 
 Argument values cannot be the same as argument options.
@@ -297,8 +295,6 @@ Your MoneyGoWhere? Let me help you track it.
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 #### On Linux OS
 
@@ -466,8 +462,6 @@ The expense was added successfully.
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Viewing expense(s): `View-Expense`
 Displays past expenses you have added.
@@ -798,8 +792,6 @@ The recurring payment was added successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing recurring payment(s): `View-RecurringPayment`
 Displays the past recurring payments you have added.
 
@@ -854,8 +846,6 @@ Mode of Payment : Card
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a recurring payment: `Delete-RecurringPayment`
 Deletes a recurring payment from the list of recurring payments.
@@ -1034,8 +1024,6 @@ The income was added successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing income(s): `View-Income`
 Displays past incomes you have added.
 
@@ -1084,8 +1072,6 @@ Amount        : 500.00
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting an income: `Delete-Income`
 Deletes an income from the list of incomes.
@@ -1158,8 +1144,6 @@ The income was edited successfully.
 <br>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ## Managing your targets
 
 ## Sub-Contents
@@ -1221,8 +1205,6 @@ The target was added successfully.
 <hr>
 <br>
 
-<div style="page-break-after: always;"></div>
-
 ### Viewing target(s): `View-Target`
 Displays past targets you have added.
 
@@ -1274,8 +1256,6 @@ Current Amount: 1500.00
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ### Deleting a target: `Delete-Target`
 Deletes a target from the list of targets.
@@ -1354,8 +1334,6 @@ The target was edited successfully.
 <br>
 <hr>
 <br>
-
-<div style="page-break-after: always;"></div>
 
 ## Handling your data
 By default, all lists are saved in the `MoneyGoWhereData.xml` file in the **Memory** folder created in the same directory as `MoneyGoWhere.jar`.
