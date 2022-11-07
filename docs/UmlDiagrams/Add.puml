@@ -3,6 +3,7 @@
 
 !include style.puml
 
+
 [-> AddCommand : execute
 activate AddCommand
 AddCommand -> Parser++: getArgumentsCount(arguments: String)

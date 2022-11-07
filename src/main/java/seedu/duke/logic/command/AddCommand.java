@@ -1,8 +1,8 @@
 package seedu.duke.logic.command;
 
-import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.logic.Parser;
 import seedu.duke.logic.Validator;
+import seedu.duke.logic.exception.IllegalValueException;
 import seedu.duke.records.RecordList;
 import seedu.duke.records.biometrics.Biometrics;
 import seedu.duke.records.biometrics.WeightAndFat;
@@ -163,11 +163,9 @@ public class AddCommand extends Command {
 
     private LocalDate getLocalDate(String[] argumentList, int maximumLength, int dateIndex)
             throws IllegalValueException {
-        LocalDate date;
+        LocalDate date = LocalDate.now();
         if (!toDisplay || argumentList.length == maximumLength) {
             date = Parser.parseDate(argumentList[dateIndex], MONTHS_TO_ADD);
-        } else {
-            date = LocalDate.now();
         }
         return date;
     }
@@ -196,11 +194,9 @@ public class AddCommand extends Command {
         try {
             double distance = Validator.getDistanceWithValidation(argumentList[2]);
             int repetition = Validator.getRepetitionWithValidation(argumentList[3]);
-            LocalDate date;
+            LocalDate date = LocalDate.now();
             if (argumentList.length == 5) {
                 date = Parser.parseDate(argumentList[4], 1);
-            } else {
-                date = LocalDate.now();
             }
             Exercise exercise = new CardioExercise(description, distance, repetition, date);
             exerciseList.addExercise(exercise);
@@ -238,11 +234,9 @@ public class AddCommand extends Command {
         try {
             Validator.validateCommandInput(argumentsCount, 2, 3, INVALID_FOOD_INPUT,
                     arguments.charAt(arguments.length() - 1));
-            LocalDate date;
+            LocalDate date = LocalDate.now();
             if (argumentList.length == 4) {
                 date = Parser.parseDate(argumentList[3], 0);
-            } else {
-                date = LocalDate.now();
             }
             String description = validateFoodName(argumentList[1]);
             int calories = validateCalories(argumentList[2]);
@@ -268,11 +262,9 @@ public class AddCommand extends Command {
         try {
             int weight = Integer.parseInt(argumentList[1]);
             int fat = Integer.parseInt(argumentList[2]);
-            LocalDate date;
+            LocalDate date = LocalDate.now();
             if (argumentList.length == 4) {
                 date = Parser.parseDate(argumentList[3], 0);
-            } else {
-                date = LocalDate.now();
             }
             WeightAndFat weightAndFat = new WeightAndFat(weight, fat, date);
             biometrics.weightAndFatList.addWeightAndFat(weightAndFat);
