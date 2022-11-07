@@ -359,40 +359,7 @@ Example of usage:
 
 `Help`
 
-_If you would like a more user-friendly view of all available commands, please refer to the [Command Summary](#command-summary) at the end of the guide._
-
-Expected output:
-```
----- EXPENSE RELATED COMMANDS ----
-Add an expense: Add-Expense -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
-View your expenses: View-Expense [-e EXPENSE-INDEX] [-c CATEGORY] [-n NAME]
-Delete an expense: Delete-Expense -e EXPENSE-INDEX
-Edit an expense: Edit-Expense -e EXPENSE-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]
-Sort your expenses: Sort-Expense -t Alphabetical/Amount/Date/Currency -o Ascending/Descending
-Convert currency of an expense: Convert-Currency -e EXPENSE-INDEX -x CURRENCY [-r RATE]
-
----- RECURRING PAYMENT RELATED COMMANDS ----
-Add a recurring payment: Add-RecurringPayment -n NAME -i INTERVAL -a AMOUNT [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]
-View your recurring payments: View-RecurringPayment [-r RECURRINGPAYMENT-INDEX]
-Delete a recurring payment: Delete-RecurringPayment -r RECURRINGPAYMENT-INDEX
-Edit a recurring payment: Edit-RecurringPayment -r RECURRINGPAYMENT-INDEX [-n NAME] [-i INTERVAL] [-a AMOUNT] [-t DESCRIPTION] [-c CATEGORY] [-x CURRENCY] [-p MODE-OF-PAYMENT]
-Pay a recurring payment: Pay-RecurringPayment -r RECURRINGPAYMENT-INDEX
-
----- INCOME RELATED COMMANDS ----
-Add an income: Add-Income -n NAME -a AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
-View your incomes: View-Income [-e INCOME-INDEX]
-Delete an income: Delete-Income -e INCOME-INDEX
-Edit an income: Edit-Income -e INCOME-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT]
-
----- TARGET RELATED COMMANDS ----
-Add an target: Add-Target -n NAME -a AMOUNT -c CURRENT-AMOUNT [-d dd/MM/yyyy HHmm] [-t DESCRIPTION]
-View your targets: View-Target [-e TARGET-INDEX]
-Delete a target: Delete-Target -e TARGET-INDEX
-Edit a target: Edit-Target -e TARGET-INDEX [-n NAME] [-d dd/MM/yyyy HHmm] [-t DESCRIPTION] [-a AMOUNT] [-c CURRENT-AMOUNT]
-
----- STORAGE RELATED COMMANDS ----
-Merging a file: Merge-File -p PATH-STRING
-```
+_If you would like a user-friendly view of all available commands, please refer to the [Command Summary](#command-summary) at the end of the guide._
 
 <br>
 <br>
@@ -441,7 +408,8 @@ Currency        : SGD
 The expense was added successfully.
 ```
 ```
-Add-Expense -n "Work Laptop" -a 2999.90 -d "01/01/2022 1200" -t "Development Laptop" -c "Work Expenses" -r "Submit invoice to finance" -x SGD -p Card
+Add-Expense -n "Work Laptop" -a 2999.90 -d "01/01/2022 1200" -t "Development Laptop"
+-c "Work Expenses" -r "Submit invoice to finance" -x SGD -p Card
 
 Name            : Work Laptop
 Date and Time   : 01 Jan 2022 12:00
@@ -607,7 +575,8 @@ Mode of Payment : Card
 The expense was edited sucessfully.
 ```
 ```
-Edit-Expense -e 1 -n "Flash Drive" -d "07/11/2022 1510" -t "Development Flash Drive" -a 26.00 -c "Work Expenses" -r "Submit invoice to finance" -x USD -p Card
+Edit-Expense -e 1 -n "Flash Drive" -d "07/11/2022 1510" -t "Development Flash Drive"
+-a 26.00 -c "Work Expenses" -r "Submit invoice to finance" -x USD -p Card
 
 ---- EXPENSE INDEX 1 ----
 Name            : Flash Drive
@@ -769,7 +738,8 @@ Currency        : SGD
 The recurring payment was added successfully.
 ```
 ```
-Add-RecurringPayment -n "Mobile Plan 2" -i 30 -a 20.00 -t "Monthly payment for my 2nd mobile plan" -c Bills -x SGD -p Card
+Add-RecurringPayment -n "Mobile Plan 2" -i 30 -a 20.00
+-t "Monthly payment for my 2nd mobile plan" -c Bills -x SGD -p Card
 
 Name            : Mobile Plan 2
 Interval (Days) : 30
@@ -901,7 +871,8 @@ Currency        : SGD
 The recurring payment was edited successfully.
 ```
 ```
-Edit-RecurringPayment -r 0 -n "Mobile Plan 2" -i 30 -t "Monthly payment for my 2nd mobile phone" -a 18.00 -c "Bills" -x SGD -p Card
+Edit-RecurringPayment -r 0 -n "Mobile Plan 2" -i 30
+-t "Monthly payment for my 2nd mobile phone" -a 18.00 -c "Bills" -x SGD -p Card
 
 ---- RECURRING PAYMENT INDEX 0 ----
 Name            : Mobile Plan 2
@@ -1176,7 +1147,8 @@ Current Amount: 1500.00
 The target was added successfully.
 ```
 ```
-Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359" -t "Money spent on food"
+Add-Target -n "Food target" -a 1000.00 -c 1500.00 -d "01/02/2022 2359"
+-t "Money spent on food"
 
 Name          : Food target
 Date and Time : 01 Feb 2022 23:59
@@ -1305,7 +1277,8 @@ Current Amount: 1500.00
 The target was edited successfully.
 ```
 ```
-Edit-Target -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359" -t "Monthly payment"
+Edit-Target -e 1 -n "Monthly Target" -a 3000 -c 1200 -d "01/01/2022 2359"
+-t "Monthly payment"
 
 ---- TARGET INDEX 1 ----
 Name          : Monthly Target
