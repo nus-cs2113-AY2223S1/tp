@@ -5,7 +5,7 @@
   * [Value Proposition](#value-proposition)
 
 * [User Stories](#user-stories)
-* [Implementation](#Implementation)
+* [Design and Implementation](#Design-and-Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
   * [Appointment Manage Feature](#Appointment-Manage-Feature)
   * [Appointment Status Feature](#Appointment-Status-Feature)
@@ -60,7 +60,7 @@ The head nurse can now:
 |v2.0|Head Nurse|view tasks| view the list of tasks that needs to be done              |
 |v2.0|Head Nurse|reassign tasks| reassign a task from an employee to another               |
 
-## Implementation
+## Design and Implementation
 
 ### Appointment Task-Employee Allocation Feature
 
