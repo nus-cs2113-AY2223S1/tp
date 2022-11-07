@@ -126,7 +126,7 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 The following sequence diagram shows how the add appointment operation works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentRmove.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentRmove.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RmoveAppointment.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RmoveAppointment.png)
 
 ### Design Considerations
 **Aspect: How addAppointment executes:**
@@ -241,7 +241,7 @@ The following sequence diagram shows how the employee management works:
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png)
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeRemove.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeRemove.png)
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png)
 ### Design Considerations:
 
 **Aspect: How to number the employee:**
@@ -321,8 +321,6 @@ The following sequence diagram shows how the service management works
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
-
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceRemove.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceRemove.png)
 
 ### Design Considerations:
 
