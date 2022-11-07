@@ -5,8 +5,6 @@ import recipeditor.parser.RecipeFileParser;
 import recipeditor.recipe.Recipe;
 import recipeditor.recipe.RecipeList;
 import recipeditor.storage.Storage;
-import recipeditor.ui.Editor;
-import recipeditor.ui.Ui;
 
 import java.io.FileNotFoundException;
 
@@ -24,6 +22,7 @@ public class GuiWorkFlow {
     /**
      * A class that handle the GUI call and the intermediate interaction between the GUI and CLI.
      * Ask the user whether they want to make changes when the format of the text in Editor is wrong.
+     *
      * @param inputPath load the content of the file
      * @throws FileNotFoundException Handled by the parser
      */

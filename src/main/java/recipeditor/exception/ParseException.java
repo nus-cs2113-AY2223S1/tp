@@ -4,8 +4,8 @@ public class ParseException extends Exception {
 
     private static final String errorMessage = "Error parsing input.";
 
-    public ParseException(String correctForamt) {
-        super(errorMessage + '\n' + correctForamt);
+    public ParseException(String correctFormat) {
+        super(errorMessage + '\n' + correctFormat);
     }
 
     public  ParseException() {

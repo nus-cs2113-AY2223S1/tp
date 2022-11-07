@@ -71,6 +71,12 @@ public class Recipe {
         this.ingredients.remove(index);
     }
 
+    /**
+     * Set the ingredient in the given index according to the input.
+     *
+     * @param index ingredient index to be set
+     * @param ingredient ingredient to be set
+     */
     public void setIngredient(int index, Ingredient ingredient) throws IndexOutOfBoundsException {
         this.ingredients.set(index, ingredient);
         if (index >= ingredients.size()) {
@@ -106,6 +112,9 @@ public class Recipe {
         this.steps.set(index, step);
     }
 
+    /**
+     * Get a formatted string output of the ingredient details for printing on the console.
+     */
     public String getIngredientAttributesFormatted() {
         StringBuilder recipeIngredientStringFormatted = new StringBuilder();
         for (int i = 0; i < ingredients.size(); i++) {
@@ -119,6 +128,9 @@ public class Recipe {
         return recipeIngredientStringFormatted.toString();
     }
 
+    /**
+     * Get a formatted string output of the step details for printing on the console.
+     */
     public String getStepAttributesFormatted() {
         StringBuilder recipeStepStringFormatted = new StringBuilder();
         for (int i = 0; i < steps.size(); i++) {
@@ -130,6 +142,9 @@ public class Recipe {
         return recipeStepStringFormatted.toString();
     }
 
+    /**
+     * Get a formatted string output of the recipe details to save as the individual recipe file.
+     */
     public String getRecipeSaveableFormatted() {
         String recipeAttributesStringFormatted = "# TITLE \n"
                 + title + "\n\n" + "# DESCRIPTION \n"
@@ -141,6 +156,9 @@ public class Recipe {
         return recipeAttributesStringFormatted;
     }
 
+    /**
+     * Get a formatted string output of the recipe details.
+     */
     public String getRecipeAttributesFormatted() {
         String recipeAttributesStringFormatted = "TITLE:\n"
                 + title + "\n\n" + "DESCRIPTION:\n"
@@ -152,6 +170,11 @@ public class Recipe {
         return recipeAttributesStringFormatted;
     }
 
+    /**
+     * Checks if all the fields of the recipe are filled to be a valid recipe.
+     *
+     * @return if the recipe is valid
+     */
     public boolean isNotRecipeValid() {
         return (this.getTitle().isBlank() || this.getDescription().isBlank() || this.getIngredients().isEmpty()
                 || this.getSteps().isEmpty());

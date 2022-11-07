@@ -3,7 +3,6 @@ package recipeditor.recipe;
 import recipeditor.exception.RecipeNotFoundException;
 import recipeditor.storage.Storage;
 
-
 import java.util.ArrayList;
 
 public class RecipeList {
@@ -40,11 +39,21 @@ public class RecipeList {
         return recipeTitles.get(index);
     }
 
+    /**
+     * Delete recipe given the recipe title.
+     */
     public static void deleteRecipeFromTitle(String recipeTitle) {
         recipes.remove(getRecipeFromTitle(recipeTitle));
         recipeTitles.removeIf(r -> r.equals(recipeTitle));
     }
 
+    /**
+     * Edit Recipe according to the given index.
+     *
+     * @param index recipe index to be edited
+     * @param newRecipe new recipe in place of the old recipe
+     * @param oldTitle previous recipe title that was edited away
+     */
     public static void editRecipe(int index, Recipe newRecipe, String oldTitle) {
         assert index > -1;
         recipes.set(index, newRecipe);
@@ -54,6 +63,12 @@ public class RecipeList {
         Storage.saveRecipe(newRecipe, oldFile, recipeFileSourcePath);
     }
 
+    /**
+     * Retrieve the recipe from its recipe title as input.
+     *
+     * @param recipeTitle recipe title to be retrieved
+     * @return recipe
+     */
     public static Recipe getRecipeFromTitle(String recipeTitle) {
         for (Recipe r : recipes) {
             if (r.getTitle().equalsIgnoreCase(recipeTitle)) {
@@ -63,11 +78,23 @@ public class RecipeList {
         return null;
     }
 
+    /**
+     * Get the recipe title from its recipe index in the recipe list.
+     *
+     * @param index recipe index of the recipe title to be retrieved
+     * @return recipe title
+     */
     public static String getTitleFromIndex(int index) throws IndexOutOfBoundsException {
         assert index > -1;
         return getRecipe(index).getTitle();
     }
 
+    /**
+     * Get the recipe index from its recipe title in the recipe list.
+     *
+     * @param recipeTitle recipe title of the recipe index to be retrieved
+     * @return recipe index
+     */
     public static int getRecipeIndexFromTitle(String recipeTitle) throws RecipeNotFoundException {
         int i = 0;
         for (Recipe r : recipes) {
@@ -79,6 +106,12 @@ public class RecipeList {
         throw new RecipeNotFoundException(recipeTitle);
     }
 
+    /**
+     * Find a list of recipe titles that contains the input (recipe title).
+     *
+     * @param findInput input to search in the recipe titles
+     * @return a list of recipe titles that contains the input (recipe title)
+     */
     public static ArrayList<String> findRecipeTitlesFromRecipeTitle(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (String r : recipeTitles) {
@@ -89,6 +122,12 @@ public class RecipeList {
         return foundRecipeTitlesList;
     }
 
+    /**
+     * Find a list of recipe titles that contains the input (ingredient name).
+     *
+     * @param findInput input to search in the ingredient name
+     * @return a list of recipe titles that contains the input (ingredient name)
+     */
     public static ArrayList<String> findRecipeTitlesFromIngredientName(String findInput) {
         ArrayList<String> foundRecipeTitlesList = new ArrayList<>();
         for (Recipe r : recipes) {
@@ -109,6 +148,12 @@ public class RecipeList {
         return recipes.size();
     }
 
+    /**
+     * Checks if the recipe list contains the recipe input.
+     *
+     * @param incomingRecipe recipe to be checked
+     * @return if the recipe list contains the recipe
+     */
     public static boolean containsRecipe(Recipe incomingRecipe) {
         for (Recipe r : recipes) {
             if (r.getTitle().equals(incomingRecipe.getTitle())) {
@@ -118,6 +163,12 @@ public class RecipeList {
         return false;
     }
 
+    /**
+     * Checks if the recipe list contains the recipe title.
+     *
+     * @param title recipe title to be checked
+     * @return if the recipe list contains the recipe title
+     */
     public static boolean containsRecipeTitle(String title) {
         for (String r : recipeTitles) {
             if (r.equals(title)) {
