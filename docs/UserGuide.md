@@ -112,18 +112,19 @@ Otherwise, the [Quick Start](#quick-start) can help you get into MoneyGoWhere in
 
 When inputting arguments:
 * The absence of square brackets denotes **mandatory** arguments.
-* Square brackets denote **optional** arguments.
+* The square brackets denote **optional** arguments.
+* The presence of invalid or extra arguments will be ignored by MoneyGoWhere.
 
 <br>
 
 Example: `Add-Expense -n NAME -a AMOUNT [-d DATE-TIME] [-t DESCRIPTION] [-c CATEGORY] [-r REMARKS] [-x CURRENCY] [-p MODE-OF-PAYMENT]`
 
->
+> ❌ Invalid Input
 > `Add-Expense -n Lunch`
 >
 > `Add-Expense -a 13.37`
 
-✔️ Valid Input
+> ✔️ Valid Input
 >
 > `Add-Expense -n Lunch -a 13.37`
 >
@@ -1378,6 +1379,3 @@ A list of all valid commands.
 
 <br>
 <br>
-
-----
-
