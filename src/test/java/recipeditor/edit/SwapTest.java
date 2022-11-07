@@ -40,6 +40,7 @@ public class SwapTest {
         EditModeCommand ed = new Swap(FlagType.STEP, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (IndexOutOfBoundsException i) {
             assert true;
         } catch (Exception i) {
@@ -61,6 +62,7 @@ public class SwapTest {
         EditModeCommand ed = new Swap(FlagType.INGREDIENT, input, recipe);
         try {
             ed.execute();
+            assert false;
         } catch (IndexOutOfBoundsException i) {
             assert true;
         } catch (Exception i) {

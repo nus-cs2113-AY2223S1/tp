@@ -246,6 +246,8 @@ whether the GUI or CLI should be called through the number of arguments passed b
 
 #### GUI Edit
 Called if the user provides exacty two parameters.
+- The workflow is similar to [Add Recipe](#add-recipe), check [GUI WorkFlow](#gui-workflow)
+- Instead of loading `Template.txt`, the recipe file with the title name corresponding to the index will be loaded
 - GUI window is called by `GuiWorkFlow`
 - After the GUI edit has finished, `EditCommand` is instantiated and the new recipe is saved to `Storage` through the
   `RecipeList` class
@@ -502,15 +504,6 @@ If the command word is none of the above, an instance of `InvalidCommand` will b
 - Because of the `stage`, Headings are **parseable** in different order (but highly discouraged)
 - Check if the recipe is empty
     - Because the blank lines are disregarded
-
-### Edit an Existing Recipe
-
-#### GUI
-
-- The workflow is similar to [Add Recipe](#add-recipe), check [GUI WorkFlow](#gui-workflow)
-- Instead of loading `Template.txt`, the recipe file with the title name corresponding to the index will be loaded
-
-#### CLI
 
 ### Find Recipe
 
