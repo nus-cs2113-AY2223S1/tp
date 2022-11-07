@@ -83,8 +83,6 @@ Our program has two modes, the [Build Management Mode](#build-management-mode) a
 
 Upon starting the Program, you will be situated in the [Build Management Mode](#build-management-mode).
 
-__Note__: Adding too many parameters will not affect command execution.
-
 ### Build Management Mode
 
 Build Management Mode handles the management of your builds. 
