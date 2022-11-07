@@ -40,6 +40,7 @@ public class RemovePetCommand extends Command {
             int appointmentId;
             while (appointmentIdList.size() > 0) {
                 appointmentId = appointmentIdList.poll();
+                Ui.showLine();
                 new RemoveAppointmentCommand(appointmentId).execute();
             }
 
