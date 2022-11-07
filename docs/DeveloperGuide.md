@@ -115,6 +115,16 @@ Tutorial : 5 lessons with class numbers "1", "2", "3", "4" and "5" (Hence, tutor
 ---
 
 #### 4.3. Auto-allocating lessons
+<img src="images/allocateModules.png" width="580" />
+
+The sequence diagram above is a simplified illustration of how lessons are allocated. The allocation algorithm computes
+all possible permutations of lesson combinations and allocated lessons in a way that minimizes clashes.
+
+**Design Decisions:**
+* The algorithm involved in allocating lessons relies heavily on the ability to check if lessons clash with each other at any point in time. Thus, the allocation algorithm is implemented in the timetableDict to allow easy
+access to lessons at any point in the timetable.
+* Due to some modules having an excessive amounts of lessons, leading to extremely high number of possible lesson permutations during allocation, we have set a limit of 30 possible lesson permutations for each mod to be allocated. 
+Taking the maximum of 7 modules, this sets a limit of 2.187 x 10^10 total permutations for the algorithm. This prevents the program from exceeding the Java heap space memory allocated.
 
 ---
 
@@ -226,7 +236,7 @@ Above is the sequence diagram for the listing of modules in the timetable. A few
         list = new StringBuilder("Here are your modules:\n");
     }
     ```
-* Each module is an object of class Module and has the `getModuleDetails` method which returns a String whihc includes all the required details for the list feature. This method is also reused in other features of the application.
+* Each module is an object of class Module and has the `getModuleDetails` method which returns a String which includes all the required details for the list feature. This method is also reused in other features of the application.
 
 ---
 

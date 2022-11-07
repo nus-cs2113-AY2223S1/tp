@@ -19,6 +19,7 @@ public class Module {
     private String moduleCode;
     private List<Lesson> lessonList;
     private final LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> lessonMap;
+    private final LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> uniqueLessonMap;
     private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> attendingMap;
     private List<Lesson> attendingList;
     private LinkedHashMap<String, ArrayList<Lesson>> classifiedLessons;
@@ -40,12 +41,24 @@ public class Module {
         return lessonMap;
     }
 
+    public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getUniqueLessonMap() {
+        return uniqueLessonMap;
+    }
+
     public LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> getAttendingMap() {
         return attendingMap;
     }
 
     public List<Lesson> getClassFromLessonMap(String lessonType, String classNumber) {
         return lessonMap.get(lessonType).get(classNumber);
+    }
+
+    private List<List<String>> getClassInfo(List<Lesson> currClass) {
+        List<List<String>> lessonsInfoList = new ArrayList<>();
+        for (Lesson lesson : currClass) {
+            lessonsInfoList.add(lesson.getInfo());
+        } 
+        return lessonsInfoList;
     }
 
     public List<Lesson> getClassFromAttendingMap(String lessonType) {
@@ -76,6 +89,7 @@ public class Module {
         this.lessonList = lessons;
         this.classifiedLessons = classifyLessons(lessons);
         this.lessonMap = populateData(); //this is the new classifiedLessons
+        this.uniqueLessonMap = populateUniqueData(); //lessonMap with classes occupying the same timing removed
         this.attendingMap = populateAttending(); //this is the new attending
         this.attendingList = getAttendingInListForm();
     }
@@ -344,6 +358,28 @@ public class Module {
             }
         }
         return data;
+    }
+
+    private LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> populateUniqueData() {
+        LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>> uniqueData
+                = new LinkedHashMap<String, LinkedHashMap<String, ArrayList<Lesson>>>();
+        List<List<List<String>>> classInfoList = new ArrayList<>();
+        // System.out.println("POPULATING UNIQUE DATA: " + moduleCode);
+        for (String lessonType : lessonMap.keySet()) {
+            uniqueData.put(lessonType, new LinkedHashMap<String, ArrayList<Lesson>>());
+            for (String classNumber : lessonMap.get(lessonType).keySet()) {
+                ArrayList<Lesson> currClass = lessonMap.get(lessonType).get(classNumber);
+                List<List<String>> currClassInfo = getClassInfo(currClass);
+                if (classInfoList.contains(currClassInfo)) {
+                    continue;
+                } else {
+                    // System.out.println("currClassInfo: " + currClassInfo.toString() + " added");
+                    classInfoList.add(currClassInfo);
+                    uniqueData.get(lessonType).put(classNumber, currClass);
+                }
+            }
+        }
+        return uniqueData;
     }
 
     private LinkedHashMap<String, ArrayList<Lesson>> classifyLessons(List<Lesson> lessons) {
