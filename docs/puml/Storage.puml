@@ -33,6 +33,6 @@ class BuildManager {
 }
 
 Storage "1"--"1" BuildManager
-Storage "1"--"many" Build
+Storage "1"--"*" Build
 
 @enduml
