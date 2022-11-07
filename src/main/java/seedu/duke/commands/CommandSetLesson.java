@@ -20,17 +20,17 @@ public class CommandSetLesson {
      * @return A response string to be printed by UI class to the user.
      */
     public static String setLesson() {
-        if (Timetable.getNumberOfSettableLessons() == 0) {
+        if (Timetable.getNumberOfSettableModules() == 0) {
             return "No modules available for lessons to be set.";
         }
 
         String indexToSet = UI.getModuleIndexFromUser(Timetable.getShortenedList());
-        if (isInvalidInput(indexToSet, Timetable.getNumberOfSettableLessons())) {
+        if (isInvalidInput(indexToSet, Timetable.getNumberOfSettableModules())) {
             return "Invalid module index!";
         }
 
         assert Integer.parseInt(indexToSet) > 0 : "index must be greater than 1 to be in range";
-        assert Integer.parseInt(indexToSet) <= Timetable.getNumberOfSettableLessons() : "index must be in range";
+        assert Integer.parseInt(indexToSet) <= Timetable.getNumberOfSettableModules() : "index must be in range";
         lgr.fine("module index accepted");
 
         return runSetProcedure(Integer.parseInt(indexToSet) - 1);
@@ -69,8 +69,14 @@ public class CommandSetLesson {
         return "Successfully set your lesson!";
     }
 
-    private static void replaceAttendingLesson(ArrayList<Lesson> newLessons, int indexForModule, String moduleType) {
-        Timetable.replaceSettableLesson(newLessons, indexForModule, moduleType);
+    /**
+     * Replaces the lesson currently stored in the program with the new lesson that the user chooses.
+     * @param newLessons The list of new lessons belonging in the same class.
+     * @param indexForModule The index for the module the user has chosen.
+     * @param lessonType Type of lesson the user wants to set.
+     */
+    private static void replaceAttendingLesson(ArrayList<Lesson> newLessons, int indexForModule, String lessonType) {
+        Timetable.replaceSettableLesson(newLessons, indexForModule, lessonType);
     }
 
     /**
