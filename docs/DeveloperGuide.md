@@ -334,6 +334,8 @@ The following sequence diagram shows how the service management works
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
 
+![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceRemove.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceRemove.png)
+
 ### Design Considerations:
 
 **Aspect: How to represent the Service:**
