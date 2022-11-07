@@ -329,8 +329,6 @@ Step 4. The user executes `service remove i/1` command to remove the service wit
 
 The following sequence diagram shows how the service management works
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceManagement.png)
-
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
