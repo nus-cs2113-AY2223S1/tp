@@ -52,6 +52,7 @@ public class FlightList extends OperationList {
 
     /**
      * Checks if user has inputted command with the correct format.
+     *
      * @param description user input
      * @throws SkyControlException empty description error
      */
@@ -63,6 +64,7 @@ public class FlightList extends OperationList {
 
     /**
      * Extracts specific flight details from user input.
+     *
      * @param command user input before extraction.
      * @param start   delimiter for flight detail.
      * @param end     delimiter for next flight detail.
@@ -82,6 +84,7 @@ public class FlightList extends OperationList {
 
     /**
      * Calls complex method to check if flight detail is missing.
+     *
      * @param startIndex beginning index of flight detail.
      * @param endIndex   end index of flight detail.
      * @throws SkyControlException if flight detail is empty.
@@ -94,6 +97,7 @@ public class FlightList extends OperationList {
 
     /**
      * Checks if flight detail is empty.
+     *
      * @param startIndex beginning index of flight detail.
      * @param endIndex   end index of flight detail.
      * @return true if detail is missing else, return false.
@@ -162,7 +166,7 @@ public class FlightList extends OperationList {
      * @param flightNum a parameter that is taken from the deleteOperation function
      * @param index     increment of the index in passengers
      * @return a boolean value that indicates if the flight number of the passenger
-     * matches the flight number that is deleted.
+     *          matches the flight number that is deleted.
      */
     private boolean isFlightNumberPresent(String flightNum, int index) {
         boolean isFlightNumberPresent;
@@ -482,6 +486,7 @@ public class FlightList extends OperationList {
 
     /**
      * Validates that the airline specified can fit into the logbook table.
+     *
      * @param airline airline name
      * @throws SkyControlException if number of characters is exceeded.
      */
@@ -493,6 +498,7 @@ public class FlightList extends OperationList {
 
     /**
      * Validates that the destination specified can fit into the logbook table.
+     *
      * @param destination destination of flight.
      * @throws SkyControlException if number of characters is exceeded.
      */
@@ -504,6 +510,7 @@ public class FlightList extends OperationList {
 
     /**
      * Ensures time entered is in 24HR format.
+     *
      * @param time input time.
      * @throws SkyControlException if time does not follow 24HR format.
      */
@@ -517,8 +524,9 @@ public class FlightList extends OperationList {
 
     /**
      * Ensures check in row/door entered are valid digits.
+     *
      * @param checkIn input check-in number.
-     * @throws SkyControlException
+     * @throws SkyControlException if check in value does not follow row-door format.
      */
     private void validateCheckIn(String checkIn) throws SkyControlException {
         Pattern p = Pattern.compile(CHECK_IN_REGEX);
@@ -529,7 +537,8 @@ public class FlightList extends OperationList {
     }
 
     /**
-     * Ensures the gate number entered is a valid gate
+     * Ensures the gate number entered is a valid gate.
+     *
      * @param gateNumber input gate number.
      * @throws SkyControlException if gate number is not valid.
      */
