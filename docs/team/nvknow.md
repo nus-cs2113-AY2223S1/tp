@@ -15,15 +15,11 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 - Implemented the attributes and functions of Employee and EmployeeList
   - What it does: add an employee into the employee list, remove an employee in the employee list, view the employees in the employee list, etc.
   - Justification: an employee is the one who operate each task, which is crucial in the management system.
-
 - Implemented the attributes and functions of Service and ServiceList
   - What it does: add a service into the service list, remove a service in the service list, view the services in the service list, etc.
   - Justification: a service is attached to each appointment and used to improve the status of the pet, which is the service goal of the clinic.
-
 - Implemented the attributes and functions of Ui
   - What it does: show logo and welcome messages to the user, read the user's command and show error messages when receiving a wrong input.
-  - Justification: the Ui is essential for the Command Line Interface requirement.
-
 - Implemented the tests of Employee and EmployeeList
 
 **Enhancements implemented**
@@ -39,8 +35,7 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
   - What it does: when an appointment is processed, the built-in index of the related pet is increased, indicating a better status.
   - Justification: achieved the process of improving the condition of the pets by completing appointments, which is the core goal for the pet clinic.
 
-- Added exception handling to EmployeeParser
-- Added exception handling to ServiceParser
+- Added exception handling to EmployeeParser and ServiceParser
 - Improved the index of Pet
 - Improved the interface of Duke to be more OOP
 - Improved the overall output information
@@ -58,17 +53,14 @@ Pet Clinic Management System(PCMS) is a project with Command Line Interface (CLI
 - Added Employee management feature and its Design considerations
 - Added the UML diagram of Employee Add, Appointment Add, Service Add
 - Added User Stories of v1.0 and v2.0
-- Added Setting Up and Getting Started
-- Added Non-Functional Requirements
+- Added Non-Functional Requirements, Setting Up and Getting Started
 - Reorganized the structure and catalog
 
 **Contributions to team-based tasks**
 
 - Served as a team leader
-- Initiated and held weekly meetings
-- Assigned weekly tasks to each group member
-- Maintained the issue tracker
-- Maintained the milestones
+- Initiated and held weekly meetings and assigned weekly tasks to each group member
+- Maintained the issue tracker and the milestone
 - Release management
 - Opened pull request from team repo to module repo
 - Carried some smoke-test on the deliverable
