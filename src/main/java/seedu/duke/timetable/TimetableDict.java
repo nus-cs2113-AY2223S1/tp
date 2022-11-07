@@ -406,19 +406,19 @@ public class TimetableDict {
                 }
             }
         }
-        int permutationCounter = 1;
-        System.out.println("------ " + module.getModuleCode() + " ------");
-        for (List<List<Lesson>> permutation : result) {
-            System.out.println("--- Permutation" + permutationCounter + " ---");
-            for (List<Lesson> currClass : permutation) {
-                for (Lesson lesson : currClass) {
-                    System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
-                        + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
-                }
-            }
-            permutationCounter++;
-        }
-        System.out.print("\n");
+        // int permutationCounter = 1;
+        // System.out.println("------ " + module.getModuleCode() + " ------");
+        // for (List<List<Lesson>> permutation : result) {
+        //     System.out.println("--- Permutation" + permutationCounter + " ---");
+        //     for (List<Lesson> currClass : permutation) {
+        //         for (Lesson lesson : currClass) {
+        //             System.out.println(lesson.getLessonType() + "|" + lesson.getDay()
+        //                 + "|" + lesson.getStartTime() + "-" + lesson.getEndTime());
+        //         }
+        //     }
+        //     permutationCounter++;
+        // }
+        // System.out.print("\n");
         return result;
     }
 
