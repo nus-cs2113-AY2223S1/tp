@@ -33,6 +33,10 @@ public class UserStorage {
      */
     public static void saveFile(String uniName, String textToAdd) throws IOException {
         logger.log(Level.INFO, "Going to start file saving");
+        File dir = new File(directory);
+        if (!dir.isDirectory()) {   //directory "data/" does not exist yet
+            dir.mkdir();
+        }
         String filePath;
         if (filePaths.get(uniName) == null) {
             filePath = directory + uniName + ".txt";
