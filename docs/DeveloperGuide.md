@@ -102,7 +102,8 @@ all possible permutations of lesson combinations and allocated lessons in a way 
 **Design Decisions:**
 * The algorithm involved in allocating lessons relies heavily on the ability to check if lessons clash with each other at any point in time. Thus, the allocation algorithm is implemented in the timetableDict to allow easy
 access to lessons at any point in the timetable.
-* ... unfinished
+* Due to some modules having an excessive amounts of lessons, leading to extremely high number of possible lesson permutations during allocation, we have set a limit of 30 possible lesson permutations for each mod to be allocated. 
+Taking the maximum of 7 modules, this sets a limit of 2.187 x 10^10 total permutations for the algorithm. This prevents the program from exceeding the Java heap space memory allocated.
 
 ---
 
