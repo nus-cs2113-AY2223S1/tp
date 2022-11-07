@@ -171,16 +171,14 @@ message regarding the information of the exercise that is marked "undone" will b
 Finding a record
 
 The sequence diagrams below represent the interactions when a user find a record.
-![Find.png](UmlDiagrams/Find.png)
 
-<<<<<<< HEAD
+![Find.png](UmlDiagrams/Find.png)
 
 In the case that user removes a weight and fat record, the removeWeight method in removeCommand is executed.
 As shown in the sequence diagram below, after the record is removed from the weightAndFatList, it is returned to
 removeCommand to be printed on the ui.
 ![](UmlDiagrams/RemoveWeight.png)  
 The interactions for removing other types of records are similar.
-=======
 The Duke will call execute() for the FindCommand object after the Parser class parsed the input is a find command.
 First, to validate the accuracy of the input command, Parser.getArgumentsCount(arguments) is executed to obtain the
 number of slashes. Then, The execute() will call Parser.getArgumentList to split the inputs into an array containing
@@ -195,12 +193,15 @@ list is not empty, a table is created and filled with the data from the list. Th
 Component.
 
 The interactions for finding other types of records are similar.
->>>>>>> b729cb710e4030c148b61acbe614d270752cb4b1
 
 
-The following sequence diagram shows how the view operation works:
+
+
 
 There is a choice to view food, exercise, weight, strength, cardio, bmi, maintenance, all.
+The Duke will call execute() for the ViewCommand object after the Parser class parsed the input is a view command
+The following sequence diagram shows how the view operation works:
+
 Viewing historical records  
 ![View.png](UmlDiagrams/View.png)
 
@@ -281,7 +282,9 @@ to better understand their journey and progress towards their fitness goals.
 | v2.0    | user           | find a to-do item by name         | locate a to-do without having to go through the entire list |
 | v2.0    | long term user | save my food consumptions         | to keep a record of all my food data over time              |
 | v2.0    | long term user | find certain food consumption     | to see my consumption of certain food over time             |
-| v2.0    | long term user | save my strength/cardio trainings | monitor my strength/cardio progress over the time           |
+| v2.0    | long term user | save my strength/cardio trainings | monitor my strength/cardio progress over time               |
+| v2.1    | long term user | check my overall calorie usage    | monitor my daily calorie intake and burn over time          |
+| v2.1    | user           | find my calorie usage by date     | monitor my overall calorie usage on a certain date          |
 | v2.1    | new user       | set my biometrics                 | receive personalised recommendations                        |
 
 ## Non-Functional Requirements
