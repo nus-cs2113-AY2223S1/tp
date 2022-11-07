@@ -1,10 +1,3 @@
----
-title: User Guide
-layout: default
-nav_order: 2
-description: "A guide specially made for you so that your money's going into the right places!"
-permalink: /userguide/
----
 # User Guide
 
 <br>
