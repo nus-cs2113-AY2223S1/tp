@@ -1,32 +1,37 @@
 # Pet Clinic Manager - Developer Guide
-* [Acknowledgements](#acknowledgements)
 * [Setting Up and Getting Started](#setting-up-and-getting-started)
 * [Product Scope](#product-scope)
-* [Target User Profile](#target-user-profile)
-* [Value Proposition](#value-proposition)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+
 * [User Stories](#user-stories)
-* [Design](#design)
-  * [Architecture](#architecture)
-  * [Common Classes](#storage-component)
-* [Implementation](#implementation)
+* [Implementation](#Implementation)
+  * [Appointment Task-Employee Allocation Feature](#Appointment Task-Employee Allocation feature)
+  * [Appointment Status Feature](#Appointment Status feature)
+  * [Employee management Feature](#Employee management feature)
+  * [Pet management Feature](#Pet management feature)
+  * [Service management Feature](#Service management feature)
+* [Non-Functional Requirements](#Non-Functional Requirements)
 
+## Setting Up and Getting Started
 
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. Ensure that you have Java 11 installed.
+2. Download the latest version of `tp.main.jar` from [here](https://github.com/AY2223S1-CS2113-F11-2/tp/releases).
+3. Put the JAR file into a folder you would like to use.
+4. Open the command line in that folder and run the command `java -jar [filename].jar`.
 
 ## Product scope
 
-### Target user profile
+### Target User Profile
 
 This application is for Head Nurses of Pet Clinics to manage the appointments of the clinic, manage employees and allocate tasks to be done by each employee.
 
-### Value proposition
+### Value Proposition
 
 The head nurse can now:
 - have an upcoming schedule of all appointments of the clinic in one place.
-- have an overview of all employees in the clinic and the ability to manage them
-- create and assign tasks to be performed
+- have an overview of all employees in the clinic and the ability to manage them.
+- create and assign tasks to be performed.
 
 
 ## User Stories
@@ -55,7 +60,7 @@ The head nurse can now:
 
 ## Implementation
 
-### Appointment Task-Employee Allocation feature
+### Appointment Task-Employee Allocation Feature
 
 ### Implementation
 
@@ -97,7 +102,7 @@ Step 4. The user then executes the command `employee task i/1002` to view the ta
 
 ------
 
-### Appointment Status feature
+### Appointment Status Feature
 
 ### Implementation
 
@@ -112,7 +117,7 @@ Given below is an example usage scenario and how the Appointment mechanism behav
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
 
-### Design considerations:
+### Design Considerations:
 
 **Aspect: How status feature executes:**
 
@@ -121,7 +126,7 @@ Given below is an example usage scenario and how the Appointment mechanism behav
 
 - Alternative 2:
 
-### Employee management feature
+### Employee management Feature
 
 ### Implementation
 
@@ -151,7 +156,7 @@ The following sequence diagram shows how the employee management works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png)
 
 
-### Design considerations:
+### Design Considerations:
 
 **Aspect: How to number the employee:**
 
@@ -169,7 +174,7 @@ The following sequence diagram shows how the employee management works:
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
 
-### Pet management feature
+### Pet Management Feature
 
 ### Implementation
 
@@ -199,7 +204,7 @@ The following sequence diagram shows how the status operation works:
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
 
-### Service management feature
+### Service Management Feature
 
 ### Implementation
 
@@ -228,7 +233,7 @@ The following sequence diagram shows how the service management works
 
 ![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
 
-### Design considerations:
+### Design Considerations:
 
 **Aspect: How to represent the Service:**
 
@@ -260,12 +265,5 @@ The following sequence diagram shows how the service management works
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+1. Should work on any Windows, Linux and MacOS that has Java `11` or above installed.
+2. Should not require users to have prior programming experience.
