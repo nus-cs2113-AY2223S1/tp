@@ -64,6 +64,7 @@ The rest of the app consists of five components.
 - [Storage](#storage-component) : Reads data from, and writes data to the hard disk
 
 <div style="page-break-after: always;"></div>  
+  
 
 **How the architecture components interact with each other**
 
@@ -143,7 +144,8 @@ Below is a partial class diagram that shows an overview of the `OperationList` c
 
 ![OperationList-class-diagram](ug-diagrams/images/OperationList%20Class%20Diagram.jpg)
 
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>  
+
 
 The various methods implemented to ensure the operations are done correctly are not included to
 maintain simplicity.
@@ -206,6 +208,7 @@ The following sequence diagrams to showcase the list of commands,
 8. [List flights feature](#list-flights-feature)
 
 ---
+<div style="page-break-after: always;"></div>  
 
 ### Add a passenger feature
 
@@ -214,8 +217,6 @@ The command Add a passenger adds passenger details of a particular passenger to 
 **Sequence Diagram**
 
 ![sequence diagram](ug-diagrams/images/passengerAddCmdSeqDiagram.jpg)
-
-<div style="page-break-after: always;"></div>
 
 1. SkyControl first retrieves the parameters `departureTime` and `gateNumber` from the respective flight detail
    in FlightList and appends the details to the lineInput.
