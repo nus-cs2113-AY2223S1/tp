@@ -25,6 +25,7 @@
     * [Convert all the money into one currency](#convert-all-money-convert-all)
     * [Transfer money into another account](#transferring-currencies-transfer)
     * [Listing the names of the available commands](#listing-commands-list)
+    * [Get information about the commands entered in the current session](#current-session-account-history-account-history)
     * [Enter the Help Center](#help-center-help)
     * [Logout](#log-out-logout-log-out)
   * [Help Center](#help-center-help)
@@ -293,9 +294,22 @@ Format:
   
 #You need to be logged into your account
 
-Example of usage: 
+Example of Usage: 
 
 `transfer testing2 100 sgd`
+
+### Current session account history: `account history`
+Print out the list of commands you have entered within this current instance of accessing your account
+
+Format: `account history`
+
+Example of Usage: `account history`
+
+#### testing logged in at 2022-11-07 13:58:28
+
+#### balance
+
+
 
 
 ### Log Out: `logout/ log out`
