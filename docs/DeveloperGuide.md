@@ -2,8 +2,6 @@
 
 ## Contents
 <!-- TOC -->
-* [Developer Guide](#developer-guide)
-  * [Contents](#contents)
   * [1 Acknowledgements](#1-acknowledgements)
   * [2 Design](#2-design)
     * [2.1 Architecture Level](#21-architecture-level)
@@ -40,9 +38,18 @@
 
 ## 1 Acknowledgements
 Our project uses external libraries and services from:
+
 1. Land Transport Authority DataMall API Service ([link](https://datamall.lta.gov.sg/content/datamall/en.html)).
 2. Jackson JSON Parser ([link](https://fasterxml.github.io/jackson-core/javadoc/2.8/com/fasterxml/jackson/core/JsonParser.html))
 3. Jansi ([link](https://github.com/fusesource/jansi))
+
+Additionally, some code was reused and modified as below by:
+
+1. Vic Seedoubleyew ([link](https://stackoverflow.com/a/36558036)) for capturing prints to `System.out`.
+2. Max Strandberg ([link](https://www.asciiart.eu/vehicles/cars))  for the ASCII art for the greeting message.
+3. patorjk.com ([link](http://patorjk.com/software/taag/)) for generation of the logo tags.
+3. GOXR3PLUS ([link](https://stackoverflow.com/questions/10308221/how-to-copy-file-inside-jar-to-outside-the-jar/44077426#44077426)) for file regeneration from within the jar file.
+4. Address Book 2 ([link](https://github.com/se-edu/addressbook-level2)) as inspiration for the `Parser` class.
 
 ## 2 Design 
 
