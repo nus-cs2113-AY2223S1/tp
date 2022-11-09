@@ -384,7 +384,7 @@ The head nurse can now:
 
 ## Appendix D: Glossary
 
-- pet: the target user of the clinic, could be renamed.
+- pet: the target user of the clinic.
 - appointment: an agreed-upon service for a certain pet.
 - task: specific matters in one appointment.
 
