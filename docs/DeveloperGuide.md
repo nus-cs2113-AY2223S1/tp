@@ -221,7 +221,6 @@ The following sequence diagram shows how the employee management works:
 
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
----
 
 
 ### Pet Management Feature
