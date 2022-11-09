@@ -46,7 +46,7 @@ Step 3. The user then wishes to reassign task id = 4001 to another employee and 
 
 > The following sequence diagram shows how the task allocation/reallocation operation works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/NewTaskAllocationSequence.png'>
 
 Step 4. The user then executes the command `employee task i/1002` to view the tasks of employee 1002, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewEmployeeTasks()`. Due to the reassignment done in step 3, task 4001 now belongs to Employee 1002, and task 4001 will not show up in Employee 1001’s tasks.
 
@@ -86,9 +86,9 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 
 The following sequence diagram shows how the appointment management operation works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/AppointmentAdd.png'>
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/RemoveAppointment.png'>
 
 
 ### Design Considerations
@@ -198,11 +198,11 @@ Step 4. The user executes `employee remove i/1` command to remove the employee w
 
 The following sequence diagram shows how the employee management works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/EmployeeView.png'>
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/EmployeeAdd.png'>
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/RemoveEmployee.png'>
 
 ### Design Considerations:
 
@@ -247,15 +247,15 @@ Step 4. The user executes `view pet` to display all pets in the pet manage syste
 
 The following sequence diagram shows how the add pet operation works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/AddPetCommand.png'>
 
 The following sequence diagram shows how the remove pet operation works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/RemovePetCommand.png'>
 
 The following sequence diagram shows how the view pet operation works:
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/ViewPetCommand.png'>
 
 ### Design Considerations:
 
@@ -298,9 +298,9 @@ Step 4. The user executes `service remove i/1` command to remove the service wit
 
 The following sequence diagram shows how the service management works
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/ServiceView.png'>
 
-<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png'>
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/raw/master/docs/uml/ServiceAdd.png'>
 
 ### Design Considerations:
 
