@@ -384,9 +384,11 @@ The head nurse can now:
 
 ## Appendix D: Glossary
 
-- pet: the target user of the clinic.
+- pet: the target service recipient of the clinic.
 - appointment: an agreed-upon service for a certain pet.
 - task: specific matters in one appointment.
+- employee: the one who operate tasks.
+- service: the clinic can provide to look after the pet.
 
 ## Appendix E: Instructions for Manual Testing
 
