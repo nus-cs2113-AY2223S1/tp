@@ -84,7 +84,7 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 - First the appointment is removed from the appointment list.
 - Secondly all tasks related to this appointment are also removed from task list.
 
-The following sequence diagram shows how the add appointment operation works:
+The following sequence diagram shows how the appointment management operation works:
 
 <img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png'>
 
