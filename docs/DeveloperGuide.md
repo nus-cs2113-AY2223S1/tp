@@ -381,3 +381,29 @@ The head nurse can now:
 
 1. Should work on any Windows, Linux and macOS that has Java `11` or above installed.
 2. Should not require users to have prior programming experience.
+
+## Appendix D: Glossary
+
+- pet: the target user of the clinic, could be renamed.
+- appointment: an agreed-upon service for a certain pet.
+- task: specific matters in one appointment.
+
+## Appendix E: Instructions for Manual Testing
+
+A complete and detailed input process has been mentioned in the UG, where all the features above are going to be tested.
+
+To provide more smoke-test samples, let's take the example of adding a pet:
+
+1. pet add n/ s/cat h/0 (missing pet name)
+2. pet add s/cat h/0 (missing pet name)
+3. pet add n/Eliza s/ h/0 (missing pet species)
+4. pet add n/Eliza h/0 (missing pet species)
+5. pet add n/Eliza s/cat h/ (missing pet health status)
+6. pet add n/Eliza s/cat (missing pet health status)
+7. pet add n/Eliza s/cat h/a (incorrect pet health status)
+8. pet add n/Eliza s/cat h/-1 (incorrect pet health status)
+9. pet add n/Eliza s/cat h/2 (incorrect pet health status)
+10. pet add n/Eliza s/cat h/999999999999999999999999999999999 (incorrect pet health status)
+11. pet add n/Eliza s/cat h/01 (incorrect pet health status)
+
+
