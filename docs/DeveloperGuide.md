@@ -46,7 +46,7 @@ Step 3. The user then wishes to reassign task id = 4001 to another employee and 
 
 > The following sequence diagram shows how the task allocation/reallocation operation works:
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/NewTaskAllocationSequence.png'>
 
 Step 4. The user then executes the command `employee task i/1002` to view the tasks of employee 1002, which is ‘John’ in this case. The `employee task` command calls `EmployeeList#viewEmployeeTasks()`. Due to the reassignment done in step 3, task 4001 now belongs to Employee 1002, and task 4001 will not show up in Employee 1001’s tasks.
 
@@ -86,8 +86,10 @@ Step 3. The user then wishes to remove an existing appointment id = 3001 and exe
 
 The following sequence diagram shows how the add appointment operation works:
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png)
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AppointmentAdd.png'>
+
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveAppointment.png'>
+
 
 ### Design Considerations
 **Aspect: How addAppointment executes:**
@@ -143,7 +145,7 @@ use enumeration class.
   - Cons: Add more overhead to create another class.
 
 - Alternative 2:  
-use hard-code integer or string.
+  use hard-code integer or string.
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
 
@@ -172,7 +174,7 @@ The proposed appointment feature is facilitated by the `appointment` class and t
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
 ---
-  
+
 
 ### Employee management Feature
 
@@ -196,12 +198,12 @@ Step 4. The user executes `employee remove i/1` command to remove the employee w
 
 The following sequence diagram shows how the employee management works:
 
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png'>
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeView.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png'>
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/EmployeeAdd.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png'>
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemoveEmployee.png)
 ### Design Considerations:
 
 **Aspect: How to number the employee:**
@@ -220,7 +222,7 @@ The following sequence diagram shows how the employee management works:
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
 ---
-  
+
 
 ### Pet Management Feature
 
@@ -244,11 +246,16 @@ Step 4. The user executes `view pet` to display all pets in the pet manage syste
 
 
 The following sequence diagram shows how the add pet operation works:
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png)
+
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/AddPetCommand.png'>
+
 The following sequence diagram shows how the remove pet operation works:
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png)
+
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/RemovePetCommand.png'>
+
 The following sequence diagram shows how the view pet operation works:
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png)
+
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ViewPetCommand.png'>
 
 ### Design Considerations:
 
@@ -291,9 +298,9 @@ Step 4. The user executes `service remove i/1` command to remove the service wit
 
 The following sequence diagram shows how the service management works
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceView.png'>
 
-![https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png](https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png)
+<img decoding = 'async' src = 'https://github.com/AY2223S1-CS2113-F11-2/tp/blob/master/docs/uml/ServiceAdd.png'>
 
 ### Design Considerations:
 
@@ -325,7 +332,7 @@ The following sequence diagram shows how the service management works
   So can not attach more attributes to it.
   2. Less oop.
 ---
-  
+
 ## Appendix A: Product scope
 
 ### Target User Profile
