@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+
+box Employee LOGIC_COLOR_T1
+participant UiManager LOGIC_COLOR
+participant Parser LOGIC_COLOR
+participant EmployeeParser LOGIC_COLOR
+participant RemoveEmployeeCommand LOGIC_COLOR
+participant EmployeeList LOGIC_COLOR
+end box
+
+[-> UiManager : readCommand("employee remove i/1")
+activate UiManager
+
+UiManager -> Parser : execute("employee remove i/1")
+activate Parser
+
+EmployeeParser -> AddEmployeeCommand : prepareAddEmployee(" n/Mozart")
+activate AddEmployeeCommand
+
+AddEmployeeCommand -> EmployeeList : addEmployee("Mozart")
+activate EmployeeList
+
+EmployeeList --> AddEmployeeCommand
+AddEmployeeCommand --> EmployeeParser
+EmployeeParser --> UiManager
+
+@enduml

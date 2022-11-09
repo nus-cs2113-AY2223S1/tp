@@ -1,1 +1,2 @@
-James Gosling
+pet add n/Eliza s/cat h/0
+bye

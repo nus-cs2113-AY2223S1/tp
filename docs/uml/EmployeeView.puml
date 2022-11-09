@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+
+box Employee LOGIC_COLOR_T1
+participant UiManager LOGIC_COLOR
+participant Parser LOGIC_COLOR
+participant EmployeeParser LOGIC_COLOR
+participant ViewEmployeeCommand LOGIC_COLOR
+end box
+
+[-> UiManager : readCommand("employee view")
+activate UiManager
+
+UiManager -> Parser : parseCommand("employee view")
+activate Parser
+
+Parser -> EmployeeParser : parseEmployee("view")
+activate EmployeeParser
+
+EmployeeParser -> ViewEmployeeCommand : execute()
+activate ViewEmployeeCommand
+
+ViewEmployeeCommand --> EmployeeParser
+EmployeeParser --> Parser
+Parser --> UiManager
+
+@enduml
