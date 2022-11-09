@@ -1,5 +1,5 @@
 # Pet Clinic Manager - Developer Guide
-* [Setting Up and Getting Started](#setting-up-and-getting-started)
+![Setting Up and Getting Started](#setting-up-and-getting-started)
 * [Design and Implementation](#Design-and-Implementation)
   * [Appointment Task-Employee Allocation Feature](#Appointment-Task-Employee-Allocation-Feature)
   * [Appointment Manage Feature](#Appointment-Manage-Feature)
