@@ -13,6 +13,8 @@
   * [Value Proposition](#value-proposition)
 * [Appendix B: User Stories](#appendix-b-user-stories)
 * [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+* [Appendix D: Glossary](#appendix-d-glossary)
+* [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## Setting Up and Getting Started
 
