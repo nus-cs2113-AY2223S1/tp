@@ -115,6 +115,7 @@ Add a new feature called `rescheduleAppointment`.
 - Pros: Less overhead when rescheduling the appointment.
 - Cons: Harder to implement.
 
+------
 
 ### Appointment Status Feature
 
@@ -149,6 +150,8 @@ use enumeration class.
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
 
+------
+
 ### Appointment Date Feature
 
 ### Implementation
@@ -173,8 +176,8 @@ The proposed appointment feature is facilitated by the `appointment` class and t
   use `String` type.
   - Pros: Low cost of constructing a status.
   - Cons: Hard to read. And have to recode if status changes much.
----
 
+------
 
 ### Employee management Feature
 
@@ -222,6 +225,7 @@ The following sequence diagram shows how the employee management works:
   - Pros: More easy, and the indexes are always continuous.	
   - Cons: The index of an employee may change frequently.
 
+------
 
 ### Pet Management Feature
 
@@ -273,7 +277,8 @@ The following sequence diagram shows how the view pet operation works:
 
   - Pros: More easy, and pet status can have a wide range.
   - Cons: hard to read and maintain, not stable, may cause misunderstanding due to typo.
----
+
+------
 
 ### Service Management Feature
 
@@ -330,7 +335,8 @@ The following sequence diagram shows how the service management works
   1. The service only has one attribute which is the description. 
   So can not attach more attributes to it.
   2. Less oop.
----
+
+------
 
 ## Appendix A: Product scope
 
