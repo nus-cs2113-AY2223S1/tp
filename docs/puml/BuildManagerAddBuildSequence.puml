@@ -1,0 +1,39 @@
+@startuml
+
+actor User
+Participant ":Ui" as Ui #AquaMarine
+Participant ":Parser" as Parser #Orange
+Participant ":BuildManager" as BuildManager #Yellow
+Participant ":Build" as Build #DarkSalmon
+Participant ":Storage" as Storage #LightGreen
+
+User -> Ui ++ #AquaMarine : "add/test build"
+
+Ui -> Ui ++ #AquaMarine : readLine()
+
+Ui -> Parser ++ #Orange : parse()
+
+Parser -> BuildManager ++ #Yellow : Initialize
+
+Parser -> Parser ++ #Orange : mainParseAdd()
+
+Parser -> BuildManager ++ #Yellow : addBuild()
+
+BuildManager -> Build ++ #DarkSalmon : getName()
+return
+
+return
+
+Parser -> Storage ++ #LightGreen : saveBuild()
+return
+
+return
+
+return
+
+return
+
+return
+
+return message "Build added"
+@enduml

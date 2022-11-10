@@ -1,0 +1,9 @@
+cpu/cpu1/123/12/ABC/4.0
+gpu/gpu1/456/45/4/5
+motherboard/mobo1/123/12/ABC/Full ATX/2/2
+memory/memory1/123/12/8/4
+drive/drive1/123/12/200/SSD
+monitor/monitor1/123/12/144/4/3440x1440
+cooler/cooler1/123/12/ABC/1500/40
+case/case1/123/1/Full ATX/2
+powersupply/powersupply1/123/850

@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+activate ":Build"
+":Build" -> ":LinkedHashMap2D": Initialize
+
+activate ":LinkedHashMap2D"
+
+":Build" -> ":Build": addComponent(type, component)
+
+":Build" -> ":LinkedHashMap2D": addElement(type, component.getName(), component)
+
+":Build" -> ":Build": deleteComponent(type, component)
+
+":Build" -> ":LinkedHashMap2D": removeElement(type, component.getName())
+
+deactivate ":Build"
+deactivate ":LinkedHashMap2D"
+
+@enduml

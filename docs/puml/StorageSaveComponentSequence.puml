@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Participant ":Ui" as Ui #Aqua
+Participant ":EditParser" as EditParser #AquaMarine
+Participant ":Storage" as Storage #Yellow
+
+
+activate Ui #Aqua
+Ui -> Ui: readline()
+activate Ui #Aqua
+Ui -> EditParser: parse()
+activate EditParser #AquaMarine
+EditParser -> EditParser : parseAdd()
+activate EditParser #AquaMarine
+EditParser -> Storage: saveComponent(Build)
+activate Storage #Yellow
+opt file directory does not exist
+        Storage -> Storage: createFileDirectory()
+        activate Storage #Yellow
+        return
+end
+opt file does not exist
+        Storage -> Storage: createFile()
+        activate Storage #Yellow
+        return
+end
+loop for each component in build
+    Storage -> Storage: write()
+    activate Storage #Yellow
+    ref over Storage
+        write all the existing components to the file
+    end
+    return
+end
+return
+return
+return
+
+return
+
+@enduml

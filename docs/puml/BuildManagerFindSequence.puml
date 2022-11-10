@@ -1,0 +1,30 @@
+@startuml
+
+actor User
+Participant ":Ui" as Ui #AquaMarine
+Participant ":Parser" as Parser #Orange
+Participant ":BuildManager" as BuildManager #Yellow
+
+User -> Ui ++ #AquaMarine : "find/<search term>"
+
+Ui -> Ui ++ #AquaMarine : readLine()
+
+Ui -> Parser ++ #Orange : parse()
+
+Parser -> BuildManager ++ #Yellow : Initialize
+
+Parser -> Parser ++ #Orange : mainParseFind()
+
+Parser -> BuildManager ++ #Yellow : findBuilds()
+return prints the list of builds with search term
+
+return
+
+return
+
+return
+
+return
+
+return builds with search term
+@enduml

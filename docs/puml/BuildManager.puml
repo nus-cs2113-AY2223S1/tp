@@ -1,0 +1,20 @@
+@startuml
+hide circle
+
+skinparam classAttributeIconSize 0
+class BuildManager {
+    -builds: HashMap<String, Build>
+
+    +addBuild(): void
+    +deleteBuild(): void
+    +getBuild(): Build
+    +getBuilds(): HashMap<String, Build>
+    +findBuilds() : void
+    +filterBuilds() : void
+}
+
+class Build {
+}
+
+BuildManager "1"---"*" Build
+@enduml

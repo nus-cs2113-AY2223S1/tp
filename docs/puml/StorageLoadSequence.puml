@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Actor User
+Participant ":ComputerComponentChooser" as ComputerComponentChooser #AquaMarine
+Participant ":Storage" as Storage #Orange
+Participant ":BuildManager" as BuildManager #LightBlue
+Participant ":DuplicateBuildException" as DuplicateBuildException #LightGreen
+Participant ":FileNotFoundException" as FileNotFoundException #Yellow
+Participant ":CPU" as CPU #Pink
+Participant ":GPU" as GPU #red
+Participant ":Motherboard" as Motherboard #Brown
+
+activate ComputerComponentChooser #AquaMarine
+User -> ComputerComponentChooser: run()
+ComputerComponentChooser -> Storage: loadBuild(BuildManager)
+activate Storage #Orange
+
+loop for each saved entry in file
+    alt there is no such existing build
+        Storage -> BuildManager: addBuild(Build)
+        activate BuildManager #LightBlue
+        return
+    else no duplicate build allowed
+        Storage -> DuplicateBuildException
+        activate DuplicateBuildException #LightGreen
+        return print error message
+    else if file is not found
+        Storage -> FileNotFoundException
+        activate FileNotFoundException #Yellow
+        return print error message
+    end
+end
+return
+
+ComputerComponentChooser -> Storage: loadComponent(BuildManager)
+activate Storage #Orange
+loop for each build in BuildManager
+    loop for each saved entry in file
+        alt saved entry in a cpu
+            Storage -> CPU: addCPU(CPU)
+            activate CPU #Pink
+            return
+        else saved entry in a gpu
+            Storage -> GPU: addGPU(GPU)
+            activate GPU #red
+            return
+        else saved entry in a motherboard
+            Storage -> Motherboard: addMotherboard(Motherboard)
+            activate Motherboard #Brown
+            return
+        else if file is not found
+                Storage -> FileNotFoundException
+                activate FileNotFoundException #Yellow
+                return print error message
+    end
+end
+
+return
+
+
+
+
+
+
+
+@enduml
