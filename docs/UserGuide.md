@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [Quick Start](#quick-start)
+* [Getting Started](#getting-started)
 * [Features](#features)
     * [Build Management Mode](#build-management-mode)
         * [Adding a build](#adding-a-build-add)
@@ -36,18 +36,21 @@
 ## Introduction
 
 Welcome to Computer Component Chooser!
-ComputerComponentChooser(CCC) is a Command Line Interface(CLI) 
-program targeting PC enthusiasts and commercial PC builders who want to:
+ComputerComponentChooser (CCC) is a command-line program targeting PC enthusiasts and commercial PC builders who want to:
 - simplify the [tracking of computer builds](#features) 
 - ensure that the parts they pick are [compatible](#checking-compatibility-check) with one another.
 
-## Quick Start
+This user guide is meant to provide an overview of the various commands and features available in CCC. It is targeted at users who have some experience with command-line interfaces.
+If you are unsure about any of the terminology used in this guide, you can refer to the [Glossary](#glossary) for a list of terms and their definitions, or consult a search engine.
+Text formatted like `this` represents commands you can enter into the command line or output that you will see in the terminal.
 
-1. Ensure that you have `Java 11` installed.
+## Getting Started
+
+1. Install [Java 11](https://www.oracle.com/java/technologies/downloads/#java11) for your operating system. If you are unsure about how to do this, you can refer to the [Java installation guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html) or consult a search engine.
 2. Download the latest version of `CCC` from 
-[here](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
-3. Copy the file to an empty folder you want to use as the _home folder_.
-4. Open a command window in that folder.
+[the releases page](https://github.com/AY2223S1-CS2113T-W11-2/tp/releases).
+3. Copy the file to an empty folder you want to use as the _home folder_ This will be the folder in which CCC will store all of its data.
+4. Open a terminal window (i.e. Command Prompt on Windows, Terminal on Mac OS, or a Linux terminal) and navigate to the home folder.
 5. Run the command `java -jar CCC.jar` to start the app.
 6. Refer to the [Features](#features) below to try out some commands!
 
@@ -81,27 +84,27 @@ ____________________________________________________________
 Our program has two modes, the [Build Management Mode](#build-management-mode) and the
 [Build Editing Mode](#build-editing-mode). 
 
-Upon starting the Program, you will be situated in the [Build Management Mode](#build-management-mode).
+Upon starting the Program, you will be situated in the [Build Management Mode](#build-management-mode). 
+As you create builds, you will be able to switch to the [Build Editing Mode](#build-editing-mode) to edit the builds you have created.
 
 ### Build Management Mode
 
-Build Management Mode handles the management of your builds. 
+Build Management Mode, also known as Main Mode, handles the management of your builds. This is the default mode when you start the program.
+You can add, delete, list, and filter through your builds in this mode.
 
 #### Adding a build: `add`
 
-Adds a build to the list of builds currently managed by the program. You only need to specify the name of the
-build.
+Adds a new empty build to your list of builds. This command takes the name of the build its only parameter.
 
 __Note__: If you wish to edit your build after adding it, you can do so by following this command [Editing a build](#editing-a-build-edit).
 
-__Note__: Build name cannot contain a slash.
+<span style="color:red">__Caution__</span>: The build name must be unique. If you try to add a build with a name that already exists, you will receive an error message. Build names cannot contain the following characters: `|`, `>`, `<`, `:`, `*`, `?`, `"`, `/`, `\`.
 
 Format: `add/NAME`
 
-Example of usage: Enter `add/test build` to add a build named 'test build' to the list of builds, a build 
-named 'test build' is added to the list of builds managed by the program.
+Example of usage: Enter `add/test build` to add a build named 'test build' to the list of builds
 
-Expected outcome: The program will add a build named 'test build' to the list of builds.
+
 ```
 ____________________________________________________________
 add/test build
@@ -112,16 +115,14 @@ ____________________________________________________________
 
 #### Editing a build: `edit`
 
-Enters [Build Editing Mode](#build-editing-mode) for the specified build. You only need to specify the name of the
-build.
+Enters [Build Editing Mode](#build-editing-mode) to edit the build with the given name. This command takes the name of the build as its only parameter.
 
 Format: `edit/NAME`
 
-__Note__: If you wish to go back to the main mode, you can do so by following this command [Exit Build Editing Mode](#exiting-build-editing-mode-back).
+__Note__: If you wish to go back to the main mode, you can do so by [entering the `back` command](#exiting-build-editing-mode-back).
 
 Example of usage: Enter `edit/test build` to edit the build named 'test build'.
 
-Expected outcome: You are now in edit mode for the build named 'test build'.
 
 ```
 ____________________________________________________________
@@ -133,14 +134,13 @@ You are now editing test build
 
 #### Deleting a build: `delete`
 
-Deletes a build in the list of builds current managed by the program. You only need to specify the name of the
-build.
+Deletes a build from the list of your builds, **including the associated data files**. This command takes the name of the build as its only parameter.
 
 Format: `delete/NAME`
 
-Example of usage: Enter `delete/test build` to delete a build named 'test build' stored in the list of builds.
+Example of usage: Enter `delete/test build` to delete the build named 'test build'.
 
-Expected outcome: The program will delete the build named 'test build' from the list of builds.
+
 ```
 ____________________________________________________________
 delete/test build
@@ -152,14 +152,13 @@ ____________________________________________________________
 
 #### Viewing a build: `view`
 
-Views a build in the list of builds current managed by the program. You only need to specify the name of the
-build.
+Lists all the components in the build with the given name, including their details. This command takes the name of the build as its only parameter.
 
 Format: `view/NAME`
 
-Example of usage: Enter `view/test build` to view a build named 'test build' stored in the list of builds.
+Example of usage: Enter `view/test build` to view the components of the build named 'test build'.
 
-Expected outcome: The program will display the components of the build named 'test build' from the list of builds.
+
 ```
 ____________________________________________________________
 view/testbuild
@@ -180,9 +179,9 @@ Lists all builds in the list of builds currently managed by the program.
 
 Format: `list`
 
-Example of usage: Enter `list` to list all builds stored in the list of builds.
+Example of usage: Enter `list` to list all builds.
 
-Expected outcome: The program will display all builds stored in the list of builds.
+
 ```
 ____________________________________________________________
 list
@@ -194,13 +193,15 @@ ____________________________________________________________
 
 #### Finding builds: `find`
     
-List all builds that contain the keyword in their name.
+Finds and lists builds whose names contain any of the given keywords. This command takes the keywords as its only parameter.
 
 Format: `find/KEYWORD`
+
+KEYWORD can be any number of words separated by a space.
     
 Example of usage: Enter `find/test` to find all builds that contain the keyword 'test'.
 
-Expected outcome: The program will display all builds that contain the keyword 'test'.
+
 ``` 
 ____________________________________________________________
 find/test
@@ -213,8 +214,7 @@ ____________________________________________________________
 #### Filtering builds: `filter`
 
 List all builds that fit the specified requirements.
-`Filter` can filter builds that are compatible or has total cost/power within a specified range.
-Range is optional for filtering compatibility.
+`filter` can display builds that pass compatibility checks, or display builds that fall within a specified price or power range.
 
 Acceptable Formats:
 1. `filter/price/RANGESTART/RANGEEND`
@@ -223,16 +223,15 @@ Acceptable Formats:
 - `RANGESTART` must be integer or float number
 - `RANGEEND` must be integer or float number
 
-__Note__: The `RANGESTART` and `RANGEEND` will be swapped if `RANGESTART` is greater than `RANGEEND`.
+__Note__: If you provide a `RANGESTART` that is greater than `RANGEEND`, the program will automatically swap the two values.
+
+If there are no builds that fit the specified requirements, the program will display a message saying so.
 
 Examples of usage: 
 1. Enter `filter/compatibility` to find all builds that are compatible.
 2. Enter `filter/price/3000/4000` to find all builds that have a total cost between $3000 and $4000.
 
-Expected outcomes: 
-1. The program will display "No builds that meet specifications found." as there no components in 
-test build yet.
-2. The program will display all builds that have a total cost between $3000 and $4000.
+
 ```
 ____________________________________________________________
 filter/compatibility
@@ -253,15 +252,16 @@ ____________________________________________________________
 
 #### Exporting builds: `export`
 
-Exports all builds to a text file in the `data/export` folder.
+Exports the information of all builds being managed by the program to text files in the `data/export` folder. This command takes no parameters.
 
 Format: `export`
 
 Example of usage: Enter `export` to export all builds.
 
-Expected outcome: The program will export all builds to a text file in the `data/export` folder.
 
-__Note__: The file will not be empty even if there are no components in all builds.
+
+__Note__: For builds that have no components, a text file will still be created.
+
 ```
 ____________________________________________________________
 export
@@ -272,13 +272,13 @@ ____________________________________________________________
 
 #### Exporting builds as CSV: `exportCSV`
 
-Exports all builds to a CSV file in the `data/export` folder.
+Exports the information of all builds to a CSV file in the `data/export` folder. This command takes no parameters.
 
 Format: `exportCSV`
 
 Example of usage: Enter `exportCSV` to export all builds.
 
-Expected outcome: The program will export all builds to a CSV file in the `data/export` folder.
+
 
 __Note__: The CSV file will be empty if there are no components in all the builds.
 ```
@@ -296,7 +296,7 @@ Format: `bye`
 
 Example of usage: Enter `bye` to exit the program.
 
-Expected outcome: The program will exit.
+
 ```
 ____________________________________________________________
 Bye. Hope to see you again soon!
@@ -304,16 +304,17 @@ ____________________________________________________________
 ```
 ### Build Editing Mode
 
-Build Editing Mode handles the management of the computer components of a build. If you want to go back to the Build 
-Management Mode, you can do so by following this command [Exit Build Editing Mode](#exiting-build-editing-mode-back).
+In Build Editing Mode, you can add, delete, and view components in the build you are currently editing.
+
+To get to this mode, you must first [enter the `edit` command](#editing-a-build-edit). You can exit this mode by [entering the `back` command](#exiting-build-editing-mode-back).
 
 #### Adding a component: `add`
 
-Adds a component to the list of components of a build.
+Adds a component to the list of components in the current build.
 
 __Note__: 
-- If you want to see the components that have been added in the Edit Mode, you can do so by following this command [Listing all components](#listing-all-components-list).
-- If you want to see the information of the component you have added, you can do so by following this command [Viewing a component](#viewing-a-component-view).
+- If you want to see the components that have been added in the Edit Mode, you can do so by [using the `list` command](#listing-all-components-list).
+- If you want to see information about a component you have added, you can do so by [using the `view` command](#viewing-a-component-view).
 
 Acceptable Formats: 
 1. `add/case/Name/Price/Power/FormFactor/ExpansionSlots`
@@ -327,14 +328,16 @@ Acceptable Formats:
 9. `add/monitor/Name/Price/Power/RefreshRate/ResponseTime/Resolution`
 10. `add/other/Name/Price/Power`
 
-__Note__: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-glossary).
+__Note__: If you need a reference for each parameter, refer to the [PC Component Parameters Glossary](#pc-component-parameters-glossary). 
+
+__Note__: The price parameter must be a positive integer or float number. The power parameter must be a positive integer.
 
 Example of usage: 
 Enter `add/cpu/intel 10990x/1200/80/lga1511/3.8` to add a cpu named 'intel 10990x' to the
 list of components. This CPU has a price of $1200, a power consumption of 80 W, a socket of lga1511 and a clock speed
 of 3.8 GHz.
 
-Expected outcome: The program will add a cpu named 'intel 10990x' to the list of components.
+
 ```
 <--------------------------------------------------------->
 add/cpu/intel 10990x/1200/80/lga1511/3.8
@@ -345,14 +348,14 @@ You have added intel 10990x
 
 #### Deleting a component: `delete`
 
-Deletes a component from the list of components of a build.
+Deletes a component from the list of components in the current build..
 
 Format: `delete/TYPE/NAME`
 
 Example of usage: Enter `delete/cpu/intel 10990x` to delete a cpu named 'intel 10990x' from the list of 
 components.
 
-Expected outcome: The program will delete a cpu named 'intel 10990x' from the list of components.
+
 ```
 <--------------------------------------------------------->
 delete/cpu/intel 10990x
@@ -363,14 +366,14 @@ You have removed intel 10990x
 
 #### Viewing a component: `view`
 
-Views a component from the list of components of a build.
+Displays information about a component in the current build.
 
 Format: `view/TYPE/NAME`
 
 Example of usage: Enter `view/cpu/intel 10990x` to view a cpu named 'intel 10990x' from the list of
 components.
 
-Expected outcome: The program will display the details of a cpu named 'intel 10990x' from the list of components.
+
 ```
 <--------------------------------------------------------->
 view/cpu/intel 10990x
@@ -385,13 +388,13 @@ Clock: 3.8 GHz
 
 #### Listing all components: `list`
 
-Lists all components from the list of components of a build.
+Lists all components in the current build.
 
 Format: `list`
 
-Example of usage: Enter `list` to list all components from the list of components.
+Example of usage: Enter `list` to list all components.
 
-Expected outcome: The program will display all components from the list of components.
+
 ```
 <--------------------------------------------------------->
 Computer parts for test build:
@@ -401,13 +404,21 @@ Computer parts for test build:
 
 #### Checking compatibility: `check`
 
-Checks if a build is compatible.
+This command runs a number of compatibility checks on the build you are currently editing and outputs the results of each check.
+A result of `true` means that the check has passed while a result of `false` means that the check has failed.
+These are the compatibility checks that are run:
+- Power supply: Checks if the power supply has enough power to power all the components in the build.
+- Socket: Checks if the CPU socket is compatible with the motherboard socket.
+- GPU slot: Checks if the motherboard has enough GPU slots to support all the GPUs in the build.
+- Memory slot: Checks if the motherboard has enough memory slots to support all the memory modules in the build.
+- Expansion slot: Checks if the case has enough expansion slots to support all the drives in the build.
+- Form factor: Checks if the motherboard form factor is compatible with the case form factor.
 
 Format: `check`
 
-Example of usage: Enter `check` to check if the build is compatible.
+Example of usage: Enter `check` to run the compatibility checks.
 
-Expected outcome: The program will display a list of compatibilities based on the components of a build.
+
 ```
 <--------------------------------------------------------->
 check
@@ -424,13 +435,13 @@ Form factor: false
 
 #### Information about a build: `info`
 
-Displays information about a build.
+Displays information about the current build. This will list the name, total price, total power consumption, and whether the build passes all the compatibility checks.
 
 Format: `info`
 
-Example of usage: Enter `info` to display information about a build.
+Example of usage: Enter `info` to display information about the build.
 
-Expected outcome: The program will display information about a build.
+
 ```
 <--------------------------------------------------------->
 info
@@ -445,15 +456,15 @@ Compatibility: Not compatible
 
 #### Exporting a build: `export`
 
-Exports a build to a text file in the `data/export` folder.
+Exports information about the current build to a text file in the `data/export` folder.
 
 Format: `export`
 
 Example of usage: Enter `export` to export a build.
 
-Expected outcome: The program will export a build to a text file in the `data/export` folder.
 
-__Note__: The file will not be empty even if there are no components in the build.
+
+__Note__: For builds with no components, a text file will still be created.
 ```
 <--------------------------------------------------------->
 export
@@ -470,7 +481,7 @@ Format: `back`
 
 Example of usage: Enter `back` to exit Build Editing mode.
 
-Expected outcome: The program will exit Build Editing mode.
+
 ```
 <--------------------------------------------------------->
 back
@@ -484,23 +495,23 @@ ____________________________________________________________
 
 ### Storage
 
-The program stores all builds in a `text` file and components of each build in separate `text` files. The text files are 
-stored in the `data` folder. 
+The program stores all data about builds and components in the `data` folder. The program will automatically create this folder if it does not exist.
+The program will automatically load and save data as necessary, so you do not have to worry about manually saving and loading data.
 
-Loading and saving are done automatically, so you do not need to worry about saving or loading data manually.
+<span style="color:red">**Warning:**</span> All files in the `data` folder (except for the `export` folder) are automatically generated by the program. Do not modify these files manually as doing so may cause unexpected behaviour or data loss. Manual modification of these files is not supported.
 
 ### Export
 
-The program exports all builds to text and CSV files. The text and CSV files are stored in the `data\export` folder.
+When the user runs any of the `export` commands, the program will create a text file in the `data/export` folder.
+The text file will be named after the build name. These text files can be used to share information about a build with other users.
 
-It makes it easier for you to view the builds and components in a more readable format outside the program.
+These text files may be accessed and modified at any time, but will be overwritten if the user runs the `export` command again.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: Upon exit of the program, your data is stored in the data folder. Simply copy the contents of the data folder 
-to the data folder of the new program on your new computer to carry over your data.
+**A**: The program stores all data in the `data` folder. You can copy this folder to another computer along with the `CCC.jar` file to carry your data over.
 
 ## Command Summary
 ### Build Management Mode Summary
@@ -552,7 +563,7 @@ to the data folder of the new program on your new computer to carry over your da
 | NoiseLevel     | Noise level in dB <br/> E.g. `50`                                |
 | RefreshRate    | Refresh Rate in Hz <br/> E.g. `144`                              |
 | ResponseTime   | Response Time in ms <br/> E.g. `1`                               |
-| Resolution     | Resolution in pixels <br/> E.g. `4000`                           |
+| Resolution     | Resolution in pixels <br/> E.g. `1920x1080`                      |
 
 
 
