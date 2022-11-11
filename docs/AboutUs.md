@@ -1,9 +1,8 @@
 # About us
 
-Display | Name | Github Profile | Portfolio 
---------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+Display |        Name         |               Github Profile                | Portfolio
+--------|:-------------------:|:-------------------------------------------:|:---------:
+![](https://via.placeholder.com/100.png?text=Photo) |        Insaf        |   [Github](https://github.com/insafhere)    | [Portfolio](team/insafhere.md)
+![](https://via.placeholder.com/100.png?text=Photo) |     Zhai Yuxin      |   [Github](https://github.com/Zhai-Yuxin)   | [Portfolio](team/zhai-yuxin.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Brandon Owen Sjarif |   [Github](https://github.com/brandon-os)   | [Portfolio](team/brandon-os.md)
+![](https://via.placeholder.com/100.png?text=Photo) |    Ishita Mandal    | [Github](https://github.com/ishitamandal06) | [Portfolio](team/Ishita-Mandal.md)
