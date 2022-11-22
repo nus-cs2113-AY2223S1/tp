@@ -222,6 +222,7 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 
 ##### Loading data
+<p></p>
 <p align="center">
 <img src="images/ComponentInteractionsSDLoadDataFromFile.png">
 </p>
@@ -238,6 +239,7 @@ Data and Storage components when data is loaded into MoneyGoWhere.
 <br>
 
 ##### Getting user commands
+<p></p>
 <p align="center">
 <img src="images/ComponentInteractionsSDGetUserCommand.png">
 </p>
@@ -254,6 +256,7 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Printing the output from a command
+<p></p>
 <p align="center">
 <img src="images/ComponentInteractionsSDPrintingAnExpense.png">
 </p>
@@ -272,6 +275,7 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Saving data
+<p></p>
 <p align="center">
 <img src="images/ComponentInteractionsSDSaveDataToFile.png">
 </p>
