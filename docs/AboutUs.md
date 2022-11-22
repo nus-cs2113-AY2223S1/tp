@@ -1,4 +1,11 @@
-# About Us
+---
+title: About Us
+layout: default
+nav_order: 4
+description: "Learn more about the team behind MoneyGoWhere!"
+permalink: /aboutus/
+---
+# About us
 
 |          Name          |             Github Profile              |            Portfolio            |
 |:----------------------:|:---------------------------------------:|:-------------------------------:|
