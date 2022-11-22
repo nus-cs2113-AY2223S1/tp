@@ -184,10 +184,10 @@ In this example, the user launches the program and enters the command `Add-Expen
 
 <br>
 
-<p align = "center">
-<img src = images/ComponentInteractionsOnCommandEntered.png>
+<p align="center">
+<img src="images/ComponentInteractionsOnCommandEntered.png">
 </p>
-<p align = "center">
+<p align="center">
 A sequence diagram showing the interaction between core components of MoneyGoWhere when Add-Expense is executed.
 </p>
 
@@ -222,10 +222,10 @@ In the example above, `consoleCommand` is an instance of `ConsoleCommandAddExpen
 <br>
 
 ##### Loading data
-<p align = "center">
-<img src = images/ComponentInteractionsSDLoadDataFromFile.png>
+<p align="center">
+<img src="images/ComponentInteractionsSDLoadDataFromFile.png">
 </p>
-<p align = "center">
+<p align="center">
 A reference diagram showing the interactions between the UI,
 Data and Storage components when data is loaded into MoneyGoWhere.
 </p>
@@ -238,10 +238,10 @@ Data and Storage components when data is loaded into MoneyGoWhere.
 <br>
 
 ##### Getting user commands
-<p align = "center">
-<img src = images/ComponentInteractionsSDGetUserCommand.png>
+<p align="center">
+<img src="images/ComponentInteractionsSDGetUserCommand.png">
 </p>
-<p align = "center">
+<p align="center">
 A reference diagram showing the interactions between the UI, Parser and Logger components when the user's input for Add-Expense is retrieved.
 </p>
 
@@ -254,10 +254,10 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Printing the output from a command
-<p align = "center">
-<img src = images/ComponentInteractionsSDPrintingAnExpense.png>
+<p align="center">
+<img src="images/ComponentInteractionsSDPrintingAnExpense.png">
 </p>
-<p align = "center">
+<p align="center">
 A reference diagram showing the interactions between the UI, Parser and Logger components when the output of Add-Expense is printed..
 </p>
 
@@ -272,10 +272,10 @@ A reference diagram showing the interactions between the UI, Parser and Logger c
 <br>
 
 ##### Saving data
-<p align = "center">
-<img src = images/ComponentInteractionsSDSaveDataToFile.png>
+<p align="center">
+<img src="images/ComponentInteractionsSDSaveDataToFile.png">
 </p>
-<p align = "center">
+<p align="center">
 A reference diagram showing the interactions between the UI,
 Data and Storage components when data is saved in MoneyGoWhere.
 </p>
