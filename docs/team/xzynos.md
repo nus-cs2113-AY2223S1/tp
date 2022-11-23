@@ -1,3 +1,10 @@
+---
+title: Lim Fang Jie
+layout: default
+nav_order: 4
+description: "Learn more about the team behind MoneyGoWhere!"
+parent: About Us
+---
 # Lim Fang Jie - Project Portfolio Page
 
 ## Overview
