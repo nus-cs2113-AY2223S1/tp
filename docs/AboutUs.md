@@ -8,6 +8,8 @@ has_toc: false
 ---
 # About us
 
+<br>
+
 |          Name          |             Github Profile              |            Portfolio            |
 |:----------------------:|:---------------------------------------:|:-------------------------------:|
 |  Javier Ong Ding Quan  |   [Github](https://github.com/jeyvia)   |   [Portfolio](team/jeyvia.md)   |
