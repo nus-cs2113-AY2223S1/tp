@@ -3,7 +3,7 @@ description: MoneyGoWhere is a CLI-based application to help manage finances
 theme: just-the-docs
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  Github Repository: https://github.com/AY2223S1-CS2113T-W11-1/tp
 
 # Enable or disable the site search
 # Supports true (default) or false
