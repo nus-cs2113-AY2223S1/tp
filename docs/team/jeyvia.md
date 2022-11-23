@@ -1,3 +1,10 @@
+---
+title: Javier Ong Ding Quan
+layout: default
+nav_order: 4
+description: "Learn more about the team behind MoneyGoWhere!"
+parent: About Us
+---
 # Javier Ong Ding Quan - Project Portfolio Page
 
 ## Overview
