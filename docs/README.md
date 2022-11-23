@@ -6,8 +6,6 @@
 
 MoneyGoWhere is a financial tracking application to help you manage your finances.
 
-
-
 Based on a Command Line Interface (CLI), you can add your `expenses`, `income` sources, spending `targets` and `recurring payments` to a trackable list that can be saved and accessed **anywhere, anytime**.
 
 <br>
