@@ -1,0 +1,51 @@
+@startuml
+!include Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "currencyManager\n:CurrencyManager" as currencyManager DATA_COLOR_6
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandConvertCurrency
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandConvertCurrency(\n\tconsoleCommand:ConsoleCommandConvertCurrency\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : getExpense(expenseIndex:int)
+    activate expenseManager DATA_COLOR_1
+
+    expenseManager --[DATA_COLOR_1]> consoleInterface : expense:Expense
+    deactivate expenseManager
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> currencyManager : hasCurrency(currency:String)
+    activate currencyManager DATA_COLOR_6
+
+    currencyManager --[DATA_COLOR_6]> consoleInterface
+    deactivate currencyManager
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> currencyManager : changeCurrency(expense:Expense, currency:String, rate:BigDecimal)
+    activate currencyManager DATA_COLOR_6
+
+    currencyManager -[DATA_COLOR_6]> currencyManager : \lexchangeCurrency(\n\texpense:Expense, \n\tcurrency:String, \n\trate:BigDecimal\n)
+    activate currencyManager DATA_COLOR_6
+
+    currencyManager -[DATA_COLOR_6]> currencyManager : newAmount:BigDecimal
+    deactivate currencyManager
+
+    currencyManager --[DATA_COLOR_6]> consoleInterface
+    deactivate currencyManager
+
+    ref over consoleInterface: print expense
+
+    ref over consoleInterface, expenseManager, LocalStorage: save data
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml

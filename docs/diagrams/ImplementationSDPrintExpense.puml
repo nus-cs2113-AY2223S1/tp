@@ -1,0 +1,30 @@
+@startuml
+!include Styles.puml
+
+skinparam noteTextAlignment left
+
+mainframe sd print expense
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "localLogger:Logger" as localLogger LOGGER_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : convertExpenseToConsoleString(expense:Expense)
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface : expenseStr:String
+deactivate consoleInterface
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : printInformationalMessage(expenseStr:String)
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+consoleInterface -[USER_INTERFACE_COLOR_1]> localLogger : logInformationalMessage(expenseStr:String)
+activate localLogger LOGGER_COLOR_1
+
+localLogger --[LOGGER_COLOR_1]> consoleInterface
+deactivate localLogger
+
+consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+deactivate consoleInterface
+@enduml

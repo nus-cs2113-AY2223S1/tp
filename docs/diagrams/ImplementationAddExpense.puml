@@ -1,0 +1,40 @@
+@startuml
+!include Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "expense\n:Expense" as expense DATA_COLOR_1
+Participant "expenseManager\n:ExpenseManager" as expenseManager DATA_COLOR_1
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandAddExpense
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandAddExpense(\n\tconsoleCommand:ConsoleCommandAddExpense\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    create expense
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expense : create
+    activate expense DATA_COLOR_1
+
+    expense --[DATA_COLOR_1]> consoleInterface
+    deactivate expense
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> expenseManager : addExpense(expense:Expense)
+    activate expenseManager DATA_COLOR_1
+
+    expenseManager --[DATA_COLOR_1]> consoleInterface
+    deactivate expenseManager
+
+    ref over consoleInterface: print expense
+
+    ref over consoleInterface, expenseManager, LocalStorage: save data
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include Styles.puml
+
+package Apis {
+    Class CurrencyApiManager DATA_COLOR_6
+    Class CurrencyApi DATA_COLOR_6
+}
+
+CurrencyApiManager -right> CurrencyApi
+
+@enduml

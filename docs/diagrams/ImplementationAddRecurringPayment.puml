@@ -1,0 +1,40 @@
+@startuml
+!include Styles.puml
+
+skinparam sequenceReferenceBackgroundColor #ffffff
+
+Participant "consoleInterface:ConsoleInterface" as consoleInterface USER_INTERFACE_COLOR_1
+Participant "recurringPayment\n:RecurringPayment" as recurringPayment DATA_COLOR_4
+Participant "recurringPaymentManager\n:RecurringPaymentManager" as recurringPaymentManager DATA_COLOR_4
+Participant "<<class>>\nLocalStorage" as LocalStorage STORAGE_COLOR_1
+
+activate consoleInterface USER_INTERFACE_COLOR_1
+
+opt consoleCommand instanceof ConsoleCommandAddRecurringPayment
+    consoleInterface -[USER_INTERFACE_COLOR_1]> consoleInterface : \lrunCommandAddRecurringPayment(\n\tconsoleCommand:ConsoleCommandAddRecurringPayment\n)
+    activate consoleInterface USER_INTERFACE_COLOR_1
+
+    create recurringPayment
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPayment : create
+    activate recurringPayment DATA_COLOR_4
+
+    recurringPayment --[DATA_COLOR_4]> consoleInterface
+    deactivate recurringPayment
+
+    consoleInterface -[USER_INTERFACE_COLOR_1]> recurringPaymentManager : addRecurringPayment(recurringPayment:RecurringPayment)
+    activate recurringPaymentManager DATA_COLOR_4
+
+    recurringPaymentManager --[DATA_COLOR_4]> consoleInterface
+    deactivate recurringPaymentManager
+
+    ref over consoleInterface: print recurring payment
+
+    ref over consoleInterface, recurringPaymentManager, LocalStorage: save data
+
+    consoleInterface --[USER_INTERFACE_COLOR_1]> consoleInterface
+    deactivate consoleInterface
+end
+
+deactivate consoleInterface
+@enduml
