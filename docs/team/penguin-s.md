@@ -1,10 +1,17 @@
+---
+title: Nur Syadiyah Bte Lutfi
+layout: default
+nav_order: 4
+description: "Learn more about the team behind MoneyGoWhere!"
+parent: About Us
+---
 # Nur Syadiyah Bte Lutfi - Project Portfolio Page
 
 ## Overview
 
 ### whoami
 Hello there! I'm Syadiyah, a year 4 computer engineering student.
-If you would like to connect with me to discuss potential project ideas, drop me a message at [LinkedIn](www.linkedin.com/in/syadiyah-lutfi).
+If you would like to connect with me to discuss potential project ideas, drop me a message at [LinkedIn](https://www.linkedin.com/in/syadiyah-lutfi).
 
 ### Summary of Contributions
 

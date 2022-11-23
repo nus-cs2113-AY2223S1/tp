@@ -1,3 +1,10 @@
+---
+title: Shen Yuchen
+layout: default
+nav_order: 4
+description: "Learn more about the team behind MoneyGoWhere!"
+parent: About Us
+---
 # Shen Yuchen - Project Portfolio Page
 
 ## Overview
