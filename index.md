@@ -6,7 +6,9 @@ description: "MoneyGoWhere is a CLI-based application to help manage finances."
 ---
 # MoneyGoWhere
 
+<br>
 <p align="center"><img alt="icon" src="https://raw.githubusercontent.com/AY2223S1-CS2113T-W11-1/tp/master/docs/images/icon.png"></p>
+<br>
 
 ## Lost? Don't worry, we know where you need to go.
 
