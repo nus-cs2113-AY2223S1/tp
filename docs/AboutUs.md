@@ -4,6 +4,7 @@ layout: default
 nav_order: 4
 description: "Learn more about the team behind MoneyGoWhere!"
 has_children: true
+has_toc: false
 ---
 # About us
 
