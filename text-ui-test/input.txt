@@ -1,1 +1,35 @@
-James Gosling
+help
+search /code 2113 /title software
+add cs2113
+list
+add 
+select /module cs2113 /type tut /code 4
+list
+export
+import https://nusmods.com/timetable/sem-1/share?CG1111A=LAB:01&CS1010=LAB:C03,TUT:10,SEC:1
+export
+list
+timetable /simple
+remove cs1010
+list
+info cs2113
+semester 2
+info cs2113
+import https://nusmods.com/timetable/sem-2/share?CFG1002=
+list
+timetable /simple
+import https://nusmods.com/timetable/sem-2/share?CFG1002=&EG1311=LEC:1,LAB:17&EG3301R=TUT:G11,LEC:1&EG4301=LEC:1&EG5302=LEC:1
+export
+timetable /simple
+remove cfg
+remove cfg1002
+info cs1111
+select
+select /module cs1111 /type lec /code 1
+select /module eg1311 /type lab /code 24
+select /module eg1311 /type lec /code 24
+list
+import https://nusmods.com/timetable/st-i/share?EE4302=PLEC:01,PTUT:01&EE4305E=LEC:1,TUT:1
+list
+timetable /simple
+bye

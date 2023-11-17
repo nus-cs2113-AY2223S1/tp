@@ -1,0 +1,71 @@
+@startuml
+box Main
+Participant ":Duke" as Duke
+end box
+box AddModuleCommand
+Participant ":AddModuleCommand" as AddModuleCommand
+end box
+box Ui
+Participant ":Ui" as Ui
+end box
+box State
+Participant ":State" as State
+end box
+box Module
+Participant ":Module" as Module
+end box
+box SelectedModule
+Participant ":SelectedModule" as SelectedModule
+end box
+
+Duke -> AddModuleCommand : execute()
+activate AddModuleCommand
+AddModuleCommand -> State : getSemester()
+activate State
+State --> AddModuleCommand
+deactivate State
+AddModuleCommand -> Module :isOfferedInSemester()
+activate Module
+Module --> AddModuleCommand
+deactivate Module
+
+
+alt module is not offered in semester
+AddModuleCommand -> Ui: addMessage()
+activate Ui
+AddModuleCommand -> Ui: displayUi()
+Ui --> AddModuleCommand
+deactivate Ui
+AddModuleCommand --> Duke
+
+else module is offered in semester
+create SelectedModule
+AddModuleCommand -> SelectedModule : new SelectedModule()
+activate SelectedModule
+SelectedModule --> AddModuleCommand
+deactivate SelectedModule
+AddModuleCommand -> State : getSelectedModulesList()
+activate State
+State --> AddModuleCommand
+deactivate State
+
+opt list does not contain module to be added
+AddModuleCommand -> State : addSelectedModule()
+activate State
+State --> AddModuleCommand
+deactivate State
+end
+
+AddModuleCommand -> Ui :addMessage()
+activate Ui
+AddModuleCommand -> Ui :displayUi()
+Ui --> AddModuleCommand :
+deactivate Ui
+end
+
+AddModuleCommand --> Duke
+destroy AddModuleCommand
+
+hide footbox
+
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class SearchModuleCommand {
+    ~ params: Map <String, String>
+    ~ toSearchModuleCode: String
+    ~ toSearchModuleTitle: String
+    ~ toSearchLevel: String
+    ~ toSearchSemester: String
+    <u>+ COMMAND_DESCRIPTION: String
+    <u>+ COMMAND_USAGE: String
+    <u>+ COMMAND_WORD: String
+    <u>+ ERROR_INVALID_LEVEL: String
+    <u>+ ERROR_INVALID_SEMESTER: String
+    <u>+ ERROR_MISSING_CODE: String
+    <u>+ ERROR_MISSING_CODE_AND_TITLE: String
+    <u>+ ERROR_MISSING_TITLE: String
+    <u>+ ERROR_UNEXPECTED_PARAMETER: String
+    <u>+ ERROR_WRONG_FORMAT: String
+    <u>+ FOOTER: String
+    <u>+ HEADING_INDENT: int
+    <u>+ SUBSYSTEM_NAME: String
+
+    + SearchModuleCommand(input: String)
+    <u>+ filterByCodeAndTitle(searchResult: List<Module>, toSearchModuleCode: String, toSearchModuleTitle : String): List<Module>
+    <u>+ filterByLevel(searchResult: List<Module>, toSearchLevel: Integer): List<Module>
+    <u>+ filterBySemester(searchResult: List<Module>, toSearchSemester: Integer): List<Module>
+    <u>+ filterModuleSearch(toSearchModuleCode: String, toSearchLevel: Integer, toSearchSemester: Integer, toSearchModuleTitle: String): List<Module>
+    <u>+ initialiseSearchResult(toSearchModuleCode: String, toSearchModuleTitle: String): List<Module>
+    - processParams()
+    - processSearchLevel(level: String): Integer
+    - processSemester(s: String): Integer
+}
+@enduml

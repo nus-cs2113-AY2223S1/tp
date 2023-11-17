@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+'credits to https://forum.plantuml.net/6263/abstract-in-written-form for displaying abstract
+!define ABSTRACT &#123;abstract&#125;
+
+abstract class "{abstract}\nCommand" as Command {
+    - input: String[]
+
+    + Command(input: String[])
+    + {abstract} execute(state: State, ui: Ui, storage: Storage) ABSTRACT
+    + {abstract} getExecutionMessage(): String ABSTRACT
+    + getInput(): String[]
+    + {abstract} isExit() ABSTRACT
+}
+@enduml
