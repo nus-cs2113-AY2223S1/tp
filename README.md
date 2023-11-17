@@ -4,6 +4,9 @@
 
 Yet Another Module Organiser / Manager offers the latest cutting edge features for NUS students favouring efficiency and productivity. Schedule your timetable without your fingers leaving your keyboard.
 
+![image](https://github.com/AY2223S1-CS2113-F11-3/tp/assets/12319674/1086a54b-2599-464d-a6ed-775899a1105e)
+
+
 ## Setting up in Intellij
 
 Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
